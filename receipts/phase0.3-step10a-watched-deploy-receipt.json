@@ -1,0 +1,41 @@
+{
+  "receipt_type": "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
+  "status": "FAILED_INVARIANT",
+  "recorded_at": "2026-06-30T11:17:30Z",
+  "verifier_receipt_id": "a7e792c8-bb67-48dc-8ea9-dba628309338",
+  "candidate_ref": "8a2fb1a45",
+  "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+  "candidate_sha256": "63eadb7a68f6f89167cc9abce840015503c6ce4c11fb1175d84cd3d0f514191d",
+  "pre_live_version_id": "628ebc37-5c66-44e5-9cad-4e05fc2f3e92",
+  "post_live_version_id": "5f8bc38e-5b81-4bf6-be45-e64137c1c4a1",
+  "new_live_version_id": "5f8bc38e-5b81-4bf6-be45-e64137c1c4a1",
+  "deploy_executed": true,
+  "deploy_exit_code": 0,
+  "founder_confirmation": "CONFIRM DEPLOY",
+  "confirmed_by": "founder",
+  "gate_exit_code": 1,
+  "gate_failure_after_deploy": "health fetch raised HTTP 403 before automatic receipt write",
+  "health_result": {
+    "ok": true,
+    "schema": "sourcea-brain-chat-health-v1",
+    "service": "sourcea-brain-chat-v1",
+    "openrouter_ready": true,
+    "trace_storage_ready": false
+  },
+  "deploy_script_validation": {
+    "disk_bundle": "OK bundle 514 chunks 5.0.0",
+    "live_knowledge": "OK live knowledge 514 chunks v 5.0.0",
+    "live_chat_citations": "OK chat citations 9",
+    "validate_sourcea_brain_knowledge_v1": "ALL PASS"
+  },
+  "post_deploy_source_bundle_sha256": "62a9857ad0820c340d49b3c5ea383e1c9989ac81d938c6114a204c1ed7aaa80e",
+  "content_identity_confirmed": false,
+  "content_identity_failure": "post-deploy SourceA bundle sha256 does not match verifier-signed candidate sha256",
+  "source_git_after_deploy": {
+    "branch": "main",
+    "matches_origin_main_before_deploy": true,
+    "clean_after_deploy": false,
+    "dirty_reason": "brain_cli_v1.sh deploy refreshes generated Brain knowledge files before wrangler deploy"
+  },
+  "unattended_enabled": false
+}
