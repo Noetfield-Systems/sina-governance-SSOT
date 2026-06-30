@@ -19,6 +19,11 @@ const ARTIFACT_DESCRIPTOR_FIELDS = [
   "schema_valid",
   "validator_runtime",
 ];
+const KNOWLEDGE_BUNDLE_LIMITS = {
+  maxBytes: 1_000_000,
+  maxChunks: 2_000,
+  maxChunkTextLength: 20_000,
+};
 
 function base64Url(input) {
   const bytes = input instanceof Uint8Array ? input : new TextEncoder().encode(input);
@@ -173,10 +178,14 @@ function validSha256(value) {
   return typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 }
 
-function validateArtifactDescriptor(descriptor) {
+function optionalString(value) {
+  return typeof value === "string" && value.length > 0 ? value : null;
+}
+
+function validateArtifactDescriptor(descriptor, body = {}) {
   const failures = [];
   if (!descriptor || typeof descriptor !== "object" || Array.isArray(descriptor)) {
-    return { descriptor: null, failures: ["artifact descriptor must be a JSON object"] };
+    return { descriptor: null, candidate_ref: null, candidate_path: null, failures: ["artifact descriptor must be a JSON object"] };
   }
 
   for (const field of ARTIFACT_DESCRIPTOR_FIELDS) {
@@ -198,6 +207,8 @@ function validateArtifactDescriptor(descriptor) {
 
   return {
     descriptor: Object.fromEntries(ARTIFACT_DESCRIPTOR_FIELDS.map((field) => [field, descriptor[field]])),
+    candidate_ref: optionalString(body.candidate_ref || descriptor.candidate_ref),
+    candidate_path: optionalString(body.candidate_path || descriptor.candidate_path),
     failures,
   };
 }
@@ -218,7 +229,116 @@ async function readArtifactDescriptor(request) {
   }
 
   const descriptor = body.artifact_descriptor || body;
-  return validateArtifactDescriptor(descriptor);
+  return validateArtifactDescriptor(descriptor, body);
+}
+
+function validateKnowledgeBundleBytes(bytes, expectedSha256) {
+  const failures = [];
+  const checks = {
+    bytes_utf8: false,
+    json_parse: false,
+    root_object: false,
+    required_top_level_keys: false,
+    chunks_non_empty_array: false,
+    chunk_metadata_present: false,
+    content_hashes_valid: false,
+    size_bytes: bytes.length,
+    chunks_count: 0,
+  };
+
+  if (bytes.length < 2) failures.push("candidate bundle is below minimum size");
+  if (bytes.length > KNOWLEDGE_BUNDLE_LIMITS.maxBytes) failures.push("candidate bundle exceeds maximum size");
+
+  const actualSha256Promise = sha256Hex(bytes);
+  let text;
+  try {
+    text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+    checks.bytes_utf8 = true;
+  } catch {
+    failures.push("candidate bundle bytes must decode as UTF-8");
+  }
+
+  let bundle;
+  if (text !== undefined) {
+    try {
+      bundle = JSON.parse(text);
+      checks.json_parse = true;
+    } catch {
+      failures.push("candidate bundle must parse as JSON");
+    }
+  }
+
+  if (bundle && typeof bundle === "object" && !Array.isArray(bundle)) {
+    checks.root_object = true;
+  } else if (bundle !== undefined) {
+    failures.push("candidate bundle root must be an object");
+  }
+
+  if (checks.root_object) {
+    const requiredKeys = ["version", "generated_at", "manifest_sha256", "chunks"];
+    const missing = requiredKeys.filter((key) => !(key in bundle));
+    if (missing.length === 0 && typeof bundle.version === "string" && bundle.version && typeof bundle.generated_at === "string" && bundle.generated_at && validSha256(bundle.manifest_sha256)) {
+      checks.required_top_level_keys = true;
+    } else {
+      failures.push(`candidate bundle top-level keys invalid${missing.length ? `; missing ${missing.join(", ")}` : ""}`);
+    }
+
+    if (Array.isArray(bundle.chunks) && bundle.chunks.length > 0) {
+      checks.chunks_non_empty_array = true;
+      checks.chunks_count = bundle.chunks.length;
+      if (bundle.chunks.length > KNOWLEDGE_BUNDLE_LIMITS.maxChunks) failures.push("candidate bundle has too many chunks");
+    } else {
+      failures.push("candidate bundle chunks must be a non-empty array");
+    }
+
+    let allMetadataPresent = Boolean(checks.chunks_non_empty_array);
+    let allContentHashesValid = Boolean(checks.chunks_non_empty_array);
+    for (const [index, chunk] of (Array.isArray(bundle.chunks) ? bundle.chunks : []).entries()) {
+      if (!chunk || typeof chunk !== "object" || Array.isArray(chunk)) {
+        failures.push(`chunk ${index} must be an object`);
+        allMetadataPresent = false;
+        allContentHashesValid = false;
+        continue;
+      }
+
+      for (const key of ["id", "source", "title", "text"]) {
+        if (typeof chunk[key] !== "string" || chunk[key].length === 0) {
+          failures.push(`chunk ${index} ${key} must be a non-empty string`);
+          allMetadataPresent = false;
+        }
+      }
+
+      if (typeof chunk.text === "string" && chunk.text.length > KNOWLEDGE_BUNDLE_LIMITS.maxChunkTextLength) {
+        failures.push(`chunk ${index} text exceeds maximum length`);
+      }
+
+      if (!chunk.metadata || typeof chunk.metadata !== "object" || Array.isArray(chunk.metadata)) {
+        failures.push(`chunk ${index} metadata must be an object`);
+        allMetadataPresent = false;
+        allContentHashesValid = false;
+        continue;
+      }
+
+      if (typeof chunk.metadata.source_path !== "string" || chunk.metadata.source_path.length === 0) {
+        failures.push(`chunk ${index} metadata.source_path must be a non-empty string`);
+        allMetadataPresent = false;
+      }
+      if (!validSha256(chunk.metadata.content_sha256)) {
+        failures.push(`chunk ${index} metadata.content_sha256 must be a lowercase SHA256 hex string`);
+        allMetadataPresent = false;
+        allContentHashesValid = false;
+      }
+    }
+    checks.chunk_metadata_present = allMetadataPresent;
+    checks.content_hashes_valid = allContentHashesValid;
+  }
+
+  return actualSha256Promise.then((actualSha256) => {
+    if (actualSha256 !== expectedSha256) {
+      failures.push(`candidate SHA256 expected ${expectedSha256}, got ${actualSha256}`);
+    }
+    return { actualSha256, checks, failures };
+  });
 }
 
 function edgeMetadata(request, env) {
@@ -242,6 +362,7 @@ function edgeMetadata(request, env) {
 async function buildReceipt(request, env, artifactDescriptorResult) {
   const failures = [];
   const artifactDescriptor = artifactDescriptorResult.descriptor;
+  const hasArtifactDescriptor = Boolean(artifactDescriptor);
   const receipt = {
     receipt_id: crypto.randomUUID(),
     receipt_type: "REMOTE_CHECK_ADVISORY",
@@ -273,11 +394,20 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     knowledge_bundle_spec_path: artifactDescriptor?.artifact_type === "knowledge_bundle" ? KNOWLEDGE_BUNDLE_SPEC_PATH : null,
     knowledge_bundle_spec_sha256: null,
     knowledge_bundle_spec_loaded: false,
+    candidate_ref: artifactDescriptorResult.candidate_ref,
+    candidate_path: artifactDescriptorResult.candidate_path,
+    candidate_sha256: null,
+    candidate_validation_checks: null,
+    candidate_validation_failures: [],
     checked_at: new Date().toISOString(),
     failures,
   };
 
   failures.push(...artifactDescriptorResult.failures);
+  if (artifactDescriptor?.artifact_type === "knowledge_bundle") {
+    if (!artifactDescriptorResult.candidate_ref) failures.push("candidate_ref is required for knowledge_bundle verification");
+    if (!artifactDescriptorResult.candidate_path) failures.push("candidate_path is required for knowledge_bundle verification");
+  }
 
   try {
     const appJwt = await createJwt(env.GITHUB_APP_PRIVATE_KEY);
@@ -289,6 +419,15 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
       const specBytes = await remoteFileBytes(token, KNOWLEDGE_BUNDLE_SPEC_PATH, receipt.remote_head);
       receipt.knowledge_bundle_spec_sha256 = await sha256Hex(specBytes);
       receipt.knowledge_bundle_spec_loaded = true;
+
+      if (artifactDescriptorResult.candidate_ref && artifactDescriptorResult.candidate_path) {
+        const candidateBytes = await remoteFileBytes(token, artifactDescriptorResult.candidate_path, artifactDescriptorResult.candidate_ref);
+        const validation = await validateKnowledgeBundleBytes(candidateBytes, artifactDescriptor.proposed_sha256);
+        receipt.candidate_sha256 = validation.actualSha256;
+        receipt.candidate_validation_checks = validation.checks;
+        receipt.candidate_validation_failures = validation.failures;
+        failures.push(...validation.failures);
+      }
     }
 
     if (receipt.remote_ssot_sha256 !== EXPECTED_SHA256) {
@@ -298,9 +437,23 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     failures.push(error instanceof Error ? error.message : String(error));
   }
 
-  if (failures.length === 0) {
+  if (hasArtifactDescriptor && !receipt.pass_eligible) {
+    failures.push("PASS requires secondary account and edge execution proof");
+  }
+
+  if (failures.length === 0 && hasArtifactDescriptor) {
+    receipt.status = "PASS";
+    receipt.result = "PASS";
+    receipt.pass_claimed = true;
+  } else if (failures.length === 0) {
     receipt.status = "REMOTE_CHECK_ADVISORY_MATCH";
     receipt.result = "MATCH";
+  } else if (hasArtifactDescriptor && failures.some((failure) => failure.includes("required") || failure.includes("not found") || failure.includes("failed: HTTP 404"))) {
+    receipt.status = "BLOCKED";
+    receipt.result = "BLOCKED";
+  } else if (hasArtifactDescriptor) {
+    receipt.status = "FAIL";
+    receipt.result = "FAIL";
   }
 
   if (receipt.pass_eligible) {
