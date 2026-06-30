@@ -8,6 +8,7 @@ const EXPECTED_SHA256 = "1ba4a793dba183388afd244ea21e850cad879c78824f78603e96107
 const GITHUB_API = "https://api.github.com";
 const SECONDARY_CF_ACCOUNT_ID = "b7282b4a5c17b84d62e3ef8866b878f8";
 const ARTIFACT_DESCRIPTOR_SCHEMA = "sina-governance/verifier/brain-config-artifact-descriptor-schema-v0.1";
+const KNOWLEDGE_BUNDLE_SPEC_PATH = "verifier/knowledge-bundle-spec-v0.1.md";
 const ARTIFACT_DESCRIPTOR_FIELDS = [
   "artifact_type",
   "artifact_path",
@@ -141,12 +142,16 @@ async function remoteHead(token) {
   return sha;
 }
 
-async function remoteSsotBytes(token) {
-  const response = await githubJson(`/repos/${OWNER}/${REPO}/contents/${SSOT_PATH}?ref=${BRANCH}`, token);
+async function remoteFileBytes(token, path, ref = BRANCH) {
+  const response = await githubJson(`/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${ref}`, token);
   if (response.encoding !== "base64" || !response.content) {
     throw new Error("GitHub contents response did not include base64 content");
   }
   return base64ToBytes(response.content.replace(/\s+/g, ""));
+}
+
+async function remoteSsotBytes(token) {
+  return remoteFileBytes(token, SSOT_PATH);
 }
 
 async function sha256Hex(bytes) {
@@ -265,6 +270,9 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     subject: artifactDescriptor?.subject || null,
     schema_valid: artifactDescriptor?.schema_valid ?? null,
     validator_runtime: artifactDescriptor?.validator_runtime || null,
+    knowledge_bundle_spec_path: artifactDescriptor?.artifact_type === "knowledge_bundle" ? KNOWLEDGE_BUNDLE_SPEC_PATH : null,
+    knowledge_bundle_spec_sha256: null,
+    knowledge_bundle_spec_loaded: false,
     checked_at: new Date().toISOString(),
     failures,
   };
@@ -276,6 +284,12 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     const token = await installationToken(appJwt);
     receipt.remote_head = await remoteHead(token);
     receipt.remote_ssot_sha256 = await sha256Hex(await remoteSsotBytes(token));
+
+    if (artifactDescriptor?.artifact_type === "knowledge_bundle") {
+      const specBytes = await remoteFileBytes(token, KNOWLEDGE_BUNDLE_SPEC_PATH, receipt.remote_head);
+      receipt.knowledge_bundle_spec_sha256 = await sha256Hex(specBytes);
+      receipt.knowledge_bundle_spec_loaded = true;
+    }
 
     if (receipt.remote_ssot_sha256 !== EXPECTED_SHA256) {
       failures.push(`SSOT SHA256 expected ${EXPECTED_SHA256}, got ${receipt.remote_ssot_sha256}`);
