@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sina-governance/verifier/brain-config-artifact-descriptor-schema-v0.1",
+  "title": "Brain Config Artifact Descriptor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "artifact_path",
+    "proposed_sha256",
+    "base_sha256",
+    "author_id",
+    "subject",
+    "schema_valid",
+    "validator_runtime"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "knowledge_bundle"
+    },
+    "artifact_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposed_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "base_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "author_id": {
+      "const": "sandbox"
+    },
+    "subject": {
+      "const": "live Worker"
+    },
+    "schema_valid": {
+      "type": "boolean"
+    },
+    "validator_runtime": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

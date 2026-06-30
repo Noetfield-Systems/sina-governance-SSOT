@@ -7,6 +7,17 @@ const SSOT_PATH = "ssot/strategy-ssot-v6-split.md";
 const EXPECTED_SHA256 = "1ba4a793dba183388afd244ea21e850cad879c78824f78603e961070ae9b3af4";
 const GITHUB_API = "https://api.github.com";
 const SECONDARY_CF_ACCOUNT_ID = "b7282b4a5c17b84d62e3ef8866b878f8";
+const ARTIFACT_DESCRIPTOR_SCHEMA = "sina-governance/verifier/brain-config-artifact-descriptor-schema-v0.1";
+const ARTIFACT_DESCRIPTOR_FIELDS = [
+  "artifact_type",
+  "artifact_path",
+  "proposed_sha256",
+  "base_sha256",
+  "author_id",
+  "subject",
+  "schema_valid",
+  "validator_runtime",
+];
 
 function base64Url(input) {
   const bytes = input instanceof Uint8Array ? input : new TextEncoder().encode(input);
@@ -153,6 +164,58 @@ function jsonResponse(body, status = 200) {
   });
 }
 
+function validSha256(value) {
+  return typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
+}
+
+function validateArtifactDescriptor(descriptor) {
+  const failures = [];
+  if (!descriptor || typeof descriptor !== "object" || Array.isArray(descriptor)) {
+    return { descriptor: null, failures: ["artifact descriptor must be a JSON object"] };
+  }
+
+  for (const field of ARTIFACT_DESCRIPTOR_FIELDS) {
+    if (!(field in descriptor)) failures.push(`artifact descriptor missing ${field}`);
+  }
+
+  if (descriptor.artifact_type !== "knowledge_bundle") failures.push("artifact_type must be knowledge_bundle");
+  if (typeof descriptor.artifact_path !== "string" || descriptor.artifact_path.length === 0) {
+    failures.push("artifact_path must be a non-empty string");
+  }
+  if (!validSha256(descriptor.proposed_sha256)) failures.push("proposed_sha256 must be a lowercase SHA256 hex string");
+  if (!validSha256(descriptor.base_sha256)) failures.push("base_sha256 must be a lowercase SHA256 hex string");
+  if (descriptor.author_id !== "sandbox") failures.push("author_id must be sandbox");
+  if (descriptor.subject !== "live Worker") failures.push("subject must be live Worker");
+  if (typeof descriptor.schema_valid !== "boolean") failures.push("schema_valid must be boolean");
+  if (typeof descriptor.validator_runtime !== "string" || descriptor.validator_runtime.length === 0) {
+    failures.push("validator_runtime must be a non-empty string");
+  }
+
+  return {
+    descriptor: Object.fromEntries(ARTIFACT_DESCRIPTOR_FIELDS.map((field) => [field, descriptor[field]])),
+    failures,
+  };
+}
+
+async function readArtifactDescriptor(request) {
+  if (request.method !== "POST") return { descriptor: null, failures: [] };
+
+  const contentType = request.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    return { descriptor: null, failures: ["artifact descriptor POST must use application/json"] };
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return { descriptor: null, failures: ["artifact descriptor POST body must parse as JSON"] };
+  }
+
+  const descriptor = body.artifact_descriptor || body;
+  return validateArtifactDescriptor(descriptor);
+}
+
 function edgeMetadata(request, env) {
   const edgeExecutionProven = request.url.startsWith(env.WORKER_URL) && Boolean(request.headers.get("cf-ray"));
   const secondaryAccountProven = env.CF_ACCOUNT_ID === SECONDARY_CF_ACCOUNT_ID;
@@ -171,8 +234,9 @@ function edgeMetadata(request, env) {
   };
 }
 
-async function buildReceipt(request, env) {
+async function buildReceipt(request, env, artifactDescriptorResult) {
   const failures = [];
+  const artifactDescriptor = artifactDescriptorResult.descriptor;
   const receipt = {
     receipt_id: crypto.randomUUID(),
     receipt_type: "REMOTE_CHECK_ADVISORY",
@@ -191,9 +255,21 @@ async function buildReceipt(request, env) {
     expected_sha256: EXPECTED_SHA256,
     remote_head: null,
     remote_ssot_sha256: null,
+    artifact_descriptor_schema: ARTIFACT_DESCRIPTOR_SCHEMA,
+    artifact_descriptor: artifactDescriptor,
+    artifact_type: artifactDescriptor?.artifact_type || null,
+    artifact_path: artifactDescriptor?.artifact_path || null,
+    proposed_sha256: artifactDescriptor?.proposed_sha256 || null,
+    base_sha256: artifactDescriptor?.base_sha256 || null,
+    author_id: artifactDescriptor?.author_id || null,
+    subject: artifactDescriptor?.subject || null,
+    schema_valid: artifactDescriptor?.schema_valid ?? null,
+    validator_runtime: artifactDescriptor?.validator_runtime || null,
     checked_at: new Date().toISOString(),
     failures,
   };
+
+  failures.push(...artifactDescriptorResult.failures);
 
   try {
     const appJwt = await createJwt(env.GITHUB_APP_PRIVATE_KEY);
@@ -231,7 +307,8 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/run") {
-      const receipt = await buildReceipt(request, env);
+      const artifactDescriptorResult = await readArtifactDescriptor(request);
+      const receipt = await buildReceipt(request, env, artifactDescriptorResult);
       await writeReceipt(env, receipt);
       return jsonResponse(receipt, receipt.result === "MATCH" ? 200 : 502);
     }
