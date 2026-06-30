@@ -1,5 +1,10 @@
 .DS_Store
 prompts/
+.env
+.env.*
+!.env.example
+.sina/secrets/
+**/.sina/secrets/
 *.pem
 *.private-key.pem
 .wrangler/
