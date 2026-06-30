@@ -46,9 +46,12 @@ No PASS claimed.
 
 ## 5. Runtime rule split
 
-- R1/R2/R6/R7 are D4-portable
+- R1/R2 plus D4-RECEIPT-LAW and D4-AGENT-NO-SELF-VERIFY are D4-portable
 - R3/R4/R5 are control-panel only
-- no wholesale R1-R7 import into brain-governance specs
+- D4-RECEIPT-LAW means PASS/FAIL/BLOCKED is computed from receipt identity, path, artifact, and evidence fields
+- D4-AGENT-NO-SELF-VERIFY means author and subject must be structurally separated; an agent cannot certify its own work
+- R6/R7 in SourceA ops = Langfuse/Telegram, distinct from these D4 rules
+- no wholesale runtime-rule import into brain-governance specs
 - status: folded into D4 package / pending implementation
 
 ## 6. SourceA Brain Registry
@@ -83,7 +86,7 @@ No PASS claimed.
 
 ## 10. Open blockers
 
-- R6/R7 canonical source not located/recreated as committed source
+- D4 rule labels no longer reuse SourceA ops R6/R7 naming
 - SOURCEA_PHASE2_MUTATION_TRIALS canonical flag location unknown
 - independent verifier path does not exist
 - private permissioned remote not yet chosen

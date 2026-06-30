@@ -48,9 +48,12 @@ A D4 receipt must bind at minimum:
 
 ## Runtime Rule Split
 
-- R1/R2/R6/R7 are D4-portable.
+- R1/R2 plus D4-RECEIPT-LAW and D4-AGENT-NO-SELF-VERIFY are D4-portable.
 - R3/R4/R5 are control-panel only.
-- No wholesale R1-R7 import into brain-governance specs.
+- D4-RECEIPT-LAW means PASS/FAIL/BLOCKED is computed from receipt identity, path, artifact, and evidence fields.
+- D4-AGENT-NO-SELF-VERIFY means author and subject must be structurally separated; an agent cannot certify its own work.
+- R6/R7 in SourceA ops = Langfuse/Telegram, distinct from these D4 rules.
+- No wholesale runtime-rule import into brain-governance specs.
 - Runtime rule movement remains pending implementation.
 
 ## Non-Authority
