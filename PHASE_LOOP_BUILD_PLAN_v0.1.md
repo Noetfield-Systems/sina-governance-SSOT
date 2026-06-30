@@ -75,8 +75,11 @@ still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 
 ## STEP 9 — Parallelize
 SCOPE: run multiple candidate sandboxes against the same gate. Each gated independently.
-DONE: N candidates, same verifier/gate, all correctly PASS/FAIL'd; no candidate
-self-promotes.
+DONE: ✅ **DONE.** Four candidate receipts ran concurrently through the same
+promotion gate. Two PASS candidates were approved as dry-runs with
+`deploy_executed: false`; one FAIL and one tampered-independence candidate were
+refused with `deploy_executed: false`. MAIN account deployment metadata showed
+the live Brain still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 
 ## STEP 10 — Wire to live (FOUNDER DECIDE) ⚠️
 SCOPE: enable the loop to run unattended — sandboxes propose, verifier gates, PASS
@@ -97,4 +100,5 @@ merge these accounts.
 - Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
 authorized.
 
-*Status: STEP 8 DONE. Next proposed: Step 9 parallelize.*
+*Status: STEP 9 DONE. Next proposed: Step 10 wire to live, founder-gated and
+propose-only unless Sina explicitly authorizes.*

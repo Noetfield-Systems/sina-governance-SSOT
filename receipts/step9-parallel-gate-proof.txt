@@ -1,0 +1,77 @@
+# Step 9 Parallel Gate Proof
+
+Same gate used for all candidates: `gates/promotion_gate.py`.
+
+Run mode: four candidate receipts were submitted concurrently through the same
+promotion gate. PASS candidates were evaluated in dry-run mode. Blocked
+candidates were evaluated with `--execute-deploy` and a sentinel deploy command;
+the sentinel did not appear, proving the deploy command did not run.
+
+## candidate A PASS dry-run
+
+receipt_file: `receipts/step9-candidate-a-pass-receipt.json`
+exit_code: 0
+
+```
+PROMOTION_GATE: APPROVED_DRY_RUN
+receipt_id: step9-candidate-a-pass
+deploy_executed: false
+```
+
+## candidate B PASS dry-run
+
+receipt_file: `receipts/step9-candidate-b-pass-receipt.json`
+exit_code: 0
+
+```
+PROMOTION_GATE: APPROVED_DRY_RUN
+receipt_id: step9-candidate-b-pass
+deploy_executed: false
+```
+
+## candidate C FAIL refusal
+
+receipt_file: `receipts/step9-candidate-c-fail-receipt.json`
+exit_code: 2
+
+```
+PROMOTION_GATE: REFUSED
+receipt_id: step9-candidate-c-fail
+status: FAIL
+deploy_executed: false
+reasons:
+- receipt status is 'FAIL', not 'PASS'
+- receipt result is 'FAIL', not 'PASS'
+- receipt pass_claimed is not true
+- receipt has candidate_validation_failures
+- receipt has failures
+```
+
+## candidate D tampered refusal
+
+receipt_file: `receipts/step9-candidate-d-tampered-receipt.json`
+exit_code: 2
+
+```
+PROMOTION_GATE: REFUSED
+receipt_id: step9-candidate-d-tampered-independence
+status: PASS
+deploy_executed: false
+reasons:
+- secondary account is not proven
+```
+
+## No self-promotion
+
+Every gate output included `deploy_executed: false`. The blocked candidates were
+invoked with a sentinel deploy command, and no sentinel output appeared.
+
+Read-only MAIN account deployment check:
+
+```
+CLOUDFLARE_ACCOUNT_ID=0d0b967b77e2e5535455d39ff3dae72c wrangler deployments list --name sourcea-brain-chat-v1 --json
+```
+
+Result: `sourcea-brain-chat-v1` remains at 100% version
+`628ebc37-5c66-44e5-9cad-4e05fc2f3e92`, created
+`2026-06-30T08:51:36.099579Z`.
