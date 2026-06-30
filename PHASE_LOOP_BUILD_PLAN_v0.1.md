@@ -87,10 +87,15 @@ auto-deploys to the live Brain. This is the only irreversible step.
 HOLD: **autonomous deploy is NOT enabled.** Step 10a confirm-each-time mode may
 gate a deploy only after a receipt-specific founder confirmation. Full
 autonomous deploy remains separate Step 10b DECIDE.
-BLOCKED: SourceA deploy source is branch `fix/cloud-drain-queue-head-rewind`, 33
-commits ahead of main, with a dirty tree including the live Brain bundle target.
-Autonomous deploy must not run from non-main dirty state (R1/R2). Blocked on
-SourceA git-main hygiene, not on the loop.
+PHASE 0.2 / STEP 10a: confirm-each-time wiring is built. The gate verifies PASS
+receipt fields, clean `main` deploy source, `HEAD == origin/main`, and committed
+bundle SHA before printing the candidate and deploy command, then waits for the
+typed founder confirmation `CONFIRM DEPLOY`. No confirmation means no deploy.
+Confirmed deploys run `bash scripts/brain_cli_v1.sh deploy` from the verified
+SourceA root and record a deploy receipt. Unattended `--execute-deploy` is
+disabled.
+BLOCKED for live execution until a fresh verifier PASS signs the exact committed
+SourceA `origin/main` candidate. No Step 10a deploy has run yet.
 
 ---
 
@@ -105,5 +110,5 @@ merge these accounts.
 - Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
 authorized.
 
-*Status: STEP 10 HOLD. Confirm-each-time gate mode added; autonomous deploy NOT
-enabled. Blocked on SourceA git-main hygiene.*
+*Status: STEP 10a wired, not executed. Confirm-each-time only; autonomous deploy
+NOT enabled.*
