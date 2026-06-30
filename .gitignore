@@ -2,3 +2,4 @@
 prompts/
 *.pem
 *.private-key.pem
+.wrangler/

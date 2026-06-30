@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sina-governance-ssot-advisory",
+  "main": "workers/github-app-advisory/index.js",
+  "compatibility_date": "2026-06-30",
+  "account_id": "0d0b967b77e2e5535455d39ff3dae72c",
+  "vars": {
+    "CF_ACCOUNT_ID": "0d0b967b77e2e5535455d39ff3dae72c",
+    "WORKER_URL": "https://sina-governance-ssot-advisory.sina-kazemnezhad-ca.workers.dev"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "kv_namespaces": [
+    {
+      "binding": "RECEIPTS",
+      "id": "3c8a1c15f58f48fca9c1cdd442ddd4a9"
+    }
+  ]
+}
