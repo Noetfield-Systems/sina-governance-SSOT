@@ -1,0 +1,11 @@
+PROMOTION_GATE: REFUSED
+receipt_id: 94b98972-6663-479e-8fae-abad493bd9b1
+status: FAIL
+reasons:
+- receipt status is 'FAIL', not 'PASS'
+- receipt result is 'FAIL', not 'PASS'
+- receipt pass_claimed is not true
+- receipt has candidate_validation_failures
+- receipt has failures
+
+exit_code: 2
