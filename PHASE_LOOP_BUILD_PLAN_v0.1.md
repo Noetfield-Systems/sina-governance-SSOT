@@ -59,7 +59,11 @@ DONE: gate refuses a non-PASS candidate (proven with a deliberate FAIL).
 
 ## STEP 7 — One loop end-to-end (happy path)
 SCOPE: sandbox → SUBMITTED bundle → verifier PASS → gate → deployed to live Worker.
-DONE: the live Worker serves the new bundle; receipt chain intact and readable.
+DONE: ✅ **DONE by founder-approved MANUAL deploy.** Gate approved the candidate
+with receipt `f73c0ce8-e3d2-4c5f-be37-fad8ffdd1684`; founder then ran the
+live Brain deploy by hand from the SourceA repo. Live Brain baseline is version
+`628ebc37-5c66-44e5-9cad-4e05fc2f3e92`, serving 514 chunks with citations OK
+and `validate-sourcea-brain-knowledge-v1.sh` ALL PASS.
 
 ## STEP 8 — FAIL teeth
 SCOPE: feed a deliberately bad bundle (malformed/oversized). Confirm verifier FAILs it
@@ -84,5 +88,11 @@ deploys stay manual/founder-approved.
 - Steps 1–9: Cursor may run-prove-advance-propose after one-word go.
 - Step 10: founder-gated, no auto-wire without Sina DECIDE.
 - NOOS Brain is the same loop later — same gate, after SourceA loop is proven.
+- Live Brain stays on the MAIN Cloudflare account `0d0b967b...`; verifier stays
+on the secondary Cloudflare account `b7282b4a5c17b84d62e3ef8866b878f8`. Never
+merge these accounts.
+- Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
+authorized.
 
-*Status: PLAN. Step 1 done. Next: Step 2.*
+*Status: STEP 7 DONE by founder-approved manual deploy. Next proposed: Step 8
+gate refusal teeth.*
