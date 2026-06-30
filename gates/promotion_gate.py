@@ -9,6 +9,7 @@ from typing import Any
 
 
 REQUIRED_STATUS = "PASS"
+CONFIRM_PREFIX = "CONFIRM_DEPLOY:"
 
 
 def load_receipt(url: str) -> dict[str, Any]:
@@ -67,6 +68,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--expected-cf-account-id", required=True)
     parser.add_argument("--deploy-command", help="Command to run only after all PASS checks succeed.")
     parser.add_argument("--execute-deploy", action="store_true", help="Actually run --deploy-command after PASS checks.")
+    parser.add_argument("--confirm-each-time", action="store_true", help="Require a receipt-specific founder confirmation before deploying.")
+    parser.add_argument("--founder-confirmation", help="Receipt-specific confirmation token: CONFIRM_DEPLOY:<receipt_id>.")
     return parser.parse_args()
 
 
@@ -84,6 +87,28 @@ def main() -> int:
         for reason in reasons:
             print(f"- {reason}")
         return 2
+
+    if args.confirm_each_time:
+        expected_confirmation = f"{CONFIRM_PREFIX}{receipt.get('receipt_id')}"
+        if args.founder_confirmation != expected_confirmation:
+            print("PROMOTION_GATE: APPROVED_CONFIRMATION_REQUIRED")
+            print(f"receipt_id: {receipt.get('receipt_id')}")
+            print("deploy_executed: false")
+            print("required_confirmation:", expected_confirmation)
+            return 3
+        if not args.deploy_command:
+            print("PROMOTION_GATE: REFUSED")
+            print(f"receipt_id: {receipt.get('receipt_id')}")
+            print("deploy_executed: false")
+            print("reasons:")
+            print("- --confirm-each-time requires --deploy-command after founder confirmation")
+            return 2
+        print("PROMOTION_GATE: APPROVED_CONFIRMED_DEPLOY")
+        print(f"receipt_id: {receipt.get('receipt_id')}")
+        print("founder_confirmation: true")
+        result = subprocess.run(args.deploy_command, shell=True, check=False)
+        print(f"deploy_exit_code: {result.returncode}")
+        return result.returncode
 
     if not args.execute_deploy:
         print("PROMOTION_GATE: APPROVED_DRY_RUN")

@@ -84,8 +84,13 @@ the live Brain still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 ## STEP 10 — Wire to live (FOUNDER DECIDE) ⚠️
 SCOPE: enable the loop to run unattended — sandboxes propose, verifier gates, PASS
 auto-deploys to the live Brain. This is the only irreversible step.
-DONE: **propose only.** Cursor presents the wiring; Sina pulls the trigger. Until then,
-deploys stay manual/founder-approved.
+HOLD: **autonomous deploy is NOT enabled.** Step 10a confirm-each-time mode may
+gate a deploy only after a receipt-specific founder confirmation. Full
+autonomous deploy remains separate Step 10b DECIDE.
+BLOCKED: SourceA deploy source is branch `fix/cloud-drain-queue-head-rewind`, 33
+commits ahead of main, with a dirty tree including the live Brain bundle target.
+Autonomous deploy must not run from non-main dirty state (R1/R2). Blocked on
+SourceA git-main hygiene, not on the loop.
 
 ---
 
@@ -100,5 +105,5 @@ merge these accounts.
 - Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
 authorized.
 
-*Status: STEP 9 DONE. Next proposed: Step 10 wire to live, founder-gated and
-propose-only unless Sina explicitly authorizes.*
+*Status: STEP 10 HOLD. Confirm-each-time gate mode added; autonomous deploy NOT
+enabled. Blocked on SourceA git-main hygiene.*
