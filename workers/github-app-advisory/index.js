@@ -6,6 +6,7 @@ const BRANCH = "main";
 const SSOT_PATH = "ssot/strategy-ssot-v6-split.md";
 const EXPECTED_SHA256 = "1ba4a793dba183388afd244ea21e850cad879c78824f78603e961070ae9b3af4";
 const GITHUB_API = "https://api.github.com";
+const SECONDARY_CF_ACCOUNT_ID = "b7282b4a5c17b84d62e3ef8866b878f8";
 
 function base64Url(input) {
   const bytes = input instanceof Uint8Array ? input : new TextEncoder().encode(input);
@@ -153,6 +154,9 @@ function jsonResponse(body, status = 200) {
 }
 
 function edgeMetadata(request, env) {
+  const edgeExecutionProven = request.url.startsWith(env.WORKER_URL) && Boolean(request.headers.get("cf-ray"));
+  const secondaryAccountProven = env.CF_ACCOUNT_ID === SECONDARY_CF_ACCOUNT_ID;
+
   return {
     cf_account_id: env.CF_ACCOUNT_ID,
     worker_url: env.WORKER_URL,
@@ -161,6 +165,9 @@ function edgeMetadata(request, env) {
     edge_request_timestamp: new Date().toISOString(),
     cf_colo: request.cf?.colo || null,
     cf_tls_version: request.cf?.tlsVersion || null,
+    edge_execution_proven: edgeExecutionProven,
+    secondary_account_proven: secondaryAccountProven,
+    pass_eligible: edgeExecutionProven && secondaryAccountProven,
   };
 }
 
@@ -204,6 +211,10 @@ async function buildReceipt(request, env) {
   if (failures.length === 0) {
     receipt.status = "REMOTE_CHECK_ADVISORY_MATCH";
     receipt.result = "MATCH";
+  }
+
+  if (receipt.pass_eligible) {
+    receipt.runtime_separation = "SECONDARY_CF_ACCOUNT_EDGE_PROVEN";
   }
 
   return receipt;
