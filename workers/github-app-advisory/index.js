@@ -9,6 +9,11 @@ const GITHUB_API = "https://api.github.com";
 const SECONDARY_CF_ACCOUNT_ID = "b7282b4a5c17b84d62e3ef8866b878f8";
 const ARTIFACT_DESCRIPTOR_SCHEMA = "sina-governance/verifier/brain-config-artifact-descriptor-schema-v0.1";
 const KNOWLEDGE_BUNDLE_SPEC_PATH = "verifier/knowledge-bundle-spec-v0.1.md";
+const DEFAULT_CANDIDATE_REPO = `${OWNER}/${REPO}`;
+const ALLOWED_CANDIDATE_REPOS = new Set([
+  DEFAULT_CANDIDATE_REPO,
+  `${OWNER}/SourceA`,
+]);
 const ARTIFACT_DESCRIPTOR_FIELDS = [
   "artifact_type",
   "artifact_path",
@@ -140,15 +145,15 @@ async function installationToken(appJwt) {
   return response.token;
 }
 
-async function remoteHead(token) {
-  const response = await githubJson(`/repos/${OWNER}/${REPO}/git/ref/heads/${BRANCH}`, token);
+async function remoteHead(token, repo = DEFAULT_CANDIDATE_REPO) {
+  const response = await githubJson(`/repos/${repo}/git/ref/heads/${BRANCH}`, token);
   const sha = response?.object?.sha;
   if (!sha) throw new Error("GitHub ref response did not include object.sha");
   return sha;
 }
 
-async function remoteFileBytes(token, path, ref = BRANCH) {
-  const response = await githubJson(`/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${ref}`, token);
+async function remoteFileBytes(token, repo, path, ref = BRANCH) {
+  const response = await githubJson(`/repos/${repo}/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${ref}`, token);
   if (response.encoding !== "base64" || !response.content) {
     throw new Error("GitHub contents response did not include base64 content");
   }
@@ -156,7 +161,7 @@ async function remoteFileBytes(token, path, ref = BRANCH) {
 }
 
 async function remoteSsotBytes(token) {
-  return remoteFileBytes(token, SSOT_PATH);
+  return remoteFileBytes(token, DEFAULT_CANDIDATE_REPO, SSOT_PATH);
 }
 
 async function sha256Hex(bytes) {
@@ -204,9 +209,18 @@ function validateArtifactDescriptor(descriptor, body = {}) {
   if (typeof descriptor.validator_runtime !== "string" || descriptor.validator_runtime.length === 0) {
     failures.push("validator_runtime must be a non-empty string");
   }
+  const candidateRepo = optionalString(body.candidate_repo || descriptor.candidate_repo) || DEFAULT_CANDIDATE_REPO;
+  if (!ALLOWED_CANDIDATE_REPOS.has(candidateRepo)) {
+    failures.push(`candidate_repo must be one of ${[...ALLOWED_CANDIDATE_REPOS].join(", ")}`);
+  }
 
   return {
-    descriptor: Object.fromEntries(ARTIFACT_DESCRIPTOR_FIELDS.map((field) => [field, descriptor[field]])),
+    descriptor: {
+      ...Object.fromEntries(ARTIFACT_DESCRIPTOR_FIELDS.map((field) => [field, descriptor[field]])),
+      candidate_repo: candidateRepo,
+      candidate_ref: optionalString(body.candidate_ref || descriptor.candidate_ref),
+    },
+    candidate_repo: candidateRepo,
     candidate_ref: optionalString(body.candidate_ref || descriptor.candidate_ref),
     candidate_path: optionalString(body.candidate_path || descriptor.candidate_path),
     failures,
@@ -383,6 +397,7 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     remote_ssot_sha256: null,
     artifact_descriptor_schema: ARTIFACT_DESCRIPTOR_SCHEMA,
     artifact_descriptor: artifactDescriptor,
+    candidate_repo: artifactDescriptorResult.candidate_repo || DEFAULT_CANDIDATE_REPO,
     artifact_type: artifactDescriptor?.artifact_type || null,
     artifact_path: artifactDescriptor?.artifact_path || null,
     proposed_sha256: artifactDescriptor?.proposed_sha256 || null,
@@ -412,16 +427,16 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
   try {
     const appJwt = await createJwt(env.GITHUB_APP_PRIVATE_KEY);
     const token = await installationToken(appJwt);
-    receipt.remote_head = await remoteHead(token);
+    receipt.remote_head = await remoteHead(token, DEFAULT_CANDIDATE_REPO);
     receipt.remote_ssot_sha256 = await sha256Hex(await remoteSsotBytes(token));
 
     if (artifactDescriptor?.artifact_type === "knowledge_bundle") {
-      const specBytes = await remoteFileBytes(token, KNOWLEDGE_BUNDLE_SPEC_PATH, receipt.remote_head);
+      const specBytes = await remoteFileBytes(token, DEFAULT_CANDIDATE_REPO, KNOWLEDGE_BUNDLE_SPEC_PATH, receipt.remote_head);
       receipt.knowledge_bundle_spec_sha256 = await sha256Hex(specBytes);
       receipt.knowledge_bundle_spec_loaded = true;
 
       if (artifactDescriptorResult.candidate_ref && artifactDescriptorResult.candidate_path) {
-        const candidateBytes = await remoteFileBytes(token, artifactDescriptorResult.candidate_path, artifactDescriptorResult.candidate_ref);
+        const candidateBytes = await remoteFileBytes(token, receipt.candidate_repo, artifactDescriptorResult.candidate_path, artifactDescriptorResult.candidate_ref);
         const validation = await validateKnowledgeBundleBytes(candidateBytes, artifactDescriptor.proposed_sha256);
         receipt.candidate_sha256 = validation.actualSha256;
         receipt.candidate_validation_checks = validation.checks;
@@ -477,7 +492,7 @@ export default {
       const artifactDescriptorResult = await readArtifactDescriptor(request);
       const receipt = await buildReceipt(request, env, artifactDescriptorResult);
       await writeReceipt(env, receipt);
-      return jsonResponse(receipt, receipt.result === "MATCH" ? 200 : 502);
+      return jsonResponse(receipt, ["MATCH", "PASS"].includes(receipt.result) ? 200 : 502);
     }
 
     if (url.pathname === "/receipt/latest") {

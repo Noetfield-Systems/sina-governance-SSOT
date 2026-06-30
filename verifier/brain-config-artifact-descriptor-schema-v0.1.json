@@ -42,6 +42,17 @@
     "validator_runtime": {
       "type": "string",
       "minLength": 1
+    },
+    "candidate_repo": {
+      "type": "string",
+      "enum": [
+        "kazemnezhadsina144-dot/sina-governance-SSOT",
+        "kazemnezhadsina144-dot/SourceA"
+      ]
+    },
+    "candidate_ref": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }
