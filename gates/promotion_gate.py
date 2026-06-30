@@ -13,6 +13,7 @@ from typing import Any
 
 REQUIRED_STATUS = "PASS"
 CONFIRM_TEXT = "CONFIRM DEPLOY"
+REFRESHING_BRAIN_DEPLOY_COMMAND = "bash scripts/brain_cli_v1.sh deploy"
 
 
 def run_text(command: list[str], cwd: Path | None = None) -> str:
@@ -136,7 +137,13 @@ def latest_live_version(version_command: str | None) -> str | None:
 def fetch_health(health_url: str | None) -> dict[str, Any] | None:
     if not health_url:
         return None
-    request = urllib.request.Request(health_url, headers={"Accept": "application/json"})
+    request = urllib.request.Request(
+        health_url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "sina-governance-promotion-gate",
+        },
+    )
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.loads(response.read().decode("utf-8"))
 
@@ -166,6 +173,8 @@ def write_deploy_receipt(
         "health_result": health,
         "deploy_exit_code": deploy_exit_code,
         "deploy_executed": deploy_exit_code == 0,
+        "founder_confirmation": CONFIRM_TEXT,
+        "confirmed_by": "founder",
     }
     output_path.write_text(json.dumps(deploy_receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -219,6 +228,13 @@ def main() -> int:
             print("deploy_executed: false")
             print("reasons:")
             print("- --confirm-each-time requires --deploy-command after founder confirmation")
+            return 2
+        if args.deploy_command.strip() == REFRESHING_BRAIN_DEPLOY_COMMAND:
+            print("PROMOTION_GATE: REFUSED")
+            print(f"receipt_id: {receipt.get('receipt_id')}")
+            print("deploy_executed: false")
+            print("reasons:")
+            print("- refreshing Brain deploy command is not allowed; use deploy-verified/deploy-no-refresh")
             return 2
 
         pre_version = latest_live_version(args.live_version_command)

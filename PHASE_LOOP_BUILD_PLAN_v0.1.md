@@ -91,9 +91,10 @@ PHASE 0.2 / STEP 10a: confirm-each-time wiring is built. The gate verifies PASS
 receipt fields, clean `main` deploy source, `HEAD == origin/main`, and committed
 bundle SHA before printing the candidate and deploy command, then waits for the
 typed founder confirmation `CONFIRM DEPLOY`. No confirmation means no deploy.
-Confirmed deploys run `bash scripts/brain_cli_v1.sh deploy` from the verified
-SourceA root and record a deploy receipt. Unattended `--execute-deploy` is
-disabled.
+Confirmed deploys run `bash scripts/brain_cli_v1.sh deploy-verified` from the
+verified SourceA root and record a deploy receipt. This deploy mode must not
+refresh or regenerate the bundle; it uploads the already committed and
+verifier-signed artifact as-is. Unattended `--execute-deploy` is disabled.
 BLOCKED for live execution until a fresh verifier PASS signs the exact committed
 SourceA `origin/main` candidate. No Step 10a deploy has run yet.
 
