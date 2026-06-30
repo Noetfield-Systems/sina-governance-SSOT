@@ -1,2 +1,4 @@
 .DS_Store
 prompts/
+*.pem
+*.private-key.pem
