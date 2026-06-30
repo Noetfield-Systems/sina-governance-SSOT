@@ -1,0 +1,23 @@
+{
+  "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+  "candidate_ref": "2b2ccca1bcba31ade254f742772770ef2e69300f",
+  "candidate_sha256": "32b4b83ae9ff7cef83d946a5815b78b7149b3b2ca498695535044841aa9e9cac",
+  "confirmed_by": "founder",
+  "deploy_executed": true,
+  "deploy_exit_code": 0,
+  "founder_confirmation": "CONFIRM DEPLOY",
+  "health_result": {
+    "at": "2026-06-30T12:32:12Z",
+    "ok": true,
+    "openrouter_ready": true,
+    "schema": "sourcea-brain-chat-health-v1",
+    "service": "sourcea-brain-chat-v1",
+    "trace_storage_ready": false
+  },
+  "new_live_version_id": "df87822b-6cc6-462f-bc62-87170aaf9903",
+  "post_live_version_id": "df87822b-6cc6-462f-bc62-87170aaf9903",
+  "pre_live_version_id": "b0b2dbdf-f5e3-4459-88d9-114a739c6a80",
+  "receipt_type": "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
+  "recorded_at": "2026-06-30T12:32:12.250241+00:00",
+  "verifier_receipt_id": "4ac1c659-2d0f-48c1-bb6e-476cf3b7f222"
+}

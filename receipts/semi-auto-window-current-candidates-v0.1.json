@@ -1,0 +1,42 @@
+{
+  "receipt_type": "SEMI_AUTO_WINDOW_CANDIDATE_CLASSIFICATION",
+  "recorded_at": "2026-06-30T12:36:00Z",
+  "window": "0.5b semi-auto 2hr bounded window",
+  "hard_bounds": {
+    "bundle_artifacts_only": true,
+    "sourcea_phase2_mutation_trials_enabled": false,
+    "token_auth_only": true,
+    "no_token_values_recorded": true
+  },
+  "live_start_version_id": "df87822b-6cc6-462f-bc62-87170aaf9903",
+  "candidates": [
+    {
+      "ref": "origin/main",
+      "commit": "2b2ccca1bcba31ade254f742772770ef2e69300f",
+      "bundle_sha256": "32b4b83ae9ff7cef83d946a5815b78b7149b3b2ca498695535044841aa9e9cac",
+      "verifier_receipt_id": "4ac1c659-2d0f-48c1-bb6e-476cf3b7f222",
+      "verifier_verdict": "PASS",
+      "gate_result": "DEPLOYED_BEFORE_WINDOW_UPDATE",
+      "live_version_id": "df87822b-6cc6-462f-bc62-87170aaf9903",
+      "what_changed": "Brain public identity wording now says the guide is grounded in retrieved sources, live tools, guardrails, and clear uncertainty handling."
+    },
+    {
+      "ref": "origin/phase-0.5b-bad-bundle-candidate",
+      "commit": "c01a030ee506e4c2f162090fe197ad6e57d6a9dc",
+      "bundle_sha256": "02e4f184a0b64c48b38b68e3389b30fad99f6eff1c11ef8e574a38041fa11e44",
+      "verifier_receipt_id": "647e2ed2-cd61-4916-82f9-5a4879b0f370",
+      "verifier_verdict": "FAIL",
+      "gate_result": "REFUSED",
+      "deploy_executed": false,
+      "block_reason": "Malformed knowledge bundle JSON; candidate bundle must parse as JSON."
+    },
+    {
+      "ref": "origin/fix/cloud-drain-queue-head-rewind",
+      "commit": "ecd9084c49ff0f8616096c77d49121af7e259b38",
+      "verifier_verdict": "NOT_RUN",
+      "gate_result": "BLOCKED_BEFORE_VERIFIER",
+      "deploy_executed": false,
+      "block_reason": "Ref changes non-bundle files including .gitignore, reports, scripts, source guard files, registry files, and many crawled/distilled knowledge inputs; violates bundle-artifacts-only bound."
+    }
+  ]
+}
