@@ -183,6 +183,10 @@ function validSha256(value) {
   return typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 }
 
+function validHex(value, minLength = 16) {
+  return typeof value === "string" && value.length >= minLength && /^[a-f0-9]+$/.test(value);
+}
+
 function optionalString(value) {
   return typeof value === "string" && value.length > 0 ? value : null;
 }
@@ -289,12 +293,23 @@ function validateKnowledgeBundleBytes(bytes, expectedSha256) {
   }
 
   if (checks.root_object) {
-    const requiredKeys = ["version", "generated_at", "manifest_sha256", "chunks"];
-    const missing = requiredKeys.filter((key) => !(key in bundle));
-    if (missing.length === 0 && typeof bundle.version === "string" && bundle.version && typeof bundle.generated_at === "string" && bundle.generated_at && validSha256(bundle.manifest_sha256)) {
+    const legacyShape =
+      typeof bundle.version === "string" &&
+      bundle.version &&
+      typeof bundle.generated_at === "string" &&
+      bundle.generated_at &&
+      validSha256(bundle.manifest_sha256);
+    const sourceaShape =
+      typeof bundle.bundle_version === "string" &&
+      bundle.bundle_version &&
+      typeof bundle.generated_at === "string" &&
+      bundle.generated_at &&
+      Number.isInteger(bundle.chunk_count);
+
+    if ((legacyShape || sourceaShape) && "chunks" in bundle) {
       checks.required_top_level_keys = true;
     } else {
-      failures.push(`candidate bundle top-level keys invalid${missing.length ? `; missing ${missing.join(", ")}` : ""}`);
+      failures.push("candidate bundle top-level keys invalid");
     }
 
     if (Array.isArray(bundle.chunks) && bundle.chunks.length > 0) {
@@ -315,32 +330,44 @@ function validateKnowledgeBundleBytes(bytes, expectedSha256) {
         continue;
       }
 
-      for (const key of ["id", "source", "title", "text"]) {
-        if (typeof chunk[key] !== "string" || chunk[key].length === 0) {
-          failures.push(`chunk ${index} ${key} must be a non-empty string`);
-          allMetadataPresent = false;
-        }
+      const legacyChunk =
+        typeof chunk.id === "string" &&
+        chunk.id &&
+        typeof chunk.source === "string" &&
+        chunk.source &&
+        typeof chunk.title === "string" &&
+        chunk.title &&
+        typeof chunk.text === "string" &&
+        chunk.text &&
+        chunk.metadata &&
+        typeof chunk.metadata === "object" &&
+        !Array.isArray(chunk.metadata) &&
+        typeof chunk.metadata.source_path === "string" &&
+        chunk.metadata.source_path &&
+        validSha256(chunk.metadata.content_sha256);
+
+      const sourceaChunk =
+        typeof chunk.id === "string" &&
+        chunk.id &&
+        typeof chunk.source_path === "string" &&
+        chunk.source_path &&
+        typeof chunk.content === "string" &&
+        chunk.content &&
+        validHex(chunk.content_hash) &&
+        typeof chunk.lane === "string" &&
+        chunk.lane &&
+        typeof chunk.kind === "string" &&
+        chunk.kind;
+
+      if (!legacyChunk && !sourceaChunk) {
+        failures.push(`chunk ${index} must match a supported knowledge bundle chunk shape`);
+        allMetadataPresent = false;
+        allContentHashesValid = false;
       }
 
-      if (typeof chunk.text === "string" && chunk.text.length > KNOWLEDGE_BUNDLE_LIMITS.maxChunkTextLength) {
+      const text = typeof chunk.text === "string" ? chunk.text : chunk.content;
+      if (typeof text === "string" && text.length > KNOWLEDGE_BUNDLE_LIMITS.maxChunkTextLength) {
         failures.push(`chunk ${index} text exceeds maximum length`);
-      }
-
-      if (!chunk.metadata || typeof chunk.metadata !== "object" || Array.isArray(chunk.metadata)) {
-        failures.push(`chunk ${index} metadata must be an object`);
-        allMetadataPresent = false;
-        allContentHashesValid = false;
-        continue;
-      }
-
-      if (typeof chunk.metadata.source_path !== "string" || chunk.metadata.source_path.length === 0) {
-        failures.push(`chunk ${index} metadata.source_path must be a non-empty string`);
-        allMetadataPresent = false;
-      }
-      if (!validSha256(chunk.metadata.content_sha256)) {
-        failures.push(`chunk ${index} metadata.content_sha256 must be a lowercase SHA256 hex string`);
-        allMetadataPresent = false;
-        allContentHashesValid = false;
       }
     }
     checks.chunk_metadata_present = allMetadataPresent;

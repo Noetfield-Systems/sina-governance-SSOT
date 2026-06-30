@@ -14,11 +14,18 @@ This spec defines the minimum valid shape for a SourceA Brain Worker knowledge b
 
 The knowledge bundle MUST be a UTF-8 JSON object.
 
-Top-level required keys:
+Top-level required keys for the original proposal shape:
 
 - `version`: non-empty string
 - `generated_at`: non-empty string
 - `manifest_sha256`: lowercase 64-character SHA256 hex string
+- `chunks`: non-empty array of chunk objects
+
+Top-level required keys for the current SourceA Brain bundle shape:
+
+- `bundle_version`: non-empty string
+- `generated_at`: non-empty string
+- `chunk_count`: integer
 - `chunks`: non-empty array of chunk objects
 
 No top-level executable code, functions, scripts, or HTML event handlers are valid bundle content.
@@ -42,7 +49,7 @@ The verifier MUST reject the bundle unless:
 
 ## Required Chunk Metadata
 
-Every chunk object MUST include:
+Every original proposal chunk object MUST include:
 
 - `id`: non-empty string
 - `source`: non-empty string
@@ -54,6 +61,15 @@ Every chunk `metadata` object MUST include:
 
 - `source_path`: non-empty string
 - `content_sha256`: lowercase 64-character SHA256 hex string
+
+Every current SourceA Brain chunk object MUST include:
+
+- `id`: non-empty string
+- `source_path`: non-empty string
+- `content`: non-empty string
+- `content_hash`: lowercase hex string, minimum 16 characters
+- `lane`: non-empty string
+- `kind`: non-empty string
 
 ## Hash Rules
 
