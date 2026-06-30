@@ -68,7 +68,10 @@ and `validate-sourcea-brain-knowledge-v1.sh` ALL PASS.
 ## STEP 8 — FAIL teeth
 SCOPE: feed a deliberately bad bundle (malformed/oversized). Confirm verifier FAILs it
 and the gate refuses deploy. Live Worker stays on the old good bundle.
-DONE: bad candidate blocked, receipt shows FAIL/BLOCKED, live unchanged.
+DONE: ✅ **DONE.** Gate refused both the deliberate FAIL receipt and a tampered
+PASS-claim receipt with `secondary_account_proven: false`; both showed
+`deploy_executed: false`. MAIN account deployment metadata showed the live Brain
+still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 
 ## STEP 9 — Parallelize
 SCOPE: run multiple candidate sandboxes against the same gate. Each gated independently.
@@ -94,5 +97,4 @@ merge these accounts.
 - Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
 authorized.
 
-*Status: STEP 7 DONE by founder-approved manual deploy. Next proposed: Step 8
-gate refusal teeth.*
+*Status: STEP 8 DONE. Next proposed: Step 9 parallelize.*

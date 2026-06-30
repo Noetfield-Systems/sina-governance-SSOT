@@ -79,6 +79,7 @@ def main() -> int:
         print("PROMOTION_GATE: REFUSED")
         print(f"receipt_id: {receipt.get('receipt_id')}")
         print(f"status: {receipt.get('status')}")
+        print("deploy_executed: false")
         print("reasons:")
         for reason in reasons:
             print(f"- {reason}")
