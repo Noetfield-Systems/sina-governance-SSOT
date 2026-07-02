@@ -9,6 +9,14 @@ const GITHUB_API = "https://api.github.com";
 const SECONDARY_CF_ACCOUNT_ID = "b7282b4a5c17b84d62e3ef8866b878f8";
 const ARTIFACT_DESCRIPTOR_SCHEMA = "sina-governance/verifier/brain-config-artifact-descriptor-schema-v0.1";
 const KNOWLEDGE_BUNDLE_SPEC_PATH = "verifier/knowledge-bundle-spec-v0.1.md";
+const BRAIN_WORKER_CODE_SPEC_PATH = "verifier/brain-worker-code-spec-v0.1.md";
+const BRAIN_WORKER_BUNDLE_PATH = "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json";
+const BRAIN_WORKER_CODE_PATHS = [
+  "cloud/workers/sourcea-brain-chat-v1/src/index.js",
+  "cloud/workers/sourcea-brain-chat-v1/src/guardrails.js",
+  "cloud/workers/sourcea-brain-chat-v1/src/brain-core-gate-v1.js",
+];
+const ALLOWED_ARTIFACT_TYPES = new Set(["knowledge_bundle", "brain_worker_bundle"]);
 const DEFAULT_CANDIDATE_REPO = `${OWNER}/${REPO}`;
 const ALLOWED_CANDIDATE_REPOS = new Set([
   DEFAULT_CANDIDATE_REPO,
@@ -201,7 +209,15 @@ function validateArtifactDescriptor(descriptor, body = {}) {
     if (!(field in descriptor)) failures.push(`artifact descriptor missing ${field}`);
   }
 
-  if (descriptor.artifact_type !== "knowledge_bundle") failures.push("artifact_type must be knowledge_bundle");
+  if (!ALLOWED_ARTIFACT_TYPES.has(descriptor.artifact_type)) {
+    failures.push("artifact_type must be knowledge_bundle or brain_worker_bundle");
+  }
+  if (descriptor.artifact_type === "brain_worker_bundle") {
+    if (!validSha256(descriptor.worker_code_sha256)) failures.push("worker_code_sha256 must be a lowercase SHA256 hex string");
+    if (!validSha256(descriptor.knowledge_bundle_sha256)) {
+      failures.push("knowledge_bundle_sha256 must be a lowercase SHA256 hex string");
+    }
+  }
   if (typeof descriptor.artifact_path !== "string" || descriptor.artifact_path.length === 0) {
     failures.push("artifact_path must be a non-empty string");
   }
@@ -221,12 +237,20 @@ function validateArtifactDescriptor(descriptor, body = {}) {
   return {
     descriptor: {
       ...Object.fromEntries(ARTIFACT_DESCRIPTOR_FIELDS.map((field) => [field, descriptor[field]])),
+      ...(descriptor.artifact_type === "brain_worker_bundle"
+        ? {
+            worker_code_sha256: descriptor.worker_code_sha256,
+            knowledge_bundle_sha256: descriptor.knowledge_bundle_sha256,
+          }
+        : {}),
       candidate_repo: candidateRepo,
       candidate_ref: optionalString(body.candidate_ref || descriptor.candidate_ref),
     },
     candidate_repo: candidateRepo,
     candidate_ref: optionalString(body.candidate_ref || descriptor.candidate_ref),
-    candidate_path: optionalString(body.candidate_path || descriptor.candidate_path),
+    candidate_path:
+      optionalString(body.candidate_path || descriptor.candidate_path) ||
+      (descriptor.artifact_type === "brain_worker_bundle" ? BRAIN_WORKER_BUNDLE_PATH : null),
     failures,
   };
 }
@@ -382,6 +406,45 @@ function validateKnowledgeBundleBytes(bytes, expectedSha256) {
   });
 }
 
+async function sha256FromSortedHashMap(map) {
+  const sortedKeys = Object.keys(map).sort();
+  const payload = JSON.stringify(Object.fromEntries(sortedKeys.map((key) => [key, map[key]])));
+  return sha256Hex(new TextEncoder().encode(payload));
+}
+
+async function validateBrainWorkerBundle(token, repo, ref, descriptor) {
+  const failures = [];
+  const pathHashes = {};
+  for (const path of [...BRAIN_WORKER_CODE_PATHS, BRAIN_WORKER_BUNDLE_PATH]) {
+    const bytes = await remoteFileBytes(token, repo, path, ref);
+    pathHashes[path] = await sha256Hex(bytes);
+  }
+  const workerMap = Object.fromEntries(BRAIN_WORKER_CODE_PATHS.map((path) => [path, pathHashes[path]]));
+  const workerCodeActual = await sha256FromSortedHashMap(workerMap);
+  const bundleBytes = await remoteFileBytes(token, repo, BRAIN_WORKER_BUNDLE_PATH, ref);
+  const bundleValidation = await validateKnowledgeBundleBytes(bundleBytes, descriptor.knowledge_bundle_sha256);
+  const proposedActual = await sha256FromSortedHashMap(pathHashes);
+
+  if (workerCodeActual !== descriptor.worker_code_sha256) {
+    failures.push(`worker_code_sha256 expected ${descriptor.worker_code_sha256}, got ${workerCodeActual}`);
+  }
+  if (proposedActual !== descriptor.proposed_sha256) {
+    failures.push(`proposed_sha256 expected ${descriptor.proposed_sha256}, got ${proposedActual}`);
+  }
+  failures.push(...bundleValidation.failures);
+
+  return {
+    candidate_sha256: bundleValidation.actualSha256,
+    knowledge_bundle_sha256: bundleValidation.actualSha256,
+    worker_code_sha256: workerCodeActual,
+    proposed_sha256: proposedActual,
+    path_hashes: pathHashes,
+    candidate_validation_checks: bundleValidation.checks,
+    candidate_validation_failures: bundleValidation.failures,
+    failures,
+  };
+}
+
 function edgeMetadata(request, env) {
   const edgeExecutionProven = request.url.startsWith(env.WORKER_URL) && Boolean(request.headers.get("cf-ray"));
   const secondaryAccountProven = env.CF_ACCOUNT_ID === SECONDARY_CF_ACCOUNT_ID;
@@ -436,6 +499,11 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
     knowledge_bundle_spec_path: artifactDescriptor?.artifact_type === "knowledge_bundle" ? KNOWLEDGE_BUNDLE_SPEC_PATH : null,
     knowledge_bundle_spec_sha256: null,
     knowledge_bundle_spec_loaded: false,
+    brain_worker_code_spec_path: artifactDescriptor?.artifact_type === "brain_worker_bundle" ? BRAIN_WORKER_CODE_SPEC_PATH : null,
+    brain_worker_code_spec_sha256: null,
+    brain_worker_code_spec_loaded: false,
+    worker_code_sha256: artifactDescriptor?.worker_code_sha256 || null,
+    knowledge_bundle_sha256: artifactDescriptor?.knowledge_bundle_sha256 || null,
     candidate_ref: artifactDescriptorResult.candidate_ref,
     candidate_path: artifactDescriptorResult.candidate_path,
     candidate_sha256: null,
@@ -446,9 +514,9 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
   };
 
   failures.push(...artifactDescriptorResult.failures);
-  if (artifactDescriptor?.artifact_type === "knowledge_bundle") {
-    if (!artifactDescriptorResult.candidate_ref) failures.push("candidate_ref is required for knowledge_bundle verification");
-    if (!artifactDescriptorResult.candidate_path) failures.push("candidate_path is required for knowledge_bundle verification");
+  if (artifactDescriptor?.artifact_type === "knowledge_bundle" || artifactDescriptor?.artifact_type === "brain_worker_bundle") {
+    if (!artifactDescriptorResult.candidate_ref) failures.push("candidate_ref is required for artifact verification");
+    if (!artifactDescriptorResult.candidate_path) failures.push("candidate_path is required for artifact verification");
   }
 
   try {
@@ -468,6 +536,29 @@ async function buildReceipt(request, env, artifactDescriptorResult) {
         receipt.candidate_sha256 = validation.actualSha256;
         receipt.candidate_validation_checks = validation.checks;
         receipt.candidate_validation_failures = validation.failures;
+        failures.push(...validation.failures);
+      }
+    }
+
+    if (artifactDescriptor?.artifact_type === "brain_worker_bundle") {
+      const specBytes = await remoteFileBytes(token, DEFAULT_CANDIDATE_REPO, BRAIN_WORKER_CODE_SPEC_PATH, receipt.remote_head);
+      receipt.brain_worker_code_spec_sha256 = await sha256Hex(specBytes);
+      receipt.brain_worker_code_spec_loaded = true;
+
+      if (artifactDescriptorResult.candidate_ref) {
+        const validation = await validateBrainWorkerBundle(
+          token,
+          receipt.candidate_repo,
+          artifactDescriptorResult.candidate_ref,
+          artifactDescriptor,
+        );
+        receipt.candidate_sha256 = validation.candidate_sha256;
+        receipt.worker_code_sha256 = validation.worker_code_sha256;
+        receipt.knowledge_bundle_sha256 = validation.knowledge_bundle_sha256;
+        receipt.proposed_sha256 = validation.proposed_sha256;
+        receipt.worker_path_hashes = validation.path_hashes;
+        receipt.candidate_validation_checks = validation.candidate_validation_checks;
+        receipt.candidate_validation_failures = validation.candidate_validation_failures;
         failures.push(...validation.failures);
       }
     }

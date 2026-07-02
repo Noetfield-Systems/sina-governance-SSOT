@@ -11,6 +11,13 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from gates.cf_tokens import load_cloudflare_tokens
+
+load_cloudflare_tokens()
 
 APP_ID = "4179901"
 INSTALLATION_ID = "143449507"
