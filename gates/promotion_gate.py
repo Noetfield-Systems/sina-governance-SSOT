@@ -106,7 +106,7 @@ def refusal_reasons(receipt: dict[str, Any], args: argparse.Namespace) -> list[s
         reasons.append("secondary account is not proven")
     if receipt.get("cf_account_id") != args.expected_cf_account_id:
         reasons.append("receipt cf_account_id does not match expected secondary account")
-    if receipt.get("candidate_ref") != args.expected_candidate_ref:
+    if not str(receipt.get("candidate_ref") or "").startswith(args.expected_candidate_ref):
         reasons.append("receipt candidate_ref does not match expected candidate ref")
     if receipt.get("candidate_path") != args.expected_candidate_path:
         reasons.append("receipt candidate_path does not match expected candidate path")

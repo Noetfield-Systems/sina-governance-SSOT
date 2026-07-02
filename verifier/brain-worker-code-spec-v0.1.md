@@ -14,8 +14,8 @@ Verifies a coordinated SourceA Brain Worker deploy set:
 ## Hash rules
 
 - `knowledge_bundle_sha256`: SHA256 of the bundle file bytes; must pass `knowledge_bundle` validation.
-- `worker_code_sha256`: SHA256 of UTF-8 JSON object mapping each code path to its SHA256, keys sorted.
-- `proposed_sha256`: SHA256 of UTF-8 JSON object mapping all four paths to SHA256, keys sorted.
+- `worker_code_sha256`: SHA256 of UTF-8 JSON object mapping each code path to its SHA256, keys sorted, compact JSON (no spaces after separators).
+- `proposed_sha256`: SHA256 of UTF-8 JSON object mapping all four paths to SHA256, keys sorted, compact JSON.
 
 ## Descriptor fields
 

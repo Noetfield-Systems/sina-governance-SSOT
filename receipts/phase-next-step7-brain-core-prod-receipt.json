@@ -1,0 +1,84 @@
+{
+  "artifact_type": "brain_worker_bundle",
+  "brain_live_smoke": {
+    "command": "bash scripts/validate-sourcea-brain-live-v1.sh",
+    "exit_code": 0,
+    "ok": true,
+    "stderr_tail": "",
+    "stdout_tail": "roduction worker GET ===\nOK ai_model_ready hint= Brain v5 \u2014 vector retrieval \u00b7 read-only live tools \u00b7 112+ live sources\n=== production CORS preflight ===\nOK CORS OPTIONS 204\n=== stranger prompts (production worker) ===\nOK what-is: SourceA positioning (public) One line SourceA is an AI execution platform powered by Forge \u2014 real bu\nOK ide-cloud\nOK records-recovery\nOK receipt /Users/sinakazemnezhad/.sina/enforcement/sourcea-brain-live-gate-receipt-v1.json\nvalidate-sourcea-brain-live-v1.sh: ALL PASS"
+  },
+  "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+  "candidate_ref": "ff34a8749",
+  "candidate_sha256": "efe393973788a845a27e3308e92c79e7a202f335c7e2956f8826c2f9addfc96d",
+  "confirmed_by": "founder",
+  "content_identity_ok": true,
+  "deploy_executed": true,
+  "deploy_exit_code": 0,
+  "deploy_marked_success": true,
+  "founder_confirmation": "CONFIRM DEPLOY",
+  "health_result": {
+    "ai_model_ready": true,
+    "at": "2026-07-02T08:32:19Z",
+    "brain_core_gate_staging": false,
+    "default_model": "AI model",
+    "endpoints": {
+      "chat": "/api/brain/chat/v1",
+      "health": "/health",
+      "status": "/api/brain/status/v1"
+    },
+    "hint": "Brain v5 \u2014 vector retrieval \u00b7 read-only live tools \u00b7 112+ live sources",
+    "knowledge": {
+      "bundle_version": "5.0.0",
+      "chars": 234341,
+      "chunk_count": 545,
+      "generated_at": "2026-07-02T07:50:04Z",
+      "lanes": {
+        "buyer": 53,
+        "core": 331,
+        "developer": 150,
+        "investor": 5,
+        "rules": 6
+      },
+      "live_source_files": 115,
+      "mode": "brain_intelligence_v5",
+      "pipeline": "rules_first_bm25_vector_live_tools",
+      "rule_chunks": 6,
+      "source_files": 124,
+      "vector": {
+        "dimensions": 96,
+        "provider": "semantic_hash_v1"
+      }
+    },
+    "live_tools": [
+      "proof_status",
+      "products_catalog",
+      "factories_catalog",
+      "pricing_route",
+      "forge_terminal_route",
+      "plan_registry"
+    ],
+    "max_message_len": 2000,
+    "model": "AI model",
+    "models": [
+      {
+        "cost": "$",
+        "group": "Cloudflare Workers AI",
+        "id": "AI model",
+        "label": "Open-source Workers AI model"
+      }
+    ],
+    "ok": true,
+    "plane": "cloudflare_worker",
+    "provider": "workers_ai",
+    "schema": "sourcea-brain-chat-status-v1",
+    "service": "sourcea-brain-chat-v1",
+    "trace_storage": "console",
+    "trace_storage_ready": false
+  },
+  "new_live_version_id": "81058e04-6b8b-442d-a108-6eebffc60519",
+  "post_live_version_id": "81058e04-6b8b-442d-a108-6eebffc60519",
+  "pre_live_version_id": "883dbc6e-5333-45e9-ad21-b61d52c7bb62",
+  "receipt_type": "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
+  "recorded_at": "2026-07-02T08:32:21.267373+00:00",
+  "verifier_receipt_id": "167e3626-2e17-4ffc-a027-1a2d4db8b890"
+}
