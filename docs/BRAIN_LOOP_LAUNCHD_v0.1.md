@@ -23,7 +23,7 @@ Save as `~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist`:
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/sinakazemnezhad/Projects/sina-governance-ssot/scripts/brain_loop_autorun_v1.sh</string>
+    <string>/Users/sinakazemnezhad/Projects/sina-governance-ssot/scripts/brain_loop_launchd_entry_v1.sh</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict>
@@ -52,6 +52,16 @@ launchctl unload ~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist 2>/
 launchctl load ~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist
 launchctl list | grep brain-loop-autorun
 ```
+
+## macOS Full Disk Access (required)
+
+launchd cannot read `~/Desktop/SourceA` without TCC approval. If logs show `Operation not permitted` or `LAUNCHD_TCC_BLOCK`:
+
+1. Open **System Settings → Privacy & Security → Full Disk Access**
+2. Add **`/bin/bash`** (or enable for **Terminal** if you run manually)
+3. Reload the agent (Install section above)
+
+The entry wrapper `scripts/brain_loop_launchd_entry_v1.sh` preflights TCC and exits without setting autonomous hold.
 
 ## Clear hold (manual)
 

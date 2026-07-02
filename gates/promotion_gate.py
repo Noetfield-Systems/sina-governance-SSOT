@@ -372,10 +372,17 @@ def semi_auto_window_active(args: argparse.Namespace) -> bool:
         return False
 
 
-def latest_live_version(version_command: str | None) -> str | None:
+def latest_live_version(version_command: str | None, cwd: Path | None = None) -> str | None:
     if not version_command:
         return None
-    result = subprocess.run(version_command, shell=True, text=True, capture_output=True, check=False)
+    result = subprocess.run(
+        version_command,
+        shell=True,
+        text=True,
+        capture_output=True,
+        check=False,
+        cwd=cwd,
+    )
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip() or result.stdout.strip())
     data = json.loads(result.stdout)
@@ -496,7 +503,8 @@ def execute_deploy_flow(
         print("- refreshing Brain deploy command is not allowed; use deploy-verified/deploy-no-refresh")
         return 2
 
-    pre_version = latest_live_version(args.live_version_command)
+    source_cwd = Path(args.deploy_source_root).expanduser() if args.deploy_source_root else None
+    pre_version = latest_live_version(args.live_version_command, cwd=source_cwd)
     if autonomous:
         print("PROMOTION_GATE: APPROVED_AUTONOMOUS_DEPLOY")
         print("founder_confirmation: not required (autonomous flag active)")
@@ -530,7 +538,7 @@ def execute_deploy_flow(
         cwd=Path(args.deploy_source_root) if args.deploy_source_root else None,
         check=False,
     )
-    post_version = latest_live_version(args.live_version_command)
+    post_version = latest_live_version(args.live_version_command, cwd=source_cwd)
     health = fetch_health(args.health_url)
     brain_live = run_brain_live_smoke(args.brain_live_smoke_command, Path(args.deploy_source_root) if args.deploy_source_root else None)
 

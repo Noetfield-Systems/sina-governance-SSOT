@@ -66,28 +66,36 @@ if [[ "$AUTONOMOUS" == "1" || "$SHIP_WINDOW" == "1" ]]; then
 fi
 
 if [[ "$RUN_MATRIX" == "1" ]]; then
+  MATRIX_LOG="$(mktemp)"
   set +e
-  bash "$ROOT/scripts/validate_brain_domain_e2e_matrix_v1.sh"
+  bash "$ROOT/scripts/validate_brain_domain_e2e_matrix_v1.sh" >"$MATRIX_LOG" 2>&1
   MATRIX_RC=$?
   set -e
+  cat "$MATRIX_LOG"
+  LAUNCHD_TCC_BLOCK=0
+  if [[ "$MATRIX_RC" -ne 0 ]] && grep -q "Operation not permitted" "$MATRIX_LOG"; then
+    LAUNCHD_TCC_BLOCK=1
+  fi
+  rm -f "$MATRIX_LOG"
 else
+  LAUNCHD_TCC_BLOCK=0
   echo "SKIP: e2e matrix (observe-only; no ship window / autonomous)"
 fi
 
-MUTATION_TRIALS=0
-if python3 - <<PY
+MUTATION_TRIALS=$(python3 - <<PY
 import sys
 from pathlib import Path
 sys.path.insert(0, "$ROOT")
 from scripts.brain_autonomous_controls_v1 import mutation_trials_enabled
-sys.exit(1 if mutation_trials_enabled(Path("$SOURCEA_ROOT")) else 0)
+print(1 if mutation_trials_enabled(Path("$SOURCEA_ROOT")) else 0)
 PY
-then
-  MUTATION_TRIALS=1
-fi
+)
 
 if [[ "$SELF_HEAL_RC" -ne 0 || "$PARALLEL_RC" -ne 0 || "$MATRIX_RC" -ne 0 ]]; then
-  if [[ "$AUTONOMOUS" == "1" ]]; then
+  if [[ "$AUTONOMOUS" == "1" && "${LAUNCHD_TCC_BLOCK:-0}" == "1" ]]; then
+    GATE_NOTE="launchd_tcc_block_no_hold"
+    echo "NOTE: matrix blocked by macOS TCC — not setting autonomous hold"
+  elif [[ "$AUTONOMOUS" == "1" ]]; then
     python3 - <<PY
 from scripts.brain_autonomous_controls_v1 import set_autonomous_hold
 set_autonomous_hold(reason="autorun pre-promote fail self_heal=$SELF_HEAL_RC parallel=$PARALLEL_RC matrix=$MATRIX_RC")
