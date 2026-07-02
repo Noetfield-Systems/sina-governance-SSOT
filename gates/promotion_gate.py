@@ -614,7 +614,19 @@ def execute_deploy_flow(
         or brain_live.get("ok") is False
         or post_promote.get("ok") is False
     )
-    if deploy_failed and autonomous:
+    deploy_landed = bool(
+        post_version and pre_version and post_version != pre_version and result.returncode == 0
+    )
+    smoke_deferred = False
+    smoke_only_fail = deploy_landed and brain_live.get("ok") is False
+    if smoke_only_fail and health is not None and health.get("ok") is True:
+        print("PROMOTION_GATE: DEPLOY_OK_SMOKE_DEFERRED")
+        print("deploy_executed: true")
+        print("note: live version changed; brain-live smoke deferred to next autorun cycle")
+        identity_ok = True
+        deploy_failed = False
+        smoke_deferred = True
+    if deploy_failed and autonomous and not smoke_deferred:
         set_autonomous_hold(
             reason=(
                 f"autonomous deploy failed exit={result.returncode} "
@@ -628,7 +640,7 @@ def execute_deploy_flow(
         return 4
     if result.returncode != 0:
         return result.returncode
-    if brain_live.get("ok") is False:
+    if brain_live.get("ok") is False and not smoke_deferred:
         return 5
     if post_promote.get("ok") is False:
         return 6

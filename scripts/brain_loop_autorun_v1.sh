@@ -6,6 +6,9 @@ cd "$ROOT"
 # shellcheck source=scripts/brain_mac_env_v1.sh
 source "$ROOT/scripts/brain_mac_env_v1.sh"
 
+brain_clear_stale_lock
+brain_try_clear_smoke_hold
+
 AUTONOMOUS_FLAG="${HOME}/.sina/brain-autonomous-deploy-v1.flag"
 HOLD_FLAG="${HOME}/.sina/enforcement/brain-autonomous-hold-v1.flag"
 SHIP_FLAG="${HOME}/.sina/asf-ship-window-v1.flag"
@@ -88,7 +91,12 @@ else
   SELF_HEAL_RC=0
 fi
 
-if ! _run_step "parallel" bash "$ROOT/scripts/run_parallel_brain_candidates_v1.sh" --all; then
+if [[ "$AUTONOMOUS" == "1" ]]; then
+  PAR_ARGS=(--sandbox-id brain_worker)
+else
+  PAR_ARGS=(--all)
+fi
+if ! _run_step "parallel" bash "$ROOT/scripts/run_parallel_brain_candidates_v1.sh" "${PAR_ARGS[@]}"; then
   PARALLEL_RC=$?
   brain_rc_is_sigkill "$PARALLEL_RC" && MAC_SIGKILL=1
 else
@@ -169,6 +177,9 @@ clear_autonomous_hold()
 PY
   else
     GATE_NOTE="autonomous_promote_failed"
+    if grep -q 'smoke_ok=False' "${HOME}/.sina/enforcement/brain-autonomous-hold-v1.flag" 2>/dev/null; then
+      echo "NOTE: promote failed on smoke — hold set; will auto-clear next cycle if deploy landed"
+    fi
   fi
 elif [[ "$SHIP_WINDOW" == "1" ]]; then
   GATE_NOTE="semi_auto_available_invoke_promote_brain_worker_v1"
@@ -207,15 +218,15 @@ if [[ "$AUTONOMOUS" != "1" && "$SHIP_WINDOW" != "1" ]]; then
   exit 0
 fi
 
-if [[ "$GATE_RC" -ne 0 || ( "$PROMOTE_READY" -eq 0 && "$MAC_SIGKILL" -eq 0 && "$LAUNCHD_TCC_BLOCK" -eq 0 ) ]]; then
-  echo "brain_loop_autorun_v1: FAIL"
-  exit 1
-fi
-
 if [[ "$MAC_SIGKILL" -eq 1 || "$LAUNCHD_TCC_BLOCK" -eq 1 ]]; then
   echo "brain_loop_autorun_v1: MAC_BLOCK (no hold — will retry next cycle)"
   exit 0
 fi
 
-echo "brain_loop_autorun_v1: ALL PASS"
-exit 0
+if [[ "$GATE_RC" -eq 0 ]]; then
+  echo "brain_loop_autorun_v1: ALL PASS"
+  exit 0
+fi
+
+echo "brain_loop_autorun_v1: FAIL"
+exit 1

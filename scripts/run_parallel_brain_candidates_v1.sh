@@ -8,17 +8,12 @@ source "$ROOT/scripts/brain_mac_env_v1.sh"
 
 bash "$ROOT/scripts/load_cf_tokens_v1.sh"
 
-PARALLEL="${BRAIN_PARALLEL_JOBS:-2}"
-SANDBOX_ARGS=()
-if [[ "${1:-}" == "--all" ]]; then
-  SANDBOX_ARGS=(--all)
-elif [[ -n "${BRAIN_SANDBOX_IDS:-}" ]]; then
-  IFS=',' read -r -a IDS <<< "$BRAIN_SANDBOX_IDS"
-  for id in "${IDS[@]}"; do
-    SANDBOX_ARGS+=(--sandbox-id "$id")
-  done
-else
-  SANDBOX_ARGS=(--sandbox-id brain_worker --sandbox-id knowledge_bundle)
+if [[ $# -gt 0 ]]; then
+  "$BRAIN_PYTHON" "$ROOT/scripts/trigger_verifier_run_v1.py" "$@" --json
+  exit $?
 fi
 
-"$BRAIN_PYTHON" "$ROOT/scripts/trigger_verifier_run_v1.py" "${SANDBOX_ARGS[@]}" --json
+"$BRAIN_PYTHON" "$ROOT/scripts/trigger_verifier_run_v1.py" \
+  --sandbox-id brain_worker \
+  --sandbox-id knowledge_bundle \
+  --json

@@ -8,6 +8,14 @@ Mac must **help** deploy, not block. All Mac-specific fixes live in `scripts/bra
 bash ~/Projects/sina-governance-ssot/scripts/install_brain_loop_launchd_v1.sh
 ```
 
+## Fast health check (<1s)
+
+```bash
+bash ~/Projects/sina-governance-ssot/scripts/brain_loop_health_check_v1.sh
+```
+
+## One-command install details
+
 This script:
 1. Creates `~/Projects/SourceA` git worktree (TCC-safe — not Desktop)
 2. Installs launchd plist with `/usr/bin/python3` (avoids Framework Python SIGKILL)

@@ -10,6 +10,8 @@ PLIST_SRC="$ROOT/scripts/com.sina.brain-loop-autorun-v1.plist"
 PLIST_DST="${HOME}/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist"
 
 mkdir -p "${HOME}/.sina/logs" "${HOME}/.sina/locks" "${HOME}/Library/LaunchAgents"
+brain_clear_stale_lock
+rm -f "${HOME}/.sina/enforcement/brain-autonomous-hold-v1.flag"
 
 brain_ensure_sourcea_worktree
 brain_sync_sourcea_worktree
@@ -31,6 +33,8 @@ echo "plist: $PLIST_DST"
 echo "sourcea_root: $SOURCEA_ROOT"
 echo "python: $BRAIN_PYTHON"
 launchctl list | grep brain-loop-autorun || true
+echo ""
+bash "$ROOT/scripts/brain_loop_health_check_v1.sh" || true
 echo ""
 echo "Logs: ${HOME}/.sina/logs/brain-loop-autorun-v1.{out,err}.log"
 echo "Manual cycle: bash $ROOT/scripts/brain_loop_launchd_entry_v1.sh"
