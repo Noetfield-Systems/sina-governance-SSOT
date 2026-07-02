@@ -2,7 +2,8 @@
 # Promote brain_worker via promotion_gate — confirm-each-time or --autonomous-deploy.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SOURCEA_ROOT="${SOURCEA_ROOT:-$HOME/Desktop/SourceA}"
+# shellcheck source=scripts/brain_mac_env_v1.sh
+source "$ROOT/scripts/brain_mac_env_v1.sh"
 RECEIPT_URL="${RECEIPT_URL:-https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev/receipt/latest}"
 SECONDARY_CF_ACCOUNT="${SECONDARY_CF_ACCOUNT:-b7282b4a5c17b84d62e3ef8866b878f8}"
 ROLLBACK_RECEIPT="${ROLLBACK_RECEIPT:-$ROOT/receipts/brain-rollback-drill-latest.json}"
@@ -23,7 +24,7 @@ done
 
 bash "$ROOT/scripts/load_cf_tokens_v1.sh"
 
-read -r CANDIDATE_REF CANDIDATE_PATH CANDIDATE_SHA WORKER_SHA <<<"$(python3 - <<PY
+read -r CANDIDATE_REF CANDIDATE_PATH CANDIDATE_SHA WORKER_SHA <<<"$("$BRAIN_PYTHON" - <<PY
 import sys
 from pathlib import Path
 
@@ -42,7 +43,7 @@ PY
 )"
 
 GATE_ARGS=(
-  python3 "$ROOT/gates/promotion_gate.py"
+  "$BRAIN_PYTHON" "$ROOT/gates/promotion_gate.py"
   --sandbox-id brain_worker
   --receipt-url "$RECEIPT_URL"
   --expected-candidate-ref "$CANDIDATE_REF"

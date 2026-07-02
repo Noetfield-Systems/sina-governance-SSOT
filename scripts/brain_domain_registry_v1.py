@@ -33,7 +33,14 @@ def resolve_sourcea_root(registry: dict[str, Any] | None = None) -> Path:
     env_root = os.environ.get("SOURCEA_ROOT")
     if env_root:
         return expand_root(env_root)
-    return expand_root(reg.get("sourcea_root_default", "~/Desktop/SourceA"))
+    default = reg.get("sourcea_root_default", "~/Projects/SourceA")
+    return expand_root(default)
+
+
+def resolve_sandbox_repo(registry: dict[str, Any], sandbox: dict[str, Any]) -> Path:
+    """Repo for verifier/heal — always SOURCEA_ROOT env, never stale Desktop path."""
+    _ = sandbox
+    return resolve_sourcea_root(registry)
 
 
 def get_sandbox(registry: dict[str, Any], sandbox_id: str) -> dict[str, Any]:

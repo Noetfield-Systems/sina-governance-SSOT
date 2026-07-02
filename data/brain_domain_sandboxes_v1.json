@@ -4,7 +4,8 @@
   "saved_at": "2026-07-02T12:00:00Z",
   "verifier_base_url": "https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev",
   "secondary_cf_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
-  "sourcea_root_default": "~/Desktop/SourceA",
+  "sourcea_root_default": "~/Projects/SourceA",
+  "sourcea_root_desktop": "~/Desktop/SourceA",
   "independence_receipt_max_age_days": 30,
   "autonomous_promote_branch": "main",
   "sandbox_branch_prefix": "sandbox/brain/",
@@ -16,7 +17,7 @@
       "artifact_type": "brain_worker_bundle",
       "candidate_repo": "kazemnezhadsina144-dot/SourceA",
       "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
-      "deploy_root": "~/Desktop/SourceA",
+      "deploy_root": "~/Projects/SourceA",
       "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
       "gate_profile": {
         "bundle_artifacts_only": false,
@@ -32,7 +33,7 @@
       "artifact_type": "knowledge_bundle",
       "candidate_repo": "kazemnezhadsina144-dot/SourceA",
       "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
-      "deploy_root": "~/Desktop/SourceA",
+      "deploy_root": "~/Projects/SourceA",
       "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
       "gate_profile": {
         "bundle_artifacts_only": true,
@@ -48,7 +49,7 @@
       "artifact_type": "brain_worker_bundle",
       "candidate_repo": "kazemnezhadsina144-dot/SourceA",
       "candidate_path": "reports/locked-definitions-v1.json",
-      "deploy_root": "~/Desktop/SourceA",
+      "deploy_root": "~/Projects/SourceA",
       "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
       "gate_profile": {
         "post_promote_command": "python3 scripts/promote_locked_definitions_v1.py --json",
@@ -62,7 +63,7 @@
       "artifact_type": "knowledge_bundle",
       "candidate_repo": "kazemnezhadsina144-dot/SourceA",
       "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
-      "deploy_root": "~/Desktop/SourceA",
+      "deploy_root": "~/Projects/SourceA",
       "health_url": "https://sourcea.app/operating-brain-install",
       "gate_profile": {
         "post_promote_command": "bash scripts/validate-sourcea-contract-pages-e2e-v1.sh",

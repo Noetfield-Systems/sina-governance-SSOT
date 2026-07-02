@@ -1,80 +1,60 @@
 # Brain Loop launchd — 24/7 autorun v0.1
 
-Install a 6-hour Brain loop on macOS when Phase 3 Step 10 is LIFT.
+Mac must **help** deploy, not block. All Mac-specific fixes live in `scripts/brain_mac_env_v1.sh`.
+
+## One-command install (recommended)
+
+```bash
+bash ~/Projects/sina-governance-ssot/scripts/install_brain_loop_launchd_v1.sh
+```
+
+This script:
+1. Creates `~/Projects/SourceA` git worktree (TCC-safe — not Desktop)
+2. Installs launchd plist with `/usr/bin/python3` (avoids Framework Python SIGKILL)
+3. Sets overlap lock (no concurrent cycles killing each other)
+4. Configures 6h interval + 5min throttle
+
+## What was blocking Mac (fixed)
+
+| Blocker | Fix |
+|---------|-----|
+| Desktop TCC (`Operation not permitted`) | `~/Projects/SourceA` worktree |
+| Framework Python SIGKILL under launchd | `BRAIN_PYTHON=/usr/bin/python3` |
+| Overlapping launchd + manual runs | mkdir lock at `~/.sina/locks/` |
+| Stale Desktop path in verifier/heal | `resolve_sandbox_repo()` uses `SOURCEA_ROOT` |
+| Wrong hold on Mac env failures | `mac_env_block_no_hold` — retry next cycle |
+
+## Manual cycle
+
+```bash
+bash ~/Projects/sina-governance-ssot/scripts/brain_loop_launchd_entry_v1.sh
+```
+
+## Logs
+
+- `~/.sina/logs/brain-loop-autorun-v1.out.log`
+- `~/.sina/logs/brain-loop-autorun-v1.err.log`
+- `~/.sina/logs/brain-autorun-step-*.log` (per-cycle step detail)
 
 ## Prerequisites
 
-- `~/.sina/brain-autonomous-deploy-v1.flag` exists (founder DECIDE)
-- No active hold: `~/.sina/enforcement/brain-autonomous-hold-v1.flag`
-- CF tokens load via `scripts/load_cf_tokens_v1.sh`
-- SourceA at `~/Desktop/SourceA` on clean `main`
+- `~/.sina/brain-autonomous-deploy-v1.flag` (founder DECIDE)
+- CF tokens via `scripts/load_cf_tokens_v1.sh`
+- `~/Desktop/SourceA` git repo (for worktree bootstrap)
 
-## Plist
-
-Save as `~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>com.sina.brain-loop-autorun-v1</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>/bin/bash</string>
-    <string>/Users/sinakazemnezhad/Projects/sina-governance-ssot/scripts/brain_loop_launchd_entry_v1.sh</string>
-  </array>
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>PATH</key>
-    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
-    <key>SOURCEA_ROOT</key>
-    <string>/Users/sinakazemnezhad/Desktop/SourceA</string>
-  </dict>
-  <key>StartInterval</key>
-  <integer>21600</integer>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StandardOutPath</key>
-  <string>/Users/sinakazemnezhad/.sina/logs/brain-loop-autorun-v1.out.log</string>
-  <key>StandardErrorPath</key>
-  <string>/Users/sinakazemnezhad/.sina/logs/brain-loop-autorun-v1.err.log</string>
-</dict>
-</plist>
-```
-
-## Install
+## Clear hold
 
 ```bash
-mkdir -p ~/.sina/logs
-launchctl unload ~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist 2>/dev/null || true
-launchctl load ~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist
-launchctl list | grep brain-loop-autorun
-```
-
-## macOS Full Disk Access (required)
-
-launchd cannot read `~/Desktop/SourceA` without TCC approval. If logs show `Operation not permitted` or `LAUNCHD_TCC_BLOCK`:
-
-1. Open **System Settings → Privacy & Security → Full Disk Access**
-2. Add **`/bin/bash`** (or enable for **Terminal** if you run manually)
-3. Reload the agent (Install section above)
-
-The entry wrapper `scripts/brain_loop_launchd_entry_v1.sh` preflights TCC and exits without setting autonomous hold.
-
-## Clear hold (manual)
-
-After fixing the failure:
-
-```bash
-bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1.sh
 rm -f ~/.sina/enforcement/brain-autonomous-hold-v1.flag
 ```
 
 ## Disable
 
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist
+launchctl bootout "gui/$(id -u)/com.sina.brain-loop-autorun-v1"
 rm -f ~/.sina/brain-autonomous-deploy-v1.flag
 ```
+
+## Fallback (Desktop only)
+
+If you must use `~/Desktop/SourceA` under launchd: System Settings → Privacy & Security → Full Disk Access → add `/bin/bash`. **Not recommended** — use the worktree install instead.

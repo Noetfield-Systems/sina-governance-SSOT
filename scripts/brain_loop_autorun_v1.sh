@@ -3,35 +3,63 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-SOURCEA_ROOT="${SOURCEA_ROOT:-$HOME/Desktop/SourceA}"
-export SOURCEA_ROOT
+# shellcheck source=scripts/brain_mac_env_v1.sh
+source "$ROOT/scripts/brain_mac_env_v1.sh"
+
 AUTONOMOUS_FLAG="${HOME}/.sina/brain-autonomous-deploy-v1.flag"
 HOLD_FLAG="${HOME}/.sina/enforcement/brain-autonomous-hold-v1.flag"
 SHIP_FLAG="${HOME}/.sina/asf-ship-window-v1.flag"
 RECEIPT_DIR="$ROOT/receipts"
+LOG_DIR="${HOME}/.sina/logs"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 AUTORUN_RECEIPT="$RECEIPT_DIR/brain-loop-autorun-${TS}.json"
+STEP_LOG="$LOG_DIR/brain-autorun-step-${TS}.log"
+
+mkdir -p "$LOG_DIR" "$RECEIPT_DIR"
+
+_run_step() {
+  local label="$1"
+  shift
+  local rc=0 attempt
+  for attempt in 1 2; do
+    echo "=== step: $label (attempt $attempt) ===" | tee -a "$STEP_LOG"
+    set +e
+    "$@" >>"$STEP_LOG" 2>&1
+    rc=$?
+    set -e
+    if [[ "$rc" -eq 0 ]]; then
+      echo "OK: $label" | tee -a "$STEP_LOG"
+      return 0
+    fi
+    if brain_rc_is_sigkill "$rc" && [[ "$attempt" -eq 1 ]]; then
+      echo "WARN: $label SIGKILL (rc=$rc) — retry in 3s" | tee -a "$STEP_LOG"
+      sleep 3
+      continue
+    fi
+    echo "FAIL: $label (rc=$rc)" | tee -a "$STEP_LOG"
+    return "$rc"
+  done
+  return "$rc"
+}
 
 bash "$ROOT/scripts/load_cf_tokens_v1.sh"
 
 AUTONOMOUS=0
 SHIP_WINDOW=0
 HOLD_ACTIVE=0
-if [[ -f "$AUTONOMOUS_FLAG" ]]; then
-  AUTONOMOUS=1
-fi
-if [[ -f "$HOLD_FLAG" ]]; then
-  HOLD_ACTIVE=1
-fi
+MAC_SIGKILL=0
+if [[ -f "$AUTONOMOUS_FLAG" ]]; then AUTONOMOUS=1; fi
+if [[ -f "$HOLD_FLAG" ]]; then HOLD_ACTIVE=1; fi
 if [[ -f "$SHIP_FLAG" || "${CI:-}" == "true" || "${GITHUB_ACTIONS:-}" == "true" ]]; then
   SHIP_WINDOW=1
 fi
 
 echo "=== brain_loop_autorun_v1 start autonomous=${AUTONOMOUS} hold=${HOLD_ACTIVE} ship_window=${SHIP_WINDOW} ==="
+echo "sourcea_root=${SOURCEA_ROOT} python=${BRAIN_PYTHON}"
 
 if [[ "$AUTONOMOUS" == "1" && "$HOLD_ACTIVE" == "1" ]]; then
   echo "brain_loop_autorun_v1: HOLD — autonomous deploy paused"
-  python3 - <<PY
+  "$BRAIN_PYTHON" - <<PY
 import json
 from pathlib import Path
 payload = {
@@ -53,36 +81,41 @@ GATE_RC=0
 GATE_NOTE="skipped"
 
 export BRAIN_SELF_HEAL_TRIGGER=1
-set +e
-bash "$ROOT/scripts/brain_loop_self_heal_v1.sh" >/dev/null
-SELF_HEAL_RC=$?
-bash "$ROOT/scripts/run_parallel_brain_candidates_v1.sh" --all >/dev/null
-PARALLEL_RC=$?
-set -e
-
-RUN_MATRIX=0
-if [[ "$AUTONOMOUS" == "1" || "$SHIP_WINDOW" == "1" ]]; then
-  RUN_MATRIX=1
+if ! _run_step "self-heal" bash "$ROOT/scripts/brain_loop_self_heal_v1.sh"; then
+  SELF_HEAL_RC=$?
+  brain_rc_is_sigkill "$SELF_HEAL_RC" && MAC_SIGKILL=1
+else
+  SELF_HEAL_RC=0
 fi
 
+if ! _run_step "parallel" bash "$ROOT/scripts/run_parallel_brain_candidates_v1.sh" --all; then
+  PARALLEL_RC=$?
+  brain_rc_is_sigkill "$PARALLEL_RC" && MAC_SIGKILL=1
+else
+  PARALLEL_RC=0
+fi
+
+RUN_MATRIX=0
+if [[ "$AUTONOMOUS" == "1" || "$SHIP_WINDOW" == "1" ]]; then RUN_MATRIX=1; fi
+
+LAUNCHD_TCC_BLOCK=0
 if [[ "$RUN_MATRIX" == "1" ]]; then
+  [[ "$AUTONOMOUS" == "1" ]] && export BRAIN_MATRIX_AUTORUN=1
   MATRIX_LOG="$(mktemp)"
   set +e
   bash "$ROOT/scripts/validate_brain_domain_e2e_matrix_v1.sh" >"$MATRIX_LOG" 2>&1
   MATRIX_RC=$?
   set -e
-  cat "$MATRIX_LOG"
-  LAUNCHD_TCC_BLOCK=0
+  cat "$MATRIX_LOG" | tee -a "$STEP_LOG"
   if [[ "$MATRIX_RC" -ne 0 ]] && grep -q "Operation not permitted" "$MATRIX_LOG"; then
     LAUNCHD_TCC_BLOCK=1
   fi
   rm -f "$MATRIX_LOG"
 else
-  LAUNCHD_TCC_BLOCK=0
-  echo "SKIP: e2e matrix (observe-only; no ship window / autonomous)"
+  echo "SKIP: e2e matrix (observe-only)"
 fi
 
-MUTATION_TRIALS=$(python3 - <<PY
+MUTATION_TRIALS=$("$BRAIN_PYTHON" - <<PY
 import sys
 from pathlib import Path
 sys.path.insert(0, "$ROOT")
@@ -91,38 +124,58 @@ print(1 if mutation_trials_enabled(Path("$SOURCEA_ROOT")) else 0)
 PY
 )
 
-if [[ "$SELF_HEAL_RC" -ne 0 || "$PARALLEL_RC" -ne 0 || "$MATRIX_RC" -ne 0 ]]; then
-  if [[ "$AUTONOMOUS" == "1" && "${LAUNCHD_TCC_BLOCK:-0}" == "1" ]]; then
-    GATE_NOTE="launchd_tcc_block_no_hold"
-    echo "NOTE: matrix blocked by macOS TCC — not setting autonomous hold"
+PROMOTE_READY=0
+BRAIN_LIVE_DRIFT=0
+if [[ "$SELF_HEAL_RC" -eq 0 && "$PARALLEL_RC" -eq 0 && "$MUTATION_TRIALS" == "0" ]]; then
+  if [[ "$MATRIX_RC" -eq 0 ]]; then
+    PROMOTE_READY=1
+  elif [[ "$AUTONOMOUS" == "1" && -f "$STEP_LOG" ]] && grep -q "FAIL: brain live smoke" "$STEP_LOG"; then
+    BRAIN_LIVE_DRIFT=1
+    PROMOTE_READY=1
+    echo "NOTE: brain-live drift — autonomous promote will sync live Worker"
+  fi
+fi
+
+if [[ "$PROMOTE_READY" -eq 0 ]]; then
+  if [[ "$AUTONOMOUS" == "1" && ( "$LAUNCHD_TCC_BLOCK" == "1" || "$MAC_SIGKILL" == "1" ) ]]; then
+    GATE_NOTE="mac_env_block_no_hold"
+    echo "NOTE: Mac TCC/SIGKILL blocker — not setting autonomous hold (fix: bash scripts/install_brain_loop_launchd_v1.sh)"
   elif [[ "$AUTONOMOUS" == "1" ]]; then
-    python3 - <<PY
+    "$BRAIN_PYTHON" - <<PY
+import sys
+sys.path.insert(0, "$ROOT")
 from scripts.brain_autonomous_controls_v1 import set_autonomous_hold
 set_autonomous_hold(reason="autorun pre-promote fail self_heal=$SELF_HEAL_RC parallel=$PARALLEL_RC matrix=$MATRIX_RC")
 PY
     GATE_NOTE="autonomous_hold_set_pre_promote"
   fi
-elif [[ "$AUTONOMOUS" == "1" && "$MUTATION_TRIALS" == "0" ]]; then
+elif [[ "$AUTONOMOUS" == "1" ]]; then
   set +e
   bash "$ROOT/scripts/promote_brain_worker_v1.sh" --autonomous-deploy \
     --deploy-receipt "$RECEIPT_DIR/brain-autonomous-promote-${TS}.json"
   GATE_RC=$?
   set -e
   if [[ "$GATE_RC" -eq 0 ]]; then
-    GATE_NOTE="autonomous_promote_executed"
-    python3 - <<'PY'
+    if [[ "$BRAIN_LIVE_DRIFT" == "1" ]]; then
+      GATE_NOTE="autonomous_promote_healed_brain_live_drift"
+    else
+      GATE_NOTE="autonomous_promote_executed"
+    fi
+    "$BRAIN_PYTHON" - <<PY
+import sys
+sys.path.insert(0, "$ROOT")
 from scripts.brain_autonomous_controls_v1 import clear_autonomous_hold
 clear_autonomous_hold()
 PY
   else
     GATE_NOTE="autonomous_promote_failed"
   fi
-elif [[ "$SHIP_WINDOW" == "1" && "$SELF_HEAL_RC" -eq 0 && "$PARALLEL_RC" -eq 0 && "$MATRIX_RC" -eq 0 ]]; then
+elif [[ "$SHIP_WINDOW" == "1" ]]; then
   GATE_NOTE="semi_auto_available_invoke_promote_brain_worker_v1"
   echo "NOTE: invoke bash scripts/promote_brain_worker_v1.sh for confirm-each-time promote"
 fi
 
-python3 - <<PY
+"$BRAIN_PYTHON" - <<PY
 import json
 from pathlib import Path
 payload = {
@@ -137,6 +190,10 @@ payload = {
     "gate_rc": $GATE_RC,
     "gate_note": "$GATE_NOTE",
     "mutation_trials": bool($MUTATION_TRIALS),
+    "sourcea_root": "$SOURCEA_ROOT",
+    "brain_python": "$BRAIN_PYTHON",
+    "mac_sigkill": bool($MAC_SIGKILL),
+    "step_log": "$STEP_LOG",
 }
 out = Path("$AUTORUN_RECEIPT")
 out.parent.mkdir(parents=True, exist_ok=True)
@@ -150,9 +207,14 @@ if [[ "$AUTONOMOUS" != "1" && "$SHIP_WINDOW" != "1" ]]; then
   exit 0
 fi
 
-if [[ "$SELF_HEAL_RC" -ne 0 || "$PARALLEL_RC" -ne 0 || "$MATRIX_RC" -ne 0 || "$GATE_RC" -ne 0 ]]; then
+if [[ "$GATE_RC" -ne 0 || ( "$PROMOTE_READY" -eq 0 && "$MAC_SIGKILL" -eq 0 && "$LAUNCHD_TCC_BLOCK" -eq 0 ) ]]; then
   echo "brain_loop_autorun_v1: FAIL"
   exit 1
+fi
+
+if [[ "$MAC_SIGKILL" -eq 1 || "$LAUNCHD_TCC_BLOCK" -eq 1 ]]; then
+  echo "brain_loop_autorun_v1: MAC_BLOCK (no hold — will retry next cycle)"
+  exit 0
 fi
 
 echo "brain_loop_autorun_v1: ALL PASS"

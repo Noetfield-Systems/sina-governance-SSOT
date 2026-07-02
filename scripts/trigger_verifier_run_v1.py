@@ -19,9 +19,9 @@ if str(ROOT) not in sys.path:
 from gates.cf_tokens import load_cloudflare_tokens  # noqa: E402
 from scripts.brain_domain_registry_v1 import (  # noqa: E402
     build_verifier_post_body,
-    expand_root,
     get_sandbox,
     load_registry,
+    resolve_sandbox_repo,
     resolve_sourcea_root,
 )
 
@@ -58,7 +58,7 @@ def post_verifier_run(base_url: str, body: dict[str, Any]) -> dict[str, Any]:
 
 def run_one(registry: dict[str, Any], sandbox_id: str, *, ref: str | None = None) -> dict[str, Any]:
     sandbox = get_sandbox(registry, sandbox_id)
-    repo = expand_root(sandbox["deploy_root"])
+    repo = resolve_sandbox_repo(registry, sandbox)
     body = build_verifier_post_body(sandbox, repo, ref=ref)
     receipt = post_verifier_run(registry["verifier_base_url"], body)
     return {
@@ -97,7 +97,7 @@ def main() -> int:
 
     batch = {
         "receipt_type": "PARALLEL_BRAIN_CANDIDATE_BATCH",
-        "recorded_at": dt.datetime.now(dt.UTC).isoformat(),
+        "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "sourcea_root": str(resolve_sourcea_root(registry)),
         "verifier_base_url": registry["verifier_base_url"],
         "candidates": results,
@@ -110,7 +110,7 @@ def main() -> int:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(batch, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-    default_receipt = ROOT / "receipts" / f"parallel-candidate-batch-{dt.datetime.now(dt.UTC).strftime('%Y%m%dT%H%M%SZ')}.json"
+    default_receipt = ROOT / "receipts" / f"parallel-candidate-batch-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
     if not args.write_batch_receipt:
         default_receipt.parent.mkdir(parents=True, exist_ok=True)
         default_receipt.write_text(json.dumps(batch, indent=2, sort_keys=True) + "\n", encoding="utf-8")

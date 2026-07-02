@@ -18,10 +18,10 @@ if str(ROOT) not in sys.path:
 from gates.cf_tokens import load_cloudflare_tokens  # noqa: E402
 from scripts.brain_domain_registry_v1 import (  # noqa: E402
     bundle_sha256,
-    expand_root,
     get_sandbox,
     git_ref,
     load_registry,
+    resolve_sandbox_repo,
     resolve_sourcea_root,
 )
 from scripts.trigger_verifier_run_v1 import run_one  # noqa: E402
@@ -48,7 +48,7 @@ def is_ancestor(repo: Path, ancestor: str, head: str) -> bool:
 
 def assess_sandbox(registry: dict[str, Any], sandbox_id: str, receipt: dict[str, Any]) -> dict[str, Any]:
     sandbox = get_sandbox(registry, sandbox_id)
-    repo = expand_root(sandbox["deploy_root"])
+    repo = resolve_sandbox_repo(registry, sandbox)
     head = git_ref(repo, sandbox.get("branch", "main"))
     bundle_sha = bundle_sha256(repo, head)
     receipt_ref = str(receipt.get("candidate_ref") or "")
@@ -105,7 +105,7 @@ def main() -> int:
 
     tick = {
         "receipt_type": "BRAIN_SELF_HEAL_TICK",
-        "recorded_at": dt.datetime.now(dt.UTC).isoformat(),
+        "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "sourcea_root": str(resolve_sourcea_root(registry)),
         "latest_verifier_receipt_id": latest.get("receipt_id"),
         "assessment": assessment,
@@ -121,7 +121,7 @@ def main() -> int:
         ),
     }
 
-    out = Path(args.write_receipt) if args.write_receipt else ROOT / "receipts" / f"brain-self-heal-tick-{dt.datetime.now(dt.UTC).strftime('%Y%m%dT%H%M%SZ')}.json"
+    out = Path(args.write_receipt) if args.write_receipt else ROOT / "receipts" / f"brain-self-heal-tick-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(tick, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     tick["tick_receipt_path"] = str(out)

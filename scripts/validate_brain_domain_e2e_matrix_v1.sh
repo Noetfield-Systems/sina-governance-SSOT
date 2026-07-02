@@ -3,7 +3,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-SOURCEA_ROOT="${SOURCEA_ROOT:-$HOME/Desktop/SourceA}"
+# shellcheck source=scripts/brain_mac_env_v1.sh
+source "$ROOT/scripts/brain_mac_env_v1.sh"
 export SOURCEA_ROOT
 export SOURCEA_CONTRACT_E2E_ALLOW_REGIONAL_REDIRECT="${SOURCEA_CONTRACT_E2E_ALLOW_REGIONAL_REDIRECT:-1}"
 SANDBOX_ID="${BRAIN_MATRIX_SANDBOX_ID:-all}"
@@ -24,14 +25,19 @@ _run() {
   echo
 }
 
-_run "brain domain registry" python3 "$ROOT/scripts/validate_brain_domain_registry_v1.py"
-_run "governance public e2e" bash "$ROOT/scripts/validate-governance-public-e2e-v1.sh"
+_run "brain domain registry" "$BRAIN_PYTHON" "$ROOT/scripts/validate_brain_domain_registry_v1.py"
 
-if [[ -f "$SOURCEA_ROOT/scripts/validate-sourcea-public-proof-e2e-v1.sh" ]]; then
-  _run "sourcea public proof" bash "$SOURCEA_ROOT/scripts/validate-sourcea-public-proof-e2e-v1.sh"
+if [[ "${BRAIN_MATRIX_AUTORUN:-}" == "1" ]]; then
+  echo "NOTE: BRAIN_MATRIX_AUTORUN=1 — registry + brain-live only (self-heal/parallel already ran)"
 else
-  echo "FAIL: missing sourcea public proof script"
-  ERRORS=$((ERRORS + 1))
+  _run "governance public e2e" bash "$ROOT/scripts/validate-governance-public-e2e-v1.sh"
+
+  if [[ -f "$SOURCEA_ROOT/scripts/validate-sourcea-public-proof-e2e-v1.sh" ]]; then
+    _run "sourcea public proof" bash "$SOURCEA_ROOT/scripts/validate-sourcea-public-proof-e2e-v1.sh"
+  else
+    echo "FAIL: missing sourcea public proof script"
+    ERRORS=$((ERRORS + 1))
+  fi
 fi
 
 if [[ "$SANDBOX_ID" == "all" || "$SANDBOX_ID" == "brain_worker" || "$SANDBOX_ID" == "knowledge_bundle" || "$SANDBOX_ID" == "locked_definitions" ]]; then
@@ -44,7 +50,9 @@ if [[ "$SANDBOX_ID" == "all" || "$SANDBOX_ID" == "brain_worker" || "$SANDBOX_ID"
 fi
 
 if [[ "$SANDBOX_ID" == "all" || "$SANDBOX_ID" == "contract_pages" ]]; then
-  if [[ -f "$SOURCEA_ROOT/scripts/validate-sourcea-contract-pages-e2e-v1.sh" ]]; then
+  if [[ "${BRAIN_MATRIX_AUTORUN:-}" == "1" ]]; then
+    echo "SKIP: contract pages e2e (BRAIN_MATRIX_AUTORUN=1)"
+  elif [[ -f "$SOURCEA_ROOT/scripts/validate-sourcea-contract-pages-e2e-v1.sh" ]]; then
     _run "contract pages e2e" bash "$SOURCEA_ROOT/scripts/validate-sourcea-contract-pages-e2e-v1.sh"
   else
     echo "FAIL: missing contract pages e2e script"

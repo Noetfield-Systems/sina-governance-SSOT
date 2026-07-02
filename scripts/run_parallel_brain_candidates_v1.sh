@@ -3,8 +3,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-SOURCEA_ROOT="${SOURCEA_ROOT:-$HOME/Desktop/SourceA}"
-export SOURCEA_ROOT
+# shellcheck source=scripts/brain_mac_env_v1.sh
+source "$ROOT/scripts/brain_mac_env_v1.sh"
 
 bash "$ROOT/scripts/load_cf_tokens_v1.sh"
 
@@ -21,4 +21,4 @@ else
   SANDBOX_ARGS=(--sandbox-id brain_worker --sandbox-id knowledge_bundle)
 fi
 
-python3 "$ROOT/scripts/trigger_verifier_run_v1.py" "${SANDBOX_ARGS[@]}" --json
+"$BRAIN_PYTHON" "$ROOT/scripts/trigger_verifier_run_v1.py" "${SANDBOX_ARGS[@]}" --json

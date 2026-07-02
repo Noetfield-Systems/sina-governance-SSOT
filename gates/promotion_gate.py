@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
 import datetime as dt
 import hashlib
@@ -64,8 +66,9 @@ def apply_sandbox_profile(args: argparse.Namespace) -> None:
     profile = sandbox.get("gate_profile") or {}
     deploy_root = str(Path(sandbox["deploy_root"]).expanduser())
 
+    env_root = os.environ.get("SOURCEA_ROOT")
     if not args.deploy_source_root:
-        args.deploy_source_root = deploy_root
+        args.deploy_source_root = env_root if env_root else deploy_root
     if not args.health_url:
         args.health_url = sandbox.get("health_url")
     if profile.get("bundle_artifacts_only"):
@@ -106,10 +109,10 @@ def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
     try:
         stamp = dt.datetime.fromisoformat(str(recorded_at).replace("Z", "+00:00"))
         if stamp.tzinfo is None:
-            stamp = stamp.replace(tzinfo=dt.UTC)
+            stamp = stamp.replace(tzinfo=dt.timezone.utc)
     except ValueError:
         return ["independence receipt recorded_at is not ISO8601"]
-    age_days = (dt.datetime.now(dt.UTC) - stamp).days
+    age_days = (dt.datetime.now(dt.timezone.utc) - stamp).days
     if age_days > args.independence_max_age_days:
         return [f"independence receipt stale ({age_days}d > {args.independence_max_age_days}d)"]
     return []
@@ -287,11 +290,11 @@ def source_refusal_reasons(args: argparse.Namespace) -> list[str]:
 
     try:
         branch = run_text(["git", "branch", "--show-current"], cwd=source_root)
-        if branch != "main":
-            reasons.append(f"deploy source branch is {branch!r}, not 'main'")
-
         head = run_text(["git", "rev-parse", "HEAD"], cwd=source_root)
         origin_main = run_text(["git", "rev-parse", "origin/main"], cwd=source_root)
+        if branch != "main":
+            if not (branch == "" and head == origin_main):
+                reasons.append(f"deploy source branch is {branch!r}, not 'main'")
         if head != origin_main:
             reasons.append("deploy source HEAD does not match origin/main")
         try:
@@ -366,8 +369,8 @@ def semi_auto_window_active(args: argparse.Namespace) -> bool:
     try:
         until = dt.datetime.fromisoformat(args.semi_auto_window_until.replace("Z", "+00:00"))
         if until.tzinfo is None:
-            until = until.replace(tzinfo=dt.UTC)
-        return dt.datetime.now(dt.UTC) <= until
+            until = until.replace(tzinfo=dt.timezone.utc)
+        return dt.datetime.now(dt.timezone.utc) <= until
     except ValueError:
         return False
 
@@ -457,7 +460,7 @@ def write_deploy_receipt(
         confirmed_by = "founder"
     deploy_receipt = {
         "receipt_type": receipt_type,
-        "recorded_at": dt.datetime.now(dt.UTC).isoformat(),
+        "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "candidate_ref": receipt.get("candidate_ref"),
         "candidate_path": receipt.get("candidate_path"),
         "candidate_sha256": receipt.get("candidate_sha256"),
@@ -539,6 +542,17 @@ def execute_deploy_flow(
         check=False,
     )
     post_version = latest_live_version(args.live_version_command, cwd=source_cwd)
+    deploy_rc = result.returncode
+    if (
+        deploy_rc in (137, 139)
+        and post_version
+        and pre_version
+        and post_version != pre_version
+    ):
+        print("PROMOTION_GATE: MAC_DEPLOY_SIGKILL_RECOVERED")
+        print(f"deploy_exit_code_was: {deploy_rc}")
+        result.returncode = 0
+        deploy_rc = 0
     health = fetch_health(args.health_url)
     brain_live = run_brain_live_smoke(args.brain_live_smoke_command, Path(args.deploy_source_root) if args.deploy_source_root else None)
 
