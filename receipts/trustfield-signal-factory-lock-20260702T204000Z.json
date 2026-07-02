@@ -1,0 +1,58 @@
+{
+  "schema": "governance-lock-receipt-v1",
+  "receipt_id": "trustfield-signal-factory-lock-20260702T204000Z",
+  "receipt_type": "RECONCILED_LOCK",
+  "recorded_at": "20260702T204000Z",
+  "entity": "sourcea",
+  "action": "save_reconcile_lock_1111_plans",
+  "artifacts": [
+    {
+      "path": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md",
+      "role": "master_reconciled_lock"
+    },
+    {
+      "path": "docs/1111_UPGRADE_PLANS_v1.md",
+      "role": "four_parallel_upgrade_plans"
+    },
+    {
+      "path": "ssot/sg-guardrails-trustfield-v1.md",
+      "role": "sg_guardrails_mirror"
+    },
+    {
+      "path": "ssot/noos-doctrine-trustfield-v1.md",
+      "role": "noos_doctrine_mirror"
+    },
+    {
+      "path": "~/.cursor/skills/signal-factory/",
+      "role": "signal_factory_v1_worker_deliverable"
+    }
+  ],
+  "reconciliation": {
+    "trustfield_status": "separate_watched_venture_not_adapter",
+    "brain_post_build": {
+      "trustfield_loops": "required_with_independent_reverify",
+      "signal_factory_v1": "skipped_meaning_complete"
+    },
+    "eval5_gating": "single_law_build_automation_or_create_service_pattern",
+    "blockers_open": [],
+    "blockers_tf_phase_only": ["B1", "B2", "B3"]
+  },
+  "proof": {
+    "signal_factory_verifier": "verify_signal_factory_v1: ALL PASS (6/6)",
+    "signal_factory_verifier_cmd": "/usr/bin/python3 ~/.cursor/skills/signal-factory/scripts/verify_signal_factory_v1.py",
+    "trustfield_surface_tag": "site-v66-entity-truth-cleanup-2026-07-02"
+  },
+  "plans_1111": {
+    "plan_1": "TrustField Loops physical autorun (TF-ARCH-W1 → Phase 5)",
+    "plan_2": "Signal Factory skill → adapters → v2",
+    "plan_3": "SG/NOOS sync ritual",
+    "plan_4": "SourceA Brain + Loop Specialist integration"
+  },
+  "next_actions": [
+    "Dispatch TF-ARCH-W1 (Plan 1 Phase 1)",
+    "B2: SG sign-off regulated-term JSON (Plan 3 Step 1)",
+    "TF-ARCH-LS1 after W1 (Plan 4 Step 1)",
+    "Brain register TF artifact with independent re-verify (Plan 4 Step 2)"
+  ],
+  "worker_report_note": "Worker PASS on Signal Factory is structural only; Brain registration not required for SF v1 per locked contract."
+}
