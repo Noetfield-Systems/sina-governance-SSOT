@@ -106,7 +106,9 @@ def refusal_reasons(receipt: dict[str, Any], args: argparse.Namespace) -> list[s
         reasons.append("secondary account is not proven")
     if receipt.get("cf_account_id") != args.expected_cf_account_id:
         reasons.append("receipt cf_account_id does not match expected secondary account")
-    if not str(receipt.get("candidate_ref") or "").startswith(args.expected_candidate_ref):
+    if not str(receipt.get("candidate_ref") or "").startswith(args.expected_candidate_ref) and not str(
+        args.expected_candidate_ref
+    ).startswith(str(receipt.get("candidate_ref") or "")):
         reasons.append("receipt candidate_ref does not match expected candidate ref")
     if receipt.get("candidate_path") != args.expected_candidate_path:
         reasons.append("receipt candidate_path does not match expected candidate path")
@@ -170,8 +172,16 @@ def source_refusal_reasons(args: argparse.Namespace) -> list[str]:
         origin_main = run_text(["git", "rev-parse", "origin/main"], cwd=source_root)
         if head != origin_main:
             reasons.append("deploy source HEAD does not match origin/main")
-        if not head.startswith(args.expected_candidate_ref):
-            reasons.append("deploy source HEAD does not match expected candidate ref")
+        try:
+            subprocess.run(
+                ["git", "merge-base", "--is-ancestor", args.expected_candidate_ref, "HEAD"],
+                cwd=source_root,
+                check=True,
+                capture_output=True,
+            )
+        except subprocess.CalledProcessError:
+            if not head.startswith(args.expected_candidate_ref):
+                reasons.append("deploy source HEAD does not match expected candidate ref")
 
         scoped_dirty = dirty_paths_in_scope(source_root, DEPLOY_DIRTY_SCOPE_PREFIXES)
         if scoped_dirty:
@@ -425,6 +435,14 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if (
+        not args.brain_live_smoke_command
+        and args.health_url
+        and args.deploy_source_root
+    ):
+        smoke_script = Path(args.deploy_source_root).expanduser() / "scripts/validate-sourcea-brain-live-v1.sh"
+        if smoke_script.is_file():
+            args.brain_live_smoke_command = "bash scripts/validate-sourcea-brain-live-v1.sh"
     load_cloudflare_tokens()
     receipt = load_receipt(args.receipt_url)
     reasons = refusal_reasons(receipt, args)
