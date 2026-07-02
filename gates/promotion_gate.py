@@ -307,6 +307,34 @@ def source_refusal_reasons(args: argparse.Namespace) -> list[str]:
     except (RuntimeError, subprocess.CalledProcessError) as exc:
         reasons.append(str(exc))
 
+    if args.sandbox_id == "brain_worker":
+        guard = source_root / "scripts/deploy_dirty_tree_guard_v1.py"
+        if guard.is_file():
+            result = subprocess.run(
+                [sys.executable, str(guard), "--scope", "brain_worker", "--json"],
+                cwd=source_root,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            if result.returncode != 0:
+                try:
+                    payload = json.loads(result.stdout)
+                except json.JSONDecodeError:
+                    payload = {"stderr": result.stderr.strip(), "stdout": result.stdout.strip()}
+                dirty_scoped = payload.get("dirty_scoped") or []
+                dirty_total = payload.get("dirty_total")
+                dirty_cap = payload.get("dirty_total_cap")
+                if dirty_scoped:
+                    reasons.append(
+                        "brain_worker deploy scope is dirty: "
+                        + ", ".join(str(path) for path in dirty_scoped[:8])
+                    )
+                elif dirty_total is not None and dirty_cap is not None:
+                    reasons.append(f"deploy dirty-tree cap exceeded: dirty_total={dirty_total} cap={dirty_cap}")
+                else:
+                    reasons.append("brain_worker deploy dirty-tree guard failed")
+
     reasons.extend(bundle_scope_refusal_reasons(args))
     return reasons
 
