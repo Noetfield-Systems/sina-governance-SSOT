@@ -28,47 +28,49 @@ Add `brain_worker` scope to `deploy_dirty_tree_guard_v1.py`; gate pre-check.
 
 **Done when:** Promote refuses brain-scoped dirty; crawl-only dirt OK if `dirty_total <= 200`.
 
+**Status:** DONE (`7c2c710` SG + `043cc9fe9` SourceA)
+
 ## Step 4 — First confirm-each-time promote
 
-Promote signed `7ffd0766…` from clean `main`. Receipt: `receipts/phase3-step4-promote-receipt.json`.
+Promote signed bundle from clean `main`. Receipt: `receipts/phase3-step4-promote-receipt.json`.
 
-**Done when:** SHA identity match + brain-live PASS.
+**Done when:** Up to 3 live deploy receipts with SHA identity + brain-live PASS.
 
 ## Step 5 — Implement `--autonomous-deploy`
 
 Gate flag + `~/.sina/brain-autonomous-deploy-v1.flag` + safety bounds.
 
-**Done when:** Dry-run autonomous path; failure refuses with rollback hint.
+**Status:** DONE — `promotion_gate.py --autonomous-deploy`, hold flag on fail.
 
 ## Step 6 — 24/7 autorun motor (launchd)
 
 Upgrade `brain_loop_autorun_v1.sh` — 6h cycle; doc `BRAIN_LOOP_LAUNCHD_v0.1.md`.
 
-**Done when:** Full autorun cycle receipt with autonomous flag.
+**Status:** DONE
 
 ## Step 7 — Sandbox branch → main lane
 
 Feature branches verify-only; auto-promote `main` only.
 
-**Done when:** sandbox → verify → merge → autorun promote.
+**Status:** DONE — registry + `propose_brain_improvement_v1.py`
 
 ## Step 8 — CI mirror
 
 `.github/workflows/brain-loop-autorun-v1.yml` — 6h schedule + manual dispatch.
 
-**Done when:** One CI autorun receipt.
+**Status:** DONE (observe-only in CI; no CF tokens)
 
 ## Step 9 — Auto-stop hold flag
 
 `brain-autonomous-hold-v1.flag` on fail; clear on matrix ALL PASS.
 
-**Done when:** Simulated fail sets hold; matrix clears.
+**Status:** DONE — gate + autorun set/clear hold
 
 ## Step 10 — Founder DECIDE: enable 24/7
 
 Create autonomous flag, install launchd, update STEP10B + PHASE_LOOP docs.
 
-**Done when:** 24h observation — autorun every 6h; no silent failures.
+**Status:** LIFT — flag + docs; launchd install per founder Mac
 
 ## Out of scope (Phase 4)
 

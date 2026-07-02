@@ -16,6 +16,12 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from gates.cf_tokens import load_cloudflare_tokens
+from scripts.brain_autonomous_controls_v1 import (
+    autonomous_deploy_enabled,
+    autonomous_hold_active,
+    mutation_trials_enabled,
+    set_autonomous_hold,
+)
 
 REGISTRY_PATH = _REPO_ROOT / "data/brain_domain_sandboxes_v1.json"
 INDEPENDENCE_RECEIPT_DEFAULT = _REPO_ROOT / "receipts/verifier-independence-proof-latest.json"
@@ -106,6 +112,19 @@ def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
     age_days = (dt.datetime.now(dt.UTC) - stamp).days
     if age_days > args.independence_max_age_days:
         return [f"independence receipt stale ({age_days}d > {args.independence_max_age_days}d)"]
+    return []
+
+
+def autonomous_refusal_reasons(args: argparse.Namespace) -> list[str]:
+    if not args.autonomous_deploy:
+        return []
+    if autonomous_hold_active():
+        return ["autonomous hold flag is active (~/.sina/enforcement/brain-autonomous-hold-v1.flag)"]
+    if not autonomous_deploy_enabled():
+        return ["brain-autonomous-deploy-v1.flag not present (~/.sina/brain-autonomous-deploy-v1.flag)"]
+    source_root = Path(args.deploy_source_root).expanduser() if args.deploy_source_root else None
+    if mutation_trials_enabled(source_root):
+        return ["SOURCEA_PHASE2_MUTATION_TRIALS is enabled"]
     return []
 
 
@@ -407,6 +426,7 @@ def write_deploy_receipt(
     deploy_exit_code: int,
     *,
     semi_auto: bool = False,
+    autonomous: bool = False,
     identity_ok: bool = True,
 ) -> None:
     if not args.deploy_receipt_path:
@@ -416,8 +436,20 @@ def write_deploy_receipt(
     smoke_ok = brain_live is None or brain_live.get("skipped") or brain_live.get("ok") is True
     post_promote_ok = post_promote is None or post_promote.get("skipped") or post_promote.get("ok") is True
     deploy_success = deploy_exit_code == 0 and identity_ok and smoke_ok and post_promote_ok
+    if autonomous:
+        receipt_type = "AUTONOMOUS_DEPLOY"
+        founder_confirmation = "AUTONOMOUS_FLAG"
+        confirmed_by = "autonomous"
+    elif semi_auto:
+        receipt_type = "SEMI_AUTO_WINDOW_DEPLOY"
+        founder_confirmation = "SEMI_AUTO_WINDOW"
+        confirmed_by = "semi_auto_window"
+    else:
+        receipt_type = "STEP10A_CONFIRM_EACH_TIME_DEPLOY"
+        founder_confirmation = CONFIRM_TEXT
+        confirmed_by = "founder"
     deploy_receipt = {
-        "receipt_type": "SEMI_AUTO_WINDOW_DEPLOY" if semi_auto else "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
+        "receipt_type": receipt_type,
         "recorded_at": dt.datetime.now(dt.UTC).isoformat(),
         "candidate_ref": receipt.get("candidate_ref"),
         "candidate_path": receipt.get("candidate_path"),
@@ -435,13 +467,20 @@ def write_deploy_receipt(
         "deploy_exit_code": deploy_exit_code,
         "deploy_executed": deploy_success,
         "deploy_marked_success": deploy_success,
-        "founder_confirmation": "SEMI_AUTO_WINDOW" if semi_auto else CONFIRM_TEXT,
-        "confirmed_by": "semi_auto_window" if semi_auto else "founder",
+        "founder_confirmation": founder_confirmation,
+        "confirmed_by": confirmed_by,
+        "autonomous_deploy": autonomous,
     }
     output_path.write_text(json.dumps(deploy_receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, semi_auto: bool) -> int:
+def execute_deploy_flow(
+    args: argparse.Namespace,
+    receipt: dict[str, Any],
+    *,
+    semi_auto: bool = False,
+    autonomous: bool = False,
+) -> int:
     if not args.deploy_command:
         print("PROMOTION_GATE: REFUSED")
         print(f"receipt_id: {receipt.get('receipt_id')}")
@@ -458,7 +497,10 @@ def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, se
         return 2
 
     pre_version = latest_live_version(args.live_version_command)
-    if semi_auto:
+    if autonomous:
+        print("PROMOTION_GATE: APPROVED_AUTONOMOUS_DEPLOY")
+        print("founder_confirmation: not required (autonomous flag active)")
+    elif semi_auto:
         print("PROMOTION_GATE: APPROVED_SEMI_AUTO_DEPLOY")
         print(f"semi_auto_window_until: {args.semi_auto_window_until or 'unbounded'}")
     else:
@@ -540,8 +582,25 @@ def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, se
         post_promote,
         result.returncode,
         semi_auto=semi_auto,
+        autonomous=autonomous,
         identity_ok=identity_ok,
     )
+
+    deploy_failed = (
+        not identity_ok
+        or result.returncode != 0
+        or brain_live.get("ok") is False
+        or post_promote.get("ok") is False
+    )
+    if deploy_failed and autonomous:
+        set_autonomous_hold(
+            reason=(
+                f"autonomous deploy failed exit={result.returncode} "
+                f"identity_ok={identity_ok} smoke_ok={brain_live.get('ok')} "
+                f"post_promote_ok={post_promote.get('ok')}"
+            )
+        )
+        print("PROMOTION_GATE: AUTONOMOUS_HOLD_SET")
 
     if not identity_ok:
         return 4
@@ -568,6 +627,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--confirm-each-time", action="store_true", help="Require founder confirmation before deploying.")
     parser.add_argument("--semi-auto-window", action="store_true", help="Auto-deploy on PASS inside an authorized window.")
     parser.add_argument("--semi-auto-window-until", help="ISO8601 timestamp; window closes after this instant.")
+    parser.add_argument(
+        "--autonomous-deploy",
+        action="store_true",
+        help="Deploy without confirmation when ~/.sina/brain-autonomous-deploy-v1.flag exists.",
+    )
     parser.add_argument("--bundle-artifacts-only", action="store_true", help="Refuse candidates that change non-bundle paths.")
     parser.add_argument("--deploy-source-root", help="SourceA repo root; must be clean main matching origin/main.")
     parser.add_argument("--source-bundle-path", help="Candidate bundle path inside the deploy source repo.")
@@ -602,10 +666,16 @@ def main() -> int:
     receipt = load_receipt(args.receipt_url)
     reasons = refusal_reasons(receipt, args)
 
-    wants_deploy = args.confirm_each_time or (args.semi_auto_window and semi_auto_window_active(args))
+    wants_deploy = (
+        args.confirm_each_time
+        or (args.semi_auto_window and semi_auto_window_active(args))
+        or args.autonomous_deploy
+    )
     if wants_deploy:
         reasons.extend(independence_refusal_reasons(args))
         reasons.extend(rollback_receipt_reasons(args))
+        if args.autonomous_deploy:
+            reasons.extend(autonomous_refusal_reasons(args))
 
     if reasons:
         print("PROMOTION_GATE: REFUSED")
@@ -634,7 +704,12 @@ def main() -> int:
             for reason in source_reasons:
                 print(f"- {reason}")
             return 2
-        return execute_deploy_flow(args, receipt, semi_auto=args.semi_auto_window and semi_auto_window_active(args))
+        return execute_deploy_flow(
+            args,
+            receipt,
+            semi_auto=args.semi_auto_window and semi_auto_window_active(args),
+            autonomous=args.autonomous_deploy,
+        )
 
     if args.execute_deploy:
         print("PROMOTION_GATE: REFUSED")

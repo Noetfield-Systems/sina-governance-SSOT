@@ -1,0 +1,32 @@
+name: brain-loop-autorun-v1
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  autorun:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout SG
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Observe-only autorun (CI has no SourceA / CF tokens)
+        env:
+          CI: "true"
+        run: bash scripts/brain_loop_autorun_v1.sh
+
+      - name: Upload autorun receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brain-loop-autorun-receipt
+          path: receipts/brain-loop-autorun-*.json
+          if-no-files-found: ignore

@@ -6,6 +6,8 @@
   "secondary_cf_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
   "sourcea_root_default": "~/Desktop/SourceA",
   "independence_receipt_max_age_days": 30,
+  "autonomous_promote_branch": "main",
+  "sandbox_branch_prefix": "sandbox/brain/",
   "sandboxes": [
     {
       "sandbox_id": "brain_worker",

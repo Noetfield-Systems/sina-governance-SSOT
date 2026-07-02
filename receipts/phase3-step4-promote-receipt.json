@@ -1,0 +1,38 @@
+{
+  "artifact_type": "knowledge_bundle",
+  "autonomous_deploy": false,
+  "brain_live_smoke": {
+    "command": "bash scripts/validate-sourcea-brain-live-v1.sh",
+    "exit_code": 0,
+    "ok": true,
+    "stderr_tail": "",
+    "stdout_tail": "roduction worker GET ===\nOK ai_model_ready hint= Brain v5 \u2014 vector retrieval \u00b7 read-only live tools \u00b7 112+ live sources\n=== production CORS preflight ===\nOK CORS OPTIONS 204\n=== stranger prompts (production worker) ===\nOK what-is: SourceA positioning (public) One line SourceA is an AI execution platform powered by Forge \u2014 real bu\nOK ide-cloud\nOK records-recovery\nOK receipt /Users/sinakazemnezhad/.sina/enforcement/sourcea-brain-live-gate-receipt-v1.json\nvalidate-sourcea-brain-live-v1.sh: ALL PASS"
+  },
+  "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+  "candidate_ref": "7ffd0766b9b43e1e7a1583964c7115415e2423f5",
+  "candidate_sha256": "642c151ee61ae1ddaaddd0163f668b6b90b41b88eabb7adbb6e15f7e02502ded",
+  "confirmed_by": "founder",
+  "content_identity_ok": true,
+  "deploy_executed": true,
+  "deploy_exit_code": 0,
+  "deploy_marked_success": true,
+  "founder_confirmation": "CONFIRM DEPLOY",
+  "health_result": {
+    "ai_model_ready": true,
+    "at": "2026-07-02T10:03:23Z",
+    "ok": true,
+    "schema": "sourcea-brain-chat-health-v1",
+    "service": "sourcea-brain-chat-v1",
+    "trace_storage_ready": false
+  },
+  "new_live_version_id": "b229e579-2196-4f28-8e54-8bedc065e03c",
+  "post_live_version_id": "b229e579-2196-4f28-8e54-8bedc065e03c",
+  "post_promote": {
+    "skipped": true
+  },
+  "pre_live_version_id": "4fecb98a-e4b3-44d1-99d8-630bb9501294",
+  "receipt_type": "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
+  "recorded_at": "2026-07-02T10:03:24.923922+00:00",
+  "sandbox_id": "brain_worker",
+  "verifier_receipt_id": "87afedb6-3330-44e4-a871-2d5d249255df"
+}
