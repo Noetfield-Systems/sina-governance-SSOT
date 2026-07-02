@@ -1,0 +1,20 @@
+{
+  "candidate_ref": "7ffd0766b9b43e1e7a1583964c7115415e2423f5",
+  "cf_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+  "expected_cf_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+  "main_token_absent": true,
+  "pass": true,
+  "receipt_type": "VERIFIER_INDEPENDENCE_PROOF",
+  "recorded_at": "2026-07-02T09:45:05.794492+00:00",
+  "result": "PASS",
+  "secondary_account_proven": true,
+  "status": "PASS",
+  "verifier_receipt_id": "cf40d32c-c007-4d9e-b02b-44bfc09ea492",
+  "verifier_token_present": true,
+  "whoami": {
+    "account_ids": [
+      "b7282b4a5c17b84d62e3ef8866b878f8"
+    ],
+    "ok": true
+  }
+}

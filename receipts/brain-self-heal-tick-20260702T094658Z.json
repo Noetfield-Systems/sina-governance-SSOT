@@ -1,0 +1,17 @@
+{
+  "assessment": {
+    "action": "skip",
+    "bundle_sha256": "642c151ee61ae1ddaaddd0163f668b6b90b41b88eabb7adbb6e15f7e02502ded",
+    "head_ref": "7ffd0766b9b43e1e7a1583964c7115415e2423f5",
+    "reason": "bundle_sha_match",
+    "receipt_ref": "7ffd0766b9b43e1e7a1583964c7115415e2423f5",
+    "receipt_sha256": "642c151ee61ae1ddaaddd0163f668b6b90b41b88eabb7adbb6e15f7e02502ded",
+    "sandbox_id": "brain_worker"
+  },
+  "latest_verifier_receipt_id": "cf40d32c-c007-4d9e-b02b-44bfc09ea492",
+  "receipt_type": "BRAIN_SELF_HEAL_TICK",
+  "recorded_at": "2026-07-02T09:46:58.506200+00:00",
+  "rerun_result": null,
+  "sourcea_root": "/Users/sinakazemnezhad/Desktop/SourceA",
+  "triggered_rerun": false
+}

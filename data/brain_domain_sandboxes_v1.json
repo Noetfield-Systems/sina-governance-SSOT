@@ -1,0 +1,71 @@
+{
+  "schema": "brain_domain_sandboxes_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-02T12:00:00Z",
+  "verifier_base_url": "https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev",
+  "secondary_cf_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+  "sourcea_root_default": "~/Desktop/SourceA",
+  "independence_receipt_max_age_days": 30,
+  "sandboxes": [
+    {
+      "sandbox_id": "brain_worker",
+      "description": "SourceA Brain Worker code + knowledge bundle",
+      "branch": "main",
+      "artifact_type": "brain_worker_bundle",
+      "candidate_repo": "kazemnezhadsina144-dot/SourceA",
+      "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+      "deploy_root": "~/Desktop/SourceA",
+      "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "gate_profile": {
+        "bundle_artifacts_only": false,
+        "brain_live_smoke_default": true,
+        "deploy_command": "bash scripts/brain_cli_v1.sh deploy-verified",
+        "source_bundle_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json"
+      }
+    },
+    {
+      "sandbox_id": "knowledge_bundle",
+      "description": "Brain knowledge bundle only (data artifact)",
+      "branch": "main",
+      "artifact_type": "knowledge_bundle",
+      "candidate_repo": "kazemnezhadsina144-dot/SourceA",
+      "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+      "deploy_root": "~/Desktop/SourceA",
+      "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "gate_profile": {
+        "bundle_artifacts_only": true,
+        "brain_live_smoke_default": true,
+        "deploy_command": "bash scripts/brain_cli_v1.sh deploy-verified",
+        "source_bundle_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json"
+      }
+    },
+    {
+      "sandbox_id": "locked_definitions",
+      "description": "Locked definitions ratification lane",
+      "branch": "main",
+      "artifact_type": "brain_worker_bundle",
+      "candidate_repo": "kazemnezhadsina144-dot/SourceA",
+      "candidate_path": "reports/locked-definitions-v1.json",
+      "deploy_root": "~/Desktop/SourceA",
+      "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "gate_profile": {
+        "post_promote_command": "python3 scripts/promote_locked_definitions_v1.py --json",
+        "brain_live_smoke_default": true
+      }
+    },
+    {
+      "sandbox_id": "contract_pages",
+      "description": "Three contract SKU pages + proxy routing",
+      "branch": "main",
+      "artifact_type": "knowledge_bundle",
+      "candidate_repo": "kazemnezhadsina144-dot/SourceA",
+      "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+      "deploy_root": "~/Desktop/SourceA",
+      "health_url": "https://sourcea.app/operating-brain-install",
+      "gate_profile": {
+        "post_promote_command": "bash scripts/validate-sourcea-contract-pages-e2e-v1.sh",
+        "brain_live_smoke_default": false
+      }
+    }
+  ]
+}

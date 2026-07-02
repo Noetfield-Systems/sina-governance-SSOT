@@ -1,0 +1,9 @@
+{
+  "receipt_type": "BRAIN_ROLLBACK_DRILL",
+  "drill_result": "PASS",
+  "result": "PASS",
+  "mode": "execute",
+  "current_version_id": "4fecb98a-e4b3-44d1-99d8-630bb9501294",
+  "previous_version_id": "8acbd0db-40e8-45ca-b0ee-2258177cd56b",
+  "live_health_restored": true
+}

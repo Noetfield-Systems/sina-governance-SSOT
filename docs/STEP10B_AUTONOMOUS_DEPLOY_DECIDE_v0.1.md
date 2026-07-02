@@ -47,7 +47,30 @@ Define prerequisites for unattended Step 10b: sandboxes propose, verifier gates,
 | Unattended `--execute-deploy` | **Disabled** |
 | `--autonomous-deploy` (10b) | **NOT enabled — DECIDE required** |
 
-## Evidence index
+## Evidence index (Phase 2 Parallel Brain)
+
+- Sandbox registry: [data/brain_domain_sandboxes_v1.json](data/brain_domain_sandboxes_v1.json)
+- Autorun doc: [docs/BRAIN_LOOP_AUTORUN_v0.1.md](docs/BRAIN_LOOP_AUTORUN_v0.1.md)
+- Independence proof: [receipts/verifier-independence-proof-latest.json](receipts/verifier-independence-proof-latest.json)
+- Rollback drill: [receipts/brain-rollback-drill-latest.json](receipts/brain-rollback-drill-latest.json)
+- Self-heal ticks: `receipts/brain-self-heal-tick-*.json`
+- Parallel batches: `receipts/parallel-candidate-batch-*.json`
+
+## Founder DECIDE question (updated 2026-07-02)
+
+> Enable Step 10b autonomous deploy (no per-deploy CONFIRM) under semi-auto bounds only, with automatic stop on smoke/identity failure?
+
+**Current answer: HOLD**
+
+Phase 2 adds Brain-only bounded autorun (heal + parallel verify). Sufficient evidence for LIFT requires:
+- Fresh independence receipt (< 30 days)
+- Rollback drill PASS receipt
+- E2E matrix ALL PASS under ship window
+- At least one improvement proposal → parallel run → promote flow
+
+**Mac nerve / Cloud Forge full mesh: DEFER Phase 3.**
+
+## Prior evidence index
 
 - Phase loop plan: [PHASE_LOOP_BUILD_PLAN_v0.1.md](PHASE_LOOP_BUILD_PLAN_v0.1.md)
 - Step 2 live sync: `883dbc6e-5333-45e9-ad21-b61d52c7bb62` → Brain Core deploy `81058e04-6b8b-442d-a108-6eebffc60519`

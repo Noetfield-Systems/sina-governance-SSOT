@@ -17,6 +17,9 @@ if str(_REPO_ROOT) not in sys.path:
 
 from gates.cf_tokens import load_cloudflare_tokens
 
+REGISTRY_PATH = _REPO_ROOT / "data/brain_domain_sandboxes_v1.json"
+INDEPENDENCE_RECEIPT_DEFAULT = _REPO_ROOT / "receipts/verifier-independence-proof-latest.json"
+
 
 REQUIRED_STATUS = "PASS"
 CONFIRM_TEXT = "CONFIRM DEPLOY"
@@ -32,6 +35,106 @@ DEPLOY_DIRTY_SCOPE_PREFIXES = (
     "cloud/workers/sourcea-brain-chat-v1/",
     "scripts/brain_cli_v1.sh",
 )
+
+
+def load_sandbox_registry() -> dict[str, Any]:
+    if not REGISTRY_PATH.is_file():
+        raise RuntimeError(f"sandbox registry missing: {REGISTRY_PATH}")
+    return json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+
+
+def get_sandbox_profile(registry: dict[str, Any], sandbox_id: str) -> dict[str, Any]:
+    for sandbox in registry.get("sandboxes", []):
+        if sandbox.get("sandbox_id") == sandbox_id:
+            return sandbox
+    raise RuntimeError(f"sandbox_id not found in registry: {sandbox_id}")
+
+
+def apply_sandbox_profile(args: argparse.Namespace) -> None:
+    if not args.sandbox_id:
+        return
+    registry = load_sandbox_registry()
+    sandbox = get_sandbox_profile(registry, args.sandbox_id)
+    profile = sandbox.get("gate_profile") or {}
+    deploy_root = str(Path(sandbox["deploy_root"]).expanduser())
+
+    if not args.deploy_source_root:
+        args.deploy_source_root = deploy_root
+    if not args.health_url:
+        args.health_url = sandbox.get("health_url")
+    if profile.get("bundle_artifacts_only"):
+        args.bundle_artifacts_only = True
+    if profile.get("deploy_command") and not args.deploy_command:
+        args.deploy_command = profile["deploy_command"]
+    if profile.get("source_bundle_path") and not args.source_bundle_path:
+        args.source_bundle_path = profile["source_bundle_path"]
+    if profile.get("post_promote_command") and not args.post_promote_command:
+        args.post_promote_command = profile["post_promote_command"]
+    if profile.get("brain_live_smoke_default") and not args.brain_live_smoke_command:
+        smoke_script = Path(deploy_root) / "scripts/validate-sourcea-brain-live-v1.sh"
+        if smoke_script.is_file():
+            args.brain_live_smoke_command = "bash scripts/validate-sourcea-brain-live-v1.sh"
+
+    if os.environ.get("BRAIN_SANDBOX_SEMI_AUTO") == args.sandbox_id:
+        args.semi_auto_window = True
+
+
+def load_json_file(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
+    if args.skip_independence_check:
+        return []
+    path = Path(args.independence_receipt_path or INDEPENDENCE_RECEIPT_DEFAULT)
+    if not path.is_file():
+        return [f"independence receipt missing: {path}"]
+    proof = load_json_file(path)
+    if proof.get("result") != "PASS" and proof.get("status") != "PASS":
+        return ["independence receipt is not PASS"]
+    if not proof.get("secondary_account_proven"):
+        return ["independence receipt missing secondary_account_proven"]
+    recorded_at = proof.get("recorded_at") or proof.get("checked_at")
+    if not recorded_at:
+        return ["independence receipt missing recorded_at"]
+    try:
+        stamp = dt.datetime.fromisoformat(str(recorded_at).replace("Z", "+00:00"))
+        if stamp.tzinfo is None:
+            stamp = stamp.replace(tzinfo=dt.UTC)
+    except ValueError:
+        return ["independence receipt recorded_at is not ISO8601"]
+    age_days = (dt.datetime.now(dt.UTC) - stamp).days
+    if age_days > args.independence_max_age_days:
+        return [f"independence receipt stale ({age_days}d > {args.independence_max_age_days}d)"]
+    return []
+
+
+def rollback_receipt_reasons(args: argparse.Namespace) -> list[str]:
+    if not args.rollback_receipt:
+        return []
+    path = Path(args.rollback_receipt)
+    if not path.is_file():
+        return [f"rollback receipt missing: {path}"]
+    proof = load_json_file(path)
+    if proof.get("drill_result") != "PASS" and proof.get("result") != "PASS":
+        return ["rollback receipt drill_result is not PASS"]
+    if not proof.get("live_health_restored"):
+        return ["rollback receipt missing live_health_restored=true"]
+    return []
+
+
+def run_post_promote_command(args: argparse.Namespace) -> dict[str, Any]:
+    if not args.post_promote_command:
+        return {"skipped": True}
+    cwd = Path(args.deploy_source_root).expanduser() if args.deploy_source_root else None
+    result = subprocess.run(args.post_promote_command, shell=True, cwd=cwd, text=True, capture_output=True, check=False)
+    return {
+        "command": args.post_promote_command,
+        "exit_code": result.returncode,
+        "ok": result.returncode == 0,
+        "stdout_tail": result.stdout.strip()[-500:],
+        "stderr_tail": result.stderr.strip()[-500:],
+    }
 
 
 def run_text(command: list[str], cwd: Path | None = None) -> str:
@@ -272,6 +375,7 @@ def write_deploy_receipt(
     post_version: str | None,
     health: dict[str, Any] | None,
     brain_live: dict[str, Any] | None,
+    post_promote: dict[str, Any] | None,
     deploy_exit_code: int,
     *,
     semi_auto: bool = False,
@@ -282,7 +386,8 @@ def write_deploy_receipt(
     output_path = Path(args.deploy_receipt_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     smoke_ok = brain_live is None or brain_live.get("skipped") or brain_live.get("ok") is True
-    deploy_success = deploy_exit_code == 0 and identity_ok and smoke_ok
+    post_promote_ok = post_promote is None or post_promote.get("skipped") or post_promote.get("ok") is True
+    deploy_success = deploy_exit_code == 0 and identity_ok and smoke_ok and post_promote_ok
     deploy_receipt = {
         "receipt_type": "SEMI_AUTO_WINDOW_DEPLOY" if semi_auto else "STEP10A_CONFIRM_EACH_TIME_DEPLOY",
         "recorded_at": dt.datetime.now(dt.UTC).isoformat(),
@@ -296,6 +401,8 @@ def write_deploy_receipt(
         "new_live_version_id": post_version,
         "health_result": health,
         "brain_live_smoke": brain_live,
+        "post_promote": post_promote,
+        "sandbox_id": args.sandbox_id,
         "content_identity_ok": identity_ok,
         "deploy_exit_code": deploy_exit_code,
         "deploy_executed": deploy_success,
@@ -383,6 +490,16 @@ def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, se
         if pre_version:
             print(f"rollback_hint: wrangler versions deploy {pre_version} --name sourcea-brain-chat-v1")
 
+    post_promote: dict[str, Any] = {"skipped": True}
+    if identity_ok and result.returncode == 0:
+        post_promote = run_post_promote_command(args)
+        if post_promote.get("ok") is False:
+            identity_ok = False
+            print("PROMOTION_GATE: POST_PROMOTE_FAIL")
+            print("deploy_executed: false")
+            if pre_version:
+                print(f"rollback_hint: wrangler versions deploy {pre_version} --name sourcea-brain-chat-v1")
+
     print(f"deploy_exit_code: {result.returncode}")
     print(f"post_live_version_id: {post_version}")
     write_deploy_receipt(
@@ -392,6 +509,7 @@ def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, se
         post_version,
         health,
         brain_live,
+        post_promote,
         result.returncode,
         semi_auto=semi_auto,
         identity_ok=identity_ok,
@@ -403,6 +521,8 @@ def execute_deploy_flow(args: argparse.Namespace, receipt: dict[str, Any], *, se
         return result.returncode
     if brain_live.get("ok") is False:
         return 5
+    if post_promote.get("ok") is False:
+        return 6
     return 0
 
 
@@ -430,11 +550,18 @@ def parse_args() -> argparse.Namespace:
         help="Shell command for production brain live smoke after deploy.",
     )
     parser.add_argument("--deploy-receipt-path", help="Path to write the confirmed deploy receipt JSON.")
+    parser.add_argument("--sandbox-id", help="Load gate profile from brain_domain_sandboxes_v1.json.")
+    parser.add_argument("--post-promote-command", help="Shell command after successful deploy.")
+    parser.add_argument("--rollback-receipt", help="Path to a PASS rollback drill receipt (optional gate prerequisite).")
+    parser.add_argument("--independence-receipt-path", help="Verifier independence proof receipt JSON.")
+    parser.add_argument("--independence-max-age-days", type=int, default=30)
+    parser.add_argument("--skip-independence-check", action="store_true")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    apply_sandbox_profile(args)
     if (
         not args.brain_live_smoke_command
         and args.health_url
@@ -447,6 +574,11 @@ def main() -> int:
     receipt = load_receipt(args.receipt_url)
     reasons = refusal_reasons(receipt, args)
 
+    wants_deploy = args.confirm_each_time or (args.semi_auto_window and semi_auto_window_active(args))
+    if wants_deploy:
+        reasons.extend(independence_refusal_reasons(args))
+        reasons.extend(rollback_receipt_reasons(args))
+
     if reasons:
         print("PROMOTION_GATE: REFUSED")
         print(f"receipt_id: {receipt.get('receipt_id')}")
@@ -456,8 +588,6 @@ def main() -> int:
         for reason in reasons:
             print(f"- {reason}")
         return 2
-
-    wants_deploy = args.confirm_each_time or (args.semi_auto_window and semi_auto_window_active(args))
 
     if args.semi_auto_window and not semi_auto_window_active(args):
         print("PROMOTION_GATE: REFUSED")

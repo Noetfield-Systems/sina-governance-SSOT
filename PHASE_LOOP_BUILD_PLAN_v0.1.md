@@ -84,21 +84,34 @@ the live Brain still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 ## STEP 10 — Wire to live (FOUNDER DECIDE) ⚠️
 SCOPE: enable the loop to run unattended — sandboxes propose, verifier gates, PASS
 auto-deploys to the live Brain. This is the only irreversible step.
-HOLD: **autonomous deploy is NOT enabled.** Step 10a confirm-each-time mode may
-gate a deploy only after a receipt-specific founder confirmation. Full
-autonomous deploy remains separate Step 10b DECIDE.
-PHASE 0.2 / STEP 10a: confirm-each-time wiring is built. The gate verifies PASS
-receipt fields, clean `main` deploy source, `HEAD == origin/main`, and committed
-bundle SHA before printing the candidate and deploy command, then waits for the
-typed founder confirmation `CONFIRM DEPLOY`. No confirmation means no deploy.
-Confirmed deploys run `bash scripts/brain_cli_v1.sh deploy-verified` from the
-verified SourceA root and record a deploy receipt. This deploy mode must not
-refresh or regenerate the bundle; it uploads the already committed and
-verifier-signed artifact as-is. Unattended `--execute-deploy` is disabled.
-BLOCKED for live execution until a fresh verifier PASS signs the exact committed
-SourceA `origin/main` candidate. No Step 10a deploy has run yet.
+HOLD: **autonomous deploy is NOT enabled.** Step 10a confirm-each-time mode is
+**wired, proven, and executed** (Brain Core prod deploy `81058e04-6b8b-442d-a108-6eebffc60519`).
+Full autonomous deploy remains separate Step 10b DECIDE — see
+[docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md](docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md).
 
 ---
+
+## Phase 2 — Parallel Brain Sandboxes (2026-07-02)
+
+SCOPE: many Brain-domain sandboxes, self-healing verifier ticks, bounded autorun.
+
+| Asset | Path |
+|-------|------|
+| Sandbox registry | [data/brain_domain_sandboxes_v1.json](data/brain_domain_sandboxes_v1.json) |
+| Parallel candidates | [scripts/run_parallel_brain_candidates_v1.sh](scripts/run_parallel_brain_candidates_v1.sh) |
+| Self-heal tick | [scripts/brain_loop_self_heal_v1.sh](scripts/brain_loop_self_heal_v1.sh) |
+| E2E matrix | [scripts/validate_brain_domain_e2e_matrix_v1.sh](scripts/validate_brain_domain_e2e_matrix_v1.sh) |
+| Bounded autorun | [scripts/brain_loop_autorun_v1.sh](scripts/brain_loop_autorun_v1.sh) |
+| Gate sandbox profiles | `promotion_gate.py --sandbox-id` |
+
+DONE when: registry validates; parallel batch produces receipts; self-heal re-verifies stale HEAD;
+E2E matrix ALL PASS; autorun observe-only without ship-window flag.
+
+Mac nerve / Cloud Forge mesh: **DEFER Phase 3** — see SourceA nerve 10-step baseline RED.
+
+---
+
+*Status: Steps 1–10 DONE. Phase 2 Parallel Brain wired. Step 10b autonomous deploy HOLD.*
 
 ## Standing rules
 - Verifier output is PASS only when receipt fields prove independence. Else SUBMITTED/FAIL/BLOCKED.
@@ -108,8 +121,4 @@ SourceA `origin/main` candidate. No Step 10a deploy has run yet.
 - Live Brain stays on the MAIN Cloudflare account `0d0b967b...`; verifier stays
 on the secondary Cloudflare account `b7282b4a5c17b84d62e3ef8866b878f8`. Never
 merge these accounts.
-- Autonomous gate-triggered deploy is Step 10, founder-gated, and not yet
-authorized.
-
-*Status: STEP 10a wired, not executed. Confirm-each-time only; autonomous deploy
-NOT enabled.*
+- Autonomous gate-triggered deploy is Step 10b, founder-gated HOLD.

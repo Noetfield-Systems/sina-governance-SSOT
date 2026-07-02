@@ -28,3 +28,7 @@ Same base fields as `knowledge_bundle`, plus:
 
 PASS when remote bytes at `candidate_ref` match all three hashes and bundle validation passes.
 Independence checks unchanged from knowledge_bundle verification.
+
+## Independence re-proof
+
+Last secondary-account independence proof: see [receipts/verifier-independence-proof-latest.json](../receipts/verifier-independence-proof-latest.json) (regenerate via `scripts/prove_verifier_independence_v1.sh`).
