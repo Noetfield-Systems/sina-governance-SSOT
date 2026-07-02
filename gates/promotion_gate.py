@@ -9,11 +9,35 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
+import os
 
 
 REQUIRED_STATUS = "PASS"
 CONFIRM_TEXT = "CONFIRM DEPLOY"
 REFRESHING_BRAIN_DEPLOY_COMMAND = "bash scripts/brain_cli_v1.sh deploy"
+CF_TOKENS_FILE = Path.home() / ".sina/secrets/cloudflare-tokens.env"
+CF_TOKEN_KEYS = ("CF_MAIN_TOKEN", "CF_VERIFIER_TOKEN", "CLOUDFLARE_API_TOKEN")
+
+
+def load_cloudflare_tokens() -> None:
+    """Load CF tokens from ~/.sina/secrets when not already in the environment."""
+    if all(os.environ.get(key) for key in ("CF_MAIN_TOKEN", "CF_VERIFIER_TOKEN")):
+        return
+    if not CF_TOKENS_FILE.is_file():
+        return
+    for raw_line in CF_TOKENS_FILE.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].strip()
+        if "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key in CF_TOKEN_KEYS and not os.environ.get(key):
+            os.environ[key] = value
 
 
 def run_text(command: list[str], cwd: Path | None = None) -> str:
@@ -199,6 +223,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    load_cloudflare_tokens()
     receipt = load_receipt(args.receipt_url)
     reasons = refusal_reasons(receipt, args)
 
