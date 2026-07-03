@@ -1,0 +1,185 @@
+{
+  "schema": "github_automation_registry_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T085000Z",
+  "authority": "SG (SSSOT)",
+  "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+  "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
+  "motors": [
+    {
+      "motor_id": "gh_actions_brain_loop_autorun_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/brain-loop-autorun-v1.yml",
+      "cadence": "*/30 * * * *",
+      "lane": "sourcea_brain_observe_promote",
+      "owns": ["ci_self_heal", "ci_parallel_verifier_batch", "ci_e2e_matrix_when_tokens"],
+      "must_not_own": ["trustfield_loops_build", "noos_doctrine_append", "sg_guardrail_append", "external_send"],
+      "requires_secrets": ["CF_MAIN_TOKEN", "CF_VERIFIER_TOKEN"],
+      "autonomous_promote": "only_when_BRAIN_CI_AUTONOMOUS_and_tokens_present",
+      "receipt_path": "receipts/brain-loop-autorun-*.json",
+      "conflicts_with": []
+    },
+    {
+      "motor_id": "mac_launchd_brain_loop_autorun_v1",
+      "kind": "mac_launchd",
+      "repo": "sina-governance-ssot",
+      "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
+      "cadence": "1800s",
+      "lane": "sourcea_brain_observe_promote",
+      "owns": ["mac_self_heal", "mac_parallel_verifier_batch", "mac_e2e_matrix_ship_window"],
+      "must_not_own": ["trustfield_loops_build", "ci_duplicate_when_ship_window"],
+      "receipt_path": "receipts/brain-loop-autorun-*.json",
+      "conflicts_with": [],
+      "note": "Complement to GH Actions — Mac sleeps; GH is 24/7 cloud mirror"
+    },
+    {
+      "motor_id": "cf_loop_specialist_tick_v1",
+      "kind": "cloudflare_cron",
+      "repo": "SourceA",
+      "health_url": "https://sourcea-loop-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "cadence": "*/15",
+      "lane": "sourcea_loop_specialist",
+      "owns": ["runtime_plans", "work_order_dispatch", "desired_state_artifacts"],
+      "must_not_own": ["brain_promote", "trustfield_deploy", "external_send"],
+      "receipt_path": "~/.sina/loop-specialist-tick-receipt-v1.json",
+      "conflicts_with": []
+    },
+    {
+      "motor_id": "cf_auto_runtime_tick_v1",
+      "kind": "cloudflare_cron",
+      "repo": "SourceA",
+      "health_url": "https://sourcea.app/api/cloud-forge-run/health/v1",
+      "cadence": "*/10",
+      "lane": "sourcea_cloud_forge",
+      "owns": ["cloud_forge_queue", "brain_tick_bundled"],
+      "must_not_own": ["sg_verifier_independence", "trustfield_intake"],
+      "conflicts_with": []
+    },
+    {
+      "motor_id": "trustfield_loops_preview",
+      "kind": "venture_worker",
+      "repo": "trustfield-loops",
+      "lane": "trustfield_capture",
+      "owns": ["tf_intake", "tf_receipt_chain", "tf_telegram_alert"],
+      "must_not_own": ["sourcea_brain_promote", "pattern_export_autorun_v1"],
+      "receipt_path": ".receipt_ids/*.json",
+      "conflicts_with": []
+    }
+  ],
+  "agent_lanes": [
+    {
+      "agent_id": "sg_sssot_cursor",
+      "kind": "cursor_agent",
+      "repo": "sina-governance-ssot",
+      "lane": "sg_governance",
+      "owns": ["locks", "verifier_scripts", "registries", "mirrors", "receipts"],
+      "must_not_own": ["venture_product_code", "brain_bundle_edit", "trustfield_loops_impl"]
+    },
+    {
+      "agent_id": "sourcea_brain",
+      "kind": "cursor_agent",
+      "repo": "SourceA",
+      "lane": "sourcea_brain",
+      "owns": ["register_artifacts", "bundle_pointers", "routing", "collision_check"],
+      "must_not_own": ["trustfield_loops_build", "gh_workflow_authority"]
+    },
+    {
+      "agent_id": "sourcea_worker",
+      "kind": "cursor_agent",
+      "repo": "SourceA",
+      "lane": "sourcea_build",
+      "owns": ["sourcea_workers", "skill_packaging", "deploy_scripts"],
+      "must_not_own": ["trustfield_loops", "sg_registry", "brain_register"]
+    },
+    {
+      "agent_id": "trustfield_worker",
+      "kind": "cursor_agent",
+      "repo": "trustfield-loops",
+      "lane": "trustfield_build",
+      "owns": ["tf_workers", "tf_d1", "tf_crons"],
+      "must_not_own": ["sourcea_repo", "noos_doctrine"]
+    },
+    {
+      "agent_id": "noos_agent",
+      "kind": "cursor_agent",
+      "repo": "noetfeld-os",
+      "lane": "noos_doctrine",
+      "owns": ["gel_runtime", "_NOOS_AGENT_docs"],
+      "must_not_own": ["noetfield_website_source", "sourcea_default_save"]
+    },
+    {
+      "agent_id": "noetfield_website_agent",
+      "kind": "cursor_agent",
+      "repo": "Noetfield",
+      "lane": "noetfield_website",
+      "owns": ["www_routes", "vercel_deploy", "live_nerve"],
+      "must_not_own": ["gel_runtime_impl", "sourcea_bundle"]
+    },
+    {
+      "agent_id": "github_copilot_agent",
+      "kind": "github_copilot",
+      "repo": "*",
+      "lane": "assist_only",
+      "owns": ["draft_pr", "suggest_patch", "explain_diff"],
+      "must_not_own": [
+        "autonomous_promote",
+        "autonomous_deploy_prod",
+        "register_brain_artifact",
+        "append_sg_noos_canonical",
+        "external_send",
+        "unregistered_cron"
+      ],
+      "required_pr_fields": ["lane", "motor_id_or_human_gate"]
+    },
+    {
+      "agent_id": "github_coding_agent",
+      "kind": "github_agent",
+      "repo": "*",
+      "lane": "assist_only",
+      "owns": ["issue_triage_draft", "pr_draft"],
+      "must_not_own": [
+        "merge_to_main_without_gate",
+        "deploy",
+        "promote_brain",
+        "overwrite_registered_motor"
+      ],
+      "required_pr_fields": ["lane", "receipt_id_or_explicit_human_approve"]
+    }
+  ],
+  "task_cell_owners": {
+    "trustfield_loops_build": "trustfield_worker",
+    "trustfield_phase2_triage": "trustfield_worker",
+    "sourcea_worker_deploy": "sourcea_worker",
+    "sourcea_brain_register": "sourcea_brain",
+    "signal_factory_package": "sourcea_worker",
+    "loop_specialist_runtime_plan": "sourcea_loop_specialist",
+    "sg_guardrail_append": "sg_sssot_cursor",
+    "noos_doctrine_append": "noos_agent",
+    "noetfield_website_deploy": "noetfield_website_agent",
+    "brain_promote_ci": "gh_actions_brain_loop_autorun_v1",
+    "brain_promote_mac": "mac_launchd_brain_loop_autorun_v1",
+    "independent_verifier_run": "sg_sssot_cursor",
+    "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify"
+  },
+  "duplication_forbidden": [
+    {
+      "task": "brain_promote_same_window",
+      "max_concurrent_writers": 1,
+      "allowed_motors": ["gh_actions_brain_loop_autorun_v1", "mac_launchd_brain_loop_autorun_v1"],
+      "rule": "CAS on promotion gate — second writer gets REJECTED receipt, not silent overwrite"
+    },
+    {
+      "task": "trustfield_loops_implementation",
+      "max_concurrent_writers": 1,
+      "allowed_motors": ["trustfield_worker"],
+      "rule": "Copilot/Agents may suggest PRs; only TrustField Worker chat merges scoped TF changes"
+    },
+    {
+      "task": "brain_artifact_registration",
+      "max_concurrent_writers": 1,
+      "allowed_motors": ["sourcea_brain"],
+      "rule": "Registration scripts run from SG only after independent verify — not from GH Actions"
+    }
+  ]
+}

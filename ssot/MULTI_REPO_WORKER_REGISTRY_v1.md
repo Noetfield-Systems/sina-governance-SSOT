@@ -71,7 +71,7 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 | TF-ARCH-LS1 | **SourceA Loop Specialist** | SourceA | PENDING — runtime plans only |
 | Signal Factory v1 build | **SourceA Worker** | SourceA (skill on disk) | **DONE** — verifier 6/6 |
 | Brain B-01–B-03 | **SourceA Brain** | SourceA | READY |
-| Brain B-04 register TF artifact | **SourceA Brain** | SourceA | **READY** — TF W1 built; independent re-verify required |
+| Brain B-04 register TF artifact | **SourceA Brain** (via SG script) | SourceA | **✅ DONE** `brain-register-tf-loops-20260703T000733Z` |
 | B2 regulated-term sign-off | **SG** + Sina | SG mirror + `data/regulated-term-hardstop-v1.json` | DRAFT pending sign-off |
 | NOOS doctrine append | **NOOS agent** | `noetfeld-os/docs/_NOOS_AGENT/` | TARGET — not SG canonical |
 | SG guardrail append | **SG** + Sina | `ssot/sg-guardrails-*.md` | Mirror locked |
@@ -125,6 +125,9 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 # SG registry
 /usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
 
+# Parallel automation (GitHub Actions / Copilot / agents)
+/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
+
 # Signal Factory (SourceA-owned skill, any repo context)
 /usr/bin/python3 ~/.cursor/skills/signal-factory/scripts/verify_signal_factory_v1.py
 
@@ -134,6 +137,22 @@ cd ~/Desktop/trustfield-loops && npm run test:phase1
 # Noetfield live nerve (run IN Noetfield repo)
 cd ~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield && make verify-live-nerve
 ```
+
+---
+
+## 8. GitHub Actions · Copilot · Agents (parallel layer)
+
+**Governance:** [PARALLEL_AUTOMATION_GOVERNANCE_v1.md](PARALLEL_AUTOMATION_GOVERNANCE_v1.md)  
+**Registry:** `data/github_automation_registry_v1.json`
+
+| Motor / agent | Lane | Writes | Never |
+|---------------|------|--------|-------|
+| `gh_actions_brain_loop_autorun_v1` | sourcea_brain_observe_promote | CI self-heal · matrix · promote if tokens | TF build · SG/NOOS append |
+| `github_copilot_agent` | assist_only | Draft PR · suggest | Promote · deploy · register · send |
+| `github_coding_agent` | assist_only | Issue/PR draft | Merge main without gate |
+| Cursor venture workers | per repo | Own repo only | Cross-repo implementation |
+
+**Law:** Parallel run OK across lanes. **One writer per task cell.** Unregistered workflow = monthly audit defect.
 
 ---
 
