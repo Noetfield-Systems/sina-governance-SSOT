@@ -35,4 +35,5 @@ jobs:
             receipts/brain-loop-autorun-*.json
             receipts/brain-self-heal-tick-*.json
             receipts/brain-kaizen-proof-*.json
+            receipts/improvement-receipt-v2-*.json
           if-no-files-found: ignore

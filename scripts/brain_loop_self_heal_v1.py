@@ -25,6 +25,10 @@ from scripts.brain_domain_registry_v1 import (  # noqa: E402
     resolve_sourcea_root,
     workflow_health_targets,
 )
+from scripts.brain_loop_health_model_v1 import (  # noqa: E402
+    build_improvement_receipt_v2,
+    score_loop_health,
+)
 from scripts.trigger_verifier_run_v1 import run_one  # noqa: E402
 
 
@@ -59,80 +63,37 @@ def parse_timestamp(value: Any) -> dt.datetime | None:
 
 
 def calculate_health_snapshot(targets: dict[str, Any], latest: dict[str, Any], assessment: dict[str, Any]) -> dict[str, Any]:
-    now = dt.datetime.now(dt.timezone.utc)
     heartbeat_dt = parse_timestamp(latest.get("checked_at") or latest.get("recorded_at"))
     heartbeat_at = heartbeat_dt.isoformat() if heartbeat_dt else None
-    heartbeat_age_minutes = None
+    freshness_age_minutes = None
     if heartbeat_dt is not None:
-        heartbeat_age_minutes = int((now - heartbeat_dt).total_seconds() // 60)
+        freshness_age_minutes = max(0.0, (dt.datetime.now(dt.timezone.utc) - heartbeat_dt).total_seconds() / 60.0)
 
-    heartbeat_max_age_minutes = int(targets.get("heartbeat_max_age_minutes", 360))
-    min_health_score = int(targets.get("min_health_score", 85))
     latest_result = str(latest.get("result") or latest.get("status") or "")
-    latest_failures = latest.get("failures") or []
-    drift_detected = assessment["action"] == "reverify"
+    success_rate_pct = 100.0 if latest_result in {"PASS", "MATCH"} else 0.0
+    latency_minutes = latest.get("latency_minutes")
+    if latency_minutes is None:
+        latency_minutes = latest.get("execution_latency_minutes")
+    if latency_minutes is None:
+        latency_minutes = latest.get("duration_minutes")
+    if latency_minutes is not None:
+        latency_minutes = float(latency_minutes)
 
-    health_score = 100
-    if heartbeat_age_minutes is None:
-        health_score -= 30
-    elif heartbeat_age_minutes > heartbeat_max_age_minutes:
-        health_score -= 40
-    elif heartbeat_age_minutes > max(heartbeat_max_age_minutes - 60, heartbeat_max_age_minutes * 3 // 4):
-        health_score -= 10
-    if latest_result not in {"PASS", "MATCH"}:
-        health_score -= 25
-    if latest_failures:
-        health_score -= 15
-    if drift_detected:
-        health_score -= 20
-    if assessment["reason"] != "receipt_fresh":
-        health_score -= 5
-    health_score = max(0, min(100, health_score))
-
-    slo_miss = (
-        heartbeat_age_minutes is None
-        or heartbeat_age_minutes > heartbeat_max_age_minutes
-        or health_score < min_health_score
-        or latest_result not in {"PASS", "MATCH"}
-        or bool(latest_failures)
+    health = score_loop_health(
+        targets,
+        freshness_age_minutes=freshness_age_minutes,
+        success_rate_pct=success_rate_pct,
+        latency_minutes=latency_minutes,
+        latest_result=latest_result,
+        failure_count=len(latest.get("failures") or []),
+        drift_detected=assessment["action"] == "reverify",
+        reason=assessment["reason"],
+        heartbeat_at=heartbeat_at,
     )
-    if drift_detected and not slo_miss:
-        health_state = "degraded"
-    elif slo_miss:
-        health_state = "at_risk"
-    else:
-        health_state = "healthy"
-
-    proof_reason = []
-    if heartbeat_age_minutes is None:
-        proof_reason.append("heartbeat_missing")
-    elif heartbeat_age_minutes > heartbeat_max_age_minutes:
-        proof_reason.append("heartbeat_stale")
-    if health_score < min_health_score:
-        proof_reason.append("health_score_below_threshold")
-    if latest_result not in {"PASS", "MATCH"}:
-        proof_reason.append("verifier_result_unhealthy")
-    if latest_failures:
-        proof_reason.append("verifier_failures_present")
-    if drift_detected:
-        proof_reason.append("drift_detected")
-    if assessment["reason"] != "receipt_fresh":
-        proof_reason.append(assessment["reason"])
-    if not proof_reason:
-        proof_reason.append("health_ok")
-
-    return {
-        "heartbeat_at": heartbeat_at,
-        "heartbeat_age_minutes": heartbeat_age_minutes,
-        "health_score": health_score,
-        "health_state": health_state,
-        "health_threshold": min_health_score,
-        "heartbeat_max_age_minutes": heartbeat_max_age_minutes,
-        "slo_targets": targets,
-        "slo_miss": slo_miss,
-        "drift_detected": drift_detected,
-        "proof_reason": ",".join(proof_reason),
-    }
+    health["latest_result"] = latest_result
+    health["heartbeat_at"] = heartbeat_at
+    health["checked_at"] = latest.get("checked_at") or latest.get("recorded_at")
+    return health
 
 
 def build_kaizen_proof_receipt(
@@ -144,38 +105,70 @@ def build_kaizen_proof_receipt(
     *,
     sandbox_id: str,
 ) -> dict[str, Any]:
-    return {
-        "receipt_type": "BRAIN_KAIZEN_PROOF",
-        "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "sourcea_root": str(resolve_sourcea_root(registry)),
-        "workflow": "brain_loop_self_heal_v1",
-        "sandbox_id": sandbox_id,
-        "latest_verifier_receipt_id": latest.get("receipt_id"),
-        "latest_verifier_result": latest.get("result") or latest.get("status"),
-        "assessment": assessment,
-        "heartbeat_at": health["heartbeat_at"],
-        "heartbeat_age_minutes": health["heartbeat_age_minutes"],
-        "health_score": health["health_score"],
-        "health_state": health["health_state"],
-        "health_threshold": health["health_threshold"],
-        "slo_targets": health["slo_targets"],
-        "slo_miss": health["slo_miss"],
-        "drift_detected": health["drift_detected"],
-        "proof_reason": health["proof_reason"],
-        "triggered_rerun": bool(rerun_result),
-        "rerun_result": (
+    diff_summary = ", ".join(
+        part
+        for part in [
+            f"freshness={health.get('freshness_age_minutes')}m/{health.get('freshness_target_minutes')}m",
+            f"success_rate={health.get('success_rate_pct')}%/{health.get('success_rate_target')}%",
+            f"latency={health.get('latency_minutes')}m/{health.get('latency_target_minutes')}m",
+        ]
+        if part
+    )
+    expected_effect = (
+        "Keep the brain loop within freshness, success-rate, and latency SLOs and surface explicit misses early."
+    )
+    roi = {
+        "expected_hours_saved_per_week": 1,
+        "confidence": "medium",
+        "risk_reduction": "medium",
+    }
+    rollback_command = f"git revert {subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()}"
+    evidence = [
+        {
+            "kind": "latest_verifier_receipt",
+            "receipt_id": latest.get("receipt_id"),
+            "result": latest.get("result") or latest.get("status"),
+            "checked_at": latest.get("checked_at"),
+        },
+        {
+            "kind": "health_snapshot",
+            "health_score": health.get("health_score"),
+            "health_state": health.get("health_state"),
+            "slo_miss": health.get("slo_miss"),
+            "missed_targets": health.get("missed_targets", []),
+        },
+        {
+            "kind": "assessment",
+            "action": assessment.get("action"),
+            "reason": assessment.get("reason"),
+        },
+    ]
+    if rerun_result:
+        evidence.append(
             {
+                "kind": "rerun_result",
                 "receipt_id": rerun_result.get("receipt_id"),
                 "result": rerun_result.get("result"),
                 "status": rerun_result.get("status"),
             }
-            if rerun_result
-            else None
-        ),
-    }
+        )
+    return build_improvement_receipt_v2(
+        registry,
+        health,
+        workflow_name="brain_loop_self_heal_v1",
+        diff_summary=diff_summary,
+        expected_effect=expected_effect,
+        roi=roi,
+        rollback_command=rollback_command,
+        evidence=evidence,
+        trigger="drift_or_slo_miss",
+        latest=latest,
+        assessment=assessment,
+    )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(
+) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Brain loop self-heal tick.")
     parser.add_argument("--sandbox-id", default="brain_worker")
     parser.add_argument("--trigger", action="store_true", help="Trigger /run when stale.")
@@ -244,7 +237,7 @@ def main() -> int:
             health,
             sandbox_id=args.sandbox_id,
         )
-        proof_prefix = str(workflow_health_targets(registry).get("kaizen_proof_prefix", "receipts/brain-kaizen-proof-"))
+        proof_prefix = str(workflow_health_targets(registry).get("kaizen_proof_prefix", "receipts/improvement-receipt-v2-"))
         proof_path = ROOT / f"{proof_prefix}{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
         proof_path.parent.mkdir(parents=True, exist_ok=True)
         proof_path.write_text(json.dumps(proof_receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -275,6 +268,7 @@ def main() -> int:
             if rerun_result
             else None
         ),
+        "improvement_receipt_path": str(proof_path) if proof_path else None,
         "kaizen_proof_path": str(proof_path) if proof_path else None,
     }
 
@@ -289,7 +283,7 @@ def main() -> int:
         print(f"self-heal: action={assessment['action']} reason={assessment['reason']}")
         print(f"tick_receipt: {out}")
         if proof_path:
-            print(f"kaizen_proof: {proof_path}")
+            print(f"improvement_receipt: {proof_path}")
 
     if assessment["action"] == "reverify" and not args.trigger:
         return 2

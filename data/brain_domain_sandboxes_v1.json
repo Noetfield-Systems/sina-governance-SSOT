@@ -9,9 +9,12 @@
   "independence_receipt_max_age_days": 30,
   "workflow_health_targets": {
     "brain_loop": {
+      "freshness_target_minutes": 360,
+      "success_rate_target": 99,
+      "latency_target_minutes": 15,
       "heartbeat_max_age_minutes": 360,
       "min_health_score": 85,
-      "kaizen_proof_prefix": "receipts/brain-kaizen-proof-"
+      "kaizen_proof_prefix": "receipts/improvement-receipt-v2-"
     }
   },
   "autonomous_promote_branch": "main",
