@@ -258,7 +258,8 @@ Inventory: `data/automation_surface_inventory_v1.json`
 ## 11. Activation checklist (GitHub Agents + Actions + Copilot)
 
 - [ ] All existing workflows registered in `github_automation_registry_v1.json`  
-- [ ] Copilot PR template adopted in org (or per-repo `.github/pull_request_template.md`)  
+- [x] `AGENTS.md` at repo root — Cursor lane lock for `sg_sssot_cursor`  
+- [x] Copilot PR template at `.github/pull_request_template.md`  
 - [ ] No new workflow cron without `motor_id` row  
 - [ ] Venture repos have `AGENTS.md` or rules pointing to lane declaration  
 - [ ] `assist_only` default communicated to all Copilot workflows  

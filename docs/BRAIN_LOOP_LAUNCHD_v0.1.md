@@ -5,6 +5,7 @@ Mac must **help** deploy, not block. All Mac-specific fixes live in `scripts/bra
 ## One-command install (recommended)
 
 ```bash
+bash ~/Projects/sina-governance-ssot/scripts/repair_sourcea_worktree_v1.sh   # if git broken
 bash ~/Projects/sina-governance-ssot/scripts/install_brain_loop_launchd_v1.sh
 ```
 
@@ -20,7 +21,7 @@ This script:
 1. Creates `~/Projects/SourceA` git worktree (TCC-safe — not Desktop)
 2. Installs launchd plist with `/usr/bin/python3` (avoids Framework Python SIGKILL)
 3. Sets overlap lock (no concurrent cycles killing each other)
-4. Configures 6h interval + 5min throttle
+4. Configures **30m** interval (`StartInterval: 1800`) + 5min throttle
 
 ## What was blocking Mac (fixed)
 
@@ -44,11 +45,23 @@ bash ~/Projects/sina-governance-ssot/scripts/brain_loop_launchd_entry_v1.sh
 - `~/.sina/logs/brain-loop-autorun-v1.err.log`
 - `~/.sina/logs/brain-autorun-step-*.log` (per-cycle step detail)
 
+## Schedule
+
+| Setting | Value |
+|---------|-------|
+| `StartInterval` | **1800s (30m)** |
+| `RunAtLoad` | true |
+| `ThrottleInterval` | 300s |
+
+Cloud mirror: GitHub Actions `brain-loop-autorun-v1` at `*/30`.
+
+**Mac ops:** [MAC_CURSOR_OPS_v1.md](MAC_CURSOR_OPS_v1.md) · **Venture lanes:** [MAC_CURSOR_VENTURE_LANES_v1.md](MAC_CURSOR_VENTURE_LANES_v1.md)
+
 ## Prerequisites
 
 - `~/.sina/brain-autonomous-deploy-v1.flag` (founder DECIDE)
 - CF tokens via `scripts/load_cf_tokens_v1.sh`
-- `~/Desktop/SourceA` git repo (for worktree bootstrap)
+- SourceA git at `~/Projects/SourceA` worktree (or archive fallback via `brain_mac_env_v1.sh`)
 
 ## Clear hold
 

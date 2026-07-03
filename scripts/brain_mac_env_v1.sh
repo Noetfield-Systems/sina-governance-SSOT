@@ -2,6 +2,33 @@
 # Mac-safe brain loop environment — TCC, Python SIGKILL, PATH, overlap lock.
 set -euo pipefail
 
+brain_sourcea_git_ok() {
+  local root="${1:-}"
+  [[ -n "$root" ]] || return 1
+  git -C "$root" rev-parse HEAD >/dev/null 2>&1
+}
+
+brain_resolve_sourcea_root() {
+  local candidate archive="${HOME}/Desktop/_ARCHIVE_OLD_WORKTREES/SourceA_old_20260702_191948"
+  for candidate in \
+    "${HOME}/Projects/SourceA" \
+    "${HOME}/Desktop/SourceA" \
+    "$archive"; do
+    if [[ -r "${candidate}/scripts/validate-sourcea-brain-live-v1.sh" ]] \
+      && brain_sourcea_git_ok "$candidate"; then
+      export SOURCEA_ROOT="$candidate"
+      return 0
+    fi
+  done
+  if [[ -r "${archive}/scripts/validate-sourcea-brain-live-v1.sh" ]]; then
+    echo "WARN: SourceA worktree git broken — run: bash scripts/repair_sourcea_worktree_v1.sh" >&2
+    export SOURCEA_ROOT="${HOME}/Projects/SourceA"
+    return 1
+  fi
+  export SOURCEA_ROOT="${HOME}/Projects/SourceA"
+  return 1
+}
+
 _brain_mac_env_init() {
   if [[ -n "${BRAIN_MAC_ENV_LOADED:-}" ]]; then
     return 0
@@ -19,13 +46,7 @@ _brain_mac_env_init() {
   export BRAIN_SG_ROOT
 
   if [[ -z "${SOURCEA_ROOT:-}" ]]; then
-    if [[ -r "${HOME}/Projects/SourceA/scripts/validate-sourcea-brain-live-v1.sh" ]]; then
-      export SOURCEA_ROOT="${HOME}/Projects/SourceA"
-    elif [[ -r "${HOME}/Desktop/SourceA/scripts/validate-sourcea-brain-live-v1.sh" ]]; then
-      export SOURCEA_ROOT="${HOME}/Desktop/SourceA"
-    else
-      export SOURCEA_ROOT="${HOME}/Projects/SourceA"
-    fi
+    brain_resolve_sourcea_root || true
   fi
 
   if [[ -x /usr/bin/python3 ]]; then
@@ -73,6 +94,10 @@ brain_acquire_lock() {
 brain_sync_sourcea_worktree() {
   local root="${SOURCEA_ROOT:-}"
   [[ -n "$root" ]] || return 0
+  if ! brain_sourcea_git_ok "$root"; then
+    echo "WARN: sourcea_sync skipped — git not usable at $root"
+    return 0
+  fi
   [[ -d "$root/.git" || -f "$root/.git" ]] || return 0
   local head origin
   head="$(git -C "$root" rev-parse HEAD 2>/dev/null || echo "")"
@@ -89,19 +114,11 @@ brain_sync_sourcea_worktree() {
 
 brain_ensure_sourcea_worktree() {
   local wt="${HOME}/Projects/SourceA"
-  local desktop="${HOME}/Desktop/SourceA"
-  if [[ -r "${wt}/scripts/validate-sourcea-brain-live-v1.sh" ]]; then
+  if [[ -r "${wt}/scripts/validate-sourcea-brain-live-v1.sh" ]] && brain_sourcea_git_ok "$wt"; then
     export SOURCEA_ROOT="$wt"
     return 0
   fi
-  if [[ ! -d "$desktop/.git" ]]; then
-    echo "BRAIN_MAC_ENV: Desktop SourceA missing — cannot create worktree" >&2
-    return 1
-  fi
-  echo "BRAIN_MAC_ENV: creating SourceA worktree at $wt"
-  mkdir -p "${HOME}/Projects"
-  git -C "$desktop" fetch origin main
-  git -C "$desktop" worktree add "$wt" origin/main
+  bash "${BRAIN_SG_ROOT}/scripts/repair_sourcea_worktree_v1.sh"
   export SOURCEA_ROOT="$wt"
 }
 
