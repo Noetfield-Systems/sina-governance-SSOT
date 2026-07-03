@@ -1,0 +1,180 @@
+{
+  "schema": "machine_autonomy_loops_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T11:50:00Z",
+  "authority": "SG (SSSOT)",
+  "parent": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+  "default_question": "How does the process solve this without Sina?",
+  "founder_triggers_minimal": [
+    {
+      "trigger_id": "FT-CAPITAL",
+      "class": "capital_commitment",
+      "examples": ["paid tier unlock", "Railway scale-up", "Opus budget > cap"],
+      "retire_when": "roi_heartbeat shows revenue_path event OR 30d spend under cap with receipts"
+    },
+    {
+      "trigger_id": "FT-LEGAL",
+      "class": "legal_regulatory",
+      "examples": ["regulated-term sign-off first time", "external send enable", "custody/settlement claims"],
+      "retire_when": "SG_SIGNED JSON + 8 consecutive trap-battery PASS receipts"
+    },
+    {
+      "trigger_id": "FT-L5-IRREVERSIBLE",
+      "class": "irreversible_l5",
+      "examples": ["prod promote without verifier PASS", "force-push main", "disable promotion gate"],
+      "retire_when": "never — machine may propose; founder only for explicit gate weaken (forbidden by default)"
+    },
+    {
+      "trigger_id": "FT-PHASE-UNLOCK",
+      "class": "phase_unlock",
+      "examples": ["TF Phase 2→3", "SF live inbox", "send_capability true"],
+      "retire_when": "phase receipt checklist ALL PASS for N consecutive cycles (N=5 hygiene, N=8 promote-class)"
+    }
+  ],
+  "loops": [
+    {
+      "loop_id": "L1-WORKER-EXEC",
+      "name": "worker_execution",
+      "purpose": "Venture worker builds scoped artifact in own repo only",
+      "owner_class": "venture_worker",
+      "motors": ["cf_auto_runtime_tick_v1", "cf_loop_specialist_tick_v1", "gh_actions_noos_factory_autorun_v1"],
+      "entry": "task_cell dispatch from registry or loop specialist plan",
+      "exit_receipt": "venture repo receipts/ or .receipt_ids/",
+      "founder_required": false,
+      "on_failure": "L4-SELF-REPAIR or L3-ADVERSARIAL"
+    },
+    {
+      "loop_id": "L2-MACHINE-VALID",
+      "name": "machine_validation",
+      "purpose": "Deterministic validators — structure, enums, gates, drift",
+      "owner_class": "sg_governance",
+      "motors": ["gh_actions_brain_loop_autorun_v1", "mac_launchd_brain_loop_autorun_v1"],
+      "scripts": [
+        "scripts/validate_parallel_automation_governance_v1.py",
+        "scripts/audit_automation_surface_v1.py",
+        "scripts/audit_automation_drift_v1.py",
+        "scripts/validate_copilot_pr_template_v1.py",
+        "scripts/brain_loop_health_check_v1.sh"
+      ],
+      "cadence": "*/30 GH + 1800s Mac + weekly ROI",
+      "exit_receipt": "receipts/automation-surface-audit-*.json",
+      "founder_required": false,
+      "on_failure": "L4-SELF-REPAIR"
+    },
+    {
+      "loop_id": "L3-ADVERSARIAL",
+      "name": "adversarial_critique",
+      "purpose": "Second identity challenges PASS claims — trap batteries, independence proof, parallel conflict",
+      "owner_class": "sg_verifier + venture_tests",
+      "motors": ["sina-governance-ssot-advisory CF worker"],
+      "scripts": [
+        "scripts/run_parallel_brain_candidates_v1.sh",
+        "scripts/prove_verifier_independence_v1.py",
+        "scripts/diagnose_gate_candidate_alignment_v1.py"
+      ],
+      "venture_scripts": [
+        "SourceA: scripts/validate-signal-factory-v1.sh",
+        "trustfield-loops: scripts/run_phase2_trap_battery.sh"
+      ],
+      "exit_receipt": "receipts/parallel-candidate-batch-*.json",
+      "founder_required": false,
+      "pass_rule": "PASS only from secondary CF account edge receipt — never builder self-report"
+    },
+    {
+      "loop_id": "L4-SELF-REPAIR",
+      "name": "self_repair",
+      "purpose": "Known fix paths run automatically before escalating",
+      "owner_class": "sg_governance + noos_self_heal",
+      "motors": ["gh_actions_noos_self_heal_loop_v1", "mac_launchd_brain_loop_autorun_v1"],
+      "scripts": [
+        "scripts/repair_sourcea_worktree_v1.sh",
+        "scripts/brain_loop_autorun_v1.sh self-heal path"
+      ],
+      "repair_budget": {"max_actions_per_cycle": 3, "max_wall_seconds": 90},
+      "exit_receipt": "receipts/brain-self-heal-tick-*.json",
+      "founder_required": false,
+      "escalate_when": "same blocker 3 cycles OR repair_budget exhausted"
+    },
+    {
+      "loop_id": "L5-OUTSIDE-AUDIT",
+      "name": "outside_audit_advisory",
+      "purpose": "Independent read path — different account, different runtime, read-only GitHub App",
+      "owner_class": "sg_verifier",
+      "motors": ["sina-governance-ssot-advisory"],
+      "health_url": "https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev/health",
+      "scripts": ["scripts/github_app_remote_check.py", "scripts/trigger_verifier_run_v1.py"],
+      "exit_receipt": "receipts/verifier-independence-proof-latest.json",
+      "founder_required": false,
+      "note": "Blocked infra (404 ref, missing deploy) → L6-RESEARCH ticket, not founder ping"
+    },
+    {
+      "loop_id": "L6-DEEP-RESEARCH",
+      "name": "deep_research_uncertainty",
+      "purpose": "Structured investigation when machine cannot classify blocker in one cycle",
+      "owner_class": "noos_researcher + sg_observe",
+      "motors": ["gh_actions_noos_researcher_v1", "gh_actions_noos_sourcea_observe_v1"],
+      "trigger_conditions": [
+        "verifier BLOCKED 3+ cycles with same root cause",
+        "drift_count > 0 after self-repair",
+        "classification confidence unclear in signal factory"
+      ],
+      "output": "research receipt with hypothesis, evidence, proposed motor change — not chat summary",
+      "exit_receipt": "noetfeld-os/.noos-runtime/research/*.json",
+      "founder_required": false,
+      "max_depth": "2 hops — then freeze writes and open assist_only PR"
+    },
+    {
+      "loop_id": "L7-RECEIPT-PROOF",
+      "name": "receipt_based_proof",
+      "purpose": "Every state transition emits hash-linked or schema-valid receipt",
+      "owner_class": "all_motors",
+      "law": "PARALLEL_AUTOMATION_GOVERNANCE L5 — no DONE without receipt_id",
+      "receipt_dirs": ["receipts/", "~/.sina/*-receipt*.json", "trustfield-loops/.receipt_ids/"],
+      "validators": ["scripts/audit_automation_surface_v1.py", "scripts/write_roi_heartbeat_v1.py"],
+      "founder_required": false
+    },
+    {
+      "loop_id": "L8-EARNED-AUTONOMY",
+      "name": "earned_autonomy_expansion",
+      "purpose": "Widen autonomous surface only after receipt streak proves safety",
+      "owner_class": "sg_governance",
+      "inputs": ["L2 pass streak", "L3 PASS count", "L7 receipt chain", "roi_heartbeat"],
+      "expansion_rules": [
+        {
+          "from": "observe_only",
+          "to": "autonomous_promote_candidate",
+          "requires": {"verifier_pass_streak": 3, "drift_pass_streak": 3, "gate_alignment": "ALIGNED"}
+        },
+        {
+          "from": "phase_N",
+          "to": "phase_N_plus_1",
+          "requires": {"trap_battery_pass_streak": 5, "b2_signed": true, "cost_per_signal_below": 0.01}
+        },
+        {
+          "from": "assist_only",
+          "to": "registered_motor",
+          "requires": {"workflow_audit_pass": true, "no_parallel_conflict": true}
+        }
+      ],
+      "exit_receipt": "receipts/earned-autonomy-expansion-*.json",
+      "founder_required": "only for FT-PHASE-UNLOCK until streak retires trigger"
+    }
+  ],
+  "cycle_order": [
+    "L1-WORKER-EXEC",
+    "L2-MACHINE-VALID",
+    "L3-ADVERSARIAL",
+    "L4-SELF-REPAIR",
+    "L5-OUTSIDE-AUDIT",
+    "L6-DEEP-RESEARCH",
+    "L7-RECEIPT-PROOF",
+    "L8-EARNED-AUTONOMY"
+  ],
+  "anti_patterns": [
+    "Ask Sina to re-run validator manually",
+    "Treat chat summary as PASS",
+    "Merge without lane + motor_id",
+    "Weaken promotion gate instead of fixing verifier path",
+    "Route hygiene red to founder before self-repair + research"
+  ]
+}

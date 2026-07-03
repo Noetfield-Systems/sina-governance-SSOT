@@ -1,7 +1,16 @@
 # SG (SSSOT) — Cursor agent lane
 
 **Agent:** `sg_sssot_cursor` · **Repo:** `~/Projects/sina-governance-ssot`  
-**Registry:** `data/github_automation_registry_v1.json` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+**Registry:** `data/github_automation_registry_v1.json` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`  
+**Autonomy loops:** `ssot/MACHINE_AUTONOMY_LOOPS_v1.md` · `data/machine_autonomy_loops_v1.json`
+
+## Default operating mode
+
+> **How does the process solve this without Sina?**
+
+Do not route validation, review, repair, audit, or uncertainty to the founder. Use the eight loops (worker exec → machine valid → adversarial → self-repair → outside audit → deep research → receipt proof → earned autonomy). Founder triggers only: capital/legal, irreversible L5, phase unlock until receipt streaks retire them.
+
+Cycle orchestrator: `python3 scripts/run_machine_autonomy_cycle_v1.py`
 
 ## You edit (this repo)
 
