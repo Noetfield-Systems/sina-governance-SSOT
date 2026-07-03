@@ -1,0 +1,54 @@
+{
+  "schema": "brain_external_artifact_registry_v1",
+  "version": "1.0.0",
+  "saved_at": "20260703T000733Z",
+  "description": "SourceA Brain read-only registrations for venture-owned artifacts outside SourceA repo. SG verifies independently; Worker self-report is not authority.",
+  "registrations": [
+    {
+      "registration_id": "brain-register-tf-loops-20260703T000733Z",
+      "registered_at": "20260703T000733Z",
+      "artifact_id": "trustfield_loops_phase1",
+      "owner_entity": "trustfield",
+      "worker_actor": "TrustField Worker",
+      "brain_task": "B-04",
+      "provenance": {
+        "repo_path": "/Users/sinakazemnezhad/Desktop/trustfield-loops",
+        "git_head": "f2a33ea81d26c40f18b1863920500375dd0cd6d0",
+        "file_sha256": {
+          "src/index.ts": "7286c39e7c6e216ac748567ee16050920b0ec44da988a68f0fce0042fe8b470e",
+          "src/receipt.ts": "aac55c2b844527d5171065a817e53b86bb202fe8b1e23ea16ce5826beb06dee1",
+          "src/intake.ts": "8d85ccb42de38d1f501f8909f66d559a4294ce1b2d52b9aac4a3896dc4912a16",
+          "src/crypto.ts": "289a7e84faabfb7d5d7e211d7c48b5bfbfb7dbe14e7554058cbf6e52bd9ae3ff",
+          "src/types.ts": "83a41d1f1791100cc6229f7f23321350c4f348f84a6893a4de86791bd9fa7d6d",
+          "migrations/0001_init.sql": "f66e897c5259a0f905098890cb0e2b02340189ed4b8a68d8999142c77b54970a",
+          "scripts/run_phase1_battery.sh": "547b683c91ec487419c1d4c8d79680e5cc743822d280dda065afe84c5d4aada9"
+        },
+        "composite_sha256": "ef9fc04a607620f612fa1344145a85c2a43e7132a3b989604725d3c2b1d6e238",
+        "entity": "trustfield",
+        "order": "TF-ARCH-W1",
+        "phase": 1,
+        "send_capability": false
+      },
+      "independent_verify": {
+        "runner": "sina-governance-ssot/scripts/brain_register_trustfield_loops_v1.py",
+        "command": "npm run test:phase1",
+        "pass_line": "PHASE1_BATTERY: PASS",
+        "test_receipt_ids": [
+          "rcpt_5b43778a-f11c-4677-937d-47a93ebb4025",
+          "rcpt_3ae4f08e-152f-46cc-a8ff-92c6aab83b18",
+          "rcpt_44036466-d094-4551-a0e3-8d403b3f2329",
+          "rcpt_39778c56-5507-46e6-b241-7aaa67259631",
+          "rcpt_c323e1f8-84f3-4a6b-ad84-4ef7ac6f9e7b",
+          "rcpt_784d3652-63d1-4e38-a7d4-f5291e525979"
+        ]
+      },
+      "collision_check": {
+        "status": "PASS",
+        "locked_definitions": "/Users/sinakazemnezhad/Projects/SourceA/reports/locked-definitions-v1.json"
+      },
+      "memory_line": "brain/register: trustfield-loops Phase1 PASS independent; head=f2a33ea8 entity=trustfield send=false",
+      "brain_mode": "read_only_pointer",
+      "export_direction": "trustfield_to_sourcea_one_way"
+    }
+  ]
+}

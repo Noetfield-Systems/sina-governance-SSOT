@@ -1,0 +1,62 @@
+{
+  "schema": "governance-lock-receipt-v1",
+  "receipt_id": "signal-factory-iteration2-lock-20260703T100500Z",
+  "receipt_type": "SIGNAL_FACTORY_ITERATION2_LOCK",
+  "recorded_at": "20260703T100500Z",
+  "entity": "sourcea",
+  "action": "architect_finalize_and_lock_iteration2",
+  "artifacts": [
+    {
+      "path": "docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md",
+      "role": "master_iteration2_lock"
+    },
+    {
+      "path": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.4.md",
+      "role": "reconciled_lock_addendum"
+    },
+    {
+      "path": "ssot/sg-guardrails-signal-factory-v1.md",
+      "role": "sg_guardrails_mirror"
+    }
+  ],
+  "iteration2": {
+    "classification_enum": [
+      "vendor",
+      "partner",
+      "client",
+      "investor",
+      "risk",
+      "bug",
+      "idea",
+      "spam",
+      "unclear"
+    ],
+    "decision_enum": [
+      "ignore",
+      "archive",
+      "reply",
+      "route",
+      "build_automation",
+      "create_service_pattern"
+    ],
+    "optional_section_gate": "decision_only_no_score_threshold",
+    "kim_auto_decision": "create_service_pattern",
+    "risk_override": "risk_score_gte_4_forces_route",
+    "test_count": 6,
+    "partnermesh": "input_class_not_employment",
+    "primary_owner": "sourcea_base_brain",
+    "noos_primary": false,
+    "sg_role": "guardrails_only"
+  },
+  "org_context": {
+    "cockpit": "~/Desktop/Noetfield-Systems/Noetfield-Systems.code-workspace",
+    "org_sync_spine_target": "noetfeld-OS",
+    "sg_role": "constitution_only"
+  },
+  "next_dispatch": {
+    "sourcea_worker": "build SKILL.md + 6 tests + verifier per lock §15",
+    "sourcea_brain": "doctrine + pointer per lock §16",
+    "sg": "stop — guardrails recorded"
+  },
+  "architect_note": "Do not build in SG chat. Do not expand to 125 skills. Do not convert to JSON registry unless separately requested."
+}

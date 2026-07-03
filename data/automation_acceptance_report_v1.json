@@ -1,0 +1,20 @@
+{
+  "schema": "automation_acceptance_report_v1",
+  "recorded_at": "20260703T092706Z",
+  "checks": {
+    "brain_loop_health_check_v1": "ALL PASS",
+    "validate_parallel_automation_governance_v1": "ALL PASS",
+    "validate_copilot_pr_template_v1": "ALL PASS",
+    "audit_automation_surface_v1": "ALL PASS",
+    "audit_automation_drift_v1": "DRIFT",
+    "diagnose_gate_candidate_alignment_v1": "BLOCKED_WITH_REASON",
+    "cf_auto_runtime_health": "ok:true"
+  },
+  "true_blockers": [
+    "GH brain-loop-autorun on main still failure until branch merges (CI observe-only fix)",
+    "Verifier BLOCKED: GitHub API 404 on sina-governance-SSOT ref — promote correctly refused"
+  ],
+  "not_blockers": [
+    "Bundle SHA local matches receipt knowledge_bundle_sha256 — alignment OK; status not PASS"
+  ]
+}
