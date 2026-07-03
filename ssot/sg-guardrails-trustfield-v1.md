@@ -3,7 +3,8 @@
 **Status:** LOCKED — append-only; Sina approves wording changes.  
 **Saved:** 2026-07-02  
 **Mirror of:** `~/.cursor/skills/signal-factory/references/sg-guardrails-v1.md`  
-**Parent lock:** [../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md](../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md)
+**Parent lock:** [../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md](../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md)  
+**Iteration 2:** [../docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md](../docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md)
 
 SG owns guardrail wording. SourceA owns skill execution. NOOS owns routing doctrine (separate file TARGET).
 

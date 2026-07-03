@@ -5,7 +5,8 @@
 **Date:** 2026-07-02 (v1.1 multi-repo correction)  
 **Status:** ACTIONABLE — Brain Wave 1 tasks may start immediately  
 **Receipt:** `trustfield-signal-factory-lock-20260702T204000Z`  
-**Plans:** [1111_UPGRADE_PLANS_v2.md](1111_UPGRADE_PLANS_v2.md) · [MULTI_REPO_WORKER_REGISTRY_v1.md](../ssot/MULTI_REPO_WORKER_REGISTRY_v1.md)
+**Plans:** [1111_UPGRADE_PLANS_v2.md](1111_UPGRADE_PLANS_v2.md) · [MULTI_REPO_WORKER_REGISTRY_v1.md](../ssot/MULTI_REPO_WORKER_REGISTRY_v1.md)  
+**Signal Factory Iteration 2 lock:** [SIGNAL_FACTORY_ITERATION2_LOCK_v1.md](SIGNAL_FACTORY_ITERATION2_LOCK_v1.md) · receipt `signal-factory-iteration2-lock-20260703T100500Z`
 
 ---
 
