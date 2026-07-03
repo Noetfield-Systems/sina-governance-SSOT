@@ -16,7 +16,7 @@ jobs:
       - name: Checkout SourceA
         uses: actions/checkout@v4
         with:
-          repository: kazemnezhadsina144-dot/SourceA
+          repository: Noetfield-Systems/SourceA
           path: SourceA
           token: ${{ secrets.SOURCEA_GITHUB_PAT || secrets.GITHUB_TOKEN }}
 
