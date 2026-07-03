@@ -12,6 +12,7 @@ REGISTRY = ROOT / "data" / "github_automation_registry_v1.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
 MULTI_REPO = ROOT / "ssot" / "MULTI_REPO_WORKER_REGISTRY_v1.md"
 GOVERNANCE = ROOT / "ssot" / "PARALLEL_AUTOMATION_GOVERNANCE_v1.md"
+PR_TEMPLATE = ROOT / ".github" / "pull_request_template.md"
 REQUIRED_TASK_CELLS = (
     "trustfield_loops_build",
     "sourcea_brain_register",
@@ -100,6 +101,17 @@ def main() -> int:
         errors.append("github_copilot_agent lane missing")
     elif "autonomous_promote" not in copilot.get("must_not_own", []):
         errors.append("copilot must_not_own must include autonomous_promote")
+    for forbidden in ("register_brain_artifact", "cross_repo_writes"):
+        if forbidden not in copilot.get("must_not_own", []):
+            errors.append(f"copilot must_not_own must include {forbidden}")
+
+    if not PR_TEMPLATE.is_file():
+        errors.append("missing .github/pull_request_template.md")
+    else:
+        pr_text = PR_TEMPLATE.read_text(encoding="utf-8")
+        for marker in ("lane:", "motor_id_or_human_gate:", "Task cell:", "receipt_id:"):
+            if marker not in pr_text:
+                errors.append(f"PR template missing: {marker}")
 
     for cell in REQUIRED_TASK_CELLS:
         if cell not in task_owners:

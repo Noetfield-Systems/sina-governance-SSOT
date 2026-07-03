@@ -149,6 +149,7 @@
         "autonomous_promote",
         "autonomous_deploy_prod",
         "register_brain_artifact",
+        "cross_repo_writes",
         "append_sg_noos_canonical",
         "external_send",
         "unregistered_cron"
