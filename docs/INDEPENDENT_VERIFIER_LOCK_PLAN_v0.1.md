@@ -2,7 +2,7 @@
 Status: SUBMITTED / HOLD / SUBMITTED
 Authority: SPEC only; no implementation authorized by this document
 Governing SSOT: ssot/strategy-ssot-v6-split.md
-Remote advisory staging: https://github.com/kazemnezhadsina144-dot/sina-governance-SSOT
+Remote advisory staging: https://github.com/Noetfield-Systems/sina-governance-SSOT
 No PASS claimed.
 
 ## 1. Executive Conclusion

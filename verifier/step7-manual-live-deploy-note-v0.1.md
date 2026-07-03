@@ -16,7 +16,7 @@ autonomous gate-triggered deploy.
 
 ## Live Brain Baseline
 
-- Live target repo: `github.com/kazemnezhadsina144-dot/SourceA`
+- Live target repo: `github.com/Noetfield-Systems/SourceA`
 - Live target worker path: `cloud/workers/sourcea-brain-chat-v1`
 - Live deploy command: `bash scripts/brain_cli_v1.sh deploy`
 - Deploy run location: `~/Desktop/SourceA`
