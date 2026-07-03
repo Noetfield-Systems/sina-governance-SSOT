@@ -1,6 +1,6 @@
 const APP_ID = "4179901";
 const INSTALLATION_ID = "143449507";
-const OWNER = "kazemnezhadsina144-dot";
+const OWNER = "Noetfield-Systems";
 const REPO = "sina-governance-SSOT";
 const BRANCH = "main";
 const SSOT_PATH = "ssot/strategy-ssot-v6-split.md";
