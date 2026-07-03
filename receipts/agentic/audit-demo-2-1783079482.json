@@ -1,0 +1,10 @@
+{
+  "receipt_signal_id": "demo-2",
+  "timestamp": "2026-07-03T11:51:22.782275Z",
+  "note": "repaired",
+  "receipt_summary": {
+    "decision": "create_service_pattern",
+    "status": "repaired_by_rerun",
+    "risk_score": 2
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "signal_id": "demo-1",
+  "timestamp": "2026-07-03T11:51:22.781301Z",
+  "source": "email:test@example.com",
+  "classification": "vendor",
+  "decision": "reply",
+  "scores": {
+    "trust": 2,
+    "risk": 2,
+    "automation_value": 0,
+    "commercial_value": 0
+  },
+  "risk_score": 1,
+  "action": "reply",
+  "status": "validated",
+  "optional_sections": {}
+}
