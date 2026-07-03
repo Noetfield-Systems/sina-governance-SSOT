@@ -1,0 +1,12 @@
+{
+  "receipt_type": "COST_POLICY_LOCK_APPLIED",
+  "recorded_at": "2026-07-03T20:36:01Z",
+  "applied_by": "copilot-cli",
+  "details": "Repo-local cost enforcement: CI early-fail, promotion gate cost receipt check, autorun observe-only defaults, local pre-commit hook added.",
+  "files_changed": [
+    ".github/workflows/agentic-ci.yml",
+    "gates/promotion_gate.py",
+    ".githooks/pre-commit",
+    "receipts/cost_policy_lock_applied.json"
+  ]
+}

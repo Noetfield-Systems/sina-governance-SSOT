@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Pre-commit hook template to run local cost policy checks. Install into .git/hooks/pre-commit if desired.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+python3 "$ROOT/scripts/cost_policy_enforcer.py" --local-check || exit 2
+exit 0

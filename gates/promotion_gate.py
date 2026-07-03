@@ -118,6 +118,28 @@ def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
     return []
 
 
+def cost_policy_refusal_reasons(args: argparse.Namespace) -> list[str]:
+    """Enforce presence of a cost policy pass receipt for deploy/autonomous flows.
+
+    Defaults:
+      - receipts/cost_policy_pass.json
+    Use --skip-cost-policy-check to bypass (for local testing only).
+    """
+    if getattr(args, "skip_cost_policy_check", False):
+        return []
+    receipt_path = Path(getattr(args, "cost_policy_receipt_path", "receipts/cost_policy_pass.json"))
+    if not receipt_path.is_file():
+        return [f"cost policy receipt missing: {receipt_path}"]
+    try:
+        proof = load_json_file(receipt_path)
+    except Exception:
+        return [f"cost policy receipt unreadable: {receipt_path}"]
+    # basic validation: must claim checked_by_ci or checked_by: 'cost_enforcer'
+    if not (proof.get("checked_by_ci") or proof.get("checked_by") == "cost_enforcer"):
+        return ["cost policy receipt missing checked_by_ci or valid checker field"]
+    return []
+
+
 def autonomous_refusal_reasons(args: argparse.Namespace) -> list[str]:
     if not args.autonomous_deploy:
         return []
@@ -682,6 +704,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--independence-receipt-path", help="Verifier independence proof receipt JSON.")
     parser.add_argument("--independence-max-age-days", type=int, default=30)
     parser.add_argument("--skip-independence-check", action="store_true")
+    parser.add_argument("--cost-policy-receipt-path", help="Path to cost policy pass receipt JSON.", default="receipts/cost_policy_pass.json")
+    parser.add_argument("--skip-cost-policy-check", action="store_true", help="Skip cost policy receipt check (local testing only)")
     return parser.parse_args()
 
 
@@ -708,6 +732,8 @@ def main() -> int:
     if wants_deploy:
         reasons.extend(independence_refusal_reasons(args))
         reasons.extend(rollback_receipt_reasons(args))
+        # Enforce cost policy receipt for any deploy/autonomous flows
+        reasons.extend(cost_policy_refusal_reasons(args))
         if args.autonomous_deploy:
             reasons.extend(autonomous_refusal_reasons(args))
 
