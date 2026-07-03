@@ -21,7 +21,7 @@ load_cloudflare_tokens()
 
 APP_ID = "4179901"
 INSTALLATION_ID = "143449507"
-OWNER = "kazemnezhadsina144-dot"
+OWNER = "Noetfield-Systems"
 REPO = "sina-governance-SSOT"
 BRANCH = "main"
 SSOT_PATH = "ssot/strategy-ssot-v6-split.md"

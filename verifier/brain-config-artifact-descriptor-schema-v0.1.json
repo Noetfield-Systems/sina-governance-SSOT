@@ -46,8 +46,8 @@
     "candidate_repo": {
       "type": "string",
       "enum": [
-        "kazemnezhadsina144-dot/sina-governance-SSOT",
-        "kazemnezhadsina144-dot/SourceA"
+        "Noetfield-Systems/sina-governance-SSOT",
+        "Noetfield-Systems/SourceA"
       ]
     },
     "candidate_ref": {

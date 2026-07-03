@@ -1,0 +1,14 @@
+schema_version: 1
+repo:
+  name: sina-governance-SSOT
+  full_name: Noetfield-Systems/sina-governance-SSOT
+  role: org-sync-plane-repo-slice
+  plane: ORG_SYNC_PLANE_v1
+coordination:
+  support_protocol: new-integrator-protocol
+  source_of_truth: this-repo
+agent_roles:
+  - id: repo-slice-implementer
+    purpose: apply repo-local org sync updates and safe config migrations
+  - id: slug-sweep-auditor
+    purpose: classify and remediate legacy slug usage in active config/code
