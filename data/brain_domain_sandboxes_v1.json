@@ -7,6 +7,13 @@
   "sourcea_root_default": "~/Projects/SourceA",
   "sourcea_root_desktop": "~/Desktop/SourceA",
   "independence_receipt_max_age_days": 30,
+  "workflow_health_targets": {
+    "brain_loop": {
+      "heartbeat_max_age_minutes": 360,
+      "min_health_score": 85,
+      "kaizen_proof_prefix": "receipts/brain-kaizen-proof-"
+    }
+  },
   "autonomous_promote_branch": "main",
   "sandbox_branch_prefix": "sandbox/brain/",
   "sandboxes": [

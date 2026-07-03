@@ -43,6 +43,19 @@ def resolve_sandbox_repo(registry: dict[str, Any], sandbox: dict[str, Any]) -> P
     return resolve_sourcea_root(registry)
 
 
+def workflow_health_targets(registry: dict[str, Any] | None = None) -> dict[str, Any]:
+    reg = registry or load_registry()
+    defaults = {
+        "heartbeat_max_age_minutes": 360,
+        "min_health_score": 85,
+        "kaizen_proof_prefix": "receipts/brain-kaizen-proof-",
+    }
+    targets = reg.get("workflow_health_targets", {}).get("brain_loop", {})
+    if not isinstance(targets, dict):
+        return defaults
+    return {**defaults, **targets}
+
+
 def get_sandbox(registry: dict[str, Any], sandbox_id: str) -> dict[str, Any]:
     for sandbox in registry.get("sandboxes", []):
         if sandbox.get("sandbox_id") == sandbox_id:
