@@ -25,6 +25,9 @@ jobs:
       - name: Byte-compile scripts
         run: |
           python -m py_compile scripts/*.py || true
+      - name: Cost policy enforcement (block PRs on code refs)
+        run: |
+          python3 scripts/cost_policy_enforcer.py
       - name: Run unit tests
         run: |
           python3 scripts/tests_agentic_v1.py
