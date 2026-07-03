@@ -97,35 +97,59 @@ class Adversary:
         return p
 
 
-class SelfRepair:
-    """Tries a sequence of repair strategies: re-run with repair=True, then auto-fill missing keys.
+class RepairStrategy:
+    """Base class for repair strategies. Subclasses implement `repair` that returns a candidate payload or None."""
 
-    Returns repaired_payload or None.
-    """
+    def repair(self, worker: SimpleWorker, task_name: str, original_payload: Dict[str, Any]) -> Tuple[Dict[str, Any] | None, str]:
+        raise NotImplementedError
 
-    @staticmethod
-    def attempt_repair(worker: SimpleWorker, task_name: str, original_payload: Dict[str, Any]) -> Dict[str, Any] | None:
-        # Strategy 1: re-run worker in repair mode
+
+class RerunStrategy(RepairStrategy):
+    """Re-run the worker in repair mode and return candidate."""
+
+    def repair(self, worker: SimpleWorker, task_name: str, original_payload: Dict[str, Any]) -> Tuple[Dict[str, Any] | None, str]:
         candidate = worker.process(task_name, original_payload, repair=True)
-        ok, errs = Validator.validate(candidate)
-        if ok:
-            candidate["status"] = "repaired_by_rerun"
-            return candidate
-        # Strategy 2: auto-fill missing fields conservatively
+        return candidate, "rerun"
+
+
+class AutoFillStrategy(RepairStrategy):
+    """Conservative auto-fill of missing fields and normalization of bounds."""
+
+    def repair(self, worker: SimpleWorker, task_name: str, original_payload: Dict[str, Any]) -> Tuple[Dict[str, Any] | None, str]:
+        # Start from a fresh re-run candidate, then fill
+        candidate = worker.process(task_name, original_payload, repair=True)
         for k in REQUIRED_FIELDS:
             if k not in candidate:
                 candidate[k] = "AUTO_FILLED"
-        # normalize risk_score if bad
+        # normalize risk_score
         try:
             rs = float(candidate.get("risk_score", 2))
             if rs < 0 or rs > 5:
                 candidate["risk_score"] = 3
         except Exception:
             candidate["risk_score"] = 3
-        ok2, errs2 = Validator.validate(candidate)
-        if ok2:
-            candidate["status"] = "repaired_by_autofill"
-            return candidate
+        return candidate, "autofill"
+
+
+class SelfRepair:
+    """Attempts a sequence of pluggable repair strategies in order.
+
+    Returns repaired_payload or None.
+    """
+
+    STRATEGIES = [RerunStrategy(), AutoFillStrategy()]
+
+    @staticmethod
+    def attempt_repair(worker: SimpleWorker, task_name: str, original_payload: Dict[str, Any]) -> Dict[str, Any] | None:
+        for strat in SelfRepair.STRATEGIES:
+            candidate, name = strat.repair(worker, task_name, original_payload)
+            if candidate is None:
+                continue
+            ok, errs = Validator.validate(candidate)
+            if ok:
+                candidate["status"] = f"repaired_by_{name}"
+                candidate.setdefault("repair_strategy", name)
+                return candidate
         return None
 
 
