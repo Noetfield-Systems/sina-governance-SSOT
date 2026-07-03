@@ -1,0 +1,79 @@
+{
+  "grant_id": "grant-1783104947",
+  "timestamp": "2026-07-03T11:55:47.983267Z",
+  "grants": {
+    "allow_repair_autofill": {
+      "granted": false,
+      "reasons": [
+        "validated+repaired 2 < required 3"
+      ],
+      "metrics": {
+        "total": 2,
+        "validated": 1,
+        "repaired": 1,
+        "failed": 0,
+        "avg_risk": 1.5,
+        "autonomy_score": 1.0
+      }
+    },
+    "allow_auto_respond": {
+      "granted": false,
+      "reasons": [
+        "validated+repaired 2 < required 5"
+      ],
+      "metrics": {
+        "total": 2,
+        "validated": 1,
+        "repaired": 1,
+        "failed": 0,
+        "avg_risk": 1.5,
+        "autonomy_score": 1.0
+      }
+    },
+    "allow_retry_rerun": {
+      "granted": true,
+      "reasons": [
+        "criteria_met"
+      ],
+      "metrics": {
+        "total": 2,
+        "validated": 1,
+        "repaired": 1,
+        "failed": 0,
+        "avg_risk": 1.5,
+        "autonomy_score": 1.0
+      },
+      "revoke_if": {
+        "autonomy_below": 0.36000000000000004
+      }
+    },
+    "allow_publish_artifacts": {
+      "granted": false,
+      "reasons": [
+        "founder_trigger_required"
+      ],
+      "metrics": {
+        "total": 2,
+        "validated": 1,
+        "repaired": 1,
+        "failed": 0,
+        "avg_risk": 1.5,
+        "autonomy_score": 1.0
+      }
+    },
+    "allow_package_publish": {
+      "granted": false,
+      "reasons": [
+        "founder_trigger_required"
+      ],
+      "metrics": {
+        "total": 2,
+        "validated": 1,
+        "repaired": 1,
+        "failed": 0,
+        "avg_risk": 1.5,
+        "autonomy_score": 1.0
+      }
+    }
+  }
+}
