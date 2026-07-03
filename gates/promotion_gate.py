@@ -119,11 +119,13 @@ def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
 
 
 def cost_policy_refusal_reasons(args: argparse.Namespace) -> list[str]:
-    """Enforce presence of a cost policy pass receipt for deploy/autonomous flows.
+    """Enforce presence and schema of a cost policy pass receipt for deploy/autonomous flows.
 
-    Defaults:
-      - receipts/cost_policy_pass.json
-    Use --skip-cost-policy-check to bypass (for local testing only).
+    Rules enforced:
+      - missing receipt => FAIL
+      - missing required fields => FAIL
+      - cost_policy_pass must be true => FAIL
+      - unknown or banned provider/model => FAIL unless exception_approved==True in receipt
     """
     if getattr(args, "skip_cost_policy_check", False):
         return []
@@ -134,9 +136,70 @@ def cost_policy_refusal_reasons(args: argparse.Namespace) -> list[str]:
         proof = load_json_file(receipt_path)
     except Exception:
         return [f"cost policy receipt unreadable: {receipt_path}"]
-    # basic validation: must claim checked_by_ci or checked_by: 'cost_enforcer'
-    if not (proof.get("checked_by_ci") or proof.get("checked_by") == "cost_enforcer"):
-        return ["cost policy receipt missing checked_by_ci or valid checker field"]
+
+    required_fields = [
+        "provider",
+        "model",
+        "tokens_in",
+        "tokens_out",
+        "estimated_cost",
+        "cost_policy_pass",
+        "cost_policy_version",
+        "checked_by_ci",
+    ]
+    missing = [f for f in required_fields if f not in proof]
+    if missing:
+        return [f"cost policy receipt missing fields: {', '.join(missing)}"]
+
+    if proof.get("cost_policy_pass") is not True:
+        return ["cost_policy_pass is not true"]
+
+    # Load machine policy to validate provider/model
+    policy_path = _REPO_ROOT / ".noetfield" / "cost_policy_machine.json"
+    policy = {}
+    if policy_path.is_file():
+        try:
+            policy = load_json_file(policy_path)
+        except Exception:
+            # If policy unreadable, be conservative and fail
+            return [f"cost policy machine unreadable: {policy_path}"]
+
+    allowed_providers = set(policy.get("allowed_providers", []))
+    banned_providers = set(policy.get("banned_providers", []))
+    allowed_models = set(policy.get("allowed_default_models", []))
+    banned_models = set(policy.get("banned_models", []))
+
+    provider = proof.get("provider")
+    model = proof.get("model")
+
+    # If explicitly banned provider or model -> fail unless exception_approved
+    if provider in banned_providers or model in banned_models:
+        if not proof.get("exception_approved"):
+            return [f"provider/model is banned by policy: {provider}/{model}"]
+
+    # Unknown provider -> fail unless exception
+    if allowed_providers and provider not in allowed_providers:
+        if not proof.get("exception_approved"):
+            return [f"unknown provider in cost receipt: {provider}"]
+
+    # Unknown model -> fail unless exception
+    if allowed_models and model not in allowed_models:
+        if not proof.get("exception_approved"):
+            return [f"unknown model in cost receipt: {model}"]
+
+    # basic tokens/cost sanity checks (non-negative numbers)
+    try:
+        if float(proof.get("tokens_in", 0)) < 0 or float(proof.get("tokens_out", 0)) < 0:
+            return ["tokens_in or tokens_out are negative"]
+        if float(proof.get("estimated_cost", 0)) < 0:
+            return ["estimated_cost is negative"]
+    except (TypeError, ValueError):
+        return ["tokens_in/tokens_out/estimated_cost must be numeric"]
+
+    # checked_by_ci must be truthy
+    if not proof.get("checked_by_ci"):
+        return ["cost policy receipt missing checked_by_ci claim"]
+
     return []
 
 
