@@ -1,10 +1,8 @@
 # NOOS Doctrine — TrustField v1
 
-**Status:** LOCKED — append-only; Sina rules conflicts.  
-**Saved:** 2026-07-02  
-**Parent lock:** [../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md](../docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md)
-
-NOOS owns routing/blocker-target doctrine. TrustField owns product logic. SourceA owns pattern export copy.
+**Status:** LOCKED — SG **mirror** only.  
+**Canonical append:** `~/Projects/noetfeld-os/docs/_NOOS_AGENT/` (NOOS agent owns).  
+**Sync:** Noetfield ↔ NOOS per `NOETFIELD_WEBSITE_NOOS_REAL_SYNC_HANDOFF_LOCKED_v1.md`
 
 ## Seven doctrine lines (architecture §22 — locked 2026-07-02)
 

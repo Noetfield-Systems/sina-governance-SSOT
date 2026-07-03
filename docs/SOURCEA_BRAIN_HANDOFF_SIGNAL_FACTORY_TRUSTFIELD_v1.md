@@ -1,21 +1,21 @@
 # SourceA Brain Handoff — Signal Factory + TrustField Domain v1
 
 **To:** SourceA Brain (live worker + knowledge bundle + registry)  
-**From:** Governance SSOT / Architect lock / Worker receipt  
-**Date:** 2026-07-02  
+**From:** SG (SSSOT) — `sina-governance-ssot` — lock + registry + verify only  
+**Date:** 2026-07-02 (v1.1 multi-repo correction)  
 **Status:** ACTIONABLE — Brain Wave 1 tasks may start immediately  
 **Receipt:** `trustfield-signal-factory-lock-20260702T204000Z`  
-**Plans:** [1111_UPGRADE_PLANS_v2.md](1111_UPGRADE_PLANS_v2.md) (ROI-ranked)
+**Plans:** [1111_UPGRADE_PLANS_v2.md](1111_UPGRADE_PLANS_v2.md) · [MULTI_REPO_WORKER_REGISTRY_v1.md](../ssot/MULTI_REPO_WORKER_REGISTRY_v1.md)
 
 ---
 
 ## 0. Executive brief (read first)
 
-Two new domain artifacts are locked. **Signal Factory v1 is built and verified** — SourceA-owned reusable triage engine. **TrustField E2E autorun architecture is locked but not yet built** — separate venture, watched pattern surface, one-way export to SourceA.
+Two domain artifacts are locked. **Signal Factory v1** — SourceA-owned skill, built by **SourceA Worker** (`~/.cursor/skills/signal-factory/`, verifier 6/6). **TrustField Phase 1** — built by **TrustField Worker** in `~/Desktop/trustfield-loops` (NOT SourceA Worker); preview receipts exist.
 
-**Your job (Brain):** Register pointers, enforce separation, consume pattern exports, never write TrustField doctrine. **Skip Brain pre-build** for both. **Post-build registration required only for TrustField Worker artifacts** — with independent re-verify, not Worker self-report.
+**Your job (Brain):** Register pointers, enforce separation, consume pattern exports, never write TrustField doctrine. **Skip Brain pre-build.** **Post-build registration:** TrustField Worker artifact → Brain registers after **independent re-verify** (Worker report = claim). Signal Factory v1 skips register (meaning complete).
 
-**Highest ROI Brain actions now:** B-01 registry pointer · B-02 memory_line template · hold B-04 until TF-ARCH-W1 preview PASS.
+**Highest ROI Brain actions now:** B-01/B-02/B-03 · ~~B-04~~ ✅ registered 20260703T000733Z
 
 ---
 
@@ -40,12 +40,13 @@ Two new domain artifacts are locked. **Signal Factory v1 is built and verified**
 
 | Layer | Owner | Brain relationship |
 |-------|-------|-------------------|
-| Signal Factory core | SourceA Brain (meaning) | Register read-only reference (B-01) |
-| TrustField venture | TrustField | Watch only; export patterns in, doctrine never out |
-| SG guardrails | SG | Pointer: `ssot/sg-guardrails-trustfield-v1.md` |
-| NOOS doctrine | NOOS | Pointer: `ssot/noos-doctrine-trustfield-v1.md` |
-| Worker build | SourceA Worker | Brain registers TF artifact after independent PASS |
-| Loop Specialist | SourceA | Runtime plans → registry desired-state (B-07) |
+| Signal Factory core | SourceA Brain + **SourceA Worker** (packaging) | Brain: read-only pointer B-01; Worker: skill → SA repo |
+| TrustField venture | **TrustField Worker** (`trustfield-loops`) | Brain watches; export patterns in; never write TF doctrine |
+| SG guardrails | **SG (SSSOT)** | Canonical mirror: `ssot/sg-guardrails-trustfield-v1.md` |
+| NOOS doctrine | **NOOS** (`noetfeld-os`) | SG file is mirror; canonical append in `docs/_NOOS_AGENT/` |
+| TF Worker build | **TrustField Worker** only | Brain registers after independent PASS — not SourceA Worker |
+| Loop Specialist | **SourceA Loop Specialist** | Runtime plans → registry desired-state (B-07) |
+| Noetfield website | **Noetfield repo** | Sync with NOOS per NF handoff — not Brain scope |
 
 ---
 
@@ -158,9 +159,11 @@ Six entities named, `cross_attribution: false`:
 **Verified:** no-custody boundary · entity-in-formation · SKU ladder live  
 **Identity:** Separate watched venture — **not** SourceA child, **not** adapter-first-class
 
-### Pending Worker order
+### TrustField Worker order (NOT SourceA Worker)
 
-**TF-ARCH-W1** — Phase 1 in isolated repo `trustfield-loops` (preview only)
+**TF-ARCH-W1** — **BUILT** in `~/Desktop/trustfield-loops` (preview only)  
+Receipt example: `rcpt_97ee4a3a-64c3-4f0e-abbe-a961f4a7e68e` · verify: `cd ~/Desktop/trustfield-loops && npm run test:phase1`  
+Phase 2+ — **TrustField Worker** chat only (after B2)
 
 ### Brain registration (post W1)
 
@@ -206,14 +209,14 @@ Brain Brief weekly pass: one SG line + one NOOS line + correlated-agreement stre
 | **B-01** | Add Signal Factory to bundle **pointer table** as read-only pattern reference (`signal_factory_v1`) | proof_asset | Registry/bundle diff + no collision |
 | **B-02** | Document `memory_line` format compatibility SF receipt → Brain memory | proof_asset | Schema doc in bundle or SSOT |
 | **B-03** | Add `pattern_export` sandbox row to `brain_domain_sandboxes_v1.json` status HOLD | hygiene | Registry validate PASS |
-| **B-04** | Register `trustfield-loops` artifact after W1 independent verifier PASS | proof_asset | Registry row + receipt_id |
-| **B-05** | Locked-definition collision check on B-04 | risk_reduction | collision PASS receipt |
+| **B-04** | Register `trustfield-loops` artifact after W1 independent verifier PASS | proof_asset | **✅ DONE** `brain-register-tf-loops-20260703T000733Z` |
+| **B-05** | Locked-definition collision check on B-04 | risk_reduction | **✅ DONE** (bundled in B-04) |
 | **B-06** | Classify TF export batch #1 reusability | revenue_path | reusability_hint + memory_line |
 | **B-07** | Ingest TF-ARCH-LS1 runtime plans as desired-state | proof_asset | LS1 receipt |
 | **B-08** | E2E matrix: add SF verifier + TF health when live | proof_asset | matrix ALL PASS |
 
-**Start now:** B-01, B-02, B-03  
-**Wait:** B-04+ until TF-ARCH-W1 preview PASS
+**Start now:** B-01, B-02, B-03, **B-04** (TF W1 already built — independent re-verify first)  
+**Wait:** B-05+ until B-04 register PASS
 
 ---
 
@@ -294,14 +297,16 @@ bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1
 
 ## 10. Orders in flight (route, don't rebuild)
 
-| Order | Actor | Status |
-|-------|-------|--------|
-| TF-ARCH-W1 | Worker | PENDING — Phase 1 preview |
-| TF-ARCH-LS1 | Loop Specialist | PENDING — after W1 |
-| Brain B-01–B-03 | Brain | **READY NOW** |
-| Brain B-04–B-05 | Brain | After W1 independent PASS |
-| SG B2 sign-off | Sina | DRAFT JSON ready |
-| SF real inbox fixtures | Sina paste + Worker | Wave 1 parallel |
+| Order | Actor | Repo | Status |
+|-------|-------|------|--------|
+| TF-ARCH-W1 | **TrustField Worker** | `trustfield-loops` | **BUILT** — Brain B-04 next |
+| TF-ARCH-LS1 | **SourceA Loop Specialist** | SourceA | PENDING |
+| Signal Factory v1 | **SourceA Worker** | skill disk | **DONE** |
+| Brain B-01–B-03 | **SourceA Brain** | SourceA | **READY NOW** |
+| Brain B-04/B-05 | **SourceA Brain** | SourceA | **✅ DONE** |
+| SG B2 sign-off | Sina + **SG** | sina-governance-ssot | DRAFT JSON ready |
+| NOOS doctrine append | **NOOS agent** | noetfeld-os | TARGET — sync NF handoff |
+| SF real inbox | Sina + **SourceA Worker** | SourceA | Wave 1 parallel |
 
 ---
 
@@ -342,7 +347,7 @@ curl -sI https://www.trustfield.ca/ | head -3
 
 ## 13. One line for Brain memory
 
-Signal Factory v1 live on disk (6/6 PASS); TrustField separate watched venture locked; Brain registers TF artifacts only after independent verify; pattern export one-way TF→SourceA; capture/classify autoruns, send never; B-01/B-02/B-03 start now.
+Multi-repo law: TrustField Worker builds trustfield-loops; SourceA Worker builds SourceA; SourceA Brain registers after independent verify; NOOS↔Noetfield sync separate; SG/SSSOT verifies+mirror only; TF W1 built—Brain B-04 now; SF 6/6 PASS; export one-way TF→SourceA; send never v1.
 
 ---
 

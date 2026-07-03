@@ -2,7 +2,7 @@
 
 **Status:** LOCKED — supersedes scheduling in v1; v1 scope unchanged.  
 **Saved:** 2026-07-02  
-**Parent:** [TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md](TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md) · [1111_UPGRADE_PLANS_v1.md](1111_UPGRADE_PLANS_v1.md)  
+**Parent:** [TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md](TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md) · [1111_UPGRADE_PLANS_v1.md](1111_UPGRADE_PLANS_v1.md) · [MULTI_REPO_WORKER_REGISTRY_v1.md](../ssot/MULTI_REPO_WORKER_REGISTRY_v1.md)  
 **Brain handoff:** [SOURCEA_BRAIN_HANDOFF_SIGNAL_FACTORY_TRUSTFIELD_v1.md](SOURCEA_BRAIN_HANDOFF_SIGNAL_FACTORY_TRUSTFIELD_v1.md)
 
 ---
@@ -58,20 +58,21 @@ WAVE 3     TF Phase 4–5 + Brain register TF artifact + LS1 + G6 promotions
 
 # PLAN 1 — TrustField Loops (ROI: proof_asset → revenue_path)
 
+**Owner:** **TrustField Worker** · repo `~/Desktop/trustfield-loops` — **NOT SourceA Worker**  
 **Unit economics target:** cost per signal < CAD 0.01 on free stack.  
 **Revenue unlock:** RPAA Discovery CAD 4,000 → funds paid tier without founder subsidy.
 
-## Wave 1 — Intake proof (TF-ARCH-W1)
+## Wave 1 — Intake proof (TF-ARCH-W1) ✅ BUILT
 
-| Step | value_class | ROI note |
-|------|-------------|----------|
-| Isolated `trustfield-loops` repo | proof_asset | Blast-radius containment |
-| D1 + HMAC receipt chain | proof_asset | Anti-Brain-leak substrate |
-| Intake worker preview | proof_asset | Existing `/contact` webhook — no B1 block |
-| Telegram alert only | risk_reduction | Zero send surface |
-| Synthetic → receipt → alert | proof_asset | T6 behavior-probe seed |
+**Order:** TF-ARCH-W1 · **TrustField Worker** · status **DONE** 2026-07-02
 
-**Done when:** receipt_id within 5 min of synthetic inject. **Skip:** new intake email (B1).
+- [x] Isolated repo `trustfield-loops`
+- [x] D1 + HMAC receipt chain + intake routes + Telegram alert stub
+- [x] Preview only · `send_capability: false`
+- [x] Test battery · receipt ids in `.receipt_ids/`
+
+**Done when:** ✅ `rcpt_97ee4a3a-64c3-4f0e-abbe-a961f4a7e68e` (webhook)  
+**Next:** **SourceA Brain B-04** — independent re-verify bytes → register (NOT SourceA Worker)
 
 ## Wave 2 — Triage + monitor (requires B2)
 
@@ -99,6 +100,7 @@ WAVE 3     TF Phase 4–5 + Brain register TF artifact + LS1 + G6 promotions
 
 # PLAN 2 — Signal Factory (ROI: hygiene → proof_asset → revenue_path)
 
+**Owner:** **SourceA Worker** (build/package) · **SourceA Brain** (pointer register)  
 **Baseline:** `~/.cursor/skills/signal-factory/` — ALL PASS (6/6).
 
 ## Wave 1 — Pointer + paste fixtures (parallel now)
@@ -132,12 +134,14 @@ WAVE 3     TF Phase 4–5 + Brain register TF artifact + LS1 + G6 promotions
 
 # PLAN 3 — SG / NOOS (ROI: risk_reduction — cheap, high leverage)
 
+**Owner:** **SG (SSSOT)** mirrors · **NOOS agent** canonical in `noetfeld-os` · **Noetfield** sync per NF handoff
+
 ## Wave 1 — Machine-readable guardrails (parallel now)
 
 | Step | value_class | Status |
 |------|-------------|--------|
 | SG mirror `ssot/sg-guardrails-trustfield-v1.md` | proof_asset | ✅ DONE |
-| NOOS mirror `ssot/noos-doctrine-trustfield-v1.md` | proof_asset | ✅ DONE |
+| NOOS mirror `ssot/noos-doctrine-trustfield-v1.md` | proof_asset | ✅ SG mirror — canonical → `noetfeld-os/docs/_NOOS_AGENT/` |
 | `data/regulated-term-hardstop-v1.json` | risk_reduction | ✅ DRAFT — SG sign-off clears B2 |
 
 ## Wave 2 — Weekly sync ritual
@@ -152,9 +156,11 @@ WAVE 3     TF Phase 4–5 + Brain register TF artifact + LS1 + G6 promotions
 
 ---
 
-# PLAN 4 — SourceA Brain + Live Brain (ROI: compounding flywheel)
+# PLAN 4 — SourceA Brain + Loop Specialist (ROI: compounding flywheel)
 
-**Live Brain today:** `sourcea-brain-chat-v1` · bundle on `main` · autorun matrix ALL PASS baseline.
+**Owner:** **SourceA Brain** (register/route) · **SourceA Loop Specialist** (runtime plans)  
+**Repo:** `~/Projects/SourceA` only — never trustfield-loops code  
+**Depends on:** TF W1 ✅ built · B2 for TF Phase 2
 
 ## Brain work queue (ROI order)
 
@@ -163,8 +169,8 @@ WAVE 3     TF Phase 4–5 + Brain register TF artifact + LS1 + G6 promotions
 | B-01 | Register Signal Factory as **read-only pattern reference** in knowledge bundle pointer table (not live doctrine) | proof_asset | 1 | SF verifier PASS |
 | B-02 | Add `signal_factory_receipt_v1` memory_line template to bundle schema docs | proof_asset | 1 | B-01 |
 | B-03 | Prepare `pattern_export` sandbox row in registry (HOLD until TF export exists) | hygiene | 1 | none |
-| B-04 | Independent re-verify + register `trustfield-loops` artifact post W1 | proof_asset | 3 | TF-ARCH-W1 PASS |
-| B-05 | Locked-definition collision check on TF register | risk_reduction | 3 | B-04 |
+| B-04 | Independent re-verify + register `trustfield-loops` artifact (W1 ✅ built) | proof_asset | **1** | TF-ARCH-W1 PASS ✅ |
+| B-05 | Locked-definition collision check on TF register | risk_reduction | 1 | B-04 |
 | B-06 | Classify first TF export batch reusability (one-way) | revenue_path | 2 | export dry-run #1 |
 | B-07 | TF-ARCH-LS1 consume — runtime plans to registry desired-state | proof_asset | 3 | B-04 |
 | B-08 | Extend E2E matrix: SF verifier + TF health probe when live | proof_asset | 2–3 | TF Phase 3 |
@@ -193,15 +199,16 @@ Brain **routes and registers**; it does **not** build TF loops or write TF doctr
 
 ## Parallel execution board (founder view)
 
-| Lane | Now | Owner | value_class |
-|------|-----|-------|-------------|
-| A | TF-ARCH-W1 preview | Worker | proof_asset |
-| B | Paste 7 real inbox → SF fixtures | Sina + Worker | proof_asset |
-| C | SG sign B2 regulated-term JSON | Sina | risk_reduction |
-| D | Brain B-01/B-02 registry pointers | Brain | proof_asset |
-| E | TF-ARCH-LS1 plan doc | Loop Specialist | hygiene |
+| Lane | Now | Owner | Repo |
+|------|-----|-------|------|
+| A | Brain B-04 register TF W1 | **SourceA Brain** | SourceA |
+| B | TF Phase 2 prep (regex list) | **TrustField Worker** | trustfield-loops |
+| C | B2 sign-off | **SG** + Sina | sina-governance-ssot |
+| D | SF inbox fixtures | **SourceA Worker** | SourceA |
+| E | NOOS doctrine append | **NOOS agent** | noetfeld-os |
+| F | TF-ARCH-LS1 | **SourceA Loop Specialist** | SourceA |
 
-Lanes A+B+C+D run **in parallel**. E after A preview PASS.
+Lanes A–E run **in parallel**. Lane F (LS1) after B-04 register PASS.
 
 ---
 
@@ -235,6 +242,9 @@ bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1
 
 # B2 draft present
 test -f ~/Projects/sina-governance-ssot/data/regulated-term-hardstop-v1.json && echo B2_DRAFT_OK
+
+# TrustField Worker Phase 1 (TrustField repo — NOT SourceA)
+cd ~/Desktop/trustfield-loops && npm run test:phase1
 ```
 
 ---

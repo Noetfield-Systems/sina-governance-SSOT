@@ -1,0 +1,23 @@
+{
+  "schema": "brain-artifact-registration-receipt-v1",
+  "receipt_id": "brain-register-tf-loops-20260703T000733Z",
+  "receipt_type": "BRAIN_REGISTER_B04",
+  "recorded_at": "20260703T000733Z",
+  "entity": "sourcea",
+  "artifact_id": "trustfield_loops_phase1",
+  "owner_entity": "trustfield",
+  "independent_verify_pass": true,
+  "collision_check_pass": true,
+  "composite_sha256": "ef9fc04a607620f612fa1344145a85c2a43e7132a3b989604725d3c2b1d6e238",
+  "git_head": "f2a33ea81d26c40f18b1863920500375dd0cd6d0",
+  "memory_line": "brain/register: trustfield-loops Phase1 PASS independent; head=f2a33ea8 entity=trustfield send=false",
+  "registry_path": "data/brain_external_artifact_registry_v1.json",
+  "test_receipt_ids": [
+    "rcpt_5b43778a-f11c-4677-937d-47a93ebb4025",
+    "rcpt_3ae4f08e-152f-46cc-a8ff-92c6aab83b18",
+    "rcpt_44036466-d094-4551-a0e3-8d403b3f2329",
+    "rcpt_39778c56-5507-46e6-b241-7aaa67259631",
+    "rcpt_c323e1f8-84f3-4a6b-ad84-4ef7ac6f9e7b",
+    "rcpt_784d3652-63d1-4e38-a7d4-f5291e525979"
+  ]
+}
