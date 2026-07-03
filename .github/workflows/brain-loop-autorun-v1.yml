@@ -2,7 +2,7 @@ name: brain-loop-autorun-v1
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -13,15 +13,32 @@ jobs:
       - name: Checkout SG
         uses: actions/checkout@v4
 
+      - name: Checkout SourceA
+        uses: actions/checkout@v4
+        with:
+          repository: kazemnezhadsina144-dot/SourceA
+          path: SourceA
+          token: ${{ secrets.SOURCEA_GITHUB_PAT || secrets.GITHUB_TOKEN }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Observe-only autorun (CI has no SourceA / CF tokens)
+      - name: Install wrangler
+        run: npm install -g wrangler
+
+      - name: Brain 24/7 autorun
         env:
           CI: "true"
-        run: bash scripts/brain_loop_autorun_v1.sh
+          SOURCEA_ROOT: ${{ github.workspace }}/SourceA
+          CF_MAIN_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          CF_VERIFIER_TOKEN: ${{ secrets.CF_VERIFIER_TOKEN }}
+        run: |
+          if [[ -n "${CF_MAIN_TOKEN:-}" && -n "${CF_VERIFIER_TOKEN:-}" ]]; then
+            export BRAIN_CI_AUTONOMOUS=1
+          fi
+          bash scripts/brain_loop_autorun_v1.sh
 
       - name: Upload autorun receipt
         if: always()

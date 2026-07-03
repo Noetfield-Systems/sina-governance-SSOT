@@ -52,6 +52,9 @@ SHIP_WINDOW=0
 HOLD_ACTIVE=0
 MAC_SIGKILL=0
 if [[ -f "$AUTONOMOUS_FLAG" ]]; then AUTONOMOUS=1; fi
+if [[ "${BRAIN_CI_AUTONOMOUS:-}" == "1" && -n "${CF_MAIN_TOKEN:-}" && -n "${CF_VERIFIER_TOKEN:-}" ]]; then
+  AUTONOMOUS=1
+fi
 if [[ -f "$HOLD_FLAG" ]]; then HOLD_ACTIVE=1; fi
 if [[ -f "$SHIP_FLAG" || "${CI:-}" == "true" || "${GITHUB_ACTIONS:-}" == "true" ]]; then
   SHIP_WINDOW=1

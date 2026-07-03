@@ -30,14 +30,18 @@ _brain_mac_env_init() {
 
   if [[ -x /usr/bin/python3 ]]; then
     export BRAIN_PYTHON="/usr/bin/python3"
-    export PATH="/usr/bin:/bin:/opt/homebrew/bin:/usr/local/bin:${PATH:-}"
+    export SOURCEA_E2E_PYTHON="/usr/bin/python3"
+    mkdir -p "${HOME}/.sina/bin"
+    ln -sf /usr/bin/python3 "${HOME}/.sina/bin/python3"
+    export PATH="${HOME}/.sina/bin:/usr/bin:/bin:/opt/homebrew/bin:/usr/local/bin:${PATH:-}"
   elif command -v python3 >/dev/null 2>&1; then
     export BRAIN_PYTHON="$(command -v python3)"
+    export SOURCEA_E2E_PYTHON="$BRAIN_PYTHON"
+    export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH:-}"
   else
     echo "BRAIN_MAC_ENV: FAIL — python3 not found" >&2
     return 127
   fi
-  export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
 }
 
 brain_rc_is_sigkill() {

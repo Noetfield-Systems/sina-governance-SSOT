@@ -1,0 +1,160 @@
+{
+  "schema": "automation_surface_inventory_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T090000Z",
+  "authority": "SG (SSSOT)",
+  "parent": "data/github_automation_registry_v1.json",
+  "repos": [
+    {
+      "repo_id": "sina-governance-ssot",
+      "path": "~/Projects/sina-governance-ssot",
+      "lane": "sg_governance",
+      "owner_agent": "sg_sssot_cursor",
+      "workflows": [
+        {
+          "file": "brain-loop-autorun-v1.yml",
+          "motor_id": "gh_actions_brain_loop_autorun_v1",
+          "cadence": "*/30 * * * *",
+          "task_cell": "brain_promote_ci",
+          "copilot_safe": false
+        }
+      ],
+      "mac_motors": [
+        {
+          "id": "mac_launchd_brain_loop_autorun_v1",
+          "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
+          "cadence": "1800s",
+          "task_cell": "brain_promote_mac"
+        }
+      ]
+    },
+    {
+      "repo_id": "SourceA",
+      "path": "~/Projects/SourceA",
+      "lane": "sourcea_build",
+      "owner_agent": "sourcea_worker",
+      "workflows": [
+        {
+          "file": "external-verify.yml",
+          "motor_id": "gh_actions_sourcea_external_verify_v1",
+          "cadence": "0 */6 * * *",
+          "task_cell": "sourcea_autorun_l4_verify",
+          "copilot_safe": false,
+          "note": "L4 PASS evidence — does not promote brain bundle"
+        },
+        {
+          "file": "validate-sourcea-boot-v1.yml",
+          "motor_id": "gh_actions_sourcea_boot_validate_v1",
+          "cadence": "on_push",
+          "task_cell": "sourcea_boot_smoke",
+          "copilot_safe": true
+        },
+        {
+          "file": "autonomous-drain-cron-v1.yml",
+          "motor_id": "gh_actions_sourcea_drain_disabled_v1",
+          "cadence": "disabled_intentional",
+          "task_cell": "none",
+          "note": "CF cron primary — GH drain disabled by design"
+        }
+      ],
+      "cloud_motors": [
+        {
+          "motor_id": "cf_auto_runtime_tick_v1",
+          "cadence": "*/10",
+          "task_cell": "sourcea_cloud_forge",
+          "health_url": "https://sourcea.app/api/cloud-forge-run/health/v1"
+        },
+        {
+          "motor_id": "cf_loop_specialist_tick_v1",
+          "cadence": "*/15",
+          "task_cell": "loop_specialist_runtime_plan",
+          "health_url": "https://sourcea-loop-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health"
+        },
+        {
+          "motor_id": "cf_brain_chat_v1",
+          "cadence": "request",
+          "task_cell": "sourcea_brain_live",
+          "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health"
+        }
+      ]
+    },
+    {
+      "repo_id": "noetfeld-os",
+      "path": "~/Projects/noetfeld-os",
+      "lane": "noos_doctrine",
+      "owner_agent": "noos_agent",
+      "workflows": [
+        { "file": "noos-factory-autorun.yml", "motor_id": "gh_actions_noos_factory_autorun_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_gel_factory" },
+        { "file": "noos-inbox-loop.yml", "motor_id": "gh_actions_noos_inbox_loop_v1", "cadence": "*/5 * * * *", "task_cell": "noos_inbox" },
+        { "file": "noos-runtime-loop.yml", "motor_id": "gh_actions_noos_runtime_loop_v1", "cadence": "5,20,35,50 * * * *", "task_cell": "noos_gel_runtime" },
+        { "file": "noos-chain-loop.yml", "motor_id": "gh_actions_noos_chain_loop_v1", "cadence": "0,30 * * * *", "task_cell": "noos_audit_chain" },
+        { "file": "noos-surface-loop.yml", "motor_id": "gh_actions_noos_surface_loop_v1", "cadence": "0,20,40 * * * *", "task_cell": "noos_surface_probe" },
+        { "file": "noos-sourcea-observe-loop.yml", "motor_id": "gh_actions_noos_sourcea_observe_v1", "cadence": "15,45 * * * *", "task_cell": "noos_sourcea_observe_readonly" },
+        { "file": "noos-self-heal-loop.yml", "motor_id": "gh_actions_noos_self_heal_loop_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_self_heal" },
+        { "file": "noos-cross-repo-orchestrator.yml", "motor_id": "gh_actions_noos_cross_repo_v1", "cadence": "0 */3 * * *", "task_cell": "noos_cross_repo_orchestrate" },
+        { "file": "noos-specialist.yml", "motor_id": "gh_actions_noos_specialist_v1", "cadence": "0 */2 * * *", "task_cell": "noos_specialist" },
+        { "file": "noos-researcher.yml", "motor_id": "gh_actions_noos_researcher_v1", "cadence": "0 * * * *", "task_cell": "noos_research" },
+        { "file": "noos-workflow-audit.yml", "motor_id": "gh_actions_noos_workflow_audit_v1", "cadence": "*/15 * * * *", "task_cell": "noos_workflow_audit" },
+        { "file": "gel-ci.yml", "motor_id": "gh_actions_noos_gel_ci_v1", "cadence": "on_push", "task_cell": "noos_gel_ci", "copilot_safe": true },
+        { "file": "deploy-noos-cloud-workers-v1.yml", "motor_id": "gh_actions_noos_cf_deploy_v1", "cadence": "manual_dispatch", "task_cell": "noos_cf_deploy" },
+        { "file": "noos-schedule-canary.yml", "motor_id": "gh_actions_noos_schedule_canary_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_schedule_canary" },
+        { "file": "noos-post-deploy-verify-v1.yml", "motor_id": "gh_actions_noos_post_deploy_verify_v1", "cadence": "workflow_run_after_deploy", "task_cell": "noos_cf_deploy_verify" },
+        { "file": "release-noetfield-gate.yml", "motor_id": "gh_actions_noos_release_gate_v1", "cadence": "on_tag_push", "task_cell": "noos_release_gate", "copilot_safe": false },
+        { "file": "noos-agent-vault.yml", "motor_id": "gh_actions_noos_agent_vault_v1", "cadence": "on_push_paths", "task_cell": "noos_agent_vault" },
+        { "file": "noos-self-heal.yml", "motor_id": "gh_actions_noos_self_heal_v1", "cadence": "15,45 * * * *", "task_cell": "noos_self_heal_legacy", "note": "legacy self-heal — distinct from noos-self-heal-loop" },
+        { "file": "noos-agent-nerve-loop.yml", "motor_id": "gh_actions_noos_agent_nerve_loop_v1", "cadence": "0 * * * *", "task_cell": "noos_agent_nerve" },
+        { "file": "publish-pypi.yml", "motor_id": "gh_actions_noos_publish_pypi_v1", "cadence": "manual_dispatch", "task_cell": "noos_pypi_publish", "copilot_safe": false }
+      ],
+      "must_not_conflict_with": ["sourcea_cloud_forge", "brain_promote_ci", "trustfield_loops_build"]
+    },
+    {
+      "repo_id": "trustfield-loops",
+      "path": "~/Desktop/trustfield-loops",
+      "lane": "trustfield_build",
+      "owner_agent": "trustfield_worker",
+      "workflows": [],
+      "cloud_motors": [
+        {
+          "motor_id": "trustfield_loops_preview",
+          "cadence": "webhook_request",
+          "task_cell": "trustfield_loops_build",
+          "health_path": "/health",
+          "note": "Phase 1 preview — no GH cron yet"
+        }
+      ]
+    }
+  ],
+  "copilot_integration": {
+    "default_lane": "assist_only",
+    "pr_template_sg": ".github/pull_request_template.md",
+    "worktree_paths_are_shadow": true,
+    "worktree_note": "copilot-worktrees/* are draft sandboxes — never registered motors; merge only via venture worker lane",
+    "forbidden_cross_repo_in_one_pr": ["sina-governance-ssot", "SourceA", "noetfeld-os", "trustfield-loops"]
+  },
+  "conflict_matrix": [
+    {
+      "task_cell": "brain_promote_same_window",
+      "writers_max": 1,
+      "motors": ["gh_actions_brain_loop_autorun_v1", "mac_launchd_brain_loop_autorun_v1"],
+      "resolution": "promotion_gate_cas"
+    },
+    {
+      "task_cell": "sourcea_cloud_forge",
+      "writers_max": 1,
+      "motors": ["cf_auto_runtime_tick_v1"],
+      "resolution": "noos_factory_autorun must not deploy SourceA workers"
+    },
+    {
+      "task_cell": "noos_gel_factory",
+      "writers_max": 1,
+      "motors": ["gh_actions_noos_factory_autorun_v1"],
+      "resolution": "separate repo lane — observe SourceA read-only via noos-sourcea-observe-loop"
+    },
+    {
+      "task_cell": "trustfield_loops_build",
+      "writers_max": 1,
+      "motors": ["trustfield_loops_preview"],
+      "resolution": "Copilot TF worktrees assist_only"
+    }
+  ]
+}

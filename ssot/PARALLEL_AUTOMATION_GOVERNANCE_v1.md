@@ -210,8 +210,7 @@ receipt_id: (or "human merge only — no autorun claim")
 
 ```bash
 /usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
-# List workflows in each org repo — compare to registry
-# Kill unregistered crons (NOOS doctrine line 7)
+/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_surface_v1.py
 ```
 
 Receipt: `receipts/parallel-automation-audit-<timestamp>.json`
@@ -221,17 +220,38 @@ Receipt: `receipts/parallel-automation-audit-<timestamp>.json`
 ## 10. Proof commands
 
 ```bash
-# Governance validator
+# Governance validator (SG repo motors)
 /usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
+
+# Full surface audit (all repos · GH Actions · CF · Copilot lanes)
+/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_surface_v1.py
 
 # Worker registry
 /usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
-
-# Multi-repo map
-cat ~/Projects/sina-governance-ssot/ssot/MULTI_REPO_WORKER_REGISTRY_v1.md
 ```
 
-Pass line: `validate_parallel_automation_governance_v1: ALL PASS`
+Pass lines:
+- `validate_parallel_automation_governance_v1: ALL PASS`
+- `audit_automation_surface_v1: ALL PASS`
+
+---
+
+## 12. Full integration map (living system)
+
+| Surface | Repo | Primary motors | Copilot role |
+|---------|------|----------------|--------------|
+| SG verifier/gate | sina-governance-ssot | `brain-loop-autorun` GH + Mac launchd | assist PRs only |
+| SourceA Brain/Forge | SourceA | CF auto-runtime `*/10`, loop specialist `*/15`, brain worker | assist PRs only |
+| SourceA L4 verify | SourceA | `external-verify.yml` `*/6h` | assist PRs only |
+| NOOS GEL factory | noetfeld-os | 14+ NOOS loop workflows | assist PRs only; no SourceA writes |
+| TrustField loops | trustfield-loops | CF preview worker (webhook) | assist PRs only |
+| Noetfield www | Noetfield (desktop) | Vercel + live nerve | assist PRs only |
+
+Inventory: `data/automation_surface_inventory_v1.json`
+
+**NOOS ↔ SourceA:** `noos-sourcea-observe-loop` is **read-only observe** — does not promote brain or deploy SourceA.
+
+**GH Actions brain-loop + Mac launchd:** same task cell `brain_promote_*` — gate CAS prevents double promote.
 
 ---
 

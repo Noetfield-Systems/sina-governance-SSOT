@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -19,10 +20,25 @@ REQUIRED_TASK_CELLS = (
     "noos_doctrine_append",
 )
 
+REPO_PATHS = {
+    "sina-governance-ssot": ROOT,
+    "SourceA": Path(os.path.expanduser("~/Projects/SourceA")),
+    "noetfeld-os": Path(os.path.expanduser("~/Projects/noetfeld-os")),
+}
 
-def fail(msg: str) -> None:
-    print(f"FAIL: {msg}", file=sys.stderr)
-    sys.exit(1)
+
+def resolve_workflow_path(motor: dict) -> Path | None:
+    wf = motor.get("workflow_file")
+    if not wf:
+        return None
+    repo = motor.get("repo", "sina-governance-ssot")
+    if repo == "sina-governance-ssot":
+        return ROOT / wf
+    base = REPO_PATHS.get(repo)
+    if base is None:
+        return None
+    name = wf.split("/")[-1]
+    return base / ".github" / "workflows" / name
 
 
 def main() -> int:
@@ -46,7 +62,7 @@ def main() -> int:
     task_owners = reg.get("task_cell_owners", {})
     dup_rules = reg.get("duplication_forbidden", [])
 
-    motor_ids = set()
+    motor_ids: set[str] = set()
     for m in motors:
         mid = m.get("motor_id")
         if not mid:
@@ -55,13 +71,11 @@ def main() -> int:
         if mid in motor_ids:
             errors.append(f"duplicate motor_id: {mid}")
         motor_ids.add(mid)
-        wf = m.get("workflow_file")
-        if wf and m.get("kind") == "github_actions":
-            wf_path = ROOT / wf
-            if not wf_path.is_file():
-                errors.append(f"{mid}: workflow missing {wf}")
+        wf_path = resolve_workflow_path(m)
+        if wf_path and m.get("kind") == "github_actions":
+            if not wf_path.is_file() and m.get("repo") == "sina-governance-ssot":
+                errors.append(f"{mid}: workflow missing {wf_path}")
 
-    # Every workflow file must be registered
     if WORKFLOWS.is_dir():
         for wf_file in WORKFLOWS.glob("*.yml"):
             rel = str(wf_file.relative_to(ROOT))
@@ -69,7 +83,7 @@ def main() -> int:
             if not registered:
                 errors.append(f"unregistered workflow: {rel}")
 
-    agent_ids = set()
+    agent_ids: set[str] = set()
     for a in agents:
         aid = a.get("agent_id")
         if not aid:
