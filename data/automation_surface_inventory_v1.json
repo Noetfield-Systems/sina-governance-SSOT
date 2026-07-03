@@ -55,6 +55,20 @@
           "cadence": "disabled_intentional",
           "task_cell": "none",
           "note": "CF cron primary — GH drain disabled by design"
+        },
+        {
+          "file": "determinism-gate.yml",
+          "motor_id": "gh_actions_sourcea_determinism_gate_v1",
+          "cadence": "30 */6 * * *",
+          "task_cell": "sourcea_determinism_gate",
+          "copilot_safe": false
+        },
+        {
+          "file": "deploy-sourcea-buyer-surfaces-v1.yml",
+          "motor_id": "gh_actions_sourcea_buyer_surfaces_deploy_v1",
+          "cadence": "on_push_paths",
+          "task_cell": "sourcea_buyer_surfaces_deploy",
+          "copilot_safe": false
         }
       ],
       "cloud_motors": [
