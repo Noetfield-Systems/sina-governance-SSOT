@@ -15,6 +15,8 @@ Do not route validation, review, repair, audit, or uncertainty to the founder. U
 
 Cycle orchestrator: `python3 scripts/run_machine_autonomy_cycle_v1.py`
 
+**Integrator (NOOS):** if you mutate integrator state in `noetfeld-os`, run `python3 scripts/noos_integrator_sync_v1.py sync` before session exit. See `ssot/NOOS_INTEGRATOR_RULES_v1.md`.
+
 ## You edit (this repo)
 
 - Governance registry, validators, independent-verify scripts

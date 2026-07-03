@@ -1,0 +1,49 @@
+{
+  "schema": "machine-autonomy-cycle-v1",
+  "receipt_id": "machine-autonomy-cycle-20260703T114612Z",
+  "recorded_at": "20260703T114612Z",
+  "default_question": "How does the process solve this without Sina?",
+  "cycle_ok": false,
+  "steps": [
+    {
+      "loop": "L2-MACHINE-VALID",
+      "step": "scripts/brain_loop_health_check_v1.sh",
+      "ok": true,
+      "tail": "OK: python\nOK: sourcea readable\nOK: sg registry\nOK: autonomous flag\nOK: cf tokens script\nOK: stale lock cleared\nsourcea_head=39a43a167 origin_main=761353952\nbrain_loop_health_check_v1: ALL PASS"
+    },
+    {
+      "loop": "L2-MACHINE-VALID",
+      "step": "scripts/validate_parallel_automation_governance_v1.py",
+      "ok": true,
+      "tail": "validate_parallel_automation_governance_v1: ALL PASS\n{\n  \"motor_count\": 7,\n  \"agent_lane_count\": 8,\n  \"task_cell_count\": 15,\n  \"workflow_files\": 1\n}"
+    },
+    {
+      "loop": "L2-MACHINE-VALID",
+      "step": "scripts/audit_automation_drift_v1.py",
+      "ok": false,
+      "tail": "audit_automation_drift_v1: DRIFT\n{\n  \"receipt_id\": \"automation-drift-audit-20260703T114613Z\",\n  \"drift_count\": 2\n}\n - cf_brain_chat: health probe failed\n - gh_brain_loop_main: latest main run completed:failure (merge CI fixes to clear)"
+    },
+    {
+      "loop": "L4-SELF-REPAIR",
+      "step": "repair_sourcea_worktree_v1.sh",
+      "ok": true,
+      "tail": "repair_sourcea_worktree_v1: OK \u2014 worktree already valid at /Users/sinakazemnezhad/Projects/SourceA\n39a43a167"
+    },
+    {
+      "loop": "L5-OUTSIDE-AUDIT",
+      "step": "diagnose_gate_candidate_alignment_v1",
+      "ok": false,
+      "tail": "c-960e-bbbabda44fe3\",\n  \"blockers\": [\n    \"GitHub API /repos/kazemnezhadsina144-dot/sina-governance-SSOT/git/ref/heads/main failed: HTTP 404: {\\\"message\\\":\\\"Not Found\\\",\\\"documentation_url\\\":\\\"https://docs.github.com/rest\\\",\\\"status\\\":\\\"404\\\"}\"\n  ],\n  \"remediation\": \"bash scripts/run_parallel_brain_candidates_v1.sh --sandbox-id brain_worker --json\",\n  \"note\": \"Do not weaken promotion_gate \\u2014 fix verifier PASS or repo ref blockers first\"\n}\n - verifier status=BLOCKED (need PASS before promote)"
+    },
+    {
+      "loop": "L7-RECEIPT-PROOF",
+      "step": "write_roi_heartbeat_v1",
+      "ok": true,
+      "tail": "write_roi_heartbeat_v1: OK\n{\n  \"receipt_id\": \"roi-heartbeat-20260703T114614Z\"\n}"
+    }
+  ],
+  "failed_count": 2,
+  "founder_required": false,
+  "escalation": "L4-SELF-REPAIR",
+  "note": "Hygiene failures do not route to founder \u2014 see ssot/MACHINE_AUTONOMY_LOOPS_v1.md"
+}

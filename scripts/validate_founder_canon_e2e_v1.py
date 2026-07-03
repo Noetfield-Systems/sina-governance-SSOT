@@ -14,6 +14,7 @@ AGENTS = ROOT / "AGENTS.md"
 PR_TEMPLATE = ROOT / ".github/pull_request_template.md"
 DISPATCH = ROOT / "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md"
 ACTIVATION = ROOT / "receipts/founder-canon-activation-v1.json"
+INTEGRATOR_RULES = ROOT / "ssot/NOOS_INTEGRATOR_RULES_v1.md"
 CYCLE_SCRIPT = ROOT / "scripts/run_machine_autonomy_cycle_v1.py"
 CANON_VERSION = "founder_canon_v1.0.0"
 LAWS_SNIPPET = "FOUNDER_CANON v1"
@@ -22,7 +23,7 @@ LAWS_SNIPPET = "FOUNDER_CANON v1"
 def main() -> int:
     errors: list[str] = []
 
-    for path in (CANON_MD, CANON_JSON, LOOPS_JSON, ACTIVATION, CYCLE_SCRIPT):
+    for path in (CANON_MD, CANON_JSON, LOOPS_JSON, ACTIVATION, CYCLE_SCRIPT, INTEGRATOR_RULES):
         if not path.is_file():
             errors.append(f"missing {path.relative_to(ROOT)}")
 

@@ -57,5 +57,7 @@
   ],
   "receipt_required_fields": ["receipt_id", "canon_version"],
   "e2e_validator": "scripts/validate_founder_canon_e2e_v1.py",
-  "cycle_orchestrator": "scripts/run_machine_autonomy_cycle_v1.py"
+  "cycle_orchestrator": "scripts/run_machine_autonomy_cycle_v1.py",
+  "integrator_rules_mirror": "ssot/NOOS_INTEGRATOR_RULES_v1.md",
+  "integrator_canonical": "noetfeld-os/data/noos-integrator-role-v1.json"
 }

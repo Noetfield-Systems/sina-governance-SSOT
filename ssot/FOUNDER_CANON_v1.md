@@ -85,6 +85,8 @@ Everything else — merge included once machine validation covers it — migrate
 
 Live source beats memory, summary, or compaction. Order: current SSOT file → current repo state → current dispatch → current receipt → prior chat. All state in-repo; hidden state is a wall violation. One canon per domain, extended by versioned pointer, never restated.
 
+**NOOS integrator:** repo-local runtime state beats home mirror (`~/.sina/noos-integrator-state-v1.json`) and cloud mirror unless promoted. See [NOOS_INTEGRATOR_RULES_v1.md](NOOS_INTEGRATOR_RULES_v1.md).
+
 ## 10. Violation law
 
 Boundary violation → machine loop first: contain, receipt, critique, repair (§6). Escalates to founder only per §8. Repeat scope/authority violations retire the session/tool. Never hide, rewrite history, or continue silently.

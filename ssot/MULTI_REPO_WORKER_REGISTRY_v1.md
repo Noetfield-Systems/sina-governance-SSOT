@@ -28,7 +28,9 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 | **SourceA Loop Specialist** | `~/Projects/SourceA` + CF tick | same | `loop_specialist_tick_v1` · runtime plans · work orders | Desired-state plans, dispatch receipts | Deploy TF workers · external send |
 | **TrustField Worker** | `~/Desktop/trustfield-loops` | TrustField-isolated git | CF intake · D1 · receipt chain · Telegram alert | Phase 1–5 TF autorun loops | SourceA imports · NOOS edits · production send |
 | **Noetfield (website/spine)** | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | Noetfield repo | Public site · platform spine · Vercel · live nerve | www.noetfield.com routes, copy, E2E | GEL runtime implementation |
-| **NOOS (GEL runtime)** | `~/Projects/noetfeld-os/` | noetfeld-os | GEL gate/log/audit · `docs/_NOOS_AGENT/` | api.noetfield.com runtime truth | Website source · default save to SourceA |
+| **NOOS (GEL runtime)** | `~/Projects/noetfeld-os/` | noetfeld-os | GEL gate/log/audit · `docs/_NOOS_AGENT/` · **integrator** | api.noetfield.com runtime truth | Website source · default save to SourceA · cloud integrator write without `cloud_owner` |
+
+**NOOS integrator (all NOOS sessions):** repo-local state authoritative unless `cloud_owner.enabled`. Session exit → `noos_integrator_sync_v1.py sync`. SG mirror: `ssot/NOOS_INTEGRATOR_RULES_v1.md`.
 
 **Signal Factory v1 (interim):** built at `~/.cursor/skills/signal-factory/` — SourceA-owned meaning; **SourceA Worker** packages to SourceA repo; **SourceA Brain** B-01 pointer register.
 
