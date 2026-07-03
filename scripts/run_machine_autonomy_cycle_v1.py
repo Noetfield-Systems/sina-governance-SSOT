@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOOPS = ROOT / "data/machine_autonomy_loops_v1.json"
 RECEIPTS = ROOT / "receipts"
+CANON_VERSION = "founder_canon_v1.0.0"
 
 
 def utc_now() -> str:
@@ -72,6 +73,10 @@ def main() -> int:
     code, tail = run(["/usr/bin/python3", str(ROOT / "scripts/write_roi_heartbeat_v1.py")])
     steps.append({"loop": "L7-RECEIPT-PROOF", "step": "write_roi_heartbeat_v1", "ok": code == 0, "tail": tail})
 
+    # Founder canon E2E wiring
+    code, tail = run(["/usr/bin/python3", str(ROOT / "scripts/validate_founder_canon_e2e_v1.py")])
+    steps.append({"loop": "L2-MACHINE-VALID", "step": "validate_founder_canon_e2e_v1", "ok": code == 0, "tail": tail})
+
     failed = [s for s in steps if not s["ok"]]
     cycle_ok = len(failed) == 0
 
@@ -79,6 +84,7 @@ def main() -> int:
         "schema": "machine-autonomy-cycle-v1",
         "receipt_id": receipt_id,
         "recorded_at": ts,
+        "canon_version": CANON_VERSION,
         "default_question": loops_doc.get("default_question"),
         "cycle_ok": cycle_ok,
         "steps": steps,

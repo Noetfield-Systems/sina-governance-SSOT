@@ -1,0 +1,12 @@
+{
+  "schema": "founder-canon-activation-v1",
+  "receipt_id": "founder-canon-activation-v1",
+  "recorded_at": "2026-07-03T12:00:00Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "status": "ACTIVE",
+  "source_desktop_draft": "FOUNDER_CANON (1).md",
+  "ssot_path": "ssot/FOUNDER_CANON_v1.md",
+  "implementation": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+  "e2e_validator": "scripts/validate_founder_canon_e2e_v1.py",
+  "note": "Founder-directed activation via E2E implement request — canon no longer inert"
+}

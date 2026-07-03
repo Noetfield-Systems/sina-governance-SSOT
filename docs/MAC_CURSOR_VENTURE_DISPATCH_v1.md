@@ -2,6 +2,8 @@
 
 Scoped one-task prompts — open the listed Cursor root; do not cross repos.
 
+**LAWS:** FOUNDER_CANON v1 + governed-autorun v3. Violations = `BLOCKED_WITH_REASON`. Receipts carry `canon_version: founder_canon_v1.0.0`.
+
 ---
 
 ## Lane A — SourceA Brain (B-01)

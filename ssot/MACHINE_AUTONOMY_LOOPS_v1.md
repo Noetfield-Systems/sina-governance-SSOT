@@ -4,7 +4,8 @@
 **Saved:** 2026-07-03  
 **Authority:** SG (SSSOT)  
 **Registry:** [data/machine_autonomy_loops_v1.json](../data/machine_autonomy_loops_v1.json)  
-**Parent:** [PARALLEL_AUTOMATION_GOVERNANCE_v1.md](PARALLEL_AUTOMATION_GOVERNANCE_v1.md)
+**Parent:** [PARALLEL_AUTOMATION_GOVERNANCE_v1.md](PARALLEL_AUTOMATION_GOVERNANCE_v1.md)  
+**Canon:** [FOUNDER_CANON_v1.md](FOUNDER_CANON_v1.md)
 
 ---
 

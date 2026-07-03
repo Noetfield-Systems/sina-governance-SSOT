@@ -4,6 +4,7 @@
 **Authority:** SG (SSSOT)  
 **Parent:** [MULTI_REPO_WORKER_REGISTRY_v1.md](MULTI_REPO_WORKER_REGISTRY_v1.md)  
 **Autonomy:** [MACHINE_AUTONOMY_LOOPS_v1.md](MACHINE_AUTONOMY_LOOPS_v1.md)  
+**Canon:** [FOUNDER_CANON_v1.md](FOUNDER_CANON_v1.md)  
 **Registry:** [data/github_automation_registry_v1.json](../data/github_automation_registry_v1.json)
 
 ---

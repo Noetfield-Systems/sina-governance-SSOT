@@ -16,6 +16,7 @@ def main() -> int:
         "schema": "roi-heartbeat-receipt-v1",
         "receipt_id": f"roi-heartbeat-{ts}",
         "recorded_at": ts,
+        "canon_version": "founder_canon_v1.0.0",
         "metrics": {
             "cost_per_signal_cad": "unknown",
             "free_tier_ceiling_max_pct": "unknown",

@@ -4,6 +4,8 @@
   "saved_at": "2026-07-03T11:50:00Z",
   "authority": "SG (SSSOT)",
   "parent": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+  "founder_canon": "ssot/FOUNDER_CANON_v1.md",
+  "canon_version": "founder_canon_v1.0.0",
   "default_question": "How does the process solve this without Sina?",
   "founder_triggers_minimal": [
     {

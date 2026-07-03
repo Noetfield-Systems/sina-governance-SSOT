@@ -1,0 +1,61 @@
+{
+  "schema": "founder_canon_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T12:00:00Z",
+  "status": "ACTIVE",
+  "activated_at": "2026-07-03T12:00:00Z",
+  "activation_receipt": "receipts/founder-canon-activation-v1.json",
+  "ssot_path": "ssot/FOUNDER_CANON_v1.md",
+  "implementation": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+  "default_question": "How does the process solve this without Sina?",
+  "dispatch_laws_line": "LAWS: FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.",
+  "doctrine_pointers": [
+    "governed-autorun v3 (L1-L13)",
+    "deterministic-loops (D1-D8)",
+    "autorun-cycle-receipt-v2",
+    "WORK_ORDER_GOVERNED_IDE_LANE_v1 (G1-G8)"
+  ],
+  "intent_filter": [
+    {"id": "Q1", "question": "Does it reduce Sina workload — or make Sina the runtime?"},
+    {"id": "Q2", "question": "Does it replace founder judgment with machine/agentic validation?"},
+    {"id": "Q3", "question": "Boundary wall vs permission loop on normal work?"},
+    {"id": "Q4", "question": "On failure, route to repair/critique/audit/research — or back to Sina?"},
+    {"id": "Q5", "question": "Keep targets as targets — or freeze into blockers?"}
+  ],
+  "failure_route": [
+    "detect",
+    "contain",
+    "critique",
+    "audit",
+    "deep_research",
+    "repair",
+    "validate",
+    "receipt",
+    "continue_or_escalate"
+  ],
+  "founder_touchpoints": [
+    {
+      "id": "FT-CAPITAL",
+      "class": "capital_legal_commitment",
+      "retire_when": "roi_heartbeat revenue_path OR 30d spend under cap with receipts"
+    },
+    {
+      "id": "FT-LEGAL",
+      "class": "regulated_legal_action",
+      "retire_when": "8x trap PASS + SG_SIGNED regulated-term JSON"
+    },
+    {
+      "id": "FT-L5-IRREVERSIBLE",
+      "class": "irreversible_l5",
+      "retire_when": "never_auto_retire"
+    },
+    {
+      "id": "FT-PHASE-UNLOCK",
+      "class": "phase_unlock",
+      "retire_when": "5x hygiene or 8x promote-class receipt streak"
+    }
+  ],
+  "receipt_required_fields": ["receipt_id", "canon_version"],
+  "e2e_validator": "scripts/validate_founder_canon_e2e_v1.py",
+  "cycle_orchestrator": "scripts/run_machine_autonomy_cycle_v1.py"
+}
