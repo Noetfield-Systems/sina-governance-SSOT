@@ -1,0 +1,10 @@
+{
+  "schema": "noos-integrator-role-v1",
+  "version": "1.0.0",
+  "role": "integrator",
+  "description": "Integrator role for NOOS Copilot Dispatcher. Discovery registration only.",
+  "contact": {
+    "team": "Noetfield-Systems/ops",
+    "email": "ops@noetfield.example"
+  }
+}
