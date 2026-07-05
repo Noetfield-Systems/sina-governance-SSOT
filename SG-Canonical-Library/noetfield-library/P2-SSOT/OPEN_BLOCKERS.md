@@ -5,6 +5,9 @@
 ## ✅ RESOLVED
 - **SUPABASE_URL** — FIXED (2026-07-04; re-verified 2026-07-05). **Credential source:** `~/.sourcea-secrets/noetfield.env` and `~/.sourcea-secrets/portfolio-spine.env` (Sina env — not Railway). Wired via NOOS `supabase_profiles` in `noetfeld-OS/data/autorun-workflows-v1.json`. Receipts can persist. **No longer a blocker.**
 
+## ⚠️ PAUSE ALERT (non-production)
+- **2026-07-05 email:** personal-org project `cybzznaieigeveiaoyoa` auto-paused — **NOT in live SSOT**. Ignore unless founder identifies legacy use. Live refs `ldfruywifqnfpwsfgmdl` + `tkgpapowwplupyekpivy` probed OK. See `P99-LEDGER/SUPABASE_PAUSE_TRIAGE_RECEIPT_2026-07-05.md`. Verifier: `scripts/verify_supabase_live_profiles_v1.py`.
+
 ## REAL BLOCKERS (currently: NONE technical)
 There is **no remaining technical blocker.** The system can run.
 

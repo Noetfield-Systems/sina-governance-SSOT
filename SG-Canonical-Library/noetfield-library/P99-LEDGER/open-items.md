@@ -4,7 +4,8 @@
 Per `P2-SSOT/OPEN_BLOCKERS.md` — no remaining technical blocker.
 
 ## CLOSED (v0.9 upgrade pass)
-- **SUPABASE_URL** — RESOLVED. Credentials live in Sina env files (not Railway): `~/.sourcea-secrets/noetfield.env` (`NOETFIELD_SUPABASE_*`) and `~/.sourcea-secrets/portfolio-spine.env` (`SUPABASE_URL`). Resolved via `noetfeld-OS/data/autorun-workflows-v1.json` → `supabase_profiles`. Verified 2026-07-05.
+- **SUPABASE_URL** — RESOLVED. Credentials live in Sina env files (not Railway): `~/.sourcea-secrets/noetfield.env` (`NOETFIELD_SUPABASE_*`) and `~/.sourcea-secrets/portfolio-spine.env` (`SUPABASE_URL`). Verifier probe PASS 2026-07-05 (`scripts/verify_supabase_live_profiles_v1.py`).
+- **Supabase pause email (cybzznaieigeveiaoyoa)** — personal-org orphan, NOT production; both live refs OK. See `SUPABASE_PAUSE_TRIAGE_RECEIPT_2026-07-05.md`.
 - P0 verify gaps — closed (P0_VERIFY_RECEIPT_2026-07-05.md)
 - 6/6 lane preflight receipts — closed (LANE_PREFLIGHT_RECEIPTS_2026-07-05/)
 - Governance hotspots (STEP10 merge, brain_deployment_state.json, SSOT v6 authority) — closed
