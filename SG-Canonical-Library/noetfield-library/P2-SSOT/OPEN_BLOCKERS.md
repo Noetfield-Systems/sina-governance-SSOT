@@ -3,7 +3,7 @@
 **Per `targets-vs-blockers`:** a blocker stops running because proceeding is unsafe/impossible. Everything else is a TARGET. This list is deliberately SHORT.
 
 ## ✅ RESOLVED
-- **SUPABASE_URL** — FIXED for all agents (2026-07-04). Railway platform-api → DATABASE_URL → Noetfield Supabase now resolving; receipts can persist. **No longer a blocker.**
+- **SUPABASE_URL** — FIXED (2026-07-04; re-verified 2026-07-05). **Credential source:** `~/.sourcea-secrets/noetfield.env` and `~/.sourcea-secrets/portfolio-spine.env` (Sina env — not Railway). Wired via NOOS `supabase_profiles` in `noetfeld-OS/data/autorun-workflows-v1.json`. Receipts can persist. **No longer a blocker.**
 
 ## REAL BLOCKERS (currently: NONE technical)
 There is **no remaining technical blocker.** The system can run.

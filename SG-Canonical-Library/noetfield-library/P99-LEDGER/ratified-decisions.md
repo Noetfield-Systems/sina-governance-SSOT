@@ -9,7 +9,7 @@ Founder DECIDE (via advisor "Approve. Do not hold."), 2026-07-03 12:34 PDT:
 5. New doctrine written: `mechanical-not-prose`, `negative-proof`, `return-on-cognition`, `base-model-first-class-language`, `founder-intent-filter`, `merge-authority-tiers-T0-T3`.
 6. Authority order locked: CANON → SSOT → MACHINE_LOOPS → WORK_ORDER/LINE_ENGINE → DOCTRINE → PATTERN_FACTORY → PRODUCT_LAYERS → LEDGER.
 
-**Explicitly NOT done (per targets-vs-blockers):** did not convert targets into blockers. Only SUPABASE_URL remains a real blocker; all else moves in parallel.
+**Explicitly NOT done (per targets-vs-blockers):** did not convert targets into blockers. SUPABASE_URL resolved via `~/.sourcea-secrets/` env files (see OPEN_BLOCKERS v0.2); all else moves in parallel.
 
 ---
 

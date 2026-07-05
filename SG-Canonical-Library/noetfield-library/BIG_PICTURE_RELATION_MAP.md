@@ -98,7 +98,7 @@
 
 6. **Founder deletes work, doesn't do it.** ROC: every manual action = assume system failed → convert to Rule/Pattern/Automation/Receipt. Canon §1 enforces; the whole library exists to make the founder unnecessary to operation. (return-on-cognition, founder-intent-filter)
 
-7. **Run 24/7 pursuing targets; stop only for the floor.** Only genuine harm/impossible = blocker (SUPABASE_URL). Everything else = target the running system chases. (targets-vs-blockers)
+7. **Run 24/7 pursuing targets; stop only for the floor.** Only genuine harm/impossible = blocker. SUPABASE_URL resolved (see `P2-SSOT/OPEN_BLOCKERS.md`). Everything else = target the running system chases. (targets-vs-blockers)
 
 ---
 
@@ -110,7 +110,7 @@ P0-FOUNDATION-SPINE (⏳ awaiting upload) → P1-CANON → P2-SSOT → P3-RUNTIM
 - **Operational master:** ✅ FOUNDER_CANON v1 installed.
 - **SSOT:** ✅ 2 items ratified.
 - **Kernel/Line-Engine/Doctrine/Patterns/Products:** ✅ present (this chat's output).
-- **Real blocker:** SUPABASE_URL. Everything else = target.
+- **Real blocker:** none technical. Commercial revenue-organ is the active target.
 
 ---
 *v0.1 (2026-07-03 12:34 PDT) — first big-picture relation map. Spine P0→Canon→SSOT→Machine-Loops→Kernel/Line-Engine→Brain-Meaning→Doctrine→Pattern-Factory→Product-Layers→Ledger, + 7 key relation chains.*
