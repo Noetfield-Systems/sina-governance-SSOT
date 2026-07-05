@@ -1,6 +1,9 @@
 # Step 10b Autonomous Deploy — DECIDE Boundary v0.1
 
-Status: **LIFT (Brain-only 24/7)** — enabled 2026-07-02 per founder GO AHEAD.
+**Status:** MERGED into [PHASE_LOOP_BUILD_PLAN_v0.1.md](../PHASE_LOOP_BUILD_PLAN_v0.1.md) Step 10 (2026-07-05).  
+**Historical:** LIFT (Brain-only 24/7) — enabled 2026-07-02 per founder GO AHEAD.
+
+> Canonical Step 10 authority is PHASE_LOOP_BUILD_PLAN_v0.1.md. This file retained for link resolution only.
 
 ## Purpose
 

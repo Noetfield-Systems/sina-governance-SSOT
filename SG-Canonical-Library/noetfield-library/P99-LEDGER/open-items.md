@@ -1,20 +1,27 @@
-# OPEN ITEMS — as of 2026-07-03
+# OPEN ITEMS — as of 2026-07-05
 
 ## REAL BLOCKER (only one)
-- **SUPABASE_URL** not resolving from Railway → `receipt_row_id: null`. Fix ($25 paid ok), then resume. No receipts = no measurement = no fleet.
+- **SUPABASE_URL** not resolving from Railway → `receipt_row_id: null`. Fix ($25 paid ok), then resume. No receipts = no measurement = no fleet. **Status unchanged** — verify on next Railway deploy.
+
+## CLOSED (v0.9 upgrade pass)
+- P0 verify gaps — closed (P0_VERIFY_RECEIPT_2026-07-05.md)
+- 6/6 lane preflight receipts — closed (LANE_PREFLIGHT_RECEIPTS_2026-07-05/)
+- Governance hotspots (STEP10 merge, brain_deployment_state.json, SSOT v6 authority) — closed
+- Revenue-start gates — closed (Brain Agent + Mac Worker receipts 2026-07-05)
+- BRAIN_REGISTRY v0.1.4 on-disk — partial inventory confirmed (`sourcea-brain-registry-inventory-v1.json`); full Phase-2 activation still gated
 
 ## TARGETS (run + pursue in parallel — NOT blockers)
 - Build the deterministic brain: `decision-core-v1` → `soup-wall-v1` → `learning-proposal-v1` (on the Llama mouth + substrate).
 - 4 founder claim decisions gate `locked-definitions` → live_locked (`sourcea_is_live` signal; `forge_terminal_guaranteed_live_runtime`; `every_possible_run_has_public_proof` → narrow to designed-around-receipts; `broken_gears` → author 3-gear ladder).
 - Prove Zero-Drift on SourceA (unlocks Tier 2 Operating Brain Install).
-- Sell Tier 1 Brain Audit (sellable now, no proof needed).
+- **Tier 1 AI Spend Leak Audit pilot** — launch authorized 2026-07-05; recruit first customer.
 - Build the IDE agentic lane (understanding→planner→router→workers→critic→aggregator) — candidate first Line Engine instance.
-- Confirm BRAIN_REGISTRY v0.1.4 is on-disk in SourceA (owner: SourceA Brain Agent), Phase-1-config-only.
 - Test the kill-switch before any unattended shipping.
 - Migrate library artifact filenames to the ratified versioning form.
+- Bulk supporting-law review (296 quarantined files) — out of scope for v0.9 pass.
 
 ## KNOWN OLDER OPEN (from gap audit — verify status)
 - 90 competitor plans (producing or dead dispatch?); Founder Email Factory (broken — fix or kill?); public API HTML defect on sales surface; Canada funding doors (un-actioned); distribution line (not built).
 
 ---
-*v0.1 (2026-07-03 12:34 PDT)*
+*v0.2 (2026-07-05 — reconciled with v0.9 upgrade)*

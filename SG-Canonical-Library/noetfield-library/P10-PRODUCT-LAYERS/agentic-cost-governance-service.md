@@ -40,7 +40,7 @@ Noetfield governance services for AI automation cost control: audit, policy, fir
 
 - **Ownership:** Noetfield Systems Inc.
 - **Delivery:** Audit reports, policy packs, governance frameworks, ROI guidance
-- **Authority:** FOUNDER_CANON v1 + agentic-cost-governance-SSOT (to be defined)
+- **Authority:** FOUNDER_CANON v1 + agentic-cost-governance-SSOT (`P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md`)
 - **Positioning:** "Governance auditor for AI automation spend" — non-technical SME facing, outcome-driven
 - **Engagement model:** 
   - Tier 1: AI Spend Leak Audit (diagnostic, no implementation)

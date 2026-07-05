@@ -61,8 +61,7 @@ DONE: gate refuses a non-PASS candidate (proven with a deliberate FAIL).
 SCOPE: sandbox → SUBMITTED bundle → verifier PASS → gate → deployed to live Worker.
 DONE: ✅ **DONE by founder-approved MANUAL deploy.** Gate approved the candidate
 with receipt `f73c0ce8-e3d2-4c5f-be37-fad8ffdd1684`; founder then ran the
-live Brain deploy by hand from the SourceA repo. Live Brain baseline is version
-`628ebc37-5c66-44e5-9cad-4e05fc2f3e92`, serving 514 chunks with citations OK
+live Brain deploy by hand from the SourceA repo. Live Brain baseline is recorded in [data/brain_deployment_state.json](data/brain_deployment_state.json) — query that file for `live_version`, not this prose.
 and `validate-sourcea-brain-knowledge-v1.sh` ALL PASS.
 
 ## STEP 8 — FAIL teeth
@@ -81,13 +80,48 @@ promotion gate. Two PASS candidates were approved as dry-runs with
 refused with `deploy_executed: false`. MAIN account deployment metadata showed
 the live Brain still serving version `628ebc37-5c66-44e5-9cad-4e05fc2f3e92`.
 
-## STEP 10 — Wire to live (FOUNDER DECIDE) ⚠️
-SCOPE: enable the loop to run unattended — sandboxes propose, verifier gates, PASS
-auto-deploys to the live Brain. This is the only irreversible step.
-HOLD: **autonomous deploy is NOT enabled.** Step 10a confirm-each-time mode is
-**wired, proven, and executed** (Brain Core prod deploy `81058e04-6b8b-442d-a108-6eebffc60519`).
-Full autonomous deploy remains separate Step 10b DECIDE — see
-[docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md](docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md).
+## STEP 10 — Live wiring + autonomous deploy (FOUNDER DECIDE) ⚠️
+
+**Single authority for Step 10.** Step 10a and 10b are sub-modes below — not separate files.
+
+### Step 10a — Confirm-each-time deploy (DONE)
+SCOPE: Wire promotion gate to live Brain with founder confirmation per deploy.
+DONE: ✅ **DONE.** Brain Core prod deploy `81058e04-6b8b-442d-a108-6eebffc60519` executed under confirm-each-time mode. Receipts: `receipts/phase0.3-step10a-watched-deploy-receipt.json`.
+
+### Step 10b — Autonomous deploy (LIFT with guardrails)
+SCOPE: Unattended loop — sandboxes propose, verifier gates, PASS auto-deploys to live Brain without per-deploy CONFIRM when founder flag is active.
+
+**Status:** **LIFT (Brain-only 24/7)** — enabled 2026-07-02 per founder GO AHEAD.
+
+| Mode | Status |
+|------|--------|
+| Dry-run (`APPROVED_DRY_RUN`) | Enabled |
+| Confirm-each-time (`CONFIRM DEPLOY`) | Enabled |
+| Semi-auto window (`--semi-auto-window`) | Enabled, bounded |
+| `--autonomous-deploy` (10b) | **Enabled** with founder flag + hold auto-stop |
+| Unattended `--execute-deploy` | **Disabled** |
+
+**Autonomous controls:**
+- Enable: `~/.sina/brain-autonomous-deploy-v1.flag`
+- Auto-stop: `~/.sina/enforcement/brain-autonomous-hold-v1.flag` on smoke/identity/promote fail
+- Clear hold: matrix ALL PASS + manual rm or successful autonomous cycle
+- Mutation guard: refuses when `SOURCEA_PHASE2_MUTATION_TRIALS` is true
+
+**Gate invocation:**
+```bash
+bash scripts/promote_brain_worker_v1.sh --autonomous-deploy
+```
+Or via autorun motor: `scripts/brain_loop_autorun_v1.sh` (6h launchd — see [docs/BRAIN_LOOP_LAUNCHD_v0.1.md](docs/BRAIN_LOOP_LAUNCHD_v0.1.md)).
+
+**Sandbox branch rule:** `sandbox/brain/*` branches are verify-only. Autonomous promote runs on `main` only after merge.
+
+**Evidence index:**
+- Sandbox registry: [data/brain_domain_sandboxes_v1.json](data/brain_domain_sandboxes_v1.json)
+- Independence proof: [receipts/verifier-independence-proof-latest.json](receipts/verifier-independence-proof-latest.json)
+- Rollback drill: [receipts/brain-rollback-drill-latest.json](receipts/brain-rollback-drill-latest.json)
+- Phase 3 plan: [docs/PHASE3_FULL_AUTO_24x7_PLAN_v0.1.md](docs/PHASE3_FULL_AUTO_24x7_PLAN_v0.1.md)
+
+**Historical reference:** [docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md](docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md) (content merged here 2026-07-05).
 
 ---
 
@@ -111,14 +145,14 @@ Mac nerve / Cloud Forge mesh: **DEFER Phase 3** — see SourceA nerve 10-step ba
 
 ---
 
-*Status: Steps 1–10 DONE. Phase 2 Parallel Brain wired. Step 10b autonomous deploy HOLD.*
+*Status: Steps 1–10 DONE (10a confirm-each-time + 10b LIFT with guardrails). Phase 2 Parallel Brain wired.*
 
 ## Standing rules
 - Verifier output is PASS only when receipt fields prove independence. Else SUBMITTED/FAIL/BLOCKED.
 - Steps 1–9: Cursor may run-prove-advance-propose after one-word go.
-- Step 10: founder-gated, no auto-wire without Sina DECIDE.
+- Step 10a/10b: founder-gated modes documented above; 10b requires founder flag + hold auto-stop.
 - NOOS Brain is the same loop later — same gate, after SourceA loop is proven.
 - Live Brain stays on the MAIN Cloudflare account `0d0b967b...`; verifier stays
 on the secondary Cloudflare account `b7282b4a5c17b84d62e3ef8866b878f8`. Never
 merge these accounts.
-- Autonomous gate-triggered deploy is Step 10b, founder-gated HOLD.
+- Step 10 authority is this file only — STEP10B doc is historical reference.

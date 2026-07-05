@@ -1,8 +1,8 @@
 # REVENUE WORK AUTHORIZATION
 
-**Status:** APPROVED — SG Preflight Only, Downstream Coordination Pending  
-**Date:** 2026-07-05 05:45:48 UTC  
-**Authority:** SG v0.8 provisionally active rules (preflight inspection scope only)  
+**Status:** REVENUE-START READY — downstream coordination complete  
+**Date:** 2026-07-05 (updated)  
+**Authority:** SG v0.9-SG-RATIFIED  
 
 ---
 
@@ -112,13 +112,7 @@ SG has completed its duty: preflight verification ✅.
 **Authority:** Revenue-start conditional on SourceA Brain Agent + Mac Worker receipts; full alignment conditional on NOOS + GitHub/Cloud (may defer if no concrete risk)
 
 **Authorization status:** ✅ SG AUTHORIZED (preflight complete)  
-**Revenue-start gate:** SourceA Brain Agent readiness receipt + Mac Worker execution receipt  
-**Full alignment gate:** Above + NOOS Integrator sync receipt + GitHub/Cloud alignment receipt (continue in parallel, defer if no concrete risk)
+**Revenue-start gate:** ✅ COMPLETE (SOURCEA_BRAIN_AGENT_READINESS_RECEIPT + MAC_WORKER_EXECUTION_RECEIPT 2026-07-05)  
+**Full alignment gate:** ✅ COMPLETE (NOOS_INTEGRATOR_SYNC_RECEIPT + GITHUB_CLOUD_ALIGNMENT_RECEIPT 2026-07-05)  
 
-**Next action:** 
-1. Dispatch SourceA Brain Agent and Mac Worker (critical path)
-2. Collect SourceA Brain Agent + Mac Worker readiness receipts
-3. **Revenue work may begin after step 2**
-4. Dispatch NOOS Integrator and GitHub/Cloud teams in parallel (collect alignment receipts unless no concrete risk found)
-
-**Revenue execution gate:** SourceA Brain Agent readiness receipt + Mac Worker execution receipt
+**Revenue execution:** Tier 1 AI Spend Leak Audit pilot launched — see TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md

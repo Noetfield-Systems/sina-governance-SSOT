@@ -1,41 +1,39 @@
 {
-  "canonical_library": "v0.8+P0-reconciled",
+  "canonical_library": "v0.9-SG-RATIFIED",
   "installed_path": "SG-Canonical-Library/noetfield-library",
-  "version": "0.8.1",
+  "version": "0.9",
+  "status": "v0.9-SG-RATIFIED",
   "date_installed": "2026-07-04T22:24:00Z",
   "date_reconciled": "2026-07-05T04:41:00Z",
-  "zip_source": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
-  "status": "SG-CANONICAL (Sina Governance SSOT)",
+  "date_ratified": "2026-07-05T12:42:00Z",
+  "zip_artifact": "SG-Canonical-Library/noetfield-library-v0.9-SG-RATIFIED-2026-07-05.zip",
+  "zip_sha256": "929d449364c6b4d88931e71f44352953ee243e4cd6e2b6b7e7495ff2d0662cc1",
+  "zip_source_prior": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
   "authority": "SG-owned",
-  "files_real": 110,
-  "files_total": 110,
+  "files_real": 125,
+  "files_total": 125,
   "pending_uploads": 0,
   "quarantined_supporting_law": 296,
-  "hash_md5": "d8389442555f0c6b7d33e32cf6f26ca9",
-  "installation_date": "Saturday, Jul 4, 2026 22:24 UTC",
-  "reconciliation_date": "Sunday, Jul 5, 2026 04:41 UTC",
-  "reconciliation_sources": [
-    "Downloads/noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
-    "Downloads/noetfield-library 7",
-    "Noetfield-Systems/SourceA/docs (canonical active lane)",
-    "SourceA/noetfield-library/P0-FOUNDATION-SPINE (found items + data JSONs)"
+  "p0_status": "VERIFIED — 0 placeholders; supporting-law quarantined",
+  "governance_pass": "4/4 complete",
+  "fragmentation_fixes_required": [],
+  "fragmentation_fixes_completed": [
+    "Merge STEP10B into PHASE_LOOP_BUILD_PLAN",
+    "Create data/brain_deployment_state.json",
+    "Lock ssot/strategy-ssot-v6-split.md as remote canonical"
   ],
-  "next_phase": "v0.9-SG-RATIFIED (after governance hotspot fixes + SG ratification)",
-  "p0_status": "INSTALLED — 0 placeholders; supporting-law quarantined",
-  "fragmentation_fixes_required": [
-    "1. Merge STEP10B into PHASE_LOOP_BUILD_PLAN (kill HOLD/LIFT contradiction)",
-    "2. Create data/brain_deployment_state.json (single source for live version)",
-    "3. Lock ssot/strategy-ssot-v6-split.md as remote canonical"
+  "v09_receipts": [
+    "P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/",
+    "P99-LEDGER/PHASE_LOOP_STEP10_MERGE_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/SSOT_V6_AUTHORITY_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/SOURCEA_BRAIN_AGENT_READINESS_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/MAC_WORKER_EXECUTION_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/NOOS_INTEGRATOR_SYNC_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/GITHUB_CLOUD_ALIGNMENT_RECEIPT_2026-07-05.md",
+    "P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md",
+    "P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md"
   ],
-  "post_reconciliation_additions": [
-    "P99-LEDGER/SOURCEA_LANE_PREFLIGHT_RECEIPT_2026-07-05.md",
-    "P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
-    "P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md",
-    "P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md",
-    "P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
-    "P0-FOUNDATION-SPINE/* (6 placeholders replaced with real files)",
-    "P0-FOUNDATION-SPINE/000-founder-rules.mdc",
-    "P0-FOUNDATION-SPINE/data/*.json",
-    "P0-FOUNDATION-SPINE/supporting-law/SUPPORTING_LAW_QUARANTINE_MANIFEST.md"
-  ]
+  "revenue_status": "TIER1_PILOT_ACTIVE"
 }

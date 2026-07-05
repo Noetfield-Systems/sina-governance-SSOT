@@ -1,12 +1,10 @@
 {
-  "package": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04",
-  "status": "SG reconciliation input; disk install receipt required",
-  "generated_at": "2026-07-04",
-  "source_base": "noetfield-library-FINAL-v0.7-E2E-AUDITED.zip",
-  "file_count_total_after_manifest_files": 99,
-  "file_count_excluding_manifest_files": 97,
-  "placeholder_upload_waiting_count": 6,
-  "manifest_scope": "all files in package except FILE_MANIFEST_SHA256.* themselves",
+  "package": "noetfield-library-v0.9-SG-RATIFIED-2026-07-05",
+  "status": "v0.9-SG-RATIFIED",
+  "generated_at": "2026-07-05T12:42:45Z",
+  "file_count": 125,
+  "placeholder_count": 0,
+  "manifest_scope": "all files in noetfield-library except FILE_MANIFEST_SHA256.*",
   "files": [
     {
       "path": "00-INDEX.md",
@@ -24,14 +22,19 @@
       "sha256": "f479d4ff61477660b5dfcc214e5ed7eeb11611e91f7ec32c038931ca9aa21f5f"
     },
     {
+      "path": "P0-FOUNDATION-SPINE/000-founder-rules.mdc",
+      "size": 431,
+      "sha256": "d22e49dad20f0facfdc2d595264c87097307871076371d2993df8d72fb613073"
+    },
+    {
       "path": "P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md",
       "size": 8915,
       "sha256": "7d68be230c51f5c9d3dfd2a8e8ee64cc47c3537825e0c13a98977a7e4cb51bc4"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.__AWAITING_UPLOAD__.md",
-      "size": 419,
-      "sha256": "d669e62cab12fe3acec398e41c9df36c802ad266c6e40b3d9f32515177e62f0c"
+      "path": "P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md",
+      "size": 12049,
+      "sha256": "ae64825c617a6725464668fb1eb5ae82f5023c148a9546dc94bd0f28febc990a"
     },
     {
       "path": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
@@ -40,8 +43,8 @@
     },
     {
       "path": "P0-FOUNDATION-SPINE/P0_FOUNDATION_MANIFEST.md",
-      "size": 5780,
-      "sha256": "4713441fe6b3a65ce23bfa5126f4cb7f8885c67bde4ba957740bbbb9da60e67b"
+      "size": 3905,
+      "sha256": "d1ed1431738278a878dce369cc15cef687b5347773ed5a7d8ebcdc9befdce011"
     },
     {
       "path": "P0-FOUNDATION-SPINE/README.md",
@@ -49,34 +52,44 @@
       "sha256": "df51f01869f031a33e4265692fb3f14980fb22863187454828bcecf7ed4691cf"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.__AWAITING_UPLOAD__.md",
-      "size": 448,
-      "sha256": "6b542752b6f405558aa10db70b6cd95c792b6d18ea2171975261348814c67f12"
+      "path": "P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md",
+      "size": 9765,
+      "sha256": "0c730422b764d37ac3adf87dde7f0ea91de5e37e699740847dc57d02e26da50e"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.__AWAITING_UPLOAD__.md",
-      "size": 452,
-      "sha256": "6b997b9463a8b7ac66d8eb177db8391dd4d04f21e34e7a03a4aa91f6afbdd5a7"
+      "path": "P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.md",
+      "size": 10905,
+      "sha256": "a2a27550e3f5d756f5da3709b3a4f4045926c37e6aa127b506d20a53b0959cc8"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.__AWAITING_UPLOAD__.md",
-      "size": 423,
-      "sha256": "a6a95dd0aa50047edf8317c76efef13a0cef7f8896cb907bd623fca3e098a934"
+      "path": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+      "size": 5852,
+      "sha256": "50a91031507926151e98f7d52686934bbfbede5eafd5b382a5df8ec88210ca0c"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/data/__AWAITING_UPLOAD__.md",
-      "size": 218,
-      "sha256": "1df1a25bb9661314f1adeecba7c5ff6732e17de5b3e9f4c52f588387dcb80405"
+      "path": "P0-FOUNDATION-SPINE/_MISSING_OR_UNVERIFIED.md",
+      "size": 1707,
+      "sha256": "4ada87afe08a4edffe8217704446957fc211eefa2547c13b97bd9ce0a3e9680d"
+    },
+    {
+      "path": "P0-FOUNDATION-SPINE/data/founder-trigger-retirement-registry-v1.json",
+      "size": 2546,
+      "sha256": "1d7975a0ae2881c8284f66dd015884c7fd51d21c93763cc846912176db5811ef"
+    },
+    {
+      "path": "P0-FOUNDATION-SPINE/data/machine-process-loops-v1.json",
+      "size": 6283,
+      "sha256": "2d6fe83fc417115c44e7b9c38175e9bce79357fdd38e11f64ccde5629427b0e6"
     },
     {
       "path": "P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md",
-      "size": 13804,
-      "sha256": "1ba4a793dba183388afd244ea21e850cad879c78824f78603e961070ae9b3af4"
+      "size": 14006,
+      "sha256": "23116adf8a24093320a634e7f80f7f1d39ac17c45a2e5109fe758d1947b53bf0"
     },
     {
-      "path": "P0-FOUNDATION-SPINE/supporting-law/__AWAITING_UPLOAD__.md",
-      "size": 164,
-      "sha256": "70a50b871ca4b8d964a989fb011a015b7076c5f7d6c63e6f81465ecbc272582a"
+      "path": "P0-FOUNDATION-SPINE/supporting-law/SUPPORTING_LAW_QUARANTINE_MANIFEST.md",
+      "size": 2894,
+      "sha256": "9f50151b6543b6accfb9768dc7c975803e7cf7c69a5c0d5d694790e79149bfe0"
     },
     {
       "path": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
@@ -114,14 +127,24 @@
       "sha256": "84bde79f21633c81311159ffb12872b63ef108a560a3851a4092f89c218850a3"
     },
     {
+      "path": "P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md",
+      "size": 2593,
+      "sha256": "7478a5ff0f89a14b63aac5b21c8eb4e652a25971222915e6b7b73d1f3b5ba35f"
+    },
+    {
+      "path": "P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+      "size": 11094,
+      "sha256": "3ddc0d36fcb64f19ee20dd2586e742ee96d1e47ef42efc536a623cc3eeeb08b6"
+    },
+    {
       "path": "P10-PRODUCT-LAYERS/big-picture-self-healing-product-june2026.md",
       "size": 8207,
       "sha256": "c5daf4b938fff39a2026a752a1d540b17ded507c5cf657691cb36a210a603f35"
     },
     {
       "path": "P10-PRODUCT-LAYERS/noetfield.md",
-      "size": 1876,
-      "sha256": "59270872929a6e041803d71d514048e358718c50fb8e6b17f7088521a7f1b2d0"
+      "size": 2417,
+      "sha256": "0cb64a1ceb20826b699757df57549c51d464fa4550b8de9d02a48058e9d280bd"
     },
     {
       "path": "P10-PRODUCT-LAYERS/product-vs-canon-boundary.md",
@@ -165,8 +188,8 @@
     },
     {
       "path": "P2-SSOT/SSOT_INDEX.md",
-      "size": 1920,
-      "sha256": "52ee783693d3453e6a791eebc5fa7a0ddf5cacbaeae45b9702a363b54779a35f"
+      "size": 2153,
+      "sha256": "3fdc0ad1c63bb3b77fbf24b6d714f2bbee5f2d2b3f7fbc126cab2b58e95577c9"
     },
     {
       "path": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
@@ -435,8 +458,8 @@
     },
     {
       "path": "P99-LEDGER/COMPLETENESS_AUDIT.md",
-      "size": 4712,
-      "sha256": "1caf8646ff20d484a35f62868df637075ee2e162abc425f409d2d3dae098c2ad"
+      "size": 4471,
+      "sha256": "b1c7f2ac45ea59b97bf280d1c0e30d495de83456938496dedd66d77b118c7c4d"
     },
     {
       "path": "P99-LEDGER/E2E_AUDIT_2026-07-04.md",
@@ -444,9 +467,64 @@
       "sha256": "fd477614a0f0114b8b20ac01a8e83d273782eaeef371edf1697135167ff57b8e"
     },
     {
+      "path": "P99-LEDGER/GITHUB_CLOUD_ALIGNMENT_RECEIPT_2026-07-05.md",
+      "size": 1165,
+      "sha256": "48b6eb1f8194f44831bf499ec6f05f7f8a0ee5a49080ae8f67b586adcd48e2cb"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/NOETFIELD_OS.md",
+      "size": 781,
+      "sha256": "d803d7e5f75e156457747e9fb85e32bcdca2593e1fc94c1b7c35bbe1d6274fb9"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/README.md",
+      "size": 667,
+      "sha256": "8c0d3756394f093137d8642bf94caa7f890283e9227ffc948a2508fa9962c771"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINAAI_MONO.md",
+      "size": 828,
+      "sha256": "2cd77aea6ca71b40d60cf9df264e36ce6ec66f0749d6b514fcc92079062166e1"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINA_GOVERNANCE_SSOT.md",
+      "size": 658,
+      "sha256": "9035f06e8f11c25626ecee09483d819b44125685403e9c1aaee00dad2af0a195"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SOURCEA.md",
+      "size": 659,
+      "sha256": "6f605db9f57ea10a838ab33357c0737189316ec26e90c63df15908dfe87838df"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/STUDIO_IDE.md",
+      "size": 627,
+      "sha256": "4a38722543a27868582ddbf57c112af033818bc3eebf304f78f1fa2410751e72"
+    },
+    {
+      "path": "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/TRUSTFIELD.md",
+      "size": 557,
+      "sha256": "074729807fb3363697a5824cea7ca9fdccf2d429a15aa03bb272279738f48808"
+    },
+    {
+      "path": "P99-LEDGER/LIBRARY_RECONCILIATION_RECEIPT_2026-07-05.md",
+      "size": 3379,
+      "sha256": "838d5056f2331799454e80385cae477836ab5fe1b057d6c029abf00623ee978f"
+    },
+    {
       "path": "P99-LEDGER/LIBRARY_STATE_FOR_SG_2026-07-04.md",
       "size": 8154,
       "sha256": "33b36390d5ce12e4bfeece9f5b88d12bdb8b7db2169c5d531404051f4d0f401e"
+    },
+    {
+      "path": "P99-LEDGER/MAC_WORKER_EXECUTION_RECEIPT_2026-07-05.md",
+      "size": 1158,
+      "sha256": "0683f90f533dfafa9b873a343cb1ff9f50a3cefc1377df7dfcef03eafa3bab39"
+    },
+    {
+      "path": "P99-LEDGER/NOOS_INTEGRATOR_SYNC_RECEIPT_2026-07-05.md",
+      "size": 1201,
+      "sha256": "f616eb262333f6aa5a295f023b2a5569760d40b0851e92eae079457da94498f5"
     },
     {
       "path": "P99-LEDGER/P0_GAP_FINAL_ANSWER_2026-07-04.md",
@@ -454,9 +532,54 @@
       "sha256": "6a2c2da3691c9d141e39b4c53363b9747966829ea127e6540538de09a9ea92cb"
     },
     {
+      "path": "P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md",
+      "size": 897,
+      "sha256": "597ef5f76af878cc2159b1eaaeab35ed5932baf0cda63faf84606b42cd854a8f"
+    },
+    {
+      "path": "P99-LEDGER/PHASE_LOOP_STEP10_MERGE_RECEIPT_2026-07-05.md",
+      "size": 867,
+      "sha256": "dfb1d71ad4be8a22d47f8c662992cf9c44ac0d4c60a724c8eebc26702759281a"
+    },
+    {
+      "path": "P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
+      "size": 5062,
+      "sha256": "bb7b00112987f464ae51f52717547717be72d5fa75dd991cba5aa11a73d460db"
+    },
+    {
+      "path": "P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md",
+      "size": 5001,
+      "sha256": "e534aa135053e987ff13efd9fbbb65f5a9a6f4a4f73d02cac083cda0f430d95d"
+    },
+    {
+      "path": "P99-LEDGER/SG_INSTALL_RECEIPT_v0.8_2026-07-04.md",
+      "size": 4237,
+      "sha256": "ffd5284af70b996c9e1b6b71f69bd343110ec8ed432d695665bd4d4f43c6dfd3"
+    },
+    {
+      "path": "P99-LEDGER/SOURCEA_BRAIN_AGENT_READINESS_RECEIPT_2026-07-05.md",
+      "size": 1611,
+      "sha256": "04115af6968ce5ba370f023a3a6746aad49978f2ee1bd6b88bc210650ea300d7"
+    },
+    {
+      "path": "P99-LEDGER/SOURCEA_LANE_PREFLIGHT_RECEIPT_2026-07-05.md",
+      "size": 3323,
+      "sha256": "fd3d4a55f61d12b0240a35cb717ddb218068956259f3a9dff2f3a256cebb5c15"
+    },
+    {
+      "path": "P99-LEDGER/SSOT_V6_AUTHORITY_RECEIPT_2026-07-05.md",
+      "size": 695,
+      "sha256": "17cc8b5347759908e3652af83092817943acb748f60116f22527a296bd41d240"
+    },
+    {
       "path": "P99-LEDGER/THE_REAL_DIAGNOSIS_revenue-organ_2026-07-04.md",
       "size": 8624,
       "sha256": "56a2d380808257ac1b815097664c3702e5a0879f7cfd6fcacb7fa2abae3d7d5a"
+    },
+    {
+      "path": "P99-LEDGER/TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md",
+      "size": 1132,
+      "sha256": "258e5ac5cc79816dfa59dd6e01c6f3ffc2a6d71b2b607ca803f14ab1c7ea9e2e"
     },
     {
       "path": "P99-LEDGER/TRUE_FINAL_PACKAGE_AUDIT_2026-07-04.md",
@@ -467,6 +590,21 @@
       "path": "P99-LEDGER/UPLOADED_ZIP_RECONCILIATION_2026-07-04.md",
       "size": 3638,
       "sha256": "32125f83812e2b23f7f2981d3be0f91911fd895bbe136d5743fc6aa43dd1e2b4"
+    },
+    {
+      "path": "P99-LEDGER/V0.9_GOVERNANCE_PASS_3_NEXT_STEPS_2026-07-04.md",
+      "size": 4410,
+      "sha256": "f5805966f160d694fbef47ed1afa9c6bf15bab9745efae9cbec0e00a76afa893"
+    },
+    {
+      "path": "P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md",
+      "size": 1179,
+      "sha256": "e96ee185346b261b96c3fc2559c039021edf97c2168de7d79d0518ccf5f75821"
+    },
+    {
+      "path": "P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md",
+      "size": 15374,
+      "sha256": "37f6d5435af79a409f9674d95cb5a7fa00ee1292dae9b2da9a6204ff2669c476"
     },
     {
       "path": "P99-LEDGER/closed-loops.md",
@@ -480,13 +618,13 @@
     },
     {
       "path": "P99-LEDGER/open-items.md",
-      "size": 1456,
-      "sha256": "80ce9cf3baf2bb93ee11f158432c299f18db4d81bf1d5b3049deee9cde5cbf39"
+      "size": 2047,
+      "sha256": "323e11172f799ca41a3f618bb33d0e5916aaddf24b7ee6f3084043cb8000bbc0"
     },
     {
       "path": "P99-LEDGER/ratified-decisions.md",
-      "size": 1185,
-      "sha256": "6ecf539890d2fd078e0181f02753c892f2a8ed529447661442b2d7bfcdd1ef66"
+      "size": 2018,
+      "sha256": "70a0e9dce862c19d5a0e0f2f36bfa86658844f593ce5fcf39081dabe7ae6af79"
     },
     {
       "path": "README_SG_INTAKE_v0.8.md",
