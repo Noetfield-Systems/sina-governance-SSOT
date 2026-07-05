@@ -1,0 +1,12 @@
+---
+description: SUPERSEDED — conflicts with agent-founder-intent-first · use 027 for language
+alwaysApply: false
+version: 2
+supersedes: v1 raw-json-only founder rules
+---
+
+# Superseded — do not apply
+
+**Use instead:** `.cursor/rules/agent-founder-intent-first.mdc` · `.cursor/rules/027-agent-report-plan-story-v1.mdc`
+
+This file contradicted founder-intent-first (plain English + disk proof). Kept for link resolution only.

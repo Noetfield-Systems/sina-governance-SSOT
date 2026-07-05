@@ -1,0 +1,41 @@
+{
+  "canonical_library": "v0.8+P0-reconciled",
+  "installed_path": "SG-Canonical-Library/noetfield-library",
+  "version": "0.8.1",
+  "date_installed": "2026-07-04T22:24:00Z",
+  "date_reconciled": "2026-07-05T04:41:00Z",
+  "zip_source": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
+  "status": "SG-CANONICAL (Sina Governance SSOT)",
+  "authority": "SG-owned",
+  "files_real": 110,
+  "files_total": 110,
+  "pending_uploads": 0,
+  "quarantined_supporting_law": 296,
+  "hash_md5": "d8389442555f0c6b7d33e32cf6f26ca9",
+  "installation_date": "Saturday, Jul 4, 2026 22:24 UTC",
+  "reconciliation_date": "Sunday, Jul 5, 2026 04:41 UTC",
+  "reconciliation_sources": [
+    "Downloads/noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
+    "Downloads/noetfield-library 7",
+    "Noetfield-Systems/SourceA/docs (canonical active lane)",
+    "SourceA/noetfield-library/P0-FOUNDATION-SPINE (found items + data JSONs)"
+  ],
+  "next_phase": "v0.9-SG-RATIFIED (after governance hotspot fixes + SG ratification)",
+  "p0_status": "INSTALLED — 0 placeholders; supporting-law quarantined",
+  "fragmentation_fixes_required": [
+    "1. Merge STEP10B into PHASE_LOOP_BUILD_PLAN (kill HOLD/LIFT contradiction)",
+    "2. Create data/brain_deployment_state.json (single source for live version)",
+    "3. Lock ssot/strategy-ssot-v6-split.md as remote canonical"
+  ],
+  "post_reconciliation_additions": [
+    "P99-LEDGER/SOURCEA_LANE_PREFLIGHT_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
+    "P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md",
+    "P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md",
+    "P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+    "P0-FOUNDATION-SPINE/* (6 placeholders replaced with real files)",
+    "P0-FOUNDATION-SPINE/000-founder-rules.mdc",
+    "P0-FOUNDATION-SPINE/data/*.json",
+    "P0-FOUNDATION-SPINE/supporting-law/SUPPORTING_LAW_QUARANTINE_MANIFEST.md"
+  ]
+}
