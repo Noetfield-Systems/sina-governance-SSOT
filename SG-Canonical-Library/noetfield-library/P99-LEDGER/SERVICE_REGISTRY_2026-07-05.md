@@ -9,6 +9,26 @@
 
 ## SERVICES REGISTERED
 
+### 0. SINA GATEWAY — Lead Intake (Revenue Organ Mouth)
+
+**Status:** LIVE (Railway HTTPS, Supabase capture, noindex pre-launch)
+
+| Field | Value |
+|-------|-------|
+| **Service name** | SINA GATEWAY — Mirror → Route → Capture → Tag |
+| **Category** | Lead intake / routing / commercial funnel mouth |
+| **Owner** | Noetfield Systems Inc. (founder-led) |
+| **Repo** | `/Users/sinakazemnezhad/Desktop/SINA GATEWAY` |
+| **Production URL** | `https://sina-gateway-production.up.railway.app` |
+| **Supabase** | Noetfield `tkgpapowwplupyekpivy` — `gateway_leads` (anon insert-only) |
+| **Feeds** | Tier 1 AI Spend Leak Audit pilot (`source:acg_pilot_v1` tag on high hire/invest/partner leads) |
+| **Notifications** | Telegram high-priority alerts (`TELEGRAM_BOT_TOKEN` + `TELEGRAM_ALERT_CHAT_ID`) |
+| **Authority** | `P10-PRODUCT-LAYERS/SINA_GATEWAY_BLUEPRINT_LOCKED_v1.md` (repo is SSOT) |
+| **Latest receipt** | GATEWAY_10_STEP_UPGRADE_RECEIPT_2026-07-06.md |
+| **Maturity** | v1 capture live; indexing gated (noindex); custom domain founder-decide |
+
+---
+
 ### 1. AI Spend Leak Audit + Premium Model Firewall
 
 **Status:** PILOT-READY (SSOT draft complete, Tier 1 launch authorized)
