@@ -1,0 +1,179 @@
+{
+  "schema": "noos-fleet-health-pass-v1",
+  "generated_at": "2026-07-06T09:51:05Z",
+  "motor": {
+    "ok": true,
+    "cron": "*/5 * * * *",
+    "execution_plane": "railway:noos-loop-runner",
+    "target_count": 14
+  },
+  "overall": "YELLOW",
+  "heartbeat_drift": "self_heal committed=every_10m deployed=0 */1 * * *",
+  "targets": [
+    {
+      "dispatch_id": "inbox",
+      "factory_id": "loop-inbox",
+      "interval_min": 5,
+      "supabase_last_at": "2026-07-06T06:30:48.554877+00:00",
+      "stale_minutes": 200.3,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:35:54Z"
+      },
+      "verdict": "STALE"
+    },
+    {
+      "dispatch_id": "runtime",
+      "factory_id": "loop-runtime",
+      "interval_min": 15,
+      "supabase_last_at": "2026-07-06T09:37:47.187051+00:00",
+      "stale_minutes": 13.3,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:30:54Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "surface",
+      "factory_id": "loop-surface",
+      "interval_min": 20,
+      "supabase_last_at": "2026-07-06T09:37:49.472788+00:00",
+      "stale_minutes": 13.3,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:20:54Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "chain",
+      "factory_id": "loop-chain",
+      "interval_min": 30,
+      "supabase_last_at": "2026-07-06T09:37:50.508905+00:00",
+      "stale_minutes": 13.2,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:30:54Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "self_heal",
+      "factory_id": "loop-self-heal",
+      "interval_min": 10,
+      "supabase_last_at": "2026-07-06T09:38:05.385193+00:00",
+      "stale_minutes": 13.0,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:30:55Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "sourcea_observe",
+      "factory_id": "loop-sourcea-observe",
+      "interval_min": 30,
+      "supabase_last_at": "2026-07-06T09:38:06.405856+00:00",
+      "stale_minutes": 13.0,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:30:55Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "agent_nerve",
+      "factory_id": "loop-agent-nerve",
+      "interval_min": 60,
+      "supabase_last_at": "2026-07-06T09:38:07.369192+00:00",
+      "stale_minutes": 13.0,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:00:58Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "workflow_audit",
+      "factory_id": "loop-workflow-audit",
+      "interval_min": 15,
+      "supabase_last_at": "2026-07-06T06:30:59.898562+00:00",
+      "stale_minutes": 200.1,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:16:18Z"
+      },
+      "verdict": "STALE"
+    },
+    {
+      "dispatch_id": "self_heal_safe_fixes",
+      "factory_id": "loop-self-heal-safe-fixes",
+      "interval_min": 30,
+      "supabase_last_at": "2026-07-06T06:31:00.458612+00:00",
+      "stale_minutes": 200.1,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T16:18:35Z"
+      },
+      "verdict": "STALE"
+    },
+    {
+      "dispatch_id": "researcher",
+      "factory_id": "loop-researcher",
+      "interval_min": 60,
+      "supabase_last_at": "2026-07-06T06:28:09.671749+00:00",
+      "stale_minutes": 202.9,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T16:55:37Z"
+      },
+      "verdict": "STALE"
+    },
+    {
+      "dispatch_id": "specialist",
+      "factory_id": "loop-specialist",
+      "interval_min": 120,
+      "supabase_last_at": "2026-07-06T06:28:10.261061+00:00",
+      "stale_minutes": 202.9,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:16:02Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "orchestrator",
+      "factory_id": "loop-orchestrator",
+      "interval_min": 180,
+      "supabase_last_at": "2026-07-06T09:39:49.12644+00:00",
+      "stale_minutes": 11.3,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T16:12:32Z"
+      },
+      "verdict": "RUNNING"
+    },
+    {
+      "dispatch_id": "factory_autorun",
+      "factory_id": "noos-gel-factory",
+      "interval_min": 10,
+      "supabase_last_at": null,
+      "stale_minutes": null,
+      "gh_last": {
+        "conclusion": "failure",
+        "createdAt": "2026-07-05T17:30:53Z"
+      },
+      "verdict": "NO_RECEIPT"
+    },
+    {
+      "dispatch_id": "improve_kaizen_daily",
+      "factory_id": "loop-improve-kaizen-daily",
+      "interval_min": 1440,
+      "supabase_last_at": null,
+      "stale_minutes": null,
+      "gh_last": null,
+      "verdict": "CF_ONLY"
+    }
+  ]
+}
