@@ -12,4 +12,4 @@
 | TrustField | [TRUSTFIELD.md](TRUSTFIELD.md) | VERIFIED |
 | Studio IDE | [STUDIO_IDE.md](STUDIO_IDE.md) | VERIFIED (feature branch) |
 | SinaaiMono | [SINAAI_MONO.md](SINAAI_MONO.md) | VERIFIED (legacy remote — migration pending) |
-| SINA GATEWAY | [SINA_GATEWAY.md](SINA_GATEWAY.md) | VERIFIED (legacy remote — live Railway + Supabase) |
+| SINA GATEWAY | [SINA_GATEWAY.md](SINA_GATEWAY.md) | VERIFIED (**personal project** — `kazemnezhadsina144-dot/sina-gateway`) |

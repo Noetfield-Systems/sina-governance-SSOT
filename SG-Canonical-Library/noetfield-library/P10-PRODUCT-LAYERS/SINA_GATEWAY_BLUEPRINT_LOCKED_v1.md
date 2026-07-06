@@ -4,7 +4,7 @@
 
 **One-line:** *Mirror → Route → Capture → Tag.* Every visitor becomes structured, queryable intelligence.
 
-**Status:** Locked for build. v1 scope frozen below. Scoring engine + dashboard explicitly deferred.
+**Status:** **BUILT & LIVE** (2026-07-06). **Personal founder project** — not Noetfield Systems Inc. Repo authority: `~/Desktop/SINA GATEWAY` (`kazemnezhadsina144-dot/sina-gateway`). Production: `https://sina-gateway-production.up.railway.app`. SG mirror is read-surface only; on conflict repo wins.
 
 ---
 

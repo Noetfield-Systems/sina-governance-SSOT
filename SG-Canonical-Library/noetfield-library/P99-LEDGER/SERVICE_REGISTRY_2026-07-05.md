@@ -9,23 +9,20 @@
 
 ## SERVICES REGISTERED
 
-### 0. SINA GATEWAY — Lead Intake (Revenue Organ Mouth)
+### 0. SINA GATEWAY — Personal Lead Intake (cross-reference only)
 
-**Status:** LIVE (Railway HTTPS, Supabase capture, noindex pre-launch)
+**Not a Noetfield Systems Inc. service.** Personal founder project; repo and deploy live under personal GitHub/Railway.
 
 | Field | Value |
 |-------|-------|
-| **Service name** | SINA GATEWAY — Mirror → Route → Capture → Tag |
-| **Category** | Lead intake / routing / commercial funnel mouth |
-| **Owner** | Noetfield Systems Inc. (founder-led) |
+| **Project type** | Personal (founder) — **not** NFI commercial lane |
 | **Repo** | `/Users/sinakazemnezhad/Desktop/SINA GATEWAY` |
+| **Git remote** | `https://github.com/kazemnezhadsina144-dot/sina-gateway.git` (canonical — do not move to Noetfield-Systems) |
 | **Production URL** | `https://sina-gateway-production.up.railway.app` |
-| **Supabase** | Noetfield `tkgpapowwplupyekpivy` — `gateway_leads` (anon insert-only) |
-| **Feeds** | Tier 1 AI Spend Leak Audit pilot (`source:acg_pilot_v1` tag on high hire/invest/partner leads) |
-| **Notifications** | Telegram high-priority alerts (`TELEGRAM_BOT_TOKEN` + `TELEGRAM_ALERT_CHAT_ID`) |
-| **Authority** | `P10-PRODUCT-LAYERS/SINA_GATEWAY_BLUEPRINT_LOCKED_v1.md` (repo is SSOT) |
+| **Supabase** | Shared Noetfield project `tkgpapowwplupyekpivy` — `gateway_leads` (anon insert-only; infra only) |
+| **SG link** | Blueprint mirror in P10; preflight in `LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINA_GATEWAY.md` |
+| **Commercial feed** | May tag leads for ACG Tier 1 pilot — routing only, not NFI product ownership |
 | **Latest receipt** | GATEWAY_10_STEP_UPGRADE_RECEIPT_2026-07-06.md |
-| **Maturity** | v1 capture live; indexing gated (noindex); custom domain founder-decide |
 
 ---
 

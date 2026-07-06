@@ -8,7 +8,7 @@
 
 ## Motion
 
-SINA GATEWAY is wired as the **lead mouth** for Noetfield commercial intake. Tier 1 **AI Spend Leak Audit** pilot cohort tagging is live in capture.
+SINA GATEWAY is a **personal founder project** (not Noetfield Systems Inc.) that can **feed** commercial intake via tags. Tier 1 **AI Spend Leak Audit** pilot cohort tagging is live in capture.
 
 ## Technical routing (2026-07-06)
 
@@ -32,7 +32,7 @@ Verified by unit test: `scripts/test-adapters.js` — "high hire intent tags ACG
 
 This receipt marks **revenue-organ infrastructure complete**. First pilot conversation receipt will supersede when founder initiates outreach to a named prospect.
 
-**Pilot CTA surface:** Gateway routes high-intent commercial leads to SourceA / Noetfield with ACG tags for downstream follow-up.
+**Pilot CTA surface:** Personal Gateway may route high-intent leads with ACG tags for downstream Noetfield/SourceA follow-up — routing only, not NFI product ownership.
 
 ---
 

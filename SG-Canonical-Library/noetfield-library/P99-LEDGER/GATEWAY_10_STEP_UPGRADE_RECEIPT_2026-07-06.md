@@ -17,7 +17,7 @@
 | 4 Private test | LAUNCH_CHECKLIST 1–16 core | **PASS** | `npm run private-test`; `PRIVATE_TEST_PASS` appendix in gateway receipt |
 | 5 Hardening | Turnstile + server-hardening | **PASS** | `test:server-hardening`, `test:turnstile` PASS; Turnstile on Railway (founder env) |
 | 6 Staging deploy | HTTPS + remote capture | **PASS** | `https://sina-gateway-production.up.railway.app`; chain:health PASS |
-| 7 SG alignment | Ledger + SERVICE_REGISTRY | **PASS** | This receipt; SERVICE_REGISTRY entry; fragmentation ledger updated |
+| 7 SG alignment | Ledger + cross-reference | **PASS** | Personal lane in fragmentation ledger; SERVICE_REGISTRY cross-ref (not NFI service) |
 | 8 Notifications | High-priority alert path | **PASS** | Telegram (`test:notifications` PASS); capture survives notification failure |
 | 9 Public launch | HTTPS live + launch receipt | **PASS_WITH_GATES** | Railway URL public; `noindex` retained per launch gate doc |
 | 10 Revenue link | ACG Tier 1 tagging | **PASS** | `source:acg_pilot_v1` + `offer:tier1_ai_spend_leak_audit` tags; revenue conversation receipt filed |
@@ -37,10 +37,11 @@ CHAIN_HEALTH_BASE_URL=https://sina-gateway-production.up.railway.app npm run cha
 
 ## Founder-gated remainders (not blockers for v1 capture)
 
-- Migrate GitHub remote to `Noetfield-Systems/sina-gateway` when org repo created
 - Custom domain + remove `noindex` when intentional public indexing desired
 - Delete `private-test` / `is_test` rows in Supabase dashboard
 - First real ACG pilot conversation (outreach) — pipeline motion beyond capture
+
+**Ownership note:** SINA GATEWAY is a **personal project** (`kazemnezhadsina144-dot/sina-gateway`). It is not and should not be under Noetfield-Systems org.
 
 ---
 
