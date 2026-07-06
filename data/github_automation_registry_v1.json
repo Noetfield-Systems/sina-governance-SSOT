@@ -7,6 +7,19 @@
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
   "motors": [
     {
+      "motor_id": "gh_actions_workflow_census_weekly_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/workflow-census-weekly-v1.yml",
+      "cadence": "0 8 * * 1",
+      "lane": "sg_governance",
+      "owns": ["workflow_census", "loop_value_class_audit"],
+      "must_not_own": ["brain_promote", "venture_product_code"],
+      "receipt_path": "receipts/workflow-census-*.json",
+      "conflicts_with": [],
+      "note": "Judging layer — which receipt does each loop serve?"
+    },
+    {
       "motor_id": "gh_actions_brain_loop_autorun_v1",
       "kind": "github_actions",
       "repo": "sina-governance-ssot",

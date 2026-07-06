@@ -1,0 +1,58 @@
+{
+  "schema": "workflow_census_value_class_rules_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-06T09:00:00Z",
+  "law": "An agent judges a loop by one question: which receipt does this loop serve?",
+  "value_classes": ["REVENUE", "GUARD", "META", "NONE"],
+  "by_task_cell": {
+    "gateway_lead_capture": { "value_class": "REVENUE", "receipt_target": "gateway_leads row (non-test)" },
+    "gateway_outbound": { "value_class": "REVENUE", "receipt_target": "channel-receipts L0/L1/L2" },
+    "gateway_channel_roi": { "value_class": "REVENUE", "receipt_target": "channel-receipts verdict" },
+    "sourcea_contract_pages": { "value_class": "REVENUE", "receipt_target": "contract page 200 + validator PASS" },
+    "brain_audit_delivery": { "value_class": "REVENUE", "receipt_target": "TIER1_AUDIT_DELIVERY_RECEIPT" },
+    "traffic_intake_conversion": { "value_class": "REVENUE", "receipt_target": "visits → gateway_leads conversion rate" },
+    "sourcea_autorun_l4_verify": { "value_class": "GUARD", "receipt_target": "external-verify PASS receipt" },
+    "noos_cf_deploy_verify": { "value_class": "GUARD", "receipt_target": "post-deploy verify PASS" },
+    "noos_workflow_audit": { "value_class": "GUARD", "receipt_target": "noos-workflow-audit receipt" },
+    "noos_surface_probe": { "value_class": "GUARD", "receipt_target": "surface probe receipt" },
+    "gateway_health_probe": { "value_class": "GUARD", "receipt_target": "gateway-ops watchdog/heartbeat GREEN" },
+    "gateway_external_uptime": { "value_class": "GUARD", "receipt_target": "UptimeRobot /ready PASS" },
+    "gateway_railway_deadman": { "value_class": "GUARD", "receipt_target": "Railway /ready deadman receipt" },
+    "brain_promote_ci": { "value_class": "META", "receipt_target": "brain-loop-autorun receipt" },
+    "brain_promote_mac": { "value_class": "META", "receipt_target": "brain-loop-autorun receipt" },
+    "noos_gel_factory": { "value_class": "META", "receipt_target": "noetfield_factory_cycle_runs" },
+    "noos_inbox": { "value_class": "META", "receipt_target": "noetfield_worker_inbox_queue processed" },
+    "noos_self_heal": { "value_class": "META", "receipt_target": "self-heal repair receipt" },
+    "noos_gel_runtime": { "value_class": "META", "receipt_target": "runtime loop cycle receipt" },
+    "sourcea_cloud_forge": { "value_class": "META", "receipt_target": "cloud-forge queue drain receipt" },
+    "loop_specialist_runtime_plan": { "value_class": "META", "receipt_target": "loop-specialist tick receipt" },
+    "sg_governance": { "value_class": "META", "receipt_target": "automation-surface-audit / census receipt" },
+    "workflow_census": { "value_class": "GUARD", "receipt_target": "workflow_census_runs_v1 row" }
+  },
+  "by_id_pattern": [
+    { "match": "deadman|watchdog|probe|verify|health|uptime|external-verify|post-deploy", "value_class": "GUARD", "receipt_target": "independent verify / probe PASS" },
+    { "match": "outbound|channel|lead|intake|conversion|brain.?audit|tier1|pilot|offer", "value_class": "REVENUE", "receipt_target": "commercial motion receipt" },
+    { "match": "census", "value_class": "GUARD", "receipt_target": "workflow_census_runs_v1" }
+  ],
+  "default": {
+    "value_class": "META",
+    "receipt_target": "motor cycle receipt (unspecified — must be named on audit)"
+  },
+  "cost_usd_month": {
+    "github_actions": 0,
+    "cloudflare_workers_free": 0,
+    "cloudflare_workers_paid": 5,
+    "railway_hobby": 5,
+    "railway_pro": 20,
+    "mac_launchd": 0,
+    "traffic": 0,
+    "supabase": 0
+  },
+  "none_stale_days": 14,
+  "standing_audit_rules": [
+    "NONE for 14 days → propose retirement (founder-gated kill, machine-drafted)",
+    "META cost > GUARD+REVENUE cost → audit_status RED (system grooming itself)",
+    "Every loop must name receipt_target — blank → audit flag",
+    "REVENUE lane may never be empty — zero REVENUE loops → audit_status RED"
+  ]
+}
