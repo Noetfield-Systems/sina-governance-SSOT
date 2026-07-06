@@ -1,0 +1,56 @@
+name: workflow-census-weekly-v1
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+    inputs:
+      traffic_visits_24h:
+        description: "Optional www visits in last 24h (founder snapshot)"
+        required: false
+        default: "0"
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install asyncpg (migration apply if needed)
+        run: pip install asyncpg
+
+      - name: Apply census migration (idempotent)
+        env:
+          NOETFIELD_SUPABASE_DATABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_DATABASE_URL }}
+        run: |
+          if [[ -n "${NOETFIELD_SUPABASE_DATABASE_URL:-}" ]]; then
+            python3 scripts/apply_workflow_census_migration_v1.py || true
+          else
+            echo "Skip migration — NOETFIELD_SUPABASE_DATABASE_URL not set"
+          fi
+
+      - name: Run WORKFLOW_CENSUS_v1
+        env:
+          NOETFIELD_SUPABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_URL }}
+          NOETFIELD_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.NOETFIELD_SUPABASE_SERVICE_ROLE_KEY }}
+          TRAFFIC_VISITS: ${{ github.event.inputs.traffic_visits_24h || '0' }}
+        run: |
+          python3 scripts/workflow_census_v1.py \
+            --write-receipt \
+            --write-supabase \
+            --traffic-visits-24h "${TRAFFIC_VISITS}" \
+            --json > receipts/workflow-census-latest-summary.json
+        continue-on-error: true
+
+      - name: Upload census receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-census-receipt
+          path: receipts/workflow-census-*.json
+          if-no-files-found: ignore

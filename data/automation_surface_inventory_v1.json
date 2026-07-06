@@ -12,6 +12,13 @@
       "owner_agent": "sg_sssot_cursor",
       "workflows": [
         {
+          "file": "workflow-census-weekly-v1.yml",
+          "motor_id": "gh_actions_workflow_census_weekly_v1",
+          "cadence": "0 8 * * 1",
+          "task_cell": "workflow_census",
+          "copilot_safe": false
+        },
+        {
           "file": "brain-loop-autorun-v1.yml",
           "motor_id": "gh_actions_brain_loop_autorun_v1",
           "cadence": "*/30 * * * *",

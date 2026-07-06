@@ -1,0 +1,73 @@
+{
+  "schema": "workflow_census_extensions_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-06T09:00:00Z",
+  "note": "Motors not in automation_surface_inventory — personal Gateway + traffic probe",
+  "cloudflare_workers": [
+    {
+      "loop_id": "cf_gateway_ops_v1",
+      "name": "gateway-ops",
+      "host": "cloudflare",
+      "repo": "sina-gateway",
+      "schedule": "*/15 * * * *",
+      "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=watchdog",
+      "task_cell": "gateway_health_probe",
+      "cost_tier": "cloudflare_workers_paid",
+      "receipt_glob": "gateway-ops receipt via Telegram"
+    },
+    {
+      "loop_id": "cf_gateway_heartbeat_v1",
+      "name": "gateway-ops heartbeat",
+      "host": "cloudflare",
+      "repo": "sina-gateway",
+      "schedule": "0 7 * * *",
+      "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=heartbeat",
+      "task_cell": "gateway_health_probe",
+      "cost_tier": "cloudflare_workers_paid",
+      "receipt_glob": "daily heartbeat with offers_sent/replies/L2"
+    }
+  ],
+  "railway_services": [
+    {
+      "loop_id": "railway_sina_gateway_v1",
+      "name": "sina-gateway-production",
+      "host": "railway",
+      "repo": "sina-gateway",
+      "schedule": "always_on",
+      "health_url": "https://sina-gateway-production.up.railway.app/ready",
+      "task_cell": "gateway_lead_capture",
+      "cost_tier": "railway_hobby",
+      "receipt_glob": "gateway_leads insert receipt"
+    }
+  ],
+  "github_workflows": [
+    {
+      "loop_id": "gh_gateway_railway_deadman_v1",
+      "name": "gateway-railway-deadman",
+      "host": "github",
+      "repo": "kazemnezhadsina144-dot/sina-gateway",
+      "workflow_file": ".github/workflows/railway-deadman-v1.yml",
+      "schedule": "0 8,20 * * *",
+      "task_cell": "gateway_railway_deadman",
+      "cost_tier": "github_actions",
+      "receipt_glob": "deadman /ready probe receipt"
+    }
+  ],
+  "traffic_probes": [
+    {
+      "loop_id": "traffic_www_intake_conversion_v1",
+      "name": "www traffic → intake conversion",
+      "host": "traffic",
+      "schedule": "daily_snapshot",
+      "task_cell": "traffic_intake_conversion",
+      "cost_tier": "traffic",
+      "receipt_target": "visits_24h / non_test_leads_24h",
+      "note": "Founder-reported 11.25k visits/24h with zero non-test leads — instrument weekly"
+    }
+  ],
+  "revenue_motors_required": [
+    "gateway_lead_capture",
+    "gateway_outbound",
+    "traffic_intake_conversion"
+  ]
+}

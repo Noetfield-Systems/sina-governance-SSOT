@@ -25,3 +25,4 @@ receipts/automation-drift-audit-*.json
 receipts/gate-candidate-alignment-*.json
 receipts/roi-heartbeat-*.json
 receipts/supabase-live-profiles-verify-*.json
+receipts/workflow-census-*.json
