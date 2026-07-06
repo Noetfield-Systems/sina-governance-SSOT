@@ -5,7 +5,7 @@
 **Ratified:** 2026-07-05 · **Merged to SG main:** 2026-07-06 (PR #6)  
 **Structure:** P0–P10 + P99  
 **Registry:** `SG-Canonical-Library/LIBRARY_REGISTRY.json`  
-**Manifest:** `P99-LEDGER/FILE_MANIFEST_SHA256.json` (140 files)
+**Manifest:** `P99-LEDGER/FILE_MANIFEST_SHA256.json` (143 files)
 
 ---
 
@@ -29,7 +29,7 @@ Repo authority for product lanes beats SG mirror copies on conflict.
 | `000-founder-rules.mdc` | **RETIRED** — superseded by Cursor rules |
 | Governance pass | **4/4 complete** (v0.9-SG-RATIFIED) |
 | SINA GATEWAY | **Personal project LIVE** — not NFI product; see P99 Gateway receipts |
-| Commercial gap | First conversation / first dollar (Steps 5–9 whole-stack plan) |
+| Commercial gap | First conversation / first dollar — see **UNLOCK DOCTRINE v2** (`P7-DOCTRINE/`) |
 
 **Start here for orientation:** [ARCHITECT_START_HERE.md](./ARCHITECT_START_HERE.md)
 
@@ -54,8 +54,10 @@ P99-LEDGER           ← receipts, audits, decisions
 
 ---
 
-## 3. KEY RECEIPTS (recent)
+## 3. KEY DOCTRINE + RECEIPTS (recent)
 
+- `P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md` — commercial unlock state machine (draft for founder lock)
+- `P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md` — cross-analysis vs library
 - `P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md` — commercial upgrade pass
 - `P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md` — library ratification
 - `P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md` — P0 spine verified
