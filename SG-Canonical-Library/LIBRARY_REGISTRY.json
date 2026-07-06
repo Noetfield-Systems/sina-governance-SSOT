@@ -10,8 +10,8 @@
   "zip_sha256": "929d449364c6b4d88931e71f44352953ee243e4cd6e2b6b7e7495ff2d0662cc1",
   "zip_source_prior": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
   "authority": "SG-owned",
-  "files_real": 140,
-  "files_total": 140,
+  "files_real": 143,
+  "files_total": 143,
   "pending_uploads": 0,
   "quarantined_supporting_law": 296,
   "p0_status": "VERIFIED — 0 placeholders; supporting-law quarantined",
@@ -34,7 +34,9 @@
     "P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md",
     "P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md",
     "P99-LEDGER/TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md",
-    "P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md"
+    "P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md",
+    "P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md",
+    "P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md"
   ],
   "revenue_status": "TIER1_PILOT_ACTIVE"
 }

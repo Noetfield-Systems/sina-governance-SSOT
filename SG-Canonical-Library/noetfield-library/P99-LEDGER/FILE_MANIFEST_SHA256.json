@@ -1,19 +1,19 @@
 {
   "schema": "file-manifest-sha256-v1",
-  "generated_at": "2026-07-06T06:33:16Z",
+  "generated_at": "2026-07-06T08:19:07Z",
   "library_version": "v0.9-SG-RATIFIED",
   "manifest_scope": "all files in noetfield-library except FILE_MANIFEST_SHA256.*",
-  "file_count": 140,
+  "file_count": 143,
   "files": [
     {
       "path": "00-INDEX.md",
-      "bytes": 4360,
-      "sha256": "a10c5cc13ec029127530f8c2f52451c958391647cd6a65aeda27062fe1074646"
+      "bytes": 2766,
+      "sha256": "91ab04160bdf0710ed41e85d8fce621e7de3cfdb56c28c67f2e17bd3a9a48e98"
     },
     {
       "path": "ARCHITECT_START_HERE.md",
-      "bytes": 5916,
-      "sha256": "6194aab7ef04fbb96625ac656d0f33bbc036985081f5d055ec83b2c2ea1d8920"
+      "bytes": 5874,
+      "sha256": "012a6ebb2b74b63226f9fc3f2a76e04c1178d081a5b031bcf72f3468f29ae627"
     },
     {
       "path": "BIG_PICTURE_RELATION_MAP.md",
@@ -306,6 +306,11 @@
       "sha256": "78771ebdd4ed444470e656f895ac5aa68bf9528564dbd4fb7cfea4f02e8fbd01"
     },
     {
+      "path": "P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md",
+      "bytes": 10519,
+      "sha256": "21eff475f83887db8eb277968134bc71f6543051153aa3e081d84754f3bb79db"
+    },
+    {
       "path": "P7-DOCTRINE/base-model-first-class-language.md",
       "bytes": 2455,
       "sha256": "c3d8d667f9fb4bf312a8e8328a6ae62cce3cefc863b781f687cd8e92c5f7c874"
@@ -417,8 +422,8 @@
     },
     {
       "path": "P9-PATTERN-FACTORY/brain-audit-v1.md",
-      "bytes": 1448,
-      "sha256": "5a158e28cb15514dd5535846e5ff9c6fc25e9b749033a2068301c5eb16c48dd0"
+      "bytes": 1756,
+      "sha256": "915e3cb3c1cd1fd5ca28376d325e60606cfa9b3489fff783d865acbba4abab43"
     },
     {
       "path": "P9-PATTERN-FACTORY/pattern-factory-index.md",
@@ -457,8 +462,8 @@
     },
     {
       "path": "P99-LEDGER/COMPLETENESS_AUDIT.md",
-      "bytes": 4471,
-      "sha256": "b1c7f2ac45ea59b97bf280d1c0e30d495de83456938496dedd66d77b118c7c4d"
+      "bytes": 4760,
+      "sha256": "f8766ff463e968b36b8b2a9896f4b618829cb64a2beed86ad47540463e5d9643"
     },
     {
       "path": "P99-LEDGER/CONVERSATION_STARTED_RECEIPT_2026-07-06.md",
@@ -546,14 +551,19 @@
       "sha256": "074729807fb3363697a5824cea7ca9fdccf2d429a15aa03bb272279738f48808"
     },
     {
+      "path": "P99-LEDGER/LIBRARY_CLEANUP_RECEIPT_2026-07-06.md",
+      "bytes": 1183,
+      "sha256": "9adb63ff3c7685e237f4cabc119c38790ab98ac1b7fda598f205435d09267593"
+    },
+    {
       "path": "P99-LEDGER/LIBRARY_RECONCILIATION_RECEIPT_2026-07-05.md",
       "bytes": 3379,
       "sha256": "838d5056f2331799454e80385cae477836ab5fe1b057d6c029abf00623ee978f"
     },
     {
       "path": "P99-LEDGER/LIBRARY_STATE_FOR_SG_2026-07-04.md",
-      "bytes": 8154,
-      "sha256": "33b36390d5ce12e4bfeece9f5b88d12bdb8b7db2169c5d531404051f4d0f401e"
+      "bytes": 8296,
+      "sha256": "eed737e3f2b46334002672f91cea32a38dc76da644901026e63185a00852cd73"
     },
     {
       "path": "P99-LEDGER/MAC_WORKER_EXECUTION_RECEIPT_2026-07-05.md",
@@ -654,6 +664,11 @@
       "path": "P99-LEDGER/TRUE_FINAL_PACKAGE_AUDIT_2026-07-04.md",
       "bytes": 4383,
       "sha256": "2c20224ffda98871fb1e5f035bc5e22a0d0274731e243f4f5e077ff4f9a6ad62"
+    },
+    {
+      "path": "P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md",
+      "bytes": 7091,
+      "sha256": "0129ec9a2a87e10b20e0722210c87d5136b86eed44bfa5547066a5409d6d2c18"
     },
     {
       "path": "P99-LEDGER/UPLOADED_ZIP_RECONCILIATION_2026-07-04.md",

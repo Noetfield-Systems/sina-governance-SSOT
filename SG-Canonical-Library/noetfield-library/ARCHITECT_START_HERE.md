@@ -46,10 +46,10 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 - Business = **pattern factory**: prove patterns (zero-drift, anti-theater, auto-heal) on our own lines, sell them; Sina = native-pattern-thinker/trader.
 
 ## 4. NO TECHNICAL BLOCKER — THE GAP IS COMMERCIAL (the real target)
-SUPABASE_URL is FIXED (2026-07-04). SINA GATEWAY (personal project) is LIVE (2026-07-06). There is no remaining technical blocker. **The real missing piece is the REVENUE ORGAN** — first conversation → close → revenue receipt. Survival now = first dollar. Next: outbound motion + ACG Tier 1 pilot (see `P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md`).
+SUPABASE_URL is FIXED (2026-07-04). SINA GATEWAY (personal project) is LIVE (2026-07-06). There is no remaining technical blocker. **The lock is `R = 0`** (zero payment receipts). Read `P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md` + analysis in `P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md`. Execute §7 seven-day protocol (D1 offer freeze → D3 send 25).
 
 ## 5. COMMERCIAL LADDER (what's sellable when)
-Brain Audit **now** → prove Zero-Drift on SourceA → Operating Brain Install → SourceA 24/7 w/ receipts → Managed Brain → VIP Architecture. (`P9-PATTERN-FACTORY/`)
+Brain Audit **now** → prove Zero-Drift on SourceA → Operating Brain Install → SourceA 24/7 w/ receipts → Managed Brain → VIP Architecture. (`P9-PATTERN-FACTORY/`) Offer GTM shape: UNLOCK §5.1 when founder locks v2.
 
 ## 6. ENTITY FACTS (don't confuse)
 - **Noetfield Systems Inc.** — D-U-N-S 243370005, Active, Vancouver BC. The parent / pattern factory.
