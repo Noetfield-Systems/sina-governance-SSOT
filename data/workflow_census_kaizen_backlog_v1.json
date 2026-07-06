@@ -1,0 +1,79 @@
+{
+  "schema": "workflow_census_kaizen_backlog_v1",
+  "version": "1.0.0",
+  "generated_at": "2026-07-06T09:35:00Z",
+  "source_run_id": "workflow-census-20260706T090917Z",
+  "source_audit_status": "RED",
+  "items": [
+    {
+      "id": "KZ-001",
+      "title": "Consolidate NOOS duplicate self-heal workflows (noos-self-heal.yml vs noos-self-heal-loop.yml)",
+      "status": "pending",
+      "class": "machine_safe",
+      "roi_rank": 1,
+      "value_class": "META",
+      "plane": "noetfeld-os",
+      "audit_rule": 2,
+      "receipt_target": "single self-heal receipt path"
+    },
+    {
+      "id": "KZ-002",
+      "title": "Mark SourceA autonomous-drain-cron GH workflow as retired in inventory (CF primary)",
+      "status": "completed",
+      "completed_at": "2026-07-06",
+      "note": "Inventory marked retired_inventory_only",
+      "class": "machine_safe",
+      "roi_rank": 2,
+      "value_class": "NONE",
+      "plane": "SourceA",
+      "audit_rule": 1,
+      "receipt_target": "inventory-only — no motor execution"
+    },
+    {
+      "id": "KZ-003",
+      "title": "Retire mac_launchd_brain_loop_autorun when GH Actions 24/7 proven (14d receipt streak)",
+      "status": "pending",
+      "class": "founder-gated",
+      "roi_rank": 3,
+      "value_class": "NONE",
+      "plane": "sina-governance-ssot",
+      "audit_rule": 1,
+      "receipt_target": "brain-loop-autorun receipt from GH only"
+    },
+    {
+      "id": "KZ-004",
+      "title": "Build gateway_outbound sends — D3 25 offers (UNLOCK §7)",
+      "status": "pending",
+      "class": "founder-gated",
+      "roi_rank": 0,
+      "value_class": "REVENUE",
+      "plane": "sina-gateway",
+      "audit_rule": 4,
+      "receipt_target": "channel-receipts sent >= 25"
+    },
+    {
+      "id": "KZ-005",
+      "title": "Diagnose traffic→intake: 11.25k visits / 0 non-test leads",
+      "status": "completed",
+      "completed_at": "2026-07-06",
+      "note": "TRAFFIC_INTAKE_FUNNEL_RECEIPT filed — bot/noise hypothesis",
+      "class": "machine_safe",
+      "roi_rank": 0,
+      "value_class": "REVENUE",
+      "plane": "sina-gateway",
+      "audit_rule": 4,
+      "receipt_target": "TRAFFIC_INTAKE_FUNNEL_RECEIPT conversion rate"
+    },
+    {
+      "id": "KZ-006",
+      "title": "Propose retirement: 9 NONE loops with no receipt (census rule 1 batch)",
+      "status": "pending",
+      "class": "founder-gated",
+      "roi_rank": 4,
+      "value_class": "NONE",
+      "plane": "cross-venture",
+      "audit_rule": 1,
+      "receipt_target": "founder-gated kill list in P99"
+    }
+  ]
+}

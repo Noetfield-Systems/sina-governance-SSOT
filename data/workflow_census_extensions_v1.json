@@ -53,6 +53,23 @@
       "receipt_glob": "deadman /ready probe receipt"
     }
   ],
+  "outbound_motors": [
+    {
+      "loop_id": "gateway_outbound_log_v1",
+      "name": "gateway-outbound-log",
+      "host": "mac",
+      "repo": "sina-gateway",
+      "schedule": "founder_manual",
+      "task_cell": "gateway_outbound",
+      "cost_tier": "mac_launchd",
+      "receipt_target": "channel-receipts sent++",
+      "receipt_glob": "data/channel-receipts.json"
+    }
+  ],
+  "gateway_paths": {
+    "channel_receipts": "~/Desktop/SINA GATEWAY/data/channel-receipts.json",
+    "d2_list": "~/Desktop/SINA GATEWAY/data/founder-audit-d2-list.json"
+  },
   "traffic_probes": [
     {
       "loop_id": "traffic_www_intake_conversion_v1",

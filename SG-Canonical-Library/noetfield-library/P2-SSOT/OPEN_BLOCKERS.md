@@ -12,12 +12,14 @@
 ## REAL BLOCKERS (currently: NONE technical)
 There is **no remaining technical blocker.** The system can run.
 
-## THE REAL CONSTRAINT IS NOW COMMERCIAL (not a blocker — the missing organ)
-Per `P99-LEDGER/THE_REAL_DIAGNOSIS_revenue-organ`: the gap is no longer technical. It is the absence of a **revenue organ** (lead intake → offer → close → revenue receipt). This is not a blocker (nothing unsafe about proceeding) — it is the missing *target* the whole system now exists to pursue: the first dollar.
+## THE REAL CONSTRAINT IS NOW COMMERCIAL (R = 0 — the lock)
+
+Per UNLOCK §2: **`R = 0`** (zero payment receipts) is THE lock. Revenue Unlock Steps 1–7 **PASS**; Steps 6, 8–10 **FOUNDER_EXECUTE**. See [`REVENUE_UNLOCK_10_STEP_RECEIPT_2026-07-06.md`](P99-LEDGER/REVENUE_UNLOCK_10_STEP_RECEIPT_2026-07-06.md).
 
 ## TARGETS (run + pursue in parallel — NOT blockers)
-- **First ACG Tier 1 pilot conversation** (Gateway capture live; outreach founder-gated). See `P99-LEDGER/GATEWAY_REVENUE_ORGAN_RECEIPT_2026-07-06.md`.
-- Sell 10 Brain Audits (first revenue receipt + first sales signal).
+- **Ratify offer price + D3 send 25** (UNLOCK §7 D1–D3) — [`OUTBOUND_MOTION_RECEIPT_2026-07-06.md`](P99-LEDGER/OUTBOUND_MOTION_RECEIPT_2026-07-06.md)
+- **First L1 reply → L2 payment** (`R ≥ 1` unlock)
+- Weekly **workflow census** judging layer — [`WORKFLOW_CENSUS_DISPATCH_2026-07-06.md`](P99-LEDGER/WORKFLOW_CENSUS_DISPATCH_2026-07-06.md)
 - Prove Zero-Drift on SourceA (unlocks Tier-2).
 - The 4 founder claim decisions (P6 → live_lock).
 - Register the 3 Architect-Two docs ACTIVE in SG.

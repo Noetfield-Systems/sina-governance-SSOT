@@ -1,8 +1,8 @@
 # Pilot Close Path Receipt
 
-**Date:** 2026-07-06  
-**Step:** 7 — Founder close path  
-**Status:** FOUNDER_EXECUTE  
+**Date:** 2026-07-06 (Revenue Unlock Step 9)  
+**Step:** 9 — L2 close path (Founder Audit)  
+**Status:** FOUNDER_EXECUTE — **push L1 → L2 this week per UNLOCK D6**  
 
 ## Authorized offer band (from SSOT — not invented)
 

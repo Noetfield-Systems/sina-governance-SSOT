@@ -61,7 +61,8 @@
           "motor_id": "gh_actions_sourcea_drain_disabled_v1",
           "cadence": "disabled_intentional",
           "task_cell": "none",
-          "note": "CF cron primary — GH drain disabled by design"
+          "status": "retired_inventory_only",
+          "note": "CF cron primary — GH drain disabled by design (Kaizen KZ-002)"
         },
         {
           "file": "determinism-gate.yml",
@@ -127,6 +128,51 @@
         { "file": "publish-pypi.yml", "motor_id": "gh_actions_noos_publish_pypi_v1", "cadence": "manual_dispatch", "task_cell": "noos_pypi_publish", "copilot_safe": false }
       ],
       "must_not_conflict_with": ["sourcea_cloud_forge", "brain_promote_ci", "trustfield_loops_build"]
+    },
+    {
+      "repo_id": "sina-gateway",
+      "path": "~/Desktop/SINA GATEWAY",
+      "lane": "gateway_revenue",
+      "owner_agent": "founder_manual",
+      "workflows": [
+        {
+          "file": "railway-deadman-v1.yml",
+          "motor_id": "gh_gateway_railway_deadman_v1",
+          "cadence": "0 8,20 * * *",
+          "task_cell": "gateway_railway_deadman",
+          "copilot_safe": false
+        }
+      ],
+      "cloud_motors": [
+        {
+          "motor_id": "cf_gateway_ops_v1",
+          "cadence": "*/15",
+          "task_cell": "gateway_health_probe",
+          "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=watchdog"
+        },
+        {
+          "motor_id": "cf_gateway_heartbeat_v1",
+          "cadence": "0 7 * * *",
+          "task_cell": "gateway_health_probe",
+          "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=heartbeat"
+        }
+      ],
+      "mac_motors": [
+        {
+          "id": "gateway_outbound_log_v1",
+          "cadence": "founder_manual",
+          "task_cell": "gateway_outbound",
+          "note": "Founder sends → npm run channel:send → sync:heartbeat"
+        }
+      ],
+      "railway_services": [
+        {
+          "motor_id": "railway_sina_gateway_v1",
+          "cadence": "always_on",
+          "task_cell": "gateway_lead_capture",
+          "health_url": "https://sina-gateway-production.up.railway.app/ready"
+        }
+      ]
     },
     {
       "repo_id": "trustfield-loops",

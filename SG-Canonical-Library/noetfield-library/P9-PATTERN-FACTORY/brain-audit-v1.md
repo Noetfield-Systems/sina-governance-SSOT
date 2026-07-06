@@ -19,7 +19,7 @@ Tier-1 is diagnosis, not implementation. It needs zero SourceA proof — you're 
 Brain Audit (now) → prove Zero-Drift on SourceA → Operating Brain Install → SourceA 24/7 receipts → Managed Brain → VIP Architecture. See `brain-as-a-service.md`.
 
 ## Offer shape (GTM — when founder locks UNLOCK v2)
-Canonical GTM invariants: `P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md` §5.1 — fixed name, fixed price stated upfront, fixed scope/duration, pay/start CTA (no discovery-call funnel). Cross-analysis: `P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md`.
+Canonical GTM invariants: `P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md` §5.1 — live offer doc on Gateway `docs/OFFER_FOUNDER_AUDIT_LOCKED_v1.md` (founder sets price before D3).
 
 ---
 *v0.1 (2026-07-03 12:34 PDT) — first write. Tier-1 Brain Audit: diagnose stack chaos → coherence report + roadmap; sellable now, no proof needed. From this chat commercial ladder.*
