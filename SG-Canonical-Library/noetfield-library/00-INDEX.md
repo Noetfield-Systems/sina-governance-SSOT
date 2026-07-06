@@ -1,156 +1,70 @@
-# NOETFIELD LIBRARY — TRUE FINAL SG INTAKE INDEX · v0.8
+# NOETFIELD LIBRARY — INDEX · v0.9-SG-RATIFIED
 
-**READ FIRST.** This package is the latest audited **sandbox/library handoff package** assembled from the uploaded zip sequence in this chat. It is **not automatically the live disk SSOT** until SG installs/reconciles it into the active library.
+**READ FIRST.** Canonical library installed on disk at `SG-Canonical-Library/noetfield-library/`.
 
-**Package date:** 2026-07-04  
+**Ratified:** 2026-07-05 · **Merged to SG main:** 2026-07-06 (PR #6)  
 **Structure:** P0–P10 + P99  
-**Source base:** `noetfield-library-FINAL-v0.7-E2E-AUDITED.zip` from the uploaded package set  
-**Final audit:** `P99-LEDGER/TRUE_FINAL_PACKAGE_AUDIT_2026-07-04.md`
+**Registry:** `SG-Canonical-Library/LIBRARY_REGISTRY.json`  
+**Manifest:** `P99-LEDGER/FILE_MANIFEST_SHA256.json` (140 files)
 
 ---
 
 ## 0. AUTHORITY WARNING
 
-This package is the best current **library artifact** from this chat, but authority still follows the system rule:
-
 ```text
-DISK/SG-registered ACTIVE truth wins over sandbox package text.
+DISK/SG-registered ACTIVE truth wins over chat/sandbox text.
 P0 wins over P1; P1 wins over P2; lower P-number wins.
-Do not bulk-promote this package to ACTIVE without SG reconciliation.
+Repo authority for product lanes beats SG mirror copies on conflict.
 ```
 
 ---
 
-## 1. CURRENT PACKAGE TRUTH
+## 1. CURRENT LIBRARY TRUTH (2026-07-06)
 
-The final package contains:
+| Item | Status |
+|------|--------|
+| P0 placeholders | **0** — all replaced 2026-07-05 |
+| P0 spine | **INSTALLED + VERIFIED** |
+| Supporting-law (296) | **QUARANTINED** — not bulk-installed |
+| `000-founder-rules.mdc` | **RETIRED** — superseded by Cursor rules |
+| Governance pass | **4/4 complete** (v0.9-SG-RATIFIED) |
+| SINA GATEWAY | **Personal project LIVE** — not NFI product; see P99 Gateway receipts |
+| Commercial gap | First conversation / first dollar (Steps 5–9 whole-stack plan) |
 
-```text
-99 total package files
-93 real/non-placeholder files
-6 placeholder/upload-waiting surfaces
-```
-
-The selected v0.7 base had 94 files. v0.8 adds the final SG-intake audit, reconciliation, README, and manifest files.
-
-The six placeholder/upload-waiting surfaces remain explicit:
-
-```text
-P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.__AWAITING_UPLOAD__.md
-P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.__AWAITING_UPLOAD__.md
-P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.__AWAITING_UPLOAD__.md
-P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.__AWAITING_UPLOAD__.md
-P0-FOUNDATION-SPINE/data/__AWAITING_UPLOAD__.md
-P0-FOUNDATION-SPINE/supporting-law/__AWAITING_UPLOAD__.md
-```
-
-One genuinely missing source remains:
-
-```text
-000-founder-rules.mdc
-```
+**Start here for orientation:** [ARCHITECT_START_HERE.md](./ARCHITECT_START_HERE.md)
 
 ---
 
 ## 2. AUTHORITY ORDER
 
 ```text
-P0-FOUNDATION-SPINE
-  P0 SSOT spine, least-knowledge law, P0 CORE founder judgment layer
-  ▼
-P1-CANON
-  FOUNDER_CANON, MACHINE_LOOPS, WORK_ORDER, BRAIN_REGISTRY
-  ▼
-P2-SSOT
-  R-split, versioning law, D4/gap doctrine, history
-  ▼
-P3-RUNTIME-REALITY-L0
-  empty until L0 Workbench upload/install
-  ▼
-P4-CLOUD-KERNEL-L1-L8
-  target/legacy kernel PDFs
-  ▼
-P5-LINE-ENGINE
-  line-engine specs and execution architecture
-  ▼
-P6-BRAIN-MEANING
-  locked definitions draft with founder decisions open
-  ▼
-P7-DOCTRINE
-  doctrine laws
-  ▼
-P8-MACHINE-LOOPS
-  validation/critique/repair/audit/research loops
-  ▼
-P9-PATTERN-FACTORY
-  sellable patterns and package types
-  ▼
-P10-PRODUCT-LAYERS
-  SourceA / Noetfield / TrustField / product boundaries
-  ▼
-P99-LEDGER
-  receipts, audits, state, reconciliation
+P0-FOUNDATION-SPINE  ← constitution + index + governed-autorun
+P1-CANON             ← FOUNDER_CANON, MACHINE_LOOPS, BRAIN_REGISTRY
+P2-SSOT              ← R-split, versioning, gap doctrine
+P3 RUNTIME-REALITY-L0← Mac Workbench (when installed)
+P4-CLOUD-KERNEL      ← kernel PDFs
+P5-LINE-ENGINE       ← execution architecture
+P6-BRAIN-MEANING     ← locked definitions
+P7-DOCTRINE          ← thinking laws
+P8-MACHINE-LOOPS     ← validation/critique/repair loops
+P9-PATTERN-FACTORY   ← sellable patterns
+P10-PRODUCT-LAYERS   ← SourceA / Noetfield / TrustField + personal Gateway cross-ref
+P99-LEDGER           ← receipts, audits, decisions
 ```
 
 ---
 
-## 3. WHAT IS INSTALLED IN THIS PACKAGE
+## 3. KEY RECEIPTS (recent)
 
-Key installed items:
-
-```text
-P0: strategy-ssot-v6-split.md
-P0: AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md
-P0: P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md
-P1: FOUNDER_CANON_v1.md
-P1: MACHINE_LOOPS_v1.md
-P1: WORK_ORDER_IDE_LANE_v1.md
-P2: R split + versioning law + D4/gap doctrine/history
-P4: SOURCEA_CLOUD_KERNEL_v1.3_TARGET_ARCH.pdf
-P4: SOURCEA_SSOT_v1.2_MASTER_ARCH_LOCKED.pdf
-P5-P9: line engine, doctrine, loops, pattern factory
-P10: Noetfield product layer with D-U-N-S 243370005
-P99: library state, E2E audit, true-final audit, manifests
-```
+- `P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md` — commercial upgrade pass
+- `P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md` — library ratification
+- `P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md` — P0 spine verified
+- `P2-SSOT/OPEN_BLOCKERS.md` — zero technical blockers
 
 ---
 
-## 4. CURRENT BLOCKER STATUS
+## 4. HISTORICAL NOTE
 
-```text
-Technical blocker: none asserted by this package.
-Commercial constraint: revenue organ / first revenue receipt remains the real missing business organ.
-Library completion blockers:
-  - install/reconcile package into live disk library
-  - replace six P0 placeholders
-  - find 000-founder-rules.mdc
-  - SG-classify any disk-only/parallel registered items before activation
-```
+Earlier v0.8 intake docs referenced six `.__AWAITING_UPLOAD__.md` placeholders. Those stubs were **deleted** during reconciliation (2026-07-05). Do not recreate them.
 
----
-
-## 5. AGENT READING RULE
-
-Do not load the whole library into workers.
-
-```text
-Router/SG reads index + relevant tier.
-Workers receive minimum law only.
-P0 CORE is for Base Live Brain / high-decision agents only.
-Workers must not load P0 CORE by default.
-```
-
----
-
-## 6. NEXT SG ACTION
-
-```text
-Treat this package as the latest audited SG intake package.
-Compare against the active disk library.
-Install missing/new files only after conflict check.
-Keep placeholder files marked as awaiting upload.
-Produce SG install receipt.
-```
-
----
-*v0.8 (2026-07-04) — true-final SG intake index. Corrects older v0.4/v0.7 status drift: package is partially P0-installed, not placeholder-only; still disk-reconciliation pending.*
+*v0.9 index (2026-07-06) — supersedes v0.8 placeholder language in this file.*

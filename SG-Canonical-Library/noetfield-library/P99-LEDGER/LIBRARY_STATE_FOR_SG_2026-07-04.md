@@ -1,5 +1,7 @@
 # TRUE-FINAL CORRECTION BLOCK — v0.8 SG INTAKE (2026-07-04)
 
+> **SUPERSEDED (2026-07-06):** Use `00-INDEX.md`, `LIBRARY_REGISTRY.json`, and `FILE_MANIFEST_SHA256.json` (140 files). P0 placeholders = 0.
+
 This file began as the earlier sandbox-state report. It is retained for lineage, but the current final-package audit supersedes stale counts/status inside the old body.
 
 **Current package label:** `noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04`  

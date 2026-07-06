@@ -1,3 +1,7 @@
+# LIBRARY COMPLETENESS AUDIT
+
+> **SUPERSEDED HEADER (2026-07-06):** Library is **v0.9-SG-RATIFIED**, 140 files, **0 P0 placeholders**. See `00-INDEX.md`, `LIBRARY_REGISTRY.json`, and `P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md`. Body below is historical v0.4/v0.8 lineage only.
+
 # TRUE-FINAL COMPLETENESS CORRECTION — v0.8.1 (2026-07-05)
 
 **Current truth after P0 reconciliation:**

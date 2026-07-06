@@ -24,3 +24,4 @@ receipts/automation-surface-audit-*.json
 receipts/automation-drift-audit-*.json
 receipts/gate-candidate-alignment-*.json
 receipts/roi-heartbeat-*.json
+receipts/supabase-live-profiles-verify-*.json

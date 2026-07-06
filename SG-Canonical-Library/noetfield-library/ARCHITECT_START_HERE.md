@@ -2,7 +2,7 @@
 
 **Purpose:** the minimum spine so ANY architect (Claude in a new chat, another AI app, a Cursor agent) is instantly oriented and does NOT get confused, lost, or duplicate work. If you read only one file, read this one, then open what it points to.
 
-**Owner:** Sina Kazemnezhad · **Updated:** 2026-07-04 16:13 PDT · **This file = read-surface pointer, not authority.**
+**Owner:** Sina Kazemnezhad · **Updated:** 2026-07-06 · **This file = read-surface pointer, not authority.**
 
 ---
 
@@ -46,7 +46,7 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 - Business = **pattern factory**: prove patterns (zero-drift, anti-theater, auto-heal) on our own lines, sell them; Sina = native-pattern-thinker/trader.
 
 ## 4. NO TECHNICAL BLOCKER — THE GAP IS COMMERCIAL (the real target)
-SUPABASE_URL is FIXED (2026-07-04). There is no remaining technical blocker. **The real missing piece is the REVENUE ORGAN** — lead intake → offer → close → revenue receipt. The system is fully built on the DELIVER side and has produced ZERO revenue receipts. Survival now = first dollar. Build order: SINA_GATEWAY (lead intake) → sell 10 Brain Audits → let ROI heal on real signal. See `P99-LEDGER/THE_REAL_DIAGNOSIS_revenue-organ`.
+SUPABASE_URL is FIXED (2026-07-04). SINA GATEWAY (personal project) is LIVE (2026-07-06). There is no remaining technical blocker. **The real missing piece is the REVENUE ORGAN** — first conversation → close → revenue receipt. Survival now = first dollar. Next: outbound motion + ACG Tier 1 pilot (see `P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md`).
 
 ## 5. COMMERCIAL LADDER (what's sellable when)
 Brain Audit **now** → prove Zero-Drift on SourceA → Operating Brain Install → SourceA 24/7 w/ receipts → Managed Brain → VIP Architecture. (`P9-PATTERN-FACTORY/`)
