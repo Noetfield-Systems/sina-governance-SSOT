@@ -4,6 +4,8 @@
 **Answer, in one line:** **You built the body and the nervous system. You never built the mouth that eats. The system has no revenue organ — no lead-in, no sales motion, no first paying customer loop. Everything built so far is cost; nothing built so far is income.**
 **Date:** 2026-07-04 · **Mode:** full architect, commercial reality, zero theory.
 
+**UPDATE 2026-07-06:** SINA GATEWAY (personal project — the mouth) is **live** — Railway HTTPS + shared Supabase capture + ACG Tier 1 pilot tagging. Remaining commercial gap: **first pilot conversation / first dollar**, not lead intake infrastructure. See `GATEWAY_10_STEP_UPGRADE_RECEIPT_2026-07-06.md`.
+
 ---
 
 ## 1. THE HONEST SITUATION (what's really true right now)

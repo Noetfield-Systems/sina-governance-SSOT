@@ -1,4 +1,8 @@
 # SINA SSOT — MASTER CANON v6 (full split)
+
+**Authority:** LIBRARY READ SURFACE — canonical source is `ssot/strategy-ssot-v6-split.md` in sina-governance-SSOT repo root  
+**Status:** MIRROR of remote canonical (verified identical 2026-07-05)
+
 *Supersedes v5. The flat Doctrines I–V are reorganized into the 3-level hierarchy.*
 *Reference; do not re-derive. Reopen only on new facts.*
 

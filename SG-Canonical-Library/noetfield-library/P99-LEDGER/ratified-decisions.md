@@ -9,7 +9,19 @@ Founder DECIDE (via advisor "Approve. Do not hold."), 2026-07-03 12:34 PDT:
 5. New doctrine written: `mechanical-not-prose`, `negative-proof`, `return-on-cognition`, `base-model-first-class-language`, `founder-intent-filter`, `merge-authority-tiers-T0-T3`.
 6. Authority order locked: CANON → SSOT → MACHINE_LOOPS → WORK_ORDER/LINE_ENGINE → DOCTRINE → PATTERN_FACTORY → PRODUCT_LAYERS → LEDGER.
 
-**Explicitly NOT done (per targets-vs-blockers):** did not convert targets into blockers. Only SUPABASE_URL remains a real blocker; all else moves in parallel.
+**Explicitly NOT done (per targets-vs-blockers):** did not convert targets into blockers. SUPABASE_URL resolved via `~/.sourcea-secrets/` env files (see OPEN_BLOCKERS v0.2); all else moves in parallel.
 
 ---
-*v0.1 (2026-07-03 12:34 PDT)*
+
+## v0.9-SG-RATIFIED (2026-07-05)
+
+Founder ratification via SG Pass 4/4 upgrade completion:
+
+7. **v0.9-SG-RATIFIED library package** — 10-step upgrade complete: P0 verify, 6/6 lane preflight receipts, governance hotspots resolved (`PHASE_LOOP` Step 10 merge, `data/brain_deployment_state.json`, SSOT v6 authority), revenue-start + full alignment receipts, agentic-cost-governance-SSOT draft, zip + SHA256 manifest.
+8. **Revenue-start authorized** — SourceA Brain Agent readiness + Mac Worker execution receipts filed; Tier 1 AI Spend Leak Audit pilot launch active.
+9. **SSOT v6 remote canonical** — `ssot/strategy-ssot-v6-split.md` (repo root); library P0 copy is verified mirror only.
+
+**Package:** `noetfield-library-v0.9-SG-RATIFIED-2026-07-05.zip` (see V0.9_PACKAGE_RECEIPT_2026-07-05.md)
+
+---
+*v0.2 (2026-07-05 — v0.9 Pass 4 ratification appended)*

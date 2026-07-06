@@ -9,9 +9,26 @@
 
 ## SERVICES REGISTERED
 
+### 0. SINA GATEWAY — Personal Lead Intake (cross-reference only)
+
+**Not a Noetfield Systems Inc. service.** Personal founder project; repo and deploy live under personal GitHub/Railway.
+
+| Field | Value |
+|-------|-------|
+| **Project type** | Personal (founder) — **not** NFI commercial lane |
+| **Repo** | `/Users/sinakazemnezhad/Desktop/SINA GATEWAY` |
+| **Git remote** | `https://github.com/kazemnezhadsina144-dot/sina-gateway.git` (canonical — do not move to Noetfield-Systems) |
+| **Production URL** | `https://sina-gateway-production.up.railway.app` |
+| **Supabase** | Shared Noetfield project `tkgpapowwplupyekpivy` — `gateway_leads` (anon insert-only; infra only) |
+| **SG link** | Blueprint mirror in P10; preflight in `LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINA_GATEWAY.md` |
+| **Commercial feed** | May tag leads for ACG Tier 1 pilot — routing only, not NFI product ownership |
+| **Latest receipt** | GATEWAY_10_STEP_UPGRADE_RECEIPT_2026-07-06.md |
+
+---
+
 ### 1. AI Spend Leak Audit + Premium Model Firewall
 
-**Status:** PRE-LAUNCH (registration complete, pilot customer recruitment starting)
+**Status:** PILOT-READY (SSOT draft complete, Tier 1 launch authorized)
 
 | Field | Value |
 |-------|-------|
@@ -23,10 +40,11 @@
 | **Noetfield role** | Buyer-facing governance audit, policy design, ROI advisory |
 | **SourceA role** | Delivery factory: audit tools, policy templates, receipt generation |
 | **NOOS role** | Internal control panel: launch registry, status cockpit, receipt routing |
-| **Authority** | FOUNDER_CANON v1 (operational law); agentic-cost-governance-SSOT (to be drafted) |
+| **Authority** | FOUNDER_CANON v1; `P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md` (draft v0.1.0) |
 | **Doc reference** | P10-PRODUCT-LAYERS/agentic-cost-governance-service.md |
-| **Latest receipt** | (none yet — service registration complete; pilot recruitment starting) |
-| **Maturity** | Governance framework proven; audit tools buildable; live enforcement unproven |
+| **SSOT reference** | P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md |
+| **Latest receipt** | TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md |
+| **Maturity** | Tier 1 diagnostic sellable; SSOT draft; live enforcement unproven |
 
 ---
 
@@ -38,7 +56,7 @@
 |-------|-------|
 | **Scope** | Inspect customer agent/model routing, identify cost leaks |
 | **Deliverable** | Audit report (PDF + JSON), cost breakdown, top 5 optimization targets |
-| **Engagement** | 4 hours consulting, $2K–$5K |
+| **Engagement** | 4 hours consulting, $2K–$5K (pilot slot: 1 customer, recruitment active) |
 | **Maturity claim** | Audit tooling built on SourceA; report is governance analysis |
 | **Risk** | Low (diagnostic only) |
 | **No overclaim** | "We found where you're wasting $X/mo" — not "we fixed it" |
