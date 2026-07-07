@@ -1,7 +1,7 @@
 # SG (SSSOT) — Cursor agent lane
 
 **Agent:** `sg_sssot_cursor` · **Repo:** `~/Projects/sina-governance-ssot`  
-**Registry:** `data/github_automation_registry_v1.json` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+**Registry:** `data/github_automation_registry_v1.json` · **Alive docs:** `data/agent_read_surfaces_v1.json` · **Staleness gate:** `scripts/verify_agent_read_staleness_v1.sh` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
 
 ## You edit (this repo)
 
