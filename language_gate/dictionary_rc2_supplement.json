@@ -1,0 +1,28 @@
+{
+  "schema": "noetfield-dictionary-rc2-supplement-v1",
+  "note": "RC2 gap fill — product SKUs and lane names referenced in canon before full dictionary batch bump",
+  "terms": [
+    {
+      "term": "NOOS",
+      "tag": "RC2_SUPPLEMENT",
+      "meaning": "Noetfield operations scheduler — cloud cron dispatch to loop runners.",
+      "public_phrasing": "operations scheduler",
+      "code_alias": ["noos", "NOOS"]
+    },
+    {
+      "term": "SG AUTHORIZED",
+      "tag": "RC2_SUPPLEMENT",
+      "meaning": "Founder ratification recorded in sina-governance-SSOT ledger.",
+      "allowed_surfaces": "internal, receipt, contract"
+    }
+  ],
+  "alias_map": {},
+  "code_alias": [
+    "noos",
+    "sourcea-brain-chat-v1",
+    "governed-autorun",
+    "brain-as-a-service",
+    "nf-001",
+    "tf-001"
+  ]
+}

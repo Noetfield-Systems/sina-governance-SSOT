@@ -1,7 +1,7 @@
 # LANGUAGE LAYER — how words work in Noetfield
 
 **Status:** v1 foundational · **Tier:** P0 (routes all other text)  
-**Updated:** 2026-07-06
+**Updated:** 2026-07-07 (language_gate RC2)
 
 ---
 
@@ -71,6 +71,10 @@ Authoring / dispute:  NOETFIELD_DICTIONARY_v1 (meaning authority — dispatch ma
 Workers **do not** load the full dictionary unless authoring a new term, role, page, clause, or field — or resolving a meaning dispute.
 
 ---
+
+## Decision language machine
+
+`decision_language_machine_v1/` — messy backlog → plain English → classify → reduced founder sheet. The 80-row FORM_OFFICIAL export is **test corpus only**.
 
 ## Lint enforcement (terminology only)
 

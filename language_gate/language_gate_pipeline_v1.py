@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Language gate pipeline: regex lint → agent plain-English rewrite."""
+"""Language gate pipeline RC2: regex lint → agent plain-English rewrite."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ sys.path.insert(0, str(GATE_DIR))
 
 from language_gate_agent_rewrite_v1 import plain_english_pass, write_sidecar  # noqa: E402
 from language_gate_core_v1 import (  # noqa: E402
+    TOOL_VERSION,
     decide,
     infer_surface,
     load_dictionary,
@@ -27,6 +28,7 @@ def run_pipeline(
     surface: str = "auto",
     write: bool = False,
     skip_agent: bool = False,
+    strict_undefined: bool = True,
 ) -> dict:
     dictionary = load_dictionary()
     resolved_surface = infer_surface(str(file_path), None if surface == "auto" else surface)
@@ -52,9 +54,10 @@ def run_pipeline(
             working = agent_text
             if write:
                 file_path.write_text(working, encoding="utf-8")
-        sidecar = write_sidecar(file_path, agent_actions)
+        warn_rows = [f.as_dict() for f in blockers if decision == "WARN"]
+        sidecar = write_sidecar(file_path, agent_actions, warnings=warn_rows or None)
 
-    if agent_applied and decision == "PASS":
+    if agent_applied and decision in {"PASS", "WARN"}:
         decision = "PASS_WITH_REWRITE"
 
     receipt_path, receipt = write_receipt(
@@ -66,7 +69,12 @@ def run_pipeline(
         rewrite_applied=regex_applied or agent_applied,
         agent_rewrite_applied=agent_applied,
         dictionary_source="SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
-        extra={"agent_actions_count": len(agent_actions), "sidecar": str(sidecar) if sidecar else None},
+        extra={
+            "agent_actions_count": len(agent_actions),
+            "sidecar": str(sidecar) if sidecar else None,
+            "strict_undefined": strict_undefined,
+            "tool_version": TOOL_VERSION,
+        },
     )
     return {
         "decision": decision,
@@ -76,7 +84,17 @@ def run_pipeline(
         "receipt_path": str(receipt_path),
         "receipt": receipt,
         "agent_actions": agent_actions,
+        "strict_undefined": strict_undefined,
     }
+
+
+def exit_code(result: dict) -> int:
+    decision = result["decision"]
+    if decision == "FAIL":
+        return 1
+    if decision == "WARN" and result.get("strict_undefined", True):
+        return 1
+    return 0
 
 
 def main() -> int:
@@ -85,6 +103,11 @@ def main() -> int:
     ap.add_argument("--surface", default="auto", choices=["auto", "internal", "public", "website", "contract", "prompt", "receipt"])
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--skip-agent", action="store_true")
+    ap.add_argument(
+        "--soft-undefined",
+        action="store_true",
+        help="Treat UNDEFINED_TERM as WARN (exit 0) so rewrite pass can be evaluated",
+    )
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
 
@@ -92,7 +115,13 @@ def main() -> int:
         print(f"FAIL: file not found: {args.file}", file=sys.stderr)
         return 1
 
-    result = run_pipeline(args.file, surface=args.surface, write=args.write, skip_agent=args.skip_agent)
+    result = run_pipeline(
+        args.file,
+        surface=args.surface,
+        write=args.write,
+        skip_agent=args.skip_agent,
+        strict_undefined=not args.soft_undefined,
+    )
     if args.json:
         print(json.dumps(result, indent=2))
     else:
@@ -100,14 +129,16 @@ def main() -> int:
         print(f"SURFACE: {result['surface']}")
         print(f"DECISION: {result['decision']}")
         for f in result["findings"]:
-            tag = "BLOCK" if f["type"] in {"BANNED_REGISTER", "OVERCLAIM", "BANNED_SURFACE", "UNDEFINED_TERM"} else "AUTO-FIX"
+            tag = "BLOCK" if f["type"] in {"BANNED_REGISTER", "OVERCLAIM", "BANNED_SURFACE"} else (
+                "WARN" if f["type"] == "UNDEFINED_TERM" else "AUTO-FIX"
+            )
             fix = f" -> '{f['fix']}'" if f.get("fix") else ""
             print(f"  [{tag}] {f['type']}: '{f['term']}' (line {f['line']}){fix}")
         if result["agent_actions"]:
             print(f"AGENT_REWRITE actions={len(result['agent_actions'])}")
         print(f"RECEIPT: {result['receipt_path']}")
 
-    return 1 if result["decision"] == "FAIL" else 0
+    return exit_code(result)
 
 
 if __name__ == "__main__":

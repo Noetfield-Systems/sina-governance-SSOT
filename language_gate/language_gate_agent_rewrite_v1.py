@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Agent rewrite pass — plain English after regex lint (deterministic v1)."""
+"""Agent rewrite pass — plain English after regex lint (deterministic RC2)."""
 
 from __future__ import annotations
 
@@ -13,11 +13,33 @@ from typing import Any
 GATE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(GATE_DIR))
 
-from language_gate_core_v1 import Dictionary, Finding, SURFACE_POLICY, load_dictionary  # noqa: E402
+from language_gate_core_v1 import (  # noqa: E402
+    Dictionary,
+    Finding,
+    SURFACE_POLICY,
+    is_compound_slug,
+    load_dictionary,
+    normalize_public_phrasing,
+    protected_spans,
+)
 
 
-def _strip_quotes(s: str) -> str:
-    return s.strip().strip('"')
+def _substitute_outside_spans(text: str, pattern: re.Pattern[str], replacement: str) -> tuple[str, bool]:
+    spans = protected_spans(text)
+    changed = False
+    parts: list[str] = []
+    cursor = 0
+    for m in pattern.finditer(text):
+        if any(m.start() >= a and m.end() <= b for a, b in spans):
+            continue
+        if is_compound_slug(text, m.start(), m.end()):
+            continue
+        parts.append(text[cursor : m.start()])
+        parts.append(replacement)
+        cursor = m.end()
+        changed = True
+    parts.append(text[cursor:])
+    return "".join(parts), changed
 
 
 def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings: list[Finding]) -> tuple[str, list[dict[str, Any]]]:
@@ -28,20 +50,48 @@ def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings
     actions: list[dict[str, Any]] = []
     out = text
 
-    # Replace known canonical terms with public phrasing on outward surfaces.
+    skip_line_re = re.compile(r"(^|\*\*)(Commercial|Live surface|Governance)\b", re.I)
+    technical_assign_re = re.compile(r"=\s*\S")
+
     if surface in {"public", "website", "contract"}:
         for term_key, phrase in sorted(dictionary.public_phrasing.items(), key=lambda x: -len(x[0])):
+            if " " not in term_key and len(term_key) <= 8:
+                continue
+            replacement = normalize_public_phrasing(phrase) or phrase
+            if not replacement or replacement.lower() == term_key.lower():
+                continue
             pat = re.compile(rf"\b{re.escape(term_key)}\b", re.IGNORECASE)
             if not pat.search(out):
                 continue
-            # Only swap multi-word jargon-like keys, not tiny words
-            if len(term_key) < 8 and " " not in term_key:
-                continue
-            replacement = _strip_quotes(phrase)
-            if replacement.lower() == term_key.lower():
-                continue
-            new_out = pat.sub(replacement, out)
-            if new_out != out:
+
+            new_parts: list[str] = []
+            cursor = 0
+            changed = False
+            for m in pat.finditer(out):
+                line_start = out.rfind("\n", 0, m.start()) + 1
+                line_end = out.find("\n", m.start())
+                if line_end < 0:
+                    line_end = len(out)
+                line = out[line_start:line_end]
+                if "`" in line or skip_line_re.search(line):
+                    continue
+                tail = out[m.end() : m.end() + 3]
+                if technical_assign_re.match(tail):
+                    continue
+                if any(m.start() >= a and m.end() <= b for a, b in protected_spans(out)):
+                    continue
+                if is_compound_slug(out, m.start(), m.end()):
+                    continue
+                repl = replacement
+                if m.start() == line_start or out[m.start() - 1] in ".:;\n":
+                    repl = repl[:1].upper() + repl[1:] if repl else repl
+                new_parts.append(out[cursor : m.start()])
+                new_parts.append(repl)
+                cursor = m.end()
+                changed = True
+            if changed:
+                new_parts.append(out[cursor:])
+                out = "".join(new_parts)
                 actions.append(
                     {
                         "type": "PLAIN_ENGLISH",
@@ -50,9 +100,7 @@ def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings
                         "reason": f"public phrasing for {surface} surface",
                     }
                 )
-                out = new_out
 
-    # Flag long unclear sentences for agent review (sidecar instructions).
     for idx, line in enumerate(out.splitlines(), start=1):
         words = line.split()
         if len(words) < 28:
@@ -68,7 +116,6 @@ def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings
                 }
             )
 
-    # Convert passive jargon patterns.
     jargon_patterns = [
         (r"\bleverage\b", "use"),
         (r"\butilize\b", "use"),
@@ -77,19 +124,23 @@ def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings
     ]
     for pat_str, repl in jargon_patterns:
         pat = re.compile(pat_str, re.IGNORECASE)
-        if pat.search(out):
+        new_out, changed = _substitute_outside_spans(out, pat, repl)
+        if changed:
             actions.append({"type": "PLAIN_ENGLISH", "pattern": pat_str, "replacement": repl})
-            out = pat.sub(repl, out)
+            out = new_out
 
     return out, actions
 
 
-def write_sidecar(file_path: Path, actions: list[dict[str, Any]]) -> Path | None:
+def write_sidecar(file_path: Path, actions: list[dict[str, Any]], *, warnings: list[dict[str, Any]] | None = None) -> Path | None:
     review = [a for a in actions if a.get("type") == "AGENT_REVIEW"]
-    if not review:
+    if not review and not warnings:
         return None
+    payload: dict[str, Any] = {"file": str(file_path), "agent_review": review}
+    if warnings:
+        payload["dictionary_warnings"] = warnings
     sidecar = file_path.with_suffix(file_path.suffix + ".language_gate_review.json")
-    sidecar.write_text(json.dumps({"file": str(file_path), "agent_review": review}, indent=2) + "\n", encoding="utf-8")
+    sidecar.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     return sidecar
 
 

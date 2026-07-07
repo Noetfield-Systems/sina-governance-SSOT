@@ -62,3 +62,29 @@ bash scripts/install_language_gate_hooks_v1.sh
 ## Known gap
 
 Regex first pass — not full language understanding. Disguised jargon may slip; title-case phrases may false-positive. Agent review sidecar flags long unclear sentences.
+
+
+## RC2 (2026-07-07)
+
+Fixes from RC1 dry scan on five controlled canon files:
+
+| RC1 issue | RC2 fix |
+|-----------|---------|
+| UNDEFINED_TERM noise (headers, doc labels, vendors) | Structural + entity allowlists; skip markdown headers, code spans, link URLs, hyphen fragments |
+| Rewrite pass skipped on FAIL | `WARN` for undefined-only; `--soft-undefined` runs rewrite pass for evaluation |
+| Agent pass corrupted compounds/links | Protected spans; skip hyphenated slugs; clean public_phrasing footnotes; skip Commercial/technical lines |
+| Dictionary gaps (NOOS, lane slugs) | `dictionary_rc2_supplement.json` merged at load |
+
+### RC2 dry scan
+
+```bash
+python3 language_gate/rc2_dry_scan_v1.py
+# report: language_gate/receipts/rc2_dry_scan_report.json
+```
+
+### Strict vs soft undefined
+
+- **Hooks / pre-commit (default):** exit 1 on `WARN` (undefined terms still block minting)
+- **Dry scan / readability eval:** `--soft-undefined` exit 0 on `WARN`; rewrites run; sidecar lists dictionary warnings
+
+Tool version: `language_gate_rc2_v1`

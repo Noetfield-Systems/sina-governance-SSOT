@@ -12,7 +12,9 @@ from typing import Any
 
 GATE_DIR = Path(__file__).resolve().parent
 DICT_PATH = GATE_DIR / "dictionary_index.json"
+SUPPLEMENT_PATH = GATE_DIR / "dictionary_rc2_supplement.json"
 RECEIPTS_DIR = GATE_DIR / "receipts"
+TOOL_VERSION = "language_gate_rc2_v1"
 
 SURFACES = frozenset({"internal", "public", "website", "contract", "prompt", "receipt"})
 
@@ -42,13 +44,39 @@ KNOWN_VENDOR_ALLOWLIST = {
     "cloudflare", "cloudflare workers", "cloudflare queues", "cloudflare cron",
     "supabase", "railway", "aider", "roo code", "openhands", "claude code",
     "github", "aws", "gcp", "perplexity", "cursor", "composer",
+    "no roo", "kilo", "gemini flash", "github actions", "llama",
 }
 
 COMMON_WORD_ALLOWLIST = {
     "draft", "todo", "note", "warning", "important", "tbd", "n/a", "id",
     "url", "api", "faq", "ceo", "cto", "cfo", "usa", "us", "ok", "asap",
     "fyi", "eta", "utc", "pdt", "pst", "pass", "fail", "json", "yaml", "md",
-    "nda", "sow", "msa",
+    "nda", "sow", "msa", "roi", "yes", "no", "defer", "approve", "never",
+}
+
+# Plain English / doc-structure tokens — not system vocabulary.
+STRUCTURAL_ALLOWLIST = {
+    "work order", "work", "head", "non", "goal", "goals", "phase", "tool decision",
+    "allowed scope", "forbidden", "mechanical", "prose", "gates", "gate", "date",
+    "dispatch", "plan", "patch", "test", "receipt", "stop", "complete", "pending",
+    "required", "ratified", "signature", "authorization statement", "authorization",
+    "revenue work authorization", "start ready", "product layer", "pattern", "factory",
+    "canon", "status", "customer id", "spend leak audit", "nnn", "ide", "github actions",
+    "gemini flash", "zero execution authority", "pending founder approval",
+    "revenue", "north star", "north-star", "related", "example", "the law", "the test",
+    "what this means", "relation to other doctrine", "first written", "parent doctrine",
+    "incident basis", "north-star deliverable", "everything else", "dimension",
+    "cycle anatomy", "no roo", "final sg", "governance hotspot fixes",
+    "noetfield governance", "noetfield os", "package assembly", "remaining lane receipts",
+}
+
+# Registered product / entity / vendor names allowed without a dictionary row.
+ENTITY_ALLOWLIST = {
+    "sourcea", "sourcea brain", "sourcea brain agent", "noetfield systems inc",
+    "noetfield systems", "cloudflare worker", "workers ai", "cloud kernel",
+    "operating brain install", "managed brain", "mac worker", "trustfield technologies",
+    "trustfield", "github actions", "gemini flash", "studio ide", "aider",
+    "acg", "spend leak audit", "brain audit",
 }
 
 LEADING_STOPWORDS = {
@@ -134,16 +162,43 @@ def clean_phrase(value: str | None) -> str | None:
     if not value:
         return None
     text = value.strip()
-    for cut in (" Is NOT:", " Example:", " Doctrine source file:", " Public phrasing:", " ---"):
+    for cut in (" Is NOT:", " Example:", " Doctrine source file:", " Public phrasing:", " ---", " Related:"):
         idx = text.find(cut)
         if idx > 0:
             text = text[:idx].strip()
+    text = text.strip('"').strip("'").strip()
     return text or None
+
+
+def normalize_public_phrasing(value: str | None) -> str | None:
+    """First safe public phrase — strip governance footnotes and quotes."""
+    text = clean_phrase(value)
+    if not text:
+        return None
+    for cut in (" — never", " only if", " unless", " Related:"):
+        idx = text.find(cut)
+        if idx > 0:
+            text = text[:idx].strip()
+    return text.strip('"').strip("'").strip() or None
 
 
 def load_dictionary(path: Path | None = None) -> Dictionary:
     path = path or DICT_PATH
     raw = json.loads(path.read_text(encoding="utf-8"))
+    if SUPPLEMENT_PATH.is_file():
+        sup = json.loads(SUPPLEMENT_PATH.read_text(encoding="utf-8"))
+        raw_terms = list(raw.get("terms") or [])
+        seen = {str(r.get("term", "")).strip().lower() for r in raw_terms}
+        for row in sup.get("terms") or []:
+            key = str(row.get("term") or "").strip().lower()
+            if key and key not in seen:
+                raw_terms.append(row)
+                seen.add(key)
+        raw = {**raw, "terms": raw_terms}
+        for k, v in (sup.get("alias_map") or {}).items():
+            raw.setdefault("alias_map", {})[k] = v
+        for item in sup.get("code_alias") or []:
+            raw.setdefault("code_alias", []).append(item)
     terms: dict[str, dict[str, Any]] = {}
     for row in raw.get("terms") or []:
         key = str(row.get("term") or "").strip().lower()
@@ -157,9 +212,9 @@ def load_dictionary(path: Path | None = None) -> Dictionary:
     code_alias = {str(t).lower() for t in (raw.get("code_alias") or [])}
     public_phrasing: dict[str, str] = {}
     for key, row in terms.items():
-        phrase = clean_phrase(row.get("public_phrasing"))
+        phrase = normalize_public_phrasing(row.get("public_phrasing"))
         if phrase:
-            public_phrasing[key] = phrase.strip('"')
+            public_phrasing[key] = phrase
     return Dictionary(
         schema=str(raw.get("schema") or "noetfield-dictionary-index-v1"),
         terms=terms,
@@ -192,6 +247,81 @@ def infer_surface(path: str, explicit: str | None = None) -> str:
 
 def line_of(text: str, pos: int) -> int:
     return text.count("\n", 0, pos) + 1
+
+
+def line_text_at(text: str, pos: int) -> str:
+    start = text.rfind("\n", 0, pos) + 1
+    end = text.find("\n", pos)
+    if end < 0:
+        end = len(text)
+    return text[start:end]
+
+
+def is_markdown_header_line(line: str) -> bool:
+    return bool(re.match(r"^\s{0,3}#{1,6}\s+", line))
+
+
+def protected_spans(text: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    for m in re.finditer(r"```[\s\S]*?```", text):
+        spans.append((m.start(), m.end()))
+    for m in re.finditer(r"`[^`\n]+`", text):
+        spans.append((m.start(), m.end()))
+    for m in re.finditer(r"\[[^\]]+\]\(([^)]+)\)", text):
+        spans.append((m.start(1), m.end(1)))
+    for m in re.finditer(r"https?://[^\s)>\]]+", text):
+        spans.append((m.start(), m.end()))
+    for m in re.finditer(r"(?<![A-Za-z0-9_/])[A-Za-z0-9][A-Za-z0-9._/-]*\.(?:md|json|yaml|yml|sh|py|tsx|ts|js)(?![A-Za-z0-9_])", text):
+        spans.append((m.start(), m.end()))
+    spans.sort()
+    return spans
+
+
+def in_protected_span(spans: list[tuple[int, int]], start: int, end: int) -> bool:
+    for a, b in spans:
+        if start >= a and end <= b:
+            return True
+    return False
+
+
+def is_hyphen_fragment(text: str, start: int, end: int) -> bool:
+    before = text[start - 1] if start > 0 else ""
+    after = text[end] if end < len(text) else ""
+    return before == "-" or after == "-"
+
+
+def is_compound_slug(text: str, start: int, end: int) -> bool:
+    """Skip single-word keys inside hyphenated identifiers (governed-autorun)."""
+    if start <= 0 or end >= len(text):
+        return False
+    if text[start - 1] != "-":
+        return False
+    return text[end] == "-" or (end < len(text) and text[end] in "-./")
+
+
+def is_skippable_undefined(term: str, *, line: str, text: str, start: int, end: int, spans: list[tuple[int, int]]) -> bool:
+    low = term.lower().strip()
+    if not low or len(low) < 3:
+        return True
+    if in_protected_span(spans, start, end):
+        return True
+    if is_markdown_header_line(line):
+        return True
+    if is_hyphen_fragment(text, start, end):
+        return True
+    if low in KNOWN_VENDOR_ALLOWLIST or low in COMMON_WORD_ALLOWLIST:
+        return True
+    if low in STRUCTURAL_ALLOWLIST or low in ENTITY_ALLOWLIST:
+        return True
+    if term.isupper() and len(term) <= 4:
+        return True
+    if re.match(r"^\d+\.\s", line.lstrip()):
+        return True
+    if line.lstrip().startswith("|"):
+        return True
+    if re.search(r"\b(for example|e\.g\.|i\.e\.)\b", line, re.I):
+        return True
+    return False
 
 
 @dataclass
@@ -261,19 +391,19 @@ def scan(text: str, surface: str, dictionary: Dictionary) -> tuple[list[Finding]
                 )
 
     if policy["block_undefined"]:
-        lines = text.split("\n")
+        spans = protected_spans(text)
         seen: set[tuple[int, str]] = set()
         for m in TERM_RE.finditer(text):
             title_case_only = m.group(3) is not None and not m.group(1) and not m.group(2)
             term = (m.group(1) or m.group(2) or m.group(3) or "").strip()
             if not term or len(term) < 3:
                 continue
-            ln = line_of(text, m.start())
-            if title_case_only and 0 <= ln - 1 < len(lines) and lines[ln - 1].lstrip().startswith("#"):
+            start, end = m.start(), m.end()
+            ln = line_of(text, start)
+            line = line_text_at(text, start)
+            if is_skippable_undefined(term, line=line, text=text, start=start, end=end, spans=spans):
                 continue
             low = term.lower()
-            if low in KNOWN_VENDOR_ALLOWLIST or low in COMMON_WORD_ALLOWLIST:
-                continue
             if low in dictionary.terms or low in dictionary.alias_map or low in dictionary.code_alias:
                 continue
             if low in dictionary.retired_terms:
@@ -285,7 +415,7 @@ def scan(text: str, surface: str, dictionary: Dictionary) -> tuple[list[Finding]
             is_allcaps = term.isupper() and len(term) >= 3
             if not (is_title or is_allcaps):
                 continue
-            span = (m.start(), term)
+            span = (start, term)
             if span in seen:
                 continue
             seen.add(span)
@@ -302,11 +432,14 @@ def scan(text: str, surface: str, dictionary: Dictionary) -> tuple[list[Finding]
 
 
 def decide(findings: list[Finding]) -> tuple[str, list[Finding]]:
-    blocking_types = {"BANNED_REGISTER", "OVERCLAIM", "BANNED_SURFACE", "UNDEFINED_TERM"}
-    blockers = [f for f in findings if f.type in blocking_types]
+    hard_types = {"BANNED_REGISTER", "OVERCLAIM", "BANNED_SURFACE"}
+    hard_blockers = [f for f in findings if f.type in hard_types]
+    soft_blockers = [f for f in findings if f.type == "UNDEFINED_TERM"]
     autofixed = [f for f in findings if f.auto_fixed]
-    if blockers:
-        return "FAIL", blockers
+    if hard_blockers:
+        return "FAIL", hard_blockers
+    if soft_blockers:
+        return "WARN", soft_blockers
     if autofixed:
         return "PASS_WITH_REWRITE", []
     return "PASS", []
@@ -341,7 +474,7 @@ def write_receipt(
         "blocking_findings_count": len(blockers),
         "regex_rewrite_applied": rewrite_applied,
         "agent_rewrite_applied": agent_rewrite_applied,
-        "tool_version": "language_gate_pipeline_v1",
+        "tool_version": TOOL_VERSION,
     }
     if extra:
         receipt.update(extra)
