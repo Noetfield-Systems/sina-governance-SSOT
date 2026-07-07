@@ -34,10 +34,12 @@ A repo/system is **wired** to SG Dictionary / Terminology Registry only when **a
 | Target | SG pointer | Overlay | Index | Dry scan receipt | Cleanup receipt | SG gaps routed | **Status** |
 |--------|:----------:|:-------:|:-----:|:----------------:|:---------------:|:--------------:|:----------:|
 | **SourceA** | yes | yes | yes | yes | yes | yes | **WIRED** |
-| **TrustField / trustfield.ca** | no | no | no | no | no | no | **NOT_WIRED** |
+| **TrustField / trustfield.ca** | yes‡ | draft | yes | yes | plan only | yes | **PARTIAL** |
 | **noetfield.com** | no | no | no | no | no | no | **NOT_WIRED** |
 | **NOOS Integrator** | partial† | no | no | no | no | no | **NOT_WIRED** |
 | **WitnessBC** | no | no | no | no | no | no | **LATER** |
+
+‡ TrustField SG pin in `receipt_tf_language_cleanup_v1.json` + `scripts/tf_language_cleanup_v1.py` — overlay draft on SG only; not mirrored to TF repo yet (`d8233e9`).
 
 † NOOS has **repo-registry** pointers to `sina-governance-SSOT` (copilot dispatcher, loop state) — not a **Dictionary/Terminology Registry** pin. Does not satisfy criterion 1.
 
