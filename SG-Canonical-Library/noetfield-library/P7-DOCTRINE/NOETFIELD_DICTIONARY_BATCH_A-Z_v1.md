@@ -725,10 +725,8 @@ Public phrasing: "marked retired"
 ---
 
 **TrustField**
-Meaning: the name of a separate venture, currently reserved but not legally filed as a company.
-Is NOT: "TrustField Inc." · a Noetfield product or subsidiary
-Example: `P10-PRODUCT-LAYERS/trustfield.md`
-Public phrasing: "TrustField" — never with "Inc." or any filed-entity language until it actually is one
+Meaning: Separate venture for regulated financial workflows (Canada). Name reserved with BC Registries — not incorporated, not filed. Noetfield/SourceA may serve it; never a Noetfield product or subsidiary.
+Doctrine source file: `P10-PRODUCT-LAYERS/trustfield.md`
 
 ---
 
@@ -780,3 +778,791 @@ Example: `P1-CANON/MACHINE_LOOPS_v1.md`
 Public phrasing: not public-facing (internal operating principle)
 
 ---
+**Actions UI**
+Meaning: GitHub Actions run UI — invalid external-verify path; building agent cannot treat "check Actions UI" as PASS.
+Doctrine source file: `P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md`
+
+---
+
+**Agentic Cost Policy Pack**
+Meaning: Tier-1 deliverable: policy templates and spend-guard recommendations from diagnostic engagement.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**AI Spend Leak Audit**
+Meaning: Tier-1 diagnostic SKU: find autonomous AI spend paths with no cap, owner, or receipt.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Apply SG**
+Meaning: Execute scoped change only in sina-governance-ssot — governance registry, gate, validators.
+Doctrine source file: `AGENTS.md`
+
+---
+
+**Authority ID**
+Meaning: Stable identifier for an authority document, role, or merge tier.
+Doctrine source file: `P8-MACHINE-LOOPS/SOURCEA_E2E_CHECK_REGISTRY_LOCKED_v1.md`
+
+---
+
+**Authority Plane**
+Meaning: Layer where merge authority, lane law, and irreversible founder gates are enforced.
+Doctrine source file: `P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md`
+
+---
+
+**Auto GUARD**
+Meaning: Shorthand for census class GUARD — loop exists to verify, probe, or audit system integrity.
+Doctrine source file: `data/workflow_census_value_class_rules_v1.json`
+
+---
+
+**Automation Cost Governance**
+Meaning: FinOps discipline for automation spend: caps, receipts, and kill paths per loop.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Automation Factory**
+Meaning: NOOS/GHA factory autorun lane — META census candidate; not revenue path.
+Doctrine source file: `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+
+---
+
+**BaaS HOLD**
+Meaning: Brain-as-a-Service tier gated: proof ladder milestone not met; do not sell as proven.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Base Brain**
+Meaning: Minimal deterministic brain install — Tier 2 path after one SourceA pattern proof.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Base Live Brain**
+Meaning: Production brain worker with live health endpoints; deploy-truth required before claims.
+Doctrine source file: `P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md`
+
+---
+
+**Brain Agent**
+Meaning: Runtime agent attached to deterministic brain — drafts and executes under gates; does not own meaning.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/deterministic-brain-doctrine.md`
+
+---
+
+**Brain Architecture**
+Meaning: Structure: deterministic core, walled LLM workers, gates, receipts — not a single model.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Brain Audits**
+Meaning: Diagnostic engagement family: drift, theater, and coherence review before Operating Brain Install.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-audit-v1.md`
+
+---
+
+**Brain Coherence Report**
+Meaning: Tier-1 deliverable summarizing semantic and policy coherence findings — diagnostic only.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Brain Meaning**
+Meaning: Approved public claims the brain may state — P6 scope, not full dictionary.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P6-BRAIN-MEANING/locked-definitions-v1.md`
+
+---
+
+**Brain OS**
+Meaning: Informal name for full operating-brain stack; use locked SKUs in contracts.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Brain Registry Founding Instruction**
+Meaning: Founder-locked bootstrap rules for brain registry — not default worker load.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md`
+
+---
+
+**Brain Worker**
+Meaning: Role that ships bounded change under gates — not the decider.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`
+
+---
+
+**Build Phase A**
+Meaning: Named milestone in phase-loop build plan — scoped delivery slice.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/PHASE_LOOP_BUILD_PLAN_v0.1.md`
+
+---
+
+**Build TrustField MVP**
+Meaning: Stand up minimum TrustField product slice in trustfield-loops — separate from SourceA brain.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md`
+
+---
+
+**Canonical GTM**
+Meaning: Approved go-to-market narrative tied to proof ladder and R≥1 — not ad-hoc pitch.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md`
+
+---
+
+**Chat Unify**
+Meaning: Canonical chat migration product (v4.9.9) — copy-first migration path.
+Doctrine source file: `SourceA snapshot`
+
+---
+
+**Cloud Loop Specialist**
+Meaning: Cloudflare motor cf_loop_specialist_tick_v1 for loop_specialist_runtime_plan.
+Doctrine source file: `data/github_automation_registry_v1.json`
+
+---
+
+**Copilot QuickScan**
+Meaning: GitHub Copilot assist-only quick scan lane — draft PRs, no autonomous merge.
+Doctrine source file: `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+
+---
+
+**Copilot Readiness**
+Meaning: Repo posture for Copilot assist_only workflows and PR template compliance.
+Doctrine source file: `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+
+---
+
+**Create TrustField**
+Meaning: Work item to open TrustField venture lane: entity hygiene, sandbox, regulated scope.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md`
+
+---
+
+**Data Graph**
+Meaning: Factory mesh graph linking nodes, edges, and receipt consumers.
+Doctrine source file: `P7-DOCTRINE/contracts-run-the-system.md`
+
+---
+
+**Decision Gate**
+Meaning: Checkpoint requiring explicit PASS before next phase or promote.
+Doctrine source file: `P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md`
+
+---
+
+**Define TrustField MVP**
+Meaning: Founder/doc step locking first TrustField MVP scope before build spend.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md`
+
+---
+
+**Disk Reconciliation**
+Meaning: Align committed disk state with cloud kernel truth — fail-closed on drift.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md`
+
+---
+
+**Domain SSOTs**
+Meaning: Per-domain authority files; on conflict the SSOT row wins.
+Doctrine source file: `P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md`
+
+---
+
+**Eval Registry**
+Meaning: Registry of eval passes, promotion gates, and rollback posture.
+Doctrine source file: `P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md`
+
+---
+
+**Evolve FBE**
+Meaning: Iterate SourceA factory/build executor — internal lane slug.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**Execution Contract Validator**
+Meaning: E2E gate validating contract pages and execution paths against SSOT.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/SOURCEA_E2E_CHECK_REGISTRY_LOCKED_v1.md`
+
+---
+
+**Forge Factory**
+Meaning: SourceA cloud forge automation surface — bounded build/deploy.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**Form UI**
+Meaning: Meta-label in DLM triage for form option chrome (Nov Options, PICKs Options) — not system vocabulary.
+Doctrine source file: `coined-internal: DLM`
+
+---
+
+**Founder Email Factory**
+Meaning: Outbound email motion — founder-execute until stranger payment receipt.
+Doctrine source file: `P99-LEDGER/gap-audit-2026-06-30.md`
+
+---
+
+**Founder Mail**
+Meaning: Mail sent by founder from personal channel — not autonomous bulk.
+Doctrine source file: `P99-LEDGER/SOURCEA_FORM_OFFICIAL_PARTIAL_SUBMIT_RECEIPT_2026-07-07.json`
+
+---
+
+**Four Canadian OSs**
+Meaning: Strategic frame: four Canadian venture operating systems (Noetfield family).
+Doctrine source file: `P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md`
+
+---
+
+**Gateway Railway**
+Meaning: Sina Gateway service hosted on Railway — health and deadman probe targets.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/SINA_GATEWAY_BLUEPRINT_LOCKED_v1.md`
+
+---
+
+**Grade-its-own-homework**
+Meaning: Anti-pattern: deployer validates its own output without independent verify.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/negative-proof.md`
+
+---
+
+**Hardened Machine Workbench**
+Meaning: Secured Mac operator environment for founder sessions.
+Doctrine source file: `docs/MAC_CURSOR_OPS_v1.md`
+
+---
+
+**HOLD/LIFT**
+Meaning: Autonomy posture: HOLD blocks promote; LIFT enables brain-only 24/7 autorun.
+Doctrine source file: `docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md`
+
+---
+
+**Hub UI**
+Meaning: Founder hub interface for spawn, pause, and kill controls.
+Doctrine source file: `P5-LINE-ENGINE/LINE_ENGINE_ARCHITECTURE_v0.1.md`
+
+---
+
+**Integrator Control Panel**
+Meaning: NOOS integrator control surface — separate venture workspace.
+Doctrine source file: `P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/NOETFIELD_OS.md`
+
+---
+
+**INTEGRITY PACK**
+Meaning: Bundled integrity checks and receipts for a lane preflight.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**LIBRARY MIRROR**
+Meaning: Synced noetfield-library copy — not ad-hoc notes.
+Doctrine source file: `P99-LEDGER/SSOT_V6_AUTHORITY_RECEIPT_2026-07-05.md`
+
+---
+
+**LIBRARY READ SURFACE**
+Meaning: Read-only library path for workers under least-knowledge.
+Doctrine source file: `P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md`
+
+---
+
+**Library-on-disk**
+Meaning: Library files in repo working tree — may lag deploy-truth.
+Doctrine source file: `P99-LEDGER/closed-loops.md`
+
+---
+
+**Line Engine ONCE**
+Meaning: Build the line-engine pattern once; replicate lines via config, not ten builds.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/LINE_ENGINE_ARCHITECTURE_v0.2_HARDENED.md`
+
+---
+
+**Local Worker**
+Meaning: Worker on Mac/local — complement to cloud motor, not schedule home.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**LOCKED SSOT**
+Meaning: Versioned authority file that cannot be silently overridden.
+Doctrine source file: `P7-DOCTRINE/immutable-floor.md`
+
+---
+
+**Mac Cursor**
+Meaning: Cursor on founder Mac — complement session, not cloud motor.
+Doctrine source file: `docs/MAC_CURSOR_OPS_v1.md`
+
+---
+
+**Mac Hardened Machine Workbench**
+Meaning: Hardened Mac operator workbench — local complement to cloud motors.
+Doctrine source file: `docs/MAC_CURSOR_OPS_v1.md`
+
+---
+
+**Mac Law**
+Meaning: Mac founder session limits: light shell, no validator marathons.
+Doctrine source file: `docs/MAC_CURSOR_OPS_v1.md`
+
+---
+
+**Mac Workbench**
+Meaning: Local Mac execution bench — not 24/7 schedule host.
+Doctrine source file: `docs/MAC_CURSOR_OPS_v1.md`
+
+---
+
+**Machine Loops**
+Meaning: Catalog of governed motors and loops across ventures.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P1-CANON/MACHINE_LOOPS_v1.md`
+
+---
+
+**Managed AI Operations**
+Meaning: Managed ops around customer AI systems — governed, receipted, not autopilot theater.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Managed AI Ops MRR**
+Meaning: Internal MRR planning line for managed AI ops — not public claim.
+Doctrine source file: `P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md`
+
+---
+
+**Managed Deterministic Brain**
+Meaning: Tier 3 BaaS: receipt-backed unattended operation — gated on SourceA proof.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Manual Hub**
+Meaning: Founder manual hub control — explicit tap per upgrade; not autonomous motor.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**Merge CREED**
+Meaning: Merge CREED doctrine fragment into canonical library with version bump.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**Merge Hub**
+Meaning: Controlled merge authority by tier T0–T3.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/merge-authority-tiers-T0-T3.md`
+
+---
+
+**Model ROI Router Advisory**
+Meaning: Advisory model routing from per-line ROI receipts — config change, not rebuild.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/capability-router-circuit-breaker.md`
+
+---
+
+**Monthly AI**
+Meaning: Internal monthly AI spend or review cadence label.
+Doctrine source file: `P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md`
+
+---
+
+**Motor X**
+Meaning: Prose placeholder for a named motor — replace with motor_id in receipts.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md`
+
+---
+
+**Native Pattern Thinker**
+Meaning: Founder VIP role: architect bespoke deterministic brains for client stacks.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Noetfield**
+Meaning: Noetfield Systems — services parent; distinct from SourceA product and TrustField venture.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/noetfield.md`
+
+---
+
+**Noetfield Studio IDE**
+Meaning: Studio IDE venture lane — separate workspace.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**Offer GTM**
+Meaning: Go-to-market offer shape under UNLOCK — honest scope per proof ladder.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md`
+
+---
+
+**One Proof Layer**
+Meaning: Architecture goal: one authoritative proof layer — receipts over diagrams.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/receipts-not-diagrams.md`
+
+---
+
+**One Truth Ticket**
+Meaning: Single tracking item for deploy-truth reconciliation.
+Doctrine source file: `P7-DOCTRINE/receipts-not-diagrams.md`
+
+---
+
+**Only Base Brain**
+Meaning: Scope constraint: base-brain work only — no managed-tier promises.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Operations Audit**
+Meaning: Operational audit engagement in Tier-1 family — findings, not live enforce.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**P1 Product Layer**
+Meaning: Kernel pillar 1 (UI/Config) — business skins (Forge, Noetfield, TrustField, WitnessBC, 777); zero custom infra. Distinct from library folder P10-PRODUCT-LAYERS.
+Doctrine source file: `P7-DOCTRINE/contracts-run-the-system.md`
+
+---
+
+**P2 Governance Layer**
+Meaning: Kernel pillar 2 (Policy/SLA) — validation loops, compliance, SLA definitions.
+Doctrine source file: `P7-DOCTRINE/contracts-run-the-system.md`
+
+---
+
+**P3 Runtime Kernel**
+Meaning: Line Engine runtime kernel layer in eight-layer map.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md`
+
+---
+
+**P4 Factory Data Graph**
+Meaning: Kernel pillar 4 — factory mesh / data-graph layer in line-engine architecture.
+Doctrine source file: `P7-DOCTRINE/contracts-run-the-system.md`
+
+---
+
+**Per SINA SSOT**
+Meaning: Citation: governing rule lives in sina-governance-ssot repo.
+Doctrine source file: `AGENTS.md`
+
+---
+
+**Personal Gateway**
+Meaning: Founder personal gateway lane — separate from SourceA enterprise surfaces.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/SINA_GATEWAY_BLUEPRINT_LOCKED_v1.md`
+
+---
+
+**Phase C**
+Meaning: Later phased rollout slice — not current P0.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/PHASE_LOOP_BUILD_PLAN_v0.1.md`
+
+---
+
+**Pilot CTA**
+Meaning: Call-to-action for time-boxed pilot — diagnostic or design-partner scope.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Pilot SKU**
+Meaning: Named pilot offer package with honest diagnostic boundaries.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Plus ONE Hub**
+Meaning: Hub component in PLUS ONE cross-system integration.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**PLUS ONE INDEX**
+Meaning: Index file for PLUS ONE linkage across systems.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**Premium Model Firewall**
+Meaning: Policy gate on model/spend paths — diagnostic first; live enforce only when deployed.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Premium Model Firewall Pilot**
+Meaning: Scoped pilot of Premium Model Firewall — not general availability.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Product Layers**
+Meaning: P10 venture and product description tier in library.
+Doctrine source file: `P99-LEDGER/COMPLETENESS_AUDIT.md`
+
+---
+
+**Production Locked**
+Meaning: Production promote frozen until founder gate clears.
+Doctrine source file: `P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md`
+
+---
+
+**Queue SSOT**
+Meaning: Authoritative worker cost-tier queue file.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md`
+
+---
+
+**QuickScan SMB**
+Meaning: Fast SMB diagnostic scan — Copilot-assisted, assist-only.
+Doctrine source file: `P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md`
+
+---
+
+**Reach CAD**
+Meaning: Revenue reach target in CAD — confidential unless receipt-proven.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md`
+
+---
+
+**Rent APIs**
+Meaning: Use vendor APIs on metered rent; self-host is later config flip per ROI receipts.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/deterministic-brain-doctrine.md`
+
+---
+
+**Retirement SSOT**
+Meaning: Registry of founder duties migrating to machine proof.
+Doctrine source file: `data/founder-trigger-retirement-registry-v1.json`
+
+---
+
+**Routing Panel**
+Meaning: Control surface for capability router and circuit breaker.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/capability-router-circuit-breaker.md`
+
+---
+
+**Runtime Reality**
+Meaning: What is actually running live — deploy-truth synonym.
+Doctrine source file: `P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md`
+
+---
+
+**Runtime Rule**
+Meaning: Locked runtime behavior constraint for a loop or worker.
+Doctrine source file: `P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md`
+
+---
+
+**Runtime SSOT**
+Meaning: Committed schedule/registry truth for runtime — contrast with live deploy-truth.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md`
+
+---
+
+**Sellable NOW**
+Meaning: Offer may be sold today with honest diagnostic scope — not future autonomy.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md`
+
+---
+
+**Service SSOT**
+Meaning: Registry of live services, URLs, owners, and probe targets.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md`
+
+---
+
+**Setup CAD**
+Meaning: Setup fee in CAD — reserved commercial figure; contract [●] only.
+Doctrine source file: `P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md`
+
+---
+
+**Sina Governance SSOT**
+Meaning: This repo: governance registry, language gate, validators, automation inventory.
+Doctrine source file: `AGENTS.md`
+
+---
+
+**SINA SSOT**
+Meaning: Abbreviation for sina-governance-ssot governance lane.
+Doctrine source file: `AGENTS.md`
+
+---
+
+**Skill SSOT**
+Meaning: Cursor agent skills loaded at session start per AGENTS.md.
+Doctrine source file: `AGENTS.md`
+
+---
+
+**SourceA Base Brain**
+Meaning: Founder's first deterministic brain — BaaS proof ladder template.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**SourceA Brain Registry**
+Meaning: Governed catalog of brain artifacts, routes, and learning gates.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md`
+
+---
+
+**SourceA FBE**
+Meaning: SourceA factory/build executor lane slug — implementation token.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**SourceA Forge**
+Meaning: SourceA cloud forge task cell — bounded build/deploy automation.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**SourceA Loop Specialist**
+Meaning: CF motor dispatching loop_specialist_runtime_plan for SourceA.
+Doctrine source file: `data/github_automation_registry_v1.json`
+
+---
+
+**SourceA Shared Authority Layer**
+Meaning: Cross-repo authority routing — who may write what.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/`
+
+---
+
+**SourceA Worker**
+Meaning: SourceA repo worker lane — ships brain/runtime; must not build TrustField loops.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**Spawn/pause/kill**
+Meaning: Founder hub controls for governed lines.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`
+
+---
+
+**Standard Audit**
+Meaning: Baseline Tier-1 audit SKU without premium firewall pilot.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**System Architect**
+Meaning: Role: design, review, delete unnecessary work — not feature coder.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`
+
+---
+
+**Target Kernel**
+Meaning: North-star runtime kernel — target architecture, not live claim.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md`
+
+---
+
+**Target-as-blocker**
+Meaning: Anti-pattern: treating a pursuit target as a halt condition.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P7-DOCTRINE/targets-vs-blockers.md`
+
+---
+
+**TF/NF**
+Meaning: DLM block tag for the TrustField + Noetfield vertical pair under identity-separation law — separate ventures; Noetfield/SourceA serves TrustField; not a competitive wedge.
+Doctrine source file: `P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md`
+
+---
+
+**Tier 0**
+Meaning: Load tier: universal agent law plus terminology on every output.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`
+
+---
+
+**Tier 1**
+Meaning: Diagnostic audit engagement — findings, not live enforcement in customer env.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md`
+
+---
+
+**Tier 2**
+Meaning: Operating Brain Install — after one SourceA pattern proof.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**Tier 3**
+Meaning: Managed deterministic brain — gated on SourceA 24/7 receipts.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md`
+
+---
+
+**TrustField Technologies** — ALIAS RETIRED
+Meaning: Retired wording. Use canonical term: TrustField. Do not use until incorporation receipt exists.
+
+---
+
+Aliases retired: TrustField Technologies
+Conflict rule: Auto-rewrite to TrustField per terminology §9.
+
+---
+
+**TrustField Technologies Inc** — ALIAS RETIRED
+Meaning: Retired wording. Use canonical term: TrustField. Wrong form implies filed corporation; name is reserved only.
+
+---
+
+Aliases retired: TrustField Technologies Inc
+Conflict rule: Auto-rewrite to TrustField per terminology §9.
+
+---
+
+**Update TrustField**
+Meaning: Sync TrustField venture docs/worker repo to SSOT — never merge into SourceA tree.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md`
+
+---
+
+**Updated TrustField**
+Meaning: Ledger note: TrustField lane docs or worker state refreshed to SSOT.
+Doctrine source file: `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md`
+
+---
+
+**Video Ad Factory**
+Meaning: Deferred venture lane for video-ad automation.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+
+**Wire PLUS ONE**
+Meaning: Connect PLUS ONE index/hub integration across systems.
+Doctrine source file: `P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.md`
+
+---
+
+**Worker RUN INBOX**
+Meaning: Worker command lane token for inbox processing — implementation, not public SKU.
+Doctrine source file: `ssot/MULTI_REPO_WORKER_REGISTRY_v1.md`
+
+---
+

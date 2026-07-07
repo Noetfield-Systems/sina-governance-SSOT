@@ -14,7 +14,7 @@ GATE_DIR = Path(__file__).resolve().parent
 DICT_PATH = GATE_DIR / "dictionary_index.json"
 SUPPLEMENT_PATH = GATE_DIR / "dictionary_rc2_supplement.json"
 RECEIPTS_DIR = GATE_DIR / "receipts"
-TOOL_VERSION = "language_gate_rc3_v1"
+TOOL_VERSION = "language_gate_rc3_pile_v1"
 
 SURFACES = frozenset({"internal", "public", "website", "contract", "prompt", "receipt"})
 
@@ -70,6 +70,64 @@ STRUCTURAL_ALLOWLIST = {
     "noetfield governance", "noetfield os", "package assembly", "remaining lane receipts",
 }
 
+# Ledger / validator / census status labels — one allowlist, not dictionary entries (Pile 2).
+STATUS_LABEL_ALLOWLIST = {
+    "align", "aligned", "amber", "audit", "black", "blocked", "build", "chosen", "closed",
+    "consistent", "correction", "critique", "deliver", "derived", "detect", "diagnose",
+    "dispatched", "earned", "exists", "found", "green", "hardened", "harvest", "incomplete",
+    "index", "install", "installed", "invalid", "killed", "known", "label", "launched",
+    "mirror", "observe", "outward", "parseable", "projected", "promote", "proposal",
+    "propose", "public", "quarantine", "ready", "reconciled", "refused", "registered",
+    "reject", "rejected", "rejects", "relabeled", "reserved", "retired", "sandbox",
+    "secondary", "staged", "stops", "structure", "stubbed", "synced", "triaged",
+    "uncertain", "unverified", "update", "upgraded", "white", "targets", "security",
+    "source", "hold",
+    "check/analyze", "fail/pass", "kill/freeze", "retired/quarantined", "pass/block",
+    "pass/fail", "pass/fail/blocked", "fix/retire", "guard/revenue",
+    "guard/revenue/meta/none", "submitted/unverified", "ssot/rag",
+    "cash pass", "commitment pass", "complete pass", "no pass", "insert ok", "new fact",
+    "smb ai", "work oegcc hitl", "superseded header", "operationally usable",
+    "fully consistent", "provisionally active", "migration pending",
+    "reconciliation required", "remote canonical", "still genuinely missing",
+    "downstream coordination pending", "request revision", "marked submitted",
+    "governance decision to confirm", "authoritative locked", "current status",
+    "operational status", "inspection complete",
+}
+
+# Title-case prose fragments the regex must not treat as vocabulary (Pile 3).
+FRAGMENT_ALLOWLIST = {
+    "do not", "can i", "explicitly not", "except", "out of scope", "after n",
+    "after supabase work", "every ai", "every ui", "everything i", "each level",
+    "then", "their", "personal", "one step", "bare no", "never supabase",
+    "no cursor", "no cf worker", "no neon", "no noos", "no pass", "no roi",
+    "no sourcea", "was doctrine i", "was doctrine ii", "was doctrine iii",
+    "was doctrine v", "doctrines i", "section b", "section c", "distinguish active",
+    "still spec", "raw ai", "chat ok", "canonical pdf", "feeds plan", "see desktop",
+    "full downloads", "b ern", "falux", "b rating", "cloud pevc", "replace", "repoint",
+    "layer", "mission", "business conditions", "consolidate step", "compliance/audit",
+    "fractional cfos", "local msp", "local vancouver", "rental market report",
+    "establish kpi", "call ai", "then sg",
+    # Pile 1 RC3 command fragments (approved 2026-07-07)
+    "let roi", "keep tier", "stay phase", "move ssot", "sync sourcea",
+    "skip proof lab", "drop forge", "drop ocre",
+}
+
+FRAGMENT_PREFIXES = ("after ", "every ", "each ", "was ", "still ", "see ", "no ", "use ", "when ", "run ")
+
+# External tech / vendor / geo references — not Noetfield vocabulary (Pile 3 extension).
+TECH_REFERENCE_ALLOWLIST = {
+    "accept playwright", "claude sonnet", "cloudflare workers ai", "durable objects",
+    "stateless workers", "github action", "railway https", "railway url", "forge terminal url",
+    "https", "deploy cli", "full cloudflare api", "api html", "api/cli", "app store",
+    "mac app store", "json dag", "sql ddl", "rpc/ipc", "read denied by rls", "run id",
+    "assign rid", "set turnstile", "public api", "local api", "linkedin dm", "origin urls",
+    "heavy webgl", "transformer", "translators", "agentic finops", "agentic ide", "ai roi",
+    "saas mrr", "saas mvp", "use rice", "monthly kpi", "monthly roi", "pacifican raii",
+    "psp/msb", "bpcpa", "statistics canada", "statistics canada gdp", "canadian gdp",
+    "canadian smes", "canadian survey", "vancouver bc", "windsor st", "civil code",
+    "use railway", "when railway", "run vancouver", "vancouver december",
+}
+
 # Census verbs, status tokens, and section labels — not mintable vocabulary.
 CENSUS_VERB_ALLOWLIST = {
     "decide", "verify", "guard", "active", "target", "meaning", "why", "unlock",
@@ -106,8 +164,8 @@ REWRITE_LOCKED_MARKERS = (
 ENTITY_ALLOWLIST = {
     "sourcea", "sourcea brain", "sourcea brain agent", "noetfield systems inc",
     "noetfield systems", "cloudflare worker", "workers ai", "cloud kernel",
-    "operating brain install", "managed brain", "mac worker", "trustfield technologies",
-    "trustfield", "github actions", "gemini flash", "studio ide", "aider",
+    "operating brain install", "managed brain", "mac worker", "trustfield",
+    "github actions", "gemini flash", "studio ide", "aider",
     "acg", "spend leak audit", "brain audit",
 }
 
@@ -118,7 +176,10 @@ _RUNTIME_ENTITY: set[str] | None = None
 def effective_structural_allowlist() -> set[str]:
     global _RUNTIME_STRUCTURAL
     if _RUNTIME_STRUCTURAL is None:
-        merged = set(STRUCTURAL_ALLOWLIST) | CENSUS_VERB_ALLOWLIST
+        merged = (
+            set(STRUCTURAL_ALLOWLIST) | CENSUS_VERB_ALLOWLIST | STATUS_LABEL_ALLOWLIST
+            | FRAGMENT_ALLOWLIST | TECH_REFERENCE_ALLOWLIST
+        )
         if SUPPLEMENT_PATH.is_file():
             sup = json.loads(SUPPLEMENT_PATH.read_text(encoding="utf-8"))
             merged |= {str(x).lower() for x in sup.get("structural_allowlist") or []}
@@ -395,9 +456,16 @@ def is_skippable_undefined(term: str, *, line: str, text: str, start: int, end: 
         return True
     if low in KNOWN_VENDOR_ALLOWLIST or low in COMMON_WORD_ALLOWLIST:
         return True
+    if low in STATUS_LABEL_ALLOWLIST or low in FRAGMENT_ALLOWLIST or low in TECH_REFERENCE_ALLOWLIST:
+        return True
+    if any(low.startswith(p) for p in FRAGMENT_PREFIXES):
+        return True
     if low in STRUCTURAL_ALLOWLIST or low in ENTITY_ALLOWLIST:
         return True
     if low in effective_structural_allowlist() or low in effective_entity_allowlist():
+        return True
+    # Question / prohibition fragments (Do NOT, Can I, …).
+    if re.match(r"^(do|can|explicitly)\s+not\b", low) or low in {"can i", "then", "their", "except"}:
         return True
     if term.isupper() and len(term) <= 4:
         return True
