@@ -119,3 +119,12 @@
 - `Third Form` (1×) — Form meta — machine product is DLM not form edition
 - `Update LinkedIn` (1×) — Action step fragment
 
+
+
+## Post-cleanup (2026-07-07)
+
+Applied triage to `language_gate/dictionary_rc2_supplement.json` and `NOETFIELD_TERMINOLOGY_v1.md` §9.
+
+**DLM re-run:** `dictionary_fix_needed_count` **51 → 0** on form test corpus.
+
+Remaining deferred items are form phrase fragments and scaffold lanes — not minted as system vocabulary.

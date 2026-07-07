@@ -79,6 +79,28 @@ ENTITY_ALLOWLIST = {
     "acg", "spend leak audit", "brain audit",
 }
 
+_RUNTIME_STRUCTURAL: set[str] | None = None
+_RUNTIME_ENTITY: set[str] | None = None
+
+
+def effective_structural_allowlist() -> set[str]:
+    global _RUNTIME_STRUCTURAL
+    if _RUNTIME_STRUCTURAL is None:
+        merged = set(STRUCTURAL_ALLOWLIST)
+        if SUPPLEMENT_PATH.is_file():
+            sup = json.loads(SUPPLEMENT_PATH.read_text(encoding="utf-8"))
+            merged |= {str(x).lower() for x in sup.get("structural_allowlist") or []}
+        _RUNTIME_STRUCTURAL = merged
+    return _RUNTIME_STRUCTURAL
+
+
+def effective_entity_allowlist() -> set[str]:
+    global _RUNTIME_ENTITY
+    if _RUNTIME_ENTITY is None:
+        merged = set(ENTITY_ALLOWLIST)
+        _RUNTIME_ENTITY = merged
+    return _RUNTIME_ENTITY
+
 LEADING_STOPWORDS = {
     "the", "a", "an", "our", "we", "this", "that", "these", "those", "under",
     "with", "for", "and", "or", "but", "in", "on", "at", "is", "are", "it",
@@ -312,6 +334,8 @@ def is_skippable_undefined(term: str, *, line: str, text: str, start: int, end: 
     if low in KNOWN_VENDOR_ALLOWLIST or low in COMMON_WORD_ALLOWLIST:
         return True
     if low in STRUCTURAL_ALLOWLIST or low in ENTITY_ALLOWLIST:
+        return True
+    if low in effective_structural_allowlist() or low in effective_entity_allowlist():
         return True
     if term.isupper() and len(term) <= 4:
         return True

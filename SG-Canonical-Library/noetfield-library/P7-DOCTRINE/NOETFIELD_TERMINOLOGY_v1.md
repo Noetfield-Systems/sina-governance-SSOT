@@ -2,7 +2,7 @@
 
 **Wording authority · daily · mandatory · machine-enforceable · Tier 0**
 
-Status: `v1` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
+Status: `v1.1-rc2-gap` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
 
 Answers: **“What word do I write, right now?”** — one line per term.  
 Meaning source: `NOETFIELD_DICTIONARY_v1.md` (terminology is **minted from** dictionary — never the reverse).  
@@ -172,6 +172,45 @@ Never emit: `we need` · `desperate` · `revolutionary` · `game-changing` · `n
 Customer tone: plain institutional English; state what we do; cut overclaim.
 
 ---
+
+---
+
+## §9 — RC2 gap fill (minted from dictionary supplement 2026-07-07)
+
+**Inbox** — The outbound revenue queue head; RUN INBOX / sa-1200 dispatch lane.  
+IS NOT: Brain reasoning backlog or form PICK list.
+
+**Proof Lab** — WitnessBC appointment-only local demo surface for proof capture.  
+IS NOT: public self-serve demo without founder arm.
+
+**Creed** — Locked identity and operating vocabulary spine.  
+IS NOT: chat shorthand or ad-hoc agent vocabulary.
+
+**Proof Layer** — Receipt and verification stratum above execution; claims cannot skip it.  
+IS NOT: diagram-only assurance.
+
+**Unify** — Brain-side gather and routing pass that collapses forks without losing items.  
+IS NOT: manual copy-paste between chats.
+
+**Witness AI** — AI-assisted witness naming lane for proof lab assets.  
+IS NOT: a public product SKU claim.
+
+**Trust Ledger** — Structured trust and send log for outreach and commercial motion.
+
+**Prompt OS** — Internal prompt routing and template system.  
+IS NOT: customer-facing product name.
+
+**Plus One** — Retired motor nickname; use **Scheduler and executor** in new text.
+
+**RT LIVE** — Hub repair path proven live with structured receipt before Phase 3–10 resume.
+
+**Worker Hub** — Legacy Worker URL hub tab; fade per E2E registry when drain complete.
+
+**Trust Center** — Public trust narrative surface; claims require receipt ladder.
+
+**Governance Platform** — Enterprise control-plane SKU narrative.  
+IS NOT: generic “AI platform.”
+
 
 ## §8 — Versioning
 
