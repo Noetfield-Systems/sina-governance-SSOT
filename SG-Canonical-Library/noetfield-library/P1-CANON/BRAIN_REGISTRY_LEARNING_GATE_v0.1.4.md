@@ -153,7 +153,7 @@ learning_record {
   layer                // which gate-stack layer this touches
   asset_affected        // asset_id from registry, if known
   failure_description
-  proposed_correction   // free text or structured patch, station-agnostic
+  proposed_correction   // free text or structured patch, station-vendor-neutral
   ssot_consistency_check // bool — does correction conflict with locked SSOT?
   critic_reviewed        // bool
   status                 // draft / proposed / approved / rejected / promoted

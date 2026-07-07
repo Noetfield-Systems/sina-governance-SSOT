@@ -41,14 +41,14 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 
 
 ## 2b. THE MIND — P0 CORE (read only if you are Base Brain or a high decision agent)
-`P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md` = how Sina judges when no Tier-1 rule fits. 10 patterns, each harvested from a real case. **Workers must NEVER load this** (least-knowledge). It grows by HARVEST only — never write a pattern speculatively.
-`P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW…LOCKED_v1.md` = the meta-law: which agent reads which law (Tier 0/1/2/3 + least-knowledge). It routes every other law. This is why no agent reads everything.
+`P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md` = how Sina judges when no Tier-1 rule fits. 10 patterns, each harvested from a real case. **Workers must NEVER load this** (Need-to-know access). It grows by HARVEST only — never write a pattern speculatively.
+`P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW…LOCKED_v1.md` = the meta-law: which agent reads which law (Tier 0/1/2/3 + Need-to-know access). It routes every other law. This is why no agent reads everything.
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.
 - **Receipts, not diagrams; mechanical, not prose; proven by rejection (negative proof).**
-- **Run governed loops pursuing targets; stop only for genuine harm (a blocker).** Live “24/7” = motor dispatch + fresh proof receipt — not Cursor/Mac/founder manual. The floor is immutable — a self-improving system can't weaken its own brakes.
+- **Run governed loops pursuing targets; stop only for genuine harm (a blocker).** Live “24/7” = Scheduler and executor dispatch + fresh proof receipt — not Cursor/Mac/founder manual. The floor is immutable — a self-improving system can't weaken its own brakes.
 - Business = **pattern factory**: prove patterns (zero-drift, anti-theater, auto-heal) on our own lines, sell them; Sina = native-pattern-thinker/trader.
 
 ## 4. NO TECHNICAL BLOCKER — THE GAP IS COMMERCIAL (the real target)
@@ -59,7 +59,7 @@ Brain Audit **now** → prove Zero-Drift on SourceA → Operating Brain Install 
 
 ## 6. ENTITY FACTS (don't confuse)
 - **Noetfield Systems Inc.** — D-U-N-S 243370005, Active, Vancouver BC. The parent / pattern factory.
-- **TrustField Technologies Inc.** — SEPARATE company Noetfield serves (NOT a subsidiary/product).
+- **TrustField** — SEPARATE company Noetfield serves (NOT a subsidiary/product). Name reserved; not incorporated.
 - **SourceA** — product under Noetfield (Forge, WitnessBC, 777 = brands/skins).
 
 ## 7. HOW TO NOT DUPLICATE / GET LOST

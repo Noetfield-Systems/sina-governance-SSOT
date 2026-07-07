@@ -1,0 +1,16 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_PARTIAL_SUBMIT_RECEIPT_2026-07-07.json",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "form frozen, audit quote preservation, or JSON no-write",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "MOTOR",
+      "line": 121,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "agent_review": []
+}

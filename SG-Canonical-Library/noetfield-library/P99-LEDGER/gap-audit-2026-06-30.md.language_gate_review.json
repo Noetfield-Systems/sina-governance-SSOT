@@ -1,0 +1,16 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/gap-audit-2026-06-30.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "jargon or AGENT_REVIEW apply would surface latent UNDEFINED_TERM WARN",
+  "proposed_regex_rewrites": [],
+  "proposed_agent_actions": [
+    {
+      "type": "PLAIN_ENGLISH",
+      "pattern": "\\bleverage\\b",
+      "replacement": "use"
+    }
+  ],
+  "latent_undefined_terms": [
+    "MULTIPLE"
+  ]
+}

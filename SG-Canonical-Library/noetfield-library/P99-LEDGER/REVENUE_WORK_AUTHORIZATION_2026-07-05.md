@@ -60,7 +60,7 @@ The following continue in parallel to downstream worker dispatch:
 **Remaining Lane Receipts (5 lanes):**
 - Noetfield Governance (sina-governance-SSOT)
 - Noetfield OS (noetfeld-OS)
-- TrustField Technologies
+- TrustField
 - Studio IDE (noetfield-studio-ide)
 - SinaaiMonoRepository
 

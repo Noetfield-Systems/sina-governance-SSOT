@@ -33,7 +33,7 @@ Add traffic row: `www traffic → intake conversion rate`.
 |----------|------|
 | Migration | `infrastructure/supabase/migrations/001_workflow_census_v1.sql` |
 | Apply script | `scripts/apply_workflow_census_migration_v1.py` |
-| Census motor | `scripts/workflow_census_v1.py` |
+| Census Scheduler and executor | `scripts/workflow_census_v1.py` |
 | Value-class rules | `data/workflow_census_value_class_rules_v1.json` |
 | Gateway/traffic extensions | `data/workflow_census_extensions_v1.json` |
 | Weekly GHA | `.github/workflows/workflow-census-weekly-v1.yml` (Mon 08:00 UTC) |
@@ -47,7 +47,7 @@ Add traffic row: `www traffic → intake conversion rate`.
 1. **NONE for 14 days** → propose retirement (founder-gated kill, machine-drafted).
 2. **META cost > GUARD+REVENUE cost** → `audit_status RED` (system grooming itself).
 3. **Every loop must name `receipt_target`** — blank → flag rule 3.
-4. **REVENUE lane gaps** — missing `gateway_outbound` motor or REVENUE loops with zero receipts → flag rule 4.
+4. **REVENUE lane gaps** — missing `gateway_outbound` Scheduler and executor or REVENUE loops with zero receipts → flag rule 4.
 
 ---
 
@@ -62,7 +62,7 @@ First local census: `workflow-census-20260706T090917Z` · **37 loops** · `audit
 | META | 22 | $10 |
 | NONE | 9 | $20 |
 
-**Rule 4:** `gateway_outbound` motor **missing** — nothing sends offers.  
+**Rule 4:** `gateway_outbound` Scheduler and executor **missing** — nothing sends offers.  
 **Rule 2:** META+NONE spend > GUARD+REVENUE — system grooming itself.  
 **Traffic row:** 11,250 visits/24h · **0 non-test leads** — funnel or bot question.
 

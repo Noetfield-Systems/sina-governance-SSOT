@@ -34,7 +34,7 @@ A deterministic brain for their stack, built from the founder's own proven templ
 
 1. **Locked definitions** — *their* vocabulary/framing/strategy/claims, extracted-then-approved (provenance-tagged, no blank-page), git-locked as their SSOT.
 2. **A raw deterministic decision-core** — code that decides over their definitions (same state → same decision), on the kernel. NOT a model; empty + their meaning.
-3. **A soup-wall** — LLMs (their choice, model-agnostic) called as disposable workers that draft/execute language-shaped subtasks; a deterministic sanitizer enforces they never introduce meaning/claims/status the core didn't decide.
+3. **A soup-wall** — LLMs (their choice, vendor-neutral) called as disposable workers that draft/execute language-shaped subtasks; a deterministic sanitizer enforces they never introduce meaning/claims/status the core didn't decide.
 4. **A gated learning loop** — failures → proposed definition-updates → sandbox → verify → client-approve → version bump. Their brain sharpens without drifting.
 5. **The governance substrate** — independent verifier, gate, content-identity, receipts — so their brain is trustworthy unattended and everything it does is auditable.
 6. **The embodied patterns** — zero-drift, anti-theater, auto-heal, poison-detection, running (see `pattern-factory.md`). These are the *features*.

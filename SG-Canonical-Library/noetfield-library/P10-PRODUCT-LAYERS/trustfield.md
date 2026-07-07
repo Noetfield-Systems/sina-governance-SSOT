@@ -4,7 +4,7 @@
 **First written:** 2026-07-03 12:34 PDT
 
 ## Entity relationship (corrected — do not confuse)
-- **TrustField Technologies Inc.** is a **separate venture/company** — its own entity, targeting regulated financial workflows (Canada). Name reserved with BC Registries; incorporation in progress.
+- **TrustField** is a **separate venture/company** — its own entity, targeting regulated financial workflows (Canada). Name reserved with BC Registries — not incorporated, not filed.
 - **Noetfield Systems Inc. is a SERVICE PROVIDER to TrustField — not its parent.** TrustField is NOT a Noetfield subsidiary, product, or brand-skin.
 - Do not list TrustField under Noetfield's product tree. It is a distinct company that Noetfield/SourceA may provide infrastructure/services to.
 

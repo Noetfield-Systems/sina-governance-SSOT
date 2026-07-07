@@ -1377,7 +1377,7 @@ For construction/trades, add:
 | Projects become custom consulting | High | High | Mandatory pattern database and productization threshold |
 | Integration complexity erodes margin | Medium | High | Pre-scope systems, charge integration premiums, use templates |
 | AI errors damage trust | Medium | High | Human approvals, testing, TrustField logs, draft-only mode |
-| Data privacy concerns block adoption | Medium | High | Data handling questionnaire, least privilege, local governance pack |
+| Data privacy concerns block adoption | Medium | High | Data handling questionnaire, Need-to-know access, local governance pack |
 | Founder becomes delivery bottleneck | High | High | Contractor bench, SOPs, productized audit |
 | SaaS too early distracts from revenue | Medium | High | Build internal tooling first, only productize repeated workflows |
 | Vertical focus too narrow | Low-medium | Medium | Start narrow, track adjacent opportunities |

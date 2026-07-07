@@ -1,0 +1,184 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "form frozen, audit quote preservation, or JSON no-write",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "Motor",
+      "line": 14,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 72,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "Motor",
+      "line": 76,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 85,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 110,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 166,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 175,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 186,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "model-agnostic",
+      "line": 15,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "model-agnostic",
+      "line": 95,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 15,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 15,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 95,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 97,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 97,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 98,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "client base",
+      "line": 16,
+      "fix": "governed reference environment",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "client base",
+      "line": 96,
+      "fix": "governed reference environment",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "SYNONYM_DRIFT",
+      "term": "model-agnostic",
+      "line": 15,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "SYNONYM_DRIFT",
+      "term": "model-agnostic",
+      "line": 95,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "SYNONYM_DRIFT",
+      "term": "client base",
+      "line": 16,
+      "fix": "governed reference environment",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "SYNONYM_DRIFT",
+      "term": "client base",
+      "line": 96,
+      "fix": "governed reference environment",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "agent_review": []
+}
