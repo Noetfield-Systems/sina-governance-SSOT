@@ -9,6 +9,9 @@
 ## 0. THE ONE RULE FOR NEW SESSIONS (anti-drift)
 Everything here is ONE continuous thread built layer-by-layer. **Do not re-derive, do not re-argue settled framing, do not treat a new chat as a new project.** (SSOT v6 invariant 0.4: banked frames reopen only on a NEW FACT.) A new chat losing context is a *continuity* problem, not a signal to rebuild. Read the spine, then continue.
 
+## 0b. LANGUAGE LAYER (before any output)
+Load **`P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`** (Tier 0 — every agent). Escalation / disputes / new specialist roles → **`NOETFIELD_DICTIONARY_v1.md`**. Guide → **`P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`**. Full word audit → **`P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`**.
+
 ## 1. AUTHORITY ORDER (lower number wins on conflict)
 ```
 P0 FOUNDATION-SPINE  ← the constitution (SSOT v6) + index + L0 runtime + governed-autorun
@@ -42,7 +45,7 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.
 - **Receipts, not diagrams; mechanical, not prose; proven by rejection (negative proof).**
-- **Run 24/7 pursuing targets; stop only for genuine harm (a blocker).** The floor is immutable — a self-improving system can't weaken its own brakes.
+- **Run governed loops pursuing targets; stop only for genuine harm (a blocker).** Live “24/7” = motor dispatch + fresh proof receipt — not Cursor/Mac/founder manual. The floor is immutable — a self-improving system can't weaken its own brakes.
 - Business = **pattern factory**: prove patterns (zero-drift, anti-theater, auto-heal) on our own lines, sell them; Sina = native-pattern-thinker/trader.
 
 ## 4. NO TECHNICAL BLOCKER — THE GAP IS COMMERCIAL (the real target)

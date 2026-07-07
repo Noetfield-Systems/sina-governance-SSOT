@@ -17,6 +17,9 @@
 - `R_DOMAIN_SPLIT.md` — the R1–R7 portability table (which rules cross into brain contexts).
 - `VERSIONING_RULE.md` — the filename+header pattern, copy-paste form.
 - `OPEN_BLOCKERS.md` — the current real blockers (per targets-vs-blockers: only genuine harm/impossible stops the system).
+- `../P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md` — mandatory short vocabulary (Tier 0).
+- `../P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md` — long-form word SSOT (escalation).
+- `../P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` — terminology vs dictionary vs doctrine routing.
 
 ## The R1–R7 portability table (canonical)
 | Rule | Domain | Portable to agentic-brain? |

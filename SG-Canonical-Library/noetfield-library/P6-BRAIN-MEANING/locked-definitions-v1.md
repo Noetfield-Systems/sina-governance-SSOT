@@ -24,7 +24,9 @@ terms{sourcea,forge} · claims[{id,approved_text,requires_status_signal,status_k
 decision-core-v1 (deterministic Python over this file) → soup-wall-v1 (Llama drafts the decided answer + sanitizer) → learning-proposal-v1 (gated definition-updates). On the Llama-mouth deploy + substrate.
 
 ## Base-model note
-Per base-model-first-class-language: this file IS the model's language layer, loaded before any other asset. Not config — language. LOCKED items = word definitions (changing one changes what the model means downstream).
+Per base-model-first-class-language: this file IS the model's language layer for **public SourceA claims**, loaded before any other brain asset. Not config — meaning. LOCKED items = word definitions (changing one changes what the model means downstream).
+
+**System vocabulary (receipt, loop, governed, census classes):** `NOETFIELD_TERMINOLOGY_v1.md` + escalation `NOETFIELD_DICTIONARY_v1.md` — not duplicated here.
 
 ---
 *v0.1 (2026-07-03 12:34 PDT) — first write. Locked-definitions draft state + 4 open founder decisions + structure + downstream build. From this chat.*

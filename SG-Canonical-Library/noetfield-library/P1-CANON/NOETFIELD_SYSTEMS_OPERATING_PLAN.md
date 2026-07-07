@@ -936,7 +936,7 @@ Open to a short call next week?
 ### Referral Offer
 
 - 10% of first project fee or reciprocal referral.
-- Co-branded AI Operations Audit for their client base.
+- Co-branded AI Operations Audit for their clients (partner channel — not an unprovable Noetfield client roster).
 - Partner dashboard later through TrustField.
 
 ## Partnership System
