@@ -1,23 +1,36 @@
 # NOETFIELD_DICTIONARY_v1
 
-**Long-form vocabulary SSOT · escalation & authoring layer**
+**Meaning authority · foundational · broader · escalation-only**
 
-Status: `v1` · **Not** loaded by every worker by default.  
-Short daily form: `NOETFIELD_TERMINOLOGY_v1.md` · Layer guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`
+Status: `v1` · **Source** from which terminology entries are minted. Not loaded on every worker output by default.
+
+Answers: **“What does this really mean, and is it allowed to exist?”**  
+Wording (daily): `NOETFIELD_TERMINOLOGY_v1.md` — one line minted **from** this file, never the reverse.  
+Layer guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`
 
 ---
 
-## How to use this file
+## Hard gate (minting rule)
 
-Read a **dictionary entry** when:
-- Two agents or docs disagree on a word
-- You are writing a **new job, task cell, specialist role, or contract SKU**
-- Customer copy might overclaim
-- You need **reasoning**, not just the one-line terminology rule
+**No new job, task, specialist, role, product page, contract clause, or receipt field** enters the system without:
 
-Every dictionary entry must eventually have a terminology line if the word is daily-use.
+- an **existing entry** in this dictionary, or  
+- a **new entry authored and versioned here first** (founder lock → bump dictionary version)
 
-**Entry format:** Meaning · Why we chose this · IS NOT · Edge cases · Examples · Related · Doctrine links
+Only after dictionary lock may the terminology one-liner be minted.
+
+---
+
+## When to load this file
+
+- Two agents or docs disagree on meaning  
+- Authoring a **new** job, task cell, specialist, role, page, clause, or receipt field  
+- Customer copy might overclaim — read **public rewrite** section of the entry  
+- Escalation: dispatch sets `load_dictionary: true`
+
+Every daily-use word **must** have a terminology line minted from its dictionary entry.
+
+**Entry format:** Meaning · Why it exists · Wrong readings (IS NOT) · Edge cases · Examples · **Conflict rule** · **Public rewrite** · Related · Doctrine links
 
 ---
 
@@ -42,6 +55,14 @@ Investors, customers, and our own census ask one question: *did it actually run?
 **Examples**  
 - PASS: `autorun-cycle-receipt-v2` with op_key + `supabase_sink.ok=true`  
 - FAIL: Agent says “I fixed the loop” with no cycle row  
+
+**Conflict rule**  
+Dictionary meaning wins over filename (`*_RECEIPT_*`), chat “done,” and doctrine metaphor. If terminology and dictionary disagree, fix terminology in the same change set. Proof receipt requires fielded schema; guard snapshots are observation records.
+
+**Public rewrite**  
+- Allowed: “verifiable record,” “proof on disk,” “machine-checked result”  
+- Banned: “we guarantee outcomes,” “certified,” “100% verified” without schema cite  
+- Plain substitute when proof missing: “unverified — no receipt yet”
 
 **Related:** deploy-truth · proof receipt · claim · receipt ladder · negative proof  
 **Doctrine:** `receipts-not-diagrams.md` · `mechanical-not-prose.md` · GOVERNED_AUTORUN L6–L8
@@ -292,16 +313,18 @@ Repair theater on META loops burns META budget (census Rule 2).
 
 ```
 ## Term name
-**Meaning** (plain English, 2–4 sentences)
-**Why** (reasoning — why this word, why not synonym)
-**IS NOT** (common misread)
+**Meaning** (plain English — what it is)
+**Why it exists** (reasoning — why this word, not a synonym)
+**Wrong readings** (IS NOT — common misreads)
 **Edge cases**
 **Examples** (good vs bad)
+**Conflict rule** (what wins on disagreement; link to SSOT / census / doctrine)
+**Public rewrite** (if customer-facing: allowed phrasing · banned phrasing · plain-English substitute)
 **Related**
 **Doctrine / files**
 ```
 
-Founder locks → compress to TERMINOLOGY § → update SSOT_INDEX → run terminology audit on affected docs.
+Founder locks dictionary entry → bump dictionary version → **mint** terminology one-liner → update SSOT_INDEX → run terminology lint on affected surfaces.
 
 ---
 

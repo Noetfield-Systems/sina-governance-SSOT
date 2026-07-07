@@ -1,15 +1,21 @@
 # NOETFIELD_TERMINOLOGY_v1
 
-**Locked short-form vocabulary · machine-enforceable · mandatory Tier 0**
+**Wording authority · daily · mandatory · machine-enforceable · Tier 0**
 
-Status: `v1` · Load before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.  
-Long form: `NOETFIELD_DICTIONARY_v1.md` · Layer guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`
+Status: `v1` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
+
+Answers: **“What word do I write, right now?”** — one line per term.  
+Meaning source: `NOETFIELD_DICTIONARY_v1.md` (terminology is **minted from** dictionary — never the reverse).  
+Layer guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`  
+Enforcement: lint — synonym rewrite (§6) + banned register (§7).
 
 ---
 
 ## The one rule
 
-Use the meaning here. If a word matters and is not here, add a **dictionary** entry first, then add the short line here. Never invent a private meaning in a prompt, receipt, or page.
+Use the wording here. If the term is not here, **stop** — author or locate the **dictionary** entry first, mint the terminology line, then write. Never invent a private meaning in a prompt, receipt field, or page.
+
+**Hard gate:** no new job, task, specialist, role, product page, contract clause, or receipt field without a dictionary entry (existing or newly versioned).
 
 ---
 
@@ -170,5 +176,7 @@ Customer tone: plain institutional English; state what we do; cut overclaim.
 
 ## §8 — Versioning
 
-Add/change: founder lock · tombstone old meaning in dictionary · bump `NOETFIELD_TERMINOLOGY_v1` → v1.1 etc.  
-This file beats prompt shorthand and model habit.
+Terminology rows are **minted from** dictionary entries — never authored standalone.
+
+Add/change: dictionary entry first (founder lock) → mint or update terminology line here → bump `NOETFIELD_TERMINOLOGY_v1` version in same change set.  
+This file beats prompt shorthand and model habit on **word choice**; dictionary beats this file on **meaning**.

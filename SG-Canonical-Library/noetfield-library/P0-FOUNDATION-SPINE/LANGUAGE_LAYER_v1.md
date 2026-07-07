@@ -5,67 +5,91 @@
 
 ---
 
-## Why three layers exist
+## Two authorities (not one file wearing two hats)
 
-Agents confuse **logs with receipts**, **always-on with governed loops**, and **governed as decoration**. Customers hear **arrogance** where we mean **selective**. The fix is not “write better prompts once” — it is a **language SSOT** that every artifact, job spec, specialist brief, and public page must obey.
+### TERMINOLOGY — **wording authority**
+
+- Daily · mandatory · machine-enforceable  
+- **One line per term** · loaded on **every output**  
+- Answers: **“What word do I write, right now?”**  
+- Enforced by lint: **synonym rewrite + banned register**
+
+**File:** `P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`
+
+### DICTIONARY — **meaning authority**
+
+- Foundational · broader · **escalation-only** (not loaded on every worker tick)  
+- **Long entry:** plain meaning · why it exists · wrong readings · example · **conflict rule** · **public rewrite**  
+- Answers: **“What does this really mean, and is it allowed to exist?”**  
+- **Source that terminology entries are minted FROM** — never the reverse
+
+**File:** `P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md`
 
 ---
 
-## The stack (authority on conflict)
+## The minting rule (hard gate)
+
+**No new job, task, specialist, role, product page, contract clause, or receipt field enters the system without:**
+
+1. An **existing dictionary entry**, or  
+2. A **new dictionary entry authored and versioned first** (founder lock → bump dictionary version)
+
+**Then** — and only then — mint the one-line terminology row from that dictionary entry.
 
 ```
-1. NOETFIELD_TERMINOLOGY_v1     ← short, mandatory, machine-enforceable (every agent, every day)
-2. NOETFIELD_DICTIONARY_v1       ← long plain-English + reasoning (escalation, disputes, new roles)
-3. P7 DOCTRINE files             ← why we operate this way (not word definitions)
-4. P6 locked-definitions-v1      ← brain public meaning only (claims, terms, forbidden_public)
-5. P2 SSOT / P0 constitution     ← structural rules (R-split, versioning, invariants)
+Dictionary (meaning)  →  Terminology (wording)  →  artifact / page / schema field
+         ↑                        ✗ never reverse
+   authored first
 ```
 
-**Rule:** Terminology wins over synonym habit. Dictionary wins over terminology when they disagree — then terminology must be updated in the same change set. Doctrine explains; it does not redefine words casually.
+Terminology is **compressed from** dictionary. Doctrine explains *why we operate*; it does not mint words. P6 `locked-definitions-v1` holds **brain public claims** only — not system vocabulary.
 
 ---
 
-## Terminology vs dictionary
+## Authority stack (on conflict)
 
-| | **Terminology** | **Dictionary** |
-|---|-----------------|----------------|
-| **Purpose** | Same word → same meaning everywhere, fast | Understand deeply when stakes are high |
-| **Length** | One line + IS NOT + example | Paragraphs: meaning, reasoning, edge cases, links |
-| **Who loads** | **Every agent** (Tier 0) | Architect, founder, dispute resolution, new job/specialist authoring |
-| **Enforcement** | Lint, census, deploy gates, banned-register | Human judgment + founder lock |
-| **Add a word** | Founder locks → bump terminology version | Long entry first → compress into terminology if daily-use |
+```
+1. NOETFIELD_DICTIONARY_v1      ← meaning wins; tombstone old readings here
+2. NOETFIELD_TERMINOLOGY_v1     ← wording must match dictionary; update same change set if drift
+3. P7 DOCTRINE                  ← operating law, not ad-hoc definitions
+4. P6 locked-definitions-v1     ← SourceA public claims / forbidden_public
+5. P2 SSOT / P0 constitution    ← structure (R-split, versioning, invariants)
+```
 
 ---
 
 ## Load order for agents
 
 ```
-Tier 0:  AGENT_LAYERED_LAW (6 universal laws)
-         + NOETFIELD_TERMINOLOGY_v1 (mandatory before any output)
+Tier 0:  AGENT_LAYERED_LAW (universal laws)
+         + NOETFIELD_TERMINOLOGY_v1 (every output — wording authority)
 Tier 1:  Role law only
 Tier 2:  Mission brief only
-Escalation: NOETFIELD_DICTIONARY_v1 when meaning is disputed or a new specialist role is defined
+Authoring / dispute:  NOETFIELD_DICTIONARY_v1 (meaning authority — dispatch may set load_dictionary: true)
 ```
 
-Workers **never** load the full dictionary unless the dispatch explicitly says `load_dictionary: true`.
+Workers **do not** load the full dictionary unless authoring a new term, role, page, clause, or field — or resolving a meaning dispute.
 
 ---
 
-## Artifact types (receipt family)
+## Lint enforcement (terminology only)
 
-| Type | When to use | Counts as “receipt” in terminology? |
-|------|-------------|-------------------------------------|
-| **Proof receipt** | Fielded machine record with schema, op_key, sink ack | Yes |
-| **Observation record** | SG guard pass, health pass, census run — honest snapshot | Only if labeled; default call it **observation record** |
-| **Claim** | Agent or log says PASS/done without fielded proof | Never |
+Machine checks (present or planned):
+
+- **Synonym rewrite** — terminology §6 map (e.g. `model-agnostic` → `vendor-neutral`)  
+- **Banned register** — terminology §7 (hype, needy tone, public `%`, unprovable roster)  
+- **Mint gate** — new schema field / task cell name must reference dictionary entry id or block merge
+
+Dictionary is **not** linted line-by-line; it is **locked by version** and founder sign-off.
 
 ---
 
 ## Change control
 
-- New daily word → dictionary entry (long) → terminology line → SSOT_INDEX row.
-- Tombstone old meaning in dictionary; never silently rewrite terminology.
-- Public website copy: terminology §7 tone + dictionary commercial entries before publish.
+| Action | Order |
+|--------|--------|
+| New word | Dictionary entry (long) → founder lock → bump dictionary version → mint terminology line → SSOT_INDEX |
+| Change meaning | Edit dictionary · tombstone old reading · update terminology same PR · never silent |
+| Public page | Dictionary public-rewrite section + terminology tone §7 before publish |
 
-**Files:** `P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md` · `P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md`  
 **Audit ledger:** `P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`

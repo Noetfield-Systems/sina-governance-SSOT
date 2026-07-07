@@ -25,11 +25,13 @@
 ## Layer placement (new)
 
 ```
-P0  LANGUAGE_LAYER_v1.md          — routes terminology vs dictionary vs doctrine
-P7  NOETFIELD_TERMINOLOGY_v1.md  — Tier 0 mandatory short form
-P7  NOETFIELD_DICTIONARY_v1.md   — escalation long form
+P0  LANGUAGE_LAYER_v1.md          — wording vs meaning authorities + minting rule
+P7  NOETFIELD_DICTIONARY_v1.md   — meaning authority (source); escalation + authoring
+P7  NOETFIELD_TERMINOLOGY_v1.md  — wording authority (minted from dictionary); lint-enforced Tier 0
 P6  locked-definitions-v1        — brain public claims only (unchanged scope)
 ```
+
+**Minting rule:** Dictionary → Terminology → artifact. Never reverse. No new job/task/specialist/role/page/clause/receipt field without dictionary entry first.
 
 ---
 

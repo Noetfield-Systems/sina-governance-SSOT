@@ -10,7 +10,10 @@
 Everything here is ONE continuous thread built layer-by-layer. **Do not re-derive, do not re-argue settled framing, do not treat a new chat as a new project.** (SSOT v6 invariant 0.4: banked frames reopen only on a NEW FACT.) A new chat losing context is a *continuity* problem, not a signal to rebuild. Read the spine, then continue.
 
 ## 0b. LANGUAGE LAYER (before any output)
-Load **`P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md`** (Tier 0 — every agent). Escalation / disputes / new specialist roles → **`NOETFIELD_DICTIONARY_v1.md`**. Guide → **`P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md`**. Full word audit → **`P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`**.
+**Wording (every output):** `P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md` — Tier 0, lint-enforced.  
+**Meaning (authoring / disputes):** `P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md` — dictionary first; terminology minted from it, never reverse.  
+**Gate:** no new job, task, specialist, role, page, clause, or receipt field without dictionary entry.  
+Guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` · Audit: `P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`.
 
 ## 1. AUTHORITY ORDER (lower number wins on conflict)
 ```
