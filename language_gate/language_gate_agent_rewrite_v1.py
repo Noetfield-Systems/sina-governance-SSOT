@@ -18,6 +18,8 @@ from language_gate_core_v1 import (  # noqa: E402
     Finding,
     SURFACE_POLICY,
     is_compound_slug,
+    is_json_path,
+    is_rewrite_locked,
     load_dictionary,
     normalize_public_phrasing,
     protected_spans,
@@ -42,8 +44,10 @@ def _substitute_outside_spans(text: str, pattern: re.Pattern[str], replacement: 
     return "".join(parts), changed
 
 
-def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings: list[Finding]) -> tuple[str, list[dict[str, Any]]]:
+def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings: list[Finding], *, file_path: str | None = None) -> tuple[str, list[dict[str, Any]]]:
     """Deterministic plain-English rewrite using dictionary public phrasing."""
+    if is_rewrite_locked(file_path) or is_json_path(file_path):
+        return text, []
     if not SURFACE_POLICY[surface]["plain_rewrite"]:
         return text, []
 
@@ -58,6 +62,8 @@ def plain_english_pass(text: str, surface: str, dictionary: Dictionary, findings
             if " " not in term_key and len(term_key) <= 8:
                 continue
             replacement = normalize_public_phrasing(phrase) or phrase
+            if "`" in replacement or "CODE_ALIAS" in replacement:
+                continue
             if not replacement or replacement.lower() == term_key.lower():
                 continue
             pat = re.compile(rf"\b{re.escape(term_key)}\b", re.IGNORECASE)

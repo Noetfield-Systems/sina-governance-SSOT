@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Language gate pipeline RC2: regex lint → agent plain-English rewrite."""
+"""Language gate pipeline RC3: regex lint → agent plain-English rewrite."""
 
 from __future__ import annotations
 
@@ -16,6 +16,8 @@ from language_gate_core_v1 import (  # noqa: E402
     TOOL_VERSION,
     decide,
     infer_surface,
+    is_json_path,
+    is_rewrite_locked,
     load_dictionary,
     scan,
     write_receipt,
@@ -33,12 +35,15 @@ def run_pipeline(
     dictionary = load_dictionary()
     resolved_surface = infer_surface(str(file_path), None if surface == "auto" else surface)
     text = file_path.read_text(encoding="utf-8")
-    findings, regex_rewritten = scan(text, resolved_surface, dictionary)
+    rel_path = str(file_path)
+    locked = is_rewrite_locked(rel_path)
+    json_file = is_json_path(rel_path)
+    findings, regex_rewritten = scan(text, resolved_surface, dictionary, file_path=rel_path)
     decision, blockers = decide(findings)
 
     regex_applied = False
     working = text
-    if decision != "FAIL" and regex_rewritten != text:
+    if decision != "FAIL" and not locked and not json_file and regex_rewritten != text:
         working = regex_rewritten
         regex_applied = True
         if write:
@@ -47,8 +52,8 @@ def run_pipeline(
     agent_applied = False
     agent_actions: list = []
     sidecar = None
-    if decision != "FAIL" and not skip_agent:
-        agent_text, agent_actions = plain_english_pass(working, resolved_surface, dictionary, findings)
+    if decision != "FAIL" and not skip_agent and not locked and not json_file:
+        agent_text, agent_actions = plain_english_pass(working, resolved_surface, dictionary, findings, file_path=rel_path)
         if agent_text != working:
             agent_applied = True
             working = agent_text
@@ -73,6 +78,8 @@ def run_pipeline(
             "agent_actions_count": len(agent_actions),
             "sidecar": str(sidecar) if sidecar else None,
             "strict_undefined": strict_undefined,
+            "rewrite_locked": locked,
+            "json_file": json_file,
             "tool_version": TOOL_VERSION,
         },
     )

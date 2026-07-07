@@ -14,7 +14,7 @@ GATE_DIR = Path(__file__).resolve().parent
 DICT_PATH = GATE_DIR / "dictionary_index.json"
 SUPPLEMENT_PATH = GATE_DIR / "dictionary_rc2_supplement.json"
 RECEIPTS_DIR = GATE_DIR / "receipts"
-TOOL_VERSION = "language_gate_rc2_v1"
+TOOL_VERSION = "language_gate_rc3_v1"
 
 SURFACES = frozenset({"internal", "public", "website", "contract", "prompt", "receipt"})
 
@@ -70,6 +70,38 @@ STRUCTURAL_ALLOWLIST = {
     "noetfield governance", "noetfield os", "package assembly", "remaining lane receipts",
 }
 
+# Census verbs, status tokens, and section labels — not mintable vocabulary.
+CENSUS_VERB_ALLOWLIST = {
+    "decide", "verify", "guard", "active", "target", "meaning", "why", "unlock",
+    "submitted", "proposed", "check", "analyze", "verified", "prove", "retire",
+    "blocker", "runtime rules", "doctrine i", "doctrine ii", "doctrine iii",
+    "doctrine iv", "doctrine v", "examples", "row ids", "read first", "located",
+    "foundation", "unreachable", "superseded", "quarantined", "spine installed",
+    "meta", "none", "fix", "local", "binding", "gated", "escalate",
+    "execute", "confirm", "commit", "control", "before", "after ship", "honest",
+    "identity", "built", "deferred", "corrected", "serve", "fixed", "resolved",
+    "short", "approved", "frozen", "failed", "mandatory", "registry",
+    "off", "offer", "while r", "advantage", "audit/execute", "configuration only",
+    "founding instruction", "learning gate", "brain registry", "conflict resolution",
+    "canonicalize", "governing ssot", "approve to spec", "commit ssot",
+    "founder decide", "line engine", "live brain", "one python", "concrete line engine",
+    "blueprint explosion", "from kernel", "advanced logic", "high volume",
+    "initial t", "title case", "build tonight", "gateway blueprint", "draft ssot",
+    "reduce sina", "yes i", "sina gateway", "sina kazemnezhad", "forge", "buildmatch",
+    "separate", "lane a", "service provider", "fintrac", "r1/r2/r6/r7", "r3/r4/r5",
+}
+
+SCAN_EXEMPT_BASENAMES = frozenset({
+    "noetfield_dictionary_v1.md",
+    "noetfield_terminology_v1.md",
+    "noetfield_dictionary_batch_a-z_v1.md",
+})
+
+REWRITE_LOCKED_MARKERS = (
+    "/p0-foundation-spine/",
+    "/p0-core/",
+)
+
 # Registered product / entity / vendor names allowed without a dictionary row.
 ENTITY_ALLOWLIST = {
     "sourcea", "sourcea brain", "sourcea brain agent", "noetfield systems inc",
@@ -86,7 +118,7 @@ _RUNTIME_ENTITY: set[str] | None = None
 def effective_structural_allowlist() -> set[str]:
     global _RUNTIME_STRUCTURAL
     if _RUNTIME_STRUCTURAL is None:
-        merged = set(STRUCTURAL_ALLOWLIST)
+        merged = set(STRUCTURAL_ALLOWLIST) | CENSUS_VERB_ALLOWLIST
         if SUPPLEMENT_PATH.is_file():
             sup = json.loads(SUPPLEMENT_PATH.read_text(encoding="utf-8"))
             merged |= {str(x).lower() for x in sup.get("structural_allowlist") or []}
@@ -254,6 +286,8 @@ def infer_surface(path: str, explicit: str | None = None) -> str:
             raise ValueError(f"unknown surface: {explicit}")
         return explicit
     p = path.lower().replace("\\", "/")
+    if "/p0-foundation-spine/" in p or "/p0-core/" in p:
+        return "internal"
     if "/prompts/" in p or p.endswith("prompt.md") or "/.cursor/" in p:
         return "prompt"
     if p.endswith(".json") and ("/receipts/" in p or "receipt" in p):
@@ -281,6 +315,34 @@ def line_text_at(text: str, pos: int) -> str:
 
 def is_markdown_header_line(line: str) -> bool:
     return bool(re.match(r"^\s{0,3}#{1,6}\s+", line))
+
+def is_scan_exempt(file_path: str | None) -> bool:
+    if not file_path:
+        return False
+    return Path(file_path).name.lower() in SCAN_EXEMPT_BASENAMES
+
+
+def is_rewrite_locked(file_path: str | None) -> bool:
+    if not file_path:
+        return False
+    p = file_path.lower().replace("\\", "/")
+    return any(marker in p for marker in REWRITE_LOCKED_MARKERS)
+
+
+def is_json_path(file_path: str | None) -> bool:
+    return bool(file_path and Path(file_path).suffix.lower() == ".json")
+
+
+def is_section_title_line(line: str) -> bool:
+    stripped = line.strip()
+    if is_markdown_header_line(line):
+        return True
+    if re.match(r"^§\d", stripped):
+        return True
+    if re.match(r"^\*\*[A-Za-z0-9][^*]{1,60}\*\*\s*$", stripped):
+        return True
+    return False
+
 
 
 def protected_spans(text: str) -> list[tuple[int, int]]:
@@ -327,7 +389,7 @@ def is_skippable_undefined(term: str, *, line: str, text: str, start: int, end: 
         return True
     if in_protected_span(spans, start, end):
         return True
-    if is_markdown_header_line(line):
+    if is_markdown_header_line(line) or is_section_title_line(line):
         return True
     if is_hyphen_fragment(text, start, end):
         return True
@@ -368,8 +430,11 @@ class Finding:
         }
 
 
-def scan(text: str, surface: str, dictionary: Dictionary) -> tuple[list[Finding], str]:
+def scan(text: str, surface: str, dictionary: Dictionary, *, file_path: str | None = None) -> tuple[list[Finding], str]:
+    if is_scan_exempt(file_path):
+        return [], text
     policy = SURFACE_POLICY[surface]
+    rewrite_locked = is_rewrite_locked(file_path)
     findings: list[Finding] = []
     rewritten = text
 
@@ -377,16 +442,16 @@ def scan(text: str, surface: str, dictionary: Dictionary) -> tuple[list[Finding]
         pat = re.compile(rf"\b{re.escape(alias)}\b", re.IGNORECASE)
         for m in pat.finditer(text):
             findings.append(
-                Finding("ALIAS_RETIRED", m.group(0), line_of(text, m.start()), canonical, auto_fixed=True)
+                Finding("ALIAS_RETIRED", m.group(0), line_of(text, m.start()), canonical, auto_fixed=not rewrite_locked)
             )
-        if policy["autofix_alias"]:
+        if policy["autofix_alias"] and not rewrite_locked:
             rewritten = pat.sub(canonical, rewritten)
 
     for pat_str, canon in SYNONYM_AUTOFIX.items():
         pat = re.compile(pat_str, re.IGNORECASE)
         for m in pat.finditer(text):
-            findings.append(Finding("SYNONYM_DRIFT", m.group(0), line_of(text, m.start()), canon, auto_fixed=True))
-        if policy["autofix_alias"]:
+            findings.append(Finding("SYNONYM_DRIFT", m.group(0), line_of(text, m.start()), canon, auto_fixed=not rewrite_locked))
+        if policy["autofix_alias"] and not rewrite_locked:
             rewritten = pat.sub(canon, rewritten)
 
     if policy["block_banned"]:
