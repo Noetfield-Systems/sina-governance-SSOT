@@ -21,132 +21,131 @@ Use the wording here. If the term is not here, **stop** — author or locate the
 
 ## §1 — Core system nouns
 
-**Receipt** — machine-readable record that *proves* what happened, with defined fields (who, model, cost, tokens, success, latency, time, sink ack when applicable).  
+**Receipt** — A machine-readable record that proves what happened. It must have defined fields: who, model, cost, tokens, success, latency, time, and sink ack when applicable.  
 IS NOT: a log line, chat “done,” or deploy log without live verify.  
 EX: “Worker said PASS but no receipt → unverified.”
 
-**Observation record** — honest guard snapshot (health pass, census run) with schema and timestamp; may lack full proof-receipt fields.  
+**Observation record** — A status snapshot with a schema and timestamp, such as a health check or census run. It does not contain full receipt fields.  
 IS NOT: a substitute for proof receipt on customer or revenue claims.  
 EX: “Fleet health pass is an observation record, not R≥1 proof.”
 
-**Claim** — any success statement without fielded receipt.  
+**Claim** — Any statement of success that does not have a structured receipt.  
 IS NOT: a receipt.
 
-**SSOT** — the one authoritative file/record when copies disagree.  
+**SSOT** — The single authoritative file or record when different copies disagree.  
 IS NOT: the latest file open in the editor.
 
-**Doctrine** — locked operating rule, versioned, not re-argued each session.  
+**Doctrine** — A locked and versioned operating rule that is not debated during a session.  
 IS NOT: chat opinion or draft.
 
-**Artifact** — saved, versioned library deliverable.  
+**Artifact** — A saved and versioned file or deliverable in the library.  
 IS NOT: chat scratch.
 
-**Library** — tiered `noetfield-library` SSOT/doctrine/architecture set.  
+**Library** — The approved set of rules, doctrine, and architecture files under `noetfield-library`.  
 IS NOT: random notes folder.
 
-**Lane** — scoped path for work or vendor with explicit rules.  
+**Lane** — A specific path for work or a provider that has clear rules.  
 IS NOT: vague category.
 
-**Kernel** — core runtime other modules attach to.  
+**Kernel** — The core running system that other modules connect to.  
 IS NOT: any script that runs once.
 
-**Motor** — cloud scheduler that dispatches loops (e.g. CF cron → Railway executor).  
+**Motor** — A cloud scheduler that starts loops. Examples include Cloudflare cron or a Railway executor.  
 IS NOT: the loop body itself.
 
-**Loop** — repeating scheduled work unit with interval, cost cap, kill path, receipt per tick.  
+**Loop** — A recurring task that runs on a schedule with a set interval, cost cap, kill path, and a receipt for each run.  
 IS NOT: unbounded “always-on,” Cursor session, or Mac launchd without motor receipt.
 
-**Reconciler** — single owner of final state resolving conflicts.  
+**Reconciler** — The single component that resolves conflicts and decides the final state.  
 IS NOT: any component that touches state.
 
 ---
 
 ## §2 — Governance & census
 
-**Governed** — explicit enforceable rules: caps, receipts, override, stop.  
+**Governed** — Having clear, enforceable rules such as limits, receipts, overrides, and stops.  
 IS NOT: “responsible-sounding.”
 
-**Deploy-truth** — what is live, verified on surface/API, not disk or agent report.  
+**Deploy-truth** — The actual state of the live system checked on the public page or API.  
 IS NOT: commit hash alone.
 
-**Drift** — committed truth ≠ deployed/live truth (schedule, hash, route, config).  
+**Drift** — A mismatch between the approved files and the live running setup, such as in schedule, hash, route, or configuration.  
 IS NOT: “we should improve someday.”
 
-**Fail-closed** — mismatch or missing proof → stop (exit 1, block deploy).  
+**Fail-closed** — Stopping the process or blocking a deployment if a check fails or proof is missing.  
 IS NOT: warn and continue.
 
-**Vendor-neutral** — no default vendor; routing earned on receipts, revocable.  
+**Vendor-neutral** — Using no default AI provider and routing work based on receipts, which can be canceled.  
 IS NOT: “agnostic” in customer text; not anti-vendor.
 
-**Cost cap** — hard ceiling; work stops at hit.  
+**Cost cap** — A strict limit where all work stops once the spending threshold is met.  
 IS NOT: soft budget.
 
-**Kill criteria** — written pre-pilot thresholds that end pilot if missed.  
+**Kill criteria** — Predefined conditions written before a pilot that will stop it if they are not met.  
 IS NOT: post-hoc judgment.
 
-**Escalation ladder** — fixed tier order (L1 → L1B → L2 …).  
+**Escalation ladder** — A fixed sequence of levels used to handle issues in order.  
 IS NOT: “use the biggest model when unsure.”
 
-**Least-knowledge** — agent gets minimum data/access for the task.  
+**Least-knowledge** — A security rule where an agent receives only the minimum data and access needed to perform its task.  
 IS NOT: load entire library.
 
-**GUARD** (census) — loop/receipt protects system integrity (verify, probe, audit).  
+**GUARD** (census) — A loop or receipt that protects the system by verifying, probing, or auditing.  
 IS NOT: META self-grooming.
 
-**REVENUE** (census) — loop/receipt serves stranger → payment / lead / delivery path (R≥1).  
+**REVENUE** (census) — A loop or receipt that directly serves an external user to generate a lead, payment, or delivery.  
 IS NOT: internal factory inbox drain.
 
-**META** (census) — loop/receipt serves system self-maintenance without direct R path.  
+**META** (census) — A loop or receipt that handles system self-maintenance without directly earning money.  
 IS NOT: excuse for unbounded cost.
 
-**NONE** (census) — no named receipt consumer 14+ days → propose retire.  
+**NONE** (census) — A loop with no active consumer for over 14 days, which should be retired.  
 IS NOT: “keep running just in case.”
 
-**FIX / RETIRE** (census verdict) — FIX only if GUARD or REVENUE consumer; else RETIRE, do not repair.  
+**FIX / RETIRE** (census verdict) — A decision to repair a loop only if it has a GUARD or REVENUE consumer, and to retire it otherwise.  
 EX: “workflow_audit FIX; inbox RETIRE.”
 
-**R≥1** — first payment receipt from a stranger (UNLOCK north star).  
+**R≥1** — The first receipt of payment received from an external user.  
 IS NOT: internal test or founder self-pay.
 
 ---
 
 ## §3 — Roles
 
-**Founder** — Sina; approves irreversible only.  
-**Architect** — design/review/delete unnecessary work; not feature coder.  
-**Worker** — ships change; not decider.  
-**Brain** — deterministic router; not LLM guess.  
-**Adversarial review** — try to break the plan; consensus triggers harder check.
+**Founder** — Sina, who only approves actions that cannot be reversed.  
+**Architect** — A role that designs, reviews, and removes unneeded work instead of writing features.  
+**Worker** — A role that implements and deploys changes but does not make decisions.  
+**Brain** — A rule-based system that routes tasks instead of using probabilistic guesses.  
+**Adversarial review** — A check where other systems or people try to find flaws in a plan.
 
 ---
 
 ## §4 — Doctrine shorthand
 
-**Soup vs raw** — LLM probabilistic vs deterministic exact layer.  
-**Return-on-cognition** — best move often deletes work.  
-**Targets vs blockers** — only genuine harm stops; else improve next tick.  
-**Split-brain** — two live copies both think canonical.  
-**Tombstone** — mark retired; never treat as live.  
-**Zero-founder validation** — system proves itself without founder in loop.  
-**Receipt ladder** — L0–L4 unlocks by receipts, not diagrams.
+**Soup vs raw** — A contrast between probabilistic LLM outputs and exact rule-based layers.  
+**Return-on-cognition** — A principle stating that the most effective action is often to remove unneeded work.  
+**Targets vs blockers** — A principle where only real damage stops a task, while minor issues are improved in the next run.  
+**Split-brain** — A condition where two live instances of a system both act as the authoritative source.  
+**Tombstone** — A marker used to flag retired items so they are never used.  
+**Zero-founder validation** — A process where the system verifies its own state without requiring the founder.  
+**Receipt ladder** — A sequence of levels unlocked only by verified receipts.
 
 ---
 
 ## §5 — Commercial (public-safe)
 
-**Selective** — few partners, evidence-chosen; standards not snobbery.  
-**Commercial alignment** — deal structure umbrella (NDA scope).  
+**Selective** — Working with only a few partners chosen based on evidence to maintain high standards.  
+**Commercial alignment** — The contract and business agreement under which partners operate.  
 IS NOT: “free API” ask.
 
-**Governed reference environment** — provable receipt-backed setup for diligence.  
+**Governed reference environment** — A verifiable, receipt-backed setup that partners can inspect.  
 IS NOT: unprovable “client base.”
 
-**Structured commercial participation** — revenue-share phrase; NDA only.  
-**Design partner** — scoped early pilot; not locked customer.  
-**NDA** — before numbers, volumes, private architecture.  
-**Reserved commercial figure** — contract `[●]` only; never public.
-
-**Diagnostic** — audit/assessment engagement; findings not live enforcement.  
+**Structured commercial participation** — A terms-of-revenue agreement that remains confidential.  
+**Design partner** — A partner in a limited early trial rather than a fully committed customer.  
+**NDA** — A confidentiality agreement signed before sharing metrics, volume, or internal design.  
+**Reserved commercial figure** — A confidential contract detail that is never made public.  
+**Diagnostic** — An engagement focused on auditing and assessment rather than active blocking.  
 IS NOT: “firewall deployed” unless customer receipt proves it.
 
 ---

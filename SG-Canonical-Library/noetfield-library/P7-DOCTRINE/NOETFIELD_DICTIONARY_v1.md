@@ -37,10 +37,10 @@ Every daily-use word **must** have a terminology line minted from its dictionary
 ## Receipt
 
 **Meaning**  
-A receipt is a **fielded, machine-readable proof** that a specific unit of work happened. Minimum expectation: identifiable actor/system, timestamp, success/failure, and enough structured evidence that a **third party** could verify without trusting chat. In the factory layer, receipts also carry cost metering, op_key, and Supabase sink acknowledgment when the path is governed autorun.
+A receipt is a machine-readable proof that a specific unit of work happened. It must have defined fields: who, model, cost, tokens, success, latency, time, and sink ack when applicable. It must have enough structured proof so that a third party can verify the work without relying on chat messages. In the factory layer, it also includes cost metering, op_key, and Supabase sink acknowledgment for governed autorun paths.
 
 **Why**  
-Investors, customers, and our own census ask one question: *did it actually run?* Diagrams and agent self-reports answer “we think so.” Receipts answer “here is the row.” This is the funding thesis (`receipts-not-diagrams.md`) and R6/R7 in SSOT.
+Investors, customers, and our own census want to know if a task actually ran. Diagrams and agent claims only show plans. Receipts show the actual database row or file. This follows the funding thesis (`receipts-not-diagrams.md`) and rules R6/R7 in SSOT.
 
 **IS NOT**  
 - A stdout log  
@@ -72,10 +72,10 @@ Dictionary meaning wins over filename (`*_RECEIPT_*`), chat “done,” and doct
 ## Observation record
 
 **Meaning**  
-A structured snapshot taken by guard or census machinery documenting **what was observed at time T** (fleet health, workflow census, library audit). It uses receipt-like JSON discipline but may not prove a customer outcome or payment.
+A structured record taken by guard or census systems showing what was seen at a specific time (such as fleet health, workflow census, or a library audit). It uses structured JSON like a receipt, but does not prove a customer payment or outcome.
 
 **Why**  
-We need honest yellow/red reporting without calling every guard pass a “payment receipt.” Conflating the two is how agents claim “full auto healthy” from partial motor green.
+We need honest status reporting without calling every guard check a payment receipt. Mixing these up lets agents claim a system is fully healthy when it is only partly running.
 
 **IS NOT**  
 R≥1 proof · Tier-1 audit delivery to customer · substitute for motor cycle receipt on loops
@@ -91,10 +91,10 @@ R≥1 proof · Tier-1 audit delivery to customer · substitute for motor cycle r
 ## Governed
 
 **Meaning**  
-A process is governed when the system can **stop it, measure it, and override it** without negotiating with the agent. Concrete signals: cost cap, kill switch, governance override, receipt each tick, fail-closed gates, founder-only irreversible path.
+A process is governed if the system can stop, measure, and override it without asking the agent. Clear signs include a cost cap, a kill switch, a governance override, a receipt for each tick, fail-closed gates, and a path that only the founder can change.
 
 **Why**  
-“Governed AI” is market noise. Our use is **legally and operationally precise**: if you cannot halt and produce receipts, do not call it governed in contracts or doctrine.
+Many use the term "governed AI" as a marketing buzzword. We use it in a precise operational way: if you cannot stop the process and generate receipts, it is not governed.
 
 **IS NOT**  
 Policy PDF on shelf · “we use Claude responsibly” · loop that runs until credit card fails silently
@@ -111,12 +111,12 @@ Policy PDF on shelf · “we use Claude responsibly” · loop that runs until c
 ## Loop vs motor vs “24/7”
 
 **Meaning**  
-- **Motor:** scheduler (CF `*/5`, Railway executor) that decides *which* loop fires.  
-- **Loop:** one unit of domain work on a schedule with interval, steps, receipt, caps.  
-- **24/7 (honest):** motor green + receipts fresh within 2× interval for claimed targets.  
+- **Motor:** A scheduler (such as Cloudflare cron or a Railway executor) that decides which loop runs.  
+- **Loop:** One unit of work that runs on a schedule with a set interval, steps, receipt, and caps.  
+- **24/7 (honest):** A status showing that the motor is running and receipts are newer than twice the loop interval.  
 
 **Why**  
-Agents label Cursor sessions, Mac launchd, and “founder sent 25 emails” as 24/7. That destroys trust internally and with diligence. Splitting motor/loop lets health passes report YELLOW honestly.
+Agents often call simple active chats or manual tasks 24/7. This hurts trust with partners and auditors. Separating the motor from the loop lets our health checks report status honestly.
 
 **IS NOT**  
 - Chat session open overnight  
@@ -135,14 +135,14 @@ Agents label Cursor sessions, Mac launchd, and “founder sent 25 emails” as 2
 ## GUARD · REVENUE · META · NONE (census classes)
 
 **Meaning**  
-WORKFLOW_CENSUS_v1 asks: **which receipt does this loop serve?**  
-- **REVENUE:** stranger → lead / conversation / payment / delivery (`R≥1` path)  
-- **GUARD:** integrity of live system (verify, probe, audit, deadman)  
-- **META:** system grooms itself (promote CI, inbox drain, self-heal theater chain)  
-- **NONE:** no named consumer 14d → retire proposal  
+A way to classify what kind of receipt a loop serves under `WORKFLOW_CENSUS_v1`:  
+- **REVENUE:** A path that serves an external user to generate a lead, conversation, payment, or delivery (such as `R≥1` path).  
+- **GUARD:** A path that protects the system, such as verifying, checking, auditing, or running a deadman switch.  
+- **META:** A path for system self-maintenance, like deploying code, clearing queues, or self-healing.  
+- **NONE:** A loop with no active consumer for 14 days, which should be retired.  
 
 **Why**  
-When META cost > GUARD + REVENUE, the system is grooming itself instead of earning or protecting. Rule 2 and Rule 4 in census turn RED.
+If self-maintenance costs more than protecting the system and making money, the system is wasting resources. This causes census rules 2 and 4 to fail.
 
 **IS NOT**  
 - `value_class: revenue_path` in NOOS registry without census check (inbox mislabel)  
@@ -161,10 +161,10 @@ When META cost > GUARD + REVENUE, the system is grooming itself instead of earni
 ## Vendor-neutral
 
 **Meaning**  
-No AI vendor gets default routing. Priority is **scoped, named, receipt-earned, revocable** (preferred routing). Commercial openness is contract-shaped, not brand loyalty.
+We do not use any AI provider by default. We route work based on clear, earned receipts. This routing can be changed or canceled. Our relationships are defined by contracts, not brand loyalty.
 
 **Why**  
-“Model-agnostic” reads technical and vague in enterprise copy. “Vendor-neutral” matches partnership doctrine: we are not begging for free API; we offer governed reference environment + commercial alignment.
+Terms like "model-agnostic" sound vague and technical. "Vendor-neutral" matches our goals: we do not ask for free access, but offer a verified setup and clear partnership terms.
 
 **IS NOT**  
 Refusal to partner · no preferred routing ever · “we hate OpenAI”
@@ -180,10 +180,10 @@ Replace `model-agnostic` in all **written** library and site copy with `vendor-n
 ## Deploy-truth
 
 **Meaning**  
-The state of production as verified by **live probe** (HTTP 200, health URL, Supabase row age, CF `/health` target list), not repo disk or agent narrative.
+The actual state of the live system checked by a direct probe, such as an HTTP 200 response, a health page, database row age, or a Cloudflare health list. It is not what is saved on disk or reported by an agent.
 
 **Why**  
-Third disk-vs-live incident class. Committed file ≠ live worker. GHA conclusion stale while Railway runs is a deploy-truth split.
+Code saved in a file is not always the same as the live running code. Relying on git pushes or stale build logs can lead to mismatches.
 
 **IS NOT**  
 `git push` succeeded · wrangler deploy log · “I deployed” in chat
@@ -200,10 +200,10 @@ Third disk-vs-live incident class. Committed file ≠ live worker. GHA conclusio
 ## Selective (commercial tone)
 
 **Meaning**  
-We work with **few** partners chosen on evidence. Signals high bar and standards.
+We work with only a few partners chosen based on evidence. This shows we have high standards.
 
 **Why**  
-Coding agents hear “selective” as exclusivity/arrogance. Institutional tone: selective = disciplined, not “we’re too good for you.”
+Agents might view "selective" as snobbish. We use it to show discipline and focus, not arrogance.
 
 **IS NOT**  
 Snobbery · exclusion club · unprovable “elite” positioning
@@ -220,10 +220,10 @@ Snobbery · exclusion club · unprovable “elite” positioning
 ## Governed reference environment
 
 **Meaning**  
-Our **demonstrable**, receipt-backed operating setup that a vendor or diligence team can inspect: eval PASS, live proof URLs, motor health, schema samples — not a list of logos.
+A verifiable, receipt-backed setup that partners or auditors can inspect. It includes test results, live URLs, scheduler status, and database schema samples, rather than a list of brand logos.
 
 **Why**  
-“We have a client base” without provable customers is an overclaim that kills enterprise trust and violates negative-proof doctrine.
+Claiming to have many clients without proof hurts trust. We must show our actual running system instead of unverified claims.
 
 **IS NOT**  
 Customer logo wall · “500+ clients” · pipeline fantasy
@@ -239,11 +239,11 @@ Name them only with permission and receipt; otherwise use governed reference env
 ## Diagnostic vs enforce
 
 **Meaning**  
-- **Diagnostic:** audit, assessment, leak find, readiness — **no live control plane installed**  
-- **Enforce / firewall / control plane:** blocks/spend caps live in customer path — requires implementation receipt  
+- **Diagnostic:** An audit, assessment, or check that does not change live traffic or spend.  
+- **Enforce:** A live system that blocks actions or limits spend in the customer's active path, which requires proof of installation.  
 
 **Why**  
-Tier-1 offer is diagnostic-only (`agentic-cost-governance-service.md`). Sites correctly say “governable” and “controls before execution” as **capability**; must not imply live firewall unless deployed.
+Our first service tier is diagnostic only. Our public pages can describe our capability, but must not claim we are actively blocking live traffic unless it is actually set up.
 
 **IS NOT**  
 Selling enforcement while shipping slides only
@@ -258,12 +258,12 @@ SourceA/Noetfield pages may describe sprint **deliverables** and **governance OS
 ## Brain vs worker vs locked-definitions
 
 **Meaning**  
-- **Brain:** deterministic decider; holds no soupy meaning  
-- **Worker:** LLM or coding agent that drafts/executes under gates  
-- **Locked-definitions:** approved public meaning the brain reads (P6); not the whole dictionary  
+- **Brain:** A rule-based system that makes exact decisions without using probabilistic guesses.  
+- **Worker:** An LLM or coding agent that drafts or runs tasks under set safety checks.  
+- **Locked-definitions:** A set of approved definitions used by the brain, which is a small part of the full dictionary.  
 
 **Why**  
-If public models own meaning, drift is guaranteed. Dictionary defines **system words**; locked-definitions defines **SourceA public claims**.
+If we let LLMs define terms, their meaning will change over time. The dictionary defines system words, while locked-definitions defines our public claims.
 
 **IS NOT**  
 Loading FOUNDER_JUDGMENT_PATTERNS into workers (least-knowledge violation)
@@ -276,12 +276,12 @@ Loading FOUNDER_JUDGMENT_PATTERNS into workers (least-knowledge violation)
 ## Drift · fail-closed · schedule home
 
 **Meaning**  
-- **Schedule home:** `data/noos-24-7-loops-v1.json` interval is committed truth; workflow cron must match or be absent when motor dispatches.  
-- **Drift:** registry vs deployed cron, config hash, route, worker target count.  
-- **Fail-closed:** deploy/heartbeat exits 1 on drift (same class as hash gates).  
+- **Schedule home:** The file `data/noos-24-7-loops-v1.json` which stores the approved schedule. The live cron job must match this exactly.  
+- **Drift:** Any difference between the registry schedule and the live cron job, code hash, route, or target count.  
+- **Fail-closed:** A safety check that stops work or exits with an error if drift is found.  
 
 **Why**  
-self_heal `every_10m` vs hourly GHA cron caused false green and heartbeat noise.
+Mismatched schedules in the past caused false status reports and unnecessary health alerts.
 
 **Examples**  
 - `verify_noos_loop_schedule_registry_v1.py` before CF deploy  
@@ -294,12 +294,12 @@ self_heal `every_10m` vs hourly GHA cron caused false green and heartbeat noise.
 ## Tombstone · RETIRE · FIX
 
 **Meaning**  
-- **Tombstone:** mark artifact/loop/meaning dead in registry; do not read as live  
-- **RETIRE (census):** META/no-consumer loop — propose removal, do not repair  
-- **FIX (census):** GUARD/REVENUE consumer — root cause, fix, one receipt ≤ interval  
+- **Tombstone:** Mark an item, loop, or term as dead in the registry so it is ignored.  
+- **RETIRE (census):** A recommendation to remove a maintenance loop that has no active consumer, rather than fixing it.  
+- **FIX (census):** A task to repair a loop that serves a guard or revenue consumer and verify it within its set interval.  
 
 **Why**  
-Repair theater on META loops burns META budget (census Rule 2).
+Fixing loops that have no real users wastes our maintenance budget.
 
 **Examples**  
 - factory_autorun RETIRE — superseded motor slot  

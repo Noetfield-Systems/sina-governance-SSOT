@@ -84,6 +84,25 @@ Dictionary is **not** linted line-by-line; it is **locked by version** and found
 
 ---
 
+## Mechanical enforcement (`language_gate/`)
+
+**Wording lint** (terminology authority — not meaning NLU):
+
+```
+language_gate/language_gate_v1.py  →  PASS | PASS_WITH_REWRITE | FAIL (exit 1)
+language_gate/dictionary_index.json  ←  built from A-Z batch (91 terms)
+```
+
+Checks: tombstone auto-rewrite · §6 synonym rewrite · §7 banned register · overclaims · PRIVATE_ONLY on public · undefined Title-Case/ALLCAPS terms (fail-closed).
+
+Every scan writes `language_gate/receipts/*.receipt.json`.
+
+**Known gap:** regex first pass only — disguised jargon may slip; ordinary Title Case may false-positive. Agent exception review still required.
+
+Mint rule unchanged: gate blocks **undefined** terms; new terms still require dictionary entry authored first, then index rebuild, then terminology mint.
+
+---
+
 ## Change control
 
 | Action | Order |
