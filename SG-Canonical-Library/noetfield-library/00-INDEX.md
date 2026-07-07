@@ -30,7 +30,7 @@ Repo authority for product lanes beats SG mirror copies on conflict.
 | Governance pass | **4/4 complete** (v0.9-SG-RATIFIED) |
 | SINA GATEWAY | **Personal project LIVE** — not NFI product; see P99 Gateway receipts |
 | Commercial gap | First conversation / first dollar — see **UNLOCK DOCTRINE v2** (`P7-DOCTRINE/`) |
-| Language layer | **INSTALLED 2026-07-06** — `LANGUAGE_LAYER_v1` · `NOETFIELD_TERMINOLOGY_v1` · `NOETFIELD_DICTIONARY_v1` · audit ledger in P99 |
+| Language layer | **INSTALLED 2026-07-06** — `LANGUAGE_LAYER_v1` · `NOETFIELD_TERMINOLOGY_v1` · `NOETFIELD_DICTIONARY_v1` · `NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md` · `language_gate/` pipeline |
 
 **Start here for orientation:** [ARCHITECT_START_HERE.md](./ARCHITECT_START_HERE.md)
 

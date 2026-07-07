@@ -86,20 +86,19 @@ Dictionary is **not** linted line-by-line; it is **locked by version** and found
 
 ## Mechanical enforcement (`language_gate/`)
 
-**Wording lint** (terminology authority — not meaning NLU):
+**Wording lint** (terminology) + **agent plain-English rewrite** (after regex):
 
-```
-language_gate/language_gate_v1.py  →  PASS | PASS_WITH_REWRITE | FAIL (exit 1)
-language_gate/dictionary_index.json  ←  built from A-Z batch (91 terms)
-```
+| Component | Role |
+|-----------|------|
+| `NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md` | **Meaning source** — plain English canonical; aliases retired |
+| `build_dictionary_index.py` | Batch → `dictionary_index.json` |
+| `language_gate_pipeline_v1.py` | Regex lint → agent rewrite; surfaces: internal, public, website, contract, prompt, receipt |
+| `.cursor/hooks.json` | Mandatory before save (afterFileEdit) and before Write (preToolUse) |
+| `.githooks/pre-commit` | Mandatory before commit |
 
-Checks: tombstone auto-rewrite · §6 synonym rewrite · §7 banned register · overclaims · PRIVATE_ONLY on public · undefined Title-Case/ALLCAPS terms (fail-closed).
+**Mint rule unchanged:** undefined terms fail-closed; new words require dictionary entry in batch markdown first, then index rebuild, then terminology mint.
 
-Every scan writes `language_gate/receipts/*.receipt.json`.
-
-**Known gap:** regex first pass only — disguised jargon may slip; ordinary Title Case may false-positive. Agent exception review still required.
-
-Mint rule unchanged: gate blocks **undefined** terms; new terms still require dictionary entry authored first, then index rebuild, then terminology mint.
+**Known gap:** regex first pass — agent rewrite + sidecar review for unclear sentences; not full NLU.
 
 ---
 
