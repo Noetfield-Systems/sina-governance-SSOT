@@ -1,7 +1,7 @@
 {
   "schema": "living_system_110_plans_v1_LOCKED",
   "version": "1.1.0_LOCK",
-  "saved_at": "2026-07-08T01:50:00Z",
+  "saved_at": "2026-07-08T07:10:18Z",
   "authority": "SG (SSSOT)",
   "parent_doctrine": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
   "parent_plans": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
@@ -62,6 +62,11 @@
       "wave": "W10",
       "name": "ROI kaizen and rungs 5-7",
       "plans": "LS-101\u2013LS-110"
+    },
+    {
+      "wave": "W11",
+      "name": "Cross-domain auth SSOT",
+      "plans": "LS-111\u2013LS-113"
     }
   ],
   "milestones": {
@@ -496,7 +501,7 @@
       "closed_loop": null,
       "done_when": "Script implements section 8 checklist",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w2_status": "COMPLETE",
       "completed_at": "2026-07-08T01:34:52Z",
       "completion_receipt": "scripts/living_system_chain_validate_v1.py"
     },
@@ -516,7 +521,7 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Manual green rejected",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w2_status": "COMPLETE",
       "completed_at": "2026-07-08T01:47:51Z",
       "completion_receipt": "receipts/living-system-rubric-pulse-2026-07-08.json"
     },
@@ -536,7 +541,7 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Reads truth_log EXTERNAL_VERIFY",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w2_status": "COMPLETE",
       "completed_at": "2026-07-08T01:50:00Z",
       "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
@@ -556,7 +561,7 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "IDLE_NO_WORK valid silence FAIL",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w2_status": "COMPLETE",
       "completed_at": "2026-07-08T01:50:00Z",
       "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
@@ -576,7 +581,7 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Stale DRIFT yields STALE verdict",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w2_status": "COMPLETE",
       "completed_at": "2026-07-08T01:50:00Z",
       "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
@@ -1028,7 +1033,7 @@
       "closed_loop": null,
       "done_when": "Section 6 flow machine-readable",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w5_status": "COMPLETE",
       "completed_at": "2026-07-08T01:34:52Z",
       "completion_receipt": "docs/commercial_pulse_loop_v0.1.md"
     },
@@ -1048,7 +1053,7 @@
       "closed_loop": null,
       "done_when": "Draft approval send states",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w5_status": "COMPLETE",
       "completed_at": "2026-07-08T01:47:51Z",
       "completion_receipt": "data/commercial_pulse_queue_v1.json"
     },
@@ -1069,7 +1074,7 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "MALFORMED_DRAFT emit",
       "w0_status": "PENDING",
-      "w1_status": "COMPLETE",
+      "w5_status": "COMPLETE",
       "completed_at": "2026-07-08T01:50:00Z",
       "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
@@ -2061,6 +2066,66 @@
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Closure receipt wave 11 queued",
       "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-111",
+      "wave": "W11",
+      "title": "Cross-domain auth proposal lock v1.1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "SG-Canonical-Library/noetfield-library/P99-LEDGER/CROSS_DOMAIN_AUTH_RATIFY_2026-07-08.md",
+      "depends": [
+        "LS-053"
+      ],
+      "closed_loop": null,
+      "done_when": "Proposal LOCKED + P99 ratify",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:07:43Z",
+      "completion_receipt": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md"
+    },
+    {
+      "id": "LS-112",
+      "wave": "W11",
+      "title": "Auth surface probe harden v1.1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "sg_auth_surface_probe_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/auth-surface-probe-*.json",
+      "depends": [
+        "LS-111"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Anti-login-wall + auth health + fail-on-warn wired",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:10:18Z",
+      "completion_receipt": "receipts/cross-domain-auth-w11-probe-2026-07-08.json"
+    },
+    {
+      "id": "LS-113",
+      "wave": "W11",
+      "title": "Venture auth dispatch packs",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/dispatch/auth-phase-1-trustfield.md",
+      "depends": [
+        "LS-111"
+      ],
+      "closed_loop": null,
+      "done_when": "Phase 1-2-4 dispatch files + auth_core_interface_spec",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:10:18Z",
+      "completion_receipt": "docs/dispatch/auth-phase-1-trustfield.md"
     }
   ],
   "status": "LOCKED",
@@ -2073,7 +2138,13 @@
     "receipt": "receipts/living-system-w0-install-2026-07-07.json"
   },
   "w1_summary": {
-    "complete": 18,
+    "complete": 10,
+    "total": 10,
+    "receipt": "receipts/living-system-w1-terminology-2026-07-08.json"
+  },
+  "w2_summary": {
+    "complete": 5,
+    "total": 6,
     "receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
   }
 }

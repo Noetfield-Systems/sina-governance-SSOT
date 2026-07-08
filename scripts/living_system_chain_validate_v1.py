@@ -26,6 +26,10 @@ SCHEDULED_MOTOR_KINDS = frozenset({"github_actions", "cloudflare_cron", "railway
 MANUAL_ONLY_SCHEMAS = frozenset({
     "living_system_w0_install_receipt_v1",
     "living_system_w1_parallel_start_receipt_v1",
+    "living_system_w1_next_steps_receipt_v1",
+    "living_system_w1_terminology_receipt_v1",
+    "living_system_rubric_pulse_receipt_v1",
+    "living_system_w2_collectors_receipt_v1",
 })
 PULSE_SCHEMAS = frozenset({
     "agent_read_staleness_receipt_v1",
@@ -132,8 +136,6 @@ def _is_scheduled_pulse(payload: dict[str, Any], path: Path) -> bool:
         return False
     if payload.get("manual_run") is True:
         return False
-    if payload.get("trigger_host") == "cloud":
-        return True
     if schema in PULSE_SCHEMAS:
         return True
     motor_id = payload.get("motor_id")
@@ -265,6 +267,12 @@ def check_membrane_or_external(subsystem: dict[str, Any] | None) -> RubricCheck:
         if "spine_live_probe" in schema.lower() or "spine-live-probe" in path.name:
             hits.append(rel)
             continue
+        if schema.startswith("sg-auth-surface-probe") and payload.get("status") in ("PASS", "WARN"):
+            hits.append(rel)
+            continue
+        if "auth-surface-probe" in path.name and payload.get("status") in ("PASS", "WARN"):
+            hits.append(rel)
+            continue
         if payload.get("rung", 0) >= 2 or payload.get("metabolism_rung", 0) >= 2:
             hits.append(rel)
 
@@ -301,16 +309,16 @@ def check_mutation_or_idle(subsystem: dict[str, Any] | None) -> RubricCheck:
         if "mutation" in schema.lower() or "mutation" in path.name:
             hits.append(rel)
             continue
-        if schema in {
-            "living_system_w1_terminology_receipt_v1",
-            "living_system_w1_next_steps_receipt_v1",
-            "living_system_w1_parallel_start_receipt_v1",
-            "language-layer-rc3-cold-session-proof-v1",
+        if payload.get("mutation_applied") is True or payload.get("mutation_receipt_id"):
+            hits.append(rel)
+            continue
+        if str(payload.get("receipt_type", "")).upper() in {
+            "MUTATION",
+            "METABOLISM_MUTATION",
+            "COMMERCIAL_PULSE_MUTATION",
         }:
             hits.append(rel)
             continue
-        if payload.get("plans_complete") or payload.get("terms_minted"):
-            hits.append(rel)
 
     if hits:
         return RubricCheck(
@@ -399,14 +407,21 @@ RUBRIC_RUNNERS = [
 
 
 def load_subsystem(subsystem_id: str | None) -> dict[str, Any] | None:
-    if not subsystem_id or subsystem_id == "global":
-        return None
+    sid = (subsystem_id or "global").strip() or "global"
     if not SUBSYSTEMS.is_file():
+        if sid == "global":
+            return {"id": "global", "window_hours": 168, "pulse_receipt_globs": []}
         return None
     data = json.loads(SUBSYSTEMS.read_text(encoding="utf-8"))
     for row in data.get("subsystems", []):
-        if row.get("id") == subsystem_id:
+        if row.get("id") == sid:
             return row
+    if sid == "global":
+        return {
+            "id": "global",
+            "window_hours": int(data.get("default_window_hours", 168)),
+            "pulse_receipt_globs": [],
+        }
     return None
 
 

@@ -1,9 +1,9 @@
 {
   "schema": "auth_surface_matrix_v1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-08T06:30:00Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-08T07:07:43Z",
   "authority": "SG (SSSOT)",
-  "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
+  "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
     "auth_project": "portfolio_spine",
     "supabase_ref": "ldfruywifqnfpwsfgmdl",
@@ -41,7 +41,8 @@
           "venture": "sourcea",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "sa_obi",
@@ -49,7 +50,8 @@
           "venture": "sourcea",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "sa_ca_avg",
@@ -58,7 +60,8 @@
           "expect_http": [
             200
           ],
-          "note": "edge may lag DNS"
+          "note": "edge may lag DNS",
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "sa_uk_eacp",
@@ -66,7 +69,8 @@
           "venture": "sourcea",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "nf_home",
@@ -74,7 +78,8 @@
           "venture": "noetfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "nf_gel",
@@ -82,7 +87,8 @@
           "venture": "noetfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "tf_home",
@@ -90,7 +96,8 @@
           "venture": "trustfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "tf_partners",
@@ -98,7 +105,8 @@
           "venture": "trustfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "tf_showcase",
@@ -106,7 +114,8 @@
           "venture": "trustfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "tf_entity",
@@ -114,7 +123,8 @@
           "venture": "trustfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         },
         {
           "id": "tf_pilot",
@@ -122,7 +132,8 @@
           "venture": "trustfield",
           "expect_http": [
             200
-          ]
+          ],
+          "must_not_redirect_to_auth": true
         }
       ]
     },
@@ -150,6 +161,17 @@
           ],
           "implementation": "partial",
           "owner_repo": "TrustField-Technologies"
+        },
+        {
+          "id": "sa_sandbox_cta",
+          "url": "https://sourcea.app/",
+          "venture": "sourcea",
+          "expect_http": [
+            200
+          ],
+          "implementation": "planned",
+          "owner_repo": "SourceA",
+          "note": "Sign-in CTA in header only; page stays public tier-0"
         }
       ]
     },
@@ -180,7 +202,11 @@
           ],
           "implementation": "planned",
           "owner_repo": "TrustField-Technologies",
-          "warn_if_public_200": true
+          "warn_if_public_200": true,
+          "expect_when_planned": [
+            404
+          ],
+          "note": "Route not shipped; 404 acceptable until Phase 1"
         }
       ]
     },
@@ -289,5 +315,44 @@
       "question": "Enterprise SSO",
       "recommended": "defer P2"
     }
-  ]
+  ],
+  "founder_decisions_ratified": [],
+  "auth_routes": {
+    "law": "Cache-Control private no-store on session routes",
+    "routes": [
+      {
+        "venture": "sourcea",
+        "domain": "sourcea.app",
+        "paths": [
+          "/auth/sign-in",
+          "/auth/sign-up",
+          "/auth/callback",
+          "/auth/sign-out"
+        ],
+        "implementation": "planned"
+      },
+      {
+        "venture": "noetfield",
+        "domain": "www.noetfield.com",
+        "paths": [
+          "/auth/sign-in",
+          "/auth/sign-up",
+          "/auth/callback",
+          "/auth/sign-out"
+        ],
+        "implementation": "planned"
+      },
+      {
+        "venture": "trustfield",
+        "domain": "www.trustfield.ca",
+        "paths": [
+          "/auth/sign-in",
+          "/auth/sign-up",
+          "/auth/callback",
+          "/auth/sign-out"
+        ],
+        "implementation": "planned"
+      }
+    ]
+  }
 }
