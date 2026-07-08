@@ -1,0 +1,77 @@
+{
+  "schema": "commercial_pulse_queue_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-08T01:50:00Z",
+  "authority": "SG (SSSOT)",
+  "parent_spec": "docs/commercial_pulse_loop_v0.1.md",
+  "lane": "metabolism",
+  "states": [
+    "idle",
+    "drafting",
+    "validate_failed",
+    "queued_for_approval",
+    "founder_blocked",
+    "approved_pending_send",
+    "sent",
+    "awaiting_reply",
+    "classified",
+    "mutation_pending",
+    "complete"
+  ],
+  "dispatchability_predicates": [
+    "named_icp_stranger",
+    "priced_offer_attached",
+    "entity_hygiene_pass",
+    "casl_mailing_address",
+    "casl_unsubscribe",
+    "link_check_receipt_attached",
+    "approval_metadata_present",
+    "inside_approval_window"
+  ],
+  "queue": [],
+  "history": [],
+  "stale_gate": {
+    "window_days": 7,
+    "last_evaluated_at": null,
+    "last_receipt_type": null
+  },
+  "draft_template": {
+    "draft_id": null,
+    "state": "idle",
+    "icp_stranger_id": null,
+    "offer_id": null,
+    "subject": null,
+    "body": null,
+    "price_display": null,
+    "entity": "Noetfield Systems Inc.",
+    "casl": {
+      "mailing_address": null,
+      "unsubscribe_url": null
+    },
+    "link_check_receipt_id": null,
+    "dispatch_check": {
+      "pass": false,
+      "failed_predicates": [],
+      "checked_at": null,
+      "checker": "scripts/commercial_pulse_dispatch_check_v1.py"
+    },
+    "approval": {
+      "required": true,
+      "status": "pending",
+      "founder_decision_at": null,
+      "block_reason": null
+    },
+    "send": {
+      "sent_at": null,
+      "send_receipt_id": null
+    },
+    "classification": {
+      "reply_type": null,
+      "objection_receipt_id": null,
+      "classified_at": null
+    },
+    "created_at": null,
+    "updated_at": null,
+    "motor_id": "cf_cron_commercial_pulse_draft_v1"
+  }
+}

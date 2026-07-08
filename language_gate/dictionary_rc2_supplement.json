@@ -215,6 +215,75 @@
       "code_alias": [
         "copilot governance pilot"
       ]
+    },
+    {
+      "term": "Living System",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Passes doctrine \u00a78 rubric in-window.",
+      "code_alias": [
+        "living system",
+        "LIVING"
+      ]
+    },
+    {
+      "term": "Stale",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Fails \u00a78 rubric in-window.",
+      "code_alias": [
+        "stale",
+        "STALE"
+      ]
+    },
+    {
+      "term": "Liveness Ladder",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Metabolism rungs 1-7.",
+      "code_alias": [
+        "liveness ladder",
+        "metabolism rung"
+      ]
+    },
+    {
+      "term": "Commercial Pulse",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Metabolism lane provocation loop.",
+      "code_alias": [
+        "commercial pulse"
+      ]
+    },
+    {
+      "term": "Unforgeable Vital Sign",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "External membrane proof only.",
+      "code_alias": [
+        "unforgeable vital sign"
+      ]
+    },
+    {
+      "term": "Dispatchable Draft",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Passes seven dispatch predicates.",
+      "code_alias": [
+        "dispatchable draft"
+      ]
+    },
+    {
+      "term": "FOUNDER_IS_THE_STALE_GATE",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Founder approval stale-gate receipt.",
+      "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "WORKER_IS_THE_STALE_GATE",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Worker draft stale-gate receipt.",
+      "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "MALFORMED_DRAFT",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Dispatch check failure receipt.",
+      "allowed_surfaces": "internal, receipt"
     }
   ],
   "structural_allowlist": [
@@ -308,5 +377,16 @@
     "worker inbox",
     "worker mac",
     "worker work"
-  ]
+  ],
+  "alias_index": {
+    "living system": "Living System",
+    "commercial pulse": "Commercial Pulse",
+    "liveness ladder": "Liveness Ladder",
+    "dispatchable draft": "Dispatchable Draft",
+    "malformed_draft": "MALFORMED_DRAFT",
+    "stale": "Stale",
+    "unforgeable vital sign": "Unforgeable Vital Sign",
+    "founder_is_the_stale_gate": "FOUNDER_IS_THE_STALE_GATE",
+    "worker_is_the_stale_gate": "WORKER_IS_THE_STALE_GATE"
+  }
 }

@@ -328,4 +328,59 @@ Founder locks dictionary entry → bump dictionary version → **mint** terminol
 
 ---
 
+
+
+---
+
+## Living System · Stale · Body · Pulse · Homeostasis · Metabolism
+
+**Living System**  
+**Meaning** — A subsystem that passes the machine-checkable liveness rubric in `LIVING_SYSTEM_DOCTRINE` §8 within its declared window: scheduled pulse, membrane or external proof, mutation or valid `IDLE_NO_WORK`, no stale DRIFT, and fresh homeostasis drills when covered.  
+**Why** — One axis replaces vibe checks; governance motion and commercial motion are judged separately but with the same rubric shape.  
+**IS NOT** — “has cron jobs,” “agent said healthy,” or governance-alive while metabolism ladder is empty.  
+**Conflict rule** — Doctrine §8 + `living_system_chain_validate_v1.py` beat prose and agent self-report.  
+**Doctrine:** `P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md`
+
+**Stale**  
+**Meaning** — Fails any §8 rubric item within the subsystem window regardless of internal motion or narrative.  
+**IS NOT** — “needs improvement,” “blocked,” or “waiting on founder” unless a stale-gate receipt names the blocker.  
+**Conflict rule** — STALE is a verdict from receipts, not shame language.
+
+**Body** — 24/7 loops, workers, queues, repos, endpoints that execute work. **IS NOT** proof of market life. Failure mode: churn with no external effect.  
+**Pulse** — Scheduled triggers, crons, gates, reminders that fire the body. **IS NOT** proof of mutation; ritual pulse without change is still pulse, not life.  
+**Homeostasis** — Sensor → diagnoser → healer → verifier → escalator for internal repair. **IS NOT** life assertion; healers must not touch sensors/ledgers (write-isolation).  
+**Metabolism** — External reality entering: strangers, buyers, verifiers, membrane-crossing signals. **IS NOT** vendor spam inbound (membrane only, rung 2).
+
+**Related:** receipt · IDLE_NO_WORK · deploy-truth · Commercial Pulse · liveness ladder  
+**Doctrine:** §1 five components · §2 two circulatory systems · §4 unforgeable vital sign
+
+---
+
+
+
+## Liveness Ladder · Unforgeable Vital Sign · Commercial Pulse
+
+**Liveness Ladder** — Seven rungs on the metabolism axis; each requires a stranger to spend something scarcer (credential → signal → provocation → objection → mutation → buyer → retention).  
+**Doctrine:** `LIVING_SYSTEM_DOCTRINE` §3
+
+**Unforgeable Vital Sign** — External provocation or membrane-crossing receipt; internal health signals may be forged (precedent `239c8b5`). Health workers report health; they never declare life.  
+**Doctrine:** §4 · governed-autorun L4
+
+**Commercial Pulse** — Metabolism lane cron loop: draft priced provocation → L5 approval → send → classify reply → mutation. First target = one stranger objection in 7 days, not revenue.  
+**Doctrine:** §6 · `docs/commercial_pulse_loop_v0.1.md`
+
+**Provocation Surface** — A priced Noetfield offer a named stranger can react to (yes/no/objection). Vendor spam inbound is not provocation.  
+**IS NOT:** membrane-only (rung 2).
+
+**Dispatchable Draft** — Queued provocation passing all seven machine checks (ICP, price, entity hygiene, CASL, links, approval metadata, window).  
+**Verified by:** `commercial_pulse_dispatch_check_v1.py` only — never agent self-report.
+
+**FOUNDER_IS_THE_STALE_GATE** — Receipt when 7d pass with dispatchable draft queued and zero founder-approved sends.  
+**WORKER_IS_THE_STALE_GATE** — Receipt when 7d pass with zero dispatchable drafts produced.  
+**MALFORMED_DRAFT** — Receipt when dispatch check fails; lists failed fields.
+
+*v1.2 (2026-07-08) — W1 ladder + Commercial Pulse dictionary mint.*
+
+*v1.1 (2026-07-08) — Living System axis dictionary seed for W1 terminology mint.*
+
 *v1 (2026-07-06) — Initial dictionary seed: receipt family, census, motor/loop, commercial tone, deploy-truth, vendor-neutral, diagnostic/enforce split.*

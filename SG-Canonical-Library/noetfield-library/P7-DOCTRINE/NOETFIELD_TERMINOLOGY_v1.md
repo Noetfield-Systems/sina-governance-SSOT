@@ -2,7 +2,7 @@
 
 **Wording authority · daily · mandatory · machine-enforceable · Tier 0**
 
-Status: `v1.1-rc2-gap` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
+Status: `v1.2-living-system-w1` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
 
 Answers: **“What word do I write, right now?”** — one line per term.  
 Meaning source: `NOETFIELD_DICTIONARY_v1.md` (terminology is **minted from** dictionary — never the reverse).  
@@ -159,6 +159,7 @@ client base (unprovable)      → governed reference environment
 log / it worked               → receipt (if fielded) else claim
 the latest file               → SSOT
 always-on / full auto 24/7    → governed loop + motor + receipt (or say what is NOT 24/7)
+alive / living (generic)        → Living System (§8 receipt) or name homeostasis vs metabolism axis
 governed (decorative)           → governed (only if stoppable + measured)
 24/7 (marketing)              → name the motor + receipt or downgrade claim
 ```
@@ -210,6 +211,56 @@ IS NOT: customer-facing product name.
 
 **Governance Platform** — Enterprise control-plane SKU narrative.  
 IS NOT: generic “AI platform.”
+
+
+
+
+## §10 — Living System axis (minted from dictionary 2026-07-07)
+
+**Living System** — A subsystem that passes doctrine §8 within its window: scheduled pulse, external or membrane proof, mutation or valid `IDLE_NO_WORK`, no stale DRIFT, fresh drills when covered.  
+IS NOT: cron exists, agent healthy, or governance-alive while metabolism rung < 3.  
+EX: “Homeostasis PASS + metabolism STALE = healthy corpse.”
+
+**Stale** — Fails any §8 rubric item in-window; verdict from receipts, not narrative.  
+IS NOT: blocked, waiting, or needs polish without a receipt.
+
+**Body** — 24/7 loops, workers, queues, repos, endpoints (the execution substrate).  
+IS NOT: proof the business is alive.
+
+**Pulse** — Crons, triggers, gates, schedulers that fire the body on schedule.  
+IS NOT: proof of mutation; manual green ≠ cron green.
+
+**Homeostasis** — Internal sensor → diagnoser → healer → verifier → escalator repair lane.  
+IS NOT: life declaration; healer touching sensor/ledger is forbidden.
+
+**Receipt** (fifth component) — see §1; disk/live proof of change or recovery. Weak if internal-only.
+
+**Metabolism** — External market input: strangers, buyers, verifiers, membrane-crossing receipts.  
+IS NOT: vendor spam inbound (membrane/rung 2 only).
+
+```
+governance-alive / internally healthy  → homeostasis axis (may be LIVING per §8)
+commercially alive / market proof      → metabolism ladder rung ≥ 3
+alive (generic)                        → name the axis or downgrade to claim
+```
+**Liveness Ladder** — Metabolism axis rungs 1–7; each rung needs a scarcer stranger cost-of-touch receipt.  
+IS NOT: internal motion or governance receipts.
+
+**Unforgeable Vital Sign** — Membrane-crossing or L4 external proof; only basis for asserting life.  
+IS NOT: cron PASS, agent healthy, or internal heal receipt.
+
+**Commercial Pulse** — Metabolism lane: draft → L5 approve → send → classify → mutate. Target = objection in 7d.  
+IS NOT: revenue target on day one.
+
+**Provocation Surface** — Priced offer a named stranger evaluates.  
+IS NOT: vendor inbound spam (rung 2 only).
+
+**Dispatchable Draft** — Queue row passing all seven dispatch predicates.  
+IS NOT: agent claim of ready-to-send.
+
+**FOUNDER_IS_THE_STALE_GATE** — Stale-gate receipt: dispatchable queued, zero sends 7d.  
+**WORKER_IS_THE_STALE_GATE** — Stale-gate receipt: zero dispatchable drafts 7d.  
+**MALFORMED_DRAFT** — Dispatch check failure receipt with failed fields.
 
 
 ## §8 — Versioning

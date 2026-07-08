@@ -1,0 +1,16 @@
+{
+  "schema": "MALFORMED_DRAFT",
+  "receipt_type": "MALFORMED_DRAFT",
+  "saved_at": "2026-07-08T01:49:59Z",
+  "draft_id": "test-bad",
+  "failed_predicates": [
+    "named_icp_stranger",
+    "priced_offer_attached",
+    "entity_hygiene_pass",
+    "casl_mailing_address",
+    "casl_unsubscribe",
+    "link_check_receipt_attached"
+  ],
+  "checker": "scripts/commercial_pulse_dispatch_check_v1.py",
+  "status": "FAIL"
+}
