@@ -1,0 +1,43 @@
+{
+  "schema": "p0pgr-phase1-scorecard-v1",
+  "updated_at": "2026-07-08T13:25:12Z",
+  "phase": "phase1_shadow_campaign_mode",
+  "total_real_shadow_packets": 10,
+  "accepted_without_sina_rewrite_pending_founder": 10,
+  "packets_confirmed_accepted_by_founder": 0,
+  "repair_candidates_created": 0,
+  "p0_leakage_count": 0,
+  "hard_block_count": 0,
+  "runtime_freeze_count": 0,
+  "unauthorized_execution_count": 0,
+  "phase2_candidates": 7,
+  "commercial_candidates": 3,
+  "estimated_cost_usd": 0.0,
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "top_3_next_moves": [
+    {
+      "move_id": "M07",
+      "packet_id": "P0PGR-20260708-008",
+      "roi_score": 88,
+      "why": "Indirect but compounding: this is the packet factory \u2014 it converts founder prompt-writing into a reusable asset (proof_asset)"
+    },
+    {
+      "move_id": "M10",
+      "packet_id": "P0PGR-20260708-011",
+      "roi_score": 86,
+      "why": "Indirect: shortest path to Phase 2 autonomy, which is where founder prompt-writing actually drops to ~0"
+    },
+    {
+      "move_id": "M03",
+      "packet_id": "P0PGR-20260708-004",
+      "roi_score": 84,
+      "why": "Direct: protects the CAD 4,000 discovery offer funnel and partner due-diligence credibility; a dead /register route is lost revenue today"
+    }
+  ],
+  "exit_criteria": {
+    "min_real_packets": 10,
+    "min_accepted_without_rewrite": 7,
+    "max_p0_leakage": 0,
+    "progress": "10/10 packets compiled; founder confirms accepts by diff-read"
+  }
+}

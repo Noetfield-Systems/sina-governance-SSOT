@@ -1,0 +1,85 @@
+{
+  "id": "P0PGR-20260708-002",
+  "created_at": "2026-07-08T13:25:00Z",
+  "lane": "SG",
+  "problem_class": "verification",
+  "owner_agent": "verifier",
+  "model_tier": "cheap",
+  "roi_score": 76,
+  "roi_reason": "Census is RED solely on rule-1 flags: 8 of 38 loops never produced a receipt. Until each is classified from evidence, the registry cannot be trusted and every downstream dispatch inherits doubt. Mechanical triage, cheap tier, removes recurring founder investigation workload.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "workflow-census-20260706T093358Z is RED: 8 loops flagged rule-1 'never produced receipt \u2014 NONE': mac_launchd_brain_loop_autorun_v1, cf_brain_chat_v1, gh_actions_noos_release_gate_v1, gh_actions_noos_publish_pypi_v1, gh_gateway_railway_deadman_v1, cf_gateway_ops_v1, cf_gateway_heartbeat_v1, trustfield_loops_preview. NONE-class loops also carry ~$20/mo of the census cost table. Task is triage classification only \u2014 census RED is NOT claimed fixed by this packet.",
+  "task": "Triage the 8 receipt-less loops from evidence only. For each loop_id: 1) locate its registry/census entry and expected receipt_path glob; 2) search receipts/ and any declared receipt sinks for ANY matching artifact; 3) where the loop is a GitHub Actions workflow, read its workflow file and run-history evidence available in the repo (badges, prior receipts, census extensions data) \u2014 do not trigger runs; 4) classify each loop as exactly one of: RECEIPT_EXISTS_WRONG_GLOB | REGISTERED_NEVER_FIRED | LOOP_DEAD_OR_REMOVED | NEVER_DEPLOYED | UNKNOWN_REQUIRES_MAC (for mac_launchd/local loops whose truth is not in repo or cloud evidence \u2014 mark, never guess); 5) for each, record the exact evidence (file path, glob tried, output); 6) emit one receipt to receipts/p0pgr/ with the 8-row verdict table and a per-loop next_pointer (candidate repair packet or decommission candidate). No healing, no edits outside receipts/p0pgr/, no run triggering.",
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "UNKNOWN_REQUIRES_MAC is a valid verdict \u2014 never interpolate local state (L10)",
+    "do not claim census RED is fixed"
+  ],
+  "allowed_actions": [
+    "read data/, receipts/, .github/workflows/, docs/",
+    "run grep/glob over the repo checkout",
+    "write exactly one triage receipt to receipts/p0pgr/"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no healing or repair edits",
+    "no triggering of any loop or workflow",
+    "no edits to registries, verifiers, gates, or census scripts",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after writing the single 8-row triage receipt. Repair or decommission actions are separate future packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "per_loop_verdict_table",
+      "unknowns_requiring_mac"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/workflow-census-20260706T093358Z.json",
+    "data/github_automation_registry_v1.json",
+    "data/workflow_census_extensions_v1.json"
+  ],
+  "decision_ref": "P0PGR-CYCLE-20260708T131523Z",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

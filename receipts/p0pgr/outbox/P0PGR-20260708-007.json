@@ -1,0 +1,79 @@
+{
+  "id": "P0PGR-20260708-007",
+  "created_at": "2026-07-08T13:25:12Z",
+  "lane": "Ops",
+  "problem_class": "hygiene",
+  "owner_agent": "verifier",
+  "model_tier": "cheap",
+  "roi_score": 74,
+  "roi_reason": "Phase 2 will spend real money; an unenforceable governor plus $20/mo dead spend is the cheapest fix on the board.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Census rule-2: META cost exceeds GUARD+REVENUE combined; NONE-class dead loops burn ~$20/mo; spend governor exists on paper (router rules) but has no enforcement receipt; no per-loop cost attribution receipts.",
+  "task": "Cost/ROI governance audit: 1) build per-loop monthly cost attribution from census + registry + billing-relevant configs; 2) verify totals reconcile with census costs_usd_month; 3) flag every loop with value_class none and its spend; 4) verify the spend governor thresholds (monthly cap, THROTTLED_ROI trigger) are computable from existing receipts \u2014 list missing inputs; 5) rank kill/throttle CANDIDATES (no action); 6) emit one receipt.",
+  "allowed_actions": [
+    "read receipts/, data/, docs/",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after attribution receipt; any throttle/kill is a separate founder-visible packet.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/workflow-census-20260706T093358Z.json",
+    "data/workflow_census_value_class_rules_v1.json"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

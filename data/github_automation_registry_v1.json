@@ -1,484 +1,513 @@
 {
-  "schema": "github_automation_registry_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-08T06:35:19Z",
-  "authority": "SG (SSSOT)",
-  "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
-  "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
-  "motors": [
-    {
-      "motor_id": "gh_actions_workflow_census_weekly_v1",
-      "kind": "github_actions",
-      "repo": "sina-governance-ssot",
-      "workflow_file": ".github/workflows/workflow-census-weekly-v1.yml",
-      "cadence": "0 8 * * 1",
-      "lane": "sg_governance",
-      "owns": [
-        "workflow_census",
-        "loop_value_class_audit"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "venture_product_code"
-      ],
-      "receipt_path": "receipts/workflow-census-*.json",
-      "conflicts_with": [],
-      "note": "Judging layer \u2014 which receipt does each loop serve?"
-    },
-    {
-      "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
-      "kind": "github_actions",
-      "repo": "sina-governance-ssot",
-      "workflow_file": ".github/workflows/agent-read-staleness-weekly-v1.yml",
-      "cadence": "0 9 * * 1",
-      "lane": "sg_governance",
-      "owns": [
-        "alive_doc_registry",
-        "stale_law_pointer_audit"
-      ],
-      "must_not_own": [
-        "venture_product_code",
-        "brain_promote"
-      ],
-      "receipt_path": "receipts/agent-read-staleness-*.json",
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "gh_actions_sg_auth_surface_probe_v1",
-      "kind": "github_actions",
-      "repo": "sina-governance-ssot",
-      "workflow_file": ".github/workflows/sg-auth-surface-probe-v1.yml",
-      "cadence": "0 */6 * * *",
-      "lane": "sg_governance",
-      "loop_id": "sg_auth_surface_probe_v1",
-      "owns": [
-        "auth_surface_probe",
-        "credential_path_audit",
-        "redirect_allow_list_lint"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "venture_product_code",
-        "external_send",
-        "auth_ui"
-      ],
-      "requires_secrets": [
-        "NOETFIELD_SUPABASE_URL",
-        "NOETFIELD_SUPABASE_SERVICE_ROLE_KEY"
-      ],
-      "receipt_path": "receipts/auth-surface-probe-*.json",
-      "deadman": "sourcea-deadman-v1",
-      "conflicts_with": [],
-      "note": "GUARD \u2014 tiered auth surface probe; SG verifies venture workers implement UI"
-    },
-    {
-      "motor_id": "gh_actions_brain_loop_autorun_v1",
-      "kind": "github_actions",
-      "repo": "sina-governance-ssot",
-      "workflow_file": ".github/workflows/brain-loop-autorun-v1.yml",
-      "cadence": "*/30 * * * *",
-      "lane": "sourcea_brain_observe_promote",
-      "owns": [
-        "ci_self_heal",
-        "ci_parallel_verifier_batch",
-        "ci_e2e_matrix_when_tokens"
-      ],
-      "must_not_own": [
-        "trustfield_loops_build",
-        "noos_doctrine_append",
-        "sg_guardrail_append",
-        "external_send"
-      ],
-      "requires_secrets": [
-        "CF_MAIN_TOKEN",
-        "CF_VERIFIER_TOKEN"
-      ],
-      "autonomous_promote": "only_when_BRAIN_CI_AUTONOMOUS_and_tokens_present",
-      "receipt_path": "receipts/brain-loop-autorun-*.json",
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "mac_launchd_brain_loop_autorun_v1",
-      "kind": "mac_launchd",
-      "repo": "sina-governance-ssot",
-      "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
-      "cadence": "1800s",
-      "lane": "sourcea_brain_observe_promote",
-      "owns": [
-        "mac_self_heal",
-        "mac_parallel_verifier_batch",
-        "mac_e2e_matrix_ship_window"
-      ],
-      "must_not_own": [
-        "trustfield_loops_build",
-        "ci_duplicate_when_ship_window"
-      ],
-      "receipt_path": "receipts/brain-loop-autorun-*.json",
-      "conflicts_with": [],
-      "note": "Complement to GH Actions \u2014 Mac sleeps; GH is 24/7 cloud mirror"
-    },
-    {
-      "motor_id": "cf_loop_specialist_tick_v1",
-      "kind": "cloudflare_cron",
-      "repo": "SourceA",
-      "health_url": "https://sourcea-loop-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/15",
-      "lane": "sourcea_loop_specialist",
-      "owns": [
-        "runtime_plans",
-        "work_order_dispatch",
-        "desired_state_artifacts"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "trustfield_deploy",
-        "external_send"
-      ],
-      "receipt_path": "~/.sina/loop-specialist-tick-receipt-v1.json",
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "cf_auto_runtime_tick_v1",
-      "kind": "cloudflare_cron",
-      "repo": "SourceA",
-      "health_url": "https://sourcea.app/api/cloud-forge-run/health/v1",
-      "cadence": "*/10",
-      "lane": "sourcea_cloud_forge",
-      "owns": [
-        "cloud_forge_queue",
-        "brain_tick_bundled"
-      ],
-      "must_not_own": [
-        "sg_verifier_independence",
-        "trustfield_intake"
-      ],
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "tf_cf_fleet_tick_v1",
-      "kind": "cloudflare_cron",
-      "repo": "TrustField-Technologies",
-      "health_url": "https://tf-cf-fleet-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/5 * * * *",
-      "lane": "trustfield_build",
-      "owns": [
-        "tf_cf_fleet_tick",
-        "tf_cf_lane_self_heal",
-        "tf_cf_lane_critic_circle",
-        "tf_cf_lane_deep_research"
-      ],
-      "must_not_own": [
-        "sourcea_brain_promote",
-        "noos_gel_factory",
-        "external_send"
-      ],
-      "receipt_path": "trustfield_loop_registry / trustfield_loop_receipts",
-      "conflicts_with": [
-        "gh_actions_noos_factory_autorun_v1"
-      ]
-    },
-    {
-      "motor_id": "tf_cf_deadman_v1",
-      "kind": "cloudflare_cron",
-      "repo": "TrustField-Technologies",
-      "health_url": "https://tf-cf-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/10 * * * *",
-      "lane": "trustfield_build",
-      "owns": [
-        "tf_cf_deadman"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "external_send"
-      ],
-      "receipt_path": "trustfield_loop_registry",
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "tf_cf_verify_recipes_v1",
-      "kind": "cloudflare_cron",
-      "repo": "TrustField-Technologies",
-      "health_url": "https://tf-cf-verify-recipes-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/15 * * * *",
-      "lane": "trustfield_build",
-      "owns": [
-        "tf_cf_verify_recipes"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "external_send"
-      ],
-      "receipt_path": "trustfield_verify_recipe_runs",
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "trustfield_loops_production",
-      "kind": "cloudflare_cron",
-      "repo": "trustfield-loops",
-      "health_url": "https://trustfield-loops.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "0 */6 * * *",
-      "lane": "trustfield_capture",
-      "owns": [
-        "trustfield_loops_intake",
-        "tf_intake",
-        "tf_receipt_chain"
-      ],
-      "must_not_own": [
-        "sourcea_brain_promote",
-        "pattern_export_autorun_v1"
-      ],
-      "receipt_path": "trustfield_loop_receipts",
-      "conflicts_with": [],
-      "note": "W8 production \u2014 supersedes trustfield_loops_preview"
-    },
-    {
-      "motor_id": "trustfield_loops_preview",
-      "kind": "venture_worker",
-      "repo": "trustfield-loops",
-      "lane": "trustfield_capture",
-      "status": "SUPERSEDED",
-      "superseded_by": "trustfield_loops_production",
-      "owns": [],
-      "must_not_own": [
-        "sourcea_brain_promote",
-        "pattern_export_autorun_v1"
-      ],
-      "receipt_path": ".receipt_ids/*.json",
-      "conflicts_with": [],
-      "note": "Frozen preview \u2014 do not register new work against preview motor"
-    },
-    {
-      "motor_id": "gh_actions_sourcea_external_verify_v1",
-      "kind": "github_actions",
-      "repo": "SourceA",
-      "workflow_file": ".github/workflows/external-verify.yml",
-      "cadence": "0 */6 * * *",
-      "lane": "sourcea_autorun_l4_verify",
-      "owns": [
-        "autorun_l4_external_verify",
-        "determinism_ci_gate"
-      ],
-      "must_not_own": [
-        "brain_promote",
-        "trustfield_deploy"
-      ],
-      "conflicts_with": []
-    },
-    {
-      "motor_id": "gh_actions_noos_factory_autorun_v1",
-      "kind": "github_actions",
-      "repo": "noetfeld-os",
-      "workflow_file": ".github/workflows/noos-factory-autorun.yml",
-      "cadence": "0,10,20,30,40,50 * * * *",
-      "lane": "noos_gel_factory",
-      "owns": [
-        "noos_gel_factory_tick"
-      ],
-      "must_not_own": [
-        "sourcea_cloud_forge",
-        "brain_promote",
-        "trustfield_loops_build"
-      ],
-      "conflicts_with": [
-        "cf_auto_runtime_tick_v1"
-      ],
-      "note": "NOOS lane \u2014 observe SourceA read-only via noos-sourcea-observe-loop"
-    }
-  ],
-  "agent_lanes": [
-    {
-      "agent_id": "sg_sssot_cursor",
-      "kind": "cursor_agent",
-      "repo": "sina-governance-ssot",
-      "lane": "sg_governance",
-      "owns": [
-        "locks",
-        "verifier_scripts",
-        "registries",
-        "mirrors",
-        "receipts"
-      ],
-      "must_not_own": [
-        "venture_product_code",
-        "brain_bundle_edit",
-        "trustfield_loops_impl"
-      ]
-    },
-    {
-      "agent_id": "sourcea_brain",
-      "kind": "cursor_agent",
-      "repo": "SourceA",
-      "lane": "sourcea_brain",
-      "owns": [
-        "register_artifacts",
-        "bundle_pointers",
-        "routing",
-        "collision_check"
-      ],
-      "must_not_own": [
-        "trustfield_loops_build",
-        "gh_workflow_authority"
-      ]
-    },
-    {
-      "agent_id": "sourcea_worker",
-      "kind": "cursor_agent",
-      "repo": "SourceA",
-      "lane": "sourcea_build",
-      "owns": [
-        "sourcea_workers",
-        "skill_packaging",
-        "deploy_scripts"
-      ],
-      "must_not_own": [
-        "trustfield_loops",
-        "sg_registry",
-        "brain_register"
-      ]
-    },
-    {
-      "agent_id": "trustfield_worker",
-      "kind": "cursor_agent",
-      "repo": "TrustField-Technologies",
-      "repos": [
-        "TrustField-Technologies",
-        "trustfield-loops"
-      ],
-      "lane": "trustfield_build",
-      "owns": [
-        "tf_workers",
-        "tf_cf_motors",
-        "tf_d1",
-        "tf_crons",
-        "tf_gha_secondary"
-      ],
-      "must_not_own": [
-        "sourcea_repo",
-        "noos_doctrine",
-        "sg_registry_append"
-      ]
-    },
-    {
-      "agent_id": "noos_agent",
-      "kind": "cursor_agent",
-      "repo": "noetfeld-os",
-      "lane": "noos_doctrine",
-      "owns": [
-        "gel_runtime",
-        "_NOOS_AGENT_docs"
-      ],
-      "must_not_own": [
-        "noetfield_website_source",
-        "sourcea_default_save"
-      ]
-    },
-    {
-      "agent_id": "noetfield_website_agent",
-      "kind": "cursor_agent",
-      "repo": "Noetfield",
-      "lane": "noetfield_website",
-      "owns": [
-        "www_routes",
-        "cloudflare_www_deploy",
-        "live_nerve_probe"
-      ],
-      "must_not_own": [
-        "gel_runtime_impl",
-        "sourcea_bundle"
-      ]
-    },
-    {
-      "agent_id": "github_copilot_agent",
-      "kind": "github_copilot",
-      "repo": "*",
-      "lane": "assist_only",
-      "owns": [
-        "draft_pr",
-        "suggest_patch",
-        "explain_diff"
-      ],
-      "must_not_own": [
-        "autonomous_promote",
-        "autonomous_deploy_prod",
-        "register_brain_artifact",
-        "cross_repo_writes",
-        "append_sg_noos_canonical",
-        "external_send",
-        "unregistered_cron"
-      ],
-      "required_pr_fields": [
-        "lane",
-        "motor_id_or_human_gate"
-      ]
-    },
-    {
-      "agent_id": "github_coding_agent",
-      "kind": "github_agent",
-      "repo": "*",
-      "lane": "assist_only",
-      "owns": [
-        "issue_triage_draft",
-        "pr_draft"
-      ],
-      "must_not_own": [
-        "merge_to_main_without_gate",
-        "deploy",
-        "promote_brain",
-        "overwrite_registered_motor"
-      ],
-      "required_pr_fields": [
-        "lane",
-        "receipt_id_or_explicit_human_approve"
-      ]
-    }
-  ],
-  "task_cell_owners": {
-    "trustfield_loops_build": "trustfield_worker",
-    "trustfield_loops_intake": "trustfield_loops_production",
-    "tf_cf_fleet_tick": "tf_cf_fleet_tick_v1",
-    "tf_cf_deadman": "tf_cf_deadman_v1",
-    "tf_cf_verify_recipes": "tf_cf_verify_recipes_v1",
-    "trustfield_phase2_triage": "trustfield_worker",
-    "sourcea_worker_deploy": "sourcea_worker",
-    "sourcea_brain_register": "sourcea_brain",
-    "signal_factory_package": "sourcea_worker",
-    "loop_specialist_runtime_plan": "sourcea_loop_specialist",
-    "sg_guardrail_append": "sg_sssot_cursor",
-    "noos_doctrine_append": "noos_agent",
-    "noetfield_website_deploy": "noetfield_website_agent",
-    "brain_promote_ci": "gh_actions_brain_loop_autorun_v1",
-    "brain_promote_mac": "mac_launchd_brain_loop_autorun_v1",
-    "independent_verifier_run": "sg_sssot_cursor",
-    "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify",
-    "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
-    "noos_gel_factory": "gh_actions_noos_factory_autorun_v1"
+ "schema": "github_automation_registry_v1",
+ "version": "1.1.0",
+ "saved_at": "2026-07-08T13:11:47Z",
+ "authority": "SG (SSSOT)",
+ "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+ "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
+ "motors": [
+  {
+   "motor_id": "gh_actions_workflow_census_weekly_v1",
+   "kind": "github_actions",
+   "repo": "sina-governance-ssot",
+   "workflow_file": ".github/workflows/workflow-census-weekly-v1.yml",
+   "cadence": "0 8 * * 1",
+   "lane": "sg_governance",
+   "owns": [
+    "workflow_census",
+    "loop_value_class_audit"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "venture_product_code"
+   ],
+   "receipt_path": "receipts/workflow-census-*.json",
+   "conflicts_with": [],
+   "note": "Judging layer — which receipt does each loop serve?"
   },
-  "duplication_forbidden": [
-    {
-      "task": "brain_promote_same_window",
-      "max_concurrent_writers": 1,
-      "allowed_motors": [
-        "gh_actions_brain_loop_autorun_v1",
-        "mac_launchd_brain_loop_autorun_v1"
-      ],
-      "rule": "CAS on promotion gate \u2014 second writer gets REJECTED receipt, not silent overwrite"
-    },
-    {
-      "task": "trustfield_loops_implementation",
-      "max_concurrent_writers": 1,
-      "allowed_motors": [
-        "trustfield_worker",
-        "trustfield_loops_production"
-      ],
-      "rule": "Copilot/Agents may suggest PRs; only TrustField Worker chat merges scoped TF changes"
-    },
-    {
-      "task": "brain_artifact_registration",
-      "max_concurrent_writers": 1,
-      "allowed_motors": [
-        "sourcea_brain"
-      ],
-      "rule": "Registration scripts run from SG only after independent verify \u2014 not from GH Actions"
-    }
-  ]
+  {
+   "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
+   "kind": "github_actions",
+   "repo": "sina-governance-ssot",
+   "workflow_file": ".github/workflows/agent-read-staleness-weekly-v1.yml",
+   "cadence": "0 9 * * 1",
+   "lane": "sg_governance",
+   "owns": [
+    "alive_doc_registry",
+    "stale_law_pointer_audit"
+   ],
+   "must_not_own": [
+    "venture_product_code",
+    "brain_promote"
+   ],
+   "receipt_path": "receipts/agent-read-staleness-*.json",
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+   "kind": "github_actions",
+   "repo": "sina-governance-ssot",
+   "workflow_file": ".github/workflows/sg-auth-surface-probe-v1.yml",
+   "cadence": "0 */6 * * *",
+   "lane": "sg_governance",
+   "loop_id": "sg_auth_surface_probe_v1",
+   "owns": [
+    "auth_surface_probe",
+    "credential_path_audit",
+    "redirect_allow_list_lint"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "venture_product_code",
+    "external_send",
+    "auth_ui"
+   ],
+   "requires_secrets": [
+    "NOETFIELD_SUPABASE_URL",
+    "NOETFIELD_SUPABASE_SERVICE_ROLE_KEY"
+   ],
+   "receipt_path": "receipts/auth-surface-probe-*.json",
+   "deadman": "sourcea-deadman-v1",
+   "conflicts_with": [],
+   "note": "GUARD — tiered auth surface probe; SG verifies venture workers implement UI"
+  },
+  {
+   "motor_id": "gh_actions_brain_loop_autorun_v1",
+   "kind": "github_actions",
+   "repo": "sina-governance-ssot",
+   "workflow_file": ".github/workflows/brain-loop-autorun-v1.yml",
+   "cadence": "*/30 * * * *",
+   "lane": "sourcea_brain_observe_promote",
+   "owns": [
+    "ci_self_heal",
+    "ci_parallel_verifier_batch",
+    "ci_e2e_matrix_when_tokens"
+   ],
+   "must_not_own": [
+    "trustfield_loops_build",
+    "noos_doctrine_append",
+    "sg_guardrail_append",
+    "external_send"
+   ],
+   "requires_secrets": [
+    "CF_MAIN_TOKEN",
+    "CF_VERIFIER_TOKEN"
+   ],
+   "autonomous_promote": "only_when_BRAIN_CI_AUTONOMOUS_and_tokens_present",
+   "receipt_path": "receipts/brain-loop-autorun-*.json",
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "mac_launchd_brain_loop_autorun_v1",
+   "kind": "mac_launchd",
+   "repo": "sina-governance-ssot",
+   "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
+   "cadence": "1800s",
+   "lane": "sourcea_brain_observe_promote",
+   "owns": [
+    "mac_self_heal",
+    "mac_parallel_verifier_batch",
+    "mac_e2e_matrix_ship_window"
+   ],
+   "must_not_own": [
+    "trustfield_loops_build",
+    "ci_duplicate_when_ship_window"
+   ],
+   "receipt_path": "receipts/brain-loop-autorun-*.json",
+   "conflicts_with": [],
+   "note": "Complement to GH Actions — Mac sleeps; GH is 24/7 cloud mirror"
+  },
+  {
+   "motor_id": "cf_loop_specialist_tick_v1",
+   "kind": "cloudflare_cron",
+   "repo": "SourceA",
+   "health_url": "https://sourcea-loop-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+   "cadence": "*/15",
+   "lane": "sourcea_loop_specialist",
+   "owns": [
+    "runtime_plans",
+    "work_order_dispatch",
+    "desired_state_artifacts"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "trustfield_deploy",
+    "external_send"
+   ],
+   "receipt_path": "~/.sina/loop-specialist-tick-receipt-v1.json",
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "cf_auto_runtime_tick_v1",
+   "kind": "cloudflare_cron",
+   "repo": "SourceA",
+   "health_url": "https://sourcea.app/api/cloud-forge-run/health/v1",
+   "cadence": "*/10",
+   "lane": "sourcea_cloud_forge",
+   "owns": [
+    "cloud_forge_queue",
+    "brain_tick_bundled"
+   ],
+   "must_not_own": [
+    "sg_verifier_independence",
+    "trustfield_intake"
+   ],
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "tf_cf_fleet_tick_v1",
+   "kind": "cloudflare_cron",
+   "repo": "TrustField-Technologies",
+   "health_url": "https://tf-cf-fleet-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+   "cadence": "*/5 * * * *",
+   "lane": "trustfield_build",
+   "owns": [
+    "tf_cf_fleet_tick",
+    "tf_cf_lane_self_heal",
+    "tf_cf_lane_critic_circle",
+    "tf_cf_lane_deep_research"
+   ],
+   "must_not_own": [
+    "sourcea_brain_promote",
+    "noos_gel_factory",
+    "external_send"
+   ],
+   "receipt_path": "trustfield_loop_registry / trustfield_loop_receipts",
+   "conflicts_with": [
+    "gh_actions_noos_factory_autorun_v1"
+   ]
+  },
+  {
+   "motor_id": "tf_cf_deadman_v1",
+   "kind": "cloudflare_cron",
+   "repo": "TrustField-Technologies",
+   "health_url": "https://tf-cf-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+   "cadence": "*/10 * * * *",
+   "lane": "trustfield_build",
+   "owns": [
+    "tf_cf_deadman"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "external_send"
+   ],
+   "receipt_path": "trustfield_loop_registry",
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "tf_cf_verify_recipes_v1",
+   "kind": "cloudflare_cron",
+   "repo": "TrustField-Technologies",
+   "health_url": "https://tf-cf-verify-recipes-v1.sina-kazemnezhad-ca.workers.dev/health",
+   "cadence": "*/15 * * * *",
+   "lane": "trustfield_build",
+   "owns": [
+    "tf_cf_verify_recipes"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "external_send"
+   ],
+   "receipt_path": "trustfield_verify_recipe_runs",
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "trustfield_loops_production",
+   "kind": "cloudflare_cron",
+   "repo": "trustfield-loops",
+   "health_url": "https://trustfield-loops.sina-kazemnezhad-ca.workers.dev/health",
+   "cadence": "0 */6 * * *",
+   "lane": "trustfield_capture",
+   "owns": [
+    "trustfield_loops_intake",
+    "tf_intake",
+    "tf_receipt_chain"
+   ],
+   "must_not_own": [
+    "sourcea_brain_promote",
+    "pattern_export_autorun_v1"
+   ],
+   "receipt_path": "trustfield_loop_receipts",
+   "conflicts_with": [],
+   "note": "W8 production — supersedes trustfield_loops_preview"
+  },
+  {
+   "motor_id": "trustfield_loops_preview",
+   "kind": "venture_worker",
+   "repo": "trustfield-loops",
+   "lane": "trustfield_capture",
+   "status": "SUPERSEDED",
+   "superseded_by": "trustfield_loops_production",
+   "owns": [],
+   "must_not_own": [
+    "sourcea_brain_promote",
+    "pattern_export_autorun_v1"
+   ],
+   "receipt_path": ".receipt_ids/*.json",
+   "conflicts_with": [],
+   "note": "Frozen preview — do not register new work against preview motor"
+  },
+  {
+   "motor_id": "gh_actions_sourcea_external_verify_v1",
+   "kind": "github_actions",
+   "repo": "SourceA",
+   "workflow_file": ".github/workflows/external-verify.yml",
+   "cadence": "0 */6 * * *",
+   "lane": "sourcea_autorun_l4_verify",
+   "owns": [
+    "autorun_l4_external_verify",
+    "determinism_ci_gate"
+   ],
+   "must_not_own": [
+    "brain_promote",
+    "trustfield_deploy"
+   ],
+   "conflicts_with": []
+  },
+  {
+   "motor_id": "gh_actions_noos_factory_autorun_v1",
+   "kind": "github_actions",
+   "repo": "noetfeld-os",
+   "workflow_file": ".github/workflows/noos-factory-autorun.yml",
+   "cadence": "0,10,20,30,40,50 * * * *",
+   "lane": "noos_gel_factory",
+   "owns": [
+    "noos_gel_factory_tick"
+   ],
+   "must_not_own": [
+    "sourcea_cloud_forge",
+    "brain_promote",
+    "trustfield_loops_build"
+   ],
+   "conflicts_with": [
+    "cf_auto_runtime_tick_v1"
+   ],
+   "note": "NOOS lane — observe SourceA read-only via noos-sourcea-observe-loop"
+  },
+  {
+   "motor_id": "p0pgr_shadow_cycle_v1",
+   "kind": "mac_launchd",
+   "repo": "sina-governance-ssot",
+   "script": "scripts/p0pgr_cycle_v1.py",
+   "cadence": "manual_or_daily_shadow",
+   "lane": "p0pgr",
+   "concurrency_key": "p0pgr-dispatch",
+   "owns": [
+    "prompt_packet_compile",
+    "packet_lint",
+    "shadow_route_decision",
+    "p0pgr_cycle_receipts"
+   ],
+   "must_not_own": [
+    "execution_of_packets",
+    "deploy",
+    "merge",
+    "brain_promote",
+    "authority_change",
+    "verifier_edit",
+    "venture_product_code"
+   ],
+   "receipt_path": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+   "conflicts_with": [],
+   "status": "DECLARED",
+   "phase": "phase0_shadow",
+   "note": "P0 Dispatch Brain Runtime v1.1 shadow loop - compile+lint+route only, zero execution. Contract: p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md. Registered 2026-07-08 after 10/10 tests + shadow round-trip P0PGR-CYCLE-20260708T131111Z (bundle 72303b04fb900e71)."
+  }
+ ],
+ "agent_lanes": [
+  {
+   "agent_id": "sg_sssot_cursor",
+   "kind": "cursor_agent",
+   "repo": "sina-governance-ssot",
+   "lane": "sg_governance",
+   "owns": [
+    "locks",
+    "verifier_scripts",
+    "registries",
+    "mirrors",
+    "receipts"
+   ],
+   "must_not_own": [
+    "venture_product_code",
+    "brain_bundle_edit",
+    "trustfield_loops_impl"
+   ]
+  },
+  {
+   "agent_id": "sourcea_brain",
+   "kind": "cursor_agent",
+   "repo": "SourceA",
+   "lane": "sourcea_brain",
+   "owns": [
+    "register_artifacts",
+    "bundle_pointers",
+    "routing",
+    "collision_check"
+   ],
+   "must_not_own": [
+    "trustfield_loops_build",
+    "gh_workflow_authority"
+   ]
+  },
+  {
+   "agent_id": "sourcea_worker",
+   "kind": "cursor_agent",
+   "repo": "SourceA",
+   "lane": "sourcea_build",
+   "owns": [
+    "sourcea_workers",
+    "skill_packaging",
+    "deploy_scripts"
+   ],
+   "must_not_own": [
+    "trustfield_loops",
+    "sg_registry",
+    "brain_register"
+   ]
+  },
+  {
+   "agent_id": "trustfield_worker",
+   "kind": "cursor_agent",
+   "repo": "TrustField-Technologies",
+   "repos": [
+    "TrustField-Technologies",
+    "trustfield-loops"
+   ],
+   "lane": "trustfield_build",
+   "owns": [
+    "tf_workers",
+    "tf_cf_motors",
+    "tf_d1",
+    "tf_crons",
+    "tf_gha_secondary"
+   ],
+   "must_not_own": [
+    "sourcea_repo",
+    "noos_doctrine",
+    "sg_registry_append"
+   ]
+  },
+  {
+   "agent_id": "noos_agent",
+   "kind": "cursor_agent",
+   "repo": "noetfeld-os",
+   "lane": "noos_doctrine",
+   "owns": [
+    "gel_runtime",
+    "_NOOS_AGENT_docs"
+   ],
+   "must_not_own": [
+    "noetfield_website_source",
+    "sourcea_default_save"
+   ]
+  },
+  {
+   "agent_id": "noetfield_website_agent",
+   "kind": "cursor_agent",
+   "repo": "Noetfield",
+   "lane": "noetfield_website",
+   "owns": [
+    "www_routes",
+    "cloudflare_www_deploy",
+    "live_nerve_probe"
+   ],
+   "must_not_own": [
+    "gel_runtime_impl",
+    "sourcea_bundle"
+   ]
+  },
+  {
+   "agent_id": "github_copilot_agent",
+   "kind": "github_copilot",
+   "repo": "*",
+   "lane": "assist_only",
+   "owns": [
+    "draft_pr",
+    "suggest_patch",
+    "explain_diff"
+   ],
+   "must_not_own": [
+    "autonomous_promote",
+    "autonomous_deploy_prod",
+    "register_brain_artifact",
+    "cross_repo_writes",
+    "append_sg_noos_canonical",
+    "external_send",
+    "unregistered_cron"
+   ],
+   "required_pr_fields": [
+    "lane",
+    "motor_id_or_human_gate"
+   ]
+  },
+  {
+   "agent_id": "github_coding_agent",
+   "kind": "github_agent",
+   "repo": "*",
+   "lane": "assist_only",
+   "owns": [
+    "issue_triage_draft",
+    "pr_draft"
+   ],
+   "must_not_own": [
+    "merge_to_main_without_gate",
+    "deploy",
+    "promote_brain",
+    "overwrite_registered_motor"
+   ],
+   "required_pr_fields": [
+    "lane",
+    "receipt_id_or_explicit_human_approve"
+   ]
+  }
+ ],
+ "task_cell_owners": {
+  "trustfield_loops_build": "trustfield_worker",
+  "trustfield_loops_intake": "trustfield_loops_production",
+  "tf_cf_fleet_tick": "tf_cf_fleet_tick_v1",
+  "tf_cf_deadman": "tf_cf_deadman_v1",
+  "tf_cf_verify_recipes": "tf_cf_verify_recipes_v1",
+  "trustfield_phase2_triage": "trustfield_worker",
+  "sourcea_worker_deploy": "sourcea_worker",
+  "sourcea_brain_register": "sourcea_brain",
+  "signal_factory_package": "sourcea_worker",
+  "loop_specialist_runtime_plan": "sourcea_loop_specialist",
+  "sg_guardrail_append": "sg_sssot_cursor",
+  "noos_doctrine_append": "noos_agent",
+  "noetfield_website_deploy": "noetfield_website_agent",
+  "brain_promote_ci": "gh_actions_brain_loop_autorun_v1",
+  "brain_promote_mac": "mac_launchd_brain_loop_autorun_v1",
+  "independent_verifier_run": "sg_sssot_cursor",
+  "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify",
+  "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
+  "noos_gel_factory": "gh_actions_noos_factory_autorun_v1"
+ },
+ "duplication_forbidden": [
+  {
+   "task": "brain_promote_same_window",
+   "max_concurrent_writers": 1,
+   "allowed_motors": [
+    "gh_actions_brain_loop_autorun_v1",
+    "mac_launchd_brain_loop_autorun_v1"
+   ],
+   "rule": "CAS on promotion gate — second writer gets REJECTED receipt, not silent overwrite"
+  },
+  {
+   "task": "trustfield_loops_implementation",
+   "max_concurrent_writers": 1,
+   "allowed_motors": [
+    "trustfield_worker",
+    "trustfield_loops_production"
+   ],
+   "rule": "Copilot/Agents may suggest PRs; only TrustField Worker chat merges scoped TF changes"
+  },
+  {
+   "task": "brain_artifact_registration",
+   "max_concurrent_writers": 1,
+   "allowed_motors": [
+    "sourcea_brain"
+   ],
+   "rule": "Registration scripts run from SG only after independent verify — not from GH Actions"
+  }
+ ]
 }

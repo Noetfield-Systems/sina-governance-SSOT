@@ -1,0 +1,49 @@
+{
+  "schema": "p0pgr-execution-receipt-v1",
+  "packet_id": "P0PGR-20260708-004",
+  "move_id": "M03",
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "executed_at": "2026-07-08T13:30:00Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executor": "cloud sandbox web_fetch (external to site build system)",
+  "authority_scope": "observe",
+  "quality_state": "PARTIAL",
+  "low_quality_labels": {
+    "confidence": "high on reachability/claims; medium on byte-level drift (see limitations)",
+    "scope": "6 public GTM routes, content-level claims diff, read-only",
+    "reversibility": "fully reversible (external GET only)",
+    "next_improvement": "re-run from CI runner with redirects OFF + raw-body sha256 to upgrade PARTIAL -> PASS"
+  },
+  "l4_limitations": [
+    "fetch tool follows redirects (apex -> www observed); redirects-OFF check not satisfiable with this executor",
+    "content hash over rendered text unavailable as raw-byte sha256; content markers recorded instead"
+  ],
+  "per_url_verdicts": [
+    {"url": "https://trustfield.ca", "final_url": "https://www.trustfield.ca/", "verdict": "CURRENT", "markers": ["site-v108-partner-premium-onboarding-2026-07-08", "CAD 4,000", "Start free sandbox", "settlement boundary disclaimer"]},
+    {"url": "https://trustfield.ca/register", "final_url": "https://www.trustfield.ca/register", "verdict": "CURRENT", "markers": ["4-step intake form (Entity/Corridor/Contacts/Review)", "workflow state only disclaimer", "site-v108"]},
+    {"url": "https://trustfield.ca/pilot", "final_url": "https://www.trustfield.ca/pilot", "verdict": "CURRENT_WITH_FLAG", "markers": ["RPAA Readiness Discovery CAD 4,000 fixed", "CAD 3,500 paid in full on signature", "Integration ~CAD 6K setup", "MSA + DPA boundary", "billing entity to be confirmed"]},
+    {"url": "https://trustfield.ca/partners/msp", "final_url": "https://www.trustfield.ca/partners/msp", "verdict": "CURRENT", "markers": ["RACI table", "channel pack", "partner slug onboarding", "Discovery SOW CAD 4,000"]},
+    {"url": "https://trustfield.ca/partner-access", "final_url": "https://www.trustfield.ca/partner-access", "verdict": "CURRENT", "markers": ["8-stage path incl. NDA unlock + private briefing room", "Operating Cofounder Track", "receipt-style status facts", "no equity/cap-table exposure"]},
+    {"url": "https://trustfield.ca/showcase", "final_url": "https://www.trustfield.ca/showcase", "verdict": "CURRENT", "markers": ["track selector MSB/Investor/Partner/Technical", "TF program ID walkthrough", "site-v108"]}
+  ],
+  "claims_diff": [
+    {"claim": "sandbox free self-serve at /register", "repo_source": "P10 TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md", "live": "CONFIRMED (form live, no fee, TF program ID on submit)", "class": "MATCH"},
+    {"claim": "CAD 4,000 RPAA Readiness Discovery published", "repo_source": "P10 doc", "live": "CONFIRMED on /, /pilot, /partners/msp", "class": "MATCH"},
+    {"claim": "apply -> verify -> NDA -> briefing room funnel", "repo_source": "P10 doc", "live": "CONFIRMED as 8-stage path on /partner-access", "class": "MATCH"},
+    {"claim": "no public regulatory self-claims", "repo_source": "receipt_tf_language_cleanup_v1", "live": "CONFIRMED: 'venture in formation', 'does not hold funds/settle', 'not legal advice' present on every page", "class": "MATCH"},
+    {"claim": "entity: reserved-to-be-incorporated, interim billing Noetfield", "repo_source": "P10 doc entity block", "live": "CONFIRMED verbatim in site footer", "class": "MATCH"},
+    {"claim": "site build site-v71-partner-access-v1.1-2026-07-07", "repo_source": "P10 doc launch credibility block", "live": "site-v108-partner-premium-onboarding-2026-07-08 (37 builds newer)", "class": "DOC_STALE"},
+    {"claim": "Discovery = CAD 4,000 fixed", "repo_source": "P10 doc + live headline", "live": "/pilot also shows 'CAD 3,500 paid in full on signature (single invoice)' adjacent to 'CAD 4,000 fixed / 50% on signature (CAD 2,000)'", "class": "CLAIM_AMBIGUITY"}
+  ],
+  "findings_requiring_founder_eyes": [
+    {"id": "F1", "class": "CLAIM_AMBIGUITY", "detail": "/pilot shows both 'CAD 4,000 fixed (2,000 + 2,000)' and 'CAD 3,500 paid in full on signature'. If intentional prepay discount, wording should say so explicitly; a diligence-minded MSB may read it as inconsistent pricing.", "next_pointer": "candidate copy-fix packet (deploy-gated, founder-only)"},
+    {"id": "F2", "class": "DOC_STALE", "detail": "Repo P10 doc cites build v71 (2026-07-07); live is v108 (2026-07-08). Live is ahead of committed doc — L12 doc-drift, not production drift. No public false claim found.", "next_pointer": "candidate hygiene packet: refresh P10 launch-credibility block"}
+  ],
+  "pass_fail": "PARTIAL — all 6 routes live and claim-coherent; 2 founder-eyes findings; no dead route; no public false claim; census/live NOT claimed fixed",
+  "changed_files": ["receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json"],
+  "commands_run": ["web_fetch x6 (GET only, external)"],
+  "cost": {"provider": "none", "model": "none", "tokens_in": 0, "tokens_out": 0, "total_usd": 0.0},
+  "external_sends": 0,
+  "forms_submitted": 0,
+  "next_pointer": "F1 copy-clarity packet + F2 doc-refresh packet -> queue behind M05/M04; upgrade this receipt to PASS via CI runner with redirects OFF + raw-body hash"
+}
