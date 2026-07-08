@@ -21,6 +21,8 @@
 | 8 | **000-founder-rules.mdc** | `SourceA/noetfield-library/P0-FOUNDATION-SPINE/` (archive verify) | `P0-FOUNDATION-SPINE/` | ✅ INSTALLED 2026-07-05 — verify active vs retired |
 | 9 | **machine-process-loops-v1.json** | `SourceA/noetfield-library/P0-FOUNDATION-SPINE/data/` | `P0-FOUNDATION-SPINE/data/` | ✅ INSTALLED 2026-07-05 — archive-origin verify |
 | 10 | **founder-trigger-retirement-registry-v1.json** | `SourceA/noetfield-library/P0-FOUNDATION-SPINE/data/` | `P0-FOUNDATION-SPINE/data/` | ✅ INSTALLED 2026-07-05 — archive-origin verify |
+| 11 | **P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md** | Downloads v1.1 founder lock | `P0-FOUNDATION-SPINE/P0-CORE/` | ✅ INSTALLED 2026-07-07 |
+| 12 | **LIVING_SYSTEM_110 upgrade plans** | SG session 2026-07-07 | `docs/` + `data/` | ✅ LOCKED W0 complete |
 
 ---
 
@@ -59,5 +61,7 @@
 3. **supporting-law 296 files** — founder batch ratify before any individual install
 
 ---
+
+*v0.3 (2026-07-07) — LIVING_SYSTEM_DOCTRINE v1.1 + 110-plan matrix W0 locked.
 
 *v0.2 (2026-07-05) — P0 reconciliation complete. 0 placeholders. 296 supporting-law files quarantined. Sources: Downloads v0.8 zip + noetfield-library 7 + Noetfield-Systems/SourceA/docs + SourceA/noetfield-library.*

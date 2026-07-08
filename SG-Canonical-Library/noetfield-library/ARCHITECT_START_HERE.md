@@ -2,7 +2,7 @@
 
 **Purpose:** the minimum spine so ANY architect (Claude in a new chat, another AI app, a Cursor agent) is instantly oriented and does NOT get confused, lost, or duplicate work. If you read only one file, read this one, then open what it points to.
 
-**Owner:** Sina Kazemnezhad · **Updated:** 2026-07-06 · **This file = read-surface pointer, not authority.**
+**Owner:** Sina Kazemnezhad · **Updated:** 2026-07-07 · **This file = read-surface pointer, not authority.**
 
 ---
 
@@ -43,6 +43,14 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 ## 2b. THE MIND — P0 CORE (read only if you are Base Brain or a high decision agent)
 `P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md` = how Sina judges when no Tier-1 rule fits. 10 patterns, each harvested from a real case. **Workers must NEVER load this** (Need-to-know access). It grows by HARVEST only — never write a pattern speculatively.
 `P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW…LOCKED_v1.md` = the meta-law: which agent reads which law (Tier 0/1/2/3 + Need-to-know access). It routes every other law. This is why no agent reads everything.
+
+
+## 2c. THE LIVING SYSTEM AXIS (P0-CORE — every subsystem judged here)
+`P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` = **LIVING vs STALE** on one machine-checkable axis.
+- **Body + Pulse + Homeostasis + Metabolism + Receipts** — 24/7 loops are body, not fake life.
+- **Two circulatory systems** — homeostasis (internal heal) and metabolism (external market input) run in **parallel lanes**; neither blocks the other.
+- **Execution:** `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md` (110 plans, W0 locked).
+- **Governance-alive ≠ commercial-alive** — brain can pass homeostasis while metabolism ladder is still on rung 2.
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
