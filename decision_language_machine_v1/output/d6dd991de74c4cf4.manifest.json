@@ -1,0 +1,32 @@
+{
+  "schema": "decision_language_machine_run_v1",
+  "run_id": "d6dd991de74c4cf4",
+  "time": "2026-07-07T07:20:42Z",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "stage_receipts": [
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.intake.1dec5cc8ccc45d9b.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.plain_english.769de73feaa3e309.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.term_extract.ff813acbd753adda.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.dictionary_check.2bc78a2eaea317e1.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.cluster.fabebfe2c1cac2af.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.classify.e75d93d0b49d53b8.receipt.json",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/receipts/d6dd991de74c4cf4.founder_sheet.351c9d5f3afba9fd.receipt.json"
+  ],
+  "summary": {
+    "run_id": "d6dd991de74c4cf4",
+    "input_path": "test_fixtures/form_official_80_open_v1.json",
+    "item_count": 80,
+    "classification": {
+      "DEFER": 11,
+      "ADVISOR_REVIEW": 31,
+      "MACHINE_VALIDATABLE": 36,
+      "FOUNDER_FACT": 2
+    },
+    "dictionary_fix_needed_count": 51,
+    "cluster_count": 13,
+    "founder_sheet": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/d6dd991de74c4cf4.founder_sheet.json",
+    "founder_sheet_md": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/d6dd991de74c4cf4.founder_sheet.md",
+    "processed": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/d6dd991de74c4cf4.processed.json",
+    "apply_map_status": "SKIPPED"
+  }
+}

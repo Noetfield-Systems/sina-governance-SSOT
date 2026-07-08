@@ -1,7 +1,7 @@
 # SG (SSSOT) — Cursor agent lane
 
 **Agent:** `sg_sssot_cursor` · **Repo:** `~/Projects/sina-governance-ssot`  
-**Registry:** `data/github_automation_registry_v1.json` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
+**Registry:** `data/github_automation_registry_v1.json` · **Alive docs:** `data/agent_read_surfaces_v1.json` · **Staleness gate:** `scripts/verify_agent_read_staleness_v1.sh` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
 
 ## You edit (this repo)
 
@@ -35,3 +35,4 @@
 1. `skill-foundational-agentic-systems`
 2. `governed-autorun`
 3. `hub-pro-mac-session`
+4. `skills/pr-conflict-resolver` (in-repo) — use for any PR/branch merge conflict; encodes the L1-L5 motor law and registry-JSON merge rules so conflicts aren't resolved by blind text-pick

@@ -90,10 +90,10 @@ Everything else (10 lines, stations, ROI engine) = replication + config once the
 
 ---
 
-## D-8 — MODEL LAYER IS LAST + MODEL-AGNOSTIC (the deferred-cost ruling)
+## D-8 — MODEL LAYER IS LAST + VENDOR-NEUTRAL (the deferred-cost ruling)
 
 On self-hosting open-source: the cost isn't licensing (that's free) — it's the **hidden ops tax** (GPU provisioning, serving, scaling, OOM-debugging at 3am = founder time, the scarcest resource) plus a **quality gap at the producing/critic roles** where output quality directly drives conversion. Open-source-self-hosted beats rented APIs only when *volume is high AND ops capacity exists AND quality gap doesn't hurt conversion* — none true yet.
 
-**Ruling:** build the AI-station layer **model-agnostic** (provider adapters; model = config). Rent APIs now (cheap at low volume, best quality, zero ops). Open-source self-host becomes a **one-config-flip**, not a rebuild, the moment per-line `cost_usd` in the ROI receipts crosses the point where always-on infra is cheaper — decided per-line, by receipts, not by which sounds better. **The model layer is the LAST thing optimized, and when optimized it's a config change, not a project.**
+**Ruling:** build the AI-station layer **vendor-neutral** (provider adapters; model = config). Rent APIs now (cheap at low volume, best quality, zero ops). Open-source self-host becomes a **one-config-flip**, not a rebuild, the moment per-line `cost_usd` in the ROI receipts crosses the point where governed always-on infra is cheaper — decided per-line, by receipts, not by which sounds better. **The model layer is the LAST thing optimized, and when optimized it's a config change, not a project.**
 
 > Note the distinction from D-1: this (D-8) is about the *worker* model layer (the soup the brain calls). D-1's rawness is about the *core*, which is NOT a model at all. Keep separate: the core is raw/deterministic/objective-driven (not a model); the workers are swappable soupy models (rented→self-hosted by config).

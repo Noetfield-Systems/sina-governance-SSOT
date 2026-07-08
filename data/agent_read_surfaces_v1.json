@@ -1,0 +1,178 @@
+{
+  "schema": "agent_read_surfaces_v1",
+  "version": "1.1.0",
+  "saved_at": "2026-07-08T00:58:22Z",
+  "authority": "SG (SSSOT)",
+  "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
+  "status_model": {
+    "ACTIVE": "Live authority",
+    "READ_SURFACE": "Index only",
+    "SUPERSEDED": "Replaced",
+    "RETIRED": "Dead law"
+  },
+  "retired_deploy_surfaces": [
+    {
+      "id": "legacy_preview_host",
+      "retired_at": "2026-06-01",
+      "replaced_by": "cloudflare_workers_opennext",
+      "note": "TrustField W1 closed on CF Worker. Legacy preview-host GHA motors are retire candidates."
+    }
+  ],
+  "lanes": {
+    "sg_sssot_cursor": {
+      "agent_id": "sg_sssot_cursor",
+      "tier": 0,
+      "must_read": [
+        {
+          "path": "AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry"
+        },
+        {
+          "path": "data/github_automation_registry_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_truth"
+        },
+        {
+          "path": "data/agent_read_surfaces_v1.json",
+          "status": "ACTIVE",
+          "role": "alive_doc_registry"
+        },
+        {
+          "path": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "living_system_plans_human"
+        },
+        {
+          "path": "data/living_system_110_plans_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "living_system_execution_matrix"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "living_system_doctrine"
+        },
+        {
+          "path": "data/stale_law_guard_patterns_v1.json",
+          "status": "ACTIVE",
+          "role": "stale_law_patterns"
+        },
+        {
+          "path": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+          "status": "ACTIVE",
+          "role": "parallel_automation_law"
+        },
+        {
+          "path": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+          "status": "ACTIVE",
+          "role": "worker_routing"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+          "status": "READ_SURFACE",
+          "role": "library_index"
+        },
+        {
+          "path": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
+          "status": "ACTIVE",
+          "role": "library_version_truth"
+        }
+      ],
+      "skills_resolve": [
+        "~/Desktop/Noetfield-Systems/SourceA/.cursor/skills/skill-foundational-agentic-systems/SKILL.md",
+        "~/Desktop/Noetfield-Systems/SourceA/.cursor/skills/governed-autorun/SKILL.md",
+        "~/Desktop/Noetfield-Systems/SourceA/.cursor/skills/hub-pro-mac-session/SKILL.md"
+      ]
+    },
+    "sourcea_brain": {
+      "agent_id": "sourcea_brain",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield-Systems/SourceA/AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry",
+          "repo": "SourceA"
+        },
+        {
+          "path": "data/brain_external_artifact_registry_v1.json",
+          "status": "ACTIVE",
+          "role": "brain_pointer_registry",
+          "repo": "sina-governance-ssot"
+        }
+      ]
+    },
+    "trustfield_worker": {
+      "agent_id": "trustfield_worker",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
+          "status": "ACTIVE",
+          "role": "deploy_truth",
+          "repo": "TrustField-Technologies"
+        },
+        {
+          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
+          "status": "ACTIVE",
+          "role": "automation_law",
+          "repo": "TrustField-Technologies"
+        }
+      ]
+    },
+    "noos_agent": {
+      "agent_id": "noos_agent",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry",
+          "repo": "noetfeld-OS",
+          "alt_paths": [
+            "~/Projects/noetfeld-os/AGENTS.md"
+          ]
+        },
+        {
+          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+          "status": "ACTIVE",
+          "role": "integrator_checklist",
+          "repo": "noetfeld-OS"
+        }
+      ]
+    },
+    "noetfield_website": {
+      "agent_id": "noetfield_website",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry",
+          "repo": "Noetfield",
+          "optional": true
+        }
+      ]
+    }
+  },
+  "scan_roots_authority": [
+    "AGENTS.md",
+    "ssot/",
+    "data/github_automation_registry_v1.json",
+    "data/agent_read_surfaces_v1.json",
+    "data/automation_surface_inventory_v1.json",
+    ".cursor/rules/",
+    ".github/copilot-instructions.md",
+    "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+    "data/living_system_110_plans_v1_LOCKED.json"
+  ],
+  "scan_roots_read_surface_only": [
+    "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md"
+  ],
+  "exclude_globs": [
+    "decision_language_machine_v1/**",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL*",
+    "receipts/**"
+  ]
+}

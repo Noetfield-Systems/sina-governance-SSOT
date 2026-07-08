@@ -1,0 +1,11 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+  "agent_review": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 191,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ]
+}

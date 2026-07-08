@@ -30,6 +30,7 @@ Repo authority for product lanes beats SG mirror copies on conflict.
 | Governance pass | **4/4 complete** (v0.9-SG-RATIFIED) |
 | SINA GATEWAY | **Personal project LIVE** — not NFI product; see P99 Gateway receipts |
 | Commercial gap | First conversation / first dollar — see **UNLOCK DOCTRINE v2** (`P7-DOCTRINE/`) |
+| Language layer | **INSTALLED 2026-07-06** — `LANGUAGE_LAYER_v1` · `NOETFIELD_TERMINOLOGY_v1` · `NOETFIELD_DICTIONARY_v1` · `NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md` · `language_gate/` pipeline |
 
 **Start here for orientation:** [ARCHITECT_START_HERE.md](./ARCHITECT_START_HERE.md)
 
@@ -45,7 +46,7 @@ P3 RUNTIME-REALITY-L0← Mac Workbench (when installed)
 P4-CLOUD-KERNEL      ← kernel PDFs
 P5-LINE-ENGINE       ← execution architecture
 P6-BRAIN-MEANING     ← locked definitions
-P7-DOCTRINE          ← thinking laws
+P7-DOCTRINE          ← thinking laws + **NOETFIELD_TERMINOLOGY_v1** (Tier 0) + **NOETFIELD_DICTIONARY_v1** (escalation)
 P8-MACHINE-LOOPS     ← validation/critique/repair loops
 P9-PATTERN-FACTORY   ← sellable patterns
 P10-PRODUCT-LAYERS   ← SourceA / Noetfield / TrustField + personal Gateway cross-ref

@@ -1,0 +1,14 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/targets-vs-blockers.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "System Architect",
+      "line": 4,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

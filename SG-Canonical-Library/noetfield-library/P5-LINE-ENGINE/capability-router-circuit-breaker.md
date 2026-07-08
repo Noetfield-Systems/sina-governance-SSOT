@@ -24,7 +24,7 @@ async function resolve({ capability, sla }) {
 ```
 
 ## Relation
-- Model-agnostic (D-8): the router IS the swap point — rented→self-hosted is a config change here.
+- Vendor-neutral (D-8): the router IS the swap point — rented→self-hosted is a config change here.
 - Layered-agents: the router is the L2-orchestration gate that assigns work to L3 workers.
 
 ---

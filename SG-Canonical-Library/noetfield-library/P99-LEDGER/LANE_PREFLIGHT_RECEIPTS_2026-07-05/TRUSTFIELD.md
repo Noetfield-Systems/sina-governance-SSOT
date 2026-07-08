@@ -1,6 +1,6 @@
-# LANE PREFLIGHT — TrustField Technologies
+# LANE PREFLIGHT — TrustField
 
-**Lane:** TrustField Technologies (Product)  
+**Lane:** TrustField (Product)  
 **Date:** 2026-07-05  
 **Status:** SG_PREFLIGHT_VERIFIED  
 

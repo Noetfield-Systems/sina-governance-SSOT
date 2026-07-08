@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Pre-commit: language gate on staged prose/receipt files.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+mapfile -t files < <(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(md|mdc|txt|json)$' || true)
+if ((${#files[@]} == 0)); then
+  exit 0
+fi
+failed=0
+for file in "${files[@]}"; do
+  [[ -f "$file" ]] || continue
+  case "$file" in
+    language_gate/receipts/*|node_modules/*) continue ;;
+  esac
+  if ! python3 language_gate/language_gate_pipeline_v1.py "$file" --surface auto; then
+    echo "LANGUAGE GATE FAIL: $file" >&2
+    failed=1
+  fi
+done
+exit "$failed"

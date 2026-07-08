@@ -1,0 +1,22 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_LANE_PREFLIGHT_RECEIPT_2026-07-05.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Inspection Complete",
+      "line": 3,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    },
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Downstream Coordination Pending",
+      "line": 3,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

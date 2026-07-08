@@ -1,0 +1,75 @@
+{
+  "schema": "language_gate_rc2_dry_scan_v1",
+  "files": [
+    {
+      "label": "internal doctrine",
+      "path": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/mechanical-not-prose.md",
+      "surface": "internal",
+      "decision": "PASS",
+      "findings_count": 0,
+      "undefined_count": 0,
+      "undefined_terms": [],
+      "blockers": [],
+      "agent_actions_count": 0,
+      "agent_preview_changed": false,
+      "meaning_changed_preview": false,
+      "receipt_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/receipts/mechanical-not-prose.md.dd02a2a451bb1bad.receipt.json"
+    },
+    {
+      "label": "public website copy",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/sourcea.md",
+      "surface": "website",
+      "decision": "PASS",
+      "findings_count": 0,
+      "undefined_count": 0,
+      "undefined_terms": [],
+      "blockers": [],
+      "agent_actions_count": 0,
+      "agent_preview_changed": false,
+      "meaning_changed_preview": false,
+      "receipt_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/receipts/sourcea.md.09d972c9ed3c9f29.receipt.json"
+    },
+    {
+      "label": "prompt/work-order",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/WORK_ORDER_IDE_LANE_v1.md",
+      "surface": "prompt",
+      "decision": "PASS",
+      "findings_count": 0,
+      "undefined_count": 0,
+      "undefined_terms": [],
+      "blockers": [],
+      "agent_actions_count": 1,
+      "agent_preview_changed": false,
+      "meaning_changed_preview": false,
+      "receipt_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/receipts/WORK_ORDER_IDE_LANE_v1.md.321518306314700a.receipt.json"
+    },
+    {
+      "label": "contract/private",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
+      "surface": "contract",
+      "decision": "PASS",
+      "findings_count": 0,
+      "undefined_count": 0,
+      "undefined_terms": [],
+      "blockers": [],
+      "agent_actions_count": 0,
+      "agent_preview_changed": false,
+      "meaning_changed_preview": false,
+      "receipt_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/receipts/REVENUE_WORK_AUTHORIZATION_2026-07-05.md.a50de258081f7582.receipt.json"
+    },
+    {
+      "label": "receipt/ledger",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FIRST_REVENUE_RECEIPT_2026-07-06.md",
+      "surface": "receipt",
+      "decision": "PASS",
+      "findings_count": 0,
+      "undefined_count": 0,
+      "undefined_terms": [],
+      "blockers": [],
+      "agent_actions_count": 0,
+      "agent_preview_changed": false,
+      "meaning_changed_preview": false,
+      "receipt_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/receipts/FIRST_REVENUE_RECEIPT_2026-07-06.md.8e5766103494798d.receipt.json"
+    }
+  ]
+}

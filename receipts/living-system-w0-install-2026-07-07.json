@@ -1,0 +1,25 @@
+{
+  "schema": "living_system_w0_install_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T00:58:07Z",
+  "wave": "W0",
+  "plans_complete": [
+    "LS-001",
+    "LS-002",
+    "LS-003",
+    "LS-004",
+    "LS-005",
+    "LS-006",
+    "LS-007",
+    "LS-008",
+    "LS-009",
+    "LS-010"
+  ],
+  "doctrine_path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+  "doctrine_sha256_prefix": "18d85f0734158595",
+  "plans_locked_json": "data/living_system_110_plans_v1_LOCKED.json",
+  "plans_locked_md": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
+  "ratification_receipt": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LIVING_SYSTEM_DOCTRINE_RATIFY_2026-07-07.md",
+  "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+  "note": "W0 install and lock pass. W1+ execution pending per plan matrix."
+}

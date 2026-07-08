@@ -1,0 +1,53 @@
+{
+  "schema": "receipt_tf_language_cleanup_v1",
+  "at": "2026-07-07T03:32:22.202171-07:00",
+  "verdict": "PASS_DRY_SCAN",
+  "task": "tf-language-cleanup-v1",
+  "mode": "dry_scan_only",
+  "rewrites_applied": 0,
+  "sg_pin": {
+    "branch": "cursor/language-layer-v1",
+    "commit": "a51025f",
+    "checkpoint": "LANGUAGE_LAYER_RC3_CHECKPOINT",
+    "dictionary_batch": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "dictionary_index": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/language_gate/dictionary_index.json",
+    "pattern_ref": "P9-PATTERN-FACTORY/operational-language-governance-pattern-v1.md",
+    "sourcea_template": "scripts/sourcea_language_cleanup_v1.py (SourceA repo)"
+  },
+  "trustfield_repo": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies",
+  "trustfield_commit": "f0f37c8",
+  "summary": {
+    "files_scanned": 471,
+    "total_findings": 1302,
+    "findings_by_class": {
+      "SG_DICTIONARY_TERM": 639,
+      "TRUSTFIELD_LOCAL_TERM": 81,
+      "ENTITY_ALIAS_RISK": 280,
+      "CONFLICT_PHRASE": 292,
+      "REGULATORY_COPY_RISK": 10
+    },
+    "backlog_count": 582,
+    "public_backlog_count": 0,
+    "public_high_risk_count": 0,
+    "overlay_entries": 38
+  },
+  "outputs": {
+    "overlay_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_DICTIONARY_OVERLAY_DRAFT_v1.md",
+    "overlay_index": "language_gate/trustfield_dictionary_overlay_index_v1.json",
+    "inventory": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TRUSTFIELD_LANGUAGE_CLEANUP_INVENTORY_v1.json",
+    "plan_md": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TRUSTFIELD_LANGUAGE_CLEANUP_PLAN_v1.md"
+  },
+  "sha256": {
+    "overlay_md": "a303a0422e2ade069bbfbb16cb7dc53d478fcdb7126d3a5748f28869b6447592",
+    "overlay_index": "db2f8f50833cdda414b6551de123527e118ae284411ecdc12b0d6988ba0072ea",
+    "inventory": "af0eead68bd849657bf85a4191f45b058f4ded445a5ed12f15d298a46a78be6e",
+    "plan_md": "edafc0aa96a366c111457bd48dfa8252511885b8792f679fac2ae5fc8a805675"
+  },
+  "scope_excluded": [
+    "TrustField-Technologies repo edits",
+    "public copy rewrite",
+    "regulatory claims invented",
+    "MSB/PSP/custody status claims added"
+  ],
+  "next_repo_recommendation": "TrustField first \u2014 legal/regulatory public copy risk"
+}

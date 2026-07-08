@@ -1,0 +1,22 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/anti-theater.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "PROJECTED",
+      "line": 13,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    },
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "FAIL/PASS",
+      "line": 16,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

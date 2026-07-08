@@ -1,0 +1,40 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "form frozen, audit quote preservation, or JSON no-write",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "MOTOR",
+      "line": 1014,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 1014,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 1016,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "MOTOR",
+      "line": 1029,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "agent_review": []
+}

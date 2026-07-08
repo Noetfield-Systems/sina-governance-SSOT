@@ -1,7 +1,12 @@
-# OPEN ITEMS — as of 2026-07-05
+# OPEN ITEMS — as of 2026-07-07
 
 ## REAL BLOCKERS (currently: none technical)
 Per `P2-SSOT/OPEN_BLOCKERS.md` — no remaining technical blocker.
+
+## STATUS SNAPSHOT (2026-07-07)
+- Agent-read staleness gate: PASS — 15 alive surfaces, 0 blockers, 0 warnings (`receipts/agent-read-staleness-20260707T234651Z.json`).
+- Branch `cursor/language-layer-v1`: 18 commits ahead of `main`, not yet merged. `check.py` advisory FAIL is expected (compares against `origin/main`, which predates this branch) — not a defect, but a merge is pending.
+- Committed today: library-wide language_gate scan sidecars (50 files), 6 staleness receipts, `decision_language_machine_v1` output/receipts, workflow_census script/rules updates. Commit is local only — push to origin blocked (no git credentials in this environment); push manually or from an authenticated session.
 
 ## CLOSED (v0.9 upgrade pass)
 - **SUPABASE_URL** — RESOLVED. Credentials live in Sina env files (not Railway): `~/.sourcea-secrets/noetfield.env` (`NOETFIELD_SUPABASE_*`) and `~/.sourcea-secrets/portfolio-spine.env` (`SUPABASE_URL`). Verifier probe PASS 2026-07-05 (`scripts/verify_supabase_live_profiles_v1.py`).
@@ -25,5 +30,7 @@ Per `P2-SSOT/OPEN_BLOCKERS.md` — no remaining technical blocker.
 ## KNOWN OLDER OPEN (from gap audit — verify status)
 - 90 competitor plans (producing or dead dispatch?); Founder Email Factory (broken — fix or kill?); public API HTML defect on sales surface; Canada funding doors (un-actioned); distribution line (not built).
 
+**TRIAGE NEEDED (flagged 2026-07-07):** None of the 5 items above have an assigned owner or fix/kill decision on record in this repo. An agent cannot resolve these without live status checks in the relevant lanes (competitor-plans dispatch, Email Factory logs, sales-surface API, funding-doors tracker, distribution-line spec) — each needs a founder or lane-owner call. Recommend assigning one owner per item next session rather than leaving them open-ended.
+
 ---
-*v0.2 (2026-07-05 — reconciled with v0.9 upgrade)*
+*v0.3 (2026-07-07 — status snapshot + stale-item triage flag added)*

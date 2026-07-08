@@ -1,0 +1,32 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/ARCHITECT2_CONSISTENCY_CHECK_2026-07-04.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "form frozen, audit quote preservation, or JSON no-write",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 43,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "least-knowledge",
+      "line": 11,
+      "fix": "Need-to-know access",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "least-knowledge",
+      "line": 18,
+      "fix": "Need-to-know access",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "agent_review": []
+}

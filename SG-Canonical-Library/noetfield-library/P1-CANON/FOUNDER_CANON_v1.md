@@ -1,7 +1,7 @@
 # FOUNDER_CANON v1
 
 **Version:** v1.0 · **Status:** machine_wired (loops operational — see `data/machine-process-loops-v1.json`)
-**Doctrine pointers (authoritative, never restated here):** governed-autorun v3 (L1–L16) · deterministic-loops (D1–D8) · `docs/MACHINE_LOOPS_v1.md` · WORK_ORDER_GOVERNED_IDE_LANE_v1 (G1–G8)
+**Doctrine pointers (authoritative, never restated here):** `P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` (LIVING vs STALE axis; intent filter #5) · governed-autorun v3 (L1–L16) · deterministic-loops (D1–D8) · `docs/MACHINE_LOOPS_v1.md` · WORK_ORDER_GOVERNED_IDE_LANE_v1 (G1–G8)
 **Applies to:** every actor — founder-side advisors, architects, IDE agents, sandbox workers, verifiers. One canon. No competing mini-constitutions.
 
 ---

@@ -1,0 +1,5212 @@
+{
+  "schema": "decision_language_machine_test_fixture_v1",
+  "corpus": "form_official_80_open",
+  "note": "First test corpus only \u2014 machine is the product",
+  "open_questions": [
+    {
+      "id": "11.05",
+      "number": 1,
+      "subject": "Step 5 \u2014 Instrument TF + NF workflows",
+      "title": "Step 5 \u2014 Instrument TF + NF workflows",
+      "question": "Instrument one TrustField MSB workflow + one Noetfield Copilot eval path + 10-minute scaffold for Buyer 1?",
+      "options": [
+        "A \u2014 one workflow each for pilot (recommended)",
+        "B \u2014 DEFER",
+        "C \u2014 CANCEL",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "one workflow each for pilot (recommended)",
+          "label": "A \u2014 one workflow each for pilot (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "B \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "CANCEL",
+          "label": "C \u2014 CANCEL",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "S",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "SHIP \u2192 PLAN-076,077,201,217 \u00b7 separate vocabulary per SSOT \u00a79",
+      "blocks": "TF/NF vertical \u00b7 identity separation law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: 11.05 SHIP",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-01",
+      "number": 2,
+      "subject": "W1 demo film \u2014 when to shoot",
+      "title": "W1 demo film \u2014 when to shoot",
+      "question": "Should we film the Week-1 enforcement demo this week (runbook is ready), or wait for a Hub one-tap button? North star reminder: agentic 24/7 engines that earn money \u2014 not Hub polish. Film may use affordable AI video tools.",
+      "options": [
+        "A \u2014 A film week2",
+        "B \u2014 B wait hub",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "A film week2",
+          "label": "A \u2014 A film week2",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "B wait hub",
+          "label": "B \u2014 B wait hub",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "A = Worker films take 1 this week \u00b7 research AI video path \u00b7 B = slips investor story to Week 4+",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-02",
+      "number": 3,
+      "subject": "Outreach vs film order",
+      "title": "Outreach vs film order",
+      "question": "Should we start Noetfield W3 outreach before the Week-1 demo is filmed?",
+      "options": [
+        "A \u2014 APPROVE",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "APPROVE",
+          "label": "A \u2014 APPROVE",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "NO = film first \u00b7 APPROVE = parallel per locked 9.07 A only if you already picked that",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-02 APPROVE",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-03",
+      "number": 4,
+      "subject": "W3 wedge \u2014 which offer leads",
+      "title": "W3 wedge \u2014 which offer leads",
+      "question": "For all Week-3 money motion: is Noetfield NF-001 the primary offer and TrustField TF-001 the backup?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO TF primary",
+        "C \u2014 DEFER",
+        "D \u2014 SPLIT",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO TF primary",
+          "label": "B \u2014 NO TF primary",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "SPLIT",
+          "label": "D \u2014 SPLIT",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = ENG-05 \u00b7 NF-001 primary \u00b7 TF backup \u00b7 Copilot-native W3",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-03 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-04",
+      "number": 5,
+      "subject": "Demo write-path check",
+      "title": "Demo write-path check",
+      "question": "Ship the demo write-path validator script as P0 before we film?",
+      "options": [
+        "A \u2014 APPROVE",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "APPROVE",
+          "label": "A \u2014 APPROVE",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "SHIPPED scripts/validate-demo-write-path-v1.sh \u00b7 anti-staleness bundle \u00b7 enf-0002 PASS",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-04 APPROVE",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-05",
+      "number": 6,
+      "subject": "Investor deck \u2014 bypass claim",
+      "title": "Investor deck \u2014 bypass claim",
+      "question": "What bypass language is allowed in the investor deck? (Read founder LinkedIn in Brain chat before drafting copy.)",
+      "options": [
+        "A \u2014 A whole repo zero",
+        "B \u2014 B demo scope only",
+        "C \u2014 C defer",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "A whole repo zero",
+          "label": "A \u2014 A whole repo zero",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "B demo scope only",
+          "label": "B \u2014 B demo scope only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "C defer",
+          "label": "C \u2014 C defer",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "B = DEMO_BYPASS_AUDIT honest \u00b7 demo scope only \u00b7 sacred path cannot lie",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-05 A",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-06",
+      "number": 7,
+      "subject": "Demo story beats",
+      "title": "Demo story beats",
+      "question": "Lock the five-minute demo beats (BLOCK \u00b7 ALLOW \u00b7 TAMPER \u00b7 KILL) \u2014 no redesign this sprint?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = ENFORCEMENT_DEMO_5MIN frozen",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-06 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-07",
+      "number": 8,
+      "subject": "Hub demo button timing",
+      "title": "Hub demo button timing",
+      "question": "When should Hub get a one-tap Run governance demo button?",
+      "options": [
+        "A \u2014 A week4",
+        "B \u2014 B after film",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "A week4",
+          "label": "A \u2014 A week4",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "B after film",
+          "label": "B \u2014 B after film",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "A = S8 parallel \u00b7 not a film blocker \u00b7 DEFER = no priority locked",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-07 A",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-08",
+      "number": 9,
+      "subject": "W3 PASS bar",
+      "title": "W3 PASS bar",
+      "question": "Does Week-3 PASS mean deposit \u2265 CAD 2K OR a signed LOI/SOW?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 LOI only",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "LOI only",
+          "label": "B \u2014 LOI only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = INVESTOR_WIN_LOCKED bar",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-08 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-09",
+      "number": 10,
+      "subject": "Factory score headline",
+      "title": "Factory score headline",
+      "question": "Can we use factory 616/1000 score as the main investor headline?",
+      "options": [
+        "A \u2014 NO",
+        "B \u2014 YES background",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "NO",
+          "label": "A \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "YES background",
+          "label": "B \u2014 YES background",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "N",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES_background = background metric only \u00b7 never hero headline",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-09 NO",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-10",
+      "number": 11,
+      "subject": "$100M round language",
+      "title": "$100M round language",
+      "question": "Can outbound email or LinkedIn mention a $100M round close?",
+      "options": [
+        "A \u2014 NEVER",
+        "B \u2014 narrative only",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "NEVER",
+          "label": "A \u2014 NEVER",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "narrative only",
+          "label": "B \u2014 narrative only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "N",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "narrative_only = investor story only \u00b7 never in LOI/SOW/email without receipt",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-10 NEVER",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-11",
+      "number": 12,
+      "subject": "First outreach batch size",
+      "title": "First outreach batch size",
+      "question": "How many targets in the first agentic outreach batch?",
+      "options": [
+        "A \u2014 A 5",
+        "B \u2014 B 10",
+        "C \u2014 C 3",
+        "D \u2014 DEFER",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "A 5",
+          "label": "A \u2014 A 5",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "B 10",
+          "label": "B \u2014 B 10",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "C 3",
+          "label": "C \u2014 C 3",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "D \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "A = 5 targets \u00b7 AGENTIC_W3 spec \u00b7 wf-w3-outreach-batch cap",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-11 A",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-12",
+      "number": 13,
+      "subject": "Manual LinkedIn override",
+      "title": "Manual LinkedIn override",
+      "question": "In an emergency, may someone post on LinkedIn manually (with a receipt)?",
+      "options": [
+        "A \u2014 NEVER",
+        "B \u2014 YES with receipt",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "NEVER",
+          "label": "A \u2014 NEVER",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "YES with receipt",
+          "label": "B \u2014 YES with receipt",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "N",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES_with_receipt = allowed only with written receipt \u00b7 NEVER = P0 portfolio law ENG-19",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-12 NEVER",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-13",
+      "number": 14,
+      "subject": "Tamper beat on camera",
+      "title": "Tamper beat on camera",
+      "question": "Must the live tamper FAIL appear on camera for Week-1 PASS?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO stub",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO stub",
+          "label": "B \u2014 NO stub",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = validate-demo-enforcement-v1.sh on screen",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-13 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-14",
+      "number": 15,
+      "subject": "LinkedIn profile update",
+      "title": "LinkedIn profile update",
+      "question": "Update LinkedIn headline and About to match enforcement story before outreach?",
+      "options": [
+        "A \u2014 APPROVE",
+        "B \u2014 AFTER film",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "APPROVE",
+          "label": "A \u2014 APPROVE",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "AFTER film",
+          "label": "B \u2014 AFTER film",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "APPROVE = profile proof alignment",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-14 APPROVE",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-15",
+      "number": 16,
+      "subject": "MASTER-PLAN week table",
+      "title": "MASTER-PLAN week table",
+      "question": "Should engineering follow the old MASTER-PLAN week table?",
+      "options": [
+        "A \u2014 NEVER",
+        "B \u2014 strategy only",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "NEVER",
+          "label": "A \u2014 NEVER",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "strategy only",
+          "label": "B \u2014 strategy only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "N",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "strategy_only = weeks 1-6 VOID \u00b7 weekly v1.1 executes",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-15 NEVER",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-16",
+      "number": 17,
+      "subject": "Factory plan picks",
+      "title": "Factory plan picks",
+      "question": "Pick enforcement factory plans only via PLAN WITH NO ASF mode?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = factory FREEZE \u00b7 enf T0 ship",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-16 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-17",
+      "number": 18,
+      "subject": "First paid SKU name",
+      "title": "First paid SKU name",
+      "question": "What is the first paid offer name we use in the room? (Include Trust Ledger in collateral.)",
+      "options": [
+        "A \u2014 A AI Trust Brief",
+        "B \u2014 B Copilot Governance Pilot",
+        "C \u2014 C custom",
+        "D \u2014 DEFER",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "A AI Trust Brief",
+          "label": "A \u2014 A AI Trust Brief",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "B Copilot Governance Pilot",
+          "label": "B \u2014 B Copilot Governance Pilot",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "C custom",
+          "label": "C \u2014 C custom",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "D \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "B = Copilot Governance Pilot \u00b7 NF-001 \u00b7 Trust Ledger language \u00b7 three-layer v2 align",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-17 B",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-18",
+      "number": 19,
+      "subject": "External category sentence",
+      "title": "External category sentence",
+      "question": "Freeze one external category sentence for all outbound (governed execution \u00b7 impossible to bypass)?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO change",
+        "C \u2014 DEFER",
+        "D \u2014 narrative only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO change",
+          "label": "B \u2014 NO change",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "narrative only",
+          "label": "D \u2014 narrative only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = COPY_SAFETY binds outbound \u00b7 narrative_only = investor deck only",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-18 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-19",
+      "number": 20,
+      "subject": "Demo dry runs",
+      "title": "Demo dry runs",
+      "question": "Require three passing 5-minute demo dry runs before we film?",
+      "options": [
+        "A \u2014 APPROVE",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "APPROVE",
+          "label": "A \u2014 APPROVE",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "APPROVE = Week 1 gate per weekly plan",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-19 APPROVE",
+      "option_effects": {}
+    },
+    {
+      "id": "ENF-20",
+      "number": 21,
+      "subject": "December closeout rule",
+      "title": "December closeout rule",
+      "question": "On Dec 31: binary W1+W2+W3 PASS or honest miss \u2014 freeze new features after November?",
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES",
+          "label": "A \u2014 YES",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO",
+          "label": "B \u2014 NO",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "DEFER",
+          "label": "C \u2014 DEFER",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "\u2014",
+          "label": "D \u2014 \u2014",
+          "disabled": true
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "Y",
+      "gather_tier": "",
+      "prior_pick": "",
+      "effect": "YES = e9 closeout \u00b7 freeze features Nov",
+      "blocks": "THREAD-ENFORCEMENT \u00b7 thread-enforcement-forks-v1.yaml",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: ENF-20 YES",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-ARCH-UNIFY-PLAN",
+      "number": 22,
+      "subject": "Post-gather \u2014 Brain unify routing plan authority?",
+      "title": "Post-gather \u2014 Brain unify routing plan authority?",
+      "question": "brain-form-gather-unify-routing-plan-v1.json routes waves to founder/brain/worker/maintainer/FBE. Lock as Brain planner SSOT after gather?",
+      "options": [
+        "A \u2014 YES \u2014 Brain planner SSOT \u00b7 Worker executes picks only (recommended)",
+        "B \u2014 Worker self-routes \u2014 no Brain plan",
+        "C \u2014 Chat routing only",
+        "D \u2014 Defer until form empty",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 Brain planner SSOT \u00b7 Worker executes picks only (recommended)",
+          "label": "A \u2014 YES \u2014 Brain planner SSOT \u00b7 Worker executes picks only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Worker self-routes \u2014 no Brain plan",
+          "label": "B \u2014 Worker self-routes \u2014 no Brain plan",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Chat routing only",
+          "label": "C \u2014 Chat routing only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer until form empty",
+          "label": "D \u2014 Defer until form empty",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_meta",
+      "prior_pick": "",
+      "effect": "Closes gather\u2192plan\u2192route pipeline without chat loss",
+      "blocks": "brain_form_gather_unify_plan_v1.py \u00b7 FAIL_IMMEDIATE_NO_TEMPER",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-ARCH-UNIFY-PLAN A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-FORM-BUILD",
+      "number": 23,
+      "subject": "Form open + BUILD \u2014 parallel OK?",
+      "title": "Form open + BUILD \u2014 parallel OK?",
+      "question": "84+ rows on form. Worker still RUN INBOX and build plans while you fill A/B/C/D on official form?",
+      "options": [
+        "A \u2014 YES \u2014 parallel form fill + Worker BUILD (recommended)",
+        "B \u2014 Form only \u2014 freeze INBOX until empty",
+        "C \u2014 BUILD only \u2014 ignore form until RT LIVE",
+        "D \u2014 Brain only \u2014 no Worker",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 parallel form fill + Worker BUILD (recommended)",
+          "label": "A \u2014 YES \u2014 parallel form fill + Worker BUILD (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Form only \u2014 freeze INBOX until empty",
+          "label": "B \u2014 Form only \u2014 freeze INBOX until empty",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "BUILD only \u2014 ignore form until RT LIVE",
+          "label": "C \u2014 BUILD only \u2014 ignore form until RT LIVE",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Brain only \u2014 no Worker",
+          "label": "D \u2014 Brain only \u2014 no Worker",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_meta",
+      "prior_pick": "",
+      "effect": "Prevents factory freeze while form has open PICKs",
+      "blocks": "FORM_OFFICIAL \u00a71b \u00b7 Worker INBOX law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-FORM-BUILD A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-GATHER-NO-LOST",
+      "number": 24,
+      "subject": "Lock \u2014 every chat A/B/C lands on FORM_OFFICIAL",
+      "title": "Lock \u2014 every chat A/B/C lands on FORM_OFFICIAL",
+      "question": "Confirm: agents must save every unpicked A/B/C/D offer to official form Canvas. Chat is never SSOT. Tamper or skip = FAIL immediate.",
+      "options": [
+        "A \u2014 YES \u2014 chat forks \u2192 form only \u00b7 FAIL immediate if lost (recommended)",
+        "B \u2014 Chat OK for picks \u2014 form optional",
+        "C \u2014 Form for P0 only \u2014 chat for rest",
+        "D \u2014 Pause form \u2014 chat only until RT LIVE",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 chat forks \u2192 form only \u00b7 FAIL immediate if lost (recommended)",
+          "label": "A \u2014 YES \u2014 chat forks \u2192 form only \u00b7 FAIL immediate if lost (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Chat OK for picks \u2014 form optional",
+          "label": "B \u2014 Chat OK for picks \u2014 form optional",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Form for P0 only \u2014 chat for rest",
+          "label": "C \u2014 Form for P0 only \u2014 chat for rest",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Pause form \u2014 chat only until RT LIVE",
+          "label": "D \u2014 Pause form \u2014 chat only until RT LIVE",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_meta",
+      "prior_pick": "",
+      "effect": "Locks governed agentic automation \u2014 SourceA reference standard for disk policy dispatch",
+      "blocks": "ASF order 2026-06-19 \u00b7 SOURCEA_LIVE_FOUNDER_DECISION_FORM \u00b7 human-machine nerve",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-GATHER-NO-LOST A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-UNIFY-GO",
+      "number": 25,
+      "subject": "After you fill \u2014 Brain UNIFY pass on all rows?",
+      "title": "After you fill \u2014 Brain UNIFY pass on all rows?",
+      "question": "When you finish PICKs (or hit cap), Brain runs unify \u00b7 organize \u00b7 prioritize on gathered rows. Auto-start UNIFY?",
+      "options": [
+        "A \u2014 YES \u2014 auto UNIFY when open count drops below 10 (recommended)",
+        "B \u2014 Manual \u2014 you say unify",
+        "C \u2014 Skip unify \u2014 ship code only",
+        "D \u2014 Reset form \u2014 regather",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 auto UNIFY when open count drops below 10 (recommended)",
+          "label": "A \u2014 YES \u2014 auto UNIFY when open count drops below 10 (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Manual \u2014 you say unify",
+          "label": "B \u2014 Manual \u2014 you say unify",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Skip unify \u2014 ship code only",
+          "label": "C \u2014 Skip unify \u2014 ship code only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Reset form \u2014 regather",
+          "label": "D \u2014 Reset form \u2014 regather",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_meta",
+      "prior_pick": "",
+      "effect": "Closes gather\u2192fill\u2192unify pipeline",
+      "blocks": "brain_form_gather_unify_plan_v1.py \u00b7 Q-GATH-05 sequence",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-UNIFY-GO A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-THREAD-10STEP-01",
+      "number": 26,
+      "subject": "10-step program \u2014 full WORK vs SAVE spec first?",
+      "title": "10-step program \u2014 full WORK vs SAVE spec first?",
+      "question": "Brain offered 10-step program scope. After you approve: implement full WORK on disk, SAVE locked spec first, or plan-only until WORK verb?",
+      "options": [
+        "A \u2014 Full WORK: code + heal + hub (10 steps implemented)",
+        "B \u2014 SAVE locked 10-step spec first, then implement in follow-up WORK (recommended)",
+        "C \u2014 Plan only \u2014 no disk changes until I say WORK",
+        "D \u2014 Worker RUN INBOX only \u2014 defer 10-step bundle",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Full WORK: code + heal + hub (10 steps implemented)",
+          "label": "A \u2014 Full WORK: code + heal + hub (10 steps implemented)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "SAVE locked 10-step spec first, then implement in follow-up WORK (recommended)",
+          "label": "B \u2014 SAVE locked 10-step spec first, then implement in follow-up WORK (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Plan only \u2014 no disk changes until I say WORK",
+          "label": "C \u2014 Plan only \u2014 no disk changes until I say WORK",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Worker RUN INBOX only \u2014 defer 10-step bundle",
+          "label": "D \u2014 Worker RUN INBOX only \u2014 defer 10-step bundle",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_meta",
+      "prior_pick": "",
+      "effect": "Bounds next implementation burst vs spec-first law",
+      "blocks": "Brain 10-step AskQuestion \u00b7 unpicked scope fork",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-THREAD-10STEP-01 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CHAT-CLOUD-01",
+      "number": 27,
+      "subject": "MCP proof \u2014 local PASS vs cloud SSE ship",
+      "title": "MCP proof \u2014 local PASS vs cloud SSE ship",
+      "question": "validate-all-e2e 6/6 PASS on local :8787/:8790. Cloud SSE not live. Ship cloud proof layer now or stay local until form P0 picks done?",
+      "options": [
+        "A \u2014 deploy SSE + VIRLUX redeploy now",
+        "B \u2014 Stay local E2E until Hub form P0 block answered (recommended)",
+        "C \u2014 npm Card1 publish before cloud SSE",
+        "D \u2014 Defer cloud + npm until UNIFY phase",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "deploy SSE + VIRLUX redeploy now",
+          "label": "A \u2014 deploy SSE + VIRLUX redeploy now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Stay local E2E until Hub form P0 block answered (recommended)",
+          "label": "B \u2014 Stay local E2E until Hub form P0 block answered (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "npm Card1 publish before cloud SSE",
+          "label": "C \u2014 npm Card1 publish before cloud SSE",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer cloud + npm until UNIFY phase",
+          "label": "D \u2014 Defer cloud + npm until UNIFY phase",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Cloud vs local proof layer sequencing",
+      "blocks": "mcp-chain-campus \u00b7 cursor marketplace Card1 \u00b7 deploy_mcp_sse_vercel",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CHAT-CLOUD-01 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CHAT-LANG-01",
+      "number": 28,
+      "subject": "Agent reply language \u2014 \u0641\u0627\u0631\u0633\u06cc school (unpicked A/B/C)",
+      "title": "Agent reply language \u2014 \u0641\u0627\u0631\u0633\u06cc school (unpicked A/B/C)",
+      "question": "Brain offered language mode 2026-06-19. You did not pick A/B/C yet. Lock default voice for all human\u2013machine replies so chat cannot lose this fork?",
+      "options": [
+        "A \u2014 \u0641\u0627\u0631\u0633\u06cc mainly \u2014 technical paths may stay English",
+        "B \u2014 Bilingual \u2014 \u0641\u0627\u0631\u0633\u06cc for meaning \u00b7 English for paths/proof (recommended)",
+        "C \u2014 English only \u2014 short \u00b7 plain \u00b7 no validator voice",
+        "D \u2014 Founder adds one \u0641\u0627\u0631\u0633\u06cc tone note on this row before pick",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "\u0641\u0627\u0631\u0633\u06cc mainly \u2014 technical paths may stay English",
+          "label": "A \u2014 \u0641\u0627\u0631\u0633\u06cc mainly \u2014 technical paths may stay English",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Bilingual \u2014 \u0641\u0627\u0631\u0633\u06cc for meaning \u00b7 English for paths/proof (recommended)",
+          "label": "B \u2014 Bilingual \u2014 \u0641\u0627\u0631\u0633\u06cc for meaning \u00b7 English for paths/proof (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "English only \u2014 short \u00b7 plain \u00b7 no validator voice",
+          "label": "C \u2014 English only \u2014 short \u00b7 plain \u00b7 no validator voice",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Founder adds one \u0641\u0627\u0631\u0633\u06cc tone note on this row before pick",
+          "label": "D \u2014 Founder adds one \u0641\u0627\u0631\u0633\u06cc tone note on this row before pick",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets Brain/Worker founder-facing language default until changed on form",
+      "blocks": "SINA_PROMPT_OS \u00a74 \u0641\u0627\u0631\u0633\u06cc \u00b7 PLUS ONE LOCALE_LAW \u00b7 founder language school thread",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CHAT-LANG-01 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CHAT-NEXT-P0-01",
+      "number": 29,
+      "subject": "Brain P0 unlock order \u2014 unpicked next taps",
+      "title": "Brain P0 unlock order \u2014 unpicked next taps",
+      "question": "Brain listed P0 unlocks: Hub form 79 \u00b7 ocree confirm \u00b7 RUN INBOX sa-1200 \u00b7 deploy SSE. Which is first tap after form rows are saved?",
+      "options": [
+        "A \u2014 Hub official form block 1 first (recommended)",
+        "B \u2014 RUN INBOX Worker sa-1200 F002 broker submit",
+        "C \u2014 deploy SSE cloud MCP + VIRLUX redeploy",
+        "D \u2014 ocree:confirm_sent commercial L3 attest",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Hub official form block 1 first (recommended)",
+          "label": "A \u2014 Hub official form block 1 first (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "RUN INBOX Worker sa-1200 F002 broker submit",
+          "label": "B \u2014 RUN INBOX Worker sa-1200 F002 broker submit",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "deploy SSE cloud MCP + VIRLUX redeploy",
+          "label": "C \u2014 deploy SSE cloud MCP + VIRLUX redeploy",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "ocree:confirm_sent commercial L3 attest",
+          "label": "D \u2014 ocree:confirm_sent commercial L3 attest",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Orders founder daily path \u2014 prevents chat-only priority drift",
+      "blocks": "STRATEGIC-SLICE \u00b7 commercial L3 75% \u00b7 queue sa-1200 bound",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CHAT-NEXT-P0-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CHAT-PLUSONE-01",
+      "number": 30,
+      "subject": "PLUS ONE voice law \u2014 wire before Brain copy?",
+      "title": "PLUS ONE voice law \u2014 wire before Brain copy?",
+      "question": "You said: find everything on search \u00b7 PLUS ONE has language resources. Lock Brain to read CREED language law before founder-facing copy?",
+      "options": [
+        "A \u2014 YES \u2014 PLUS ONE language law + Prompt OS \u00a74 before voice (recommended)",
+        "B \u2014 Prompt OS \u00a74 \u0641\u0627\u0631\u0633\u06cc only \u2014 skip PLUS ONE on non-locale topics",
+        "C \u2014 English commercial copy only \u2014 defer \u0641\u0627\u0631\u0633\u06cc",
+        "D \u2014 Defer until Q-CHAT-LANG-01 answered",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 PLUS ONE language law + Prompt OS \u00a74 before voice (recommended)",
+          "label": "A \u2014 YES \u2014 PLUS ONE language law + Prompt OS \u00a74 before voice (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Prompt OS \u00a74 \u0641\u0627\u0631\u0633\u06cc only \u2014 skip PLUS ONE on non-locale topics",
+          "label": "B \u2014 Prompt OS \u00a74 \u0641\u0627\u0631\u0633\u06cc only \u2014 skip PLUS ONE on non-locale topics",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "English commercial copy only \u2014 defer \u0641\u0627\u0631\u0633\u06cc",
+          "label": "C \u2014 English commercial copy only \u2014 defer \u0641\u0627\u0631\u0633\u06cc",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer until Q-CHAT-LANG-01 answered",
+          "label": "D \u2014 Defer until Q-CHAT-LANG-01 answered",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Stops agent improvising voice without campus SSOT",
+      "blocks": "PLUS ONE INDEX \u00b7 LOCALE_LAW \u00b7 FOUNDER_LANGUAGE_LAW \u00b7 FALUX prove",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CHAT-PLUSONE-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CHAT-PUBLISH-01",
+      "number": 31,
+      "subject": "Cursor marketplace Card1 \u2014 npm publish timing",
+      "title": "Cursor marketplace Card1 \u2014 npm publish timing",
+      "question": "Card1 bundle on disk \u00b7 npm pack ready \u00b7 founder npm login required. Publish now or wait for form/language picks?",
+      "options": [
+        "A \u2014 npm login + publish Card1 now",
+        "B \u2014 After Q-CHAT-NEXT-P0-01 form block + language pick (recommended)",
+        "C \u2014 Cloud SSE first \u00b7 then npm",
+        "D \u2014 Defer marketplace until MergePack L1 ship",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "npm login + publish Card1 now",
+          "label": "A \u2014 npm login + publish Card1 now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "After Q-CHAT-NEXT-P0-01 form block + language pick (recommended)",
+          "label": "B \u2014 After Q-CHAT-NEXT-P0-01 form block + language pick (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Cloud SSE first \u00b7 then npm",
+          "label": "C \u2014 Cloud SSE first \u00b7 then npm",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer marketplace until MergePack L1 ship",
+          "label": "D \u2014 Defer marketplace until MergePack L1 ship",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Commercial publish sequencing vs governance picks",
+      "blocks": "cursor-plugin/sourcea-forge-governance \u00b7 multi-factory advisory Card1",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CHAT-PUBLISH-01 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-01",
+      "number": 32,
+      "subject": "North star after FBE-W6 \u2014 outbound drain vs cloud catalog sell?",
+      "title": "North star after FBE-W6 \u2014 outbound drain vs cloud catalog sell?",
+      "question": "Brain chat arc: FBE-W0..W6 shipped \u00b7 you want 24/7 cloud factories + website catalog. Disk also has outbound queue head sa-1100 (66 upgrades). Which is P0 for daily work?",
+      "options": [
+        "A \u2014 STRATEGIC-SLICE parallel: outbound P0 spine + FBE catalog cloud (recommended)",
+        "B \u2014 Outbound 66 only \u2014 pause FBE catalog until U067",
+        "C \u2014 FBE catalog/cloud only \u2014 pause outbound drain",
+        "D \u2014 Commercial W1 film only \u2014 pause both",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "STRATEGIC-SLICE parallel: outbound P0 spine + FBE catalog cloud (recommended)",
+          "label": "A \u2014 STRATEGIC-SLICE parallel: outbound P0 spine + FBE catalog cloud (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Outbound 66 only \u2014 pause FBE catalog until U067",
+          "label": "B \u2014 Outbound 66 only \u2014 pause FBE catalog until U067",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "FBE catalog/cloud only \u2014 pause outbound drain",
+          "label": "C \u2014 FBE catalog/cloud only \u2014 pause outbound drain",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Commercial W1 film only \u2014 pause both",
+          "label": "D \u2014 Commercial W1 film only \u2014 pause both",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets daily north star after factory builder proof",
+      "blocks": "Brain chat e6507c62 \u00b7 FBE fleet \u00b7 outbound-factory queue \u00b7 Phase C catalog",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-02",
+      "number": 33,
+      "subject": "U031 RRL bay \u2014 implement on FBE cloud runner or Worker WORK?",
+      "title": "U031 RRL bay \u2014 implement on FBE cloud runner or Worker WORK?",
+      "question": "Queue head U031 needs outbound-rrl-intelligence bay. FBE has cloud runner + bay registry on disk. Build bay on FBE cloud path, bounded Worker WORK, or defer?",
+      "options": [
+        "A \u2014 Build outbound-rrl-intelligence FBE cloud bay first (recommended)",
+        "B \u2014 Worker bounded WORK on Mac now",
+        "C \u2014 sign_only until B0503 cloud consumer ships",
+        "D \u2014 Defer U031 until FORM unify pass done",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Build outbound-rrl-intelligence FBE cloud bay first (recommended)",
+          "label": "A \u2014 Build outbound-rrl-intelligence FBE cloud bay first (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Worker bounded WORK on Mac now",
+          "label": "B \u2014 Worker bounded WORK on Mac now",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "sign_only until B0503 cloud consumer ships",
+          "label": "C \u2014 sign_only until B0503 cloud consumer ships",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer U031 until FORM unify pass done",
+          "label": "D \u2014 Defer U031 until FORM unify pass done",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Unblocks sa-1100 with architecture-aligned execution",
+      "blocks": "brain-outbound-work-order-active \u00b7 fbe_node_graph_v1 \u00b7 U031 planned",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-02 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-03",
+      "number": 34,
+      "subject": "Mono never_sync_as_authority \u2014 lock for all FBE cloud sync?",
+      "title": "Mono never_sync_as_authority \u2014 lock for all FBE cloud sync?",
+      "question": "FBE-W3 note: adopt Mono never_sync_as_authority + bundle sync. Confirm law/graph never authored from cloud \u2014 receipts only?",
+      "options": [
+        "A \u2014 YES \u2014 lock never_sync_as_authority on all FBE sync (recommended)",
+        "B \u2014 Receipts only \u2014 no bundle sync yet",
+        "C \u2014 Allow cloud to author graph SSOT",
+        "D \u2014 Defer until Railway URL set",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 lock never_sync_as_authority on all FBE sync (recommended)",
+          "label": "A \u2014 YES \u2014 lock never_sync_as_authority on all FBE sync (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Receipts only \u2014 no bundle sync yet",
+          "label": "B \u2014 Receipts only \u2014 no bundle sync yet",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Allow cloud to author graph SSOT",
+          "label": "C \u2014 Allow cloud to author graph SSOT",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer until Railway URL set",
+          "label": "D \u2014 Defer until Railway URL set",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Prevents cloud from becoming law SSOT",
+      "blocks": "fbe_cloud_workspace_map_v1.json \u00b7 fbe_cloud_sync_v1.py",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-03 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-04",
+      "number": 35,
+      "subject": "Vocabulary lock \u2014 Kernel \u00b7 Factory spec \u00b7 36 nodes \u00b7 14 buyer lines",
+      "title": "Vocabulary lock \u2014 Kernel \u00b7 Factory spec \u00b7 36 nodes \u00b7 14 buyer lines",
+      "question": "Brain admitted mistake: 14 commercial lines \u2260 machine count. CREED SSOT = 36 nodes. Lock: Kernel=runtime \u00b7 Factory spec=SKU \u00b7 36 nodes=operators \u00b7 14 lines=buyers only?",
+      "options": [
+        "A \u2014 YES \u2014 vocabulary law on all Brain/commercial copy (recommended)",
+        "B \u2014 Hub UI shows 14 only",
+        "C \u2014 Single merged node count for marketing",
+        "D \u2014 Defer documentation",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 vocabulary law on all Brain/commercial copy (recommended)",
+          "label": "A \u2014 YES \u2014 vocabulary law on all Brain/commercial copy (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Hub UI shows 14 only",
+          "label": "B \u2014 Hub UI shows 14 only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Single merged node count for marketing",
+          "label": "C \u2014 Single merged node count for marketing",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer documentation",
+          "label": "D \u2014 Defer documentation",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Stops repeat 14-vs-36 factory builder confusion",
+      "blocks": "CREED FACTORY_MESH.json \u00b7 Brain self-improve pass",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-04 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-05",
+      "number": 36,
+      "subject": "Gathering complete \u2014 authorize UNIFY phase on 72+ rows?",
+      "title": "Gathering complete \u2014 authorize UNIFY phase on 72+ rows?",
+      "question": "Extraction/gather done: meta + conflicts + brain cloud + integrity + ENF + commercial on Canvas. Next: unify duplicates \u00b7 organize tiers \u00b7 prioritize P0 picks?",
+      "options": [
+        "A \u2014 YES \u2014 gathering complete \u00b7 start UNIFY pass (recommended)",
+        "B \u2014 More extraction first \u2014 agents keep adding rows",
+        "C \u2014 Pick P0 only now \u2014 skip unify",
+        "D \u2014 Reset form \u2014 regather from scratch",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 gathering complete \u00b7 start UNIFY pass (recommended)",
+          "label": "A \u2014 YES \u2014 gathering complete \u00b7 start UNIFY pass (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "More extraction first \u2014 agents keep adding rows",
+          "label": "B \u2014 More extraction first \u2014 agents keep adding rows",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Pick P0 only now \u2014 skip unify",
+          "label": "C \u2014 Pick P0 only now \u2014 skip unify",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Reset form \u2014 regather from scratch",
+          "label": "D \u2014 Reset form \u2014 regather from scratch",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Transitions form workflow to organize/prioritize",
+      "blocks": "form-official-gathering-phase-v1.json \u00b7 live-founder-decision-form-extraction-v1.json",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-05 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-06",
+      "number": 37,
+      "subject": "Brain disk-first law \u2014 every strategic turn cites FOUND/NOT FOUND?",
+      "title": "Brain disk-first law \u2014 every strategic turn cites FOUND/NOT FOUND?",
+      "question": "You ordered: Brain must read most accurate live info \u00b7 not chat memory. Lock B0007-style FOUND/NOT FOUND on every Brain strategic reply?",
+      "options": [
+        "A \u2014 YES \u2014 disk path proof mandatory on Brain turns (recommended)",
+        "B \u2014 Form picks only \u2014 Brain essays allowed",
+        "C \u2014 Weekly disk pass only",
+        "D \u2014 Defer until UNIFY done",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 disk path proof mandatory on Brain turns (recommended)",
+          "label": "A \u2014 YES \u2014 disk path proof mandatory on Brain turns (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Form picks only \u2014 Brain essays allowed",
+          "label": "B \u2014 Form picks only \u2014 Brain essays allowed",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Weekly disk pass only",
+          "label": "C \u2014 Weekly disk pass only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer until UNIFY done",
+          "label": "D \u2014 Defer until UNIFY done",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Prevents repeat Brain vocabulary/queue mistakes",
+      "blocks": "brain-live-context-v1.json \u00b7 brain-cloud plan B0007 planned",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-06 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-FINAL-07",
+      "number": 38,
+      "subject": "Loop auto ON (True) + unmapped bay dispatch \u2014 safe?",
+      "title": "Loop auto ON (True) + unmapped bay dispatch \u2014 safe?",
+      "question": "loop_auto_dispatch_enabled=True \u00b7 U031 bay unmapped \u00b7 false-done guard wired. Keep loop auto, require mapped bay only, or pause auto until bays exist?",
+      "options": [
+        "A \u2014 Keep loop auto on all items",
+        "B \u2014 Loop auto OFF until all bays mapped",
+        "C \u2014 Auto dispatch mapped bays only \u00b7 sign_only unmapped (recommended)",
+        "D \u2014 Manual Hub tap per upgrade only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Keep loop auto on all items",
+          "label": "A \u2014 Keep loop auto on all items",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Loop auto OFF until all bays mapped",
+          "label": "B \u2014 Loop auto OFF until all bays mapped",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Auto dispatch mapped bays only \u00b7 sign_only unmapped (recommended)",
+          "label": "C \u2014 Auto dispatch mapped bays only \u00b7 sign_only unmapped (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Manual Hub tap per upgrade only",
+          "label": "D \u2014 Manual Hub tap per upgrade only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "C",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Closes loop auto vs unmapped bay paradox from chat",
+      "blocks": "loop-specialist-config-v1.json \u00b7 Q-CONF-FALSE-DONE-GUARD",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-FINAL-07 C",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-01",
+      "number": 39,
+      "subject": "Mac = cockpit only \u2014 lock cloud execution law?",
+      "title": "Mac = cockpit only \u2014 lock cloud execution law?",
+      "question": "Confirm: Mac is control panel only (Hub \u00b7 gate \u00b7 approve). All factories run cloud auto-loops \u2014 no render on Mac?",
+      "options": [
+        "A \u2014 YES \u2014 lock Mac cockpit + cloud execution (recommended)",
+        "B \u2014 Allow local render for dev only",
+        "C \u2014 Revert \u2014 Mac may run heavy jobs",
+        "D \u2014 Defer until Supabase live",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 lock Mac cockpit + cloud execution (recommended)",
+          "label": "A \u2014 YES \u2014 lock Mac cockpit + cloud execution (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Allow local render for dev only",
+          "label": "B \u2014 Allow local render for dev only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Revert \u2014 Mac may run heavy jobs",
+          "label": "C \u2014 Revert \u2014 Mac may run heavy jobs",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer until Supabase live",
+          "label": "D \u2014 Defer until Supabase live",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets empire architecture \u2014 all agents stop suggesting Mac compute",
+      "blocks": "docs/SOURCEA_MULTI_FACTORY_ENTERPRISE_BLUEPRINT_LOCKED_v1.md \u00b7 cursor-bootstrap-ledger mac_role",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-02",
+      "number": 40,
+      "subject": "Cursor Card 1 \u2014 publish npm now?",
+      "title": "Cursor Card 1 \u2014 publish npm now?",
+      "question": "SourceA Forge Proof Layer bundle ready on disk. npm @sourcea/mcp-verify still 404. Publish now?",
+      "options": [
+        "A \u2014 npm login + publish + marketplace submit now (recommended)",
+        "B \u2014 Wait until Supabase edge loop live",
+        "C \u2014 Wait until all form PICKs done",
+        "D \u2014 Defer marketplace entirely",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "npm login + publish + marketplace submit now (recommended)",
+          "label": "A \u2014 npm login + publish + marketplace submit now (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Wait until Supabase edge loop live",
+          "label": "B \u2014 Wait until Supabase edge loop live",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Wait until all form PICKs done",
+          "label": "C \u2014 Wait until all form PICKs done",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer marketplace entirely",
+          "label": "D \u2014 Defer marketplace entirely",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Unblocks external Proof Layer product",
+      "blocks": "cursor-plugin/sourcea-forge-governance \u00b7 Card 1 marketplace",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-02 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-03",
+      "number": 41,
+      "subject": "One marketplace card at launch?",
+      "title": "One marketplace card at launch?",
+      "question": "Ship ONE card (SourceA Forge Governance) \u2014 keep VIRLUX/Noetfield/TrustField internal?",
+      "options": [
+        "A \u2014 YES \u2014 one Proof Layer card only (recommended)",
+        "B \u2014 Also list VIRLUX Infrastructure card",
+        "C \u2014 Four cards now (SourceA/VIRLUX/Noetfield/Canvas)",
+        "D \u2014 No marketplace \u2014 internal only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 one Proof Layer card only (recommended)",
+          "label": "A \u2014 YES \u2014 one Proof Layer card only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Also list VIRLUX Infrastructure card",
+          "label": "B \u2014 Also list VIRLUX Infrastructure card",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Four cards now (SourceA/VIRLUX/Noetfield/Canvas)",
+          "label": "C \u2014 Four cards now (SourceA/VIRLUX/Noetfield/Canvas)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "No marketplace \u2014 internal only",
+          "label": "D \u2014 No marketplace \u2014 internal only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Marketplace discovery vs split attention",
+      "blocks": "GPT + thread strategy \u00b7 multi-factory advisory",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-03 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-05",
+      "number": 42,
+      "subject": "Build order \u2014 billing before creative?",
+      "title": "Build order \u2014 billing before creative?",
+      "question": "Confirm factory build order: billing tier gate \u2192 orchestration \u2192 Fal bridge \u2192 StoreKit?",
+      "options": [
+        "A \u2014 YES \u2014 billing \u2192 orchestration \u2192 render \u2192 StoreKit (recommended)",
+        "B \u2014 Creative factory first \u2014 billing later",
+        "C \u2014 Supabase + Edge before billing",
+        "D \u2014 Parallel all tracks",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 billing \u2192 orchestration \u2192 render \u2192 StoreKit (recommended)",
+          "label": "A \u2014 YES \u2014 billing \u2192 orchestration \u2192 render \u2192 StoreKit (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Creative factory first \u2014 billing later",
+          "label": "B \u2014 Creative factory first \u2014 billing later",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Supabase + Edge before billing",
+          "label": "C \u2014 Supabase + Edge before billing",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Parallel all tracks",
+          "label": "D \u2014 Parallel all tracks",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Spend gates before Fal/ElevenLabs cost",
+      "blocks": "Gemini vs SourceA \u00b7 fbe_billing_* \u00b7 video-ad factory",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-05 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-06",
+      "number": 43,
+      "subject": "Supabase edge loop \u2014 name project and deploy?",
+      "title": "Supabase edge loop \u2014 name project and deploy?",
+      "question": "First cloud auto-loop ready as scaffold. Name Supabase project ref and authorize WORK: supabase-edge-loop deploy?",
+      "options": [
+        "A \u2014 Deploy now \u2014 I will paste project ref in chat",
+        "B \u2014 After npm Card1 + top form PICKs (recommended)",
+        "C \u2014 Never Supabase \u2014 local JSON campaigns only",
+        "D \u2014 Use Railway instead of Supabase Edge",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Deploy now \u2014 I will paste project ref in chat",
+          "label": "A \u2014 Deploy now \u2014 I will paste project ref in chat",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "After npm Card1 + top form PICKs (recommended)",
+          "label": "B \u2014 After npm Card1 + top form PICKs (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Never Supabase \u2014 local JSON campaigns only",
+          "label": "C \u2014 Never Supabase \u2014 local JSON campaigns only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Use Railway instead of Supabase Edge",
+          "label": "D \u2014 Use Railway instead of Supabase Edge",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "First real cloud factory vs cockpit simulators",
+      "blocks": "data/supabase-edge-loop-v1.json \u00b7 migration SSOT",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-06 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-08",
+      "number": 44,
+      "subject": "HUMAN_APPROVAL_REQUIRED \u2014 mandatory before Fal spend?",
+      "title": "HUMAN_APPROVAL_REQUIRED \u2014 mandatory before Fal spend?",
+      "question": "Lock law: never call paid Fal.ai while campaign state is HUMAN_APPROVAL_REQUIRED?",
+      "options": [
+        "A \u2014 YES \u2014 mandatory founder approve before Fal (recommended)",
+        "B \u2014 Auto-approve after ElevenLabs",
+        "C \u2014 Skip approval for sandbox tier only",
+        "D \u2014 Remove approval gate",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 mandatory founder approve before Fal (recommended)",
+          "label": "A \u2014 YES \u2014 mandatory founder approve before Fal (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Auto-approve after ElevenLabs",
+          "label": "B \u2014 Auto-approve after ElevenLabs",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Skip approval for sandbox tier only",
+          "label": "C \u2014 Skip approval for sandbox tier only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Remove approval gate",
+          "label": "D \u2014 Remove approval gate",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Cost overrun protection on cloud render",
+      "blocks": "shared/types/campaign-v1.ts \u00b7 demo campaign on disk",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-08 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-ARCH-PILLAR",
+      "number": 45,
+      "subject": "Strategic slice \u2014 next bounded WORK pillar?",
+      "title": "Strategic slice \u2014 next bounded WORK pillar?",
+      "question": "Three pillars on disk: (1) billing fbe_billing_* + StoreKit ledger (2) creative factory ElevenLabs+render bridge+OEGCC HITL (3) analytics Phase3 telemetry after W6. Which gets next WORK order?",
+      "options": [
+        "A \u2014 Pillar 1 billing \u2014 name Supabase project + apply migration-001 (recommended)",
+        "B \u2014 Pillar 2 creative \u2014 WORK OEGCC HITL in orchestrator",
+        "C \u2014 Pillar 3 analytics \u2014 extend telemetry after W6 stable",
+        "D \u2014 Parallel all three thin slices",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Pillar 1 billing \u2014 name Supabase project + apply migration-001 (recommended)",
+          "label": "A \u2014 Pillar 1 billing \u2014 name Supabase project + apply migration-001 (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Pillar 2 creative \u2014 WORK OEGCC HITL in orchestrator",
+          "label": "B \u2014 Pillar 2 creative \u2014 WORK OEGCC HITL in orchestrator",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Pillar 3 analytics \u2014 extend telemetry after W6 stable",
+          "label": "C \u2014 Pillar 3 analytics \u2014 extend telemetry after W6 stable",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Parallel all three thin slices",
+          "label": "D \u2014 Parallel all three thin slices",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Routes Brain planner + Worker INBOX after form picks",
+      "blocks": "strategic slice thread \u00b7 multi-factory blueprint \u00b7 architecture-ledger-v1",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-ARCH-PILLAR A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-ARCH-REFSTD",
+      "number": 46,
+      "subject": "SourceA \u2014 reference standard for agentic prof on disk?",
+      "title": "SourceA \u2014 reference standard for agentic prof on disk?",
+      "question": "Lock positioning: SourceA = governed pre-LLM agentic runtime \u00b7 policy dispatch \u00b7 receipt standard \u2014 not generic video SaaS?",
+      "options": [
+        "A \u2014 YES \u2014 reference standard for governed agentic automation (recommended)",
+        "B \u2014 Video factory product only",
+        "C \u2014 MCP marketplace plugin only",
+        "D \u2014 Internal tooling \u2014 no public standard claim",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 reference standard for governed agentic automation (recommended)",
+          "label": "A \u2014 YES \u2014 reference standard for governed agentic automation (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Video factory product only",
+          "label": "B \u2014 Video factory product only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "MCP marketplace plugin only",
+          "label": "C \u2014 MCP marketplace plugin only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Internal tooling \u2014 no public standard claim",
+          "label": "D \u2014 Internal tooling \u2014 no public standard claim",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets buyer + agent vocabulary for all lanes",
+      "blocks": "SOURCEA_REFERENCE_ARCHITECTURE_CONSTELLATION \u00b7 Proof Layer \u00b7 WTM",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-ARCH-REFSTD A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-INBOX-NEXT",
+      "number": 47,
+      "subject": "Next INBOX head \u2014 Noetfield freemium bay (P0-13)?",
+      "title": "Next INBOX head \u2014 Noetfield freemium bay (P0-13)?",
+      "question": "Unified queue head is P0-13 Noetfield freemium cloud bay. Run INBOX on this next after form glance?",
+      "options": [
+        "A \u2014 YES \u2014 RUN INBOX P0-13 next (recommended)",
+        "B \u2014 WitnessBC Proof Lab first",
+        "C \u2014 Pause INBOX \u2014 form fills only",
+        "D \u2014 Skip phase0 \u2014 outbound only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 RUN INBOX P0-13 next (recommended)",
+          "label": "A \u2014 YES \u2014 RUN INBOX P0-13 next (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "WitnessBC Proof Lab first",
+          "label": "B \u2014 WitnessBC Proof Lab first",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Pause INBOX \u2014 form fills only",
+          "label": "C \u2014 Pause INBOX \u2014 form fills only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Skip phase0 \u2014 outbound only",
+          "label": "D \u2014 Skip phase0 \u2014 outbound only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets Worker next act after form session",
+      "blocks": "phase0-freemium-sandbox-reference \u00b7 plans-unified-worker-queue",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-INBOX-NEXT A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-PHASE0-SPOT",
+      "number": 48,
+      "subject": "Phase0 13/13 on disk \u2014 spot-check or trust?",
+      "title": "Phase0 13/13 on disk \u2014 spot-check or trust?",
+      "question": "Phase0 pulse shows 13/13 complete after WitnessBC P0-03/P0-08. Trust machine or you spot-check Proof Lab + Trust Center?",
+      "options": [
+        "A \u2014 Trust machine \u2014 move to outbound scale",
+        "B \u2014 Spot-check Proof Lab + Trust Center once (recommended)",
+        "C \u2014 Re-run full phase0 pulse audit",
+        "D \u2014 Reopen all P0 rows",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Trust machine \u2014 move to outbound scale",
+          "label": "A \u2014 Trust machine \u2014 move to outbound scale",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Spot-check Proof Lab + Trust Center once (recommended)",
+          "label": "B \u2014 Spot-check Proof Lab + Trust Center once (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Re-run full phase0 pulse audit",
+          "label": "C \u2014 Re-run full phase0 pulse audit",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Reopen all P0 rows",
+          "label": "D \u2014 Reopen all P0 rows",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_final_fix",
+      "prior_pick": "",
+      "effect": "Sets verification depth before scale",
+      "blocks": "phase0-freemium-sandbox-reference-v1.json \u00b7 pulse receipt",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-PHASE0-SPOT B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-B0503-CONSUMER",
+      "number": 49,
+      "subject": "B0503 open \u2014 cloud worker still reads chat not work-order?",
+      "title": "B0503 open \u2014 cloud worker still reads chat not work-order?",
+      "question": "B0502 compiler done \u00b7 B0503 (cloud consumes work-order not chat prompt) still planned. Ship B0503 before more auto dispatch?",
+      "options": [
+        "A \u2014 YES \u2014 B0503 P0 before more loop auto dispatch (recommended)",
+        "B \u2014 Parallel \u2014 dispatch continues \u00b7 B0503 background",
+        "C \u2014 Defer B0503 until outbound-rrl bay exists",
+        "D \u2014 Revert to Worker chat prompt consumption",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 B0503 P0 before more loop auto dispatch (recommended)",
+          "label": "A \u2014 YES \u2014 B0503 P0 before more loop auto dispatch (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Parallel \u2014 dispatch continues \u00b7 B0503 background",
+          "label": "B \u2014 Parallel \u2014 dispatch continues \u00b7 B0503 background",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Defer B0503 until outbound-rrl bay exists",
+          "label": "C \u2014 Defer B0503 until outbound-rrl bay exists",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Revert to Worker chat prompt consumption",
+          "label": "D \u2014 Revert to Worker chat prompt consumption",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Sets cloud consumer law vs chat prompt loop",
+      "blocks": "brain-cloud-reasoning-1000-upgrade-plan-v1.json \u00b7 E06",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-B0503-CONSUMER A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-CREED-36V14",
+      "number": 50,
+      "subject": "CREED 36 mesh nodes vs 14 commercial lines \u2014 buyer vocabulary",
+      "title": "CREED 36 mesh nodes vs 14 commercial lines \u2014 buyer vocabulary",
+      "question": "Brain once collapsed CREED to ~14 lines; disk SSOT is 36 nodes in FACTORY_MESH.json. Lock 36-node mesh for operators \u00b7 14 lines for buyers only?",
+      "options": [
+        "A \u2014 YES \u2014 36 nodes SSOT \u00b7 14 lines buyer vocabulary only (recommended)",
+        "B \u2014 Collapse to 14 for Hub UI simplicity",
+        "C \u2014 Merge CREED into SourceA FBE graph as single SSOT",
+        "D \u2014 Defer \u2014 document later",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 36 nodes SSOT \u00b7 14 lines buyer vocabulary only (recommended)",
+          "label": "A \u2014 YES \u2014 36 nodes SSOT \u00b7 14 lines buyer vocabulary only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Collapse to 14 for Hub UI simplicity",
+          "label": "B \u2014 Collapse to 14 for Hub UI simplicity",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Merge CREED into SourceA FBE graph as single SSOT",
+          "label": "C \u2014 Merge CREED into SourceA FBE graph as single SSOT",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer \u2014 document later",
+          "label": "D \u2014 Defer \u2014 document later",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Prevents factory builder vocabulary drift in Brain/commercial copy",
+      "blocks": "CREED/FACTORY_MESH.json \u00b7 Brain chat correction 2026-06",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-CREED-36V14 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-F002-BROKER",
+      "number": 51,
+      "subject": "F002 broker round-trip \u2014 still required after Brain work-order?",
+      "title": "F002 broker round-trip \u2014 still required after Brain work-order?",
+      "question": "F001 (Brain dispatch) is done. F002 (broker submit / last_worker_report) is still planned on P0 path. Run broker after every work-order, or retire F002?",
+      "options": [
+        "A \u2014 YES \u2014 broker round-trip stays on P0 path (recommended)",
+        "B \u2014 Retire F002 \u2014 work-order receipt replaces broker",
+        "C \u2014 Defer F002 until first cloud bay executes",
+        "D \u2014 Worker-only broker \u2014 Brain never triggers",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 broker round-trip stays on P0 path (recommended)",
+          "label": "A \u2014 YES \u2014 broker round-trip stays on P0 path (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Retire F002 \u2014 work-order receipt replaces broker",
+          "label": "B \u2014 Retire F002 \u2014 work-order receipt replaces broker",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Defer F002 until first cloud bay executes",
+          "label": "C \u2014 Defer F002 until first cloud bay executes",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Worker-only broker \u2014 Brain never triggers",
+          "label": "D \u2014 Worker-only broker \u2014 Brain never triggers",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Clarifies broker vs brain work-order receipt chain",
+      "blocks": "sourcea-full-stack-100-fix-plan-v1.json \u00b7 critical_path F002",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-F002-BROKER A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-FALSE-DONE-GUARD",
+      "number": 52,
+      "subject": "False-done guard \u2014 never mark done without bay + receipt",
+      "title": "False-done guard \u2014 never mark done without bay + receipt",
+      "question": "U031/U032 were once falsely auto-marked done. Plan reverted to planned. Lock guard: mark_done only when bay mapped + receipt proof?",
+      "options": [
+        "A \u2014 YES \u2014 hard guard \u00b7 no done without bay+receipt (recommended)",
+        "B \u2014 Soft warning only",
+        "C \u2014 Allow done for sign_only work-orders",
+        "D \u2014 Revert guard \u2014 trust loop auto",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 hard guard \u00b7 no done without bay+receipt (recommended)",
+          "label": "A \u2014 YES \u2014 hard guard \u00b7 no done without bay+receipt (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Soft warning only",
+          "label": "B \u2014 Soft warning only",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Allow done for sign_only work-orders",
+          "label": "C \u2014 Allow done for sign_only work-orders",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Revert guard \u2014 trust loop auto",
+          "label": "D \u2014 Revert guard \u2014 trust loop auto",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Prevents repeat false-done on outbound queue",
+      "blocks": "outbound-factory plan \u00b7 loop_specialist_tick guard",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-FALSE-DONE-GUARD A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-MCP-PHASE2",
+      "number": 53,
+      "subject": "MCP Phase 2 paid wire \u2014 founder gate before cloud execution URL",
+      "title": "MCP Phase 2 paid wire \u2014 founder gate before cloud execution URL",
+      "question": "MCP law: Phase 1 free-tier only \u00b7 Phase 2 paid wire needs founder approval. Approve Phase 2 cloud URL (Railway/CF) now or stay Mac headless?",
+      "options": [
+        "A \u2014 Approve Phase 2 paid cloud wire now",
+        "B \u2014 Stay Phase 1 \u2014 Mac headless until W1 film ships (recommended)",
+        "C \u2014 CF Workers free tier only \u2014 no Railway",
+        "D \u2014 Defer all cloud URL until FORM picks done",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Approve Phase 2 paid cloud wire now",
+          "label": "A \u2014 Approve Phase 2 paid cloud wire now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Stay Phase 1 \u2014 Mac headless until W1 film ships (recommended)",
+          "label": "B \u2014 Stay Phase 1 \u2014 Mac headless until W1 film ships (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "CF Workers free tier only \u2014 no Railway",
+          "label": "C \u2014 CF Workers free tier only \u2014 no Railway",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer all cloud URL until FORM picks done",
+          "label": "D \u2014 Defer all cloud URL until FORM picks done",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Gates cloud execution URL vs free-tier law",
+      "blocks": "mcp-stack-free-tier-v1.json \u00b7 NO-CC infra law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-MCP-PHASE2 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CONF-PLUSONE-MOTOR",
+      "number": 54,
+      "subject": "Plus ONE campus vs SourceA motor \u2014 who owns founder picks?",
+      "title": "Plus ONE campus vs SourceA motor \u2014 who owns founder picks?",
+      "question": "Plus ONE builds factory campuses (CREED/CHURCH). SourceA is governance motor + FORM_OFFICIAL. Confirm all human\u2013machine picks stay on SourceA M1 Canvas only?",
+      "options": [
+        "A \u2014 YES \u2014 SourceA M1 only for picks \u00b7 Plus ONE never hosts form (recommended)",
+        "B \u2014 Duplicate form on Plus ONE Hub",
+        "C \u2014 Plus ONE picks for CREED \u00b7 SourceA for outbound only",
+        "D \u2014 Single merged chat \u2014 no Canvas",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 SourceA M1 only for picks \u00b7 Plus ONE never hosts form (recommended)",
+          "label": "A \u2014 YES \u2014 SourceA M1 only for picks \u00b7 Plus ONE never hosts form (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Duplicate form on Plus ONE Hub",
+          "label": "B \u2014 Duplicate form on Plus ONE Hub",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Plus ONE picks for CREED \u00b7 SourceA for outbound only",
+          "label": "C \u2014 Plus ONE picks for CREED \u00b7 SourceA for outbound only",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Single merged chat \u2014 no Canvas",
+          "label": "D \u2014 Single merged chat \u2014 no Canvas",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_conflict",
+      "prior_pick": "",
+      "effect": "Prevents split pick surfaces across portfolio",
+      "blocks": "PLUS ONE shell \u00b7 SourceA FORM_OFFICIAL \u00b7 ecosystem catalog",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CONF-PLUSONE-MOTOR A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-01",
+      "number": 55,
+      "subject": "Who executes outbound upgrades when loop auto is ON?",
+      "title": "Who executes outbound upgrades when loop auto is ON?",
+      "question": "Outbound factory queue is active (U031 head). Loop auto is ON. Who should execute each upgrade?",
+      "options": [
+        "A \u2014 Cloud/API only \u2014 retire Worker INBOX completely for outbound",
+        "B \u2014 Worker Mac turn still runs every upgrade (old path)",
+        "C \u2014 Hybrid: cloud when bay mapped \u00b7 Worker bounded WORK when unmapped (recommended \u2014 matches disk today)",
+        "D \u2014 Pause all auto dispatch until every bay is mapped",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Cloud/API only \u2014 retire Worker INBOX completely for outbound",
+          "label": "A \u2014 Cloud/API only \u2014 retire Worker INBOX completely for outbound",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Worker Mac turn still runs every upgrade (old path)",
+          "label": "B \u2014 Worker Mac turn still runs every upgrade (old path)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Hybrid: cloud when bay mapped \u00b7 Worker bounded WORK when unmapped (recommended \u2014 matches disk today)",
+          "label": "C \u2014 Hybrid: cloud when bay mapped \u00b7 Worker bounded WORK when unmapped (recommended \u2014 matches disk today)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Pause all auto dispatch until every bay is mapped",
+          "label": "D \u2014 Pause all auto dispatch until every bay is mapped",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "C",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Sets primary execution plane for outbound factory drain",
+      "blocks": "Brain cloud pivot \u00b7 B0501 compiler \u00b7 loop_specialist_tick \u00b7 outbound_factory_queue",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-01 C",
+      "option_effects": {
+        "A": "Worker INBOX retired \u00b7 all bays must exist before dispatch",
+        "B": "Revert B0501 pivot \u00b7 Brain reasons only",
+        "C": "Keep compiler \u00b7 sign_only for unmapped \u00b7 Worker WORK for U031-class items",
+        "D": "Loop auto OFF until bay registry complete"
+      }
+    },
+    {
+      "id": "Q-BC-02",
+      "number": 56,
+      "subject": "Is Mac headless proof honest while cloud URL is unset?",
+      "title": "Is Mac headless proof honest while cloud URL is unset?",
+      "question": "Work-orders say execution_plane=cloudflare_worker but bay runs headless_w2 python on Mac (no FBE_CLOUD_WORKER_URL). Is that honest?",
+      "options": [
+        "A \u2014 YES \u2014 Mac headless is fine until you wire Railway/CF URL",
+        "B \u2014 NO \u2014 never mark upgrade done until true remote cloud executes",
+        "C \u2014 Split: sign_only on Mac \u00b7 done only after remote proof (recommended)",
+        "D \u2014 Mac headless counts as cloud if Docker runs",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 Mac headless is fine until you wire Railway/CF URL",
+          "label": "A \u2014 YES \u2014 Mac headless is fine until you wire Railway/CF URL",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO \u2014 never mark upgrade done until true remote cloud executes",
+          "label": "B \u2014 NO \u2014 never mark upgrade done until true remote cloud executes",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Split: sign_only on Mac \u00b7 done only after remote proof (recommended)",
+          "label": "C \u2014 Split: sign_only on Mac \u00b7 done only after remote proof (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Mac headless counts as cloud if Docker runs",
+          "label": "D \u2014 Mac headless counts as cloud if Docker runs",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "C",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Defines when outbound plan row may be status=done",
+      "blocks": "fbe cloud adapter \u00b7 outbound_fdg_icp_bay \u00b7 NO-CC infra law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-02 C",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-03",
+      "number": 57,
+      "subject": "U031 RRL history \u2014 what happens next?",
+      "title": "U031 RRL history \u2014 what happens next?",
+      "question": "U031 (per-account receipt history) has a signed Brain work-order but bay_slug=unmapped. What is your pick?",
+      "options": [
+        "A \u2014 Worker chat bounded WORK now (skip cloud bay)",
+        "B \u2014 Build outbound-rrl-intelligence cloud bay first \u00b7 then dispatch (recommended)",
+        "C \u2014 Defer U031 \u2014 commercial P0 (9.07 A) first",
+        "D \u2014 Mark U031 done as signed-only (no implementation)",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Worker chat bounded WORK now (skip cloud bay)",
+          "label": "A \u2014 Worker chat bounded WORK now (skip cloud bay)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Build outbound-rrl-intelligence cloud bay first \u00b7 then dispatch (recommended)",
+          "label": "B \u2014 Build outbound-rrl-intelligence cloud bay first \u00b7 then dispatch (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Defer U031 \u2014 commercial P0 (9.07 A) first",
+          "label": "C \u2014 Defer U031 \u2014 commercial P0 (9.07 A) first",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Mark U031 done as signed-only (no implementation)",
+          "label": "D \u2014 Mark U031 done as signed-only (no implementation)",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Unblocks or defers sa-1100 queue head",
+      "blocks": "healthy-queue head U031 \u00b7 brain-outbound-work-order-active-v1.json",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-03 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-04",
+      "number": 58,
+      "subject": "Two chats after cloud pivot \u2014 Brain vs Worker",
+      "title": "Two chats after cloud pivot \u2014 Brain vs Worker",
+      "question": "You locked two chats: Brain routes \u00b7 Worker implements. After B0501, what is the daily rule?",
+      "options": [
+        "A \u2014 Brain reasons + signs work-orders \u00b7 Worker only on explicit WORK: (recommended)",
+        "B \u2014 Worker still runs daily INBOX for all factory queue items",
+        "C \u2014 Single merged chat for both roles",
+        "D \u2014 Brain implements when loop auto ON",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Brain reasons + signs work-orders \u00b7 Worker only on explicit WORK: (recommended)",
+          "label": "A \u2014 Brain reasons + signs work-orders \u00b7 Worker only on explicit WORK: (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Worker still runs daily INBOX for all factory queue items",
+          "label": "B \u2014 Worker still runs daily INBOX for all factory queue items",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Single merged chat for both roles",
+          "label": "C \u2014 Single merged chat for both roles",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Brain implements when loop auto ON",
+          "label": "D \u2014 Brain implements when loop auto ON",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Chat routing law for daily ops",
+      "blocks": "WORKER_ASSIGNMENT_AND_CHAT_ROUTING \u00b7 brain-cloud 1000 plan E10",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-04 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-05",
+      "number": 59,
+      "subject": "Goal 1 1000/1000 vs outbound 66 pending \u2014 north star?",
+      "title": "Goal 1 1000/1000 vs outbound 66 pending \u2014 north star?",
+      "question": "Disk shows Goal 1 1000/1000 honest AND outbound factory 66 upgrades pending. Which is the blocker?",
+      "options": [
+        "A \u2014 STRATEGIC-SLICE spine \u00b7 outbound parallel \u00b7 not Goal 1 blocker (recommended \u00b7 matches 1.02 pick)",
+        "B \u2014 Goal 1 not honest until outbound 100 upgrades done",
+        "C \u2014 Pause outbound until commercial P0 gates all PASS",
+        "D \u2014 Outbound is new Goal 1 \u2014 rebase north star",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "STRATEGIC-SLICE spine \u00b7 outbound parallel \u00b7 not Goal 1 blocker (recommended \u00b7 matches 1.02 pick)",
+          "label": "A \u2014 STRATEGIC-SLICE spine \u00b7 outbound parallel \u00b7 not Goal 1 blocker (recommended \u00b7 matches 1.02 pick)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Goal 1 not honest until outbound 100 upgrades done",
+          "label": "B \u2014 Goal 1 not honest until outbound 100 upgrades done",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Pause outbound until commercial P0 gates all PASS",
+          "label": "C \u2014 Pause outbound until commercial P0 gates all PASS",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Outbound is new Goal 1 \u2014 rebase north star",
+          "label": "D \u2014 Outbound is new Goal 1 \u2014 rebase north star",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Agent stop treating INBOX/outbound as P0 over Brain reasoning",
+      "blocks": "factory-now \u00b7 outbound-factory-100-upgrade-plan \u00b7 STRATEGIC-SLICE",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-05 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-06",
+      "number": 60,
+      "subject": "When is B0501 truly done?",
+      "title": "When is B0501 truly done?",
+      "question": "B0501 (work-order compiler) is marked done after one ICP bay. Is that enough?",
+      "options": [
+        "A \u2014 YES \u2014 compiler shipped \u00b7 bays are incremental",
+        "B \u2014 NO \u2014 B0501 done only when 3+ bays mapped",
+        "C \u2014 Split: B0501=compiler done \u00b7 B0502=first cloud proof per upgrade (recommended)",
+        "D \u2014 Reopen B0501 until CF Worker cron live",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 compiler shipped \u00b7 bays are incremental",
+          "label": "A \u2014 YES \u2014 compiler shipped \u00b7 bays are incremental",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO \u2014 B0501 done only when 3+ bays mapped",
+          "label": "B \u2014 NO \u2014 B0501 done only when 3+ bays mapped",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Split: B0501=compiler done \u00b7 B0502=first cloud proof per upgrade (recommended)",
+          "label": "C \u2014 Split: B0501=compiler done \u00b7 B0502=first cloud proof per upgrade (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Reopen B0501 until CF Worker cron live",
+          "label": "D \u2014 Reopen B0501 until CF Worker cron live",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "C",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Brain 1000 plan progress honesty",
+      "blocks": "brain-cloud-reasoning-1000-plan B0501-B0502 \u00b7 full-stack F001",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-06 C",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-07",
+      "number": 61,
+      "subject": "Loop auto dispatch without your tap each upgrade",
+      "title": "Loop auto dispatch without your tap each upgrade",
+      "question": "Loop auto currently signs work-orders on tick without a Hub Action tap. OK?",
+      "options": [
+        "A \u2014 YES \u2014 Hub glance only was always the motion",
+        "B \u2014 NO \u2014 require Hub Action tap per upgrade before dispatch",
+        "C \u2014 Auto for mapped bays only \u00b7 manual/sign_only for unmapped (recommended)",
+        "D \u2014 Turn loop auto OFF until Third Form picks done",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 Hub glance only was always the motion",
+          "label": "A \u2014 YES \u2014 Hub glance only was always the motion",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO \u2014 require Hub Action tap per upgrade before dispatch",
+          "label": "B \u2014 NO \u2014 require Hub Action tap per upgrade before dispatch",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Auto for mapped bays only \u00b7 manual/sign_only for unmapped (recommended)",
+          "label": "C \u2014 Auto for mapped bays only \u00b7 manual/sign_only for unmapped (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Turn loop auto OFF until Third Form picks done",
+          "label": "D \u2014 Turn loop auto OFF until Third Form picks done",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "C",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Prevents false done marks like U031/U032 incident",
+      "blocks": "loop_specialist_config loop_auto_dispatch_enabled \u00b7 founder_motion Hub glance only",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-07 C",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-08",
+      "number": 62,
+      "subject": "Fate of Worker INBOX file",
+      "title": "Fate of Worker INBOX file",
+      "question": "worker-prompt-inbox-v1.json still exists with cleared stub. What should happen?",
+      "options": [
+        "A \u2014 Keep as legacy relay stub only (recommended)",
+        "B \u2014 Delete INBOX path entirely from factory",
+        "C \u2014 Repurpose as work-order status mirror (rename schema)",
+        "D \u2014 Restore Worker paste as fallback when cloud fails",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Keep as legacy relay stub only (recommended)",
+          "label": "A \u2014 Keep as legacy relay stub only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Delete INBOX path entirely from factory",
+          "label": "B \u2014 Delete INBOX path entirely from factory",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Repurpose as work-order status mirror (rename schema)",
+          "label": "C \u2014 Repurpose as work-order status mirror (rename schema)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Restore Worker paste as fallback when cloud fails",
+          "label": "D \u2014 Restore Worker paste as fallback when cloud fails",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Vocabulary + monitor honesty alignment",
+      "blocks": "run_inbox_disk_truth \u00b7 worker_inject_lib \u00b7 INCIDENT-034 vocabulary",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-08 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-09",
+      "number": 63,
+      "subject": "Free-tier cloud plane (NO-CC law)",
+      "title": "Free-tier cloud plane (NO-CC law)",
+      "question": "Which cloud plane should execute FBE outbound bays first? (No credit card \u2014 free tier only)",
+      "options": [
+        "A \u2014 Cloudflare Workers cron (loop-specialist phase 2b) (recommended)",
+        "B \u2014 Railway FBE runner when URL provided",
+        "C \u2014 Mac headless only until revenue",
+        "D \u2014 You will paste FBE_CLOUD_WORKER_URL when ready \u2014 sign_only until then",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Cloudflare Workers cron (loop-specialist phase 2b) (recommended)",
+          "label": "A \u2014 Cloudflare Workers cron (loop-specialist phase 2b) (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Railway FBE runner when URL provided",
+          "label": "B \u2014 Railway FBE runner when URL provided",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Mac headless only until revenue",
+          "label": "C \u2014 Mac headless only until revenue",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "You will paste FBE_CLOUD_WORKER_URL when ready \u2014 sign_only until then",
+          "label": "D \u2014 You will paste FBE_CLOUD_WORKER_URL when ready \u2014 sign_only until then",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Wires cloud_adapter default mode for outbound bays",
+      "blocks": "NO-CC law \u00b7 loop-specialist-cloud-contract \u00b7 fbe_cloud_worker_config",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-09 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-BC-10",
+      "number": 64,
+      "subject": "Prior pick 7.07 vs new paradox rows",
+      "title": "Prior pick 7.07 vs new paradox rows",
+      "question": "You picked 7.07 NEVER (no new paradox LOCKED doc this sprint). These 10 forks are form-only \u2014 confirm?",
+      "options": [
+        "A \u2014 YES \u2014 Third Form rows only \u00b7 no new LOCKED doc (recommended \u00b7 honors 7.07)",
+        "B \u2014 NO \u2014 author BRAIN_CLOUD_PIVOT_LOCKED_v1.md now",
+        "C \u2014 Defer all Third Form until W1 film ships",
+        "D \u2014 Add to H2 pending only \u2014 not Form",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 Third Form rows only \u00b7 no new LOCKED doc (recommended \u00b7 honors 7.07)",
+          "label": "A \u2014 YES \u2014 Third Form rows only \u00b7 no new LOCKED doc (recommended \u00b7 honors 7.07)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "NO \u2014 author BRAIN_CLOUD_PIVOT_LOCKED_v1.md now",
+          "label": "B \u2014 NO \u2014 author BRAIN_CLOUD_PIVOT_LOCKED_v1.md now",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Defer all Third Form until W1 film ships",
+          "label": "C \u2014 Defer all Third Form until W1 film ships",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Add to H2 pending only \u2014 not Form",
+          "label": "D \u2014 Add to H2 pending only \u2014 not Form",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Scope control for this sprint",
+      "blocks": "Canvas 7.07 \u00b7 INTEGRITY PACK 5 \u00b7 form third pack",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-BC-10 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CW-BATCH3",
+      "number": 65,
+      "subject": "Cloud drain batch 2 done at CLOUD-SEC-200 \u2014 start batch 3?",
+      "title": "Cloud drain batch 2 done at CLOUD-SEC-200 \u2014 start batch 3?",
+      "question": "Railway queue_batch_complete=true \u00b7 head CLOUD-SEC-200. Generate and lock batch 3 (CLOUD-SEC-201..300) now?",
+      "options": [
+        "A \u2014 YES \u2014 generate batch 3 and arm Cloud Workers Proceed",
+        "B \u2014 PAUSE \u2014 celebrate batch 2 \u00b7 batch 3 after sourcea.app fix (recommended)",
+        "C \u2014 Manual \u2014 founder picks row range in chat",
+        "D \u2014 Retire cloud drain \u2014 no more CLOUD-SEC packs",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 generate batch 3 and arm Cloud Workers Proceed",
+          "label": "A \u2014 YES \u2014 generate batch 3 and arm Cloud Workers Proceed",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "PAUSE \u2014 celebrate batch 2 \u00b7 batch 3 after sourcea.app fix (recommended)",
+          "label": "B \u2014 PAUSE \u2014 celebrate batch 2 \u00b7 batch 3 after sourcea.app fix (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Manual \u2014 founder picks row range in chat",
+          "label": "C \u2014 Manual \u2014 founder picks row range in chat",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Retire cloud drain \u2014 no more CLOUD-SEC packs",
+          "label": "D \u2014 Retire cloud drain \u2014 no more CLOUD-SEC packs",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Arms or pauses next 100-pack cloud drain",
+      "blocks": "cloud-drain-queue-active-v1.json \u00b7 secondary-cloud-drain-batch-3",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CW-BATCH3 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CW-SOURCEA-APP",
+      "number": 66,
+      "subject": "sourcea.app still down (CF 1016) \u2014 fix DNS before batch 3?",
+      "title": "sourcea.app still down (CF 1016) \u2014 fix DNS before batch 3?",
+      "question": "sourcea-com.pages.dev works \u00b7 sourcea.app custom domain pending CNAME. Prioritize Cloudflare Pages DNS activation?",
+      "options": [
+        "A \u2014 YES \u2014 fix sourcea.app DNS first (recommended)",
+        "B \u2014 Batch 3 first \u2014 DNS later",
+        "C \u2014 Use pages.dev only for now",
+        "D \u2014 Move to Vercel per locked doc",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 fix sourcea.app DNS first (recommended)",
+          "label": "A \u2014 YES \u2014 fix sourcea.app DNS first (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Batch 3 first \u2014 DNS later",
+          "label": "B \u2014 Batch 3 first \u2014 DNS later",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Use pages.dev only for now",
+          "label": "C \u2014 Use pages.dev only for now",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Move to Vercel per locked doc",
+          "label": "D \u2014 Move to Vercel per locked doc",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Sets commercial domain priority vs cloud drain batch 3",
+      "blocks": "sourcea.app commercial landing \u00b7 MVP intake",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CW-SOURCEA-APP A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-CLOUD-CF06",
+      "number": 67,
+      "subject": "Cloud factory step6 federated FAIL \u2014 fix or defer?",
+      "title": "Cloud factory step6 federated FAIL \u2014 fix or defer?",
+      "question": "CF-STEP6_FEDERATED failed (remote_status=None, Railway rate limit). P0 fix federated bay or defer?",
+      "options": [
+        "A \u2014 P0 fix federated remote now",
+        "B \u2014 Defer \u2014 local bays + INBOX first (recommended)",
+        "C \u2014 Drop cloud factory from queue",
+        "D \u2014 Retry Railway hourly auto",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "P0 fix federated remote now",
+          "label": "A \u2014 P0 fix federated remote now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Defer \u2014 local bays + INBOX first (recommended)",
+          "label": "B \u2014 Defer \u2014 local bays + INBOX first (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Drop cloud factory from queue",
+          "label": "C \u2014 Drop cloud factory from queue",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Retry Railway hourly auto",
+          "label": "D \u2014 Retry Railway hourly auto",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P0_brain_cloud",
+      "prior_pick": "",
+      "effect": "Prioritizes local factory vs cloud remote",
+      "blocks": "cloud factory receipt \u00b7 unified queue CF items",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-CLOUD-CF06 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-CW-HUB-RETIRE",
+      "number": 68,
+      "subject": "Retire Worker Hub from official links bar?",
+      "title": "Retire Worker Hub from official links bar?",
+      "question": "Cloud Workers.app is now primary cockpit for Proceed. Remove or demote Worker Hub :13020 from desktop app link bar?",
+      "options": [
+        "A \u2014 Remove Worker Hub from link bar entirely",
+        "B \u2014 Keep demoted \u2014 legacy glance only (recommended)",
+        "C \u2014 Restore Hub first \u2014 revert link order",
+        "D \u2014 Merge Hub into Cloud Workers single app",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Remove Worker Hub from link bar entirely",
+          "label": "A \u2014 Remove Worker Hub from link bar entirely",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Keep demoted \u2014 legacy glance only (recommended)",
+          "label": "B \u2014 Keep demoted \u2014 legacy glance only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Restore Hub first \u2014 revert link order",
+          "label": "C \u2014 Restore Hub first \u2014 revert link order",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Merge Hub into Cloud Workers single app",
+          "label": "D \u2014 Merge Hub into Cloud Workers single app",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "Desktop app navigation \u00b7 agent proceed guidance",
+      "blocks": "official-links-bar.js \u00b7 hub-cloud-drain-proceed-v1.json",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-CW-HUB-RETIRE B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-04",
+      "number": 69,
+      "subject": "Buyer tagline \u2014 Proof vs Governance?",
+      "title": "Buyer tagline \u2014 Proof vs Governance?",
+      "question": "Market as 'The Proof Layer for AI Agents' not 'Governance Platform'?",
+      "options": [
+        "A \u2014 Proof Layer primary \u00b7 governance in keywords only (recommended)",
+        "B \u2014 Governance Platform primary",
+        "C \u2014 Both equal in title",
+        "D \u2014 Founder picks custom tagline later",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Proof Layer primary \u00b7 governance in keywords only (recommended)",
+          "label": "A \u2014 Proof Layer primary \u00b7 governance in keywords only (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Governance Platform primary",
+          "label": "B \u2014 Governance Platform primary",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Both equal in title",
+          "label": "C \u2014 Both equal in title",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Founder picks custom tagline later",
+          "label": "D \u2014 Founder picks custom tagline later",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "Enterprise buyer messaging",
+      "blocks": "MARKETPLACE_LISTING.md \u00b7 Card 1 copy",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-04 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-07",
+      "number": 70,
+      "subject": "Gemini video-ad-factory \u2014 port TS to apps/ or keep scripts/?",
+      "title": "Gemini video-ad-factory \u2014 port TS to apps/ or keep scripts/?",
+      "question": "Gemini proposed apps/video-ad-factory TypeScript. Disk has Python machine path until lane opens. Which path?",
+      "options": [
+        "A \u2014 EDIT ALLOWED apps/ \u2014 port Gemini TS now",
+        "B \u2014 Keep scripts/ until Supabase Edge live (recommended)",
+        "C \u2014 Fork new Bun monorepo (Gemini original)",
+        "D \u2014 Abandon video-ad factory track",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "EDIT ALLOWED apps/ \u2014 port Gemini TS now",
+          "label": "A \u2014 EDIT ALLOWED apps/ \u2014 port Gemini TS now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Keep scripts/ until Supabase Edge live (recommended)",
+          "label": "B \u2014 Keep scripts/ until Supabase Edge live (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Fork new Bun monorepo (Gemini original)",
+          "label": "C \u2014 Fork new Bun monorepo (Gemini original)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Abandon video-ad factory track",
+          "label": "D \u2014 Abandon video-ad factory track",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "Implementation surface for creative factory",
+      "blocks": "data/video-ad-factory-gemini-port-spec-v1.json \u00b7 worker lane apps/ blocked",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-07 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-ARCH-GEMINI-WS",
+      "number": 71,
+      "subject": "Gemini monorepo \u2014 root package.json workspaces?",
+      "title": "Gemini monorepo \u2014 root package.json workspaces?",
+      "question": "Gemini proposed Yarn/Bun workspaces at repo root. SourceA has packages/ + apps/ but no root package.json. Add workspaces now?",
+      "options": [
+        "A \u2014 Add root package.json workspaces now",
+        "B \u2014 Defer until video-ad-factory TS port WORK (recommended)",
+        "C \u2014 Bun only \u2014 no Yarn",
+        "D \u2014 Reject monorepo \u2014 keep scripts/ machine path",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Add root package.json workspaces now",
+          "label": "A \u2014 Add root package.json workspaces now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Defer until video-ad-factory TS port WORK (recommended)",
+          "label": "B \u2014 Defer until video-ad-factory TS port WORK (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Bun only \u2014 no Yarn",
+          "label": "C \u2014 Bun only \u2014 no Yarn",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Reject monorepo \u2014 keep scripts/ machine path",
+          "label": "D \u2014 Reject monorepo \u2014 keep scripts/ machine path",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "Prevents fragmentation vs Gemini fork",
+      "blocks": "Gemini blueprint \u00b7 cursor-bootstrap-ledger \u00b7 do_not_fork law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-ARCH-GEMINI-WS B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-ARCH-SCAFFOLD",
+      "number": 72,
+      "subject": "Scaffold apple-store-api subdirs now?",
+      "title": "Scaffold apple-store-api subdirs now?",
+      "question": "Gemini tree has core/billing/push-gateway. SourceA has README+rules only. Scaffold empty dirs + epoch bump in architecture ledger?",
+      "options": [
+        "A \u2014 Scaffold now \u2014 core/ billing/ push-gateway/ README stubs",
+        "B \u2014 After Supabase WORK + top form PICKs (recommended)",
+        "C \u2014 Wait until iOS app WORK order",
+        "D \u2014 Never apple-store-api \u2014 web only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Scaffold now \u2014 core/ billing/ push-gateway/ README stubs",
+          "label": "A \u2014 Scaffold now \u2014 core/ billing/ push-gateway/ README stubs",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "After Supabase WORK + top form PICKs (recommended)",
+          "label": "B \u2014 After Supabase WORK + top form PICKs (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Wait until iOS app WORK order",
+          "label": "C \u2014 Wait until iOS app WORK order",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Never apple-store-api \u2014 web only",
+          "label": "D \u2014 Never apple-store-api \u2014 web only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "Closes Gemini vs disk folder gap without mixing factories",
+      "blocks": "apps/apple-store-api \u00b7 Gemini vs SourceA architect gap",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-ARCH-SCAFFOLD B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-THREAD-DEPLOY-01",
+      "number": 73,
+      "subject": "E2E deploy target \u2014 Agent Run only or both SA4?",
+      "title": "E2E deploy target \u2014 Agent Run only or both SA4?",
+      "question": "validate-all-e2e deploy step fails without ~/Desktop/SA4 and ~/Desktop/agentrun-app. Which deploy target is required for E2E polish?",
+      "options": [
+        "A \u2014 Agent Run only (:5180) \u2014 SA4 optional / skip when missing (recommended)",
+        "B \u2014 Keep both SA4 + Agent Run required (fail if either missing)",
+        "C \u2014 SA4 only \u2014 drop Agent Run requirement",
+        "D \u2014 Skip deploy step in E2E until cloud SSE live",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Agent Run only (:5180) \u2014 SA4 optional / skip when missing (recommended)",
+          "label": "A \u2014 Agent Run only (:5180) \u2014 SA4 optional / skip when missing (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Keep both SA4 + Agent Run required (fail if either missing)",
+          "label": "B \u2014 Keep both SA4 + Agent Run required (fail if either missing)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "SA4 only \u2014 drop Agent Run requirement",
+          "label": "C \u2014 SA4 only \u2014 drop Agent Run requirement",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Skip deploy step in E2E until cloud SSE live",
+          "label": "D \u2014 Skip deploy step in E2E until cloud SSE live",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P1_integrity_core",
+      "prior_pick": "",
+      "effect": "E2E honesty vs local dev friction",
+      "blocks": "validate-all-e2e-v1.sh \u00b7 deploy gate \u00b7 AskQuestion unpicked",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-THREAD-DEPLOY-01 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-MF-10",
+      "number": 74,
+      "subject": "W3 commercial \u2014 confirm-sent after Mail?",
+      "title": "W3 commercial \u2014 confirm-sent after Mail?",
+      "question": "Commercial L3 ~75% \u2014 w3_send_ready red until founder confirms Mail sent. Confirm sent for fundmore/ocree packs?",
+      "options": [
+        "A \u2014 YES \u2014 I sent Mail \u2014 mark confirm-sent",
+        "B \u2014 Not sent yet \u2014 keep red",
+        "C \u2014 Skip W3 \u2014 focus marketplace",
+        "D \u2014 Defer commercial until form done",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 I sent Mail \u2014 mark confirm-sent",
+          "label": "A \u2014 YES \u2014 I sent Mail \u2014 mark confirm-sent",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Not sent yet \u2014 keep red",
+          "label": "B \u2014 Not sent yet \u2014 keep red",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Skip W3 \u2014 focus marketplace",
+          "label": "C \u2014 Skip W3 \u2014 focus marketplace",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Defer commercial until form done",
+          "label": "D \u2014 Defer commercial until form done",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Commercial L3 honesty \u2014 no fake green",
+      "blocks": "execution_plane_honesty \u00b7 W3 founder gate",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-MF-10 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-TUNNEL-DEMO",
+      "number": 75,
+      "subject": "Proof Lab public demo \u2014 free tunnel?",
+      "title": "Proof Lab public demo \u2014 free tunnel?",
+      "question": "publish_witnessbc_landing_v1.py can expose Proof Lab via free trycloudflare tunnel (no paid Cloudflare). Run tunnel for buyers?",
+      "options": [
+        "A \u2014 YES \u2014 run --backend tunnel now",
+        "B \u2014 Local only until you say tunnel (recommended)",
+        "C \u2014 Paid Cloudflare Pages \u2014 not yet",
+        "D \u2014 No public URL",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 run --backend tunnel now",
+          "label": "A \u2014 YES \u2014 run --backend tunnel now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Local only until you say tunnel (recommended)",
+          "label": "B \u2014 Local only until you say tunnel (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Paid Cloudflare Pages \u2014 not yet",
+          "label": "C \u2014 Paid Cloudflare Pages \u2014 not yet",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "No public URL",
+          "label": "D \u2014 No public URL",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Sets buyer demo URL posture without paid infra",
+      "blocks": "publish_witnessbc_landing_v1.py \u00b7 proof URL receipt",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-TUNNEL-DEMO B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-SESSION-WBC-SUMMARY",
+      "number": 76,
+      "subject": "WitnessBC work summary \u2014 deposit to vault?",
+      "title": "WitnessBC work summary \u2014 deposit to vault?",
+      "question": "WitnessBC lane + Proof Lab factory + film ship gate summary on disk. Deposit summary receipt to vault for portfolio?",
+      "options": [
+        "A \u2014 YES \u2014 vault deposit summary (recommended)",
+        "B \u2014 Wait until STYLE-B1 hero ships",
+        "C \u2014 Chat only \u2014 no vault",
+        "D \u2014 Commercial only \u2014 no portfolio row",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 vault deposit summary (recommended)",
+          "label": "A \u2014 YES \u2014 vault deposit summary (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Wait until STYLE-B1 hero ships",
+          "label": "B \u2014 Wait until STYLE-B1 hero ships",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Chat only \u2014 no vault",
+          "label": "C \u2014 Chat only \u2014 no vault",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Commercial only \u2014 no portfolio row",
+          "label": "D \u2014 Commercial only \u2014 no portfolio row",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Locks WitnessBC session evidence for fleet",
+      "blocks": "witnessbc-work-summary-receipt-v1.json \u00b7 commercial pipeline",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-SESSION-WBC-SUMMARY A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-WBC-OCRE-L3",
+      "number": 77,
+      "subject": "OCRE commercial L3 \u2014 founder Mail confirm only",
+      "title": "OCRE commercial L3 \u2014 founder Mail confirm only",
+      "question": "Commercial L3 at 75% \u2014 ocree confirm_sent is founder-only (agents never send email). You send Mail from your account and run --confirm-sent ocre?",
+      "options": [
+        "A \u2014 YES \u2014 I will send Mail + confirm_sent this week (recommended)",
+        "B \u2014 Defer L3 \u2014 focus Proof Lab first",
+        "C \u2014 Worker may send on my behalf (forbidden \u2014 pick A or B)",
+        "D \u2014 Drop OCRE lane",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 I will send Mail + confirm_sent this week (recommended)",
+          "label": "A \u2014 YES \u2014 I will send Mail + confirm_sent this week (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Defer L3 \u2014 focus Proof Lab first",
+          "label": "B \u2014 Defer L3 \u2014 focus Proof Lab first",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Worker may send on my behalf (forbidden \u2014 pick A or B)",
+          "label": "C \u2014 Worker may send on my behalf (forbidden \u2014 pick A or B)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Drop OCRE lane",
+          "label": "D \u2014 Drop OCRE lane",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Closes commercial L3 without agent email violation",
+      "blocks": "commercial L3 \u00b7 outbound \u00b7 agent never email law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-WBC-OCRE-L3 A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-WBC-PROOF-LAB-OK",
+      "number": 78,
+      "subject": "Proof Lab interactive is ready \u2014 show buyers now?",
+      "title": "Proof Lab interactive is ready \u2014 show buyers now?",
+      "question": "Proof Lab scenarios + BLOCK/tamper demo are built and publish-ready at local :8090. STYLE-B1 hero film stays blocked until Screen Studio. Open tunnel demo for buyers now?",
+      "options": [
+        "A \u2014 YES \u2014 tunnel or local demo for NGO/civic buyers now (recommended)",
+        "B \u2014 Wait for STYLE-B1 hero before any demo",
+        "C \u2014 Internal only \u2014 no external URL yet",
+        "D \u2014 Skip Proof Lab \u2014 film only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "YES \u2014 tunnel or local demo for NGO/civic buyers now (recommended)",
+          "label": "A \u2014 YES \u2014 tunnel or local demo for NGO/civic buyers now (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Wait for STYLE-B1 hero before any demo",
+          "label": "B \u2014 Wait for STYLE-B1 hero before any demo",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Internal only \u2014 no external URL yet",
+          "label": "C \u2014 Internal only \u2014 no external URL yet",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Skip Proof Lab \u2014 film only",
+          "label": "D \u2014 Skip Proof Lab \u2014 film only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "A",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Unblocks W-P5 Proof Lab outreach without fake A-tier film",
+      "blocks": "witnessbc-proof-lab-v1.json \u00b7 proof-scenarios \u00b7 publish receipt interactive=YES",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-WBC-PROOF-LAB-OK A",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-WBC-STYLE-B1",
+      "number": 79,
+      "subject": "Record STYLE-B1 ~3m institutional hero \u2014 when?",
+      "title": "Record STYLE-B1 ~3m institutional hero \u2014 when?",
+      "question": "Ship gate blocks hero publish (Playwright capture \u2260 Screen Studio). Record per STYLE_B1 brief this week or defer?",
+      "options": [
+        "A \u2014 Record Screen Studio this week \u2014 bash witnessbc-commercial-film-ship.sh",
+        "B \u2014 Defer 30 days \u2014 Proof Lab interactive is enough for now (recommended)",
+        "C \u2014 Accept Playwright capture as hero (not recommended)",
+        "D \u2014 Cancel hero film \u2014 Proof Lab only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Record Screen Studio this week \u2014 bash witnessbc-commercial-film-ship.sh",
+          "label": "A \u2014 Record Screen Studio this week \u2014 bash witnessbc-commercial-film-ship.sh",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Defer 30 days \u2014 Proof Lab interactive is enough for now (recommended)",
+          "label": "B \u2014 Defer 30 days \u2014 Proof Lab interactive is enough for now (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Accept Playwright capture as hero (not recommended)",
+          "label": "C \u2014 Accept Playwright capture as hero (not recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Cancel hero film \u2014 Proof Lab only",
+          "label": "D \u2014 Cancel hero film \u2014 Proof Lab only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Sets honest film tier vs interactive-only posture",
+      "blocks": "STYLE_B1_WITNESSBC_SHOT_MATCH_BRIEF \u00b7 commercial_film_ship_gate",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-WBC-STYLE-B1 B",
+      "option_effects": {}
+    },
+    {
+      "id": "Q-WBC-WITNESS-AI-NAME",
+      "number": 80,
+      "subject": "Public name \u2014 Witness AI vs WitnessBC on publish",
+      "title": "Public name \u2014 Witness AI vs WitnessBC on publish",
+      "question": "witnessbc.com uses Witness AI product name with \u2260 witness.ai disclaimer. Rebrand public HTML to WitnessBC on next publish?",
+      "options": [
+        "A \u2014 Rebrand all public pages to WitnessBC now",
+        "B \u2014 Keep Witness AI on site + disclaimer until buyer call (recommended)",
+        "C \u2014 Dual brand \u2014 Witness AI + WitnessBC footer",
+        "D \u2014 Pause site \u2014 form only",
+        "E \u2014 5 \u2014 Write your own answer"
+      ],
+      "option_slots": [
+        {
+          "slot": 1,
+          "key": "A",
+          "type": "choice",
+          "text": "Rebrand all public pages to WitnessBC now",
+          "label": "A \u2014 Rebrand all public pages to WitnessBC now",
+          "disabled": false
+        },
+        {
+          "slot": 2,
+          "key": "B",
+          "type": "choice",
+          "text": "Keep Witness AI on site + disclaimer until buyer call (recommended)",
+          "label": "B \u2014 Keep Witness AI on site + disclaimer until buyer call (recommended)",
+          "disabled": false
+        },
+        {
+          "slot": 3,
+          "key": "C",
+          "type": "choice",
+          "text": "Dual brand \u2014 Witness AI + WitnessBC footer",
+          "label": "C \u2014 Dual brand \u2014 Witness AI + WitnessBC footer",
+          "disabled": false
+        },
+        {
+          "slot": 4,
+          "key": "D",
+          "type": "choice",
+          "text": "Pause site \u2014 form only",
+          "label": "D \u2014 Pause site \u2014 form only",
+          "disabled": false
+        },
+        {
+          "slot": 5,
+          "key": "E",
+          "type": "founder_free_text",
+          "text": "5 \u2014 Write your own answer",
+          "label": "5 \u2014 Write your own answer",
+          "placeholder": "Type your answer here (option 5)"
+        }
+      ],
+      "option_schema": "form-official-question-schema-v1",
+      "option_count": 5,
+      "recommended": "B",
+      "gather_tier": "P4_commercial",
+      "prior_pick": "",
+      "effect": "Sets buyer-facing identity before outreach",
+      "blocks": "witnessbc-portfolio-routing title_fix_note \u00b7 identity law",
+      "reply_template": "ASF: FIVE-STEP \u2014 PICK: Q-WBC-WITNESS-AI-NAME B",
+      "option_effects": {}
+    }
+  ]
+}

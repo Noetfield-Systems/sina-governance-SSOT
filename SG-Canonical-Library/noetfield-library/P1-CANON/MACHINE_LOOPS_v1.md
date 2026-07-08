@@ -34,7 +34,7 @@
 | Cycle rollup | — | `scripts/machine_cycle_receipt_v1.py` | `receipts/proof/machine-cycle-latest-v1.json` |
 | **E2E gate** | all | `scripts/validate-machine-loops-e2e-v1.sh` | `receipts/proof/machine-loops-e2e-latest-v1.json` |
 
-**Motor:** `scripts/loop_specialist_tick_v1.py` → `run_machine_process_cycle()` (piggyback SA-T-machine-cycle on */15 loop-specialist tick).
+**Scheduler and executor:** `scripts/loop_specialist_tick_v1.py` → `run_machine_process_cycle()` (piggyback SA-T-machine-cycle on */15 loop-specialist tick).
 
 **Retirement SSOT:** `data/founder-trigger-retirement-registry-v1.json` · shadow-decision ledger: `data/founder-trigger-ledger-v1.json`
 
