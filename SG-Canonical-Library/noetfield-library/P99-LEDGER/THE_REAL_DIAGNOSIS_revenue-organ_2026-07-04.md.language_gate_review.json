@@ -1,0 +1,14 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/THE_REAL_DIAGNOSIS_revenue-organ_2026-07-04.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Railway HTTPS",
+      "line": 7,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

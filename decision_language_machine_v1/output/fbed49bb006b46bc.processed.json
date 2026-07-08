@@ -1,0 +1,139 @@
+[
+  {
+    "id": "AUDIT-001",
+    "raw_text": "Brain Worker URL returns 502 on /health \u2014 should we fail closed or retry?",
+    "source": "audit_finding",
+    "title": "",
+    "question": "",
+    "options": [],
+    "blocks": "E2E registry",
+    "effect": "",
+    "metadata": {
+      "source": "audit_finding",
+      "blocks": "E2E registry"
+    },
+    "plain_english": "Brain Worker URL returns 502 on /health \u2014 should we fail closed or retry?",
+    "terms": [
+      {
+        "term": "Brain Worker URL",
+        "normalized": "brain worker url"
+      }
+    ],
+    "dictionary_flags": [
+      {
+        "term": "Brain Worker URL",
+        "normalized": "brain worker url",
+        "status": "DICTIONARY_FIX_NEEDED",
+        "fix": "add dictionary entry before minting terminology"
+      }
+    ],
+    "dictionary_fix_needed": true,
+    "classification": "MACHINE_VALIDATABLE",
+    "classification_reason": "Evidence on disk or live probe can decide",
+    "evidence_hint": "HTTP probe live status",
+    "cluster_id": "CLUSTER-CLOUD-EXEC",
+    "cluster_name": "Where code runs (cloud vs Mac)",
+    "validated": false
+  },
+  {
+    "id": "CHAT-FORK-12",
+    "raw_text": "User asked: leverage the Motor for outbound. Which Motor \u2014 NOOS or Plus-One?",
+    "source": "chat_fork",
+    "title": "",
+    "question": "",
+    "options": [
+      "A \u2014 NOOS",
+      "B \u2014 Plus-One",
+      "C \u2014 DEFER"
+    ],
+    "blocks": "",
+    "effect": "",
+    "metadata": {
+      "source": "chat_fork",
+      "options": [
+        "A \u2014 NOOS",
+        "B \u2014 Plus-One",
+        "C \u2014 DEFER"
+      ]
+    },
+    "plain_english": "User asked: use the scheduler and executor for outbound. Which scheduler and executor \u2014 operations scheduler or Plus-One? Options: NOOS \u00b7 Plus-One \u00b7 DEFER",
+    "terms": [
+      {
+        "term": "NOOS",
+        "normalized": "noos"
+      },
+      {
+        "term": "Which Motor",
+        "normalized": "which motor"
+      }
+    ],
+    "dictionary_flags": [
+      {
+        "term": "NOOS",
+        "normalized": "noos",
+        "status": "DICTIONARY_FIX_NEEDED",
+        "fix": "add dictionary entry before minting terminology"
+      },
+      {
+        "term": "Which Motor",
+        "normalized": "which motor",
+        "status": "DICTIONARY_FIX_NEEDED",
+        "fix": "add dictionary entry before minting terminology"
+      }
+    ],
+    "dictionary_fix_needed": true,
+    "classification": "MACHINE_VALIDATABLE",
+    "classification_reason": "Close after dictionary entry added (mint gate)",
+    "evidence_hint": "Add term to dictionary batch; rebuild index",
+    "cluster_id": "CLUSTER-REVENUE",
+    "cluster_name": "Revenue and daily priority",
+    "validated": false
+  },
+  {
+    "id": "AGENT-Q-44",
+    "raw_text": "Did you send the Mail for Q-MF-10 outreach batch?",
+    "source": "agent_question",
+    "title": "",
+    "question": "",
+    "options": [],
+    "blocks": "",
+    "effect": "Founder-only confirm",
+    "metadata": {
+      "source": "agent_question",
+      "effect": "Founder-only confirm"
+    },
+    "plain_english": "Did you send the Mail for Q-MF-10 outreach batch? Effect: Founder-only confirm",
+    "terms": [],
+    "dictionary_flags": [],
+    "dictionary_fix_needed": false,
+    "classification": "FOUNDER_FACT",
+    "classification_reason": "Requires founder-only fact",
+    "evidence_hint": "Founder confirms yes/no; agents never infer",
+    "cluster_id": "CLUSTER-DEMO-FILM",
+    "cluster_name": "Demo film and outreach timing",
+    "validated": false
+  },
+  {
+    "id": "BACKLOG-99",
+    "raw_text": "Gemini scaffold workspace \u2014 revisit when revenue lane stable",
+    "source": "backlog",
+    "title": "",
+    "question": "",
+    "options": [],
+    "blocks": "",
+    "effect": "",
+    "metadata": {
+      "source": "backlog"
+    },
+    "plain_english": "Gemini scaffold workspace \u2014 revisit when revenue lane stable",
+    "terms": [],
+    "dictionary_flags": [],
+    "dictionary_fix_needed": false,
+    "classification": "DEFER",
+    "classification_reason": "Cluster bucket: Scaffold and defer",
+    "evidence_hint": "Low priority scaffold",
+    "cluster_id": "CLUSTER-DEFER-SCAFFOLD",
+    "cluster_name": "Scaffold and defer",
+    "validated": false
+  }
+]

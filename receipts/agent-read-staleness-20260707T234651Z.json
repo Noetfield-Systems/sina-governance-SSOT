@@ -1,0 +1,142 @@
+{
+  "schema": "agent_read_staleness_receipt_v1",
+  "at": "2026-07-07T23:46:51Z",
+  "ok": true,
+  "alive_surfaces": 15,
+  "blocker_count": 0,
+  "warn_count": 0,
+  "alive": [
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/github_automation_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_truth",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/agent_read_surfaces_v1.json",
+      "status": "ACTIVE",
+      "role": "alive_doc_registry",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/stale_law_guard_patterns_v1.json",
+      "status": "ACTIVE",
+      "role": "stale_law_patterns",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+      "status": "ACTIVE",
+      "role": "parallel_automation_law",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+      "status": "ACTIVE",
+      "role": "worker_routing",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+      "status": "READ_SURFACE",
+      "role": "library_index",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
+      "status": "ACTIVE",
+      "role": "library_version_truth",
+      "last_modified": "2026-07-06"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/SourceA/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-03"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/data/brain_external_artifact_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "brain_pointer_registry",
+      "last_modified": "2026-07-05"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
+      "status": "ACTIVE",
+      "role": "deploy_truth",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
+      "status": "ACTIVE",
+      "role": "automation_law",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-03"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+      "status": "ACTIVE",
+      "role": "integrator_checklist",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-06-29"
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "warns": [],
+  "reasoning": {
+    "alive_doc_count": 15,
+    "authority_scan_roots": [
+      "AGENTS.md",
+      "ssot/",
+      "data/github_automation_registry_v1.json",
+      "data/agent_read_surfaces_v1.json",
+      "data/automation_surface_inventory_v1.json",
+      ".cursor/rules/",
+      ".github/copilot-instructions.md"
+    ],
+    "retired_deploy_surfaces": [
+      "legacy_preview_host"
+    ],
+    "verdict": "AUTHORITY_CLEAN",
+    "next_actions": [],
+    "handoff_by_lane": {}
+  },
+  "queue_summary": {
+    "open": 0,
+    "open_p0": 0,
+    "path": "data/governance_stale_pointer_queue_v1.json"
+  },
+  "closure_token": "AGENT_READ_STALENESS: pass"
+}

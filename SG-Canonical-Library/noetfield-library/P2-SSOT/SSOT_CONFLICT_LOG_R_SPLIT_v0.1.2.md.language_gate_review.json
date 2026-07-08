@@ -1,0 +1,23 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+  "agent_review": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 17,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 37,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 39,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ]
+}

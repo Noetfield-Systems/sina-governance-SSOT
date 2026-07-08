@@ -1,0 +1,22 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/receipts-not-diagrams.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Execution Contract Validator",
+      "line": 22,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    },
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "One Truth Ticket",
+      "line": 30,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

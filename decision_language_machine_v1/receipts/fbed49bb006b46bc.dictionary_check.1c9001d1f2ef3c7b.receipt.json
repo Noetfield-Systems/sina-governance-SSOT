@@ -1,0 +1,18 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "fbed49bb006b46bc",
+  "stage": "dictionary_check",
+  "time": "2026-07-07T07:11:12Z",
+  "scan_id": "1c9001d1f2ef3c7b",
+  "decision": "PASS",
+  "input_path": "test_fixtures/messy_backlog_sample_v1.json",
+  "payload": {
+    "items_with_dictionary_fix_needed": 2,
+    "flagged_terms": [
+      "Brain Worker URL",
+      "NOOS",
+      "Which Motor"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "fbed49bb006b46bc",
+  "stage": "founder_sheet",
+  "time": "2026-07-07T07:11:12Z",
+  "scan_id": "c081cd73365a5396",
+  "decision": "PASS",
+  "input_path": "test_fixtures/messy_backlog_sample_v1.json",
+  "payload": {
+    "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/fbed49bb006b46bc.founder_sheet.json",
+    "summary": {
+      "total_items": 4,
+      "advisor_clusters": 0,
+      "advisor_items": 0,
+      "founder_fact_items": 1,
+      "machine_validatable": 2,
+      "deferred": 1
+    }
+  }
+}

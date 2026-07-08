@@ -1,0 +1,22 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LIBRARY_RECONCILIATION_RECEIPT_2026-07-05.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "RECONCILED",
+      "line": 3,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    },
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Full Downloads",
+      "line": 84,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

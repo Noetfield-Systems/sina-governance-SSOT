@@ -1,0 +1,26 @@
+{
+  "schema": "decision_language_machine_founder_sheet_v1",
+  "summary": {
+    "total_items": 4,
+    "advisor_clusters": 0,
+    "advisor_items": 0,
+    "founder_fact_items": 1,
+    "machine_validatable": 2,
+    "deferred": 1
+  },
+  "advisor_clusters": [],
+  "founder_facts": [
+    {
+      "id": "AGENT-Q-44",
+      "plain_english": "Did you send the Mail for Q-MF-10 outreach batch? Effect: Founder-only confirm",
+      "evidence_hint": "Founder confirms yes/no; agents never infer"
+    }
+  ],
+  "machine_queue_ids": [
+    "AUDIT-001",
+    "CHAT-FORK-12"
+  ],
+  "deferred_ids": [
+    "BACKLOG-99"
+  ]
+}

@@ -27,7 +27,15 @@
     "sourcea_cloud_forge": { "value_class": "META", "receipt_target": "cloud-forge queue drain receipt" },
     "loop_specialist_runtime_plan": { "value_class": "META", "receipt_target": "loop-specialist tick receipt" },
     "sg_governance": { "value_class": "META", "receipt_target": "automation-surface-audit / census receipt" },
-    "workflow_census": { "value_class": "GUARD", "receipt_target": "workflow_census_runs_v1 row" }
+    "workflow_census": { "value_class": "GUARD", "receipt_target": "workflow_census_runs_v1 row" },
+    "tf_cf_fleet_tick": { "value_class": "GUARD", "receipt_target": "trustfield_loop_registry" },
+    "tf_cf_deadman": { "value_class": "GUARD", "receipt_target": "trustfield_loop_registry" },
+    "tf_cf_verify_recipes": { "value_class": "GUARD", "receipt_target": "trustfield_verify_recipe_runs" },
+    "trustfield_loops_intake": { "value_class": "GUARD", "receipt_target": "trustfield_loop_receipts" },
+    "trustfield_loops_build": { "value_class": "GUARD", "receipt_target": "trustfield_loop_receipts" },
+    "tf_cf_cloud_loop_witness": { "value_class": "GUARD", "receipt_target": "trustfield_loop_receipts" },
+    "tf_cf_gha_secondary_witness": { "value_class": "GUARD", "receipt_target": "trustfield_loop_receipts" },
+    "trustfield_www_edge": { "value_class": "GUARD", "receipt_target": "trustfield_loop_registry" }
   },
   "by_id_pattern": [
     { "match": "deadman|watchdog|probe|verify|health|uptime|external-verify|post-deploy", "value_class": "GUARD", "receipt_target": "independent verify / probe PASS" },

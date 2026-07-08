@@ -1,0 +1,23 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md",
+  "agent_review": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 12,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 34,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 78,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ]
+}

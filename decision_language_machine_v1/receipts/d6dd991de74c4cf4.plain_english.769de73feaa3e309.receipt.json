@@ -1,0 +1,13 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "d6dd991de74c4cf4",
+  "stage": "plain_english",
+  "time": "2026-07-07T07:20:42Z",
+  "scan_id": "769de73feaa3e309",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "rewritten": 80
+  }
+}
