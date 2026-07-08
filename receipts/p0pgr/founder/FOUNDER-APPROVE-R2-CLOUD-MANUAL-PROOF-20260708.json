@@ -1,0 +1,18 @@
+{
+  "schema": "p0pgr-founder-authorization-v1",
+  "id": "FOUNDER-APPROVE-R2-CLOUD-MANUAL-PROOF-20260708",
+  "recorded_at": "2026-07-08T16:20:00Z",
+  "recorded_by": "session agent, transcribing founder directive received in chat 2026-07-08",
+  "founder": "Sina Kazemnezhad",
+  "unlocks": "R2 cloud manual proof execution: push branch + 2 manual workflow_dispatch runs of p0pgr-shadow-cycle-v1 + proof receipt",
+  "directive_verbatim_excerpt": "APPROVED: Execute P0-PGR R2 cloud manual proof. Do not rebuild the P0-PGR architecture. Do not rewrite existing schemas. Do not add TrustField or Team Bench features. Do not enable cron. Do not auto-dispatch. Do not send anything. Do not deploy anything. [...] Final status: R2_CLOUD_MANUAL_PASS or R2_CLOUD_MANUAL_PARTIAL with exact blocker. STOP after receipt.",
+  "scope_limits": [
+    "no architecture rebuild, no schema rewrites",
+    "no TrustField/Team Bench feature work",
+    "cron stays disabled (R3 remains locked)",
+    "no dispatch, no send, no deploy",
+    "writes only to receipts/artifacts",
+    "stop after proof receipt"
+  ],
+  "note": "Authorization recorded BEFORE execution per operator skill v2 rule (M03 lesson)."
+}
