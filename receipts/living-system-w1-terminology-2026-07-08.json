@@ -1,0 +1,29 @@
+{
+  "schema": "living_system_w1_terminology_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T01:47:51Z",
+  "trigger_host": "cloud",
+  "plan": "LS-020",
+  "milestone": "M2_terminology_minted",
+  "terms_minted": [
+    "Living System",
+    "Stale",
+    "Body",
+    "Pulse",
+    "Homeostasis",
+    "Metabolism",
+    "Liveness Ladder",
+    "Unforgeable Vital Sign",
+    "Commercial Pulse",
+    "Provocation Surface",
+    "Dispatchable Draft",
+    "FOUNDER_IS_THE_STALE_GATE",
+    "WORKER_IS_THE_STALE_GATE",
+    "MALFORMED_DRAFT"
+  ],
+  "artifacts": [
+    "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md \u00a710",
+    "P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md",
+    "language_gate/dictionary_rc2_supplement.json"
+  ]
+}

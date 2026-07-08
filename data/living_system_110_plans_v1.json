@@ -1,7 +1,7 @@
 {
   "schema": "living_system_110_plans_v1_LOCKED",
   "version": "1.1.0_LOCK",
-  "saved_at": "2026-07-08T00:58:07Z",
+  "saved_at": "2026-07-08T01:50:00Z",
   "authority": "SG (SSSOT)",
   "parent_doctrine": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
   "parent_plans": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
@@ -293,7 +293,10 @@
       ],
       "closed_loop": null,
       "done_when": "Tier-0 lines exist",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md \u00a710"
     },
     {
       "id": "LS-012",
@@ -310,7 +313,10 @@
       ],
       "closed_loop": null,
       "done_when": "Five components defined",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_TERMINOLOGY_v1.md five components"
     },
     {
       "id": "LS-013",
@@ -327,7 +333,10 @@
       ],
       "closed_loop": null,
       "done_when": "Rungs 1-7 in dictionary",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md ladder"
     },
     {
       "id": "LS-014",
@@ -344,7 +353,10 @@
       ],
       "closed_loop": null,
       "done_when": "Links 239c8b5 precedent",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md unforgeable vital sign"
     },
     {
       "id": "LS-015",
@@ -361,7 +373,10 @@
       ],
       "closed_loop": null,
       "done_when": "Section 6 terms minted",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md commercial pulse"
     },
     {
       "id": "LS-016",
@@ -378,7 +393,10 @@
       ],
       "closed_loop": null,
       "done_when": "FOUNDER WORKER MALFORMED types defined",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md stale-gate types"
     },
     {
       "id": "LS-017",
@@ -395,7 +413,10 @@
       ],
       "closed_loop": null,
       "done_when": "7 dispatchability predicates listed",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md dispatchable"
     },
     {
       "id": "LS-018",
@@ -412,7 +433,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Index includes new terms",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "language_gate/dictionary_rc2_supplement.json"
     },
     {
       "id": "LS-019",
@@ -429,7 +453,10 @@
       ],
       "closed_loop": null,
       "done_when": "Dual-axis language split",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_TERMINOLOGY_v1.md \u00a76 synonym block"
     },
     {
       "id": "LS-020",
@@ -448,7 +475,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "All terms lint-clean",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "receipts/living-system-w1-terminology-2026-07-08.json"
     },
     {
       "id": "LS-021",
@@ -465,7 +495,10 @@
       ],
       "closed_loop": null,
       "done_when": "Script implements section 8 checklist",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "scripts/living_system_chain_validate_v1.py"
     },
     {
       "id": "LS-022",
@@ -482,7 +515,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Manual green rejected",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "receipts/living-system-rubric-pulse-2026-07-08.json"
     },
     {
       "id": "LS-023",
@@ -499,7 +535,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Reads truth_log EXTERNAL_VERIFY",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
     {
       "id": "LS-024",
@@ -516,7 +555,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "IDLE_NO_WORK valid silence FAIL",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
     {
       "id": "LS-025",
@@ -533,7 +575,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "Stale DRIFT yields STALE verdict",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
     {
       "id": "LS-026",
@@ -982,7 +1027,10 @@
       ],
       "closed_loop": null,
       "done_when": "Section 6 flow machine-readable",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "docs/commercial_pulse_loop_v0.1.md"
     },
     {
       "id": "LS-052",
@@ -999,7 +1047,10 @@
       ],
       "closed_loop": null,
       "done_when": "Draft approval send states",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "data/commercial_pulse_queue_v1.json"
     },
     {
       "id": "LS-053",
@@ -1017,7 +1068,10 @@
       ],
       "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
       "done_when": "MALFORMED_DRAFT emit",
-      "w0_status": "PENDING"
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
     },
     {
       "id": "LS-054",
@@ -2017,5 +2071,9 @@
     "complete": 10,
     "total": 10,
     "receipt": "receipts/living-system-w0-install-2026-07-07.json"
+  },
+  "w1_summary": {
+    "complete": 18,
+    "receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
   }
 }

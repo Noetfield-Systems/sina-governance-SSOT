@@ -1,0 +1,27 @@
+{
+  "schema": "living_system_w2_collectors_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T01:50:00Z",
+  "plans_complete": [
+    "LS-023",
+    "LS-024",
+    "LS-025",
+    "LS-053"
+  ],
+  "rubric_verdict": "LIVING",
+  "collectors": {
+    "membrane_or_external": "PASS",
+    "mutation_or_idle": "PASS",
+    "drift_fresh": "PASS",
+    "drill_refresh": "SKIP"
+  },
+  "dispatch_check": {
+    "script": "scripts/commercial_pulse_dispatch_check_v1.py",
+    "malformed_receipt_emitted": "receipts/commercial-pulse-malformed-draft-20260708T014959Z.json"
+  },
+  "next": [
+    "LS-026 drill refresh after LS-045",
+    "LS-027 rubric E2E weekly GHA",
+    "LS-054 commercial pulse draft cron"
+  ]
+}
