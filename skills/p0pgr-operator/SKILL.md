@@ -69,7 +69,8 @@ python3 scripts/p0pgr_phase2_rank_v1.py
 - Every external claim stores an artifact: per-URL status + body sha256 + saved body under `receipts/p0pgr/artifacts/<receipt-id>/`. Prose reproduction of what a page said is not evidence.
 - If the actual executor differs from the packet's declared route, say so in `executor_route_note` — silent route deviation reads as authority drift.
 - Cost accounting: session-embedded LLM work is not a bare $0; use `accounting_note` to say where the cost actually sits.
-- Flag new receipts for git commit in the next founder-visible commit — untracked receipts carry no tamper evidence.
+- **End every session that wrote runtime files with a scoped git commit on the working branch** (p0pgr paths only, `--no-verify` not required if hooks pass; merge stays founder-gated). Uncommitted receipts are invisible receipts: the 2026-07-08 cross-clone incident (`receipts/p0pgr/DRIFT-CROSS-CLONE-20260708.json`) happened because the entire runtime lived untracked in one working tree while a second clone's audit correctly reported RUNTIME_NOT_SCAFFOLDED.
+- Two clones may exist (Desktop working copy vs `~/Projects` Cursor lane per AGENTS.md). Before declaring anything MISSING, check which clone you're in (`git remote -v`, `pwd`) — and after committing, remind the founder to push so the other clone can fetch.
 
 **Update scorecards** after every operation: counters (executions, sends=0, deploys=0, leaks, freezes, cost), queue position, new candidate packets born from findings.
 
