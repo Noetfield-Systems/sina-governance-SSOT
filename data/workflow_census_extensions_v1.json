@@ -1,7 +1,7 @@
 {
   "schema": "workflow_census_extensions_v1",
   "version": "1.0.0",
-  "saved_at": "2026-07-07T23:50:00Z",
+  "saved_at": "2026-07-08T06:35:19Z",
   "note": "Motors not in automation_surface_inventory \u2014 personal Gateway + traffic probe",
   "cloudflare_workers": [
     {
@@ -62,6 +62,18 @@
       "task_cell": "sg_governance",
       "cost_tier": "github_actions",
       "receipt_glob": "receipts/agent-read-staleness-*.json",
+      "value_class": "GUARD"
+    },
+    {
+      "loop_id": "sg_auth_surface_probe_v1",
+      "name": "sg-auth-surface-probe-v1",
+      "host": "github",
+      "repo": "Noetfield-Systems/sina-governance-SSOT",
+      "workflow_file": ".github/workflows/sg-auth-surface-probe-v1.yml",
+      "schedule": "0 */6 * * *",
+      "task_cell": "sg_auth_surface_probe",
+      "cost_tier": "github_actions",
+      "receipt_glob": "receipts/auth-surface-probe-*.json",
       "value_class": "GUARD"
     }
   ],

@@ -1,7 +1,7 @@
 {
   "schema": "automation_surface_inventory_v1",
   "version": "1.1.0",
-  "saved_at": "2026-07-07T09:30:00Z",
+  "saved_at": "2026-07-08T06:47:10Z",
   "authority": "SG (SSSOT)",
   "parent": "data/github_automation_registry_v1.json",
   "repos": [
@@ -23,6 +23,20 @@
           "motor_id": "gh_actions_brain_loop_autorun_v1",
           "cadence": "*/30 * * * *",
           "task_cell": "brain_promote_ci",
+          "copilot_safe": false
+        },
+        {
+          "file": "agent-read-staleness-weekly-v1.yml",
+          "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
+          "cadence": "0 9 * * 1",
+          "task_cell": "sg_governance",
+          "copilot_safe": false
+        },
+        {
+          "file": "sg-auth-surface-probe-v1.yml",
+          "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+          "cadence": "0 */6 * * *",
+          "task_cell": "sg_auth_surface_probe",
           "copilot_safe": false
         }
       ],
@@ -47,7 +61,7 @@
           "cadence": "0 */6 * * *",
           "task_cell": "sourcea_autorun_l4_verify",
           "copilot_safe": false,
-          "note": "L4 PASS evidence — does not promote brain bundle"
+          "note": "L4 PASS evidence \u2014 does not promote brain bundle"
         },
         {
           "file": "validate-sourcea-boot-v1.yml",
@@ -61,7 +75,7 @@
           "motor_id": "gh_actions_sourcea_drain_disabled_v1",
           "cadence": "disabled_intentional",
           "task_cell": "none",
-          "note": "CF cron primary — GH drain disabled by design"
+          "note": "CF cron primary \u2014 GH drain disabled by design"
         },
         {
           "file": "determinism-gate.yml",
@@ -105,28 +119,139 @@
       "lane": "noos_doctrine",
       "owner_agent": "noos_agent",
       "workflows": [
-        { "file": "noos-factory-autorun.yml", "motor_id": "gh_actions_noos_factory_autorun_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_gel_factory" },
-        { "file": "noos-inbox-loop.yml", "motor_id": "gh_actions_noos_inbox_loop_v1", "cadence": "*/5 * * * *", "task_cell": "noos_inbox" },
-        { "file": "noos-runtime-loop.yml", "motor_id": "gh_actions_noos_runtime_loop_v1", "cadence": "5,20,35,50 * * * *", "task_cell": "noos_gel_runtime" },
-        { "file": "noos-chain-loop.yml", "motor_id": "gh_actions_noos_chain_loop_v1", "cadence": "0,30 * * * *", "task_cell": "noos_audit_chain" },
-        { "file": "noos-surface-loop.yml", "motor_id": "gh_actions_noos_surface_loop_v1", "cadence": "0,20,40 * * * *", "task_cell": "noos_surface_probe" },
-        { "file": "noos-sourcea-observe-loop.yml", "motor_id": "gh_actions_noos_sourcea_observe_v1", "cadence": "15,45 * * * *", "task_cell": "noos_sourcea_observe_readonly" },
-        { "file": "noos-self-heal-loop.yml", "motor_id": "gh_actions_noos_self_heal_loop_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_self_heal" },
-        { "file": "noos-cross-repo-orchestrator.yml", "motor_id": "gh_actions_noos_cross_repo_v1", "cadence": "0 */3 * * *", "task_cell": "noos_cross_repo_orchestrate" },
-        { "file": "noos-specialist.yml", "motor_id": "gh_actions_noos_specialist_v1", "cadence": "0 */2 * * *", "task_cell": "noos_specialist" },
-        { "file": "noos-researcher.yml", "motor_id": "gh_actions_noos_researcher_v1", "cadence": "0 * * * *", "task_cell": "noos_research" },
-        { "file": "noos-workflow-audit.yml", "motor_id": "gh_actions_noos_workflow_audit_v1", "cadence": "*/15 * * * *", "task_cell": "noos_workflow_audit" },
-        { "file": "gel-ci.yml", "motor_id": "gh_actions_noos_gel_ci_v1", "cadence": "on_push", "task_cell": "noos_gel_ci", "copilot_safe": true },
-        { "file": "deploy-noos-cloud-workers-v1.yml", "motor_id": "gh_actions_noos_cf_deploy_v1", "cadence": "manual_dispatch", "task_cell": "noos_cf_deploy" },
-        { "file": "noos-schedule-canary.yml", "motor_id": "gh_actions_noos_schedule_canary_v1", "cadence": "0,10,20,30,40,50 * * * *", "task_cell": "noos_schedule_canary" },
-        { "file": "noos-post-deploy-verify-v1.yml", "motor_id": "gh_actions_noos_post_deploy_verify_v1", "cadence": "workflow_run_after_deploy", "task_cell": "noos_cf_deploy_verify" },
-        { "file": "release-noetfield-gate.yml", "motor_id": "gh_actions_noos_release_gate_v1", "cadence": "on_tag_push", "task_cell": "noos_release_gate", "copilot_safe": false },
-        { "file": "noos-agent-vault.yml", "motor_id": "gh_actions_noos_agent_vault_v1", "cadence": "on_push_paths", "task_cell": "noos_agent_vault" },
-        { "file": "noos-self-heal.yml", "motor_id": "gh_actions_noos_self_heal_v1", "cadence": "15,45 * * * *", "task_cell": "noos_self_heal_legacy", "note": "legacy self-heal — distinct from noos-self-heal-loop" },
-        { "file": "noos-agent-nerve-loop.yml", "motor_id": "gh_actions_noos_agent_nerve_loop_v1", "cadence": "0 * * * *", "task_cell": "noos_agent_nerve" },
-        { "file": "publish-pypi.yml", "motor_id": "gh_actions_noos_publish_pypi_v1", "cadence": "manual_dispatch", "task_cell": "noos_pypi_publish", "copilot_safe": false }
+        {
+          "file": "noos-factory-autorun.yml",
+          "motor_id": "gh_actions_noos_factory_autorun_v1",
+          "cadence": "0,10,20,30,40,50 * * * *",
+          "task_cell": "noos_gel_factory"
+        },
+        {
+          "file": "noos-inbox-loop.yml",
+          "motor_id": "gh_actions_noos_inbox_loop_v1",
+          "cadence": "*/5 * * * *",
+          "task_cell": "noos_inbox"
+        },
+        {
+          "file": "noos-runtime-loop.yml",
+          "motor_id": "gh_actions_noos_runtime_loop_v1",
+          "cadence": "5,20,35,50 * * * *",
+          "task_cell": "noos_gel_runtime"
+        },
+        {
+          "file": "noos-chain-loop.yml",
+          "motor_id": "gh_actions_noos_chain_loop_v1",
+          "cadence": "0,30 * * * *",
+          "task_cell": "noos_audit_chain"
+        },
+        {
+          "file": "noos-surface-loop.yml",
+          "motor_id": "gh_actions_noos_surface_loop_v1",
+          "cadence": "0,20,40 * * * *",
+          "task_cell": "noos_surface_probe"
+        },
+        {
+          "file": "noos-sourcea-observe-loop.yml",
+          "motor_id": "gh_actions_noos_sourcea_observe_v1",
+          "cadence": "15,45 * * * *",
+          "task_cell": "noos_sourcea_observe_readonly"
+        },
+        {
+          "file": "noos-self-heal-loop.yml",
+          "motor_id": "gh_actions_noos_self_heal_loop_v1",
+          "cadence": "0,10,20,30,40,50 * * * *",
+          "task_cell": "noos_self_heal"
+        },
+        {
+          "file": "noos-cross-repo-orchestrator.yml",
+          "motor_id": "gh_actions_noos_cross_repo_v1",
+          "cadence": "0 */3 * * *",
+          "task_cell": "noos_cross_repo_orchestrate"
+        },
+        {
+          "file": "noos-specialist.yml",
+          "motor_id": "gh_actions_noos_specialist_v1",
+          "cadence": "0 */2 * * *",
+          "task_cell": "noos_specialist"
+        },
+        {
+          "file": "noos-researcher.yml",
+          "motor_id": "gh_actions_noos_researcher_v1",
+          "cadence": "0 * * * *",
+          "task_cell": "noos_research"
+        },
+        {
+          "file": "noos-workflow-audit.yml",
+          "motor_id": "gh_actions_noos_workflow_audit_v1",
+          "cadence": "*/15 * * * *",
+          "task_cell": "noos_workflow_audit"
+        },
+        {
+          "file": "gel-ci.yml",
+          "motor_id": "gh_actions_noos_gel_ci_v1",
+          "cadence": "on_push",
+          "task_cell": "noos_gel_ci",
+          "copilot_safe": true
+        },
+        {
+          "file": "deploy-noos-cloud-workers-v1.yml",
+          "motor_id": "gh_actions_noos_cf_deploy_v1",
+          "cadence": "manual_dispatch",
+          "task_cell": "noos_cf_deploy"
+        },
+        {
+          "file": "noos-schedule-canary.yml",
+          "motor_id": "gh_actions_noos_schedule_canary_v1",
+          "cadence": "0,10,20,30,40,50 * * * *",
+          "task_cell": "noos_schedule_canary"
+        },
+        {
+          "file": "noos-post-deploy-verify-v1.yml",
+          "motor_id": "gh_actions_noos_post_deploy_verify_v1",
+          "cadence": "workflow_run_after_deploy",
+          "task_cell": "noos_cf_deploy_verify"
+        },
+        {
+          "file": "release-noetfield-gate.yml",
+          "motor_id": "gh_actions_noos_release_gate_v1",
+          "cadence": "on_tag_push",
+          "task_cell": "noos_release_gate",
+          "copilot_safe": false
+        },
+        {
+          "file": "noos-agent-vault.yml",
+          "motor_id": "gh_actions_noos_agent_vault_v1",
+          "cadence": "on_push_paths",
+          "task_cell": "noos_agent_vault"
+        },
+        {
+          "file": "noos-self-heal.yml",
+          "motor_id": "gh_actions_noos_self_heal_v1",
+          "cadence": "15,45 * * * *",
+          "task_cell": "noos_self_heal_legacy",
+          "note": "legacy self-heal \u2014 distinct from noos-self-heal-loop"
+        },
+        {
+          "file": "noos-agent-nerve-loop.yml",
+          "motor_id": "gh_actions_noos_agent_nerve_loop_v1",
+          "cadence": "0 * * * *",
+          "task_cell": "noos_agent_nerve"
+        },
+        {
+          "file": "publish-pypi.yml",
+          "motor_id": "gh_actions_noos_publish_pypi_v1",
+          "cadence": "manual_dispatch",
+          "task_cell": "noos_pypi_publish",
+          "copilot_safe": false
+        }
       ],
-      "must_not_conflict_with": ["sourcea_cloud_forge", "brain_promote_ci", "trustfield_loops_build", "tf_cf_fleet_tick", "tf_cf_verify_recipes", "trustfield_loops_intake"]
+      "must_not_conflict_with": [
+        "sourcea_cloud_forge",
+        "brain_promote_ci",
+        "trustfield_loops_build",
+        "tf_cf_fleet_tick",
+        "tf_cf_verify_recipes",
+        "trustfield_loops_intake"
+      ]
     },
     {
       "repo_id": "TrustField-Technologies",
@@ -134,25 +259,117 @@
       "lane": "trustfield_build",
       "owner_agent": "trustfield_worker",
       "workflows": [
-        { "file": "cloud-loop-health.yml", "motor_id": "gh_actions_tf_cloud_loop_secondary_v1", "cadence": "30 6,12,18 * * *", "task_cell": "tf_cf_cloud_loop_witness", "motor_role": "secondary_witness", "note": "W6 — CF fleet tick primary" },
-        { "file": "www-upgrade-loop.yml", "motor_id": "gh_actions_tf_www_upgrade_secondary_v1", "cadence": "0 2,8,14,20 * * *", "task_cell": "tf_cf_www_upgrade_witness", "motor_role": "secondary_witness" },
-        { "file": "autorun-health.yml", "motor_id": "gh_actions_tf_autorun_secondary_v1", "cadence": "30 7,13,19 * * *", "task_cell": "tf_cf_autorun_witness", "motor_role": "secondary_witness" },
-        { "file": "external-verify.yml", "motor_id": "gh_actions_tf_external_verify_secondary_v1", "cadence": "workflow_run", "task_cell": "tf_cf_verify_recipes_witness", "motor_role": "secondary_witness", "note": "CF verify-recipes worker primary" },
-        { "file": "system-readiness-prod.yml", "motor_id": "gh_actions_tf_readiness_secondary_v1", "cadence": "0 13 * * *", "task_cell": "tf_cf_readiness_witness", "motor_role": "secondary_witness" },
-        { "file": "ci.yml", "motor_id": "gh_actions_tf_ci_pr_gate_v1", "cadence": "on_push", "task_cell": "tf_cf_pr_gate", "motor_role": "pr_gate_only", "copilot_safe": true }
+        {
+          "file": "cloud-loop-health.yml",
+          "motor_id": "gh_actions_tf_cloud_loop_secondary_v1",
+          "cadence": "30 6,12,18 * * *",
+          "task_cell": "tf_cf_cloud_loop_witness",
+          "motor_role": "secondary_witness",
+          "note": "W6 \u2014 CF fleet tick primary"
+        },
+        {
+          "file": "www-upgrade-loop.yml",
+          "motor_id": "gh_actions_tf_www_upgrade_secondary_v1",
+          "cadence": "0 2,8,14,20 * * *",
+          "task_cell": "tf_cf_www_upgrade_witness",
+          "motor_role": "secondary_witness"
+        },
+        {
+          "file": "autorun-health.yml",
+          "motor_id": "gh_actions_tf_autorun_secondary_v1",
+          "cadence": "30 7,13,19 * * *",
+          "task_cell": "tf_cf_autorun_witness",
+          "motor_role": "secondary_witness"
+        },
+        {
+          "file": "external-verify.yml",
+          "motor_id": "gh_actions_tf_external_verify_secondary_v1",
+          "cadence": "workflow_run",
+          "task_cell": "tf_cf_verify_recipes_witness",
+          "motor_role": "secondary_witness",
+          "note": "CF verify-recipes worker primary"
+        },
+        {
+          "file": "system-readiness-prod.yml",
+          "motor_id": "gh_actions_tf_readiness_secondary_v1",
+          "cadence": "0 13 * * *",
+          "task_cell": "tf_cf_readiness_witness",
+          "motor_role": "secondary_witness"
+        },
+        {
+          "file": "ci.yml",
+          "motor_id": "gh_actions_tf_ci_pr_gate_v1",
+          "cadence": "on_push",
+          "task_cell": "tf_cf_pr_gate",
+          "motor_role": "pr_gate_only",
+          "copilot_safe": true
+        }
       ],
       "cloud_motors": [
-        { "motor_id": "tf_cf_fleet_tick_v1", "cadence": "*/5 * * * *", "task_cell": "tf_cf_fleet_tick", "health_url": "https://tf-cf-fleet-tick-v1.sina-kazemnezhad-ca.workers.dev/health", "loop_id": "tf_cf_fleet_tick_v1", "receipt_target": "trustfield_loop_registry" },
-        { "motor_id": "tf_cf_deadman_v1", "cadence": "*/10 * * * *", "task_cell": "tf_cf_deadman", "health_url": "https://tf-cf-deadman-v1.sina-kazemnezhad-ca.workers.dev/health", "loop_id": "tf_cf_deadman_v1", "receipt_target": "trustfield_loop_registry" },
-        { "motor_id": "tf_cf_verify_recipes_v1", "cadence": "*/15 * * * *", "task_cell": "tf_cf_verify_recipes", "health_url": "https://tf-cf-verify-recipes-v1.sina-kazemnezhad-ca.workers.dev/health", "loop_id": "tf_cf_verify_recipes_v1", "receipt_target": "trustfield_verify_recipe_runs" },
-        { "motor_id": "trustfield_www_edge_v1", "cadence": "request", "task_cell": "trustfield_www_edge", "health_url": "https://www.trustfield.ca/", "loop_id": "tf_cf_www_pages_v1", "receipt_target": "trustfield_loop_registry", "note": "W1 OpenNext www worker" },
-        { "motor_id": "tf_cf_gha_secondary_v1", "cadence": "21600s", "task_cell": "tf_cf_gha_secondary_witness", "loop_id": "tf_cf_gha_secondary_v1", "receipt_target": "trustfield_loop_receipts", "note": "W6 GHA demotion witness row" }
+        {
+          "motor_id": "tf_cf_fleet_tick_v1",
+          "cadence": "*/5 * * * *",
+          "task_cell": "tf_cf_fleet_tick",
+          "health_url": "https://tf-cf-fleet-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+          "loop_id": "tf_cf_fleet_tick_v1",
+          "receipt_target": "trustfield_loop_registry"
+        },
+        {
+          "motor_id": "tf_cf_deadman_v1",
+          "cadence": "*/10 * * * *",
+          "task_cell": "tf_cf_deadman",
+          "health_url": "https://tf-cf-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+          "loop_id": "tf_cf_deadman_v1",
+          "receipt_target": "trustfield_loop_registry"
+        },
+        {
+          "motor_id": "tf_cf_verify_recipes_v1",
+          "cadence": "*/15 * * * *",
+          "task_cell": "tf_cf_verify_recipes",
+          "health_url": "https://tf-cf-verify-recipes-v1.sina-kazemnezhad-ca.workers.dev/health",
+          "loop_id": "tf_cf_verify_recipes_v1",
+          "receipt_target": "trustfield_verify_recipe_runs"
+        },
+        {
+          "motor_id": "trustfield_www_edge_v1",
+          "cadence": "request",
+          "task_cell": "trustfield_www_edge",
+          "health_url": "https://www.trustfield.ca/",
+          "loop_id": "tf_cf_www_pages_v1",
+          "receipt_target": "trustfield_loop_registry",
+          "note": "W1 OpenNext www worker"
+        },
+        {
+          "motor_id": "tf_cf_gha_secondary_v1",
+          "cadence": "21600s",
+          "task_cell": "tf_cf_gha_secondary_witness",
+          "loop_id": "tf_cf_gha_secondary_v1",
+          "receipt_target": "trustfield_loop_receipts",
+          "note": "W6 GHA demotion witness row"
+        }
       ],
       "railway_motors": [
-        { "motor_id": "railway_trustfield_api_v1", "cadence": "request", "task_cell": "trustfield_api_runtime", "health_url": "https://api.trustfield.ca/health", "receipt_target": "trustfield_loop_receipts" },
-        { "motor_id": "railway_trustfield_plan_worker_v1", "cadence": "300s", "task_cell": "tf_cf_plan_matrix_witness", "health_url": "https://trustfield-plan-worker-production.up.railway.app/health", "receipt_target": "trustfield_loop_receipts", "note": "Secondary witness until W2 lanes fully CF-native" }
+        {
+          "motor_id": "railway_trustfield_api_v1",
+          "cadence": "request",
+          "task_cell": "trustfield_api_runtime",
+          "health_url": "https://api.trustfield.ca/health",
+          "receipt_target": "trustfield_loop_receipts"
+        },
+        {
+          "motor_id": "railway_trustfield_plan_worker_v1",
+          "cadence": "300s",
+          "task_cell": "tf_cf_plan_matrix_witness",
+          "health_url": "https://trustfield-plan-worker-production.up.railway.app/health",
+          "receipt_target": "trustfield_loop_receipts",
+          "note": "Secondary witness until W2 lanes fully CF-native"
+        }
       ],
-      "must_not_conflict_with": ["sourcea_cloud_forge", "noos_gel_factory", "brain_promote_ci"]
+      "must_not_conflict_with": [
+        "sourcea_cloud_forge",
+        "noos_gel_factory",
+        "brain_promote_ci"
+      ]
     },
     {
       "repo_id": "trustfield-loops",
@@ -168,7 +385,7 @@
           "health_url": "https://trustfield-loops.sina-kazemnezhad-ca.workers.dev/health",
           "loop_id": "tf_cf_trustfield_loops_v1",
           "receipt_target": "trustfield_loop_receipts",
-          "note": "W8 production — supersedes trustfield_loops_preview"
+          "note": "W8 production \u2014 supersedes trustfield_loops_preview"
         }
       ]
     }
@@ -177,57 +394,80 @@
     "default_lane": "assist_only",
     "pr_template_sg": ".github/pull_request_template.md",
     "worktree_paths_are_shadow": true,
-    "worktree_note": "copilot-worktrees/* are draft sandboxes — never registered motors; merge only via venture worker lane",
-    "forbidden_cross_repo_in_one_pr": ["sina-governance-ssot", "SourceA", "noetfeld-os", "trustfield-loops", "TrustField-Technologies"]
+    "worktree_note": "copilot-worktrees/* are draft sandboxes \u2014 never registered motors; merge only via venture worker lane",
+    "forbidden_cross_repo_in_one_pr": [
+      "sina-governance-ssot",
+      "SourceA",
+      "noetfeld-os",
+      "trustfield-loops",
+      "TrustField-Technologies"
+    ]
   },
   "conflict_matrix": [
     {
       "task_cell": "brain_promote_same_window",
       "writers_max": 1,
-      "motors": ["gh_actions_brain_loop_autorun_v1", "mac_launchd_brain_loop_autorun_v1"],
+      "motors": [
+        "gh_actions_brain_loop_autorun_v1",
+        "mac_launchd_brain_loop_autorun_v1"
+      ],
       "resolution": "promotion_gate_cas"
     },
     {
       "task_cell": "sourcea_cloud_forge",
       "writers_max": 1,
-      "motors": ["cf_auto_runtime_tick_v1"],
+      "motors": [
+        "cf_auto_runtime_tick_v1"
+      ],
       "resolution": "noos_factory_autorun must not deploy SourceA workers"
     },
     {
       "task_cell": "noos_gel_factory",
       "writers_max": 1,
-      "motors": ["gh_actions_noos_factory_autorun_v1"],
-      "resolution": "separate repo lane — observe SourceA read-only via noos-sourcea-observe-loop"
+      "motors": [
+        "gh_actions_noos_factory_autorun_v1"
+      ],
+      "resolution": "separate repo lane \u2014 observe SourceA read-only via noos-sourcea-observe-loop"
     },
     {
       "task_cell": "trustfield_loops_build",
       "writers_max": 1,
-      "motors": ["trustfield_loops_production"],
-      "resolution": "W8 production supersedes preview — Copilot TF worktrees assist_only"
+      "motors": [
+        "trustfield_loops_production"
+      ],
+      "resolution": "W8 production supersedes preview \u2014 Copilot TF worktrees assist_only"
     },
     {
       "task_cell": "trustfield_loops_intake",
       "writers_max": 1,
-      "motors": ["trustfield_loops_production"],
-      "resolution": "www.trustfield.ca routes bound — noos must_not_conflict"
+      "motors": [
+        "trustfield_loops_production"
+      ],
+      "resolution": "www.trustfield.ca routes bound \u2014 noos must_not_conflict"
     },
     {
       "task_cell": "tf_cf_fleet_tick",
       "writers_max": 1,
-      "motors": ["tf_cf_fleet_tick_v1"],
-      "resolution": "CF cron primary — gh_actions_tf_cloud_loop_secondary_v1 witness only"
+      "motors": [
+        "tf_cf_fleet_tick_v1"
+      ],
+      "resolution": "CF cron primary \u2014 gh_actions_tf_cloud_loop_secondary_v1 witness only"
     },
     {
       "task_cell": "tf_cf_verify_recipes",
       "writers_max": 1,
-      "motors": ["tf_cf_verify_recipes_v1"],
-      "resolution": "CF verify-recipes primary — GHA external-verify secondary artifact"
+      "motors": [
+        "tf_cf_verify_recipes_v1"
+      ],
+      "resolution": "CF verify-recipes primary \u2014 GHA external-verify secondary artifact"
     },
     {
       "task_cell": "tf_cf_deadman",
       "writers_max": 1,
-      "motors": ["tf_cf_deadman_v1"],
-      "resolution": "Watches W2 motors only — no duplicate deadman in noos"
+      "motors": [
+        "tf_cf_deadman_v1"
+      ],
+      "resolution": "Watches W2 motors only \u2014 no duplicate deadman in noos"
     }
   ]
 }

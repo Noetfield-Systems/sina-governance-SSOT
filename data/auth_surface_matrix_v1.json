@@ -1,0 +1,293 @@
+{
+  "schema": "auth_surface_matrix_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-08T06:30:00Z",
+  "authority": "SG (SSSOT)",
+  "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
+  "identity_plane": {
+    "auth_project": "portfolio_spine",
+    "supabase_ref": "ldfruywifqnfpwsfgmdl",
+    "factory_project": "noetfield",
+    "factory_ref": "tkgpapowwplupyekpivy",
+    "ventures": [
+      "sourcea",
+      "noetfield",
+      "trustfield"
+    ],
+    "cross_domain_strategy": "per_domain_sessions",
+    "auth_methods_p0": [
+      "magic_link",
+      "email_password"
+    ],
+    "auth_methods_p1": [
+      "google",
+      "github"
+    ],
+    "server_rule": "Use supabase.auth.getClaims() on server \u2014 not getSession() alone"
+  },
+  "supabase_redirect_allow_list": [
+    "https://sourcea.app/auth/callback",
+    "https://www.noetfield.com/auth/callback",
+    "https://www.trustfield.ca/auth/callback",
+    "http://localhost:3000/auth/callback"
+  ],
+  "tiers": {
+    "tier_0_public": {
+      "law": "No login wall \u2014 SEO and contract SKU discovery",
+      "surfaces": [
+        {
+          "id": "sa_home",
+          "url": "https://sourcea.app/",
+          "venture": "sourcea",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "sa_obi",
+          "url": "https://sourcea.app/operating-brain-install",
+          "venture": "sourcea",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "sa_ca_avg",
+          "url": "https://sourcea.ca/ai-value-governance",
+          "venture": "sourcea",
+          "expect_http": [
+            200
+          ],
+          "note": "edge may lag DNS"
+        },
+        {
+          "id": "sa_uk_eacp",
+          "url": "https://sourcea.uk/enterprise-ai-control-plane",
+          "venture": "sourcea",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "nf_home",
+          "url": "https://www.noetfield.com/",
+          "venture": "noetfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "nf_gel",
+          "url": "https://www.noetfield.com/ai-value-governance-os/",
+          "venture": "noetfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "tf_home",
+          "url": "https://www.trustfield.ca/",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "tf_partners",
+          "url": "https://www.trustfield.ca/partners",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "tf_showcase",
+          "url": "https://www.trustfield.ca/showcase",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "tf_entity",
+          "url": "https://www.trustfield.ca/entity-status",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        },
+        {
+          "id": "tf_pilot",
+          "url": "https://www.trustfield.ca/pilot",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        }
+      ]
+    },
+    "tier_1_optional": {
+      "law": "Sign-up unlocks value; marketing pages stay public",
+      "surfaces": [
+        {
+          "id": "tf_register",
+          "url": "https://www.trustfield.ca/register",
+          "venture": "trustfield",
+          "expect_http": [
+            200,
+            302
+          ],
+          "implementation": "partial",
+          "owner_repo": "TrustField-Technologies"
+        },
+        {
+          "id": "tf_register_partner",
+          "url": "https://www.trustfield.ca/register?partner=demo",
+          "venture": "trustfield",
+          "expect_http": [
+            200,
+            302
+          ],
+          "implementation": "partial",
+          "owner_repo": "TrustField-Technologies"
+        }
+      ]
+    },
+    "tier_2_gated": {
+      "law": "Must be signed in \u2014 probe expects 401 or redirect until venture ships gate",
+      "surfaces": [
+        {
+          "id": "tf_partner_access",
+          "url": "https://www.trustfield.ca/partner-access",
+          "venture": "trustfield",
+          "expect_when_gated": [
+            401,
+            302,
+            307
+          ],
+          "implementation": "planned",
+          "owner_repo": "TrustField-Technologies",
+          "warn_if_public_200": true
+        },
+        {
+          "id": "tf_customer_portal",
+          "url": "https://www.trustfield.ca/customer-portal",
+          "venture": "trustfield",
+          "expect_when_gated": [
+            401,
+            302,
+            307
+          ],
+          "implementation": "planned",
+          "owner_repo": "TrustField-Technologies",
+          "warn_if_public_200": true
+        }
+      ]
+    },
+    "tier_3_api": {
+      "law": "JWT or service role \u2014 user cookies never on motors",
+      "surfaces": [
+        {
+          "id": "noos_api",
+          "url": "https://api.noetfield.com/health",
+          "venture": "noetfield",
+          "expect_http": [
+            200,
+            404
+          ],
+          "note": "health path may vary"
+        },
+        {
+          "id": "tf_api",
+          "url": "https://api.trustfield.ca/health",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ]
+        }
+      ]
+    }
+  },
+  "repo_ownership": {
+    "SourceA": {
+      "agent": "sourcea_worker",
+      "phase": 2,
+      "owns": [
+        "sourcea.app sign-in/up",
+        "/auth/callback",
+        "buyer sandbox"
+      ]
+    },
+    "TrustField-Technologies": {
+      "agent": "trustfield_worker",
+      "phase": 1,
+      "owns": [
+        "/register",
+        "Partner Access OS",
+        "customer portal",
+        "api.trustfield.ca JWT"
+      ]
+    },
+    "Noetfield": {
+      "agent": "noetfield_website",
+      "phase": 3,
+      "owns": [
+        "noetfield.com auth UI",
+        "sandbox CTA"
+      ]
+    },
+    "noetfeld-os": {
+      "agent": "noos_agent",
+      "phase": 4,
+      "owns": [
+        "api.noetfield.com JWT validation"
+      ]
+    },
+    "trustfield-loops": {
+      "agent": "trustfield_worker",
+      "phase": 1,
+      "owns": [
+        "intake webhooks JWT verify only"
+      ]
+    },
+    "sina-governance-ssot": {
+      "agent": "sg_sssot_cursor",
+      "phase": 5,
+      "owns": [
+        "verify script",
+        "registry",
+        "surface matrix"
+      ],
+      "must_not_own": [
+        "auth UI"
+      ]
+    }
+  },
+  "founder_decisions_pending": [
+    {
+      "id": 1,
+      "question": "Auth project",
+      "recommended": "portfolio_spine only"
+    },
+    {
+      "id": 2,
+      "question": "Cross-brand login",
+      "recommended": "per-domain sessions"
+    },
+    {
+      "id": 3,
+      "question": "P0 methods",
+      "recommended": "magic_link + email_password"
+    },
+    {
+      "id": 4,
+      "question": "First ship target",
+      "recommended": "TrustField /register + portal"
+    },
+    {
+      "id": 5,
+      "question": "Enterprise SSO",
+      "recommended": "defer P2"
+    }
+  ]
+}

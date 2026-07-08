@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
   "version": "1.1.0",
-  "saved_at": "2026-07-08T00:58:22Z",
+  "saved_at": "2026-07-08T06:47:10Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -77,6 +77,16 @@
           "path": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
           "status": "ACTIVE",
           "role": "library_version_truth"
+        },
+        {
+          "path": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
+          "status": "ACTIVE",
+          "role": "cross_domain_auth_proposal"
+        },
+        {
+          "path": "data/auth_surface_matrix_v1.json",
+          "status": "ACTIVE",
+          "role": "auth_surface_matrix"
         }
       ],
       "skills_resolve": [
@@ -140,7 +150,8 @@
           "role": "integrator_checklist",
           "repo": "noetfeld-OS"
         }
-      ]
+      ],
+      "skills_resolve": []
     },
     "noetfield_website": {
       "agent_id": "noetfield_website",
@@ -165,7 +176,11 @@
     ".cursor/rules/",
     ".github/copilot-instructions.md",
     "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
-    "data/living_system_110_plans_v1_LOCKED.json"
+    "data/living_system_110_plans_v1_LOCKED.json",
+    "skills/pr-conflict-resolver/",
+    "data/pr_conflict_skill_lock_v1.json",
+    "data/auth_surface_matrix_v1.json",
+    "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md"
   ],
   "scan_roots_read_surface_only": [
     "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md"

@@ -1,0 +1,36 @@
+name: sg-auth-surface-probe-v1
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Auth surface probe
+        run: |
+          python3 scripts/verify_auth_surfaces_e2e_v1.py --json --write-receipt > receipts/auth-surface-probe-latest-summary.json
+        env:
+          NOETFIELD_SUPABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_URL }}
+          NOETFIELD_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.NOETFIELD_SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        continue-on-error: true
+
+      - name: Upload auth surface receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-surface-probe-receipt
+          path: |
+            receipts/auth-surface-probe-*.json
+          if-no-files-found: ignore

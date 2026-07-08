@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
   "version": "1.1.0",
-  "saved_at": "2026-07-07T09:30:00Z",
+  "saved_at": "2026-07-08T06:35:19Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -42,6 +42,34 @@
       ],
       "receipt_path": "receipts/agent-read-staleness-*.json",
       "conflicts_with": []
+    },
+    {
+      "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/sg-auth-surface-probe-v1.yml",
+      "cadence": "0 */6 * * *",
+      "lane": "sg_governance",
+      "loop_id": "sg_auth_surface_probe_v1",
+      "owns": [
+        "auth_surface_probe",
+        "credential_path_audit",
+        "redirect_allow_list_lint"
+      ],
+      "must_not_own": [
+        "brain_promote",
+        "venture_product_code",
+        "external_send",
+        "auth_ui"
+      ],
+      "requires_secrets": [
+        "NOETFIELD_SUPABASE_URL",
+        "NOETFIELD_SUPABASE_SERVICE_ROLE_KEY"
+      ],
+      "receipt_path": "receipts/auth-surface-probe-*.json",
+      "deadman": "sourcea-deadman-v1",
+      "conflicts_with": [],
+      "note": "GUARD \u2014 tiered auth surface probe; SG verifies venture workers implement UI"
     },
     {
       "motor_id": "gh_actions_brain_loop_autorun_v1",
