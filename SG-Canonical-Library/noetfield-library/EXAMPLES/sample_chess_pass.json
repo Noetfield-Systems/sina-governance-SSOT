@@ -1,0 +1,34 @@
+{
+  "move": "Remove buyer sandbox CTA from Partner Access page",
+  "immediate_goal": "Reduce candidate/buyer funnel conflict",
+  "protected_assets": [
+    "Sign in",
+    "Create account",
+    "Partner Access Platform",
+    "View application status",
+    "Request Partner Access",
+    "three candidate tracks",
+    "apply routes"
+  ],
+  "likely_misread": [
+    "Agent may remove all header CTAs because prompt says minimal header",
+    "Agent may treat Platform as buyer nav instead of Partner Access Platform"
+  ],
+  "second_move_risk": [
+    "Candidate loses sign-in/account entry",
+    "Applicant status access disappears"
+  ],
+  "third_move_consequence": [
+    "LinkedIn/outreach traffic reaches page but cannot access the platform",
+    "Founder receives manual questions and loses control leverage"
+  ],
+  "patch_before_execution": "Remove only sandbox/product CTAs. Preserve all Partner Access auth/platform/status CTAs.",
+  "verification_after_execution": [
+    "Live page contains Sign in",
+    "Live page contains Create account or Enter Partner Access Platform",
+    "Live page contains Request Partner Access",
+    "Live page does not contain Start free sandbox",
+    "All apply routes return 200"
+  ],
+  "action": "PROCEED_WITH_PATCH"
+}

@@ -71,6 +71,7 @@ TrustField offers **two partner surfaces** on one domain:
 
 - Entity: `trustfield.md`
 - Overlay draft: `TRUSTFIELD_DICTIONARY_OVERLAY_DRAFT_v1.md`
+- CHESS overlay: `../P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md`
 - Pattern: `operational-language-governance-pattern-v1.md`
 - Wiring audit: `REPO_LANGUAGE_REGISTRY_WIRING_AUDIT_v1.md`
 

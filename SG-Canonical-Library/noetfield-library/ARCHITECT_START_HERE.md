@@ -52,6 +52,14 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 - **Execution:** `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md` (110 plans, W0 locked).
 - **Governance-alive ≠ commercial-alive** — brain can pass homeostasis while metabolism ladder is still on rung 2.
 
+## 2d. CHESS REASONING MACHINE (P0-DOCTRINE — forecast before material moves)
+`P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` = **Forecast → Patch → Proceed → Verify** (reasoning machine, **not** a blocker).  
+**Labels:** `PROCEED` · `PROCEED_WITH_PATCH` · `ASK_IF_IRREVERSIBLE` only — no `BLOCK` label.  
+**Templates:** `P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md` · `AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md` · `RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md`  
+**Skills:** `SKILLS/SKILL_01`…`SKILL_07` · **Playbooks:** `PLAYBOOKS/` · **TrustField overlay:** `P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md`  
+**CLI:** `scripts/chess_pass_cli_v1.py` · **Verify:** `scripts/verify_chess_pattern_reasoning_v2_install_v1.sh`
+
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.
