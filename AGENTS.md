@@ -35,3 +35,4 @@
 1. `skill-foundational-agentic-systems`
 2. `governed-autorun`
 3. `hub-pro-mac-session`
+4. `skills/pr-conflict-resolver` (in-repo) — use for any PR/branch merge conflict; encodes the L1-L5 motor law and registry-JSON merge rules so conflicts aren't resolved by blind text-pick
