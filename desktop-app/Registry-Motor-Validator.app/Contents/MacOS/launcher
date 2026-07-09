@@ -1,0 +1,30 @@
+#!/bin/bash
+# Standalone launcher for Registry Motor Validator.
+# Regenerates the report fresh (runs the real script) every launch, then
+# opens it as its own chromeless app window, not a browser tab.
+
+DIR="$(cd "$(dirname "$0")/../Resources" && pwd)"
+HTML_PATH="/tmp/registry-motor-validator-report.html"
+
+/usr/bin/python3 "$DIR/generate.py" > /dev/null 2>&1 || {
+  osascript -e 'display alert "Report generation failed" message "Check that sina-governance-SSOT is at the expected path and python3 is available." as critical'
+  exit 1
+}
+
+HTML_URL="file://$HTML_PATH"
+
+launch_app_mode() {
+  local app_path="$1"
+  if [ -d "$app_path" ]; then
+    open -na "$app_path" --args --new-window "--app=$HTML_URL" \
+      --window-size=1200,860 --window-position=140,90
+    return 0
+  fi
+  return 1
+}
+
+if launch_app_mode "/Applications/Google Chrome.app"; then exit 0; fi
+if launch_app_mode "/Applications/Microsoft Edge.app"; then exit 0; fi
+if launch_app_mode "/Applications/Brave Browser.app"; then exit 0; fi
+
+open "$HTML_PATH"

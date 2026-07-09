@@ -25,9 +25,9 @@
     <string>@SG_ROOT@</string>
   </dict>
   <key>StartInterval</key>
-  <integer>21600</integer>
+  <integer>1800</integer>
   <key>RunAtLoad</key>
-  <false/>
+  <true/>
   <key>StandardOutPath</key>
   <string>@HOME@/.sina/logs/brain-loop-autorun-v1.out.log</string>
   <key>StandardErrorPath</key>

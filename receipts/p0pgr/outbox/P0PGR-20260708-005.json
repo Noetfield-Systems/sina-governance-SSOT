@@ -1,0 +1,82 @@
+{
+  "id": "P0PGR-20260708-005",
+  "created_at": "2026-07-08T13:25:11Z",
+  "lane": "TrustField",
+  "problem_class": "revenue",
+  "owner_agent": "verifier",
+  "model_tier": "capable",
+  "roi_score": 80,
+  "roi_reason": "Partner funnel is the live commercial acquisition path; verifying parity protects conversions at near-zero risk (test identity, sandbox).",
+  "value_class": "revenue_path",
+  "cost_limit_usd": 5.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "queue_cloud_worker",
+  "target_executor": "custom_script",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "TrustField Partner Access OS funnel (apply -> email verify -> NDA -> briefing room) is the gated acquisition path for strategic contributors; feature parity and no-downgrade after launch credibility pass is unproven.",
+  "task": "Audit TrustField partner funnel readiness end-to-end with a labeled test identity at sandbox tier: 1) /register self-serve flow reachable and completes; 2) partner-access apply -> email verify -> NDA gate -> briefing room sequence: each step reachable, gating intact (gated-by-design = PASS); 3) diff available features against documented parity list (no silent downgrade); 4) record evidence per step; 5) emit one receipt with per-step verdicts. Do NOT sign a real NDA; do NOT create non-labeled accounts.",
+  "allowed_actions": [
+    "sandbox-tier funnel walk with labeled test identity",
+    "read TrustField readiness ledger docs",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof",
+    "no real NDA signature",
+    "no production partner data touched",
+    "no unlabeled test accounts"
+  ],
+  "stop_rule": "Stop after funnel receipt + test-identity cleanup note; fixes are separate packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cross_domain_auth_w11_lock_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T07:07:43Z",
+  "plans_complete": [
+    "LS-111"
+  ],
+  "artifacts": [
+    "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
+    "data/auth_surface_matrix_v1.json",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/CROSS_DOMAIN_AUTH_RATIFY_2026-07-08.md"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "package": "CHESS_PATTERN_REASONING_MACHINE_v2.0_PACKAGE",
+  "created_at": "2026-07-08T09:42:52.330229Z",
+  "type": "non_blocking_reasoning_machine",
+  "core_loop": "Forecast \u2192 Patch \u2192 Proceed \u2192 Verify",
+  "action_labels": [
+    "PROCEED",
+    "PROCEED_WITH_PATCH",
+    "ASK_IF_IRREVERSIBLE"
+  ],
+  "forbidden_action_labels": [
+    "BLOCK"
+  ],
+  "files": [
+    "README.md",
+    "P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+    "P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+    "P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+    "P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+    "P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+    "SKILLS/SKILL_01_CHESS_PASS.md",
+    "SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+    "SKILLS/SKILL_03_PROMPT_PATCHER.md",
+    "SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+    "SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+    "SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+    "SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+    "SCHEMAS/chess_pass.schema.json",
+    "SCHEMAS/protected_feature_ledger.schema.json",
+    "SCHEMAS/chess_receipt.schema.json",
+    "PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+    "PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+    "PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+    "EXAMPLES/trustfield_partner_access_minimal_header_incident.md",
+    "EXAMPLES/sample_chess_pass.json",
+    "EXAMPLES/raw_to_patched_prompt_examples.md",
+    "TOOLS/chess_pass_cli.py",
+    "TOOLS/README.md",
+    "INSTALL/INSTALL_PROMPT_FOR_SG_AGENT.md",
+    "INSTALL/WIRING_CHECKLIST.md"
+  ]
+}

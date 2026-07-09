@@ -1,0 +1,55 @@
+{
+  "skill_name": "pr-conflict-resolver",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Two branches both add the same task_cell key to a motor registry JSON but with different owning motors (duplicate-authority claim) -- produces a real git merge conflict.",
+      "expected_output": "Agent identifies this as an L1 one-writer-per-task-cell violation, does not silently pick a side, preserves all non-conflicting entries, and escalates rather than declaring it merge-ready.",
+      "files": [],
+      "expectations": [
+        "Identifies that the conflict is two different motors/owners claiming the same task_cell key, not just a generic JSON text conflict",
+        "Does NOT silently pick one side's value for the conflicting key and call it resolved",
+        "Explicitly names this as a duplicate-ownership / one-writer-per-task-cell governance problem needing a human/registry decision, not a normal merge",
+        "Preserves all non-conflicting registry entries from both branches with no data loss",
+        "Does not claim the PR is merge-ready without an explicit escalation or flagged open question about which owner is correct"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Two branches each add a receipt file at the exact same path/filename but with different proof content -- a real git merge conflict on a file added by both sides.",
+      "expected_output": "Agent preserves both receipts (proof-of-done claims), never drops one, flags the identical-filename collision as suspicious, and disambiguates rather than picking a winner.",
+      "files": [],
+      "expectations": [
+        "Recognizes both receipts represent real proof-of-done claims that must both be preserved",
+        "Does not delete or silently overwrite one receipt in favor of the other",
+        "Flags the identical-filename collision itself as suspicious (possible duplicate-motor claim) rather than treating it as an ordinary text conflict",
+        "Resolves by disambiguating (e.g. renaming/keeping both under distinct paths) rather than picking a single winner",
+        "Does not declare the conflict fully resolved without noting the collision is worth investigating further"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A merge conflict inside a doc whose header explicitly says Status: LOCKED with a named Authority -- two branches propose different values for a locked policy line.",
+      "expected_output": "Agent notices the LOCKED marker, refuses to unilaterally resolve the locked content, and escalates to a human/founder for sign-off.",
+      "files": [],
+      "expectations": [
+        "Explicitly notices/mentions the LOCKED status marker in the document header",
+        "Declines to unilaterally pick a merged value for the locked content itself",
+        "Recommends escalating to a human/founder for sign-off before any resolution is finalized",
+        "Does not present a self-resolved 'final' merged version of the locked line as done/ready-to-merge"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A merge conflict in a machine-generated sidecar JSON file (produced by a scanner script) where two branches produced different scan output for the same source doc.",
+      "expected_output": "Agent recognizes the file is generated output and recommends regenerating via the source script instead of hand-merging the JSON.",
+      "files": [],
+      "expectations": [
+        "Recognizes the conflicted file is machine-generated output, not hand-authored content",
+        "Recommends regenerating the file by re-running the generator/scanner script rather than hand-merging the JSON",
+        "If it does provide a manual merge as a stopgap, explicitly flags it as temporary and to be replaced by regeneration",
+        "Does not silently hand-craft merged JSON and present it as equivalent to what the generator would produce"
+      ]
+    }
+  ]
+}

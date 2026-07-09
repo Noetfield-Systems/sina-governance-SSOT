@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChessPass",
+  "type": "object",
+  "required": [
+    "move",
+    "immediate_goal",
+    "protected_assets",
+    "likely_misread",
+    "second_move_risk",
+    "third_move_consequence",
+    "patch_before_execution",
+    "verification_after_execution",
+    "action"
+  ],
+  "properties": {
+    "move": {
+      "type": "string"
+    },
+    "immediate_goal": {
+      "type": "string"
+    },
+    "protected_assets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "likely_misread": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "second_move_risk": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "third_move_consequence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "patch_before_execution": {
+      "type": "string"
+    },
+    "verification_after_execution": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "PROCEED",
+        "PROCEED_WITH_PATCH",
+        "ASK_IF_IRREVERSIBLE"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

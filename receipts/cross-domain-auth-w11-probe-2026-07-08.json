@@ -1,0 +1,11 @@
+{
+  "schema": "cross_domain_auth_w11_probe_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T07:05:00Z",
+  "plans_complete": ["LS-112", "LS-113"],
+  "probe_verdict": "WARN",
+  "probe_note": "WARN expected until TrustField Phase 1 ships gated routes",
+  "tier_0": "11/11 PASS",
+  "tests": "10/10 unittest PASS",
+  "governance_validator": "PASS"
+}

@@ -1,0 +1,29 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "2d597a1da6c048ad",
+  "stage": "dictionary_check",
+  "time": "2026-07-07T07:28:51Z",
+  "scan_id": "4cbdf51d578960e6",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "items_with_dictionary_fix_needed": 10,
+    "flagged_terms": [
+      "B Copilot Governance Pilot",
+      "Copilot Governance Pilot",
+      "Gemini TS",
+      "Include Trust Ledger",
+      "Instrument TF",
+      "Keep Witness AI",
+      "Manual LinkedIn",
+      "Noetfield Copilot",
+      "Nov Options",
+      "OEGCC HITL",
+      "PICKs Options",
+      "PLAN WITH NO ASF",
+      "TrustField MSB",
+      "Update LinkedIn"
+    ]
+  }
+}

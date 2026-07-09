@@ -1,0 +1,14 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "5150a5519a094825",
+  "stage": "apply_map",
+  "time": "2026-07-07T07:10:58Z",
+  "scan_id": "0a23142827173ae8",
+  "decision": "PASS",
+  "input_path": "../SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.json",
+  "payload": {
+    "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/5150a5519a094825.apply_map.json",
+    "status": "READY"
+  }
+}

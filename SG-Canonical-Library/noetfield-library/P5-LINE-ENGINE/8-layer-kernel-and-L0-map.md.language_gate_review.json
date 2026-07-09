@@ -1,0 +1,30 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "jargon or AGENT_REVIEW apply would surface latent UNDEFINED_TERM WARN",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "motor",
+      "line": 28,
+      "fix": "Scheduler and executor",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "proposed_agent_actions": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 19,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 31,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ],
+  "latent_undefined_terms": []
+}

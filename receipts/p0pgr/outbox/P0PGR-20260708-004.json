@@ -1,0 +1,80 @@
+{
+  "id": "P0PGR-20260708-004",
+  "created_at": "2026-07-08T13:25:11Z",
+  "lane": "TrustField",
+  "problem_class": "verification",
+  "owner_agent": "verifier",
+  "model_tier": "capable",
+  "roi_score": 84,
+  "roi_reason": "Live public claims back the CAD 4k offer; drift or dead routes directly cost partner conversions. External probe satisfies L4/L12.",
+  "value_class": "revenue_path",
+  "cost_limit_usd": 4.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "cloudflare_worker",
+  "target_executor": "custom_script",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "github_action",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "trustfield.ca is live ('launch credibility pass active' per P10 product layer doc) with published claims: sandbox at /register, CAD 4,000 RPAA Readiness Discovery, partner surfaces. No receipt proves live pages currently match repo claims; deploy stamps unverified; L12 drift undetected.",
+  "task": "Audit live truth for trustfield.ca: 1) fetch /, /register, partner program and partner-access pages from the raw public hostname, redirects OFF, record status + full-body hash per URL; 2) extract live claims (sandbox availability, CAD 4,000 discovery, partner surfaces) and diff against P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md and readiness ledger; 3) check deploy stamps/receipts freshness; 4) classify each diff CONTENT_DRIFT|ROUTE_DEAD|CLAIM_MISMATCH|COSMETIC; 5) emit one receipt. No claim that anything is fixed.",
+  "allowed_actions": [
+    "external HTTP GET on public trustfield.ca URLs (redirects OFF)",
+    "read SG-Canonical-Library P10/P99 TrustField docs",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed",
+    "external fetch only from runner the builder does not control (L4)"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after live-truth receipt; repairs/redeploys are separate founder-visible packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

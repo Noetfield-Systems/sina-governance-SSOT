@@ -79,6 +79,21 @@
         "post_promote_command": "bash scripts/validate-sourcea-contract-pages-e2e-v1.sh",
         "brain_live_smoke_default": false
       }
+    },
+    {
+      "sandbox_id": "pattern_export",
+      "description": "TrustField pattern export dry-run lane (HOLD until TF export batch exists)",
+      "branch": "main",
+      "artifact_type": "knowledge_bundle",
+      "candidate_repo": "Noetfield-Systems/SourceA",
+      "candidate_path": "cloud/workers/sourcea-brain-chat-v1/src/knowledge-bundle.json",
+      "deploy_root": "~/Projects/SourceA",
+      "status": "HOLD",
+      "health_url": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "gate_profile": {
+        "bundle_artifacts_only": true,
+        "brain_live_smoke_default": false
+      }
     }
   ]
 }

@@ -1,4 +1,10 @@
 # SINA SSOT — MASTER CANON v6 (full split)
+
+**Authority:** REMOTE CANONICAL — `ssot/strategy-ssot-v6-split.md` (this file in sina-governance-SSOT repo)  
+**Library read surface:** `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md` (mirror; must match byte-for-byte)  
+**Verifier reference:** `check.py`, `workers/github-app-advisory/index.js` → this path only  
+**Status:** LOCKED / CANONICAL (2026-07-05)
+
 *Supersedes v5. The flat Doctrines I–V are reorganized into the 3-level hierarchy.*
 *Reference; do not re-derive. Reopen only on new facts.*
 

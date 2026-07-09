@@ -1,0 +1,927 @@
+{
+  "schema": "sourcea-dictionary-overlay-index-v1",
+  "generated_at": "2026-07-07T02:43:58.294666-07:00",
+  "authority": {
+    "meaning_authority": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "overlay_scope": "SourceA-local operational terms only \u2014 not a competing dictionary",
+    "sg_dictionary_terms_indexed": 225
+  },
+  "inputs": [
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md",
+    "decision_language_machine_v1/test_fixtures/form_official_80_open_v1.json",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/DLM_DICTIONARY_GAP_TRIAGE_RC2_2026-07-07.json",
+    "SourceA/scripts/hub_form_submit_v1.py",
+    "SourceA/scripts/live_founder_decision_form_v1.py",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_PARTIAL_SUBMIT_RECEIPT_2026-07-07.json",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.json"
+  ],
+  "stats": {
+    "SG_DICTIONARY_TERM": 21,
+    "SOURCEA_LOCAL_TERM": 19,
+    "STATUS_LABEL": 16,
+    "COMMAND_FRAGMENT": 17,
+    "FORM_OPTION": 26,
+    "CONFLICT_PHRASE": 9,
+    "NEEDS_SG_ENTRY": 23
+  },
+  "entries": [
+    {
+      "term": "Approve Phase",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "B Copilot Governance Pilot",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form option prefix fragment"
+    },
+    {
+      "term": "Cloud Workers Proceed",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form action phrase, not system vocabulary"
+    },
+    {
+      "term": "Copilot Governance Pilot",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Pilot SKU \u2014 dictionary row pending founder lock"
+    },
+    {
+      "term": "Gemini TS",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Scaffold stack choice \u2014 defer until lane opens"
+    },
+    {
+      "term": "Include Trust Ledger",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Sentence fragment not a term"
+    },
+    {
+      "term": "Instrument TF",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form question fragment (TrustField)"
+    },
+    {
+      "term": "Keep Witness AI",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Instruction phrase not a term"
+    },
+    {
+      "term": "Manual LinkedIn",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Action step fragment"
+    },
+    {
+      "term": "Nov Options",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form UI label fragment"
+    },
+    {
+      "term": "OEGCC HITL",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Future org/HITL lane \u2014 not in revenue P0"
+    },
+    {
+      "term": "PICKs Options",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form UI label fragment"
+    },
+    {
+      "term": "PLAN WITH NO ASF",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form gather instruction fragment"
+    },
+    {
+      "term": "Record Screen Studio",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Action phrase not a term"
+    },
+    {
+      "term": "Third Form",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Form meta \u2014 machine product is DLM not form edition"
+    },
+    {
+      "term": "Update LinkedIn",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Action step fragment"
+    },
+    {
+      "term": "VIRLUX",
+      "class": "COMMAND_FRAGMENT",
+      "note": "Product line scaffold \u2014 no public SKU yet"
+    },
+    {
+      "term": "authority confusion: gather vs pick",
+      "class": "CONFLICT_PHRASE",
+      "source": "gathering_phase",
+      "note": "Gather rows are not \u00a7ANSWERED until submit"
+    },
+    {
+      "term": "duplicate decision rows",
+      "class": "CONFLICT_PHRASE",
+      "source": "DLM cluster pass",
+      "note": "DLM dedupes overlapping form questions"
+    },
+    {
+      "term": "FOUNDER PICK > AGENT RECOMMENDATION",
+      "class": "CONFLICT_PHRASE",
+      "source": "hub_form_submit_v1.py",
+      "note": "Authority order"
+    },
+    {
+      "term": "FOUNDER_ACTOR_REQUIRED",
+      "class": "CONFLICT_PHRASE",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit guard \u2014 not vocabulary"
+    },
+    {
+      "term": "FOUNDER_PICKS_REQUIRED",
+      "class": "CONFLICT_PHRASE",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit guard \u2014 not vocabulary"
+    },
+    {
+      "term": "INCOMPLETE_FOUNDER_PICKS",
+      "class": "CONFLICT_PHRASE",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit guard \u2014 not vocabulary"
+    },
+    {
+      "term": "machine-submit risk",
+      "class": "CONFLICT_PHRASE",
+      "source": "INCIDENT-037",
+      "note": "agent_live_submit false"
+    },
+    {
+      "term": "partial_batch without INCOMPLETE_FOUNDER_PICKS",
+      "class": "CONFLICT_PHRASE",
+      "source": "partial submit receipt",
+      "note": "Use partial_batch=true"
+    },
+    {
+      "term": "recommended is not a pick",
+      "class": "CONFLICT_PHRASE",
+      "source": "INCIDENT-037",
+      "note": "Recommended column \u2260 founder pick"
+    },
+    {
+      "term": "AFTER",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "After Supabase",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Agent Run",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Closes Gemini",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Cloud SSE",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "CNAME",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Cursor Card",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "EDIT ALLOWED",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Full WORK",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Hub Action",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Lock Brain",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Locks WitnessBC",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "LOI/SOW",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Name Supabase",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "NO TF",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Paid Cloudflare Pages",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Prioritize Cloudflare Pages",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Prioritize Cloudflare Pages DNS",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "README",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Restore Worker",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Retry Railway",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Routes Brain",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Sets Brain",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Sets Worker",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Ship ONE",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Supabase Edge",
+      "class": "FORM_OPTION",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Cloud Workers",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "CREED",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 3,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "CREED SSOT",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "CREED/CHURCH",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Delete INBOX",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Governance Platform",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "INBOX",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 4,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Next INBOX",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Noetfield Copilot",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Pause INBOX",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Prompt OS",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Remove Worker Hub",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Retire Worker Hub",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "RT LIVE",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Screen Studio",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 2,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Trust Center",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Trust Ledger",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Witness AI",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "WitnessBC Proof Lab",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker BUILD",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker Hub",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Worker Mac",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker WORK",
+      "class": "NEEDS_SG_ENTRY",
+      "sg_dictionary_term": null,
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Brain UNIFY",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Chat Unify",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: Chat Unify"
+    },
+    {
+      "term": "Brain Worker",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Brain Worker",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "PLUS ONE",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Plus ONE Hub",
+      "dlm_action": "dictionary+terminology",
+      "count": 1,
+      "note": "Form corpus cites SG term: Plus ONE Hub"
+    },
+    {
+      "term": "Premium Model Firewall",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Premium Model Firewall",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "Proof Lab",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Skip Proof Lab",
+      "dlm_action": "dictionary+terminology",
+      "count": 4,
+      "note": "Form corpus cites SG term: Skip Proof Lab"
+    },
+    {
+      "term": "Proof Layer",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "One Proof Layer",
+      "dlm_action": "dictionary+terminology",
+      "count": 3,
+      "note": "Form corpus cites SG term: One Proof Layer"
+    },
+    {
+      "term": "Queue SSOT",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Queue SSOT",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "Railway FBE",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Gateway Railway",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: Gateway Railway"
+    },
+    {
+      "term": "Restore Hub",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Merge Hub",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: Merge Hub"
+    },
+    {
+      "term": "RUN INBOX",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Worker RUN INBOX",
+      "dlm_action": "dictionary",
+      "count": 2,
+      "note": "Form corpus cites SG term: Worker RUN INBOX"
+    },
+    {
+      "term": "SourceA Forge Governance",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "SourceA Forge",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: SourceA Forge"
+    },
+    {
+      "term": "SourceA Forge Proof Layer",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "One Proof Layer",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: One Proof Layer"
+    },
+    {
+      "term": "SourceA Worker",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "SourceA Worker",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "System Architect",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "System Architect",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "TF/NF",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "TF/NF",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "TrustField",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "TrustField",
+      "source": "FORM_OFFICIAL corpus",
+      "note": "Already in SG dictionary \u2014 form must not redefine"
+    },
+    {
+      "term": "TrustField MSB",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "TrustField",
+      "dlm_action": "dictionary",
+      "count": 1,
+      "note": "Form corpus cites SG term: TrustField"
+    },
+    {
+      "term": "UNIFY",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Chat Unify",
+      "dlm_action": "dictionary",
+      "count": 2,
+      "note": "Form corpus cites SG term: Chat Unify"
+    },
+    {
+      "term": "Worker INBOX",
+      "class": "SG_DICTIONARY_TERM",
+      "sg_dictionary_term": "Worker RUN INBOX",
+      "dlm_action": "dictionary",
+      "count": 3,
+      "note": "Form corpus cites SG term: Worker RUN INBOX"
+    },
+    {
+      "term": "apply_map",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "DLM validated-picks output \u2014 never auto from open form alone.",
+      "source": "decision_language_machine_v1/dlm_apply_map_v1.py",
+      "surfaces": [
+        "dlm",
+        "submit"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "ASF",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Answer Submission Format \u2014 founder reply template on form rows (e.g. ASF: FIVE-STEP \u2014 PICK: 11.05 SHIP). Not autonomous submit.",
+      "source": "FORM_OFFICIAL exports",
+      "surfaces": [
+        "form",
+        "submit"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "canvas_form_apply",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Applies confirmed canvas picks to \u00a7ANSWERED and machine dispatch.",
+      "source": "canvas_form_apply_picks_v1.py",
+      "surfaces": [
+        "hub",
+        "worker"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "CF URL",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Implementation slug for Cloudflare URL field in form options \u2014 code_alias only.",
+      "source": "DLM triage",
+      "surfaces": [
+        "form"
+      ],
+      "code_alias": true
+    },
+    {
+      "term": "disk_fast_apply",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Zero-latency apply: canvas picks \u2192 \u00a7ANSWERED without full hub rebuild; background wire follows.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "hub",
+        "worker"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "DRIFT_FLOOR",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Form edition drift tolerance (90) for open-question extraction.",
+      "source": "live_founder_decision_form_v1.py",
+      "surfaces": [
+        "form"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "form-official-question-schema-v1",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "JSON schema for FORM_OFFICIAL option_slots rows.",
+      "source": "form_official_80_open_v1.json",
+      "surfaces": [
+        "form"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "FORM_OFFICIAL",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "SourceA live founder decision form \u2014 third_form edition; high-signal corpus for open picks, blocks, and submit law. Machine product is DLM; form is evidence surface.",
+      "source": "SourceA/scripts/live_founder_decision_form_v1.py",
+      "surfaces": [
+        "hub",
+        "form",
+        "submit"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "form_official_line",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Status string from live form mirror: FORM_OFFICIAL \u00b7 N open.",
+      "source": "live_founder_decision_form_v1.py",
+      "surfaces": [
+        "hub",
+        "brain"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "FOUNDER PICK supremacy",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "FOUNDER PICK > AGENT RECOMMENDATION > DISK GATHER ROW.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "form",
+        "hub",
+        "brain"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "gathering_phase",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Form gather tier before founder lock \u2014 disk rows proposed, not picks until submit.",
+      "source": "live_founder_decision_form_v1.py",
+      "surfaces": [
+        "form"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "Hub Submit",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Founder explicit picks path via hub_form_submit_v1 \u2014 writes canvas state, applies \u00a7ANSWERED; INCIDENT-037 gated.",
+      "source": "SourceA/scripts/hub_form_submit_v1.py",
+      "surfaces": [
+        "hub",
+        "submit"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "hub-form-submit-receipt",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Receipt schema ~/.sina/hub-form-submit-receipt-v1.json after fast apply.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "receipt"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "INCIDENT-037",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Founder submit only \u2014 agents draft/dry-run; founder/asf/human writes \u00a7ANSWERED.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "submit",
+        "hub",
+        "worker"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "Machine Hub",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Machine hub cache \u2014 co-invalidated on submit.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "hub"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "nerve_map",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "form_official_nerve_map_v1.json \u2014 wires row IDs to machines, blocks, plans.",
+      "source": "SourceA/data/form_official_nerve_map_v1.json",
+      "surfaces": [
+        "form",
+        "apply-map"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "partial_batch",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Submit only founder-picked rows when form incomplete; requires partial_batch=true or INCOMPLETE_FOUNDER_PICKS blocks.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "submit",
+        "apply-map"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "Worker Hub",
+      "class": "SOURCEA_LOCAL_TERM",
+      "sg_dictionary_term": null,
+      "meaning": "Worker hub cache \u2014 invalidated on founder submit.",
+      "source": "hub_form_submit_v1.py",
+      "surfaces": [
+        "worker",
+        "hub"
+      ],
+      "code_alias": false
+    },
+    {
+      "term": "ALLOW",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "applied_now",
+      "class": "STATUS_LABEL",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit state field"
+    },
+    {
+      "term": "BLOCK",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "CANCEL",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "confirmed",
+      "class": "STATUS_LABEL",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit state field"
+    },
+    {
+      "term": "FOUND/NOT FOUND",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "FREEZE",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "LOCKED",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "missing_ids",
+      "class": "STATUS_LABEL",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit state field"
+    },
+    {
+      "term": "open_remaining",
+      "class": "STATUS_LABEL",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit state field"
+    },
+    {
+      "term": "PAUSE",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "recommended",
+      "class": "STATUS_LABEL",
+      "source": "hub_form_submit_v1.py",
+      "note": "Submit state field"
+    },
+    {
+      "term": "SHIPPED",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "SPLIT",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "TAMPER",
+      "class": "STATUS_LABEL",
+      "note": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    }
+  ],
+  "cleanup_rules": [
+    "Never mint COMMAND_FRAGMENT or FORM_OPTION into SG Dictionary.",
+    "SG_DICTIONARY_TERM: cite SG meaning only \u2014 no SourceA overlay definition.",
+    "NEEDS_SG_ENTRY: queue for SG pile approval with named source file \u2014 do not define here.",
+    "SOURCEA_LOCAL_TERM: operational glue unique to SourceA form/hub/submit path.",
+    "CONFLICT_PHRASE: fix guards or copy \u2014 audit artifact only."
+  ]
+}

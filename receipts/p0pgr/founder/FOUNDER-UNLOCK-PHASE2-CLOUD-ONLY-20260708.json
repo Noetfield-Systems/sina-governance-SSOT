@@ -1,0 +1,21 @@
+{
+  "schema": "p0pgr-founder-authorization-v1",
+  "id": "FOUNDER-UNLOCK-PHASE2-CLOUD-ONLY-20260708",
+  "recorded_at": "2026-07-08T14:05:00Z",
+  "recorded_by": "session agent, transcribing founder directive received in chat 2026-07-08",
+  "founder": "Sina Kazemnezhad",
+  "unlocks": "PHASE_2_CLOUD_ONLY_ROI_TRACK — execution of top-ranked queue candidate",
+  "directive_verbatim_excerpt": "Correction: Phase 2 priority is ROI-smart CLOUD ONLY. [...] Start with M10 if it is zero/low-cost and cloud-only. M10 must produce a ranked execution queue for cloud-only ROI moves and choose the first real execution candidate. Then execute only the top candidate if: CLOUD_ONLY / read-only or reversible / ROI-positive / no deploy / no external send / no legal/financial commitment / no P0 leakage / no unauthorized authority change.",
+  "scope_limits": [
+    "cloud-only; no Mac routing, no Mac runner build, no HYBRID_MAC fallback",
+    "one candidate at a time, gates checked per execution",
+    "no scheduled automation",
+    "deploy/merge/L5/authority changes remain FOUNDER_ONLY",
+    "cloud-unsafe items labeled HOLD_CLOUD_UNSAFE, no action"
+  ],
+  "executions_under_this_authorization": [
+    {"move_id": "M10", "receipt": "receipts/p0pgr/phase2_queue_v1.json", "note": "ranker run"},
+    {"move_id": "M03", "receipt": "receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json", "note": "executed before this receipt was recorded — provenance gap acknowledged in that receipt's audit; receipt recorded retroactively same day"}
+  ],
+  "note": "Recorded after the M03 audit flagged chat-only authorization as an evidence gap. From this receipt forward, real executions must cite founder_authorization_ref per P0_EXECUTION_RECEIPT_SCHEMA_v1.json."
+}

@@ -1,0 +1,82 @@
+{
+  "id": "P0PGR-20260708-008",
+  "created_at": "2026-07-08T13:25:12Z",
+  "lane": "SG",
+  "problem_class": "architecture",
+  "owner_agent": "architect",
+  "model_tier": "capable",
+  "roi_score": 88,
+  "roi_reason": "Highest workload-reduction move on the board: converts recurring problems into lint-clean reusable templates, the direct input to Phase 2 autonomy.",
+  "value_class": "proof_asset",
+  "cost_limit_usd": 5.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Phase 2 needs a supply of CLOUD_ONLY-safe packet templates; currently packets are authored ad hoc. No inventory exists of which recurring problems are cloud-executable end-to-end.",
+  "task": "Cloud-executable packet discovery: 1) sweep receipts/ and registry for recurring problem classes (staleness, census, wiring, live-truth, cost attribution); 2) for each class with >=2 historical receipts, draft a v1.1 packet TEMPLATE (CLOUD_ONLY, observe scope) with parameter slots; 3) lint every template with scripts/p0pgr_packet_lint_v1.py; 4) sweep templates for P0 fingerprints; 5) emit one receipt listing templates + lint results, templates saved under receipts/p0pgr/templates/.",
+  "allowed_actions": [
+    "read receipts/, data/, docs/, scripts/",
+    "write templates to receipts/p0pgr/templates/",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after template inventory receipt; enabling templates for auto-dispatch is a Phase 2 founder decision.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "template_inventory",
+      "lint_results"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/p0pgr/P0PGR-CYCLE-20260708T131523Z.json",
+    "data/github_automation_registry_v1.json"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

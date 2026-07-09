@@ -1,0 +1,561 @@
+{
+  "schema": "dlm_dictionary_gap_triage_rc2_v1",
+  "source": "decision_language_machine_v1 test corpus (80-row form export \u2014 evidence only)",
+  "items_with_dictionary_fix_needed": 51,
+  "unique_flagged_terms": 91,
+  "summary": {
+    "dictionary+terminology": 12,
+    "dictionary": 25,
+    "allowlist": 37,
+    "defer": 16,
+    "code_alias": 1
+  },
+  "triage": [
+    {
+      "term": "INBOX",
+      "count": 4,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Proof Lab",
+      "count": 4,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "CREED",
+      "count": 3,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Proof Layer",
+      "count": 3,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Worker INBOX",
+      "count": 3,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "BLOCK",
+      "count": 2,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "RUN INBOX",
+      "count": 2,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Screen Studio",
+      "count": 2,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "UNIFY",
+      "count": 2,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "VIRLUX",
+      "count": 2,
+      "action": "defer",
+      "reason": "Product line scaffold \u2014 no public SKU yet"
+    },
+    {
+      "term": "AFTER",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "After Supabase",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Agent Run",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "ALLOW",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Approve Phase",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "B Copilot Governance Pilot",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form option prefix fragment"
+    },
+    {
+      "term": "Brain UNIFY",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "CANCEL",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "CF URL",
+      "count": 1,
+      "action": "code_alias",
+      "reason": "Implementation slug or lane token \u2014 allow in gate, not public terminology"
+    },
+    {
+      "term": "Closes Gemini",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Cloud SSE",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Cloud Workers",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Cloud Workers Proceed",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form action phrase, not system vocabulary"
+    },
+    {
+      "term": "CNAME",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Copilot Governance Pilot",
+      "count": 1,
+      "action": "defer",
+      "reason": "Pilot SKU \u2014 dictionary row pending founder lock"
+    },
+    {
+      "term": "CREED SSOT",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "CREED/CHURCH",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Cursor Card",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Delete INBOX",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "EDIT ALLOWED",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "FOUND/NOT FOUND",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "FREEZE",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Full WORK",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Gemini TS",
+      "count": 1,
+      "action": "defer",
+      "reason": "Scaffold stack choice \u2014 defer until lane opens"
+    },
+    {
+      "term": "Governance Platform",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Hub Action",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Include Trust Ledger",
+      "count": 1,
+      "action": "defer",
+      "reason": "Sentence fragment not a term"
+    },
+    {
+      "term": "Instrument TF",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form question fragment (TrustField)"
+    },
+    {
+      "term": "Keep Witness AI",
+      "count": 1,
+      "action": "defer",
+      "reason": "Instruction phrase not a term"
+    },
+    {
+      "term": "Lock Brain",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "LOCKED",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Locks WitnessBC",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "LOI/SOW",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Manual LinkedIn",
+      "count": 1,
+      "action": "defer",
+      "reason": "Action step fragment"
+    },
+    {
+      "term": "Name Supabase",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Next INBOX",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "NO TF",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Noetfield Copilot",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Nov Options",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form UI label fragment"
+    },
+    {
+      "term": "OEGCC HITL",
+      "count": 1,
+      "action": "defer",
+      "reason": "Future org/HITL lane \u2014 not in revenue P0"
+    },
+    {
+      "term": "Paid Cloudflare Pages",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "PAUSE",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Pause INBOX",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "PICKs Options",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form UI label fragment"
+    },
+    {
+      "term": "PLAN WITH NO ASF",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form gather instruction fragment"
+    },
+    {
+      "term": "PLUS ONE",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Plus ONE",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Prioritize Cloudflare Pages",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Prioritize Cloudflare Pages DNS",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Prompt OS",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Railway FBE",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "README",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Record Screen Studio",
+      "count": 1,
+      "action": "defer",
+      "reason": "Action phrase not a term"
+    },
+    {
+      "term": "Remove Worker Hub",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Restore Hub",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Restore Worker",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Retire Worker Hub",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Retry Railway",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Routes Brain",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "RT LIVE",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Run INBOX",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Sets Brain",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Sets Worker",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Ship ONE",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "SHIPPED",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "SourceA Forge Governance",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "SourceA Forge Proof Layer",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "SPLIT",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Supabase Edge",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "TAMPER",
+      "count": 1,
+      "action": "allowlist",
+      "reason": "Form option, action fragment, vendor token, or status word \u2014 not mintable vocabulary"
+    },
+    {
+      "term": "Third Form",
+      "count": 1,
+      "action": "defer",
+      "reason": "Form meta \u2014 machine product is DLM not form edition"
+    },
+    {
+      "term": "Trust Center",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Trust Ledger",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "TrustField MSB",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Update LinkedIn",
+      "count": 1,
+      "action": "defer",
+      "reason": "Action step fragment"
+    },
+    {
+      "term": "Witness AI",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "WitnessBC Proof Lab",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker BUILD",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker Hub",
+      "count": 1,
+      "action": "dictionary+terminology",
+      "reason": "System/lane vocabulary \u2014 mint dictionary then terminology row"
+    },
+    {
+      "term": "Worker Mac",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    },
+    {
+      "term": "Worker WORK",
+      "count": 1,
+      "action": "dictionary",
+      "reason": "System/lane vocabulary \u2014 dictionary entry required before mint"
+    }
+  ]
+}

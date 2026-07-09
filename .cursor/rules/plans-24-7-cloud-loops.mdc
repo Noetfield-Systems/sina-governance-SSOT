@@ -1,0 +1,46 @@
+---
+description: All plans must target 24/7 cloud loops, dead-man liveness, and closed-loop repair — not Mac-only automation theater
+alwaysApply: true
+---
+
+# Plans — 24/7 Live System Direction
+
+When drafting or implementing **any plan** (Cursor plans, upgrade steps, architecture, autorun):
+
+## Required direction
+
+1. **Cloud-first triggers** — default schedule host: Cloudflare cron, Railway, or GitHub Actions. Mac launchd / Cursor sessions are **complement only**, never the sole motor.
+2. **Closed loop** — every plan must close: `Observe → Detect → Critique → Repair → Re-deploy → Observe`.
+3. **Loop liveness** — every 24/7 motor upserts `last_fired_at` to `loop_registry` / `noos_loop_registry`. Independent deadman (different CF path) checks `2× interval` staleness → alert + one restart attempt + receipt.
+4. **Useful loops** — prefer loops that move revenue, capture, verify, or heal production. No new docs-only or governance-only plans unless explicitly requested.
+5. **Evolution = propose + ratify** — machine may propose (Kaizen queue, ROI-ranked); founder ratifies architecture. **No unsupervised self-redesign** (L5 immutable floor).
+6. **48h test** — liveness gate for autorun plans: laptop closed 48h; cloud heartbeats must still fire.
+
+## Plan must include (when autorun/ops scope)
+
+| Section | Content |
+|---------|---------|
+| Trigger host | `cloud` \| `mac-complement` \| `founder-manual` |
+| Registry row | `loop_id` + cadence + `last_fired_at` target table |
+| Deadman | which worker watches this loop |
+| Receipt | where PASS/FAIL is filed (P99 or `receipts/`) |
+
+## Forbidden in plans
+
+- "Add Evolution Agent that redesigns architecture unsupervised"
+- Mac-only scheduler with no cloud mirror
+- New loops with no external verify or stale detection
+- More execution volume without repair/liveness wiring
+
+## References
+
+- `data/github_automation_registry_v1.json`
+- `data/automation_surface_inventory_v1.json`
+- `data/workflow_census_value_class_rules_v1.json`
+- `scripts/workflow_census_v1.py` — weekly judging layer (REVENUE/GUARD/META/NONE)
+- `SourceA/cloud/workers/sourcea-deadman-v1/`
+- `noetfeld-OS/cloud/workers/noos-deadman-v1/`
+
+## GitHub Actions
+
+Account has **GitHub Pro**. Prefer **public repos** for unlimited standard GHA minutes on public workflows; keep secrets in repo/org secrets, never in files.

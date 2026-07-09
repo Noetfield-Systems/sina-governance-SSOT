@@ -1,0 +1,37 @@
+{
+  "schema": "receipt_sourcea_dictionary_overlay_v1",
+  "at": "2026-07-07T02:44:33.856418-07:00",
+  "verdict": "PASS",
+  "checkpoint_ref": "LANGUAGE_LAYER_RC3_CHECKPOINT",
+  "purpose": "SourceA-local terminology overlay without competing SG dictionary",
+  "files": {
+    "overlay_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/SOURCEA_DICTIONARY_OVERLAY_v1.md",
+    "audit_md": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_TERMINOLOGY_AUDIT_v1.md",
+    "index_json": "language_gate/sourcea_dictionary_overlay_index_v1.json"
+  },
+  "sha256": {
+    "overlay_md": "f241fd72ca3e09655df04940ce5002c9b69d6f977897b13ef90e20c0120d1931",
+    "audit_md": "455d8a4fdb2709597725a71610d81c47cfce31b79706c088c3bad4297c730401",
+    "index_json": "4b4e5c7a6f1d4c764a4b27c63272fdc62d7fca4250393a05c17e6c50e9f7c8ec"
+  },
+  "stats": {
+    "SG_DICTIONARY_TERM": 21,
+    "SOURCEA_LOCAL_TERM": 19,
+    "STATUS_LABEL": 16,
+    "COMMAND_FRAGMENT": 17,
+    "FORM_OPTION": 26,
+    "CONFLICT_PHRASE": 9,
+    "NEEDS_SG_ENTRY": 23
+  },
+  "entries_total": 127,
+  "sg_dictionary_terms_indexed": 225,
+  "high_risk_findings": 8,
+  "needs_sg_entry_count": 23,
+  "sourcea_local_defined": 19,
+  "scope_excluded": [
+    "SourceA product repo edits",
+    "FORM_OFFICIAL live reopen",
+    "new SG dictionary writes"
+  ],
+  "rebuild": "python3 language_gate/build_sourcea_overlay_index_v1.py (future) or regenerate from DLM triage + scripts"
+}

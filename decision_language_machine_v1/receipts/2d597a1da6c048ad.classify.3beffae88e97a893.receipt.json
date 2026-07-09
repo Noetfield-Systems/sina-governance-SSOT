@@ -1,0 +1,16 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "2d597a1da6c048ad",
+  "stage": "classify",
+  "time": "2026-07-07T07:28:51Z",
+  "scan_id": "3beffae88e97a893",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "DEFER": 11,
+    "ADVISOR_REVIEW": 45,
+    "MACHINE_VALIDATABLE": 22,
+    "FOUNDER_FACT": 2
+  }
+}

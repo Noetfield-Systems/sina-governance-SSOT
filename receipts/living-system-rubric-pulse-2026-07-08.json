@@ -1,0 +1,24 @@
+{
+  "schema": "living_system_rubric_pulse_receipt_v1",
+  "status": "PASS",
+  "saved_at": "2026-07-08T01:47:51Z",
+  "trigger_host": "cloud",
+  "plan": "LS-022",
+  "check": {
+    "id": "pulse_scheduled",
+    "doctrine_ref": "\u00a78 item 1 \u00b7 governed-autorun manual green \u2260 cron green",
+    "status": "PASS",
+    "detail": "11 scheduled pulse receipt(s) in 168h window",
+    "evidence": [
+      "receipts/workflow-census-20260706T090917Z.json",
+      "receipts/workflow-census-20260706T093358Z.json",
+      "receipts/agent-read-staleness-20260707T234315Z.json",
+      "receipts/agent-read-staleness-20260707T234322Z.json",
+      "receipts/agent-read-staleness-20260707T234335Z.json",
+      "receipts/agent-read-staleness-20260707T234347Z.json",
+      "receipts/agent-read-staleness-20260707T234503Z.json",
+      "receipts/agent-read-staleness-20260707T234651Z.json"
+    ]
+  },
+  "verdict": "STALE"
+}

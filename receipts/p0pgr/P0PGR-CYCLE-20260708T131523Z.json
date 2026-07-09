@@ -1,0 +1,76 @@
+{
+  "classification": {
+    "evidence_refs": [
+      "receipts/workflow-census-20260706T093358Z.json",
+      "data/github_automation_registry_v1.json",
+      "data/workflow_census_extensions_v1.json"
+    ],
+    "problem_class": "verification",
+    "reason": "lint PASS; shadow route -> github_action / claude_code_cli (no execution in Phase-0)"
+  },
+  "cost": {
+    "model": "none",
+    "provider": "none",
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "total_usd": 0.0
+  },
+  "cycle_id": "P0PGR-CYCLE-20260708T131523Z",
+  "decision": {
+    "reason": "lint PASS; shadow route -> github_action / claude_code_cli (no execution in Phase-0)",
+    "verdict": "DISPATCH_CLOUD"
+  },
+  "dispatch": {
+    "delivery_route": "github_action",
+    "dispatched_at": "2026-07-08T13:15:23Z",
+    "execution_mode": "CLOUD_ONLY",
+    "fallback_used": false,
+    "founder_approved": false,
+    "mode": "shadow",
+    "target": "verifier",
+    "target_executor": "claude_code_cli"
+  },
+  "evidence": {
+    "bundle_hash": "2f48e2f35d6a2a71c1ae50856842bfa203ba234f99c5e3e4463540511128100e",
+    "row_ids": [
+      "P0PGR-20260708-002"
+    ],
+    "sources_read": [
+      "EXAMPLE_PACKET_P0PGR-20260708-001.json",
+      "P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+      "P0_DISPATCH_ROUTER_RULES_v1.md",
+      "P0_PROMPT_COMPILER_MVP_PLAN_v1.md",
+      "P0_PROMPT_GOVERNANCE_RUNTIME_v1.md",
+      "P0_PROMPT_LOOP_STATE_SCHEMA_v1.json",
+      "P0_PROMPT_PACKET_SCHEMA_v1.json",
+      "data/github_automation_registry_v1.json",
+      "data/agent_read_surfaces_v1.json",
+      "receipts/"
+    ],
+    "stale_sources": []
+  },
+  "finished_at": "2026-07-08T13:15:23Z",
+  "founder_blocked_snapshot": {
+    "count": 0,
+    "oldest_age_days": 0
+  },
+  "packet_id": "P0PGR-20260708-002",
+  "receipt_result": {
+    "low_quality_labels": {
+      "confidence": "high",
+      "next_improvement": "founder review of shadow packet",
+      "reversibility": "fully reversible (files only)",
+      "scope": "shadow compile+route only, zero execution"
+    },
+    "quality_state": "PASS",
+    "verdict": "PENDING"
+  },
+  "roi": {
+    "model_tier": "cheap",
+    "reduces_founder_workload": true,
+    "score": 76,
+    "value_class": "risk_reduction"
+  },
+  "started_at": "2026-07-08T13:15:23Z",
+  "state": "COMPLETE"
+}

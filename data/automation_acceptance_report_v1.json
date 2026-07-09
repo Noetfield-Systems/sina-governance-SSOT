@@ -1,0 +1,27 @@
+{
+  "schema": "automation_acceptance_report_v1",
+  "recorded_at": "20260703T114600Z",
+  "checks": {
+    "brain_loop_health_check_v1": "ALL PASS",
+    "validate_parallel_automation_governance_v1": "ALL PASS",
+    "validate_copilot_pr_template_v1": "ALL PASS",
+    "audit_automation_surface_v1": "ALL PASS",
+    "audit_automation_drift_v1": "PARTIAL",
+    "diagnose_gate_candidate_alignment_v1": "BLOCKED_WITH_REASON",
+    "cf_auto_runtime_health": "ok:true",
+    "pr3_merged": "b294e63",
+    "sg_b2_signed": "SG_SIGNED",
+    "sf_iteration2_verifier": "6/6 PASS",
+    "tf_phase2_traps": "5/5 PASS",
+    "noos_observe_env_wired": "committed cursor/cheap-worker-kernel-v1",
+    "roi_heartbeat": "roi-heartbeat-20260703T114512Z"
+  },
+  "true_blockers": [
+    "Verifier worker redeploy required for SSOT org-repo fix (committed 40fe2a0, deploy pending)",
+    "GH brain-loop on main awaits next */30 schedule after 40fe2a0 push"
+  ],
+  "not_blockers": [
+    "Promote BLOCKED until fresh verifier PASS receipt after worker redeploy",
+    "NOOS observe fix on feature branch until merged to main"
+  ]
+}

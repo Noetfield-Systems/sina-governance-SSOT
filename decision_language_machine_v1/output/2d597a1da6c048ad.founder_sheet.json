@@ -1,0 +1,267 @@
+{
+  "schema": "decision_language_machine_founder_sheet_v1",
+  "summary": {
+    "total_items": 80,
+    "advisor_clusters": 10,
+    "advisor_items": 45,
+    "founder_fact_items": 2,
+    "machine_validatable": 22,
+    "deferred": 11
+  },
+  "advisor_clusters": [
+    {
+      "cluster_id": "CLUSTER-REVENUE",
+      "name": "Revenue and daily priority",
+      "plain_english": "W3 wedge \u2014 which offer leads. For all Week-3 money motion: is Noetfield NF-001 the primary offer and TrustField TF-001 the backup? Effect: YES = ENG-05 \u00b7 NF-001 primary \u00b7 TF backup \u00b7 Copilot-native W3 (+ 20 related items)",
+      "controls": "A = 5 targets \u00b7 AGENTIC_W3 spec \u00b7 wf-w3-outreach-batch cap; Agent stop treating INBOX/outbound as P0 over Brain reasoning; Chat routing law for daily ops",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "ENF-03",
+        "ENF-08",
+        "ENF-11",
+        "Q-SESSION-FORM-BUILD",
+        "Q-CHAT-NEXT-P0-01",
+        "Q-FINAL-01",
+        "Q-BC-04",
+        "Q-BC-05",
+        "Q-SESSION-CLOUD-CF06"
+      ],
+      "options": [
+        "A \u2014 YES",
+        "B \u2014 NO TF primary",
+        "C \u2014 DEFER",
+        "D \u2014 SPLIT"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-DEMO-FILM",
+      "name": "Demo film and outreach timing",
+      "plain_english": "W1 demo film \u2014 when to shoot. Should we film the Week-1 enforcement demo this week (runbook is ready), or wait for a Hub one-tap button? North star reminder: agentic 24/7 engines that earn money \u2014 not (+ 11 related items)",
+      "controls": "A = S8 parallel \u00b7 not a film blocker \u00b7 DEFER = no priority locked; A = Worker films take 1 this week \u00b7 research AI video path \u00b7 B = slips investor ; APPROVE = Week 1 gate per weekly plan",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "ENF-01",
+        "ENF-02",
+        "ENF-05",
+        "ENF-06",
+        "ENF-07",
+        "ENF-14",
+        "ENF-19",
+        "Q-MF-08",
+        "Q-WBC-WITNESS-AI-NAME"
+      ],
+      "options": [
+        "A \u2014 A film week2",
+        "B \u2014 B wait hub",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-CLOUD-EXEC",
+      "name": "Where code runs (cloud vs Mac)",
+      "plain_english": "U031 RRL bay \u2014 implement on FBE cloud runner or Worker WORK. Queue head U031 needs outbound-rrl-intelligence bay. cloud factory builder has cloud runner + bay registry on disk. Build bay on cloud fact (+ 8 related items)",
+      "controls": "Brain 1000 plan progress honesty; Defines when outbound plan row may be status=done; Gates cloud execution URL vs free-tier law",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-FINAL-02",
+        "Q-FINAL-06",
+        "Q-MF-01",
+        "Q-CONF-MCP-PHASE2",
+        "Q-BC-01",
+        "Q-BC-02",
+        "Q-BC-06",
+        "Q-BC-09"
+      ],
+      "options": [
+        "A \u2014 Build outbound-rrl-intelligence FBE cloud bay first (recommended)",
+        "B \u2014 Worker bounded WORK on Mac now",
+        "C \u2014 sign_only until B0503 cloud consumer ships",
+        "D \u2014 Defer U031 until FORM unify pass done"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-FORM-META",
+      "name": "Form process and gather",
+      "plain_english": "Post-gather \u2014 Brain unify routing plan authority. brain-form-gather-unify-routing-plan-v1.json routes waves to founder/brain/worker/maintainer/cloud factory builder. Lock as Brain planner single sourc (+ 5 related items)",
+      "controls": "Closes gather\u2192fill\u2192unify pipeline; Closes gather\u2192plan\u2192route pipeline without chat loss; Locks governed agentic automation \u2014 SourceA reference standard for disk policy d",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-SESSION-ARCH-UNIFY-PLAN",
+        "Q-SESSION-GATHER-NO-LOST",
+        "Q-SESSION-UNIFY-GO",
+        "Q-FINAL-05",
+        "Q-CONF-PLUSONE-MOTOR"
+      ],
+      "options": [
+        "A \u2014 YES \u2014 Brain planner SSOT \u00b7 Worker executes picks only (recommended)",
+        "B \u2014 Worker self-routes \u2014 no Brain plan",
+        "C \u2014 Chat routing only",
+        "D \u2014 Defer until form empty"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-NPM-MARKET",
+      "name": "Marketplace and npm",
+      "plain_english": "MCP proof \u2014 local PASS vs cloud SSE ship. validate-all-e2e 6/6 PASS on local :8787/:8790. Cloud SSE not live. Ship cloud proof layer now or stay local until form P0 picks done? Effect: Cloud vs local  (+ 5 related items)",
+      "controls": "Cloud vs local proof layer sequencing; Commercial publish sequencing vs governance picks; Enterprise buyer messaging",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-CHAT-PUBLISH-01",
+        "Q-MF-02",
+        "Q-MF-03",
+        "Q-MF-04"
+      ],
+      "options": [
+        "A \u2014 npm login + publish Card1 now",
+        "B \u2014 After Q-CHAT-NEXT-P0-01 form block + language pick (recommended)",
+        "C \u2014 Cloud SSE first \u00b7 then npm",
+        "D \u2014 Defer marketplace until MergePack L1 ship"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-CLAIMS",
+      "name": "Public claims safety",
+      "plain_english": "Factory score headline. Can we use factory 616/1000 score as the main investor headline? Effect: YES_background = background metric only \u00b7 never hero headline Options: NO \u00b7 YES background \u00b7 DEFER \u00b7 \u2014 (+ 3 related items)",
+      "controls": "YES = COPY_SAFETY binds outbound \u00b7 narrative_only = investor deck only; YES_background = background metric only \u00b7 never hero headline; narrative_only = investor story only \u00b7 never in LOI/SOW/email without receipt",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "ENF-09",
+        "ENF-10"
+      ],
+      "options": [
+        "A \u2014 NO",
+        "B \u2014 YES background",
+        "C \u2014 DEFER",
+        "D \u2014 \u2014"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-LOOP-AUTO",
+      "name": "Loop auto and false-done",
+      "plain_english": "Loop auto ON (True) + unmapped bay dispatch \u2014 safe. loop_auto_dispatch_enabled=True \u00b7 U031 bay unmapped \u00b7 false-done guard wired. Keep loop auto, require mapped bay only, or pause auto until bays exis (+ 3 related items)",
+      "controls": "Closes loop auto vs unmapped bay paradox from chat; Prevents false done marks like U031/U032 incident; Sets buyer + agent vocabulary for all lanes",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-SESSION-ARCH-REFSTD"
+      ],
+      "options": [
+        "A \u2014 YES \u2014 reference standard for governed agentic automation (recommended)",
+        "B \u2014 Video factory product only",
+        "C \u2014 MCP marketplace plugin only",
+        "D \u2014 Internal tooling \u2014 no public standard claim"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-WITNESSBC",
+      "name": "WitnessBC and proof lab",
+      "plain_english": "Proof Lab public demo \u2014 free tunnel. publish_witnessbc_landing_v1.py can expose Proof Lab via free trycloudflare tunnel (no paid Cloudflare). Run tunnel for buyers? Effect: Sets buyer demo URL posture (+ 3 related items)",
+      "controls": "Locks WitnessBC session evidence for fleet; Sets buyer demo URL posture without paid infra; Sets honest film tier vs interactive-only posture",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-SESSION-TUNNEL-DEMO",
+        "Q-SESSION-WBC-SUMMARY",
+        "Q-WBC-PROOF-LAB-OK"
+      ],
+      "options": [
+        "A \u2014 YES \u2014 run --backend tunnel now",
+        "B \u2014 Local only until you say tunnel (recommended)",
+        "C \u2014 Paid Cloudflare Pages \u2014 not yet",
+        "D \u2014 No public URL"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-LANGUAGE",
+      "name": "Reply language and voice",
+      "plain_english": "First paid SKU name. What is the first paid offer name we use in the room? (Include Trust Ledger in collateral.) Effect: B = Copilot Governance Pilot \u00b7 NF-001 \u00b7 Trust Ledger language \u00b7 three-layer v2  (+ 2 related items)",
+      "controls": "B = Copilot Governance Pilot \u00b7 NF-001 \u00b7 Trust Ledger language \u00b7 three-layer v2 a; Sets Brain/Worker founder-facing language default until changed on form; Stops agent improvising voice without campus SSOT",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "ENF-17",
+        "Q-CHAT-LANG-01",
+        "Q-CHAT-PLUSONE-01"
+      ],
+      "options": [
+        "A \u2014 A AI Trust Brief",
+        "B \u2014 B Copilot Governance Pilot",
+        "C \u2014 C custom",
+        "D \u2014 DEFER"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    },
+    {
+      "cluster_id": "CLUSTER-DNS-DRAIN",
+      "name": "Domain and cloud drain",
+      "plain_english": "Cloud drain batch 2 done at CLOUD-SEC-200 \u2014 start batch 3. Railway queue_batch_complete=true \u00b7 head CLOUD-SEC-200. Generate and lock batch 3 (CLOUD-SEC-201..300) now? Effect: Arms or pauses next 100-p (+ 1 related items)",
+      "controls": "Arms or pauses next 100-pack cloud drain; Sets commercial domain priority vs cloud drain batch 3",
+      "if_unanswered": "Decision stays open; agents may guess priority",
+      "member_ids": [
+        "Q-CW-BATCH3"
+      ],
+      "options": [
+        "A \u2014 YES \u2014 generate batch 3 and arm Cloud Workers Proceed",
+        "B \u2014 PAUSE \u2014 celebrate batch 2 \u00b7 batch 3 after sourcea.app fix (recommended)",
+        "C \u2014 Manual \u2014 founder picks row range in chat",
+        "D \u2014 Retire cloud drain \u2014 no more CLOUD-SEC packs"
+      ],
+      "note": "Recommended picks are hints only \u2014 not authority"
+    }
+  ],
+  "founder_facts": [
+    {
+      "id": "Q-MF-10",
+      "plain_english": "W3 commercial \u2014 confirm-sent after Mail. Commercial L3 ~75% \u2014 w3_send_ready red until founder confirms Mail sent. Confirm sent for fundmore/ocree packs? Effect: Commercial L3 honesty \u2014 no fake green Options: YES \u2014 I sent Mail \u2014 mark confirm-sent \u00b7 Not sent yet \u2014 keep red \u00b7 Skip W3 \u2014 focus marketplace \u00b7 Defer\u2026",
+      "evidence_hint": "Founder confirms yes/no; agents never infer"
+    },
+    {
+      "id": "Q-WBC-OCRE-L3",
+      "plain_english": "OCRE commercial L3 \u2014 founder Mail confirm only. Commercial L3 at 75% \u2014 ocree confirm_sent is founder-only (agents never send email). You send Mail from your account and run --confirm-sent ocre? Effect: Closes commercial L3 without agent email violation Options: YES \u2014 I will send Mail + confirm_sent this week \u00b7 Defer\u2026",
+      "evidence_hint": "Founder confirms yes/no; agents never infer"
+    }
+  ],
+  "machine_queue_ids": [
+    "ENF-04",
+    "ENF-12",
+    "ENF-13",
+    "ENF-15",
+    "ENF-16",
+    "ENF-18",
+    "ENF-20",
+    "Q-CHAT-CLOUD-01",
+    "Q-FINAL-04",
+    "Q-FINAL-07",
+    "Q-SESSION-ARCH-PILLAR",
+    "Q-SESSION-INBOX-NEXT",
+    "Q-SESSION-PHASE0-SPOT",
+    "Q-CONF-B0503-CONSUMER",
+    "Q-CONF-CREED-36V14",
+    "Q-CONF-FALSE-DONE-GUARD",
+    "Q-BC-03",
+    "Q-BC-07",
+    "Q-CW-SOURCEA-APP",
+    "Q-CW-HUB-RETIRE",
+    "Q-THREAD-DEPLOY-01",
+    "Q-WBC-STYLE-B1"
+  ],
+  "deferred_ids": [
+    "11.05",
+    "Q-THREAD-10STEP-01",
+    "Q-FINAL-03",
+    "Q-MF-05",
+    "Q-MF-06",
+    "Q-CONF-F002-BROKER",
+    "Q-BC-08",
+    "Q-BC-10",
+    "Q-MF-07",
+    "Q-SESSION-ARCH-GEMINI-WS",
+    "Q-SESSION-ARCH-SCAFFOLD"
+  ]
+}

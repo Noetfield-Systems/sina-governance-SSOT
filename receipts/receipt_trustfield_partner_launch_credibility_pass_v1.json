@@ -1,0 +1,29 @@
+{
+  "schema": "receipt_trustfield_partner_launch_credibility_pass_v1",
+  "at": "2026-07-07T08:36:58.283139-07:00",
+  "verdict": "PASS",
+  "task": "tf-partner-launch-credibility-pass-v1",
+  "purpose": "SG mirror of TrustField-Technologies partner launch credibility pass",
+  "sg_branch": "cursor/language-layer-v1",
+  "sg_commit_at_mirror": "3c9a111",
+  "trustfield_repo": "Noetfield-Systems/TrustField-Technologies",
+  "trustfield_branch": "cursor/cf-188-w9-w10-closure",
+  "trustfield_commit": "db398f5",
+  "trustfield_receipt": "data/trustfield_partner_launch_credibility_pass_v1.json",
+  "site_build_id": "site-v72-partner-launch-credibility-2026-07-07",
+  "www_origin": "https://www.trustfield.ca",
+  "scope_locked": {
+    "incorporation": "reserved to be incorporated \u2014 not claimed filed",
+    "mlro": "not appointed \u2014 Sina Kazemnezhad as Founder Compliance / Vendor Diligence Contact",
+    "billing": "interim Noetfield Systems Inc \u2014 confirm before signed production agreement",
+    "esign": "interim click-wrap stub only",
+    "boundary": "TrustField does not hold funds, transmit money, execute settlement, or act as settlement party of record"
+  },
+  "live_verify_summary": {
+    "/partner-access": 200,
+    "/entity-status": 200,
+    "/pilot/vendor-pack": 200,
+    "/partners": 200,
+    "api_invalid_token": "blocked"
+  }
+}

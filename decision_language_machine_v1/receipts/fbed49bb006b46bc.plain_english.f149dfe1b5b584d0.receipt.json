@@ -1,0 +1,13 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "fbed49bb006b46bc",
+  "stage": "plain_english",
+  "time": "2026-07-07T07:11:12Z",
+  "scan_id": "f149dfe1b5b584d0",
+  "decision": "PASS",
+  "input_path": "test_fixtures/messy_backlog_sample_v1.json",
+  "payload": {
+    "rewritten": 4
+  }
+}

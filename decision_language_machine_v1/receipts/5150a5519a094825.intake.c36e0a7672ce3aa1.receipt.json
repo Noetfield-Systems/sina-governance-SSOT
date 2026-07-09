@@ -1,0 +1,20 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "5150a5519a094825",
+  "stage": "intake",
+  "time": "2026-07-07T07:10:58Z",
+  "scan_id": "c36e0a7672ce3aa1",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "item_count": 80,
+    "sample_ids": [
+      "11.05",
+      "ENF-01",
+      "ENF-02",
+      "ENF-03",
+      "ENF-04"
+    ]
+  }
+}

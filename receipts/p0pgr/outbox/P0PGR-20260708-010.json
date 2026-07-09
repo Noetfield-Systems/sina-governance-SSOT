@@ -1,0 +1,80 @@
+{
+  "id": "P0PGR-20260708-010",
+  "created_at": "2026-07-08T13:25:12Z",
+  "lane": "SG",
+  "problem_class": "verification",
+  "owner_agent": "verifier",
+  "model_tier": "cheap",
+  "roi_score": 72,
+  "roi_reason": "One-shot mechanical sweep closes the least-knowledge gap for all legacy prompts, not just new packets \u2014 extends the Phase-0 guarantee backwards.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "P0 leak detector exists (117 fingerprints) but has only ever scanned P0-PGR packets; legacy dispatch docs (docs/dispatch/*, docs/*DISPATCH*, handoff docs) predate the detector and were never swept.",
+  "task": "P0 leakage safety sweep: 1) classify every prompt/dispatch surface in docs/dispatch/, docs/*DISPATCH*, docs/*HANDOFF*, and receipts/p0pgr/outbox/ as worker-facing or brain-facing; 2) run the P0 fingerprint sweep (scripts/p0pgr_packet_lint_v1.py p0_fingerprints) against all worker-facing surfaces; 3) report per-document verdict CLEAN|LEAK(lines) \u2014 report-only, no redaction edits; 4) emit one receipt.",
+  "allowed_actions": [
+    "read docs/, receipts/p0pgr/outbox/, SG-Canonical-Library P0-CORE (fingerprints only)",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof",
+    "no edits to any scanned document"
+  ],
+  "stop_rule": "Stop after sweep receipt; redactions are separate founder-visible repair packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "docs/dispatch/auth-phase-1-trustfield.md",
+    "scripts/p0pgr_packet_lint_v1.py"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

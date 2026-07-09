@@ -1,0 +1,49 @@
+{
+  "schema": "founder-trigger-retirement-registry-v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T11:00:00Z",
+  "law": "Founder triggers are technical debt — each row defines machine substitute + green receipt count to retire",
+  "never_auto_retire": ["L5_VERIFIER_FREEZE", "CAPITAL_LEGAL", "PRICING_TESTIMONIALS", "IRREVERSIBLE_SCOPE_MAP"],
+  "triggers": [
+    {
+      "trigger_id": "FT-TIER1-PARALLEL-ORCH",
+      "current_blocker": "Parallel orchestration Tier 1+ blocked until founder triggers (GOVERNED_AUTORUN_LAWS_v3)",
+      "machine_substitute": "conflict matrix C001-C010 green + concurrency groups in GHA workflows",
+      "green_receipts_required": 30,
+      "consecutive_green": 0,
+      "receipt_sources": ["receipts/proof/machine-validation-latest-v1.json", "receipts/proof/adversarial-critique-latest-v1.json"],
+      "status": "active",
+      "patch_on_retire": "docs/GOVERNED_AUTORUN_LAWS_v3.md: Parallel orchestration section → machine_enabled"
+    },
+    {
+      "trigger_id": "FT-KZ002-COPILOT-P4",
+      "current_blocker": "Kaizen KZ-002 blocked_until founder P4 for Copilot T1 pilot",
+      "machine_substitute": "adversarial_critique_gate + worker cost tier T1 queue",
+      "green_receipts_required": 10,
+      "consecutive_green": 0,
+      "receipt_sources": ["receipts/proof/adversarial-critique-latest-v1.json", "receipts/proof/machine-validation-latest-v1.json"],
+      "status": "active",
+      "patch_on_retire": "data/autorun-kaizen-backlog-v1.json: KZ-002 remove blocked_until"
+    },
+    {
+      "trigger_id": "FT-FOUNDER-OBSERVATION",
+      "current_blocker": "Agents block on founder please check when API exists (L7 observation law)",
+      "machine_substitute": "scripts/spine_live_probe_v1.py + read_action_runs_v1.py",
+      "green_receipts_required": 5,
+      "consecutive_green": 0,
+      "receipt_sources": ["receipts/proof/spine-live-probe-latest-v1.json"],
+      "status": "active",
+      "patch_on_retire": null
+    },
+    {
+      "trigger_id": "FT-MERGE-T0-T1",
+      "current_blocker": "Founder merge review for T0-T1 changes during bootstrap",
+      "machine_substitute": "machine_merge_gate_v1.py + adversarial_critic APPROVE + validate-machine-loops-e2e",
+      "green_receipts_required": 5,
+      "consecutive_green": 0,
+      "receipt_sources": ["receipts/proof/machine-loops-e2e-latest-v1.json", "receipts/proof/machine-merge-gate-latest-v1.json"],
+      "status": "active",
+      "patch_on_retire": "docs/MACHINE_LOOPS_v1.md: T0-T1 bootstrap → machine merge enabled"
+    }
+  ]
+}

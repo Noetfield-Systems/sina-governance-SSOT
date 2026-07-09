@@ -1,0 +1,142 @@
+{
+  "schema": "machine-process-loops-v1",
+  "version": "1.2.0",
+  "saved_at": "2026-07-03T17:10:00Z",
+  "law": "Default question: How does the process solve this without Sina?",
+  "canon_version": "FOUNDER_CANON_v1",
+  "canon_doc": "docs/FOUNDER_CANON_v1.md",
+  "loops_doc": "docs/MACHINE_LOOPS_v1.md",
+  "e2e_gate": "scripts/validate-machine-loops-e2e-v1.sh",
+  "loops": [
+    {
+      "loop_id": "LP-WORKER-EXEC",
+      "name": "worker_execution",
+      "owner_lane": "L_cursor_worker",
+      "entry_script": "scripts/worker_execution_gate_v1.py",
+      "validator": "scripts/worker_execution_gate_v1.py",
+      "receipt_path": "receipts/proof/worker-execution-gate-latest-v1.json",
+      "founder_substitute": "session gate + cost tier + mission routing",
+      "retires_trigger_ids": ["FT-FOUNDER-TIER-ROUTING", "FT-FOUNDER-MISSION-PICK"]
+    },
+    {
+      "loop_id": "LP-MACHINE-VALID",
+      "name": "machine_validation",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/validate-machine-process-v1.sh",
+      "validator": "scripts/validate-machine-process-v1.sh",
+      "receipt_path": "receipts/proof/machine-validation-latest-v1.json",
+      "founder_substitute": "L14 trigger sweep + L16 governance + SSOT schema check",
+      "retires_trigger_ids": ["FT-FOUNDER-VALIDATOR-CHECK"]
+    },
+    {
+      "loop_id": "LP-ADVERSARIAL",
+      "name": "adversarial_critique",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/adversarial_critique_gate_v1.sh",
+      "validator": "scripts/adversarial_critique_gate_v1.sh",
+      "receipt_path": "receipts/proof/adversarial-critique-latest-v1.json",
+      "founder_substitute": "duplicate impl scan + conflict matrix + D1 sample",
+      "retires_trigger_ids": ["FT-DUP-IMPL-FOUNDER"]
+    },
+    {
+      "loop_id": "LP-CRITIC",
+      "name": "adversarial_critic",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/adversarial_critic_receipt_v1.py",
+      "validator": "scripts/adversarial_critic_receipt_v1.py",
+      "receipt_path": "receipts/proof/adversarial-critic-latest-v1.json",
+      "founder_substitute": "APPROVE|REJECT|UNCERTAIN verdict on receipt+diff",
+      "retires_trigger_ids": ["FT-FOUNDER-RECEIPT-READ"]
+    },
+    {
+      "loop_id": "LP-CRITIC-SECOND",
+      "name": "adversarial_critic_second",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/adversarial_critic_second_v1.py",
+      "validator": "scripts/adversarial_critic_second_v1.py",
+      "receipt_path": "receipts/proof/adversarial-critic-second-latest-v1.json",
+      "founder_substitute": "independent second critic for T2 merge authority",
+      "retires_trigger_ids": []
+    },
+    {
+      "loop_id": "LP-RECEIPT-CHAIN",
+      "name": "receipt_chain_audit",
+      "owner_lane": "L_gha_truth_l4",
+      "entry_script": "scripts/receipt_chain_hmac_audit_v1.py",
+      "validator": "scripts/receipt_chain_hmac_audit_v1.py",
+      "receipt_path": "receipts/proof/receipt-chain-audit-latest-v1.json",
+      "founder_substitute": "HMAC-chained tamper detection on proof receipts",
+      "retires_trigger_ids": []
+    },
+    {
+      "loop_id": "LP-DISPATCH-RECON",
+      "name": "dispatch_reconciler",
+      "owner_lane": "L_cursor_worker",
+      "entry_script": "scripts/dispatch_template_reconciler_v1.py",
+      "validator": "scripts/dispatch_template_reconciler_v1.py",
+      "receipt_path": "receipts/proof/dispatch-instantiated-latest-v1.json",
+      "founder_substitute": "R2 template instantiation from failure receipts + queue",
+      "retires_trigger_ids": []
+    },
+    {
+      "loop_id": "LP-MERGE",
+      "name": "machine_merge",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/machine_merge_gate_v1.py",
+      "validator": "scripts/machine_merge_gate_v1.py",
+      "receipt_path": "receipts/proof/machine-merge-gate-latest-v1.json",
+      "founder_substitute": "T0-T1 merge on validation+critic criteria",
+      "retires_trigger_ids": ["FT-MERGE-T0-T1"]
+    },
+    {
+      "loop_id": "LP-SELF-REPAIR",
+      "name": "self_repair",
+      "owner_lane": "L_cursor_worker",
+      "entry_script": "scripts/self_repair_ci_to_kaizen_v1.py",
+      "validator": "scripts/self_repair_ci_to_kaizen_v1.py",
+      "receipt_path": "receipts/proof/self-repair-latest-v1.json",
+      "founder_substitute": "CI failure auto-file Kaizen machine_safe + pick",
+      "retires_trigger_ids": ["FT-FOUNDER-CI-TRIAGE"]
+    },
+    {
+      "loop_id": "LP-OUTSIDE-AUDIT",
+      "name": "outside_audit",
+      "owner_lane": "L_gha_truth_l4",
+      "entry_script": "scripts/spine_live_probe_v1.py",
+      "validator": "scripts/spine_live_probe_v1.py",
+      "receipt_path": "receipts/proof/spine-live-probe-latest-v1.json",
+      "founder_substitute": "truth_log + GHA read_action_runs + SHA drift",
+      "retires_trigger_ids": ["FT-FOUNDER-OBSERVATION"]
+    },
+    {
+      "loop_id": "LP-RESEARCH",
+      "name": "deep_research",
+      "owner_lane": "L_cursor_worker",
+      "entry_script": "scripts/uncertainty_research_enqueue_v1.py",
+      "validator": "scripts/uncertainty_research_enqueue_v1.py",
+      "receipt_path": "receipts/proof/uncertainty-research-latest-v1.json",
+      "founder_substitute": "research pipeline intake with sources receipt",
+      "retires_trigger_ids": ["FT-FOUNDER-UNCERTAINTY"]
+    },
+    {
+      "loop_id": "LP-RECEIPT-PROOF",
+      "name": "receipt_proof",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/machine_cycle_receipt_v1.py",
+      "validator": "scripts/machine_cycle_receipt_v1.py",
+      "receipt_path": "receipts/proof/machine-cycle-latest-v1.json",
+      "founder_substitute": "heartbeat-style rollup of all loop receipts",
+      "retires_trigger_ids": []
+    },
+    {
+      "loop_id": "LP-EARNED-AUTONOMY",
+      "name": "earned_autonomy",
+      "owner_lane": "L_gha_determinism",
+      "entry_script": "scripts/founder_trigger_retirement_evaluator_v1.py",
+      "validator": "scripts/founder_trigger_retirement_evaluator_v1.py",
+      "receipt_path": "receipts/proof/founder-trigger-retirement-latest-v1.json",
+      "founder_substitute": "consecutive green receipts retire founder triggers",
+      "retires_trigger_ids": ["FT-TIER1-PARALLEL-ORCH", "FT-KZ002-COPILOT-P4"]
+    }
+  ]
+}

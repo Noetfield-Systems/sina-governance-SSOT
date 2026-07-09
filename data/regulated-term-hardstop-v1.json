@@ -1,0 +1,31 @@
+{
+  "schema": "regulated-term-hardstop-v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-02T21:00:00Z",
+  "status": "SG_SIGNED",
+  "signed_at": "2026-07-03T10:35:00Z",
+  "signed_by": "sg_sssot_cursor",
+  "blocker_id": "B2",
+  "risk_score_on_match": 5,
+  "decision_on_match": "route_to_human",
+  "match_mode": "case_insensitive_word_boundary",
+  "terms": [
+    "custody",
+    "settlement",
+    "hold funds",
+    "escrow funds",
+    "money transmission",
+    "remittance execution",
+    "msb licensing on trustfield's behalf",
+    "psp claims",
+    "banking claims",
+    "crypto settlement",
+    "safeguarding",
+    "fintrac",
+    "rpaa obligations",
+    "regulator contact"
+  ],
+  "notes": "Deterministic regex runs BEFORE bulk model. Model cannot lower a term-hit score. SG sign-off required before Phase 2 triage autorun.",
+  "sg_guardrail_ref": "ssot/sg-guardrails-trustfield-v1.md",
+  "owner": "SG"
+}

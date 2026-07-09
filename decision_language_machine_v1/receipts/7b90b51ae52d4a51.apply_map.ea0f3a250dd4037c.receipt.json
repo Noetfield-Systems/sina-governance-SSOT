@@ -1,0 +1,14 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "7b90b51ae52d4a51",
+  "stage": "apply_map",
+  "time": "2026-07-07T07:10:11Z",
+  "scan_id": "ea0f3a250dd4037c",
+  "decision": "PASS",
+  "input_path": null,
+  "payload": {
+    "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/decision_language_machine_v1/output/7b90b51ae52d4a51.apply_map.json",
+    "status": "EMPTY"
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "agent_read_staleness_receipt_v1",
+  "at": "2026-07-07T23:43:22Z",
+  "ok": false,
+  "alive_surfaces": 15,
+  "blocker_count": 2,
+  "warn_count": 0,
+  "alive": [
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/github_automation_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_truth"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/agent_read_surfaces_v1.json",
+      "status": "ACTIVE",
+      "role": "alive_doc_registry"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/stale_law_guard_patterns_v1.json",
+      "status": "ACTIVE",
+      "role": "stale_law_patterns"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+      "status": "ACTIVE",
+      "role": "parallel_automation_law"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+      "status": "ACTIVE",
+      "role": "worker_routing"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+      "status": "READ_SURFACE",
+      "role": "library_index"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
+      "status": "ACTIVE",
+      "role": "library_version_truth"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/SourceA/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/data/brain_external_artifact_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "brain_pointer_registry"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
+      "status": "ACTIVE",
+      "role": "deploy_truth"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
+      "status": "ACTIVE",
+      "role": "automation_law"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+      "status": "ACTIVE",
+      "role": "integrator_checklist"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "BLOCKER",
+      "kind": "stale_law_pattern",
+      "pattern_id": "vercel_deploy_owner",
+      "path": "data/github_automation_registry_v1.json",
+      "hits": 1,
+      "replacement": "cloudflare_www_deploy",
+      "message": "vercel_deploy owner retired"
+    },
+    {
+      "severity": "BLOCKER",
+      "kind": "stale_law_pattern",
+      "pattern_id": "deploy_vercel_word",
+      "path": "data/agent_read_surfaces_v1.json",
+      "hits": 1,
+      "replacement": "Cloudflare Workers / OpenNext",
+      "message": "Vercel RETIRED"
+    }
+  ],
+  "blockers": [
+    {
+      "severity": "BLOCKER",
+      "kind": "stale_law_pattern",
+      "pattern_id": "vercel_deploy_owner",
+      "path": "data/github_automation_registry_v1.json",
+      "hits": 1,
+      "replacement": "cloudflare_www_deploy",
+      "message": "vercel_deploy owner retired"
+    },
+    {
+      "severity": "BLOCKER",
+      "kind": "stale_law_pattern",
+      "pattern_id": "deploy_vercel_word",
+      "path": "data/agent_read_surfaces_v1.json",
+      "hits": 1,
+      "replacement": "Cloudflare Workers / OpenNext",
+      "message": "Vercel RETIRED"
+    }
+  ],
+  "warns": [],
+  "closure_token": "AGENT_READ_STALENESS: fail"
+}
