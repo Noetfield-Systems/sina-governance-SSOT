@@ -1,5 +1,3 @@
-> **LIBRARY MIRROR (P10-PRODUCT-LAYERS).** Canonical deliverable set lives in `sina-governance-SSOT/product/`. This copy is the ratified product-layer reference; the registry sibling in this folder is byte-identical to the canonical one.
-
 # Noetfield / SourceA Cloud Factory — Commercial Product Map (v1)
 
 **Status:** `PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION` · **Locked:** 2026-07-09T07:06:11Z · **Status patch:** `PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1` (CAT-03/04/06) · **Authority:** SG-owned (Sina Governance SSOT)
@@ -82,6 +80,6 @@ Do not build code · Do not buy domains · Do not create public claims · Do not
 
 ---
 
-**FINAL STATUS: `PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION`** — lock receipt: [`../receipts/SG_PRODUCT_CATEGORY_LOCK_RECEIPT_v1.json`](../../../receipts/SG_PRODUCT_CATEGORY_LOCK_RECEIPT_v1.json) · status patch: [`../receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json`](../../../receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json)
+**FINAL STATUS: `PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION`** — lock receipt: [`../receipts/SG_PRODUCT_CATEGORY_LOCK_RECEIPT_v1.json`](../receipts/SG_PRODUCT_CATEGORY_LOCK_RECEIPT_v1.json) · status patch: [`../receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json`](../receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json)
 
 > **Ratification precondition (reverse-drift):** the CAT-03/04 proving receipts currently live only in the archived clone `~/Projects/sina-governance-ssot.MIGRATED-2026-07-08` and must be synced into canonical before commit. See the status-patch receipt.

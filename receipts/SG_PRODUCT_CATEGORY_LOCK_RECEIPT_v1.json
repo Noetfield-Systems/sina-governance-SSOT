@@ -76,8 +76,8 @@
     },
     {
       "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md",
-      "bytes": 7928,
-      "sha256": "ccdf475ef8e895a28e4c99902e029004985eb1c0aeed4b23b7637cc1da236769"
+      "bytes": 7677,
+      "sha256": "8e58a81ee10c241ab01ddd4a5859f199efa6d560c58622a59efa816209afb0c9"
     }
   ],
   "categories_summary": [
@@ -210,5 +210,20 @@
     "reason": "Two autonomous agents were committing/pushing to cursor/language-layer-v1 with no worktree isolation; a concurrent --amend collision resulted.",
     "action": "product-lock work moved to dedicated branch cursor/product-category-lock-v1 in its own worktree; shared checkout left untouched for the L0 agent.",
     "residual": "cursor/language-layer-v1 local tip still carries my commit 723259d (receipt correction); recommend founder reset that branch to origin (7737d3b) when the L0 agent is idle \u2014 not done here to avoid disturbing its uncommitted files."
+  },
+  "mirror_correction_v1": {
+    "corrected_at": "2026-07-09T10:14:20Z",
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md",
+    "before": {
+      "bytes": 7928,
+      "sha256": "ccdf475ef8e895a28e4c99902e029004985eb1c0aeed4b23b7637cc1da236769"
+    },
+    "after": {
+      "bytes": 7677,
+      "sha256": "8e58a81ee10c241ab01ddd4a5859f199efa6d560c58622a59efa816209afb0c9"
+    },
+    "method": "byte-identical copy from product/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md (source of truth)",
+    "found_by": "adversarial hash verification during PRODUCT_CATEGORY_LOCK_STATUS_UPDATE_v1 audit",
+    "commit_note": "applied as isolated commit off b378fe9 on new branch patch/product-category-mirror-sync-v1 \u2014 cursor/product-category-lock-v1 worktree (sg-product-lock) was live/busy with unrelated concurrent work (tip 11ad9d1, uncommitted AGENTS.md/data changes) at patch time, so this commit does not touch that branch or worktree."
   }
 }
