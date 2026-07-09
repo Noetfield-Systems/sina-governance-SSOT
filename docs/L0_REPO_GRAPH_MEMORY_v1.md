@@ -100,23 +100,29 @@ subsystem or a large batch of docs/data files; a few days of drift on receipts/d
 churn is acceptable since those are usually queried by exact keyword (e.g. an
 artifact id), not by fresh listing.
 
-## Rollout plan (not executed in this pilot)
+## Rollout status (executed 2026-07-09)
 
-Pilot is scoped to `sina-governance-ssot` only per the architect order (no deploy,
-no cloud schedule, no other repo touched). If the pilot verifier stays green and the
-token-reduction estimate in the pilot receipt holds up in real sessions, the same
-three files (`build_repo_graph_v1.py`, `query_repo_graph_v1.py`, an `AGENTS.md`/
-`CLAUDE.md` broad-read-gate section) can be copied into each target repo with only
-the `SUBSYSTEM_DIRS` list edited to match that repo's actual top-level layout:
+All target repos live in the canonical workspace `~/Desktop/Noetfield-Systems/`
+(NOT the old `~/Projects/` clones). Each got its **own** copy of the three files
+(`build_repo_graph_v1.py`, `query_repo_graph_v1.py`, `verify_l0_repo_graph_memory_v1.sh`),
+its own `docs/L0_REPO_GRAPH_MEMORY_v1.md`, an `AGENTS.md` broad-read-gate section,
+and its own `graph-out/GRAPH_REPORT.md` — intentionally not a shared cross-repo
+service (no deploy, no central DB).
 
-| Repo | Path | Notes for rollout |
-|---|---|---|
-| SourceA | `~/Projects/SourceA` | Brain/Worker code — likely has real Python import edges in addition to path-string edges; consider extending edge scan to parse `import`/`from` statements with `ast` before rollout. |
-| NOOS | `~/Projects/noetfeld-os` | Doctrine + integrator state; subsystem list will differ (doctrine/, integrator/, etc. — confirm actual top-level dirs before copying). |
-| TrustField loops | `~/Desktop/trustfield-loops` | Cloud loop registries/receipts — similar shape to this repo (docs/data/receipts heavy); low-risk next pilot. |
-| Noetfield website | `~/Desktop/Noetfield/.../Noetfield/` | Likely a JS/TS app — `SUBSYSTEM_DIRS` and edge-scan extensions need `.ts/.tsx/.jsx` added, and real import-statement parsing would add more value here than in the SSOT repos. |
-| Studio IDE / Forge Factory repos | (not yet located in this session) | Confirm repo paths and top-level layout first; do not assume the same subsystem list applies. |
+| Repo | Path | Status | Notes |
+|---|---|---|---|
+| sina-governance-SSOT | `~/Desktop/Noetfield-Systems/sina-governance-SSOT` | ✅ done | origin pilot; index committed (small) |
+| SourceA | `~/Desktop/Noetfield-Systems/SourceA` | ✅ done (PR #27) | 28k files/47 subsystems; builder symlink-hardened (broken `.bin/ffmpeg`); 20MB index gitignored |
+| NOOS | `~/Desktop/Noetfield-Systems/noetfeld-OS` | ✅ done (PR #42) | 19 subsystems; index committed (326KB); fixed stale `~/Projects` workspace_root pointer |
+| TrustField | `~/Desktop/Noetfield-Systems/TrustField-Technologies` | ✅ done (PR #14) | 17 subsystems; index gitignored (`web/` build assets); `receipts/` dir created |
+| Noetfield | `~/Desktop/Noetfield-Systems/Noetfield` | ✅ done (PR #99) | ~90 subsystems via **auto-discovery** → library (`os/plan-library`, `L2-knowledge`) + memory (`.cursor/agent-memory`) covered; index gitignored |
+| Studio IDE / Forge Factory repos | (not yet located) | ⏳ pending | confirm repo paths + top-level layout before copying |
 
-Each rollout repo should get its **own** `scripts/build_repo_graph_v1.py` /
-`graph-out/` — this is intentionally not a shared cross-repo service (no deploy, no
-central DB), consistent with the "do not deploy" constraint on this pilot.
+Shared hardening added during rollout (all copies): builder skips symlinks and
+survives unreadable paths; large/build-heavy repos gitignore the full index and
+commit only the compact report; Noetfield auto-discovers subsystems.
+
+**Deferred improvement:** edges are still best-effort path-string references. For
+the code-heavy repos (SourceA `brain-os`, Noetfield JS/TS app), adding
+`ast`/import-statement parsing would produce a truer import graph — revisit if
+path-string edges prove too noisy for a real routing task.
