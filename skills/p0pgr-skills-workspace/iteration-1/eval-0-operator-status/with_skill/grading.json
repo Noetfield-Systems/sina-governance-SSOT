@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "Identifies operating mode PHASE_2_CLOUD_ONLY_ROI_TRACK",
+      "passed": true,
+      "evidence": "mode string present"
+    },
+    {
+      "text": "Names next queued move M05 / packet P0PGR-20260708-006",
+      "passed": true,
+      "evidence": "M05+packet id found"
+    },
+    {
+      "text": "Checks the eight Phase 2 execution gates explicitly",
+      "passed": true,
+      "evidence": "gate list present"
+    },
+    {
+      "text": "Read-only: executes nothing, modifies no repo files",
+      "passed": true,
+      "evidence": "only status_report.md written; agent affirmed read-only"
+    },
+    {
+      "text": "Surfaces founder/authority consideration (pending diff-read or missing unlock receipt)",
+      "passed": true,
+      "evidence": "founder consideration mentioned"
+    }
+  ]
+}

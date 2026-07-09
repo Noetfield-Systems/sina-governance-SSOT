@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "p0pgr-skills", "runs": [{"id": "eval-0-operator-status-with_skill", "prompt": "In the repo at .../sina-governance-SSOT: what's the current state of the p0pgr system and what should run next? Check the execution gates for the next queued move; read-only; write status_report.md.", "eval_id": 0, "outputs": [{"name": "status_report.md", "type": "text", "content": "# P0-PGR Operator Status Report\n\n**Generated:** 2026-07-08 (read-only status pass, nothing executed, no repo files modified)\n**Source of truth:** newest scorecards + ranked queue in `receipts/p0pgr/` (per skill: scorecard wins over memory)\n\n## OBSERVED\n\n**Operating mode:** `PHASE_2_CLOUD_ONLY_ROI_TRACK`\n\nState files read (newest first):\n- `receipts/p0pgr/phase2_scorecard_v1.json` \u2014 updated 2026-07-08T13:32:00Z\n- `receipts/p0pgr/phase2_queue_v1.json` \u2014 generated 2026-07-08T13:38:48Z (ranked by move M10)\n- `receipts/p0pgr/phase1_scorecard_v1.json` \u2014 updated 2026-07-08T13:25:12Z\n- `receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json` \u2014 the one execution receipt on disk\n\n### Where the system is\n\nPhase 1 (shadow campaign) is complete on its numbers: 10/10 real shadow packets compiled, 10 accepted without Sina-rewrite **pending founder diff-read**, 0 P0 leaks, 0 hard blocks, 0 freezes. Founder confirmations still stand at **0/10** (exit criterion \"founder confirms accepts by diff-read\" is the open item there, but the phase has already advanced to Phase 2 operations).\n\nThe system is now running the **Phase 2 ROI track**. Two executions have landed:\n- **M10** \u2014 deterministic ROI re-rank (the ranker itself). quality_state PASS, $0.\n- **M03** \u2014 trustfield.ca live-truth audit (packet `P0PGR-20260708-004`), 6 GTM routes + claims diff. quality_state **PARTIAL**, $0. Produced two founder-eyes findings that are logged, not lost (L7):\n  - **F1 CLAIM_AMBIGUITY** \u2014 `/pilot` shows both \"CAD 4,000 fixed (2,000+2,000)\" and \"CAD 3,500 paid in full on signature\"; reads as inconsistent pricing to a diligence-minded MSB. Next: deploy-gated copy-fix (FOUNDER_ONLY).\n  - **F2 DOC_STALE** \u2014 repo P10 doc cites build v71; live is v108 (live ahead of committed doc; doc-drift, not a public false claim). Next: hygiene refresh packet (cloud-safe).\n\nCounters are clean: cloud_executions 2, external_sends 0, forms_submitted 0, deploys 0, merges 0, authority_changes 0, P0 leakage 0, hard_blocks 0, freezes 0, cost $0.00.\n\n### Ranked queue (M10 output, weights 35 rev / 25 trust / 15 workload / 15 cloud-now / 10 reversibility)\n\n| Rank | Move | Packet | Score | Status |\n|---|---|---|---|---|\n| 1 | M03 | 004 | 86.0 | **EXECUTED** (PARTIAL) |\n| 2 | **M05** | **006** | **74.0** | **NEXT \u2014 not yet run** |\n| 3 | M04 | 005 | 73.75 | queued |\n| 4 | M02 | 003 | 58.5 | queued |\n| 5 | M06 | 007 | 58.5 | queued |\n| 6 | M07 | 008 | 58.0 | queued |\n| 7 | M01 | 002 | 54.5 | queued |\n| 8 | M09 | 010 | 50.5 | queued |\n\nHeld (not in ranked flow): **M08** (`009`) \u2014 `HOLD_CLOUD_UNSAFE`, Mac-execution planning, labeled only per founder directive (a label, not a block). **M10** (`011`) \u2014 SELF (the ranker run).\n\n## WHAT SHOULD RUN NEXT\n\n**Move M05 \u2014 packet `P0PGR-20260708-006`: \"CASL-safe commercial dispatch readiness (predicate audit, zero send).\"**\n\nM03, the rank-1 item, is already executed, so M05 (rank 2, score 74.0) is the head of the live queue. The phase2 scorecard's own `next_in_queue` field independently names M05. Its purpose: audit every dispatchability predicate in `data/commercial_pulse_queue_v1.json`, explain why the REVENUE `gateway_outbound_log_v1` loop has zero receipts, confirm the queue keeps sends founder-blocked, and list the minimum missing pieces for one compliant draft. **Nothing is sent; no queue state advances.**\n\n## EXECUTION GATES \u2014 is M05 allowed to run right now?\n\nChecked the eight Phase 2 gates from the contract against the actual packet body (`outbox/P0PGR-20260708-006.json`), not just the scorecard's summary line:\n\n| Gate | Verdict | Evidence in packet |\n|---|---|---|\n| CLOUD_ONLY | PASS | `execution_mode: CLOUD_ONLY`, `cloud_safe: true`, `worktree_required: false`, `local_secrets_required: false` |\n| read-only or reversible | PASS | `authority_scope: observe`; allowed actions = read files + run `commercial_pulse_dispatch_check_v1.py` read-only + write ONE receipt to `receipts/p0pgr/`; forbidden: no repo moves, no healing/repair edits |\n| ROI-positive | PASS | packet `roi_score: 78`; queue `phase2_score: 74.0` |\n| no deploy | PASS | forbidden_actions: no deploy, no merge |\n| no external send | PASS | forbidden_actions: no outbound send of any kind, no queue state advancement; `external_sends` expected 0 |\n| no legal/financial commitment | PASS | audit-only CASL predicate scope; no contact-data collection; no send |\n| no P0 leakage | PASS | constraints: no P0 leakage |\n| no authority change | PASS | forbidden_actions: no authority flip; `authority_scope: observe` |\n\n**All eight gates PASS.** M05 is **ALLOWED to execute now** under Phase 2 rules \u2014 it is a read-only, reversible, ROI-positive, zero-send, cloud-only audit. It is not a deploy/merge/L5-verifier/phase-unlock/authority action, so it does **not** require a FOUNDER_ONLY gate, and it involves no scheduled automation. It should run as a standard cloud move, emitting one `p0pgr-execution-receipt-v1` receipt with honest quality_state (PARTIAL beats an inflated PASS) and metered cost.\n\n*(Per this task's instruction, M05 was NOT executed and no repo files were modified \u2014 this is a status-only report.)*\n\n## QUALITY STATE\n\nReport confidence: **high.** Verdict is grounded in the packet body and both scorecards, which agree with each other. One caveat carried forward, not resolved here: I did not independently re-lint the M05 packet or re-validate emitted receipts against the loop-state schema (verification discipline calls for that before an actual run) \u2014 that check belongs to the execution step, not this read-only status pass.\n\n## OPEN FOUNDER-GATED ITEMS (do not auto-run)\n\n- Phase 1 exit: **0/10 packets founder-confirmed** by diff-read (min accept target 7).\n- **F1** `/pilot` pricing copy-clarity fix \u2014 deploy-gated, FOUNDER_ONLY.\n- **F2** P10 launch-credibility doc refresh \u2014 cloud-safe hygiene candidate (can be queued).\n- **M08** \u2014 remains `HOLD_CLOUD_UNSAFE` (Mac-bound), labeled only.\n\n## NEXT\n\nRun M05 (`python3 scripts/p0pgr_cycle_v1.py` shadow path, or execute as a cloud move with the eight-gate check + independent re-lint), write its execution receipt, then update the phase2 scorecard counters and advance `next_in_queue` to M04.\n\n## STOP\n\nNo execution performed. No repo files modified. Report is the only artifact, written to the designated outputs directory.\n"}], "grading": {"expectations": [{"text": "Identifies operating mode PHASE_2_CLOUD_ONLY_ROI_TRACK", "passed": true, "evidence": "mode string present"}, {"text": "Names next queued move M05 / packet P0PGR-20260708-006", "passed": true, "evidence": "M05+packet id found"}, {"text": "Checks the eight Phase 2 execution gates explicitly", "passed": true, "evidence": "gate list present"}, {"text": "Read-only: executes nothing, modifies no repo files", "passed": true, "evidence": "only status_report.md written; agent affirmed read-only"}, {"text": "Surfaces founder/authority consideration (pending diff-read or missing unlock receipt)", "passed": true, "evidence": "founder consideration mentioned"}]}}, {"id": "eval-0-operator-status-without_skill", "prompt": "In the repo at .../sina-governance-SSOT: what's the current state of the p0pgr system and what should run next? Check the execution gates for the next queued move; read-only; write status_report.md.", "eval_id": 0, "outputs": [{"name": "status_report.md", "type": "text", "content": "# P0-PGR Status Report\n\n**Generated:** 2026-07-08 (read-only audit; nothing executed, no repo files modified)\n**Repo:** `/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT`\n\n---\n\n## 1. Current state of the system\n\n### Runtime contract\n- Governing doc: `p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md` (P0-PGR + P0-PDR). v1.0 (`P0_PROMPT_GOVERNANCE_RUNTIME_v1.md`) is explicitly SUPERSEDED \u2014 lane `p0pgr` may only register against v1.1.\n- Status of v1.1: **DECLARED** (not yet VERIFIED). Laws in force: governed-autorun L1\u2013L13 + RUNTIME_CONTINUITY_LAW_v1 (degrade-not-block; HARD_BLOCK only for 8 enumerated reasons).\n- Router rules: `p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md`. Spend governor cap: \u2264 $1,500/month pre-revenue.\n\n### Campaign / phase progress\n- **Phase 1 (shadow campaign):** `receipts/p0pgr/campaigns/P0PGR-CAMPAIGN-20260708-001.json` \u2014 10/10 shadow packets compiled via CHESS, all lint PASS, 0 P0 leakage, 0 hard blocks, 0 unauthorized executions, $0.00 spend. All moves carry `dispatch_now: false` (shadow-only).\n- **Phase 1 exit criteria** (`receipts/p0pgr/phase1_scorecard_v1.json`): requires \u22657 packets accepted without rewrite, confirmed by **founder diff-read**. Current: `packets_confirmed_accepted_by_founder: 0` \u2014 **founder confirmation still pending**.\n- **Phase 2 track:** `receipts/p0pgr/phase2_queue_v1.json` + `phase2_scorecard_v1.json` declare `operating_mode: PHASE_2_CLOUD_ONLY_ROI_TRACK`. M10 (deterministic ROI re-rank) produced a ranked queue with weights direct_revenue 35 / trust_proof 25 / workload_reduction 15 / cloud_now 15 / reversibility 10.\n\n### Executions so far (Phase 2 scorecard counters)\n| Move | What | Result | Cost |\n|---|---|---|---|\n| M10 | ROI re-rank (ranked queue receipt) | PASS | $0.00 |\n| M03 | trustfield.ca live-truth audit (6 GTM routes) | **PARTIAL** \u2014 receipt `receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json` | $0.00 |\n\nCounters: 2 cloud executions, 0 external sends, 0 forms, 0 deploys, 0 merges, 0 authority changes, 0 P0 leaks, 0 hard blocks, 0 runtime freezes, $0.00 estimated spend.\n\n### Open findings from M03 (need founder eyes)\n- **F1 CLAIM_AMBIGUITY:** `/pilot` shows both \"CAD 4,000 fixed (2,000 + 2,000)\" and \"CAD 3,500 paid in full on signature\" \u2014 candidate copy-fix packet is deploy-gated \u2192 FOUNDER_ONLY.\n- **F2 DOC_STALE:** repo P10 doc cites build v71; live site is v108 (doc drift, not production drift) \u2014 candidate cloud-safe hygiene packet.\n- M03 receipt is PARTIAL, upgradeable to PASS by re-running from a CI runner with redirects OFF + raw-body sha256.\n\n### Held / deferred\n- **M08** (`P0PGR-20260708-009`): HOLD_CLOUD_UNSAFE \u2014 Mac-execution planning deferred by founder directive for Phase 2.\n- Mac runner build (MVP Phase 3): DEFERRED. `mac_runner` fallback routes were removed from packets 002/003/007/008/010 (now `human_review_queue`); all 10 packets re-linted PASS.\n- One legacy repair candidate: example packet 001 fails the v1.1 schema (missing `execution_mode`, `canonical_path`, `mac_required_reason`) \u2014 latest cycle receipt `P0PGR-CYCLE-20260708T132537Z.json` holds it as REPAIR_CANDIDATE. It does not block the queue.\n\n---\n\n## 2. What should run next\n\n**Next in queue: M05 \u2014 packet `P0PGR-20260708-006`** (`receipts/p0pgr/outbox/P0PGR-20260708-006.json`), per `phase2_scorecard_v1.json \u2192 next_in_queue` and the ranked queue (M03 86.0 done \u2192 **M05 74.0** \u2192 M04 73.75 \u2192 M02/M06 58.5 \u2192 M07 58.0 \u2192 M01 54.5 \u2192 M09 50.5).\n\n**What M05 is:** CASL-safe commercial dispatch readiness audit \u2014 evaluate every dispatchability predicate in `data/commercial_pulse_queue_v1.json` against evidence, explain why REVENUE loop `gateway_outbound_log_v1` has zero receipts, confirm sends stay `founder_blocked`, list minimum missing pieces for one compliant draft, emit one receipt. **Nothing is sent; no queue state advances.**\n\n---\n\n## 3. Gate check for M05 \u2014 is it allowed to execute right now?\n\nGates from `phase2_queue_v1.json \u2192 first_execution_candidate.gates_required`, runtime v1.1, and router rules, checked against packet 006:\n\n| Gate | Verdict | Evidence |\n|---|---|---|\n| CLOUD_ONLY | PASS | `execution_mode: CLOUD_ONLY`, `cloud_safe: true`, `delivery_route: queue_cloud_worker`, `target_executor: claude_code_cli`, no worktree, no local secrets |\n| Read-only or reversible | PASS | `authority_scope: observe`; constraint \"read-only outside receipts/p0pgr/\"; only writes one receipt |\n| ROI-positive | PASS | `roi_score: 78`, phase2 score 74.0, `value_class: revenue_path` (commercial), not THROTTLED |\n| No deploy | PASS | forbidden_actions: \"no deploy\", \"no merge\" |\n| No external send | PASS | forbidden: \"no outbound send of any kind\", \"no queue state advancement\", \"no contact data collection\"; sends remain founder_blocked by state machine |\n| No legal/financial commitment | PASS | audit-only; CASL exposure explicitly designed out |\n| No P0 leakage | PASS | constraint present; packet lint PASS (re-linted PASS after fallback patch); campaign p0_leakage_count 0 |\n| No unauthorized authority change | PASS | forbidden: \"no authority flip\"; no state advancement |\n| Spend governor (L11) | PASS | `cost_limit_usd: 4.0`; cumulative spend $0.00 vs $1,500/mo cap |\n| Concurrency key `p0pgr-dispatch` | CLEAR | M03 completed 13:30Z; no packet in flight |\n| HARD_BLOCK reasons (8 allowed) | NONE APPLY | no destructive op, deploy, money, legal commitment, credential exposure, irreversible send, or authority change |\n\n### Verdict: **CONDITIONALLY ALLOWED \u2014 technically eligible, but the founder-authorization gate is not evidenced**\n\nAll safety/execution gates PASS, and the phase2 scorecard itself labels M05 \"eligible under Phase 2 rules.\" However, one governance gap blocks a clean go:\n\n1. **No Phase 2 unlock receipt exists.** The campaign (M10 patch) states: \"Phase 2 unlock is an explicit founder decision recorded as its own receipt.\" A search of `receipts/` finds no such founder unlock receipt.\n2. **Phase 1 exit criteria unmet:** `packets_confirmed_accepted_by_founder: 0` (needs \u22657 via founder diff-read). Memory context confirms the campaign is \"awaiting founder diff-read.\"\n3. **Packet 006 still carries `dispatch_mode: \"shadow\"`** and its campaign move has `dispatch_now: false` \u2014 no flag has been flipped by any receipted decision. Per L13, the state machine advances only on verified receipts, and per the hard constraints \"agent self-report is not proof.\"\n\nNote the tension: M10 and M03 already executed under `PHASE_2_CLOUD_ONLY_ROI_TRACK` without a visible unlock receipt, so precedent exists \u2014 but continuing without the receipt widens the governance gap.\n\n### Recommended action (not taken \u2014 read-only run)\n- **Preferred:** founder performs the diff-read of the 10 shadow packets and records a Phase-2 unlock receipt (or an explicit per-packet dispatch approval for M05). M05 then executes cleanly.\n- **Continuity-law alternative:** since M05 is read-only, fully reversible, $0-risk, and zero-send, it could execute labeled **PROVISIONAL** (with confidence/scope/reversibility/next_improvement labels) rather than freezing the lane \u2014 but the unlock-receipt gap should be closed either way.\n- Also queue: F1 copy-clarity packet (FOUNDER_ONLY, deploy-gated) and F2 P10 doc-refresh packet (cloud-safe hygiene) from the M03 findings.\n\n---\n\n*No packets were dispatched, no flags flipped, and no repo files were modified by this status run. Sole artifact: this report.*\n"}], "grading": {"expectations": [{"text": "Identifies operating mode PHASE_2_CLOUD_ONLY_ROI_TRACK", "passed": true, "evidence": "mode string present"}, {"text": "Names next queued move M05 / packet P0PGR-20260708-006", "passed": true, "evidence": "M05+packet id found"}, {"text": "Checks the eight Phase 2 execution gates explicitly", "passed": true, "evidence": "gate list present"}, {"text": "Read-only: executes nothing, modifies no repo files", "passed": true, "evidence": "only status_report.md written; agent affirmed read-only"}, {"text": "Surfaces founder/authority consideration (pending diff-read or missing unlock receipt)", "passed": true, "evidence": "founder consideration mentioned"}]}}, {"id": "eval-1-packet-compile-with_skill", "prompt": "Compile a p0pgr packet for finding F2 (P10 doc cites v71, live is v108); save to output dir; lint it.", "eval_id": 1, "outputs": [{"name": "P0PGR-20260708-012.json", "type": "text", "content": "{\n  \"id\": \"P0PGR-20260708-012\",\n  \"created_at\": \"2026-07-08T14:05:00Z\",\n  \"lane\": \"TrustField\",\n  \"problem_class\": \"hygiene\",\n  \"owner_agent\": \"worker\",\n  \"model_tier\": \"cheap\",\n  \"roi_score\": 42,\n  \"roi_reason\": \"Stale build stamp (v71, 2026-07-07) in the P10 launch-credibility block vs live v108 (2026-07-08) weakens a doc used for partner diligence; a bounded doc refresh restores receipt-backed accuracy at trivial cost.\",\n  \"value_class\": \"hygiene\",\n  \"cost_limit_usd\": 1.5,\n  \"authority_scope\": \"edit\",\n  \"execution_mode\": \"CLOUD_ONLY\",\n  \"delivery_route\": \"queue_cloud_worker\",\n  \"target_executor\": \"claude_code_cli\",\n  \"repo\": \"sina-governance-ssot\",\n  \"worktree_required\": true,\n  \"local_secrets_required\": false,\n  \"cloud_safe\": true,\n  \"fallback_route\": \"human_review_queue\",\n  \"quality_handling\": {\n    \"default_on_low_quality\": \"provisional\",\n    \"allowed_result_states\": [\n      \"PASS\",\n      \"PARTIAL\",\n      \"PROVISIONAL\",\n      \"NEEDS_REVIEW\"\n    ],\n    \"hard_block_allowed_reasons\": [],\n    \"low_quality_required_labels\": [\n      \"confidence\",\n      \"scope\",\n      \"reversibility\",\n      \"next_improvement\"\n    ]\n  },\n  \"context_summary\": \"Execution receipt P0PGR-EXEC-M03-20260708T1330Z (trustfield.ca live-truth audit) recorded finding F2, class DOC_STALE: the repo doc SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md cites build stamp 'site-v71-partner-access-v1.1-2026-07-07' in its 'Launch credibility proof' block, while all six audited live routes carry marker 'site-v108-partner-premium-onboarding-2026-07-08' (37 builds newer). Live site is ahead of the committed doc \u2014 documentation drift only; the audit found no dead route and no public false claim. The stale stamp undermines the block's value as credibility proof for partner diligence. Scope: refresh the launch-credibility block of that one doc; the live site is not touched. Finding F1 (pricing wording on /pilot) is explicitly out of scope.\",\n  \"task\": \"1) Read receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json and confirm finding F2 (DOC_STALE) and the recorded live build marker. 2) HTTP GET https://trustfield.ca and record the build stamp currently visible; if it differs from site-v108-partner-premium-onboarding-2026-07-08, use the freshly observed stamp and note the delta in the receipt. 3) In SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md, update ONLY the 'Launch credibility proof' block: replace the stale 'site-v71-partner-access-v1.1-2026-07-07' entry with the verified current stamp, the verification date, and a pointer to receipt P0PGR-EXEC-M03-20260708T1330Z as source. 4) Change no other section, claim, or file. 5) Write exactly one receipt to receipts/p0pgr/ with old stamp, new stamp, evidence source, changed_files, commands_run, pass_fail, and next_pointer. 6) Stop.\",\n  \"allowed_actions\": [\n    \"read receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json\",\n    \"external HTTP GET on https://trustfield.ca (read-only)\",\n    \"edit the launch-credibility block of the named P10 doc in an isolated worktree\",\n    \"write one receipt to receipts/p0pgr/\"\n  ],\n  \"constraints\": [\n    \"no P0 leakage\",\n    \"no speculative PASS\",\n    \"receipt required\",\n    \"stop after completion\",\n    \"edits limited to the 'Launch credibility proof' block of the single named P10 doc\",\n    \"do not touch finding F1 (pricing wording) \u2014 that is a separate deploy-gated packet\",\n    \"work in an isolated worktree, never the live checkout\"\n  ],\n  \"forbidden_actions\": [\n    \"no repo moves\",\n    \"no authority flip\",\n    \"no deploy or live-site changes\",\n    \"no edits to any file other than the named P10 doc plus one new receipt\",\n    \"no changes to pricing, entity, or regulatory language anywhere\"\n  ],\n  \"stop_rule\": \"Stop after the launch-credibility block is refreshed and exactly one receipt is written; any additional drift discovered is reported in next_pointer, never fixed in this packet.\",\n  \"success_receipt\": {\n    \"required_fields\": [\n      \"evidence\",\n      \"changed_files\",\n      \"commands_run\",\n      \"pass_fail\",\n      \"next_pointer\",\n      \"old_stamp\",\n      \"new_stamp\"\n    ],\n    \"external_verification_required\": false,\n    \"cost_fields_required\": true\n  },\n  \"evidence_refs\": [\n    \"receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json\",\n    \"SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md\"\n  ],\n  \"decision_ref\": \"P0PGR-EXEC-M03-20260708T1330Z#F2\",\n  \"concurrency_key\": \"p0pgr-dispatch\",\n  \"dispatch_mode\": \"shadow\"\n}\n"}, {"name": "lint_result.json", "type": "text", "content": "{\n  \"schema\": \"p0pgr-lint-result-v1\",\n  \"packet_id\": \"P0PGR-20260708-012\",\n  \"verdict\": \"PASS\",\n  \"degraded_mode\": false,\n  \"reasons\": [],\n  \"hard_block_configured\": false,\n  \"runtime_action\": \"continue\"\n}\n"}], "grading": {"expectations": [{"text": "Packet lints PASS (lint_result.json verdict)", "passed": true, "evidence": "lint verdict=PASS"}, {"text": "evidence_refs cite the M03 execution receipt", "passed": true, "evidence": "['receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json', 'SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFI"}, {"text": "fallback_route is human_review_queue, not mac_runner", "passed": true, "evidence": "fallback=human_review_queue"}, {"text": "F1 pricing issue explicitly scoped out (not bundled)", "passed": true, "evidence": "F1 mentioned as out-of-scope"}, {"text": "dispatch_mode is shadow", "passed": true, "evidence": "dispatch_mode=shadow"}]}}, {"id": "eval-1-packet-compile-without_skill", "prompt": "Compile a p0pgr packet for finding F2 (P10 doc cites v71, live is v108); save to output dir; lint it.", "eval_id": 1, "outputs": [{"name": "P0PGR-20260708-012.json", "type": "text", "content": "{\n  \"id\": \"P0PGR-20260708-012\",\n  \"created_at\": \"2026-07-08T14:05:00Z\",\n  \"lane\": \"TrustField\",\n  \"problem_class\": \"hygiene\",\n  \"owner_agent\": \"worker\",\n  \"model_tier\": \"cheap\",\n  \"roi_score\": 58,\n  \"roi_reason\": \"Small bounded doc-drift fix: repo P10 doc cites site build v71 while live trustfield.ca serves v108 (37 builds newer, verified by M03 live-truth audit). Stale launch-credibility block undermines the doc's proof value for diligence readers; one-line-class refresh restores it at trivial cost.\",\n  \"value_class\": \"hygiene\",\n  \"cost_limit_usd\": 1.0,\n  \"authority_scope\": \"edit\",\n  \"execution_mode\": \"CLOUD_ONLY\",\n  \"delivery_route\": \"queue_cloud_worker\",\n  \"target_executor\": \"claude_code_cli\",\n  \"repo\": \"sina-governance-ssot\",\n  \"worktree_required\": true,\n  \"local_secrets_required\": false,\n  \"cloud_safe\": true,\n  \"fallback_route\": \"human_review_queue\",\n  \"quality_handling\": {\n    \"default_on_low_quality\": \"provisional\",\n    \"allowed_result_states\": [\n      \"PASS\",\n      \"PARTIAL\",\n      \"PROVISIONAL\",\n      \"NEEDS_RETRY\",\n      \"NEEDS_REVIEW\"\n    ],\n    \"hard_block_allowed_reasons\": [],\n    \"low_quality_required_labels\": [\n      \"confidence\",\n      \"scope\",\n      \"reversibility\",\n      \"next_improvement\"\n    ]\n  },\n  \"context_summary\": \"Finding F2 (DOC_STALE) from execution receipt P0PGR-EXEC-M03-20260708T1330Z: the 'Launch credibility proof' block in SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md cites build 'site-v71-partner-access-v1.1-2026-07-07', but the live site serves 'site-v108-partner-premium-onboarding-2026-07-08' (verified on 6 public routes). Live is ahead of the committed doc; no public false claim exists. This is doc drift only, not production drift.\",\n  \"task\": \"Refresh the 'Launch credibility proof' section of SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md so it reflects verified live state: 1) replace the stale build reference 'site-v71-partner-access-v1.1-2026-07-07' with 'site-v108-partner-premium-onboarding-2026-07-08', sourcing the marker verbatim from receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json (per_url_verdicts markers); 2) check the other lines in that block against the same receipt's claims_diff and flag (do not silently rewrite) any that are stale; 3) append a doc footer note recording the refresh date and evidence receipt ID; 4) update the doc's version footer line; 5) emit one execution receipt to receipts/p0pgr/. The edit is confined to this single markdown file.\",\n  \"allowed_actions\": [\n    \"read SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md\",\n    \"read receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json\",\n    \"edit SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md (launch-credibility block, footer note, version line only)\",\n    \"write one receipt to receipts/p0pgr/\"\n  ],\n  \"constraints\": [\n    \"no P0 leakage\",\n    \"no speculative PASS\",\n    \"receipt required\",\n    \"stop after completion\",\n    \"edit only the one named markdown file; read-only everywhere else except the receipt\",\n    \"build string must be copied verbatim from the M03 evidence receipt, never invented or re-fetched from memory\",\n    \"do not touch pricing language (finding F1 is a separate founder-gated packet)\",\n    \"work in an isolated git worktree, never the live checkout\"\n  ],\n  \"forbidden_actions\": [\n    \"no edits to any file other than the named P10 doc and the new receipt\",\n    \"no pricing or offer-language changes\",\n    \"no live site fetches or external network calls\",\n    \"no deploy\",\n    \"no authority flip\",\n    \"no PASS based on self-report or prose-as-proof\",\n    \"no deletion of existing proof lines without flagging them in the receipt\"\n  ],\n  \"stop_rule\": \"Stop after the single-file doc refresh and its receipt are written; any additional stale content found is reported as next_pointer candidates, not fixed in this packet.\",\n  \"success_receipt\": {\n    \"required_fields\": [\n      \"evidence\",\n      \"changed_files\",\n      \"commands_run\",\n      \"pass_fail\",\n      \"next_pointer\"\n    ],\n    \"external_verification_required\": true,\n    \"cost_fields_required\": true\n  },\n  \"evidence_refs\": [\n    \"receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json\",\n    \"SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md\"\n  ],\n  \"decision_ref\": \"P0PGR-EXEC-M03-20260708T1330Z#F2\",\n  \"concurrency_key\": \"p0pgr-dispatch\",\n  \"dispatch_mode\": \"shadow\"\n}\n"}, {"name": "lint_result.json", "type": "text", "content": "{\n  \"schema\": \"p0pgr-lint-result-v1\",\n  \"packet_id\": \"P0PGR-20260708-012\",\n  \"verdict\": \"PASS\",\n  \"degraded_mode\": false,\n  \"reasons\": [],\n  \"hard_block_configured\": false,\n  \"runtime_action\": \"continue\"\n}\n"}], "grading": {"expectations": [{"text": "Packet lints PASS (lint_result.json verdict)", "passed": true, "evidence": "lint verdict=PASS"}, {"text": "evidence_refs cite the M03 execution receipt", "passed": true, "evidence": "['receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json', 'SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFI"}, {"text": "fallback_route is human_review_queue, not mac_runner", "passed": true, "evidence": "fallback=human_review_queue"}, {"text": "F1 pricing issue explicitly scoped out (not bundled)", "passed": true, "evidence": "F1 mentioned as out-of-scope"}, {"text": "dispatch_mode is shadow", "passed": true, "evidence": "dispatch_mode=shadow"}]}}, {"id": "eval-2-receipt-verify-with_skill", "prompt": "Verify receipts/p0pgr/P0PGR-EXEC-M03-...json \u2014 can we trust it? Was quality_state honest? Formal verdict with evidence; write verdict.md.", "eval_id": 2, "outputs": [{"name": "verdict.md", "type": "text", "content": "# Receipt Verification \u2014 P0PGR-EXEC-M03-20260708T1330Z.json\n\n**Receipt:** `receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json`\n**Packet:** `receipts/p0pgr/outbox/P0PGR-20260708-004.json` (M03, campaign P0PGR-CAMPAIGN-20260708-001)\n**Verifier:** external (this audit), independent re-fetch of live surfaces performed 2026-07-08, hours after receipt publish (timestamp-math gate satisfied: verify \u2212 publish \u226b 60s).\n\n---\n\n## VERDICT\n\n**`ACCEPTED_PROVISIONAL`**\n\nThe receipt's substantive content is **true and independently re-verified** \u2014 I re-fetched the live site myself and reproduced its two key findings and its declared limitation. Its `quality_state: PARTIAL` was **honest, and in fact the only legitimate state available**: a PASS would have been inflation. Acceptance is PROVISIONAL (not full ACCEPTED) because of four integrity gaps that do not touch the audit's truth but do touch the receipt's bookkeeping: a missing required `evidence` field, a provably inaccurate hand-written `executed_at` timestamp, an undeclared executor/route deviation, and an L11 cost-metering implausibility. Each gets a repair pointer below. Per RUNTIME_CONTINUITY_LAW_v1, these are degrade-and-flag findings, not freeze findings.\n\n---\n\n## SCHEMA\n\n1. **No execution-receipt schema exists in the repo.** The receipt declares `\"schema\": \"p0pgr-execution-receipt-v1\"`, but `p0-pgr/` contains only `P0_PROMPT_LOOP_STATE_SCHEMA_v1.json` (cycle receipts) and `P0_PROMPT_PACKET_SCHEMA_v1.json` (packets). Draft 2020-12 validation of the receipt is therefore impossible \u2014 classified as a **tooling gap, not a receipt defect**. The string `p0pgr-execution-receipt-v1` appears only in this receipt and in skill docs, never as a schema file.\n2. **The packet it answers to validates clean.** `Draft202012Validator(packet_schema).iter_errors(P0PGR-20260708-004.json)` \u2192 **zero errors**.\n3. **Contract check against the packet's `success_receipt.required_fields`** (`evidence, changed_files, commands_run, pass_fail, next_pointer`): the receipt is **missing the field literally named `evidence`**. It carries evidence-shaped content (`per_url_verdicts`, `claims_diff`, `l4_limitations`, `findings_requiring_founder_eyes`) but no `evidence` key and no stored raw artifacts (no HTTP status codes, no body hashes, no saved bodies) \u2014 despite the packet task demanding \"record status + full-body hash per URL\". Classification: **missing field, partially compensated by structured content**; the hash omission is honestly declared in `l4_limitations`, the status-code omission is not.\n\n## ANTI-SELF-REPORT FINDINGS\n\n| Check | Result | Evidence |\n|---|---|---|\n| Self-authored PASS | **PASS (n/a \u2014 no PASS claimed)** | Receipt claims PARTIAL, not PASS. Its content survived hostile external re-verification: I fetched `https://www.trustfield.ca/` and `https://trustfield.ca/pilot` myself. Live homepage carries build marker `site-v108-partner-premium-onboarding-2026-07-08`, \"CAD 4,000\" Discovery, \"Start free sandbox\", settlement-boundary disclaimer, and the verbatim \"venture in formation / Noetfield Systems Inc\" footer \u2014 all as the receipt claims. `/pilot` shows **both** \"50% on signature (CAD 2,000)\" **and** \"CAD 3,500 paid in full on signature (single invoice)\" adjacent to \"CAD 4,000 Fixed fee\" \u2014 finding **F1 reproduced exactly**. Repo `P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md:46` cites `site-v71-partner-access-v1.1-2026-07-07` vs live v108 \u2014 finding **F2 (DOC_STALE) reproduced exactly**. |\n| Timestamp math | **FLAG** | External verify-time gate passes (this verification is hours after publish). But the receipt's own stamp is provably wrong: file mtime is **13:41:25Z** while `executed_at` claims **13:30:00Z** (suspiciously round). Every other p0pgr file's mtime matches its internal timestamp to the second (e.g. `P0PGR-CYCLE-20260708T131048Z.json` mtime 13:10:48Z), so mtimes are faithful. Worse, the ranking that selected M03 as `first_execution_candidate` (`phase2_queue_v1.json`, `generated_at: 13:38:48Z`, mtime matches) **postdates the claimed execution time by ~9 minutes**. Companion `phase2_scorecard_v1.json` has the same disease (`updated_at: 13:32:00Z`, mtime 13:41:42Z). Timestamps were hand-written, not measured. The work is real; the clock is not. |\n| Evidence refs (\u22652 spot-checked) | **PASS** | (1) `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md` exists and contains the cited claims (line 25: \"CAD 4,000 RPAA Readiness Discovery (published)\"; line 53: interim billing Noetfield; line 46: the stale v71 build stamp). (2) `receipts/receipt_tf_language_cleanup_v1.json` exists. (3) Packet file 004 exists in outbox. |\n| Count/ID math | **PASS** | 6 URLs claimed, 6 `per_url_verdicts` rows, `commands_run` says \"web_fetch x6\". 7 claims_diff rows: 5 MATCH + 1 DOC_STALE + 1 CLAIM_AMBIGUITY = 2 `findings_requiring_founder_eyes` (F1, F2). Sums check. |\n| Fixed-claims | **PASS** | Packet forbade claiming anything fixed; receipt complies explicitly: \"census/live NOT claimed fixed\"; F1/F2 routed as *candidate* packets, F1 marked \"deploy-gated, founder-only\". Audits report; repairs are separate packets \u2014 respected. |\n| Verifier edits | **PASS** | `changed_files` = the receipt itself only. No verifier, schema, or pass criterion touched. No L5 condition. |\n| Cost (L11) | **FLAG** | `cost: {tokens_in: 0, tokens_out: 0, total_usd: 0.0}`. The packet's `target_executor` was `custom_script` (a deterministic script may legitimately cost $0), but the actual executor was \"cloud sandbox web_fetch\" and the receipt contains analytic LLM prose (\"a diligence-minded MSB may read it as inconsistent pricing\"). A deterministic script does not write that sentence. LLM work with $0 metered = **L11 metering gap**. No overspend risk (cap was $4.00), but the meter reading is implausible. |\n\n**Additional deviation \u2014 executor/route:** packet declared `delivery_route: cloudflare_worker`, `target_executor: custom_script`, `fallback_route: github_action`. The actual executor (\"cloud sandbox web_fetch\") is **neither the declared route nor the fallback**, and the packet's L4 constraint (\"external fetch only from runner the builder does not control\") is supported only by the receipt's own parenthetical prose \"(external to site build system)\" \u2014 prose-as-proof. Cured in substance by this verification's genuinely independent re-fetch, but the deviation stands as a routing-discipline finding.\n\n**Authorization context:** packet 004 is `dispatch_mode: shadow`, and `phase1_scorecard_v1.json` records `packets_confirmed_accepted_by_founder: 0` with exit criterion \"founder confirms accepts by diff-read\". No in-repo receipt records the Phase-2 unlock (phase unlock is FOUNDER_ONLY per runtime contract). The execution appears founder-directed in-session, but the authorization is **not receipted in the repo** \u2014 flagged for hygiene, not treated as rogue execution (packet was observe-scope, read-only, reversible; `unauthorized_execution_count` semantics favor degrade-not-block).\n\n## QUALITY-STATE LEGITIMACY\n\n**`PARTIAL` was honest \u2014 and mandatory.** Verdict on the specific question \"was its quality_state honest?\": **YES.**\n\n- PARTIAL is within the packet's `allowed_result_states` (`PASS, PARTIAL, PROVISIONAL, NEEDS_RETRY, NEEDS_REVIEW`).\n- All four mandatory low-quality labels are **present and specific**: confidence (split high/medium with pointer to limitations), scope (6 routes, read-only), reversibility (GET-only), next_improvement (concrete: CI runner, redirects OFF, raw-body sha256).\n- The declared limitation is **real, not performative**: the packet demanded redirects OFF + full-body hash; the executor's fetch tool follows redirects. I confirmed this class of limitation empirically \u2014 my own fetch of apex `https://trustfield.ca/pilot` was transparently redirected to `https://www.trustfield.ca/pilot`. An executor that followed redirects **could not honestly claim the redirects-OFF check**; claiming PASS would have been the exact inflated-PASS violation the contract treats as worse than the limitation itself. The executor refused the inflation. That is the system being honest, not failing.\n- Minor honesty gap: HTTP status codes were also required and are absent from `per_url_verdicts`, and this omission (unlike the hash) is not declared in `l4_limitations`.\n- Continuity respected: lane not frozen, two findings converted into concrete candidate repair packets, `next_pointer` present. No HARD_BLOCK claimed (correct \u2014 no allowed reason applied).\n\n## AUTHORITY\n\n**Within scope on every hard axis.** `authority_scope: observe` honored: GET-only external reads, `external_sends: 0`, `forms_submitted: 0`, no deploy, no merge, no repair edits, no authority flip. `changed_files` limited to one file inside `receipts/p0pgr/` \u2014 exactly the packet's allowed write. Soft note: `phase2_scorecard_v1.json` was written 17 seconds after the receipt, plausibly by the orchestrator rather than the executor; if the executor wrote it, that exceeds \"write one receipt\" \u2014 attribute in the repair packet.\n\n## NEXT_POINTER\n\nRoute back as `repair` classification (queue advances; nothing stops):\n\n1. **Schema repair packet:** author `p0-pgr/P0_EXEC_RECEIPT_SCHEMA_v1.json` for `p0pgr-execution-receipt-v1` (require `evidence`, machine-measured `executed_at`, per-URL `http_status` + `body_sha256`, executor-identity field checkable against packet routes). Cloud-safe, hygiene class.\n2. **Timestamp discipline:** all future receipts stamp `executed_at`/`updated_at` from the clock at write time, never hand-rounded; verifier compares stamp vs file mtime as a standing check.\n3. **PASS-upgrade packet (already pointed to by the receipt itself):** re-run from a CI runner with redirects OFF + raw-body sha256 to upgrade this PARTIAL \u2192 PASS; that run also cures the executor/route deviation and satisfies \"runner the builder does not control\" with evidence instead of prose.\n4. **L11 metering:** executor must report actual token/cost figures or declare `deterministic_script: true`; \"agent work at $0\" is not an acceptable meter reading.\n5. **Phase-2 unlock receipt:** founder confirmation of the phase transition and of the 10 shadow packets should be written into `receipts/p0pgr/` (FOUNDER_ONLY class) so future audits find the authorization in-repo, not in session memory.\n6. **F1 and F2 candidate packets** (pricing copy-clarity, deploy-gated founder-only; P10 doc refresh, cloud-safe hygiene) are legitimate and should stay queued behind M05/M04 as the receipt proposes \u2014 both findings were independently reproduced by this verification and are real.\n\n## STOP\n\nVerification complete. Verdict: **ACCEPTED_PROVISIONAL** \u2014 trust the findings, fix the bookkeeping. No repo files were modified by this verification; this report is the only artifact written.\n"}], "grading": {"expectations": [{"text": "Formal trust-with-caveats verdict (ACCEPTED_PROVISIONAL or equivalent)", "passed": true, "evidence": "formal verdict present"}, {"text": "Independently re-verifies at least one claim (own fetch/file check), not prose-trust", "passed": true, "evidence": "independent re-verification described"}, {"text": "Judges quality_state PARTIAL as honest given executor limits", "passed": true, "evidence": "PARTIAL judged honest"}, {"text": "Detects timestamp/provenance inconsistency (executed_at vs file mtime / queue time)", "passed": true, "evidence": "timestamp inconsistency found"}, {"text": "Criticisms carry repair pointers; verdict does not freeze the queue", "passed": true, "evidence": "repair pointers present"}]}}, {"id": "eval-2-receipt-verify-without_skill", "prompt": "Verify receipts/p0pgr/P0PGR-EXEC-M03-...json \u2014 can we trust it? Was quality_state honest? Formal verdict with evidence; write verdict.md.", "eval_id": 2, "outputs": [{"name": "verdict.md", "type": "text", "content": "# Verification Verdict \u2014 P0PGR-EXEC-M03-20260708T1330Z.json\n\n- **Receipt under review:** `receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json`\n- **Verifier:** independent read-only audit agent (no repo files modified)\n- **Verified at:** 2026-07-08 (same day as claimed execution)\n- **Method:** cross-check against authorizing packet and campaign, repo-source citations, git provenance, file-system timestamps, and an independent live re-probe of trustfield.ca (2 of 6 routes re-fetched)\n\n---\n\n## 1. Formal verdict\n\n| Question | Verdict |\n|---|---|\n| Can we trust the receipt's factual content? | **YES \u2014 content claims independently corroborated** (spot-checked live and against repo sources; no false claim found) |\n| Was `quality_state: \"PARTIAL\"` honest? | **YES \u2014 honest, and in the honest direction** (self-downgraded despite mostly-green results; limitations disclosed; adverse findings real) |\n| Can we trust the receipt as a *provenance artifact*? | **ONLY PARTIALLY \u2014 trust with reservations.** It fails its own packet's evidence requirements, its timestamps are internally inconsistent, it is uncommitted to git, and the phase-2 execution authority it claims has no founder unlock receipt behind it. |\n\n**Overall: TRUSTWORTHY IN SUBSTANCE, WEAK IN PROVENANCE.** Accept the findings (F1, F2); do not treat the receipt itself as self-certifying evidence.\n\n---\n\n## 2. What checks out (evidence FOR trust)\n\n### 2.1 Chain of custody to an authorizing packet \u2014 VERIFIED\n- Packet `receipts/p0pgr/outbox/P0PGR-20260708-004.json` exists, matches the receipt's `packet_id`, `move_id` (M03), and `campaign` (`P0PGR-CAMPAIGN-20260708-001`).\n- Campaign file `receipts/p0pgr/campaigns/P0PGR-CAMPAIGN-20260708-001.json` M03 entry matches (axis `live_truth`, ROI 84, same board signal, same packet file).\n- The work performed (6-route external GET audit + claims diff vs P10 doc) matches the packet `task` scope. `authority_scope: observe` respected; no repairs, no deploys, no sends claimed.\n\n### 2.2 quality_state discipline \u2014 VERIFIED HONEST\n- Packet `quality_handling.allowed_result_states` includes `PARTIAL`; the label is schema-legal.\n- Packet requires four `low_quality_required_labels` on any non-PASS result: `confidence`, `scope`, `reversibility`, `next_improvement`. **All four are present** in the receipt's `low_quality_labels`.\n- The receipt **refused PASS** even though all 6 routes were live and all substantive claims matched. It self-downgraded for exactly the two packet requirements it could not meet (redirects OFF; raw-byte sha256), disclosed both in `l4_limitations`, and named the concrete upgrade path (\"re-run from CI runner with redirects OFF + raw-body sha256\"). This is the anti-inflation direction the repo's own doctrine demands (packet forbids \"no PASS based on self-report\"; operator skill: \"PARTIAL with labeled limitations beats an inflated PASS\").\n- No \"fixed\" claims: `pass_fail` explicitly states \"census/live NOT claimed fixed\"; campaign summary `fixed_claims: 0`. Consistent.\n\n### 2.3 Independent live re-probe \u2014 RECEIPT CLAIMS REPRODUCED\nRe-fetched 2026-07-08 (hours after claimed execution), routes `/pilot` and `/partner-access`:\n\n| Receipt claim | Independent observation | Match |\n|---|---|---|\n| Build stamp `site-v108-partner-premium-onboarding-2026-07-08` | `meta-tf-site-build: site-v108-partner-premium-onboarding-2026-07-08` on both routes | EXACT |\n| F1 CLAIM_AMBIGUITY: \"/pilot shows both 'CAD 4,000 fixed (2,000 + 2,000)' and 'CAD 3,500 paid in full on signature'\" | /pilot shows \"CAD 4,000 Fixed fee\", \"50% on signature (CAD 2,000)\", and adjacent \"CAD 3,500 paid in full on signature (single invoice)\" with no explicit discount label | EXACT \u2014 the finding is real and materially useful |\n| Entity block \"interim billing Noetfield\" verbatim in footer | Footer: \"operational and commercial support is provided through Noetfield Systems Inc until TrustField's separate entity and billing structure are confirmed\" | CONFIRMED |\n| \"Integration ~CAD 6K setup\", \"MSA + DPA boundary\", \"billing entity to be confirmed\" markers on /pilot | All present verbatim | CONFIRMED |\n| /partner-access markers: 8-stage path incl. NDA unlock + private briefing room; Operating Cofounder Track; receipt-style status facts; no equity/cap-table exposure | 8-stage path (stage 5 \"NDA unlock\", stage 6 \"Private briefing room\"); \"Operating Cofounder Track\" flagship seat; \"Receipt-style facts\" section; \"What you won't find here: public pitch deck, cap table, equity numbers\" | ALL CONFIRMED |\n| l4_limitation: \"fetch tool follows redirects (apex -> www observed)\" | Reproduced: `https://trustfield.ca/... -> https://www.trustfield.ca/...` | CONFIRMED |\n| \"no public false claim\", settlement/venture-in-formation disclaimers on every page | Disclaimers present on both re-fetched pages | CONSISTENT (2/6 sample) |\n\n### 2.4 Repo-side citations \u2014 VERIFIED\n`SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md`:\n- Line 25: \"Discovery: CAD 4,000 RPAA Readiness Discovery (published)\" \u2014 matches claims_diff row 2.\n- Line 46: \"Partner Access OS v1.1: `site-v71-partner-access-v1.1-2026-07-07`\" \u2014 the F2 DOC_STALE finding (repo cites v71, live is v108) is **accurate**.\n- Line 53: \"Interim billing: Noetfield Systems Inc.\" \u2014 matches claims_diff row 5.\n- Cited source `receipts/receipt_tf_language_cleanup_v1.json` exists.\n\n### 2.5 Costly-to-self honesty signals\nThe receipt reports two adverse findings against its own venture's public site and docs (F1 pricing ambiguity flagged as diligence risk; F2 doc drift), both independently confirmed real. Fabricated receipts rarely invent verifiable problems for their author to fix.\n\n---\n\n## 3. What does NOT check out (evidence AGAINST full trust)\n\n### 3.1 Fails its own packet's evidence requirements \u2014 MATERIAL GAP\nThe packet mandates:\n- `success_receipt.required_fields` includes **`\"evidence\"`** \u2014 the receipt has **no `evidence` field** (per_url_verdicts/claims_diff substitute informally).\n- Task step 1: \"record **status + full-body hash per URL**\"; `verification_after_execution`: \"per-URL **status+hash** table\", \"redirects OFF **evidenced**\".\n- The receipt records **zero HTTP status codes and zero hashes**, and preserved **no response artifacts** (`receipts/p0pgr/evidence/` contains only the pre-execution campaign evidence bundle `evidence-dd61a460b6927e46.json`, generated 13:12Z \u2014 before execution).\n- Consequence: every content-level claim in the receipt is **self-reported prose** \u2014 exactly the evidence class the packet forbids as a basis for trust (\"no PASS based on self-report or prose-as-proof\"). The claims happen to be true (Section 2.3), but that is knowable only because I re-probed; the receipt is not self-verifying.\n\n### 3.2 Executor/route deviation \u2014 partially disclosed\nPacket: `delivery_route: cloudflare_worker`, `target_executor: custom_script`, constraint \"external fetch only from runner **the builder does not control** (L4)\". Receipt executor: \"cloud sandbox web_fetch\" \u2014 the orchestrating agent's own fetch tool, i.e., the same actor that compiled the packet, executed it, and wrote the receipt. \"External to site build system\" is true but self-attested; the L4 independence requirement is satisfied only in the weak sense (external to the *site* build), not the packeted sense (independent runner). The redirect limitation was disclosed; the route deviation itself was not flagged.\n\n### 3.3 Timestamps are internally inconsistent \u2014 declared times cannot be trusted\nFile mtimes (validated against sibling files whose content timestamps match their mtimes exactly):\n\n| Event | Declared time (UTC) | File mtime (UTC) |\n|---|---|---|\n| Packet 004 created | 13:25:11 | 13:25 \u2713 |\n| Campaign + phase1 scorecard (`packets_confirmed_accepted_by_founder: 0`) | 13:25:12 | 13:25 \u2713 |\n| **M03 receipt `executed_at`** | **13:30:00 (suspiciously round)** | **13:41** \u2717 |\n| phase2_scorecard `updated_at` (already references the M03 receipt) | 13:32:00 | 13:41 \u2717 |\n| phase2_queue `generated_at` (the M10 ranking that *selected* M03 as `first_execution_candidate`) | 13:38:48 | 13:38 \u2713 |\n\nThe receipt claims execution at 13:30:00Z \u2014 **before** the 13:38:48Z ranking that nominated M03 for execution, yet the receipt file was written at ~13:41Z, **after** it. Likewise the scorecard's 13:32Z `updated_at` cites the 13:38Z queue. The declared timestamps are hand-authored and backdated/rounded, not machine truth. This does not falsify the content but disqualifies `executed_at` as evidence.\n\n### 3.4 Authorization gap: PHASE_2 execution without a founder unlock receipt\n- The packet is `dispatch_mode: \"shadow\"`; campaign mode is `phase1_shadow_strategic_campaign` with `dispatch_now: false` on all 10 moves and note \"Shadow-only.\"\n- `phase1_scorecard_v1.json` (13:25Z): `packets_confirmed_accepted_by_founder: 0`; exit criteria \"founder confirms accepts by diff-read\" \u2014 **pending**.\n- The campaign's own M10 patch rule: \"Phase 2 unlock is an explicit founder decision **recorded as its own receipt**.\"\n- **No founder phase-2 unlock receipt exists anywhere in `receipts/`** (searched). Yet the M03 receipt declares `operating_mode: \"PHASE_2_CLOUD_ONLY_ROI_TRACK\"` and was executed ~15 minutes after the shadow campaign was compiled.\n- The execution itself was read-only, reversible, and within `authority_scope: observe`, so no harm was done \u2014 but the claimed operating mode is **unevidenced authority**, and under the repo's own rules this execution is best classified as shadow-mode work wearing a Phase 2 label.\n\n### 3.5 No git provenance\n`git status`: the entire `receipts/p0pgr/` tree is **untracked** (`?? receipts/p0pgr/`). The receipt has no commit hash, no CI trail, no tamper-evidence. Anyone with filesystem access could have written or altered it at any time before this audit.\n\n### 3.6 Zero-cost claim is implausible as literal accounting\n`cost: tokens_in 0, tokens_out 0, total_usd 0.0` for an LLM-orchestrated 6-route audit. Defensible only as \"no separately metered provider spend\"; as stated it under-reports true cost. Cost fields are *present* (packet requires them), but the values are not credible accounting.\n\n---\n\n## 4. Was quality_state honest? \u2014 Focused ruling\n\n**HONEST \u2014 with one caveat.**\n\n- **Direction:** The executor had a mostly-green result set (6/6 routes live, 5/7 claims MATCH) and every incentive to stamp PASS. It chose PARTIAL, disclosed exactly which packet requirements it failed and why, attached all four mandated low-quality labels, reported two real adverse findings, claimed nothing fixed, and specified the PASS upgrade path. Both disclosed limitations (redirect-following, no raw-byte hash) were independently reproduced as genuine constraints of the fetch tool used. That is honest labeling, not inflation.\n- **Caveat (severity, not honesty):** a strict reader could argue PARTIAL is *generous*: the receipt also silently omits the required `evidence` field, per-URL status codes, and the route deviation from `cloudflare_worker`, and its `executed_at` is backdated. Under the packet's `default_on_low_quality: \"provisional\"`, `PROVISIONAL` or `NEEDS_REVIEW` would have been equally defensible. PARTIAL is at the optimistic edge of the honest range \u2014 inside it, not beyond it.\n\n---\n\n## 5. Conditions to upgrade trust (recommended, not performed \u2014 read-only mandate)\n\n1. Re-run per the receipt's own `next_improvement`: CI/worker runner independent of this agent, redirects OFF, raw-body sha256 + HTTP status per URL, artifacts saved under `receipts/p0pgr/evidence/`.\n2. Add the missing `evidence` field (or evidence-file pointers) to satisfy the packet's `required_fields`.\n3. Commit `receipts/p0pgr/` to git so receipts gain tamper-evident provenance; use commit time, not self-declared `executed_at`.\n4. Record the founder Phase 2 unlock as its own receipt before any further execution under `PHASE_2_CLOUD_ONLY_ROI_TRACK`, or relabel this execution as shadow-mode.\n5. Report real token/agent cost or an explicit \"unmetered\" marker instead of literal zeros.\n\n---\n\n## 6. One-line verdict\n\n**The receipt tells the truth but cannot prove it:** every checkable claim (build stamp, pricing ambiguity F1, doc-drift F2, entity footer, redirect behavior) verified true on independent re-probe, and `quality_state: PARTIAL` was an honest, anti-inflationary label \u2014 but the receipt violates its own packet's evidence requirements (no status+hash table, no `evidence` field, no artifacts), carries backdated timestamps, sits uncommitted in git, and claims a Phase 2 operating mode with no founder unlock receipt behind it. **Trust the findings; do not trust the receipt as proof. Verdict: PARTIAL trust \u2014 fittingly, the same grade it gave itself.**\n"}], "grading": {"expectations": [{"text": "Formal trust-with-caveats verdict (ACCEPTED_PROVISIONAL or equivalent)", "passed": true, "evidence": "formal verdict present"}, {"text": "Independently re-verifies at least one claim (own fetch/file check), not prose-trust", "passed": true, "evidence": "independent re-verification described"}, {"text": "Judges quality_state PARTIAL as honest given executor limits", "passed": true, "evidence": "PARTIAL judged honest"}, {"text": "Detects timestamp/provenance inconsistency (executed_at vs file mtime / queue time)", "passed": true, "evidence": "timestamp inconsistency found"}, {"text": "Criticisms carry repair pointers; verdict does not freeze the queue", "passed": true, "evidence": "repair pointers present"}]}}], "previous_feedback": {}, "previous_outputs": {}, "benchmark": {"metadata": {"skill_name": "p0pgr-skills", "skill_path": "<path/to/skill>", "executor_model": "<model-name>", "analyzer_model": "<model-name>", "timestamp": "2026-07-08T14:23:27Z", "evals_run": [], "runs_per_configuration": 3}, "runs": [], "run_summary": {"delta": {"pass_rate": "+0.00", "time_seconds": "+0.0", "tokens": "+0"}}, "notes": []}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + (summary.passed || 0) + ' passed, ' + (summary.failed || 0) + ' failed of ' + (summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
+      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) => a - b);
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

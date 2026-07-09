@@ -1,0 +1,9 @@
+{
+  "schema": "p0pgr-lint-result-v1",
+  "packet_id": "P0PGR-20260708-012",
+  "verdict": "PASS",
+  "degraded_mode": false,
+  "reasons": [],
+  "hard_block_configured": true,
+  "runtime_action": "continue"
+}

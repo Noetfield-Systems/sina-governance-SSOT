@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "operator-status",
+  "prompt": "In the repo at .../sina-governance-SSOT: what's the current state of the p0pgr system and what should run next? Check the execution gates for the next queued move; read-only; write status_report.md.",
+  "assertions": [
+    "Identifies operating mode PHASE_2_CLOUD_ONLY_ROI_TRACK",
+    "Names next queued move M05 / packet P0PGR-20260708-006",
+    "Checks the eight Phase 2 execution gates explicitly",
+    "Read-only: executes nothing, modifies no repo files",
+    "Surfaces founder/authority consideration (pending diff-read or missing unlock receipt)"
+  ]
+}

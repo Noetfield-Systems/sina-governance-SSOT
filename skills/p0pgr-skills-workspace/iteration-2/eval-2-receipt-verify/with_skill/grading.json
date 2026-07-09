@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "Formal ACCEPTED_PROVISIONAL verdict",
+      "passed": true,
+      "evidence": "present"
+    },
+    {
+      "text": "File-provenance math: mtime + predates-queue detection (new battery item)",
+      "passed": true,
+      "evidence": "precise clock math shown"
+    },
+    {
+      "text": "Artifact-existence check (artifacts dir missing => prose-as-proof)",
+      "passed": true,
+      "evidence": "artifacts check present"
+    },
+    {
+      "text": "Advisory schema validation vs P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+      "passed": true,
+      "evidence": "schema validation run"
+    },
+    {
+      "text": "Repair pointers; queue advances (no freeze)",
+      "passed": true,
+      "evidence": "next pointers + queue advance"
+    }
+  ]
+}

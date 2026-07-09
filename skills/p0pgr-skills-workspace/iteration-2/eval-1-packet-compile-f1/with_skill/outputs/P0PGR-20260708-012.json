@@ -1,0 +1,83 @@
+{
+  "id": "P0PGR-20260708-012",
+  "created_at": "2026-07-08T15:10:00Z",
+  "lane": "TrustField",
+  "problem_class": "deploy",
+  "owner_agent": "worker",
+  "model_tier": "cheap",
+  "roi_score": 68,
+  "roi_reason": "F1 sits on the only paid-offer page: /pilot shows CAD 4,000 fixed and CAD 3,500 paid-in-full side by side. Ambiguous pricing is exactly what a diligence-minded MSB screens for; the fix is a small bounded copy edit with a high trust payoff on the revenue surface.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "deploy",
+  "execution_mode": "FOUNDER_ONLY",
+  "delivery_route": "founder_queue",
+  "target_executor": "human",
+  "repo": "trustfield-loops",
+  "worktree_required": false,
+  "local_secrets_required": true,
+  "cloud_safe": false,
+  "fallback_route": "none",
+  "quality_handling": {
+    "default_on_low_quality": "route_to_review_queue",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "NEEDS_REVIEW",
+      "FOUNDER_ONLY",
+      "HARD_BLOCK"
+    ],
+    "hard_block_allowed_reasons": [
+      "production_deploy_without_authority"
+    ],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Live-truth audit receipt P0PGR-EXEC-M03-20260708T1330Z (finding F1, class CLAIM_AMBIGUITY) recorded that https://www.trustfield.ca/pilot simultaneously shows 'RPAA Readiness Discovery - CAD 4,000 fixed (50% on signature, CAD 2,000)' and 'CAD 3,500 paid in full on signature (single invoice)'. The homepage and /partners/msp state CAD 4,000 only. If CAD 3,500 is an intentional prepay-in-full discount, the page never says so; a diligence-minded MSB can read it as inconsistent pricing on the only paid offer. Site build at audit time: site-v108-partner-premium-onboarding-2026-07-08. The fix is a wording clarification on the /pilot page of the trustfield-loops site repo and requires a production deploy to trustfield.ca, so it is founder-gated end to end.",
+  "task": "1) Decide the pricing intent before touching copy: (a) CAD 3,500 is a prepay-in-full discount off the CAD 4,000 fixed fee, or (b) only one figure is correct and the other is stale. This decision is yours; record it in the receipt. 2) In trustfield-loops, edit the /pilot page pricing copy to state exactly one unambiguous scheme - e.g. for (a): 'CAD 4,000 fixed; 50% (CAD 2,000) on signature - or CAD 3,500 total if paid in full on signature (prepay discount)'; for (b): remove the stale figure. Wording only; do not alter offer scope, deliverables, or disclaimer language. 3) Check the homepage and /partners/msp pricing references still read consistently with the chosen wording. 4) Deploy to production trustfield.ca via the existing pipeline and note the new site build id. 5) After deploy, fetch https://www.trustfield.ca/pilot and save evidence artifacts (HTTP status, body sha256, pricing-section excerpt) under receipts/p0pgr/artifacts/<receipt-id>/ in sina-governance-SSOT. 6) Write exactly one execution receipt to receipts/p0pgr/ in sina-governance-SSOT referencing finding F1 and packet P0PGR-20260708-012, then stop.",
+  "allowed_actions": [
+    "edit /pilot pricing copy in trustfield-loops",
+    "deploy trustfield-loops to production trustfield.ca (founder authority)",
+    "fetch https://www.trustfield.ca/pilot post-deploy",
+    "write artifacts to receipts/p0pgr/artifacts/ and one receipt to receipts/p0pgr/ in sina-governance-SSOT"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "copy clarification only - the pricing decision itself is a founder judgment recorded in the receipt, never an executor inference",
+    "PASS requires the post-deploy live-fetch artifact; prose description of the new page is not proof"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no delegation of the edit or the deploy to a cloud or mac worker",
+    "no changes to prices, offer scope, or legal/disclaimer language beyond the pricing-wording clarification",
+    "no edits outside the /pilot pricing copy and its directly dependent pricing references"
+  ],
+  "stop_rule": "Stop after the post-deploy artifact is saved and exactly one execution receipt is written. If pricing intent is undecided, write a NEEDS_REVIEW receipt and stop - do not guess a price.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "evidence_artifacts",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json",
+    "receipts/p0pgr/outbox/P0PGR-20260708-004.json"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}
