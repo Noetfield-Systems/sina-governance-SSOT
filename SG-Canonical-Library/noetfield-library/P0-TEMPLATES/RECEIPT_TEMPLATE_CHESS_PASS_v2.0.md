@@ -1,0 +1,40 @@
+# RECEIPT_TEMPLATE_CHESS_PASS_v2.0
+
+```yaml
+receipt_name:
+status: PASS | PARTIAL | FAILED
+agent:
+timestamp:
+repo:
+  path:
+  branch:
+  commit_before:
+  commit_after:
+  remote:
+deploy:
+  target:
+  build_marker:
+  url:
+chess_pass:
+  move:
+  action_label:
+  likely_misreads:
+  second_move_risks:
+  third_move_consequences:
+  patch_applied:
+protected_feature_verification:
+  preserved:
+  missing:
+  intentionally_removed:
+verification:
+  routes:
+  tests:
+  live_html_proof:
+  browser_proof:
+  monitor:
+rollback:
+  trigger:
+  rollback_commit_or_build:
+non_blocking_residuals:
+final_status:
+```

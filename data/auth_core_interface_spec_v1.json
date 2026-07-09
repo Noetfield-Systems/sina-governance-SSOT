@@ -1,0 +1,58 @@
+{
+  "schema": "auth_core_interface_spec_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-08T07:00:00Z",
+  "authority": "SG (SSSOT)",
+  "package_name": "@noetfield/auth-core",
+  "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
+  "identity_plane": {
+    "supabase_project": "portfolio_spine",
+    "supabase_ref": "ldfruywifqnfpwsfgmdl"
+  },
+  "exports": {
+    "createBrowserClient": "@supabase/ssr browser adapter",
+    "createServerClient": "@supabase/ssr cookie adapter",
+    "middleware": "token refresh + route guard helper",
+    "types": [
+      "Venture",
+      "Role",
+      "AppMetadata"
+    ]
+  },
+  "required_routes": [
+    "/auth/sign-in",
+    "/auth/sign-up",
+    "/auth/callback",
+    "/auth/sign-out"
+  ],
+  "server_law": "Use supabase.auth.getClaims() on server \u2014 not getSession() alone",
+  "session_law": "Cache-Control: private, no-store on auth/session routes",
+  "env_public": [
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"
+  ],
+  "env_forbidden_in_browser": [
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "SUPABASE_SERVICE_KEY"
+  ],
+  "redirect_callbacks": [
+    "https://sourcea.app/auth/callback",
+    "https://www.noetfield.com/auth/callback",
+    "https://www.trustfield.ca/auth/callback",
+    "http://localhost:3000/auth/callback"
+  ],
+  "profiles_schema": {
+    "table": "public.profiles",
+    "columns": [
+      "id",
+      "venture",
+      "role",
+      "created_at"
+    ],
+    "venture_check": [
+      "sourcea",
+      "noetfield",
+      "trustfield"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "TrustField Partner Access",
+      "line": 3,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    },
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "TrustField Partner Access",
+      "line": 100,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

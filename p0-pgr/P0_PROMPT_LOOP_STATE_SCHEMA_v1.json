@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noetfield:p0pgr:loop-state:v1.1",
+  "title": "P0-PGR Loop State v1.1 (delivery-aware, continuity-law states)",
+  "description": "State of one P0-PGR cycle. Deterministic (L13): same evidence bundle -> same classification -> same decision. Written to receipts/p0pgr/ every cycle including IDLE_NO_WORK.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["cycle_id", "started_at", "state", "evidence", "cost"],
+  "properties": {
+    "cycle_id": {
+      "type": "string",
+      "pattern": "^P0PGR-CYCLE-[0-9]{8}T[0-9]{6}Z$"
+    },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": "string", "format": "date-time" },
+    "state": {
+      "enum": ["RUNNING", "IDLE_NO_WORK", "BLOCKED_WITH_REASON", "COMPLETE", "FAILED_WITH_RECEIPT", "TRIAGE_REQUIRED", "THROTTLED_ROI"]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources_read", "row_ids", "stale_sources"],
+      "properties": {
+        "sources_read": { "type": "array", "items": { "type": "string" } },
+        "row_ids": { "type": "array", "items": { "type": "string" } },
+        "stale_sources": {
+          "type": "array", "items": { "type": "string" },
+          "description": "Sources failing the staleness gate — marked STALE_DATA, never guessed (L10)"
+        },
+        "bundle_hash": { "type": "string", "description": "Hash of evidence bundle for L13 replay" }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["problem_class", "reason", "evidence_refs"],
+      "properties": {
+        "problem_class": {
+          "enum": ["blocker", "repair", "verification", "revenue", "hygiene", "research", "deploy", "architecture", "founder_escalation"]
+        },
+        "reason": { "type": "string", "minLength": 10 },
+        "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["strategy", "critic_verdict"],
+        "properties": {
+          "strategy": { "type": "string" },
+          "est_cost_usd": { "type": "number" },
+          "authority_scope": { "enum": ["observe", "edit", "deploy", "blocked"] },
+          "critic_verdict": { "enum": ["survives", "killed"] },
+          "critic_reason": { "type": "string" }
+        }
+      }
+    },
+    "advisor_selection": { "type": "string" },
+    "roi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "value_class", "model_tier", "reduces_founder_workload"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "value_class": { "enum": ["revenue_path", "proof_asset", "risk_reduction", "hygiene", "none"] },
+        "model_tier": { "enum": ["cheap", "capable", "premium"] },
+        "reduces_founder_workload": { "type": "boolean" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "reason"],
+      "properties": {
+        "verdict": {
+          "enum": ["DISPATCH_CLOUD", "DISPATCH_MAC", "HUMAN_REVIEW_PACKET", "VERIFY_FIRST", "HOLD", "REJECT_LOW_ROI", "FOUNDER_ONLY"]
+        },
+        "reason": { "type": "string", "minLength": 10 }
+      }
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^P0PGR-[0-9]{8}-[0-9]{3}$"
+    },
+    "dispatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target": { "enum": ["architect", "sg", "sourcea_brain", "noos", "worker", "verifier", "revenue_agent"] },
+        "mode": { "enum": ["shadow", "semi_auto", "auto"] },
+        "execution_mode": { "enum": ["CLOUD_ONLY", "HYBRID_MAC", "HUMAN_REVIEW", "FOUNDER_ONLY"] },
+        "delivery_route": { "enum": ["queue_cloud_worker", "github_action", "railway_worker", "cloudflare_worker", "mac_runner", "human_review_queue", "founder_queue"] },
+        "target_executor": { "enum": ["cursor_cli", "claude_code_cli", "codex_cli", "github_action", "railway_worker", "cloudflare_worker", "custom_script", "verifier", "human"] },
+        "fallback_used": { "type": "boolean" },
+        "dispatched_at": { "type": "string", "format": "date-time" },
+        "founder_approved": { "type": "boolean", "description": "required true in shadow mode and for high-risk in semi_auto" }
+      }
+    },
+    "receipt_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "quality_state": {
+          "enum": ["PASS", "PARTIAL", "DEGRADED", "SANDBOXED", "PROVISIONAL", "NEEDS_RETRY", "NEEDS_REVIEW", "FOUNDER_ONLY", "HARD_BLOCK"],
+          "description": "RUNTIME_CONTINUITY_LAW_v1: non-binary. Weak output is labeled and kept moving, never silently killed."
+        },
+        "hard_block_reason": {
+          "enum": ["destructive_action", "production_deploy_without_authority", "money_movement", "legal_financial_commitment", "credential_or_security_exposure", "irreversible_external_send", "authority_change", "merge_L5_phase_unlock"],
+          "description": "Required when quality_state is HARD_BLOCK; any other reason is malformed"
+        },
+        "low_quality_labels": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "confidence": { "type": "string" },
+            "scope": { "type": "string" },
+            "reversibility": { "type": "string" },
+            "next_improvement": { "type": "string" }
+          },
+          "description": "Mandatory when quality_state is PARTIAL/DEGRADED/SANDBOXED/PROVISIONAL"
+        },
+        "verdict": { "enum": ["ACCEPTED", "ACCEPTED_PROVISIONAL", "REJECTED_SELF_PASS", "REJECTED_NO_EVIDENCE", "REJECTED_STALE", "REJECTED_TIMESTAMP", "REJECTED_AUTHORITY_VIOLATION", "REJECTED_VERIFIER_EDIT", "PENDING"] },
+        "receipt_path": { "type": "string" },
+        "external_verify_evidence": { "type": "string" }
+      },
+      "if": { "properties": { "quality_state": { "const": "HARD_BLOCK" } }, "required": ["quality_state"] },
+      "then": { "required": ["hard_block_reason"] }
+    },
+    "harvest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pattern_harvested": { "type": "boolean" },
+        "pattern_ref": { "type": "string" },
+        "earning_receipt": { "type": "string", "description": "Harvest only cites verified receipts — never speculative philosophy" }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_usd"],
+      "properties": {
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "tokens_in": { "type": "integer", "minimum": 0 },
+        "tokens_out": { "type": "integer", "minimum": 0 },
+        "total_usd": { "type": "number", "minimum": 0, "description": "Metered at call site, not estimated after (L11)" }
+      }
+    },
+    "founder_blocked_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "oldest_age_days": { "type": "number", "minimum": 0 }
+      },
+      "description": "L7: founder items present in every cycle receipt, never vanish"
+    }
+  }
+}

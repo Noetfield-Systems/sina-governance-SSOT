@@ -1,0 +1,13 @@
+{
+  "schema": "p0pgr-repair-candidate-v1",
+  "cycle_id": "P0PGR-CYCLE-20260708T143639Z",
+  "packet_id": "P0PGR-20260708-001",
+  "packet_path": "/sessions/vigilant-bold-cerf/tmp/pytest-of-vigilant-bold-cerf/pytest-4/test_repair_candidate_filed_no0/bad_packet.json",
+  "reasons": [
+    "schema: 'execution_mode' is a required property",
+    "schema: 'canonical_path' is a required property",
+    "schema: 'mac_required_reason' is a required property"
+  ],
+  "filed_at": "2026-07-08T14:36:39Z",
+  "next_improvement": "fix packet fields listed in reasons, re-lint"
+}

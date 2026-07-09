@@ -1,0 +1,187 @@
+{
+  "schema": "p0pgr-phase2-queue-v1",
+  "generated_at": "2026-07-08T13:38:48Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executed_by_move": "M10",
+  "weights": {
+    "direct_revenue": 35,
+    "trust_proof": 25,
+    "workload_reduction": 15,
+    "cloud_now": 15,
+    "reversibility": 10
+  },
+  "ranked_queue": [
+    {
+      "move_id": "M03",
+      "packet_id": "P0PGR-20260708-004",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-004.json",
+      "phase2_score": 86.0,
+      "factors": {
+        "direct_revenue": 0.9,
+        "trust_proof": 1.0,
+        "workload_reduction": 0.3,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "Protects live CAD 4k offer + /register funnel; pure external read",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": true
+    },
+    {
+      "move_id": "M05",
+      "packet_id": "P0PGR-20260708-006",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-006.json",
+      "phase2_score": 74.0,
+      "factors": {
+        "direct_revenue": 0.8,
+        "trust_proof": 0.6,
+        "workload_reduction": 0.4,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "Unblocks first compliant outbound pipeline; predicate audit only, zero send",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": true
+    },
+    {
+      "move_id": "M04",
+      "packet_id": "P0PGR-20260708-005",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-005.json",
+      "phase2_score": 73.75,
+      "factors": {
+        "direct_revenue": 0.85,
+        "trust_proof": 0.8,
+        "workload_reduction": 0.2,
+        "cloud_now": 0.8,
+        "reversibility": 0.9
+      },
+      "rationale": "Conversion audit; needs labeled test identity + gating care -> slightly less immediately executable",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": true
+    },
+    {
+      "move_id": "M02",
+      "packet_id": "P0PGR-20260708-003",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-003.json",
+      "phase2_score": 58.5,
+      "factors": {
+        "direct_revenue": 0.2,
+        "trust_proof": 0.7,
+        "workload_reduction": 0.6,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "Registry trust underpins all dispatch; repo-evidence sweep",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": false
+    },
+    {
+      "move_id": "M06",
+      "packet_id": "P0PGR-20260708-007",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-007.json",
+      "phase2_score": 58.5,
+      "factors": {
+        "direct_revenue": 0.5,
+        "trust_proof": 0.4,
+        "workload_reduction": 0.4,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "~$20/mo dead-spend recovery + governor enforceability",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": false
+    },
+    {
+      "move_id": "M07",
+      "packet_id": "P0PGR-20260708-008",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-008.json",
+      "phase2_score": 58.0,
+      "factors": {
+        "direct_revenue": 0.3,
+        "trust_proof": 0.3,
+        "workload_reduction": 1.0,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "Packet factory; ranked only for its revenue/trust template share per founder rule",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": false
+    },
+    {
+      "move_id": "M01",
+      "packet_id": "P0PGR-20260708-002",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-002.json",
+      "phase2_score": 54.5,
+      "factors": {
+        "direct_revenue": 0.2,
+        "trust_proof": 0.6,
+        "workload_reduction": 0.5,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "Census triage; trust recovery, low direct revenue",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": false
+    },
+    {
+      "move_id": "M09",
+      "packet_id": "P0PGR-20260708-010",
+      "packet_file": "receipts/p0pgr/outbox/P0PGR-20260708-010.json",
+      "phase2_score": 50.5,
+      "factors": {
+        "direct_revenue": 0.1,
+        "trust_proof": 0.7,
+        "workload_reduction": 0.3,
+        "cloud_now": 1.0,
+        "reversibility": 1.0
+      },
+      "rationale": "P0 leak sweep; governance trust, no direct revenue",
+      "execution_mode": "CLOUD_ONLY",
+      "route_decision": "DISPATCH_CLOUD",
+      "value_class_commercial": false
+    }
+  ],
+  "held_items": [
+    {
+      "move_id": "M08",
+      "packet_id": "P0PGR-20260708-009",
+      "status": "HOLD_CLOUD_UNSAFE",
+      "reason": "HOLD_CLOUD_UNSAFE: value is Mac-execution planning; founder directive defers all Mac-bound design in Phase 2"
+    },
+    {
+      "move_id": "M10",
+      "packet_id": "P0PGR-20260708-011",
+      "status": "SELF",
+      "reason": "SELF: executed by this script run"
+    }
+  ],
+  "first_execution_candidate": {
+    "move_id": "M03",
+    "packet_id": "P0PGR-20260708-004",
+    "gates_required": [
+      "CLOUD_ONLY",
+      "read-only or reversible",
+      "ROI-positive",
+      "no deploy",
+      "no external send",
+      "no legal/financial commitment",
+      "no P0 leakage",
+      "no unauthorized authority change"
+    ]
+  },
+  "routing_rules": [
+    "CLOUD_ONLY + ROI-positive -> ranked",
+    "Mac/local-state/secrets/IDE-bound -> HOLD_CLOUD_UNSAFE (not HARD_BLOCK)",
+    "no Mac routing, no Mac runner build, no HYBRID_MAC fallback",
+    "no Cursor UI automation",
+    "weak high-ROI packet -> PROVISIONAL/DEGRADED, continue"
+  ],
+  "note": "Ranked recommendation. Dispatch flags not flipped by this script."
+}

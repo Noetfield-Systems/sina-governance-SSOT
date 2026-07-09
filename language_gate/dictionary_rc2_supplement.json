@@ -284,6 +284,100 @@
       "tag": "LIVING_SYSTEM_W1",
       "meaning": "Dispatch check failure receipt.",
       "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "CHESS",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Check Horizon \u00b7 Evaluate Second-order \u00b7 Select move \u2014 P0 reasoning machine (Forecast \u2192 Patch \u2192 Proceed \u2192 Verify).",
+      "in_our_system": "P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md; not a blocker rule.",
+      "code_alias": [
+        "chess",
+        "chess pass",
+        "chess v2.0",
+        "chess pattern reasoning machine",
+        "extend chess",
+        "partner access chess"
+      ]
+    },
+    {
+      "term": "Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField gated talent/strategic acquisition funnel (apply \u2192 verify \u2192 NDA \u2192 briefing room).",
+      "in_our_system": "Partner Access OS on trustfield.ca; separate from commercial MSP partner programs.",
+      "code_alias": [
+        "partner access",
+        "request partner access",
+        "partner access os"
+      ]
+    },
+    {
+      "term": "Partner Access Platform",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField hub at /partner-access for applicant sign-in, apply, and status.",
+      "code_alias": [
+        "partner access platform",
+        "enter partner access platform"
+      ]
+    },
+    {
+      "term": "TrustField UX",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField user-facing web copy, forms, and funnel surfaces.",
+      "code_alias": [
+        "trustfield ux"
+      ]
+    },
+    {
+      "term": "PROCEED_WITH_PATCH",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: execute after rewriting a risky instruction to preserve capability.",
+      "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "ASK_IF_IRREVERSIBLE",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: stop once and ask founder before irreversible harm classes.",
+      "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "TrustField Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField commercial acquisition funnel for partner candidates.",
+      "code_alias": [
+        "trustfield partner access"
+      ]
+    },
+    {
+      "term": "Request Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Primary CTA entering TrustField Partner Access funnel.",
+      "code_alias": [
+        "request partner access"
+      ]
+    },
+    {
+      "term": "CHESS_PASS",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Structured forecast object from CHESS reasoning machine.",
+      "code_alias": [
+        "chess pass",
+        "chess_pass"
+      ]
+    },
+    {
+      "term": "Feature Parity Ledger",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Protected-feature list before/after live edits.",
+      "code_alias": [
+        "feature parity",
+        "protected feature ledger"
+      ]
+    },
+    {
+      "term": "PROCEED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: low-risk reversible execute.",
+      "allowed_surfaces": "internal, prompt, receipt"
     }
   ],
   "structural_allowlist": [
@@ -387,6 +481,18 @@
     "stale": "Stale",
     "unforgeable vital sign": "Unforgeable Vital Sign",
     "founder_is_the_stale_gate": "FOUNDER_IS_THE_STALE_GATE",
-    "worker_is_the_stale_gate": "WORKER_IS_THE_STALE_GATE"
+    "worker_is_the_stale_gate": "WORKER_IS_THE_STALE_GATE",
+    "chess": "CHESS",
+    "chess pass": "CHESS",
+    "chess v2.0": "CHESS",
+    "chess pattern reasoning machine": "CHESS",
+    "extend chess": "CHESS",
+    "partner access chess": "CHESS",
+    "partner access": "Partner Access",
+    "request partner access": "Partner Access",
+    "partner access os": "Partner Access",
+    "partner access platform": "Partner Access Platform",
+    "enter partner access platform": "Partner Access Platform",
+    "trustfield ux": "TrustField UX"
   }
 }

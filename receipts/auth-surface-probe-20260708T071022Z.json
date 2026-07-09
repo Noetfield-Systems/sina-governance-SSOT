@@ -1,0 +1,319 @@
+{
+  "schema": "sg-auth-surface-probe-v1.1",
+  "generated_at": "2026-07-08T07:10:22Z",
+  "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+  "loop_id": "sg_auth_surface_probe_v1",
+  "status": "WARN",
+  "identity_plane": {
+    "auth_project": "portfolio_spine",
+    "supabase_ref": "ldfruywifqnfpwsfgmdl",
+    "factory_project": "noetfield",
+    "factory_ref": "tkgpapowwplupyekpivy",
+    "ventures": [
+      "sourcea",
+      "noetfield",
+      "trustfield"
+    ],
+    "cross_domain_strategy": "per_domain_sessions",
+    "auth_methods_p0": [
+      "magic_link",
+      "email_password"
+    ],
+    "auth_methods_p1": [
+      "google",
+      "github"
+    ],
+    "server_rule": "Use supabase.auth.getClaims() on server \u2014 not getSession() alone"
+  },
+  "surface_results": [
+    {
+      "id": "sa_home",
+      "tier": "tier_0_public",
+      "url": "https://sourcea.app/",
+      "venture": "sourcea",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "sa_obi",
+      "tier": "tier_0_public",
+      "url": "https://sourcea.app/operating-brain-install",
+      "venture": "sourcea",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "sa_ca_avg",
+      "tier": "tier_0_public",
+      "url": "https://sourcea.ca/ai-value-governance",
+      "venture": "sourcea",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "sa_uk_eacp",
+      "tier": "tier_0_public",
+      "url": "https://sourcea.uk/enterprise-ai-control-plane",
+      "venture": "sourcea",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "nf_home",
+      "tier": "tier_0_public",
+      "url": "https://www.noetfield.com/",
+      "venture": "noetfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "nf_gel",
+      "tier": "tier_0_public",
+      "url": "https://www.noetfield.com/ai-value-governance-os/",
+      "venture": "noetfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_home",
+      "tier": "tier_0_public",
+      "url": "https://www.trustfield.ca/",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_partners",
+      "tier": "tier_0_public",
+      "url": "https://www.trustfield.ca/partners",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_showcase",
+      "tier": "tier_0_public",
+      "url": "https://www.trustfield.ca/showcase",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_entity",
+      "tier": "tier_0_public",
+      "url": "https://www.trustfield.ca/entity-status",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_pilot",
+      "tier": "tier_0_public",
+      "url": "https://www.trustfield.ca/pilot",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_register",
+      "tier": "tier_1_optional",
+      "url": "https://www.trustfield.ca/register",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "partial",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_register_partner",
+      "tier": "tier_1_optional",
+      "url": "https://www.trustfield.ca/register?partner=demo",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "partial",
+      "status": "PASS"
+    },
+    {
+      "id": "sa_sandbox_cta",
+      "tier": "tier_1_optional",
+      "url": "https://sourcea.app/",
+      "venture": "sourcea",
+      "http": 200,
+      "implementation": "planned",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_partner_access",
+      "tier": "tier_2_gated",
+      "url": "https://www.trustfield.ca/partner-access",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "planned",
+      "status": "WARN",
+      "reason": "public 200 \u2014 gate not wired yet (expected when Phase 1 ships)"
+    },
+    {
+      "id": "tf_customer_portal",
+      "tier": "tier_2_gated",
+      "url": "https://www.trustfield.ca/customer-portal",
+      "venture": "trustfield",
+      "http": 404,
+      "implementation": "planned",
+      "status": "WARN",
+      "reason": "planned route http 404 \u2014 ship Phase 1"
+    },
+    {
+      "id": "noos_api",
+      "tier": "tier_3_api",
+      "url": "https://api.noetfield.com/health",
+      "venture": "noetfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    },
+    {
+      "id": "tf_api",
+      "tier": "tier_3_api",
+      "url": "https://api.trustfield.ca/health",
+      "venture": "trustfield",
+      "http": 200,
+      "implementation": "live",
+      "status": "PASS"
+    }
+  ],
+  "tier_summary": {
+    "tier_0_public": 11,
+    "tier_1_optional": 3,
+    "tier_2_gated": 0,
+    "tier_3_api": 2
+  },
+  "venture_summary": {
+    "sourcea": 5,
+    "noetfield": 3,
+    "trustfield": 10
+  },
+  "next_venture_action": [
+    "TrustField-Technologies: execute docs/dispatch/auth-phase-1-trustfield.md",
+    "Founder: ratify auth decisions #1 and #4 in matrix founder_decisions_ratified"
+  ],
+  "supabase_subprobe": {
+    "live_profiles": {
+      "status": "PASS",
+      "schema": "sg-supabase-live-profiles-verify-v1",
+      "failures": []
+    },
+    "auth_health": {
+      "status": "WARN",
+      "url": "https://ldfruywifqnfpwsfgmdl.supabase.co/auth/v1/health",
+      "http": 401,
+      "error": "http_error"
+    },
+    "profiles_table": {
+      "status": "WARN",
+      "http": 404,
+      "reason": "profiles table not migrated yet"
+    },
+    "status": "WARN"
+  },
+  "redirect_allow_list_lint": {
+    "status": "PASS",
+    "count": 4,
+    "bad_entries": [],
+    "mismatched_entries": []
+  },
+  "hard_failures": [],
+  "repo_ownership": {
+    "SourceA": {
+      "agent": "sourcea_worker",
+      "phase": 2,
+      "owns": [
+        "sourcea.app sign-in/up",
+        "/auth/callback",
+        "buyer sandbox"
+      ]
+    },
+    "TrustField-Technologies": {
+      "agent": "trustfield_worker",
+      "phase": 1,
+      "owns": [
+        "/register",
+        "Partner Access OS",
+        "customer portal",
+        "api.trustfield.ca JWT"
+      ]
+    },
+    "Noetfield": {
+      "agent": "noetfield_website",
+      "phase": 3,
+      "owns": [
+        "noetfield.com auth UI",
+        "sandbox CTA"
+      ]
+    },
+    "noetfeld-os": {
+      "agent": "noos_agent",
+      "phase": 4,
+      "owns": [
+        "api.noetfield.com JWT validation"
+      ]
+    },
+    "trustfield-loops": {
+      "agent": "trustfield_worker",
+      "phase": 1,
+      "owns": [
+        "intake webhooks JWT verify only"
+      ]
+    },
+    "sina-governance-ssot": {
+      "agent": "sg_sssot_cursor",
+      "phase": 5,
+      "owns": [
+        "verify script",
+        "registry",
+        "surface matrix"
+      ],
+      "must_not_own": [
+        "auth UI"
+      ]
+    }
+  },
+  "founder_decisions_pending": [
+    {
+      "id": 1,
+      "question": "Auth project",
+      "recommended": "portfolio_spine only"
+    },
+    {
+      "id": 2,
+      "question": "Cross-brand login",
+      "recommended": "per-domain sessions"
+    },
+    {
+      "id": 3,
+      "question": "P0 methods",
+      "recommended": "magic_link + email_password"
+    },
+    {
+      "id": 4,
+      "question": "First ship target",
+      "recommended": "TrustField /register + portal"
+    },
+    {
+      "id": 5,
+      "question": "Enterprise SSO",
+      "recommended": "defer P2"
+    }
+  ],
+  "founder_decisions_ratified": [],
+  "closed_loop": "probe \u2192 FAIL/WARN \u2192 alert \u2192 venture fix \u2192 redeploy \u2192 probe PASS"
+}

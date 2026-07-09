@@ -11,7 +11,9 @@
 |---|---|---|
 | **SSOT v6 constitution** | `ssot/strategy-ssot-v6-split.md` (repo root — **REMOTE CANONICAL**) | Level 0 invariants + D1–D5 domain SSOTs. Library mirror: `P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md`. Verifier: `check.py`. |
 | **R-domain split** | `SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md` | Only D4-portable Runtime Rules **R1/R2/R6/R7** import into agentic-brain contexts (Brain Registry, Learning Gate, mutation lanes). **R3/R4/R5 stay control-panel only** (founder-assistant conversation), never inlined into agentic specs. `AUDIT`/`EXECUTE` are control-panel terms, excluded from brain vocabulary. |
+| **Cross-domain auth** | `../../docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md` | Tiered Supabase auth law; matrix `data/auth_surface_matrix_v1.json`; SG probe only. |
 | **Living System doctrine** | `../P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` | P0-CORE organ law: LIVING vs STALE axis; dual circulatory systems; §8 machine rubric. Execution: `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md`. |
+| **CHESS reasoning machine** | `../P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` | P0 forecast-before-action machine: Forecast → Patch → Proceed → Verify; labels PROCEED / PROCEED_WITH_PATCH / ASK_IF_IRREVERSIBLE; template `../P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md`. |
 | **Versioning law** | `SSOT_VERSIONING_LAW_v0.1.1.md` | Every edited artifact carries `v{major}.{minor}.{edit}_{YYYYMMDD-HHMM}` in **filename + in-file header + edit-log**. major=scope/phase change; minor=founder-approved substantive change; edit=every saved pass. No silent re-saves. Superseded versions retained unless founder says clean up. |
 
 ## QUICK-REFERENCE derivations (for agents)
