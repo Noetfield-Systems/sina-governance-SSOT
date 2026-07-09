@@ -15,8 +15,13 @@
 # Prints the cd command to enter the isolated worktree. Makes NO commits.
 set -uo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && git rev-parse --show-toplevel 2>/dev/null)"
-WS_ROOT="$(cd "$REPO_ROOT/.." && pwd)"           # ~/Desktop/Noetfield-Systems
+# Resolve the CANONICAL (main) checkout even when run from inside a worktree:
+# --git-common-dir points at the shared .git; its parent is the main checkout.
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COMMON="$(git -C "$HERE" rev-parse --git-common-dir 2>/dev/null)"
+case "$COMMON" in /*) ;; *) COMMON="$(cd "$HERE" && cd "$COMMON" && pwd)" ;; esac
+REPO_ROOT="$(dirname "$COMMON")"                  # main checkout root
+WS_ROOT="$(cd "$REPO_ROOT/.." && pwd)"            # ~/Desktop/Noetfield-Systems
 REPO_NAME="$(basename "$REPO_ROOT")"
 
 slug="${1:-}"
