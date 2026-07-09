@@ -1,0 +1,35 @@
+{
+  "schema": "brain_deployment_state_v1",
+  "version": "1.0.0",
+  "updated_at": "2026-07-05T12:00:00Z",
+  "authority": "Single source for live Brain deployment state — query this file, not scattered doc claims",
+  "live_target": {
+    "repo": "github.com/Noetfield-Systems/SourceA",
+    "worker_path": "cloud/workers/sourcea-brain-chat-v1",
+    "worker_name": "sourcea-brain-chat-v1",
+    "deploy_url": "sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev",
+    "cloudflare_account": "0d0b967b (MAIN — live Brain only)"
+  },
+  "verifier": {
+    "worker": "sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev",
+    "cloudflare_account": "b7282b4a5c17b84d62e3ef8866b878f8 (SECONDARY — never merge with MAIN)"
+  },
+  "live_version": "628ebc37-5c66-44e5-9cad-4e05fc2f3e92",
+  "bundle_sha256": null,
+  "knowledge_chunks_live": 514,
+  "promotion_timestamp": "2026-07-02T00:00:00Z",
+  "last_confirmed_deploy_receipt": "f73c0ce8-e3d2-4c5f-be37-fad8ffdd1684",
+  "last_manual_deploy_version": "81058e04-6b8b-442d-a108-6eebffc60519",
+  "gate_flags": {
+    "step10a_confirm_each_time": true,
+    "step10b_autonomous_deploy": true,
+    "autonomous_flag_path": "~/.sina/brain-autonomous-deploy-v1.flag",
+    "hold_flag_path": "~/.sina/enforcement/brain-autonomous-hold-v1.flag",
+    "sourcea_phase2_mutation_trials": false
+  },
+  "validation_scripts": [
+    "scripts/validate-sourcea-brain-knowledge-v1.sh",
+    "scripts/validate_brain_domain_e2e_matrix_v1.sh"
+  ],
+  "notes": "Populate bundle_sha256 from next live deploy. Re-query Cloudflare API to refresh live_version when promoting."
+}

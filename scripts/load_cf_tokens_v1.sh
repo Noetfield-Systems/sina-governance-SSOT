@@ -10,6 +10,9 @@ load_cf_tokens() {
   fi
   if [[ ! -f "$CF_TOKENS_FILE" ]]; then
     echo "WARN: missing $CF_TOKENS_FILE; CF tokens not loaded" >&2
+    if [[ "${CI:-}" == "true" || "${GITHUB_ACTIONS:-}" == "true" ]]; then
+      return 0
+    fi
     return 1
   fi
   set -a

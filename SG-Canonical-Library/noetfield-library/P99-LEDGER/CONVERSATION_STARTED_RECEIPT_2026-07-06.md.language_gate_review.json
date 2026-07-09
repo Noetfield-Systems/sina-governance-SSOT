@@ -1,0 +1,14 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/CONVERSATION_STARTED_RECEIPT_2026-07-06.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Personal Gateway",
+      "line": 9,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

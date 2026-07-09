@@ -1,0 +1,80 @@
+{
+  "id": "P0PGR-20260708-011",
+  "created_at": "2026-07-08T13:25:12Z",
+  "lane": "SG",
+  "problem_class": "architecture",
+  "owner_agent": "architect",
+  "model_tier": "cheap",
+  "roi_score": 86,
+  "roi_reason": "Absorbs the 'what next' decision into the runtime with a deterministic, replayable formula \u2014 the direct precondition for Phase 2.",
+  "value_class": "proof_asset",
+  "cost_limit_usd": 1.5,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "queue_cloud_worker",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "github_action",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Phase 2 requires ranked, evidence-backed dispatch candidates; ranking currently lives in founder judgment \u2014 exactly the workload P0-PGR exists to absorb.",
+  "task": "Rank Phase 2 dispatch candidates: 1) read all campaign packet files in receipts/p0pgr/outbox/ and the campaign receipt; 2) score each: rank = roi_score x reversibility_factor x cloud_safety_factor x (1 - rewrite_likelihood_factor); 3) show the formula inputs per packet; 4) emit one ranked recommendation receipt; dispatch flags remain false. Phase 2 unlock is founder-only.",
+  "allowed_actions": [
+    "read receipts/p0pgr/",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof",
+    "no dispatch flag changes",
+    "no packet edits"
+  ],
+  "stop_rule": "Stop after ranking receipt.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/p0pgr/campaigns/P0PGR-CAMPAIGN-20260708-001.json"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

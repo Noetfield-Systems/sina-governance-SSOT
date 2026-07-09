@@ -1,0 +1,17 @@
+{
+  "schema": "language-layer-rc3-cold-session-proof-v1",
+  "at": "2026-07-07T02:38:38.877657-07:00",
+  "checkpoint": "LANGUAGE_LAYER_RC3_CHECKPOINT",
+  "commit": "8c0293b",
+  "proof": {
+    "session": "cold \u2014 no prior chat context",
+    "dictionary_index_terms": 225,
+    "dictionary_index_sha256": "d6d8f9918fd54ef367d3958f1b5684bf6c4101ac2b5d5aaa5da079e3f19ab1ea",
+    "dictionary_batch_sha256": "a22e2639d4105d1ea55c13acd823477579f2ba363dd2579f5f0a8a26d3f15d61",
+    "sample_file": "language_gate/test_files/cold_session_doctrine_sample_v1.md",
+    "gate_decision": "PASS",
+    "dictionary_source_from_receipt": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "machine_reads_disk": true
+  },
+  "verdict": "PASS"
+}

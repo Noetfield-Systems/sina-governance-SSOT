@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noetfield:p0pgr:execution-receipt:v1",
+  "title": "P0-PGR Execution Receipt v1",
+  "description": "Receipt for a real (non-shadow) packet execution. Added 2026-07-08 after the M03 audit found execution receipts had no schema (additive brake, L5-compliant). Provenance rules: timestamps machine-generated at write time, external claims backed by stored artifacts, never prose.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema", "packet_id", "executed_at", "recorded_at", "operating_mode",
+    "executor", "authority_scope", "quality_state", "evidence_artifacts",
+    "pass_fail", "changed_files", "commands_run", "cost",
+    "external_sends", "forms_submitted", "next_pointer", "founder_authorization_ref"
+  ],
+  "properties": {
+    "schema": { "const": "p0pgr-execution-receipt-v1" },
+    "packet_id": { "type": "string", "pattern": "^P0PGR-[0-9]{8}-[0-9]{3}$" },
+    "move_id": { "type": "string" },
+    "campaign": { "type": "string" },
+    "executed_at": {
+      "type": "string", "format": "date-time",
+      "description": "Machine-generated at execution start — never hand-typed. Must not predate any input it depends on (queue, packet created_at)."
+    },
+    "recorded_at": {
+      "type": "string", "format": "date-time",
+      "description": "Machine-generated at receipt write time; verifiers compare this to file mtime."
+    },
+    "operating_mode": { "type": "string" },
+    "executor": { "type": "string" },
+    "executor_route_note": {
+      "type": "string",
+      "description": "If actual executor differs from the packet's declared delivery_route/target_executor, say so and why."
+    },
+    "authority_scope": { "enum": ["observe", "edit", "test", "commit", "deploy", "blocked"] },
+    "founder_authorization_ref": {
+      "type": "string",
+      "description": "Path to the in-repo founder authorization/unlock receipt that permits real execution. Chat approval alone is not evidence; record it first (receipts/p0pgr/founder/)."
+    },
+    "quality_state": {
+      "enum": ["PASS", "PARTIAL", "DEGRADED", "SANDBOXED", "PROVISIONAL", "NEEDS_RETRY", "NEEDS_REVIEW", "FOUNDER_ONLY", "HARD_BLOCK"]
+    },
+    "low_quality_labels": {
+      "type": "object",
+      "properties": {
+        "confidence": { "type": "string" },
+        "scope": { "type": "string" },
+        "reversibility": { "type": "string" },
+        "next_improvement": { "type": "string" }
+      }
+    },
+    "evidence_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Stored proof, not prose. For external fetches: one entry per URL with status + body hash + saved artifact path under receipts/p0pgr/artifacts/<receipt-id>/.",
+      "items": {
+        "type": "object",
+        "required": ["claim", "artifact_path"],
+        "properties": {
+          "claim": { "type": "string" },
+          "url": { "type": "string" },
+          "http_status": { "type": "integer" },
+          "body_sha256": { "type": "string" },
+          "artifact_path": { "type": "string" }
+        }
+      }
+    },
+    "pass_fail": { "type": "string" },
+    "changed_files": { "type": "array", "items": { "type": "string" } },
+    "commands_run": { "type": "array", "items": { "type": "string" } },
+    "cost": {
+      "type": "object",
+      "required": ["total_usd"],
+      "properties": {
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "tokens_in": { "type": "integer" },
+        "tokens_out": { "type": "integer" },
+        "total_usd": { "type": "number", "minimum": 0 },
+        "accounting_note": { "type": "string", "description": "If analysis was LLM-authored inside a session, say so — session-cost vs metered-API-cost distinction, never a bare implausible $0" }
+      }
+    },
+    "external_sends": { "type": "integer", "minimum": 0 },
+    "forms_submitted": { "type": "integer", "minimum": 0 },
+    "next_pointer": { "type": "string" }
+  }
+}

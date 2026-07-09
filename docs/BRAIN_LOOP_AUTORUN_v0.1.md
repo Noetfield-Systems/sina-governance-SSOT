@@ -18,16 +18,14 @@ Bounded Brain-domain autorun for SG promotion loop. **Brain-only** — no Mac ne
 | `SOURCEA_PHASE2_MUTATION_TRIALS` | Must stay `false` — autorun never sets it |
 | `--autonomous-deploy` | **NOT enabled** — Step 10b HOLD |
 
-## Schedule (launchd example)
+## Schedule (launchd + GitHub Actions)
 
-```xml
-<!-- ~/Library/LaunchAgents/com.sina.brain-loop-autorun.plist -->
-<!-- Run every 6h observe; set BRAIN_SELF_HEAL_TRIGGER=1 in ProgramArguments env -->
-```
+| Motor | Cadence |
+|-------|---------|
+| Mac launchd | **30m** (`1800s`) + RunAtLoad |
+| GitHub Actions `brain-loop-autorun-v1` | ***/30** (24/7 cloud mirror) |
 
-Suggested cadence:
-- **6h** — observe tick (self-heal without promote)
-- **On ship window** — full matrix + optional semi-auto
+When `CF_MAIN_TOKEN` + `CF_VERIFIER_TOKEN` present in CI: `BRAIN_CI_AUTONOMOUS=1` enables promote path (gate CAS still applies).
 
 ## Commands
 

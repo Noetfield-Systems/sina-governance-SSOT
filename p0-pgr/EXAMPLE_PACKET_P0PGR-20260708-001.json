@@ -1,0 +1,71 @@
+{
+  "id": "P0PGR-20260708-001",
+  "created_at": "2026-07-08T05:45:00Z",
+  "lane": "SG",
+  "problem_class": "verification",
+  "owner_agent": "verifier",
+  "model_tier": "capable",
+  "roi_score": 82,
+  "roi_reason": "Blocks all downstream dispatch: no packet can be trusted while wiring currency is unproven. Removes recurring founder verification workload. Risk_reduction across every lane.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 3.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "mac_runner",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": ["PASS", "PARTIAL", "PROVISIONAL", "NEEDS_RETRY", "NEEDS_REVIEW"],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": ["confidence", "scope", "reversibility", "next_improvement"]
+  },
+  "context_summary": "Registry data/github_automation_registry_v1.json lists active automation surfaces. Alive docs data/agent_read_surfaces_v1.json declare read surfaces for SG, NOOS, SourceA, Library. Latest workflow census receipt (workflow-census-20260706T093358Z) reported audit_status RED with loops that never produced receipts. Task: establish whether current wiring claims are evidence-backed TODAY, without trusting any agent self-report.",
+  "task": "Audit wiring currency for SG / NOOS / SourceA / Library. 1) Run scripts/verify_agent_read_staleness_v1.sh; capture full output. 2) For each registry entry in data/github_automation_registry_v1.json, locate its most recent receipt in receipts/; record receipt path + timestamp; entries with no receipt in freshness window are flagged STALE_DATA, not guessed. 3) Cross-check data/agent_read_surfaces_v1.json pointers against files that actually exist on disk; list dangling pointers. 4) Re-run workflow census script and diff against workflow-census-20260706T093358Z audit_flags: resolved / persisting / new. 5) Emit one receipt to receipts/p0pgr/ with verdict per surface: CURRENT | STALE | DANGLING | NO_RECEIPT.",
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only: no file edits outside receipts/p0pgr/",
+    "stale rows reported as STALE_DATA, never interpolated"
+  ],
+  "allowed_actions": [
+    "read receipts/, data/, ssot/, scripts/",
+    "execute existing verify/audit scripts",
+    "write exactly one receipt to receipts/p0pgr/"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip between SG / NOOS / SourceA / Library",
+    "no live deploy",
+    "no edits to registries, verifiers, or gates",
+    "no PASS based on agent self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after writing the single audit receipt. Do not attempt repairs; flagged items return to the loop as repair candidates.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "per_surface_verdict_table",
+      "census_diff"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/workflow-census-20260706T093358Z.json",
+    "data/github_automation_registry_v1.json",
+    "data/agent_read_surfaces_v1.json"
+  ],
+  "decision_ref": "P0PGR-CYCLE-20260708T054500Z",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

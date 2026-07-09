@@ -1,0 +1,46 @@
+{
+  "schema": "dictionary-pile1-rc3-receipt-v1",
+  "at": "2026-07-07T09:30:00-07:00",
+  "verdict": "PASS",
+  "founder_approval": "approved with clerical wording fix 2026-07-07",
+  "note": "Pile 1 total after edits is 131. Unchanged rows carry forward; corrected rows above replace their prior versions.",
+  "pile_counts": {
+    "pile_1_dictionary_entries": 131,
+    "pile_2_status_labels_allowlist": 102,
+    "pile_3_fragments_gate_skip": 120
+  },
+  "pile_1_removed_to_pile_3": [
+    "Let ROI",
+    "Keep Tier",
+    "Stay Phase",
+    "Move SSOT",
+    "Sync SourceA",
+    "Skip Proof Lab",
+    "Drop Forge",
+    "Drop OCRE"
+  ],
+  "dictionary": {
+    "batch_file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "entries_before": 95,
+    "entries_appended": 130,
+    "entries_updated_in_place": ["TrustField"],
+    "index_terms_after": 225,
+    "index_file": "language_gate/dictionary_index.json"
+  },
+  "gate": {
+    "tool_version": "language_gate_rc3_pile_v1",
+    "core_file": "language_gate/language_gate_core_v1.py"
+  },
+  "library_scan_after": {
+    "files": 158,
+    "PASS": 129,
+    "WARN": 0,
+    "PASS_WITH_REWRITE": 29,
+    "FAIL": 0
+  },
+  "safety_checks": {
+    "violations_example_md": "FAIL",
+    "p0_agent_layered_law": "PASS"
+  },
+  "scope_excluded": "SourceA product repo — not touched"
+}

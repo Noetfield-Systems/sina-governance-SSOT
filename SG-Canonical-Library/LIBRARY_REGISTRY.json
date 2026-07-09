@@ -1,0 +1,42 @@
+{
+  "canonical_library": "v0.9-SG-RATIFIED",
+  "installed_path": "SG-Canonical-Library/noetfield-library",
+  "version": "0.9",
+  "status": "v0.9-SG-RATIFIED",
+  "date_installed": "2026-07-04T22:24:00Z",
+  "date_reconciled": "2026-07-05T04:41:00Z",
+  "date_ratified": "2026-07-05T12:42:00Z",
+  "zip_artifact": "SG-Canonical-Library/noetfield-library-v0.9-SG-RATIFIED-2026-07-05.zip",
+  "zip_sha256": "929d449364c6b4d88931e71f44352953ee243e4cd6e2b6b7e7495ff2d0662cc1",
+  "zip_source_prior": "noetfield-library-TRUE-FINAL-v0.8-SG-INTAKE-2026-07-04.zip",
+  "authority": "SG-owned",
+  "files_real": 143,
+  "files_total": 143,
+  "pending_uploads": 0,
+  "quarantined_supporting_law": 296,
+  "p0_status": "VERIFIED — 0 placeholders; supporting-law quarantined",
+  "governance_pass": "4/4 complete",
+  "fragmentation_fixes_required": [],
+  "fragmentation_fixes_completed": [
+    "Merge STEP10B into PHASE_LOOP_BUILD_PLAN",
+    "Create data/brain_deployment_state.json",
+    "Lock ssot/strategy-ssot-v6-split.md as remote canonical"
+  ],
+  "v09_receipts": [
+    "P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/",
+    "P99-LEDGER/PHASE_LOOP_STEP10_MERGE_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/SSOT_V6_AUTHORITY_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/SOURCEA_BRAIN_AGENT_READINESS_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/MAC_WORKER_EXECUTION_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/NOOS_INTEGRATOR_SYNC_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/GITHUB_CLOUD_ALIGNMENT_RECEIPT_2026-07-05.md",
+    "P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md",
+    "P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md",
+    "P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md",
+    "P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md",
+    "P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md"
+  ],
+  "revenue_status": "TIER1_PILOT_ACTIVE"
+}

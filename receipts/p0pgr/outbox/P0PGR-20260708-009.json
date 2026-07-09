@@ -1,0 +1,81 @@
+{
+  "id": "P0PGR-20260708-009",
+  "created_at": "2026-07-08T13:25:12Z",
+  "lane": "Ops",
+  "problem_class": "architecture",
+  "owner_agent": "architect",
+  "model_tier": "cheap",
+  "roi_score": 70,
+  "roi_reason": "Prerequisite for the Mac runner phase: prevents building Mac execution for tasks that never needed it, and prevents cloud dispatch of genuinely Mac-bound work.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "observe",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Router doctrine says ~20% of work is Mac-bound, but no evidence-backed inventory exists of WHICH loops/tasks genuinely require local Mac state (launchd truth, local secrets, local repos) vs merely assumed to.",
+  "task": "Build the Mac-required truth list from repo evidence only: 1) for each registry motor and each recurring task class, determine execution dependency: CLOUD_OK | MAC_REQUIRED(local_repo_state_not_in_cloud|local_secrets_or_env|mac_specific_tooling|human_ide_review) | UNKNOWN; 2) cite evidence per verdict (workflow files, configs, launchd references); 3) reference any secret by opaque slot-id only; 4) emit one receipt with the truth list. Do not probe the live Mac.",
+  "allowed_actions": [
+    "read data/, receipts/, .github/workflows/, docs/",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "read-only outside receipts/p0pgr/",
+    "do not claim any audited issue is fixed"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merge",
+    "no healing or repair edits",
+    "no PASS based on self-report or prose-as-proof",
+    "no live Mac probing",
+    "no secret names or values in any output"
+  ],
+  "stop_rule": "Stop after truth-list receipt; Mac runner build remains founder-gated Phase 3 work.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "data/github_automation_registry_v1.json",
+    "p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md"
+  ],
+  "decision_ref": "P0PGR-CAMPAIGN-20260708-001",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

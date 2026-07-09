@@ -1,0 +1,15 @@
+{
+  "schema": "automation_baseline_freeze_v1",
+  "recorded_at": "20260703T092505Z",
+  "branch": "cursor/trustfield-signal-factory-lock-1111-plans",
+  "checks": {
+    "brain_loop_health_check_v1": "ALL PASS",
+    "validate_parallel_automation_governance_v1": "ALL PASS",
+    "audit_automation_surface_v1": "ALL PASS",
+    "launchd_label": "com.sina.brain-loop-autorun-v1",
+    "sourcea_root": "~/Projects/SourceA",
+    "sourcea_head": "0460b5f93"
+  },
+  "latest_autorun_receipt": "receipts/brain-loop-autorun-20260703T090912Z.json",
+  "note": "Gate promote BLOCKED on candidate SHA mismatch — expected until fresh verifier PASS"
+}

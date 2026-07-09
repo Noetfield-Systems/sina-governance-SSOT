@@ -169,7 +169,7 @@ async function remoteFileBytes(token, repo, path, ref = BRANCH) {
 }
 
 async function remoteSsotBytes(token) {
-  return remoteFileBytes(token, DEFAULT_CANDIDATE_REPO, SSOT_PATH);
+  return remoteFileBytes(token, `${OWNER}/${REPO}`, SSOT_PATH);
 }
 
 async function sha256Hex(bytes) {

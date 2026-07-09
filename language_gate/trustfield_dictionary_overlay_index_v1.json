@@ -1,0 +1,249 @@
+{
+  "schema": "trustfield-dictionary-overlay-index-v1",
+  "status": "DRAFT",
+  "generated_at": "2026-07-07T03:32:22.169879-07:00",
+  "authority": {
+    "meaning_authority": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "overlay_scope": "TrustField-local operational terms only \u2014 draft; not a competing dictionary",
+    "sg_dictionary_terms_indexed": 225,
+    "trustfield_repo": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies",
+    "trustfield_commit": "f0f37c8"
+  },
+  "stats": {
+    "TRUSTFIELD_LOCAL_TERM": 10,
+    "SG_DICTIONARY_TERM": 22,
+    "CONFLICT_PHRASE": 3,
+    "REGULATORY_COPY_RISK": 3
+  },
+  "entries_total": 38,
+  "entries": [
+    {
+      "id": "TF-OVL-001",
+      "term": "RPAA",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Receipt-truth positioning guard \u2014 blocks MSP/PSP self-claims in web copy"
+    },
+    {
+      "id": "TF-OVL-002",
+      "term": "TF program ID",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "TrustField program identifier in workflow state"
+    },
+    {
+      "id": "TF-OVL-003",
+      "term": "MSB API",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Product surface name \u2014 API for licensed MSB partners; not TrustField MSB status"
+    },
+    {
+      "id": "TF-OVL-004",
+      "term": "settlement party of record",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Partner MSB/institution role \u2014 TrustField explicitly not"
+    },
+    {
+      "id": "TF-OVL-005",
+      "term": "program operations and evidence layer",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Canonical RPAA positioning line"
+    },
+    {
+      "id": "TF-OVL-006",
+      "term": "trustfield.ca",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Public web origin for TrustField venture"
+    },
+    {
+      "id": "TF-OVL-007",
+      "term": "tf_cf_fleet_tick",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "CF cron motor \u2014 fleet tick loop"
+    },
+    {
+      "id": "TF-OVL-008",
+      "term": "trustfield_loops",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Intake/receipt worker on CF"
+    },
+    {
+      "id": "TF-OVL-009",
+      "term": "payload-free handoff",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Sandbox lane A \u2014 no functional transmission"
+    },
+    {
+      "id": "TF-OVL-010",
+      "term": "FINTRAC",
+      "class": "TRUSTFIELD_LOCAL_TERM",
+      "note": "Canadian AML regulator \u2014 cite only with honest program posture"
+    },
+    {
+      "id": "TF-OVL-011",
+      "term": "TrustField",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-012",
+      "term": "Founder",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-013",
+      "term": "Line",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-014",
+      "term": "Lane",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-015",
+      "term": "Loop",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-016",
+      "term": "Drift",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-017",
+      "term": "Noetfield",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-018",
+      "term": "Blueprint",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-019",
+      "term": "Claim",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-020",
+      "term": "Worker",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-021",
+      "term": "Router",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-022",
+      "term": "Library",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-023",
+      "term": "SSOT",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-024",
+      "term": "Governed",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-025",
+      "term": "Critic",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-026",
+      "term": "Artifact",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-027",
+      "term": "Kernel",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-028",
+      "term": "Deploy-truth",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-029",
+      "term": "Brain",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-030",
+      "term": "Diagnostic",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-031",
+      "term": "Specialist",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-032",
+      "term": "Aggregator",
+      "class": "SG_DICTIONARY_TERM",
+      "note": "Cite SG meaning \u2014 align copy to dictionary_index.json"
+    },
+    {
+      "id": "TF-OVL-033",
+      "term": "TrustField Technologies",
+      "class": "CONFLICT_PHRASE",
+      "note": "Regulatory/entity confusion \u2014 human review before rewrite"
+    },
+    {
+      "id": "TF-OVL-034",
+      "term": "we are an MSP",
+      "class": "CONFLICT_PHRASE",
+      "note": "Regulatory/entity confusion \u2014 human review before rewrite"
+    },
+    {
+      "id": "TF-OVL-035",
+      "term": "we process payments",
+      "class": "CONFLICT_PHRASE",
+      "note": "Regulatory/entity confusion \u2014 human review before rewrite"
+    },
+    {
+      "id": "TF-OVL-036",
+      "term": "retired entity alias (partial)",
+      "class": "REGULATORY_COPY_RISK",
+      "note": "Dry-scan risk class \u2014 not auto-fixed"
+    },
+    {
+      "id": "TF-OVL-037",
+      "term": "MSP self-identification",
+      "class": "REGULATORY_COPY_RISK",
+      "note": "Dry-scan risk class \u2014 not auto-fixed"
+    },
+    {
+      "id": "TF-OVL-038",
+      "term": "payment processing self-claim",
+      "class": "REGULATORY_COPY_RISK",
+      "note": "Dry-scan risk class \u2014 not auto-fixed"
+    }
+  ]
+}

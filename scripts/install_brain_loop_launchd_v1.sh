@@ -12,6 +12,9 @@ PLIST_DST="${HOME}/Library/LaunchAgents/com.sina.brain-loop-autorun-v1.plist"
 mkdir -p "${HOME}/.sina/logs" "${HOME}/.sina/locks" "${HOME}/Library/LaunchAgents"
 brain_clear_stale_lock
 rm -f "${HOME}/.sina/enforcement/brain-autonomous-hold-v1.flag"
+if [[ -f "${HOME}/.sina/brain-autonomous-deploy-v1.flag" ]]; then
+  touch "${HOME}/.sina/asf-ship-window-v1.flag"
+fi
 
 brain_ensure_sourcea_worktree
 brain_sync_sourcea_worktree

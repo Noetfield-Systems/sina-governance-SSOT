@@ -1,0 +1,39 @@
+{
+  "schema": "sg-supabase-live-profiles-verify-v1",
+  "generated_at": "2026-07-05T12:56:43Z",
+  "status": "FAIL",
+  "credential_source": "~/.sourcea-secrets/ (Sina env \u2014 not Railway)",
+  "live_profiles": {
+    "portfolio_spine": {
+      "expected_ref": "ldfruywifqnfpwsfgmdl",
+      "env_file": "/Users/sinakazemnezhad/.sourcea-secrets/portfolio-spine.env",
+      "env_file_exists": true,
+      "actual_ref": "ldfruywifqnfpwsfgmdl",
+      "ref_match": true,
+      "ok": true,
+      "http": 200,
+      "rows": 1
+    },
+    "noetfield": {
+      "expected_ref": "tkgpapowwplupyekpivy",
+      "env_file": "/Users/sinakazemnezhad/.sourcea-secrets/noetfield.env",
+      "env_file_exists": true,
+      "actual_ref": "tkgpapowwplupyekpivy",
+      "ref_match": true,
+      "ok": false,
+      "http": 404,
+      "error": "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table 'public.noetfield_truth_log'\",\"message\":\"Could not find the table 'public.truth_log' in the schema cache\"}",
+      "likely_paused": false
+    }
+  },
+  "orphan_paused_refs": {
+    "cybzznaieigeveiaoyoa": {
+      "org": "sina.kazemnezhad.ca@gmail.com's Org",
+      "action": "IGNORE unless founder identifies legacy use; not production"
+    }
+  },
+  "failures": [
+    "noetfield: probe failed ({\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table 'public.noetfield_truth_log'\",\"message\":\"Could not find the table 'public.truth_log' in the schema cache\"})"
+  ],
+  "founder_note": "Email ref cybzznaieigeveiaoyoa is personal-org orphan \u2014 NOT in live SSOT. Production uses ldfruywifqnfpwsfgmdl + tkgpapowwplupyekpivy only."
+}

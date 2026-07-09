@@ -1,0 +1,11 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/CANONICAL_D4_PACKAGE_v0.1.md",
+  "agent_review": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 25,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ]
+}

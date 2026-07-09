@@ -1,0 +1,192 @@
+{
+  "alive_docs": {
+    "keys": [
+      "authority",
+      "exclude_globs",
+      "lanes",
+      "law",
+      "retired_deploy_surfaces",
+      "saved_at",
+      "scan_roots_authority",
+      "scan_roots_read_surface_only",
+      "schema",
+      "status_model",
+      "version"
+    ],
+    "sha256": "b4b223905580c9e9b8fccaafd0a904d15221bc8a399aa84fb2c8a5741454651e"
+  },
+  "bundle_hash": "dd61a460b6927e466d65f85b6537956a8e04841ae05a73f4c2ea56ca78f10b2b",
+  "census": {
+    "audit_status": "RED",
+    "counts": {
+      "GUARD": 5,
+      "META": 22,
+      "NONE": 8,
+      "REVENUE": 3
+    },
+    "file": "workflow-census-20260706T093358Z.json",
+    "flag_count": 10,
+    "loop_count": 38
+  },
+  "generated_at": "2026-07-08T13:12:00+00:00",
+  "latest_receipts": [
+    {
+      "mtime_utc": "2026-07-08T13:11:52+00:00",
+      "name": "automation-surface-audit-20260708T131153Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:57:51+00:00",
+      "name": "cross-domain-auth-w11-closeout-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:56:42+00:00",
+      "name": "auth-supabase-redirect-config-latest.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:10:38+00:00",
+      "name": "cross-domain-auth-w11-probe-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:10:22+00:00",
+      "name": "auth-surface-probe-20260708T071022Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:07:43+00:00",
+      "name": "cross-domain-auth-w11-lock-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:03:01+00:00",
+      "name": "living-system-rubric-pulse-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T07:03:01+00:00",
+      "name": "pr-conflict-skill-lock-20260708T023000Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T02:47:18+00:00",
+      "name": "automation-surface-audit-20260708T024717Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T02:39:35+00:00",
+      "name": "automation-surface-audit-20260708T023935Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T01:50:31+00:00",
+      "name": "living-system-w2-collectors-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T01:49:59+00:00",
+      "name": "commercial-pulse-malformed-draft-20260708T014959Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T01:47:51+00:00",
+      "name": "living-system-w1-next-steps-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T01:47:51+00:00",
+      "name": "living-system-w1-terminology-2026-07-08.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T01:34:52+00:00",
+      "name": "living-system-w1-parallel-start-2026-07-07.json"
+    },
+    {
+      "mtime_utc": "2026-07-08T00:58:07+00:00",
+      "name": "living-system-w0-install-2026-07-07.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:46:51+00:00",
+      "name": "agent-read-staleness-20260707T234651Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:45:03+00:00",
+      "name": "agent-read-staleness-20260707T234503Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:43:47+00:00",
+      "name": "agent-read-staleness-20260707T234347Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:43:35+00:00",
+      "name": "agent-read-staleness-20260707T234335Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:43:22+00:00",
+      "name": "agent-read-staleness-20260707T234322Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T23:43:15+00:00",
+      "name": "agent-read-staleness-20260707T234315Z.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T15:36:58+00:00",
+      "name": "receipt_trustfield_partner_launch_credibility_pass_v1.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T10:32:22+00:00",
+      "name": "receipt_tf_language_cleanup_v1.json"
+    },
+    {
+      "mtime_utc": "2026-07-07T09:44:33+00:00",
+      "name": "receipt_sourcea_dictionary_overlay_v1.json"
+    }
+  ],
+  "p0pgr_files": {
+    "EXAMPLE_PACKET_P0PGR-20260708-001.json": "50688f86e9d8b4722b5039198b74d6b79fc8ad347ff7f7c0bbfeb85b77b0be35",
+    "P0_DISPATCH_BRAIN_RUNTIME_v1.1.md": "079dbbb2333633b25007191b26bc72858e5d0d68ee55e71cd11fd82985cef30f",
+    "P0_DISPATCH_ROUTER_RULES_v1.md": "e59de50d35a38849903c603428bcc7ed2081cc4b91233bfc185e7d199e638ca3",
+    "P0_PROMPT_COMPILER_MVP_PLAN_v1.md": "009ac7d7bc664933d25943ef52c2da05d41e9243b45724286b9d350e510f08a3",
+    "P0_PROMPT_GOVERNANCE_RUNTIME_v1.md": "40b4431b05d21238cc942c5402e94998270b5ab59219648ee629a22b92d48080",
+    "P0_PROMPT_LOOP_STATE_SCHEMA_v1.json": "95e9987cd0fc0195750d5d8469366d298f78c91d6de03d0221aef9a46a06527d",
+    "P0_PROMPT_PACKET_SCHEMA_v1.json": "d71ff410c706d7395db4604ecdadd69a1695bf19e30bc7019cd19238e0914523"
+  },
+  "p0pgr_queue": {
+    "outbox": [],
+    "repair_candidates": [
+      "P0PGR-CYCLE-20260708T131048Z-P0PGR-20260708-001.json",
+      "P0PGR-CYCLE-20260708T131200Z-P0PGR-20260708-001.json"
+    ]
+  },
+  "registry": {
+    "lanes": [
+      "noos_gel_factory",
+      "p0pgr",
+      "sg_governance",
+      "sourcea_autorun_l4_verify",
+      "sourcea_brain_observe_promote",
+      "sourcea_cloud_forge",
+      "sourcea_loop_specialist",
+      "trustfield_build",
+      "trustfield_capture"
+    ],
+    "motor_ids": [
+      "cf_auto_runtime_tick_v1",
+      "cf_loop_specialist_tick_v1",
+      "gh_actions_agent_read_staleness_weekly_v1",
+      "gh_actions_brain_loop_autorun_v1",
+      "gh_actions_noos_factory_autorun_v1",
+      "gh_actions_sg_auth_surface_probe_v1",
+      "gh_actions_sourcea_external_verify_v1",
+      "gh_actions_workflow_census_weekly_v1",
+      "mac_launchd_brain_loop_autorun_v1",
+      "p0pgr_shadow_cycle_v1",
+      "tf_cf_deadman_v1",
+      "tf_cf_fleet_tick_v1",
+      "tf_cf_verify_recipes_v1",
+      "trustfield_loops_preview",
+      "trustfield_loops_production"
+    ],
+    "p0pgr_registered": true,
+    "saved_at": "2026-07-08T13:11:47Z",
+    "version": "1.1.0"
+  },
+  "schema": "p0pgr-evidence-bundle-v1",
+  "staleness_gate": {
+    "latest_receipts": [
+      "agent-read-staleness-20260707T234347Z.json",
+      "agent-read-staleness-20260707T234503Z.json",
+      "agent-read-staleness-20260707T234651Z.json"
+    ],
+    "script_present": true
+  }
+}

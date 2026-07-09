@@ -1,0 +1,14 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINAAI_MONO.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "MIGRATION PENDING",
+      "line": 5,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

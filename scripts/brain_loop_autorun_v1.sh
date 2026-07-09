@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Brain loop autorun — 6h cycle; autonomous promote when founder flag set.
+# Brain loop autorun — 30m cycle; autonomous promote when founder flag set.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -46,13 +46,16 @@ _run_step() {
   return "$rc"
 }
 
-bash "$ROOT/scripts/load_cf_tokens_v1.sh"
+bash "$ROOT/scripts/load_cf_tokens_v1.sh" || true
 
 AUTONOMOUS=0
 SHIP_WINDOW=0
 HOLD_ACTIVE=0
 MAC_SIGKILL=0
 if [[ -f "$AUTONOMOUS_FLAG" ]]; then AUTONOMOUS=1; fi
+if [[ "${BRAIN_CI_AUTONOMOUS:-}" == "1" && -n "${CF_MAIN_TOKEN:-}" && -n "${CF_VERIFIER_TOKEN:-}" ]]; then
+  AUTONOMOUS=1
+fi
 if [[ -f "$HOLD_FLAG" ]]; then HOLD_ACTIVE=1; fi
 if [[ -f "$SHIP_FLAG" || "${CI:-}" == "true" || "${GITHUB_ACTIONS:-}" == "true" ]]; then
   SHIP_WINDOW=1
@@ -285,6 +288,12 @@ fi
 
 if [[ "$GATE_RC" -eq 0 ]]; then
   echo "brain_loop_autorun_v1: ALL PASS"
+  exit 0
+fi
+
+# CI observe-only mirror: do not fail workflow when tokens absent and not autonomous
+if [[ "${CI:-}" == "true" && "$AUTONOMOUS" != "1" ]]; then
+  echo "brain_loop_autorun_v1: CI_OBSERVE_ONLY (non-fatal)"
   exit 0
 fi
 

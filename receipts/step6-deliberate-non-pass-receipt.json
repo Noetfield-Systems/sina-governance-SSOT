@@ -19,7 +19,7 @@
     "pass_eligible": true,
     "app_id": "4179901",
     "installation_id": "143449507",
-    "repo": "kazemnezhadsina144-dot/sina-governance-SSOT",
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
     "branch": "main",
     "ssot_path": "ssot/strategy-ssot-v6-split.md",
     "expected_sha256": "1ba4a793dba183388afd244ea21e850cad879c78824f78603e961070ae9b3af4",

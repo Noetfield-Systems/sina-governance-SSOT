@@ -1,0 +1,498 @@
+{
+  "schema": "noetfield-dictionary-rc2-supplement-v1",
+  "note": "RC2 gap fill \u2014 triage from DLM form test corpus 2026-07-07",
+  "terms": [
+    {
+      "term": "NOOS",
+      "tag": "RC2_SUPPLEMENT",
+      "meaning": "Noetfield operations scheduler \u2014 cloud cron dispatch to loop runners.",
+      "public_phrasing": "operations scheduler",
+      "code_alias": [
+        "noos"
+      ]
+    },
+    {
+      "term": "SG AUTHORIZED",
+      "tag": "RC2_SUPPLEMENT",
+      "meaning": "Founder ratification recorded in sina-governance-SSOT ledger.",
+      "allowed_surfaces": "internal, receipt, contract"
+    },
+    {
+      "term": "INBOX",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "The outbound revenue queue head \u2014 work orders waiting for founder or worker dispatch.",
+      "in_our_system": "RUN INBOX / sa-1200 queue; census REVENUE consumer.",
+      "is_not": "Brain reasoning backlog or form PICK list.",
+      "code_alias": [
+        "inbox",
+        "worker inbox",
+        "run inbox",
+        "next inbox",
+        "pause inbox",
+        "delete inbox"
+      ],
+      "public_phrasing": "outbound work queue",
+      "allowed_surfaces": "internal, receipt, prompt"
+    },
+    {
+      "term": "Proof Lab",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "WitnessBC appointment-only local demo surface for proof capture.",
+      "in_our_system": "Tunnel + style-b1 hero film lane; not public until founder arms.",
+      "public_phrasing": "proof capture lab (appointment only)",
+      "code_alias": [
+        "proof lab",
+        "witnessbc proof lab"
+      ]
+    },
+    {
+      "term": "CREED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Locked identity and operating vocabulary spine \u2014 not chat shorthand.",
+      "in_our_system": "CREED SSOT / CHURCH routing; dictionary mint gate applies.",
+      "code_alias": [
+        "creed",
+        "creed ssot",
+        "creed/church"
+      ]
+    },
+    {
+      "term": "Proof Layer",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "The receipt and verification stratum above execution \u2014 claims cannot skip it.",
+      "in_our_system": "SourceA Forge Proof Layer; negative-proof doctrine.",
+      "public_phrasing": "verification and receipt layer",
+      "code_alias": [
+        "proof layer",
+        "sourcea forge proof layer"
+      ]
+    },
+    {
+      "term": "UNIFY",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Brain-side gather and routing pass that collapses forks without losing items.",
+      "in_our_system": "brain-form-gather-unify-routing-plan; Brain UNIFY authority.",
+      "code_alias": [
+        "unify",
+        "brain unify"
+      ]
+    },
+    {
+      "term": "Witness AI",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "AI-assisted witness naming lane for proof lab assets \u2014 not a public product claim.",
+      "code_alias": [
+        "witness ai"
+      ]
+    },
+    {
+      "term": "Trust Ledger",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Structured trust and send log for outreach and commercial motion.",
+      "public_phrasing": "trust and send ledger",
+      "code_alias": [
+        "trust ledger"
+      ]
+    },
+    {
+      "term": "Prompt OS",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Internal prompt routing and template system \u2014 not customer-facing product name.",
+      "allowed_surfaces": "internal, prompt",
+      "code_alias": [
+        "prompt os"
+      ]
+    },
+    {
+      "term": "Plus One",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Internal motor nickname for founder-tap dispatch \u2014 retired in favor of scheduler vocabulary.",
+      "aliases_retired": [
+        "PLUS ONE",
+        "Plus ONE"
+      ],
+      "code_alias": [
+        "plus one",
+        "plus-one"
+      ]
+    },
+    {
+      "term": "RT LIVE",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Hub repair path proven live with structured receipt \u2014 gate before Phase 3\u201310 resume.",
+      "code_alias": [
+        "rt live"
+      ]
+    },
+    {
+      "term": "Worker Hub",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Legacy Worker URL hub tab \u2014 fade/retire per E2E registry when drain complete.",
+      "code_alias": [
+        "worker hub",
+        "retire worker hub",
+        "remove worker hub",
+        "restore hub"
+      ]
+    },
+    {
+      "term": "Trust Center",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Public trust and compliance narrative surface \u2014 claims require receipt ladder.",
+      "public_phrasing": "trust center (receipt-backed claims only)"
+    },
+    {
+      "term": "Governance Platform",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Enterprise control-plane SKU narrative \u2014 not a generic AI platform claim.",
+      "public_phrasing": "governed AI control plane"
+    },
+    {
+      "term": "Screen Studio",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Mac screen recording vendor tool for demo film capture.",
+      "code_alias": [
+        "screen studio",
+        "record screen studio"
+      ],
+      "allowed_surfaces": "internal, prompt"
+    },
+    {
+      "term": "SourceA Forge Governance",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Forge execution under governed-autorun and kernel law.",
+      "code_alias": [
+        "sourcea forge governance"
+      ]
+    },
+    {
+      "term": "Worker BUILD",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Worker execution lane for implementation and deploy \u2014 not founder decision forum.",
+      "code_alias": [
+        "worker build",
+        "worker work",
+        "worker mac"
+      ]
+    },
+    {
+      "term": "Cloud Workers",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Workers execution plane for Brain and edge surfaces.",
+      "code_alias": [
+        "cloud workers",
+        "cf url"
+      ]
+    },
+    {
+      "term": "Railway FBE",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Railway-hosted factory builder executor for bay-mapped cloud jobs.",
+      "code_alias": [
+        "railway fbe"
+      ]
+    },
+    {
+      "term": "TrustField MSB",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField managed service bundle workflow pilot lane.",
+      "code_alias": [
+        "trustfield msb"
+      ]
+    },
+    {
+      "term": "Noetfield Copilot",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Copilot-native eval path for Noetfield W3 wedge.",
+      "code_alias": [
+        "noetfield copilot"
+      ]
+    },
+    {
+      "term": "Copilot Governance Pilot",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Pilot SKU for Copilot governance eval \u2014 pre-revenue.",
+      "code_alias": [
+        "copilot governance pilot"
+      ]
+    },
+    {
+      "term": "Living System",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Passes doctrine \u00a78 rubric in-window.",
+      "code_alias": [
+        "living system",
+        "LIVING"
+      ]
+    },
+    {
+      "term": "Stale",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Fails \u00a78 rubric in-window.",
+      "code_alias": [
+        "stale",
+        "STALE"
+      ]
+    },
+    {
+      "term": "Liveness Ladder",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Metabolism rungs 1-7.",
+      "code_alias": [
+        "liveness ladder",
+        "metabolism rung"
+      ]
+    },
+    {
+      "term": "Commercial Pulse",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Metabolism lane provocation loop.",
+      "code_alias": [
+        "commercial pulse"
+      ]
+    },
+    {
+      "term": "Unforgeable Vital Sign",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "External membrane proof only.",
+      "code_alias": [
+        "unforgeable vital sign"
+      ]
+    },
+    {
+      "term": "Dispatchable Draft",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Passes seven dispatch predicates.",
+      "code_alias": [
+        "dispatchable draft"
+      ]
+    },
+    {
+      "term": "FOUNDER_IS_THE_STALE_GATE",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Founder approval stale-gate receipt.",
+      "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "WORKER_IS_THE_STALE_GATE",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Worker draft stale-gate receipt.",
+      "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "MALFORMED_DRAFT",
+      "tag": "LIVING_SYSTEM_W1",
+      "meaning": "Dispatch check failure receipt.",
+      "allowed_surfaces": "internal, receipt"
+    },
+    {
+      "term": "CHESS",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Check Horizon \u00b7 Evaluate Second-order \u00b7 Select move \u2014 P0 reasoning machine (Forecast \u2192 Patch \u2192 Proceed \u2192 Verify).",
+      "in_our_system": "P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md; not a blocker rule.",
+      "code_alias": [
+        "chess",
+        "chess pass",
+        "chess v2.0",
+        "chess pattern reasoning machine",
+        "extend chess",
+        "partner access chess"
+      ]
+    },
+    {
+      "term": "Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField gated talent/strategic acquisition funnel (apply \u2192 verify \u2192 NDA \u2192 briefing room).",
+      "in_our_system": "Partner Access OS on trustfield.ca; separate from commercial MSP partner programs.",
+      "code_alias": [
+        "partner access",
+        "request partner access",
+        "partner access os"
+      ]
+    },
+    {
+      "term": "Partner Access Platform",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField hub at /partner-access for applicant sign-in, apply, and status.",
+      "code_alias": [
+        "partner access platform",
+        "enter partner access platform"
+      ]
+    },
+    {
+      "term": "TrustField UX",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField user-facing web copy, forms, and funnel surfaces.",
+      "code_alias": [
+        "trustfield ux"
+      ]
+    },
+    {
+      "term": "PROCEED_WITH_PATCH",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: execute after rewriting a risky instruction to preserve capability.",
+      "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "ASK_IF_IRREVERSIBLE",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: stop once and ask founder before irreversible harm classes.",
+      "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "TrustField Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "TrustField commercial acquisition funnel for partner candidates.",
+      "code_alias": [
+        "trustfield partner access"
+      ]
+    },
+    {
+      "term": "Request Partner Access",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Primary CTA entering TrustField Partner Access funnel.",
+      "code_alias": [
+        "request partner access"
+      ]
+    },
+    {
+      "term": "CHESS_PASS",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Structured forecast object from CHESS reasoning machine.",
+      "code_alias": [
+        "chess pass",
+        "chess_pass"
+      ]
+    },
+    {
+      "term": "Feature Parity Ledger",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Protected-feature list before/after live edits.",
+      "code_alias": [
+        "feature parity",
+        "protected feature ledger"
+      ]
+    },
+    {
+      "term": "PROCEED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "CHESS action label: low-risk reversible execute.",
+      "allowed_surfaces": "internal, prompt, receipt"
+    }
+  ],
+  "structural_allowlist": [
+    "after",
+    "after supabase",
+    "agent run",
+    "allow",
+    "approve phase",
+    "b copilot governance pilot",
+    "block",
+    "cancel",
+    "closes gemini",
+    "cloud sse",
+    "cname",
+    "cursor card",
+    "edit allowed",
+    "found/not found",
+    "freeze",
+    "full work",
+    "gemini ts",
+    "hub action",
+    "include trust ledger",
+    "instrument tf",
+    "keep witness ai",
+    "lock brain",
+    "locked",
+    "locks witnessbc",
+    "loi/sow",
+    "manual linkedin",
+    "name supabase",
+    "no tf",
+    "nov options",
+    "oegcc hitl",
+    "paid cloudflare pages",
+    "pause",
+    "picks options",
+    "plan with no asf",
+    "prioritize cloudflare pages",
+    "prioritize cloudflare pages dns",
+    "readme",
+    "restore worker",
+    "retry railway",
+    "routes brain",
+    "sets brain",
+    "sets worker",
+    "ship one",
+    "shipped",
+    "split",
+    "supabase edge",
+    "tamper",
+    "update linkedin"
+  ],
+  "alias_map": {},
+  "code_alias": [
+    "brain unify",
+    "cf url",
+    "cloud workers",
+    "cloud workers proceed",
+    "creed",
+    "creed ssot",
+    "creed/church",
+    "delete inbox",
+    "inbox",
+    "loi/sow",
+    "next inbox",
+    "noos",
+    "pause inbox",
+    "plus one",
+    "plus-one",
+    "prompt os",
+    "proof lab",
+    "proof layer",
+    "railway fbe",
+    "record screen studio",
+    "remove worker hub",
+    "restore hub",
+    "retire worker hub",
+    "rt live",
+    "run inbox",
+    "screen studio",
+    "sourcea forge governance",
+    "sourcea forge proof layer",
+    "third form",
+    "trust ledger",
+    "unify",
+    "virlux",
+    "witness ai",
+    "witnessbc proof lab",
+    "worker build",
+    "worker hub",
+    "worker inbox",
+    "worker mac",
+    "worker work"
+  ],
+  "alias_index": {
+    "living system": "Living System",
+    "commercial pulse": "Commercial Pulse",
+    "liveness ladder": "Liveness Ladder",
+    "dispatchable draft": "Dispatchable Draft",
+    "malformed_draft": "MALFORMED_DRAFT",
+    "stale": "Stale",
+    "unforgeable vital sign": "Unforgeable Vital Sign",
+    "founder_is_the_stale_gate": "FOUNDER_IS_THE_STALE_GATE",
+    "worker_is_the_stale_gate": "WORKER_IS_THE_STALE_GATE",
+    "chess": "CHESS",
+    "chess pass": "CHESS",
+    "chess v2.0": "CHESS",
+    "chess pattern reasoning machine": "CHESS",
+    "extend chess": "CHESS",
+    "partner access chess": "CHESS",
+    "partner access": "Partner Access",
+    "request partner access": "Partner Access",
+    "partner access os": "Partner Access",
+    "partner access platform": "Partner Access Platform",
+    "enter partner access platform": "Partner Access Platform",
+    "trustfield ux": "TrustField UX"
+  }
+}
