@@ -1,0 +1,26 @@
+{
+  "schema": "noetfield_product_dictionary_overlay_index_v1",
+  "authored_at": "2026-07-09",
+  "authority": "P10-PRODUCT-LAYERS + P9-PATTERN-FACTORY (point-to-canon)",
+  "purpose": "Clear the open UNDEFINED_TERM backlog on the P9/P10 sidecars. Every term below is either a status/census label or a product/entity term already DEFINED in canon (not new vocabulary). CONFLICT_PHRASE / REGULATORY_COPY_RISK are never included here — those must stay block-eligible.",
+  "inputs": ["P9-PATTERN-FACTORY/*.language_gate_review.json", "P10-PRODUCT-LAYERS/*.language_gate_review.json"],
+  "cleanup_rules": "STATUS_LABEL + NOETFIELD_PRODUCT_TERM are allow-classes (folded into effective_structural_allowlist). CONFLICT_PHRASE/REGULATORY_COPY_RISK excluded by policy.",
+  "stats": { "STATUS_LABEL": 5, "NOETFIELD_PRODUCT_TERM": 10, "total": 15 },
+  "entries": [
+    { "term": "DETECT", "class": "STATUS_LABEL", "note": "machine-loop census verb" },
+    { "term": "DIAGNOSE", "class": "STATUS_LABEL", "note": "machine-loop census verb" },
+    { "term": "PROPOSE", "class": "STATUS_LABEL", "note": "machine-loop census verb" },
+    { "term": "PROJECTED", "class": "STATUS_LABEL", "note": "status label" },
+    { "term": "FAIL/PASS", "class": "STATUS_LABEL", "note": "verdict label" },
+    { "term": "Brain Coherence Report", "class": "NOETFIELD_PRODUCT_TERM", "note": "Tier-1 deliverable — defined in P9-PATTERN-FACTORY/brain-audit-v1.md" },
+    { "term": "Managed Deterministic Brain", "class": "NOETFIELD_PRODUCT_TERM", "note": "BaaS tier — defined in P9-PATTERN-FACTORY/brain-as-a-service.md" },
+    { "term": "BaaS HOLD", "class": "NOETFIELD_PRODUCT_TERM", "note": "brain-as-a-service staged-gate status — brain-as-a-service.md" },
+    { "term": "Sellable NOW", "class": "NOETFIELD_PRODUCT_TERM", "note": "commercial ladder rung label — brain-as-a-service.md" },
+    { "term": "Brain Architecture", "class": "NOETFIELD_PRODUCT_TERM", "note": "product term — VIP Architecture tier" },
+    { "term": "System Architect", "class": "NOETFIELD_PRODUCT_TERM", "note": "role descriptor — P1 canon" },
+    { "term": "Native Pattern Thinker", "class": "NOETFIELD_PRODUCT_TERM", "note": "founder role descriptor — ARCHITECT_START_HERE §3" },
+    { "term": "Grade-its-own-homework", "class": "NOETFIELD_PRODUCT_TERM", "note": "anti-theater doctrine phrase — P7 doctrine" },
+    { "term": "Noetfield", "class": "NOETFIELD_PRODUCT_TERM", "note": "parent entity Noetfield Systems Inc (D-U-N-S 243370005) — point to entity registry" },
+    { "term": "TrustField Inc", "class": "NOETFIELD_PRODUCT_TERM", "note": "SEPARATE venture Noetfield serves, not a subsidiary — point to entity registry" }
+  ]
+}

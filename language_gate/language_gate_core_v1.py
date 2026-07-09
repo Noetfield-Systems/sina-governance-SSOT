@@ -215,8 +215,9 @@ def load_allowlist(name: str, json_path: Path | None = None) -> set[str]:
 OVERLAY_INDEX_PATHS = (
     GATE_DIR / "sourcea_dictionary_overlay_index_v1.json",
     GATE_DIR / "trustfield_dictionary_overlay_index_v1.json",
+    GATE_DIR / "noetfield_product_dictionary_overlay_index_v1.json",  # WI-3
 )
-OVERLAY_ALLOW_CLASSES = {"COMMAND_FRAGMENT", "STATUS_LABEL", "SOURCEA_LOCAL_TERM"}
+OVERLAY_ALLOW_CLASSES = {"COMMAND_FRAGMENT", "STATUS_LABEL", "SOURCEA_LOCAL_TERM", "NOETFIELD_PRODUCT_TERM"}
 OVERLAY_NEVER_ALLOWLIST = {"CONFLICT_PHRASE", "REGULATORY_COPY_RISK"}
 
 
