@@ -210,5 +210,20 @@
     "reason": "Two autonomous agents were committing/pushing to cursor/language-layer-v1 with no worktree isolation; a concurrent --amend collision resulted.",
     "action": "product-lock work moved to dedicated branch cursor/product-category-lock-v1 in its own worktree; shared checkout left untouched for the L0 agent.",
     "residual": "cursor/language-layer-v1 local tip still carries my commit 723259d (receipt correction); recommend founder reset that branch to origin (7737d3b) when the L0 agent is idle \u2014 not done here to avoid disturbing its uncommitted files."
+  },
+  "execution_method_disclosure": {
+    "asked_by_founder": "2026-07-09: 'did you lock all categories as isolated deterministic workflows and autoruns'",
+    "deterministic_workflow": "YES \u2014 the 20-agent evidence+adversarial-verify pass ran via the Workflow tool (scripted pipeline: evidence-gatherer -> verifier, per category), not ad-hoc chat reasoning. Journal-logged, re-runnable: workflow run wf_0e4cdcf8-c34.",
+    "worktree_isolation": "PARTIAL, correctly scoped \u2014 the 20 evidence/verify agents were read-only research (no file mutation), so no worktree isolation was needed or used for them. This repo's own commits/writes ARE worktree-isolated (branch cursor/product-category-lock-v1, confirmed clean of the concurrent L0-maintenance agent's commits).",
+    "autorun": "WAS ABSENT at initial lock (2026-07-09T07:06:11Z) \u2014 the lock was a one-time manual pass with no scheduled re-verification. CLOSED same day via a durable scheduled task (NOT the ephemeral session-only CronCreate, which dies with the session and auto-expires at 7 days): see autorun_drift_guard below."
+  },
+  "autorun_drift_guard": {
+    "created_at": "2026-07-09",
+    "mechanism": "durable scheduled cloud task (mcp scheduled-tasks), stored at ~/.claude/scheduled-tasks/category-registry-drift-guard/SKILL.md \u2014 persists across sessions, no 7-day expiry (distinct from the ephemeral in-session CronCreate tool)",
+    "task_id": "category-registry-drift-guard",
+    "cadence": "weekly, Monday 08:49 local time",
+    "scope": "READ-ONLY: re-checks that every cited proof-asset path still exists and whether any new activation receipt has appeared per category; does NOT re-run full web research and does NOT auto-edit the registry or any product/ file",
+    "output": "commits a receipts/CATEGORY_DRIFT_CHECK_<timestamp>.json receipt on this same isolated branch each run (local only, never pushed/merged); sends a push notification only if drift or a missing proof asset is found",
+    "caveat": "runs only while the Claude Code app is open; if closed at fire time it runs on next launch \u2014 this is a governance guard-rail, not a substitute for founder review of the underlying categories"
   }
 }
