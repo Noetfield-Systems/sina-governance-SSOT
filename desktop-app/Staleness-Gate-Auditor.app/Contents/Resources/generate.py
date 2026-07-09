@@ -9,7 +9,30 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO = Path("/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT")
+def _resolve_repo() -> Path:
+    """Locate the governance repo root without a hardcoded machine path (DX-3).
+    Order: SG_REPO_ROOT env -> git toplevel from this file -> walk up for a
+    data/+scripts/ marker -> legacy default (last-resort, preserves capability)."""
+    import os, subprocess
+    env = os.environ.get("SG_REPO_ROOT")
+    if env and Path(env).is_dir():
+        return Path(env)
+    here = Path(__file__).resolve()
+    try:
+        top = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"], cwd=here.parent,
+            text=True, capture_output=True, check=True).stdout.strip()
+        if top and (Path(top) / "data").is_dir() and (Path(top) / "scripts").is_dir():
+            return Path(top)
+    except Exception:
+        pass
+    for parent in here.parents:
+        if (parent / "data").is_dir() and (parent / "scripts").is_dir():
+            return parent
+    return Path("/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT")
+
+
+REPO = _resolve_repo()
 
 STYLE = """
 <style>
