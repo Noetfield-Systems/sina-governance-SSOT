@@ -37,14 +37,35 @@ Ordered by how much they touch trust / money / founder authority.
 - **Why it matters:** these are the founder-touchpoint triggers the machine loops claim to *retire* (automate away). If the retirement registry never defined them, either the loops are retiring triggers that were never ratified, or the registry is missing 7 entries — "registry is routing truth" (L4) is broken either way.
 - **Your decision:** confirm whether those 7 founder triggers should be defined in the retirement registry (then add them) or the loops shouldn't claim to retire them (then correct the loop refs). The reconciler (`catalog/builds/WI-4/`) re-checks on demand.
 
+## 7. Four of six census motors are DEAD  · `MO-2` · **HIGH**
+- **What:** the dead-motor detector globs each motor's `receipt_glob` against disk and finds **4 of 6 motors produce zero receipts**: `cf_gateway_ops_v1`, `cf_gateway_heartbeat_v1`, `railway_sina_gateway_v1`, `gh_gateway_railway_deadman_v1`. Their globs are prose descriptors ("gateway-ops receipt via Telegram", "gateway_leads insert receipt") with no resolvable on-disk artifact. The 2 path-glob motors (staleness, auth-probe) do produce receipts.
+- **Why it matters:** these are your Sina Gateway / Railway gateway motors — the revenue-organ surface. If they emit no receipts, either they aren't running or their proof isn't landing anywhere the census can see. A motor with no receipt is not alive (Living System doctrine).
+- **Your decision:** confirm whether these 4 gateway/railway motors are actually running; if they are, give them a real receipt path (not a prose glob) so the census can see them; if they're not, mark them retired. Re-runnable: `catalog/builds/MO-2/`.
+
+## 8. Governance overhead exceeds value-producing work  · `MO-3` · **HIGH**
+- **What:** the value-class cost attribution joins your census rules with the newest evidence bundle: **22 of 38 loops (57.9%) are class META**, exceeding GUARD+REVENUE **combined (8 loops)**. This trips your own standing-audit rule ("META cost > value-producing").
+- **Why it matters:** most of the machine's motion is *about* the machine (meta/governance) rather than producing guarded outcomes or revenue. That's the exact anti-pattern the ROI/value-class rules exist to catch — the metabolism ladder can't climb if 58% of loops are internal.
+- **Your decision:** review the META loops — which can be retired, merged, or converted to GUARD/REVENUE. This is a ROI-rebalancing call, not a code fix. Table: `catalog/builds/MO-3/`.
+
+## 9. All repair candidates reference missing packets  · `MO-4` · **REVIEW**
+- **What:** all **5** on-disk repair candidates in `receipts/p0pgr/repair_candidates/` are `UNRESOLVED_PACKET` — the packets they claim to repair are not found on disk.
+- **Why it matters:** a repair loop that points at packets that don't exist can't close; the rejection→repair cycle is broken at the reference layer.
+- **Your decision:** confirm whether those packets were moved/archived (then fix the refs) or the candidates are stale (then retire them). Re-checker: `catalog/builds/MO-4/`.
+
+## 10. Two dispatch packets carry latent CHESS risk the linter misses  · `BR-3` · **REVIEW**
+- **What:** packet `P0PGR-20260708-010` (task says "clean") triggers a CHESS `likely_misread` (clean→delete-capability risk); `P0PGR-20260708-007` (task says "spend") triggers `action=ASK_IF_IRREVERSIBLE`. The packet linter passes both; the CHESS→lint bridge flags them.
+- **Why it matters:** these packets would be dispatched as lint-clean, but CHESS says an agent should confirm intent first (the anti-downgrade / irreversible-spend forecast). Wiring the CHESS bridge into the packet path would catch this pre-dispatch.
+- **Your decision:** none urgent (nothing is dispatching). If/when the packet path goes live, run BR-3 as a pre-dispatch gate. Bridge: `catalog/builds/BR-3/`.
+
 ---
 
 ## Recommended order
 1. **#2 (DLM fence)** — the only one touching founder authority; decide (a) `deferred_unvalidated` or (b) block.
-2. **#6 (dangling triggers)** — 7 founder-touchpoint triggers retired-but-undefined; a registry-truth gap worth closing.
-3. **#1 (FAIL deploy)** — verify live version; 5-minute check with the auditor's rollback hint.
-4. **#3 (worker↔schema)** — pick source of truth.
-5. **#5 (manifest)** — trivial, whenever.
-6. **#4** — no action; just know the bar is now enforced.
+2. **#7 (4 dead gateway motors)** — HIGH; revenue-organ motors emitting no proof. Confirm running + give real receipt paths.
+3. **#8 (META > value)** — HIGH; 58% of loops are governance overhead. ROI-rebalance the META loops.
+4. **#6 (dangling triggers)** — 7 founder-touchpoint triggers retired-but-undefined; a registry-truth gap.
+5. **#1 (FAIL deploy)** — verify live version; 5-minute check with the auditor's rollback hint.
+6. **#9 (unresolved repair candidates)** · **#3 (worker↔schema)** · **#5 (manifest)** — cleanup, whenever.
+7. **#4, #10** — no action now; the bar/gate is enforced and ready when the packet path goes live.
 
 **Evidence for every finding:** the named `catalog/builds/<ID>/` dir holds the tool, a red-capable test, a red-run canary, and a receipt. None of these fixes were applied — they await your DECIDE.
