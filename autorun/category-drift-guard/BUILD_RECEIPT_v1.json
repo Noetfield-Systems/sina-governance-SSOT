@@ -1,6 +1,6 @@
 {
   "schema": "category_drift_guard_build_receipt_v1",
-  "status": "PHASE_1_BUILT_NOT_DEPLOYED",
+  "status": "PHASE_1_BUILT_E2E_PROVEN_LOCAL_NOT_DEPLOYED",
   "built_at": "2026-07-09T10:41:11Z",
   "authority": "Founder directive 'START BUILDING Isolated (worktree) Autorun ON GHA CLOUDFLARE RAILWAY SUPABASE' 2026-07-09",
   "lane": "cursor/product-category-lock-v1 (isolated worktree ~/Desktop/Noetfield-Systems/sg-product-lock)",
@@ -101,5 +101,17 @@
     "read_only_to_product_registry": true,
     "left_existing_local_drift_guard_running_as_fallback": true
   },
-  "stop_after_receipt": true
+  "stop_after_receipt": true,
+  "e2e_upgrade_20260709": {
+    "authority": "Founder directive 'CHECK AND FIX AND UPGRADE THEM FULLY E2E'",
+    "evidence_doc": "autorun/category-drift-guard/E2E_TEST_EVIDENCE_v1.md",
+    "findings_fixed": [
+      "CAT-03 skills/p0pgr-skills-workspace and CAT-05 PR_CONFLICT_RESOLVER_SKILL_LOCKED_v1.md pulled in from cursor/language-layer-v1 (additive, verified before pulling); drift check now shows 0 drifted / 0 missing (commit e713e9f)"
+    ],
+    "e2e_chain_proven": "script -> real Cloudflare Worker (wrangler dev --local, real KV) -> Railway monitor, all pointed at each other for real, not mocked in isolation. Supabase leg validated via the exact GHA-embedded Python code against a local mock REST server.",
+    "real_bug_found_and_handled": "wrangler local runtime doesn't yet support compatibility_date 2026-07-09 (max 2026-06-24 in installed version) -- worked around for the local test only via --compatibility-date flag; committed config unchanged, correct for real deployment",
+    "correct_negative_result": "Cloudflare verifier returned FAIL/422 in local dev because no real cf-ray edge header exists locally -- this is the independence-proof working as designed, not a defect",
+    "incident": "mid-task the isolated worktree directory was deleted by a third autonomous agent's lane-consolidation process; branch and all commits were intact in the shared .git store; worktree safely recreated with git worktree add, no data lost",
+    "still_not_deployed": "no live GHA run, no Worker on a real Cloudflare account, no real KV namespace, no Supabase migration run against production, no Railway service, no real secrets, cron still disabled"
+  }
 }
