@@ -21,7 +21,7 @@
       ]
     }
   },
-  "commit_state": "DRAFT \u2014 files written to working tree, NOT committed, NOT merged, NOT deployed. Pending founder ratification (assist_only lane).",
+  "commit_state": "COMMITTED-LOCAL \u2014 ratified by founder directive 'OK DO THE NEXT' (2026-07-09) and committed to canonical branch cursor/language-layer-v1 as two unmixed commits (evidence commit 8d1b984 + this map-lock commit). NOT pushed, NOT merged to main, NOT deployed. Push/PR/merge remain founder-gated (assist_only lane).",
   "lock_scope": "Locks the IDENTITY of 10 commercial product categories (what each is, how it differs, its domain posture, and the receipt that gates its activation). This is a category-map lock, NOT a build/live/for-sale claim.",
   "categories_locked": 10,
   "build_status_distribution": {
@@ -199,5 +199,10 @@
     "Founder ratifies product/ deliverables; commit on a governance branch (no merge/deploy).",
     "Reconcile reverse-drift root cause: ~/Projects is gone \u2014 confirm canonical is the sole home for P0-PGR/TrustField work; optionally regenerate the 2 cycle receipts via a fresh R2 cloud run."
   ],
-  "sync_receipt": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json"
+  "sync_receipt": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json",
+  "ratification": {
+    "by": "founder directive 'OK DO THE NEXT' 2026-07-09",
+    "canonical_branch": "cursor/language-layer-v1 (per founder reconciliation order)",
+    "scope": "local commit only \u2014 not pushed/merged/deployed"
+  }
 }
