@@ -1,0 +1,203 @@
+{
+  "schema": "sg_product_category_lock_receipt_v1",
+  "status": "PASS",
+  "final_status": "PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION",
+  "saved_at": "2026-07-09T07:06:11Z",
+  "locked_at": "2026-07-09T07:06:11Z",
+  "authority": "SG-owned (Sina Governance SSOT)",
+  "title": "Noetfield / SourceA Cloud Factory \u2014 Commercial Product Category Lock",
+  "locked_in": {
+    "SG": {
+      "repo": "sina-governance-SSOT",
+      "branch": "cursor/language-layer-v1",
+      "head": "9f6773a",
+      "dir": "product/"
+    },
+    "Library": {
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/",
+      "mirrored": [
+        "PRODUCT_CATEGORY_REGISTRY_v1.json",
+        "NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md"
+      ]
+    }
+  },
+  "commit_state": "DRAFT \u2014 files written to working tree, NOT committed, NOT merged, NOT deployed. Pending founder ratification (assist_only lane).",
+  "lock_scope": "Locks the IDENTITY of 10 commercial product categories (what each is, how it differs, its domain posture, and the receipt that gates its activation). This is a category-map lock, NOT a build/live/for-sale claim.",
+  "categories_locked": 10,
+  "build_status_distribution": {
+    "built-not-activated": 6,
+    "live-running": 1,
+    "partial-scaffold": 2,
+    "concept-only": 1
+  },
+  "evidence_basis": {
+    "method": "20-agent evidence + adversarial-verify workflow",
+    "workflow_run_id": "wf_0e4cdcf8-c34",
+    "agents": 20,
+    "agents_error": 0,
+    "agents_empty": 0,
+    "status_downgrades_on_verify": 0,
+    "verifier_confidence": "high on all 10 categories",
+    "note": "Every cited proof-asset path confirmed to exist; every build_status adversarially re-checked with a downgrade-biased verifier against the ecosystem's documented fake-green failure mode.",
+    "environment_limits": "Read-only/offline: no GitHub Actions API, no live HTTP, no gh auth. CI-run-history and production-HTTP claims are receipt-attested, not re-observed."
+  },
+  "deliverables": [
+    {
+      "path": "product/PRODUCT_CATEGORY_REGISTRY_v1.json",
+      "bytes": 52024,
+      "sha256": "7fdd5ad3e47bebd01838cecd16260c3893db5c30110481c7704fc3bcd26e60ee"
+    },
+    {
+      "path": "product/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md",
+      "bytes": 7677,
+      "sha256": "8e58a81ee10c241ab01ddd4a5859f199efa6d560c58622a59efa816209afb0c9"
+    },
+    {
+      "path": "product/COMMERCIAL_DOMAIN_STRATEGY_v1.md",
+      "bytes": 4918,
+      "sha256": "e2c5a2b225e4b68734df6cf62a394a97891b3bba386a717ba1e94d0f01edf90b"
+    },
+    {
+      "path": "product/CATEGORY_TO_PHASE_LADDER_v1.md",
+      "bytes": 5821,
+      "sha256": "cf6f87e77697602c7c45ec24ada1c78170de60c03168342bea5ee1cf50a99bee"
+    },
+    {
+      "path": "product/PRODUCT_MOAT_COMPARISON_v1.md",
+      "bytes": 6440,
+      "sha256": "a8d4a931ad431ea28fcd1eaaf22838b9a757b43cf7d891b23ae1c4126449bf6c"
+    }
+  ],
+  "library_mirror": [
+    {
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/PRODUCT_CATEGORY_REGISTRY_v1.json",
+      "bytes": 52024,
+      "sha256": "7fdd5ad3e47bebd01838cecd16260c3893db5c30110481c7704fc3bcd26e60ee"
+    },
+    {
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md",
+      "bytes": 7928,
+      "sha256": "ccdf475ef8e895a28e4c99902e029004985eb1c0aeed4b23b7637cc1da236769"
+    }
+  ],
+  "categories_summary": [
+    {
+      "category_id": "CAT-01-GOVERNED-AGENT-MEMORY",
+      "product_name": "MemoryGate / Governed Agent Memory / DecisionGraph",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "MEMORYGATE_COMPOSITE_GATE_RECEIPT"
+    },
+    {
+      "category_id": "CAT-02-REPO-CODE-GRAPH-MEMORY",
+      "product_name": "RepoGraph L0 / SourceA Repo Memory",
+      "current_build_status": "live-running",
+      "status_ladder_phase": "P4-LIVE-RUNNING",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "REPOGRAPH_TOKEN_TAX_RECEIPT"
+    },
+    {
+      "category_id": "CAT-03-PROMPT-GOVERNANCE-RUNTIME",
+      "product_name": "P0-PGR / PromptGraph / Noetfield Prompt Runtime",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "umbrella",
+      "receipt_required_to_activate": "P0PGR_R2_CLOUD_PASS"
+    },
+    {
+      "category_id": "CAT-04-CLOUD-FACTORY-LINES",
+      "product_name": "Forge Factory / SourceA Factory Lines",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "FACTORY_LINE_R2_CLOUD_PASS"
+    },
+    {
+      "category_id": "CAT-05-SANDBOX-WORKTREE-EXECUTION",
+      "product_name": "Forge Workcells / Noetfield Sandboxes",
+      "current_build_status": "partial-scaffold",
+      "status_ladder_phase": "P2-BUILT-SCAFFOLD",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "WORKCELL_FACTORY_RUN_RECEIPT"
+    },
+    {
+      "category_id": "CAT-06-AGENTIC-WORKFLOW-BUILDER",
+      "product_name": "Noetfield Workflow Builder / SourceA Agentic Workflows",
+      "current_build_status": "partial-scaffold",
+      "status_ladder_phase": "P2-BUILT-SCAFFOLD",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "WORKFLOW_GOVERNED_APPROVAL_RECEIPT"
+    },
+    {
+      "category_id": "CAT-07-NOCODE-APP-BUILDER",
+      "product_name": "Noetfield App Factory / SourceA App Builder",
+      "current_build_status": "concept-only",
+      "status_ladder_phase": "P0-CONCEPT",
+      "domain_target": "standalone-later",
+      "receipt_required_to_activate": "APP_FACTORY_SPEC_LOCK_RECEIPT"
+    },
+    {
+      "category_id": "CAT-08-STUDIO-IDE-CONTROL-COCKPIT",
+      "product_name": "Noetfield Studio IDE / Forge Studio / Forge Terminal",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "subdomain",
+      "receipt_required_to_activate": "STUDIO_LOOP_GREEN_RECEIPT"
+    },
+    {
+      "category_id": "CAT-09-RECEIPT-TRUST-AUDIT-LAYER",
+      "product_name": "ReceiptGraph / Noetfield Trust Layer",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "umbrella",
+      "receipt_required_to_activate": "RECEIPTGRAPH_SELF_AUDIT_RECEIPT"
+    },
+    {
+      "category_id": "CAT-10-VERTICAL-PROOF-PRODUCTS",
+      "product_name": "TrustField / Noetfield AI Value Governance / SourceA / WitnessBC",
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "domain_target": "mixed-per-lane",
+      "receipt_required_to_activate": "PROOF_LANE_LIVE_TRUTH_RECEIPT"
+    }
+  ],
+  "governing_constraints_honored": [
+    "Noetfield public GTM remains 3 locked SKUs (Trust Brief, Copilot Governance Pack, Bank Pilot); these 10 are platform/internal categories, not new public SKUs.",
+    "Noetfield 'never touches value' constitution preserved; TrustField framed as governance/decision layer, not money movement.",
+    "Product/canon boundary respected: product docs describe what is sold, do not compete with canon.",
+    "L0 repo-graph broad-read gate honored during evidence gathering."
+  ],
+  "boundaries_enforced": {
+    "did_not_build_code": true,
+    "did_not_buy_domains": true,
+    "did_not_create_public_claims": true,
+    "did_not_merge_or_deploy": true,
+    "did_not_let_workers_define_new_categories": true,
+    "categories_locked_first": true
+  },
+  "missing_evidence": [],
+  "map_lock_blockers": [],
+  "note_on_gaps": "Per-category evidence gaps DO exist and are recorded in each category's honesty_caveats in the registry. They gate ACTIVATION of that category (via its receipt_required_to_activate), NOT the lock of the category MAP. The map is therefore LOCKED, not BLOCKED.",
+  "activation_gate": "No category advances its ladder rung or makes any external/commercial claim without producing its named receipt_required_to_activate. Rungs above P4 and all commercial activation are founder-gated.",
+  "next_action_for_founder": "Review product/ deliverables; if ratified, commit on a governance branch (no merge/deploy). One founder push + 2 cloud runs would advance CAT-03/04/06 together (shared R2 blocker).",
+  "stop_after_receipt": true,
+  "superseded_status": "PRODUCT_CATEGORY_MAP_LOCKED (2026-07-09T07:06:11Z) \u2014 patched, see status_patch",
+  "status_patch": {
+    "patch_id": "PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1",
+    "applied_at": "2026-07-09T07:43:23Z",
+    "receipt": "receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json",
+    "categories_changed": [
+      "CAT-03 (R2 cloud manual PASS)",
+      "CAT-04 (loops built PR#10, RECONCILED_PASS, not VERIFIED)",
+      "CAT-06 (held partial-scaffold; not advanced by R2)"
+    ]
+  },
+  "reverse_drift_flag": "RESOLVED-PARTIAL via PRODUCT_CATEGORY_LOCK_SYNC_v1: 4 proving receipts recovered from git 2f2f38b into canonical (archived clone ~/Projects deleted); 2 cycle receipts unrecoverable (evidence embedded). Root-cause reconciliation = precondition #3.",
+  "ratification_preconditions": [
+    "DONE (PRODUCT_CATEGORY_LOCK_SYNC_v1): 4 CAT-03/04 proving receipts in canonical receipts/p0pgr/ (git-recovered, hash-verified); 2 cycle receipts unrecoverable (evidence embedded in R2 PASS).",
+    "Founder ratifies product/ deliverables; commit on a governance branch (no merge/deploy).",
+    "Reconcile reverse-drift root cause: ~/Projects is gone \u2014 confirm canonical is the sole home for P0-PGR/TrustField work; optionally regenerate the 2 cycle receipts via a fresh R2 cloud run."
+  ],
+  "sync_receipt": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json"
+}

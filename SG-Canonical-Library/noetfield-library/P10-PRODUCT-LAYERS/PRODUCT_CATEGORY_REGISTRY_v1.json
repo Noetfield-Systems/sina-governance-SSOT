@@ -1,0 +1,404 @@
+{
+  "schema": "noetfield_product_category_registry_v1",
+  "title": "Noetfield / SourceA Cloud Factory — Commercial Product Category Registry",
+  "version": "v1",
+  "status": "PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION",
+  "locked_at": "2026-07-09T07:06:11Z",
+  "status_patched_at": "2026-07-09T07:06:11Z",
+  "status_patch": "PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1 applied: CAT-03/CAT-04/CAT-06 statuses corrected from verified receipts. See receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json. PRECONDITION #1 DONE (PRODUCT_CATEGORY_LOCK_SYNC_v1): 4 CAT-03/04 proving receipts recovered byte-exact from git 2f2f38b (branch cursor/machine-autonomy-loops-v1) and written to canonical receipts/p0pgr/ after the archived clone (all of ~/Projects) was deleted; 2 cloud cycle receipts (P0PGR-CYCLE-20260709T000048Z/000050Z) were never committed and are unrecoverable (evidence embedded in the R2 PASS receipt). Root-cause reverse-drift reconciliation remains open as precondition #3.",
+  "authority": "SG-owned (Sina Governance SSOT)",
+  "locked_in": {
+    "SG": "sina-governance-SSOT (branch cursor/language-layer-v1, HEAD 9f6773a) — draft, uncommitted, pending founder ratification",
+    "Library": "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS"
+  },
+  "north_star": "Noetfield / SourceA Cloud Factory Platform lets Sina or clients issue orders that are converted by P0-PGR into governed prompt packets, routed through cloud factory lines, executed in isolated sandboxes/worktrees, verified with receipts, and surfaced through Studio IDE / client workspace.",
+  "purpose": "Lock the identity of the commercial product categories so execution resumes only against this registry. This is a CATEGORY-MAP lock, not a build claim: it fixes what each category IS, how it differs, and the receipt that gates its activation. It does not assert that any category is finished, live, or sellable.",
+  "governing_constraints": [
+    "Noetfield's public GTM is narrowly locked to THREE contract SKUs only (Trust Brief, Copilot Governance Pack, Bank Pilot) per Noetfield/OFFERINGS_LOCKED.md. The 10 categories below are PLATFORM / INTERNAL product categories (the factory that builds and governs), NOT new public SKUs.",
+    "Noetfield constitution: 'Noetfield never touches value — only policy, compliance logic, and traceability.' Any payment/onboarding framing (esp. TrustField) is a governance/decision layer, never money movement, custody, settlement, or routing.",
+    "Product/canon boundary (P10 product-vs-canon-boundary.md): product docs describe WHAT is sold; they cross-reference canon (HOW the system runs) but never compete with it.",
+    "This lock creates NO public claim, buys NO domain, merges NO branch, deploys NOTHING, and defines NO new category. Workers may not add categories; execution resumes only against this registry."
+  ],
+  "evidence_basis": {
+    "method": "20-agent evidence + adversarial-verify workflow (run wf_0e4cdcf8-c34): one read-only evidence gatherer per category, then one downgrade-biased verifier per category re-checking each build-status claim against its cited proof assets.",
+    "categories_assessed": 10,
+    "status_downgrades_on_verify": 0,
+    "verifier_confidence": "high on all 10",
+    "note": "Every proof-asset path cited below was confirmed to exist. Build statuses were adversarially re-checked against a known 'fake-green / inflated-capability' failure mode in this ecosystem (SourceA incident reports 048/049). Honesty caveats per category record what is NOT yet true.",
+    "environment_limits": "Read-only, offline pass: no GitHub Actions API, no live HTTP fetches, no gh auth. 'live/running' claims that depend on CI run history or production HTTP are receipt-attested, not re-observed this pass — flagged per category.",
+    "status_patch_v1": {
+      "applied_at": "2026-07-09T07:06:11Z",
+      "authority": "founder directive 2026-07-09 (PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1)",
+      "changed": ["CAT-03 (R2 cloud manual now PASS)", "CAT-04 (TrustField loops built PR#10, RECONCILED_PASS, still not VERIFIED)", "CAT-06 (kept partial-scaffold; NOT advanced by P0-PGR R2 proof)"],
+      "verification": "Each corrected status was confirmed against the actual receipt before patching (not accepted on assertion).",
+      "reverse_drift_finding": "CRITICAL: the CAT-03 R2 PASS receipt (P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json, sha256 8f43f2e8...) and the CAT-04 receipts (trustfield-cloud-loops-built / P0PGR_DUAL_SCAFFOLD_RECONCILIATION RECONCILED_PASS / TRUSTFIELD_CLOUD_LOOPS_ACTIVATION) exist ONLY in ~/Projects/sina-governance-ssot.MIGRATED-2026-07-08 (an archived clone), NOT in canonical ~/Desktop/Noetfield-Systems/sina-governance-SSOT. The two cloud cycle receipts the R2 PASS depends on (P0PGR-CYCLE-20260709T000048Z/000050Z) are also absent from canonical. RESOLUTION (PRODUCT_CATEGORY_LOCK_SYNC_v1): the archived clone was subsequently DELETED; the 4 proving receipts were recovered byte-exact from git commit 2f2f38b (hashes re-verified against the preserved anchors) and written to canonical receipts/p0pgr/. The 2 cycle receipts were never committed and remain unrecoverable (their per-run evidence is embedded in the R2 PASS receipt's per_run_checks). Root-cause reconciliation (where new P0-PGR/TrustField work lands now that ~/Projects is gone) remains open as precondition #3."
+    }
+  },
+  "build_status_vocabulary": {
+    "live-running": "Real executions happen and emit receipts; the capability runs, not just parses.",
+    "built-not-activated": "Real runnable artifacts exist (code/schemas/workflows/receipts) but the packaged product / external activation does not exist yet.",
+    "partial-scaffold": "Some runnable pieces exist but the end-to-end capability is not wired; core spec or gate still 'to be built'.",
+    "spec-doc-only": "Specs/plans/docs committed; no runnable artifact.",
+    "concept-only": "Named and reasoned about; no product artifact of this category exists."
+  },
+  "status_ladder": {
+    "P0": "CONCEPT — named only",
+    "P1": "SPEC-LOCKED — schema/spec/plan committed",
+    "P2": "BUILT-SCAFFOLD — runnable pieces, not wired end-to-end",
+    "P3": "BUILT-NOT-ACTIVATED — wired/runnable internally, no external/commercial activation",
+    "P4": "LIVE-RUNNING (INTERNAL) — real executions emit receipts inside the factory",
+    "P5": "PROOF-LANE VALIDATED — external/vertical proof with outcome receipts",
+    "P6": "COMMERCIAL-ACTIVATION-GATED — packaged; founder + receipt gate to sell",
+    "mechanism": "Grounded in the real proof loop: sandbox proposes -> independent verifier checks -> promotion gate -> only PASS reaches live; STEP-10-class actions are founder-gated (PHASE_LOOP_BUILD_PLAN_v0.1.md)."
+  },
+  "domain_posture_vocabulary": {
+    "posture_now": "For ALL categories the current posture is 'umbrella-internal': no standalone domain, no public SKU, no public claim — this enforces the founder lock rules.",
+    "target": "umbrella = intended to live under noetfield.com / sourcea.app; subdomain = own subdomain once proven; standalone-later = own commercial domain/SKU only after its activation receipt exists."
+  },
+  "lock_rules": [
+    "Do not build code.",
+    "Do not buy domains.",
+    "Do not create public claims.",
+    "Do not merge or deploy.",
+    "Do not let workers define new categories.",
+    "Lock categories first; execution resumes only against this registry."
+  ],
+  "categories": [
+    {
+      "category_id": "CAT-01-GOVERNED-AGENT-MEMORY",
+      "product_name": "MemoryGate / Governed Agent Memory / DecisionGraph",
+      "product_name_status": "PROPOSED — the names MemoryGate / DecisionGraph / Governed Agent Memory appear in ZERO files across SG, SourceA, and Noetfield; this is a commercial framing over real internal governance tooling.",
+      "buyer": "Now: the founder's own Noetfield/SourceA multi-agent ecosystem (internal). Later: operators of autonomous / multi-agent systems burned by agents acting on stale, superseded, or unauthorized context who need provenance + freshness + receipts over agent memory.",
+      "pain_solved": "Agent memory (vector/Graphiti/Zep/Mem0) has no authority, provenance, freshness, ROI, or execution gate — you cannot prove why an agent 'remembered' something, whether the memory was still live law, or whether the agent was allowed to act on it.",
+      "comparison_category": "Graphiti, Zep, Mem0, vector memory",
+      "noetfield_differentiation": "A governance/gate layer OVER memory rather than a retrieval store: authority-scoped read surfaces (ACTIVE/SUPERSEDED/RETIRED), a staleness engine that BLOCKS on stale law, sha256 provenance chains with independent verification, per-stage decision receipts, and execution/promotion gates. Memory can block an action, not just recall text.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "No public surface today; earn standalone status only after the three lanes unify into one governed-memory product with an ROI lane and a non-founder consumer." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/data/agent_read_surfaces_v1.json (authority-scoped read-surface registry v1.3.0)",
+        "sina-governance-SSOT/scripts/agent_read_staleness_engine_v1.py (15KB freshness/staleness gate)",
+        "sina-governance-SSOT/receipts/agent-read-staleness-20260707T234651Z.json (real execution receipt; 6 dated)",
+        "sina-governance-SSOT/data/brain_external_artifact_registry_v1.json (sha256 provenance + independent-verify + test_receipt_ids)",
+        "sina-governance-SSOT/decision_language_machine_v1/ (11 modules, per-stage decision receipts)",
+        "sina-governance-SSOT/data/brain_domain_sandboxes_v1.json (authority-scoped deploy gates)",
+        "sina-governance-SSOT/gates/promotion_gate.py (31KB gate)",
+        "sina-governance-SSOT/docs/GRAPH_TOOL_DECISION_v1.md (internal Graphiti/Zep/Mem0 tool-selection)"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "build_status_rationale": "The freshness, provenance, and decision-receipt lanes are genuinely built and executing internally, but they are three separate scripts/registries — there is no unified 'governed agent memory' interface, no ROI attribution tied to memory, no external consumer, and no product/SKU/domain. Built, not a stub; not activated as a product.",
+      "next_build_phase": "Unify the three lanes behind one authority-scoped memory interface, add the missing ROI-attribution lane (tie a prevented bad deploy/spend to a memory gate), and produce ONE composite end-to-end receipt where a single agent action is allowed/blocked by combined authority+freshness+provenance checks. Then one non-founder design-partner before any external claim.",
+      "not_now_boundary": "No public claim; no Graphiti/Zep/Mem0/vector-memory competitor positioning (Graphiti was rejected internally, not beaten as a product); no 'ROI' claim until an attribution lane exists; no MemoryGate/DecisionGraph brand, domain, or SKU; no claim of external users.",
+      "receipt_required_to_activate": "MEMORYGATE_COMPOSITE_GATE_RECEIPT — one composite receipt in which a single agent action was gated by combined authority-scope + freshness + sha256 provenance, PLUS one non-founder consumer, PLUS one ROI line attributing a specific prevented bad deploy/spend to the memory gate.",
+      "honesty_caveats": [
+        "Product names exist nowhere in code.",
+        "Seed drift: data/brain_domain_registry_v1.json does not exist; real file is data/brain_domain_sandboxes_v1.json.",
+        "Provenance registry has only one registration (trustfield_loops_phase1); its verify receipts were not re-run this pass.",
+        "All 6 staleness receipts cluster on 2026-07-07; weekly CI run history unverified.",
+        "No ROI attribution linked to memory anywhere in repo."
+      ]
+    },
+    {
+      "category_id": "CAT-02-REPO-CODE-GRAPH-MEMORY",
+      "product_name": "RepoGraph L0 / SourceA Repo Memory",
+      "product_name_status": "IN-USE internally as 'L0 repo graph memory'; 'RepoGraph'/'SourceA Repo Memory' commercial branding is external framing.",
+      "buyer": "Now: internal agents/operators. Later: agent-platform / dev-tools teams paying a 'token tax' to re-orient agents on every repo read.",
+      "pain_solved": "Agents blindly re-read repos to orient (the design doc cites a ~371k-token blind pass), driving cost, latency, and drift; no compact structural memory or broad-read discipline.",
+      "comparison_category": "Graphify, code search, repo graph tools",
+      "noetfield_differentiation": "Zero-token structural repo memory (compact subsystem map + query script) plus a broad-read GATE enforced in AGENTS.md, so orientation costs ~2-6k tokens instead of ~371k. Governance-native (the gate is a rule), not just a search index.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "Most mature category and the natural first standalone candidate — but only after measured cross-repo savings receipts." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/scripts/build_repo_graph_v1.py",
+        "sina-governance-SSOT/scripts/query_repo_graph_v1.py",
+        "sina-governance-SSOT/graph-out/GRAPH_REPORT.md (indexes 5401 files / 14.1MB / 19 present subsystems)",
+        "sina-governance-SSOT/graph-out/graph_index_v1.json",
+        "sina-governance-SSOT/scripts/verify_l0_repo_graph_memory_v1.sh",
+        "sina-governance-SSOT/receipts/l0-repo-graph-verify-20260709T060304Z.json (build+query+gate-present PASS)",
+        "sina-governance-SSOT/docs/L0_REPO_GRAPH_MEMORY_v1.md",
+        "sina-governance-SSOT/AGENTS.md (broad-read gate section)"
+      ],
+      "current_build_status": "live-running",
+      "status_ladder_phase": "P4-LIVE-RUNNING",
+      "build_status_rationale": "The only category verified as live-running: the builder/query/report and verify receipt exist and the gate text is enforced in AGENTS.md in THIS repo. It runs today.",
+      "next_build_phase": "Prove generality + savings: add AST import/from edges (edges today are regex path-strings, self-admitted 'not a real import graph'); pilot to one second repo (e.g., TrustField) with its own build+green verify receipt; capture a real before/after token-count receipt from an actual session; fix design-doc drift (broken file refs, stale 703-file/17-subsystem figures).",
+      "not_now_boundary": "No hosted/cloud service, central cross-repo DB, or multi-tenant SKU; no 'measured production token savings' claim (only build-time estimates + one anecdote); no all-repo rollout or commercial branding; no standalone domain.",
+      "receipt_required_to_activate": "REPOGRAPH_TOKEN_TAX_RECEIPT — a real before/after token-measurement from an actual multi-agent session AND a green build+verify receipt for the tool running in at least one second repo.",
+      "honesty_caveats": [
+        "No measured token-savings receipt yet — the 2-6k vs 371k figures are estimate + anecdote.",
+        "Single-repo only; SourceA/ECOSYSTEM_GRAPH.json is a separate dependency graph, so the 'SourceA Repo Memory' half is unproven.",
+        "Edges are regex path-strings, not AST; closer to a file map than a dependency graph.",
+        "Gate is convention-only (verify checks the instruction text is present, not runtime obedience).",
+        "Lives on non-default branch cursor/language-layer-v1; not confirmed merged to main. Live index reports 19 subsystems (the '22' is the candidate-dir list length)."
+      ]
+    },
+    {
+      "category_id": "CAT-03-PROMPT-GOVERNANCE-RUNTIME",
+      "product_name": "P0-PGR / PromptGraph / Noetfield Prompt Runtime",
+      "product_name_status": "IN-USE internally as 'P0-PGR' (P0 Prompt Governance Runtime / Dispatch Brain Runtime v1.1).",
+      "buyer": "Now: internal dogfood. Later: teams running many agent prompts/workflows who need governance, ROI, and receipts over dispatched work.",
+      "pain_solved": "Prompt hubs/libraries store prompts but don't compile, route, critic, ROI-judge, or receipt-verify them; there is no governance or provenance over the work an agent is dispatched to do.",
+      "comparison_category": "prompt hubs, prompt management tools, agent prompt libraries",
+      "noetfield_differentiation": "An evidence-based prompt compiler -> router -> critic -> ROI judge -> receipt verifier: orders become governed, lint-clean packets that are gated, phased (shadow -> cloud-only -> autonomous), and receipted, with founder-unlock gates on each rung.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "umbrella", "note": "This is the platform spine (the 'runtime' the North Star routes through), not a near-term standalone SKU." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+        "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md",
+        "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json + P0_PROMPT_REGISTRY_SCHEMA_v1.json",
+        "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py, p0pgr_packet_lint_v1.py, p0pgr_evidence_reader_v1.py, p0pgr_campaign_planner_v1.py, p0pgr_phase2_rank_v1.py",
+        "sina-governance-SSOT/tests/test_p0pgr_phase0.py",
+        "sina-governance-SSOT/.github/workflows/p0pgr-shadow-cycle-v1.yml",
+        "sina-governance-SSOT/receipts/p0pgr/ (cycle, exec-M03, phase2_scorecard, campaign, founder-unlock receipts)",
+        "sina-governance-SSOT/skills/p0pgr-skills-workspace (operator/compiler/verifier skills + evals)",
+        "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json (R2 cloud-manual PASS: 2 GitHub cloud runs verified; now in canonical receipts/p0pgr/, recovered from git 2f2f38b)"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED (R1+R2 cloud PASS; R3+ founder-gated)",
+      "r_ladder": {
+        "R1_session_driven": "PASS",
+        "R2_cloud_manual": "PASS",
+        "R3_cron_shadow": "HOLD",
+        "R4_low_risk_auto_dispatch": "not-active",
+        "R5_roi_aware_autonomy": "not-active",
+        "proof_receipt": "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json (sha256 8f43f2e8fb70bc3a11b65ad1e10ab8e5ae1c62f0858d9fd1c4789a615fd97b59; now in canonical receipts/p0pgr/, recovered from git 2f2f38b, hash-verified)"
+      },
+      "build_status_rationale": "R-ladder (per verified receipts): R1 session-driven PASS; R2 cloud-manual PASS — two GitHub-hosted cloud runs (run IDs 28984157746 / 28984159107, both concluded success, event=workflow_dispatch, branch cursor/language-layer-v1 @ 3f61d41, in-cloud jsonschema validation PASS, artifacts present), cron disabled and R3 founder-gated; R3 cron-shadow HOLD; R4 low-risk auto-dispatch not active; R5 ROI-aware autonomy not active. The loop now runs in the cloud with no Mac and no session. As a COMMERCIAL product it remains built-not-activated: R3+ are founder-gated, the LLM reasoning stages are still not wired (deterministic Python, $0.00 cost), and there is no external consumer/SKU.",
+      "next_build_phase": "R2 is DONE (cloud-manual PASS, verified). Next rung is R3 cron-shadow, currently HOLD: enabling the schedule requires a FOUNDER-UNLOCK-R3-CRON-SHADOW receipt. Then close Phase-1 exit and progress the canonical registry lane DECLARED -> VERIFIED after a 24h zero-manual green window. Do NOT wire R4/R5 until their founder-unlock receipts exist.",
+      "not_now_boundary": "No R3 cron/scheduled automation without FOUNDER-UNLOCK-R3-CRON-SHADOW; no R4 auto-dispatch or R5 ROI-autonomy; no real edit/deploy/merge/send — all founder-gated per the ladder + v1.1 contract. No '24/7 / self-running / autonomous / VERIFIED' claims (R2 manual-green != cron-green). Do not describe the critic/ROI-judge as live model reasoning (deterministic scaffolding). No public product claim.",
+      "receipt_required_to_activate": "R2 cloud PASS is ACHIEVED (P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json). Next activation gate = FOUNDER-UNLOCK-R3-CRON-SHADOW + canonical registry lane DECLARED -> VERIFIED after a 24h zero-manual green window. Commercial activation remains a separate, explicit founder decision.",
+      "honesty_caveats": [
+        "R2 cloud-manual PASS receipt is now in canonical (recovered from git 2f2f38b, hash-verified). The 2 cloud cycle receipts (P0PGR-CYCLE-20260709T000048Z / 000050Z) were never committed and are unrecoverable — their per-run evidence is embedded in the R2 PASS receipt's per_run_checks.",
+        "Canonical registry lane p0pgr still reads DECLARED / phase0_shadow — not yet flipped to VERIFIED (needs the 24h zero-manual green window).",
+        "R3 cron-shadow is HOLD; R4/R5 not active. Manual-green is not cron-green.",
+        "LLM reasoning stages still not wired/metered (deterministic Python, $0.00) — critic/ROI-judge are scaffolding, not live model reasoning.",
+        "Bootstrap clone ssot-p0pgr-workflow-bootstrap + a cross-clone DRIFT receipt exist; canonical trails the archived clone on P0-PGR work."
+      ]
+    },
+    {
+      "category_id": "CAT-04-CLOUD-FACTORY-LINES",
+      "product_name": "Forge Factory / SourceA Factory Lines",
+      "product_name_status": "PARTIAL — 'forge-governance'/'forge-core-governance' apps exist in SourceA; 'Forge Factory / Factory Lines' as a named product is framing.",
+      "buyer": "Now: internal. Later: teams wanting governed cloud execution (vs Fly/Railway/Modal/GHA) where every run carries a gate, receipt, cost token, and ROI control — not raw compute.",
+      "pain_solved": "Generic runners execute anything with no authority, receipt, ROI, or gate; there is no governance over what ran, its cost, or its outcome.",
+      "comparison_category": "Fly.io, Railway, Modal, GitHub Actions, agent runners",
+      "noetfield_differentiation": "A governance OVERLAY on execution: promotion gate + cost tokens + autorun workflows + advisory worker, so each line's runs are gated, costed, and receipted. Not its own compute plane — governed lines on top of GitHub Actions / workers.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "Umbrella under sourcea.app first; standalone 'Forge Factory' only after per-line governed-run receipts." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/.github/workflows/p0pgr-shadow-cycle-v1.yml + brain-loop-autorun-v1.yml (present on origin/main)",
+        "sina-governance-SSOT/gates/promotion_gate.py + gates/cf_tokens.py",
+        "sina-governance-SSOT/workers/github-app-advisory/index.js (GitHub App + Cloudflare advisory worker)",
+        "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md",
+        "sina-governance-SSOT/receipts/p0pgr/P0PGR-R2-CLOUD-MANUAL-PROOF-v1.json + founder approval receipt",
+        "SourceA/apps/forge-core-governance/govern_cli.py",
+        "SourceA/apps/forge-governance/src/service/govern.ts",
+        "trustfield-cloud-loops-built-v1-20260709T001150Z.json (PR #10 loops BUILT/DECLARED; sha256 2d056237...; now in canonical receipts/p0pgr/, recovered from git 2f2f38b)",
+        "P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z.json (RECONCILED_PASS; sha256 891f49ab...; now in canonical receipts/p0pgr/, recovered from git 2f2f38b)",
+        "TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json (PR #11 merged + Railway deploy, DECLARED_ACTIVE; sha256 38bf99e8...; now in canonical receipts/p0pgr/, recovered from git 2f2f38b)"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED (line R2 cloud PASS; TrustField loops DECLARED_ACTIVE, NOT VERIFIED)",
+      "build_status_rationale": "The p0pgr shadow-cycle LINE now has R2 cloud-manual PASS (2 GitHub cloud runs; see CAT-03), so lines can run in the cloud with no Mac/session. TrustField cloud loops were BUILT in PR #10 (TrustField-Technologies loops/p0-cloud-factory-foundation @ de263b7, DECLARED) and reconciled RECONCILED_PASS (P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1: zero p0-pgr schema duplication, TrustField = local adapter only). A later activation receipt records PR #11 merged + Railway deploy SUCCESS -> DECLARED_ACTIVE. Status remains built-not-activated / NOT VERIFIED: the 24h zero-manual scheduled-receipt window is pending, GH Actions secrets are incomplete (ANTHROPIC_API_KEY dormant), and all proving receipts live only in the archived clone.",
+      "next_build_phase": "Reach VERIFIED for the TrustField loops: complete the founder-gated activation chain (secrets wired, deploy-truth cron observed) and hold a 24h zero-manual scheduled-receipt window (doctrine: manual green != cron green), flipping DECLARED_ACTIVE -> VERIFIED. Separately, advance the p0pgr cloud LINE past R2 only via its R3+ founder-unlock receipts. The PR#10 / reconciliation / activation receipts are now in canonical (recovered from git 2f2f38b).",
+      "not_now_boundary": "No cron shadow (R3), auto-dispatch (R4), or ROI-autonomy/spend-governor (R5) without founder-unlock receipts. No 'VERIFIED' or '24/7 cloud autonomy' claim until the 24h zero-manual scheduled-receipt window closes green. No Fly/Railway/Modal compute-competitor positioning (governance overlay). Agents do not self-merge PRs or set credentials — founder-gated. Do not count shadow or manual-green cycles as VERIFIED.",
+      "receipt_required_to_activate": "FACTORY_LINE_VERIFIED — for the TrustField loops: a 24h zero-manual window of scheduled receipts (pa-health-cron + pa-deploy-truth) with secrets wired, flipping DECLARED_ACTIVE -> VERIFIED. For the p0pgr cloud line: R2 PASS is achieved; any rung beyond R2 requires a founder receipt in receipts/p0pgr/founder/. Precondition (DONE): proving receipts recovered from git 2f2f38b into canonical.",
+      "honesty_caveats": [
+        "R2 cloud PASS now proves the p0pgr shadow-cycle line runs in the cloud (verified) — this supersedes the earlier 'no cloud execution proven'.",
+        "TrustField loops are DECLARED_ACTIVE, NOT VERIFIED: 24h zero-manual scheduled window pending; ANTHROPIC_API_KEY + some GH Actions secrets unset.",
+        "All CAT-04 proving receipts (R2 PASS, PR#10 built, RECONCILED_PASS, activation) are now in canonical (recovered from git 2f2f38b, hash-verified). Root-cause reverse-drift (where new work lands) remains open as precondition #3.",
+        "Forge apps are library/CLI/MVP-grade with no live production-invocation receipt.",
+        "Older brain-loop-autorun receipts trace to /Users/.../Projects/SourceA — a stale/archived-clone path (canonical workspace is ~/Desktop/Noetfield-Systems)."
+      ]
+    },
+    {
+      "category_id": "CAT-05-SANDBOX-WORKTREE-EXECUTION",
+      "product_name": "Forge Workcells / Noetfield Sandboxes",
+      "product_name_status": "PROPOSED — 'workcell' / 'Forge Workcells' / 'Noetfield Sandboxes' appear NOWHERE in code; in-code framing is 'Cloud Factory Substrate' + 'Sandbox Manager'.",
+      "buyer": "Now: internal agent runs. Later: teams needing isolated, safe agent execution with branch/PR/preview/rollback (vs Replit/Cursor background agents/Devin).",
+      "pain_solved": "Agent sandboxes run code without governed isolation guarantees, receipts, or provable rollback; unsafe autonomous execution against real repos.",
+      "comparison_category": "cloud IDEs, Replit agents, Cursor background agents, Devin-style sandboxes",
+      "noetfield_differentiation": "Isolated workcells with branch/PR/preview/rollback plus isolation + wall-gate receipts; safe-by-construction (never auto-merge to venture repos). Governance-first isolation, not just an ephemeral container.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "Standalone 'Forge Workcells' only after a real factory-run isolation+rollback receipt; today it is design + git-worktree isolation." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/gates/promotion_gate.py",
+        "sina-governance-SSOT/data/brain_domain_sandboxes_v1.json (brain deploy-candidate lanes, authority-scoped)",
+        "sina-governance-SSOT/skills/pr-conflict-resolver/PR_CONFLICT_RESOLVER_SKILL_LOCKED_v1.md + scripts/verify_pr_conflict_skill_v1.py",
+        "sina-governance-SSOT/receipts/step9-candidate-a-pass-receipt.json (SYNTHETIC gate-logic fixture)",
+        "sina-governance-SSOT/docs/L0_GRAPH_FIRST_OPERATOR_RULE_v1.md",
+        "sg-sandbox/.git + sg-sandbox/.noetfield/agent_manifest.yml (worktree/clone)",
+        "sandbox/README.md"
+      ],
+      "current_build_status": "partial-scaffold",
+      "status_ladder_phase": "P2-BUILT-SCAFFOLD",
+      "build_status_rationale": "Git-worktree isolation, a promotion gate, PR-conflict skill, and a synthetic gate-logic fixture exist, but the core product spec (SANDBOX_MANAGER_SPEC_v0, sandbox_ledger_v0, walls W1-W9 exit gate) is 'design only, to be built' and lives only on a different branch (cursor/machine-autonomy-loops-v1), not on disk. No real factory-run receipt; no container/microVM isolation; no preview/rollback mechanism.",
+      "next_build_phase": "CF-P1 internal founder-only cloud factory: build sandbox_ledger_v0 + allocation (git worktree add per sandbox_id), implement machine-readable walls W1-W9 with a mechanical exit-gate script, and produce ONE real (non-synthetic) factory-run receipt from a live worktree-isolated agent run. Reconcile the L0-graph/doc drift (missing cloud-factory files).",
+      "not_now_boundary": "No container/microVM isolation claim (only git-worktree exists); no cron/scheduled sandbox automation (needs FOUNDER-UNLOCK-CF-CRON); no preview/rollback product surface; no authenticated client workspaces or paid platform (CF-P2/CF-P5); no auto-merge to venture repos. The existing founder unlock is design-only — it does not authorize building/deploying.",
+      "receipt_required_to_activate": "WORKCELL_FACTORY_RUN_RECEIPT — a real factory-run receipt at receipts/factory/<FR-ID>/ from a live git-worktree-isolated agent run that allocated a ledger row, hit a wall (BLOCKED_WITH_REASON), and exited with a branch/PR (no auto-merge) — explicitly NOT a step9-style synthetic fixture. Plus a founder build-unlock receipt.",
+      "honesty_caveats": [
+        "Core spec (cloud-factory/*) exists only on branch cursor/machine-autonomy-loops-v1 (commit b4e4cdd), not on checked-out HEAD or disk.",
+        "step9 candidate PASS/FAIL/TAMPERED receipts are synthetic fixtures (placeholder SHA256).",
+        "Isolation is git-worktree-level only; no container/microVM found.",
+        "'preview/rollback' is unevidenced (a planned CF-P4 phase).",
+        "brain_domain_sandboxes are brain deploy lanes, not compute/agent-execution sandboxes; a stale prunable worktree exists at /private/tmp/sg-cost-locks-fix."
+      ]
+    },
+    {
+      "category_id": "CAT-06-AGENTIC-WORKFLOW-BUILDER",
+      "product_name": "Noetfield Workflow Builder / SourceA Agentic Workflows",
+      "product_name_status": "PROPOSED — no builder product exists; internal 'workflow' means Noetfield's own automation motors (WORKFLOW_CENSUS).",
+      "buyer": "Now: internal governance. Later: ops teams building AI workflows (vs Zapier/Make/n8n/LangGraph/CrewAI) who need approvals + receipts + cost control + regulated-action gates.",
+      "pain_solved": "Workflow tools automate steps but have no approval gates, receipts, cost control, or regulated-action boundaries — unsafe for governed/regulated work.",
+      "comparison_category": "Zapier, Make, n8n, LangGraph, CrewAI",
+      "noetfield_differentiation": "Workflows with human approvals, receipts, cost/value classification, and regulated-action gates built in; the same P0-PGR dispatch governance applied to multi-step work. Governance-native, not a visual node toy.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "Umbrella now; subdomain/standalone only after an externally-authored, receipted workflow exists." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/scripts/workflow_census_v1.py + receipts/workflow-census-20260706T093358Z.json",
+        "sina-governance-SSOT/infrastructure/supabase/migrations/001_workflow_census_v1.sql",
+        "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py + receipts/p0pgr/P0PGR-CYCLE-20260708T143639Z.json",
+        "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md",
+        "sina-governance-SSOT/.github/workflows/p0pgr-shadow-cycle-v1.yml + brain-loop-autorun-v1.yml",
+        "ssot-p0pgr-workflow-bootstrap/PHASE_LOOP_BUILD_PLAN_v0.1.md",
+        "Noetfield/AGENTIC_PROCESS_LOOPS.md (DRAFT/INERT doctrine)"
+      ],
+      "current_build_status": "partial-scaffold",
+      "status_ladder_phase": "P2-BUILT-SCAFFOLD",
+      "build_status_rationale": "A workflow census, its migration, and the P0-PGR dispatch engine exist and run in shadow, but there is no customer-facing builder (no UI, node editor, templates, or user-authored workflows); every 'workflow' is Noetfield's own internal motor, dispatch is shadow-only, and the census's own audit_status is RED (META cost > GUARD+REVENUE). Scaffold, not a builder.",
+      "next_build_phase": "Build the thinnest external surface that is THIS category's OWN evidence: let ONE design-partner author a workflow packet and watch it run with an approval gate + a receipt + cost + value_class returned — 'define a governed workflow, get its receipt'. NOTE (founder patch): P0-PGR's R2 cloud PASS (CAT-03) is runtime proof for the prompt runtime, NOT proof of a workflow BUILDER — it does not advance this category. No cron/auto-dispatch/ROI-autonomy until their founder-unlock receipts exist.",
+      "not_now_boundary": "No visual node/drag-drop builder, template marketplace, or multi-tenant SaaS; no Zapier/Make/n8n parity claim; no cron or real dispatch/send/deploy/merge (R3+) without a FOUNDER-UNLOCK receipt; no 'live workflow builder' or '24/7 autonomous' claim (honest rung is R1, R2 only PARTIAL, executions shadow-only).",
+      "receipt_required_to_activate": "WORKFLOW_GOVERNED_APPROVAL_RECEIPT — one externally/partner-authored workflow packet executed with an approval gate + a schema-valid receipt (cost + value_class). Must be DIRECT evidence for the builder category; the P0-PGR R2 cloud PASS does NOT satisfy it.",
+      "honesty_caveats": [
+        "Founder patch: P0-PGR's R2 cloud PASS does NOT advance this category — it stays partial-scaffold until a direct workflow-builder receipt exists.",
+        "No UI / node editor / template library / user-authored workflow of any kind.",
+        "No external users, pilots, pricing, SKU, or domain.",
+        "Census audit_status RED; 8 NONE loops produced no receipt; cost is declared, not billed ($0 metered).",
+        "ssot-p0pgr-workflow-bootstrap is a bootstrap clone; a cross-clone DRIFT receipt exists — git isolation not independently verified.",
+        "Only one census run read; weekly schedule not confirmed."
+      ]
+    },
+    {
+      "category_id": "CAT-07-NOCODE-APP-BUILDER",
+      "product_name": "Noetfield App Factory / SourceA App Builder",
+      "product_name_status": "CONCEPT — no prompt-to-app engine, template library, or generated-app runtime exists anywhere in the workspace.",
+      "buyer": "Later: internal-tool builders (vs Lovable/Bolt/Replit/v0/Bubble/Softr) who need GOVERNED prompt-to-app for regulated internal tools, portals, dashboards, and workflows.",
+      "pain_solved": "Prompt-to-app tools ship ungoverned apps; there is no policy/receipt/approval layer for regulated internal tools.",
+      "comparison_category": "Lovable, Bolt, Replit, v0, Bubble/Softr",
+      "noetfield_differentiation": "Prompt-to-app for GOVERNED internal tools/portals/dashboards/workflows: every generated app carries an approval gate + generation receipt + policy layer. (Aspirational — nothing built.)",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "standalone-later", "note": "Weakest/most immature; may not warrant a distinct product — decide whether it folds into the Studio IDE (CAT-08) before any build." },
+      "current_proof_assets": [
+        "buildmatch/index.html + README.md (OFF-CATEGORY: a Vancouver-construction static 'action packs' demo; README is a 13-byte stub)",
+        "SourceA/apps/README.md + SourceA/apps/newmatch/README.md (domain-specific scaffolds, not an app builder)",
+        "SourceA/.cursor/skills/forge-living-ui-modern-ide/SKILL.md",
+        "noetfield-studio-ide/README.md (an AI CODE IDE — adjacent category, NOT no-code)",
+        "Noetfield/OFFERINGS_LOCKED.md (confirms this is NOT a locked SKU)"
+      ],
+      "current_build_status": "concept-only",
+      "status_ladder_phase": "P0-CONCEPT",
+      "build_status_rationale": "No builder engine, no generated-app runtime, and 0 files for 'app builder' in the L0 graph. buildmatch is off-category; noetfield-studio-ide is a code IDE, not a no-code builder. Concept-only.",
+      "next_build_phase": "Scope-decision SPEC first: decide whether 'no-code app builder' is a distinct product or a generation mode of the Studio IDE (which already has the gate/router). If pursued, deliver 1 spec doc + 1 real prompt -> governed internal tool (form-backed dashboard) that emits an approval-gate receipt and a persisted, viewable artifact.",
+      "not_now_boundary": "No 'App Factory'/'App Builder'/'prompt-to-app' SKU, page, or deck claim; do not present buildmatch or noetfield-studio-ide as evidence of this category; keep it out of OFFERINGS_LOCKED. Hard hold: no build before a scope-decision spec receipt.",
+      "receipt_required_to_activate": "APP_FACTORY_SPEC_LOCK_RECEIPT — a locked scope-decision spec PLUS one real execution where a natural-language prompt produces a governed internal tool that is (a) deployed/viewable at a URL, (b) approval-gated, and (c) backed by a persisted generation receipt (prompt -> spec -> app -> gate PASS -> artifact).",
+      "honesty_caveats": [
+        "No prompt-to-app / no-code artifact of any kind in the workspace.",
+        "May be miscategorized — candidate to fold into CAT-08 Studio IDE.",
+        "buildmatch is a construction action-pack templater (client-side localStorage, no backend).",
+        "Not in OFFERINGS_LOCKED (only Trust Brief, Copilot Pack, Bank Pilot are locked SKUs).",
+        "Buyer/pain/differentiation are inferred from the category definition — no observed customer or usage."
+      ]
+    },
+    {
+      "category_id": "CAT-08-STUDIO-IDE-CONTROL-COCKPIT",
+      "product_name": "Noetfield Studio IDE / Forge Studio / Forge Terminal",
+      "product_name_status": "REAL app exists as 'noetfield-studio-ide' (v0.1.0 / Phase 0, 'cursor-lite' loop).",
+      "buyer": "Sina + clients operating the factory — one cockpit for orders, prompts, sandboxes, approvals, runs, receipts, and deploys.",
+      "pain_solved": "Cursor/VS Code/Retool are generic; nothing ties orders -> prompts -> sandboxes -> approvals -> runs -> receipts -> deploys into one governed cockpit view.",
+      "comparison_category": "Cursor, VS Code, Retool/admin consoles, internal developer portals",
+      "noetfield_differentiation": "A governance-native cockpit that surfaces the full order->receipt->deploy chain with worktrees, gate/promote receipts, and an approval flow — the operator surface of the Cloud Factory, not a generic editor.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "subdomain", "note": "Local-first single-founder now; a studio.* subdomain once the autonomous loop is green and the app is packaged; standalone-later possible." },
+      "current_proof_assets": [
+        "noetfield-studio-ide/src/app/page.tsx + src/app/api + src/lib (running Next.js app)",
+        "noetfield-studio-ide/.noetfield/receipts/gate-1783153935533.json + promote-1783153941164.json (real dev-run receipts)",
+        "noetfield-studio-ide/.noetfield/worktrees/agent-2df12a7f (live worktree)",
+        "noetfield-studio-ide/.noetfield/studio-store.json",
+        "noetfield-studio-ide/docs/demo/receipts/cursor-lite-loop-sample.json (verify.ok=false — loop not yet green)",
+        "noetfield-studio-ide/model-probe-latest.json (live LLM connectivity, Google models)",
+        "noetfield-studio-ide/vscode-extension (compiled, not packaged/published)",
+        "noetfield-studio-ide/e2e/v1-readiness.spec.ts"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "build_status_rationale": "A real Next.js cockpit runs (via next dev) with gate/promote receipts, live worktrees, a model probe, and a compiled VS Code bridge. But the flagship autonomous loop is NOT green (the cursor-lite sample records verify.ok=false, 'synthesized from partial run'), there is no hosting/auth/multi-tenant, and receipts are dev smoke runs (4 total). Built app, loop + product not activated.",
+      "next_build_phase": "Green the cursor-lite end-to-end loop: fix the sandbox typecheck so a real run reaches verify.ok=true and emits a genuine gate->verify-PASS->promote receipt. Then package the notarized macOS .app/DMG and finish the Docker command-sandbox isolation lane. Only then add auth/multi-workspace for any hosted offering.",
+      "not_now_boundary": "No hosted/multi-tenant SaaS; no auth/billing/cloud deployment yet; no 'replaces Cursor/VS Code' claim; keep local-first single-founder until the loop is proven green and packaged. Do not conflate with the adjacent SourceA forge-governance Cursor plugin listing or the SG desktop-app auditor bundles (separate products).",
+      "receipt_required_to_activate": "STUDIO_LOOP_GREEN_RECEIPT — a real, non-synthesized end-to-end cursor-lite receipt where sandbox -> gate-approve -> verify (typecheck/build) PASS -> promote all succeed on a fresh change (a promote receipt whose linked gate carries verify.ok=true), PLUS a run receipt from an installed/notarized app (not `next dev`).",
+      "honesty_caveats": [
+        "Flagship autonomous loop is not green (verify.ok=false sample).",
+        "No deployment/hosting/auth/multi-tenant; runs only via next dev on 127.0.0.1:3005; v0.1.0.",
+        "Only 4 receipts, all dev smoke runs (2026-07-04).",
+        "vscode-extension compiled but not packaged (.vsix) or published; model probe is multi-model single-provider (Google), not multi-vendor.",
+        "Did not boot the app live this pass; runnability inferred from build dir + last-run + receipts."
+      ]
+    },
+    {
+      "category_id": "CAT-09-RECEIPT-TRUST-AUDIT-LAYER",
+      "product_name": "ReceiptGraph / Noetfield Trust Layer",
+      "product_name_status": "PROPOSED — 'ReceiptGraph'/'Noetfield Trust Layer' appear NOWHERE in the repo; the underlying receipts/ledger/auditor plumbing is real.",
+      "buyer": "Every buyer of the other categories + auditors/compliance (vs audit logs/LangSmith/observability/SOC2 evidence tools).",
+      "pain_solved": "Traces/logs show WHAT happened but not authority, cost, changed files, deploy state, and outcome as verifiable receipts you can independently check.",
+      "comparison_category": "audit logs, LangSmith traces, observability, SOC2 evidence tools",
+      "noetfield_differentiation": "Every AI action emits a receipt carrying proof + authority + cost + changed-files + deploy-state + outcome, independently verifiable (birth receipt from a separate Cloudflare-Worker verifier). The trust spine under every other category.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "umbrella", "note": "The cross-category trust spine; a subdomain 'ReceiptGraph' only after a unified, queryable, self-audited index exists." },
+      "current_proof_assets": [
+        "sina-governance-SSOT/receipts/ (101+ receipts, e.g. phase0.3-step10a-watched-deploy, cross-domain-auth-w11-closeout)",
+        "sina-governance-SSOT/receipts/p0pgr/ + receipts/p0pgr/campaigns/ (cycle + campaign receipts)",
+        "sina-governance-SSOT/verifier/independent-verifier-birth-receipt-61d95d74.json (separate CF-Worker verifier)",
+        "sina-governance-SSOT/scripts/audit_receipt_ledger_v1.py (auditor — never executed)",
+        "sina-governance-SSOT/skills/receipt-ledger-auditor/SKILL.md",
+        "sina-governance-SSOT/desktop-app/Receipt-Ledger-Auditor.app (HTML aggregation dashboard, ephemeral output)",
+        "sina-governance-SSOT/ledger/session-decision-ledger.md",
+        "sina-governance-SSOT/language_gate/receipts/ (~4,645 receipts, un-aggregated)"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED",
+      "build_status_rationale": "Thousands of real receipts, a ledger, an auditor script, an auditor skill, a desktop dashboard, and an independent verifier exist. But the auditor has NEVER run to a persisted output, the three receipt stores are disjoint/un-aggregated, there is no unified schema or query/graph surface, and the product name exists nowhere. Real plumbing, not an activated trust product.",
+      "next_build_phase": "Activate the auditor: run audit_receipt_ledger_v1.py --write-receipt to produce the first receipt-ledger-audit; extend coverage to all three stores; define a unified receipt schema guaranteeing the six dimensions (proof, authority, cost, changed_files, deploy_state, outcome) in every receipt; build a query/graph/aggregation surface so 'ReceiptGraph' is an actual index.",
+      "not_now_boundary": "No 'finished trust layer/observability product' claim; no SOC2 or audit-log parity claim; no 'every AI action has a receipt' as a shipped guarantee. Under-claim: real internal governance plumbing, not a sellable audit product.",
+      "receipt_required_to_activate": "RECEIPTGRAPH_SELF_AUDIT_RECEIPT — a first successful audit_receipt_ledger_v1.py --write-receipt run across a UNIFIED corpus (all three receipt stores) producing an audit receipt with ok=true (or an honest findings list), countersigned by the independent Cloudflare-Worker verifier.",
+      "honesty_caveats": [
+        "Auditor has never been executed (0 receipt-ledger-audit outputs).",
+        "Auditor only globs top-level receipts/ non-recursively; misses receipts/p0pgr/ and language_gate/receipts/.",
+        "No graph/query/index/unified schema; receipt shapes are heterogeneous per motor.",
+        "session-decision-ledger.md self-labels UNVERIFIED and contradicts the later verifier-birth receipt on whether independent verification is real.",
+        "Could not re-execute the CF-Worker verifier (birth receipt ~8 days stale); desktop dashboard output is ephemeral /tmp with no launch evidence."
+      ]
+    },
+    {
+      "category_id": "CAT-10-VERTICAL-PROOF-PRODUCTS",
+      "product_name": "TrustField / Noetfield AI Value Governance / SourceA / WitnessBC",
+      "product_name_status": "REAL ventures with in-repo assets for all four lanes; commercial activation differs per lane (see per-lane).",
+      "buyer": "Per lane: fintech / partner onboarding (TrustField); enterprise AI cost/ROI (Noetfield AI Value Governance); internal control-plane operators (SourceA); proof/media (WitnessBC).",
+      "pain_solved": "The platform needs external proof that governed execution produces real outcomes in a real vertical — each lane is a proof that the factory works end-to-end with receipts.",
+      "comparison_category": "vertical proof lanes: fintech onboarding/payment orchestration; enterprise AI ROI; control-plane/factory; proof/media",
+      "noetfield_differentiation": "Four proof lanes that demonstrate the factory with outcome receipts. TrustField stays a decision/governance layer (never touches value/settlement). Governance + receipts are the throughline vs generic vertical tools.",
+      "domain_strategy": { "posture_now": "umbrella-internal", "target": "mixed-per-lane", "note": "TrustField = standalone (trustfield.ca); SourceA = standalone (sourcea.app), internal control-plane; Noetfield AI Value Governance = umbrella under noetfield.com; WitnessBC = standalone-later (witnessbc.com, cutover pending)." },
+      "current_proof_assets": [
+        "TrustField-Technologies/reports/partner-access-bplus-live-truth-receipt-v1.json (2026-07-08, LIVE_BPLUS_PASS — receipt-attested)",
+        "TrustField-Technologies/data/runtime_truth_sync_v1.json + README.md",
+        "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md",
+        "Noetfield/ai-value-governance-os/index.html + Noetfield/services/agentic-cost-governance/index.html",
+        "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+        "SourceA/PROGRAM_PROGRESS.json + SourceA/START_HERE.md (stale internal control-plane)",
+        "SourceA/witnessbc-site + SourceA/sites/WitnessBC-landing + SourceA/docs/WITNESSBC_TWO_LANE_OBSERVE_LOCKED_v1.md + SourceA/data/witnessbc-vercel-main-dns-cutover-v1.json"
+      ],
+      "current_build_status": "built-not-activated",
+      "status_ladder_phase": "P3-BUILT-NOT-ACTIVATED (per-lane: TrustField P4/P5 software-live receipt-attested; AIVG P3 pre-launch; SourceA P4 internal/stale; WitnessBC P3 preview-only)",
+      "build_status_rationale": "All four lanes have real in-repo assets. TrustField is software-live by receipt (LIVE_BPLUS_PASS) but pre-revenue and the entity is only 'reserved to be incorporated'. AI Value Governance is self-labeled pre-launch/pilot. SourceA is a stale internal control-plane, not a sellable SKU. WitnessBC has only a Vercel preview (witnessbc.com cutover pending). NO paying-customer/revenue receipt exists for ANY lane.",
+      "next_build_phase": "Bring the three non-live lanes to TrustField's evidentiary bar: (1) WitnessBC — execute the witnessbc.com DNS cutover and produce an in-repo live-truth receipt; (2) AI Value Governance — confirm the noetfield.com pages are deployed live AND land the first paying pilot for a delivery receipt; (3) TrustField — sign a paying partner (SOW/invoice); (4) SourceA — refresh PROGRAM_PROGRESS.json and decide internal-control-plane vs productized surface.",
+      "not_now_boundary": "Do not claim WitnessBC or AI Value Governance are 'live' without an in-repo production live-truth receipt; do not claim any signed customer, revenue, or paid pilot for ANY lane (none found); do not claim TrustField is incorporated or that it holds funds/settles; do not treat SourceA as a sellable external SKU; do not invent a fifth vertical lane.",
+      "receipt_required_to_activate": "PROOF_LANE_LIVE_TRUTH_RECEIPT (per lane) — a machine live-truth receipt structurally equal to TrustField's partner-access-bplus receipt: HTTP 200 on the production custom domain with expected_build == live_build and pass:true, committed in-repo (witnessbc.com for WitnessBC; the noetfield.com AIVG URLs for Lane 2). For COMMERCIAL activation of any lane, a distinct revenue receipt (signed SOW / paid invoice / Stripe charge); AIVG additionally needs a first customer audit-delivery receipt.",
+      "honesty_caveats": [
+        "No paying-customer/revenue receipt for ANY of the four lanes — all pre-revenue on the evidence seen.",
+        "WitnessBC production not confirmed live (Vercel preview_ok only; dns_change_required pending; cutover receipt lives outside the repo).",
+        "AI Value Governance self-labels 'pre-launch, pilot phase'; live deploy of noetfield.com pages not confirmed this pass.",
+        "TrustField entity only 'reserved to be incorporated' (interim contracting via Noetfield Systems Inc.); live status is receipt-attested, not re-observed; local HEAD ahead of origin.",
+        "SourceA PROGRAM_PROGRESS.json is stale (updated 2026-06-19); describes an internal factory, not a sellable SKU."
+      ]
+    }
+  ]
+}
