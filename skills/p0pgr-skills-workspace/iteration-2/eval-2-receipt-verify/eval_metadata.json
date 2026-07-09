@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "receipt-verify-provenance-v2",
+  "prompt": "verify M03 receipt (post-upgrade: provenance battery, schema)",
+  "assertions": [
+    "Formal ACCEPTED_PROVISIONAL verdict",
+    "File-provenance math: mtime + predates-queue detection (new battery item)",
+    "Artifact-existence check (artifacts dir missing => prose-as-proof)",
+    "Advisory schema validation vs P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+    "Repair pointers; queue advances (no freeze)"
+  ]
+}

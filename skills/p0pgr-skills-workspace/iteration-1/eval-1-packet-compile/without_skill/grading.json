@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "Packet lints PASS (lint_result.json verdict)",
+      "passed": true,
+      "evidence": "lint verdict=PASS"
+    },
+    {
+      "text": "evidence_refs cite the M03 execution receipt",
+      "passed": true,
+      "evidence": "['receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json', 'SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFI"
+    },
+    {
+      "text": "fallback_route is human_review_queue, not mac_runner",
+      "passed": true,
+      "evidence": "fallback=human_review_queue"
+    },
+    {
+      "text": "F1 pricing issue explicitly scoped out (not bundled)",
+      "passed": true,
+      "evidence": "F1 mentioned as out-of-scope"
+    },
+    {
+      "text": "dispatch_mode is shadow",
+      "passed": true,
+      "evidence": "dispatch_mode=shadow"
+    }
+  ]
+}

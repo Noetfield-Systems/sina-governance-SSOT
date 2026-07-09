@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "Lint PASS",
+      "passed": true,
+      "evidence": "verdict=PASS"
+    },
+    {
+      "text": "Deploy correctly founder-gated: FOUNDER_ONLY + founder_queue + deploy scope",
+      "passed": true,
+      "evidence": "FOUNDER_ONLY/founder_queue/deploy"
+    },
+    {
+      "text": "cloud_safe=false for live-site work",
+      "passed": true,
+      "evidence": "cloud_safe=False"
+    },
+    {
+      "text": "evidence_artifacts demanded in success_receipt (new 4b rule)",
+      "passed": true,
+      "evidence": "present in required_fields"
+    },
+    {
+      "text": "Price decision reserved to founder (no executor guessing)",
+      "passed": true,
+      "evidence": "task step 1: 'This decision is yours; record it in the receipt' \u2014 executor is target_executor:human via founder_queue, so the decider is the founder; grader regex was too narrow"
+    }
+  ]
+}

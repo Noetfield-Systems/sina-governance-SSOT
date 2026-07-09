@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "receipt-verify",
+  "prompt": "Verify receipts/p0pgr/P0PGR-EXEC-M03-...json \u2014 can we trust it? Was quality_state honest? Formal verdict with evidence; write verdict.md.",
+  "assertions": [
+    "Formal trust-with-caveats verdict (ACCEPTED_PROVISIONAL or equivalent)",
+    "Independently re-verifies at least one claim (own fetch/file check), not prose-trust",
+    "Judges quality_state PARTIAL as honest given executor limits",
+    "Detects timestamp/provenance inconsistency (executed_at vs file mtime / queue time)",
+    "Criticisms carry repair pointers; verdict does not freeze the queue"
+  ]
+}

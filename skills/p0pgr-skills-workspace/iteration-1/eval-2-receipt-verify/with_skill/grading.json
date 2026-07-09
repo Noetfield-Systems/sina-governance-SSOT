@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "Formal trust-with-caveats verdict (ACCEPTED_PROVISIONAL or equivalent)",
+      "passed": true,
+      "evidence": "formal verdict present"
+    },
+    {
+      "text": "Independently re-verifies at least one claim (own fetch/file check), not prose-trust",
+      "passed": true,
+      "evidence": "independent re-verification described"
+    },
+    {
+      "text": "Judges quality_state PARTIAL as honest given executor limits",
+      "passed": true,
+      "evidence": "PARTIAL judged honest"
+    },
+    {
+      "text": "Detects timestamp/provenance inconsistency (executed_at vs file mtime / queue time)",
+      "passed": true,
+      "evidence": "timestamp inconsistency found"
+    },
+    {
+      "text": "Criticisms carry repair pointers; verdict does not freeze the queue",
+      "passed": true,
+      "evidence": "repair pointers present"
+    }
+  ]
+}
