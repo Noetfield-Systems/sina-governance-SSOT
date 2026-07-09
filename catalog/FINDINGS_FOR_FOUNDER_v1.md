@@ -32,13 +32,19 @@ Ordered by how much they touch trust / money / founder authority.
 - **Why it matters:** a manifest that points at missing files erodes "registry is truth." Cosmetic vs the above, but easy.
 - **Your decision:** approve a one-line manifest path correction (append-only edit). I can prepare it as a sandbox proposal on request.
 
+## 6. Loop registry retires triggers it never defines  · `WI-4` · **REVIEW**
+- **What:** `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/data/machine-process-loops-v1.json` has **7 `retires_trigger_ids`** that resolve to no `trigger_id` defined in `founder-trigger-retirement-registry-v1.json`: `FT-FOUNDER-TIER-ROUTING`, `FT-FOUNDER-MISSION-PICK`, `FT-FOUNDER-VALIDATOR-CHECK`, `FT-DUP-IMPL-FOUNDER`, `FT-FOUNDER-RECEIPT-READ`, `FT-FOUNDER-CI-TRIAGE`, `FT-FOUNDER-UNCERTAINTY`.
+- **Why it matters:** these are the founder-touchpoint triggers the machine loops claim to *retire* (automate away). If the retirement registry never defined them, either the loops are retiring triggers that were never ratified, or the registry is missing 7 entries — "registry is routing truth" (L4) is broken either way.
+- **Your decision:** confirm whether those 7 founder triggers should be defined in the retirement registry (then add them) or the loops shouldn't claim to retire them (then correct the loop refs). The reconciler (`catalog/builds/WI-4/`) re-checks on demand.
+
 ---
 
 ## Recommended order
 1. **#2 (DLM fence)** — the only one touching founder authority; decide (a) `deferred_unvalidated` or (b) block.
-2. **#1 (FAIL deploy)** — verify live version; 5-minute check with the auditor's rollback hint.
-3. **#3 (worker↔schema)** — pick source of truth.
-4. **#5 (manifest)** — trivial, whenever.
-5. **#4** — no action; just know the bar is now enforced.
+2. **#6 (dangling triggers)** — 7 founder-touchpoint triggers retired-but-undefined; a registry-truth gap worth closing.
+3. **#1 (FAIL deploy)** — verify live version; 5-minute check with the auditor's rollback hint.
+4. **#3 (worker↔schema)** — pick source of truth.
+5. **#5 (manifest)** — trivial, whenever.
+6. **#4** — no action; just know the bar is now enforced.
 
 **Evidence for every finding:** the named `catalog/builds/<ID>/` dir holds the tool, a red-capable test, a red-run canary, and a receipt. None of these fixes were applied — they await your DECIDE.
