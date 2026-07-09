@@ -27,7 +27,7 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 | **SourceA Worker** | `~/Projects/SourceA` | same | SA deploy scripts · skill packaging · brain CLI | SourceA workers, Signal Factory **packaging into SA** | `trustfield-loops` code · NOOS `_NOOS_AGENT` docs |
 | **SourceA Loop Specialist** | `~/Projects/SourceA` + CF tick | same | `loop_specialist_tick_v1` · runtime plans · work orders | Desired-state plans, dispatch receipts | Deploy TF workers · external send |
 | **TrustField Worker** | `~/Desktop/trustfield-loops` | TrustField-isolated git | CF intake · D1 · receipt chain · Telegram alert | Phase 1–5 TF autorun loops | SourceA imports · NOOS edits · production send |
-| **Noetfield (website/spine)** | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | Noetfield repo | Public site · platform spine · Vercel · live nerve | www.noetfield.com routes, copy, E2E | GEL runtime implementation |
+| **Noetfield (website/spine)** | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | Noetfield repo | Public site · platform spine · Cloudflare Workers · live nerve | www.noetfield.com routes, copy, E2E | GEL runtime implementation |
 | **NOOS (GEL runtime)** | `~/Projects/noetfeld-os/` | noetfeld-os | GEL gate/log/audit · `docs/_NOOS_AGENT/` | api.noetfield.com runtime truth | Website source · default save to SourceA |
 
 **Signal Factory v1 (interim):** built at `~/.cursor/skills/signal-factory/` — SourceA-owned meaning; **SourceA Worker** packages to SourceA repo; **SourceA Brain** B-01 pointer register.

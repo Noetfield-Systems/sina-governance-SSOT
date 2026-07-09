@@ -24,6 +24,7 @@ Input → Artifact → Evidence → Decision → Receipt
 ## Relation
 - Anti-theater + negative-proof: a receipt is proof-by-evidence; a diagram is a claim. Same law as "prove gates by rejection."
 - ROC: the receipt is the reusable asset that proves a pattern ran — the thing you trade.
+- Language: proof receipt vs observation record — `NOETFIELD_TERMINOLOGY_v1.md` · long form `NOETFIELD_DICTIONARY_v1.md`.
 
 ---
 *v0.1 (2026-07-03 12:34 PDT) — first write. Receipts>diagrams; Input→Artifact→Evidence→Decision→Receipt; the One Truth Ticket; validator-first build order.*

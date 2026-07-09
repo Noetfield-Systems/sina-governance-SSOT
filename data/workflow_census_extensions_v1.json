@@ -1,8 +1,8 @@
 {
   "schema": "workflow_census_extensions_v1",
   "version": "1.0.0",
-  "saved_at": "2026-07-06T09:00:00Z",
-  "note": "Motors not in automation_surface_inventory — personal Gateway + traffic probe",
+  "saved_at": "2026-07-08T06:35:19Z",
+  "note": "Motors not in automation_surface_inventory \u2014 personal Gateway + traffic probe",
   "cloudflare_workers": [
     {
       "loop_id": "cf_gateway_ops_v1",
@@ -51,6 +51,30 @@
       "task_cell": "gateway_railway_deadman",
       "cost_tier": "github_actions",
       "receipt_glob": "deadman /ready probe receipt"
+    },
+    {
+      "loop_id": "sg_agent_read_staleness_v1",
+      "name": "agent-read-staleness-weekly-v1",
+      "host": "github",
+      "repo": "Noetfield-Systems/sina-governance-SSOT",
+      "workflow_file": ".github/workflows/agent-read-staleness-weekly-v1.yml",
+      "schedule": "0 9 * * 1",
+      "task_cell": "sg_governance",
+      "cost_tier": "github_actions",
+      "receipt_glob": "receipts/agent-read-staleness-*.json",
+      "value_class": "GUARD"
+    },
+    {
+      "loop_id": "sg_auth_surface_probe_v1",
+      "name": "sg-auth-surface-probe-v1",
+      "host": "github",
+      "repo": "Noetfield-Systems/sina-governance-SSOT",
+      "workflow_file": ".github/workflows/sg-auth-surface-probe-v1.yml",
+      "schedule": "0 */6 * * *",
+      "task_cell": "sg_auth_surface_probe",
+      "cost_tier": "github_actions",
+      "receipt_glob": "receipts/auth-surface-probe-*.json",
+      "value_class": "GUARD"
     }
   ],
   "outbound_motors": [
@@ -73,18 +97,19 @@
   "traffic_probes": [
     {
       "loop_id": "traffic_www_intake_conversion_v1",
-      "name": "www traffic → intake conversion",
+      "name": "www traffic \u2192 intake conversion",
       "host": "traffic",
       "schedule": "daily_snapshot",
       "task_cell": "traffic_intake_conversion",
       "cost_tier": "traffic",
       "receipt_target": "visits_24h / non_test_leads_24h",
-      "note": "Founder-reported 11.25k visits/24h with zero non-test leads — instrument weekly"
+      "note": "Founder-reported 11.25k visits/24h with zero non-test leads \u2014 instrument weekly"
     }
   ],
   "revenue_motors_required": [
     "gateway_lead_capture",
     "gateway_outbound",
     "traffic_intake_conversion"
-  ]
+  ],
+  "github_actions_guard": []
 }

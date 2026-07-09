@@ -1,0 +1,53 @@
+name: sg-auth-surface-probe-v1
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      strict_warn:
+        description: "Exit 1 on WARN (pre-release gate)"
+        required: false
+        default: "false"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Auth surface probe
+        run: |
+          ARGS="--json --write-receipt"
+          if [[ "${{ github.event.inputs.strict_warn }}" == "true" ]]; then
+            ARGS="$ARGS --fail-on-warn"
+          fi
+          python3 scripts/verify_auth_surfaces_e2e_v1.py $ARGS > receipts/auth-surface-probe-latest-summary.json
+          STATUS=$(python3 -c "import json; print(json.load(open('receipts/auth-surface-probe-latest-summary.json'))['status'])")
+          if [[ "$STATUS" == "FAIL" ]]; then
+            echo "Auth surface probe FAIL"
+            exit 1
+          fi
+          if [[ "${{ github.event.inputs.strict_warn }}" == "true" && "$STATUS" == "WARN" ]]; then
+            echo "Auth surface probe WARN (strict mode)"
+            exit 1
+          fi
+        env:
+          NOETFIELD_SUPABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_URL }}
+          NOETFIELD_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.NOETFIELD_SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Upload auth surface receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-surface-probe-receipt
+          path: |
+            receipts/auth-surface-probe-*.json
+          if-no-files-found: ignore

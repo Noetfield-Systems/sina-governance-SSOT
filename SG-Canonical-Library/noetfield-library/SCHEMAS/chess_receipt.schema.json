@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChessReceipt",
+  "type": "object",
+  "required": [
+    "receipt_name",
+    "status",
+    "chess_pass",
+    "protected_feature_verification",
+    "verification"
+  ],
+  "properties": {
+    "receipt_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PARTIAL",
+        "FAILED"
+      ]
+    },
+    "chess_pass": {
+      "$ref": "chess_pass.schema.json"
+    },
+    "protected_feature_verification": {
+      "type": "object",
+      "properties": {
+        "preserved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intentionally_removed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object"
+    },
+    "rollback": {
+      "type": "object"
+    }
+  }
+}

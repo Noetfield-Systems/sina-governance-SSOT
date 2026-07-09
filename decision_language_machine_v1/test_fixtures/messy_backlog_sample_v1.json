@@ -1,0 +1,10 @@
+{
+  "schema": "decision_language_machine_test_fixture_v1",
+  "corpus": "messy_backlog_sample",
+  "items": [
+    {"id": "AUDIT-001", "source": "audit_finding", "text": "Brain Worker URL returns 502 on /health — should we fail closed or retry?", "blocks": "E2E registry"},
+    {"id": "CHAT-FORK-12", "source": "chat_fork", "text": "User asked: leverage the Motor for outbound. Which Motor — NOOS or Plus-One?", "options": ["A — NOOS", "B — Plus-One", "C — DEFER"]},
+    {"id": "AGENT-Q-44", "source": "agent_question", "text": "Did you send the Mail for Q-MF-10 outreach batch?", "effect": "Founder-only confirm"},
+    {"id": "BACKLOG-99", "source": "backlog", "text": "Gemini scaffold workspace — revisit when revenue lane stable"}
+  ]
+}

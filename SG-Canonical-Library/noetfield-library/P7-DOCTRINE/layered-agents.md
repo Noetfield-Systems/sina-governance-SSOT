@@ -1,6 +1,6 @@
 # ARCHITECTURE — LAYERED AGENTS (not every agent reads every rule)
 
-> **STATUS: DERIVED / read-surface.** The AUTHORITATIVE locked law is `P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md` (Tier 0/1/2/3 + least-knowledge + dispatch contract). This doc is the doctrine-layer expansion; on any conflict, the P0 locked law wins. Authority = SG registry, not file existence.
+> **STATUS: DERIVED / read-surface.** The AUTHORITATIVE locked law is `P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md` (Tier 0/1/2/3 + Need-to-know access + dispatch contract). This doc is the doctrine-layer expansion; on any conflict, the P0 locked law wins. Authority = SG registry, not file existence.
 
 
 **Status:** Core architecture decision. Governs how agents are scoped and how layers connect.

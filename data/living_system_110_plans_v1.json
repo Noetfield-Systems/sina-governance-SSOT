@@ -1,0 +1,2150 @@
+{
+  "schema": "living_system_110_plans_v1_LOCKED",
+  "version": "1.1.0_LOCK",
+  "saved_at": "2026-07-08T07:10:18Z",
+  "authority": "SG (SSSOT)",
+  "parent_doctrine": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+  "parent_plans": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
+  "extends": "docs/1111_UPGRADE_PLANS_v2.md",
+  "law": "Every cloud motor closes Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe. Mac is complement only.",
+  "waves": [
+    {
+      "wave": "W0",
+      "name": "P0 doctrine install",
+      "plans": "LS-001\u2013LS-010"
+    },
+    {
+      "wave": "W1",
+      "name": "Terminology mint",
+      "plans": "LS-011\u2013LS-020"
+    },
+    {
+      "wave": "W2",
+      "name": "Liveness rubric validator",
+      "plans": "LS-021\u2013LS-030"
+    },
+    {
+      "wave": "W3",
+      "name": "Homeostasis policy bootstrap",
+      "plans": "LS-031\u2013LS-040"
+    },
+    {
+      "wave": "W4",
+      "name": "Homeostasis drills",
+      "plans": "LS-041\u2013LS-050"
+    },
+    {
+      "wave": "W5",
+      "name": "Commercial Pulse motor",
+      "plans": "LS-051\u2013LS-060"
+    },
+    {
+      "wave": "W6",
+      "name": "Metabolism rungs 3-4",
+      "plans": "LS-061\u2013LS-070"
+    },
+    {
+      "wave": "W7",
+      "name": "Cloud registry and census",
+      "plans": "LS-071\u2013LS-080"
+    },
+    {
+      "wave": "W8",
+      "name": "Deadman and 48h liveness",
+      "plans": "LS-081\u2013LS-090"
+    },
+    {
+      "wave": "W9",
+      "name": "Library cross-binds",
+      "plans": "LS-091\u2013LS-100"
+    },
+    {
+      "wave": "W10",
+      "name": "ROI kaizen and rungs 5-7",
+      "plans": "LS-101\u2013LS-110"
+    },
+    {
+      "wave": "W11",
+      "name": "Cross-domain auth SSOT",
+      "plans": "LS-111\u2013LS-113"
+    }
+  ],
+  "milestones": {
+    "M1_doctrine_installed": {
+      "plan": "LS-003",
+      "target_days": 1
+    },
+    "M2_terminology_minted": {
+      "plan": "LS-020",
+      "target_days": 3
+    },
+    "M3_rubric_validator_green": {
+      "plan": "LS-030",
+      "target_days": 7
+    },
+    "M4_first_heal_class_drilled": {
+      "plan": "LS-045",
+      "target_days": 14
+    },
+    "M5_commercial_pulse_cron_live": {
+      "plan": "LS-055",
+      "target_days": 10
+    },
+    "M6_first_objection_receipt": {
+      "plan": "LS-068",
+      "target_days": 17
+    },
+    "M7_48h_cloud_survives": {
+      "plan": "LS-088",
+      "target_days": 21
+    },
+    "M8_first_revenue_receipt": {
+      "plan": "LS-107",
+      "target_days": 90
+    }
+  },
+  "plans": [
+    {
+      "id": "LS-001",
+      "wave": "W0",
+      "title": "Copy doctrine Downloads to P0-CORE locked path",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+      "depends": [],
+      "closed_loop": null,
+      "done_when": "File on disk",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-002",
+      "wave": "W0",
+      "title": "Founder L5 ratification receipt for v1.1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P99-LEDGER/LIVING_SYSTEM_DOCTRINE_RATIFY_2026-07-07.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Ratification receipt filed",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-003",
+      "wave": "W0",
+      "title": "P0_FOUNDATION_MANIFEST row 11",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P0_FOUNDATION_MANIFEST.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Manifest lists doctrine INSTALLED",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-004",
+      "wave": "W0",
+      "title": "SSOT_INDEX quick-ref bind Living System axis",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P2-SSOT/SSOT_INDEX.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Index row points P0-CORE doctrine",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-005",
+      "wave": "W0",
+      "title": "BIG_PICTURE_RELATION_MAP dual-axis overlay",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "BIG_PICTURE_RELATION_MAP.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Map shows metabolism and homeostasis lanes",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-006",
+      "wave": "W0",
+      "title": "ARCHITECT_START_HERE read order bump",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "ARCHITECT_START_HERE.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Doctrine in P0 read spine",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-007",
+      "wave": "W0",
+      "title": "agent_read_surfaces_v1.json ACTIVE row",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/agent_read_surfaces_v1.json",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Staleness gate includes doctrine path",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-008",
+      "wave": "W0",
+      "title": "Cross-bind GOVERNED_AUTORUN L2 L4 L7 L12",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "GOVERNED_AUTORUN_LAWS_v3.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Laws doc links section 8 rubric",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-009",
+      "wave": "W0",
+      "title": "Cross-bind FOUNDER_CANON intent filter",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "FOUNDER_CANON_v1.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Canon cites LIVING vs STALE axis",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-010",
+      "wave": "W0",
+      "title": "W0 install receipt and section 8 self-check",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_w0_install_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w0-install-*.json",
+      "depends": [
+        "LS-003",
+        "LS-007"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "W0 receipt PASS",
+      "w0_status": "COMPLETE",
+      "completed_at": "2026-07-08T00:58:07Z"
+    },
+    {
+      "id": "LS-011",
+      "wave": "W1",
+      "title": "Mint Living System and Stale in NOETFIELD_TERMINOLOGY",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Tier-0 lines exist",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md \u00a710"
+    },
+    {
+      "id": "LS-012",
+      "wave": "W1",
+      "title": "Mint Body Pulse Homeostasis Metabolism Receipts",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_TERMINOLOGY_v1.md",
+      "depends": [
+        "LS-011"
+      ],
+      "closed_loop": null,
+      "done_when": "Five components defined",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_TERMINOLOGY_v1.md five components"
+    },
+    {
+      "id": "LS-013",
+      "wave": "W1",
+      "title": "Mint Liveness Ladder and rung names",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_DICTIONARY_v1.md",
+      "depends": [
+        "LS-011"
+      ],
+      "closed_loop": null,
+      "done_when": "Rungs 1-7 in dictionary",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md ladder"
+    },
+    {
+      "id": "LS-014",
+      "wave": "W1",
+      "title": "Mint Unforgeable Vital Sign",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_DICTIONARY_v1.md",
+      "depends": [
+        "LS-011"
+      ],
+      "closed_loop": null,
+      "done_when": "Links 239c8b5 precedent",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md unforgeable vital sign"
+    },
+    {
+      "id": "LS-015",
+      "wave": "W1",
+      "title": "Mint Commercial Pulse and Provocation Surface",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_DICTIONARY_v1.md",
+      "depends": [
+        "LS-013"
+      ],
+      "closed_loop": null,
+      "done_when": "Section 6 terms minted",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md commercial pulse"
+    },
+    {
+      "id": "LS-016",
+      "wave": "W1",
+      "title": "Mint stale-gate receipt types",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_DICTIONARY_v1.md",
+      "depends": [
+        "LS-015"
+      ],
+      "closed_loop": null,
+      "done_when": "FOUNDER WORKER MALFORMED types defined",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md stale-gate types"
+    },
+    {
+      "id": "LS-017",
+      "wave": "W1",
+      "title": "Mint Dispatchable Draft machine fields",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_DICTIONARY_v1.md",
+      "depends": [
+        "LS-016"
+      ],
+      "closed_loop": null,
+      "done_when": "7 dispatchability predicates listed",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_DICTIONARY_v1.md dispatchable"
+    },
+    {
+      "id": "LS-018",
+      "wave": "W1",
+      "title": "language_gate dictionary_index sync",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_language_gate_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "language_gate/dictionary_index.json",
+      "depends": [
+        "LS-013"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Index includes new terms",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "language_gate/dictionary_rc2_supplement.json"
+    },
+    {
+      "id": "LS-019",
+      "wave": "W1",
+      "title": "Synonym ban governance-alive vs commercial-alive",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "NOETFIELD_TERMINOLOGY_v1.md",
+      "depends": [
+        "LS-011"
+      ],
+      "closed_loop": null,
+      "done_when": "Dual-axis language split",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "NOETFIELD_TERMINOLOGY_v1.md \u00a76 synonym block"
+    },
+    {
+      "id": "LS-020",
+      "wave": "W1",
+      "title": "W1 terminology receipt and lint PASS",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_language_gate_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w1-terminology-*.json",
+      "depends": [
+        "LS-011",
+        "LS-016",
+        "LS-017"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "All terms lint-clean",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "receipts/living-system-w1-terminology-2026-07-08.json"
+    },
+    {
+      "id": "LS-021",
+      "wave": "W2",
+      "title": "Spec living_system_chain_validate_v1.py rubric",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "scripts/living_system_chain_validate_v1.py",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Script implements section 8 checklist",
+      "w0_status": "PENDING",
+      "w2_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "scripts/living_system_chain_validate_v1.py"
+    },
+    {
+      "id": "LS-022",
+      "wave": "W2",
+      "title": "Pulse receipt checker scheduled-only",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-pulse-*.json",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Manual green rejected",
+      "w0_status": "PENDING",
+      "w2_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "receipts/living-system-rubric-pulse-2026-07-08.json"
+    },
+    {
+      "id": "LS-023",
+      "wave": "W2",
+      "title": "External membrane receipt checker L4 rung2",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-membrane-*.json",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Reads truth_log EXTERNAL_VERIFY",
+      "w0_status": "PENDING",
+      "w2_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
+    },
+    {
+      "id": "LS-024",
+      "wave": "W2",
+      "title": "Mutation or IDLE_NO_WORK checker L2",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-mutation-*.json",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "IDLE_NO_WORK valid silence FAIL",
+      "w0_status": "PENDING",
+      "w2_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
+    },
+    {
+      "id": "LS-025",
+      "wave": "W2",
+      "title": "DRIFT freshness checker L12",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-drift-*.json",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Stale DRIFT yields STALE verdict",
+      "w0_status": "PENDING",
+      "w2_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
+    },
+    {
+      "id": "LS-026",
+      "wave": "W2",
+      "title": "Drill-refresh checker for heal classes",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-drill-*.json",
+      "depends": [
+        "LS-021",
+        "LS-045"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Expired drill yields STALE",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-027",
+      "wave": "W2",
+      "title": "Subsystem registry living_system_subsystems_v1.json",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/living_system_subsystems_v1.json",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": null,
+      "done_when": "Each motor has rubric scope",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-028",
+      "wave": "W2",
+      "title": "Wire rubric into HARDENED_MACHINE_WORKBENCH gate",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "SOURCEA_HARDENED_MACHINE_WORKBENCH pointer",
+      "depends": [
+        "LS-021"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "PROVE gate references live script",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-029",
+      "wave": "W2",
+      "title": "Negative-proof rubric rejects internal-only",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-negative-proof-*.json",
+      "depends": [
+        "LS-023"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Internal-only fixture yields STALE",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-030",
+      "wave": "W2",
+      "title": "W2 rubric E2E weekly GHA receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-rubric-e2e-*.json",
+      "depends": [
+        "LS-022",
+        "LS-023",
+        "LS-024",
+        "LS-025"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "validate --fast ALL PASS",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-031",
+      "wave": "W3",
+      "title": "data/noos_self_heal_policy_v1.json schema",
+      "value_class": "proof_asset",
+      "lane": "noos_agent",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/noos_self_heal_policy_v1.json",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "auto_heal vs escalate classes listed",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-032",
+      "wave": "W3",
+      "title": "Class 1 pick stale_pointer repair SG alive-doc",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "noos_self_heal_policy_v1.json",
+      "depends": [
+        "LS-031"
+      ],
+      "closed_loop": null,
+      "done_when": "Class entry with recipe pointer",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-033",
+      "wave": "W3",
+      "title": "Sensor role agent-read-staleness symptom emitter",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_agent_read_staleness_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/homeostasis-symptom-*.json",
+      "depends": [
+        "LS-032"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Sensor receipt no heal",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-034",
+      "wave": "W3",
+      "title": "Diagnoser map symptom to class script",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_diagnose_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-diagnosis-*.json",
+      "depends": [
+        "LS-033"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Unknown class escalates only",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-035",
+      "wave": "W3",
+      "title": "Healer write-isolation guard",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_heal_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-heal-guard-*.json",
+      "depends": [
+        "LS-034"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Floor paths rejected on heal",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-036",
+      "wave": "W3",
+      "title": "Verifier spine_live_probe post-heal only",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_verify_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/homeostasis-verify-*.json",
+      "depends": [
+        "LS-035"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Healer self-report INVALID",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-037",
+      "wave": "W3",
+      "title": "Escalator founder page unknown repeat-fail",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_escalate_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-escalation-*.json",
+      "depends": [
+        "LS-036"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "2x heal fail pages founder",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-038",
+      "wave": "W3",
+      "title": "Domino chain receipt schema v1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "schemas/homeostasis_chain_receipt_v1.json",
+      "depends": [
+        "LS-033"
+      ],
+      "closed_loop": null,
+      "done_when": "4-link chain HMAC-ready",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-039",
+      "wave": "W3",
+      "title": "NOOS lane ACTIVE for class 1 only",
+      "value_class": "proof_asset",
+      "lane": "noos_agent",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "noetfeld-os homeostasis-class1-active.md",
+      "depends": [
+        "LS-031"
+      ],
+      "closed_loop": null,
+      "done_when": "NOOS mirror not global ratify",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-040",
+      "wave": "W3",
+      "title": "W3 homeostasis policy install receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_policy_install_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/living-system-w3-homeostasis-*.json",
+      "depends": [
+        "LS-031",
+        "LS-038"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Policy on disk sensor-only wired",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-041",
+      "wave": "W4",
+      "title": "Drill plan kill stale pointer on purpose",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/drills/homeostasis_class1_drill_v1.md",
+      "depends": [
+        "LS-032"
+      ],
+      "closed_loop": null,
+      "done_when": "Disposable branch drill spec",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-042",
+      "wave": "W4",
+      "title": "Execute drill branch gate-test/homeostasis-c1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_drill_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-drill-c1-symptom-*.json",
+      "depends": [
+        "LS-041"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Symptom detected under 30m",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-043",
+      "wave": "W4",
+      "title": "Drill diagnosis heal verify chain",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_drill_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-drill-c1-chain-*.json",
+      "depends": [
+        "LS-042"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Full domino PASS branch deleted",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-044",
+      "wave": "W4",
+      "title": "Ratify class 1 auto-heal write authority",
+      "value_class": "proof_asset",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P99-LEDGER/HOMEOSTASIS_CLASS1_RATIFY_*.md",
+      "depends": [
+        "LS-043"
+      ],
+      "closed_loop": null,
+      "done_when": "Policy row ACTIVE",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-045",
+      "wave": "W4",
+      "title": "M4 milestone first heal class drilled",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_drill_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/milestone-M4-*.json",
+      "depends": [
+        "LS-044"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Progressive trust for class 1",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-046",
+      "wave": "W4",
+      "title": "Class 2 spec CI self-heal existing motor",
+      "value_class": "hygiene",
+      "lane": "sourcea_brain",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_brain_loop_autorun_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "noos_self_heal_policy_v1.json",
+      "depends": [
+        "LS-045"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Maps self_repair_ci_to_kaizen",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-047",
+      "wave": "W4",
+      "title": "Class 3 spec drift redeploy mismatch",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_sandbox_health_sweep_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "noos_self_heal_policy_v1.json",
+      "depends": [
+        "LS-045"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "L12 mismatch class documented",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-048",
+      "wave": "W4",
+      "title": "Immune library heal_class_registry_v1.json",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/heal_class_registry_v1.json",
+      "depends": [
+        "LS-044"
+      ],
+      "closed_loop": null,
+      "done_when": "c1 ACTIVE c2 c3 PROPOSED",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-049",
+      "wave": "W4",
+      "title": "Health workers never declare life test",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/unforgeable-vital-negative-*.json",
+      "depends": [
+        "LS-029"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Health receipt cannot set LIVING",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-050",
+      "wave": "W4",
+      "title": "W4 homeostasis drill rollup receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_drill_weekly_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/living-system-w4-homeostasis-*.json",
+      "depends": [
+        "LS-045",
+        "LS-049"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Weekly rollup PASS",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-051",
+      "wave": "W5",
+      "title": "Commercial Pulse state machine spec",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/commercial_pulse_loop_v0.1.md",
+      "depends": [
+        "LS-001",
+        "LS-015"
+      ],
+      "closed_loop": null,
+      "done_when": "Section 6 flow machine-readable",
+      "w0_status": "PENDING",
+      "w5_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:34:52Z",
+      "completion_receipt": "docs/commercial_pulse_loop_v0.1.md"
+    },
+    {
+      "id": "LS-052",
+      "wave": "W5",
+      "title": "data/commercial_pulse_queue_v1.json schema",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/commercial_pulse_queue_v1.json",
+      "depends": [
+        "LS-051"
+      ],
+      "closed_loop": null,
+      "done_when": "Draft approval send states",
+      "w0_status": "PENDING",
+      "w5_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:47:51Z",
+      "completion_receipt": "data/commercial_pulse_queue_v1.json"
+    },
+    {
+      "id": "LS-053",
+      "wave": "W5",
+      "title": "Dispatchability validator script",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_commercial_pulse_validate_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "scripts/commercial_pulse_dispatch_check_v1.py",
+      "depends": [
+        "LS-017",
+        "LS-052"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "MALFORMED_DRAFT emit",
+      "w0_status": "PENDING",
+      "w5_status": "COMPLETE",
+      "completed_at": "2026-07-08T01:50:00Z",
+      "completion_receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
+    },
+    {
+      "id": "LS-054",
+      "wave": "W5",
+      "title": "ICP stranger selector and drafter cron",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-draft-*.json",
+      "depends": [
+        "LS-052",
+        "LS-053"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Cron drafts never sends",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-055",
+      "wave": "W5",
+      "title": "M5 Commercial Pulse cron registered heartbeat",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/milestone-M5-*.json",
+      "depends": [
+        "LS-054"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "last_fired_at in loop_registry",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-056",
+      "wave": "W5",
+      "title": "Founder approval queue CLI L5 gate",
+      "value_class": "revenue_path",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "scripts/commercial_pulse_approve_v1.sh",
+      "depends": [
+        "LS-052"
+      ],
+      "closed_loop": null,
+      "done_when": "Approve yields send-receipt only",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-057",
+      "wave": "W5",
+      "title": "CASL compliance fields enforcer",
+      "value_class": "risk_reduction",
+      "lane": "trustfield_worker",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_commercial_pulse_validate_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-casl-*.json",
+      "depends": [
+        "LS-053"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Missing address unsub yields MALFORMED",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-058",
+      "wave": "W5",
+      "title": "Link-check receipt attachment gate",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_commercial_pulse_validate_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-linkcheck-*.json",
+      "depends": [
+        "LS-053"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Broken links block dispatchable",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-059",
+      "wave": "W5",
+      "title": "Stale-gate 7d evaluator FOUNDER vs WORKER",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_stale_gate_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-stale-gate-*.json",
+      "depends": [
+        "LS-054",
+        "LS-056"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Non-suppressible names blocker",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-060",
+      "wave": "W5",
+      "title": "W5 Commercial Pulse lane ACTIVE receipt",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w5-commercial-pulse-*.json",
+      "depends": [
+        "LS-055",
+        "LS-059"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Parallel with homeostasis",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-061",
+      "wave": "W6",
+      "title": "Rung 3 provocation surface registry",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/metabolism_ladder_state_v1.json",
+      "depends": [
+        "LS-055"
+      ],
+      "closed_loop": null,
+      "done_when": "Rung 3 target SKU and ICP",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-062",
+      "wave": "W6",
+      "title": "Named stranger ICP list v1 ten targets",
+      "value_class": "revenue_path",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/commercial_pulse_icp_v1.json",
+      "depends": [
+        "LS-061"
+      ],
+      "closed_loop": null,
+      "done_when": "10 named entities",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-063",
+      "wave": "W6",
+      "title": "Priced offer attach ACG Tier 1 audit SKU",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/commercial_pulse_offers_v1.json",
+      "depends": [
+        "LS-061"
+      ],
+      "closed_loop": null,
+      "done_when": "Price and entity hygiene PASS",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-064",
+      "wave": "W6",
+      "title": "First dispatchable draft produced",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-first-dispatchable-*.json",
+      "depends": [
+        "LS-054",
+        "LS-062",
+        "LS-063"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "dispatch_check PASS",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-065",
+      "wave": "W6",
+      "title": "First founder-approved send receipt",
+      "value_class": "revenue_path",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "receipts/commercial-pulse-first-send-*.json",
+      "depends": [
+        "LS-056",
+        "LS-064"
+      ],
+      "closed_loop": null,
+      "done_when": "Approval and send pair on disk",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-066",
+      "wave": "W6",
+      "title": "Rung 3 provocation metabolism receipt",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/metabolism-rung3-*.json",
+      "depends": [
+        "LS-065"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Ladder state rung 3 or higher",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-067",
+      "wave": "W6",
+      "title": "Reply objection classifier SF adapter",
+      "value_class": "revenue_path",
+      "lane": "sourcea_brain",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_classify_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-classify-*.json",
+      "depends": [
+        "LS-065"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "SF triage on replies",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-068",
+      "wave": "W6",
+      "title": "M6 first stranger objection receipt",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_classify_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/milestone-M6-objection-*.json",
+      "depends": [
+        "LS-067"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Rung 4 within 7d of LS-060",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-069",
+      "wave": "W6",
+      "title": "Low-information intake guard on inbound",
+      "value_class": "risk_reduction",
+      "lane": "sourcea_brain",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_brain_loop_autorun_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/metabolism-membrane-only-*.json",
+      "depends": [
+        "LS-067"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Vendor spam not rung 3 plus",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-070",
+      "wave": "W6",
+      "title": "W6 metabolism rung 3-4 rollup",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w6-metabolism-*.json",
+      "depends": [
+        "LS-066",
+        "LS-068"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "metabolism_ladder_state updated",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-071",
+      "wave": "W7",
+      "title": "Register LS motors github_automation_registry",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/github_automation_registry_v1.json",
+      "depends": [
+        "LS-055",
+        "LS-030"
+      ],
+      "closed_loop": null,
+      "done_when": "No unregistered LS cron",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-072",
+      "wave": "W7",
+      "title": "Register LS motors trigger-registry L14",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/trigger-registry-v1.json",
+      "depends": [
+        "LS-071"
+      ],
+      "closed_loop": null,
+      "done_when": "Co-commit rule satisfied",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-073",
+      "wave": "W7",
+      "title": "automation_surface_inventory LS rows",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/automation_surface_inventory_v1.json",
+      "depends": [
+        "LS-071"
+      ],
+      "closed_loop": null,
+      "done_when": "Body and pulse mapped",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-074",
+      "wave": "W7",
+      "title": "workflow_census value_class tags LS loops",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_workflow_census_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/workflow-census-ls-*.json",
+      "depends": [
+        "LS-071"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "REVENUE or GUARD not NONE",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-075",
+      "wave": "W7",
+      "title": "loop_registry last_fired_at upsert wiring",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_loop_registry_heartbeat_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/loop-registry-heartbeat-*.json",
+      "depends": [
+        "LS-055"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "All LS crons upsert",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-076",
+      "wave": "W7",
+      "title": "Mac complement plist mirror not sole motor",
+      "value_class": "hygiene",
+      "lane": "mac_complement",
+      "trigger_host": "mac-complement",
+      "loop_id": "mac_launchd_living_system_complement_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/mac-living-system-complement-*.json",
+      "depends": [
+        "LS-075"
+      ],
+      "closed_loop": null,
+      "done_when": "Cloud primary Mac mirrors",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-077",
+      "wave": "W7",
+      "title": "cost_event on Commercial Pulse cycles L11",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/commercial-pulse-cost-*.json",
+      "depends": [
+        "LS-054"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Cost per draft in receipt",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-078",
+      "wave": "W7",
+      "title": "THROTTLED_ROI guard if over 30 percent none",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_workflow_census_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-roi-throttle-*.json",
+      "depends": [
+        "LS-074",
+        "LS-077"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "L11 throttle wired",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-079",
+      "wave": "W7",
+      "title": "Kaizen queue seeds for LS backlog",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_brain_loop_autorun_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/kaizen-ls-seed-*.json",
+      "depends": [
+        "LS-071"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Open LS plans in kaizen",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-080",
+      "wave": "W7",
+      "title": "W7 registry install receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_workflow_census_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w7-registry-*.json",
+      "depends": [
+        "LS-071",
+        "LS-075"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Census PASS on LS motors",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-081",
+      "wave": "W8",
+      "title": "sourcea-deadman watches LS cron 2x interval",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_worker_sourcea_deadman_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/deadman-ls-stale-*.json",
+      "depends": [
+        "LS-075"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Stale yields alert and restart",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-082",
+      "wave": "W8",
+      "title": "noos-deadman watches homeostasis motors",
+      "value_class": "risk_reduction",
+      "lane": "noos_agent",
+      "trigger_host": "cloud",
+      "loop_id": "cf_worker_noos_deadman_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/deadman-homeostasis-*.json",
+      "depends": [
+        "LS-040"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Independent path from heal cron",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-083",
+      "wave": "W8",
+      "title": "48h test protocol doc and start receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/LIVING_SYSTEM_48H_TEST_v1.md",
+      "depends": [
+        "LS-075"
+      ],
+      "closed_loop": null,
+      "done_when": "Laptop-closed procedure defined",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-084",
+      "wave": "W8",
+      "title": "48h test execution window 1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_draft_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/48h-test-run1-*.json",
+      "depends": [
+        "LS-083",
+        "LS-060"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Heartbeats survived 48h",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-085",
+      "wave": "W8",
+      "title": "Closed-loop repair drill kill cron restart",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_worker_sourcea_deadman_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/closed-loop-repair-drill-*.json",
+      "depends": [
+        "LS-081"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Observe Repair Observe PASS",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-086",
+      "wave": "W8",
+      "title": "external-verify.yml includes LS rubric job",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_external_verify_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/external-verify-ls-*.json",
+      "depends": [
+        "LS-030"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "L4 PASS in truth_log",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-087",
+      "wave": "W8",
+      "title": "Spine live probe ACG and gateway surfaces",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_spine_live_probe_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/spine-live-probe-metabolism-*.json",
+      "depends": [
+        "LS-066"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Membrane surfaces probed",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-088",
+      "wave": "W8",
+      "title": "M7 48h cloud survives milestone",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_worker_sourcea_deadman_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/milestone-M7-48h-*.json",
+      "depends": [
+        "LS-084",
+        "LS-085"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "M7 receipt filed",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-089",
+      "wave": "W8",
+      "title": "Doctrine section 8 monthly self-staleness check",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_agent_read_staleness_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/doctrine-self-rubric-*.json",
+      "depends": [
+        "LS-030",
+        "LS-001"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Doctrine LIVING or STALE public",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-090",
+      "wave": "W8",
+      "title": "W8 liveness gate rollup receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_worker_sourcea_deadman_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w8-liveness-*.json",
+      "depends": [
+        "LS-088",
+        "LS-089"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "W8 complete",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-091",
+      "wave": "W9",
+      "title": "THE_REAL_DIAGNOSIS cross-bind metabolism lane",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "THE_REAL_DIAGNOSIS pointer",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "P11 equals Commercial Pulse",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-092",
+      "wave": "W9",
+      "title": "BRAIN_REGISTRY governance vs commercial alive",
+      "value_class": "risk_reduction",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "BRAIN_REGISTRY_LEARNING_GATE diff",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Dual-axis language",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-093",
+      "wave": "W9",
+      "title": "auto-heal-hospital supersession note to section 5",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "auto-heal-hospital.md pointer",
+      "depends": [
+        "LS-040"
+      ],
+      "closed_loop": null,
+      "done_when": "Pattern defers to organ model",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-094",
+      "wave": "W9",
+      "title": "targets-vs-blockers section 7 bind",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "targets-vs-blockers.md pointer",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Parallel lanes cited",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-095",
+      "wave": "W9",
+      "title": "OPEN_BLOCKERS metabolism ladder snapshot",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "OPEN_BLOCKERS.md",
+      "depends": [
+        "LS-070"
+      ],
+      "closed_loop": null,
+      "done_when": "Current rung in blockers doc",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-096",
+      "wave": "W9",
+      "title": "FIRST_REVENUE_RECEIPT links ladder rung 6",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "FIRST_REVENUE_RECEIPT diff",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "Rung 6 equals payment receipt",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-097",
+      "wave": "W9",
+      "title": "signal-factory-v1 rung 2 membrane bind",
+      "value_class": "proof_asset",
+      "lane": "sourcea_brain",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "signal-factory-v1.md pointer",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "SF is rung 2 unless provocation",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-098",
+      "wave": "W9",
+      "title": "governance_stale_pointer_queue feeds sensor",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_agent_read_staleness_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "data/governance_stale_pointer_queue_v1.json",
+      "depends": [
+        "LS-033"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Queue to symptom path live",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-099",
+      "wave": "W9",
+      "title": "1111 plans v2 LS dependency footnote",
+      "value_class": "hygiene",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "1111_UPGRADE_PLANS_v2.md pointer",
+      "depends": [
+        "LS-001"
+      ],
+      "closed_loop": null,
+      "done_when": "TF SF tracks cite LS ladder",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-100",
+      "wave": "W9",
+      "title": "W9 library reconciliation receipt",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_agent_read_staleness_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-w9-crossbind-*.json",
+      "depends": [
+        "LS-091",
+        "LS-092",
+        "LS-098"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Zero conflicting definitions",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-101",
+      "wave": "W10",
+      "title": "Rung 5 mutation receipt from objection",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "cf_cron_commercial_pulse_mutate_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/metabolism-rung5-mutation-*.json",
+      "depends": [
+        "LS-068"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Copy or ICP change receipted",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-102",
+      "wave": "W10",
+      "title": "ROI engine fed by metabolism receipts",
+      "value_class": "revenue_path",
+      "lane": "sourcea_brain",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_brain_loop_autorun_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/roi-metabolism-signal-*.json",
+      "depends": [
+        "LS-101"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Objection signal in ROI rank",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-103",
+      "wave": "W10",
+      "title": "Rung 6 buyer metabolism demo LOI pilot",
+      "value_class": "revenue_path",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "data/metabolism_ladder_state_v1.json",
+      "depends": [
+        "LS-101"
+      ],
+      "closed_loop": null,
+      "done_when": "Pipeline row per prospect",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-104",
+      "wave": "W10",
+      "title": "SINA GATEWAY capture links objection to lead",
+      "value_class": "revenue_path",
+      "lane": "sourcea_worker",
+      "trigger_host": "cloud",
+      "loop_id": "railway_sina_gateway_capture_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/gateway-metabolism-link-*.json",
+      "depends": [
+        "LS-068"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Lead row links provocation id",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-105",
+      "wave": "W10",
+      "title": "Class 2 heal drill CI self-heal parallel",
+      "value_class": "hygiene",
+      "lane": "sourcea_brain",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_homeostasis_drill_v1",
+      "deadman": "noos-deadman-v1",
+      "receipt": "receipts/homeostasis-drill-c2-*.json",
+      "depends": [
+        "LS-046",
+        "LS-060"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Section 7 parallel proof",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-106",
+      "wave": "W10",
+      "title": "Weekly living-system executive brief motor",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_brief_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-brief-*.json",
+      "depends": [
+        "LS-030",
+        "LS-070"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "LIVING STALE dashboard weekly",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-107",
+      "wave": "W10",
+      "title": "M8 first revenue receipt rung 6",
+      "value_class": "revenue_path",
+      "lane": "founder_manual",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "P99-LEDGER/FIRST_REVENUE_RECEIPT filled",
+      "depends": [
+        "LS-103",
+        "LS-104"
+      ],
+      "closed_loop": null,
+      "done_when": "Payment on disk ROI numerator nonzero",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-108",
+      "wave": "W10",
+      "title": "Rung 7 retention track spec post-first-dollar",
+      "value_class": "revenue_path",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/metabolism_rung7_retention_v1.md",
+      "depends": [
+        "LS-107"
+      ],
+      "closed_loop": null,
+      "done_when": "Renewal referral receipt schema",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-109",
+      "wave": "W10",
+      "title": "Full stack LIVING verdict SourceA and SG",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_rubric_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-full-verdict-*.json",
+      "depends": [
+        "LS-030",
+        "LS-107"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Both axes rubric-green",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-110",
+      "wave": "W10",
+      "title": "LS-110 closure receipt and kaizen wave 11",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "gh_actions_living_system_brief_weekly_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/living-system-110-closure-*.json",
+      "depends": [
+        "LS-109"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Closure receipt wave 11 queued",
+      "w0_status": "PENDING"
+    },
+    {
+      "id": "LS-111",
+      "wave": "W11",
+      "title": "Cross-domain auth proposal lock v1.1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "SG-Canonical-Library/noetfield-library/P99-LEDGER/CROSS_DOMAIN_AUTH_RATIFY_2026-07-08.md",
+      "depends": [
+        "LS-053"
+      ],
+      "closed_loop": null,
+      "done_when": "Proposal LOCKED + P99 ratify",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:07:43Z",
+      "completion_receipt": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md"
+    },
+    {
+      "id": "LS-112",
+      "wave": "W11",
+      "title": "Auth surface probe harden v1.1",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "cloud",
+      "loop_id": "sg_auth_surface_probe_v1",
+      "deadman": "sourcea-deadman-v1",
+      "receipt": "receipts/auth-surface-probe-*.json",
+      "depends": [
+        "LS-111"
+      ],
+      "closed_loop": "Observe\u2192Detect\u2192Critique\u2192Repair\u2192Re-deploy\u2192Observe",
+      "done_when": "Anti-login-wall + auth health + fail-on-warn wired",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:10:18Z",
+      "completion_receipt": "receipts/cross-domain-auth-w11-probe-2026-07-08.json"
+    },
+    {
+      "id": "LS-113",
+      "wave": "W11",
+      "title": "Venture auth dispatch packs",
+      "value_class": "proof_asset",
+      "lane": "sg_sssot",
+      "trigger_host": "founder-manual",
+      "loop_id": null,
+      "deadman": null,
+      "receipt": "docs/dispatch/auth-phase-1-trustfield.md",
+      "depends": [
+        "LS-111"
+      ],
+      "closed_loop": null,
+      "done_when": "Phase 1-2-4 dispatch files + auth_core_interface_spec",
+      "w0_status": "PENDING",
+      "w1_status": "COMPLETE",
+      "completed_at": "2026-07-08T07:10:18Z",
+      "completion_receipt": "docs/dispatch/auth-phase-1-trustfield.md"
+    }
+  ],
+  "status": "LOCKED",
+  "locked_at": "2026-07-08T00:58:07Z",
+  "lock_authority": "Founder L5 via SG W0 pass",
+  "doctrine_sha256_prefix": "18d85f0734158595",
+  "w0_summary": {
+    "complete": 10,
+    "total": 10,
+    "receipt": "receipts/living-system-w0-install-2026-07-07.json"
+  },
+  "w1_summary": {
+    "complete": 10,
+    "total": 10,
+    "receipt": "receipts/living-system-w1-terminology-2026-07-08.json"
+  },
+  "w2_summary": {
+    "complete": 5,
+    "total": 6,
+    "receipt": "receipts/living-system-w2-collectors-2026-07-08.json"
+  }
+}

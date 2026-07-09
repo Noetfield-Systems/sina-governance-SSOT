@@ -1,0 +1,67 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "3a35ff4a96c3488c",
+  "stage": "cluster",
+  "time": "2026-07-07T07:10:11Z",
+  "scan_id": "ba863ef4caacc598",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "cluster_count": 13,
+    "clusters": [
+      {
+        "id": "CLUSTER-REVENUE",
+        "members": 21
+      },
+      {
+        "id": "CLUSTER-DEMO-FILM",
+        "members": 12
+      },
+      {
+        "id": "CLUSTER-CLOUD-EXEC",
+        "members": 9
+      },
+      {
+        "id": "CLUSTER-FORM-META",
+        "members": 6
+      },
+      {
+        "id": "CLUSTER-NPM-MARKET",
+        "members": 6
+      },
+      {
+        "id": "CLUSTER-DEFER-SCAFFOLD",
+        "members": 5
+      },
+      {
+        "id": "CLUSTER-CLAIMS",
+        "members": 4
+      },
+      {
+        "id": "CLUSTER-LOOP-AUTO",
+        "members": 4
+      },
+      {
+        "id": "CLUSTER-WITNESSBC",
+        "members": 4
+      },
+      {
+        "id": "CLUSTER-LANGUAGE",
+        "members": 3
+      },
+      {
+        "id": "CLUSTER-OTHER",
+        "members": 2
+      },
+      {
+        "id": "CLUSTER-VOCAB",
+        "members": 2
+      },
+      {
+        "id": "CLUSTER-DNS-DRAIN",
+        "members": 2
+      }
+    ]
+  }
+}

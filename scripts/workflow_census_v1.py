@@ -44,6 +44,10 @@ REPO_PATH_CANDIDATES = {
         Path.home() / "Desktop/trustfield-loops",
         Path.home() / "Projects/trustfield-loops",
     ],
+    "TrustField-Technologies": [
+        Path.home() / "Desktop/Noetfield-Systems/TrustField-Technologies",
+        Path.home() / "Projects/TrustField-Technologies",
+    ],
 }
 
 GH_REPO_MAP = {
@@ -51,6 +55,7 @@ GH_REPO_MAP = {
     "SourceA": "Noetfield-Systems/SourceA",
     "noetfeld-os": "Noetfield-Systems/noetfeld-os",
     "trustfield-loops": "Noetfield-Systems/trustfield-loops",
+    "TrustField-Technologies": "Noetfield-Systems/TrustField-Technologies",
     "sina-gateway": "kazemnezhadsina144-dot/sina-gateway",
 }
 
@@ -385,6 +390,49 @@ def enrich_loop(loop: dict, rules: dict, factory_receipts: dict[str, dict], gh_c
     }
 
 
+def fetch_trustfield_loop_registry(base: str, key: str) -> dict[str, dict]:
+    rows = supabase_get(
+        base,
+        key,
+        "trustfield_loop_registry?select=loop_id,last_fired_at,last_ok,updated_at&order=updated_at.desc&limit=200",
+    )
+    out: dict[str, dict] = {}
+    if not isinstance(rows, list):
+        return out
+    for row in rows:
+        lid = row.get("loop_id")
+        if lid and lid not in out:
+            out[lid] = row
+    return out
+
+
+TRUSTFIELD_MOTOR_LOOP_MAP = {
+    "tf_cf_fleet_tick_v1": "tf_cf_fleet_tick_v1",
+    "tf_cf_deadman_v1": "tf_cf_deadman_v1",
+    "tf_cf_verify_recipes_v1": "tf_cf_verify_recipes_v1",
+    "trustfield_loops_production": "tf_cf_trustfield_loops_v1",
+    "trustfield_www_edge_v1": "tf_cf_www_pages_v1",
+    "tf_cf_gha_secondary_v1": "tf_cf_gha_secondary_v1",
+}
+
+
+def apply_trustfield_registry_receipts(loops: list[dict], tf_registry: dict[str, dict]) -> None:
+    for loop in loops:
+        registry_id = TRUSTFIELD_MOTOR_LOOP_MAP.get(loop.get("loop_id", ""), "")
+        rec = tf_registry.get(registry_id) if registry_id else None
+        if not rec:
+            continue
+        ts = rec.get("last_fired_at") or rec.get("updated_at")
+        if ts:
+            loop["last_receipt_at"] = ts
+        if rec.get("last_ok") is True and loop.get("value_class") == "NONE":
+            task_cell = (loop.get("metadata") or {}).get("task_cell", "")
+            vc, rt = classify(task_cell, loop.get("loop_id", ""), load_json(RULES))
+            loop["value_class"] = vc
+            if rt:
+                loop["receipt_target"] = rt
+
+
 def apply_standing_audit(loops: list[dict], rules: dict, ext: dict) -> tuple[list[dict], str]:
     flags: list[dict] = []
     stale_days = int(rules.get("none_stale_days", 14))
@@ -475,10 +523,12 @@ def main() -> int:
     cred = resolve_supabase_cred()
     factory_receipts: dict[str, dict] = {}
     gateway_stats: dict = {}
+    tf_registry: dict[str, dict] = {}
     if cred:
         base, key = cred
         factory_receipts = fetch_factory_last_receipts(base, key)
         gateway_stats = fetch_gateway_leads_stats(base, key)
+        tf_registry = fetch_trustfield_loop_registry(base, key)
 
     gh_cache: dict = {}
     loops = [enrich_loop(loop, rules, factory_receipts, gh_cache) for loop in raw_loops]
@@ -492,6 +542,8 @@ def main() -> int:
         seen.add(loop["loop_id"])
         deduped.append(loop)
     loops = deduped
+
+    apply_trustfield_registry_receipts(loops, tf_registry)
 
     # Enrich traffic row
     for loop in loops:

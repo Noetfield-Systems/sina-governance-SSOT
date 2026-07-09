@@ -1,0 +1,80 @@
+{
+  "schema": "language-layer-rc3-final-receipt-v1",
+  "checkpoint": "LANGUAGE_LAYER_RC3_CHECKPOINT",
+  "checkpoint_commit": "8c0293b",
+  "verdict": "PASS",
+  "dictionary_terms_indexed": 225,
+  "pile_counts": {
+    "pile_1_dictionary_entries": 131,
+    "pile_2_status_labels_allowlist": 102,
+    "pile_3_fragments_gate_skip": 120
+  },
+  "library_scan": {
+    "files": 158,
+    "PASS": 143,
+    "WARN": 0,
+    "PASS_WITH_REWRITE": 15,
+    "FAIL": 0
+  },
+  "safety": {
+    "violations_example_md": "FAIL"
+  },
+  "cold_session_proof": {
+    "schema": "language-layer-rc3-cold-session-proof-v1",
+    "at": "2026-07-07T02:38:38.877657-07:00",
+    "checkpoint": "LANGUAGE_LAYER_RC3_CHECKPOINT",
+    "commit": "8c0293b",
+    "proof": {
+      "session": "cold \u2014 no prior chat context",
+      "dictionary_index_terms": 225,
+      "dictionary_index_sha256": "d6d8f9918fd54ef367d3958f1b5684bf6c4101ac2b5d5aaa5da079e3f19ab1ea",
+      "dictionary_batch_sha256": "a22e2639d4105d1ea55c13acd823477579f2ba363dd2579f5f0a8a26d3f15d61",
+      "sample_file": "language_gate/test_files/cold_session_doctrine_sample_v1.md",
+      "gate_decision": "PASS",
+      "dictionary_source_from_receipt": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+      "machine_reads_disk": true
+    },
+    "verdict": "PASS"
+  },
+  "rewrite_pass": {
+    "safe_applied_files": 14,
+    "safe_applied": [
+      "noetfield-library/ARCHITECT_START_HERE.md",
+      "noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+      "noetfield-library/P1-CANON/MACHINE_LOOPS_v1.md",
+      "noetfield-library/P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md",
+      "noetfield-library/P10-PRODUCT-LAYERS/trustfield.md",
+      "noetfield-library/P2-SSOT/AGENT_LAYERED_LAW_xref.md",
+      "noetfield-library/P7-DOCTRINE/layered-agents.md",
+      "noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md",
+      "noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/TRUSTFIELD.md",
+      "noetfield-library/P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
+      "noetfield-library/P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md",
+      "noetfield-library/P99-LEDGER/V0.9_GOVERNANCE_PASS_3_NEXT_STEPS_2026-07-04.md",
+      "noetfield-library/P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md",
+      "noetfield-library/P99-LEDGER/WORKFLOW_CENSUS_DISPATCH_2026-07-06.md"
+    ],
+    "sidecar_preview_only": [
+      "noetfield-library/P99-LEDGER/ARCHITECT2_CONSISTENCY_CHECK_2026-07-04.md",
+      "noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_FOUNDER_OVERRIDES_2026-07-07.json",
+      "noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md",
+      "noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_PARTIAL_SUBMIT_RECEIPT_2026-07-07.json",
+      "noetfield-library/P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md",
+      "noetfield-library/P2-SSOT/gap-doctrine-ssot-v1.md",
+      "noetfield-library/P2-SSOT/history/strategy-ssot-v2.md",
+      "noetfield-library/P2-SSOT/history/strategy-ssot-v3.md",
+      "noetfield-library/P2-SSOT/history/strategy-ssot-v4.md",
+      "noetfield-library/P2-SSOT/history/strategy-ssot-v5.md",
+      "noetfield-library/P7-DOCTRINE/return-on-cognition.md",
+      "noetfield-library/P99-LEDGER/2026-07-03-reconciliation.md",
+      "noetfield-library/P99-LEDGER/gap-audit-2026-06-30.md",
+      "noetfield-library/P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md",
+      "noetfield-library/P99-LEDGER/2026-06-30-deep-mined-gems.md"
+    ],
+    "policy": "Applied ALIAS_RETIRED regex fixes only; jargon and AGENT_REVIEW kept as sidecar previews where disk apply would flip PASS_WITH_REWRITE\u2192WARN."
+  },
+  "scope_excluded": [
+    "SourceA product repo",
+    "FORM_OFFICIAL form corpus"
+  ]
+}

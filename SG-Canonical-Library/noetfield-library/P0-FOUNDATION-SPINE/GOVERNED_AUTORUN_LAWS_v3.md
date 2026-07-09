@@ -184,6 +184,10 @@ Failed checks, DRIFT, `THROTTLED_ROI`, audit findings auto-file improvement cand
 | Agent boot pack | `docs/AGENT_BOOT_PACK_v1.md` |
 | Spine migrations CI | `scripts/apply_portfolio_spine_migrations_v1.sh` |
 
+## Living System cross-bind (P0-CORE)
+
+Liveness rubric (doctrine §8) maps to autorun laws: **L2** (`IDLE_NO_WORK`) · **L4** (external verify only) · **L7** (founder items never vanish — stale-gate receipts) · **L12** (drift detection). Validator target: `scripts/living_system_chain_validate_v1.py`. Plans: `data/living_system_110_plans_v1_LOCKED.json`.
+
 ## Out of scope
 
 Sales copy · LinkedIn · product pages · NOOS repo · founder decisions.

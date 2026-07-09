@@ -249,4 +249,6 @@ cd ~/Desktop/trustfield-loops && npm run test:phase1
 
 ---
 
+**Living System extension (2026-07-07):** `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md` — 110 plans for doctrine v1.1. TF/SF tracks run parallel; see LS-099.
+
 *v2.0 — 2026-07-02 — ROI-ranked waves; supersedes v1 scheduling only.*

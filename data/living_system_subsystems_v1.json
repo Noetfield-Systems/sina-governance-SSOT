@@ -1,0 +1,38 @@
+{
+  "schema": "living_system_subsystems_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-08T01:50:00Z",
+  "default_window_hours": 168,
+  "subsystems": [
+    {
+      "id": "sg_sssot",
+      "name": "SG governance SSOT",
+      "window_hours": 168,
+      "pulse_receipt_globs": [
+        "receipts/agent-read-staleness-*.json",
+        "receipts/workflow-census-*.json"
+      ],
+      "homeostasis_classes": []
+    },
+    {
+      "id": "sourcea_brain",
+      "name": "SourceA brain observe/promote",
+      "window_hours": 48,
+      "pulse_receipt_globs": [
+        "receipts/brain-loop-autorun-*.json"
+      ],
+      "homeostasis_classes": []
+    },
+    {
+      "id": "global",
+      "name": "Portfolio spine aggregate",
+      "window_hours": 168,
+      "pulse_receipt_globs": [
+        "receipts/agent-read-staleness-*.json",
+        "receipts/workflow-census-*.json",
+        "receipts/brain-loop-autorun-*.json"
+      ],
+      "homeostasis_classes": []
+    }
+  ]
+}

@@ -9,11 +9,12 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│ P0 · SSOT SPINE  (⚠ UNREACHABLE — Sina must upload)                       │
+│ P0 · SSOT SPINE  (INSTALLED 2026-07-05 + LIVING_SYSTEM v1.1 2026-07-07)     │
 │   SOURCEA_SSOT_INDEX ── reconciles ──► L0 Runtime  vs  L1–L8 Target       │
 │   SSOT v6 (Level-0 Constitution + D1–D5) = the brain's first-class language│
 │   L0 Workbench (Mac: SCAN→SAY→PICK→PROVE→SHIP) = what RUNS today          │
 │   governed-autorun v3 (L1–L16, D1–D8) · 000-founder-rules (R1–R7)         │
+│   LIVING_SYSTEM v1.1: homeostasis lane ∥ metabolism lane (§8 rubric)       │
 └───────────────────────────────┬─────────────────────────────────────────┘
                                 │ every actor reads the SSOT Index first
 ┌───────────────────────────────▼─────────────────────────────────────────┐
@@ -27,7 +28,7 @@
 │ 2 · SSOT  (01-SSOT/)  — ratified truth/state rules                        │
 │   R-domain-split (R1/R2/R6/R7→brain; R3/R4/R5→control-panel) [RATIFIED]   │
 │   Versioning law (major.minor.edit_datetime) [RATIFIED]                   │
-│   OPEN_BLOCKERS: no current technical blocker; revenue organ is the active business constraint                      │
+│   OPEN_BLOCKERS: no technical blocker; metabolism ladder rung 3+ is active target (Commercial Pulse)              │
 └───────────────────────────────┬─────────────────────────────────────────┘
                                 │
 ┌───────────────────────────────▼─────────────────────────────────────────┐

@@ -1,0 +1,17 @@
+{
+  "schema": "p0pgr-drift-receipt-v1",
+  "id": "DRIFT-CROSS-CLONE-20260708",
+  "class": "L12_DRIFT + L6_UNCOMMITTED_WORK",
+  "detected_by": "founder-pasted audit from a second session operating in ~/Projects/sina-governance-ssot (reported RUNTIME_NOT_SCAFFOLDED)",
+  "recorded_at": "2026-07-08T15:06:00Z",
+  "finding": "Two clones of sina-governance-SSOT exist: (A) ~/Desktop/Noetfield-Systems/sina-governance-SSOT (Cowork session working tree, branch cursor/language-layer-v1) and (B) ~/Projects/sina-governance-ssot (Cursor agent lane per AGENTS.md). The entire P0-PGR runtime (Phase 0-2, 63 files) existed only as untracked files in clone A. Clone B's audit was correct for clone B: nothing in any branch or history, because nothing was ever committed.",
+  "root_cause": "Session file tools write to the working tree but never commit; L6 (receipts live in the repo) was satisfied only in the working-tree sense, not the git sense. Both prior audits flagged 'receipts untracked - no tamper evidence' — this incident is that flag materializing.",
+  "resolution": {
+    "commit": "7bd58d5 on cursor/language-layer-v1 (feat(p0pgr): P0 Dispatch Brain Runtime v1.1 — Phase 0-2 complete scope, 63 files)",
+    "push_status": "BLOCKED_WITH_REASON: sandbox has no GitHub credentials — founder or Mac-side session must run 'git push origin cursor/language-layer-v1' from clone A",
+    "clone_b_sync": "after push: git fetch && git checkout cursor/language-layer-v1 (or cherry-pick 7bd58d5) in ~/Projects/sina-governance-ssot"
+  },
+  "new_law_candidate": "Every P0-PGR session that writes runtime files ends with a scoped git commit on the working branch (never merge — merge stays founder-gated). Uncommitted receipts are invisible receipts.",
+  "authority_note": "Which clone is canonical (Desktop vs Projects) is a founder decision; AGENTS.md currently names ~/Projects as the SG lane repo.",
+  "next_pointer": "founder: push branch; decide canonical clone; optionally add commit step to p0pgr-operator skill checklist (done in skill v2.1)"
+}

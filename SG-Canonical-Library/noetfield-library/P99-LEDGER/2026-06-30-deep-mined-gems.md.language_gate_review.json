@@ -1,0 +1,70 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/2026-06-30-deep-mined-gems.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "jargon or AGENT_REVIEW apply would surface latent UNDEFINED_TERM WARN",
+  "proposed_regex_rewrites": [
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "model-agnostic",
+      "line": 63,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "ALIAS_RETIRED",
+      "term": "agnostic",
+      "line": 63,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    },
+    {
+      "type": "SYNONYM_DRIFT",
+      "term": "model-agnostic",
+      "line": 63,
+      "fix": "vendor-neutral",
+      "reason": null,
+      "auto_fixed": true
+    }
+  ],
+  "proposed_agent_actions": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 57,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 58,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "AGENT_REVIEW",
+      "line": 63,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    },
+    {
+      "type": "PLAIN_ENGLISH",
+      "pattern": "\\bleverage\\b",
+      "replacement": "use"
+    }
+  ],
+  "latent_undefined_terms": [
+    "Brain Asset Registry",
+    "Eval Registry Controller",
+    "Learning Database",
+    "Semantic Firewall",
+    "Promotion Controller",
+    "Shadow Mode",
+    "Canary Release",
+    "Sandbox Brain Farm",
+    "Model Lineage Registry",
+    "Founder Load Dashboard",
+    "Public AIs",
+    "Semantic Firewall"
+  ]
+}

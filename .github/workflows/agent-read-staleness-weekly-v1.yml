@@ -1,0 +1,33 @@
+name: agent-read-staleness-weekly-v1
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Agent read staleness inspect
+        run: |
+          chmod +x scripts/run_agent_read_governance_cycle_v1.sh
+          ./scripts/run_agent_read_governance_cycle_v1.sh --json > receipts/agent-read-staleness-latest-summary.json
+        continue-on-error: true
+
+      - name: Upload staleness receipt and queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-read-staleness-receipt
+          path: |
+            receipts/agent-read-staleness-*.json
+            data/governance_stale_pointer_queue_v1.json
+          if-no-files-found: ignore

@@ -1,0 +1,75 @@
+{
+  "classification": {
+    "evidence_refs": [
+      "receipts/workflow-census-20260706T093358Z.json",
+      "data/github_automation_registry_v1.json",
+      "data/agent_read_surfaces_v1.json"
+    ],
+    "problem_class": "repair",
+    "reason": "lint REPAIR_CANDIDATE: schema: 'execution_mode' is a required property; schema: 'canonical_path' is a required property; schema: 'mac_required_reason' is a required property"
+  },
+  "cost": {
+    "model": "none",
+    "provider": "none",
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "total_usd": 0.0
+  },
+  "cycle_id": "P0PGR-CYCLE-20260708T131048Z",
+  "decision": {
+    "reason": "lint REPAIR_CANDIDATE: schema: 'execution_mode' is a required property; schema: 'canonical_path' is a required property; schema: 'mac_required_reason' is a required property",
+    "verdict": "HOLD"
+  },
+  "dispatch": {
+    "delivery_route": "github_action",
+    "dispatched_at": "2026-07-08T13:10:48Z",
+    "fallback_used": false,
+    "founder_approved": false,
+    "mode": "shadow",
+    "target": "verifier",
+    "target_executor": "claude_code_cli"
+  },
+  "evidence": {
+    "bundle_hash": "5bbe9878eb2fe3a92839d5ee6a79dac984ebf1a45f29651b77f30147a7134f7d",
+    "row_ids": [
+      "P0PGR-20260708-001"
+    ],
+    "sources_read": [
+      "EXAMPLE_PACKET_P0PGR-20260708-001.json",
+      "P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+      "P0_DISPATCH_ROUTER_RULES_v1.md",
+      "P0_PROMPT_COMPILER_MVP_PLAN_v1.md",
+      "P0_PROMPT_GOVERNANCE_RUNTIME_v1.md",
+      "P0_PROMPT_LOOP_STATE_SCHEMA_v1.json",
+      "P0_PROMPT_PACKET_SCHEMA_v1.json",
+      "data/github_automation_registry_v1.json",
+      "data/agent_read_surfaces_v1.json",
+      "receipts/"
+    ],
+    "stale_sources": []
+  },
+  "finished_at": "2026-07-08T13:10:48Z",
+  "founder_blocked_snapshot": {
+    "count": 0,
+    "oldest_age_days": 0
+  },
+  "packet_id": "P0PGR-20260708-001",
+  "receipt_result": {
+    "low_quality_labels": {
+      "confidence": "low",
+      "next_improvement": "repair packet per candidate file",
+      "reversibility": "fully reversible (files only)",
+      "scope": "shadow compile+route only, zero execution"
+    },
+    "quality_state": "NEEDS_RETRY",
+    "verdict": "PENDING"
+  },
+  "roi": {
+    "model_tier": "capable",
+    "reduces_founder_workload": true,
+    "score": 82,
+    "value_class": "risk_reduction"
+  },
+  "started_at": "2026-07-08T13:10:48Z",
+  "state": "COMPLETE"
+}

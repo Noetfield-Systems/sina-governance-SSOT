@@ -40,6 +40,12 @@ jobs:
           fi
           bash scripts/brain_loop_autorun_v1.sh
 
+      - name: Agent read staleness gate (SG authority)
+        if: always()
+        run: |
+          chmod +x scripts/verify_agent_read_staleness_v1.sh
+          ./scripts/verify_agent_read_staleness_v1.sh || true
+
       - name: Upload autorun receipt
         if: always()
         uses: actions/upload-artifact@v4

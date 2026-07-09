@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noetfield:p0pgr:prompt-packet:v1.1",
+  "title": "P0-PGR/PDR Prompt Packet v1.1 (delivery-aware)",
+  "description": "Governed executable instruction compiled by the P0 Dispatch Brain Runtime. v1.1 adds the delivery rail (execution_mode, delivery_route, target_executor, repo/path/worktree fields) and RUNTIME_CONTINUITY_LAW_v1 quality handling. Workers receive ONLY this packet — never P0 content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "created_at", "lane", "problem_class", "owner_agent", "model_tier",
+    "roi_score", "roi_reason", "value_class", "cost_limit_usd", "authority_scope",
+    "execution_mode", "delivery_route", "target_executor", "repo",
+    "worktree_required", "local_secrets_required", "cloud_safe", "fallback_route",
+    "quality_handling",
+    "context_summary", "task", "constraints", "forbidden_actions",
+    "stop_rule", "success_receipt", "evidence_refs", "decision_ref"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^P0PGR-[0-9]{8}-[0-9]{3}$"
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "lane": {
+      "enum": ["SourceA", "NOOS", "SG", "TrustField", "Noetfield", "Revenue", "Ops"]
+    },
+    "problem_class": {
+      "enum": ["blocker", "repair", "verification", "revenue", "hygiene", "research", "deploy", "architecture", "founder_escalation"]
+    },
+    "owner_agent": {
+      "enum": ["architect", "sg", "sourcea_brain", "noos", "worker", "verifier", "revenue_agent"]
+    },
+    "model_tier": {
+      "enum": ["cheap", "capable", "premium"],
+      "description": "premium requires roi_score >= 70 AND difficulty justification in roi_reason (L11)"
+    },
+    "roi_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "roi_reason": { "type": "string", "minLength": 10 },
+    "value_class": {
+      "enum": ["revenue_path", "proof_asset", "risk_reduction", "hygiene", "none"]
+    },
+    "cost_limit_usd": { "type": "number", "exclusiveMinimum": 0 },
+    "authority_scope": {
+      "enum": ["observe", "edit", "test", "commit", "deploy", "blocked"],
+      "description": "deploy requires FOUNDER_ONLY execution_mode or explicit founder authorization in decision_ref"
+    },
+    "execution_mode": {
+      "enum": ["CLOUD_ONLY", "HYBRID_MAC", "HUMAN_REVIEW", "FOUNDER_ONLY"],
+      "description": "CLOUD_ONLY is default. HYBRID_MAC only when local repo state / secrets / Mac tooling / IDE review is required."
+    },
+    "delivery_route": {
+      "enum": ["queue_cloud_worker", "github_action", "railway_worker", "cloudflare_worker", "mac_runner", "human_review_queue", "founder_queue"],
+      "description": "UI automation / Cursor-chat injection is NOT a route. IDE is a review surface only."
+    },
+    "target_executor": {
+      "enum": ["cursor_cli", "claude_code_cli", "codex_cli", "github_action", "railway_worker", "cloudflare_worker", "custom_script", "verifier", "human"]
+    },
+    "repo": { "type": "string", "minLength": 1 },
+    "canonical_path": {
+      "type": "string",
+      "description": "Required for HYBRID_MAC. Mac runner rejects any path outside this."
+    },
+    "worktree_required": {
+      "type": "boolean",
+      "description": "true = executor must run in an isolated git worktree, never the live checkout"
+    },
+    "local_secrets_required": { "type": "boolean" },
+    "cloud_safe": {
+      "type": "boolean",
+      "description": "false forces execution_mode HYBRID_MAC | HUMAN_REVIEW | FOUNDER_ONLY"
+    },
+    "mac_required_reason": {
+      "enum": ["local_repo_state_not_in_cloud", "local_secrets_or_env", "mac_specific_tooling", "human_ide_review"],
+      "description": "Required for HYBRID_MAC — a Mac packet without a reason is malformed"
+    },
+    "fallback_route": {
+      "enum": ["queue_cloud_worker", "github_action", "railway_worker", "cloudflare_worker", "mac_runner", "human_review_queue", "founder_queue", "none"],
+      "description": "Where the packet goes if the primary route fails — continuity over blocking"
+    },
+    "quality_handling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_on_low_quality", "allowed_result_states", "hard_block_allowed_reasons"],
+      "description": "RUNTIME_CONTINUITY_LAW_v1: quality gates degrade, never default to STOP",
+      "properties": {
+        "default_on_low_quality": {
+          "enum": ["continue_with_degradation", "tag_confidence", "reduce_scope", "sandbox", "provisional", "retry_if_roi_positive", "route_to_review_queue"],
+          "description": "never hard_block"
+        },
+        "allowed_result_states": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "enum": ["PASS", "PARTIAL", "DEGRADED", "SANDBOXED", "PROVISIONAL", "NEEDS_RETRY", "NEEDS_REVIEW", "FOUNDER_ONLY", "HARD_BLOCK"]
+          }
+        },
+        "hard_block_allowed_reasons": {
+          "type": "array",
+          "items": {
+            "enum": ["destructive_action", "production_deploy_without_authority", "money_movement", "legal_financial_commitment", "credential_or_security_exposure", "irreversible_external_send", "authority_change", "merge_L5_phase_unlock"]
+          },
+          "description": "HARD_BLOCK is valid ONLY for these reasons; empty array = this packet may never hard-block"
+        },
+        "low_quality_required_labels": {
+          "type": "array",
+          "items": { "enum": ["confidence", "scope", "reversibility", "next_improvement"] },
+          "default": ["confidence", "scope", "reversibility", "next_improvement"]
+        }
+      }
+    },
+    "context_summary": {
+      "type": "string", "maxLength": 1200,
+      "description": "MUST NOT contain P0 doctrine, founder-judgment patterns, or pipeline reasoning."
+    },
+    "task": { "type": "string", "minLength": 20 },
+    "allowed_actions": { "type": "array", "items": { "type": "string" } },
+    "constraints": {
+      "type": "array", "minItems": 4, "items": { "type": "string" },
+      "description": "Minimum: no P0 leakage; no speculative PASS; receipt required; stop after completion."
+    },
+    "forbidden_actions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "stop_rule": { "type": "string", "minLength": 5 },
+    "success_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "external_verification_required"],
+      "properties": {
+        "required_fields": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+        "external_verification_required": { "type": "boolean" },
+        "cost_fields_required": { "type": "boolean", "default": true }
+      }
+    },
+    "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "decision_ref": { "type": "string" },
+    "concurrency_key": { "type": "string" },
+    "dispatch_mode": {
+      "enum": ["shadow", "semi_auto", "auto"],
+      "default": "shadow"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "execution_mode": { "const": "HYBRID_MAC" } } },
+      "then": { "required": ["canonical_path", "mac_required_reason"] }
+    },
+    {
+      "if": { "properties": { "cloud_safe": { "const": false } } },
+      "then": {
+        "properties": {
+          "execution_mode": { "enum": ["HYBRID_MAC", "HUMAN_REVIEW", "FOUNDER_ONLY"] }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "authority_scope": { "enum": ["deploy"] } } },
+      "then": {
+        "properties": {
+          "execution_mode": { "const": "FOUNDER_ONLY" }
+        }
+      }
+    }
+  ]
+}

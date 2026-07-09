@@ -131,7 +131,7 @@ In library, **do not delete** but **demote as pre-UNLOCK framing** if found:
 | 1 | Founder reads §5.1 + §7; writes frozen offer (D1) | Founder |
 | 2 | Lock v2 status: Draft → **LOCKED** in frontmatter | Founder |
 | 3 | Extend Signal Factory routing for external actors (C1) | SourceA Worker |
-| 4 | Heartbeat amendment (§6) | Cloud/GHA motor |
+| 4 | Heartbeat amendment (§6) | Cloud/GHA Scheduler and executor |
 | 5 | Cross-pointer in `brain-audit-v1.md` + `00-INDEX.md` | SG |
 
 **Until step 2:** treat as **strong draft** — authoritative for planning, not yet P7-locked.

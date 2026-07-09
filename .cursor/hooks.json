@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/language-gate-after-edit.sh",
+        "failClosed": true
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/language-gate-pre-write.sh",
+        "matcher": "Write|StrReplace|EditNotebook",
+        "failClosed": true
+      }
+    ]
+  }
+}

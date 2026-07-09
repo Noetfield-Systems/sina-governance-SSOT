@@ -1,0 +1,28 @@
+{
+  "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/history/strategy-ssot-v4.md",
+  "rewrite_policy": "SIDECAR_PREVIEW_ONLY",
+  "reason": "jargon or AGENT_REVIEW apply would surface latent UNDEFINED_TERM WARN",
+  "proposed_regex_rewrites": [],
+  "proposed_agent_actions": [
+    {
+      "type": "PLAIN_ENGLISH",
+      "pattern": "\\bleverage\\b",
+      "replacement": "use"
+    }
+  ],
+  "latent_undefined_terms": [
+    "Procedure Over Truth",
+    "Independent Receipt Authority",
+    "Operating Triggers",
+    "BANKED",
+    "YOUNG LAWYER / Rule-mapper",
+    "OLD LAWYER / Gap-mapper",
+    "TRADER / Pricer",
+    "Builder",
+    "DNS/CDN",
+    "DIRTY",
+    "CLEAN",
+    "CRITIC SAID",
+    "Never Claude"
+  ]
+}

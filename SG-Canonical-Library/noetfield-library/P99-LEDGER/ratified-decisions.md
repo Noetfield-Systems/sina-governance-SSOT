@@ -25,3 +25,13 @@ Founder ratification via SG Pass 4/4 upgrade completion:
 
 ---
 *v0.2 (2026-07-05 — v0.9 Pass 4 ratification appended)*
+
+## Living System lock (2026-07-07)
+
+10. **LIVING_SYSTEM_DOCTRINE v1.1 = P0-CORE LOCKED.** Single axis LIVING vs STALE. Complements FOUNDER_CANON; does not compete.
+11. **LIVING_SYSTEM_110 upgrade plans = LOCKED execution matrix.** W0 complete (LS-001–LS-010). Receipt: `receipts/living-system-w0-install-2026-07-07.json`.
+12. **Parallel lanes mandatory** — homeostasis work never blocks metabolism work (doctrine §7).
+
+
+---
+*v0.3 (2026-07-07) — Living System doctrine + 110-plan W0 lock appended.*

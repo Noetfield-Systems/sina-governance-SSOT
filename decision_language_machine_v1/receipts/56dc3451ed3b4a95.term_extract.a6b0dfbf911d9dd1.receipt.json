@@ -1,0 +1,13 @@
+{
+  "receipt_type": "decision_language_machine_stage_receipt_v1",
+  "schema": "decision_language_machine_v1",
+  "run_id": "56dc3451ed3b4a95",
+  "stage": "term_extract",
+  "time": "2026-07-07T07:29:15Z",
+  "scan_id": "a6b0dfbf911d9dd1",
+  "decision": "PASS",
+  "input_path": "test_fixtures/form_official_80_open_v1.json",
+  "payload": {
+    "total_terms": 59
+  }
+}

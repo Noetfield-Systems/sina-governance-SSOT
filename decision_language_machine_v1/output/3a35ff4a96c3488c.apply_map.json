@@ -1,0 +1,79 @@
+{
+  "schema": "decision_language_machine_apply_map_v1",
+  "status": "READY",
+  "target_form": "FORM_OFFICIAL",
+  "partial_batch": true,
+  "pick_count": 4,
+  "picks": [
+    {
+      "id": "decisions",
+      "pick": "{'C1': {'pick': 'A', 'label': 'Outbound first', 'row_ids': ['Q-FINAL-01', 'Q-BC-05', 'Q-CHAT-NEXT-P0-01']}, 'C2': {'pick': 'C', 'labels': {'cash_pass': 'deposit', 'commitment_pass': 'signed LOI/SOW'}, 'row_ids': ['ENF-08']}, 'C3': {'pick': 'B', 'patch': 'small outreach OK; broad waits for demo asset', 'row_ids': ['ENF-01', 'ENF-02', 'ENF-14']}, 'C4': {'pick': 'C', 'label': 'Auto GUARD; REVENUE founder tap', 'row_ids': ['Q-BC-07']}, 'C5': {'pick': 'C', 'label': 'Parallel; DNS public-priority', 'row_ids': ['Q-CW-BATCH3', 'Q-CW-SOURCEA-APP']}, 'C6': {'pick': 'B', 'label': 'Wait on npm', 'row_ids': ['Q-MF-02', 'Q-CHAT-PUBLISH-01']}, 'C7': {'pick': 'C', 'label': 'Appointment-only local', 'row_ids': ['Q-WBC-PROOF-LAB-OK', 'Q-SESSION-TUNNEL-DEMO']}, 'C8': {'pick': 'C', 'patch': {'internal': 'Persian allowed', 'public_contracts': 'English'}, 'row_ids': ['Q-CHAT-LANG-01']}}"
+    },
+    {
+      "id": "locked_at",
+      "pick": "2026-07-07T06:55:00Z"
+    },
+    {
+      "id": "source",
+      "pick": "80-row FORM_OFFICIAL collapsed"
+    },
+    {
+      "id": "submitted_to_sourcea_form",
+      "pick": "False"
+    }
+  ],
+  "machine_closed_without_founder": [
+    "ENF-04",
+    "ENF-06",
+    "ENF-12",
+    "ENF-13",
+    "ENF-15",
+    "ENF-16",
+    "ENF-18",
+    "ENF-20",
+    "Q-SESSION-ARCH-UNIFY-PLAN",
+    "Q-SESSION-UNIFY-GO",
+    "Q-CHAT-CLOUD-01",
+    "Q-CHAT-PLUSONE-01",
+    "Q-FINAL-02",
+    "Q-FINAL-04",
+    "Q-FINAL-05",
+    "Q-FINAL-06",
+    "Q-FINAL-07",
+    "Q-MF-03",
+    "Q-SESSION-ARCH-PILLAR",
+    "Q-SESSION-INBOX-NEXT",
+    "Q-SESSION-PHASE0-SPOT",
+    "Q-CONF-B0503-CONSUMER",
+    "Q-CONF-CREED-36V14",
+    "Q-CONF-FALSE-DONE-GUARD",
+    "Q-CONF-MCP-PHASE2",
+    "Q-CONF-PLUSONE-MOTOR",
+    "Q-BC-02",
+    "Q-BC-03",
+    "Q-BC-04",
+    "Q-BC-06",
+    "Q-BC-07",
+    "Q-BC-09",
+    "Q-CW-SOURCEA-APP",
+    "Q-SESSION-CLOUD-CF06",
+    "Q-CW-HUB-RETIRE",
+    "Q-MF-04",
+    "Q-THREAD-DEPLOY-01",
+    "Q-WBC-STYLE-B1"
+  ],
+  "deferred_ids": [
+    "11.05",
+    "Q-THREAD-10STEP-01",
+    "Q-FINAL-03",
+    "Q-MF-05",
+    "Q-MF-06",
+    "Q-CONF-F002-BROKER",
+    "Q-BC-08",
+    "Q-BC-10",
+    "Q-MF-07",
+    "Q-SESSION-ARCH-GEMINI-WS",
+    "Q-SESSION-ARCH-SCAFFOLD"
+  ],
+  "note": "Submit map is downstream of validation \u2014 never auto-submit FORM_OFFICIAL"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "stale_law_guard_patterns_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-07T23:45:00Z",
+  "patterns": [
+    {
+      "id": "deploy_vercel_word",
+      "severity": "BLOCKER",
+      "regex": "\\bVercel\\b",
+      "replacement": "Cloudflare Workers / OpenNext",
+      "applies_to_status": [
+        "ACTIVE"
+      ],
+      "message": "Vercel RETIRED"
+    },
+    {
+      "id": "vercel_deploy_owner",
+      "severity": "BLOCKER",
+      "regex": "vercel_deploy",
+      "replacement": "cloudflare_www_deploy",
+      "applies_to_status": [
+        "ACTIVE"
+      ],
+      "message": "vercel_deploy owner retired"
+    },
+    {
+      "id": "noos_for_vercel",
+      "severity": "BLOCKER",
+      "regex": "NOOS for Vercel",
+      "replacement": "NOOS for CF/www nerve",
+      "applies_to_status": [
+        "ACTIVE"
+      ],
+      "message": "stale routing law"
+    },
+    {
+      "id": "mac_only_24_7",
+      "severity": "WARN",
+      "regex": "Mac[- ]only.*24/7",
+      "replacement": "cloud-first cron",
+      "applies_to_status": [
+        "ACTIVE"
+      ],
+      "message": "cloud-first violation"
+    },
+    {
+      "id": "vercel_workflow_file",
+      "severity": "WARN",
+      "regex": "vercel",
+      "replacement": "disable or mark RETIRED \u2014 CF is deploy truth",
+      "applies_to_status": [
+        "ACTIVE"
+      ],
+      "scan_workflow_globs": [
+        "**/.github/workflows/*vercel*.yml",
+        "**/.github/workflows/*vercel*.yaml"
+      ],
+      "message": "Legacy preview-host workflow still on disk"
+    }
+  ]
+}

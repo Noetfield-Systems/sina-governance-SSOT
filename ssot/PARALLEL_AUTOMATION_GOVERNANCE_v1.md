@@ -188,7 +188,7 @@ receipt_id: (or "human merge only — no autorun claim")
 | Loop Specialist | CF `*/15` tick | GH Action spawning duplicate plan jobs |
 | TrustField Worker | trustfield-loops | SourceA Worker; Copilot direct merge to TF main |
 | NOOS agent | noetfeld-os | SG mirror as canonical; Noetfield website for GEL |
-| Noetfield website | Noetfield repo | NOOS for Vercel/www |
+| Noetfield website | Noetfield repo | NOOS for CF/www nerve |
 | SG (this chat) | sina-governance-ssot | Any venture building product code |
 
 ---
@@ -245,7 +245,7 @@ Pass lines:
 | SourceA L4 verify | SourceA | `external-verify.yml` `*/6h` | assist PRs only |
 | NOOS GEL factory | noetfeld-os | 14+ NOOS loop workflows | assist PRs only; no SourceA writes |
 | TrustField loops | trustfield-loops | CF preview worker (webhook) | assist PRs only |
-| Noetfield www | Noetfield (desktop) | Vercel + live nerve | assist PRs only |
+| Noetfield www | Noetfield (desktop) | Cloudflare Workers + live nerve | assist PRs only |
 
 Inventory: `data/automation_surface_inventory_v1.json`
 

@@ -1,0 +1,1442 @@
+[
+  {
+    "file": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/00-INDEX.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 15,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/BIG_PICTURE_RELATION_MAP.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/000-founder-rules.mdc",
+    "surface": "contract",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 16,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 15,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 4
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 4,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "surface": "contract",
+    "decision": "FAIL",
+    "findings_count": 16,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0_FOUNDATION_MANIFEST.md",
+    "surface": "contract",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/README.md",
+    "surface": "contract",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 19,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 3
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 19,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 3
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 8,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/_MISSING_OR_UNVERIFIED.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/data/founder-trigger-retirement-registry-v1.json",
+    "surface": "contract",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/data/machine-process-loops-v1.json",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md",
+    "surface": "contract",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 33,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/supporting-law/SUPPORTING_LAW_QUARANTINE_MANIFEST.md",
+    "surface": "contract",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 18,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 20,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_CANON_v1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/MACHINE_LOOPS_v1.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 3,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/NOETFIELD_SYSTEMS_OPERATING_PLAN.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 55,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 3
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/WORK_ORDER_IDE_LANE_v1.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P1-CANON/WORK_ORDER_IDE_LANE_v1.md.language_gate_review.json",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/SINA_GATEWAY_BLUEPRINT_LOCKED_v1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 10,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 14,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/big-picture-self-healing-product-june2026.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/noetfield.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 9,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/product-vs-canon-boundary.md",
+    "surface": "contract",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/sourcea.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/trustfield.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 6,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/AGENT_LAYERED_LAW_xref.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 4,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/CANONICAL_D4_PACKAGE_v0.1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 32,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/OPEN_BLOCKERS.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 6,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/R_DOMAIN_SPLIT.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 18,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 3
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/SSOT_INDEX.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 4,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/VERSIONING_RULE.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/gap-doctrine-ssot-v1.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 8,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/history/strategy-ssot-v2.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 16,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/history/strategy-ssot-v3.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 20,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/history/strategy-ssot-v4.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 33,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P2-SSOT/history/strategy-ssot-v5.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 43,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/8-layer-kernel-and-L0-map.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 11,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 2
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/LINE_ENGINE_ARCHITECTURE_v0.1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 17,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/LINE_ENGINE_ARCHITECTURE_v0.2_HARDENED.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 27,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/blueprint-registry.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/capability-router-circuit-breaker.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 5,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/critic-verifier-aggregator.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/execution-contract-as-brain.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/ide-agentic-lane.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/line-engine-index.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/line-engine-specs-v0.1-v0.2.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 11,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/receipts-and-negative-proof.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P5-LINE-ENGINE/understanding-planner-router-workers.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P6-BRAIN-MEANING/locked-definitions-v1.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_BATCH_A-Z_v1.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 42,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md",
+    "surface": "internal",
+    "decision": "FAIL",
+    "findings_count": 70,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md",
+    "surface": "internal",
+    "decision": "FAIL",
+    "findings_count": 28,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/UNLOCK_DOCTRINE_v2.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/base-model-first-class-language.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/contracts-run-the-system.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 9,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/deterministic-brain-doctrine.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 6,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/founder-intent-filter.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/immutable-floor.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/layered-agents.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 10,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/mechanical-not-prose.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/negative-proof.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/receipts-not-diagrams.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/return-on-cognition.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P7-DOCTRINE/targets-vs-blockers.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 21,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/5-stage-loop.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 9,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/SOURCEA_E2E_CHECK_REGISTRY_LOCKED_v1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/audit-loop.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/critique-loop.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/merge-authority-tiers-T0-T3.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/repair-loop.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/research-loop.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/validation-loop.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/anti-theater.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/auto-heal-hospital.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 4,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-as-a-service.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 17,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/brain-audit-v1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 5,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/pattern-factory-index.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/signal-factory-v1.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 4,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P9-PATTERN-FACTORY/zero-drift-target.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/2026-06-30-deep-mined-gems.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 22,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 4
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/2026-06-30-governance-loop.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 5,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/2026-07-03-reconciliation.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 7,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/ARCHITECT2_CONSISTENCY_CHECK_2026-07-04.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 10,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/COMPLETENESS_AUDIT.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 13,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/CONVERSATION_STARTED_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/DLM_DICTIONARY_GAP_TRIAGE_RC2_2026-07-07.json",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/DLM_DICTIONARY_GAP_TRIAGE_RC2_2026-07-07.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/E2E_AUDIT_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 7,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FILE_MANIFEST_SHA256.json",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FILE_MANIFEST_SHA256.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FIRST_REVENUE_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_FOUNDER_OVERRIDES_2026-07-07.json",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 1,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL_80_OPEN_PICKS_2026-07-07.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 28,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FOUNDER_DECISION_BATCH_SIMPLIFIED_FORM_2026-07-07.json",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/FOUNDER_DECISION_BATCH_SIMPLIFIED_FORM_2026-07-07.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 11,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GATEWAY_10_STEP_UPGRADE_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GATEWAY_NOTIFICATION_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GATEWAY_PUBLIC_LAUNCH_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GATEWAY_REVENUE_ORGAN_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 4,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GATEWAY_STAGING_DEPLOY_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/GITHUB_CLOUD_ALIGNMENT_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/NOETFIELD_OS.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/README.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINAAI_MONO.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINA_GATEWAY.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SINA_GOVERNANCE_SSOT.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/SOURCEA.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/STUDIO_IDE.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LANE_PREFLIGHT_RECEIPTS_2026-07-05/TRUSTFIELD.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LIBRARY_CLEANUP_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LIBRARY_RECONCILIATION_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/LIBRARY_STATE_FOR_SG_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 15,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/MAC_WORKER_EXECUTION_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NOOS_INTEGRATOR_SYNC_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/OUTBOUND_MOTION_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/P0_GAP_FINAL_ANSWER_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 7,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/P0_VERIFY_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/PHASE_LOOP_STEP10_MERGE_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/PILOT_CLOSE_PATH_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/REVENUE_WORK_AUTHORIZATION_2026-07-05.md.language_gate_review.json",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/ROI_HEAL_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 4,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SG_INSTALL_RECEIPT_v0.8_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 9,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_BRAIN_AGENT_READINESS_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 3,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_PARTIAL_SUBMIT_RECEIPT_2026-07-07.json",
+    "surface": "receipt",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 5,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.json",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 5,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_LANE_PREFLIGHT_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_TIER1_DELIVERY_READINESS_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SSOT_V6_AUTHORITY_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/SUPABASE_PAUSE_TRIAGE_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 26,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/THE_REAL_DIAGNOSIS_revenue-organ_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 8,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TIER1_AUDIT_DELIVERY_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TIER1_PILOT_LAUNCH_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/TRUE_FINAL_PACKAGE_AUDIT_2026-07-04.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/UNLOCK_DOCTRINE_LIBRARY_ANALYSIS_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 17,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/UPLOADED_ZIP_RECONCILIATION_2026-07-04.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/V0.9_GOVERNANCE_PASS_3_NEXT_STEPS_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 8,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/V0.9_PACKAGE_RECEIPT_2026-07-05.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/V0.9_REPO_FRAGMENTATION_LEDGER_DRAFT_2026-07-04.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 10,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/WHOLE_STACK_10_STEP_RECEIPT_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/WORKFLOW_CENSUS_DISPATCH_2026-07-06.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 7,
+    "regex_would_change": true,
+    "agent_would_change": true,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/closed-loops.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 8,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/gap-audit-2026-06-30.md",
+    "surface": "internal",
+    "decision": "PASS_WITH_REWRITE",
+    "findings_count": 1,
+    "regex_would_change": false,
+    "agent_would_change": true,
+    "agent_actions": 1
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/open-items.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 5,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/P99-LEDGER/ratified-decisions.md",
+    "surface": "internal",
+    "decision": "WARN",
+    "findings_count": 2,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  },
+  {
+    "file": "SG-Canonical-Library/noetfield-library/README_SG_INTAKE_v0.8.md",
+    "surface": "internal",
+    "decision": "PASS",
+    "findings_count": 0,
+    "regex_would_change": false,
+    "agent_would_change": false,
+    "agent_actions": 0
+  }
+]
