@@ -172,6 +172,32 @@ ENTITY_ALLOWLIST = {
 _RUNTIME_STRUCTURAL: set[str] | None = None
 _RUNTIME_ENTITY: set[str] | None = None
 
+# WI-1: wire the two orphaned dictionary overlay indexes into the structural
+# allowlist. Additive only — folds ONLY the allow-classes (local/structural
+# vocabulary that should not read as UNDEFINED_TERM). CONFLICT_PHRASE and
+# REGULATORY_COPY_RISK are NEVER allowlisted — they must stay block-eligible so
+# the RPAA/MSP/PSP overclaim tripwire keeps firing (anti-downgrade).
+OVERLAY_INDEX_PATHS = (
+    GATE_DIR / "sourcea_dictionary_overlay_index_v1.json",
+    GATE_DIR / "trustfield_dictionary_overlay_index_v1.json",
+)
+OVERLAY_ALLOW_CLASSES = {"COMMAND_FRAGMENT", "STATUS_LABEL", "SOURCEA_LOCAL_TERM"}
+OVERLAY_NEVER_ALLOWLIST = {"CONFLICT_PHRASE", "REGULATORY_COPY_RISK"}
+
+
+def _load_overlay_allow_terms() -> set[str]:
+    terms: set[str] = set()
+    for path in OVERLAY_INDEX_PATHS:
+        if not path.is_file():
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for entry in data.get("entries") or []:
+            cls = entry.get("class")
+            term = entry.get("term")
+            if term and cls in OVERLAY_ALLOW_CLASSES and cls not in OVERLAY_NEVER_ALLOWLIST:
+                terms.add(str(term).lower())
+    return terms
+
 
 def effective_structural_allowlist() -> set[str]:
     global _RUNTIME_STRUCTURAL
@@ -183,6 +209,7 @@ def effective_structural_allowlist() -> set[str]:
         if SUPPLEMENT_PATH.is_file():
             sup = json.loads(SUPPLEMENT_PATH.read_text(encoding="utf-8"))
             merged |= {str(x).lower() for x in sup.get("structural_allowlist") or []}
+        merged |= _load_overlay_allow_terms()  # WI-1: recover the orphaned overlay allow-terms
         _RUNTIME_STRUCTURAL = merged
     return _RUNTIME_STRUCTURAL
 
