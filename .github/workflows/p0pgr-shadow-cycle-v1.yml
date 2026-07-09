@@ -1,0 +1,73 @@
+# P0-PGR Shadow Cycle — Rung R2 of the Cloud Activation Ladder.
+# workflow_dispatch ONLY. The cron line below stays commented until the
+# founder records FOUNDER-UNLOCK-R3-CRON-SHADOW receipt (see
+# p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md). Shadow = compile+lint+route
+# only; this workflow can never dispatch, deploy, send, or merge.
+name: p0pgr-shadow-cycle-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      packet:
+        description: "Packet path to cycle (default: example packet)"
+        required: false
+        default: "p0-pgr/EXAMPLE_PACKET_P0PGR-20260708-001.json"
+  # schedule:                    # R3 — founder-gated, do not uncomment
+  #   - cron: "0 9 * * *"        # without the R3 unlock receipt
+
+permissions:
+  contents: read
+
+jobs:
+  shadow-cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install jsonschema pytest
+
+      - name: Phase-0 tests must stay green
+        run: python -m pytest tests/test_p0pgr_phase0.py -q
+
+      - name: Evidence read
+        run: python scripts/p0pgr_evidence_reader_v1.py --stdout > /tmp/evidence.json && tail -5 /tmp/evidence.json
+
+      - name: Shadow cycle (compile + lint + route, zero execution)
+        run: |
+          python scripts/p0pgr_cycle_v1.py --packet "${{ github.event.inputs.packet || 'p0-pgr/EXAMPLE_PACKET_P0PGR-20260708-001.json' }}" | tee /tmp/cycle_result.json
+
+      - name: Independent receipt validation (never trust the cycle's own claim)
+        run: |
+          python - <<'EOF'
+          import json
+          from jsonschema import Draft202012Validator
+          result = json.load(open('/tmp/cycle_result.json'))
+          receipt = json.load(open(result['receipt_path']))
+          schema = json.load(open('p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json'))
+          errs = [e.message for e in Draft202012Validator(schema).iter_errors(receipt)]
+          assert not errs, f"receipt invalid: {errs}"
+          print("independent validation: PASS |", result['cycle_id'], result['verdict'])
+          EOF
+
+      - name: Upload receipts as run artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0pgr-cycle-receipts-${{ github.run_id }}
+          path: |
+            receipts/p0pgr/P0PGR-CYCLE-*.json
+            receipts/p0pgr/evidence/
+            /tmp/cycle_result.json
+
+      - name: Job summary
+        run: |
+          echo "## P0-PGR shadow cycle (cloud, R2)" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          cat /tmp/cycle_result.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "Shadow only — zero dispatch, zero execution, zero sends." >> $GITHUB_STEP_SUMMARY
