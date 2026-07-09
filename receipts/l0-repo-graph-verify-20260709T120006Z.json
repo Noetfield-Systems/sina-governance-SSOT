@@ -1,0 +1,68 @@
+{
+  "action": "l0_repo_graph_memory_verify",
+  "repo": "sina-governance-ssot",
+  "timestamp_utc": "2026-07-09T12:00:06Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "graph_builds",
+      "pass": true,
+      "detail": "build_repo_graph_v1.py exit=0"
+    },
+    {
+      "name": "graph_outputs_exist_and_valid_json",
+      "pass": true,
+      "detail": "graph_index_v1.json + GRAPH_REPORT.md present, index parses"
+    },
+    {
+      "name": "report_has_section:Subsystem map",
+      "pass": true,
+      "detail": "GRAPH_REPORT.md contains 'Subsystem map'"
+    },
+    {
+      "name": "report_has_section:Dependency / reference edges",
+      "pass": true,
+      "detail": "GRAPH_REPORT.md contains 'Dependency / reference edges'"
+    },
+    {
+      "name": "report_has_section:Ignored directories",
+      "pass": true,
+      "detail": "GRAPH_REPORT.md contains 'Ignored directories'"
+    },
+    {
+      "name": "report_has_section:Generated (last indexed)",
+      "pass": true,
+      "detail": "GRAPH_REPORT.md contains 'Generated (last indexed)'"
+    },
+    {
+      "name": "graph_timestamp_current",
+      "pass": true,
+      "detail": "generated_at is 0s old (<=300s)"
+    },
+    {
+      "name": "query_subsystem_works",
+      "pass": true,
+      "detail": "query_repo_graph_v1.py data returned a subsystem listing"
+    },
+    {
+      "name": "query_keyword_works",
+      "pass": true,
+      "detail": "query_repo_graph_v1.py founder_canon returned matches"
+    },
+    {
+      "name": "instruction_file_references_graph",
+      "pass": true,
+      "detail": "AGENTS.md references L0 repo graph memory"
+    },
+    {
+      "name": "broad_read_gate_rule_present",
+      "pass": true,
+      "detail": "AGENTS.md contains the broad-read gate rule"
+    },
+    {
+      "name": "token_budget_rule_present",
+      "pass": true,
+      "detail": "AGENTS.md contains the token budget rule"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "receipt_ledger_audit_v1",
+  "at": "2026-07-09T12:03:25Z",
+  "receipts_scanned": 62,
+  "malformed_count": 0,
+  "missing_timestamp_count": 25,
+  "cluster_count": 3,
+  "receipt_family_count": 6,
+  "malformed": [],
+  "missing_timestamp": [
+    {
+      "file": "receipts/PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1.json"
+    },
+    {
+      "file": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json"
+    },
+    {
+      "file": "receipts/brain-rollback-drill-latest.json"
+    },
+    {
+      "file": "receipts/phase-next-step2-live-sync-receipt.json"
+    },
+    {
+      "file": "receipts/phase-next-step4-semi-auto-proof-receipt.json"
+    },
+    {
+      "file": "receipts/phase-next-step7-brain-core-prod-receipt.json"
+    },
+    {
+      "file": "receipts/phase0.3-step10a-watched-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/phase0.3-step10a-watched-deploy-rerun-receipt.json"
+    },
+    {
+      "file": "receipts/phase0.5b-part1-watched-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/phase3-step4-promote-receipt.json"
+    },
+    {
+      "file": "receipts/receipt_sourcea_dictionary_overlay_v1.json"
+    },
+    {
+      "file": "receipts/receipt_tf_language_cleanup_v1.json"
+    },
+    {
+      "file": "receipts/receipt_trustfield_partner_launch_credibility_pass_v1.json"
+    },
+    {
+      "file": "receipts/semi-auto-window-candidate-1-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/semi-auto-window-candidate-2-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/semi-auto-window-candidate-3-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/semi-auto-window-candidate-4-deploy-receipt.json"
+    },
+    {
+      "file": "receipts/semi-auto-window-current-candidates-v0.1.json"
+    },
+    {
+      "file": "receipts/step6-deliberate-non-pass-receipt.json"
+    },
+    {
+      "file": "receipts/step8-tampered-independence-receipt.json"
+    },
+    {
+      "file": "receipts/step9-candidate-a-pass-receipt.json"
+    },
+    {
+      "file": "receipts/step9-candidate-b-pass-receipt.json"
+    },
+    {
+      "file": "receipts/step9-candidate-c-fail-receipt.json"
+    },
+    {
+      "file": "receipts/step9-candidate-d-tampered-receipt.json"
+    },
+    {
+      "file": "receipts/verifier-independence-proof-latest.json"
+    }
+  ],
+  "clusters": [
+    {
+      "window_start": "2026-07-02T10:18:33Z",
+      "window_end": "2026-07-02T10:18:33Z",
+      "files": [
+        "receipts/brain-autonomous-promote-20260702T101833Z.json",
+        "receipts/brain-loop-autorun-20260702T101833Z.json"
+      ],
+      "note": "Different receipt types clustered within 5s of each other -- verify these aren't two motors racing on the same task cell."
+    },
+    {
+      "window_start": "2026-07-08T01:47:51Z",
+      "window_end": "2026-07-08T01:47:51Z",
+      "files": [
+        "receipts/living-system-rubric-pulse-2026-07-08.json",
+        "receipts/living-system-w1-next-steps-2026-07-08.json",
+        "receipts/living-system-w1-terminology-2026-07-08.json"
+      ],
+      "note": "Different receipt types clustered within 5s of each other -- verify these aren't two motors racing on the same task cell."
+    },
+    {
+      "window_start": "2026-07-08T01:49:59Z",
+      "window_end": "2026-07-08T01:50:00Z",
+      "files": [
+        "receipts/commercial-pulse-malformed-draft-20260708T014959Z.json",
+        "receipts/living-system-w2-collectors-2026-07-08.json"
+      ],
+      "note": "Different receipt types clustered within 5s of each other -- verify these aren't two motors racing on the same task cell."
+    }
+  ],
+  "receipt_families_informational": {
+    "agent-read-staleness-<TS>.json": [
+      "receipts/agent-read-staleness-20260707T234315Z.json",
+      "receipts/agent-read-staleness-20260707T234322Z.json",
+      "receipts/agent-read-staleness-20260707T234335Z.json",
+      "receipts/agent-read-staleness-20260707T234347Z.json",
+      "receipts/agent-read-staleness-20260707T234503Z.json",
+      "receipts/agent-read-staleness-20260707T234651Z.json"
+    ],
+    "brain-loop-autorun-<TS>.json": [
+      "receipts/brain-loop-autorun-20260702T101833Z.json",
+      "receipts/brain-loop-autorun-20260702T105003Z.json",
+      "receipts/brain-loop-autorun-20260702T105513Z.json"
+    ],
+    "brain-self-heal-tick-<TS>.json": [
+      "receipts/brain-self-heal-tick-20260702T092223Z.json",
+      "receipts/brain-self-heal-tick-20260702T093657Z.json",
+      "receipts/brain-self-heal-tick-20260702T094658Z.json"
+    ],
+    "l0-repo-graph-verify-<TS>.json": [
+      "receipts/l0-repo-graph-verify-20260709T060304Z.json",
+      "receipts/l0-repo-graph-verify-20260709T120006Z.json"
+    ],
+    "parallel-candidate-batch-<TS>.json": [
+      "receipts/parallel-candidate-batch-20260702T093706Z.json",
+      "receipts/parallel-candidate-batch-20260702T094707Z.json"
+    ],
+    "supabase-live-profiles-verify-<TS>.json": [
+      "receipts/supabase-live-profiles-verify-20260705T125643Z.json",
+      "receipts/supabase-live-profiles-verify-20260705T125659Z.json"
+    ]
+  },
+  "ok": false
+}
