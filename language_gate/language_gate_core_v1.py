@@ -172,6 +172,41 @@ ENTITY_ALLOWLIST = {
 _RUNTIME_STRUCTURAL: set[str] | None = None
 _RUNTIME_ENTITY: set[str] | None = None
 
+# WI-6: externalize the six hardcoded allowlists to JSON (ADDITIVE-PARITY).
+# The Python constants above REMAIN the source-of-truth fallback and are NEVER
+# deleted. allowlists_v1.json is a reviewable externalized COPY; the loader below
+# prefers it when present but falls back to the in-module constants when absent.
+# Runtime behavior (effective_* / scan / decide) is unchanged — this only ADDS a
+# loader, so the frozen TH-3 golden cannot drift.
+ALLOWLISTS_JSON_PATH = GATE_DIR / "allowlists_v1.json"
+
+# name -> the hardcoded source-of-truth set (fallback, never removed).
+EXTERNALIZED_ALLOWLISTS: dict[str, set[str]] = {
+    "STRUCTURAL_ALLOWLIST": STRUCTURAL_ALLOWLIST,
+    "STATUS_LABEL_ALLOWLIST": STATUS_LABEL_ALLOWLIST,
+    "FRAGMENT_ALLOWLIST": FRAGMENT_ALLOWLIST,
+    "TECH_REFERENCE_ALLOWLIST": TECH_REFERENCE_ALLOWLIST,
+    "CENSUS_VERB_ALLOWLIST": CENSUS_VERB_ALLOWLIST,
+    "ENTITY_ALLOWLIST": ENTITY_ALLOWLIST,
+}
+
+
+def load_allowlist(name: str, json_path: Path | None = None) -> set[str]:
+    """Return an allowlist by name, PREFERRING the externalized JSON copy and
+    FALLING BACK to the hardcoded Python constant when the JSON is absent (or
+    omits that key). The Python constant is the durable source of truth; the JSON
+    is an additive, reviewable mirror that must stay byte-identical to it."""
+    if name not in EXTERNALIZED_ALLOWLISTS:
+        raise KeyError(f"unknown allowlist: {name}")
+    fallback = EXTERNALIZED_ALLOWLISTS[name]
+    path = json_path or ALLOWLISTS_JSON_PATH
+    if path.is_file():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        block = data.get("allowlists") or {}
+        if name in block:
+            return {str(x) for x in block[name]}
+    return set(fallback)
+
 # WI-1: wire the two orphaned dictionary overlay indexes into the structural
 # allowlist. Additive only — folds ONLY the allow-classes (local/structural
 # vocabulary that should not read as UNDEFINED_TERM). CONFLICT_PHRASE and
