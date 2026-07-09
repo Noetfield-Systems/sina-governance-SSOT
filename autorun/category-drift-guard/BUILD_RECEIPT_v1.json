@@ -1,0 +1,105 @@
+{
+  "schema": "category_drift_guard_build_receipt_v1",
+  "status": "PHASE_1_BUILT_NOT_DEPLOYED",
+  "built_at": "2026-07-09T10:41:11Z",
+  "authority": "Founder directive 'START BUILDING Isolated (worktree) Autorun ON GHA CLOUDFLARE RAILWAY SUPABASE' 2026-07-09",
+  "lane": "cursor/product-category-lock-v1 (isolated worktree ~/Desktop/Noetfield-Systems/sg-product-lock)",
+  "supersedes_local_gap": "The prior mcp scheduled-tasks routine 'category-registry-drift-guard' only runs while Claude Code is open on this Mac. This build adds a real cloud execution/verification/history/monitoring stack. The local routine is LEFT RUNNING as a fallback until Phase 2/3 below are proven \u2014 not disabled.",
+  "architecture": {
+    "GHA": "isolated ephemeral runner + explicit git worktree add, runs scripts/category_registry_drift_check_v1.py (read-only), workflow_dispatch only, schedule commented pending FOUNDER-UNLOCK-DRIFT-CRON",
+    "Cloudflare": "independent verifier (workers/category-drift-verifier) \u2014 re-derives drift/missing counts from the receipt's own results array and rejects any mismatch; proves separate account+edge runtime via cf-ray + secondary account id",
+    "Supabase": "durable queryable history (category_drift_status_v1 current-state + category_drift_runs_v1 run-history), same pattern as workflow_census_v1.sql, no FK back into product/",
+    "Railway": "dead-man's-switch monitor \u2014 independently polls the Cloudflare Worker's /category-drift/latest on its own clock, alerts if stale beyond MAX_AGE_HOURS; the only layer that catches total pipeline silence"
+  },
+  "testing_performed_before_shipping": [
+    "Ran scripts/category_registry_drift_check_v1.py against the REAL registry twice; caught and fixed 2 real bugs (bare-filename resolution, and a same-repo-different-branch false-negative that would have masked real drift) before ever wiring it to a cloud service",
+    "Confirmed both modes work: local full check (--workspace-root) and cloud-scoped check (no cross-repo access) correctly agree on the 2 genuinely missing proof assets and correctly separate 6 out-of-scope (cross-repo) findings from real drift",
+    "node --check on both the Cloudflare Worker and the Railway monitor: syntax OK",
+    "Extracted the Worker's verifyReceiptConsistency logic and ran it in plain Node against the REAL generated receipt: independently recomputed drifted=2, missing=2, out_of_scope=6 \u2014 exact agreement with the Python script's own count, proving the two independently-written layers actually agree",
+    "Started the Railway monitor for real (not just syntax-checked) and hit /health, /status, and a 404 path \u2014 all correct; separately pointed it at an unreachable URL and confirmed it reports ok:false without crashing (the actual failure-detection path was exercised, not just the happy path)",
+    "GHA workflow YAML parsed and confirmed the schedule trigger is absent (workflow_dispatch only) \u2014 the founder-gate is real, not just a comment"
+  ],
+  "known_first_run_findings_not_fixed": [
+    "CAT-03: sina-governance-SSOT/skills/p0pgr-skills-workspace does not exist on branch cursor/product-category-lock-v1 (exists on cursor/language-layer-v1 \u2014 likely worktree/branch divergence, not a real regression)",
+    "CAT-05: sina-governance-SSOT/skills/pr-conflict-resolver/PR_CONFLICT_RESOLVER_SKILL_LOCKED_v1.md similarly missing on this branch",
+    "Not fixed here deliberately: this is a read-only drift GUARD, not an editor; these are exactly the kind of findings it exists to surface for founder review, not to silently patch"
+  ],
+  "artifacts": [
+    {
+      "path": "autorun/category-drift-guard/ARCHITECTURE_AND_CHESS_PLAN_v1.md",
+      "bytes": 5663,
+      "sha256": "65259d148ee95c3abe293c785bb5a6fd8d58bc52d3310368e42b37cb6c8ab5a3"
+    },
+    {
+      "path": "scripts/category_registry_drift_check_v1.py",
+      "bytes": 9458,
+      "sha256": "e5f23b078f47b438d7cc9f0211c719f49c78f5ede7b6b37621a79498b5371fd0"
+    },
+    {
+      "path": ".github/workflows/category-drift-guard-v1.yml",
+      "bytes": 4797,
+      "sha256": "5a3393c44c8ef02b7c54d4d05bc4a08df795e6a3e546b7212d5e1dce010404c5"
+    },
+    {
+      "path": "workers/category-drift-verifier/index.js",
+      "bytes": 7678,
+      "sha256": "24d02f52c891f5fc93bb9b133185daaf5d0256d194cdaaa931010cea8feb9e6f"
+    },
+    {
+      "path": "wrangler.category-drift-verifier.jsonc",
+      "bytes": 1121,
+      "sha256": "829341c0ac69c6a938d061b321a3e9a2696c0dcb4fa3ba28fcd1f08a0e10497e"
+    },
+    {
+      "path": "infrastructure/supabase/migrations/002_category_drift_guard_v1.sql",
+      "bytes": 2492,
+      "sha256": "a2dc3db44277c9e10319a7b08b16a0041e94575b6cc5524fe0a5718c3ab23698"
+    },
+    {
+      "path": "autorun/category-drift-guard/railway-monitor/index.js",
+      "bytes": 3879,
+      "sha256": "59af89d5a8ab8391f2407353561a533dd8e72b63f4914bbf131f55042b04cef9"
+    },
+    {
+      "path": "autorun/category-drift-guard/railway-monitor/package.json",
+      "bytes": 368,
+      "sha256": "a5aa9dae71c0bd9a09a0c2a1b1a359853c9a9ac939f90b1e0eb64123f7991057"
+    },
+    {
+      "path": "autorun/category-drift-guard/railway-monitor/railway.json",
+      "bytes": 295,
+      "sha256": "4a09e2da5bafa1b5f1f996a6dd7a6fb11d157bacc48f0ec21c3e6490ecd62e5c"
+    },
+    {
+      "path": "autorun/category-drift-guard/railway-monitor/.env.example",
+      "bytes": 231,
+      "sha256": "90f0908a31716a72b25bf275c790511eece63df3c89b5c9ff32fb082201dfbe1"
+    }
+  ],
+  "not_deployed": {
+    "no_github_workflow_has_run": true,
+    "no_cloudflare_worker_deployed": true,
+    "no_cloudflare_kv_namespace_created": true,
+    "no_supabase_migration_run": true,
+    "no_railway_service_created": true,
+    "no_real_secrets_committed": true,
+    "cron_trigger_disabled": true
+  },
+  "phase_2_founder_actions_required_to_go_live": [
+    "GitHub: add repo secrets CATEGORY_DRIFT_VERIFIER_URL, SUPABASE_URL, SUPABASE_SERVICE_KEY",
+    "Cloudflare: wrangler kv:namespace create DRIFT_RECEIPTS, paste id into wrangler.category-drift-verifier.jsonc, wrangler deploy",
+    "Supabase: run infrastructure/supabase/migrations/002_category_drift_guard_v1.sql against project tkgpapowwplupyekpivy",
+    "Railway: new service from autorun/category-drift-guard/railway-monitor, set env vars from .env.example (real CATEGORY_DRIFT_VERIFIER_URL + optional ALERT_WEBHOOK_URL)",
+    "Manually trigger .github/workflows/category-drift-guard-v1.yml via workflow_dispatch to prove R1->R2 cloud-manual, exactly like the P0-PGR precedent",
+    "Only after a FOUNDER-UNLOCK-DRIFT-CRON receipt: uncomment the schedule: line in category-drift-guard-v1.yml"
+  ],
+  "boundaries_enforced": {
+    "did_not_deploy": true,
+    "did_not_create_live_cloud_resources": true,
+    "did_not_commit_real_secrets": true,
+    "did_not_enable_live_cron": true,
+    "read_only_to_product_registry": true,
+    "left_existing_local_drift_guard_running_as_fallback": true
+  },
+  "stop_after_receipt": true
+}
