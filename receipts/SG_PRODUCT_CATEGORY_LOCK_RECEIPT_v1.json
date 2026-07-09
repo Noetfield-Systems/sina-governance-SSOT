@@ -21,7 +21,7 @@
       ]
     }
   },
-  "commit_state": "COMMITTED-LOCAL \u2014 ratified by founder directive 'OK DO THE NEXT' (2026-07-09) and committed to canonical branch cursor/language-layer-v1 as two unmixed commits (evidence commit 8d1b984 + this map-lock commit). NOT pushed, NOT merged to main, NOT deployed. Push/PR/merge remain founder-gated (assist_only lane).",
+  "commit_state": "COMMITTED \u2014 ratified by founder directive (2026-07-09). Canonical clean home is the ISOLATED branch cursor/product-category-lock-v1 (worktree ~/Desktop/Noetfield-Systems/sg-product-lock), created to stop collision with a concurrent L0-maintenance agent on cursor/language-layer-v1. Clean history: evidence 8d1b984 + map-lock 88e97e9 + receipt commits \u2014 no other agent's commit mixed in. NOTE: the same evidence + map-lock commits (8d1b984, 88e97e9) ALSO reached origin/cursor/language-layer-v1 via the concurrent agent's push (not by me). NOT merged to main, NOT deployed. Push/PR/merge remain founder-gated (assist_only lane).",
   "lock_scope": "Locks the IDENTITY of 10 commercial product categories (what each is, how it differs, its domain posture, and the receipt that gates its activation). This is a category-map lock, NOT a build/live/for-sale claim.",
   "categories_locked": 10,
   "build_status_distribution": {
@@ -202,7 +202,13 @@
   "sync_receipt": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json",
   "ratification": {
     "by": "founder directive 'OK DO THE NEXT' 2026-07-09",
-    "canonical_branch": "cursor/language-layer-v1 (per founder reconciliation order)",
-    "scope": "local commit only \u2014 not pushed/merged/deployed"
+    "canonical_branch": "cursor/product-category-lock-v1 (isolated worktree) \u2014 moved off cursor/language-layer-v1 to stop concurrent-agent collision",
+    "also_on_remote": "origin/cursor/language-layer-v1 carries commits 8d1b984 + 88e97e9 (pushed by the concurrent L0 agent, not by this session)",
+    "scope": "committed; not merged to main; not deployed"
+  },
+  "isolation": {
+    "reason": "Two autonomous agents were committing/pushing to cursor/language-layer-v1 with no worktree isolation; a concurrent --amend collision resulted.",
+    "action": "product-lock work moved to dedicated branch cursor/product-category-lock-v1 in its own worktree; shared checkout left untouched for the L0 agent.",
+    "residual": "cursor/language-layer-v1 local tip still carries my commit 723259d (receipt correction); recommend founder reset that branch to origin (7737d3b) when the L0 agent is idle \u2014 not done here to avoid disturbing its uncommitted files."
   }
 }
