@@ -1,0 +1,54 @@
+{
+  "schema": "p0pgr_execution_receipt_v1",
+  "receipt_id": "P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z",
+  "recorded_at": "2026-07-09T00:21:44.542054+00:00",
+  "packet_id": "P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1",
+  "authorized_by": "founder order 2026-07-09: enforce the split; canonical P0-PGR authority = sina-governance-SSOT @ cursor/language-layer-v1",
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "canonical_authority": {
+    "repo_branch": "sina-governance-SSOT @ cursor/language-layer-v1",
+    "r2_pass_receipt": "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json"
+  },
+  "subject": "TrustField PR #10 (loops/p0-cloud-factory-foundation @ cb90412, 35 files)",
+  "checks": {
+    "duplicates_p0pgr_schemas_or_runtime": "NO \u2014 zero p0-pgr/ files, no loop-state/packet/execution schema files in diff (git diff name-only sweep)",
+    "local_trustfield_adapters_only": "YES \u2014 all 35 files scoped to TrustField app/scripts/workflows/prompts/tests; receipt sink is /api/ops on trustfield-api",
+    "registry_conforms_to_canonical_rules": "YES \u2014 contract points to SSOT prompt_registry_schema_v1; validator enforces semver, single-active, dollars->founder-flag; 5/5 seeds status=testing",
+    "global_authority_claims": "NONE \u2014 diff grep for p0-pgr/canonical/global-authority empty (one unrelated code comment)",
+    "global_auto_dispatch": "NONE \u2014 sourcing workflow is workflow_dispatch-only (no cron); creates SOURCED tracker rows only; no packet dispatch capability",
+    "auto_dispatch_approved_without_founder": "IMPOSSIBLE \u2014 no such mechanism exists; candidate-touching prompts carry founder_approval_required_to_activate=true; activation gate in validator",
+    "cron_send_contact_deploy": "NONE \u2014 crons are probe/verify/summary/advisory only; no deploy or send tooling in any workflow (grep empty); telegram ops-channel alerts only"
+  },
+  "patch_applied": {
+    "kind": "hardening (not a violation fix)",
+    "commit": "cb90412 \u2014 data/prompt_registry_v1.json now explicitly declares: TRUSTFIELD-LOCAL ADAPTER ONLY, canonical P0-PGR authority = SSOT @ cursor/language-layer-v1 with R2 PASS receipt id",
+    "post_patch_validation": "registry validator PASS, contract tests 9/9 green"
+  },
+  "naming_note": "PR packet labels P0..P7 are Loop Specialist packet numbers, not P0-PGR authority claims; recorded here to preempt confusion",
+  "holds_respected": [
+    "R3 NOT unlocked",
+    "cron disabled everywhere",
+    "no candidate contact",
+    "no email",
+    "no deploy performed \u2014 PR merge remains the founder gate"
+  ],
+  "verdict": "RECONCILED_PASS",
+  "quality_state": "PASS",
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "determine \u2014 git/grep verification"
+  },
+  "accounting_note": "session-embedded verification",
+  "executor_route_note": "verifier role; single hardening commit pushed to the open PR branch (not merged)",
+  "commit_flag": "flag for next founder-visible SSOT commit"
+}
