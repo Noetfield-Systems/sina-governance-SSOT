@@ -33,12 +33,7 @@ IGNORED_DIR_NAMES = {
 
 # === L0-SUBSYSTEM-CONFIG (rendered by sync_l0_repo_graph_v1.py from the registry — do not hand-edit) ===
 SUBSYSTEM_DIRS = [
-    "data", "docs", "ssot", "scripts",
-    "receipts", "p0-pgr", "cloud-factory", "packages",
-    "policy", "gates", "ledger", "proposals",
-    "reports", "tests", "verifier", "workers",
-    ".github", "skills", "desktop-app", "language_gate",
-    "decision_language_machine_v1", "infrastructure", "SG-Canonical-Library",
+    "data", "docs", "scripts", "receipts", "tests", ".github",
 ]
 # === END L0-SUBSYSTEM-CONFIG ===
 
