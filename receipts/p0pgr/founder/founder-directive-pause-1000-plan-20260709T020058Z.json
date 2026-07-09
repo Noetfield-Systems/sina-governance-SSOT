@@ -1,0 +1,19 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-directive-pause-1000-plan-20260709T020058Z",
+  "recorded_at": "2026-07-09T02:00:58.491590+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "Continue only the current Cloud Factory Substrate v0 package. Do not start the 1000-Plan Cloud Factory order yet. Finish: 1. Apply confirmed fixes. 2. Validate JSON. 3. Write final receipt with: exact files written; diff summary; sha256 pins; token usage; verifier findings; no code/deploy/schedule proof. After receipt, STOP. Next architecture work must consume L0 Repo Graph Memory first. No more broad reader/drafter workflows before graph query.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "v0 package close-out only (fixes + validation + receipt evidence)"
+    ],
+    "does_not_unlock": [],
+    "defers": [
+      "the 1000-PLAN CLOUD FACTORY order (founder-order-1000-plan-cloud-factory-20260709T014708Z) \u2014 deferred, not revoked; restarts only after L0 Repo Graph Memory exists and is queried first"
+    ],
+    "process_law": "No broad reader OR drafter multi-agent workflows before an L0 Repo Graph Memory query. The in-flight 1000-plan draft workflow wm8ac69z1 was stopped on receipt of this directive; zero plan-factory files had been written."
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

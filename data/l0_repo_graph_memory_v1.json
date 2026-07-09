@@ -1,0 +1,3416 @@
+{
+ "schema": "l0_repo_graph_memory_v1",
+ "version": "1.0.0",
+ "status": "ACTIVE_WORKING_ARTIFACT",
+ "built_at": "2026-07-09T02:09:15.907810+00:00",
+ "git_head": "51a9ae97de230a8e26a118bd79363237521a53db",
+ "built_by": "deterministic file scan + distilled subsystem maps from the receipted 2026-07-08 sweep (workflow wf_abafa868-89f; the LAST blind pass)",
+ "law": "Query this graph BEFORE any architecture/audit/design pass. No broad reader or drafter workflows before a graph query (founder receipts founder-directive-pause-1000-plan-20260709T020058Z, founder-order-resume-1000-plan-l0-20260709T020915Z). Dispatch agents only at query-narrowed file sets.",
+ "stats": {
+  "nodes": 459,
+  "edges": 30,
+  "receipt_dirs": {
+   "receipts": 168,
+   "receipts/p0pgr": 17,
+   "receipts/p0pgr/outbox": 2,
+   "receipts/p0pgr/founder": 6,
+   "receipts/p0pgr/artifacts/CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z": 1,
+   "receipts/p0pgr/campaigns": 1
+  }
+ },
+ "nodes": [
+  {
+   "id": "ssot/noos-doctrine-trustfield-v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 1825
+  },
+  {
+   "id": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 12158
+  },
+  {
+   "id": "ssot/FOUNDER_CANON_v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 6207
+  },
+  {
+   "id": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 5949
+  },
+  {
+   "id": "ssot/GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 11491
+  },
+  {
+   "id": "ssot/strategy-ssot-v6-split.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 13804
+  },
+  {
+   "id": "ssot/sg-guardrails-trustfield-v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 2045
+  },
+  {
+   "id": "ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 8674
+  },
+  {
+   "id": "ssot/NOOS_INTEGRATOR_RULES_v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 3239
+  },
+  {
+   "id": "ssot/DAILY_GOVERNANCE_MACHINE_RUNBOOK_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 9188
+  },
+  {
+   "id": "ssot/NOOS_COPILOT_DISPATCHER_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 4519
+  },
+  {
+   "id": "ssot/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 9097
+  },
+  {
+   "id": "ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 4161
+  },
+  {
+   "id": "ssot/sg-guardrails-signal-factory-v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 1745
+  },
+  {
+   "id": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+   "kind": "ssot_law",
+   "tracked": true,
+   "size": 9883
+  },
+  {
+   "id": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+   "kind": "ssot_law",
+   "tracked": false,
+   "size": 8668
+  },
+  {
+   "id": "data/automation_surface_inventory_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 8472,
+   "schema_id": "automation_surface_inventory_v1"
+  },
+  {
+   "id": "data/governance_thread_rubric_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3981,
+   "schema_id": "governance_thread_rubric_v1"
+  },
+  {
+   "id": "data/p0_core_invocation_scope_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2821,
+   "schema_id": "p0_core_invocation_scope_v1",
+   "status": "ACTIVE"
+  },
+  {
+   "id": "data/daily_governance_calibration_matrix_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3615,
+   "schema_id": "daily_governance_calibration_matrix_v1"
+  },
+  {
+   "id": "data/noos_control_desk_builder_roles_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12991,
+   "schema_id": "noos_control_desk_builder_roles_v1"
+  },
+  {
+   "id": "data/founder_canon_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 3410,
+   "schema_id": "founder_canon_v1",
+   "status": "ACTIVE"
+  },
+  {
+   "id": "data/team_bench_sourced_rows_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 34729,
+   "schema_id": "team_bench_sourced_rows_v1",
+   "status": "SOURCED_ONLY \u2014 no contact made, no messages sent; CONTACTED requires founder approval via platform CASL gate"
+  },
+  {
+   "id": "data/governance_library_promote_queue_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 24571,
+   "schema_id": "governance_library_promote_queue_v1"
+  },
+  {
+   "id": "data/governance_intake_sink_rules_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4434,
+   "schema_id": "governance_intake_sink_rules_v1"
+  },
+  {
+   "id": "data/automation_baseline_freeze_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 632,
+   "schema_id": "automation_baseline_freeze_v1"
+  },
+  {
+   "id": "data/noos-integrator-role-v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 558,
+   "schema_id": "noos-integrator-role-pointer-v1"
+  },
+  {
+   "id": "data/governance_library_target_map_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2755,
+   "schema_id": "governance_library_target_map_v1"
+  },
+  {
+   "id": "data/governance_thread_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 6111,
+   "schema_id": "governance_thread_registry_v1"
+  },
+  {
+   "id": "data/founder_judgment_patterns_read_scope_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1164,
+   "schema_id": "founder_judgment_patterns_read_scope_v1"
+  },
+  {
+   "id": "data/noos_copilot_dispatcher_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3724,
+   "schema_id": "noos_copilot_dispatcher_v1",
+   "status": "ACTIVE"
+  },
+  {
+   "id": "data/team_bench_tracker_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1415,
+   "schema_id": "team_bench_tracker_v1"
+  },
+  {
+   "id": "data/governance_repo_map_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4215,
+   "schema_id": "governance_repo_map_v1"
+  },
+  {
+   "id": "data/noos_control_desk_package_map_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 10193,
+   "schema_id": "noos_control_desk_package_map_v1",
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_artifact_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 43817,
+   "schema_id": "governance_artifact_registry_v1"
+  },
+  {
+   "id": "data/governance_structure_tree_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 6308,
+   "schema_id": "governance_structure_tree_v1"
+  },
+  {
+   "id": "data/machine_autonomy_loops_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 8478,
+   "schema_id": "machine_autonomy_loops_v1"
+  },
+  {
+   "id": "data/regulated-term-hardstop-v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 904,
+   "schema_id": "regulated-term-hardstop-v1",
+   "status": "SG_SIGNED"
+  },
+  {
+   "id": "data/governance_review_queue_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 337241
+  },
+  {
+   "id": "data/governance_completeness_rubric_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3407,
+   "schema_id": "governance_completeness_rubric_v1"
+  },
+  {
+   "id": "data/brain_domain_sandboxes_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 3830,
+   "schema_id": "brain_domain_sandboxes_v1"
+  },
+  {
+   "id": "data/cloud_line_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 6059,
+   "schema_id": "cloud_line_registry_v1"
+  },
+  {
+   "id": "data/governance_intake_path_rubric_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1297,
+   "schema_id": "governance_intake_path_rubric_v1"
+  },
+  {
+   "id": "data/github_automation_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 8372,
+   "schema_id": "github_automation_registry_v1"
+  },
+  {
+   "id": "data/noos-copilot-dispatcher-mode-v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1398,
+   "schema_id": "noos-copilot-dispatcher-mode-v1",
+   "status": "RECORDED_STEP_5"
+  },
+  {
+   "id": "data/prompt_registry_schema_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2862,
+   "schema_id": "data/prompt_registry_schema_v1.json"
+  },
+  {
+   "id": "data/automation_acceptance_report_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 1094,
+   "schema_id": "automation_acceptance_report_v1"
+  },
+  {
+   "id": "data/brain_external_artifact_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": true,
+   "size": 2668,
+   "schema_id": "brain_external_artifact_registry_v1"
+  },
+  {
+   "id": "data/p0_core_decision_use_contract_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 6107,
+   "schema_id": "p0_core_decision_use_contract_v1",
+   "status": "ACTIVE"
+  },
+  {
+   "id": "data/noos_control_desk_api_contract_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4344,
+   "schema_id": "noos_control_desk_api_contract_v1"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12521
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/receipts/self_scan_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/receipts/v2_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1989,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/receipts/v2_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12320
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11405
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/receipts/control_desk_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2354,
+   "status": "MVP_WORKING_LOCALLY_VERIFIED"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/control-desk/README.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4041
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/control-desk/app.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12264
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/control-desk/static/index.html",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 13347
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/scripts/noos_integrator_sync_v1.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4115
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12431
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11404
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-mvp/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12390
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11405
+  },
+  {
+   "id": "data/governance_intake_extract_v1/smart-production-cost-law-v2-batch/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 5330
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/receipts/self_scan_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 200,
+   "status": "PASS"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/receipts/v1_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 527
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/receipts/v1_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2317,
+   "status": "PASS"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3097
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 798
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_founder_approval.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 233
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_manual_merge.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 180
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_frozen_proof_target.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 193
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_blocker_no_repair.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 245
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_l5_normal_stage.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 192
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/scripts/check_founder_runtime_dependency.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8496
+  },
+  {
+   "id": "data/governance_intake_extract_v1/founder-intent-filter-v1/founder-intent-filter/policy/founder_intent.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4696
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12521
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/receipts/self_scan_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/receipts/v2_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 1989,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/receipts/v2_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12320
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11405
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/receipts/control_desk_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2354,
+   "status": "MVP_WORKING_LOCALLY_VERIFIED"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/control-desk/README.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4041
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/control-desk/app.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12264
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/control-desk/static/index.html",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 13347
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/scripts/noos_integrator_sync_v1.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4115
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12431
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11404
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-mvp/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12390
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11405
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/smart-production-cost-law-v2-batch/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 5330
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/receipts/self_scan_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 200,
+   "status": "PASS"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/receipts/v1_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 527
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/receipts/v1_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2317,
+   "status": "PASS"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3097
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 798
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_founder_approval.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 233
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_manual_merge.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 180
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_frozen_proof_target.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 193
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_blocker_no_repair.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 245
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/tests/fixtures/bad_l5_normal_stage.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 192
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/scripts/check_founder_runtime_dependency.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8496
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/founder-intent-filter-v1/founder-intent-filter/policy/founder_intent.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4696
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/receipts/control_desk_v2_patch_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2908,
+   "status": "MVP_PATCHED_AND_VERIFIED_OBSERVED_REALITY_WORKING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/control-desk/README.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4675
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/control-desk/app.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 20873
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/control-desk/static/index.html",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 18184
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/scripts/noos_integrator_sync_v1.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4115
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12431
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11404
+  },
+  {
+   "id": "data/governance_intake_extract_v1/tag/noos-control-desk-v2-patched/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 7617
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/receipts/batch_delivery_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2556,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/receipts/self_scan_v2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 8355,
+   "status": "FAIL"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/receipts/batch_test_output.txt",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 751
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/receipts/control_desk_v2_patch_receipt.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 2908,
+   "status": "MVP_PATCHED_AND_VERIFIED_OBSERVED_REALITY_WORKING"
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/run_negative_tests.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_trigger.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 142
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_effort.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 146
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 477
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/good_clean_config.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 169
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp4.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 485
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/good_registry.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 939
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp2.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 915
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_forbidden_model.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 172
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/tests/fixtures/bad_registry_rcp3.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 501
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/control-desk/README.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4675
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/control-desk/app.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 20873
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/control-desk/static/index.html",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 18184
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/scripts/noos_integrator_sync_v1.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4115
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/scripts/check_cost_policy.py",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12431
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/.noos/workflow_registry_v1.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 11404
+  },
+  {
+   "id": "data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/policy/cost_policy.yaml",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "data/governance_intake_staging_v1/manifest.json",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 39411,
+   "schema_id": "governance-intake-staging-manifest-v1"
+  },
+  {
+   "id": "data/governance_intake_staging_v1/founder_intent_filter/FOUNDER_INTENT_FILTER.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 5330
+  },
+  {
+   "id": "data/governance_intake_staging_v1/ssot_proposal_artifact_versioning/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 3681
+  },
+  {
+   "id": "data/governance_intake_staging_v1/ssot_conflict_log_runtime_rules_domain_split/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4305
+  },
+  {
+   "id": "data/governance_intake_staging_v1/deep_research_report/deep-research-report.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 48072
+  },
+  {
+   "id": "data/governance_intake_staging_v1/sourcea_brain_registry/SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 4335
+  },
+  {
+   "id": "data/governance_intake_staging_v1/sourcea_brain_registry_learning_gate/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 12633
+  },
+  {
+   "id": "data/governance_intake_staging_v1/strategy_ssot_v6_split/strategy-ssot-v6-split.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 13804
+  },
+  {
+   "id": "data/governance_intake_staging_v1/copilot_automation_cost_profile_locked/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "data_registry",
+   "tracked": false,
+   "size": 9770
+  },
+  {
+   "id": "docs/SOURCEA_WORKER_SF_ITERATION2_DISPATCH_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 629
+  },
+  {
+   "id": "docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 14668
+  },
+  {
+   "id": "docs/1111_UPGRADE_PLANS_v2.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 11412
+  },
+  {
+   "id": "docs/PHASE3_FULL_AUTO_24x7_PLAN_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 2602
+  },
+  {
+   "id": "docs/.DS_Store",
+   "kind": "doc",
+   "tracked": false,
+   "size": 6148
+  },
+  {
+   "id": "docs/BRAIN_LOOP_LAUNCHD_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 2573
+  },
+  {
+   "id": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 2027
+  },
+  {
+   "id": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 7712
+  },
+  {
+   "id": "docs/SOURCEA_BRAIN_HANDOFF_SIGNAL_FACTORY_TRUSTFIELD_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 15492
+  },
+  {
+   "id": "docs/MERGE_MAIN_CHECKLIST_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1841
+  },
+  {
+   "id": "docs/BRAIN_LOOP_AUTORUN_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1537
+  },
+  {
+   "id": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 824
+  },
+  {
+   "id": "docs/L0_REPO_GRAPH_MEMORY_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 7519
+  },
+  {
+   "id": "docs/MAC_CURSOR_OPS_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1751
+  },
+  {
+   "id": "docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 14006
+  },
+  {
+   "id": "docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 8831
+  },
+  {
+   "id": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.4.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1458
+  },
+  {
+   "id": "docs/TEAM_BENCH_FORMATION_PACKAGE_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 6760
+  },
+  {
+   "id": "docs/NOOS_SOURCEA_OBSERVE_LOOP_TRIAGE_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 4449
+  },
+  {
+   "id": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.3.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 819
+  },
+  {
+   "id": "docs/MAC_CURSOR_VENTURE_LANES_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 926
+  },
+  {
+   "id": "docs/INDEPENDENT_VERIFIER_LOCK_PLAN_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 6485
+  },
+  {
+   "id": "docs/TRUSTFIELD_SIGNAL_FACTORY_RECONCILED_LOCK_v1.2.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1884
+  },
+  {
+   "id": "docs/L0_GRAPH_FIRST_OPERATOR_RULE_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 7458
+  },
+  {
+   "id": "docs/VERIFIER_IDENTITY_SELF_AUDIT_8b_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 6790
+  },
+  {
+   "id": "docs/ACTIVATION_LADDER_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 4364
+  },
+  {
+   "id": "docs/1111_UPGRADE_PLANS_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 10370
+  },
+  {
+   "id": "docs/CANONICAL_D4_PACKAGE_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 2943
+  },
+  {
+   "id": "docs/STEP10B_AUTONOMOUS_DEPLOY_DECIDE_v0.1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 1992
+  },
+  {
+   "id": "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 4015
+  },
+  {
+   "id": "docs/DEPLOYMENT_CHAIN_STATUS_v1.md",
+   "kind": "doc",
+   "tracked": true,
+   "size": 5850
+  },
+  {
+   "id": "docs/GRAPH_TOOL_DECISION_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 7275
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/NOETFIELD_COHERENT_SYSTEM_SPEC_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 11362
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/SINA_OS_SSOT_LOCKED_1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 99
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/SINA_OS_SSOT_LOCKED.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 99
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 12521
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 9770
+  },
+  {
+   "id": "docs/governance_drafts_intake_v1/NOOS_CONTROL_DESK_v2_README.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 4675
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 12633
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 5330
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 3681
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 4305
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/deep-research-report.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 129
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 15443
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 13967
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 9770
+  },
+  {
+   "id": "docs/governance_drafts_tag_v1/NOOS_CONTROL_DESK_v2_README.md",
+   "kind": "doc",
+   "tracked": false,
+   "size": 4675
+  },
+  {
+   "id": "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 2695,
+   "schema_id": "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json"
+  },
+  {
+   "id": "p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 1480
+  },
+  {
+   "id": "p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 1633,
+   "schema_id": "p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json"
+  },
+  {
+   "id": "p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 2053,
+   "schema_id": "p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json"
+  },
+  {
+   "id": "p0-pgr/P0_PROMPT_COMPILER_MVP_PLAN_v1.md",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 1770
+  },
+  {
+   "id": "p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+   "kind": "p0pgr_contract",
+   "tracked": false,
+   "size": 4525
+  },
+  {
+   "id": "cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+   "kind": "cloud_factory_package",
+   "tracked": false,
+   "size": 17477,
+   "schema_id": "factory_line_registry_v0",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "cloud-factory/MVP_ACTIVATION_PLAN_v0.md",
+   "kind": "cloud_factory_package",
+   "tracked": false,
+   "size": 23380
+  },
+  {
+   "id": "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+   "kind": "cloud_factory_package",
+   "tracked": false,
+   "size": 33301
+  },
+  {
+   "id": "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+   "kind": "cloud_factory_package",
+   "tracked": false,
+   "size": 19686,
+   "schema_id": "client_order_to_factory_run_v0",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+   "kind": "cloud_factory_package",
+   "tracked": false,
+   "size": 23349
+  },
+  {
+   "id": "policy/repo_fences_v1.yaml",
+   "kind": "policy",
+   "tracked": false,
+   "size": 2388
+  },
+  {
+   "id": "scripts/prove_verifier_independence_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 259
+  },
+  {
+   "id": "scripts/diagnose_gate_candidate_alignment_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 3624
+  },
+  {
+   "id": "scripts/brain_autonomous_controls_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 1573
+  },
+  {
+   "id": "scripts/p0pgr_scaffold_seed_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 7457
+  },
+  {
+   "id": "scripts/verify_p0_core_read_scope_gate_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 7715
+  },
+  {
+   "id": "scripts/governance_registry_ops_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 15185
+  },
+  {
+   "id": "scripts/trigger_verifier_run_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 5208
+  },
+  {
+   "id": "scripts/write_roi_heartbeat_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 1448
+  },
+  {
+   "id": "scripts/brain_register_trustfield_loops_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 7303
+  },
+  {
+   "id": "scripts/governance_merge_engine_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 11266
+  },
+  {
+   "id": "scripts/validate_copilot_pr_template_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 2031
+  },
+  {
+   "id": "scripts/validate_parallel_automation_governance_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 5470
+  },
+  {
+   "id": "scripts/governance_promote_intake_drafts_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 7363
+  },
+  {
+   "id": "scripts/validate_tag_intake_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 3089
+  },
+  {
+   "id": "scripts/p0pgr_cycle_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 4003
+  },
+  {
+   "id": "scripts/p0pgr_evidence_reader_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 1542
+  },
+  {
+   "id": "scripts/validate_brain_domain_registry_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 2953
+  },
+  {
+   "id": "scripts/github_app_remote_check.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 6398
+  },
+  {
+   "id": "scripts/audit_automation_drift_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 5024
+  },
+  {
+   "id": "scripts/governance_narrative_intelligence_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 11883
+  },
+  {
+   "id": "scripts/check_repo_fences_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 12804
+  },
+  {
+   "id": "scripts/brain_loop_self_heal_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 4883
+  },
+  {
+   "id": "scripts/audit_automation_surface_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 4739
+  },
+  {
+   "id": "scripts/brain_loop_health_check_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 1251
+  },
+  {
+   "id": "scripts/validate_governance_intelligence_e2e_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 9338
+  },
+  {
+   "id": "scripts/load_cf_tokens_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 589
+  },
+  {
+   "id": "scripts/query_repo_graph_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 3618
+  },
+  {
+   "id": "scripts/resolve_sourcea_root_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 195
+  },
+  {
+   "id": "scripts/brain_mac_env_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 4304
+  },
+  {
+   "id": "scripts/p0pgr_execute_pkt0002_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 6124
+  },
+  {
+   "id": "scripts/validate-founder-canon-e2e-v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 464
+  },
+  {
+   "id": "scripts/governance_intake_path_intelligence_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 19386
+  },
+  {
+   "id": "scripts/install_brain_loop_launchd_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 1524
+  },
+  {
+   "id": "scripts/build_repo_graph_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 9441
+  },
+  {
+   "id": "scripts/validate_intake_sink_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 3145
+  },
+  {
+   "id": "scripts/prove_verifier_independence_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 4529
+  },
+  {
+   "id": "scripts/brain_loop_autorun_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 7425
+  },
+  {
+   "id": "scripts/governance_promote_tag_drafts_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 394
+  },
+  {
+   "id": "scripts/verify_p0_core_output_soup_wall_gate_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 8671
+  },
+  {
+   "id": "scripts/com.sina.brain-loop-autorun-v1.plist",
+   "kind": "script",
+   "tracked": true,
+   "size": 1173
+  },
+  {
+   "id": "scripts/p0pgr_packet_lint_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 5403
+  },
+  {
+   "id": "scripts/run_machine_autonomy_cycle_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 4718
+  },
+  {
+   "id": "scripts/brain_domain_registry_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 5581
+  },
+  {
+   "id": "scripts/validate-governance-public-e2e-v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 639
+  },
+  {
+   "id": "scripts/governance_intake_sink_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 12809
+  },
+  {
+   "id": "scripts/p0pgr_phase2_rank_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 2296
+  },
+  {
+   "id": "scripts/governance_promote_intake_artifacts_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 11254
+  },
+  {
+   "id": "scripts/validate_brain_domain_e2e_matrix_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 2443
+  },
+  {
+   "id": "scripts/governance_thread_intelligence_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 21033
+  },
+  {
+   "id": "scripts/validate_intake_coherence_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 2736
+  },
+  {
+   "id": "scripts/validate_registry_structure_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 2622
+  },
+  {
+   "id": "scripts/brain_loop_launchd_entry_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 802
+  },
+  {
+   "id": "scripts/governance_intelligence_engine_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 69546
+  },
+  {
+   "id": "scripts/verify_l0_repo_graph_memory_v1.sh",
+   "kind": "script",
+   "tracked": false,
+   "size": 4803
+  },
+  {
+   "id": "scripts/validate-governance-intelligence-v1.sh",
+   "kind": "script",
+   "tracked": false,
+   "size": 520
+  },
+  {
+   "id": "scripts/validate_library_promote_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 2703
+  },
+  {
+   "id": "scripts/validate_founder_canon_e2e_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 3599
+  },
+  {
+   "id": "scripts/validate_governance_intelligence_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 8055
+  },
+  {
+   "id": "scripts/governance_promote_library_drafts_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 13864
+  },
+  {
+   "id": "scripts/brain_loop_self_heal_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 545
+  },
+  {
+   "id": "scripts/promote_brain_worker_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 2683
+  },
+  {
+   "id": "scripts/run_parallel_brain_candidates_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 559
+  },
+  {
+   "id": "scripts/team_bench_import_sourced_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 3619
+  },
+  {
+   "id": "scripts/p0pgr_campaign_planner_v1.py",
+   "kind": "script",
+   "tracked": false,
+   "size": 8839
+  },
+  {
+   "id": "scripts/repair_sourcea_worktree_v1.sh",
+   "kind": "script",
+   "tracked": true,
+   "size": 1377
+  },
+  {
+   "id": "scripts/validate_governance_public_e2e_v1.py",
+   "kind": "script",
+   "tracked": true,
+   "size": 4160
+  },
+  {
+   "id": ".github/CODEOWNERS",
+   "kind": "gh_meta",
+   "tracked": false,
+   "size": 1034
+  },
+  {
+   "id": ".github/pull_request_template.md",
+   "kind": "gh_meta",
+   "tracked": true,
+   "size": 870
+  },
+  {
+   "id": ".github/copilot-instructions.md",
+   "kind": "gh_meta",
+   "tracked": true,
+   "size": 873
+  },
+  {
+   "id": ".github/workflows/brain-loop-autorun-v1.yml",
+   "kind": "gh_workflow",
+   "tracked": true,
+   "size": 1324
+  },
+  {
+   "id": ".github/workflows/repo-fences-v1.yml",
+   "kind": "gh_workflow",
+   "tracked": false,
+   "size": 1713
+  },
+  {
+   "id": "packages/noos-control-desk-v1/NOOS_INTEGRATOR_SYNC_RULE_v1.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1142
+  },
+  {
+   "id": "packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 3370
+  },
+  {
+   "id": "packages/noos-control-desk-v1/HANDOFF_BACKEND_BUILDER_v1.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 6317
+  },
+  {
+   "id": "packages/noos-control-desk-v1/WORK_ORDER_NOOS_CONTROL_DESK_MVP_v1.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1966
+  },
+  {
+   "id": "packages/noos-control-desk-v1/SMART_PRODUCTION_COST_LAW_v2.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 15475
+  },
+  {
+   "id": "packages/noos-control-desk-v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 7678
+  },
+  {
+   "id": "packages/noos-control-desk-v1/HANDOFF_FRONTEND_BUILDER_v1.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 5343
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_ssot_security_risk_assessment_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 405
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_7.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/frontend_step3_smoke_v1.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 695
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noetfield_governance_console_e2e_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 408
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7b_verdict_patch_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2027
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7c_registry_drift_review_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 6513,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 8657
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_ssot_cost_policy_receipt_validation_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 411
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/validation_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 7692
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noetfield_www_ci_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 392
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/control_desk_last_validate.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 10796,
+   "status": "FAIL"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noetfield_trust_ledger_ci_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 401
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_6.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_sourcea_external_verify_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 399
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noetfield_supabase_heartbeat_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 404
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_ssot_brain_loop_autorun_v1_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 402
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_10.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1336
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noetfield_platform_ci_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 397
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 12595,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_11.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2871
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_trustfield_autorun_24_7_health_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 406
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noos_cost_policy_scan_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 397
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noos_cross_repo_health_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 398
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_sourcea_deploy_buyer_surfaces_v1_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 408
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_trustfield_copilot_cloud_agent_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 689
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_trustfield_e2e_production_smoke_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 407
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7_workflow_audit_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 16715,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_ssot_agentic_ci_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 625
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/integrator_step4_verifier_v1.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2965
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7f_b_copilot_unresolved_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1127,
+   "status": "UNRESOLVED"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_trustfield_ci_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 389
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_12.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2871
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_3.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_2.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_sourcea_determinism_gate_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 400
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_sourcea_validate_boot_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 397
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_13.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2871
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7f_a_branch_only_resolution_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 6997
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1226,
+   "schema_id": "trustfield_copilot_ui_attestation_sanitized_v1",
+   "status": "PARTIAL"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noos_factory_autorun_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 396
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7fc_final_reattestation_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 3981,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7c_proposed_registry_patch.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 2329,
+   "schema_id": "step7c_proposed_registry_patch",
+   "status": "APPLIED"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_14.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 3492
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_sourcea_repo_policy_gate_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 400
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_5.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 3746,
+   "status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_noos_loop_health_checks_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 399
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/self_scan_v2.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 9311,
+   "status": "FAIL"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/lock_candidate_blocked_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 4487
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_9.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_trustfield_deploy_vercel_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 400
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_8.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 646
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/step7f_b_copilot_ui_partial_2026-07-04.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1221,
+   "status": "PARTIAL_EVIDENCE_RECEIVED"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/draft_save_ssot_agentic_ci_2026-07-03.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 391
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/registry_draft_save.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 339
+  },
+  {
+   "id": "packages/noos-control-desk-v1/receipts/sync_4.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1335
+  },
+  {
+   "id": "packages/noos-control-desk-v1/tests/run_negative_tests.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 4171
+  },
+  {
+   "id": "packages/noos-control-desk-v1/tests/test_verdict_v1.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 4718
+  },
+  {
+   "id": "packages/noos-control-desk-v1/control-desk/README.md",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 5281
+  },
+  {
+   "id": "packages/noos-control-desk-v1/control-desk/app.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 249
+  },
+  {
+   "id": "packages/noos-control-desk-v1/scripts/run_step7fc_final_reattestation_v1.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 8084
+  },
+  {
+   "id": "packages/noos-control-desk-v1/scripts/run_step7e_repost_attestations_v1.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 7794
+  },
+  {
+   "id": "packages/noos-control-desk-v1/scripts/run_step7_workflow_audit_v1.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 16067
+  },
+  {
+   "id": "packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 7228
+  },
+  {
+   "id": "packages/noos-control-desk-v1/scripts/check_cost_policy.py",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 12505
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/integrator_state.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 303
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/receipt_schema_v1.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 631,
+   "schema_id": "receipt_schema_v1"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/workflow_registry_draft.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 490
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/copilot_attestation_schema_v1.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 1211,
+   "schema_id": "copilot_attestation_schema_v1"
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/registry_draft.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 19079
+  },
+  {
+   "id": "packages/noos-control-desk-v1/.noos/workflow_registry_v1.json",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 11989
+  },
+  {
+   "id": "packages/noos-control-desk-v1/policy/cost_policy.yaml",
+   "kind": "package_file",
+   "tracked": false,
+   "size": 3664
+  },
+  {
+   "id": "workers/github-app-advisory/index.js",
+   "kind": "infra",
+   "tracked": true,
+   "size": 24742
+  },
+  {
+   "id": "tests/test_p0pgr_phase0.py",
+   "kind": "test",
+   "tracked": false,
+   "size": 5702
+  },
+  {
+   "id": "tests/repo_fences/run_negative_tests.py",
+   "kind": "test",
+   "tracked": false,
+   "size": 6895
+  }
+ ],
+ "edges": [
+  {
+   "from": "ssot/FOUNDER_CANON_v1.md",
+   "to": "*",
+   "rel": "canon_root_authority"
+  },
+  {
+   "from": "data/founder_canon_v1.json",
+   "to": "ssot/FOUNDER_CANON_v1.md",
+   "rel": "machine_registry_of"
+  },
+  {
+   "from": "p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+   "to": "p0-pgr/",
+   "rel": "package_authority_of"
+  },
+  {
+   "from": "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+   "to": "receipts/p0pgr/outbox/",
+   "rel": "validates"
+  },
+  {
+   "from": "scripts/p0pgr_packet_lint_v1.py",
+   "to": "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+   "rel": "lint_gate_for"
+  },
+  {
+   "from": "scripts/p0pgr_cycle_v1.py",
+   "to": "receipts/p0pgr/",
+   "rel": "writes_receipts_to"
+  },
+  {
+   "from": "scripts/p0pgr_phase2_rank_v1.py",
+   "to": "receipts/p0pgr/phase2_queue_v1.json",
+   "rel": "writes"
+  },
+  {
+   "from": "scripts/p0pgr_campaign_planner_v1.py",
+   "to": "receipts/p0pgr/campaigns/",
+   "rel": "writes_receipts_to"
+  },
+  {
+   "from": "docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md",
+   "to": "data/cloud_line_registry_v1.json",
+   "rel": "authority_of"
+  },
+  {
+   "from": "receipts/p0pgr/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1-20260708T234714Z.json",
+   "to": "data/cloud_line_registry_v1.json",
+   "rel": "sha256_pins"
+  },
+  {
+   "from": "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+   "to": "cloud-factory/",
+   "rel": "package_authority_of"
+  },
+  {
+   "from": "cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+   "to": "data/cloud_line_registry_v1.json",
+   "rel": "untouched_sibling_of"
+  },
+  {
+   "from": "receipts/p0pgr/CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z.json",
+   "to": "cloud-factory/",
+   "rel": "sha256_pins"
+  },
+  {
+   "from": "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+   "to": "data/brain_domain_sandboxes_v1.json",
+   "rel": "extends_branch_prefix_of"
+  },
+  {
+   "from": "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+   "to": "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+   "rel": "wraps_by_reference"
+  },
+  {
+   "from": "policy/repo_fences_v1.yaml",
+   "to": "scripts/check_repo_fences_v1.py",
+   "rel": "enforced_by"
+  },
+  {
+   "from": "policy/repo_fences_v1.yaml",
+   "to": ".github/workflows/repo-fences-v1.yml",
+   "rel": "enforced_by"
+  },
+  {
+   "from": ".github/CODEOWNERS",
+   "to": "policy/repo_fences_v1.yaml",
+   "rel": "zone_paired_with"
+  },
+  {
+   "from": "data/machine_autonomy_loops_v1.json",
+   "to": "scripts/run_machine_autonomy_cycle_v1.py",
+   "rel": "implemented_by"
+  },
+  {
+   "from": "data/machine_autonomy_loops_v1.json",
+   "to": "ssot/FOUNDER_CANON_v1.md",
+   "rel": "governed_by"
+  },
+  {
+   "from": "data/github_automation_registry_v1.json",
+   "to": "*",
+   "rel": "motor_routing_truth"
+  },
+  {
+   "from": "data/prompt_registry_schema_v1.json",
+   "to": "data/cloud_line_registry_v1.json",
+   "rel": "lane_enum_bound_to"
+  },
+  {
+   "from": "data/noos_control_desk_api_contract_v1.json",
+   "to": "packages/noos-control-desk-v1/",
+   "rel": "contract_of"
+  },
+  {
+   "from": "data/p0_core_decision_use_contract_v1.json",
+   "to": "scripts/verify_p0_core_output_soup_wall_gate_v1.py",
+   "rel": "gated_by"
+  },
+  {
+   "from": "data/founder_judgment_patterns_read_scope_v1.json",
+   "to": "scripts/verify_p0_core_read_scope_gate_v1.py",
+   "rel": "gated_by"
+  },
+  {
+   "from": "ssot/NOOS_INTEGRATOR_RULES_v1.md",
+   "to": "data/noos-integrator-role-v1.json",
+   "rel": "sg_pointer_pair"
+  },
+  {
+   "from": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+   "to": "data/governance_repo_map_v1.json",
+   "rel": "superseded_paths_use_instead"
+  },
+  {
+   "from": "receipts/p0pgr/phase2_scorecard_v1.json",
+   "to": "receipts/p0pgr/phase2_queue_v1.json",
+   "rel": "queue_ref"
+  },
+  {
+   "from": "workers/",
+   "to": "data/brain_domain_sandboxes_v1.json",
+   "rel": "verifier_worker_config"
+  },
+  {
+   "from": "receipts/p0pgr/founder/",
+   "to": "p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+   "rel": "authorization_gate_source"
+  }
+ ],
+ "subsystems": {
+  "p0pgr-runtime": {
+   "constraints": [
+    "All nine gates must pass before a packet executes; partial execution is forbidden ('does not execute a little bit') \u2014 p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md.",
+    "Cloud-only: MAC_RUNNER and HYBRID_MAC are forbidden routes, including as fallback; the Mac is cockpit, never runner \u2014 p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md.",
+    "FOUNDER_ONLY, always: deploy, merge, L5 verifier changes, phase unlocks, authority changes, scheduled automation approval, retiring a founder trigger \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md. A cron/24-7 factory loop therefore needs explicit founder approval; scorecard currently records ladder_r3 'HOLD \u2014 cron disabled'.",
+    "no_deploy gate + HARD_BLOCK reason 2: no production deploy/promote \u2014 the factory's deploy line must be preview-only unless founder-authorized per deployment (precedent: TEAM_BENCH_PLATFORM_PROD_DEPLOY_v1 counted in scorecard deploys with founder authorization).",
+    "no_external_send gate + HARD_BLOCK reason 1: nothing sent to humans outside the repo \u2014 client-facing delivery from factory lines is gated.",
+    "founder_authorization_receipt gate: an in-repo receipt must exist in receipts/p0pgr/founder/ before acting; chat-only authorization is not durable evidence (M03 lesson) \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md.",
+    "Continuity law: never default to STOP; degrade tag confidence -> reduce scope -> sandbox -> partial -> provisional -> retry-if-ROI-positive -> review queue; lint failure files a repair candidate and the lane keeps moving \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md / P0_PROMPT_COMPILER_MVP_PLAN_v1.md.",
+    "Lint R7: packets may not route validation/review/uncertainty to the founder (violates autonomy loops); R6 bans vague-verb missions without measurable acceptance \u2014 P0_PROMPT_COMPILER_MVP_PLAN_v1.md, scripts/p0pgr_packet_lint_v1.py.",
+    "Receipt provenance: timestamps machine-generated at event time (datetime.now(timezone.utc)); every external claim needs per-URL status + body sha256 + saved body under receipts/p0pgr/artifacts/<receipt-id>/; route deviations must be recorded in executor_route_note \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md.",
+    "P0 leakage wall (gate no_p0_leakage): workers/prompt bundles may never contain P0 CORE reasoning; worker task specs restricted to the seven allowed keys; forbidden_readers include worker/normal_worker/tier_1_worker/tier_2_prompt_bundle \u2014 data/p0_core_decision_use_contract_v1.json.",
+    "SESSION_EMBEDDED rail (INCIDENT-039): max one light shell <=90s per turn on the Mac; heavy work routes to cloud \u2014 P0_DISPATCH_ROUTER_RULES_v1.md.",
+    "Phase 3 (earned autonomy) is LOCKED \u2014 founder unlock only; M4 cloud execution LOCKED until first gated packet, M5 LOCKED \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md, P0_PROMPT_COMPILER_MVP_PLAN_v1.md.",
+    "Integration law (census F3): consume adjacent live systems as inputs, never duplicate their queues \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md.",
+    "Fixed report format: 'OBSERVED \u00b7 <operation sections> \u00b7 QUALITY STATE \u00b7 RECEIPT \u00b7 SCORECARD \u00b7 NEXT \u00b7 STOP' \u2014 P0_DISPATCH_BRAIN_RUNTIME_v1.1.md."
+   ],
+   "reusable_vocabulary": [
+    "Schema consts: p0_prompt_packet_v1.1, p0_execution_receipt_v1, p0_prompt_loop_state_v1, p0pgr_phase2_queue_v1, p0pgr_phase2_scorecard_v1, p0pgr_repair_candidate_v1, p0pgr_evidence_digest_v1, p0_core_decision_use_contract_v1",
+    "packet_id pattern: ^PKT-[0-9]{4}(-[a-z0-9-]+)?$ (e.g. PKT-0002-noetfield-live-truth, PKT-0101-runtime-health-revalidate)",
+    "Routes: CLOUD_WORKER, CLOUD_RESEARCH, SESSION_EMBEDDED, REVIEW_QUEUE; forbidden: MAC_RUNNER, HYBRID_MAC; label: HOLD_CLOUD_UNSAFE",
+    "Nine gate keys: cloud_only, read_only_or_reversible, roi_positive, no_deploy, no_external_send, no_legal_financial_commitment, no_p0_leakage, no_authority_change, founder_authorization_receipt",
+    "Packet statuses: DRAFT, OUTBOX, ROUTED, HOLD_CLOUD_UNSAFE, QUEUED_FOUNDER_REVIEW, DONE, KILLED; cycle verdicts: ROUTED, REPAIR_CANDIDATE, HOLD_CLOUD_UNSAFE, QUEUED_FOUNDER_REVIEW; quality_state: PASS, PARTIAL, PROVISIONAL, FAIL; confidence: HIGH, MEDIUM, LOW",
+    "ROI fields + weights: revenue 35, trust 25, workload_relief 15, cloud_now 15, reversibility 10 (each scored 0-5); queue field next_move",
+    "Evidence kinds: url_fetch, script_run, file_stat, hash; evidence item fields: claim, kind, url, status, sha256, saved_path",
+    "Receipt field names: receipt_id, recorded_at, gates_checked, quality_state, limitations, evidence, cost{llm_calls, metered_note}, accounting_note, executor_route_note, findings, commit_flag; loop-state: cycle_id, packet_path, stages{compiled,linted,routed}, lint_rejects, gate_results, counters{executions,sends,deploys,leaks,freezes}",
+    "Lint codes R1-R9; repair candidate filing pattern repair-<packet_id>-<YYYYMMDDTHHMMSSZ>.json; loop-state filing pattern loop-state-cycle-<ts>.json; execution receipt pattern execution-<PKT-id>-<ts>.json; compact timestamp format %Y%m%dT%H%M%SZ",
+    "Era/phase names: PHASE_2_CLOUD_ONLY_ROI_TRACK; MVP step ids M0-M5; ladder ids ladder_r2/ladder_r3; six board axes: runtime_health, authority_wiring, commercial_readiness, live_truth, cost_roi, delivery_readiness; CHESS pass: forecast, patch, proceed, verify",
+    "Directory layout under receipts/p0pgr/: outbox/, founder/, artifacts/, campaigns/, repair_candidates/, phase2_queue_v1.json, phase2_scorecard_v1.json, phase1_scorecard_v1.json",
+    "P0 CORE wall vocabulary: read_only_judgment_source, output_soup_wall, worker_task_spec_allowed_keys (goal, files, constraints, done_criteria, verify_method, receipts_required, decision_verdict), allowed_readers base_live_brain/high_decision_agent, stop_continue_verdict STOP|CONTINUE|ESCALATE_TO_SG, harvest_proposed",
+    "Deliverable types already in use: truth_diff_report, validation_report, commit_manifest; labels in use: SUPPORTING_TRUST_PROOF, live_truth; source_findings convention: census F1/F3; lesson ids: M03, INCIDENT-039"
+   ],
+   "integration_points": [
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json \u2014 every factory order must be a valid `p0_prompt_packet_v1.1` packet; the deliverable {type, destination, acceptance} triple is the natural hook for factory-line output contracts (e.g. type 'truth_diff_report', destination 'receipts/p0pgr/artifacts/').",
+    "receipts/p0pgr/outbox/*.json \u2014 the packet intake sink; the ROI ranker consumes this directory and factory lines should pull from receipts/p0pgr/phase2_queue_v1.json `next_move` rather than inventing a new queue (integration law F3).",
+    "scripts/p0pgr_cycle_v1.py run_cycle(packet_path, receipts_dir) and route_packet() \u2014 the routing entry point a Cloud Factory dispatcher must call (or extend) before any execution; founder_receipt_exists() checks receipts/p0pgr/founder/*.json.",
+    "scripts/p0pgr_packet_lint_v1.py \u2014 ALLOWED_ROUTES, FORBIDDEN_ROUTES, NINE_GATES, ROI_FIELDS constants; adding any factory route/lane requires synchronized edits here, in the packet schema route enum, and in p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md (and is arguably an `no_authority_change`/FOUNDER_ONLY change).",
+    "scripts/p0pgr_phase2_rank_v1.py WEIGHTS dict + receipts/p0pgr/phase2_queue_v1.json (schema p0pgr_phase2_queue_v1, field `next_move`) \u2014 factory scheduling/prioritization should reuse this deterministic ranker.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json \u2014 the receipt line of every factory lane must emit `p0_execution_receipt_v1` with gates_checked PASS/FAIL, quality_state, and evidence items of kind url_fetch|script_run|file_stat|hash; artifacts saved under receipts/p0pgr/artifacts/<receipt-id>/.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json \u2014 per-cycle loop-state receipts (stages compiled/linted/routed, counters executions/sends/deploys/leaks/freezes) that a factory conveyor should extend per line stage.",
+    "receipts/p0pgr/phase2_scorecard_v1.json \u2014 factory executions must increment counters here (executions, deploys, cost_usd) and respect ladder_r3 'HOLD \u2014 cron disabled' before any scheduled loop.",
+    "receipts/p0pgr/founder/ \u2014 founder authorization receipts directory; gate 9 requires an in-repo receipt here before any factory execution; chat-only authorization is not durable evidence (M03 lesson).",
+    "receipts/p0pgr/repair_candidates/ \u2014 lint-failure sink (schema p0pgr_repair_candidate_v1); a factory 'repair' loop already has its filing convention: repair-<packet_id>-<ts>.json.",
+    "data/p0_core_decision_use_contract_v1.json output_soup_wall.worker_task_spec_allowed_keys [goal, files, constraints, done_criteria, verify_method, receipts_required, decision_verdict] \u2014 the exact allowed shape of any worker/sandbox prompt bundle a factory line compiles from a packet; gate script scripts/verify_p0_core_output_soup_wall_gate_v1.py.",
+    "scripts/p0pgr_campaign_planner_v1.py \u2014 six board axes + CHESS (forecast/patch/proceed/verify) pattern to reuse as the factory's per-line self-repair pass.",
+    "scripts/p0pgr_evidence_reader_v1.py \u2014 deterministic read-only digest (schema p0pgr_evidence_digest_v1) over receipts/p0pgr/**; the harvest/verifier lines can build on this.",
+    "Adjacent queues the factory must consume, not duplicate: data/governance_review_queue_v1.json, data/governance_library_promote_queue_v1.json, receipts/roi-heartbeat-*.json.",
+    "receipts/p0pgr/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1-20260708T234714Z.json and docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md \u2014 an existing cloud-factory promotion receipt/plan already registered under P0-PGR (covered by another subsystem reader, but the substrate must reconcile with it; scorecard notes dual_scaffold 'TrustField = adapter layer; canonical brain = cursor/language-layer-v1')."
+   ],
+   "gaps": [
+    "No factory-line taxonomy: the route enum has only 4 coarse routes (CLOUD_WORKER, CLOUD_RESEARCH, SESSION_EMBEDDED, REVIEW_QUEUE). There is no field for the requested line types (research, architecture, code, no-code app builder, workflow builder, test, deploy-preview, verifier, receipt, harvest); a substrate must either add a line field (e.g. reuse labels[] or a new deliverable.type convention) or extend the enum, which requires synchronized changes to P0_PROMPT_PACKET_SCHEMA_v1.json, p0pgr_packet_lint_v1.py ALLOWED_ROUTES, and P0_DISPATCH_ROUTER_RULES_v1.md \u2014 and likely FOUNDER_ONLY authority sign-off.",
+    "No executor-binding field in the packet: nothing names a concrete execution target (GitHub Actions workflow, Cloudflare Worker, Railway API, Supabase, repo worktree/sandbox id). route is only a class; executor_route_note in receipts is free text after the fact.",
+    "No automated executor exists: scripts/p0pgr_cycle_v1.py ends at verdict ROUTED and never invokes anything (M4 is LOCKED in the MVP plan). The 8 executions on the scorecard were manual founder-authorized passes (e.g. receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json). The substrate's dispatch layer from ROUTED -> sandbox is entirely missing.",
+    "founder_authorization_receipt gate is coarse: founder_receipt_exists() in p0pgr_cycle_v1.py passes if ANY *.json exists in receipts/p0pgr/founder/ \u2014 there is no per-packet or per-scope authorization binding.",
+    "No compiler script: the 'compiled' stage is set true unconditionally in run_cycle(); packet compilation is operator/skill work (anthropic-skills:p0pgr-packet-compiler), not code \u2014 a substrate turning founder/client orders into packets automatically has no existing script to extend.",
+    "No queue-consumption loop: phase2_queue_v1.json exposes next_move but nothing consumes it; scheduled automation is FOUNDER_ONLY and ladder_r3 is 'HOLD \u2014 cron disabled', so a 24/7 factory motor needs both new code and a founder unlock receipt.",
+    "No packet status lifecycle enforcement: nothing programmatically transitions status OUTBOX -> ROUTED -> DONE/KILLED after execution; outbox packets are hand-edited (PKT-0002 is status DONE in place).",
+    "No preview-artifact schema: deliverable.destination is a repo path string; there is no schema for hosted preview URLs (Cloudflare/Railway/Supabase) or client-visible artifacts, and gate no_external_send currently forbids delivery to humans outside the repo.",
+    "No independent verifier line: quality_state in execution receipts is self-reported; the schema-revalidation verifier was only a proposed campaign candidate (PKT-0101-runtime-health-revalidate). loop-state gate_results is an unconstrained object (no required keys).",
+    "No harvest schema in P0-PGR: harvest_proposed/harvest_note exist only in the P0 CORE decision contract output schema (data/p0_core_decision_use_contract_v1.json), not in packet or execution receipt schemas \u2014 a harvest line needs a new receipt shape.",
+    "Cost tracking is minimal: cost = {llm_calls int, metered_note string}; scorecard cost_usd is 0 with no accumulation mechanism \u2014 no per-line or per-sandbox spend attribution for Railway/Cloudflare/Supabase.",
+    "Minor doc/code divergence to reconcile: route_packet() exempts SESSION_EMBEDDED packets from the cloud_only -> HOLD_CLOUD_UNSAFE rule (scripts/p0pgr_cycle_v1.py line 30), an exception not written in P0_DISPATCH_ROUTER_RULES_v1.md."
+   ]
+  },
+  "trustfield-cloud-loops": {
+   "constraints": [
+    "\"Mac executes nothing on schedule; every line writes a receipt; founder approvals are structural API gates, not conventions\" \u2014 rule field of data/cloud_line_registry_v1.json and plan \u00a72 (docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md).",
+    "No receipt sink = no loop (governed-autorun L8/L11 cited as P0's prerequisite) \u2014 docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md.",
+    "DECLARED until 24h zero-manual window of scheduled externally-written receipts closes green, then VERIFIED; manual green != cron green \u2014 docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md doctrine header.",
+    "Every p0pgr execution receipt must pass 9 gates: cloud_only, read_only_or_reversible, roi_positive, no_deploy, no_external_send, no_legal_financial_commitment, no_p0_leakage, no_authority_change, founder_authorization_receipt \u2014 receipts/p0pgr/TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json and trustfield-cloud-loops-built-v1-20260709T001150Z.json.",
+    "Structural guards on all packets: no candidate contact, no email send, no public copy change; email defer stays ON until founder flips it \u2014 docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md.",
+    "Drift -> deploy_truth_hold row blocks L3/L4 autoruns until founder resolves; hold clearance is a founder point \u2014 data/cloud_line_registry_v1.json L6 + packets P3/P5.",
+    "No unregistered/inactive prompt_id may run in cloud (runtime refusal gate); contract-test failure blocks only new version, previous version keeps running; two versions never active at once; cost_class dollars requires founder-activated budget line / L8 approval \u2014 plan \u00a74 + data/prompt_registry_schema_v1.json + packet P7.",
+    "L8 never auto-approves; L1 never auto-rollbacks; every founder decision writes an approval_decision receipt with verbatim scope (M03 lesson) \u2014 data/cloud_line_registry_v1.json + plan \u00a71.",
+    "Verification by external runner only, >=60s post-deploy (law L4); redirect policy OFF + full-body marker checks (D8); LLM output is a proposal, validator gates persistence (D7); same op_key twice -> one row (D1) \u2014 docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md.",
+    "Registry is authority over implementation orders (recorded conflict resolution: 6h vs */30 -> \"Registry wins\") \u2014 docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md.",
+    "R3 cron for the SSOT P0-PGR brain remains locked (separate ladder, untouched) \u2014 activation receipt known_conditions.",
+    "The four architecture artifacts are sha256-pinned in receipts/p0pgr/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1-20260708T234714Z.json \u2014 in-place edits to cloud_line_registry_v1.json invalidate a founder-receipted package.",
+    "A ladder step is DONE only when its receipt exists; no step contacts anyone, sends email, or publishes public UX \u2014 docs/ACTIVATION_LADDER_v1.md."
+   ],
+   "reusable_vocabulary": [
+    "line_id: L1..L8; line names: Platform Health Line, Candidate Intake Line, Team Bench Sourcing Line, Agentic Evaluation Line, Prompt Registry Line, Deploy Truth Line, Asset Gate Line, Founder Approval Queue",
+    "owner_role values: noos_runtime, platform, sourcing_agent, evaluation_agent, architect, verifier, founder",
+    "trigger values: schedule, event, event+schedule, schedule+dispatch; run_trigger.kind enum: cron | event | manual",
+    "execution_target enum-like strings: github_actions, cloudflare_deadman_worker, railway_api, github_actions_nightly, claude_cloud_scheduled_agent, github_actions_runner, railway_api_deterministic, github_actions_llm_narrative, github_registry_ci, railway_serving_prompt_runs, cloudflare_verify_recipes_worker, railway_asset_views_logging, railway_api_admin_dashboard, github_actions_telegram_digest",
+    "receipt_type values on ops_receipts: health_check, intake_summary, sourcing_run, evaluation_run, deploy_truth, deploy_truth_hold, asset_gate_audit, approval_decision, prompt_registry_seeded, receipt_summary, cloud_factory_tables_live; receipt class TEAM_BENCH_SOURCED_ROWS",
+    "prompt_id convention: lane-prefixed kebab, pattern ^(tb|pa|ops)\\.[a-z0-9-]+\\.[a-z0-9-]+$ \u2014 e.g. tb.sourcing.r1/r3/r4, pa.eval.review-pack, ops.health.narrative",
+    "prompt registry field names: prompt_id, version (semver, immutable once activated), lane, owner (architect|founder|machine), prompt_body_ref, input_contract, output_schema, model_tier (determine|fast|standard|judgment), cost_class (zero|cents|dollars), run_trigger, receipt_path, rollback_rule, status (draft|testing|active|retired), founder_approval_required_to_activate, contract_tests_ref",
+    "state vocabulary: DECLARED, DECLARED_ACTIVE, VERIFIED; verdicts PASS / PARTIAL / PLATFORM_PACKAGE_PASS; BLOCKED_WITH_REASON; HOLD; SEV-1; IDLE/finding (zero-row run)",
+    "receipt schema names: p0pgr_execution_receipt_v1, p0pgr_architecture_package_v1, cloud_line_registry_v1, prompt_registry_schema_v1; receipt fields: receipt_id, recorded_at, packet_id, authorized_by, gates_checked, gates_note, quality_state, verdict, cost{llm_calls, metered_note}, accounting_note, executor_route_note, commit_flag, op_key, value_class",
+    "gate names (9): cloud_only, read_only_or_reversible, roi_positive, no_deploy, no_external_send, no_legal_financial_commitment, no_p0_leakage, no_authority_change, founder_authorization_receipt",
+    "law citations: governed-autorun L1-L13, deterministic core D1-D8 (D1 idempotency, D7 validator-gated persistence, D8 redirect-off checks, L4 external verification, L11 cost metering, L12 drift check)",
+    "era tag: PHASE_2_CLOUD_ONLY_ROI_TRACK; packet ids: P0 (foundation), P1..P7 mapping to lines L1,L2,L3,L4,L6,L7,L5",
+    "file naming: <PACKET_ID>-<ISO8601Z>.json under receipts/p0pgr/; workflow names pa-health-cron / pa-deploy-truth / pa-intake-nightly / pa-eval-nightly / pa-asset-gate-weekly / tb-sourcing-weekly / prompt-registry-ci; migration id 20260709_0006_cloud_factory_tables; scripts *_v1.py/.sh; docs *_v1.md; data *_v1.json",
+    "ladder steps A-F with per-step Preconditions/Artifacts/Verification/Receipt/Founder point structure (docs/ACTIVATION_LADDER_v1.md)"
+   ],
+   "integration_points": [
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/cloud_line_registry_v1.json \u2014 the line-record shape to clone for a new factory-line registry (line_id, name, owner_role, trigger, schedule, execution_target{primary,secondary}, input_source, output_artifact, receipt, failure_behavior, founder_approval_points).",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/prompt_registry_schema_v1.json \u2014 prompt packet contract to reuse: prompt_id pattern ^(tb|pa|ops)\\.[a-z0-9-]+\\.[a-z0-9-]+$ (add a new lane prefix for substrate lines), input_contract/output_schema JSON Schemas, model_tier, cost_class, run_trigger{kind: cron|event|manual}, status lifecycle, rollback_rule, founder_approval_required_to_activate, contract_tests_ref.",
+    "Receipt sink API (live): POST/GET https://api.trustfield.ca/api/ops/receipts behind require_admin (TrustField repo app/routers/ops_receipts.py, app/deps.py:28), upsert on op_key; GET /api/ops/prompt-registry serves active prompt versions. Substrate lines targeting Railway/Supabase can reuse this sink pattern or the table schema (ops_receipts with receipt_type discriminator).",
+    "app/prompt_runtime.py (Noetfield-Systems/TrustField-Technologies) \u2014 the \"no unregistered prompt runs in cloud\" refusal gate + prompt_runs logging; the substrate's prompt-packet executor should replicate or call this.",
+    "GitHub Actions workflow fleet in Noetfield-Systems/TrustField-Technologies: .github/workflows/pa-health-cron.yml (*/30 cron + workflow_dispatch + repository_dispatch: deploy_completed, 0-60s jitter step), pa-deploy-truth.yml, pa-intake-nightly.yml (0 8 * * *), pa-eval-nightly.yml (0 9 * * *), pa-asset-gate-weekly.yml, tb-sourcing-weekly.yml (fallback), prompt-registry-ci.yml \u2014 established naming and trigger patterns for new factory-line workflows.",
+    "SSOT receipt mirror conventions: receipts/p0pgr/<PACKET_ID>-<ISO8601Z>.json with schema p0pgr_execution_receipt_v1 and the 9-gate gates_checked block; per-loop mirrors receipts/trustfield-cloud-loop-<packet>-v1-<ISO8601Z>.json (packets doc completion doctrine). New substrate receipts must follow this naming + gate block.",
+    "deploy_truth_hold row contract (ops_receipts type deploy_truth_hold) \u2014 the existing cross-line blocking primitive; substrate deploy-preview/verifier lines should honor and reuse this HOLD semantics for gating downstream lines.",
+    "approval_queue table (created by migration 20260709_0006) + planned GET/POST /api/ops/approvals + admin dashboard section + daily 15:00 UTC Telegram digest (docs/ACTIVATION_LADDER_v1.md step D, NOT yet built) \u2014 the single founder-decision surface any new factory line's founder points must route into.",
+    "Verifier entry points: scripts/verify_partner_access_platform_package_v1.sh + scripts/deploy_truth_check_v1.sh (SITE_BUILD_ID in web/lib/site-config.ts vs live marker; deployed SHA vs origin/main HEAD; alembic head check via /api/readiness) \u2014 pattern for the substrate's verifier line.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md \u2014 packet template every substrate line spec should copy: Files to touch / Env vars / Migration / Tests / Deploy command / Verification command / Receipt name, plus explicit dependency-order graph (P0 -> P1/P5/P7 -> P3 etc.).",
+    "Secrets already wired as GH Actions env: VERIFY_BASE_URL, VERIFY_WWW_BASE, ADMIN_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID; API_BASE, WWW_BASE; ANTHROPIC_API_KEY slot exists but is unset.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/ACTIVATION_LADDER_v1.md \u2014 the step doctrine (preconditions -> artifacts -> verification -> receipt; a step is DONE only when its receipt exists) to reuse for substrate activation."
+   ],
+   "gaps": [
+    "L8 Founder Approval Queue is NOT built: approval_queue table exists (migration 20260709_0006) but the GET/POST /api/ops/approvals endpoints, admin dashboard section, and daily Telegram digest (ladder step D) were explicitly out of scope per Loop Specialist order. The substrate's founder-approval routing has no live queue surface to plug into yet.",
+    "No loop is VERIFIED \u2014 everything is DECLARED_ACTIVE pending the 24h zero-manual window of scheduled receipts (activation receipt: verified_criteria_pending).",
+    "ANTHROPIC_API_KEY is not in GH Actions secrets \u2014 L3 sourcing and L4 evaluation LLM layers are dormant (L4 runs deterministic-only PARTIAL). The substrate's LLM-executing lines cannot assume a wired cloud LLM credential.",
+    "tb-sourcing-weekly primary (Claude Code cloud scheduled routine) was deliberately not created \u2014 only a workflow_dispatch fallback exists. There is no proven scheduled-cloud-agent execution path yet, only GH Actions crons.",
+    "L1-L8 cover operations loops for one venture only. None of the substrate's proposed factory stages exist as lines: research, architecture, code, no-code app builder, workflow builder, test, deploy-preview, verifier-as-line, harvest. There is also no line concept for isolated sandboxes/worktrees, per-order execution, or preview artifacts.",
+    "No client/founder ORDER intake exists \u2014 L2 intake is candidate application intake for TrustField, not order-to-packet compilation. The substrate needs a new order->prompt-packet front end.",
+    "The lane enum in data/prompt_registry_schema_v1.json is hardcoded to [\"L1\"..\"L8\"] and prompt_id prefixes to (tb|pa|ops) \u2014 new factory lines require a schema v2 (or a parallel substrate schema) before any substrate prompt can be registered.",
+    "Extending cloud_line_registry_v1.json in place would break the sha256-pinned architecture package receipt and mix venture-scoped ops lines with venture-generic factory lines; the evidence points to a NEW registry file (e.g. a factory/substrate line registry reusing the identical record shape and rule string) with L1-L8 left intact and cross-referenced.",
+    "Supabase appears only as backing storage via Railway (auth, Postgres); no line executes on Supabase directly, and Cloudflare Workers are secondary/edge-check only \u2014 no Workers-primary execution pattern exists to copy.",
+    "Receipt dashboard (ladder step F, ops_receipts.receipt_summary) not built \u2014 no unified founder-visible view over cloud receipts.",
+    "First deploy-truth run was expected to open a HOLD (www worker at 46d394a vs main 164337d) requiring founder clearance \u2014 an open condition any new line depending on the HOLD contract inherits.",
+    "The 'deadman worker alarms if Actions goes silent' success criterion (plan \u00a77) references an existing CF deadman worker pattern, but no receipt in these files proves the deadman path was wired for the new pa-health-cron."
+   ]
+  },
+  "autonomy-loops": {
+   "constraints": [
+    "No motor reports DONE without `receipt_id` \u2014 agent summaries are claims, not proof (loops JSON L7 `law` citing ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md L5; also loops MD agent rule 2).",
+    "Adversarial PASS only from a secondary CF account edge receipt \u2014 never builder self-report (L3-ADVERSARIAL `pass_rule`, data/machine_autonomy_loops_v1.json).",
+    "A loop is DECLARED at merge and VERIFIED only after a 24h zero-manual window of externally-written scheduled receipts with sink invariants + cost tables (L11) and drift check (L12) present; manual green \u2260 cron green (docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md).",
+    "Founder involvement restricted to FT-CAPITAL, FT-LEGAL, FT-L5-IRREVERSIBLE, FT-PHASE-UNLOCK; hygiene failures must go through L4 self-repair then L6 research, never to founder (data/machine_autonomy_loops_v1.json founder_triggers_minimal; ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a74\u20135; cycle receipt hardcodes founder_required: false).",
+    "FT-L5-IRREVERSIBLE never retires: prod promote without verifier PASS, force-push main, and disabling/weakening the promotion gate are forbidden by default \u2014 machine may only propose (data/machine_autonomy_loops_v1.json; agent rule 3: fix verifier path instead of weakening gate).",
+    "Autonomy expands only on receipt streaks per L8 expansion_rules (3\u00d7 verifier + 3\u00d7 drift PASS + gate ALIGNED for promote-candidate; 5\u00d7 trap PASS + b2_signed + cost_per_signal < 0.01 for phase unlock; workflow_audit_pass + no_parallel_conflict for motor registration) \u2014 never on chat approval (ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a76).",
+    "Self-repair budget: max 3 actions and 90s wall time per cycle; escalate when the same blocker persists 3 cycles or budget exhausted (L4 `repair_budget`/`escalate_when`); L6 research max_depth 2 hops, then freeze writes and open assist_only PR.",
+    "One writer per task cell, lane declaration before action, assist \u2260 authority, registry is routing truth (ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md laws L1\u2013L4); merges without lane + motor_id are an anti-pattern.",
+    "Mac executes nothing on schedule for cloud factory lines \u2014 crons live only in GH Actions/CF/Railway (docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md \u00a72); Mac founder session runs L2 subset only per INCIDENT-039, full L3/L5 in cloud GH (ssot/MACHINE_AUTONOMY_LOOPS_v1.md agent rule 5).",
+    "Ladder step discipline: preconditions \u2192 artifacts \u2192 verification \u2192 receipt; a step is DONE only when its receipt exists; no ladder step contacts anyone, sends email, or publishes public UX (docs/ACTIVATION_LADDER_v1.md header rule).",
+    "Structural (API-enforced, not conventional) guards: team bench admin create hardcodes status=\"sourced\" (TrustField app/routers/team_bench.py:245); `approve_to_contact`/`mark_contacted` founder-gated; email defer stays ON; `cost_class: dollars` prompts require founder-activated budget line; prompt version activates only after CI contract tests pass and two versions are never active at once (rollback_rule).",
+    "24/7 autonomous deploy requires founder DECIDE plus `~/.sina/brain-autonomous-deploy-v1.flag`; any fail sets `brain-autonomous-hold-v1.flag` (auto-stop), cleared only on matrix ALL PASS (docs/PHASE3_FULL_AUTO_24x7_PLAN_v0.1.md Steps 5, 9, 10).",
+    "Proposals introducing any new founder trigger must state which loop retires it (ssot/MACHINE_AUTONOMY_LOOPS_v1.md agent rule 4).",
+    "Default question gate for all new motors/escalations: \"How does the process solve this without Sina?\" \u2014 if the answer is 'ask the founder to check', the design is incomplete."
+   ],
+   "reusable_vocabulary": [
+    "Loop IDs: `L1-WORKER-EXEC`, `L2-MACHINE-VALID`, `L3-ADVERSARIAL`, `L4-SELF-REPAIR`, `L5-OUTSIDE-AUDIT`, `L6-DEEP-RESEARCH`, `L7-RECEIPT-PROOF`, `L8-EARNED-AUTONOMY`; loop names: worker_execution, machine_validation, adversarial_critique, self_repair, outside_audit_advisory, deep_research_uncertainty, receipt_based_proof, earned_autonomy_expansion.",
+    "Founder trigger IDs: `FT-CAPITAL`, `FT-LEGAL`, `FT-L5-IRREVERSIBLE`, `FT-PHASE-UNLOCK` (classes capital_commitment, legal_regulatory, irreversible_l5, phase_unlock; each with `retire_when`).",
+    "Loop-object field names: loop_id, name, purpose, owner_class, motors, scripts, entry, exit_receipt, founder_required, on_failure, pass_rule, repair_budget, escalate_when, trigger_conditions, max_depth, expansion_rules ({from, to, requires}), cycle_order, anti_patterns, default_question.",
+    "Owner classes: venture_worker, sg_governance, sg_verifier, sg_verifier + venture_tests, sg_governance + noos_self_heal, noos_researcher + sg_observe, all_motors.",
+    "Autonomy states (L8): `observe_only`, `autonomous_promote_candidate`, `phase_N`/`phase_N_plus_1`, `assist_only`, `registered_motor`; streak keys: verifier_pass_streak, drift_pass_streak, gate_alignment (\"ALIGNED\"), trap_battery_pass_streak, b2_signed, cost_per_signal_below, workflow_audit_pass, no_parallel_conflict.",
+    "Motor IDs (registry naming convention `<platform>_<name>_v1`): cf_auto_runtime_tick_v1, cf_loop_specialist_tick_v1, gh_actions_noos_factory_autorun_v1, gh_actions_brain_loop_autorun_v1, mac_launchd_brain_loop_autorun_v1, gh_actions_noos_self_heal_loop_v1, gh_actions_noos_researcher_v1, gh_actions_noos_sourcea_observe_v1, sina-governance-ssot-advisory.",
+    "Receipt conventions: schema `machine-autonomy-cycle-v1`; receipt_id `machine-autonomy-cycle-<YYYYMMDDTHHMMSSZ>` (utc strftime %Y%m%dT%H%M%SZ); escalation enum values \"L6-DEEP-RESEARCH\" / \"L4-SELF-REPAIR\" / \"none\"; glob patterns receipts/automation-surface-audit-*.json, receipts/parallel-candidate-batch-*.json, receipts/brain-self-heal-tick-*.json, receipts/earned-autonomy-expansion-*.json, receipts/verifier-independence-proof-latest.json; SSOT mirror pattern receipts/trustfield-cloud-loop-<packet>-v1-<ISO8601Z>.json.",
+    "ops_receipts `receipt_type` values (TrustField): health_check, deploy_truth, evaluation_run, sourcing_run, asset_gate_audit, approval_decision, prompt_run, receipt_summary, intake_summary, prompt_registry_seeded, cloud_factory_tables_live; dedup key `op_key`.",
+    "Activation ladder step letters A\u2013F; ladder step verdict word `PLATFORM_PACKAGE_PASS`; migration id `20260709_0006_cloud_factory_tables`; cloud line IDs L1\u2013L8 (Health, Intake, Sourcing, Evaluation, Prompt Registry, Deploy Truth, Asset Gate, Approval Queue); implementation packet IDs P0\u2013P7.",
+    "Prompt registry vocabulary: prompt_id lane-prefixed kebab (`tb.sourcing.r1/r3/r4`, `pa.eval.review-pack`, `ops.health.narrative`), model_tier enum determine/fast/standard/judgment, cost_class enum zero/cents/dollars, prompt status `testing`, rollback_rule, input_contract, output_schema, run_trigger.",
+    "Law citations: \"PARALLEL_AUTOMATION_GOVERNANCE L5\" (receipt or unverified), governed-autorun L1\u2013L13, deterministic core D1\u2013D8; cycle verdict words: OK / DEGRADED (orchestrator), PASS / FAIL / PARTIAL / BLOCKED / DECLARED / VERIFIED / HOLD (loops and lines); flag files `brain-autonomous-deploy-v1.flag`, `brain-autonomous-hold-v1.flag`."
+   ],
+   "integration_points": [
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/machine_autonomy_loops_v1.json \u2014 a substrate's execution/verifier motors must be added to the relevant loop's `motors` array (L1-WORKER-EXEC for factory lines, L3/L5 for verification); each loop object supplies the reusable field shape: loop_id, name, purpose, owner_class, motors[], scripts[], entry, exit_receipt, founder_required, on_failure/pass_rule/escalate_when.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/scripts/run_machine_autonomy_cycle_v1.py \u2014 the cycle orchestrator; substrate validators plug in by extending the hardcoded L2 script lists (lines 45\u201357) and the receipt `steps[]` convention {loop, step, ok, tail}; receipts land in /Users/sinakazemnezhad/Projects/sina-governance-ssot/receipts/machine-autonomy-cycle-<ts>.json.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/github_automation_registry_v1.json \u2014 motor registry; law L4 \"registry is routing truth\" means every new substrate motor (GH Actions workflow, CF worker, Railway cron) must be registered here before it may act.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/ACTIVATION_LADDER_v1.md + /Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md + /Users/sinakazemnezhad/Projects/sina-governance-ssot/data/cloud_line_registry_v1.json \u2014 the existing cloud factory line map (cloud lines L1 Health \u2026 L8 Founder Approval Queue) the substrate generalizes; each line spec = name \u00b7 owner role \u00b7 trigger \u00b7 schedule/event \u00b7 input\u2192output \u00b7 receipt \u00b7 failure behavior \u00b7 founder points.",
+    "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/prompt_registry_schema_v1.json \u2014 approved contract for governed prompt packets; substrate prompt records must carry prompt_id (lane-prefixed kebab, e.g. `tb.sourcing.r3`), semver `version` immutable once activated, `lane`, `owner`, `input_contract`, `output_schema`, `model_tier` (determine/fast/standard/judgment), `cost_class` (zero/cents/dollars), `run_trigger`, `receipt_path`, `rollback_rule`.",
+    "Receipt sinks: repo `receipts/` dir (SSOT mirrors named `receipts/trustfield-cloud-loop-<packet>-v1-<ISO8601Z>.json`), TrustField Postgres `ops_receipts` table (`receipt_type` discriminator, unique `op_key`, `cost` JSON, `value_class`) via `POST /api/ops/receipts` behind `require_admin` (app/deps.py:28 in TrustField repo), plus `receipts/earned-autonomy-expansion-*.json` for autonomy widening.",
+    "Founder gate surface: L8 approval queue \u2014 Railway `GET/POST /api/ops/approvals`, `approval_queue` table, admin dashboard under /admin/partner-access, daily Telegram digest at 15:00 UTC; every decision writes an `approval_decision` receipt. Substrate founder points must route here, not to chat.",
+    "Adversarial/outside-audit hook: secondary CF account verifier `sina-governance-ssot-advisory` with health URL https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev/health, scripts/github_app_remote_check.py, scripts/trigger_verifier_run_v1.py, scripts/prove_verifier_independence_v1.py, scripts/run_parallel_brain_candidates_v1.sh, scripts/diagnose_gate_candidate_alignment_v1.py; exit receipt receipts/verifier-independence-proof-latest.json.",
+    "Hold/auto-stop hooks: `~/.sina/brain-autonomous-deploy-v1.flag` (founder enables 24/7), `~/.sina/brain-autonomous-hold-v1.flag` (auto-set on fail), `promotion_gate.py --autonomous-deploy`, deploy_truth HOLD flag row (blocks downstream autoruns); CI mirror .github/workflows/brain-loop-autorun-v1.yml.",
+    "Research escalation sink: L6 research receipts at `noetfeld-os/.noos-runtime/research/*.json` (hypothesis + evidence + proposed motor change, not chat summary), triggered by \"verifier BLOCKED 3+ cycles with same root cause\" / \"drift_count > 0 after self-repair\"."
+   ],
+   "gaps": [
+    "No R1/R2/R3 \"rung\" terminology exists anywhere in the repo (grep for 'rung' across docs/, ssot/, data/ returns nothing) \u2014 the activation ladder uses lettered steps A\u2013F, and the r1/r3/r4 in `tb.sourcing.r1/r3/r4` are team-bench ROLE lanes, not ladder rungs. A Cloud Factory Substrate design must either adopt the existing A\u2013F step convention or explicitly define a new rung vocabulary; it should not assume R-numbered rungs already exist.",
+    "No loop covers multi-line factory execution in isolated cloud sandboxes/worktrees: L1-WORKER-EXEC only covers \"venture worker builds scoped artifact in own repo\"; the only worktree machinery is the repair script scripts/repair_sourcea_worktree_v1.sh. Substrate needs a sandbox/worktree provisioning + isolation loop (or an L1 extension) with its own motors, entry contract, and exit_receipt.",
+    "PASS/HOLD is not a formalized enum in data/machine_autonomy_loops_v1.json \u2014 HOLD exists only as scattered mechanisms (~/.sina/brain-autonomous-hold-v1.flag, TrustField deploy_truth HOLD flag rows, prompt-activation blocks). The substrate would need one unified hold/verdict representation consumable by all execution targets.",
+    "scripts/run_machine_autonomy_cycle_v1.py hardcodes its L2 validator list (lines 45\u201357) instead of reading the `scripts` arrays already present in the loops JSON \u2014 plugging substrate validators into the cycle currently requires editing the orchestrator, not just the registry.",
+    "No factory-line stage vocabulary (research, architecture, code, no-code app builder, workflow builder, test, deploy-preview, verifier, receipt, harvest) exists in the autonomy loops \u2014 the closest is the TrustField cloud line map L1\u2013L8, which is venture-specific (candidates/sourcing), not a generic order\u2192packet\u2192line pipeline. The substrate must define generic line IDs without colliding with the three existing L-number namespaces (autonomy loops L1\u2013L8, cloud lines L1\u2013L8, governance laws L1\u2013L5 / governed-autorun L1\u2013L13 / deterministic core D1\u2013D8) \u2014 a disambiguating prefix is effectively mandatory.",
+    "Retirement backlog items still open (ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a78): verifier deploy via `wrangler deploy` in CI post-merge (\"L4 \u2014 add GH workflow step\") and promote-gate-by-verifier-PASS-streak (\"L3/L5 in progress\") \u2014 the substrate's deploy-preview/verifier lines would land on these unfinished paths.",
+    "Activation ladder steps B\u2013F are all unstarted as of 2026-07-08 (only A is DONE): the prompt_registry/prompt_runs/approval_queue/ops_receipts/asset_views tables, the GH Actions loops, the founder approval queue endpoints, and the receipt dashboard the substrate would depend on do not exist yet \u2014 they are planned in migration `20260709_0006_cloud_factory_tables` and packets P0\u2013P7.",
+    "No cost/ROI attribution schema for factory-line runs beyond the prompt registry's cost_class and the weekly write_roi_heartbeat_v1.py \u2014 per-order or per-packet cost roll-up (needed for FT-CAPITAL retire_when \"30d spend under cap with receipts\") is not defined.",
+    "docs/PHASE3_FULL_AUTO_24x7_PLAN_v0.1.md is brain-loop-specific (Mac launchd + SourceA); its Step 10 founder-flag pattern is the only codified 24/7-enable mechanism \u2014 there is no equivalent enable/hold flag design for cloud-hosted substrate lines (GH Actions/CF/Railway), and Phase 4 items (\"Cloud Forge autorun\") are explicitly out of scope there."
+   ]
+  },
+  "canon-safety": {
+   "constraints": [
+    "No direct main writes: canon \u00a75 wall 'main writes'; fences enforce only on enforce_target_branches: [main]; protected-path merge to main requires receipt (RF_RECEIPT_REQUIRED) \u2014 source policy/repo_fences_v1.yaml + scripts/check_repo_fences_v1.py.",
+    "Policy/law mutation gate: any change matching policy_law_globs (ssot/**/*.md, policy/**/*.yaml|yml, packages/noos-control-desk-v1 LAW/COPILOT_/NOOS_/SMART_ files) merged to main requires work_order_id AND receipt (RF_POLICY_LAW_MUTATION) \u2014 policy/repo_fences_v1.yaml.",
+    "No fake ACTIVE: while package_status is audit-pending, promotions to ACTIVE are blocked by RF1_package_status_active / RF2_operational_rollout_active / RF3_status_flip_from_audit_pending \u2014 policy/repo_fences_v1.yaml; substrate lines must never self-promote status.",
+    "Agents never produce approvals, sign-offs, status promotions, or ledger entries \u2014 only evidence; missing authority \u2192 BLOCKED_WITH_REASON, never improvisation \u2014 ssot/FOUNDER_CANON_v1.md \u00a74.",
+    "Receipts required: no DONE without receipt_id (MACHINE_AUTONOMY_LOOPS \u00a77 rule 2; PARALLEL_AUTOMATION_GOVERNANCE L5); every receipt carries canon_version founder_canon_v1.0.0 \u2014 ssot/FOUNDER_CANON_v1.md dispatch line + data/founder_canon_v1.json receipt_required_fields.",
+    "Mechanical walls at sandbox boundary (G1-G8 classes): main writes, governance/SSOT/ledger writes, approval language, token handling, hidden state, global installs, deploys, destructive git, out-of-scope files \u2014 ssot/FOUNDER_CANON_v1.md \u00a75; the substrate must implement these as walls that fire on escape, not permission loops that fire on normal work (intent filter Q3).",
+    "Failures route to machines, not the founder: detect\u2192contain\u2192critique\u2192audit\u2192deep_research\u2192repair\u2192validate\u2192receipt\u2192continue_or_escalate; founder reached only via FT-CAPITAL / FT-LEGAL / FT-L5-IRREVERSIBLE / FT-PHASE-UNLOCK \u2014 ssot/FOUNDER_CANON_v1.md \u00a76-\u00a78, ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a74-\u00a75.",
+    "Never weaken a verifier, gate, law, or schema (FT-L5-IRREVERSIBLE, never auto-retire; 'Never weaken L5 promotion gate \u2014 fix verifier path') \u2014 ssot/FOUNDER_CANON_v1.md \u00a78, ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a77.",
+    "One writer per task cell; second writer gets REJECTED receipt; every actor declares lane + motor_id before editing; unregistered automation is a defect \u2014 ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md L1/L2/L4.",
+    "Assist \u2260 authority: Copilot/Coding Agents default assist_only and may never promote brain, deploy prod, register artifacts, append SG/NOOS canonical, or external send; GitHub Actions forbidden from prod deploys / auto-merge to main without promotion gate unless registered \u2014 ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md L3 \u00a75-\u00a76.",
+    "Approval before external send: 'No external message leaves any TrustField loop without human approval in v1'; regulated inbound (custody, settlement, MSB, PSP, banking) always routes to Sina/legal; risk_score >= 4 \u2192 route \u2014 ssot/sg-guardrails-trustfield-v1.md, ssot/sg-guardrails-signal-factory-v1.md.",
+    "No legal/equity/payment/employment claims: no regulated-capability claims unless legally established; partner/equity signals \u2192 bounded exploratory action only, no commitment language; no employment implication; claim ladder VERIFIED/DECLARED/PLANNED with no evidence-free upgrades \u2014 ssot/sg-guardrails-trustfield-v1.md guardrails 1/3/4/5.",
+    "Autonomy expansion only on receipt streaks (3x verifier PASS etc.), never chat approval; preview/observe before promote (observe_only \u2192 promote_candidate \u2192 phase unlock ladder) \u2014 ssot/MACHINE_AUTONOMY_LOOPS_v1.md \u00a76, ssot/FOUNDER_CANON_v1.md \u00a77.",
+    "Truth order: live SSOT file beats repo state beats dispatch beats receipt beats chat; hidden state is a wall violation; one canon per domain extended by versioned pointer, never restated \u2014 ssot/FOUNDER_CANON_v1.md \u00a79.",
+    "Session-exit law: any session mutating NOOS integrator state runs noos_integrator_sync_v1.py sync/session-exit before stopping; cloud/Supabase integrator writes blocked while cloud_owner.enabled=false; repo-local state authoritative \u2014 ssot/NOOS_INTEGRATOR_RULES_v1.md.",
+    "Least-knowledge prompt packets: workers get Tier 0 + their role layer + one ephemeral mission brief only; P0 CORE judgment text never enters worker prompts (soup-wall allows only goal, files, constraints, done_criteria, verify_method, receipts_required, decision_verdict) \u2014 ssot/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md, ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md \u00a76, data/founder_judgment_patterns_read_scope_v1.json.",
+    "Violation law: boundary violation \u2192 contain, receipt, critique, repair; repeat scope/authority violations retire the session/tool; never hide, rewrite history, or continue silently \u2014 ssot/FOUNDER_CANON_v1.md \u00a710.",
+    "Intent filter Q1-Q5 applies to every proposed substrate rule/gate: founder-as-validator, permission loop, Sina-as-runtime, or frozen target \u2192 redesign or drop \u2014 ssot/FOUNDER_CANON_v1.md \u00a73."
+   ],
+   "reusable_vocabulary": [
+    "BLOCKED_WITH_REASON (universal refusal token), REJECTED receipt (second writer), canon_version: founder_canon_v1.0.0, receipt_id, work_order_id, dispatch line 'LAWS: FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.'",
+    "Fence rule IDs: RF_RECEIPT_REQUIRED, RF_POLICY_LAW_MUTATION, RF1_package_status_active, RF2_operational_rollout_active, RF3_status_flip_from_audit_pending; checker name 'check_repo_fences_v1'; report statuses PASS/FAIL; exit codes 0/1/2; severity 'red'.",
+    "Policy YAML keys: policy_version, phase, protected_zones, exempt_paths, draft_branch_patterns, enforce_target_branches, policy_law_globs, audit_pending_statuses, receipt_reference_patterns, work_order_reference_patterns, fake_active_rules.",
+    "Status enums: ACTIVE, LOCKED, PROPOSED, Superseded, SCAFFOLD_READY_AUDIT_PENDING, AUDIT_PENDING, audit-pending.",
+    "Founder touchpoint IDs: FT-CAPITAL, FT-LEGAL, FT-L5-IRREVERSIBLE, FT-PHASE-UNLOCK; intent filter Q1-Q5; walls G1-G8; loops L1 WorkerExec / L2 MachineValid / L3 Adversarial / L4 SelfRepair / L5 OutsideAudit / L6 DeepResearch / L7 ReceiptProof / L8 EarnedAutonomy.",
+    "Lane enum: sg_governance | sourcea_brain | sourcea_build | trustfield_build | noos_doctrine | noetfield_website | assist_only; PR header fields lane:, motor_id:, motor_id_or_human_gate:, receipt_id:; 'task cell' and task_cell_owners; motor_id / owns / must_not_own registry fields; human gate id G6_sina_approve; B2 sign-off / SG_SIGNED.",
+    "Autonomy states: observe_only, promote_candidate, assist_only, registered_motor, phase_N \u2192 phase_N+1; expansion receipt receipts/earned-autonomy-expansion-*.json.",
+    "Claim ladder: VERIFIED / DECLARED / PLANNED; sender_declared; production_connected; risk_score; decision = route | build_automation | create_service_pattern; entity tags Noetfield / TrustField / SourceA / WitnessBC / SG / NOOS.",
+    "P0 CORE vocabulary: allowed_readers [base_live_brain, high_decision_agent], forbidden_readers (worker, tier_1_worker, build_lane_worker, ...), forbidden_tiers [tier_1, tier_2], dispatch_rule mode_gated_read_scope, stop_continue_verdict STOP|CONTINUE|ESCALATE_TO_SG, decision ESCALATE_TO_FOUNDER, harvest_proposed, dry_run, live_authority, receipt schema p0-core-decision-receipt-v1, task-spec fields goal/files/constraints/done_criteria/verify_method/receipts_required/decision_verdict.",
+    "Tier model: Tier 0 / Tier 1 / Tier 2 / Tier 3 (gates); 'least knowledge'; 'soup-wall'; agent id sg_sssot_cursor; owner team @Noetfield-Systems/sg-governance.",
+    "Naming conventions: SSOT law docs ssot/SCREAMING_SNAKE_v1.md, machine schemas data/snake_case_v1.json with top-level \"schema\" + \"version\" fields, gates scripts/verify_*_gate_v1.py, validators scripts/validate_*_v1.py, checkers scripts/check_*_v1.py, receipts receipts/<kebab-name>-<UTC timestamp>.json, draft branches draft/* | assist/* | copilot/*."
+   ],
+   "integration_points": [
+    "policy/repo_fences_v1.yaml \u2014 add Cloud Factory Substrate paths to protected_zones / policy_law_globs / exempt_paths; this is the single policy file scripts/check_repo_fences_v1.py loads.",
+    "scripts/check_repo_fences_v1.py \u2014 CLI gate (--base --head --target-branch --head-branch --pr-body --policy --json); substrate line runners can invoke it locally pre-merge exactly as CI does; JSON report shape: {checker, status, protected_changes, policy_law_changes, has_receipt_ref, has_work_order_ref, violations[], notes[]}.",
+    ".github/workflows/repo-fences-v1.yml \u2014 the merge-to-main gate every substrate PR passes; note its 'Verify CODEOWNERS covers protected zones' step hardcodes the zone list (ssot/ data/ policy/ scripts/ .noos/ packages/noos-control-desk-v1/) separately from the YAML policy \u2014 adding a substrate zone means editing both plus CODEOWNERS.",
+    ".github/CODEOWNERS \u2014 new substrate directories (e.g. a factory-lines package or substrate policy dir) must be added under @Noetfield-Systems/sg-governance or the CI CODEOWNERS-coverage step will fail.",
+    ".github/pull_request_template.md \u2014 required lane-declaration block: LAWS line, lane:, motor_id_or_human_gate:, Task cell (from data/github_automation_registry_v1.json task_cell_owners), receipt_id, non-duplication checklist; substrate-opened PRs must fill it.",
+    "data/github_automation_registry_v1.json \u2014 every new substrate motor (GH Actions workflow, CF Worker cron, Railway job) must register a motor_id row with owns / must_not_own before running; validated by scripts/validate_parallel_automation_governance_v1.py; checklist in PARALLEL_AUTOMATION_GOVERNANCE_v1.md \u00a75.",
+    "data/founder_canon_v1.json \u2014 registry of canon pointers; substrate receipts must include receipt_required_fields [\"receipt_id\", \"canon_version\"] with canon_version = founder_canon_v1.0.0; add substrate pointers here the way governance_* pointers were added.",
+    "scripts/run_machine_autonomy_cycle_v1.py \u2014 existing L1-L8 cycle orchestrator the substrate's verify/repair loops should be reached from (canon \u00a76 names it as the implementation).",
+    "scripts/validate_founder_canon_e2e_v1.py \u2014 wiring validator that greps AGENTS.md, PR template, and docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md for the LAWS snippet; substrate dispatch docs should carry 'FOUNDER_CANON v1' to stay green, and new substrate wiring can be appended to this validator.",
+    "receipts/ \u2014 the exempt publication lane: receipt-only commits pass fences with no receipt-ref requirement; substrate receipt writers should target receipts/<name>-<timestamp>.json matching receipt_reference_patterns ('receipts/[a-zA-Z0-9_.-]+\\.(json|md)', 'receipt_id\\s*:\\s*\\S+').",
+    "tests/repo_fences/run_negative_tests.py \u2014 negative-proof harness pattern (temp git repo, known-bad mutation, expect FAIL with rule_id); substrate gates need equivalent negative tests wired into the same CI job.",
+    "Draft lanes: head branches matching draft/*, assist/*, copilot/* skip fence enforcement \u2014 substrate sandbox/worktree branches can use this namespace for in-flight work, but must then pass full fences at merge-to-main.",
+    "data/founder_judgment_patterns_read_scope_v1.json + scripts/verify_p0_core_read_scope_gate_v1.py + scripts/verify_p0_core_output_soup_wall_gate_v1.py \u2014 the existing read-scope/soup-wall gate pair to reuse for substrate prompt-packet scoping (P0-PGR command brain reads P0 CORE; workers get only the seven allowed task-spec fields).",
+    "AGENTS.md \u2014 repo-root lane lock for sg_sssot_cursor; carries the LAWS line (line 15) and the integrator session-exit pointer (line 23); substrate agent entry rules belong here.",
+    "ssot/NOOS_INTEGRATOR_RULES_v1.md \u2014 if any substrate session mutates NOOS integrator state it must run noos_integrator_sync_v1.py sync/session-exit in ~/Projects/noetfeld-os before stopping; SG/SourceA/TrustField sessions that did not touch integrator state are exempt."
+   ],
+   "gaps": [
+    "G1-G8 wall definitions are only a doctrine pointer: FOUNDER_CANON_v1.md cites 'WORK_ORDER_GOVERNED_IDE_LANE_v1 (G1-G8)' but no file in this repo enumerates G1-G8 individually \u2014 the substrate needs a machine-readable wall list (currently only the prose class list in canon \u00a75).",
+    "policy/ contains exactly one file (repo_fences_v1.yaml). There is no policy file for cloud execution targets \u2014 no Cloudflare Workers / Railway / Supabase / GitHub Actions deploy gate, no allowlisted-command policy, no spend-cap policy; 'deploys' and 'token handling' walls exist as prose only.",
+    "No machine-enforced 'approval before external send' gate in SG: the TrustField human-approval rule and risk_score>=4 routing live as prose in ssot/sg-guardrails-trustfield-v1.md / sg-guardrails-signal-factory-v1.md with no verify script in scripts/.",
+    "Fences only fire at merge-to-main; draft/assist/copilot branches skip enforcement entirely, and there are no in-sandbox/worktree runtime gates in this repo \u2014 the substrate must add sandbox-boundary enforcement itself.",
+    "Fence checker validates receipt references by regex presence only; it never opens the receipt or checks receipt_required_fields (receipt_id, canon_version) \u2014 no receipt schema validator gate exists in CI.",
+    "Zone list duplication: protected zones are hardcoded in three places (policy/repo_fences_v1.yaml, the CODEOWNERS-coverage step inside .github/workflows/repo-fences-v1.yml, and .github/CODEOWNERS) with no single source; adding a substrate zone requires three synchronized edits.",
+    "Branch protection is not captured as code: CODEOWNERS comments say to pair with 'require review from Code Owners on main' and note the @Noetfield-Systems/sg-governance team may not exist yet in the org \u2014 actual GitHub branch-protection state is unverifiable from the repo.",
+    "data/p0_core_invocation_scope_v1.json is PROPOSED, not ACTIVE ('Do not register ACTIVE until SG review + receipt confirms') \u2014 the P0-PGR command-brain invocation scope the substrate depends on is not yet law.",
+    "No approval-language linter: canon \u00a75 lists 'approval language' as a wall and PARALLEL_AUTOMATION forbids agent sign-offs, but no script scans diffs/receipts for forged approval or sign-off text (the 2026-07-03 forged-L5-sign-off incident motivated the rule).",
+    "No secrets/token-handling policy file or scanner in this repo (token handling wall is prose); substrate sandboxes touching CF/Railway/Supabase credentials have no committed gate.",
+    "Guardrail docs referenced from sg-guardrails-trustfield-v1.md live outside or partially outside this snapshot (e.g. mirror path ~/.cursor/skills/signal-factory/references/sg-guardrails-v1.md, canonical NOOS protocol in ~/Projects/noetfeld-os) \u2014 cross-repo mirrors are pointer-based with no sync checker for the guardrail mirrors themselves."
+   ]
+  },
+  "noos-control-desk": {
+   "constraints": [
+    "Phase 1 canonical routes only; no duplicate public route names; Phase 2 may replace routes only via explicit refactor doc \u2014 data/noos_control_desk_api_contract_v1.json ('rule') and packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md.",
+    "Control Desk binds 127.0.0.1 only; 'no cloud, no Electron, no Selenium, no fake audit' \u2014 packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md; enforced in control-desk/backend/server.py.",
+    "forbidden_until_audit: direct_main_write, cloud_deploy, electron_shell, selenium_automation, premium_models, fake_audited_registry \u2014 data/noos_control_desk_package_map_v1.json.",
+    "Pre-full-PASS cloud_write_scope_gate: only receipts, status, drift_reports, draft_branch_pr_prep may be written to cloud; fleet_rollout, active_promotion, direct_main_write, policy_law_mutation, audit_pending_registry_propagation blocked; cloud_write_unrestricted_allowed_before_full_pass = false \u2014 data/noos_copilot_dispatcher_v1.json and data/noos_control_desk_api_contract_v1.json ('integrator_gate').",
+    "Full PASS is not yet earned (pre_pass_gate 'full_PASS_not_yet_earned'); steps 8-9 BLOCKED until trustfield_copilot_cloud_agent resolves (22/23 PASS, 1 BLOCKED) \u2014 data/noos-copilot-dispatcher-mode-v1.json and data/noos_control_desk_package_map_v1.json.",
+    "NOOS Copilot forbidden_actions: promote_active, write_policy, amend_policy, propagate_audit_pending_registry_to_fleet, propagate_audit_pending_registry_to_cloud, fleet_rollout, direct_main_merge, policy_law_mutation, cloud_write_unrestricted, recurring_copilot_automation \u2014 data/noos_copilot_dispatcher_v1.json.",
+    "SG is pointer-only for integrator/sync behavior; NOOS (noetfeld-os) owns mode enforcement and runtime sync \u2014 docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md and data/noos-integrator-role-v1.json ('sg_does_not_own': 'integrator/sync behavior'). A substrate must not re-implement sync behavior inside SG.",
+    "Policy verdicts are computed backend-only; frontend displays, never computes \u2014 packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md.",
+    "GitHub Copilot UI is a bounded manual helper only (GPT-5 mini, Low, Manual; never autorun or architect) and is distinct from NOOS Copilot dispatcher \u2014 data/noos_control_desk_builder_roles_v1.json ('tool_law') and data/noos_copilot_dispatcher_v1.json ('distinction').",
+    "Cloudflare is deferred to Phase 3/4 control plane only \u2014 data/noos_control_desk_builder_roles_v1.json ('tool_law.cloudflare'); a v0 substrate targeting Cloudflare Workers conflicts with this law unless the phase is advanced.",
+    "P0 CORE may be invoked only by base_live_brain or high_decision_agent, never by workers/tier_1_worker/tier_2_prompt_bundle; requires at least one of the 6 invocation_triggers; no fabricated pattern match; no_pattern_11_without_ratification \u2014 data/p0_core_invocation_scope_v1.json and data/p0_core_decision_use_contract_v1.json ('hard_limits').",
+    "Output soup wall: P0 reasoning must not propagate into worker prompts; worker packets restricted to goal, files, constraints, done_criteria, verify_method, receipts_required, decision_verdict; gate script scripts/verify_p0_core_output_soup_wall_gate_v1.py \u2014 data/p0_core_decision_use_contract_v1.json ('output_soup_wall').",
+    "P0 CORE output is a decision proposal unless actor authority allows execution; it cannot directly mutate registry, code, gates, or prompts \u2014 data/p0_core_decision_use_contract_v1.json ('hard_limits').",
+    "Every P0 CORE invocation requires a receipt (receipt_required: true, schema p0-core-decision-receipt-v1, path receipts/p0-core-decision-<case_id>-<timestamp>.json) \u2014 data/p0_core_invocation_scope_v1.json.",
+    "Lock candidate submission requires all attestations PASS + checker PASS and produces bounded local branch+commit only, never direct main \u2014 data/noos_control_desk_api_contract_v1.json (/api/lock-candidate/submit) and builder_roles 'lock_candidate_step'."
+   ],
+   "reusable_vocabulary": [
+    "Route names: GET /api/dashboard, GET /api/registry/load, POST /api/registry/save-draft, POST /api/attestation/save, POST /api/policy/check, GET /api/integrator/status, POST /api/integrator/sync, GET /api/receipts/list, GET /api/pr/prepare, POST /api/lock-candidate/submit",
+    "Role/actor IDs: noos_copilot_dispatcher, architect_spec_keeper, policy_checker_agent, backend_builder, frontend_builder, integrator_agent, noos_sync_mode_patch, repo_fences, workflow_audit_23, policy_check_step, lock_candidate_step, sg_records_result, negative_test_agent, critic_auditor, packager; P0 actors: base_live_brain, high_decision_agent; forbidden actors: worker, normal_worker, tier_1_worker, tier_2_prompt_bundle",
+    "Sync mode enum: read_status, publish_receipt, publish_status, publish_drift_report, prepare_draft_branch, prepare_pr (allowed) / fleet_rollout, active_promotion, direct_main_write, policy_law_mutation, publish_audit_pending_registry_as_active_fleet_truth (blocked); sync_model value 'mode_gated'",
+    "Gate field names: cloud_write_scope ('gated'), cloud_write_scope_gate, allowed_before_full_pass, blocked_before_full_pass, cloud_write_unrestricted_allowed_before_full_pass, pre_pass_gate, integrator_gate, gate_note",
+    "allowed_actions enum: integrator_status_read, integrator_sync_repo_local, receipt_write, status_publish, drift_report_publish, draft_branch_pr_prep, home_mirror_readout, cloud_mirror_readout_read_only",
+    "Invocation triggers enum: novel_case, lower_law_conflict, money_build_sell_sequencing, authority_registry_dispute, target_vs_blocker_dispute, no_tier1_rule_fits; verdict enum: STOP, CONTINUE, ESCALATE_TO_SG; escalation value ESCALATE_TO_FOUNDER",
+    "Worker task spec allowed keys (soup wall): goal, files, constraints, done_criteria, verify_method, receipts_required, decision_verdict",
+    "Layer names: P0 (package/contract authority), P0_CORE_CONTRACT (sub_layer), P2 (integrator/execution), P3 (mac_runtime local UI), P7 (governance_structure execution_contract), P8 (automation/policy), P99 (ledger/receipts)",
+    "Status vocabulary: ACTIVE, PROPOSED, RECORDED_STEP_5, SCAFFOLD_READY_AUDIT_PENDING, LOCKED_POLICY_ARTIFACT, COMPLETE_HONEST_BLOCKED, PARTIAL_EVIDENCE_RECEIVED, BLOCKED, ACCEPTED, RETIRED_BUILD_PHASE, pass_count/fail_count/blocked_count/todo_count",
+    "Schema naming convention: snake_case 'schema' field + '_v1' suffix (e.g. noos_control_desk_api_contract_v1, p0_core_invocation_scope_v1); artifact_id kebab-case + '-v1' (e.g. noos-copilot-dispatcher-v1, p0-core-decision-use-contract-v1); receipt filenames like receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json and pattern receipts/p0-core-decision-<case_id>-<timestamp>.json",
+    "Package member shape fields: artifact_id, path, layer, domain, stack_role, status, depends_on, affects_layers, operational_rollout_status; stack_role values: package_authority, master_law, copilot_sub_policy, control_ledger, machine_policy_config, policy_gate, local_ui_blueprint, attestation_contract, receipt_contract, cross_repo_sync_dispatcher, sync_mode_model, sync_law, execution_contract",
+    "Root repos list: sina-governance-ssot, noetfeld-os, SourceA, Noetfield, TrustField-Technologies; owner string 'SG (sina-governance-ssot)'; tool enum: cursor, copilot, noos_copilot, github_actions, cloudflare, control_desk_api, cursor_chat, noos",
+    "P0 contract field names: allowed_readers, forbidden_readers, invocation_triggers, input_schema (case_id, invoking_actor, decision_question, lower_tier_facts, conflicting_rules, available_receipts, proposed_options), output_schema (decision, matched_patterns, reasoning_summary, chosen_next_action, stop_continue_verdict, required_gate_or_receipt, harvest_proposed, harvest_note), no_match_handling, output_soup_wall, hard_limits, dry_run, live_authority"
+   ],
+   "integration_points": [
+    "data/noos_control_desk_api_contract_v1.json \u2014 the canonical route registry; a Cloud Factory Substrate order-intake route (e.g. POST /api/orders/submit) must be added here first (Phase 2 requires an explicit refactor doc per the contract's 'rule' field) and implemented in packages/noos-control-desk-v1/control-desk/backend/handler.py.",
+    "packages/noos-control-desk-v1/control-desk/backend/handler.py \u2014 GET routes at lines 15-19, POST routes at lines 23-27, GET dispatch at lines 77-108, POST dispatch at lines 116-128; server entry packages/noos-control-desk-v1/control-desk/backend/server.py (127.0.0.1, default --port 17877).",
+    "POST /api/integrator/sync + GET /api/integrator/status \u2014 the only existing cross-repo dispatch surface; scoped cloud writes flow through scripts noetfeld-os/scripts/noos_integrator_sync_v1.py (canonical) and packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py (SSOT adapter).",
+    "data/noos_copilot_dispatcher_v1.json \u2014 extend 'allowed_actions' / 'api_routes_allowed' arrays here to grant the dispatcher any new substrate routes; mode gates live in data/noos-copilot-dispatcher-mode-v1.json (NOOS-owned, SG pointer only per docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md).",
+    "GET /api/receipts/list + receipts/ directory \u2014 existing receipt surface; substrate factory-line receipts should land here to be visible in the Control Desk Receipts tile; receipt contract stub at packages/noos-control-desk-v1/.noos/receipt_schema_v1.json (artifact_id 'noos-receipt-schema-v1', layer P99, status PROPOSED).",
+    "GET /api/pr/prepare and POST /api/lock-candidate/submit \u2014 the bounded 'branch + commit, no push, no direct main' promotion path; substrate deploy-preview/harvest lines must exit through this pattern rather than direct main writes.",
+    "packages/noos-control-desk-v1/.noos/workflow_registry_v1.json ('noos-workflow-registry-v1', control_ledger) + packages/noos-control-desk-v1/policy/cost_policy.yaml + packages/noos-control-desk-v1/scripts/check_cost_policy.py (policy_gate, run via POST /api/policy/check) \u2014 any new cloud factory workflow (GitHub Actions, Cloudflare Workers, Railway, Supabase jobs) must be registered as a workflow row and pass the cost-policy checker; per-workflow attestation via POST /api/attestation/save against packages/noos-control-desk-v1/.noos/copilot_attestation_schema_v1.json.",
+    "data/p0_core_decision_use_contract_v1.json + data/p0_core_invocation_scope_v1.json + ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md \u2014 the P0-PGR 'command brain' judgment hook: substrate escalations must invoke as base_live_brain or high_decision_agent with the required input schema (case_id, invoking_actor, decision_question, lower_tier_facts, conflicting_rules, available_receipts, proposed_options, invocation_triggers) and emit p0-core-decision-receipt-v1 receipts.",
+    "scripts/verify_p0_core_output_soup_wall_gate_v1.py \u2014 existing gate script the substrate's packet compiler must pass: worker packets may contain only the 7 worker_task_spec_allowed_keys.",
+    "data/noos_control_desk_builder_roles_v1.json 'roles' array + 'tool_law' map \u2014 register any new substrate builder/executor role here (pattern: role_id, status, tool, repos, deliverables, receipt); GitHub Actions gates follow the repo_fences pattern: .github/CODEOWNERS, policy/repo_fences_v1.yaml, scripts/check_repo_fences_v1.py, .github/workflows/repo-fences-v1.yml.",
+    "data/noos_control_desk_package_map_v1.json 'members' array \u2014 register substrate artifacts using the existing member shape (artifact_id, path, layer, domain, stack_role, status, depends_on, affects_layers); package authority doc ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md."
+   ],
+   "gaps": [
+    "No order-intake surface exists anywhere in the Control Desk contract: none of the 10 canonical routes accepts a founder/client order, prompt packet, or job submission. A Cloud Factory Substrate needs a new order/dispatch route family added via the mandated Phase 2 'explicit refactor doc' path.",
+    "No cloud-reachable API: the Control Desk binds 127.0.0.1 only and cloud_deploy is in forbidden_until_audit. Client or Studio-IDE orders arriving over the network (Cloudflare Workers, Railway API, Supabase) have no existing entry point; only mode-gated cloud WRITES (receipts/status/drift/PR-prep) exist, no cloud READ/intake service.",
+    "No authentication/authorization model in the API contract \u2014 routes have no auth fields, tokens, or actor identity binding; multi-party (founder vs client) intake would need an identity layer that does not exist today.",
+    "No queue/packet bridge between the Control Desk and P0-PGR: grep found zero control-desk references in p0-pgr/*.json. The command brain (P0-PGR) and the dispatch surface (Control Desk) are currently unconnected subsystems.",
+    "No execution-target contracts for Railway or Supabase anywhere in these files; Cloudflare is explicitly deferred to Phase 3/4 'control plane only' in tool_law \u2014 the substrate's stated targets exceed current law.",
+    "Canonical integrator role behavior lives outside this repo (noetfeld-os/data/noos-integrator-role-v1.json, referenced as ~/Projects/noetfeld-os/...) and could not be verified from sina-governance-ssot; SG holds only a pointer (data/noos-integrator-role-v1.json).",
+    "Full PASS is not earned: step 7F-B (trustfield_copilot_cloud_agent) is PARTIAL_EVIDENCE_RECEIVED/BLOCKED, so steps 8 (policy check) and 9 (lock candidate) are BLOCKED \u2014 any substrate v0 must run entirely inside pre-PASS modes (receipts/status/drift/draft-branch/PR-prep) until this clears.",
+    "Attestation and receipt schemas are still PROPOSED not ACTIVE: packages/noos-control-desk-v1/.noos/copilot_attestation_schema_v1.json ('noos-copilot-attestation-schema-v1') and .noos/receipt_schema_v1.json ('noos-receipt-schema-v1') \u2014 substrate receipts would build on unratified contracts.",
+    "recurring_copilot_automation is a forbidden action and github_actions tool_law is 'model:none' \u2014 there is no lawful always-on LLM-driven cloud loop; a 24/7 factory substrate needs a new authority grant for recurring model-backed automation.",
+    "Spec/implementation drift: NOOS_CONTROL_DESK_MVP_SPEC.md declares FastAPI at control-desk/app.py, but the actual implementation is stdlib ThreadingHTTPServer at control-desk/backend/server.py + handler.py \u2014 the substrate design should treat handler.py as truth.",
+    "No sandbox/worktree vocabulary in any of these contracts \u2014 isolation primitives (cloud sandboxes, repo worktrees) for factory lines are entirely absent from the Control Desk and dispatcher law and would be net-new."
+   ]
+  },
+  "multi-repo-infra": {
+   "constraints": [
+    "One actor \u00b7 one repo \u00b7 one scope; mixed-scope orders are defects; SG routes, it does NOT build venture workers (ssot/MULTI_REPO_WORKER_REGISTRY_v1.md).",
+    "One motor/writer per task cell; unregistered workflow or agent = defect on monthly audit; CAS on promotion gate \u2014 second concurrent writer gets a REJECTED receipt, never a silent overwrite (data/github_automation_registry_v1.json).",
+    "never_auto merge actions: write_to_venture_repo, mark_superseded_on_live_base, promote_without_receipt; manual_required includes founder_ratification, registry_row_promotion, cross_repo_copy_to_sourcea, phase_unlock (data/governance_repo_map_v1.json).",
+    "Version law: existing rules stay live; newer versions amend and win only on direct conflict; never label a live base rule 'superseded' (ssot/MULTI_REPO_WORKER_REGISTRY_v1.md \u00a71).",
+    "Prompt registry: version immutable once activated; two versions never active at once; contract-test failure blocks only the new version (previous keeps running); cost_class 'dollars' requires founder-activated budget line via L8; founder approval required to activate prompts touching candidates, public copy, or spend (data/prompt_registry_schema_v1.json + L5 in data/cloud_line_registry_v1.json).",
+    "Phase-2 cloud-only rule: 'Mac executes nothing on schedule; every line writes a receipt; founder approvals are structural API gates, not conventions' (data/cloud_line_registry_v1.json).",
+    "P0-PGR cloud activation ladder: p0pgr-shadow-cycle-v1.yml is workflow_dispatch ONLY; the cron stays commented until the founder records FOUNDER-UNLOCK-R3-CRON-SHADOW receipt; shadow = compile+lint+route only, can never dispatch, deploy, send, or merge (ssot-p0pgr-workflow-bootstrap/.github/workflows/p0pgr-shadow-cycle-v1.yml).",
+    "Repo fences on main: changes under ssot/, data/, policy/, scripts/, .noos/, packages/noos-control-desk-v1/ require CODEOWNERS review + work_order_id and receipt references in PR body; RF1/RF2/RF3 block any status flip to ACTIVE while audit-pending (policy/repo_fences_v1.yaml, .github/workflows/repo-fences-v1.yml).",
+    "Copilot/coding agents are assist_only: draft PRs and suggestions only; must_not_own autonomous_promote, autonomous_deploy_prod, cross_repo_writes, external_send, unregistered_cron; required_pr_fields lane + motor_id_or_human_gate / receipt_id_or_explicit_human_approve (data/github_automation_registry_v1.json).",
+    "Brain artifact registration runs from SG only after independent verify \u2014 not from GH Actions (duplication_forbidden.brain_artifact_registration rule, data/github_automation_registry_v1.json).",
+    "L6 Deploy Truth drift \u2192 alert + HOLD flag row blocking L3/L4 autoruns until founder resolves; L1 never auto-rollbacks; L8 never auto-approves (data/cloud_line_registry_v1.json).",
+    "TrustField repo-policy.json lane limits: one lane per pass, max 40 files per pass, atomic commit per coherent lane; cross-repo dependencies only via contracts/exports/manifests/apis, never sibling-repo internal scripts or private runtime state.",
+    "Receipts must be emitted for every submit/sync/policy check with fields action, repo, files_changed, commands_run, policy_pass, errors, timestamp, next_machine_action; policy_verdict is server-computed, never accepted from the client (packages/noos-control-desk-v1/.noos/receipt_schema_v1.json, control-desk README)."
+   ],
+   "reusable_vocabulary": [
+    "motor_id values: gh_actions_brain_loop_autorun_v1, mac_launchd_brain_loop_autorun_v1, cf_loop_specialist_tick_v1, cf_auto_runtime_tick_v1, trustfield_loops_preview, gh_actions_sourcea_external_verify_v1, gh_actions_noos_factory_autorun_v1; motor 'kind' enum: github_actions, mac_launchd, cloudflare_cron, venture_worker, cursor_agent, github_copilot, github_agent.",
+    "agent_id values: sg_sssot_cursor, sourcea_brain, sourcea_worker, trustfield_worker, noos_agent, noetfield_website_agent, github_copilot_agent, github_coding_agent; lane values: sg_governance, sourcea_brain_observe_promote, sourcea_loop_specialist, sourcea_cloud_forge, trustfield_capture, trustfield_build, noos_doctrine, noos_gel_factory, noetfield_website, assist_only.",
+    "Registry field names: motor_id, kind, repo, workflow_file, cadence, lane, owns, must_not_own, requires_secrets, autonomous_promote, receipt_path, conflicts_with, required_pr_fields, task_cell_owners, duplication_forbidden, max_concurrent_writers.",
+    "Cloud line record fields: line_id (L1-L8), name, owner_role (noos_runtime, platform, sourcing_agent, evaluation_agent, architect, verifier, founder), trigger (schedule|event|event+schedule|schedule+dispatch), execution_target{primary,secondary}, input_source, output_artifact, receipt, failure_behavior, founder_approval_points.",
+    "execution_target values already in use: github_actions, cloudflare_deadman_worker, railway_api, github_actions_nightly, claude_cloud_scheduled_agent, github_actions_runner, railway_api_deterministic, github_actions_llm_narrative, github_registry_ci, railway_serving_prompt_runs, cloudflare_verify_recipes_worker, railway_asset_views_logging, railway_api_admin_dashboard, github_actions_telegram_digest.",
+    "Prompt registry vocabulary: prompt_id pattern ^(tb|pa|ops)\\.<domain>\\.<name>$ (e.g. tb.sourcing.r3, pa.eval.review-pack, ops.health.narrative); model_tier determine|fast|standard|judgment; cost_class zero|cents|dollars; status draft|testing|active|retired; run_trigger.kind cron|event|manual; owner architect|founder|machine.",
+    "Receipt vocabulary: ops_receipts.health_check / intake_summary / sourcing_run / evaluation_run / deploy_truth / asset_gate_audit / approval_decision / prompt_run; receipts/brain-loop-autorun-*.json; receipt fields action, repo, files_changed, commands_run, policy_pass, errors, timestamp, next_machine_action; verdicts PASS/FAIL/BLOCKED and PLATFORM_PACKAGE_PASS/PARTIAL; hash-chain columns payload_hash, prev_receipt_hash, chain_hash.",
+    "Supabase enums: host in (cloudflare, railway, github, supabase, traffic, mac); value_class in (REVENUE, GUARD, META, NONE); audit_status in (GREEN, YELLOW, RED); event_type in (loop_fired, loop_pass, loop_fail, probe, migration, deadman_alert); tables workflow_census_v1, workflow_census_runs_v1, trustfield_loop_registry, trustfield_loop_receipts, trustfield_verify_recipe_runs.",
+    "Naming conventions: lowercase_snake ids with _v1 suffix everywhere (files, schemas, motors, scripts); Cloudflare workers named tf-cf-<function>-v1 / sourcea-<function>-tick-v1 / sina-governance-ssot-advisory; workflows <topic>-v1.yml; Supabase migrations NNN_<name>_v1.sql.",
+    "Branch prefixes in live use: cursor/*, copilot/*, fix/*, ci/*, autorun/*, loops/* (loops/p0-cloud-factory-foundation), audit/update-registry-YYYY-MM-DD; fence-exempt draft lanes: draft/*, assist/*, copilot/*, */draft/*, *-draft, *-draft-*.",
+    "P0-PGR packet required fields: schema, packet_id, created_at, mission, problem_statement, deliverable, route, gates, roi, evidence_required, confidence, status (p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json); founder unlock receipt naming: FOUNDER-UNLOCK-R3-CRON-SHADOW.",
+    "Infra identifiers: GitHub org Noetfield-Systems; Supabase project tkgpapowwplupyekpivy; Cloudflare accounts b7282b4a5c17b84d62e3ef8866b878f8 (SG) and 0d0b967b77e2e5535455d39ff3dae72c (TrustField); KV binding RECEIPTS; Railway URL trustfield-plan-worker-production.up.railway.app; CODEOWNERS team @Noetfield-Systems/sg-governance; sandbox env flags TF_WWW_UPGRADE_WORKTREE_SANDBOX, TF_CLOUD_LOOP_CONTAINER, TF_GHA_SECONDARY, TF_PRIMARY_MOTOR."
+   ],
+   "integration_points": [
+    "data/github_automation_registry_v1.json \u2014 every new substrate motor MUST be registered here with motor_id, kind, repo, cadence, lane, owns[], must_not_own[], receipt_path; add a task_cell_owners entry and, if two motors can write the same cell, a duplication_forbidden block (max_concurrent_writers=1, CAS rule).",
+    "data/cloud_line_registry_v1.json \u2014 the existing line record shape (line_id, name, owner_role, trigger, schedule, execution_target{primary,secondary}, input_source, output_artifact, receipt, failure_behavior, founder_approval_points[]) is the template for Cloud Factory Substrate lines; authority doc pattern: docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md.",
+    "data/prompt_registry_schema_v1.json \u2014 governed prompt packets should validate against this record schema (or extend it); TrustField CI gate already exists at TrustField-Technologies/.github/workflows/prompt-registry-ci.yml running scripts/validate_prompt_registry_v1.py (schema, versions, single-active, bodies-on-disk) + tests/test_prompt_registry_contract_v1.py.",
+    "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json, p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json, p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json, p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md \u2014 the command-brain contracts the substrate consumes orders from.",
+    "GitHub Actions template: /Users/sinakazemnezhad/Desktop/Noetfield-Systems/ssot-p0pgr-workflow-bootstrap/.github/workflows/p0pgr-shadow-cycle-v1.yml \u2014 the existing cloud cycle runner pattern (workflow_dispatch, permissions contents:read, phase-0 pytest gate, evidence read, cycle, independent jsonschema receipt validation step 'never trust the cycle's own claim').",
+    "Cloudflare Worker + KV artifact hook: wrangler.github-app-advisory.jsonc in the working repo (worker sina-governance-ssot-advisory, account_id b7282b4a5c17b84d62e3ef8866b878f8, KV binding RECEIPTS id cf97659f15f14d06be4400caad4823c2, URL https://sina-governance-ssot-advisory.kazemnezhadsina144.workers.dev) \u2014 the SG-side cloud receipt store the sandbox manager can reuse.",
+    "Supabase project tkgpapowwplupyekpivy \u2014 reusable tables: public.trustfield_loop_receipts (hash-chained receipt ledger), public.trustfield_loop_registry (loop liveness for deadman checks), public.workflow_census_v1 / workflow_census_runs_v1 (loop census + value_class audit). Migration convention: infrastructure/supabase/migrations/NNN_<name>_v1.sql in each repo.",
+    "Railway deploy hook: TrustField-Technologies/railway.plan-worker.json + Dockerfile.plan-worker + .github/workflows/railway-plan-worker-deploy.yml; live URL https://trustfield-plan-worker-production.up.railway.app with /health healthcheck.",
+    "Worktree allocation precedent: TrustField-Technologies/scripts/bridge_loops_intake_www_upgrade_v1.py ensure_worktree_sandbox() (git worktree add --detach under .worktrees/, env kill-switch, container-delegation escape hatch) \u2014 the pattern to generalize into per-order sandbox allocation.",
+    "PR gate plumbing: .github/workflows/repo-fences-v1.yml + policy/repo_fences_v1.yaml + scripts/check_repo_fences_v1.py + .github/CODEOWNERS (@Noetfield-Systems/sg-governance) \u2014 substrate-produced PRs into protected zones must carry work_order_id + receipts/<file>.json references in the PR body; receipts/ is the exempt receipt-only lane.",
+    "Existing TrustField branch remotes/origin/loops/p0-cloud-factory-foundation \u2014 a cloud-factory foundation branch already staged in the venture repo.",
+    "Cross-motor observability: TrustField cloud lines' HOLD mechanism (L6 Deploy Truth drift files a HOLD flag row blocking L3/L4 autoruns) and tf-cf-deadman-v1 (STALE_MULTIPLIER=2 over trustfield_loop_registry.interval_seconds) are the liveness/verifier hooks a substrate deadman should reuse."
+   ],
+   "gaps": [
+    "No sandbox manager exists anywhere: the only worktree code is TrustField's ensure_worktree_sandbox() \u2014 a single fixed detached worktree at .worktrees/www-upgrade-sandbox with no per-order allocation, no branch-per-packet creation, no cleanup/GC, and no registry of active sandboxes. The substrate needs an allocation scheme (e.g. .worktrees/<packet_id>/ + branch naming law) and a sandbox ledger.",
+    "No branch-naming law document; conventions (cursor/*, loops/*, autorun/*) are emergent from usage, only draft_branch_patterns in policy/repo_fences_v1.yaml are codified. Factory-line branches for the substrate would need a declared prefix (nothing reserves e.g. factory/* or sandbox/*).",
+    "data/prompt_registry_schema_v1.json is a record schema only \u2014 no registry instance (data/prompt_registry_v1.json) exists in the SG repo; the validated instance + CI live in TrustField-Technologies. SG-side prompt-packet storage/validation for the substrate must be added.",
+    "The lane enum in prompt_registry_schema_v1 (L1-L8) and cloud_line_registry_v1 lines are TrustField-scoped; there are no line_ids for the substrate's proposed lines (research, architecture, code, no-code app builder, workflow builder, test, deploy-preview, verifier, receipt, harvest) \u2014 the registry would need new rows or a parallel SG-scoped registry.",
+    "No artifact-storage convention for preview artifacts: today's options are GH Actions upload-artifact (www-upgrade-loop), the SG worker's Cloudflare KV RECEIPTS namespace, and Supabase receipt tables \u2014 none is designated for build/preview artifacts (no R2/S3 bucket, no artifact registry, no retention policy).",
+    "Railway is a live execution target (L2/L4/L5/L8 primary) but has no motor 'kind' in github_automation_registry_v1 and no registered motor entry; Supabase likewise appears only as a host enum value, not a registered motor \u2014 the substrate's registry additions must extend the kind enum or add rows.",
+    "Three divergent working copies of sina-governance-SSOT exist (/Users/sinakazemnezhad/Projects/sina-governance-ssot on branch cursor/machine-autonomy-loops-v1 with heavy uncommitted state, plus Desktop/Noetfield-Systems/sina-governance-SSOT and ssot-p0pgr-workflow-bootstrap); which checkout is authoritative for the substrate build is undeclared \u2014 e.g. p0pgr-shadow-cycle-v1.yml and the Supabase workflow-census migration exist only in the Desktop clones, while repo-fences and packages/ exist only in the Projects clone.",
+    "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md (LOCKED) still points at pre-migration remotes (kazemnezhadsina144-dot/*) and paths (~/Desktop/trustfield-loops, ~/Projects/SourceA, ~/Projects/noetfeld-os) that no longer match the Noetfield-Systems org layout under ~/Desktop/Noetfield-Systems/ \u2014 the substrate's repo map should key off data/governance_repo_map_v1.json plus verified remotes, and the registry doc needs an amending append.",
+    "No secrets/credential registry: requires_secrets appears only on one motor (CF_MAIN_TOKEN, CF_VERIFIER_TOKEN); ADMIN_TOKEN, Telegram, Railway, and Supabase service keys are referenced in workflows/receipts but there is no SG-side inventory of which secret lives where for sandbox provisioning.",
+    "CODEOWNERS relies on team @Noetfield-Systems/sg-governance existing in the org ('Team must exist in Noetfield-Systems org; fallback owner review still applies') \u2014 existence not verifiable from disk.",
+    "docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md (authority for cloud_line_registry_v1) and docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md exist in the working repo but are uncommitted; the substrate design should not assume they are merged law yet."
+   ]
+  }
+ },
+ "query_recipes": [
+  {
+   "mission": "factory/plan/substrate architecture",
+   "select": [
+    "cloud-factory/*",
+    "p0-pgr/*",
+    "data/cloud_line_registry_v1.json",
+    "data/machine_autonomy_loops_v1.json",
+    "data/prompt_registry_schema_v1.json",
+    "data/brain_domain_sandboxes_v1.json",
+    "data/github_automation_registry_v1.json",
+    "receipts/p0pgr/phase2_scorecard_v1.json",
+    "subsystems.*.constraints"
+   ]
+  },
+  {
+   "mission": "safety/gates audit",
+   "select": [
+    "ssot/FOUNDER_CANON_v1.md",
+    "policy/*",
+    ".github/*",
+    "scripts/check_*",
+    "scripts/verify_*",
+    "subsystems.canon-safety"
+   ]
+  },
+  {
+   "mission": "order intake / client surfaces",
+   "select": [
+    "data/noos_control_desk_api_contract_v1.json",
+    "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+    "subsystems.noos-control-desk"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "p0pgr_architecture_package_v1",
+  "receipt_id": "CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z",
+  "recorded_at": "2026-07-09T01:54:08.705315+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "packet_id": "CLOUD_FACTORY_SUBSTRATE_v0",
+  "canon_version": "founder_canon_v1.0.0",
+  "authorized_by": [
+    "founder-order-cloud-factory-substrate-20260709T011955Z",
+    "founder-order-1000-plan-cloud-factory-20260709T014708Z"
+  ],
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "gates_note": "Design-only authoring: new files + receipts only, all reversible, nothing deployed/sent/scheduled, no schema or gate mutated, package status PROPOSED.",
+  "artifacts": [
+    {
+      "path": "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "sha256": "4a7b0c82f1172551b637eb948b1d3e18e8dba670bdc32de13fd864e880a3560d"
+    },
+    {
+      "path": "cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+      "sha256": "9de01995fbca5385c35cc3604431eaf5ead0c0fd1ce9aa9923349f61844f0008"
+    },
+    {
+      "path": "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+      "sha256": "e3fda17ac421884861166c7763fe364e39515984ae6a10587797a667fc4959e2"
+    },
+    {
+      "path": "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "sha256": "2151a27aa92d2a6e053030862d8bc15265bbb41b338944a77525401858771f28"
+    },
+    {
+      "path": "cloud-factory/MVP_ACTIVATION_PLAN_v0.md",
+      "sha256": "4684544cb356835443010092146e64349f281c205d413bf50afcbd48783861fd"
+    }
+  ],
+  "files_written": [
+    "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+    "cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+    "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+    "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+    "cloud-factory/MVP_ACTIVATION_PLAN_v0.md",
+    "receipts/p0pgr/founder/founder-order-cloud-factory-substrate-20260709T011955Z.json",
+    "receipts/p0pgr/founder/founder-order-1000-plan-cloud-factory-20260709T014708Z.json"
+  ],
+  "git_diff_summary": "All additions, zero modifications to existing tracked files: new untracked dir cloud-factory/ (5 files, 1336 lines total: schema 370, substrate doc 277, registry 256, sandbox spec 246, mvp plan 187) + 3 new receipts under receipts/p0pgr/. No existing file touched by this operation.",
+  "agent_roster": {
+    "readers_wf_abafa868": [
+      "read:p0pgr-runtime \u2014 mapped packet/receipt/loop-state schemas, R1-R9 lint, nine gates, routes, ROI weights",
+      "read:trustfield-cloud-loops \u2014 mapped L1-L8 ops registry, receipts sinks, DECLARED/VERIFIED law, extend-vs-new evidence",
+      "read:autonomy-loops \u2014 mapped autonomy loops L1-L8, four FT-* triggers, expansion_rules, escalation ladder",
+      "read:canon-safety \u2014 mapped canon walls, repo fences, CODEOWNERS, soup wall, guardrails, intent filter",
+      "read:noos-control-desk \u2014 mapped 10 canonical routes, dispatcher pre-PASS write scope, P0 CORE contracts",
+      "read:multi-repo-infra \u2014 mapped org repos, motors registry, worktree/branch precedents, CF/Railway/Supabase reality"
+    ],
+    "drafters_wf_392a0474": [
+      "draft:substrate-doc -> CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "draft:line-registry -> FACTORY_LINE_REGISTRY_v0.json",
+      "draft:sandbox-spec -> SANDBOX_MANAGER_SPEC_v0.md",
+      "draft:order-schema -> CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "draft:mvp-plan -> MVP_ACTIVATION_PLAN_v0.md"
+    ],
+    "verifiers_wf_392a0474": [
+      "verify:consistency \u2014 6 findings (1 BLOCKER: verdict enum missing BLOCKED_WITH_REASON; enum/vocab drift)",
+      "verify:law \u2014 8 findings (fake-active fence claim, FL9 hygiene->founder anti-pattern, FL10 direct data/ write, W2 missing scripts/)",
+      "verify:feasibility \u2014 2 findings (secret inventory wrong, p0pgr-shadow-cycle-v1.yml cited as existing)",
+      "verify:coverage \u2014 1 finding (studio_ide intake thin); all 8 ordered layers otherwise covered"
+    ],
+    "fixes_applied": "17/17 findings fixed in-session by the operator; deterministic re-validation PASS (JSON parse, FL1-FL10 ids, cross-file enums, approvals_required required, event+dispatch vocabulary)"
+  },
+  "token_usage": {
+    "understand_workflow_subagent_tokens": 371187,
+    "draft_verify_workflow_subagent_tokens": 1130193,
+    "subagent_total": 1501380,
+    "note": "Main-session orchestration tokens not separately metered by the harness; session-embedded LLM cost carried in accounting_note per L11."
+  },
+  "confirmations": {
+    "no_code_built": true,
+    "no_deploy": true,
+    "no_schedule_or_cron_created": true,
+    "no_external_send": true,
+    "no_existing_schema_or_gate_mutated": true,
+    "package_status": "PROPOSED (RF1/RF2/RF3: no self-promotion to ACTIVE)"
+  },
+  "limitations": [
+    "jsonschema not installed on this Mac; CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json is parse-checked and idiom-matched to p0-pgr schemas, but draft-07 meta-validation must re-run in CI where jsonschema exists",
+    "founder receipts dir receipts/p0pgr/founder/ is still untracked \u2014 carries no tamper evidence until the next founder-visible commit (commit_flag)"
+  ],
+  "quality_state": "PASS",
+  "verdict": "ARCHITECTURE_PACKAGE_COMPLETE_PROPOSED",
+  "cost": {
+    "llm_calls": 15,
+    "metered_note": "6 readers + 5 drafters + 4 verifiers (subagent tokens above); orchestration session-embedded"
+  },
+  "accounting_note": "Session-embedded operator (founder-visible session) orchestrated two local multi-agent workflows; cost sits in the Claude session, not a bare Architect.",
+  "executor_route_note": "Declared route SESSION_EMBEDDED (design/authoring). Workflow subagents executed locally within the session harness on the Mac as authoring tools \u2014 a deviation from cloud-only EXECUTION rules is not triggered because nothing executed against live systems; noted per no-silent-deviation law.",
+  "next_required_step": "L0 Repo Graph Memory: this was the LAST blind multi-agent repo-understanding pass (founder directive 2026-07-08). Before any future broad reader workflow, build/load an L0 Repo Graph Memory artifact and dispatch only narrowed file reads from it.",
+  "commit_flag": "flag for next founder-visible commit"
+}

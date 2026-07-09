@@ -1,0 +1,20 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-order-resume-1000-plan-l0-20260709T020915Z",
+  "recorded_at": "2026-07-09T02:09:15.907810+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "Run 1000-Plan Cloud Factory design using L0 graph output as required input.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "building L0 Repo Graph Memory (data/l0_repo_graph_memory_v1.json) as the prerequisite artifact",
+      "querying L0 for the narrowed input set (query receipt required)",
+      "resuming the deferred 1000-Plan design (founder-order-1000-plan-cloud-factory-20260709T014708Z) with L0 query output as mandatory drafter input"
+    ],
+    "does_not_unlock": [
+      "any blind/broad repo-understanding pass (law stands)",
+      "building or deploying factory components, cron, sends, client surfaces, payment/legal claims"
+    ]
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

@@ -1,0 +1,370 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "client_order_to_factory_run_v0",
+  "title": "Client order to factory run envelope v0 (PROPOSED)",
+  "description": "Wraps a compiled p0_prompt_packet_v1.1 by reference; never mutates P0-PGR schemas.",
+  "version": "0.1.0",
+  "package_status": "PROPOSED",
+  "canon_version": "founder_canon_v1.0.0",
+  "laws": "FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.",
+  "type": "object",
+  "required": [
+    "schema",
+    "envelope_id",
+    "created_at",
+    "order",
+    "classification",
+    "packet_ref",
+    "factory_run",
+    "status",
+    "receipts"
+  ],
+  "properties": {
+    "schema": { "const": "client_order_to_factory_run_v0" },
+    "envelope_id": {
+      "type": "string",
+      "pattern": "^FR-[0-9]{4}(-[a-z0-9-]+)?$",
+      "description": "Factory run id; equals factory_run.run_id in v0. Mirrors PKT-NNNN pattern."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "machine-generated ISO-8601 UTC (datetime.now(timezone.utc)); never typed from memory"
+    },
+    "order": { "$ref": "#/definitions/order" },
+    "classification": { "$ref": "#/definitions/classification" },
+    "packet_ref": { "$ref": "#/definitions/packet_ref" },
+    "factory_run": { "$ref": "#/definitions/factory_run" },
+    "status": { "$ref": "#/definitions/status" },
+    "receipts": { "$ref": "#/definitions/receipts" }
+  },
+  "definitions": {
+    "order": {
+      "type": "object",
+      "description": "Layer-1 intake record. v0/CF-P1: only founder_session orders (order file at receipts/factory/orders/<ORD-ID>.json + founder authorization receipt in receipts/p0pgr/founder/) and manual workflow_dispatch; no network intake exists yet (TO BE BUILT, CF-P2).",
+      "required": [
+        "order_id",
+        "received_at",
+        "channel",
+        "principal",
+        "venture",
+        "product_mode",
+        "order_text",
+        "budget"
+      ],
+      "properties": {
+        "order_id": { "type": "string", "pattern": "^ORD-[0-9]{4}(-[a-z0-9-]+)?$" },
+        "received_at": { "type": "string", "description": "machine-generated ISO-8601 UTC" },
+        "channel": {
+          "type": "string",
+          "enum": ["founder_session", "founder_control_desk", "client_workspace", "api", "studio_ide"],
+          "description": "v0 valid in practice: founder_session only. founder_control_desk requires the Control Desk contract's Phase-2 explicit refactor doc (no order route exists in the 10 canonical routes today); client_workspace/api arrive CF-P2; studio_ide arrives CF-P2+ over the same Railway API + Supabase auth substrate as api (token-bound studio_ide actors). All non-founder channels NOT BUILT."
+        },
+        "principal": {
+          "type": "object",
+          "required": ["actor_kind", "actor_id", "auth_ref"],
+          "properties": {
+            "actor_kind": { "type": "string", "enum": ["founder", "client", "api_client", "studio_ide"] },
+            "actor_id": { "type": "string" },
+            "auth_ref": {
+              "type": ["string", "null"],
+              "description": "Identity binding (Supabase auth user id) required for all non-founder channels; null allowed for founder_session only. Client authority never exceeds their own run scope."
+            }
+          }
+        },
+        "venture": { "type": "string", "enum": ["noetfield", "sourcea", "forge", "trustfield", "sg"] },
+        "product_mode": {
+          "type": "string",
+          "enum": ["factory_task", "workflow_builder", "app_builder"],
+          "description": "factory_task = Mode 0, internal founder/governance deliverable with no client surface (the only mode exercised in CF-P1); workflow_builder = Mode A (activation of produced workflows is a separate founder-gated step); app_builder = Mode B (production deploy remains founder-gated, CF-P4+)."
+        },
+        "order_text": { "type": "string", "minLength": 8 },
+        "attachments": { "type": "array", "items": { "type": "string" } },
+        "constraints": { "type": "array", "items": { "type": "string" } },
+        "budget": {
+          "type": "object",
+          "required": ["cost_cap_usd"],
+          "properties": {
+            "cost_cap_usd": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Founder-adjustable per-run cap (default 5.00; per-line default 2.00). Breach halts the line, writes a PARTIAL receipt, and sends the run to QUEUED_FOUNDER_REVIEW (FT-CAPITAL)."
+            },
+            "deadline": { "type": ["string", "null"], "description": "ISO-8601 UTC or null" }
+          }
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "description": "Classifier output preceding packet compilation. Confirms or overrides order.product_mode and order.venture; the classification values are authoritative for the run.",
+      "required": ["intent", "product_mode", "venture", "line_plan", "risk_flags", "hold_labels", "classified_by", "classified_at"],
+      "properties": {
+        "intent": { "type": "string", "minLength": 8 },
+        "product_mode": {
+          "type": "string",
+          "enum": ["factory_task", "workflow_builder", "app_builder"],
+          "description": "Confirmed product mode (may override order.product_mode; the classification value is authoritative for the run)."
+        },
+        "venture": {
+          "type": "string",
+          "enum": ["noetfield", "sourcea", "forge", "trustfield", "sg"],
+          "description": "Confirmed venture (may override order.venture; the classification value is authoritative for the run)."
+        },
+        "line_plan": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["FL1", "FL2", "FL3", "FL4", "FL5", "FL6", "FL7", "FL8", "FL9", "FL10"]
+          },
+          "description": "Ordered factory line ids (FL prefix mandatory; L1-L8 already means autonomy loops, TrustField cloud lines, and governance laws). Mirrored on the packet as label FL-plan:<FL ids>."
+        },
+        "risk_flags": { "type": "array", "items": { "type": "string" } },
+        "hold_labels": { "type": "array", "items": { "type": "string" } },
+        "classified_by": { "type": "string" },
+        "classified_at": { "type": "string", "description": "machine-generated ISO-8601 UTC" }
+      }
+    },
+    "packet_ref": {
+      "type": "object",
+      "description": "Reference to the compiled p0_prompt_packet_v1.1 (p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json). The nine execution gates (cloud_only, read_only_or_reversible, roi_positive, no_deploy, no_external_send, no_legal_financial_commitment, no_p0_leakage, no_authority_change, founder_authorization_receipt) live in the packet and are NOT duplicated in this envelope. The envelope never mutates P0-PGR schemas (no_authority_change gate; FT-L5 forbids casual schema/gate mutation). Factory metadata (line_plan, sandbox spec) lives in the envelope, not inside the packet.",
+      "required": ["packet_id", "packet_path", "route", "lint_verdict"],
+      "properties": {
+        "packet_id": { "type": "string", "pattern": "^PKT-[0-9]{4}(-[a-z0-9-]+)?$" },
+        "packet_path": { "type": "string", "description": "e.g. receipts/p0pgr/outbox/<packet_id>.json" },
+        "route": {
+          "type": "string",
+          "enum": ["CLOUD_WORKER", "CLOUD_RESEARCH", "SESSION_EMBEDDED", "REVIEW_QUEUE"],
+          "description": "EXISTING route enum only. A dedicated CLOUD_FACTORY route is a PROPOSED v1.2 router amendment (founder-gated, requires synchronized edits to P0_PROMPT_PACKET_SCHEMA_v1.json, scripts/p0pgr_packet_lint_v1.py ALLOWED_ROUTES, and P0_DISPATCH_ROUTER_RULES_v1.md) and is NOT yet valid here."
+        },
+        "lint_verdict": {
+          "type": "string",
+          "enum": ["ROUTED", "REPAIR_CANDIDATE", "HOLD_CLOUD_UNSAFE", "QUEUED_FOUNDER_REVIEW"],
+          "description": "Existing R1-R9 packet lint applies unchanged; lint fail files a repair candidate and the lane continues (continuity law: never default to STOP)."
+        }
+      }
+    },
+    "sandbox": {
+      "type": "object",
+      "description": "Sandbox allocation record; canonical copy lives in the sandbox ledger (one writer per task cell, second writer gets a REJECTED receipt, CAS per PARALLEL_AUTOMATION L1). Sandbox walls W1-W9 enforced by mechanical exit check scripts/check_sandbox_walls_v0.py (TO BE BUILT, CF-P1).",
+      "required": [
+        "sandbox_id",
+        "repo",
+        "worktree_path",
+        "branch",
+        "allowed_scope",
+        "env_profile",
+        "timeout_seconds",
+        "cost_cap_usd",
+        "artifact_dir",
+        "receipt_dir",
+        "ledger_ref"
+      ],
+      "properties": {
+        "sandbox_id": {
+          "type": "string",
+          "pattern": "^sbx-fr-[0-9]{4}-[0-9]{2}$",
+          "description": "Trailing 2 digits = allocation sequence, e.g. sbx-fr-0001-01"
+        },
+        "repo": { "type": "string" },
+        "worktree_path": { "type": "string", "description": ".worktrees/factory/<sandbox_id>" },
+        "branch": {
+          "type": "string",
+          "pattern": "^sandbox/factory/",
+          "description": "sandbox/factory/fr-NNNN(-slug). Merges to main always pass full repo fences; sandbox/factory/* is NOT fence-exempt in v0 (adding it would be a policy/law mutation — PROPOSED amendment only). No direct main writes (repo fences + CODEOWNERS + W1 wall)."
+        },
+        "allowed_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Per-line file scope declared at allocation; out-of-scope writes fail the W9 wall at sandbox exit."
+        },
+        "env_profile": {
+          "type": "string",
+          "enum": ["none", "read_public_web", "gh_actions_scoped", "preview_deploy_scoped"],
+          "description": "Deny-by-default secret policy: raw secrets never enter the worktree environment; execution requiring a secret runs where the secret already lives. Build/code lines get NO send-capable credentials — makes the no_external_send gate structural."
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 14400,
+          "description": "Per-line default from FACTORY_LINE_REGISTRY_v0; run-level max 4h. Timeout kills the line and writes a PARTIAL receipt with limitations[] (continuity law: partial beats lost)."
+        },
+        "cost_cap_usd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Per-line default 2.00, per-run default 5.00; founder-adjustable via order.budget. Breach halts the line (FT-CAPITAL)."
+        },
+        "artifact_dir": { "type": "string", "description": "receipts/factory/artifacts/<FR-ID>/" },
+        "receipt_dir": { "type": "string", "description": "receipts/factory/<FR-ID>/" },
+        "ledger_ref": {
+          "type": "string",
+          "default": "receipts/factory/sandbox_ledger_v0.json",
+          "description": "Always the sandbox ledger (schema sandbox_ledger_v0) in v0."
+        }
+      }
+    },
+    "line_execution": {
+      "type": "object",
+      "required": ["line_id", "status", "receipt_path", "artifacts", "cost_usd", "started_at", "ended_at"],
+      "properties": {
+        "line_id": {
+          "type": "string",
+          "enum": ["FL1", "FL2", "FL3", "FL4", "FL5", "FL6", "FL7", "FL8", "FL9", "FL10"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "RUNNING", "PASS", "PARTIAL", "FAIL", "BLOCKED_WITH_REASON", "SKIPPED"],
+          "description": "BLOCKED_WITH_REASON only citing a HARD_BLOCK reason; failure otherwise degrades per continuity law order (tag confidence, reduce scope, sandbox, partial, provisional, retry-if-ROI-positive, review queue). Never default to STOP."
+        },
+        "receipt_path": {
+          "type": ["string", "null"],
+          "description": "receipts/factory/<FR-ID>/<line_key>-<ISO8601Z>.json (schema factory_line_receipt_v0); null until written. Every line writes a receipt — no receipt sink = no line (governed-autorun L8/L11)."
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": { "type": "string" },
+              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          },
+          "description": "Every artifact gets its sha256 recorded in the line receipt."
+        },
+        "cost_usd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Rolls up: line receipt -> run receipt -> phase2 scorecard counters.cost_usd."
+        },
+        "started_at": { "type": ["string", "null"], "description": "machine-generated ISO-8601 UTC; null until started" },
+        "ended_at": { "type": ["string", "null"], "description": "machine-generated ISO-8601 UTC; null until ended" }
+      }
+    },
+    "factory_run": {
+      "type": "object",
+      "required": ["run_id", "sandbox", "line_executions", "preview", "approvals_required", "approvals", "verification", "harvest"],
+      "properties": {
+        "run_id": { "type": "string", "pattern": "^FR-[0-9]{4}(-[a-z0-9-]+)?$" },
+        "sandbox": {
+          "anyOf": [{ "$ref": "#/definitions/sandbox" }, { "type": "null" }],
+          "description": "null until allocated by the sandbox manager (SANDBOX_MANAGER_SPEC_v0.md, TO BE BUILT)."
+        },
+        "line_executions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/line_execution" }
+        },
+        "preview": {
+          "type": "object",
+          "required": ["available", "kind", "ref"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "kind": {
+              "type": "string",
+              "enum": ["pr", "gh_artifact", "preview_url", "dry_run_trace", "none"],
+              "description": "FL7 produces PREVIEW ONLY. Production deploy is NOT part of the v0 substrate — FOUNDER_ONLY via existing paths (no_deploy gate; HARD_BLOCK reason 2)."
+            },
+            "ref": { "type": ["string", "null"] }
+          }
+        },
+        "approvals_required": {
+          "type": "array",
+          "description": "Machine-checkable approval requirements, populated at classification. The run may enter APPROVED only when every approvals_required row has a matching approvals entry with decision APPROVED. Founder rows are mandatory for any scope touching production, spend, sends, or legal; client rows never exceed the client's own run scope.",
+          "items": {
+            "type": "object",
+            "required": ["approver_kind", "scope"],
+            "properties": {
+              "approver_kind": { "type": "string", "enum": ["founder", "client"] },
+              "scope": { "type": "string", "description": "verbatim scope this approval must cover" }
+            }
+          }
+        },
+        "approvals": {
+          "type": "array",
+          "description": "Founder approvals route via the L8 Founder Approval Queue when built (approval_queue table exists; endpoints = ladder step D, NOT BUILT); interim sink receipts/factory/approval_queue_v0.json + QUEUED_FOUNDER_REVIEW. Client approval gates only their run's preview-to-deliver step; founder approval gates anything touching production, spend, sends, legal. Every founder decision writes a receipt with verbatim scope (M03 lesson).",
+          "items": {
+            "type": "object",
+            "required": ["approval_id", "approver_kind", "scope", "decision", "decided_at", "receipt_path"],
+            "properties": {
+              "approval_id": { "type": "string" },
+              "approver_kind": { "type": "string", "enum": ["founder", "client"] },
+              "scope": { "type": "string", "description": "verbatim decision scope" },
+              "decision": { "type": "string", "enum": ["APPROVED", "REJECTED", "DEFERRED"] },
+              "decided_at": { "type": "string", "description": "machine-generated ISO-8601 UTC" },
+              "receipt_path": { "type": "string" }
+            }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "required": ["verifier", "verdict", "external_receipt_ref"],
+          "description": "FL8 pass_rule: PASS only from a secondary CF account edge receipt (account b7282b4a5c17b84d62e3ef8866b878f8, worker sina-governance-ssot-advisory) — never builder self-report (autonomy loop L3). Any FL8 FAIL or deploy-truth drift writes a HOLD row that blocks further line dispatch for this run until resolved; production-facing hold resolution is a founder point.",
+          "properties": {
+            "verifier": {
+              "type": "string",
+              "enum": ["cloudflare_worker", "github_actions"],
+              "description": "FL8 execution targets: primary cloudflare_worker (secondary CF account read/verify path only; no new CF control plane in v0), secondary github_actions."
+            },
+            "verdict": {
+              "type": ["string", "null"],
+              "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED_WITH_REASON", null],
+              "description": "null until FL8 runs. BLOCKED_WITH_REASON is the canon's universal refusal token — a lawful FL8 refusal (wall/HARD_BLOCK event during verification) is recorded as such, never mislabeled FAIL."
+            },
+            "external_receipt_ref": {
+              "type": ["string", "null"],
+              "description": "Reference to the externally-written verifier receipt; required for verdict PASS (PASS only from secondary CF account edge receipt)."
+            }
+          }
+        },
+        "harvest": {
+          "type": "object",
+          "required": ["done", "report_path"],
+          "properties": {
+            "done": { "type": "boolean" },
+            "report_path": { "type": ["string", "null"], "description": "null until the FL10 harvest report is written." }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "CLASSIFIED",
+        "PACKET_COMPILED",
+        "QUEUED",
+        "SANDBOX_ALLOCATED",
+        "RUNNING",
+        "PREVIEW_READY",
+        "VERIFYING",
+        "AWAITING_APPROVAL",
+        "APPROVED",
+        "RECEIPTED",
+        "HARVESTED",
+        "CLOSED",
+        "REPAIR_CANDIDATE",
+        "HOLD_CLOUD_UNSAFE",
+        "QUEUED_FOUNDER_REVIEW",
+        "BLOCKED_WITH_REASON",
+        "KILLED"
+      ],
+      "description": "Lifecycle: RECEIVED -> CLASSIFIED -> PACKET_COMPILED -> QUEUED -> SANDBOX_ALLOCATED -> RUNNING -> PREVIEW_READY -> VERIFYING -> AWAITING_APPROVAL -> APPROVED -> RECEIPTED -> HARVESTED -> CLOSED. Exception states: REPAIR_CANDIDATE, HOLD_CLOUD_UNSAFE (label semantics: stays visible and re-rankable), QUEUED_FOUNDER_REVIEW, BLOCKED_WITH_REASON (must cite a HARD_BLOCK reason), KILLED."
+    },
+    "receipts": {
+      "type": "object",
+      "required": ["run_receipt_path", "line_receipt_dir", "chain_complete"],
+      "properties": {
+        "run_receipt_path": {
+          "type": ["string", "null"],
+          "description": "receipts/factory/<FR-ID>-run-<ISO8601Z>.json (schema factory_run_receipt_v0); null until written."
+        },
+        "line_receipt_dir": { "type": "string", "description": "receipts/factory/<FR-ID>/" },
+        "chain_complete": {
+          "type": "boolean",
+          "description": "Run cannot reach CLOSED unless chain_complete is true and every executed line has a receipt (governed-autorun L5). Receipts and artifacts are NEVER deleted."
+        }
+      }
+    }
+  }
+}

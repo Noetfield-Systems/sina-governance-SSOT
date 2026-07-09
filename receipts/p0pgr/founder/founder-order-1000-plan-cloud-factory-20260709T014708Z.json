@@ -1,0 +1,23 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-order-1000-plan-cloud-factory-20260709T014708Z",
+  "recorded_at": "2026-07-09T01:47:08.221624+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "Continue and finish this architecture package only. Finish only the five Cloud Factory Substrate deliverables: CLOUD_FACTORY_SUBSTRATE_v0.md, FACTORY_LINE_REGISTRY_v0.json, SANDBOX_MANAGER_SPEC_v0.md, CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json, MVP_ACTIVATION_PLAN_v0.md. Before final receipt, include: exact files written; exact git diff summary; token usage summary; what each reader/drafter/verifier did; confirmed no code/deploy/schedule; next required step: L0 Repo Graph Memory before any future broad reader workflow. Important: This must be the last blind multi-agent repo-understanding pass. Future architecture/audit passes must use L0 Repo Graph Memory first, then only read narrowed files. ARCHITECT ORDER - 1000-PLAN CLOUD FACTORY DESIGN. Mission: Design the Noetfield / SourceA 1000-Plan Cloud Factory. Goal: Founder or client orders should become ranked, governed, cloud-executable plans that can run through isolated sandboxes/worktrees and produce previews, artifacts, receipts, and reusable templates. Core principle: P0-PGR is the brain. Forge Factory is the engine. Studio IDE / Forge Terminal are control surfaces. Sandboxes/worktrees are execution cells. Client workspace is the product. Required outputs: PLAN_FACTORY_ARCHITECTURE_v1.md, PLAN_SCHEMA_v1.json, FACTORY_LINE_REGISTRY_v1.json, SANDBOX_WORKTREE_MANAGER_v1.md, CLIENT_ORDER_TO_PLAN_PIPELINE_v1.md, PLAN_RANKING_ROI_MODEL_v1.json, 1000_PLAN_LIBRARY_SEED_v1.json. Plan types: app builder plans, workflow builder plans, research plans, compliance/governance plans, deploy plans, verification plans, revenue plans, client onboarding plans, site/app repair plans, automation/cron plans. Rules: no direct main writes; no send/contact without approval; no public legal/equity/payment claims without approval; no premium models unless ROI justifies; every plan has cost cap, authority scope, sandbox target, and receipt schema; every execution runs through cloud line or controlled sandbox; founder/client approves high-risk transitions; low-risk templates can later be auto-dispatch approved per template only. Output format: OBSERVED / DECISION / CLOUD FACTORY MODEL / PLAN TYPES / SCHEMA / EXECUTION LINES / SANDBOX MODEL / CLIENT PRODUCT MODEL / MVP PHASES / NEXT BUILD PACKET / STOP.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "finalization of the five cloud-factory/ v0 deliverables (verifier fixes + accounting receipt)",
+      "design/authoring of the seven 1000-Plan Cloud Factory v1 deliverables (design only)",
+      "process law: last blind multi-agent repo-understanding pass; L0 Repo Graph Memory required before any future broad reader workflow"
+    ],
+    "does_not_unlock": [
+      "building or deploying any substrate/factory component",
+      "scheduled automation or cron of any kind",
+      "client-facing surfaces, external sends, payment/legal/equity claims",
+      "merges to main, production deploys",
+      "auto-dispatch approval of any template (future founder decision, per-template only)"
+    ]
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

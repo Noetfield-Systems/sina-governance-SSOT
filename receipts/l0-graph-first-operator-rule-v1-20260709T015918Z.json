@@ -1,0 +1,76 @@
+{
+  "schema": "l0_graph_first_operator_rule_receipt_v1",
+  "action": "make_l0_repo_graph_memory_mandatory_for_architect_workflows",
+  "repo": "sina-governance-ssot",
+  "timestamp_utc": "2026-07-09T01:59:18Z",
+  "order_context": "Follow-on to the L0 Repo Graph Memory pilot (receipts/GRAPHIFY_OR_GRAPHITI_PILOT_RECEIPT_v1.json), aligned with receipts/p0pgr/founder/founder-order-1000-plan-cloud-factory-20260709T014708Z.json which states: 'This must be the last blind multi-agent repo-understanding pass. Future architecture/audit passes must use L0 Repo Graph Memory first, then only read narrowed files.'",
+  "scope": "docs-only handoff — one new file, plus this receipt",
+
+  "file_added": "docs/L0_GRAPH_FIRST_OPERATOR_RULE_v1.md",
+
+  "mandatory_sequence_documented": [
+    "1. refresh the graph if stale (python3 scripts/build_repo_graph_v1.py — sub-second, offline, zero LLM tokens)",
+    "2. query the graph for the target task before opening any file (python3 scripts/query_repo_graph_v1.py <subsystem|keyword>)",
+    "3. produce a compact file/subsystem map from the report + query output as the task's scoping artifact",
+    "4. only then spawn reader agents (Explore, general-purpose, Workflow parallel/pipeline stages), scoped to exactly the files the graph named"
+  ],
+
+  "exact_commands_included": {
+    "build": "python3 scripts/build_repo_graph_v1.py",
+    "query": "python3 scripts/query_repo_graph_v1.py <subsystem-name|keyword|path-fragment>",
+    "verify": "bash scripts/verify_l0_repo_graph_memory_v1.sh",
+    "staleness_check": "compare graph_index_v1.json's generated_at to `git log -1 --format=%cI`; rebuild is cheap enough to just always run it"
+  },
+
+  "example_queries_included": [
+    {
+      "target_task": "Cloud Factory Substrate",
+      "command": "python3 scripts/query_repo_graph_v1.py cloud-factory",
+      "result_summary": "5 files / 112223 bytes in cloud-factory/, 89 edges to p0-pgr/, data/, scripts/, policy/, receipts/ — real output captured in the doc"
+    },
+    {
+      "target_task": "1000-Plan Cloud Factory",
+      "commands": [
+        "python3 scripts/query_repo_graph_v1.py FACTORY_LINE_REGISTRY",
+        "python3 scripts/query_repo_graph_v1.py p0-pgr"
+      ],
+      "result_summary": "Confirms FACTORY_LINE_REGISTRY_v1.json would be a version bump of the existing 16.8KB cloud-factory/FACTORY_LINE_REGISTRY_v0.json, and that the founder order's 'P0-PGR is the brain' principle maps to the existing 6-file/14KB p0-pgr/ subsystem — read those, don't re-derive. Other five of the seven authorized 1000-Plan deliverables (PLAN_SCHEMA_v1.json, SANDBOX_WORKTREE_MANAGER_v1.md, CLIENT_ORDER_TO_PLAN_PIPELINE_v1.md, PLAN_RANKING_ROI_MODEL_v1.json, 1000_PLAN_LIBRARY_SEED_v1.json) have no existing matches in the graph — confirmed net-new, not assumed."
+    }
+  ],
+
+  "verifier_result": {
+    "script": "scripts/verify_l0_repo_graph_memory_v1.sh",
+    "result": "PASS",
+    "checks_passed": 12,
+    "checks_total": 12,
+    "receipt": "receipts/l0-repo-graph-verify-20260709T015912Z.json",
+    "note": "Re-run after adding the new doc file so the graph index/report include it; no verifier logic changed for this task."
+  },
+
+  "constraints_honored": [
+    "no other repo touched (SourceA, NOOS, TrustField, Noetfield website, Studio IDE/Forge Factory untouched)",
+    "no deploy",
+    "no cloud schedule enabled",
+    "no new Workflow-tool run started for this task — authored directly, single small doc + receipt",
+    "no product code changed"
+  ],
+
+  "files_changed": {
+    "created": [
+      "docs/L0_GRAPH_FIRST_OPERATOR_RULE_v1.md",
+      "graph-out/graph_index_v1.json (regenerated to include the new doc)",
+      "graph-out/GRAPH_REPORT.md (regenerated)",
+      "receipts/l0-repo-graph-verify-20260709T015912Z.json (verifier run receipt)",
+      "receipts/l0-graph-first-operator-rule-v1-20260709T015918Z.json (this file)"
+    ],
+    "modified": []
+  },
+
+  "sg_did_not": [
+    "touch_any_repo_other_than_sina_governance_ssot",
+    "deploy_anything",
+    "enable_any_cloud_schedule",
+    "start_a_new_workflow_tool_run",
+    "modify_agents_md_this_time"
+  ]
+}

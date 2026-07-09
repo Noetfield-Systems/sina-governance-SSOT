@@ -1,0 +1,26 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-order-cloud-factory-substrate-20260709T011955Z",
+  "recorded_at": "2026-07-09T01:19:55.169692+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "ARCHITECT ORDER \u2014 CLOUD FACTORY SUBSTRATE v0. P0-PGR is the command brain. Now design the execution substrate that lets founder/client orders run through cloud factory lines. Mission: Design Cloud Factory Substrate v0 for Noetfield / SourceA / Forge. Goal: A founder or client order should become a governed prompt packet, route into an isolated cloud sandbox/worktree, execute through factory lines, produce a preview/artifact, verify itself, and write a receipt. Required layers: 1. Order Intake (founder order, client order, API order, Studio IDE order). 2. P0-PGR Integration (classify order, ROI score, compile prompt packet, route to factory line). 3. Factory Line Registry (lines: research, architecture, code, no-code app builder, workflow builder, test, deploy-preview, verifier, receipt, harvest). 4. Sandbox Manager (sandbox_id, repo/worktree allocation, branch naming, allowed file scope, env secret policy, timeout, cost cap, cleanup rule, artifact storage, receipt path). 5. Execution Targets (use existing stack first: GitHub Actions, Cloudflare Workers, Railway API, Supabase, repo worktrees, future container runners if needed). 6. Client Product Modes (Mode A: Agentic Workflow Builder; Mode B: No-code App Builder). 7. Safety Gates (no direct main writes, preview before production, founder/client approval before deploy, no sends without approval, no legal/equity/payment claims without approval, receipts required). 8. MVP Build Plan (Phase 1: internal founder-only cloud factory; Phase 2: authenticated client workspace; Phase 3: workflow builder; Phase 4: no-code app builder; Phase 5: paid client platform). Deliverables: CLOUD_FACTORY_SUBSTRATE_v0.md, FACTORY_LINE_REGISTRY_v0.json, SANDBOX_MANAGER_SPEC_v0.md, CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json, MVP_ACTIVATION_PLAN_v0.md. Return architecture package first.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "design/authoring of CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "design/authoring of FACTORY_LINE_REGISTRY_v0.json",
+      "design/authoring of SANDBOX_MANAGER_SPEC_v0.md",
+      "design/authoring of CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "design/authoring of MVP_ACTIVATION_PLAN_v0.md",
+      "architecture package returned in-session (design only)"
+    ],
+    "does_not_unlock": [
+      "building or deploying any substrate component",
+      "scheduled automation of any factory line",
+      "client-facing surfaces or authenticated client workspace",
+      "external sends, payment/legal/equity claims",
+      "merges to main, production deploys"
+    ]
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

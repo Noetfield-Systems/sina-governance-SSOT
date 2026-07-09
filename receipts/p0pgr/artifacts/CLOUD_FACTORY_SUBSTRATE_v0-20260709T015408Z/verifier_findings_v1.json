@@ -1,0 +1,151 @@
+{
+  "schema": "verifier_findings_artifact_v1",
+  "receipt_ref": "CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z",
+  "recorded_at": "2026-07-09T02:00:58.491590+00:00",
+  "source": "workflow wf_392a0474-b93 (4 adversarial verifiers: consistency, law-compliance, feasibility, order-coverage)",
+  "total_findings": 17,
+  "severity_counts": {
+    "BLOCKER": 2,
+    "MAJOR": 10,
+    "MINOR": 5
+  },
+  "note": "Both BLOCKER entries are the same defect (verification.verdict enum missing BLOCKED_WITH_REASON) found independently by two verifiers; 17 unique defects total, all fixed in-session before the package receipt.",
+  "findings": [
+    {
+      "verifier": "order-coverage",
+      "file": "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "severity": "MINOR",
+      "issue": "Of the four order-intake types the founder order requires, 'Studio IDE order' is the only one with no specified intake mechanism anywhere in the package. The \u00a73 channel table row says only 'Repo noetfield-studio-ide exists; no intake wiring. | CF-P2+', and the schema's channel description just repeats 'studio_ide arrives CF-P2+'. Every other channel names its substrate (founder_session: order file + authorization receipt; founder_control_desk: Control Desk Phase-2 refactor doc; client_workspace: Railway API + Supabase auth; api: same substrate, token-bound api_client actors). The MVP plan's CF-P2 section wires client_workspace and api but never mentions studio_ide intake. The element is present (channel enum, actor_kind studio_ide, identity-binding rules apply, phase CF-P2+) so this is thin coverage, not a missing layer.",
+      "fix": "In the \u00a73 channel table of cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md, change the studio_ide row's 'Today' cell from 'Repo `noetfield-studio-ide` exists; no intake wiring.' to 'Repo `noetfield-studio-ide` exists; no intake wiring. Arrives via the same Railway API + Supabase auth substrate as `api`, token-bound `studio_ide` actors.' (reuses existing spine vocabulary only \u2014 no new enums, IDs, or paths). Optionally mirror one clause in the schema's channel enum description: 'studio_ide arrives CF-P2+ over the api substrate'.",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "severity": "BLOCKER",
+      "issue": "definitions.factory_run.verification.verdict enum is [\"PASS\", \"PARTIAL\", \"FAIL\", null] (line 289), but FACTORY_LINE_REGISTRY_v0.json FL8 output_artifact declares the verification_verdict enum as \"PASS | PARTIAL | FAIL | BLOCKED_WITH_REASON\" and the spine's line-verdict enum includes BLOCKED_WITH_REASON. A lawful FL8 BLOCKED_WITH_REASON verdict (e.g. a wall/HARD_BLOCK event during verification) cannot be recorded in the envelope \u2014 jsonschema validation of the run envelope would fail, breaking machine parsing.",
+      "fix": "In CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json line 289, change \"enum\": [\"PASS\", \"PARTIAL\", \"FAIL\", null] -> \"enum\": [\"PASS\", \"PARTIAL\", \"FAIL\", \"BLOCKED_WITH_REASON\", null]",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "severity": "MAJOR",
+      "issue": "The \u00a72 end-to-end walkthrough labels the worked example as a CF-P1 run (\"Example: founder order 'client wants a lead-intake workflow' (CF-P1, so channel = `founder_session`)\", line 97) with line_plan [FL1, FL2, FL5, FL6, FL7, FL8, FL9, FL10] and step 12 saying \"In CF-P1 the founder approves...\". MVP_ACTIVATION_PLAN_v0.md \u00a72 CF-P1 scope (line 53) states \"FL4/FL5 are NOT in CF-P1 scope\" \u2014 a Mode A/FL5 run cannot occur in CF-P1. Direct cross-file contradiction on which lines CF-P1 permits.",
+      "fix": "In CLOUD_FACTORY_SUBSTRATE_v0.md line 97, change \"(CF-P1, so channel = `founder_session`)\" -> \"(channel = `founder_session`; illustrative full Mode A flow \u2014 FL5 runs unlock at CF-P3, since CF-P1's minimum line set excludes FL4/FL5 per MVP_ACTIVATION_PLAN_v0.md \u00a72)\". Keep step 12's interim-approval-queue note but drop its CF-P1 framing (\"In CF-P1 the founder approves via...\" -> \"Until ladder step D is built the founder approves via...\").",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "severity": "MAJOR",
+      "issue": "Classification output fields disagree across files. Substrate \u00a74 (line 144), MVP CF-P1-C (line 75), and the binding spine all define classification output as \"intent, product_mode, venture, line_plan[], risk_flags[], hold_labels[]\". The schema's definitions.classification (lines 97\u2013116) requires only [intent, line_plan, risk_flags, hold_labels, classified_by, classified_at] and explicitly states \"product_mode and venture live in order, not here\" \u2014 so a classifier built to the authority doc/spine emits keys the machine schema does not define, and the schema deviates from the binding spine.",
+      "fix": "Add to definitions.classification.properties: \"product_mode\": {\"type\": \"string\", \"enum\": [\"workflow_builder\", \"app_builder\", \"factory_task\"]}, \"venture\": {\"type\": \"string\", \"enum\": [\"noetfield\", \"sourcea\", \"forge\", \"trustfield\", \"sg\"]}; add both to classification.required; change the description to \"...confirms/overrides order.product_mode and order.venture\". (Alternative if the intake-owns-them design is preferred: change substrate \u00a74 line 144 and MVP CF-P1-C line 75 to \"intent, line_plan[], risk_flags[], hold_labels[] (product_mode and venture are order intake fields, confirmed at classification)\" \u2014 but that requires amending the spine, which currently binds the three-file wording.)",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "severity": "MAJOR",
+      "issue": "order.product_mode enum (line 77) is [\"factory_task\", \"workflow_builder\", \"app_builder\"], but the substrate authority doc \u00a77/Layer 6 (lines 73\u201377, 202\u2013207) and the spine define exactly two client product modes (Mode A workflow_builder, Mode B app_builder). \"factory_task\" exists in no other package file \u2014 an invented enum value under a spine that forbids inventing enums. (It is evidently needed: CF-P1's FR-0001 internal governance deliverable is neither Mode A nor Mode B, so no other file's mode vocabulary can classify CF-P1 runs at all.)",
+      "fix": "Define the third value in the authority doc instead of leaving it schema-only: in CLOUD_FACTORY_SUBSTRATE_v0.md \u00a77 add a first bullet \"**Mode 0 `factory_task`.** Internal (founder/governance) build deliverable with no client surface \u2014 the only mode exercised in CF-P1 (e.g. FR-0001).\" and mirror one sentence in \u00a72 Layer 6. If instead two modes are the intended truth, delete \"factory_task\" from the schema enum at line 77 \u2014 but then MVP CF-P1-E's internal-deliverable FR-0001 has no valid product_mode, so documenting Mode 0 is the coherent fix.",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/MVP_ACTIVATION_PLAN_v0.md",
+      "severity": "MAJOR",
+      "issue": "CF-P1-D (line 83) cites \"GH Actions dispatch workflow patterned on `p0pgr-shadow-cycle-v1.yml`\" as an existing pattern precedent, but no such workflow exists: .github/workflows/ contains only brain-loop-autorun-v1.yml and repo-fences-v1.yml \u2014 exactly the two the substrate doc \u00a76 itself lists as the SG fleet. A nonexistent file is presented as an existing precedent (violates the package's honesty rule and its own internal claim about the SG workflow fleet).",
+      "fix": "Change \"patterned on `p0pgr-shadow-cycle-v1.yml`\" -> \"patterned on `.github/workflows/brain-loop-autorun-v1.yml` (dispatch trigger only \u2014 its `schedule:` block must NOT be copied; cron stays absent until `FOUNDER-UNLOCK-CF-CRON`)\".",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "consistency",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+      "severity": "MINOR",
+      "issue": "FL6, FL8, and FL9 use trigger value \"event+dispatch\" (lines 136, 181, 205), but the documented trigger vocabulary in the substrate \u00a75 rules (line 169: \"Trigger: `dispatch` or `event` ONLY in v0\"), the registry's own top-level \"rule\" string (line 10: \"trigger is dispatch or event only\"), and the spine never define a compound value. A strict validator built from the documented vocabulary would reject three of ten registry rows. (The compound follows the cloud_line_registry_v1 precedent of \"event+schedule\" and does not violate no-cron, so this is polish, not law.)",
+      "fix": "In CLOUD_FACTORY_SUBSTRATE_v0.md \u00a75 rules change \"Trigger: `dispatch` or `event` ONLY in v0\" -> \"Trigger: `dispatch`, `event`, or `event+dispatch` ONLY in v0\", and in FACTORY_LINE_REGISTRY_v0.json \"rule\" change \"trigger is dispatch or event only\" -> \"trigger is dispatch, event, or event+dispatch only\". (Or normalize the three rows to \"dispatch\" and record the event path in input_source only \u2014 either way the vocabulary and the rows must match.)",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "severity": "BLOCKER",
+      "issue": "Line 289: factory_run.verification.verdict enum is [\"PASS\", \"PARTIAL\", \"FAIL\", null], omitting BLOCKED_WITH_REASON. FACTORY_LINE_REGISTRY_v0.json line 187 declares FL8's verification_verdict as (PASS | PARTIAL | FAIL | BLOCKED_WITH_REASON), and BLOCKED_WITH_REASON is the canon's universal refusal token (FOUNDER_CANON v1 dispatch law). A lawful FL8 refusal verdict cannot be serialized into the envelope without failing jsonschema validation \u2014 the machine must either mislabel a refusal as FAIL or break parsing, suppressing the mandated refusal path.",
+      "fix": "In verification.verdict change \"enum\": [\"PASS\", \"PARTIAL\", \"FAIL\", null] -> \"enum\": [\"PASS\", \"PARTIAL\", \"FAIL\", \"BLOCKED_WITH_REASON\", null]",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+      "severity": "MAJOR",
+      "issue": "Line 217: FL9 failure_behavior routes a hygiene failure straight to the founder: \"retry-if-ROI-positive once -> unresolved goes QUEUED_FOUNDER_REVIEW\". A receipt-write failure is a hygiene/infrastructure failure, not FT-CAPITAL/FT-LEGAL/FT-L5/FT-PHASE. Canon \u00a76 + MACHINE_AUTONOMY_LOOPS \u00a74-5 require machine-first routing (L4 self-repair -> L6 deep research; founder only at stage 7 via the four FT-* triggers), and the loops JSON names \"Route hygiene red to founder before self-repair + research\" as a codified anti-pattern. It also deviates from the binding degrade order, which ends at \"review queue\", not founder review (QUEUED_FOUNDER_REVIEW is reserved in this package for gate failures and FT-CAPITAL cost-cap breaches).",
+      "fix": "Change FL9 failure_behavior: \"retry-if-ROI-positive once -> unresolved goes QUEUED_FOUNDER_REVIEW\" -> \"retry-if-ROI-positive once -> unresolved files a repair candidate and escalates machine-first (L4 self-repair -> L6 deep research -> review queue); run stays un-CLOSED until the chain completes; founder reached only via the four FT-* triggers\"",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+      "severity": "MAJOR",
+      "issue": "Line 244 (and CLOUD_FACTORY_SUBSTRATE_v0.md lines 112, 180): FL10 notes say the harvest line \"writes into data/governance_library_promote_queue_v1.json\". data/ is a fence-protected governance zone (policy/repo_fences_v1.yaml protected_zones; canon \u00a75 wall W2), FL10 is an assist_only machine line with sandbox_required:false (no worktree, no branch), so as written the only available write path is a direct write to a governance file on main \u2014 violating no-direct-main-writes (canon \u00a75 / W1+W2), PARALLEL_AUTOMATION L3 (assist \u2260 authority: agents never append canonical/registry state), and governance_repo_map_v1 never_auto (promote_without_receipt / registry_row_promotion is manual). The line's own output_artifact and key rule (\"harvest proposes promotions; it never promotes\") say drafts only \u2014 the notes contradict them.",
+      "fix": "In FL10 notes change \"writes into data/governance_library_promote_queue_v1.json\" -> \"drafts candidate rows for data/governance_library_promote_queue_v1.json as artifacts under receipts/factory/artifacts/<FR-ID>/, delivered as branch + PR through full repo fences \u2014 never a direct data/ write\". Mirror the same wording in CLOUD_FACTORY_SUBSTRATE_v0.md step 14 (\"reusable patterns \u2192 data/governance_library_promote_queue_v1.json\") and \u00a75 FL10 (\"produces harvest entries feeding ...\").",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "severity": "MAJOR",
+      "issue": "Line 190 (\u00a76 execution-target table) claims \"Live workflow fleet exists (SG: repo-fences-v1.yml, brain-loop-autorun-v1.yml; TrustField: 19 workflows)\" \u2014 but .github/workflows/repo-fences-v1.yml, .github/CODEOWNERS, and policy/repo_fences_v1.yaml are UNTRACKED in the working repo (verified via git status): the fence workflow has never been committed, has never run in CI, and is not merged law. Calling it part of a \"live\" fleet is a false active-state claim (honesty rule: nothing in the package may claim built/active state; RF-class fake-active discipline). CF-P1-A's verification also silently depends on this uncommitted fence stack being live, and MVP \u00a78 KNOWN BLOCKERS does not list it.",
+      "fix": "Change \u00a76 row to: \"TrustField: 19 live workflows; SG: brain-loop-autorun-v1.yml live; repo-fences-v1.yml + CODEOWNERS + policy/repo_fences_v1.yaml exist as staged, UNCOMMITTED working-tree files \u2014 not yet merged law.\" Add blocker B10 to MVP_ACTIVATION_PLAN_v0.md \u00a78: \"Repo-fences stack (policy/repo_fences_v1.yaml, .github/workflows/repo-fences-v1.yml, .github/CODEOWNERS) uncommitted \u2014 must land on main before CF-P1-A can verify against it.\"",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md",
+      "severity": "MAJOR",
+      "issue": "Lines 97-112: the worked example is explicitly labeled CF-P1 (\"Example: founder order ... (CF-P1, so channel = founder_session)\") and runs line_plan [FL1, FL2, FL5, FL6, FL7, FL8, FL9, FL10] \u2014 but MVP_ACTIVATION_PLAN_v0.md line 53 states \"FL4/FL5 are NOT in CF-P1 scope\" (Mode A / FL5 is CF-P3). The package's authority doc demonstrates a run its own activation plan forbids in that phase.",
+      "fix": "Either relabel the walkthrough: \"(CF-P1, so channel = founder_session)\" -> \"(founder_session channel; note FL5/Mode A runs are CF-P3 scope \u2014 shown end-to-end for illustration only)\", or change the example to a CF-P1-scope run using FL3 instead of FL5 (line_plan [FL1, FL2, FL3, FL6, FL7, FL8, FL9, FL10] with a code deliverable).",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/FACTORY_LINE_REGISTRY_v0.json",
+      "severity": "MINOR",
+      "issue": "Line 175 (FL7 notes): FL7's secondary execution target is cloudflare_worker, but its notes omit the Cloudflare tool_law caveat that FL8's notes carry (line 198: CF deferred to Phase 3/4 control plane; v0 uses ONLY the existing verifier worker read/verify path). A dispatcher reading FL7's row alone could lawfully-looking route preview publication (a write operation) to a CF worker, exceeding the read/verify-only constraint \u2014 a deploy-adjacent path not flagged as requiring amendment.",
+      "fix": "Append to FL7 notes: \"cloudflare_worker secondary is unusable in v0 under CF tool_law (Phase 3/4 control plane deferral; v0 permits only the existing verifier read/verify path) \u2014 requires a PROPOSED founder-ratified amendment before use; github_actions is the only operable v0 preview path.\"",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+      "severity": "MINOR",
+      "issue": "Line 96: wall W2 blocks writes under \"ssot/, data/, policy/, .noos/, packages/noos-control-desk-v1/\" \u2014 omitting scripts/, which IS a protected zone in policy/repo_fences_v1.yaml (protected_zones: ssot/, data/, policy/, scripts/, .noos/, packages/noos-control-desk-v1/). The sandbox wall is therefore weaker than the fence zone list it mirrors: a sandbox could write validator/gate scripts (the very enforcement code, FT-L5 territory) without tripping W2, caught only later by W9 (if out of allowed_scope) or fences at merge. Wall/fence parity is the cheap fix.",
+      "fix": "In the W2 row change \"ssot/, data/, policy/, .noos/, packages/noos-control-desk-v1/\" -> \"ssot/, data/, policy/, scripts/, .noos/, packages/noos-control-desk-v1/ (parity with policy/repo_fences_v1.yaml protected_zones)\"",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "law-compliance",
+      "file": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json",
+      "severity": "MINOR",
+      "issue": "Lines 261-275: the approvals array records approver_kind (founder|client) but nothing machine-readable states WHICH approver kind is required to satisfy AWAITING_APPROVAL -> APPROVED for a given run. The rule \"client approval gates only their run's preview->deliver step; founder approval gates anything touching production, spend, sends, legal\" lives only in a description string, so at implementation time a client APPROVED row is schema-indistinguishable from a founder approval \u2014 the exact client-authority-exceeds-run-scope failure the safety gates forbid.",
+      "fix": "Add to factory_run a machine-checkable field, e.g. \"approvals_required\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"required\": [\"approver_kind\", \"scope\"] } } populated at classification, with a constraint note: run may enter APPROVED only when every approvals_required row has a matching approval with decision APPROVED; founder rows are mandatory for any production/spend/send/legal scope.",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "feasibility",
+      "file": "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md",
+      "severity": "MAJOR",
+      "issue": "\u00a75 'Current secret inventory (reality, not design)' misstates live reality. Actual TrustField-Technologies GH Actions repo secrets (verified via gh api actions/secrets) are: ADMIN_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, NOETFIELD_SUPABASE_URL, NOETFIELD_SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, VERCEL_DEPLOY_HOOK_URL. The claimed VERIFY_BASE_URL, VERIFY_WWW_BASE, API_BASE, WWW_BASE are NOT secrets \u2014 they are hardcoded public-URL env values in workflow files (e.g. www-prod-audit.yml line 21). The inventory also omits VERCEL_DEPLOY_HOOK_URL (deploy-capable) and the two Supabase service-role keys \u2014 precisely the send/deploy-capable credential classes the \u00a75 env_profile audit and W4/W7 walls are designed around. (The 'ANTHROPIC_API_KEY is NOT wired' claim is correct.)",
+      "fix": "In \u00a75, replace 'GH Actions (TrustField fleet) has wired: `VERIFY_BASE_URL`, `VERIFY_WWW_BASE`, `ADMIN_TOKEN`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `API_BASE`, `WWW_BASE`.' with 'GH Actions (TrustField fleet) repo secrets wired: `ADMIN_TOKEN`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `NOETFIELD_SUPABASE_URL`, `NOETFIELD_SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `VERCEL_DEPLOY_HOOK_URL` \u2014 note the deploy-capable hook and DB service-role keys are in scope for the send/deploy-credential exclusion. `VERIFY_BASE_URL`/`API_BASE`/`WWW_BASE` are non-secret public-URL env values hardcoded in workflow files, not secrets.'",
+      "outcome": "FIXED_IN_SESSION"
+    },
+    {
+      "verifier": "feasibility",
+      "file": "cloud-factory/MVP_ACTIVATION_PLAN_v0.md",
+      "severity": "MAJOR",
+      "issue": "CF-P1-D (line 83) cites 'GH Actions dispatch workflow patterned on `p0pgr-shadow-cycle-v1.yml`' as an existing precedent, but that workflow file exists on no live ref of the SG repo: main and every fetched branch carry only brain-loop-autorun-v1.yml and repo-fences-v1.yml, and its source branch cursor/language-layer-v1 returns 404 on GitHub. The file is evidenced only historically (Actions run 28984157746, path .github/workflows/p0pgr-shadow-cycle-v1.yml, per receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json). A CF-P1 builder cannot read the cited pattern file.",
+      "fix": "Change 'patterned on `p0pgr-shadow-cycle-v1.yml`' to 'patterned on the R2 cloud-proven shadow-cycle workflow (`.github/workflows/p0pgr-shadow-cycle-v1.yml`, existed only on the now-deleted branch `cursor/language-layer-v1` \u2014 not on main; evidence: receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json, runs 28984157746/28984159107)'.",
+      "outcome": "FIXED_IN_SESSION"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "p0pgr_execution_receipt_v1",
+  "receipt_id": "L0_REPO_GRAPH_MEMORY_BUILD_v1-20260709T020915Z",
+  "recorded_at": "2026-07-09T02:09:15.907810+00:00",
+  "packet_id": "L0_REPO_GRAPH_MEMORY_BUILD_v1",
+  "canon_version": "founder_canon_v1.0.0",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "authorized_by": [
+    "founder-order-resume-1000-plan-l0-20260709T020915Z"
+  ],
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "gates_note": "Deterministic local scan + reuse of already-receipted subsystem knowledge; one new data artifact written (reversible, uncommitted); no LLM re-derivation of repo facts, no deploy/send/schedule.",
+  "quality_state": "PASS",
+  "evidence": [
+    {
+      "claim": "L0 graph artifact written",
+      "kind": "hash",
+      "sha256": "4da1865596b88bd72ee9c8a090f9ce4da14f32460526c530fa4b2ea0502c2fb6",
+      "saved_path": "data/l0_repo_graph_memory_v1.json"
+    },
+    {
+      "claim": "distilled from receipted sweep, not a new blind pass",
+      "kind": "file_stat",
+      "saved_path": "receipts/p0pgr/CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z.json"
+    }
+  ],
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "deterministic python scan; zero LLM calls (true Architect)"
+  },
+  "accounting_note": "session-embedded deterministic script",
+  "executor_route_note": "SESSION_EMBEDDED deterministic build",
+  "commit_flag": "flag for next founder-visible commit"
+}
