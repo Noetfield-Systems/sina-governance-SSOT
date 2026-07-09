@@ -1,0 +1,192 @@
+{
+  "schema": "sourcea_form_official_submit_map_v1",
+  "dry_run_only": true,
+  "row_count": 22,
+  "picks": [
+    {
+      "id": "Q-FINAL-01",
+      "pick": "A",
+      "sg": "C1",
+      "reason": "Outbound P0 spine; catalog parallel not paused",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-BC-05",
+      "pick": "A",
+      "sg": "C1",
+      "reason": "Outbound is spine; Goal 1 does not block drain",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CHAT-NEXT-P0-01",
+      "pick": "B",
+      "sg": "C1",
+      "reason": "Outbound first: RUN INBOX sa-1200, not form-block-first",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-SESSION-FORM-BUILD",
+      "pick": "A",
+      "sg": "C1",
+      "reason": "Form fill parallel with Worker BUILD \u2014 meta supports revenue",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-SESSION-INBOX-NEXT",
+      "pick": "A",
+      "sg": "C1",
+      "reason": "RUN INBOX P0-13 next \u2014 outbound queue head",
+      "founder_fact": false
+    },
+    {
+      "id": "ENF-08",
+      "pick": "YES",
+      "sg": "C2",
+      "reason": "Either counts: Cash PASS=deposit OR Commitment PASS=signed LOI/SOW (patch labels)",
+      "founder_fact": false
+    },
+    {
+      "id": "ENF-01",
+      "pick": "A",
+      "sg": "C3",
+      "reason": "Film on schedule; parallel track \u2014 not waiting for Hub button",
+      "founder_fact": false
+    },
+    {
+      "id": "ENF-02",
+      "pick": "APPROVE",
+      "sg": "C3",
+      "reason": "Small outreach parallel; broad outreach waits for demo asset",
+      "founder_fact": false
+    },
+    {
+      "id": "ENF-14",
+      "pick": "C",
+      "sg": "C3+D",
+      "reason": "LinkedIn gate open by default (DEFER); flip to APPROVE only if founder confirms updated",
+      "founder_fact": true
+    },
+    {
+      "id": "Q-BC-07",
+      "pick": "C",
+      "sg": "C4",
+      "reason": "Auto for mapped/GUARD bays; manual or sign-only for unmapped/REVENUE",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CW-SOURCEA-APP",
+      "pick": "A",
+      "sg": "C5",
+      "reason": "DNS fix public-priority (parallel track)",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CW-BATCH3",
+      "pick": "A",
+      "sg": "C5",
+      "reason": "Drain continues \u2014 batch 3 arms while DNS track runs",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-MF-02",
+      "pick": "C",
+      "sg": "C6",
+      "reason": "Wait: verify package, copy, version, login before npm publish",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-MF-03",
+      "pick": "A",
+      "sg": "C6",
+      "reason": "One Proof Layer card only when publish gate opens",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CHAT-PUBLISH-01",
+      "pick": "B",
+      "sg": "C6",
+      "reason": "Wait until simplified batch + language surface lock applied",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-WBC-PROOF-LAB-OK",
+      "pick": "C",
+      "sg": "C7",
+      "reason": "Internal/appointment-only \u2014 no external buyer URL yet",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-SESSION-TUNNEL-DEMO",
+      "pick": "B",
+      "sg": "C7",
+      "reason": "Local only until founder authorizes tunnel",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-WBC-STYLE-B1",
+      "pick": "B",
+      "sg": "C7",
+      "reason": "Defer hero film; Proof Lab interactive sufficient for selective demos",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CHAT-LANG-01",
+      "pick": "B",
+      "sg": "C8",
+      "reason": "Per surface: Persian for meaning/internal; English for paths/proof/public",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-CHAT-PLUSONE-01",
+      "pick": "A",
+      "sg": "C8",
+      "reason": "Wire PLUS ONE + Prompt OS before voice; supports surface split",
+      "founder_fact": false
+    },
+    {
+      "id": "Q-MF-10",
+      "pick": "B",
+      "sg": "D",
+      "reason": "Default not sent \u2014 use A only if founder confirms Mail sent",
+      "founder_fact": true
+    },
+    {
+      "id": "Q-WBC-OCRE-L3",
+      "pick": "B",
+      "sg": "D",
+      "reason": "Default not confirmed \u2014 use A only if founder confirms Mail from their account",
+      "founder_fact": true
+    }
+  ],
+  "overrides": {
+    "Q-FINAL-01": "A",
+    "Q-BC-05": "A",
+    "Q-CHAT-NEXT-P0-01": "B",
+    "Q-SESSION-FORM-BUILD": "A",
+    "Q-SESSION-INBOX-NEXT": "A",
+    "ENF-08": "YES",
+    "ENF-01": "A",
+    "ENF-02": "APPROVE",
+    "ENF-14": "C",
+    "Q-BC-07": "C",
+    "Q-CW-SOURCEA-APP": "A",
+    "Q-CW-BATCH3": "A",
+    "Q-MF-02": "C",
+    "Q-MF-03": "A",
+    "Q-CHAT-PUBLISH-01": "B",
+    "Q-WBC-PROOF-LAB-OK": "C",
+    "Q-SESSION-TUNNEL-DEMO": "B",
+    "Q-WBC-STYLE-B1": "B",
+    "Q-CHAT-LANG-01": "B",
+    "Q-CHAT-PLUSONE-01": "A",
+    "Q-MF-10": "B",
+    "Q-WBC-OCRE-L3": "B"
+  },
+  "dry_run_verified": {
+    "picked": 22,
+    "open_remaining": 80,
+    "complete": false,
+    "partial_batch": true
+  },
+  "dry_run_command": "cd ~/Desktop/Noetfield-Systems/SourceA && \\\npython3 scripts/hub_form_submit_v1.py --dry-state --actor founder \\\n  --picks-json \"$(python3 -c \\\"import json; print(json.dumps(json.load(open('/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P99-LEDGER/SOURCEA_FORM_OFFICIAL_SUBMIT_MAP_SIMPLIFIED_2026-07-07.json'))['overrides']))\\\")\" \\\n  --json"
+}

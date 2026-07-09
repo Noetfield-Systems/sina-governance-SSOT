@@ -31,6 +31,41 @@ def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _parse_iso(raw: str | None) -> datetime | None:
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _approval_metadata_present(draft: dict[str, Any]) -> bool:
+    approval = draft.get("approval")
+    if not isinstance(approval, dict):
+        return False
+    if approval.get("required") is not True:
+        return False
+    status = str(approval.get("status") or "").strip()
+    return bool(status)
+
+
+def _inside_approval_window(draft: dict[str, Any], *, now: datetime | None = None) -> bool:
+    if draft.get("approval_window_expired") is True:
+        return False
+    now = now or datetime.now(timezone.utc)
+    approval = draft.get("approval") if isinstance(draft.get("approval"), dict) else {}
+    start_raw = approval.get("window_start") or draft.get("approval_window_start")
+    end_raw = approval.get("window_end") or draft.get("approval_window_end")
+    start = _parse_iso(start_raw)
+    end = _parse_iso(end_raw)
+    if start and now < start:
+        return False
+    if end and now > end:
+        return False
+    return True
+
+
 def check_dispatchable(draft: dict[str, Any]) -> tuple[bool, list[str]]:
     failed: list[str] = []
     if not draft.get("icp_stranger_id"):
@@ -50,10 +85,9 @@ def check_dispatchable(draft: dict[str, Any]) -> tuple[bool, list[str]]:
     if not draft.get("link_check_receipt_id"):
         failed.append("link_check_receipt_attached")
 
-    approval = draft.get("approval") or {}
-    if approval.get("required") and not approval.get("status"):
+    if not _approval_metadata_present(draft):
         failed.append("approval_metadata_present")
-    if draft.get("approval_window_expired") is True:
+    if not _inside_approval_window(draft):
         failed.append("inside_approval_window")
 
     return len(failed) == 0, failed

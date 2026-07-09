@@ -1,12 +1,23 @@
 {
   "schema": "auth_core_interface_spec_v1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-08T07:00:00Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-08T08:00:00Z",
   "authority": "SG (SSSOT)",
   "package_name": "@noetfield/auth-core",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
-    "supabase_project": "portfolio_spine",
+    "law": "split_per_supabase_repo_split_v1",
+    "auth_projects": {
+      "portfolio_spine": {
+        "supabase_ref": "ldfruywifqnfpwsfgmdl",
+        "ventures": ["sourcea"]
+      },
+      "noetfield": {
+        "supabase_ref": "tkgpapowwplupyekpivy",
+        "ventures": ["noetfield", "trustfield"]
+      }
+    },
+    "supabase_project": "split_law",
     "supabase_ref": "ldfruywifqnfpwsfgmdl"
   },
   "exports": {

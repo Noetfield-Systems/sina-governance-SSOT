@@ -1,11 +1,22 @@
 {
   "schema": "auth_surface_matrix_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-08T07:07:43Z",
+  "version": "1.2.0",
+  "saved_at": "2026-07-08T08:00:00Z",
   "authority": "SG (SSSOT)",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
-    "auth_project": "portfolio_spine",
+    "law": "split_per_supabase_repo_split_v1",
+    "auth_projects": {
+      "portfolio_spine": {
+        "supabase_ref": "ldfruywifqnfpwsfgmdl",
+        "ventures": ["sourcea"]
+      },
+      "noetfield": {
+        "supabase_ref": "tkgpapowwplupyekpivy",
+        "ventures": ["noetfield", "trustfield"]
+      }
+    },
+    "auth_project": "split_law",
     "supabase_ref": "ldfruywifqnfpwsfgmdl",
     "factory_project": "noetfield",
     "factory_ref": "tkgpapowwplupyekpivy",
@@ -15,6 +26,7 @@
       "trustfield"
     ],
     "cross_domain_strategy": "per_domain_sessions",
+    "link_strategy": "same_user_id_when_email_matches_async_only",
     "auth_methods_p0": [
       "magic_link",
       "email_password"
@@ -187,7 +199,7 @@
             302,
             307
           ],
-          "implementation": "planned",
+          "implementation": "partial",
           "owner_repo": "TrustField-Technologies",
           "warn_if_public_200": true
         },
@@ -200,13 +212,13 @@
             302,
             307
           ],
-          "implementation": "planned",
-          "owner_repo": "TrustField-Technologies",
-          "warn_if_public_200": true,
-          "expect_when_planned": [
-            404
-          ],
-          "note": "Route not shipped; 404 acceptable until Phase 1"
+        "implementation": "partial",
+        "owner_repo": "TrustField-Technologies",
+        "warn_if_public_200": true,
+        "expect_when_planned": [
+          404
+        ],
+        "note": "Gated customer portal stub in repo; deploy to flip live"
         }
       ]
     },
@@ -289,34 +301,44 @@
       ]
     }
   },
-  "founder_decisions_pending": [
+  "founder_decisions_pending": [],
+  "founder_decisions_ratified": [
     {
       "id": 1,
       "question": "Auth project",
-      "recommended": "portfolio_spine only"
+      "decision": "split_law: SourceA/Forge on portfolio_spine; Noetfield+TrustField on noetfield project",
+      "ratified_at": "2026-07-08T08:00:00Z",
+      "authority": "founder_via_sg_w11_upgrade"
     },
     {
       "id": 2,
       "question": "Cross-brand login",
-      "recommended": "per-domain sessions"
+      "decision": "per_domain_sessions",
+      "ratified_at": "2026-07-08T08:00:00Z",
+      "authority": "founder_via_sg_w11_upgrade"
     },
     {
       "id": 3,
       "question": "P0 methods",
-      "recommended": "magic_link + email_password"
+      "decision": "magic_link + email_password",
+      "ratified_at": "2026-07-08T08:00:00Z",
+      "authority": "founder_via_sg_w11_upgrade"
     },
     {
       "id": 4,
       "question": "First ship target",
-      "recommended": "TrustField /register + portal"
+      "decision": "TrustField /register + Partner Access platform",
+      "ratified_at": "2026-07-08T08:00:00Z",
+      "authority": "founder_via_sg_w11_upgrade"
     },
     {
       "id": 5,
       "question": "Enterprise SSO",
-      "recommended": "defer P2"
+      "decision": "defer_p2",
+      "ratified_at": "2026-07-08T08:00:00Z",
+      "authority": "founder_via_sg_w11_upgrade"
     }
   ],
-  "founder_decisions_ratified": [],
   "auth_routes": {
     "law": "Cache-Control private no-store on session routes",
     "routes": [
@@ -329,7 +351,7 @@
           "/auth/callback",
           "/auth/sign-out"
         ],
-        "implementation": "planned"
+        "implementation": "partial"
       },
       {
         "venture": "noetfield",
@@ -340,7 +362,7 @@
           "/auth/callback",
           "/auth/sign-out"
         ],
-        "implementation": "planned"
+        "implementation": "partial"
       },
       {
         "venture": "trustfield",
@@ -351,7 +373,7 @@
           "/auth/callback",
           "/auth/sign-out"
         ],
-        "implementation": "planned"
+        "implementation": "live"
       }
     ]
   }

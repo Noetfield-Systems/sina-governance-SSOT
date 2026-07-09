@@ -1,0 +1,43 @@
+{
+  "schema": "pr-conflict-skill-lock-v1",
+  "status": "LOCKED",
+  "locked_at": "2026-07-08T02:30:00Z",
+  "authority": "SG_SSSOT",
+  "one_law": "PR merge conflicts in governance-sensitive paths MUST follow skills/pr-conflict-resolver before any side is picked or committed.",
+  "canonical_skill": "skills/pr-conflict-resolver/SKILL.md",
+  "lock_doc": "skills/pr-conflict-resolver/PR_CONFLICT_RESOLVER_SKILL_LOCKED_v1.md",
+  "evals": "skills/pr-conflict-resolver/evals/evals.json",
+  "benchmark": "skills/pr-conflict-resolver/evals/benchmark.json",
+  "skill_sha256_prefix": "f460c26916385116",
+  "evals_sha256_prefix": "dbc87948eaeb457d",
+  "desktop_app": {
+    "ssot_path": "desktop-app/PR-Conflict-Resolver-Report.app",
+    "desktop_shortcut": "~/Desktop/PR-Conflict-Resolver-Report.app",
+    "launcher": "Contents/MacOS/launcher",
+    "report_html": "Contents/Resources/report.html"
+  },
+  "verifier": "scripts/verify_pr_conflict_skill_v1.py",
+  "mandatory_for_agents": [
+    "sg_sssot_cursor",
+    "noos_agent",
+    "copilot-cli-mac"
+  ],
+  "governance_sensitive_globs": [
+    "data/*_registry_v1.json",
+    "data/noos-*-v1.json",
+    "data/autorun-workflows-v1.json",
+    "receipts/proof/*.json",
+    "docs/_NOOS_AGENT/*_LOCKED.md",
+    "ssot/*LOCKED*"
+  ],
+  "resolution_receipt_pattern": "receipts/proof/noos-pr-conflict-resolution-*.json",
+  "sourcea_machine_enforcement": {
+    "repo": "~/Desktop/Noetfield-Systems/SourceA",
+    "ssot": "data/pr-conflict-resolver-mandatory-v1.json",
+    "law": "brain-os/law/enforcement/PR_CONFLICT_RESOLVER_MANDATORY_LOCKED_v1.md",
+    "first_check": "scripts/pr_conflict_resolver_first_check_v1.py",
+    "validator": "scripts/validate-pr-conflict-resolver-mandatory-v1.sh",
+    "cursor_rule": ".cursor/rules/pr-conflict-resolver-mandatory-v1.mdc",
+    "wired_at": "2026-07-08T02:25:00Z"
+  }
+}

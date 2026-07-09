@@ -1,9 +1,9 @@
 {
-  "file": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+  "file": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
   "agent_review": [
     {
       "type": "AGENT_REVIEW",
-      "line": 58,
+      "line": 71,
       "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
       "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
     }

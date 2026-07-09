@@ -1,12 +1,13 @@
 {
   "schema": "living_system_rubric_pulse_receipt_v1",
-  "status": "PASS",
   "saved_at": "2026-07-08T01:47:51Z",
   "trigger_host": "cloud",
+  "motor_id": "gh_actions_living_system_rubric_v1",
   "plan": "LS-022",
+  "rubric_scope": "pulse_scheduled_only",
   "check": {
     "id": "pulse_scheduled",
-    "doctrine_ref": "\u00a78 item 1 \u00b7 governed-autorun manual green \u2260 cron green",
+    "doctrine_ref": "§8 item 1 · governed-autorun manual green ≠ cron green",
     "status": "PASS",
     "detail": "11 scheduled pulse receipt(s) in 168h window",
     "evidence": [
@@ -20,5 +21,5 @@
       "receipts/agent-read-staleness-20260707T234651Z.json"
     ]
   },
-  "verdict": "STALE"
+  "verdict": "PASS"
 }

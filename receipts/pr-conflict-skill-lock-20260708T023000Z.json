@@ -1,0 +1,17 @@
+{
+  "schema": "pr-conflict-skill-lock-receipt-v1",
+  "locked_at": "2026-07-08T02:30:00Z",
+  "authority": "SG_SSSOT",
+  "status": "LOCKED",
+  "verifier": "scripts/verify_pr_conflict_skill_v1.py",
+  "verifier_result": "ALL PASS",
+  "skill_sha256_prefix": "f460c26916385116",
+  "evals_sha256_prefix": "dbc87948eaeb457d",
+  "desktop_app_ssot": "desktop-app/PR-Conflict-Resolver-Report.app",
+  "mandatory_for_agents": [
+    "sg_sssot_cursor",
+    "noos_agent",
+    "copilot-cli-mac"
+  ],
+  "report_line": "pr_conflict_skill_lock · SAVE AND LOCK complete"
+}

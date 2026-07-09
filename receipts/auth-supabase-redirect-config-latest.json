@@ -1,0 +1,29 @@
+{
+  "schema": "sg-auth-supabase-redirect-config-v1",
+  "allow_list_from_matrix": [
+    "https://sourcea.app/auth/callback",
+    "https://www.noetfield.com/auth/callback",
+    "https://www.trustfield.ca/auth/callback",
+    "http://localhost:3000/auth/callback"
+  ],
+  "results": [
+    {
+      "project": "portfolio_spine",
+      "ref": "ldfruywifqnfpwsfgmdl",
+      "patch": {
+        "ok": false,
+        "skipped": true,
+        "reason": "no SUPABASE_ACCESS_TOKEN"
+      }
+    },
+    {
+      "project": "noetfield",
+      "ref": "tkgpapowwplupyekpivy",
+      "patch": {
+        "ok": false,
+        "skipped": true,
+        "reason": "no SUPABASE_ACCESS_TOKEN"
+      }
+    }
+  ]
+}

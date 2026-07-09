@@ -1,0 +1,52 @@
+{
+  "schema": "cross-domain-auth-w11-closeout-v1",
+  "closed_at": "2026-07-08T08:30:00Z",
+  "authority": "SG W11 cross-domain auth upgrade",
+  "matrix_version": "1.2.0",
+  "founder_decisions_ratified": 5,
+  "identity_plane": "split_law: portfolio_spine (sourcea) + noetfield (noetfield, trustfield)",
+  "packages": {
+    "@noetfield/auth-core": "noetfeld-os/packages/auth-core"
+  },
+  "venture_prs": {
+    "sina-governance-ssot": [
+      "data/auth_surface_matrix_v1.json v1.2.0",
+      "data/auth_core_interface_spec_v1.json v1.1.0",
+      "scripts/verify_auth_surfaces_e2e_v1.py split-law profiles probe",
+      "scripts/configure_portfolio_auth_redirects_v1.py"
+    ],
+    "TrustField-Technologies": [
+      "web/lib/auth/paths.ts gate /partner-access",
+      "web/app/customer-portal/page.tsx",
+      "web/lib/auth/paths.test.ts"
+    ],
+    "SourceA": [
+      "sites/SourceA-landing/green-unified/auth/*.html canonical routes"
+    ],
+    "Noetfield": [
+      "auth/sign-in|sign-up|callback|sign-out",
+      "assets/nf-www-auth-v1.js",
+      "data/nf-www-auth-config-v1.json",
+      "scripts/sync_nf_www_auth_public_v1.py",
+      "assets/partials/header.html Sign in CTA"
+    ],
+    "noetfeld-os": [
+      "packages/auth-core",
+      "supabase_jwt.py JWT middleware on /v1/decision",
+      "tests/test_supabase_jwt.py"
+    ]
+  },
+  "probe_status": "WARN",
+  "probe_notes": [
+    "tier_0_public 11/11 PASS",
+    "tier_2 tf_partner_access WARN until TrustField deploy",
+    "supabase redirect config requires SUPABASE_ACCESS_TOKEN (founder ops)"
+  ],
+  "deploy_required": [
+    "TrustField-Technologies: deploy www for /partner-access gate",
+    "Noetfield: deploy www auth routes + sync auth config from vault",
+    "SourceA: deploy auth/*.html routes",
+    "Founder: run configure_portfolio_auth_redirects_v1.py with SUPABASE_ACCESS_TOKEN"
+  ],
+  "closure_token": "CROSS_DOMAIN_AUTH_W11: code_complete_pending_deploy"
+}

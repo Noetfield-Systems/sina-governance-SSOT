@@ -1,0 +1,21 @@
+{
+  "schema": "founder_decision_batch_simplified_v1",
+  "locked_at": "2026-07-07T06:55:00Z",
+  "source": "80-row FORM_OFFICIAL collapsed",
+  "submitted_to_sourcea_form": false,
+  "decisions": {
+    "C1": {"pick": "A", "label": "Outbound first", "row_ids": ["Q-FINAL-01", "Q-BC-05", "Q-CHAT-NEXT-P0-01"]},
+    "C2": {"pick": "C", "labels": {"cash_pass": "deposit", "commitment_pass": "signed LOI/SOW"}, "row_ids": ["ENF-08"]},
+    "C3": {"pick": "B", "patch": "small outreach OK; broad waits for demo asset", "row_ids": ["ENF-01", "ENF-02", "ENF-14"]},
+    "C4": {"pick": "C", "label": "Auto GUARD; REVENUE founder tap", "row_ids": ["Q-BC-07"]},
+    "C5": {"pick": "C", "label": "Parallel; DNS public-priority", "row_ids": ["Q-CW-BATCH3", "Q-CW-SOURCEA-APP"]},
+    "C6": {"pick": "B", "label": "Wait on npm", "row_ids": ["Q-MF-02", "Q-CHAT-PUBLISH-01"]},
+    "C7": {"pick": "C", "label": "Appointment-only local", "row_ids": ["Q-WBC-PROOF-LAB-OK", "Q-SESSION-TUNNEL-DEMO"]},
+    "C8": {"pick": "C", "patch": {"internal": "Persian allowed", "public_contracts": "English"}, "row_ids": ["Q-CHAT-LANG-01"]}
+  },
+  "founder_facts": {
+    "Q-MF-10": "not sent if no personal Mail",
+    "ENF-14": "gate open if LinkedIn not updated",
+    "Q-WBC-OCRE-L3": "not confirmed if no founder Mail"
+  }
+}

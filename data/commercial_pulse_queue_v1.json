@@ -58,6 +58,8 @@
     "approval": {
       "required": true,
       "status": "pending",
+      "window_start": null,
+      "window_end": null,
       "founder_decision_at": null,
       "block_reason": null
     },

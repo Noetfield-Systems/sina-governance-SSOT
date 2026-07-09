@@ -23,7 +23,7 @@ class AuthSurfaceProbeTests(unittest.TestCase):
     def test_matrix_loads(self) -> None:
         matrix = load_matrix()
         self.assertEqual(matrix["schema"], "auth_surface_matrix_v1")
-        self.assertEqual(matrix["version"], "1.1.0")
+        self.assertEqual(matrix["version"], "1.2.0")
         self.assertIn("tier_0_public", matrix["tiers"])
 
     def test_is_auth_redirect(self) -> None:

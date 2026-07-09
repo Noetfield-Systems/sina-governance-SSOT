@@ -164,35 +164,35 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
     return row
 
 
-def _load_portfolio_spine_url() -> str | None:
+def _load_env_url(env_name: str, url_key: str = "SUPABASE_URL") -> str | None:
     import os
 
-    for key in ("SUPABASE_URL",):
-        val = os.environ.get(key, "").strip()
-        if val:
-            return val.rstrip("/")
-    env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
+    val = os.environ.get(url_key, "").strip()
+    if val:
+        return val.rstrip("/")
+    env_path = Path.home() / ".sourcea-secrets" / env_name
     if env_path.is_file():
         for line in env_path.read_text(encoding="utf-8").splitlines():
             line = line.strip()
-            if line.startswith("SUPABASE_URL="):
+            if line.startswith(f"{url_key}="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'").rstrip("/")
     return None
 
 
-def probe_auth_health(base: str) -> dict[str, Any]:
-    url = f"{base}/auth/v1/health"
-    probe = http_probe(url, timeout=15)
-    status = "PASS" if probe.get("http") == 200 else "WARN"
-    return {"status": status, "url": url, "http": probe.get("http"), "error": probe.get("error")}
+def _load_portfolio_spine_url() -> str | None:
+    return _load_env_url("portfolio-spine.env")
 
 
-def probe_profiles_table(base: str) -> dict[str, Any]:
+def _load_noetfield_url() -> str | None:
+    return _load_env_url("noetfield.env")
+
+
+def probe_profiles_table(base: str, *, table: str = "profiles", env_file: str = "portfolio-spine.env") -> dict[str, Any]:
     import os
 
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_SERVICE_KEY")
     if not key:
-        env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
+        env_path = Path.home() / ".sourcea-secrets" / env_file
         if env_path.is_file():
             for line in env_path.read_text(encoding="utf-8").splitlines():
                 if line.startswith("SUPABASE_SERVICE_ROLE_KEY=") or line.startswith("SUPABASE_SERVICE_KEY="):
@@ -203,21 +203,28 @@ def probe_profiles_table(base: str) -> dict[str, Any]:
 
     headers = {"apikey": key, "Authorization": f"Bearer {key}"}
     req = urllib.request.Request(
-        f"{base}/rest/v1/profiles?select=id&limit=1",
+        f"{base}/rest/v1/{table}?select=id&limit=1",
         headers=headers,
     )
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
-            return {"status": "PASS", "http": resp.status, "table": "profiles"}
+            return {"status": "PASS", "http": resp.status, "table": table}
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")[:200]
         if exc.code == 404 or "does not exist" in body.lower() or "relation" in body.lower():
-            return {"status": "WARN", "http": exc.code, "reason": "profiles table not migrated yet"}
+            return {"status": "WARN", "http": exc.code, "reason": f"{table} table not migrated yet"}
         if exc.code >= 500:
             return {"status": "FAIL", "http": exc.code, "reason": "profiles probe server error"}
         return {"status": "WARN", "http": exc.code, "reason": "profiles probe non-200"}
     except urllib.error.URLError as exc:
         return {"status": "WARN", "reason": str(exc.reason)}
+
+
+def probe_auth_health(base: str) -> dict[str, Any]:
+    url = f"{base}/auth/v1/health"
+    probe = http_probe(url, timeout=15)
+    status = "PASS" if probe.get("http") == 200 else "WARN"
+    return {"status": status, "url": url, "http": probe.get("http"), "error": probe.get("error")}
 
 
 def run_supabase_subprobe() -> dict[str, Any]:
@@ -243,12 +250,23 @@ def run_supabase_subprobe() -> dict[str, Any]:
         out["live_profiles"] = {"status": "SKIP"}
 
     base = _load_portfolio_spine_url()
+    noetfield_base = _load_noetfield_url()
     if base:
         out["auth_health"] = probe_auth_health(base)
-        out["profiles_table"] = probe_profiles_table(base)
+        out["profiles_table"] = probe_profiles_table(base, table="profiles", env_file="portfolio-spine.env")
     else:
         out["auth_health"] = {"status": "WARN", "reason": "portfolio_spine URL not configured"}
         out["profiles_table"] = {"status": "SKIP", "reason": "no base URL"}
+
+    if noetfield_base:
+        tf_profiles = probe_profiles_table(
+            noetfield_base, table="trustfield_profiles", env_file="noetfield.env"
+        )
+        out["trustfield_profiles_table"] = tf_profiles
+        if tf_profiles.get("status") == "PASS":
+            out["profiles_table"] = tf_profiles
+    else:
+        out["trustfield_profiles_table"] = {"status": "SKIP", "reason": "noetfield URL not configured"}
 
     statuses = [v.get("status") for v in out.values() if isinstance(v, dict)]
     if "FAIL" in statuses:
