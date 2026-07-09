@@ -1,0 +1,2360 @@
+{
+ "schema": "plan_library_v1",
+ "version": "1.0.0",
+ "status": "PROPOSED",
+ "era": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+ "authority": "plan-factory/PLAN_FACTORY_ARCHITECTURE_v1.md",
+ "canon_version": "founder_canon_v1.0.0",
+ "laws": "FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.",
+ "founder_authorization": "founder-order-1000-plan-cloud-factory-20260709T014708Z; deliverable set revised by founder-order-1000-plan-l0-first-5file-20260709T021931Z (receipts/p0pgr/founder/)",
+ "capacity": 1000,
+ "bands": [
+  {
+   "band": 1,
+   "plan_type": "app_builder",
+   "id_range_start": "PLAN-0001",
+   "id_range_end": "PLAN-0100",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL4",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "risk_default": "medium",
+   "band_rule": "FL4 builds app manifests/drafts only; no service provisioning without its own founder point; production deploy absent from substrate (CF-P4+)."
+  },
+  {
+   "band": 2,
+   "plan_type": "workflow_builder",
+   "id_range_start": "PLAN-0101",
+   "id_range_end": "PLAN-0200",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "risk_default": "medium",
+   "band_rule": "FL5 produces DRAFT workflow definitions only; activation is a separate founder-gated step (prompt L5 rules)."
+  },
+  {
+   "band": 3,
+   "plan_type": "research",
+   "id_range_start": "PLAN-0201",
+   "id_range_end": "PLAN-0300",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL9",
+    "FL10"
+   ],
+   "risk_default": "low",
+   "band_rule": "Read-only; every external claim carries per-URL status + body sha256 evidence (CLOUD_RESEARCH discipline)."
+  },
+  {
+   "band": 4,
+   "plan_type": "compliance_governance",
+   "id_range_start": "PLAN-0301",
+   "id_range_end": "PLAN-0400",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "risk_default": "high",
+   "band_rule": "Governance-zone writes reach main only via branch + PR through full repo fences; W2 wall applies."
+  },
+  {
+   "band": 5,
+   "plan_type": "deploy",
+   "id_range_start": "PLAN-0401",
+   "id_range_end": "PLAN-0500",
+   "default_line_plan": [
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "risk_default": "high",
+   "band_rule": "Preview only. Production stays FOUNDER_ONLY outside the substrate (HARD_BLOCK reason 2)."
+  },
+  {
+   "band": 6,
+   "plan_type": "verification",
+   "id_range_start": "PLAN-0501",
+   "id_range_end": "PLAN-0600",
+   "default_line_plan": [
+    "FL8",
+    "FL9"
+   ],
+   "risk_default": "low",
+   "band_rule": "FL8 PASS only from the secondary CF account edge receipt \u2014 never builder self-report (autonomy loop L3)."
+  },
+  {
+   "band": 7,
+   "plan_type": "revenue",
+   "id_range_start": "PLAN-0601",
+   "id_range_end": "PLAN-0700",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "risk_default": "high",
+   "band_rule": "Offers/funnels as DRAFTS only \u2014 no sends, no pricing/legal/equity claims without founder approval (claim ladder VERIFIED/DECLARED/PLANNED). FL4 may substitute FL5 for app-shaped offers (justify in plan notes)."
+  },
+  {
+   "band": 8,
+   "plan_type": "client_onboarding",
+   "id_range_start": "PLAN-0701",
+   "id_range_end": "PLAN-0800",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "risk_default": "medium",
+   "band_rule": "Client-facing copy requires founder approval before shipping; deliverables use the simple-web format (HTML page), never slide decks."
+  },
+  {
+   "band": 9,
+   "plan_type": "site_app_repair",
+   "id_range_start": "PLAN-0801",
+   "id_range_end": "PLAN-0900",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "risk_default": "medium",
+   "band_rule": "Patches land as PR from sandbox/factory/* branches; merge to main is a founder point through full fences."
+  },
+  {
+   "band": 10,
+   "plan_type": "automation_cron",
+   "id_range_start": "PLAN-0901",
+   "id_range_end": "PLAN-1000",
+   "default_line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL8",
+    "FL9"
+   ],
+   "risk_default": "high",
+   "band_rule": "Compiles + dry-runs ONLY. Activating any schedule is double-locked: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation (recurring_copilot_automation is forbidden today). cron_schedule stays in forbidden_actions regardless of eligibility."
+  }
+ ],
+ "growth_law": "Plans enter as draft via FL10 harvest or architect order; a founder receipt ratifies seed -> testing -> active; plan_version immutable once active; two versions never active at once; retired plans are never deleted. No self-promotion to active (RF fence precedent). Library capacity is 1000 ids, banded 100 per plan_type.",
+ "seed_note": "EXACTLY 30 seed records \u2014 the first three ids of each band \u2014 every record complete against PLAN_SCHEMA_v1, status seed, auto_dispatch.eligible false. Seeds are design records, not ratified plans; nothing here is built, active, or verified.",
+ "plans": [
+  {
+   "plan_id": "PLAN-0001",
+   "plan_version": "1.0.0",
+   "plan_type": "app_builder",
+   "title": "Client intake portal (template stack)",
+   "venture": "client",
+   "mission_template": "Build an intake portal app manifest for {{client_name}} from the governed template stack (Railway service + Supabase schema + CF Pages/Worker front) capturing {{intake_fields}}; preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL4",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "resolved at instantiation (venture or client workspace repo)",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "apps/{{client_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "production deploy of built app \u2014 absent from substrate, CF-P4+ per-deploy founder authorization"
+     },
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 3,
+    "workload_relief": 3,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "app_manifest",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "hash evidence for every generated artifact",
+    "test_report from FL6 contract tests"
+   ],
+   "notes": "Template-stack drafting only; provisions no live service. cloud_now 2: primary target claude_cloud_agent dormant (blocker B2)."
+  },
+  {
+   "plan_id": "PLAN-0002",
+   "plan_version": "1.0.0",
+   "plan_type": "app_builder",
+   "title": "Team bench mini-dashboard",
+   "venture": "trustfield",
+   "mission_template": "Build a read-only team-bench dashboard app manifest over {{data_source}} for founder review; preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL4",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/bench-dashboard/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "production deploy of built app \u2014 absent from substrate, CF-P4+ per-deploy founder authorization"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "app_manifest",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "hash evidence for every generated artifact",
+    "test_report from FL6 contract tests"
+   ],
+   "notes": "Reads candidate data via existing gated APIs only; no candidate contact paths."
+  },
+  {
+   "plan_id": "PLAN-0003",
+   "plan_version": "1.0.0",
+   "plan_type": "app_builder",
+   "title": "SourceA knowledge-app template",
+   "venture": "sourcea",
+   "mission_template": "Build a knowledge-app manifest over the SourceA brain bundle for {{use_case}}; preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL4",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/SourceA",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "cloud/apps/{{app_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "production deploy of built app \u2014 absent from substrate, CF-P4+ per-deploy founder authorization"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 3,
+    "workload_relief": 3,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "app_manifest",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "hash evidence for every generated artifact",
+    "test_report from FL6 contract tests"
+   ],
+   "notes": "Consumes the knowledge bundle read-only; bundle promotion stays on its own gated path (brain_domain_sandboxes_v1)."
+  },
+  {
+   "plan_id": "PLAN-0101",
+   "plan_version": "1.0.0",
+   "plan_type": "workflow_builder",
+   "title": "Lead-intake scoring workflow",
+   "venture": "trustfield",
+   "mission_template": "Draft a governed lead-intake scoring workflow definition for {{intake_channel}} with scoring rubric {{rubric_ref}}; drafts only, dry-run trace as preview.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "activation of the produced workflow definition (separate founder-gated step; no recurring automation without founder unlock)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 3,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "dry-run trace artifact with hash",
+    "contract-test results (script_run)"
+   ],
+   "notes": "Produces cf.* prompt-row drafts + workflow YAML drafts; nothing activates or schedules."
+  },
+  {
+   "plan_id": "PLAN-0102",
+   "plan_version": "1.0.0",
+   "plan_type": "workflow_builder",
+   "title": "Receipt-digest workflow (draft)",
+   "venture": "sg",
+   "mission_template": "Draft a workflow definition that assembles a daily receipt digest from {{receipt_dirs}} for founder review; dispatch-triggered dry-run only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "activation of the produced workflow definition (separate founder-gated step; no recurring automation without founder unlock)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 4,
+    "workload_relief": 5,
+    "cloud_now": 3,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "dry-run trace artifact with hash",
+    "contract-test results (script_run)"
+   ],
+   "notes": "Digest content is receipts-only (fence-exempt lane); any schedule stays behind the cron double lock."
+  },
+  {
+   "plan_id": "PLAN-0103",
+   "plan_version": "1.0.0",
+   "plan_type": "workflow_builder",
+   "title": "Client-order triage workflow",
+   "venture": "client",
+   "mission_template": "Draft an order-triage workflow definition for {{client_name}} routing {{order_categories}} to the correct plan bands; dry-run preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "resolved at instantiation (venture or client workspace repo)",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/{{client_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "activation of the produced workflow definition (separate founder-gated step; no recurring automation without founder unlock)"
+     },
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 3,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "preview_artifact",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "dry-run trace artifact with hash",
+    "contract-test results (script_run)"
+   ],
+   "notes": "Client sees only their run's artifacts (asset-gate discipline)."
+  },
+  {
+   "plan_id": "PLAN-0201",
+   "plan_version": "1.0.0",
+   "plan_type": "research",
+   "title": "Competitor / pricing scan",
+   "venture": "noetfield",
+   "mission_template": "Research competitors and pricing for {{offer_or_market}}; produce a sourced brief with per-URL evidence.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": false,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 3,
+    "workload_relief": 3,
+    "cloud_now": 3,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief"
+   ],
+   "outputs": [
+    "research_brief",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256 for every external claim"
+   ],
+   "notes": "Read-only; unverifiable sources dropped, never fabricated."
+  },
+  {
+   "plan_id": "PLAN-0202",
+   "plan_version": "1.0.0",
+   "plan_type": "research",
+   "title": "Candidate market scan (roles)",
+   "venture": "trustfield",
+   "mission_template": "Scan the candidate market for {{role_lane}}; produce a sourced brief of channels and public benchmarks with per-URL evidence. No contact, no outreach.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": false,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 4,
+    "workload_relief": 3,
+    "cloud_now": 3,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief"
+   ],
+   "outputs": [
+    "research_brief",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256 for every external claim"
+   ],
+   "notes": "Zero candidate contact (CASL gate untouched); public sources only."
+  },
+  {
+   "plan_id": "PLAN-0203",
+   "plan_version": "1.0.0",
+   "plan_type": "research",
+   "title": "Tooling evaluation brief",
+   "venture": "sg",
+   "mission_template": "Evaluate tooling options for {{capability}}; produce a decision brief with criteria, evidence, and a recommendation.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": false,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 3,
+    "workload_relief": 4,
+    "cloud_now": 3,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief"
+   ],
+   "outputs": [
+    "research_brief",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256 for every external claim"
+   ],
+   "notes": "Pattern precedent: docs/GRAPH_TOOL_DECISION_v1.md (evaluate, decide, receipt)."
+  },
+  {
+   "plan_id": "PLAN-0301",
+   "plan_version": "1.0.0",
+   "plan_type": "compliance_governance",
+   "title": "Repo-fences audit run",
+   "venture": "sg",
+   "mission_template": "Audit repo-fence coverage for {{zone_or_rule}}; produce an audit report and draft fixes as a PR through full fences.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "reports/**",
+     "tests/repo_fences/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of any governance-zone PR to main (fences + CODEOWNERS review)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 5,
+    "workload_relief": 3,
+    "cloud_now": 3,
+    "reversibility": 3
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "script_run evidence for every checker executed",
+    "hash evidence for the audit report"
+   ],
+   "notes": "Never weakens a gate (FT-L5): findings propose strengthening; fixes land only via founder-merged PR."
+  },
+  {
+   "plan_id": "PLAN-0302",
+   "plan_version": "1.0.0",
+   "plan_type": "compliance_governance",
+   "title": "Receipt-chain completeness audit",
+   "venture": "sg",
+   "mission_template": "Audit receipt-chain completeness for {{receipt_scope}}; report gaps (missing receipt_id, canon_version, evidence) and draft repair candidates.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "reports/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of any governance-zone PR to main (fences + CODEOWNERS review)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 5,
+    "workload_relief": 4,
+    "cloud_now": 3,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "file_stat evidence per audited receipt",
+    "hash evidence for the audit report"
+   ],
+   "notes": "Findings get IDs and next_pointers; they never silently disappear (L7)."
+  },
+  {
+   "plan_id": "PLAN-0303",
+   "plan_version": "1.0.0",
+   "plan_type": "compliance_governance",
+   "title": "Claim-ladder lint sweep of public copy",
+   "venture": "noetfield",
+   "mission_template": "Sweep public copy under {{copy_scope}} for legal/equity/payment/employment claim language; classify per claim ladder VERIFIED/DECLARED/PLANNED and draft corrections.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/Noetfield",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/**",
+     "reports/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of any governance-zone PR to main (fences + CODEOWNERS review)"
+     },
+     {
+      "approver_kind": "founder",
+      "scope": "any change to public copy before it ships"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 5,
+    "workload_relief": 3,
+    "cloud_now": 3,
+    "reversibility": 3
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "hash evidence for the sweep report",
+    "script_run evidence for the lint pass"
+   ],
+   "notes": "No claim-class upgrades without evidence; corrections are drafts pending founder approval."
+  },
+  {
+   "plan_id": "PLAN-0401",
+   "plan_version": "1.0.0",
+   "plan_type": "deploy",
+   "title": "Preview-chain proof for venture site",
+   "venture": "noetfield",
+   "mission_template": "Run the tested branch {{branch_ref}} through the preview chain (PR + build artifact + preview reference) and verify externally; no production path.",
+   "line_plan": [
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/Noetfield",
+    "sandbox_required": true,
+    "env_profile": "gh_actions_scoped"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "anything beyond preview \u2014 production promote is FOUNDER_ONLY via existing paths (HARD_BLOCK reason 2)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 4,
+    "workload_relief": 3,
+    "cloud_now": 4,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "code_change_set",
+    "test_report"
+   ],
+   "outputs": [
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "preview artifact reference + hash",
+    "secondary CF account edge receipt for FL8 verdict"
+   ],
+   "notes": "Deterministic; zero LLM cost reported truthfully (L11)."
+  },
+  {
+   "plan_id": "PLAN-0402",
+   "plan_version": "1.0.0",
+   "plan_type": "deploy",
+   "title": "TrustField www preview build",
+   "venture": "trustfield",
+   "mission_template": "Build and preview the TrustField www change set {{change_ref}}; verify build markers externally; never touch production.",
+   "line_plan": [
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "gh_actions_scoped"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "anything beyond preview \u2014 production promote is FOUNDER_ONLY via existing paths (HARD_BLOCK reason 2)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 4,
+    "workload_relief": 3,
+    "cloud_now": 4,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "code_change_set",
+    "test_report"
+   ],
+   "outputs": [
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "preview artifact reference + hash",
+    "secondary CF account edge receipt for FL8 verdict"
+   ],
+   "notes": "Deploy-truth HOLD semantics honored: drift blocks downstream dispatch until founder resolves."
+  },
+  {
+   "plan_id": "PLAN-0403",
+   "plan_version": "1.0.0",
+   "plan_type": "deploy",
+   "title": "SourceA worker preview bundle",
+   "venture": "forge",
+   "mission_template": "Assemble a preview bundle for the SourceA worker change {{change_ref}} (build artifact + dry-run health output); production deploy stays on the existing founder-gated brain path.",
+   "line_plan": [
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/SourceA",
+    "sandbox_required": true,
+    "env_profile": "gh_actions_scoped"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "cloud/workers/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "anything beyond preview \u2014 production promote is FOUNDER_ONLY via existing paths (HARD_BLOCK reason 2)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 4,
+    "workload_relief": 3,
+    "cloud_now": 4,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "code_change_set",
+    "test_report"
+   ],
+   "outputs": [
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "preview artifact reference + hash",
+    "secondary CF account edge receipt for FL8 verdict"
+   ],
+   "notes": "Forge = SourceA Cloud Forge lineage; existing deploy-verified CLI path remains the only production route."
+  },
+  {
+   "plan_id": "PLAN-0501",
+   "plan_version": "1.0.0",
+   "plan_type": "verification",
+   "title": "Live-truth hash diff of public site",
+   "venture": "noetfield",
+   "mission_template": "Fetch {{url_set}} from the live site, hash bodies, diff against repo static files, and record match/mismatch verdicts with per-URL evidence.",
+   "line_plan": [
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": false,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 5,
+    "workload_relief": 3,
+    "cloud_now": 5,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "preview_artifact"
+   ],
+   "outputs": [
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256",
+    "secondary CF account edge receipt for the verdict"
+   ],
+   "notes": "PKT-0002 live-truth precedent; GET requests only, zero writes to the site."
+  },
+  {
+   "plan_id": "PLAN-0502",
+   "plan_version": "1.0.0",
+   "plan_type": "verification",
+   "title": "Deploy-truth drift check",
+   "venture": "trustfield",
+   "mission_template": "Compare deployed markers for {{surface}} against origin/main HEAD and record a drift verdict; drift writes a HOLD row.",
+   "line_plan": [
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": false,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 5,
+    "workload_relief": 3,
+    "cloud_now": 5,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "preview_artifact"
+   ],
+   "outputs": [
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256",
+    "secondary CF account edge receipt for the verdict"
+   ],
+   "notes": "Drift resolution is a founder point (L6 Deploy Truth precedent); probing continues."
+  },
+  {
+   "plan_id": "PLAN-0503",
+   "plan_version": "1.0.0",
+   "plan_type": "verification",
+   "title": "Receipt schema validation sweep",
+   "venture": "sg",
+   "mission_template": "Validate every receipt under {{receipt_glob}} against its declared schema; report failures as repair candidates.",
+   "line_plan": [
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": false,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 2.0,
+   "model_policy": {
+    "default_tier": "determine",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "receipts/factory/artifacts/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": []
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 4,
+    "reversibility": 5
+   },
+   "risk_class": "low",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "receipt_chain"
+   ],
+   "outputs": [
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "script_run evidence for the validation pass"
+   ],
+   "notes": "Never trusts a writer's own success claim \u2014 independent re-validation (verification discipline)."
+  },
+  {
+   "plan_id": "PLAN-0601",
+   "plan_version": "1.0.0",
+   "plan_type": "revenue",
+   "title": "Offer-page draft with claim-ladder lint",
+   "venture": "noetfield",
+   "mission_template": "Draft an offer page for {{offer_name}} as a simple HTML page with claim-ladder-linted copy; DRAFT only, no publication, no sends.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL4",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/Noetfield",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/offers/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "offer/pricing copy approval before any publication (claim ladder; no sends; no legal/equity/payment claims)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 5,
+    "trust": 3,
+    "workload_relief": 2,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "app_manifest",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "hash evidence for the draft page",
+    "claim-ladder lint results (script_run)"
+   ],
+   "notes": "Line-plan deviation justified: FL4 substitutes FL5 (band rule) because the deliverable is an app-shaped offer page, not a workflow."
+  },
+  {
+   "plan_id": "PLAN-0602",
+   "plan_version": "1.0.0",
+   "plan_type": "revenue",
+   "title": "Partner-access funnel draft",
+   "venture": "trustfield",
+   "mission_template": "Draft a partner-access funnel workflow definition for {{segment}} (qualification -> review -> founder queue); DRAFTS only, no sends, email defer stays ON.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "offer/pricing copy approval before any publication (claim ladder; no sends; no legal/equity/payment claims)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 5,
+    "trust": 3,
+    "workload_relief": 3,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "dry-run trace with hash",
+    "claim-ladder lint results (script_run)"
+   ],
+   "notes": "No external message leaves any loop without human approval (guardrails, LOCKED)."
+  },
+  {
+   "plan_id": "PLAN-0603",
+   "plan_version": "1.0.0",
+   "plan_type": "revenue",
+   "title": "Pricing-experiment brief + draft page",
+   "venture": "sourcea",
+   "mission_template": "Research pricing for {{product_surface}} and draft an experiment page; pricing copy is DECLARED-class until founder approves; no publication.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9",
+    "FL10"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/SourceA",
+    "sandbox_required": true,
+    "env_profile": "read_public_web"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/experiments/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "offer/pricing copy approval before any publication (claim ladder; no sends; no legal/equity/payment claims)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 5,
+    "trust": 2,
+    "workload_relief": 2,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "research_brief"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain",
+    "harvest_report"
+   ],
+   "evidence_required": [
+    "per-URL status + body sha256 for pricing research claims",
+    "hash evidence for the draft page"
+   ],
+   "notes": "No pricing claims published without founder approval; research portion follows CLOUD_RESEARCH evidence discipline."
+  },
+  {
+   "plan_id": "PLAN-0701",
+   "plan_version": "1.0.0",
+   "plan_type": "client_onboarding",
+   "title": "Workspace provisioning checklist run",
+   "venture": "client",
+   "mission_template": "Produce the provisioning checklist and draft workspace configuration for {{client_name}} (identity binding, visibility wall, plan-catalog scope); preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "resolved at instantiation (venture or client workspace repo)",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "fast",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "clients/{{client_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     },
+     {
+      "approver_kind": "founder",
+      "scope": "any client-facing copy before it ships"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "preview_artifact",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "hash evidence for provisioning drafts",
+    "contract-test results (script_run)"
+   ],
+   "notes": "Client authority never exceeds their run scope; auth_ref binding mandatory (CF-P2 identity rules)."
+  },
+  {
+   "plan_id": "PLAN-0702",
+   "plan_version": "1.0.0",
+   "plan_type": "client_onboarding",
+   "title": "Onboarding page draft (simple web format)",
+   "venture": "noetfield",
+   "mission_template": "Draft the onboarding page for {{audience}} as a simple HTML page (never a slide deck); claim-ladder-linted copy; preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/Noetfield",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "fast",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/onboarding/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     },
+     {
+      "approver_kind": "founder",
+      "scope": "any client-facing copy before it ships"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 4,
+    "workload_relief": 3,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "preview_artifact",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "hash evidence for the draft page",
+    "claim-ladder lint results (script_run)"
+   ],
+   "notes": "Founder format law: presentations are simple HTML pages for the website/onboarding, no .pptx."
+  },
+  {
+   "plan_id": "PLAN-0703",
+   "plan_version": "1.0.0",
+   "plan_type": "client_onboarding",
+   "title": "Client kickoff packet workflow",
+   "venture": "client",
+   "mission_template": "Draft a kickoff-packet workflow for {{client_name}}: intake summary, plan-catalog shortlist, approval map; preview only.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "resolved at instantiation (venture or client workspace repo)",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "fast",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "clients/{{client_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     },
+     {
+      "approver_kind": "founder",
+      "scope": "any client-facing copy before it ships"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 3,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "preview_artifact",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "hash evidence for packet drafts"
+   ],
+   "notes": "Shortlist only names active plans; seed/draft/testing plans are not client-visible."
+  },
+  {
+   "plan_id": "PLAN-0801",
+   "plan_version": "1.0.0",
+   "plan_type": "site_app_repair",
+   "title": "Broken-route diagnosis + patch PR",
+   "venture": "noetfield",
+   "mission_template": "Diagnose the broken route {{route_or_url}}, produce a root-cause note, and draft a patch PR from a sandbox branch; preview build must pass before verify.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/Noetfield",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "web/**",
+     "tests/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of the patch PR to main (full fences + CODEOWNERS)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 3
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "research_brief"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "failing-then-passing test evidence (script_run)",
+    "hash evidence for the change set"
+   ],
+   "notes": "Repair follows machine-first escalation; founder appears only at PR merge."
+  },
+  {
+   "plan_id": "PLAN-0802",
+   "plan_version": "1.0.0",
+   "plan_type": "site_app_repair",
+   "title": "Form/API contract repair",
+   "venture": "trustfield",
+   "mission_template": "Repair the failing form/API contract {{contract_ref}}: reproduce, patch in sandbox, prove with contract tests, draft PR.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "app/**",
+     "web/**",
+     "tests/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of the patch PR to main (full fences + CODEOWNERS)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 3,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 3
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "research_brief"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "failing-then-passing test evidence (script_run)",
+    "hash evidence for the change set"
+   ],
+   "notes": "Intake never blocked during repair (L2 precedent: validation 422 is normal, intake continues)."
+  },
+  {
+   "plan_id": "PLAN-0803",
+   "plan_version": "1.0.0",
+   "plan_type": "site_app_repair",
+   "title": "Worker health regression fix",
+   "venture": "sourcea",
+   "mission_template": "Fix the health regression in {{worker_name}}: reproduce locally, patch in sandbox, verify health endpoint dry-run; draft PR; production deploy stays on the existing founder-gated path.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL3",
+    "FL6",
+    "FL7",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/SourceA",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "cloud/workers/**",
+     "tests/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "merge of the patch PR to main (full fences + CODEOWNERS)"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 3
+   },
+   "risk_class": "medium",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "research_brief"
+   ],
+   "outputs": [
+    "code_change_set",
+    "test_report",
+    "preview_artifact",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "failing-then-passing test evidence (script_run)",
+    "hash evidence for the change set"
+   ],
+   "notes": "Health URL checks are read-only during the fix; live smoke stays on the deploy-verified path."
+  },
+  {
+   "plan_id": "PLAN-0901",
+   "plan_version": "1.0.0",
+   "plan_type": "automation_cron",
+   "title": "Nightly report definition (dry-run only)",
+   "venture": "sg",
+   "mission_template": "Draft a nightly governance-report workflow definition over {{report_inputs}}; dry-run trace as preview; no schedule installed.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "schedule activation \u2014 double-locked: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 1,
+    "trust": 4,
+    "workload_relief": 5,
+    "cloud_now": 3,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "dry-run trace with hash",
+    "grep-proof of zero schedule triggers in drafts (script_run)"
+   ],
+   "notes": "Compiles + dry-runs ONLY; installs no schedule. Double lock: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation (recurring_copilot_automation forbidden today). cron_schedule stays in forbidden_actions regardless of any future eligibility."
+  },
+  {
+   "plan_id": "PLAN-0902",
+   "plan_version": "1.0.0",
+   "plan_type": "automation_cron",
+   "title": "Weekly lead-report automation definition",
+   "venture": "client",
+   "mission_template": "Draft a weekly lead-report workflow definition for {{client_name}} over {{lead_source}}; dry-run trace as preview; schedule activation stays double-locked.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "resolved at instantiation (venture or client workspace repo)",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/{{client_slug}}/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "schedule activation \u2014 double-locked: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation"
+     },
+     {
+      "approver_kind": "client",
+      "scope": "preview acceptance for their run"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 4,
+    "trust": 3,
+    "workload_relief": 4,
+    "cloud_now": 2,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "dry-run trace with hash",
+    "grep-proof of zero schedule triggers in drafts (script_run)"
+   ],
+   "notes": "Compiles + dry-runs ONLY; installs no schedule. Double lock: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation (recurring_copilot_automation forbidden today). cron_schedule stays in forbidden_actions regardless of any future eligibility. This is the ORD-0002 worked-example band (architecture doc \u00a74)."
+  },
+  {
+   "plan_id": "PLAN-0903",
+   "plan_version": "1.0.0",
+   "plan_type": "automation_cron",
+   "title": "Health-probe schedule definition",
+   "venture": "trustfield",
+   "mission_template": "Draft a health-probe workflow definition for {{probe_targets}} with deadman semantics; dry-run only; activation double-locked.",
+   "line_plan": [
+    "FL1",
+    "FL2",
+    "FL5",
+    "FL6",
+    "FL8",
+    "FL9"
+   ],
+   "sandbox_target": {
+    "repo": "Noetfield-Systems/TrustField-Technologies",
+    "sandbox_required": true,
+    "env_profile": "none"
+   },
+   "cost_cap_usd": 5.0,
+   "model_policy": {
+    "default_tier": "standard",
+    "premium_rule": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it"
+   },
+   "authority_scope": {
+    "allowed_scope": [
+     "workflows/**"
+    ],
+    "forbidden_actions": [
+     "direct_main_write",
+     "external_send",
+     "production_deploy",
+     "legal_equity_payment_claims",
+     "cron_schedule"
+    ],
+    "approvals_required": [
+     {
+      "approver_kind": "founder",
+      "scope": "schedule activation \u2014 double-locked: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation"
+     }
+    ]
+   },
+   "receipt_schema": "factory_line_receipt_v0 + factory_run_receipt_v0",
+   "roi_priors": {
+    "revenue": 2,
+    "trust": 4,
+    "workload_relief": 4,
+    "cloud_now": 3,
+    "reversibility": 4
+   },
+   "risk_class": "high",
+   "auto_dispatch": {
+    "eligible": false,
+    "unlock_rule": "per-template founder receipt naming the plan_id + plan_version; never class-wide"
+   },
+   "status": "seed",
+   "inputs": [
+    "order_brief",
+    "architecture_package"
+   ],
+   "outputs": [
+    "workflow_definition",
+    "test_report",
+    "verification_verdict",
+    "receipt_chain"
+   ],
+   "evidence_required": [
+    "dry-run trace with hash",
+    "grep-proof of zero schedule triggers in drafts (script_run)"
+   ],
+   "notes": "Compiles + dry-runs ONLY; installs no schedule. Double lock: FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation (recurring_copilot_automation forbidden today). cron_schedule stays in forbidden_actions regardless of any future eligibility."
+  }
+ ]
+}

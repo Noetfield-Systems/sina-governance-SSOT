@@ -1,0 +1,253 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "plan_schema_v1",
+  "title": "1000-plan library PLAN record v1 (PROPOSED)",
+  "description": "A single PLAN record in the 1000-plan library (plan-factory/PLAN_LIBRARY_SEED_1000_v1.json). DESIGN ONLY: the library validator that enforces this schema is TO BE BUILT (phase PF-B); nothing here claims a built, active, or verified component. A plan is a reusable template: instantiated per order into a standard p0_prompt_packet_v1.1 packet wrapped by a client_order_to_factory_run_v0 envelope. This schema never mutates P0-PGR schemas or the cloud-factory v0 package (no_authority_change gate; version law: v1 amends and wins only on direct conflict, v0 stays live). Order rule 5 is structural here: every plan carries cost_cap_usd, authority_scope, sandbox_target, and receipt_schema as REQUIRED fields — a plan missing any of them is invalid, not merely incomplete.",
+  "version": "1.0.0",
+  "package_status": "PROPOSED",
+  "canon_version": "founder_canon_v1.0.0",
+  "laws": "FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.",
+  "type": "object",
+  "required": [
+    "plan_id",
+    "plan_version",
+    "plan_type",
+    "title",
+    "venture",
+    "mission_template",
+    "line_plan",
+    "sandbox_target",
+    "cost_cap_usd",
+    "model_policy",
+    "authority_scope",
+    "receipt_schema",
+    "roi_priors",
+    "risk_class",
+    "auto_dispatch",
+    "status",
+    "inputs",
+    "outputs",
+    "evidence_required",
+    "notes"
+  ],
+  "properties": {
+    "plan_id": {
+      "type": "string",
+      "pattern": "^PLAN-[0-9]{4}$",
+      "description": "PLAN-0001..PLAN-1000. Ids are banded 100 per plan_type in fixed order: app_builder 0001-0100, workflow_builder 0101-0200, research 0201-0300, compliance_governance 0301-0400, deploy 0401-0500, verification 0501-0600, revenue 0601-0700, client_onboarding 0701-0800, site_app_repair 0801-0900, automation_cron 0901-1000. Band maps (default line plans + risk defaults) live in plan-factory/PLAN_LIBRARY_SEED_1000_v1.json (bands); a fuller amendment registry exists only as the unratified addendum draft FACTORY_LINE_REGISTRY_v1.json."
+    },
+    "plan_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semver. Immutable once status is active (prompt-registry precedent: version immutable once activated; two versions never active at once). Changing an active plan means a new version record, never an in-place edit."
+    },
+    "plan_type": {
+      "type": "string",
+      "enum": [
+        "app_builder",
+        "workflow_builder",
+        "research",
+        "compliance_governance",
+        "deploy",
+        "verification",
+        "revenue",
+        "client_onboarding",
+        "site_app_repair",
+        "automation_cron"
+      ],
+      "description": "Exactly 10 plan types, one 100-id band each (order fixed by founder order). Type-specific laws: deploy plans are preview-only (production stays FOUNDER_ONLY outside the substrate; HARD_BLOCK reason 2); revenue plans produce offers/funnels as DRAFTS only — no sends, no pricing claims without founder; automation_cron plans compile + preview ONLY — activating any schedule is double-locked (FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation; recurring_copilot_automation is forbidden today)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable plan title."
+    },
+    "venture": {
+      "type": "string",
+      "enum": ["noetfield", "sourcea", "forge", "trustfield", "sg", "client"],
+      "description": "Owning venture for the plan template. client = plan built for external client orders via the client workspace product (CF-P2+, NOT BUILT). Client authority never exceeds the client's own run scope."
+    },
+    "mission_template": {
+      "type": "string",
+      "minLength": 16,
+      "description": "Mission text with {{placeholders}} filled from the order at pipeline stage 3 (Instantiate — PLAN_FACTORY_ARCHITECTURE_v1.md §4, the canonical pipeline). The instantiated mission becomes the packet mission and must pass the existing R1-R9 packet lint unchanged (R6 bans vague-verb missions without measurable acceptance; R7 bans routing validation/review/uncertainty to the founder; lint fail files a repair candidate and the lane continues — never default to STOP)."
+    },
+    "line_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["FL1", "FL2", "FL3", "FL4", "FL5", "FL6", "FL7", "FL8", "FL9", "FL10"]
+      },
+      "description": "Ordered factory line ids (cloud-factory/FACTORY_LINE_REGISTRY_v0.json rows — the resolution registry; plan-aware band maps in plan-factory/PLAN_LIBRARY_SEED_1000_v1.json). Must be composable per the v0 consumes/produces chain and a subset of the plan_type default line-plan spine (or justified in notes). Every plan run resolves its line_plan against the registry; a plan naming a line not in the registry is a lint reject. Order rule 6 anchor: every execution runs through a cloud line or a controlled sandbox — line_plan resolution plus the sandbox cell ledger, never ad-hoc execution."
+    },
+    "sandbox_target": { "$ref": "#/definitions/sandbox_target" },
+    "cost_cap_usd": {
+      "type": "number",
+      "minimum": 0,
+      "default": 5.0,
+      "description": "Per-run cost cap in USD (default 5.00; per-line default 2.00 inherited from v0). Breach halts the line, writes a PARTIAL receipt, and sends the run to QUEUED_FOUNDER_REVIEW (FT-CAPITAL). An order budget may LOWER this cap, never raise it above the plan cap without founder approval (pipeline stage 3 rule). Costs roll up: line receipt -> run receipt -> phase2 scorecard counters.cost_usd. Order rule 5 anchor: every plan has a cost cap."
+    },
+    "model_policy": { "$ref": "#/definitions/model_policy" },
+    "authority_scope": { "$ref": "#/definitions/authority_scope" },
+    "receipt_schema": {
+      "const": "factory_line_receipt_v0 + factory_run_receipt_v0",
+      "description": "Plans reuse the v0 receipt schemas unchanged: line receipts receipts/factory/<FR-ID>/<line_key>-<ISO8601Z>.json (factory_line_receipt_v0), run receipt receipts/factory/<FR-ID>-run-<ISO8601Z>.json (factory_run_receipt_v0), both carrying all NINE P0-PGR gates, quality_state, evidence[], cost, with machine-generated timestamps (never typed). A plan may ADD a plan_receipt_note (optional field) appended to its receipts but never removes receipt fields. No receipt sink = no line (governed-autorun L8/L11). Order rule 5 anchor: every plan has a receipt schema."
+    },
+    "plan_receipt_note": {
+      "type": "string",
+      "description": "OPTIONAL. Note appended to this plan's line/run receipts. Additive only — never removes or overrides factory_line_receipt_v0 / factory_run_receipt_v0 fields."
+    },
+    "roi_priors": { "$ref": "#/definitions/roi_priors" },
+    "risk_class": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Defaults by plan_type (overridable per plan; map plan_type_risk_defaults in plan-factory/PLAN_LIBRARY_SEED_1000_v1.json bands): research/verification = low; workflow_builder/app_builder/client_onboarding/site_app_repair = medium; deploy/revenue/compliance_governance/automation_cron = high. Order rule 7 anchor: high-risk transitions — anything touching production, spend, sends, legal/equity/payment claims, schedule activation, or governance zones — REQUIRE founder/client approval via authority_scope.approvals_required. PLAN_RANKING_ROI_MODEL_v1 risk_penalty: low 0, medium -5, high -15."
+    },
+    "auto_dispatch": { "$ref": "#/definitions/auto_dispatch" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "seed", "testing", "active", "retired"],
+      "description": "seed = shipped in plan-factory/PLAN_LIBRARY_SEED_1000_v1.json, not yet founder-ratified. Growth law: plans enter as draft via FL10 harvest or architect order; a founder receipt ratifies seed -> testing -> active; plan_version is immutable once active; retired plans are never deleted (rejection is never permission to delete). No self-promotion to active (RF1/RF2/RF3 fence precedent: status flips are founder-receipted, never machine-claimed)."
+    },
+    "inputs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/artifact_type" },
+      "description": "Artifact types the plan consumes, from the v0 line consumes/produces chain. Must be satisfiable by the order intake plus upstream lines in line_plan."
+    },
+    "outputs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/artifact_type" },
+      "description": "Artifact types the plan produces, from the v0 line consumes/produces chain. Every artifact gets its sha256 recorded in its line receipt."
+    },
+    "evidence_required": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Claims that must carry evidence in the run's receipts (evidence kinds: url_fetch | script_run | file_stat | hash). Receipt provenance law: every external claim needs per-URL status + body sha256 + saved body under the run's artifact dir. FL8 verification PASS only from a secondary CF account edge receipt — never builder self-report (autonomy loop L3)."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-form plan notes (required field; may be empty). A line_plan deviating from its band's default spine must be justified here."
+    }
+  },
+  "definitions": {
+    "sandbox_target": {
+      "type": "object",
+      "required": ["repo", "sandbox_required", "env_profile"],
+      "description": "Order rule 5 anchor: every plan names its sandbox target. Cells are allocated by the sandbox manager (cloud-factory/SANDBOX_MANAGER_SPEC_v0.md base law + the execution-cell delta in PLAN_FACTORY_ARCHITECTURE_v1.md §7, TO BE BUILT); walls W1-W9 enforced as mechanical exit checks, not mid-run permission loops.",
+      "properties": {
+        "repo": {
+          "type": "string",
+          "description": "Target repo for cell allocation. Venture deliverables allocate cells in the venture repo (one actor · one repo · one scope); SG repo cells only for governance artifacts; cross-repo runs take one cell per repo, one writer per cell, run envelope references all cells."
+        },
+        "sandbox_required": {
+          "type": "boolean",
+          "description": "When true, no line of this plan executes without an allocated cell (ledger row). One writer per task cell; a second writer gets a REJECTED receipt (CAS per PARALLEL_AUTOMATION L1)."
+        },
+        "env_profile": {
+          "type": "string",
+          "enum": ["none", "read_public_web", "gh_actions_scoped", "preview_deploy_scoped"],
+          "description": "Deny-by-default secret policy (v0): raw secrets never enter the worktree environment; execution requiring a secret runs where the secret already lives. Build/code lines get NO send-capable credentials — makes the no_external_send gate structural."
+        }
+      }
+    },
+    "model_policy": {
+      "type": "object",
+      "required": ["default_tier", "premium_rule"],
+      "description": "Order rule 4 anchor: no premium models unless ROI justifies — carried by premium_rule and enforced structurally by the PLAN_RANKING_ROI_MODEL_v1 premium_model_penalty.",
+      "properties": {
+        "default_tier": {
+          "type": "string",
+          "enum": ["determine", "fast", "standard", "judgment"],
+          "description": "Default model tier for the plan's lines (v0 registry model_tier enum). PLAN_RANKING_ROI_MODEL_v1 applies premium_model_penalty -10 when default_tier is judgment AND score_base < 60."
+        },
+        "premium_rule": {
+          "type": "string",
+          "default": "judgment tier allowed only if roi_priors weighted score >= 60 or an explicit founder order names it",
+          "description": "Law-bearing rule string (order rule 4): the judgment tier is allowed ONLY if the roi_priors weighted score (35/25/15/15/10 base model, max 100) is >= 60 OR an explicit founder order names it. No plan may weaken this rule — a weaker premium_rule is a lint reject (never weaken a gate; fix the ROI case instead)."
+        }
+      }
+    },
+    "authority_scope": {
+      "type": "object",
+      "required": ["allowed_scope", "forbidden_actions", "approvals_required"],
+      "description": "Order rule 5 anchor: every plan has an authority scope. allowed_scope feeds the sandbox cell's allowed_scope at instantiation; forbidden_actions carry the fixed structural bans; approvals_required carries the human gates (same shape as the v0 envelope approvals_required).",
+      "properties": {
+        "allowed_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Path globs the plan's cells may write. Copied into sandbox allowed_scope at pipeline stage 3; out-of-scope writes fail the W9 wall at cell exit. Governance/SSOT/ledger paths (W2) are out of scope unless explicitly listed."
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "allOf": [
+            { "contains": { "const": "direct_main_write" } },
+            { "contains": { "const": "external_send" } },
+            { "contains": { "const": "production_deploy" } },
+            { "contains": { "const": "legal_equity_payment_claims" } },
+            { "contains": { "const": "cron_schedule" } }
+          ],
+          "description": "MUST include the five fixed entries (schema-enforced via contains): direct_main_write (order rule 1 — repo fences + CODEOWNERS + sandbox branches + W1 wall), external_send (order rule 2 — no_external_send gate + no send-capable credentials in cells), production_deploy (FL7 is preview-only; HARD_BLOCK reason 2), legal_equity_payment_claims (order rule 3 — no_legal_financial_commitment gate + claim ladder VERIFIED/DECLARED/PLANNED), cron_schedule (scheduled automation is FOUNDER_ONLY; automation_cron plans compile + preview only, activation double-locked FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation). Plans may ADD further forbidden actions, never remove these five."
+        },
+        "approvals_required": {
+          "type": "array",
+          "description": "Same shape as v0 envelope approvals_required (client_order_to_factory_run_v0). Order rule 7 anchor: founder rows are mandatory for any scope touching production, spend, sends, legal/equity/payment claims, schedule activation, or governance zones; client rows gate only the client's own run's preview-to-deliver step and never exceed their run scope. Every founder decision writes a receipt with verbatim scope (M03 lesson: chat-only authorization is not durable evidence).",
+          "items": {
+            "type": "object",
+            "required": ["approver_kind", "scope"],
+            "properties": {
+              "approver_kind": { "type": "string", "enum": ["founder", "client"] },
+              "scope": { "type": "string", "description": "verbatim scope this approval must cover" }
+            }
+          }
+        }
+      }
+    },
+    "roi_priors": {
+      "type": "object",
+      "required": ["revenue", "trust", "workload_relief", "cloud_now", "reversibility"],
+      "description": "Five ROI prior axes, each scored 0-5 — the SAME five axes and 35/25/15/15/10 weights as scripts/p0pgr_phase2_rank_v1.py (score_base = sum(weight * clamp(axis,0,5)/5), max 100). PLAN_RANKING_ROI_MODEL_v1 applies bounded deterministic modifiers ON TOP of this base; the plan ranker NEVER invents a new base model and consumes the SAME queue (receipts/p0pgr/phase2_queue_v1.json), never a private one.",
+      "properties": {
+        "revenue": { "type": "number", "minimum": 0, "maximum": 5, "description": "weight 35" },
+        "trust": { "type": "number", "minimum": 0, "maximum": 5, "description": "weight 25" },
+        "workload_relief": { "type": "number", "minimum": 0, "maximum": 5, "description": "weight 15" },
+        "cloud_now": { "type": "number", "minimum": 0, "maximum": 5, "description": "weight 15" },
+        "reversibility": { "type": "number", "minimum": 0, "maximum": 5, "description": "weight 10" }
+      }
+    },
+    "auto_dispatch": {
+      "type": "object",
+      "required": ["eligible", "unlock_rule"],
+      "description": "Order rule 8 anchor: auto-dispatch is per-template only and arrives LATER (PF-E). eligible is const false in v1 for every plan, including low-risk ones.",
+      "properties": {
+        "eligible": {
+          "const": false,
+          "description": "const false in v1. Low-risk templates can LATER be founder-approved per template. The PLAN_RANKING_ROI_MODEL_v1 auto_dispatch_gate (risk_class == low AND reuse_bonus == 5, i.e. >= 5 verified runs with FL8 external PASS, AND zero wall violations in those runs AND cost under cap in all runs) computes ELIGIBILITY only — dispatch approval is a founder receipt per template, never a machine flip. Auto-dispatch never unlocks scheduling: cron_schedule stays in forbidden_actions regardless."
+        },
+        "unlock_rule": {
+          "const": "per-template founder receipt naming the plan_id + plan_version; never class-wide",
+          "description": "Fixed unlock law (const to prevent drift): eligibility may only flip via a per-template founder receipt in receipts/p0pgr/founder/ naming this exact plan_id + plan_version. Never class-wide, never chat approval (autonomy expands only on receipt streaks plus founder receipt — L8 earned-autonomy pattern)."
+        }
+      }
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "order_brief",
+        "research_brief",
+        "architecture_package",
+        "code_change_set",
+        "app_manifest",
+        "workflow_definition",
+        "test_report",
+        "preview_artifact",
+        "verification_verdict",
+        "receipt_chain",
+        "harvest_report"
+      ],
+      "description": "Artifact-type vocabulary from the v0 factory line consumes/produces chain. preview_artifact is preview-only (pr | gh_artifact | preview_url | dry_run_trace); production deploy artifacts do not exist in this substrate."
+    }
+  }
+}

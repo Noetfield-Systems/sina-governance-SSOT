@@ -1,0 +1,22 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-order-1000-plan-l0-first-5file-20260709T021931Z",
+  "recorded_at": "2026-07-09T02:19:31.499489+00:00",
+  "git_head_at_recording": "b4e4cdd22bee499ffd096a6cdceb272b136076bc",
+  "directive_verbatim": "Resume 1000-Plan Cloud Factory design using L0 Graph First. Before drafting: 1. Run graph verifier. 2. Query graph for: cloud-factory, FACTORY_LINE_REGISTRY, p0-pgr, sandbox, client order, plan factory. 3. Produce compact file/subsystem map. 4. Only then draft the 1000-Plan package. Do not spawn broad reader agents. Do not exceed token budget without founder approval. Do not code. Do not deploy. Do not enable cron. Required deliverables: 1. PLAN_FACTORY_ARCHITECTURE_v1.md 2. PLAN_SCHEMA_v1.json 3. PLAN_LIBRARY_SEED_1000_v1.json 4. PLAN_RANKING_ROI_MODEL_v1.json 5. PLAN_FACTORY_ACTIVATION_PLAN_v1.md. Use Cloud Factory Substrate v0 as base. STOP after receipt.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "L0-first orientation (verifier + 6 queries + compact map)",
+      "in-session drafting of the FIVE named deliverables in plan-factory/",
+      "adoption/repair of matching drafts from the stopped workflow wj41pdl0d"
+    ],
+    "does_not_unlock": [
+      "broad reader/drafter agent fan-outs",
+      "code, deploy, cron",
+      "the three dropped 7-file-layout drafts as package members (retained on disk as unratified addenda, never deleted)"
+    ],
+    "supersedes_note": "Deliverable set revised from 7 files to 5; prior in-flight workflow wj41pdl0d stopped before its library-seed and verify stages ran."
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

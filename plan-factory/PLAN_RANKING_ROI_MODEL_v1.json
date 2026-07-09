@@ -1,0 +1,187 @@
+{
+ "schema": "plan_ranking_roi_model_v1",
+ "version": "1.0.0",
+ "status": "PROPOSED",
+ "era": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+ "authority": "plan-factory/PLAN_FACTORY_ARCHITECTURE_v1.md",
+ "canon_version": "founder_canon_v1.0.0",
+ "laws": "FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON.",
+ "founder_authorization": "founder-order-1000-plan-cloud-factory-20260709T014708Z (receipts/p0pgr/founder/) — design-only unlock; building, deploying, scheduling NOT unlocked",
+ "build_state": "NOT BUILT. This file is a DESIGN artifact. The base model exists today as scripts/p0pgr_phase2_rank_v1.py; the v1 modifier layer, ranking glue, and eligibility computation are TO BE BUILT in phase PF-B. Nothing in this file claims built, active, or verified state.",
+ "determinism": "Deterministic, no LLM in the formula. Every input is a plan-record field (roi_priors, risk_class, cost_cap_usd, model_policy.default_tier, line_plan) or a receipt count from prior factory runs. LLM output never enters scoring (deterministic core D7: LLM output is a proposal, validator gates persistence).",
+ "base_model": {
+  "name": "p0pgr_phase2_rank_v1",
+  "implementation": "scripts/p0pgr_phase2_rank_v1.py — existing P0-PGR phase 2 ranker, UNCHANGED by this package",
+  "weights": {
+   "revenue": 35,
+   "trust": 25,
+   "workload_relief": 15,
+   "cloud_now": 15,
+   "reversibility": 10
+  },
+  "axis_scale": "each axis scored 0-5 (plan roi_priors uses the same five axes)",
+  "score_base": "sum(weight * clamp(axis,0,5)/5)",
+  "score_base_max": 100,
+  "consumes": "receipts/p0pgr/phase2_queue_v1.json — never a private queue",
+  "law": "The plan ranker NEVER invents a new base model. Plan roi_priors reuses the identical five axes and 35/25/15/15/10 weights, and ranked plan packets flow through the same phase2 queue as every other packet (integration law: consume adjacent live systems as inputs, never duplicate their queues)."
+ },
+ "constants": {
+  "risk_penalty": {
+   "low": 0,
+   "medium": -5,
+   "high": -15
+  },
+  "reuse_bonus_per_qualifying_run": 1,
+  "reuse_bonus_cap": 5,
+  "reuse_qualifying_run": "a prior run of the same plan_id whose FL8 verdict is PASS from the external verifier path (secondary CF account edge receipt) — never builder self-report (autonomy loop L3 pass_rule)",
+  "cost_efficiency_bonus": 5,
+  "cost_efficiency_threshold": 20,
+  "cost_efficiency_condition": "score_base / max(cost_cap_usd, 0.01) >= 20",
+  "premium_model_penalty": -10,
+  "premium_model_penalty_condition": "model_policy.default_tier == 'judgment' AND score_base < 60",
+  "premium_model_score_floor": 60,
+  "blocked_target_penalty": -10,
+  "blocked_target_condition": "any line in the plan's line_plan has a dormant or unusable primary execution target today",
+  "blocked_targets_today": [
+   "claude_cloud_agent — dormant, blocker B2 inherited from cloud-factory/MVP_ACTIVATION_PLAN_v0.md §8 (ANTHROPIC_API_KEY not wired in GH Actions secrets)",
+   "cloudflare_worker as FL7 primary — Cloudflare tool_law defers CF control plane to Phase 3/4; FL8's existing secondary-account read/verify path (worker sina-governance-ssot-advisory) is NOT blocked"
+  ],
+  "score_min": 0,
+  "score_max": 100
+ },
+ "modifiers": [
+  {
+   "id": "risk_penalty",
+   "formula": "constants.risk_penalty[plan.risk_class]",
+   "bound": "[-15, 0]",
+   "rationale": "Higher-risk plan types (deploy, revenue, compliance_governance, automation_cron) rank lower by default so low-risk receipt-earning work drains first; a penalty never bypasses approvals — high-risk transitions still require founder/client approval regardless of score.",
+   "law_ref": "founder order rule 7 (founder/client approves high-risk transitions); FOUNDER_CANON v1 §7 observe-before-promote"
+  },
+  {
+   "id": "reuse_bonus",
+   "formula": "min(constants.reuse_bonus_per_qualifying_run * count_prior_runs(plan_id, fl8_external_pass=true), constants.reuse_bonus_cap)",
+   "bound": "[0, +5]",
+   "rationale": "A plan template that has repeatedly survived external verification is cheaper and safer to run again; the bonus counts only FL8 external PASS receipts, so autonomy expands on receipt streaks, never on self-report or chat approval.",
+   "law_ref": "autonomy loop L3-ADVERSARIAL pass_rule (PASS only from secondary CF account edge receipt); L8 earned-autonomy expansion_rules (receipt streaks)"
+  },
+  {
+   "id": "cost_efficiency_bonus",
+   "formula": "constants.cost_efficiency_bonus if (score_base / max(cost_cap_usd, 0.01)) >= constants.cost_efficiency_threshold else 0",
+   "bound": "{0, +5}",
+   "rationale": "Rewards plans that promise high base value per capped dollar; the max(cost_cap_usd, 0.01) floor keeps the formula defined for a zero cap. The bonus reads the plan's declared cost_cap_usd — every plan carries a cost cap by schema (order rule 5).",
+   "law_ref": "governed-autorun L11 (cost metering); roi_positive gate; founder order rule 5 (every plan has a cost cap)"
+  },
+  {
+   "id": "premium_model_penalty",
+   "formula": "constants.premium_model_penalty if (model_policy.default_tier == 'judgment' and score_base < constants.premium_model_score_floor) else 0",
+   "bound": "{-10, 0}",
+   "rationale": "Structural expression of 'no premium models unless ROI justifies': a judgment-tier plan whose base score is under 60 ranks 10 points lower, so cheaper-tier plans drain first. Complements (does not replace) model_policy.premium_rule, which gates judgment tier to weighted score >= 60 OR an explicit founder order naming it.",
+   "law_ref": "founder order rule 4 (no premium models unless ROI justifies); PLAN_SCHEMA_v1 model_policy.premium_rule"
+  },
+  {
+   "id": "blocked_target_penalty",
+   "formula": "constants.blocked_target_penalty if any(primary_target_dormant_or_unusable_today(line) for line in plan.line_plan) else 0",
+   "bound": "{-10, 0}",
+   "rationale": "A plan whose line_plan depends on a target that cannot execute today (see constants.blocked_targets_today) would stall in the queue; ranking it lower keeps runnable work draining first. This is a ranking signal only — it never marks the plan BLOCKED and never substitutes for the activation dependency being resolved by the founder.",
+   "law_ref": "cloud-factory/MVP_ACTIVATION_PLAN_v0.md §8 known blockers (B2 ANTHROPIC_API_KEY; CF tool_law Phase 3/4 deferral); continuity law (never default to STOP — degrade and keep the lane moving)"
+  }
+ ],
+ "score_v1": "clamp(score_base + risk_penalty + reuse_bonus + cost_efficiency_bonus + premium_model_penalty + blocked_target_penalty, 0, 100)",
+ "tie_break": "(-score_v1, plan_id)",
+ "auto_dispatch_gate": {
+  "purpose": "Computes ELIGIBILITY only. The model never dispatches anything. Dispatch approval is a founder receipt per template; auto_dispatch.eligible is const false in every v1 plan record.",
+  "machine_conditions_all_must_hold": [
+   "risk_class == low",
+   "reuse_bonus == 5 (at least 5 prior runs of this plan_id with FL8 external PASS)",
+   "zero sandbox wall violations (W1-W9) across those qualifying runs",
+   "actual cost under cost_cap_usd in all qualifying runs"
+  ],
+  "founder_condition_mandatory": "a per-template founder receipt in receipts/p0pgr/founder/ naming the plan_id AND plan_version — never class-wide, never chat-only (M03 lesson: chat authorization is not durable evidence)",
+  "eligible_false_in_v1": true,
+  "gate_note": "Even when all four machine conditions hold, eligibility is a PROPOSAL surfaced to the founder queue (order rule 8: auto-dispatch per-template only, later). No v1 component may flip auto_dispatch.eligible; that flip is a per-template founder receipt in a later phase (PF-E)."
+ },
+ "examples": [
+  {
+   "example_id": "example_verification_clean_low_risk",
+   "label": "PLAN-0501 (verification band): clean low-risk plan earning the cost-efficiency bonus",
+   "note": "Hypothetical worked example over a seed plan record — no run has occurred; the substrate is NOT BUILT.",
+   "inputs": {
+    "plan_id": "PLAN-0501",
+    "plan_type": "verification",
+    "line_plan": ["FL8", "FL9"],
+    "roi_priors": {
+     "revenue": 1,
+     "trust": 5,
+     "workload_relief": 3,
+     "cloud_now": 5,
+     "reversibility": 5
+    },
+    "risk_class": "low",
+    "cost_cap_usd": 2.0,
+    "model_policy_default_tier": "determine",
+    "prior_fl8_external_pass_runs": 0
+   },
+   "score_base_computation": {
+    "revenue": "35 * clamp(1,0,5)/5 = 7.0",
+    "trust": "25 * clamp(5,0,5)/5 = 25.0",
+    "workload_relief": "15 * clamp(3,0,5)/5 = 9.0",
+    "cloud_now": "15 * clamp(5,0,5)/5 = 15.0",
+    "reversibility": "10 * clamp(5,0,5)/5 = 10.0",
+    "score_base": 66.0
+   },
+   "modifier_computation": {
+    "risk_penalty": "risk_class low -> 0",
+    "reuse_bonus": "0 qualifying runs (no factory run exists at design time) -> 0",
+    "cost_efficiency_bonus": "66.0 / max(2.0, 0.01) = 33.0 >= 20 -> +5",
+    "premium_model_penalty": "default_tier 'determine' != 'judgment' -> 0",
+    "blocked_target_penalty": "FL8 primary is the existing secondary-CF-account read/verify path (not blocked; the CF deferral names FL7) and FL9 primary github_actions is usable -> 0"
+   },
+   "score_v1_computation": "clamp(66.0 + 0 + 0 + 5 + 0 + 0, 0, 100) = 71.0",
+   "score_v1": 71.0
+  },
+  {
+   "example_id": "example_automation_cron_high_risk_dormant",
+   "label": "PLAN-0901 (automation_cron band): high-risk plan hit by risk, premium-tier, and blocked-target penalties",
+   "note": "Hypothetical worked example over a seed plan record — no run has occurred; the substrate is NOT BUILT. Consistency note: with score_base 56.0 < 60, the judgment default_tier is lawful only under the second clause of model_policy.premium_rule (an explicit founder order naming it); the ranking penalty applies regardless. Schedule activation for automation_cron stays double-locked (FOUNDER-UNLOCK-CF-CRON + per-workflow founder activation) — ranking never unlocks it.",
+   "inputs": {
+    "plan_id": "PLAN-0901",
+    "plan_type": "automation_cron",
+    "line_plan": ["FL1", "FL2", "FL5", "FL6", "FL8", "FL9"],
+    "roi_priors": {
+     "revenue": 2,
+     "trust": 3,
+     "workload_relief": 4,
+     "cloud_now": 3,
+     "reversibility": 3
+    },
+    "risk_class": "high",
+    "cost_cap_usd": 5.0,
+    "model_policy_default_tier": "judgment",
+    "prior_fl8_external_pass_runs": 0
+   },
+   "score_base_computation": {
+    "revenue": "35 * clamp(2,0,5)/5 = 14.0",
+    "trust": "25 * clamp(3,0,5)/5 = 15.0",
+    "workload_relief": "15 * clamp(4,0,5)/5 = 12.0",
+    "cloud_now": "15 * clamp(3,0,5)/5 = 9.0",
+    "reversibility": "10 * clamp(3,0,5)/5 = 6.0",
+    "score_base": 56.0
+   },
+   "modifier_computation": {
+    "risk_penalty": "risk_class high -> -15",
+    "reuse_bonus": "0 qualifying runs (no factory run exists at design time) -> 0",
+    "cost_efficiency_bonus": "56.0 / max(5.0, 0.01) = 11.2 < 20 -> 0",
+    "premium_model_penalty": "default_tier 'judgment' AND score_base 56.0 < 60 -> -10",
+    "blocked_target_penalty": "FL1, FL2, FL5 primary target claude_cloud_agent is dormant today (blocker B2: ANTHROPIC_API_KEY not wired) -> -10"
+   },
+   "score_v1_computation": "clamp(56.0 + (-15) + 0 + 0 + (-10) + (-10), 0, 100) = 21.0",
+   "score_v1": 21.0
+  }
+ ],
+ "amendment_note": "All thresholds live in the constants block so future amendments are one-line diffs ratified by founder receipt. This file amends nothing; it layers deterministic modifiers over the unchanged p0pgr_phase2_rank_v1 base model.",
+ "next": [
+  "PF-B packet candidate: build the ranking glue (TO BE BUILT) that applies these modifiers over scripts/p0pgr_phase2_rank_v1.py output and reproduces both worked examples exactly (66.0 -> 71.0 and 56.0 -> 21.0) as its acceptance test",
+  "PF-B packet candidate: library validator (TO BE BUILT) rejects any plan whose line_plan names a line absent from cloud-factory/FACTORY_LINE_REGISTRY_v0.json before ranking runs",
+  "PF-E (later, founder-gated): first per-template auto-dispatch founder receipt naming a plan_id + plan_version once the four machine conditions hold on real receipts"
+ ]
+}

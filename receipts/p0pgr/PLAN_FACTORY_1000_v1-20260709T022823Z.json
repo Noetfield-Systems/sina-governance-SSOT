@@ -1,0 +1,102 @@
+{
+  "schema": "p0pgr_architecture_package_v1",
+  "receipt_id": "PLAN_FACTORY_1000_v1-20260709T022823Z",
+  "recorded_at": "2026-07-09T02:28:23.033427+00:00",
+  "git_head_at_recording": "b4e4cdd22bee499ffd096a6cdceb272b136076bc",
+  "packet_id": "PLAN_FACTORY_1000_v1",
+  "canon_version": "founder_canon_v1.0.0",
+  "authorized_by": [
+    "founder-order-1000-plan-cloud-factory-20260709T014708Z",
+    "founder-order-resume-1000-plan-l0-20260709T020915Z",
+    "founder-order-1000-plan-l0-first-5file-20260709T021931Z"
+  ],
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "gates_note": "Design-only authoring: new/edited files under plan-factory/ + receipts. No code built, no deploy, no cron/schedule created, no send, no P0-PGR or v0 schema mutated. Package status PROPOSED.",
+  "l0_graph_first_compliance": {
+    "verifier": "receipts/l0-repo-graph-verify-20260709T021931Z.json (12/12 PASS)",
+    "queries": [
+      "cloud-factory",
+      "FACTORY_LINE_REGISTRY",
+      "p0-pgr",
+      "sandbox",
+      "client order (0)",
+      "plan factory (0)",
+      "CLIENT_ORDER",
+      "plan-factory (0)",
+      "PLAN_"
+    ],
+    "compact_map": "receipts/l0-map-1000-plan-5file-20260709T022035Z.json",
+    "broad_reader_agents_spawned": 0,
+    "drafting_mode": "in-session only; three drafts adopted from stopped workflow wj41pdl0d after review + repointing; seed library generated deterministically; activation plan written fresh"
+  },
+  "artifacts": [
+    {
+      "path": "plan-factory/PLAN_FACTORY_ARCHITECTURE_v1.md",
+      "sha256": "a64c6423e85dc994e64941603e43769a1ec111e5b95ada6ed49e20781a0b18f8"
+    },
+    {
+      "path": "plan-factory/PLAN_SCHEMA_v1.json",
+      "sha256": "2dd89a4fa564b5ee54427ef30fd3f405e8807c2daf59bef0db0f8601ee977a6f"
+    },
+    {
+      "path": "plan-factory/PLAN_LIBRARY_SEED_1000_v1.json",
+      "sha256": "b6091b378cec4c9369cd482093bd14d0acef5461943493811e2a44fefffab8df"
+    },
+    {
+      "path": "plan-factory/PLAN_RANKING_ROI_MODEL_v1.json",
+      "sha256": "869b4c672f7b3b6e5a02802a83fa52cfa239ad347314a5bd938ecf3fbda99168"
+    },
+    {
+      "path": "plan-factory/PLAN_FACTORY_ACTIVATION_PLAN_v1.md",
+      "sha256": "fbf980968c5b56a9f4dc2a4f0a9154853f693c2fc4db90312ff2b132de9cba63"
+    }
+  ],
+  "files_written": [
+    "plan-factory/PLAN_FACTORY_ARCHITECTURE_v1.md",
+    "plan-factory/PLAN_SCHEMA_v1.json",
+    "plan-factory/PLAN_LIBRARY_SEED_1000_v1.json",
+    "plan-factory/PLAN_RANKING_ROI_MODEL_v1.json",
+    "plan-factory/PLAN_FACTORY_ACTIVATION_PLAN_v1.md",
+    "receipts/p0pgr/founder/founder-order-1000-plan-l0-first-5file-20260709T021931Z.json",
+    "receipts/l0-repo-graph-verify-20260709T021931Z.json",
+    "receipts/l0-map-1000-plan-5file-20260709T022035Z.json"
+  ],
+  "supplementary_unratified_addenda_retained": [
+    "plan-factory/FACTORY_LINE_REGISTRY_v1.json",
+    "plan-factory/SANDBOX_WORKTREE_MANAGER_v1.md",
+    "plan-factory/CLIENT_ORDER_TO_PLAN_PIPELINE_v1.md"
+  ],
+  "validation": "30/30 seeds carry every PLAN_SCHEMA_v1 required field; band/id allocation exact (first three ids per band); line plans subsets of band spines or justified; auto_dispatch.eligible false everywhere; zero judgment-tier seeds; ROI worked examples recompute exactly (66.0->71.0, 56.0->21.0); zero stale filename references. Draft-07 meta-validation pending CI (jsonschema not installed locally). Machine library-validator is PF-B (B11) \u2014 this is deterministic review, not a validator PASS claim.",
+  "token_usage": {
+    "stopped_workflow_wj41pdl0d": "partial draft phase only (6 of 7 drafts, verify never ran); usage not summarized by harness because the workflow was stopped \u2014 order-of-magnitude several hundred thousand subagent tokens",
+    "this_close_out": "in-session only: orientation (verifier + 9 queries + map) within the 2k-6k AGENTS.md budget; drafting/review in-session with zero subagents"
+  },
+  "confirmations": {
+    "no_code_built": true,
+    "no_deploy": true,
+    "no_cron_or_schedule": true,
+    "no_external_send": true,
+    "no_broad_reader_agents": true,
+    "package_status": "PROPOSED"
+  },
+  "quality_state": "PASS",
+  "verdict": "PLAN_FACTORY_PACKAGE_COMPLETE_PROPOSED",
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "close-out turn: deterministic scripts + in-session drafting; stopped workflow tokens noted above"
+  },
+  "accounting_note": "session-embedded operator; no subagents this turn",
+  "executor_route_note": "SESSION_EMBEDDED design/authoring; L0-graph-first orientation preceded all reads",
+  "next_pointer": "PF-B plan compiler + library validator packet (PLAN_FACTORY_ACTIVATION_PLAN_v1.md \u00a79); founder ratification of this package via work_order + receipt",
+  "commit_flag": "flag for next founder-visible commit"
+}

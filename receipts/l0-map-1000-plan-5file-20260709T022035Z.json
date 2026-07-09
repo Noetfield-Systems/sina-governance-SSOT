@@ -1,0 +1,63 @@
+{
+  "schema": "l0_compact_map_v1",
+  "map_id": "l0-map-1000-plan-5file-20260709T022035Z",
+  "recorded_at": "2026-07-09T02:20:35.969035+00:00",
+  "mission": "1000-Plan Cloud Factory design, 5-file layout (founder-order-1000-plan-l0-first-5file-20260709T021931Z)",
+  "orientation": {
+    "verifier": "receipts/l0-repo-graph-verify-20260709T021931Z.json \u2014 12/12 PASS",
+    "queries_run": [
+      "cloud-factory",
+      "FACTORY_LINE_REGISTRY",
+      "p0-pgr",
+      "sandbox",
+      "client order (0 hits)",
+      "plan factory (0 hits)",
+      "CLIENT_ORDER (fragment retry)",
+      "plan-factory (fragment retry, 0 hits)",
+      "PLAN_ (fragment retry)"
+    ]
+  },
+  "base_read_set": {
+    "cloud_factory_substrate_v0": [
+      "cloud-factory/CLOUD_FACTORY_SUBSTRATE_v0.md (33KB)",
+      "cloud-factory/FACTORY_LINE_REGISTRY_v0.json (17KB)",
+      "cloud-factory/SANDBOX_MANAGER_SPEC_v0.md (23KB)",
+      "cloud-factory/CLIENT_ORDER_TO_FACTORY_RUN_SCHEMA_v0.json (20KB)",
+      "cloud-factory/MVP_ACTIVATION_PLAN_v0.md (23KB)"
+    ],
+    "p0pgr_brain": [
+      "p0-pgr/ 6 files, 14KB total \u2014 packet/receipt/loop-state schemas, router rules, runtime, compiler plan"
+    ],
+    "key_registries": [
+      "data/cloud_line_registry_v1.json (TrustField ops, untouched)",
+      "data/brain_domain_sandboxes_v1.json (sandbox branch prefix precedent)",
+      "data/prompt_registry_schema_v1.json",
+      "data/machine_autonomy_loops_v1.json",
+      "data/governance_library_promote_queue_v1.json (harvest sink)"
+    ]
+  },
+  "new_files_confirmed_no_collision": [
+    "PLAN_SCHEMA_v1.json",
+    "PLAN_LIBRARY_SEED_1000_v1.json",
+    "PLAN_RANKING_ROI_MODEL_v1.json",
+    "PLAN_FACTORY_ARCHITECTURE_v1.md",
+    "PLAN_FACTORY_ACTIVATION_PLAN_v1.md \u2014 none matched by graph query"
+  ],
+  "existing_unratified_drafts": {
+    "adoptable_after_review": [
+      "plan-factory/PLAN_FACTORY_ARCHITECTURE_v1.md (28KB)",
+      "plan-factory/PLAN_SCHEMA_v1.json (18KB)",
+      "plan-factory/PLAN_RANKING_ROI_MODEL_v1.json (12KB)"
+    ],
+    "supplementary_not_in_package": [
+      "plan-factory/FACTORY_LINE_REGISTRY_v1.json",
+      "plan-factory/SANDBOX_WORKTREE_MANAGER_v1.md",
+      "plan-factory/CLIENT_ORDER_TO_PLAN_PIPELINE_v1.md \u2014 retained on disk, unratified addenda (never deleted)"
+    ],
+    "source": "workflow wj41pdl0d, stopped before library-seed draft and verify phase"
+  },
+  "graph_gaps": [
+    "plan-factory/ not in build_repo_graph_v1.py SUBSYSTEM_DIRS \u2014 drafts invisible to graph; fix is a one-line code change, deferred (order: do not code)"
+  ],
+  "drafting_plan": "In-session only, no agents: review+repair 3 adoptable drafts, write library seed (30 records, 10 bands) + activation plan fresh, deterministic validation, receipt."
+}
