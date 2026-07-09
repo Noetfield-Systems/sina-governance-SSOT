@@ -1,0 +1,63 @@
+{
+  "action": "sg_record_step7fb_unresolved",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Registry-Package-Recorder",
+  "timestamp": "2026-07-04T05:10:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "amends": "receipts/sg-record-step7de-complete-20260704T045800Z.json",
+  "substep": "7F-B",
+  "substep_name": "Copilot cloud agent resolution",
+  "substep_status": "UNRESOLVED",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "classification": "BLOCKED_UI_ATTESTATION_REQUIRED",
+  "evidence": {
+    "summary": "TrustField repo search found no repo-local config and cannot verify GitHub/Copilot UI state",
+    "receipt": "reports/trustfield-copilot-agent-resolution-v1.jsonl"
+  },
+  "draft_verdict": "BLOCKED",
+  "step_7f_progress": {
+    "7F-A_branch_surface_verifier": {
+      "status": "COMPLETE",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json",
+      "branch_only_unresolved": [
+        "ssot_agentic_ci",
+        "noos_cost_policy_scan"
+      ]
+    },
+    "7F-B_copilot_agent_resolution": {
+      "status": "UNRESOLVED",
+      "classification": "BLOCKED_UI_ATTESTATION_REQUIRED"
+    }
+  },
+  "next_required_evidence": [
+    "manual UI attestation for Copilot cloud agent settings",
+    "or API/export evidence for model, effort, and trigger"
+  ],
+  "step_8": {
+    "status": "BLOCKED",
+    "advance_blocked": true,
+    "reason": "22/23 PASS — trustfield_copilot_cloud_agent BLOCKED_UI_ATTESTATION_REQUIRED; branch-only workflows not on main"
+  },
+  "lock_candidate": {
+    "status": "BLOCKED",
+    "reason": "1 BLOCKED workflow; 7F-B unresolved"
+  },
+  "sg_did_not": [
+    "mark_package_ACTIVE",
+    "start_step_8",
+    "submit_lock_candidate",
+    "fake_ui_attestation",
+    "rewrite_noos_sync_behavior",
+    "edit_control_desk_frontend_backend"
+  ],
+  "receipt_refs": [
+    "reports/trustfield-copilot-agent-resolution-v1.jsonl",
+    "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json",
+    "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+    "receipts/sg-record-step7de-complete-20260704T045800Z.json"
+  ],
+  "policy_pass": false,
+  "active_promotion": false
+}

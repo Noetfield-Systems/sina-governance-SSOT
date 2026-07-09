@@ -1,0 +1,106 @@
+{
+  "action": "step7d_registry_drift_patch_applied",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7D",
+  "role": "Registry Patch Worker",
+  "input_receipt": "receipts/step7c_proposed_registry_patch.json",
+  "timestamp": "2026-07-04T05:00:00+00:00",
+  "policy_pass": false,
+  "files_changed": [
+    ".noos/workflow_registry_v1.json",
+    "receipts/step7c_proposed_registry_patch.json"
+  ],
+  "commands_run": [
+    "python3 -c json.load(workflow_registry_v1.json)"
+  ],
+  "errors": [],
+  "applied_patches": [
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "before": {
+        "owner": "cloudflare_worker",
+        "max_daily_runs": 288
+      },
+      "after": {
+        "owner": "github_actions",
+        "max_daily_runs": 1,
+        "note": "Primary surface: .github/workflows/supabase-heartbeat.yml (schedule Mon 14:00 UTC + workflow_dispatch). Former cloudflare_worker owner was seed error; no CF cron found for this row."
+      },
+      "unchanged": ["trigger", "last_audited", "class", "model_policy"]
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "before": {
+        "owner": "cloudflare_worker",
+        "max_daily_runs": 288
+      },
+      "after": {
+        "owner": "github_actions",
+        "max_daily_runs": 48,
+        "note": "Primary surface: .github/workflows/autorun-health.yml (cron */30 + workflow_dispatch). cloud-loop-health.yml is a separate backup row."
+      },
+      "unchanged": ["trigger", "last_audited", "class", "model_policy"]
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "before": {
+        "trigger": "schedule"
+      },
+      "after": {
+        "trigger": "event",
+        "note": "GHA external-verify.yml fires on workflow_run after deploy-sourcea-buyer-surfaces-v1 (main success), path-filtered push, and workflow_dispatch. No schedule stanza in live YAML (Step 7 evidence_note schedule claim was incorrect)."
+      },
+      "unchanged": ["owner", "last_audited", "max_daily_runs", "class", "model_policy"]
+    }
+  ],
+  "explicitly_not_touched": [
+    "ssot_agentic_ci",
+    "noos_cost_policy_scan",
+    "trustfield_copilot_cloud_agent",
+    "control-desk/backend",
+    "control-desk/frontend",
+    ".noos/registry_draft.json"
+  ],
+  "remaining_blockers": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "branch_only_pending",
+      "detail": "agentic-ci.yml not on main — merge before lock candidate"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "branch_only_pending",
+      "detail": "cost-policy-scan.yml not on main — merge before lock candidate"
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "surface_registry_mismatch",
+      "detail": "Registry DISABLE vs GH Copilot cloud agent active — manual UI disable + attestation required"
+    },
+    {
+      "workflow_id": null,
+      "kind": "rcp5_staleness",
+      "detail": "All 23 registry rows still last_audited=TODO"
+    },
+    {
+      "workflow_id": null,
+      "kind": "draft_staleness",
+      "detail": "registry_draft.json attestations stale — re-POST Step 7 after drift patch"
+    },
+    {
+      "workflow_id": null,
+      "kind": "self_scan",
+      "detail": "check_cost_policy.py still reports STALE_AUDIT on all rows until physical audit dates applied via lock candidate flow"
+    }
+  ],
+  "summary": {
+    "workflows_patched": 3,
+    "workflows_unchanged": 20,
+    "active_promotion": false,
+    "lock_candidate_submitted": false,
+    "last_audited_faked": false
+  },
+  "next_machine_action": "Re-run Step 7 attestations for the three patched rows; resolve branch-only and Copilot blockers separately.",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING"
+}

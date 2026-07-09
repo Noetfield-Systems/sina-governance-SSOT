@@ -1,0 +1,252 @@
+{
+  "checker": "check_cost_policy.py",
+  "policy_version": "2.0",
+  "registry_present": true,
+  "registry_entries": 23,
+  "files_scanned": 3,
+  "violations_found": 30,
+  "violations_active": [
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_agentic_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_security_risk_assessment: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_brain_loop_autorun_v1: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_cost_policy_receipt_validation: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_cost_policy_scan: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_factory_autorun: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_loop_health_checks: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_cross_repo_health: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_validate_boot: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_repo_policy_gate: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_external_verify: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_determinism_gate: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_deploy_buyer_surfaces_v1: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_governance_console_e2e: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_www_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_platform_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_supabase_heartbeat: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_trust_ledger_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_autorun_24_7_health: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_deploy_vercel: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_e2e_production_smoke: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_copilot_cloud_agent: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_BACKEND_BUILDER_v1.md",
+      "line": 56,
+      "matched_text": "Observed fields free-text (gpt-5.4, Auto, High allowed \u2014 record leaks, mark FAIL/BLOCKED)",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)\\bauto\\b"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_BACKEND_BUILDER_v1.md",
+      "line": 56,
+      "matched_text": "Observed fields free-text (gpt-5.4, Auto, High allowed \u2014 record leaks, mark FAIL/BLOCKED)",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)gpt-5\\.4"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_BACKEND_BUILDER_v1.md",
+      "line": 94,
+      "matched_text": "- POST attestation with gpt-5.4 \u2192 SAVED + policy_verdict FAIL (not rejected)",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)gpt-5\\.4"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_FRONTEND_BUILDER_v1.md",
+      "line": 24,
+      "matched_text": "- Hide observed bad values (gpt-5.4, Auto, High must be typeable and show FAIL/BLOCKED)",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)\\bauto\\b"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_FRONTEND_BUILDER_v1.md",
+      "line": 24,
+      "matched_text": "- Hide observed bad values (gpt-5.4, Auto, High must be typeable and show FAIL/BLOCKED)",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)gpt-5\\.4"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_FRONTEND_BUILDER_v1.md",
+      "line": 86,
+      "matched_text": "- Enter gpt-5.4 + high + hourly \u2192 save \u2192 FAIL visible, not hidden",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)gpt-5\\.4"
+    },
+    {
+      "rule_id": "COST_forbidden_model",
+      "severity": "red",
+      "file": "HANDOFF_FRONTEND_BUILDER_v1.md",
+      "line": 87,
+      "matched_text": "- Enter unknown model \u2192 BLOCKED visible",
+      "description": "Matched forbidden pattern group 'forbidden_model_patterns': (?i)unknown model"
+    }
+  ],
+  "violations_exempted": [],
+  "status": "FAIL"
+}

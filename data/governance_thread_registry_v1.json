@@ -1,0 +1,124 @@
+{
+  "schema": "governance_thread_registry_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T02:01:23Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Daily thread registry \u2014 intake and promoted threads separate from artifact rules",
+  "threads": [
+    {
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "copilot-automation-cost-profile-v1",
+      "registry_path": "docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "founder_intent_filter",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "founder-intent-filter-v1",
+      "registry_path": "docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+      "registry_path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+      "registry_path": "docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "ssot_proposal_artifact_versioning",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+      "registry_path": "docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "sourcea_brain_registry_learning_gate_impl",
+      "status": "AWAITING_REGISTRY_ENTRY",
+      "registered_at": "2026-07-04T01:53:37Z",
+      "source": "manual",
+      "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+      "registry_path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+      "source_tag_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "smart_production_cost_law_v2",
+      "status": "REGISTERED",
+      "registered_at": "2026-07-04T02:01:23Z",
+      "source": "manual",
+      "artifact_id": "smart-production-cost-law-v2",
+      "registry_path": "docs/governance_drafts_intake_v1/SMART_PRODUCTION_COST_LAW_v2.md",
+      "source_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_extract_v1/smart-production-cost-law-v2/cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+      "intake_kind": "zip_bundle",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "noos_control_desk_v2",
+      "status": "REGISTERED",
+      "registered_at": "2026-07-04T02:01:23Z",
+      "source": "manual",
+      "artifact_id": "noos-control-desk-v2",
+      "registry_path": "docs/governance_drafts_intake_v1/NOOS_CONTROL_DESK_v2_README.md",
+      "source_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_extract_v1/noos-control-desk-v2-patched/cost-production-law/control-desk/README.md",
+      "intake_kind": "zip_bundle",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "noetfield_coherent_system_spec_v1",
+      "status": "REGISTERED",
+      "registered_at": "2026-07-04T02:01:23Z",
+      "source": "manual",
+      "artifact_id": "noetfield-coherent-system-spec-v1",
+      "registry_path": "docs/governance_drafts_intake_v1/NOETFIELD_COHERENT_SYSTEM_SPEC_v1.md",
+      "source_path": "/Users/sinakazemnezhad/Downloads/NOETFIELD_COHERENT_SYSTEM_SPEC_v1.md",
+      "intake_kind": "downloads_root",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "sina_os_ssot_locked",
+      "status": "REGISTERED",
+      "registered_at": "2026-07-04T02:01:23Z",
+      "source": "manual",
+      "artifact_id": "sina-os-ssot-locked",
+      "registry_path": "docs/governance_drafts_intake_v1/SINA_OS_SSOT_LOCKED.md",
+      "source_path": "/Users/sinakazemnezhad/Downloads/SINA_OS_SSOT_LOCKED.md",
+      "intake_kind": "downloads_root",
+      "library_promote_pending": true
+    },
+    {
+      "thread_id": "sina_os_ssot_locked_1",
+      "status": "REGISTERED",
+      "registered_at": "2026-07-04T02:01:23Z",
+      "source": "manual",
+      "artifact_id": "sina-os-ssot-locked-1",
+      "registry_path": "docs/governance_drafts_intake_v1/SINA_OS_SSOT_LOCKED_1.md",
+      "source_path": "/Users/sinakazemnezhad/Downloads/SINA_OS_SSOT_LOCKED_1.md",
+      "intake_kind": "downloads_root",
+      "library_promote_pending": true
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "action": "noos_copilot_dispatcher_mode_patch",
+  "owner": "NOOS",
+  "sg_record_role": "pointer_only",
+  "repo": "noetfeld-os",
+  "layer": "P2",
+  "role_id": "noos_copilot_dispatcher",
+  "timestamp": "2026-07-03T19:58:00Z",
+  "patch": "sync_mode_gated",
+  "replaces": "binary cloud_write_allowed",
+  "allowed_modes_before_full_pass": [
+    "read_status",
+    "publish_receipt",
+    "publish_status",
+    "publish_drift_report",
+    "prepare_draft_branch",
+    "prepare_pr"
+  ],
+  "blocked_modes_before_full_pass": [
+    "fleet_rollout",
+    "active_promotion",
+    "direct_main_write",
+    "policy_law_mutation",
+    "publish_audit_pending_registry_as_active_fleet_truth"
+  ],
+  "deliverables": [
+    "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+    "data/noos-copilot-dispatcher-mode-v1.json",
+    "data/noos-integrator-role-v1.json"
+  ],
+  "policy_pass": true,
+  "next_machine_action": "SG record Step 5 pointers; Step 6 Machine-Enforceable Repo Fences"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "p0pgr_phase1_scorecard_v1",
+  "status": "BACKFILLED_EMPTY",
+  "recorded_at": "2026-07-08T16:16:59.558921+00:00",
+  "note": "Phase 1 never ran under this scaffold; see census receipt p0pgr-checklist-20260708T144545Z",
+  "counters": {
+    "executions": 0,
+    "sends": 0,
+    "deploys": 0,
+    "leaks": 0,
+    "freezes": 0
+  }
+}

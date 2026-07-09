@@ -1,7 +1,7 @@
 # L0 Repo Graph Report — sina-governance-ssot
 
-Generated (last indexed): `2026-07-09T02:16:34Z`
-Total files: 719 · Total size: 4.1MB · Edges detected: 2365
+Generated (last indexed): `2026-07-09T02:19:31Z`
+Total files: 721 · Total size: 4.1MB · Edges detected: 2365
 
 **Read this file first.** Do not spawn broad repo-reading agents ("understand the repo", "map subsystem X", "audit Y") until you have read this report and, if you need more detail, queried the index with `python3 scripts/query_repo_graph_v1.py <subsystem-or-keyword>`. This report + a query response should answer routing questions ("which files touch X", "how big is subsystem Y") without opening every file in the subsystem.
 
@@ -10,7 +10,7 @@ Total files: 719 · Total size: 4.1MB · Edges detected: 2365
 | subsystem | files | size | largest files |
 |---|---:|---:|---|
 | data/ | 232 | 1.6MB | `data/governance_review_queue_v1.json`, `data/l0_repo_graph_memory_v1.json`, `data/governance_intake_staging_v1/deep_research_report/deep-research-report.md`, `data/governance_artifact_registry_v1.json`, `data/governance_intake_staging_v1/manifest.json`, `data/team_bench_sourced_rows_v1.json` |
-| receipts/ | 203 | 932.4KB | `receipts/governance-intelligence-20260704T013119Z.json`, `receipts/l0-graph-query-1000-plan-20260709T020940Z.json`, `receipts/p0pgr/artifacts/execution-PKT-0002-20260708T164627Z/www.noetfield.com.html`, `receipts/governance-intelligence-20260704T013325Z.json`, `receipts/p0pgr/artifacts/CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z/verifier_findings_v1.json`, `receipts/parallel-candidate-batch-20260702T103251Z.json` |
+| receipts/ | 205 | 935.9KB | `receipts/governance-intelligence-20260704T013119Z.json`, `receipts/l0-graph-query-1000-plan-20260709T020940Z.json`, `receipts/p0pgr/artifacts/execution-PKT-0002-20260708T164627Z/www.noetfield.com.html`, `receipts/governance-intelligence-20260704T013325Z.json`, `receipts/p0pgr/artifacts/CLOUD_FACTORY_SUBSTRATE_v0-20260709T015408Z/verifier_findings_v1.json`, `receipts/parallel-candidate-batch-20260702T103251Z.json` |
 | packages/ | 119 | 586.4KB | `packages/noos-control-desk-v1/control-desk/static/assets/index-BUsr7EfJ.js`, `packages/noos-control-desk-v1/control-desk/frontend/package-lock.json`, `packages/noos-control-desk-v1/.noos/registry_draft.json`, `packages/noos-control-desk-v1/control-desk/backend/handler.py`, `packages/noos-control-desk-v1/receipts/step7_workflow_audit_2026-07-03.json`, `packages/noos-control-desk-v1/scripts/run_step7_workflow_audit_v1.py` |
 | scripts/ | 66 | 402.3KB | `scripts/governance_intelligence_engine_v1.py`, `scripts/governance_thread_intelligence_v1.py`, `scripts/governance_intake_path_intelligence_v1.py`, `scripts/governance_registry_ops_v1.py`, `scripts/governance_promote_library_drafts_v1.py`, `scripts/governance_intake_sink_v1.py` |
 | docs/ | 46 | 269.3KB | `docs/SOURCEA_BRAIN_HANDOFF_SIGNAL_FACTORY_TRUSTFIELD_v1.md`, `docs/governance_drafts_tag_v1/SMART_PRODUCTION_COST_LAW_v2.md`, `docs/TRUSTFIELD_CLOUD_LOOPS_IMPLEMENTATION_PACKETS_v1.md`, `docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md`, `docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md`, `docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md` |

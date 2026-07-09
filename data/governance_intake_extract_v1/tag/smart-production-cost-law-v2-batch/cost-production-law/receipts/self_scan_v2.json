@@ -1,0 +1,196 @@
+{
+  "checker": "check_cost_policy.py",
+  "policy_version": "2.0",
+  "registry_present": true,
+  "registry_entries": 23,
+  "files_scanned": 0,
+  "violations_found": 23,
+  "violations_active": [
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_agentic_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_security_risk_assessment: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_brain_loop_autorun_v1: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=ssot_cost_policy_receipt_validation: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_cost_policy_scan: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_factory_autorun: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_loop_health_checks: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noos_cross_repo_health: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_validate_boot: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_repo_policy_gate: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_external_verify: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_determinism_gate: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=sourcea_deploy_buyer_surfaces_v1: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_governance_console_e2e: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_www_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_platform_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_supabase_heartbeat: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=noetfield_trust_ledger_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_autorun_24_7_health: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_ci: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_deploy_vercel: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_e2e_production_smoke: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    },
+    {
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow",
+      "file": ".noos/workflow_registry_v1.json",
+      "line": null,
+      "matched_text": "workflow_id=trustfield_copilot_cloud_agent: last_audited is unset/TODO",
+      "description": "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    }
+  ],
+  "violations_exempted": [],
+  "status": "FAIL"
+}

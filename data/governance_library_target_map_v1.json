@@ -1,0 +1,42 @@
+{
+  "schema": "governance_library_target_map_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T02:00:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "canonical_library_root": "~/Desktop/SourceA/noetfield-library",
+  "artifact_targets": {
+    "sourcea-brain-registry-learning-gate-v0-1-4": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+    "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+    "ssot-conflict-log-runtime-rules-v0-1-2": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+    "ssot-proposal-artifact-versioning-v0-1-1": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+    "copilot-automation-cost-profile-v1": "P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+    "smart-production-cost-law-v2": "P8-MACHINE-LOOPS/SMART_PRODUCTION_COST_LAW_v2.md",
+    "noos-control-desk-v2": "P3-RUNTIME-REALITY-L0/NOOS_CONTROL_DESK_v2.md",
+    "noos-workflow-registry-v1": "P8-MACHINE-LOOPS/.noos/workflow_registry_v1.json",
+    "noos-cost-policy-v1": "P8-MACHINE-LOOPS/policy/cost_policy.yaml",
+    "noos-control-desk-mvp-spec-v1": "P3-RUNTIME-REALITY-L0/NOOS_CONTROL_DESK_MVP_SPEC.md",
+    "noos-integrator-sync-rule-v1": "P2-SSOT/NOOS_INTEGRATOR_SYNC_RULE_v1.md",
+    "noetfield-coherent-system-spec-v1": "P10-PRODUCT-LAYERS/NOETFIELD_COHERENT_SYSTEM_SPEC_v1.md",
+    "founder-intent-filter-v1": "P7-DOCTRINE/founder-intent-filter.md",
+    "agent-layered-law-least-knowledge-v1": "P0-FOUNDATION-SPINE/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md",
+    "founder-judgment-patterns-v1": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "noetfield-coherent-system-spec-v1": "P10-PRODUCT-LAYERS/NOETFIELD_COHERENT_SYSTEM_SPEC_v1.md"
+  },
+  "intake_full_doc_patterns": {
+    "zip_names": ["noos-control-desk", "smart-production", "smart.product"],
+    "root_md": ["LOCKED", "SMART_PRODUCTION", "NOETFIELD_COHERENT", "CANONICAL_D4_PACKAGE"],
+    "exclude_stems": ["deep-research-report", "linkedin-profile"]
+  },
+  "placeholder_targets": {
+    "strategy-ssot-v6-split": "P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md",
+    "GOVERNED_AUTORUN_LAWS_v3": "P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md",
+    "SOURCEA_SSOT_INDEX_LOCKED_v1": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+    "SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1": "P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md",
+    "SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1": "P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.md",
+    "P0_FOUNDATION_MANIFEST": "P0-FOUNDATION-SPINE/P0_FOUNDATION_MANIFEST.md"
+  },
+  "intake_library_folder_patterns": [
+    "noetfield-library",
+    "noetfield-library 4"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "action": "step7fc_final_reattestation",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7F-C",
+  "timestamp": "2026-07-04T05:08:58.363369+00:00",
+  "policy_pass": false,
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [
+    "python3 scripts/run_step7fc_final_reattestation_v1.py (via http://127.0.0.1:17878/api/attestation/save x3)"
+  ],
+  "affected_workflows": [
+    "trustfield_copilot_cloud_agent",
+    "ssot_agentic_ci",
+    "noos_cost_policy_scan"
+  ],
+  "reattest_results": [
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'unknown' is empty/unknown \u2014 Copilot UI attestation required.",
+        "observed_effort 'unknown' is forbidden by default."
+      ],
+      "receipt": "receipts/draft_save_trustfield_copilot_cloud_agent_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "saved": true,
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "receipt": "receipts/draft_save_ssot_agentic_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "saved": true,
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "receipt": "receipts/draft_save_noos_cost_policy_scan_2026-07-03.json",
+      "error": null
+    }
+  ],
+  "seven_f_b_status": "incomplete",
+  "seven_f_b_evidence": {
+    "ssot_pr5": "OPEN, CI FAIL",
+    "noos_pr22": "OPEN, CI FAIL",
+    "main_merge": false
+  },
+  "summary": {
+    "total": 23,
+    "pass_count": 22,
+    "fail_count": 0,
+    "blocked_count": 1,
+    "todo_count": 0,
+    "pass_ids": [
+      "ssot_agentic_ci",
+      "ssot_security_risk_assessment",
+      "ssot_brain_loop_autorun_v1",
+      "ssot_cost_policy_receipt_validation",
+      "noos_cost_policy_scan",
+      "noos_factory_autorun",
+      "noos_loop_health_checks",
+      "noos_cross_repo_health",
+      "sourcea_validate_boot",
+      "sourcea_repo_policy_gate",
+      "sourcea_external_verify",
+      "sourcea_determinism_gate",
+      "sourcea_deploy_buyer_surfaces_v1",
+      "noetfield_governance_console_e2e",
+      "noetfield_www_ci",
+      "noetfield_platform_ci",
+      "noetfield_supabase_heartbeat",
+      "noetfield_trust_ledger_ci",
+      "trustfield_autorun_24_7_health",
+      "trustfield_ci",
+      "trustfield_deploy_vercel",
+      "trustfield_e2e_production_smoke"
+    ],
+    "fail_ids": [],
+    "blocked_ids": [
+      "trustfield_copilot_cloud_agent"
+    ],
+    "ready_for_lock_candidate": false
+  },
+  "errors": [
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'unknown' is empty/unknown \u2014 Copilot UI attestation required.",
+        "observed_effort 'unknown' is forbidden by default."
+      ],
+      "receipt": "receipts/draft_save_trustfield_copilot_cloud_agent_2026-07-03.json",
+      "error": null
+    }
+  ],
+  "remaining_blockers": [
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "copilot_ui_unread",
+      "detail": "Copilot UI not machine-readable; registry DISABLE vs GH active"
+    },
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "branch_pending",
+      "detail": "7F-B incomplete \u2014 not on main; PR #5 CI red"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "branch_pending",
+      "detail": "7F-B incomplete \u2014 not on main; PR #22 CI red"
+    }
+  ],
+  "next_machine_action": "Complete 7F-B CI fixes + bounded merge; re-attest Copilot after UI evidence.",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING",
+  "lock_candidate_submitted": false
+}

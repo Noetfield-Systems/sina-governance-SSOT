@@ -1,0 +1,54 @@
+{
+  "schema": "p0pgr_phase2_scorecard_v1",
+  "era": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "recorded_at": "2026-07-08T16:16:59.558921+00:00",
+  "updated_at": "2026-07-09T02:28:23.033427+00:00",
+  "seeded_from": "p0pgr-checklist-20260708T144545Z",
+  "founder_receipts": [
+    "founder-authorization-20260708T161659Z",
+    "founder-directive-team-bench-20260708T170125Z",
+    "founder-order-cloud-factory-substrate-20260709T011955Z",
+    "founder-order-1000-plan-cloud-factory-20260709T014708Z",
+    "founder-order-1000-plan-l0-first-5file-20260709T021931Z"
+  ],
+  "counters": {
+    "executions": 10,
+    "sends": 0,
+    "deploys": 2,
+    "leaks": 0,
+    "freezes": 0,
+    "shadow_cycles": 1,
+    "cost_usd": 0
+  },
+  "queue_ref": "receipts/p0pgr/phase2_queue_v1.json",
+  "directives": [
+    "cloud-only; Mac is cockpit, never runner",
+    "no scheduled automation without explicit founder approval",
+    "continuity law: never default to STOP"
+  ],
+  "last_cycle": {
+    "cycle_id": "cycle-20260708T161659Z",
+    "verdict": "ROUTED",
+    "recorded_at": "2026-07-08T16:16:59.603139+00:00"
+  },
+  "last_execution": {
+    "receipt_id": "PLAN_FACTORY_1000_v1-20260709T022823Z",
+    "packet_id": "PLAN_FACTORY_1000_v1"
+  },
+  "top_lane": "TEAM_BENCH_FORMATION",
+  "lane_weights_founder_20260708": {
+    "team_credibility_capacity": 35,
+    "revenue_readiness_after_team": 25,
+    "founder_workload_reduction": 15,
+    "trust_proof_support": 15,
+    "cloud_execution_speed": 10
+  },
+  "deploys_note": "deploys counter reflects founder-authorized TEAM_BENCH_PLATFORM_PROD_DEPLOY_v1",
+  "ladder_r2": "PASS",
+  "ladder_r3": "HOLD \u2014 cron disabled",
+  "dual_scaffold": "RECONCILED_PASS \u2014 TrustField = adapter layer; canonical brain = cursor/language-layer-v1",
+  "trustfield_cloud_loops": "DECLARED_ACTIVE",
+  "cloud_factory_substrate": "DESIGN_RECEIPTED_PROPOSED \u2014 cloud-factory/ package v0, five files sha256-pinned",
+  "reader_pass_law": "LAST blind multi-agent repo-understanding pass completed 2026-07-08; L0 Repo Graph Memory required before any future broad reader workflow",
+  "plan_factory_1000": "DESIGN_RECEIPTED_PROPOSED \u2014 plan-factory/ 5-file package, L0-graph-first, sha256-pinned"
+}

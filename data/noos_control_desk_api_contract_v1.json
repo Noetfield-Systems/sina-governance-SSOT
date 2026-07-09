@@ -1,0 +1,99 @@
+{
+  "schema": "noos_control_desk_api_contract_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T03:55:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "package_id": "noos-control-desk-v1",
+  "phase": 1,
+  "authority_doc": "packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md",
+  "implementation": "packages/noos-control-desk-v1/control-desk/backend/handler.py",
+  "rule": "Phase 1 uses canonical routes only. No duplicate public route names. Phase 2 may replace routes only via explicit refactor doc.",
+
+  "canonical_routes": [
+    {
+      "method": "GET",
+      "path": "/api/dashboard",
+      "purpose": "Dashboard tile — workflow counts, lock readiness, git summary",
+      "response_keys": ["registry_entries", "pass_count", "fail_count", "blocked_count", "todo_count", "ready_for_lock_candidate", "git"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/registry/load",
+      "purpose": "Load live workflow_registry_v1.json",
+      "response_keys": ["workflows", "registry_version"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/registry/save-draft",
+      "purpose": "Save workflow_registry_draft.json — never overwrites live registry",
+      "body": {"workflows": "array"},
+      "response_keys": ["status", "path", "entries", "receipt"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/attestation/save",
+      "purpose": "Save per-workflow attestation draft; server computes policy_verdict",
+      "body": ["workflow_id", "last_audited", "observed_trigger", "observed_mode", "observed_model", "observed_effort", "evidence_note", "desired_trigger", "desired_model", "desired_effort"],
+      "response_keys": ["status", "workflow_id", "policy_verdict", "verdict_reasons", "receipt"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/policy/check",
+      "purpose": "Run check_cost_policy.py — aggregate all violations",
+      "response_keys": ["status", "checker_exit_code", "report", "receipt"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/integrator/status",
+      "purpose": "Read-only integrator summary — repo-local, home mirror, cloud mirror readout",
+      "response_keys": ["repo_local", "home_mirror", "cloud_mirror", "cloud_write_scope", "cloud_write_unrestricted_allowed", "cloud_write_scope_gate", "gate_note"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/integrator/sync",
+      "purpose": "Repo-local integrator sync — scoped cloud writes only per NOOS Copilot gate",
+      "response_keys": ["status", "summary", "receipt", "cloud_write_scope", "cloud_write_unrestricted_allowed", "cloud_write_scope_gate", "gate_note"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/receipts/list",
+      "purpose": "List receipt JSON filenames",
+      "response_keys": ["receipts"]
+    },
+    {
+      "method": "GET",
+      "path": "/api/pr/prepare",
+      "purpose": "PR prep plan only — suggested branch/commit, no push",
+      "response_keys": ["status", "suggested_branch", "suggested_commit", "git", "note"]
+    },
+    {
+      "method": "POST",
+      "path": "/api/lock-candidate/submit",
+      "purpose": "Submit lock candidate when all attestations PASS + checker PASS; bounded local branch+commit only",
+      "response_keys": ["status", "checker_status", "git_result", "receipt", "cloud_write_scope", "cloud_write_unrestricted_allowed", "cloud_write_scope_gate", "gate_note", "note"]
+    }
+  ],
+
+  "phase_1_forbidden_public_routes": [
+    "/api/registry",
+    "/api/receipts",
+    "/api/draft",
+    "/api/draft/status",
+    "/api/draft/save",
+    "/api/validate",
+    "/api/sync",
+    "/api/git/status",
+    "/api/attestation/draft",
+    "/api/attestation/lock-candidate"
+  ],
+
+  "integrator_gate": {
+    "cloud_write_scope": "gated",
+    "cloud_write_scope_gate": {
+      "rule": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked.",
+      "allowed_before_full_pass": ["receipts", "status", "drift_reports", "draft_branch_pr_prep"],
+      "blocked_before_full_pass": ["fleet_rollout", "active_promotion", "direct_main_write", "policy_law_mutation", "audit_pending_registry_propagation"]
+    },
+    "cloud_write_unrestricted_allowed_before_full_pass": false
+  }
+}

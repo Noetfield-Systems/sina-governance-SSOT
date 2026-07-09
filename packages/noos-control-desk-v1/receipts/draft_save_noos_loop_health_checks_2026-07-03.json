@@ -1,0 +1,14 @@
+{
+  "action": "attestation_draft",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [],
+  "policy_pass": true,
+  "errors": [],
+  "timestamp": "2026-07-04T04:56:38.412634+00:00",
+  "next_machine_action": "Continue attesting remaining workflows or run policy check.",
+  "workflow_id": "noos_loop_health_checks",
+  "policy_verdict": "PASS"
+}

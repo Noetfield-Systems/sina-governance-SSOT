@@ -1,0 +1,36 @@
+{
+  "schema": "founder_judgment_patterns_read_scope_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T05:21:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "library_path": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+  "layer": "P0",
+  "sub_layer": "P0_CORE",
+  "authority_source": "SG registry ACTIVE pointer only — file LOCKED header is not authority",
+  "dispatch_rule": "mode_gated_read_scope",
+  "allowed_readers": [
+    "base_live_brain",
+    "high_decision_agent"
+  ],
+  "forbidden_readers": [
+    "worker",
+    "normal_worker",
+    "tier_1_worker",
+    "build_lane_worker",
+    "integrator_worker",
+    "policy_checker_worker",
+    "frontend_builder_worker",
+    "packager_worker"
+  ],
+  "forbidden_tiers": [
+    "tier_1",
+    "tier_2"
+  ],
+  "inject_into_worker_prompts": false,
+  "inject_into_tier_0": false,
+  "inject_into_tier_1": false,
+  "growth_rule": "harvest_from_real_decisions_only_no_speculative_philosophy",
+  "dispatcher_action_if_worker_request": "BLOCKED_WITH_REASON — request re-scope to Base Brain or high decision agent",
+  "registry_status_required": "ACTIVE"
+}

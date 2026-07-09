@@ -1,0 +1,223 @@
+{
+  "schema": "governance-intelligence-receipt-v1",
+  "receipt_id": "governance-intelligence-20260704T015416Z",
+  "recorded_at": "2026-07-04T01:54:16Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "command": "audit",
+  "ok": true,
+  "result": {
+    "schema": "governance-intelligence-audit-v1",
+    "audited_at": "2026-07-04T01:54:16Z",
+    "canon_version": "founder_canon_v1.0.0",
+    "ok": true,
+    "registry_artifacts": 30,
+    "discovered_files": 417,
+    "unregistered_candidates": 107,
+    "classification_drift": [
+      {
+        "artifact_id": "library-ssot-index-v1",
+        "path": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+        "registry_layer": "P0",
+        "detected_layer": "P4",
+        "registry_domain": "ssot_plane",
+        "detected_domain": "ssot_plane"
+      },
+      {
+        "artifact_id": "llm-agent-operating-law-v3",
+        "path": "P2-SSOT/ssot/SOURCEA_LLM_AGENT_OPERATING_LAW_SSOT_v3.md",
+        "registry_layer": "P2",
+        "detected_layer": "P3",
+        "registry_domain": "ssot_plane",
+        "detected_domain": "ssot_plane"
+      },
+      {
+        "artifact_id": "sourcea-ssot-v1-2-pdf",
+        "path": "P2-SSOT/ssot/version-lineage/Source-A-SSOT-v1.2.pdf",
+        "registry_layer": "P2",
+        "detected_layer": "P2",
+        "registry_domain": "ssot_plane",
+        "detected_domain": "governance_structure"
+      },
+      {
+        "artifact_id": "cloud-kernel-v1-2-base",
+        "path": "P4-CLOUD-KERNEL-L1-L8/cloud-kernel-v1.2-schema-MISSING.md",
+        "registry_layer": "P4",
+        "detected_layer": "P3",
+        "registry_domain": "cloud_kernel",
+        "detected_domain": "cloud_kernel"
+      },
+      {
+        "artifact_id": "library-completeness-audit-v0-4",
+        "path": "P99-LEDGER/COMPLETENESS_AUDIT_v0.4.md",
+        "registry_layer": "P99",
+        "detected_layer": "P0",
+        "registry_domain": "governance_structure",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "founder-canon-json-v1",
+        "path": "data/founder_canon_v1.json",
+        "registry_layer": "P1",
+        "detected_layer": "P99",
+        "registry_domain": "founder_canon",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "github-automation-registry-v1",
+        "path": "data/github_automation_registry_v1.json",
+        "registry_layer": "P8",
+        "detected_layer": "P3",
+        "registry_domain": "automation",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "governance-artifact-registry-v1",
+        "path": "data/governance_artifact_registry_v1.json",
+        "registry_layer": "P0",
+        "detected_layer": "P3",
+        "registry_domain": "governance_structure",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "governance-structure-tree-v1",
+        "path": "data/governance_structure_tree_v1.json",
+        "registry_layer": "P0",
+        "detected_layer": "P2",
+        "registry_domain": "governance_structure",
+        "detected_domain": "founder_canon"
+      },
+      {
+        "artifact_id": "governance-thread-registry-v1",
+        "path": "data/governance_thread_registry_v1.json",
+        "registry_layer": "P0",
+        "detected_layer": "P0",
+        "registry_domain": "intake_thread",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "machine-autonomy-loops-json-v1",
+        "path": "data/machine_autonomy_loops_v1.json",
+        "registry_layer": "P8",
+        "detected_layer": "P3",
+        "registry_domain": "automation",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "mac-cursor-venture-dispatch-v1",
+        "path": "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md",
+        "registry_layer": "P3",
+        "detected_layer": "P6",
+        "registry_domain": "mac_runtime",
+        "detected_domain": "governance_structure"
+      },
+      {
+        "artifact_id": "copilot-automation-cost-profile-v1",
+        "path": "docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "registry_layer": "P8",
+        "detected_layer": "P0",
+        "registry_domain": "automation",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "founder-intent-filter-v1",
+        "path": "docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+        "registry_layer": "P1",
+        "detected_layer": "P3",
+        "registry_domain": "founder_canon",
+        "detected_domain": "founder_canon"
+      },
+      {
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+        "registry_layer": "P0",
+        "detected_layer": "P6",
+        "registry_domain": "founder_canon",
+        "detected_domain": "venture_routing"
+      },
+      {
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+        "registry_layer": "P0",
+        "detected_layer": "P5",
+        "registry_domain": "founder_canon",
+        "detected_domain": "founder_canon"
+      },
+      {
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "path": "docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+        "registry_layer": "P0",
+        "detected_layer": "P3",
+        "registry_domain": "governance_structure",
+        "detected_domain": "venture_routing"
+      },
+      {
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "path": "docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+        "registry_layer": "P0",
+        "detected_layer": "P3",
+        "registry_domain": "governance_structure",
+        "detected_domain": "governance_structure"
+      },
+      {
+        "artifact_id": "deep-research-founder-intent-v1",
+        "path": "docs/governance_drafts_tag_v1/deep-research-report.md",
+        "registry_layer": "P1",
+        "detected_layer": "P0",
+        "registry_domain": "founder_canon",
+        "detected_domain": "founder_canon"
+      },
+      {
+        "artifact_id": "governance-intelligence-pipeline-v1",
+        "path": "ssot/GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md",
+        "registry_layer": "P0",
+        "detected_layer": "P3",
+        "registry_domain": "governance_structure",
+        "detected_domain": "governance_structure"
+      },
+      {
+        "artifact_id": "machine-autonomy-loops-v1",
+        "path": "ssot/MACHINE_AUTONOMY_LOOPS_v1.md",
+        "registry_layer": "P8",
+        "detected_layer": "P3",
+        "registry_domain": "automation",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "multi-repo-worker-registry-v1",
+        "path": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+        "registry_layer": "P2",
+        "detected_layer": "P2",
+        "registry_domain": "venture_routing",
+        "detected_domain": "automation"
+      },
+      {
+        "artifact_id": "noos-integrator-rules-v1",
+        "path": "ssot/NOOS_INTEGRATOR_RULES_v1.md",
+        "registry_layer": "P2",
+        "detected_layer": "P3",
+        "registry_domain": "integrator",
+        "detected_domain": "integrator"
+      },
+      {
+        "artifact_id": "parallel-automation-governance-v1",
+        "path": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+        "registry_layer": "P8",
+        "detected_layer": "P3",
+        "registry_domain": "automation",
+        "detected_domain": "automation"
+      }
+    ],
+    "pointer_drift": [],
+    "conflicts": {
+      "issues": [],
+      "stale_language_hits": [],
+      "ok": true
+    },
+    "graph_nodes": 30,
+    "review_queue": {
+      "path": "data/governance_review_queue_v1.json",
+      "open_count": 131,
+      "high_severity_count": 0
+    }
+  }
+}

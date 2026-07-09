@@ -1,0 +1,52 @@
+{
+  "schema": "step7c_proposed_registry_patch",
+  "version": "1.0.0",
+  "status": "APPLIED",
+  "target_file": ".noos/workflow_registry_v1.json",
+  "rationale": "Minimal owner/trigger/budget corrections where GitHub YAML evidence is unambiguous. Does not set ACTIVE, last_audited, or attestation fields.",
+  "evidence_sources": [
+    "gh api repos/Noetfield-Systems/Noetfield/actions/workflows/303004354",
+    "gh api repos/Noetfield-Systems/TrustField-Technologies/actions/workflows/306288023",
+    "gh api repos/Noetfield-Systems/SourceA/contents/.github/workflows/external-verify.yml",
+    "packages/noos-control-desk-v1/receipts/step7_workflow_audit_2026-07-03.json"
+  ],
+  "patches": [
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "fields": {
+        "owner": "github_actions",
+        "max_daily_runs": 1
+      },
+      "note_append": "Primary surface: .github/workflows/supabase-heartbeat.yml (schedule Mon 14:00 UTC + workflow_dispatch). Former cloudflare_worker owner was seed error; no CF cron found for this row."
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "fields": {
+        "owner": "github_actions",
+        "max_daily_runs": 48
+      },
+      "note_append": "Primary surface: .github/workflows/autorun-health.yml (cron */30 + workflow_dispatch). cloud-loop-health.yml is a separate backup row."
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "fields": {
+        "trigger": "event"
+      },
+      "note_append": "GHA external-verify.yml fires on workflow_run after deploy-sourcea-buyer-surfaces-v1 (main success), path-filtered push, and workflow_dispatch. No schedule stanza in live YAML (Step 7 evidence_note schedule claim was incorrect)."
+    }
+  ],
+  "explicitly_excluded": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "reason": "Registry fields match intended surface; YAML absent on main — branch-only pending."
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "reason": "Registry fields match intended surface; YAML absent on main — branch-only pending."
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "reason": "Registry intentionally disabled (max_daily_runs=0); GH surface still active — requires manual Copilot UI disable + attestation, not registry promotion."
+    }
+  ]
+}

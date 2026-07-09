@@ -1,0 +1,31 @@
+{
+  "schema": "trustfield_copilot_ui_attestation_sanitized_v1",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "repo": "TrustField-Technologies",
+  "package": "noos-control-desk-v1",
+  "step": "7F-B",
+  "timestamp": "2026-07-04T05:38:00+00:00",
+  "status": "PARTIAL",
+  "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+  "pass_granted": false,
+  "control_desk_re_attestation_required": true,
+  "ui_settings_attested": {
+    "require_approval_for_workflow_runs": "ON",
+    "allow_automations": "OFF",
+    "firewall": "ON",
+    "recommended_allowlist": "ON"
+  },
+  "attestation_scope": "Repo-level Copilot Cloud Agent settings — automations disabled posture only; partial evidence",
+  "raw_receipt": {
+    "repo": "TrustField-Technologies",
+    "path": "reports/improvement-receipt-v2.jsonl",
+    "gitignored": true,
+    "committed": false,
+    "branch_push_note": "TrustField Copilot branch push confirmed; HEAD unchanged because reports/ is gitignored"
+  },
+  "remaining_gap": "Tracked sanitized receipt or Control Desk re-attestation required before blocker closes",
+  "draft_verdict": "BLOCKED",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING",
+  "step_8": "BLOCKED",
+  "lock_candidate": "BLOCKED"
+}

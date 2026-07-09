@@ -1,0 +1,48 @@
+{
+  "schema": "copilot_attestation_schema_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T03:30:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "package": "noos-control-desk-v1",
+  "layer": "P8",
+  "purpose": "Shape for observed Copilot UI reality vs desired policy state",
+  "required_fields": [
+    "automation_name",
+    "repo",
+    "observed_trigger",
+    "observed_mode",
+    "observed_model",
+    "observed_effort",
+    "policy_verdict",
+    "desired_trigger",
+    "desired_model",
+    "desired_effort",
+    "last_audited",
+    "evidence_note"
+  ],
+  "enums": {
+    "policy_verdict": ["PASS", "FAIL", "BLOCKED", "TODO"],
+    "desired_trigger": ["manual"],
+    "desired_model": ["gpt-5-mini"],
+    "desired_effort": ["low"]
+  },
+  "defaults": {
+    "desired_trigger": "manual",
+    "desired_model": "gpt-5-mini",
+    "desired_effort": "low"
+  },
+  "example": {
+    "automation_name": "",
+    "repo": "",
+    "observed_trigger": "",
+    "observed_mode": "",
+    "observed_model": "",
+    "observed_effort": "",
+    "policy_verdict": "PASS",
+    "desired_trigger": "manual",
+    "desired_model": "gpt-5-mini",
+    "desired_effort": "low",
+    "last_audited": "YYYY-MM-DD",
+    "evidence_note": ""
+  }
+}

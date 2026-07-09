@@ -1,0 +1,208 @@
+{
+  "action": "step7f_a_branch_surface_verifier",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7F-A",
+  "role": "SG Workflow Surface Verifier",
+  "timestamp": "2026-07-04T05:09:00+00:00",
+  "policy_pass": false,
+  "files_changed": [],
+  "commands_run": [
+    "gh api repos/Noetfield-Systems/sina-governance-SSOT/contents/.github/workflows/agentic-ci.yml?ref=main",
+    "gh api repos/Noetfield-Systems/sina-governance-SSOT/contents/.github/workflows/agentic-ci.yml?ref=copilot/cost-locks-v1",
+    "gh api repos/Noetfield-Systems/sina-governance-SSOT/actions/workflows/306625675",
+    "gh run list --repo Noetfield-Systems/sina-governance-SSOT --workflow=agentic-ci.yml --limit 5",
+    "gh run list --repo Noetfield-Systems/sina-governance-SSOT --branch main --workflow=agentic-ci.yml --limit 3",
+    "gh pr view 5 --repo Noetfield-Systems/sina-governance-SSOT",
+    "gh api repos/Noetfield-Systems/noetfeld-os/contents/.github/workflows/cost-policy-scan.yml?ref=main",
+    "gh api repos/Noetfield-Systems/noetfeld-os/contents/.github/workflows/cost-policy-scan.yml?ref=pr-10",
+    "gh api repos/Noetfield-Systems/noetfeld-os/contents/.github/workflows/cost-policy-scan.yml?ref=copilot/cost-locks-v1",
+    "gh api repos/Noetfield-Systems/noetfeld-os/actions/workflows/306862038",
+    "gh run list --repo Noetfield-Systems/noetfeld-os --workflow=cost-policy-scan.yml --limit 5",
+    "gh run list --repo Noetfield-Systems/noetfeld-os --branch main --workflow=cost-policy-scan.yml --limit 3",
+    "gh pr view 22 --repo Noetfield-Systems/noetfeld-os",
+    "gh pr view 24 --repo Noetfield-Systems/noetfeld-os"
+  ],
+  "errors": [],
+  "classifications": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "registry_repo": "sina-governance-SSOT",
+      "classification": "branch_pending_not_live_main",
+      "lock_readiness": "excluded_until_main_merge",
+      "live_on_main": false,
+      "gh_workflow": {
+        "id": 306625675,
+        "name": "Agentic CI",
+        "path": ".github/workflows/agentic-ci.yml",
+        "state": "active"
+      },
+      "main_yaml": {
+        "path": ".github/workflows/agentic-ci.yml",
+        "present": false,
+        "evidence": "gh api contents?ref=main → HTTP 404 Not Found"
+      },
+      "branch_yaml": {
+        "present_on": [
+          "copilot/cost-locks-v1"
+        ],
+        "absent_on": [
+          "main"
+        ],
+        "evidence": "gh api contents?ref=copilot/cost-locks-v1 → agentic-ci.yml (sha 5825e928…, 1715 bytes)"
+      },
+      "run_evidence": {
+        "main_branch_runs": 0,
+        "recent_branches": [
+          "copilot/cost-locks-v1",
+          "kazemnezhadsina144-dot-ssot-org-sync-plane-v1"
+        ],
+        "latest_run": {
+          "branch": "copilot/cost-locks-v1",
+          "conclusion": "failure",
+          "created_at": "2026-07-04T04:46:14Z"
+        }
+      },
+      "draft_verdict_note": "Step 7E draft PASS on model:none — does not override not_live_main; branch-only gap remains for lock readiness",
+      "bounded_merge_path": {
+        "primary_pr": {
+          "repo": "Noetfield-Systems/sina-governance-SSOT",
+          "number": 5,
+          "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/5",
+          "title": "Repo-local cost-policy locks: CI early-fail + promotion gate checks",
+          "head": "copilot/cost-locks-v1",
+          "base": "main",
+          "state": "OPEN",
+          "mergeable": "CONFLICTING",
+          "merge_state_status": "DIRTY",
+          "checks": [
+            {"name": "tests", "conclusion": "FAILURE"}
+          ]
+        },
+        "alternate_pr": {
+          "number": 4,
+          "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/4",
+          "head": "kazemnezhadsina144-dot-ssot-org-sync-plane-v1",
+          "note": "Separate agentic-loops prototype lane; not the cost-locks bounded path"
+        }
+      },
+      "action_taken": "observation_only — verified main absence and branch/PR surface",
+      "action_proposed": "Resolve PR #5 merge conflicts + green CI; merge agentic-ci.yml to main; re-attest ssot_agentic_ci with main-present evidence before lock candidate"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "registry_repo": "noetfeld-os",
+      "classification": "branch_pending_not_live_main",
+      "lock_readiness": "excluded_until_main_merge",
+      "live_on_main": false,
+      "gh_workflow": {
+        "id": 306862038,
+        "name": "Cost policy scan",
+        "path": ".github/workflows/cost-policy-scan.yml",
+        "state": "active"
+      },
+      "main_yaml": {
+        "path": ".github/workflows/cost-policy-scan.yml",
+        "present": false,
+        "evidence": "gh api contents?ref=main → HTTP 404 Not Found"
+      },
+      "branch_yaml": {
+        "present_on": [
+          "pr-10",
+          "copilot/cost-locks-v1"
+        ],
+        "absent_on": [
+          "main"
+        ],
+        "evidence": "gh api contents?ref=pr-10 and ref=copilot/cost-locks-v1 → cost-policy-scan.yml present; ref=main → 404"
+      },
+      "run_evidence": {
+        "main_branch_runs": 0,
+        "recent_branches": [
+          "copilot/cost-locks-v1",
+          "pr-10"
+        ],
+        "latest_run": {
+          "branch": "copilot/cost-locks-v1",
+          "conclusion": "failure",
+          "created_at": "2026-07-04T04:48:28Z"
+        }
+      },
+      "draft_verdict_note": "Step 7E draft PASS on model:none — does not override not_live_main; branch-only gap remains for lock readiness",
+      "bounded_merge_path": {
+        "primary_pr": {
+          "repo": "Noetfield-Systems/noetfeld-os",
+          "number": 24,
+          "url": "https://github.com/Noetfield-Systems/noetfeld-os/pull/24",
+          "title": "NOOS Copilot Step 5: dispatcher discovery & registration",
+          "head": "copilot/cost-locks-v1",
+          "base": "main",
+          "state": "OPEN",
+          "mergeable": "CONFLICTING",
+          "merge_state_status": "DIRTY",
+          "checks": [
+            {"name": "discover", "conclusion": "SUCCESS"},
+            {"name": "scan", "conclusion": "FAILURE"}
+          ]
+        },
+        "alternate_pr": {
+          "number": 22,
+          "url": "https://github.com/Noetfield-Systems/noetfeld-os/pull/22",
+          "head": "pr-10",
+          "title": "Cost lock v1: CI scanner + runtime routing guard",
+          "state": "OPEN",
+          "mergeable": "CONFLICTING",
+          "note": "Earlier cost-lock lane; YAML also on pr-10; prefer consolidating via primary PR #24 or rebasing pr-10 before merge"
+        }
+      },
+      "action_taken": "observation_only — verified main absence and branch/PR surface",
+      "action_proposed": "Resolve PR #24 (or rebased PR #22) conflicts + green scan job; merge cost-policy-scan.yml to main; re-attest noos_cost_policy_scan with main-present evidence before lock candidate"
+    }
+  ],
+  "summary": {
+    "workflows_reviewed": 2,
+    "live_on_main": 0,
+    "branch_pending_not_live_main": 2,
+    "lock_readiness_excluded_until_main_merge": 2,
+    "bounded_prs_identified": 2,
+    "prs_merge_blocked": 2,
+    "active_promotion": false,
+    "lock_candidate_submitted": false,
+    "package_status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  "remaining_blockers": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "not_live_main",
+      "detail": "agentic-ci.yml absent on main; PR #5 CONFLICTING + tests FAILURE"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "not_live_main",
+      "detail": "cost-policy-scan.yml absent on main; PR #24 CONFLICTING + scan FAILURE"
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "surface_registry_mismatch",
+      "detail": "Out of 7F-A scope — still BLOCKED in draft (1/23); unresolved for Step 8"
+    },
+    {
+      "workflow_id": null,
+      "kind": "rcp5_staleness",
+      "detail": "workflow_registry_v1.json last_audited=TODO on all 23 rows until lock candidate flow"
+    }
+  ],
+  "sg_did_not": [
+    "fake_main_presence",
+    "mark_ACTIVE",
+    "submit_lock_candidate",
+    "edit_control_desk_frontend_backend",
+    "modify_noos_sync_behavior"
+  ],
+  "next_machine_action": "7F-B or merge lane: resolve PR conflicts/CI for #5 (SSOT) and #24 (NOOS); after main merge re-attest both workflows; Copilot cloud agent remains separate blocker.",
+  "evidence_receipt_refs": [
+    "packages/noos-control-desk-v1/receipts/step7c_registry_drift_review_2026-07-04.json",
+    "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+    "receipts/sg-record-step7de-complete-20260704T045800Z.json"
+  ]
+}

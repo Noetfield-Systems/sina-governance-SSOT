@@ -1,0 +1,14 @@
+{
+  "action": "attestation_draft",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [],
+  "policy_pass": true,
+  "errors": [],
+  "timestamp": "2026-07-04T04:56:38.403602+00:00",
+  "next_machine_action": "Continue attesting remaining workflows or run policy check.",
+  "workflow_id": "noetfield_platform_ci",
+  "policy_verdict": "PASS"
+}

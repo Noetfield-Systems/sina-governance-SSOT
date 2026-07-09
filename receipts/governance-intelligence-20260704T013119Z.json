@@ -1,0 +1,2171 @@
+{
+  "schema": "governance-intelligence-receipt-v1",
+  "receipt_id": "governance-intelligence-20260704T013119Z",
+  "recorded_at": "2026-07-04T01:31:19Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "command": "audit-selection",
+  "ok": true,
+  "result": {
+    "schema": "governance-final-version-audit-v1",
+    "audited_at": "2026-07-04T01:31:19Z",
+    "canon_version": "founder_canon_v1.0.0",
+    "rubric": "data/governance_completeness_rubric_v1.json",
+    "selected_count": 31,
+    "cluster_count": 4,
+    "domain_filter": null,
+    "cluster_by": "domain",
+    "clusters": [
+      {
+        "cluster_id": "automation",
+        "domain": "automation",
+        "layer": "mixed",
+        "candidate_count": 2,
+        "candidates": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 15,
+            "completeness_score": 70,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 0,
+            "completeness_score": 70,
+            "authority_rank": 5
+          }
+        ],
+        "decision": {
+          "deterministic_rank_order": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "domain": "automation",
+              "layer": "P0",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 70,
+              "saved_at": "2026-07-03T22:07:46Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "domain": "automation",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 70,
+              "saved_at": "2026-07-04T00:01:50Z"
+            }
+          ],
+          "primary_final": {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+            "artifact_id": null,
+            "domain": "automation",
+            "layer": "P0",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 15,
+            "completeness_score": 70,
+            "reason": "best deterministic tuple: authority_rank, progress, completeness, date, filename_version, body_version, status, registry"
+          },
+          "amendment_finals": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            }
+          ],
+          "base_retain": [],
+          "void_or_pointer_only": [],
+          "section_merge_plan": [
+            {
+              "action": "adopt_section_into_primary",
+              "section": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 34 > primary 24 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "2. Effort Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 24 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "3. Trigger Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 24 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "4. Mode Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 34 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. Workflow Classes (Copilot-specific settings only \u2014 see Level 1 for class ownership/engine)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. NOOS Integrator Sync Rule (Copilot's role in it)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. Automation Inventory Requirement (feeds Level 1's `last_audited` field)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "10. UI Checklist for Every Copilot Automation",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            }
+          ],
+          "registry_actions": [
+            "Set primary_final as ACTIVE carrier in governance_artifact_registry_v1.json",
+            "Set amendment_finals as ACTIVE_AMENDMENT rows with amends=[primary artifact_id]",
+            "Set base_retain as ACTIVE_BASE rows; never label superseded",
+            "Apply section_merge_plan edits in SG repo only"
+          ]
+        }
+      },
+      {
+        "cluster_id": "founder_canon",
+        "domain": "founder_canon",
+        "layer": "mixed",
+        "candidate_count": 7,
+        "candidates": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 65,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 20,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 20,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 20,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 5,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT_TARGET",
+            "progress_score": 0,
+            "completeness_score": 55,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 45,
+            "authority_rank": 5
+          }
+        ],
+        "decision": {
+          "deterministic_rank_order": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "domain": "founder_canon",
+              "layer": "P5",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 65,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:55:56Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "domain": "founder_canon",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 20,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:40:09Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "domain": "founder_canon",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 20,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:26:05Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "domain": "founder_canon",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 20,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:22:56Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+              "domain": "founder_canon",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 5,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:08:16Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "domain": "founder_canon",
+              "layer": "P0",
+              "status": "ACTIVE_AMENDMENT_TARGET",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 55,
+              "saved_at": "2026-07-03T19:05:39Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "domain": "founder_canon",
+              "layer": "P3",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 45,
+              "saved_at": "2026-07-03T19:10:45Z"
+            }
+          ],
+          "primary_final": {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+            "artifact_id": null,
+            "domain": "founder_canon",
+            "layer": "P5",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 65,
+            "completeness_score": 65,
+            "reason": "best deterministic tuple: authority_rank, progress, completeness, date, filename_version, body_version, status, registry"
+          },
+          "amendment_finals": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            }
+          ],
+          "base_retain": [],
+          "void_or_pointer_only": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "reason": "lower rank or completeness",
+              "role": "pointer_only"
+            }
+          ],
+          "section_merge_plan": [
+            {
+              "action": "adopt_section_into_primary",
+              "section": "Context",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "section_score 28 > primary 20 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Executive summary",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Scope assumptions and north-star definitions",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Founder checks as machine-evaluable heuristics",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Reduces Sina\u2019s future workload vs makes Sina the runtime",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Boundary wall vs permission loop",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Keeps a target a target vs freezes it into a blocker",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Control pattern catalog and redesign rules",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 48 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Architecture and runtime design",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Sandboxing and isolation pattern",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Policy plane and enforcement model",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Runtime behaviors and control semantics",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 32 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Failure modes and mitigations",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Migration, metrics, and validation",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Decision matrix and example policy code",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Escape-trigger example",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 16 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Produce a structured escape packet instead of a dead stop.",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "In-process admission example",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Merge and phase-unlock semantics example",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "FOUNDER INTENT FILTER v1 \u2014 Canon",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 32 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "What this filter is NOT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 20 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Hard rules (v1)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Severity rubric (per control)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Escape packet contract (rule 3, made concrete)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Metrics this filter should be able to report (evidence, not vibes)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "What is explicitly out of scope for v1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 20 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Enforcement chain",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+              "reason": "unique section score 20 >= 15",
+              "conflict_review_required": false
+            }
+          ],
+          "registry_actions": [
+            "Set primary_final as ACTIVE carrier in governance_artifact_registry_v1.json",
+            "Set amendment_finals as ACTIVE_AMENDMENT rows with amends=[primary artifact_id]",
+            "Set base_retain as ACTIVE_BASE rows; never label superseded",
+            "Apply section_merge_plan edits in SG repo only"
+          ]
+        }
+      },
+      {
+        "cluster_id": "governance_structure",
+        "domain": "governance_structure",
+        "layer": "mixed",
+        "candidate_count": 7,
+        "candidates": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 70,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_frozen_proof_target.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_blocker_no_repair.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_l5_normal_stage.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_manual_merge.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_founder_approval.md",
+            "artifact_id": null,
+            "status": "ACTIVE",
+            "progress_score": 0,
+            "completeness_score": 20,
+            "authority_rank": 5
+          }
+        ],
+        "decision": {
+          "deterministic_rank_order": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+              "domain": "governance_structure",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 70,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:55:15Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+              "domain": "governance_structure",
+              "layer": "P0",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:12:21Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_frozen_proof_target.md",
+              "domain": "governance_structure",
+              "layer": "P0",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:12:13Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_blocker_no_repair.md",
+              "domain": "governance_structure",
+              "layer": "P5",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:12:05Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_l5_normal_stage.md",
+              "domain": "governance_structure",
+              "layer": "P0",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:12:01Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_manual_merge.md",
+              "domain": "governance_structure",
+              "layer": "P0",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:11:51Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_founder_approval.md",
+              "domain": "governance_structure",
+              "layer": "P5",
+              "status": "ACTIVE",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 20,
+              "saved_at": "2026-07-03T19:11:46Z"
+            }
+          ],
+          "primary_final": {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+            "artifact_id": null,
+            "domain": "governance_structure",
+            "layer": "P3",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 70,
+            "completeness_score": 65,
+            "reason": "best deterministic tuple: authority_rank, progress, completeness, date, filename_version, body_version, status, registry"
+          },
+          "amendment_finals": [],
+          "base_retain": [],
+          "void_or_pointer_only": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_frozen_proof_target.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_blocker_no_repair.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_l5_normal_stage.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_manual_merge.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/bad_founder_approval.md",
+              "reason": "superseded_or_low_value_read_surface",
+              "role": "pointer_only"
+            }
+          ],
+          "section_merge_plan": [
+            {
+              "action": "add_section_to_primary",
+              "section": "Deploy workflow (GOOD example - should PASS, zero violations)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/tests/fixtures/good_clean_policy.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+              "reason": "unique section score 16 >= 15",
+              "conflict_review_required": false
+            }
+          ],
+          "registry_actions": [
+            "Set primary_final as ACTIVE carrier in governance_artifact_registry_v1.json",
+            "Set amendment_finals as ACTIVE_AMENDMENT rows with amends=[primary artifact_id]",
+            "Set base_retain as ACTIVE_BASE rows; never label superseded",
+            "Apply section_merge_plan edits in SG repo only"
+          ]
+        }
+      },
+      {
+        "cluster_id": "venture_routing",
+        "domain": "venture_routing",
+        "layer": "mixed",
+        "candidate_count": 15,
+        "candidates": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 70,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 60,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 60,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 20,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 15,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 15,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 15,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 15,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 15,
+            "completeness_score": 55,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 5,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 0,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SSOT CONFLICT LOG runtime rules domain split.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 0,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 0,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+            "artifact_id": null,
+            "status": "PROPOSED",
+            "progress_score": 0,
+            "completeness_score": 65,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+            "artifact_id": null,
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": -15,
+            "completeness_score": 65,
+            "authority_rank": 5
+          }
+        ],
+        "decision": {
+          "deterministic_rank_order": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 70,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:56:25Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 60,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:59:24Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "domain": "venture_routing",
+              "layer": "P6",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 60,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:55:32Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "domain": "venture_routing",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 20,
+              "completeness_score": 65,
+              "saved_at": "2026-06-29T23:55:02Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "domain": "venture_routing",
+              "layer": "P6",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:40:22Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "domain": "venture_routing",
+              "layer": "P6",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:25:48Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "domain": "venture_routing",
+              "layer": "P6",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:22:46Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "domain": "venture_routing",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 65,
+              "saved_at": "2026-06-29T23:51:32Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 55,
+              "saved_at": "2026-06-29T10:22:42Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "domain": "venture_routing",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 5,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:02:19Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:40:30Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SSOT CONFLICT LOG runtime rules domain split.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:39:48Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "domain": "venture_routing",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:02:29Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "domain": "venture_routing",
+              "layer": "P5",
+              "status": "PROPOSED",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 65,
+              "saved_at": "2026-06-29T23:54:28Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+              "domain": "venture_routing",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": -15,
+              "completeness_score": 65,
+              "saved_at": "2026-06-30T00:48:29Z"
+            }
+          ],
+          "primary_final": {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+            "artifact_id": null,
+            "domain": "venture_routing",
+            "layer": "P3",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 70,
+            "completeness_score": 65,
+            "reason": "best deterministic tuple: authority_rank, progress, completeness, date, filename_version, body_version, status, registry"
+          },
+          "amendment_finals": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SSOT CONFLICT LOG runtime rules domain split.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "role": "candidate_amendment",
+              "reason": "near-primary completeness; review for amendment merge"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            }
+          ],
+          "base_retain": [],
+          "void_or_pointer_only": [],
+          "section_merge_plan": [
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_DISCOVERY_REPORT_v1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Founding Instruction \u2014 Vocabulary Layer First",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Goal",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. Existing evals",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. Existing RAG / knowledge sources",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. Existing brain modules",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. Missing registry layer",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. Missing connection layer",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. Brain-evolution readiness",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Output",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Founding Principle \u2014 Base Model as Blank Vocabulary Slate",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.1 Phase Sequencing \u2014 Three Phases, v0.1 Is Phase 1 Only",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.2 SourceA Is Already a Living System",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Context",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 6 \u2014 Receipt Schema for Promotions",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Explicit Stop Conditions",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Hard Boundaries \u2014 Do Not Build",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Founding Principle \u2014 Base Model as Blank Vocabulary Slate",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.1 Phase Sequencing \u2014 Three Phases, v0.1 Is Phase 1 Only",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.2 SourceA Is Already a Living System",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Founding Principle \u2014 Base Model as Blank Vocabulary Slate",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.1 Phase Sequencing \u2014 Three Phases, v0.1 Is Phase 1 Only",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.2 SourceA Is Already a Living System",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Founding Principle \u2014 Base Model as Blank Vocabulary Slate",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.1 Phase Sequencing \u2014 Three Phases, v0.1 Is Phase 1 Only",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0.2 SourceA Is Already a Living System",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Purpose",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SINA SSOT \u2014 MASTER CANON v6 (full split)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "HIERARCHY MAP (index)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "LEVEL 0 \u2014 SINA SSOT (CONSTITUTION)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "CONFORMANCE & CONFLICT (binds Level 0 \u2194 Level 1)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "D1 \u2014 RISK & EDGE",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "D2 \u2014 INSTITUTIONAL INTERFACE",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "D3 \u2014 JURISDICTION",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "D4 \u2014 RECEIPT & VERIFICATION",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "D5 \u2014 OPERATING LOOP",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "LEVEL 2 \u2014 EXECUTION ARTIFACTS",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 18 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Context",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 48 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Task 6 \u2014 Receipt Schema for Promotions",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Explicit Stop Conditions",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "Hard Boundaries \u2014 Do Not Build",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "Proposed clarification",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "section_score 48 > primary 42 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "Proposed clarification",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SSOT CONFLICT LOG runtime rules domain split.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "section_score 48 > primary 42 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Purpose",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 24 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "0. Purpose",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "1. OBSERVE \u2014 Asset Inventory",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 42 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "2. LAYER MAP \u2014 Where Each Asset Belongs",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "3. MUTATION CLASS \u2014 What Can Change and How",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "4. EVAL \u2194 ASSET BINDING",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. LEARNING RECORD SCHEMA",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. MUTATION PROPOSAL PATH (sandbox agents)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 40 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "7. RECEIPT REQUIREMENT",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. EXPLICIT STOP CONDITIONS for v0.1",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "9. Sequencing Note",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+              "reason": "unique section score 26 >= 15",
+              "conflict_review_required": false
+            }
+          ],
+          "registry_actions": [
+            "Set primary_final as ACTIVE carrier in governance_artifact_registry_v1.json",
+            "Set amendment_finals as ACTIVE_AMENDMENT rows with amends=[primary artifact_id]",
+            "Set base_retain as ACTIVE_BASE rows; never label superseded",
+            "Apply section_merge_plan edits in SG repo only"
+          ]
+        }
+      }
+    ],
+    "ok": true
+  }
+}

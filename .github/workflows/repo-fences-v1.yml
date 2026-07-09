@@ -1,0 +1,58 @@
+name: repo-fences-v1
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  repo-fences:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Verify CODEOWNERS covers protected zones
+        run: |
+          test -f .github/CODEOWNERS
+          for zone in ssot/ data/ policy/ scripts/ .noos/ packages/noos-control-desk-v1/; do
+            grep -Fq "$zone" .github/CODEOWNERS
+          done
+
+      - name: Run repo fence checker
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+            TARGET="${{ github.base_ref }}"
+            HEAD_BRANCH="${{ github.head_ref }}"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+            TARGET="${{ github.ref_name }}"
+            HEAD_BRANCH="${{ github.ref_name }}"
+          fi
+          python3 scripts/check_repo_fences_v1.py \
+            --base "$BASE" \
+            --head "$HEAD" \
+            --target-branch "$TARGET" \
+            --head-branch "$HEAD_BRANCH" \
+            --pr-body "$PR_BODY" \
+            --json receipts/repo-fences-ci-report.json
+
+      - name: Run repo fence negative tests
+        run: python3 tests/repo_fences/run_negative_tests.py

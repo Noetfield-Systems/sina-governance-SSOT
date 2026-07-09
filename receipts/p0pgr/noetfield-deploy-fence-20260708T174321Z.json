@@ -1,0 +1,22 @@
+{
+  "schema": "p0pgr_deploy_fence_v1",
+  "receipt_id": "noetfield-deploy-fence-20260708T174321Z",
+  "recorded_at": "2026-07-08T17:43:21.224309+00:00",
+  "finding": "www.noetfield.com served untracked, never-committed /structure/ page \u2014 deploy route bypasses git and review entirely",
+  "evidence": {
+    "untracked_live_page": "deploy-awareness-structure-20260708T170125Z.json (status 200, normalized-hash MATCH, git status '?? structure/')",
+    "publish_mechanism": "Noetfield/scripts/deploy-www-cloudflare.sh \u2014 direct-upload `wrangler pages deploy` of the working tree to Cloudflare Pages project noetfield-www",
+    "caller_sweep": "only .github/workflows/noetfield-www-ci.yml references it in repo surfaces; CI cannot deploy uncommitted files, so the /structure/ publish was a local working-tree invocation",
+    "brain_loop": "com.sina.brain-loop-autorun-v1 launchd loop present but no www-deploy reference found in its chain \u2014 left untouched"
+  },
+  "actions_taken": [
+    "noindex,nofollow retained on /structure/ (set at creation)",
+    "deploy_fence() guard added to Noetfield/scripts/deploy-www-cloudflare.sh: blocks deploy when working tree is dirty/untracked, branch != main, or HEAD != origin/main; NF_WWW_FOUNDER_OVERRIDE=1 escape hatch for founder-supervised deploys"
+  ],
+  "residual_risk": [
+    "raw `npx wrangler pages deploy` invoked outside the script bypasses the fence \u2014 strict option: move CF Pages token out of the Mac vault",
+    "fence is uncommitted until the next founder-visible commit"
+  ],
+  "review_point_after_fence": "PR to protected main (founder merge) is the only sanctioned path",
+  "commit_flag": "flag for next founder-visible commit"
+}

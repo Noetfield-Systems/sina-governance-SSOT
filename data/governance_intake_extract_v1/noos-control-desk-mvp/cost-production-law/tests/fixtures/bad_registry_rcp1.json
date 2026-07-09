@@ -1,0 +1,20 @@
+{
+  "workflows": [
+    {
+      "workflow_id": "bad_entry_no_receipt",
+      "repo": "TestRepo",
+      "class": "safe_fix",
+      "owner": "copilot_manual",
+      "trigger": "manual",
+      "model_policy": "gpt-5-mini-low",
+      "writes": "branch_pr",
+      "risk": "low",
+      "receipt_required": false,
+      "safe_fix_allowed": true,
+      "escalation": "log_only",
+      "single_owner_lock": true,
+      "last_audited": "2026-07-01",
+      "max_daily_runs": 5
+    }
+  ]
+}

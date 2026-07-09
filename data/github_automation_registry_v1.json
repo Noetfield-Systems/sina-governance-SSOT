@@ -151,6 +151,8 @@
         "register_brain_artifact",
         "cross_repo_writes",
         "append_sg_noos_canonical",
+        "define_governance_structure",
+        "override_version_authority",
         "external_send",
         "unregistered_cron"
       ],

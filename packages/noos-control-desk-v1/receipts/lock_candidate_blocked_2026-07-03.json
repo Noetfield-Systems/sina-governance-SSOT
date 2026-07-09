@@ -1,0 +1,143 @@
+{
+  "action": "lock_candidate_blocked",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [],
+  "commands_run": [],
+  "policy_pass": false,
+  "errors": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "failed",
+      "message": "Draft attestation policy_verdict is FAIL.",
+      "verdict_reasons": [
+        "observed_model 'gpt-5.4' is on the known-forbidden list.",
+        "observed_effort 'high' is forbidden by default."
+      ]
+    },
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "unaudited",
+      "message": "Registry last_audited is TODO and draft is not PASS."
+    },
+    {
+      "workflow_id": "ssot_security_risk_assessment",
+      "kind": "blocked",
+      "message": "Draft attestation policy_verdict is BLOCKED.",
+      "verdict_reasons": [
+        "observed_model 'mystery-model-x' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "ssot_security_risk_assessment",
+      "kind": "unaudited",
+      "message": "Registry last_audited is TODO and draft is not PASS."
+    },
+    {
+      "workflow_id": "ssot_brain_loop_autorun_v1",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "ssot_cost_policy_receipt_validation",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noos_factory_autorun",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noos_loop_health_checks",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noos_cross_repo_health",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "sourcea_validate_boot",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "sourcea_repo_policy_gate",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "sourcea_determinism_gate",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "sourcea_deploy_buyer_surfaces_v1",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noetfield_governance_console_e2e",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noetfield_www_ci",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noetfield_platform_ci",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "noetfield_trust_ledger_ci",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "trustfield_ci",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "trustfield_deploy_vercel",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "trustfield_e2e_production_smoke",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "incomplete",
+      "message": "No draft attestation saved for this workflow."
+    }
+  ],
+  "timestamp": "2026-07-04T03:00:59.848618+00:00",
+  "next_machine_action": "Fix draft attestations until all workflows PASS and are fresh."
+}

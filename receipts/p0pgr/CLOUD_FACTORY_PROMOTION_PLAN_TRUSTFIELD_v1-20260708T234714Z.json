@@ -1,0 +1,45 @@
+{
+  "schema": "p0pgr_architecture_package_v1",
+  "receipt_id": "CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1-20260708T234714Z",
+  "recorded_at": "2026-07-08T23:47:14.091490+00:00",
+  "authorized_by": "founder architect order 2026-07-08 (in-session)",
+  "package": [
+    {
+      "path": "docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md",
+      "sha256": "15dc9e211ca0a014e875560bbc40c5e065ac467e556cd4753a0cdf89df1d8d6c"
+    },
+    {
+      "path": "data/cloud_line_registry_v1.json",
+      "sha256": "dc58c96ccc44f5ece3e6938163d95f7e42e0454a0c873ef0fe029afd26ca6d06"
+    },
+    {
+      "path": "data/prompt_registry_schema_v1.json",
+      "sha256": "804423ee7891178a8ba8c02009d057edce6c3daae4b189c97c558a5afcde774b"
+    },
+    {
+      "path": "docs/ACTIVATION_LADDER_v1.md",
+      "sha256": "c366d513497cf4f21a892ff753e69171bfb3c3ddc3d8df6917d31cac6f431ec5"
+    }
+  ],
+  "scope_respected": [
+    "no code written",
+    "no outreach",
+    "no public UX",
+    "no candidate-name requests to founder"
+  ],
+  "lines_defined": [
+    "L1 health",
+    "L2 intake",
+    "L3 sourcing",
+    "L4 evaluation",
+    "L5 prompt registry",
+    "L6 deploy truth",
+    "L7 asset gate",
+    "L8 founder approval queue"
+  ],
+  "ladder_state": {
+    "A": "DONE (TEAM_BENCH_PLATFORM_PROD_DEPLOY_v1-20260708T233943Z)",
+    "B-F": "designed, pending founder go"
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

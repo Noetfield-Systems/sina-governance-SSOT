@@ -1,0 +1,36 @@
+{
+  "schema": "p0_prompt_loop_state_v1",
+  "cycle_id": "cycle-20260708T161659Z",
+  "recorded_at": "2026-07-08T16:16:59.602903+00:00",
+  "packet_id": "PKT-0002-noetfield-live-truth",
+  "packet_path": "receipts/p0pgr/outbox/PKT-0002-noetfield-live-truth.json",
+  "stages": {
+    "compiled": true,
+    "linted": true,
+    "routed": true
+  },
+  "lint_rejects": [],
+  "gate_results": {
+    "cloud_only": true,
+    "read_only_or_reversible": true,
+    "roi_positive": true,
+    "no_deploy": true,
+    "no_external_send": true,
+    "no_legal_financial_commitment": true,
+    "no_p0_leakage": true,
+    "no_authority_change": true,
+    "founder_authorization_receipt": true
+  },
+  "verdict": "ROUTED",
+  "route": "CLOUD_RESEARCH",
+  "counters": {
+    "executions": 0,
+    "sends": 0,
+    "deploys": 0,
+    "leaks": 0,
+    "freezes": 0
+  },
+  "accounting_note": "deterministic script, zero LLM calls inside cycle; orchestration cost sits in the invoking session",
+  "executor_route_note": "shadow cycle only \u2014 no executor invoked, no route deviation possible",
+  "commit_flag": "flag for next founder-visible commit"
+}

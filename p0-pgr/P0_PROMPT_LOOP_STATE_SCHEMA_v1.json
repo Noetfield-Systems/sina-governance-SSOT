@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json",
+  "title": "P0 prompt loop-state receipt v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "cycle_id",
+    "recorded_at",
+    "packet_id",
+    "stages",
+    "verdict",
+    "counters",
+    "accounting_note",
+    "executor_route_note"
+  ],
+  "properties": {
+    "schema": { "const": "p0_prompt_loop_state_v1" },
+    "cycle_id": { "type": "string" },
+    "recorded_at": { "type": "string" },
+    "packet_id": { "type": "string" },
+    "packet_path": { "type": "string" },
+    "stages": {
+      "type": "object",
+      "required": ["compiled", "linted", "routed"],
+      "properties": {
+        "compiled": { "type": "boolean" },
+        "linted": { "type": "boolean" },
+        "routed": { "type": "boolean" }
+      }
+    },
+    "lint_rejects": { "type": "array", "items": { "type": "string" } },
+    "gate_results": { "type": "object" },
+    "verdict": {
+      "type": "string",
+      "enum": ["ROUTED", "REPAIR_CANDIDATE", "HOLD_CLOUD_UNSAFE", "QUEUED_FOUNDER_REVIEW"]
+    },
+    "route": { "type": "string" },
+    "counters": {
+      "type": "object",
+      "required": ["executions", "sends", "deploys", "leaks", "freezes"],
+      "properties": {
+        "executions": { "type": "integer" },
+        "sends": { "type": "integer" },
+        "deploys": { "type": "integer" },
+        "leaks": { "type": "integer" },
+        "freezes": { "type": "integer" }
+      }
+    },
+    "accounting_note": { "type": "string" },
+    "executor_route_note": { "type": "string" },
+    "commit_flag": { "type": "string" }
+  }
+}

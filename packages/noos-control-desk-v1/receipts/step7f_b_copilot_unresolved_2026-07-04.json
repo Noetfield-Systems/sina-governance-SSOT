@@ -1,0 +1,29 @@
+{
+  "action": "step7f_b_copilot_agent_resolution",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7F-B",
+  "role": "SG Copilot Agent Resolution Worker",
+  "timestamp": "2026-07-04T05:10:00+00:00",
+  "policy_pass": false,
+  "files_changed": [],
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "status": "UNRESOLVED",
+  "classification": "BLOCKED_UI_ATTESTATION_REQUIRED",
+  "evidence": {
+    "trustfield_repo_search": "no repo-local config found",
+    "github_copilot_ui_state": "cannot verify",
+    "detail": "TrustField repo search found no repo-local config and cannot verify GitHub/Copilot UI state"
+  },
+  "evidence_receipt": "reports/trustfield-copilot-agent-resolution-v1.jsonl",
+  "draft_verdict": "BLOCKED",
+  "next_required_evidence": [
+    "manual UI attestation for Copilot cloud agent settings",
+    "or API/export evidence for model, effort, and trigger"
+  ],
+  "step_8": "BLOCKED",
+  "lock_candidate": "BLOCKED",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING",
+  "active_promotion": false,
+  "sg_record": "receipts/sg-record-step7fb-unresolved-20260704T051000Z.json"
+}

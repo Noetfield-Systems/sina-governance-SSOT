@@ -1,0 +1,37 @@
+{
+  "schema": "noos-copilot-dispatcher-mode-v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T19:58:00Z",
+  "owner": "NOOS",
+  "sg_record_role": "pointer_only",
+  "sg_pointer_doc": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+  "dispatcher_registry": "data/noos_copilot_dispatcher_v1.json",
+  "layer": "P2",
+  "role_id": "noos_copilot_dispatcher",
+  "display_name": "NOOS Copilot",
+  "sync_model": "mode_gated",
+  "replaces": "binary cloud_write_allowed",
+  "status": "RECORDED_STEP_5",
+  "pre_pass_gate": "full_PASS_not_yet_earned",
+  "allowed_modes_before_full_pass": [
+    "read_status",
+    "publish_receipt",
+    "publish_status",
+    "publish_drift_report",
+    "prepare_draft_branch",
+    "prepare_pr"
+  ],
+  "blocked_modes_before_full_pass": [
+    "fleet_rollout",
+    "active_promotion",
+    "direct_main_write",
+    "policy_law_mutation",
+    "publish_audit_pending_registry_as_active_fleet_truth"
+  ],
+  "integrator_role_pointer": "data/noos-integrator-role-v1.json",
+  "integrator_role_canonical": "noetfeld-os/data/noos-integrator-role-v1.json",
+  "step_5_receipt": "receipts/noos-copilot-dispatcher-mode-patch-20260703T195800Z.json",
+  "step_5_report": "receipts/noos-copilot-sync-mode-step5-report.md",
+  "sg_record_receipt": "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json",
+  "note": "SG records mode pointers only. NOOS owns integrator/sync runtime behavior."
+}

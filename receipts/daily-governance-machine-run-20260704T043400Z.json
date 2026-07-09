@@ -1,0 +1,72 @@
+{
+  "schema": "daily-governance-machine-run-v1",
+  "action": "daily_governance_machine_run_sample",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:34:00Z",
+  "runbook": "ssot/DAILY_GOVERNANCE_MACHINE_RUNBOOK_v1.md",
+  "calibration_matrix": "data/daily_governance_calibration_matrix_v1.json",
+  "steps": [
+    {
+      "step": "A",
+      "trigger": "messy intake / duplicate finals",
+      "command": "audit-selection --cluster-by thread --write-receipt",
+      "machine_recommendation": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md primary; void duplicate 2.md",
+      "required_sg_action": "stage to intake; registry-add PROPOSED if closing thread",
+      "registry_status": "ACTIVE_AMENDMENT (intake — unregistered)",
+      "receipt_path": "receipts/governance-intelligence-20260704T043341Z.json",
+      "live_authority": false,
+      "state_ladder": "selected"
+    },
+    {
+      "step": "B",
+      "trigger": "active thread progress",
+      "command": "thread-audit --root ~/Desktop/Raw AI --write-receipt",
+      "machine_recommendation": "7 threads mapped; brain gate PENDING_THREAD; conflict log PENDING_FOUNDER",
+      "required_sg_action": "close pending_items per thread; do not treat final_carrier as ACTIVE",
+      "registry_status": "mixed intake — not registry ACTIVE",
+      "receipt_path": "receipts/governance-intelligence-20260704T013325Z.json",
+      "live_authority": false,
+      "state_ladder": "checked"
+    },
+    {
+      "step": "C",
+      "trigger": "proposed law change review",
+      "command": "impact --path ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md --write-receipt",
+      "machine_recommendation": "downstream pointer updates if amending structure law",
+      "required_sg_action": "registry-amend only after human ratification",
+      "registry_status": "ACTIVE (gov-structure-authority-v1)",
+      "receipt_path": "receipts/governance-intelligence-20260704T043356Z.json",
+      "live_authority": true,
+      "state_ladder": "ACTIVE"
+    },
+    {
+      "step": "D",
+      "trigger": "registry hygiene",
+      "command": "registry-show --id founder-judgment-patterns-v1",
+      "machine_recommendation": "P0 CORE milestone locked; no mutation needed",
+      "required_sg_action": "none today",
+      "registry_status": "ACTIVE",
+      "receipt_path": "receipts/founder-judgment-patterns-v1-milestone-lock-20260704T042656Z.json",
+      "live_authority": true,
+      "state_ladder": "ACTIVE"
+    }
+  ],
+  "calibration": {
+    "validator": "scripts/validate_governance_intelligence_e2e_v1.py",
+    "verdict": "ALL_PASS",
+    "cases_passed": "5/5",
+    "matrix": "data/daily_governance_calibration_matrix_v1.json"
+  },
+  "negative_proof": {
+    "receipt_path": "receipts/daily-governance-negative-proof-20260704T043400Z.json",
+    "verdict": "ALL_PASS"
+  },
+  "hard_rule_observed": "machine done = selected/checked only unless registry receipt proves ACTIVE",
+  "sg_did_not": [
+    "modify_p0_core",
+    "modify_worker_prompts",
+    "promote_artifact_without_registry_receipt"
+  ],
+  "policy_pass": true
+}

@@ -4,6 +4,8 @@ Scoped one-task prompts — open the listed Cursor root; do not cross repos.
 
 **LAWS:** FOUNDER_CANON v1 + governed-autorun v3. Violations = `BLOCKED_WITH_REASON`. Receipts carry `canon_version: founder_canon_v1.0.0`.
 
+**Governance structure/version law:** `ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md` — SG owns structure; existing rules stay live; newer versions amend and win only on direct conflict.
+
 **Integrator (NOOS lane only):** session that mutates integrator state → `python3 scripts/noos_integrator_sync_v1.py sync --agent-id <id>` before stop. Mirror: `~/.sina/noos-integrator-state-v1.json` (coordination copy). Cloud owner: see `data/noos-integrator-role-v1.json`. SG mirror: `ssot/NOOS_INTEGRATOR_RULES_v1.md`.
 
 ---

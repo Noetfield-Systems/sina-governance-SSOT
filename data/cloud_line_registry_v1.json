@@ -1,0 +1,112 @@
+{
+  "schema": "cloud_line_registry_v1",
+  "authority": "docs/CLOUD_FACTORY_PROMOTION_PLAN_TRUSTFIELD_v1.md",
+  "era": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "rule": "Mac executes nothing on schedule; every line writes a receipt; founder approvals are structural API gates, not conventions",
+  "lines": [
+    {
+      "line_id": "L1",
+      "name": "Platform Health Line",
+      "owner_role": "noos_runtime",
+      "trigger": "schedule",
+      "schedule": "*/30 * * * *",
+      "execution_target": {"primary": "github_actions", "secondary": "cloudflare_deadman_worker"},
+      "input_source": "live www + api endpoints",
+      "output_artifact": "health JSON (trustfield-partner-access-health-v3)",
+      "receipt": "ops_receipts.health_check",
+      "failure_behavior": "1 fail warn; 2 consecutive -> telegram alert + github issue; never auto-rollback; keep probing",
+      "founder_approval_points": []
+    },
+    {
+      "line_id": "L2",
+      "name": "Candidate Intake Line",
+      "owner_role": "platform",
+      "trigger": "event+schedule",
+      "schedule": "on POST /api/partner-access/apply; nightly re-score 08:00 UTC",
+      "execution_target": {"primary": "railway_api", "secondary": "github_actions_nightly"},
+      "input_source": "application payloads (v1.4 qualification form)",
+      "output_artifact": "scored candidate rows; high-score telegram notify",
+      "receipt": "candidate row + ops_receipts.intake_summary (nightly)",
+      "failure_behavior": "validation 422 normal; scoring exceptions file repair candidates; intake never blocked",
+      "founder_approval_points": ["FOUNDER_REVIEW status decisions via L8"]
+    },
+    {
+      "line_id": "L3",
+      "name": "Team Bench Sourcing Line",
+      "owner_role": "sourcing_agent",
+      "trigger": "schedule+dispatch",
+      "schedule": "weekly Mon 14:00 UTC + founder dispatch",
+      "execution_target": {"primary": "claude_cloud_scheduled_agent", "secondary": "github_actions_runner"},
+      "input_source": "prompt registry tb.sourcing.* (role lanes R1-R5)",
+      "output_artifact": "SOURCED rows via POST /api/partner-access/team-bench/admin (ADMIN_TOKEN secret)",
+      "receipt": "ops_receipts.sourcing_run (rows, dedup, evidence URLs, cost)",
+      "failure_behavior": "unverifiable candidates dropped; zero-row run files finding; never fabricate",
+      "founder_approval_points": ["approve_to_contact (structural CASL gate)", "any transition beyond SOURCED"]
+    },
+    {
+      "line_id": "L4",
+      "name": "Agentic Evaluation Line",
+      "owner_role": "evaluation_agent",
+      "trigger": "schedule+event",
+      "schedule": "nightly 09:00 UTC + on status change to founder_review",
+      "execution_target": {"primary": "railway_api_deterministic", "secondary": "github_actions_llm_narrative"},
+      "input_source": "candidate + prospect rows",
+      "output_artifact": "risk flags, fit deltas, founder-review question packs, rank ordering",
+      "receipt": "ops_receipts.evaluation_run (prompt version + cost)",
+      "failure_behavior": "LLM failure degrades to deterministic-only output tagged PARTIAL",
+      "founder_approval_points": []
+    },
+    {
+      "line_id": "L5",
+      "name": "Prompt Registry Line",
+      "owner_role": "architect",
+      "trigger": "event",
+      "schedule": "on registry PR; on every prompt run",
+      "execution_target": {"primary": "github_registry_ci", "secondary": "railway_serving_prompt_runs"},
+      "input_source": "prompt definitions per prompt_registry_schema_v1",
+      "output_artifact": "versioned prompts with contracts; prompt_runs log",
+      "receipt": "prompt_runs rows + CI receipt on version activation",
+      "failure_behavior": "contract-test failure blocks new version only; previous version keeps running (rollback rule)",
+      "founder_approval_points": ["activating versions that touch candidates or spend money (cost_class dollars)"]
+    },
+    {
+      "line_id": "L6",
+      "name": "Deploy Truth Line",
+      "owner_role": "verifier",
+      "trigger": "event+schedule",
+      "schedule": "on push to main; daily 12:00 UTC",
+      "execution_target": {"primary": "github_actions", "secondary": "cloudflare_verify_recipes_worker"},
+      "input_source": "git main + live build markers + package verifier",
+      "output_artifact": "PLATFORM_PACKAGE_PASS/PARTIAL verdict",
+      "receipt": "ops_receipts.deploy_truth",
+      "failure_behavior": "drift -> alert + HOLD flag row blocking L3/L4 autoruns until founder resolves",
+      "founder_approval_points": ["drift resolution", "rollback/redeploy decisions"]
+    },
+    {
+      "line_id": "L7",
+      "name": "Asset Gate Line",
+      "owner_role": "verifier",
+      "trigger": "schedule",
+      "schedule": "inside every L1 run + weekly deep audit Sun 10:00 UTC",
+      "execution_target": {"primary": "github_actions", "secondary": "railway_asset_views_logging"},
+      "input_source": "ASSET_GATES map (8 assets) + NDA-gated team bench materials",
+      "output_artifact": "gate audit matrix; anomalous access flags",
+      "receipt": "ops_receipts.asset_gate_audit",
+      "failure_behavior": "any leak = SEV-1 alert + immediate founder notify; probing continues",
+      "founder_approval_points": ["leak response only"]
+    },
+    {
+      "line_id": "L8",
+      "name": "Founder Approval Queue",
+      "owner_role": "founder",
+      "trigger": "event+schedule",
+      "schedule": "on approval-state entry; daily digest 15:00 UTC",
+      "execution_target": {"primary": "railway_api_admin_dashboard", "secondary": "github_actions_telegram_digest"},
+      "input_source": "bench contact requests, founder_review candidates, drift holds, prompt activations, spend unlocks, offer/trial stages",
+      "output_artifact": "single ordered decision queue with approve/reject/defer mapped to gated API actions",
+      "receipt": "ops_receipts.approval_decision (verbatim scope, per M03 lesson)",
+      "failure_behavior": "never auto-approves; stale items age visibly in digest",
+      "founder_approval_points": ["this line IS the founder surface"]
+    }
+  ]
+}

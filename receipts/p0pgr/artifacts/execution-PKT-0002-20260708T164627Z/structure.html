@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noetfield Systems — Structure</title>
+<meta name="description" content="How the Noetfield Systems workspace is organized: ten repos, three jobs." />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="theme-color" content="#f4f5f8" />
+<link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" />
+<style>
+  :root {
+    --bg: #f4f5f8;
+    --card: #ffffff;
+    --ink: #152238;
+    --body: #3a4557;
+    --muted: #6a7486;
+    --line: #e3e6ec;
+    --teal: #0e7d74;
+    --amber: #b96f10;
+    --indigo: #3e4c9b;
+    --slate: #5b6779;
+    --rust: #b0432e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-snap-type: y proximity; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--body);
+    line-height: 1.55;
+  }
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); color: var(--ink); line-height: 1.15; margin-bottom: 14px; }
+  h2 { font-size: clamp(1.5rem, 4vw, 2rem); color: var(--ink); line-height: 1.2; margin-bottom: 18px; }
+  .lead { font-size: 1.05rem; max-width: 640px; }
+  .lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 28px; }
+  .lane { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .lane h3 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .lane ul { list-style: none; }
+  .lane li { margin-bottom: 10px; font-size: 0.92rem; }
+  .lane li strong { display: block; color: var(--ink); }
+  .lane li span { color: var(--muted); font-size: 0.85rem; }
+  .t h3 { color: var(--teal); } .a h3 { color: var(--amber); } .i h3 { color: var(--indigo); }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; flex: none; margin-top: 7px; }
+  .rows { margin-top: 8px; }
+  .row { display: flex; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: none; }
+  .row div strong { color: var(--ink); font-size: 0.95rem; }
+  .row div p { color: var(--muted); font-size: 0.88rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 8px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .card h3 { color: var(--ink); font-size: 1.05rem; margin-bottom: 8px; }
+  .card p { font-size: 0.92rem; }
+  .card .tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .note { margin-top: 18px; font-size: 0.9rem; color: var(--muted); font-style: italic; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 8px; }
+  .list { list-style: none; }
+  .list li { padding: 8px 0 8px 26px; position: relative; font-size: 0.95rem; }
+  .list li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 8px; height: 8px; border-radius: 50%; }
+  .good li::before { background: var(--teal); }
+  .bad li::before { background: var(--rust); }
+  .steps { counter-reset: step; margin-top: 8px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; }
+  .step .n {
+    counter-increment: step; flex: none; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--ink); color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  }
+  .step .n::before { content: counter(step); }
+  .step strong { color: var(--ink); display: block; }
+  .step p { font-size: 0.92rem; }
+  .closing { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); font-style: italic; color: var(--muted); }
+  footer { text-align: center; padding: 24px; font-size: 0.8rem; color: var(--muted); }
+  @media print {
+    html { scroll-snap-type: none; }
+    .slide { min-height: 0; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Slide 1 — Big picture -->
+<section class="slide">
+  <p class="eyebrow">Noetfield Systems · Structure</p>
+  <h1>One folder. Ten repos. Three jobs.</h1>
+  <p class="lead">Everything in the Noetfield-Systems workspace does one of three things: it faces the market, runs the machine, or holds the rules.</p>
+  <div class="lanes">
+    <div class="lane t">
+      <h3>Faces the market</h3>
+      <ul>
+        <li><strong>Noetfield</strong><span>Public site &amp; governance story — noetfield.com</span></li>
+        <li><strong>TrustField-Technologies</strong><span>Commercial execution &amp; partner funnel</span></li>
+      </ul>
+    </div>
+    <div class="lane a">
+      <h3>Runs the machine</h3>
+      <ul>
+        <li><strong>noetfeld-OS (NOOS)</strong><span>Cloud runtime — loops, automation, cost control</span></li>
+        <li><strong>noetfield-studio-ide</strong><span>Interface &amp; tooling — the cockpit</span></li>
+      </ul>
+    </div>
+    <div class="lane i">
+      <h3>Holds the rules</h3>
+      <ul>
+        <li><strong>SG-Canonical-Library</strong><span>Doctrine, chess reasoning, patterns</span></li>
+        <li><strong>SourceA</strong><span>Agent / control / product brain</span></li>
+        <li><strong>sina-governance-SSOT</strong><span>P0/PGR, receipts, scorecards</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Plus: the .code-workspace file (opens everything), SinaaiMonoRepo (legacy — caution), and buildmatch (separate lane).</p>
+</section>
+
+<!-- Slide 2 — Each folder -->
+<section class="slide">
+  <p class="eyebrow">02 · The folders</p>
+  <h2>The ten folders, one line each</h2>
+  <div class="rows">
+    <div class="row"><span class="dot" style="background:var(--teal)"></span><div><strong>Noetfield</strong><p>The public face — governance story and company website (noetfield.com).</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--teal)"></span><div><strong>TrustField-Technologies</strong><p>Commercial execution — offers, partners, and the revenue funnel.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--amber)"></span><div><strong>noetfeld-OS (NOOS)</strong><p>Cloud runtime — loops, automation, and cost governance.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--amber)"></span><div><strong>noetfield-studio-ide</strong><p>The cockpit — interface and tooling for driving the system.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--indigo)"></span><div><strong>SourceA</strong><p>The product brain — agent logic, control, and product thinking.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--indigo)"></span><div><strong>SG-Canonical-Library</strong><p>The doctrine — canonical rules, chess reasoning, patterns.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--indigo)"></span><div><strong>sina-governance-SSOT</strong><p>The record — P0/PGR packets, receipts, schemas, scorecards.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--slate)"></span><div><strong>Noetfield-Systems.code-workspace</strong><p>Not a repo — one file that opens all of these together.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--rust)"></span><div><strong>SinaaiMonoRepo</strong><p>Legacy mixed repo — read for history, don't build here.</p></div></div>
+    <div class="row"><span class="dot" style="background:var(--slate)"></span><div><strong>buildmatch</strong><p>A separate venture lane — own project, kept cleanly apart.</p></div></div>
+  </div>
+</section>
+
+<!-- Slide 3 — Public / commercial -->
+<section class="slide">
+  <p class="eyebrow">03 · Public &amp; commercial</p>
+  <h2>Front of house — what the world sees</h2>
+  <div class="cards">
+    <div class="card"><p class="tag" style="color:var(--teal)">Public</p><h3>Noetfield</h3><p>The public company. The governance story, brand, and website at noetfield.com. Changes here are visible to everyone — slow and deliberate.</p></div>
+    <div class="card"><p class="tag" style="color:var(--teal)">Commercial</p><h3>TrustField-Technologies</h3><p>The commercial engine. Offers, partnerships, and the funnel that turns interest into revenue.</p></div>
+    <div class="card"><p class="tag" style="color:var(--slate)">Separate lane</p><h3>buildmatch</h3><p>Its own product, own audience, own pace. It shares the folder, not the funnel.</p></div>
+  </div>
+  <p class="note">Rule of thumb: everything in this lane ships with human eyes on it.</p>
+</section>
+
+<!-- Slide 4 — Runtime / automation -->
+<section class="slide">
+  <p class="eyebrow">04 · Runtime &amp; automation</p>
+  <h2>Engine room — what runs on its own</h2>
+  <div class="cards">
+    <div class="card"><p class="tag" style="color:var(--amber)">Cloud runtime</p><h3>noetfeld-OS · NOOS</h3><p>Loops and scheduled jobs run here, 24/7, in the cloud. Cost governance is built in — every loop has a budget and leaves a receipt. This is the target home for anything currently running on the Mac.</p></div>
+    <div class="card"><p class="tag" style="color:var(--amber)">Tooling</p><h3>noetfield-studio-ide</h3><p>The cockpit. Interface and tooling for seeing and steering the system — not a second runtime.</p></div>
+    <div class="card"><p class="tag" style="color:var(--slate)">Convenience</p><h3>.code-workspace file</h3><p>Not a repo — a single file that opens all ten folders side-by-side in one editor window.</p></div>
+  </div>
+</section>
+
+<!-- Slide 5 — Governance / brain -->
+<section class="slide">
+  <p class="eyebrow">05 · Governance &amp; brain</p>
+  <h2>The brain — rules, reasoning, and receipts</h2>
+  <div class="cards">
+    <div class="card"><p class="tag" style="color:var(--indigo)">The rules</p><h3>SG-Canonical-Library</h3><p>What we believe. Canonical rules, chess reasoning, doctrine, and patterns. Changes rarely — gets cited constantly.</p></div>
+    <div class="card"><p class="tag" style="color:var(--indigo)">The decisions</p><h3>SourceA</h3><p>How we think. The agent, control, and product brain that turns doctrine into decisions and product moves.</p></div>
+    <div class="card"><p class="tag" style="color:var(--indigo)">The proof</p><h3>sina-governance-SSOT</h3><p>What actually happened. P0/PGR runtime, prompt packets, receipts, schemas, and scorecards — the audit trail.</p></div>
+  </div>
+  <p class="note">Rules feed decisions. Decisions leave receipts. That loop is the governance system.</p>
+</section>
+
+<!-- Slide 6 — Safe use -->
+<section class="slide">
+  <p class="eyebrow">06 · Safe use</p>
+  <h2>Working rules for Claude Code</h2>
+  <div class="two">
+    <div class="card">
+      <p class="tag" style="color:var(--teal)">Green lanes</p>
+      <ul class="list good">
+        <li><strong>Read the rules first.</strong> SG-Canonical-Library and the SSOT define how work is done.</li>
+        <li><strong>Build where change is expected.</strong> NOOS, SourceA, and studio-ide are the working lanes.</li>
+        <li><strong>Leave a receipt.</strong> Every meaningful run lands a receipt in sina-governance-SSOT.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="tag" style="color:var(--rust)">Handle with care</p>
+      <ul class="list bad">
+        <li><strong>Public lanes need human eyes.</strong> Noetfield and TrustField ship nothing without review.</li>
+        <li><strong>Legacy is read-only.</strong> SinaaiMonoRepo is history, not a workspace.</li>
+        <li><strong>Don't cross lanes.</strong> buildmatch stays separate. One repo, one job.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 7 — Current priority -->
+<section class="slide">
+  <p class="eyebrow">07 · Current priority</p>
+  <h2>ROI-smart and cloud-only — the Mac is not a runner</h2>
+  <div class="two">
+    <div class="card">
+      <p class="tag" style="color:var(--teal)">Cloud-only · NOOS</p>
+      <ul class="list good">
+        <li>Runs around the clock — no laptop awake, no babysitting</li>
+        <li>Every loop carries a cost line and leaves a receipt</li>
+        <li>Spend scales only where ROI is proven</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="tag" style="color:var(--rust)">Mac-as-runner</p>
+      <ul class="list bad">
+        <li>Stops when the lid closes — automation you can't trust</li>
+        <li>Hidden costs and no clean audit trail</li>
+        <li>Turns a personal machine into fragile infrastructure</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">The Mac is the cockpit. The cloud is the engine. Nothing runs without paying for itself.</p>
+</section>
+
+<!-- Slide 8 — Next action -->
+<section class="slide">
+  <p class="eyebrow">08 · Next action</p>
+  <h2>Prove one loop. Then scale.</h2>
+  <div class="steps">
+    <div class="step"><span class="n"></span><div><strong>Pick one loop</strong><p>Choose the single highest-ROI automation candidate. One, not five.</p></div></div>
+    <div class="step"><span class="n"></span><div><strong>Run it cloud-only in NOOS</strong><p>End-to-end, with a cost line attached and a receipt landing in sina-governance-SSOT.</p></div></div>
+    <div class="step"><span class="n"></span><div><strong>Read the receipt, then decide</strong><p>Scale to a second loop only if the first pays for itself. If it doesn't — fix it or kill it.</p></div></div>
+  </div>
+  <p class="closing">One folder. Ten repos. One rule: nothing runs without a receipt.</p>
+</section>
+
+<footer>Noetfield Systems · workspace structure · internal onboarding page</footer>
+
+</body>
+</html>

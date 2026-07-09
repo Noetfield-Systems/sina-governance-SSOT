@@ -1,0 +1,93 @@
+{
+  "action": "sg_record_step7bc_accepted",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Workflow-Audit-Recorder",
+  "timestamp": "2026-07-04T04:56:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "amends": "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json",
+  "accepted_substeps": {
+    "7B_verdict_patch": {
+      "status": "ACCEPTED",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7b_verdict_patch_2026-07-03.json",
+      "scope": "model:none deterministic workflows in control-desk/backend/verdict.py"
+    },
+    "7C_registry_drift_review": {
+      "status": "ACCEPTED",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7c_registry_drift_review_2026-07-04.json",
+      "proposed_patch": "packages/noos-control-desk-v1/receipts/step7c_proposed_registry_patch.json",
+      "scope": "observed-surface drift review; 3 safe patches proposed; branch-only and Copilot rows excluded from patch"
+    }
+  },
+  "step_8": {
+    "status": "BLOCKED",
+    "advance_blocked": true,
+    "reason": "Step 7D–7E and branch/Copilot resolution incomplete"
+  },
+  "lock_candidate": {
+    "status": "BLOCKED"
+  },
+  "next_sequence": [
+    {
+      "substep": "7D",
+      "name": "Apply safe registry drift patch",
+      "status": "PENDING",
+      "target": "packages/noos-control-desk-v1/.noos/workflow_registry_v1.json",
+      "patch_source": "packages/noos-control-desk-v1/receipts/step7c_proposed_registry_patch.json",
+      "workflows": [
+        "noetfield_supabase_heartbeat",
+        "trustfield_autorun_24_7_health",
+        "sourcea_external_verify"
+      ]
+    },
+    {
+      "substep": "7E",
+      "name": "Re-post attestations",
+      "status": "PENDING",
+      "detail": "Re-POST all 23 workflows via /api/attestation/save so registry_draft.json verdicts reflect 7B model:none PASS and 7D registry rows"
+    },
+    {
+      "substep": "7F",
+      "name": "Resolve branch-only workflows and Copilot cloud agent mismatch",
+      "status": "PENDING",
+      "items": [
+        {
+          "workflow_id": "ssot_agentic_ci",
+          "kind": "branch_only_pending",
+          "detail": "Merge agentic-ci.yml to main before lock candidate"
+        },
+        {
+          "workflow_id": "noos_cost_policy_scan",
+          "kind": "branch_only_pending",
+          "detail": "Merge cost-policy-scan.yml to main before lock candidate"
+        },
+        {
+          "workflow_id": "trustfield_copilot_cloud_agent",
+          "kind": "surface_registry_mismatch",
+          "detail": "Registry DISABLE vs GH active — manual Copilot UI disable + honest attestation"
+        }
+      ]
+    }
+  ],
+  "then": {
+    "step": 8,
+    "name": "Policy Check",
+    "status": "blocked_until_7D_7E_7F"
+  },
+  "sg_did_not": [
+    "advance_to_step_8",
+    "submit_lock_candidate",
+    "promote_package_ACTIVE",
+    "apply_unsafe_registry_patches",
+    "fake_pass_verdicts"
+  ],
+  "receipt_refs": [
+    "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json",
+    "packages/noos-control-desk-v1/receipts/step7b_verdict_patch_2026-07-03.json",
+    "packages/noos-control-desk-v1/receipts/step7c_registry_drift_review_2026-07-04.json",
+    "packages/noos-control-desk-v1/receipts/step7c_proposed_registry_patch.json"
+  ],
+  "policy_pass": false,
+  "active_promotion": false
+}

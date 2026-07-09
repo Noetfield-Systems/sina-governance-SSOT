@@ -1,0 +1,9 @@
+{
+  "checker": "check_founder_runtime_dependency.py",
+  "policy_version": 1,
+  "files_scanned": 0,
+  "violations_found": 0,
+  "violations_active": [],
+  "violations_exempted": [],
+  "status": "PASS"
+}

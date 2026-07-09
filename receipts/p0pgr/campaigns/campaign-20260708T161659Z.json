@@ -1,0 +1,380 @@
+{
+  "schema": "p0pgr_campaign_receipt_v1",
+  "campaign_id": "campaign-20260708T161659Z",
+  "recorded_at": "2026-07-08T16:16:59.622645+00:00",
+  "axes": [
+    "runtime_health",
+    "authority_wiring",
+    "commercial_readiness",
+    "live_truth",
+    "cost_roi",
+    "delivery_readiness"
+  ],
+  "candidates": [
+    {
+      "axis": "runtime_health",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0101-runtime-health-revalidate",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Independently re-validate the newest loop-state receipt against P0_PROMPT_LOOP_STATE_SCHEMA_v1",
+        "problem_statement": "Scripts' own success claims are untrusted; receipts need independent schema re-validation.",
+        "deliverable": {
+          "type": "validation_report",
+          "destination": "receipts/p0pgr/",
+          "acceptance": "report lists every required field checked with PASS/FAIL per field"
+        },
+        "route": "CLOUD_WORKER",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 0,
+          "trust": 4,
+          "workload_relief": 3,
+          "cloud_now": 5,
+          "reversibility": 5,
+          "rationale": "board axis: runtime_health"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "script_run output",
+          "schema field checklist"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "runtime_health"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "validator could drift from schema file",
+        "patch": "validator reads schema JSON at runtime instead of hardcoding fields",
+        "verify": "re-run against a known-bad receipt fixture and confirm FAIL",
+        "proceed": true
+      },
+      "lint_rejects": []
+    },
+    {
+      "axis": "authority_wiring",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0102-untracked-receipt-manifest",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Sweep receipts/ for untracked files and produce a commit manifest for the next founder-visible commit",
+        "problem_statement": "Untracked receipts carry no tamper evidence (M03 lesson).",
+        "deliverable": {
+          "type": "commit_manifest",
+          "destination": "receipts/p0pgr/",
+          "acceptance": "manifest lists every untracked receipt path with sha256; zero mutations"
+        },
+        "route": "CLOUD_WORKER",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 0,
+          "trust": 5,
+          "workload_relief": 2,
+          "cloud_now": 5,
+          "reversibility": 5,
+          "rationale": "board axis: authority_wiring"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "git status --porcelain capture",
+          "per-file sha256"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "authority_wiring"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "manifest could go stale before founder commits",
+        "patch": "manifest embeds git HEAD hash so staleness is detectable",
+        "verify": "recompute two random sha256 values from the manifest",
+        "proceed": true
+      },
+      "lint_rejects": []
+    },
+    {
+      "axis": "commercial_readiness",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0103-trustfield-offer-truth",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Fetch TrustField public offer surface and hash-compare against repo copies",
+        "problem_statement": "Commercial pages may drift from governed repo copies without detection.",
+        "deliverable": {
+          "type": "truth_diff_report",
+          "destination": "receipts/p0pgr/artifacts/",
+          "acceptance": "per-URL status + sha256 + match/mismatch verdict for every checked page"
+        },
+        "route": "CLOUD_RESEARCH",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 3,
+          "trust": 4,
+          "workload_relief": 2,
+          "cloud_now": 4,
+          "reversibility": 5,
+          "rationale": "board axis: commercial_readiness"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "per-URL status + body sha256",
+          "saved bodies under artifacts/"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "commercial_readiness"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "page templating may cause noisy hash mismatches",
+        "patch": "normalize whitespace before hashing and record both raw and normalized hashes",
+        "verify": "one manually confirmed match and one confirmed mismatch fixture",
+        "proceed": true
+      },
+      "lint_rejects": []
+    },
+    {
+      "axis": "live_truth",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0104-noetfield-live-truth",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Fetch key noetfield.com pages, hash bodies, and diff against repo static files",
+        "problem_statement": "Live site truth is asserted from memory, not evidence.",
+        "deliverable": {
+          "type": "truth_diff_report",
+          "destination": "receipts/p0pgr/artifacts/",
+          "acceptance": "per-URL status + sha256 + diff verdict; bodies saved as artifacts"
+        },
+        "route": "CLOUD_RESEARCH",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 2,
+          "trust": 5,
+          "workload_relief": 2,
+          "cloud_now": 5,
+          "reversibility": 5,
+          "rationale": "board axis: live_truth"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "per-URL status + body sha256",
+          "saved bodies under artifacts/"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "live_truth"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "redirects (www canonical) could mask real page state",
+        "patch": "record full redirect chain per URL",
+        "verify": "status codes cross-checked against _redirects rules",
+        "proceed": true
+      },
+      "lint_rejects": []
+    },
+    {
+      "axis": "cost_roi",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0105-roi-heartbeat-trend",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Aggregate receipts/roi-heartbeat-*.json into a cost/ROI trend summary",
+        "problem_statement": "Spend signals exist as scattered heartbeat receipts with no trend view.",
+        "deliverable": {
+          "type": "trend_summary",
+          "destination": "receipts/p0pgr/",
+          "acceptance": "summary covers every heartbeat receipt present, with count, span, and per-metric trend"
+        },
+        "route": "CLOUD_WORKER",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 1,
+          "trust": 3,
+          "workload_relief": 4,
+          "cloud_now": 5,
+          "reversibility": 5,
+          "rationale": "board axis: cost_roi"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "input receipt list with hashes",
+          "aggregation script output"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "cost_roi"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "heartbeat schema may vary across versions",
+        "patch": "summary records per-file schema version and skips-with-reason instead of crashing",
+        "verify": "row count equals input file count",
+        "proceed": true
+      },
+      "lint_rejects": []
+    },
+    {
+      "axis": "delivery_readiness",
+      "packet": {
+        "schema": "p0_prompt_packet_v1.1",
+        "packet_id": "PKT-0106-governance-queue-census",
+        "created_at": "2026-07-08T16:16:59.622566+00:00",
+        "mission": "Parse governance intake queues and emit a counts census (review + promote queues)",
+        "problem_statement": "Queue depth is unknown between sessions; delivery readiness is unmeasured.",
+        "deliverable": {
+          "type": "queue_census",
+          "destination": "receipts/p0pgr/",
+          "acceptance": "census reports item counts and oldest item age for each queue file"
+        },
+        "route": "CLOUD_WORKER",
+        "gates": {
+          "cloud_only": true,
+          "read_only_or_reversible": true,
+          "roi_positive": true,
+          "no_deploy": true,
+          "no_external_send": true,
+          "no_legal_financial_commitment": true,
+          "no_p0_leakage": true,
+          "no_authority_change": true,
+          "founder_authorization_receipt": true
+        },
+        "roi": {
+          "revenue": 1,
+          "trust": 3,
+          "workload_relief": 4,
+          "cloud_now": 5,
+          "reversibility": 5,
+          "rationale": "board axis: delivery_readiness"
+        },
+        "constraints": [
+          "zero execution in this campaign \u2014 candidates only",
+          "integration law: consume adjacent systems, never duplicate queues"
+        ],
+        "evidence_required": [
+          "queue file hashes",
+          "parsed counts"
+        ],
+        "confidence": "MEDIUM",
+        "status": "DRAFT",
+        "labels": [
+          "delivery_readiness"
+        ],
+        "source_findings": [
+          "census F1",
+          "census F3"
+        ]
+      },
+      "chess_pass": {
+        "forecast": "queue files may be mid-write during a cycle",
+        "patch": "census records file mtime and sha256 at read moment",
+        "verify": "re-read after census; identical hash confirms stable read",
+        "proceed": true
+      },
+      "lint_rejects": []
+    }
+  ],
+  "clean_candidates": 6,
+  "counters": {
+    "executions": 0,
+    "sends": 0,
+    "deploys": 0,
+    "leaks": 0,
+    "freezes": 0
+  },
+  "accounting_note": "deterministic planner, zero LLM calls; candidates are drafts, not executions",
+  "executor_route_note": "no execution \u2014 planning only",
+  "commit_flag": "flag for next founder-visible commit"
+}

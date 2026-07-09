@@ -1,0 +1,29 @@
+{
+  "receipt_type": "smart_production_cost_law_v2_delivery",
+  "date": "2026-07-03",
+  "supersedes": [
+    "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+    "unlocked Smart Production Workflow Stack v1 proposal"
+  ],
+  "files_created": [
+    "SMART_PRODUCTION_COST_LAW_v2.md",
+    "policy/cost_policy.yaml",
+    ".noos/workflow_registry_v1.json",
+    "scripts/check_cost_policy.py",
+    "tests/fixtures/* (9 fixtures: 8 negative, ambient mix of text+registry, 2 clean)",
+    "tests/run_negative_tests.py"
+  ],
+  "hidden_gems_added_in_v2": [
+    "10.1 Registry collision risk - workflow_id now globally unique + single_owner_lock field",
+    "10.2 Safe-fixer receipt gap - safe_fix_allowed=true now hard-requires receipt_required=true at validation time",
+    "10.3 No aggregate rate limit - added Class 7 circuit breaker + copilot_daily_task_cap/cost_cap/PR_cap budgets",
+    "10.4 GitHub Actions isn't free either - added github_actions_daily_minutes_cap",
+    "10.5 Self-protection gap - stated who may edit the cost policy itself (same gates as any governance change)",
+    "10.6 Audit staleness - last_audited field + 30-day flag, since Copilot UI settings can't be read by script"
+  ],
+  "tests_run": "tests/run_negative_tests.py",
+  "tests_result": "9/9 PASS (4 text-pattern cases + 5 registry-rule cases)",
+  "self_scan_result": "FAIL (by design) - seed registry correctly flags all 23 entries as last_audited=TODO. This is the checker doing its job: it will not let a freshly-scaffolded registry silently claim to be audited. Real audit dates must be filled in via the live Copilot/Actions UI per canon section 10.6 before this goes green.",
+  "known_limitation": "Model/effort/trigger settings for Copilot automations live in a UI the checker cannot read directly. The registry's last_audited field exists specifically to make that gap visible, not to close it - a human still has to check the Copilot Automations UI on a cadence.",
+  "status": "SCAFFOLD_READY_AUDIT_PENDING"
+}

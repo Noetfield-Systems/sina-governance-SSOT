@@ -1,0 +1,167 @@
+{
+  "action": "step7f_a_branch_only_resolution",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7F-A",
+  "role": "Branch-Only Workflow Resolution",
+  "timestamp": "2026-07-04T05:05:00+00:00",
+  "policy_pass": false,
+  "files_changed": [],
+  "commands_run": [
+    "gh api repos/Noetfield-Systems/sina-governance-ssot/contents/.github/workflows (default branch)",
+    "gh api repos/Noetfield-Systems/noetfeld-os/contents/.github/workflows (default branch)",
+    "gh pr view 5 --repo Noetfield-Systems/sina-governance-ssot",
+    "gh pr view 22 --repo Noetfield-Systems/noetfeld-os",
+    "gh workflow view 306625675 --ref copilot/cost-locks-v1",
+    "gh workflow view 306862038 --ref pr-10",
+    "gh run list/view (Agentic CI + Cost policy scan failure logs)"
+  ],
+  "errors": [],
+  "main_presence_verified": {
+    "ssot_agentic_ci": {
+      "on_main": false,
+      "main_workflow_files": ["brain-loop-autorun-v1.yml"],
+      "agentic_ci_yml_on_main": false
+    },
+    "noos_cost_policy_scan": {
+      "on_main": false,
+      "cost_policy_scan_yml_on_main": false,
+      "main_workflow_count": 21
+    }
+  },
+  "classifications": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "classification": "merge_intended_branch_pending",
+      "live_on_main": false,
+      "surface_status": "branch_pending",
+      "repo": "Noetfield-Systems/sina-governance-ssot",
+      "workflow_file": ".github/workflows/agentic-ci.yml",
+      "gh_workflow_id": 306625675,
+      "live_branch": "copilot/cost-locks-v1",
+      "open_pr": {
+        "number": 5,
+        "title": "Repo-local cost-policy locks: CI early-fail + promotion gate checks",
+        "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/5",
+        "base": "main",
+        "state": "OPEN"
+      },
+      "latest_run": {
+        "id": 28695304453,
+        "branch": "copilot/cost-locks-v1",
+        "conclusion": "failure",
+        "blocking_step": "Cost policy enforcement (early-fail in CI)",
+        "failure_reason": "ModuleNotFoundError: No module named 'yaml' in scripts/cost_policy_enforcer.py"
+      },
+      "registry_draft_verdict": "PASS",
+      "registry_draft_caveat": "Attestation PASS is for observed branch surface; main-live status remains unresolved until merge.",
+      "trigger_drift_note": "Branch YAML includes schedule cron 0 * * * * (hourly) in addition to push/PR; registry row trigger=event — reconcile after merge.",
+      "action_taken": "Classified branch_pending; no merge, no fake main presence.",
+      "action_proposed": [
+        "Fix PR #5 CI: pip install pyyaml (or add requirements step) before cost_policy_enforcer.py",
+        "Green Agentic CI on copilot/cost-locks-v1",
+        "Bounded merge: PR #5 → main via normal review (no direct main write from Control Desk)",
+        "Re-attest ssot_agentic_ci after merge with main-live evidence",
+        "Reconcile registry trigger if hourly schedule is removed or authorized"
+      ]
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "classification": "merge_intended_branch_pending",
+      "live_on_main": false,
+      "surface_status": "branch_pending",
+      "repo": "Noetfield-Systems/noetfeld-os",
+      "workflow_file": ".github/workflows/cost-policy-scan.yml",
+      "gh_workflow_id": 306862038,
+      "live_branches": ["pr-10", "copilot/cost-locks-v1"],
+      "primary_branch": "pr-10",
+      "open_pr": {
+        "number": 22,
+        "title": "Cost lock v1: CI scanner + runtime routing guard",
+        "url": "https://github.com/Noetfield-Systems/noetfeld-os/pull/22",
+        "base": "main",
+        "head": "pr-10",
+        "state": "OPEN"
+      },
+      "related_pr": {
+        "number": 24,
+        "title": "NOOS Copilot Step 5: dispatcher discovery & registration",
+        "head": "copilot/cost-locks-v1",
+        "state": "OPEN",
+        "note": "Also runs Cost policy scan on push; not the primary merge vehicle for cost-policy-scan.yml"
+      },
+      "latest_run": {
+        "id": 28683001606,
+        "branch": "pr-10",
+        "conclusion": "failure",
+        "blocking_step": "Run cost policy scanner",
+        "failure_reason": "scripts/cost_policy_scan.py exited 1 (policy scan FAIL — see run log JSON output)"
+      },
+      "registry_draft_verdict": "PASS",
+      "registry_draft_caveat": "Attestation PASS is for observed branch surface; main-live status remains unresolved until merge.",
+      "trigger_drift_note": "Branch YAML triggers on push/** and pull_request only; registry row trigger=schedule — update registry or add schedule stanza before lock candidate.",
+      "action_taken": "Classified branch_pending; no merge, no fake main presence.",
+      "action_proposed": [
+        "Fix PR #22 CI: resolve cost_policy_scan.py failure on pr-10",
+        "Green Cost policy scan job on pr-10",
+        "Bounded merge: PR #22 → main via normal review",
+        "Re-attest noos_cost_policy_scan after merge with main-live evidence",
+        "Align registry trigger field with live YAML (event vs schedule)"
+      ]
+    }
+  ],
+  "summary": {
+    "workflows_reviewed": 2,
+    "live_on_main": 0,
+    "branch_pending": 2,
+    "not_live_main": 2,
+    "merge_intended": 2,
+    "decommission_recommended": 0,
+    "direct_main_write": false,
+    "lock_candidate_submitted": false,
+    "active_promotion": false,
+    "package_status": "SCAFFOLD_READY_AUDIT_PENDING"
+  },
+  "remaining_blockers": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "branch_pending",
+      "detail": "agentic-ci.yml not on main; PR #5 OPEN; Agentic CI FAIL (missing pyyaml)"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "branch_pending",
+      "detail": "cost-policy-scan.yml not on main; PR #22 OPEN; scan job FAIL"
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "copilot_ui_unread",
+      "detail": "Unrelated to 7F-A but still blocks 23/23 PASS"
+    },
+    {
+      "workflow_id": null,
+      "kind": "rcp5_staleness",
+      "detail": "workflow_registry_v1.json last_audited still TODO on all 23 rows"
+    },
+    {
+      "workflow_id": null,
+      "kind": "trigger_registry_drift",
+      "detail": "ssot_agentic_ci branch YAML has hourly schedule; noos_cost_policy_scan branch YAML is event-only vs registry schedule"
+    }
+  ],
+  "next_machine_action": "7F-B: fix PR #5 and PR #22 CI on branch; merge to main when green; re-attest both workflows with main-live evidence.",
+  "bounded_merge_path": {
+    "sg": {
+      "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/5",
+      "gate": "Agentic CI green on copilot/cost-locks-v1",
+      "merge_target": "main",
+      "blocked_by": "cost_policy_enforcer.py missing PyYAML dependency in CI"
+    },
+    "noos": {
+      "pr": "https://github.com/Noetfield-Systems/noetfeld-os/pull/22",
+      "gate": "Cost policy scan green on pr-10",
+      "merge_target": "main",
+      "blocked_by": "cost_policy_scan.py policy scan exit 1"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "action": "step7b_verdict_patch",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    "control-desk/backend/config.py",
+    "control-desk/backend/verdict.py",
+    "control-desk/backend/handler.py",
+    "tests/test_verdict_v1.py"
+  ],
+  "commands_run": [
+    "python3 tests/test_verdict_v1.py",
+    "python3 tests/run_negative_tests.py"
+  ],
+  "policy_pass": true,
+  "errors": [],
+  "timestamp": "2026-07-04T03:45:00+00:00",
+  "next_machine_action": "Re-POST Step 7 attestations to refresh draft verdicts; do not lock until checker PASS and drift resolved.",
+  "patch": "Step 7B — deterministic non-Copilot workflows PASS on observed_model=model:none when owner/class/model_policy compatible.",
+  "acceptance": {
+    "deterministic_model_none_pass": true,
+    "copilot_unknown_model_blocked": true,
+    "negative_tests_unchanged": true,
+    "observed_reality_preserved": true
+  },
+  "remaining_blockers": [
+    {
+      "kind": "surface_drift",
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "detail": "registry owner=cloudflare_worker vs observed GHA supabase-heartbeat.yml — evidence_note preserved; verdict may PASS model:none but drift unresolved"
+    },
+    {
+      "kind": "surface_drift",
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "detail": "registry owner=cloudflare_worker vs observed GHA autorun-health.yml"
+    },
+    {
+      "kind": "copilot_ui_unread",
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "detail": "Copilot UI settings not machine-readable — remains BLOCKED until honest attestation"
+    },
+    {
+      "kind": "branch_gap",
+      "detail": "ssot_agentic_ci + noos_cost_policy_scan workflow YAML not on main branch"
+    },
+    {
+      "kind": "registry_staleness",
+      "detail": "RCP5 last_audited TODO on live registry until lock candidate applies attested dates"
+    },
+    {
+      "kind": "draft_re_eval",
+      "detail": "Existing registry_draft.json verdicts stale until workflows re-saved via POST /api/attestation/draft"
+    }
+  ]
+}

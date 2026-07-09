@@ -1,0 +1,24 @@
+{
+  "action": "frontend_step3_smoke",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "frontend_builder_step_3",
+  "timestamp": "2026-07-04T03:00:59.848979+00:00",
+  "policy_pass": true,
+  "checks_passed": 11,
+  "checks_total": 11,
+  "base_url": "http://127.0.0.1:17877",
+  "acceptance": {
+    "app_localhost_17877": true,
+    "dashboard_registry": true,
+    "attestation_save": true,
+    "verdict_honest": true,
+    "save_draft": true,
+    "policy_aggregated": true,
+    "integrator_local": true,
+    "receipts_list": true,
+    "pr_prep_plan_only": true,
+    "lock_blocked": true
+  },
+  "next_machine_action": "Step 4 integrator agent or negative test suite."
+}

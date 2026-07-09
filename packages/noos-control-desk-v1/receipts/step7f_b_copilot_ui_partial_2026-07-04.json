@@ -1,0 +1,31 @@
+{
+  "action": "step7f_b_copilot_ui_attestation_partial",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7F-B",
+  "timestamp": "2026-07-04T05:38:00+00:00",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "status": "PARTIAL_EVIDENCE_RECEIVED",
+  "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+  "pass_granted": false,
+  "ui_settings_attested": {
+    "require_approval_for_workflow_runs": "ON",
+    "allow_automations": "OFF",
+    "firewall": "ON",
+    "recommended_allowlist": "ON"
+  },
+  "raw_receipt": {
+    "repo": "TrustField-Technologies",
+    "path": "reports/improvement-receipt-v2.jsonl",
+    "gitignored": true,
+    "committed": false
+  },
+  "sanitized_receipt": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+  "tracked_pointer": "reports/trustfield-copilot-ui-attestation-pointer-v1.json",
+  "draft_verdict": "BLOCKED",
+  "remaining_gap": "Control Desk re-attestation or accepted tracked sanitized receipt",
+  "sg_record": "receipts/sg-record-step7fb-partial-ui-evidence-20260704T053800Z.json",
+  "step_8": "BLOCKED",
+  "lock_candidate": "BLOCKED",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING"
+}

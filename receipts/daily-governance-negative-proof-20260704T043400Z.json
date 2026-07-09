@@ -1,0 +1,69 @@
+{
+  "schema": "daily-governance-negative-proof-v1",
+  "action": "daily_governance_negative_proof",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:34:00Z",
+  "runbook": "ssot/DAILY_GOVERNANCE_MACHINE_RUNBOOK_v1.md",
+  "purpose": "Disposable tests where machine must reject or block wrong authority",
+  "policy_pass": true,
+  "tests": [
+    {
+      "test_id": "NEG-01-rank-le2-delete-block",
+      "machine": "governance_registry_ops_v1.py op_registry_remove",
+      "command": "registry-remove --id gov-structure-authority-v1 (dry-run)",
+      "expected": "BLOCK — rank ≤2 never deleted",
+      "result": {
+        "ok": false,
+        "error": "strict rule: only SUPERSEDED artifacts may be removed — retire first"
+      },
+      "verdict": "PASS",
+      "live_authority": false,
+      "required_sg_action": "none — block is correct; retire only if superseding"
+    },
+    {
+      "test_id": "NEG-02-duplicate-active-id-block",
+      "machine": "governance_registry_ops_v1.py op_registry_add",
+      "command": "registry-add duplicate founder-judgment-patterns-v1 (dry-run)",
+      "expected": "BLOCK — duplicate artifact_id",
+      "result": {
+        "ok": false,
+        "errors": ["duplicate artifact_id: founder-judgment-patterns-v1"]
+      },
+      "verdict": "PASS",
+      "live_authority": false,
+      "required_sg_action": "none — use registry-amend or retire path instead"
+    },
+    {
+      "test_id": "NEG-03-wrong-duplicate-final-rejected",
+      "machine": "governance_intelligence_engine_v1.py audit-selection",
+      "command": "audit-selection COPILOT v1.md vs v1 2.md",
+      "expected": "Primary excludes ' 2.md'; status ACTIVE_AMENDMENT not live",
+      "result": {
+        "primary": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "status": "ACTIVE_AMENDMENT",
+        "excluded": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md"
+      },
+      "verdict": "PASS",
+      "live_authority": false,
+      "required_sg_action": "stage selected file; registry-add PROPOSED before any ACTIVE claim"
+    },
+    {
+      "test_id": "NEG-04-staged-not-active",
+      "machine": "governance_registry_ops_v1.py op_registry_show",
+      "command": "registry-show --id noos-copilot-dispatcher-mode-v1",
+      "expected": "RECORDED_STEP_5 — not live dispatch authority",
+      "result": {
+        "status": "RECORDED_STEP_5",
+        "live_authority": false
+      },
+      "verdict": "PASS",
+      "required_sg_action": "complete package steps before ACTIVE promotion"
+    }
+  ],
+  "machine_recommendation": "All negative gates blocked wrong authority paths",
+  "required_sg_action": "none — gates healthy",
+  "registry_status": "n/a",
+  "receipt_path": "receipts/daily-governance-negative-proof-20260704T043400Z.json",
+  "live_authority": false
+}

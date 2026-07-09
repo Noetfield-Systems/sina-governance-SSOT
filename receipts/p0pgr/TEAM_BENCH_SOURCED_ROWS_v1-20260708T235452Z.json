@@ -1,0 +1,127 @@
+{
+  "schema": "p0pgr_execution_receipt_v1",
+  "receipt_id": "TEAM_BENCH_SOURCED_ROWS_v1-20260708T235452Z",
+  "recorded_at": "2026-07-08T23:54:52.542705+00:00",
+  "packet_id": "TEAM_BENCH_SOURCED_ROWS_v1",
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "method": "3 parallel research agents (R3/R4/R1 lanes) with anti-fabrication rules: every row requires a source URL surfaced in-session + evidence quote; unverifiable candidates dropped",
+  "attestations": [
+    "zero contact made",
+    "zero messages sent",
+    "zero rows beyond SOURCED",
+    "all outreach routes to https://www.trustfield.ca/partner-access",
+    "CONTACTED transition remains founder-gated in platform API"
+  ],
+  "counts": {
+    "total_unique": 29,
+    "R1": 9,
+    "R3": 10,
+    "R4": 10
+  },
+  "shortfall_note": "29 unique vs 30 requested: Carole Piovesan independently surfaced in both R3 and R1 sweeps — counted once (R3, flagged dual_fit_R1). Integrity over quota; no padding.",
+  "verification": {
+    "spot_checks": [
+      "Sharon Bauer page fetched directly: founder claim confirmed verbatim",
+      "IRM Consulting framework claims corroborated by two independent URLs",
+      "VerifyWise directory checked: firms-only, yielded no padding candidates"
+    ],
+    "flags": [
+      "Mélissa M'Raidi-Kechichian site failed direct fetch — re-verify before any founder approval",
+      "same-org cluster: Amber D. Scott (R3) + David Vijan (R4) = Outlier; coordinate as one relationship"
+    ]
+  },
+  "ranked_top10": [
+    {
+      "rank": 1,
+      "name": "Sharon Bauer",
+      "lane": "R3",
+      "score": 84
+    },
+    {
+      "rank": 2,
+      "name": "Katrina Ingram",
+      "lane": "R1",
+      "score": 83
+    },
+    {
+      "rank": 3,
+      "name": "Constantine Karbaliotis",
+      "lane": "R3",
+      "score": 81
+    },
+    {
+      "rank": 4,
+      "name": "Shaun Brown",
+      "lane": "R3",
+      "score": 81
+    },
+    {
+      "rank": 5,
+      "name": "Amber D. Scott",
+      "lane": "R3",
+      "score": 80
+    },
+    {
+      "rank": 6,
+      "name": "Dina Vardouniotis",
+      "lane": "R4",
+      "score": 78
+    },
+    {
+      "rank": 7,
+      "name": "Carole Piovesan",
+      "lane": "R3",
+      "score": 73
+    },
+    {
+      "rank": 8,
+      "name": "Kristy Duncan",
+      "lane": "R4",
+      "score": 73
+    },
+    {
+      "rank": 9,
+      "name": "Sue Britton",
+      "lane": "R4",
+      "score": 73
+    },
+    {
+      "rank": 10,
+      "name": "Nicky Senyard",
+      "lane": "R4",
+      "score": 69
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "data/team_bench_sourced_rows_v1.json",
+      "sha256": "ad41cb45b98871e990ec9bd7a95be2b1bb4509d21a2f66c43c680b7b5d810a13"
+    },
+    {
+      "path": "scripts/team_bench_import_sourced_v1.py",
+      "note": "import to platform tracker when ADMIN_TOKEN present (SOURCED-only by construction)"
+    }
+  ],
+  "quality_state": "PASS",
+  "limitations": [
+    "rows not yet in prod platform tracker (no ADMIN_TOKEN in this session) — import script ready; ladder step E seeds from this file",
+    "R2/R5 lanes deferred per founder priority order"
+  ],
+  "cost": {
+    "llm_calls": 3,
+    "metered_note": "3 research subagents (~213k tokens total) + spot-check fetches; deterministic scoring"
+  },
+  "accounting_note": "session-orchestrated cloud research agents",
+  "executor_route_note": "research agents ran as session-spawned workers (cloud APIs for search); no packet route deviation — sourcing packet class",
+  "commit_flag": "flag for next founder-visible commit"
+}

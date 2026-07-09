@@ -1,0 +1,233 @@
+{
+  "schema": "noos_control_desk_package_map_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T05:38:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "authority_doc": "ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md",
+  "package_id": "noos-control-desk-v1",
+  "install_root": "packages/noos-control-desk-v1",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING",
+  "api_contract": "data/noos_control_desk_api_contract_v1.json",
+  "phase_0": "ACCEPTED",
+  "phase_1": "UNBLOCKED_BACKEND_FRONTEND",
+  "step_3_frontend_smoke": "11/11 PASS",
+  "step_4_integrator_verifier": "13/13 PASS ACCEPTED",
+  "step_5_noos_sync_mode": "COMPLETE_RECORDED",
+  "step_5_receipt": "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json",
+  "step_6_repo_fences": "COMPLETE_PHASE_1",
+  "step_6_receipt": "receipts/sg-record-step6-repo-fences-20260704T044500Z.json",
+  "step_7_workflow_audit": "COMPLETE_HONEST_BLOCKED",
+  "step_7_receipt": "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json",
+  "step_7B_verdict_patch": "ACCEPTED",
+  "step_7C_registry_drift_review": "ACCEPTED",
+  "step_7bc_acceptance_receipt": "receipts/sg-record-step7bc-accepted-20260704T045600Z.json",
+  "step_7D_registry_drift_patch": "COMPLETE",
+  "step_7D_receipt": "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+  "step_7E_repost_attestations": "COMPLETE",
+  "step_7E_receipt": "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+  "step_7de_record_receipt": "receipts/sg-record-step7de-complete-20260704T045800Z.json",
+  "step_7F_A_branch_surface_verifier": "COMPLETE",
+  "step_7F_A_receipt": "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json",
+  "step_7F_B_copilot_resolution": "PARTIAL_EVIDENCE_RECEIVED",
+  "step_7F_B_classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+  "step_7F_B_receipt": "packages/noos-control-desk-v1/receipts/step7f_b_copilot_ui_partial_2026-07-04.json",
+  "step_7F_B_sanitized_receipt": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+  "step_7F_B_ui_pointer": "reports/trustfield-copilot-ui-attestation-pointer-v1.json",
+  "step_7F_B_raw_receipt": {
+    "repo": "TrustField-Technologies",
+    "path": "reports/improvement-receipt-v2.jsonl",
+    "gitignored": true,
+    "committed": false,
+    "branch_push_note": "TrustField Copilot branch push confirmed; HEAD unchanged because reports/ is gitignored"
+  },
+  "step_7fb_partial_evidence_receipt": "receipts/sg-record-step7fb-partial-ui-evidence-20260704T053800Z.json",
+  "step_7_next_required_evidence": [
+    "Control Desk re-attestation or accepted tracked sanitized receipt for trustfield_copilot_cloud_agent"
+  ],
+  "step_7_draft_verdict_summary": {
+    "pass_count": 22,
+    "fail_count": 0,
+    "blocked_count": 1,
+    "todo_count": 0,
+    "blocked_ids": ["trustfield_copilot_cloud_agent"]
+  },
+  "step_7_branch_only_notes_unresolved": [
+    "ssot_agentic_ci",
+    "noos_cost_policy_scan"
+  ],
+  "step_7_next": [
+    {"substep": "7F-A", "name": "Branch surface verifier", "status": "COMPLETE"},
+    {"substep": "7F-B", "name": "Copilot cloud agent resolution", "status": "PARTIAL_EVIDENCE_RECEIVED", "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL", "draft_verdict": "BLOCKED"}
+  ],
+  "step_8_policy_check": "BLOCKED",
+  "step_9_lock_candidate": "BLOCKED",
+  "noos_copilot_dispatcher": "data/noos_copilot_dispatcher_v1.json",
+  "noos_copilot_dispatcher_mode": "data/noos-copilot-dispatcher-mode-v1.json",
+  "noos_copilot_dispatcher_authority": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+  "noos_integrator_role_pointer": "data/noos-integrator-role-v1.json",
+  "noos_integrator_role_canonical": "noetfeld-os/data/noos-integrator-role-v1.json",
+  "rollout_order": [
+    "sina-governance-ssot",
+    "noetfeld-os",
+    "SourceA",
+    "Noetfield",
+    "TrustField-Technologies"
+  ],
+  "policy_stack": [
+    {"level": 1, "role": "master_law", "artifact_id": "smart-production-cost-law-v2", "layer": "P8"},
+    {"level": 2, "role": "copilot_sub_policy", "artifact_id": "copilot-automation-cost-profile-v1", "layer": "P8"},
+    {"level": 3, "role": "control_ledger", "artifact_id": "noos-workflow-registry-v1", "layer": "P8"},
+    {"level": 4, "role": "local_ui", "artifact_id": "noos-control-desk-mvp-spec-v1", "layer": "P3"},
+    {"level": 5, "role": "execution", "artifact_id": null, "layer": "P2", "note": "per-repo GH Actions / CF / NOOS / Copilot manual"}
+  ],
+  "members": [
+    {
+      "artifact_id": "noos-control-desk-package-v1",
+      "path": "ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md",
+      "layer": "P0",
+      "domain": "package_authority",
+      "stack_role": "package_authority",
+      "status": "ACTIVE",
+      "operational_rollout_status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["gov-structure-authority-v1"],
+      "affects_layers": ["P0", "P2", "P3", "P7", "P8", "P99"]
+    },
+    {
+      "artifact_id": "smart-production-cost-law-v2",
+      "path": "packages/noos-control-desk-v1/SMART_PRODUCTION_COST_LAW_v2.md",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "master_law",
+      "status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["gov-structure-authority-v1"],
+      "affects_layers": ["P0", "P2", "P3", "P4", "P8"]
+    },
+    {
+      "artifact_id": "copilot-automation-cost-profile-v1",
+      "path": "packages/noos-control-desk-v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "copilot_sub_policy",
+      "status": "LOCKED_POLICY_ARTIFACT",
+      "operational_rollout_status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["gov-structure-authority-v1", "smart-production-cost-law-v2"],
+      "affects_layers": ["P8"]
+    },
+    {
+      "artifact_id": "noos-workflow-registry-v1",
+      "path": "packages/noos-control-desk-v1/.noos/workflow_registry_v1.json",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "control_ledger",
+      "status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["smart-production-cost-law-v2", "copilot-automation-cost-profile-v1"],
+      "affects_layers": ["P8"],
+      "seed_note": "23 workflows, all last_audited TODO — not fake-audited"
+    },
+    {
+      "artifact_id": "noos-cost-policy-v1",
+      "path": "packages/noos-control-desk-v1/policy/cost_policy.yaml",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "machine_policy_config",
+      "status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["smart-production-cost-law-v2"],
+      "affects_layers": ["P8"]
+    },
+    {
+      "artifact_id": "noos-check-cost-policy-v1",
+      "path": "packages/noos-control-desk-v1/scripts/check_cost_policy.py",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "policy_gate",
+      "status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "depends_on": ["noos-cost-policy-v1", "noos-workflow-registry-v1"],
+      "affects_layers": ["P8", "P99"]
+    },
+    {
+      "artifact_id": "noos-control-desk-mvp-spec-v1",
+      "path": "packages/noos-control-desk-v1/NOOS_CONTROL_DESK_MVP_SPEC.md",
+      "layer": "P3",
+      "domain": "mac_runtime",
+      "stack_role": "local_ui_blueprint",
+      "status": "PROPOSED",
+      "depends_on": ["smart-production-cost-law-v2", "noos-workflow-registry-v1"],
+      "affects_layers": ["P3", "P8"]
+    },
+    {
+      "artifact_id": "noos-copilot-attestation-schema-v1",
+      "path": "packages/noos-control-desk-v1/.noos/copilot_attestation_schema_v1.json",
+      "layer": "P8",
+      "domain": "automation",
+      "stack_role": "attestation_contract",
+      "status": "PROPOSED",
+      "depends_on": ["copilot-automation-cost-profile-v1"],
+      "affects_layers": ["P8"]
+    },
+    {
+      "artifact_id": "noos-receipt-schema-v1",
+      "path": "packages/noos-control-desk-v1/.noos/receipt_schema_v1.json",
+      "layer": "P99",
+      "domain": "ledger",
+      "stack_role": "receipt_contract",
+      "status": "PROPOSED",
+      "depends_on": ["gov-structure-authority-v1"],
+      "affects_layers": ["P8", "P99"]
+    },
+    {
+      "artifact_id": "noos-copilot-dispatcher-v1",
+      "path": "ssot/NOOS_COPILOT_DISPATCHER_v1.md",
+      "layer": "P2",
+      "domain": "integrator",
+      "stack_role": "cross_repo_sync_dispatcher",
+      "status": "ACTIVE",
+      "depends_on": ["gov-structure-authority-v1", "noos-integrator-sync-rule-v1"],
+      "affects_layers": ["P2", "P3"],
+      "sg_pointer_only": false,
+      "machine_ssot": "data/noos_copilot_dispatcher_v1.json"
+    },
+    {
+      "artifact_id": "noos-copilot-dispatcher-mode-v1",
+      "path": "data/noos-copilot-dispatcher-mode-v1.json",
+      "layer": "P2",
+      "domain": "integrator",
+      "stack_role": "sync_mode_model",
+      "status": "RECORDED_STEP_5",
+      "owner_note": "NOOS owns behavior; SG pointer only",
+      "depends_on": ["noos-copilot-dispatcher-v1"],
+      "affects_layers": ["P2"],
+      "authority_doc": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+      "integrator_role_pointer": "data/noos-integrator-role-v1.json",
+      "step_5_receipt": "receipts/noos-copilot-dispatcher-mode-patch-20260703T195800Z.json"
+    },
+    {
+      "artifact_id": "noos-integrator-sync-rule-v1",
+      "path": "packages/noos-control-desk-v1/NOOS_INTEGRATOR_SYNC_RULE_v1.md",
+      "layer": "P2",
+      "domain": "integrator",
+      "stack_role": "sync_law",
+      "status": "ACTIVE",
+      "depends_on": ["gov-structure-authority-v1"],
+      "affects_layers": ["P2", "P3"],
+      "sg_canonical_mirror": "ssot/NOOS_INTEGRATOR_RULES_v1.md"
+    },
+    {
+      "artifact_id": "work-order-noos-control-desk-mvp-v1",
+      "path": "packages/noos-control-desk-v1/WORK_ORDER_NOOS_CONTROL_DESK_MVP_v1.md",
+      "layer": "P7",
+      "domain": "governance_structure",
+      "stack_role": "execution_contract",
+      "status": "PROPOSED",
+      "depends_on": ["noos-control-desk-mvp-spec-v1"],
+      "affects_layers": ["P3", "P8"]
+    }
+  ],
+  "forbidden_until_audit": [
+    "direct_main_write",
+    "cloud_deploy",
+    "electron_shell",
+    "selenium_automation",
+    "premium_models",
+    "fake_audited_registry"
+  ]
+}

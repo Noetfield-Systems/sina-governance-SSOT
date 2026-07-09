@@ -1,0 +1,29 @@
+{
+  "receipt_type": "noos_control_desk_v2_observed_reality_patch",
+  "date": "2026-07-03",
+  "advisor_verdict_addressed": "MVP_SCAFFOLD_WORKING_PATCH_REQUIRED - Patch 1 (observed reality) was not implemented; form only accepted allowed values instead of recording leaks.",
+  "patches_applied": [
+    "1. Added observed_trigger/observed_mode/observed_model/observed_effort as free-text fields - form no longer restricts these to allowed values. gpt-5.4, Auto, Claude, High, Hourly can all be typed and saved.",
+    "2. Server computes policy_verdict (PASS/FAIL/BLOCKED) from observed values against known-forbidden lists - client-sent verdicts are never trusted. Verdict + reasons returned to UI and stored in draft.",
+    "3. Added desired_trigger/desired_model/desired_effort as separate dropdown-constrained fields representing 'what it should be', distinct from observed reality.",
+    "4. Split into Draft (.noos/registry_draft.json, any completeness/verdict mix, never touches real registry) vs Lock Candidate (only submittable when all 23 are PASS; applies to real registry, re-runs checker, only on PASS creates a bounded local git branch+commit).",
+    "5. No Selenium/scraper added - manual observed-reality entry remains the MVP mechanism, per Advisor's 4th patch.",
+    "6. PR creation explicitly NOT claimed as built - branch+commit are real and tested; push/PR require a real remote+auth this environment doesn't have."
+  ],
+  "real_tests_run_this_session": [
+    "draft/save with observed_model=gpt-5.4, observed_effort=high, observed_trigger=hourly -> SAVED, verdict=FAIL, reasons listed (leak recorded, not hidden)",
+    "draft/save with clean gpt-5-mini/low/event -> SAVED, verdict=PASS",
+    "draft/save with unrecognized model string -> SAVED, verdict=BLOCKED",
+    "lock-candidate/submit with 1 FAIL + 1 BLOCKED + 20 TODO in draft -> 409 BLOCKED, exact blocking workflow_ids listed",
+    "all 23 workflows attested PASS via script",
+    "lock-candidate/submit with all 23 PASS -> LOCK_CANDIDATE_READY, checker_status=PASS, real git branch 'audit/update-registry-2026-07-04' created with a real local commit - verified via `git log` and `git branch` after the call, not just the API response"
+  ],
+  "cleanup_before_packaging": [
+    "Test git repo/branch/commit removed (.git deleted) - this ships as plain files, not a git repo, so it can be dropped into the real sina-governance-SSOT repo cleanly.",
+    "Test draft file (.noos/registry_draft.json) removed.",
+    "Registry reset to all 23 entries last_audited=TODO - no fake pre-audited data ships.",
+    "Test-only receipts (draft_save_*, lock_candidate_*, sync_*, control_desk_last_validate.json) removed."
+  ],
+  "regression_after_patch": "9/9 negative tests still pass. Self-scan back to exactly 23 violations, all RCP5_audit_staleness, zero new false positives.",
+  "status": "MVP_PATCHED_AND_VERIFIED_OBSERVED_REALITY_WORKING"
+}

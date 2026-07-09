@@ -1,0 +1,121 @@
+{
+  "action": "step7c_registry_drift_review",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "7C",
+  "role": "Registry Drift Review Worker",
+  "timestamp": "2026-07-04T04:45:00+00:00",
+  "policy_pass": false,
+  "files_changed": [],
+  "commands_run": [
+    "gh workflow list --repo Noetfield-Systems/{Noetfield,TrustField-Technologies,sina-governance-ssot,noetfeld-os,SourceA}",
+    "gh api repos/Noetfield-Systems/*/actions/workflows/{303004354,306288023,305960084,306625675,306862038,306444735}",
+    "gh api repos/Noetfield-Systems/{sina-governance-ssot,noetfeld-os}/contents/.github/workflows/{agentic-ci,cost-policy-scan}.yml?ref=main",
+    "gh api repos/Noetfield-Systems/{Noetfield,TrustField-Technologies,SourceA}/contents/.github/workflows/{supabase-heartbeat,autorun-health,external-verify}.yml",
+    "gh run list --repo Noetfield-Systems/sina-governance-ssot --workflow=agentic-ci.yml --limit 3",
+    "gh run list --repo Noetfield-Systems/noetfeld-os --workflow=cost-policy-scan.yml --limit 3"
+  ],
+  "errors": [],
+  "drift_classifications": [
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "classification": "registry_wrong",
+      "registry_claim": "owner=cloudflare_worker, max_daily_runs=288",
+      "observed_surface": "GHA Supabase heartbeat (id 303004354) path .github/workflows/supabase-heartbeat.yml, state=active",
+      "observed_detail": "schedule cron 0 14 * * 1 + workflow_dispatch; deterministic REST ping; last schedule run 2026-06-29",
+      "proposed_action": "Apply owner→github_actions, max_daily_runs→1 (see step7c_proposed_registry_patch.json)",
+      "patch_safe": true
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "classification": "registry_wrong",
+      "registry_claim": "owner=cloudflare_worker, max_daily_runs=288",
+      "observed_surface": "GHA Autorun 24/7 health (id 306288023) path .github/workflows/autorun-health.yml, state=active",
+      "observed_detail": "schedule cron */30 + workflow_dispatch; schedule runs confirmed 2026-07-04; cloud-loop-health.yml is separate backup",
+      "proposed_action": "Apply owner→github_actions, max_daily_runs→48",
+      "patch_safe": true
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "classification": "registry_wrong",
+      "registry_claim": "trigger=schedule",
+      "observed_surface": "GHA external-verify (id 305960084) path .github/workflows/external-verify.yml, state=active",
+      "observed_detail": "on: workflow_dispatch, workflow_run after deploy-sourcea-buyer-surfaces-v1 (main success), path-filtered push — no schedule stanza in live YAML",
+      "proposed_action": "Apply trigger→event; append workflow_run chain note",
+      "patch_safe": true,
+      "correction_note": "Step 7 audit evidence_note incorrectly cited schedule 30 */6 — that cron belongs to determinism-gate.yml, not external-verify.yml"
+    },
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "classification": "branch_only_pending",
+      "registry_claim": "owner=github_actions, trigger=event (consistent with intent)",
+      "observed_surface": "GHA Agentic CI (id 306625675) state=active; YAML 404 on main",
+      "observed_detail": "Recent runs on branch copilot/cost-locks-v1 (push events); .github/workflows/agentic-ci.yml not merged to main",
+      "proposed_action": "No registry patch until YAML lands on main; re-attest after merge",
+      "patch_safe": false
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "classification": "branch_only_pending",
+      "registry_claim": "owner=github_actions, trigger=schedule (consistent with intent)",
+      "observed_surface": "GHA Cost policy scan (id 306862038) state=active; YAML 404 on main",
+      "observed_detail": "Recent run on branch pr-10; .github/workflows/cost-policy-scan.yml not on main",
+      "proposed_action": "No registry patch until YAML lands on main; re-attest after merge",
+      "patch_safe": false
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "classification": "intentionally_disabled",
+      "secondary_classification": "surface_wrong",
+      "tertiary_classification": "needs_manual_ui_evidence",
+      "registry_claim": "max_daily_runs=0, owner=copilot_manual, note=DISABLE",
+      "observed_surface": "GHA Copilot cloud agent (id 306444735) path dynamic/copilot-swe-agent/copilot, state=active",
+      "observed_detail": "Dynamic Copilot workflow; model/effort/trigger not machine-readable without Copilot Automations UI scrape",
+      "proposed_action": "Founder/manual lane: disable Copilot automation in GH UI to match registry intent; then UI-attest model/effort before any registry change",
+      "patch_safe": false
+    }
+  ],
+  "proposed_registry_patch": "receipts/step7c_proposed_registry_patch.json",
+  "patch_applied": false,
+  "unresolved_items": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "branch_only_pending",
+      "detail": "Workflow active on GH but agentic-ci.yml not on main — merge PR before lock candidate"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "branch_only_pending",
+      "detail": "Workflow active on GH but cost-policy-scan.yml not on main — merge PR before lock candidate"
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "surface_registry_mismatch",
+      "detail": "Registry DISABLE vs GH active — requires manual Copilot UI disable + honest attestation (model/effort unknown)"
+    },
+    {
+      "workflow_id": null,
+      "kind": "draft_staleness",
+      "detail": "registry_draft.json attestations stale (pre-Step7B model:none); re-POST after registry patch review accepted"
+    },
+    {
+      "workflow_id": null,
+      "kind": "rcp5_staleness",
+      "detail": "All 23 workflow_registry_v1.json rows still last_audited=TODO — unchanged by this review"
+    }
+  ],
+  "summary": {
+    "items_reviewed": 6,
+    "registry_wrong": 3,
+    "branch_only_pending": 2,
+    "intentionally_disabled": 1,
+    "surface_wrong": 1,
+    "needs_manual_ui_evidence": 1,
+    "safe_patches_proposed": 3,
+    "patches_applied": 0,
+    "active_promotion": false,
+    "lock_candidate_submitted": false
+  },
+  "next_machine_action": "Founder or Step 8 worker may apply step7c_proposed_registry_patch.json to workflow_registry_v1.json after review; then re-run Step 7 attestations. Do not lock until branch merges + copilot surface reconciled.",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING"
+}

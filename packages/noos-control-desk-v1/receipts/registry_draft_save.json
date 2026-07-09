@@ -1,0 +1,12 @@
+{
+  "action": "registry_save_draft",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/workflow_registry_draft.json"
+  ],
+  "commands_run": [],
+  "policy_pass": true,
+  "errors": [],
+  "timestamp": "2026-07-04T03:00:59.721317+00:00",
+  "next_machine_action": "Review workflow_registry_draft.json before any lock attempt."
+}

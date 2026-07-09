@@ -1,0 +1,45 @@
+{
+  "schema": "p0-core-decision-receipt-v1",
+  "action": "p0_core_decision_invocation",
+  "repo": "sina-governance-ssot",
+  "dry_run": true,
+  "post_active": true,
+  "timestamp": "2026-07-04T04:42:54Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "contract_id": "p0-core-decision-use-contract-v1",
+  "contract_status": "ACTIVE",
+  "contract_registry_receipt": "receipts/p0-core-decision-use-contract-v1-registry-20260704T044240Z.json",
+  "invoking_actor": "high_decision_agent",
+  "case_id": "founder-judgment-chronology-reconciliation-historical",
+  "input": {
+    "case_id": "founder-judgment-chronology-reconciliation-historical",
+    "invoking_actor": "high_decision_agent",
+    "decision_question": "Did negative-proof run before ACTIVE registration, or is the apparent receipt-order inversion a labeling defect?",
+    "invocation_triggers": ["authority_registry_dispute", "novel_case"]
+  },
+  "output": {
+    "decision": "Option B — filename timestamp-labeling error on registry receipt; not a receipt-order defect",
+    "matched_patterns": [
+      "PATTERN 4 — Negative Proof",
+      "PATTERN 9 — Authority from Registry, Not Existence"
+    ],
+    "stop_continue_verdict": "CONTINUE",
+    "harvest_proposed": false
+  },
+  "matched_patterns": [
+    "PATTERN 4 — Negative Proof",
+    "PATTERN 9 — Authority from Registry, Not Existence"
+  ],
+  "harvest_proposed": false,
+  "dry_run_validation": {
+    "contract_registry_status": "ACTIVE",
+    "expected_patterns": ["PATTERN 4 — Negative Proof", "PATTERN 9 — Authority from Registry, Not Existence"],
+    "actual_patterns_match": true,
+    "pattern_11_created": false,
+    "worker_prompt_receives_p0_reasoning": false,
+    "verdict": "ALL_PASS"
+  },
+  "live_authority": true,
+  "policy_pass": true,
+  "receipt_path": "receipts/p0-core-decision-dryrun-post-active-20260704T044254Z.json"
+}

@@ -1,0 +1,90 @@
+{
+  "action": "integrator_step4_verifier",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": "integrator_sync_step_4",
+  "timestamp": "2026-07-04T02:44:18.066046+00:00",
+  "policy_pass": true,
+  "checks_passed": 13,
+  "checks_total": 13,
+  "base_url": "http://127.0.0.1:17877",
+  "files_changed": [
+    "receipts/sync_10.json"
+  ],
+  "commands_run": [
+    "GET http://127.0.0.1:17877/api/integrator/status",
+    "POST http://127.0.0.1:17877/api/integrator/sync",
+    "GET http://127.0.0.1:17877/api/receipts/list"
+  ],
+  "errors": [],
+  "next_machine_action": "STOP \u2014 Step 4 integrator verifier complete.",
+  "acceptance": {
+    "integrator_status_visible": true,
+    "local_sync_runs": true,
+    "cloud_write_blocked": true,
+    "receipt_written_and_listed": true
+  },
+  "evidence": {
+    "status_before": {
+      "repo_local": "fresh",
+      "repo_local_age_hours": 0.01,
+      "home_mirror": "synced",
+      "home_mirror_age_hours": 4.25,
+      "home_mirror_path": "/Users/sinakazemnezhad/.sina/noos-integrator-state-v1.json",
+      "cloud_mirror": {
+        "status": "unconfigured",
+        "path": null,
+        "last_seen": null,
+        "age_hours": null,
+        "cloud_write_allowed": false
+      },
+      "cloud_write_allowed": false,
+      "cross_ide_ready": true,
+      "sync_count": 9,
+      "gate_note": "No cloud write/propagation until validator PASS + receipt + bounded PR path."
+    },
+    "sync_response": {
+      "status": "OK",
+      "cloud_write_allowed": false,
+      "receipt": "receipts/sync_10.json",
+      "summary": {
+        "repo_local": "fresh",
+        "repo_local_age_hours": 0.0,
+        "home_mirror": "synced",
+        "home_mirror_age_hours": 4.25,
+        "home_mirror_path": "/Users/sinakazemnezhad/.sina/noos-integrator-state-v1.json",
+        "cloud_mirror": {
+          "status": "unconfigured",
+          "path": null,
+          "last_seen": null,
+          "age_hours": null,
+          "cloud_write_allowed": false
+        },
+        "cloud_write_allowed": false,
+        "cross_ide_ready": true,
+        "sync_count": 10,
+        "gate_note": "No cloud write/propagation until validator PASS + receipt + bounded PR path."
+      }
+    },
+    "status_after": {
+      "repo_local": "fresh",
+      "repo_local_age_hours": 0.0,
+      "home_mirror": "synced",
+      "home_mirror_age_hours": 4.25,
+      "home_mirror_path": "/Users/sinakazemnezhad/.sina/noos-integrator-state-v1.json",
+      "cloud_mirror": {
+        "status": "unconfigured",
+        "path": null,
+        "last_seen": null,
+        "age_hours": null,
+        "cloud_write_allowed": false
+      },
+      "cloud_write_allowed": false,
+      "cross_ide_ready": true,
+      "sync_count": 10,
+      "gate_note": "No cloud write/propagation until validator PASS + receipt + bounded PR path."
+    },
+    "sync_receipt_action": "integrator_sync",
+    "server_note": "Canonical backend control-desk.backend.server on :17877"
+  }
+}

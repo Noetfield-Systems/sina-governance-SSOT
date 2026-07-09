@@ -5,6 +5,7 @@
 **Authority:** SG (SSSOT) routes; **canonical** in `noetfeld-os`  
 **Canonical protocol:** `~/Projects/noetfeld-os/docs/_NOOS_AGENT/[NOOS-AGENT-20260703-001]_INTEGRATOR_AGENT_PROTOCOL_v1.md`  
 **Machine SSOT:** `~/Projects/noetfeld-os/data/noos-integrator-role-v1.json`
+**Governance structure/version law:** `ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md` (SG-owned)
 
 Applies to **any agent/IDE/session** that mutates NOOS integrator state (claim, complete, heartbeat, task open, agent register).
 
@@ -76,4 +77,4 @@ SG (`sg_sssot_cursor`) does **not** own integrator writes. When dispatch touches
 - End session with `sync` or `session-exit`
 - Do not mirror integrator state into SG repo
 
-Cross-link: [FOUNDER_CANON_v1.md](FOUNDER_CANON_v1.md) §9 Truth & memory · [MACHINE_AUTONOMY_LOOPS_v1.md](MACHINE_AUTONOMY_LOOPS_v1.md) L7 receipt proof
+Cross-link: [FOUNDER_CANON_v1.md](FOUNDER_CANON_v1.md) §9 Truth & memory · [GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md](GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md) · [MACHINE_AUTONOMY_LOOPS_v1.md](MACHINE_AUTONOMY_LOOPS_v1.md) L7 receipt proof

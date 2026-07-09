@@ -1,0 +1,98 @@
+{
+  "schema": "governance_structure_tree_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T03:30:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "authority_doc": "ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md",
+  "registry_doc": "data/governance_artifact_registry_v1.json",
+  "thread_registry_doc": "data/governance_thread_registry_v1.json",
+  "purpose": "Strict structure tree + machine map for daily add/remove/amend of rules and threads",
+  "authority_order": [
+    {"rank": 1, "name": "sg_canonical", "repo": "sina-governance-ssot", "writes": ["ssot/", "data/", "scripts/"]},
+    {"rank": 2, "name": "sg_operational", "repo": "sina-governance-ssot", "writes": ["ssot/", "data/"]},
+    {"rank": 3, "name": "sg_entrypoint", "repo": "sina-governance-ssot", "writes": ["AGENTS.md", ".github/", "docs/"]},
+    {"rank": 4, "name": "library_asset_surface", "repo": "noetfield-library", "writes": ["canonical files by layer — SG controls authority"]},
+    {"rank": 5, "name": "venture_copy", "repo": "venture repos", "writes": ["never governance law"]}
+  ],
+  "layers": {
+    "P0": {"name": "foundation spine", "owns": ["structure law", "registry", "strategy index"]},
+    "P1": {"name": "founder canon", "owns": ["founder touchpoints", "intent filter"]},
+    "P2": {"name": "ssot plane", "owns": ["operating law", "dispatch", "lane ownership"]},
+    "P3": {"name": "mac runtime", "owns": ["hub", "receipts", "mac session law"]},
+    "P4": {"name": "cloud kernel", "owns": ["L1-L8 kernel target"]},
+    "P5": {"name": "line engine", "owns": ["forge", "pipelines"]},
+    "P6": {"name": "brain meaning", "owns": ["knowledge", "essays"]},
+    "P7": {"name": "doctrine", "owns": ["governance ops", "prompt library"]},
+    "P8": {"name": "machine loops", "owns": ["autonomy loops", "automation governance"]},
+    "P9": {"name": "pattern factory", "owns": ["plan library", "prompt packs"]},
+    "P10": {"name": "product boundary", "owns": ["venture boundaries", "SKU walls"]},
+    "P99": {"name": "ledger", "owns": ["audit", "completeness", "receipts"]}
+  },
+  "domains": [
+    "package_authority",
+    "governance_structure",
+    "founder_canon",
+    "automation",
+    "ssot_plane",
+    "cloud_kernel",
+    "mac_runtime",
+    "ledger",
+    "product_boundary",
+    "integrator",
+    "venture_routing",
+    "intake_thread"
+  ],
+  "status_transitions": {
+    "allowed": [
+      ["PROPOSED", "ACTIVE"],
+      ["PROPOSED", "ACTIVE_AMENDMENT"],
+      ["ACTIVE", "ACTIVE_AMENDMENT"],
+      ["ACTIVE_BASE", "ACTIVE_AMENDMENT"],
+      ["ACTIVE", "ACTIVE_BASE"],
+      ["ACTIVE_AMENDMENT", "ACTIVE"],
+      ["ACTIVE", "SUPERSEDED"],
+      ["ACTIVE_AMENDMENT", "SUPERSEDED"],
+      ["ACTIVE_BASE", "SUPERSEDED"]
+    ],
+    "forbidden_labels_on_live_base": ["superseded as default", "ignore older rule"]
+  },
+  "machines": [
+    {"machine_id": "governance_intelligence_engine", "script": "scripts/governance_intelligence_engine_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_registry_ops", "script": "scripts/governance_registry_ops_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_thread_intelligence", "script": "scripts/governance_thread_intelligence_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_intake_path_intelligence", "script": "scripts/governance_intake_path_intelligence_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_narrative_intelligence", "script": "scripts/governance_narrative_intelligence_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_merge_engine", "script": "scripts/governance_merge_engine_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_intake_sink", "script": "scripts/governance_intake_sink_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_promote_intake_drafts", "script": "scripts/governance_promote_intake_drafts_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_promote_tag_drafts", "script": "scripts/governance_promote_tag_drafts_v1.py", "layer": "P0", "domain": "governance_structure", "note": "deprecated alias"},
+    {"machine_id": "governance_promote_library_drafts", "script": "scripts/governance_promote_library_drafts_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "governance_promote_intake_artifacts", "script": "scripts/governance_promote_intake_artifacts_v1.py", "layer": "P0", "domain": "governance_structure"},
+    {"machine_id": "validate_governance_intelligence", "script": "scripts/validate_governance_intelligence_v1.py", "layer": "P99", "domain": "governance_structure"},
+    {"machine_id": "validate_registry_structure", "script": "scripts/validate_registry_structure_v1.py", "layer": "P99", "domain": "governance_structure"},
+    {"machine_id": "validate_intake_coherence", "script": "scripts/validate_intake_coherence_v1.py", "layer": "P99", "domain": "governance_structure"},
+    {"machine_id": "noos_check_cost_policy", "script": "packages/noos-control-desk-v1/scripts/check_cost_policy.py", "layer": "P8", "domain": "automation", "package_id": "noos-control-desk-v1"}
+  ],
+  "packages": {
+    "noos-control-desk-v1": {
+      "authority_doc": "ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md",
+      "map_json": "data/noos_control_desk_package_map_v1.json",
+      "install_root": "packages/noos-control-desk-v1",
+      "status": "SCAFFOLD_READY_AUDIT_PENDING",
+      "primary_layers": ["P8", "P3", "P2", "P99", "P7"],
+      "rollout_order": ["sina-governance-ssot", "noetfeld-os", "SourceA", "Noetfield", "TrustField-Technologies"]
+    }
+  },
+  "daily_ops": {
+    "list_rules": "registry list",
+    "show_rule": "registry show --id <artifact_id>",
+    "add_rule": "registry add --spec <json>",
+    "amend_rule": "registry amend --id <id> --amends <target>",
+    "retire_rule": "registry retire --id <id> --reason <text>",
+    "list_threads": "thread list",
+    "register_thread": "thread register --thread-id <id> --from-staging",
+    "retire_thread": "thread retire --thread-id <id> --reason <text>",
+    "structure_tree": "structure-tree --json",
+    "strict_validate": "validate_registry_structure_v1.py"
+  }
+}

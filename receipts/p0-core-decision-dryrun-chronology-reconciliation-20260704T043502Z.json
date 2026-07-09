@@ -1,0 +1,106 @@
+{
+  "schema": "p0-core-decision-receipt-v1",
+  "action": "p0_core_decision_invocation",
+  "repo": "sina-governance-ssot",
+  "dry_run": true,
+  "timestamp": "2026-07-04T04:35:02Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "contract_id": "p0-core-decision-use-contract-v1",
+  "contract_path": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+  "invoking_actor": "high_decision_agent",
+  "case_id": "founder-judgment-chronology-reconciliation-historical",
+  "historical_note": "Dry-run replay of already-decided case; does not create Pattern 11 or mutate P0 CORE",
+  "input": {
+    "case_id": "founder-judgment-chronology-reconciliation-historical",
+    "invoking_actor": "high_decision_agent",
+    "decision_question": "Did negative-proof run before ACTIVE registration, or is the apparent receipt-order inversion a labeling defect?",
+    "lower_tier_facts": [
+      "Registry ACTIVE receipt filename suffix 052100Z embeds 05:21:00Z",
+      "Negative-proof receipt filename suffix 042325Z embeds 04:23:25Z",
+      "Filesystem mtime: registry receipt 04:21:37Z, negative-proof 04:23:25Z",
+      "Negative-proof read live registry JSON with status ACTIVE at execution time",
+      "verify_p0_core_read_scope_gate_v1.py ALL PASS on rerun"
+    ],
+    "conflicting_rules": [
+      "lexicographic receipt filename sort implies negative-proof before registry",
+      "filesystem write order implies registry before negative-proof"
+    ],
+    "available_receipts": [
+      "receipts/founder-judgment-patterns-v1-registry-20260704T052100Z.json",
+      "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042325Z.json",
+      "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042435Z.json",
+      "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json",
+      "receipts/founder-judgment-patterns-v1-milestone-lock-20260704T042656Z.json"
+    ],
+    "proposed_options": [
+      {
+        "option_id": "A",
+        "description": "Treat as receipt-order defect; invalidate negative-proof and re-register",
+        "risks": ["unnecessary rework", "silent history rewrite"]
+      },
+      {
+        "option_id": "B",
+        "description": "Treat as registry receipt timestamp-labeling error; preserve history, write reconciliation receipt, rerun negative-proof post-ACTIVE",
+        "risks": ["audit chain confusion if not documented"]
+      },
+      {
+        "option_id": "C",
+        "description": "Ignore and proceed without reconciliation",
+        "risks": ["weak audit chain", "future filename-sort misreads"]
+      }
+    ],
+    "invocation_triggers": [
+      "authority_registry_dispute",
+      "novel_case"
+    ]
+  },
+  "output": {
+    "decision": "Option B — filename timestamp-labeling error on registry receipt; not a receipt-order defect",
+    "matched_patterns": [
+      "PATTERN 4 — Negative Proof",
+      "PATTERN 9 — Authority from Registry, Not Existence"
+    ],
+    "reasoning_summary": "Apply negative proof: try to prove negative-proof ran before ACTIVE registration. Filesystem mtime order refutes that; registry JSON was ACTIVE at negative-proof runtime. Filename embedded timestamps on registry receipt are ~1h ahead of actual write — a labeling error, not execution order. Authority comes from registry + receipt chain, not filename sort alone. Preserve original receipts; add reconciliation receipt; rerun negative-proof for clean audit ladder.",
+    "chosen_next_action": "Write chronology reconciliation receipt; rerun verify_p0_core_read_scope_gate_v1.py; link receipts in registry audit chain — already executed in live case",
+    "stop_continue_verdict": "CONTINUE",
+    "required_gate_or_receipt": "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json + post-ACTIVE negative-proof rerun receipt",
+    "harvest_proposed": false,
+    "harvest_note": "Case already maps to Patterns 4 and 9; no new pattern warranted"
+  },
+  "matched_patterns": [
+    "PATTERN 4 — Negative Proof",
+    "PATTERN 9 — Authority from Registry, Not Existence"
+  ],
+  "harvest_proposed": false,
+  "dry_run_validation": {
+    "expected_patterns": ["PATTERN 4 — Negative Proof", "PATTERN 9 — Authority from Registry, Not Existence"],
+    "actual_patterns": ["PATTERN 4 — Negative Proof", "PATTERN 9 — Authority from Registry, Not Existence"],
+    "pattern_match_verdict": "PASS",
+    "pattern_11_created": false,
+    "worker_prompt_receives_p0_reasoning": false,
+    "soup_wall_gate": "scripts/verify_p0_core_output_soup_wall_gate_v1.py",
+    "soup_wall_verdict": "PASS — leaked bundle BLOCKED, clean task-spec ALLOWED",
+    "verdict": "ALL_PASS"
+  },
+  "worker_task_spec_example_allowed": {
+    "goal": "Write chronology reconciliation receipt and link audit chain",
+    "decision_verdict": "CONTINUE — labeling error only; preserve history",
+    "files": ["data/governance_artifact_registry_v1.json"],
+    "constraints": ["preserve original receipts", "no P0 CORE edits"],
+    "done_criteria": ["reconciliation receipt on disk"],
+    "verify_method": "python3 scripts/verify_p0_core_read_scope_gate_v1.py",
+    "receipts_required": ["receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json"]
+  },
+  "live_authority": false,
+  "machine_recommendation": "Historical decision replay confirms Option B; audit chain closed",
+  "required_sg_action": "none — case already decided; contract dry-run for calibration only",
+  "registry_status": "founder-judgment-patterns-v1 ACTIVE",
+  "receipt_path": "receipts/p0-core-decision-dryrun-chronology-reconciliation-20260704T043502Z.json",
+  "policy_pass": true,
+  "sg_did_not": [
+    "edit_p0_core_file",
+    "modify_worker_prompts",
+    "create_pattern_11",
+    "promote_contract_to_active_without_registry_receipt"
+  ]
+}

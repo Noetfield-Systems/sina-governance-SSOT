@@ -1,0 +1,104 @@
+{
+  "action": "founder_judgment_patterns_negative_proof",
+  "repo": "sina-governance-ssot",
+  "timestamp": "2026-07-04T04:24:35Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "read_scope_path": "data/founder_judgment_patterns_read_scope_v1.json",
+  "registry_status": "ACTIVE",
+  "prerequisite_registry_receipt": "receipts/founder-judgment-patterns-v1-registry-20260704T052100Z.json",
+  "chronology_reconciliation": "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json",
+  "supersedes_for_audit_chain": "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042325Z.json",
+  "rerun_reason": "post-ACTIVE confirmation with reconciled chronology",
+  "verification_result": "PASS",
+  "policy_pass": true,
+  "disposable_dispatch": {
+    "dispatch_id": "disposable-negative-proof-tier1-worker",
+    "reader_id": "tier_1_worker",
+    "tier": "tier_1",
+    "role": "policy_checker_worker",
+    "law_bundle": [
+      "gov-structure-authority-v1",
+      "founder-judgment-patterns-v1",
+      "FOUNDER_JUDGMENT_PATTERNS_v1.md"
+    ],
+    "note": "disposable test only \u2014 never executed"
+  },
+  "attempted_forbidden_reader": "tier_1_worker",
+  "expected_result": "BLOCK",
+  "actual_result": "BLOCK",
+  "block_reason": "BLOCKED_WITH_REASON \u2014 request re-scope to Base Brain or high decision agent",
+  "allowed_reader_controls": [
+    {
+      "reader": "base_live_brain",
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "pass": true
+    },
+    {
+      "reader": "high_decision_agent",
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "pass": true
+    }
+  ],
+  "all_tests": [
+    {
+      "name": "forbidden_tier1_worker_by_artifact_id",
+      "reader_id": "tier_1_worker",
+      "tier": "tier_1",
+      "law_bundle": [
+        "gov-structure-authority-v1",
+        "founder-judgment-patterns-v1"
+      ],
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "blocked": true,
+      "reason": "BLOCKED_WITH_REASON \u2014 request re-scope to Base Brain or high decision agent",
+      "pass": true
+    },
+    {
+      "name": "forbidden_tier1_worker_by_filename",
+      "reader_id": "normal_worker",
+      "tier": "tier_1",
+      "law_bundle": [
+        "skill-foundational-agentic-systems",
+        "FOUNDER_JUDGMENT_PATTERNS_v1.md"
+      ],
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "blocked": true,
+      "reason": "BLOCKED_WITH_REASON \u2014 request re-scope to Base Brain or high decision agent",
+      "pass": true
+    },
+    {
+      "name": "allowed_base_live_brain",
+      "reader_id": "base_live_brain",
+      "tier": "tier_0",
+      "law_bundle": [
+        "founder-judgment-patterns-v1"
+      ],
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "blocked": false,
+      "reason": "reader base_live_brain in allowed_readers for P0 CORE",
+      "pass": true
+    },
+    {
+      "name": "allowed_high_decision_agent",
+      "reader_id": "high_decision_agent",
+      "tier": "tier_0",
+      "law_bundle": [
+        "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md"
+      ],
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "blocked": false,
+      "reason": "reader high_decision_agent in allowed_readers for P0 CORE",
+      "pass": true
+    }
+  ],
+  "sg_did_not": [
+    "edit_p0_core_file",
+    "modify_worker_prompts"
+  ]
+}

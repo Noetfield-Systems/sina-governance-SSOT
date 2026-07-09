@@ -1,0 +1,162 @@
+{
+  "schema": "governance-intelligence-receipt-v1",
+  "receipt_id": "governance-intelligence-20260704T043341Z",
+  "recorded_at": "2026-07-04T04:33:41Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "command": "audit-selection",
+  "ok": true,
+  "result": {
+    "schema": "governance-final-version-audit-v1",
+    "audited_at": "2026-07-04T04:33:41Z",
+    "canon_version": "founder_canon_v1.0.0",
+    "rubric": "data/governance_completeness_rubric_v1.json",
+    "selected_count": 2,
+    "cluster_count": 1,
+    "domain_filter": null,
+    "cluster_by": "thread",
+    "clusters": [
+      {
+        "cluster_id": "copilot_automation_cost_profile_locked",
+        "domain": "automation",
+        "layer": "P0",
+        "candidate_count": 2,
+        "candidates": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+            "artifact_id": null,
+            "thread_role": "spec",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 15,
+            "completeness_score": 70,
+            "authority_rank": 5
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+            "artifact_id": null,
+            "thread_role": "duplicate_copy",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 0,
+            "completeness_score": 70,
+            "authority_rank": 5
+          }
+        ],
+        "decision": {
+          "deterministic_rank_order": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "domain": "automation",
+              "layer": "P0",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 15,
+              "completeness_score": 70,
+              "saved_at": "2026-07-03T22:07:46Z"
+            },
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "domain": "automation",
+              "layer": "P3",
+              "status": "ACTIVE_AMENDMENT",
+              "authority_rank": 5,
+              "progress_score": 0,
+              "completeness_score": 70,
+              "saved_at": "2026-07-04T00:01:50Z"
+            }
+          ],
+          "primary_final": {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+            "artifact_id": null,
+            "domain": "automation",
+            "layer": "P0",
+            "status": "ACTIVE_AMENDMENT",
+            "progress_score": 15,
+            "completeness_score": 70,
+            "reason": "best deterministic tuple: authority_rank, progress, completeness, date, filename_version, body_version, status, registry"
+          },
+          "amendment_finals": [
+            {
+              "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "role": "amendment_final",
+              "reason": "newer amendment carrier; wins only on direct conflict"
+            }
+          ],
+          "base_retain": [],
+          "void_or_pointer_only": [],
+          "section_merge_plan": [
+            {
+              "action": "adopt_section_into_primary",
+              "section": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 34 > primary 24 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "2. Effort Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 24 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "3. Trigger Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 24 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "adopt_section_into_primary",
+              "section": "4. Mode Lock",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "section_score 34 > primary 0 + margin 5",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "5. Workflow Classes (Copilot-specific settings only \u2014 see Level 1 for class ownership/engine)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "6. NOOS Integrator Sync Rule (Copilot's role in it)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 34 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "8. Automation Inventory Requirement (feeds Level 1's `last_audited` field)",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            },
+            {
+              "action": "add_section_to_primary",
+              "section": "10. UI Checklist for Every Copilot Automation",
+              "from_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+              "over_target_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+              "reason": "unique section score 28 >= 15",
+              "conflict_review_required": false
+            }
+          ],
+          "registry_actions": [
+            "Set primary_final as ACTIVE carrier in governance_artifact_registry_v1.json",
+            "Set amendment_finals as ACTIVE_AMENDMENT rows with amends=[primary artifact_id]",
+            "Set base_retain as ACTIVE_BASE rows; never label superseded",
+            "Apply section_merge_plan edits in SG repo only"
+          ]
+        }
+      }
+    ],
+    "ok": true
+  }
+}

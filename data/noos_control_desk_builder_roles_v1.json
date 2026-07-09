@@ -1,0 +1,320 @@
+{
+  "schema": "noos_control_desk_builder_roles_v1",
+  "version": "1.1.0",
+  "saved_at": "2026-07-04T05:38:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "authority_doc": "ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md",
+  "architect_status": "FINISHED_RETIRED_FOR_BUILD_PHASE",
+  "primary_builder": "cursor",
+  "primary_repo": "sina-governance-ssot",
+  "package_steps": {
+    "completed": [1, 2, 3, 4, 5, 6, 7],
+    "remaining": [8, 9, 10],
+    "canonical": [
+      {"step": 1, "name": "Policy Checker Agent", "status": "done"},
+      {"step": 2, "name": "Backend Builder", "status": "done"},
+      {"step": 3, "name": "Frontend Builder", "status": "done", "proof": "11/11 smoke PASS"},
+      {"step": 4, "name": "Integrator / NOOS Copilot", "status": "accepted", "proof": "13/13 PASS"},
+      {"step": 5, "name": "NOOS Sync Mode Patch", "status": "complete_recorded", "proof": "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json"},
+      {"step": 6, "name": "Machine-Enforceable Repo Fences", "status": "COMPLETE_PHASE_1"},
+      {"step": 7, "name": "Real 23-Workflow Audit", "status": "COMPLETE_HONEST_BLOCKED", "proof": "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json", "substeps": {"7B": "ACCEPTED", "7C": "ACCEPTED", "7D": "COMPLETE", "7E": "COMPLETE", "7F-A": "COMPLETE", "7F-B": "PARTIAL_EVIDENCE_RECEIVED"}, "fb_partial_evidence_receipt": "receipts/sg-record-step7fb-partial-ui-evidence-20260704T053800Z.json"},
+      {"step": 8, "name": "Policy Check", "status": "blocked_pending_7D_7E_7F"},
+      {"step": 9, "name": "Lock Candidate", "status": "blocked"},
+      {"step": 10, "name": "SG Records Result", "status": "pending"}
+    ]
+  },
+  "package_qa": {
+    "note": "Optional gates — not canonical package steps",
+    "items": [
+      {"id": "QA-A", "name": "negative tests", "tool": "cursor+gha"},
+      {"id": "QA-B", "name": "auditor pass", "tool": "cursor_chat"},
+      {"id": "QA-C", "name": "packager receipt", "tool": "cursor"}
+    ]
+  },
+  "build_order": [
+    "policy_checker",
+    "backend_builder",
+    "frontend_builder",
+    "integrator_agent",
+    "noos_sync_mode_patch",
+    "repo_fences",
+    "workflow_audit_23",
+    "policy_check",
+    "lock_candidate",
+    "sg_records_result"
+  ],
+  "tool_law": {
+    "cursor": "main multi-file builder — FastAPI, React/Vite, tests, checker, packaging",
+    "copilot": "bounded manual helper only — GPT-5 mini, Low, Manual; never autorun or architect",
+    "noos_copilot": "P2 cross-repo sync dispatcher — integrator status/sync + receipts only; see data/noos_copilot_dispatcher_v1.json",
+    "github_actions": "verifier/gate — model:none recurring automation",
+    "cloudflare": "deferred — Phase 3/4 control plane only"
+  },
+  "roles": [
+    {
+      "role_id": "architect_spec_keeper",
+      "status": "RETIRED_BUILD_PHASE",
+      "tool": null,
+      "repo": null,
+      "note": "Package + layer map complete; no new architecture in build phase"
+    },
+    {
+      "role_id": "policy_checker_agent",
+      "status": "COMPLETE_STEP_1",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "deliverables": [
+        "packages/noos-control-desk-v1/scripts/check_cost_policy.py",
+        "packages/noos-control-desk-v1/tests/run_negative_tests.py",
+        "packages/noos-control-desk-v1/.noos/workflow_registry_v1.json"
+      ],
+      "gh_actions": ["cost-policy scan", "registry validation"],
+      "package_qa": "QA-A"
+    },
+    {
+      "role_id": "backend_builder",
+      "status": "COMPLETE_STEP_2",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "deliverables": [
+        "packages/noos-control-desk-v1/control-desk/backend/handler.py",
+        "packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py"
+      ],
+      "api_contract": "data/noos_control_desk_api_contract_v1.json",
+      "routes": [
+        "GET /api/dashboard",
+        "GET /api/registry/load",
+        "POST /api/registry/save-draft",
+        "POST /api/attestation/save",
+        "POST /api/policy/check",
+        "GET /api/integrator/status",
+        "POST /api/integrator/sync",
+        "GET /api/receipts/list",
+        "GET /api/pr/prepare",
+        "POST /api/lock-candidate/submit"
+      ],
+      "handoff": "packages/noos-control-desk-v1/HANDOFF_BACKEND_BUILDER_v1.md",
+      "phase_1_integrator": {
+        "repo_local_sync": true,
+        "home_mirror_readout": true,
+        "cloud_mirror_readout_read_only": true,
+        "cloud_write_unrestricted_allowed": false,
+        "gate": "scope-gated cloud writes per noos_copilot_dispatcher_v1"
+      }
+    },
+    {
+      "role_id": "frontend_builder",
+      "status": "COMPLETE_STEP_3",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "deliverables": [
+        "packages/noos-control-desk-v1/control-desk/static/index.html",
+        "packages/noos-control-desk-v1/control-desk/frontend/"
+      ],
+      "pages": ["Dashboard", "Workflow Registry", "Copilot UI Attestation", "Policy Validator", "NOOS Integrator Sync", "Receipts", "PR Prep"],
+      "handoff": "packages/noos-control-desk-v1/HANDOFF_FRONTEND_BUILDER_v1.md",
+      "proof": "11/11 smoke PASS"
+    },
+    {
+      "role_id": "noos_copilot_dispatcher",
+      "display_name": "NOOS Copilot",
+      "status": "ACTIVE",
+      "layer": "P2",
+      "tool": "control_desk_api",
+      "package_step": 4,
+      "repos": [
+        "sina-governance-ssot",
+        "noetfeld-os",
+        "SourceA",
+        "Noetfield",
+        "TrustField-Technologies"
+      ],
+      "authority": "data/noos_copilot_dispatcher_v1.json",
+      "allowed": ["GET /api/integrator/status", "POST /api/integrator/sync", "GET /api/receipts/list"],
+      "forbidden": [
+        "fleet rollout",
+        "ACTIVE promotion",
+        "direct main write",
+        "policy/law mutation",
+        "audit-pending registry propagation",
+        "cloud_write_unrestricted",
+        "recurring Copilot automation"
+      ],
+      "cloud_write_scope_gate": "data/noos_copilot_dispatcher_v1.json#cloud_write_scope_gate",
+      "step_4_verifier": "ACCEPTED 13/13",
+      "receipt": "packages/noos-control-desk-v1/receipts/integrator_step4_verifier_v1.json",
+      "next_package_step": 8,
+      "next_package_step_blocked": true,
+      "next_package_step_blocker": "step_7F_copilot_backend_reattestation_and_branch_only_main"
+    },
+    {
+      "role_id": "integrator_agent",
+      "status": "ACCEPTED_STEP_4",
+      "tool": "cursor",
+      "repos": ["noetfeld-os", "sina-governance-ssot"],
+      "deliverables": [
+        "noetfeld-os/scripts/noos_integrator_sync_v1.py",
+        "packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py"
+      ],
+      "dispatcher_role": "noos_copilot_dispatcher",
+      "verifier": "13/13 PASS",
+      "receipt": "packages/noos-control-desk-v1/receipts/integrator_step4_verifier_v1.json",
+      "note": "Step 4 complete — NOOS Copilot recorded as P2 dispatcher"
+    },
+    {
+      "role_id": "noos_sync_mode_patch",
+      "status": "COMPLETE_RECORDED_STEP_5",
+      "tool": "noos",
+      "repos": ["noetfeld-os", "sina-governance-ssot"],
+      "scope": "P2 integrator sync mode-gated patch — NOOS owns behavior; SG pointers only",
+      "receipt": "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json",
+      "pointers": [
+        "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+        "data/noos-copilot-dispatcher-mode-v1.json",
+        "data/noos-integrator-role-v1.json"
+      ]
+    },
+    {
+      "role_id": "repo_fences",
+      "status": "COMPLETE_PHASE_1_STEP_6",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "scope": "Phase 1 SG repo fences — CODEOWNERS + CI checker; fleet rollout deferred",
+      "receipt": "receipts/sg-record-step6-repo-fences-20260704T044500Z.json",
+      "pointers": [
+        ".github/CODEOWNERS",
+        "policy/repo_fences_v1.yaml",
+        "scripts/check_repo_fences_v1.py",
+        ".github/workflows/repo-fences-v1.yml"
+      ]
+    },
+    {
+      "role_id": "workflow_audit_23",
+      "status": "COMPLETE_HONEST_BLOCKED_STEP_7",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "scope": "real observed-reality audit for 23 workflows — no fake last_audited",
+      "receipt": "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json",
+      "acceptance_receipt": "receipts/sg-record-step7bc-accepted-20260704T045600Z.json",
+      "de_receipt": "receipts/sg-record-step7de-complete-20260704T045800Z.json",
+      "fb_receipt": "receipts/sg-record-step7fb-unresolved-20260704T051000Z.json",
+      "fb_partial_receipt": "receipts/sg-record-step7fb-partial-ui-20260704T053700Z.json",
+      "fb_partial_evidence_receipt": "receipts/sg-record-step7fb-partial-ui-evidence-20260704T053800Z.json",
+      "substeps_accepted": {
+        "7B_verdict_patch": "ACCEPTED",
+        "7C_registry_drift_review": "ACCEPTED"
+      },
+      "substeps_complete": {
+        "7D_registry_drift_patch": "COMPLETE",
+        "7E_repost_attestations": "COMPLETE"
+      },
+      "draft_verdict_summary": {
+        "pass_count": 22,
+        "fail_count": 0,
+        "blocked_count": 1,
+        "todo_count": 0,
+        "blocked_ids": ["trustfield_copilot_cloud_agent"]
+      },
+      "branch_only_notes_unresolved": [
+        "ssot_agentic_ci",
+        "noos_cost_policy_scan"
+      ],
+      "copilot_agent_resolution": {
+        "workflow_id": "trustfield_copilot_cloud_agent",
+        "substep": "7F-B",
+        "status": "PARTIAL_EVIDENCE_RECEIVED",
+        "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+        "draft_verdict": "BLOCKED",
+        "pass_not_granted": true,
+        "sanitized_receipt": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+        "tracked_pointer": "reports/trustfield-copilot-ui-attestation-pointer-v1.json",
+        "raw_receipt": {
+          "repo": "TrustField-Technologies",
+          "path": "reports/improvement-receipt-v2.jsonl",
+          "gitignored": true,
+          "committed": false
+        },
+        "remaining_gap": "Control Desk re-attestation or accepted tracked sanitized receipt"
+      },
+      "substeps_7f": {
+        "7F-A_branch_surface_verifier": {
+          "status": "COMPLETE",
+          "receipt": "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json"
+        },
+        "7F-B_copilot_agent_resolution": {
+          "status": "PARTIAL_EVIDENCE_RECEIVED",
+          "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+          "receipt": "packages/noos-control-desk-v1/receipts/step7f_b_copilot_ui_partial_2026-07-04.json"
+        }
+      },
+      "next_required_evidence": [
+        "Control Desk re-attestation or accepted tracked sanitized receipt for trustfield_copilot_cloud_agent"
+      ],
+      "next_substeps": [],
+      "lock_candidate": "BLOCKED"
+    },
+    {
+      "role_id": "policy_check_step",
+      "status": "BLOCKED",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "scope": "aggregate checker PASS before lock candidate — blocked until 7F complete (22/23 PASS; 1 BLOCKED)"
+    },
+    {
+      "role_id": "lock_candidate_step",
+      "status": "BLOCKED",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "scope": "checker + receipt + bounded branch — no direct main"
+    },
+    {
+      "role_id": "sg_records_result",
+      "status": "PENDING_STEP_10",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "scope": "registry update + receipt proof in SG"
+    },
+    {
+      "role_id": "negative_test_agent",
+      "status": "QA_A_OPTIONAL",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "gh_actions": ["negative test workflow model:none"],
+      "package_qa": "QA-A"
+    },
+    {
+      "role_id": "critic_auditor",
+      "status": "QA_B_OPTIONAL",
+      "tool": "cursor_chat",
+      "repos": ["all_outputs"],
+      "note": "Not a code writer — reviews leaks, fake audit, direct main, prompt contamination",
+      "package_qa": "QA-B"
+    },
+    {
+      "role_id": "packager",
+      "status": "QA_C_OPTIONAL",
+      "tool": "cursor",
+      "repos": ["sina-governance-ssot"],
+      "deliverables": ["README.md", "INSTALL.md", "RUN_LOCAL.md", "delivery_receipt.json"],
+      "package_qa": "QA-C"
+    }
+  ],
+  "api_contract": "data/noos_control_desk_api_contract_v1.json",
+  "canonical_routes_phase_1": [
+    "GET /api/dashboard",
+    "GET /api/registry/load",
+    "POST /api/registry/save-draft",
+    "POST /api/attestation/save",
+    "POST /api/policy/check",
+    "GET /api/integrator/status",
+    "POST /api/integrator/sync",
+    "GET /api/receipts/list",
+    "GET /api/pr/prepare",
+    "POST /api/lock-candidate/submit"
+  ],
+  "rollout_targets_not_build_repos": [
+    {"repo": "SourceA", "phase": "registry_audit_after_mvp"},
+    {"repo": "Noetfield", "phase": "workflow_inventory_rollout"},
+    {"repo": "TrustField-Technologies", "phase": "high_risk_rollout_last"}
+  ]
+}

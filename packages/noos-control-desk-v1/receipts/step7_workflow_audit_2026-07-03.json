@@ -1,0 +1,509 @@
+{
+  "action": "step7_workflow_audit_23",
+  "repo": "sina-governance-SSOT",
+  "package": "noos-control-desk-v1",
+  "step": 7,
+  "timestamp": "2026-07-04T03:38:11.988188+00:00",
+  "policy_pass": false,
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [
+    "python3 scripts/run_step7_workflow_audit_v1.py (via http://127.0.0.1:17877/api/attestation/save x23)"
+  ],
+  "errors": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "ssot_security_risk_assessment",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "ssot_brain_loop_autorun_v1",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "ssot_cost_policy_receipt_validation",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noos_factory_autorun",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noos_loop_health_checks",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noos_cross_repo_health",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "sourcea_validate_boot",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "sourcea_repo_policy_gate",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "sourcea_determinism_gate",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "sourcea_deploy_buyer_surfaces_v1",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noetfield_governance_console_e2e",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noetfield_www_ci",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noetfield_platform_ci",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "noetfield_trust_ledger_ci",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "trustfield_ci",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "trustfield_deploy_vercel",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "trustfield_e2e_production_smoke",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ]
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'unknown' is not recognized as allowed or forbidden - unknown model.",
+        "observed_effort 'unknown' is forbidden by default."
+      ]
+    },
+    {
+      "workflow_id": null,
+      "kind": "surface_drift",
+      "detail": "noetfield_supabase_heartbeat registry owner cloudflare_worker vs GHA supabase-heartbeat.yml"
+    },
+    {
+      "workflow_id": null,
+      "kind": "surface_drift",
+      "detail": "trustfield_autorun_24_7_health registry owner cloudflare_worker vs GHA autorun-health.yml"
+    },
+    {
+      "workflow_id": null,
+      "kind": "branch_gap",
+      "detail": "ssot_agentic_ci + noos_cost_policy_scan workflow YAML not on main branch"
+    },
+    {
+      "workflow_id": null,
+      "kind": "backend_gap",
+      "detail": "verdict.py does not recognize observed_model=model:none for deterministic surfaces (BLOCKED)"
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "kind": "copilot_ui_unread",
+      "detail": "Copilot Automations UI / dynamic copilot workflow settings not machine-readable"
+    }
+  ],
+  "summary": {
+    "total": 23,
+    "pass_count": 0,
+    "fail_count": 0,
+    "blocked_count": 23,
+    "todo_count": 0,
+    "pass_ids": [],
+    "fail_ids": [],
+    "blocked_ids": [
+      "ssot_agentic_ci",
+      "ssot_security_risk_assessment",
+      "ssot_brain_loop_autorun_v1",
+      "ssot_cost_policy_receipt_validation",
+      "noos_cost_policy_scan",
+      "noos_factory_autorun",
+      "noos_loop_health_checks",
+      "noos_cross_repo_health",
+      "sourcea_validate_boot",
+      "sourcea_repo_policy_gate",
+      "sourcea_external_verify",
+      "sourcea_determinism_gate",
+      "sourcea_deploy_buyer_surfaces_v1",
+      "noetfield_governance_console_e2e",
+      "noetfield_www_ci",
+      "noetfield_platform_ci",
+      "noetfield_supabase_heartbeat",
+      "noetfield_trust_ledger_ci",
+      "trustfield_autorun_24_7_health",
+      "trustfield_ci",
+      "trustfield_deploy_vercel",
+      "trustfield_e2e_production_smoke",
+      "trustfield_copilot_cloud_agent"
+    ],
+    "ready_for_lock_candidate": false
+  },
+  "dashboard": {
+    "registry_entries": 23,
+    "pass_count": 0,
+    "fail_count": 0,
+    "blocked_count": 23,
+    "todo_count": 0,
+    "ready_for_lock_candidate": false,
+    "git": {
+      "is_git_repo": false,
+      "message": "Not a git repository - branch/commit flow unavailable until this is a real repo."
+    }
+  },
+  "attestation_results": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_ssot_agentic_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "ssot_security_risk_assessment",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_ssot_security_risk_assessment_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "ssot_brain_loop_autorun_v1",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_ssot_brain_loop_autorun_v1_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "ssot_cost_policy_receipt_validation",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_ssot_cost_policy_receipt_validation_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noos_cost_policy_scan_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noos_factory_autorun",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noos_factory_autorun_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noos_loop_health_checks",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noos_loop_health_checks_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noos_cross_repo_health",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noos_cross_repo_health_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "sourcea_validate_boot",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_sourcea_validate_boot_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "sourcea_repo_policy_gate",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_sourcea_repo_policy_gate_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "sourcea_external_verify",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_sourcea_external_verify_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "sourcea_determinism_gate",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_sourcea_determinism_gate_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "sourcea_deploy_buyer_surfaces_v1",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_sourcea_deploy_buyer_surfaces_v1_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noetfield_governance_console_e2e",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noetfield_governance_console_e2e_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noetfield_www_ci",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noetfield_www_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noetfield_platform_ci",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noetfield_platform_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noetfield_supabase_heartbeat",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noetfield_supabase_heartbeat_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "noetfield_trust_ledger_ci",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_noetfield_trust_ledger_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "trustfield_autorun_24_7_health",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_trustfield_autorun_24_7_health_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "trustfield_ci",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_trustfield_ci_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "trustfield_deploy_vercel",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_trustfield_deploy_vercel_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "trustfield_e2e_production_smoke",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'model:none' is not recognized as allowed or forbidden - unknown model."
+      ],
+      "receipt": "receipts/draft_save_trustfield_e2e_production_smoke_2026-07-03.json",
+      "error": null
+    },
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "http_status": 200,
+      "saved": true,
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'unknown' is not recognized as allowed or forbidden - unknown model.",
+        "observed_effort 'unknown' is forbidden by default."
+      ],
+      "receipt": "receipts/draft_save_trustfield_copilot_cloud_agent_2026-07-03.json",
+      "error": null
+    }
+  ],
+  "next_machine_action": "Step 8 policy check \u2014 do not submit lock candidate until all 23 PASS (backend may need model:none recognition for deterministic workflows).",
+  "package_status": "SCAFFOLD_READY_AUDIT_PENDING",
+  "active_promotion": false
+}

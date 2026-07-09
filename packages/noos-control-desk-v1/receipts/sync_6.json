@@ -1,0 +1,22 @@
+{
+  "action": "noos_integrator_sync",
+  "summary": {
+    "repo_local": "fresh",
+    "repo_local_age_hours": 0.0,
+    "home_mirror": "synced",
+    "home_mirror_age_hours": 4.12,
+    "home_mirror_path": "/Users/sinakazemnezhad/.sina/noos-integrator-state-v1.json",
+    "cloud_mirror": {
+      "status": "unconfigured",
+      "path": null,
+      "last_seen": null,
+      "age_hours": null,
+      "cloud_write_allowed": false
+    },
+    "cloud_write_allowed": false,
+    "cross_ide_ready": true,
+    "sync_count": 6,
+    "gate_note": "No cloud write/propagation until validator PASS + receipt + bounded PR path."
+  },
+  "cloud_write_allowed": false
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "governance-registry-ops-receipt-v1",
+  "receipt_id": "governance-registry-ops-20260704T020129Z",
+  "recorded_at": "2026-07-04T02:01:29Z",
+  "command": "registry-retire",
+  "ok": true,
+  "result": {
+    "artifact_id": "sina-os-ssot-locked-1",
+    "reason": "false positive from broad LOCKED scan \u2014 not intake target",
+    "ok": true
+  }
+}

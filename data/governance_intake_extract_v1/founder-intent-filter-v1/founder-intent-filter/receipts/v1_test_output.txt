@@ -1,0 +1,8 @@
+✅ bad_founder_approval.md: expected FAIL (R1_no_founder_specific_approval), got FAIL
+✅ bad_manual_merge.md: expected FAIL (R5_evidence_based_merge_and_phase_unlock), got FAIL
+✅ bad_l5_normal_stage.md: expected FAIL (R4_L5_is_anomaly_only), got FAIL
+✅ bad_blocker_no_repair.md: expected FAIL (R3_denial_must_preserve_progress), got FAIL
+✅ bad_frozen_proof_target.md: expected FAIL (R7_frozen_proof_targets_not_hard_blockers), got FAIL
+✅ good_clean_policy.md: expected PASS, got PASS
+
+ALL PASS: 6/6 cases match spec.

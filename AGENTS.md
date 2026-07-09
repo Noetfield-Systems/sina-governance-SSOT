@@ -4,6 +4,9 @@
 **Registry:** `data/github_automation_registry_v1.json` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`  
 **Autonomy loops:** `ssot/MACHINE_AUTONOMY_LOOPS_v1.md` · `data/machine_autonomy_loops_v1.json`  
 **Founder canon:** `ssot/FOUNDER_CANON_v1.md` · `data/founder_canon_v1.json` (ACTIVE)
+**Structure/version authority:** `ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md` (ACTIVE)  
+**SG guard model:** SG registry = authority; library = asset surface; file existence = zero authority. Dispatch: Tier 0 + role + mission + gates only (`ssot/AGENT_LAYERED_LAW_AND_LEAST_KNOWLEDGE_SSOT_LOCKED_v1.md`).
+**Governance intelligence pipeline:** `ssot/GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md` · `data/governance_artifact_registry_v1.json` · `data/governance_review_queue_v1.json` · `scripts/governance_intelligence_engine_v1.py`
 **L0 repo graph memory (read before broad reads):** `graph-out/GRAPH_REPORT.md` · query: `python3 scripts/query_repo_graph_v1.py <term>` · design: `docs/L0_REPO_GRAPH_MEMORY_v1.md`
 
 ## Default operating mode
@@ -13,6 +16,8 @@
 **LAWS:** FOUNDER_CANON v1 + governed-autorun v3. Violations = `BLOCKED_WITH_REASON`.
 
 Do not route validation, review, repair, audit, or uncertainty to the founder. Use the eight loops (worker exec → machine valid → adversarial → self-repair → outside audit → deep research → receipt proof → earned autonomy). Founder triggers only: capital/legal, irreversible L5, phase unlock until receipt streaks retire them.
+
+Version law: existing rules stay live; newer versions are amendments and win only on direct conflict. `superseded` means not active for decisions and must not be used for a live base rule.
 
 Cycle orchestrator: `python3 scripts/run_machine_autonomy_cycle_v1.py`
 

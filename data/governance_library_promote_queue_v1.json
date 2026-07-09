@@ -1,0 +1,438 @@
+{
+  "schema": "governance_library_promote_queue_v1",
+  "saved_at": "2026-07-04T01:58:45Z",
+  "manifest": {
+    "schema": "governance-library-draft-manifest-v1",
+    "intake_root": "/Users/sinakazemnezhad/Downloads",
+    "canonical_library": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library",
+    "registry_pending": [
+      {
+        "kind": "registry_pending",
+        "artifact_id": "copilot-automation-cost-profile-v1",
+        "source_registry_path": "docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "library_target": "P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "deep-research-founder-intent-v1",
+        "source_registry_path": "docs/governance_drafts_tag_v1/deep-research-report.md",
+        "library_target": "P7-DOCTRINE/deep-research-founder-intent-v1.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/deep-research-report.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "founder-intent-filter-v1",
+        "source_registry_path": "docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+        "library_target": "P7-DOCTRINE/founder-intent-filter.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "source_registry_path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "source_registry_path": "docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+        "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "source_registry_path": "docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+        "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      },
+      {
+        "kind": "registry_pending",
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "source_registry_path": "docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "intake_source": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+        "already_in_library": false,
+        "awaiting_library_promote": true
+      }
+    ],
+    "upload_placeholders": [
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.__AWAITING_UPLOAD__.md",
+        "stem": "SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1",
+        "library_target": "P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md",
+        "resolved_source": null,
+        "already_in_library": true,
+        "awaiting_library_upload": false
+      },
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.__AWAITING_UPLOAD__.md",
+        "stem": "GOVERNED_AUTORUN_LAWS_v3",
+        "library_target": "P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md",
+        "resolved_source": null,
+        "already_in_library": true,
+        "awaiting_library_upload": false
+      },
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.__AWAITING_UPLOAD__.md",
+        "stem": "SOURCEA_SSOT_INDEX_LOCKED_v1",
+        "library_target": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+        "resolved_source": null,
+        "already_in_library": true,
+        "awaiting_library_upload": false
+      },
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.__AWAITING_UPLOAD__.md",
+        "stem": "SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1",
+        "library_target": "P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.md",
+        "resolved_source": null,
+        "already_in_library": true,
+        "awaiting_library_upload": false
+      },
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/strategy-ssot-v6-split.__AWAITING_UPLOAD__.md",
+        "stem": "strategy-ssot-v6-split",
+        "library_target": "P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md",
+        "resolved_source": "/Users/sinakazemnezhad/Downloads/strategy-ssot-v6-split.SUPERSEDED-see-staging-git.md",
+        "already_in_library": true,
+        "awaiting_library_upload": false
+      },
+      {
+        "kind": "upload_placeholder",
+        "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/supporting-law/__AWAITING_UPLOAD__.md",
+        "stem": "",
+        "library_target": null,
+        "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/deep-research-report.md",
+        "already_in_library": false,
+        "awaiting_library_upload": false
+      }
+    ],
+    "intake_library_copies": [
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library/01-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library/01-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "founder-intent-filter-v1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library/02-DOCTRINE/founder-intent-filter.md",
+        "library_target": "P7-DOCTRINE/founder-intent-filter.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library/00-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library/00-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "founder-intent-filter-v1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P7-DOCTRINE/founder-intent-filter.md",
+        "library_target": "P7-DOCTRINE/founder-intent-filter.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "founder-intent-filter-v1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 3/P7-DOCTRINE/founder-intent-filter.md",
+        "library_target": "P7-DOCTRINE/founder-intent-filter.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 3/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 3/P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 3/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 3/P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 2/01-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 2/01-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "founder-intent-filter-v1",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 2/02-DOCTRINE/founder-intent-filter.md",
+        "library_target": "P7-DOCTRINE/founder-intent-filter.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 2/00-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+        "already_in_registry": true
+      },
+      {
+        "kind": "intake_library_copy",
+        "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+        "source_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 2/00-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+        "already_in_registry": true
+      }
+    ],
+    "counts": {
+      "registry_pending": 7,
+      "upload_placeholders": 6,
+      "intake_library_copies": 20,
+      "awaiting_promote": 7,
+      "placeholder_gaps": 0
+    }
+  },
+  "actions": [
+    {
+      "artifact_id": "copilot-automation-cost-profile-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "library_target": "P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md"
+    },
+    {
+      "artifact_id": "deep-research-founder-intent-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/deep-research-report.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P7-DOCTRINE/deep-research-founder-intent-v1.md",
+      "library_target": "P7-DOCTRINE/deep-research-founder-intent-v1.md"
+    },
+    {
+      "artifact_id": "founder-intent-filter-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P7-DOCTRINE/founder-intent-filter.md",
+      "library_target": "P7-DOCTRINE/founder-intent-filter.md"
+    },
+    {
+      "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+      "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md"
+    },
+    {
+      "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+      "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md"
+    },
+    {
+      "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+      "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md"
+    },
+    {
+      "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+      "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md"
+    }
+  ],
+  "promoted": [
+    {
+      "artifact_id": "copilot-automation-cost-profile-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "library_target": "P8-MACHINE-LOOPS/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md"
+    },
+    {
+      "artifact_id": "deep-research-founder-intent-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/deep-research-report.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P7-DOCTRINE/deep-research-founder-intent-v1.md",
+      "library_target": "P7-DOCTRINE/deep-research-founder-intent-v1.md"
+    },
+    {
+      "artifact_id": "founder-intent-filter-v1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/FOUNDER_INTENT_FILTER.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P7-DOCTRINE/founder-intent-filter.md",
+      "library_target": "P7-DOCTRINE/founder-intent-filter.md"
+    },
+    {
+      "artifact_id": "sourcea-brain-registry-learning-gate-v0-1-4",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md",
+      "library_target": "P1-CANON/BRAIN_REGISTRY_LEARNING_GATE_v0.1.4.md"
+    },
+    {
+      "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md",
+      "library_target": "P2-SSOT/SSOT_CONFLICT_LOG_R_SPLIT_v0.1.2.md"
+    },
+    {
+      "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md",
+      "library_target": "P2-SSOT/SSOT_VERSIONING_LAW_v0.1.1.md"
+    },
+    {
+      "artifact_id": "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+      "source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0_1_4_IMPLEMENTATION_PROMPT_20260629-1753.md",
+      "dest": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md",
+      "library_target": "P1-CANON/BRAIN_REGISTRY_IMPL_PROMPT_v0.1.4.md"
+    }
+  ],
+  "skipped": [
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.__AWAITING_UPLOAD__.md",
+      "stem": "SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1",
+      "library_target": "P0-FOUNDATION-SPINE/SOURCEA_CLOUD_KERNEL_VS_DISK_RECONCILIATION_LOCKED_v1.md",
+      "resolved_source": null,
+      "already_in_library": true,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_target_already_live"
+    },
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.__AWAITING_UPLOAD__.md",
+      "stem": "GOVERNED_AUTORUN_LAWS_v3",
+      "library_target": "P0-FOUNDATION-SPINE/GOVERNED_AUTORUN_LAWS_v3.md",
+      "resolved_source": null,
+      "already_in_library": true,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_target_already_live"
+    },
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.__AWAITING_UPLOAD__.md",
+      "stem": "SOURCEA_SSOT_INDEX_LOCKED_v1",
+      "library_target": "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md",
+      "resolved_source": null,
+      "already_in_library": true,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_target_already_live"
+    },
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.__AWAITING_UPLOAD__.md",
+      "stem": "SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1",
+      "library_target": "P0-FOUNDATION-SPINE/SOURCEA_HARDENED_MACHINE_WORKBENCH_ARCHITECTURE_LOCKED_v1.md",
+      "resolved_source": null,
+      "already_in_library": true,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_target_already_live"
+    },
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/strategy-ssot-v6-split.__AWAITING_UPLOAD__.md",
+      "stem": "strategy-ssot-v6-split",
+      "library_target": "P0-FOUNDATION-SPINE/strategy-ssot-v6-split.md",
+      "resolved_source": "/Users/sinakazemnezhad/Downloads/strategy-ssot-v6-split.SUPERSEDED-see-staging-git.md",
+      "already_in_library": true,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_target_already_live"
+    },
+    {
+      "kind": "upload_placeholder",
+      "placeholder_path": "/Users/sinakazemnezhad/Downloads/noetfield-library 4/P0-FOUNDATION-SPINE/supporting-law/__AWAITING_UPLOAD__.md",
+      "stem": "",
+      "library_target": null,
+      "resolved_source": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/docs/governance_drafts_tag_v1/deep-research-report.md",
+      "already_in_library": false,
+      "awaiting_library_upload": false,
+      "reason": "placeholder_no_source"
+    }
+  ],
+  "errors": [],
+  "dry_run": false
+}

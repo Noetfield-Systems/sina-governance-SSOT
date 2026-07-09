@@ -1,0 +1,20 @@
+{
+  "workflows": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "repo": "sina-governance-SSOT",
+      "class": "verify",
+      "owner": "github_actions",
+      "trigger": "event",
+      "model_policy": "model:none",
+      "writes": "artifacts_only",
+      "risk": "medium",
+      "receipt_required": true,
+      "safe_fix_allowed": false,
+      "escalation": "create_triage_issue",
+      "single_owner_lock": true,
+      "last_audited": "TODO",
+      "max_daily_runs": 50
+    }
+  ]
+}

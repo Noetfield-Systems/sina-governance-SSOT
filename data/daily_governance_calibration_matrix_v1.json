@@ -1,0 +1,75 @@
+{
+  "schema": "daily_governance_calibration_matrix_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T04:34:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Trust-hardening known-answer cases for daily governance machine loop",
+  "runbook": "ssot/DAILY_GOVERNANCE_MACHINE_RUNBOOK_v1.md",
+  "validator": "scripts/validate_governance_intelligence_e2e_v1.py",
+  "last_calibration_at": "2026-07-04T04:33:00Z",
+  "summary": {
+    "total_cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "verdict": "ALL_PASS"
+  },
+  "cases": [
+    {
+      "case_id": "CAL-01-audit-selection-brain-gate",
+      "machine": "governance_intelligence_engine_v1.py audit-selection",
+      "command": "audit-selection --cluster-by domain",
+      "expected_winner_or_status": "SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+      "machine_result": "PASS — primary contains v0_1_4 20260629-1753",
+      "verdict": "PASS",
+      "state_ladder": "selected",
+      "live_authority": false,
+      "tuning_if_fail": "progress_score rubric; penalize Finder duplicate suffixes; prefer semantic version in filename"
+    },
+    {
+      "case_id": "CAL-02-audit-selection-conflict-log",
+      "machine": "governance_intelligence_engine_v1.py audit-selection",
+      "command": "audit-selection --cluster-by domain",
+      "expected_winner_or_status": "SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+      "machine_result": "PASS — primary contains v0_1_2 20260629-1753",
+      "verdict": "PASS",
+      "state_ladder": "selected",
+      "live_authority": false,
+      "tuning_if_fail": "completeness + progress scoring; edit-log date weight"
+    },
+    {
+      "case_id": "CAL-03-audit-selection-copilot-duplicate",
+      "machine": "governance_intelligence_engine_v1.py audit-selection",
+      "command": "audit-selection --cluster-by domain",
+      "expected_winner_or_status": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md (exclude ' 2.md')",
+      "machine_result": "PASS — primary excludes Finder duplicate suffix",
+      "verdict": "PASS",
+      "state_ladder": "selected",
+      "live_authority": false,
+      "tuning_if_fail": "duplicate_copy role detection; progress_score penalty for ' N.md' suffixes"
+    },
+    {
+      "case_id": "CAL-04-thread-audit-brain-gate",
+      "machine": "governance_intelligence_engine_v1.py thread-audit (governance_thread_intelligence_v1.py)",
+      "command": "thread-audit --root ~/Desktop/Raw AI",
+      "expected_winner_or_status": "thread sourcea_brain_registry_learning_gate → PENDING_THREAD, final v0_1_4",
+      "machine_result": "PASS — completion_state PENDING_THREAD, final contains v0_1_4",
+      "verdict": "PASS",
+      "state_ladder": "checked",
+      "live_authority": false,
+      "tuning_if_fail": "thread_rubric completion_state rules; pending_items extraction"
+    },
+    {
+      "case_id": "CAL-05-registry-active-founder-judgment",
+      "machine": "governance_intelligence_engine_v1.py registry-show (governance_registry_ops_v1.py)",
+      "command": "registry-show --id founder-judgment-patterns-v1",
+      "expected_winner_or_status": "ACTIVE + milestone ACTIVE_P0_CORE_LOCKED",
+      "machine_result": "PASS — status ACTIVE, milestone ACTIVE_P0_CORE_LOCKED",
+      "verdict": "PASS",
+      "state_ladder": "ACTIVE",
+      "live_authority": true,
+      "tuning_if_fail": "registry row integrity; milestone_lock_receipt pointer"
+    }
+  ],
+  "negative_proof_receipt": "receipts/daily-governance-negative-proof-20260704T043400Z.json",
+  "sample_daily_run_receipt": "receipts/daily-governance-machine-run-20260704T043400Z.json"
+}

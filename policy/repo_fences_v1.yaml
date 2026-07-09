@@ -1,0 +1,77 @@
+# policy/repo_fences_v1.yaml
+# Phase 1 machine-enforceable repo fences for sina-governance-ssot.
+# scripts/check_repo_fences_v1.py loads this policy.
+# Authority: ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md · data/noos_control_desk_package_map_v1.json
+
+policy_version: "1.0"
+phase: 1
+authority_doc: ssot/NOOS_CONTROL_DESK_PACKAGE_v1.md
+package_map: data/noos_control_desk_package_map_v1.json
+
+protected_zones:
+  - ssot/
+  - data/
+  - policy/
+  - scripts/
+  - .noos/
+  - packages/noos-control-desk-v1/
+
+# Always allowed without full protected-change gate (Phase 1).
+exempt_paths:
+  - receipts/
+  - "tests/repo_fences/"
+  - .github/workflows/repo-fences-v1.yml
+  - .github/CODEOWNERS
+  - policy/repo_fences_v1.yaml
+  - scripts/check_repo_fences_v1.py
+
+# Draft / assist lanes — no fence enforcement on these head branches.
+draft_branch_patterns:
+  - "draft/*"
+  - "assist/*"
+  - "copilot/*"
+  - "*/draft/*"
+  - "*-draft"
+  - "*-draft-*"
+
+enforce_target_branches:
+  - main
+
+# Policy/law mutation requires work_order_id + receipt on merge to main.
+policy_law_globs:
+  - "ssot/**/*.md"
+  - "policy/**/*.yaml"
+  - "policy/**/*.yml"
+  - "packages/noos-control-desk-v1/**/*LAW*.md"
+  - "packages/noos-control-desk-v1/policy/**"
+  - "packages/noos-control-desk-v1/COPILOT_*.md"
+  - "packages/noos-control-desk-v1/NOOS_*.md"
+  - "packages/noos-control-desk-v1/SMART_*.md"
+
+audit_pending_statuses:
+  - SCAFFOLD_READY_AUDIT_PENDING
+  - AUDIT_PENDING
+  - audit-pending
+
+receipt_reference_patterns:
+  - 'receipts/[a-zA-Z0-9_.-]+\.(json|md)'
+  - 'receipt_id\s*:\s*\S+'
+  - '"receipt(_ref(s)?)?"\s*:\s*"receipts/'
+  - '"step_\d+_receipt"\s*:\s*"receipts/'
+
+work_order_reference_patterns:
+  - 'work_order_id\s*:\s*\S+'
+  - '"work_order_id"\s*:\s*"[^"]+"'
+  - 'WORK_ORDER_[A-Z0-9_]+'
+
+fake_active_rules:
+  - id: RF1_package_status_active
+    description: Block package_status promotion to ACTIVE while package is audit-pending
+    pattern: '"package_status"\s*:\s*"ACTIVE"'
+  - id: RF2_operational_rollout_active
+    description: Block operational_rollout_status promotion to ACTIVE while package is audit-pending
+    pattern: '"operational_rollout_status"\s*:\s*"ACTIVE"'
+  - id: RF3_status_flip_from_audit_pending
+    description: Block member status flip from audit-pending to ACTIVE
+    from_pattern: '"status"\s*:\s*"(SCAFFOLD_READY_AUDIT_PENDING|AUDIT_PENDING)"'
+    to_pattern: '"status"\s*:\s*"ACTIVE"'

@@ -1,0 +1,89 @@
+{
+  "schema": "p0_core_invocation_scope_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T04:37:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "status": "ACTIVE",
+  "activated_at": "2026-07-04T04:42:40Z",
+  "artifact_id": "p0-core-decision-use-contract-v1",
+  "governs": "founder-judgment-patterns-v1",
+  "contract_doc": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+  "read_scope_marker": "data/founder_judgment_patterns_read_scope_v1.json",
+  "purpose": "When and how allowed actors may invoke P0 CORE judgment — distinct from read-scope (who may load file)",
+  "mode": "read_only_judgment_invocation",
+  "registry_status_required": "ACTIVE",
+  "allowed_invoking_actors": ["base_live_brain", "high_decision_agent"],
+  "forbidden_invoking_actors": [
+    "worker",
+    "normal_worker",
+    "tier_1_worker",
+    "tier_2_prompt_bundle"
+  ],
+  "invocation_triggers": [
+    {
+      "id": "novel_case",
+      "description": "Situation not covered by existing Tier-1 rules"
+    },
+    {
+      "id": "lower_law_conflict",
+      "description": "Two or more lower-tier laws conflict"
+    },
+    {
+      "id": "money_build_sell_sequencing",
+      "description": "Sell vs build vs capital equipment sequencing"
+    },
+    {
+      "id": "authority_registry_dispute",
+      "description": "File claim vs registry; receipt vs filesystem truth"
+    },
+    {
+      "id": "target_vs_blocker_dispute",
+      "description": "Aspiration incorrectly treated as halt gate"
+    },
+    {
+      "id": "no_tier1_rule_fits",
+      "description": "Tier 0 + role + mission + gates exhausted"
+    }
+  ],
+  "preconditions": [
+    "founder-judgment-patterns-v1 registry status ACTIVE",
+    "read_scope marker allows invoking_actor",
+    "input schema complete per contract",
+    "at least one invocation_trigger present"
+  ],
+  "no_match_handling": {
+    "decision": "ESCALATE_TO_FOUNDER",
+    "matched_patterns": [],
+    "harvest_proposed": true,
+    "fabricate_pattern_match": false,
+    "force_weak_similarity": false,
+    "note": "Genuinely novel case — founder DECIDE + future harvest candidate"
+  },
+  "output_soup_wall": {
+    "rule": "P0 reasoning must not propagate into worker prompts",
+    "worker_receives_only": [
+      "goal",
+      "files",
+      "constraints",
+      "done_criteria",
+      "verify_method",
+      "receipts_required",
+      "decision_verdict"
+    ],
+    "stays_above_gate": [
+      "matched_patterns",
+      "reasoning_summary",
+      "founder_judgment_language",
+      "internal_decision_analysis",
+      "p0_core_text"
+    ],
+    "gate_script": "scripts/verify_p0_core_output_soup_wall_gate_v1.py"
+  },
+  "receipt_required": true,
+  "receipt_schema": "p0-core-decision-receipt-v1",
+  "activation_requires": [
+    "p0-core-decision-use-contract-v1 registered ACTIVE",
+    "sg_review",
+    "registry_receipt"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "p0_execution_receipt_v1",
+  "receipt_id": "TEAM_BENCH_PLATFORM_PROD_DEPLOY_v1-20260708T233943Z",
+  "recorded_at": "2026-07-08T23:39:43.082980+00:00",
+  "packet_id": "TEAM_BENCH_PLATFORM_PROD_DEPLOY_v1",
+  "founder_authorization": "APPROVED in-session 2026-07-08: commit -> push -> deploy -> verify; scope locked; email defer ON",
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "gates_note": "no_deploy gate satisfied by explicit founder deploy authorization (this packet IS the authorized deploy); no external sends, email defer preserved (SMTP-enabling script mod excluded from lane and restored uncommitted)",
+  "commit": {
+    "lane_commit": "4663bc6df8077623af24b2137b1173cb750994aa \u2014 add team bench program to partner access platform (13 files)",
+    "verifier_commits": [
+      "96e6cb3 verifiers v1.4 schema + asset gates",
+      "5c6a370 cap-table disclaimer filter",
+      "46d394a filter window"
+    ],
+    "pushed_branch": "main (bb57855..46d394a)",
+    "excluded_unrelated_dirt": [
+      "scripts/railway_deploy_api.sh (SMTP block \u2014 conflicts with email defer)",
+      "web/tsconfig.tsbuildinfo (build cache)"
+    ]
+  },
+  "api_deploy": {
+    "result": "SUCCESS",
+    "deployment": "79503683-1132-4c16-8b7f-cc14a8e15919",
+    "service": "trustfield-api (Railway)",
+    "health": "200 ok",
+    "readiness": "200 True"
+  },
+  "migration": {
+    "result": "APPLIED",
+    "evidence": "Railway log: Running upgrade 20260707_0004 -> 20260708_0005, Team Bench Formation prospects table"
+  },
+  "web_deploy": {
+    "result": "PASS",
+    "worker": "trustfield-www",
+    "version_id": "65325b06-bfe0-4221-ae4f-a7afb1d5e28e",
+    "cache_purge": "PASS",
+    "live_build_marker": "site-v109-bilingual-en-fr-2026-07-08 (matches repo); build manifest embeds commit 4663bc6"
+  },
+  "verification": {
+    "package_verifier": "PLATFORM_PACKAGE_PASS (scripts/verify_partner_access_platform_package_v1.sh vs production)",
+    "partner_access_200": "200 via /en/ canonical redirect (all tracks)",
+    "platform_gated": "307 to sign-in when signed out",
+    "team_bench_live": "GET /api/partner-access/team-bench/program -> 200; lanes [R1,R2,R3,R4,R5]; min_credible_bench [R1,R3,R4]",
+    "workspace_bundle": "deployed workspace JS chunk contains 'Team Bench Formation' panel",
+    "nda_gate_proof": "pre-NDA dashboard: materials=[] and zero compensation figures (tests); prod program endpoint contains 0 percent-figures",
+    "casl_gate_proof": "API-side: SOURCED->CONTACTED returns 400 without founder approval timestamp + casl_basis + source/warm-intro + intended_message_type (tests test_team_bench_program_v1.py); prod admin endpoints 401 without token",
+    "score_fields": "total_bench_score = 30/25/20/15/10 weights minus conflict penalty \u2014 verified by unit + API tests (28/28 green)",
+    "no_leak_proof": "public HTML leak checks PASS (75%, 15% vesting, Mutual Non-Disclosure absent; cap table only in deliberate no-leak disclaimer copy)",
+    "health": "PARTNER_ACCESS_HEALTH: PASS (monitor repaired to v1.4 apply schema \u2014 stale payload predated lane, root-caused to commit 55b9365)",
+    "backend_tests": "28 passed",
+    "web_build": "PASS"
+  },
+  "quality_state": "PASS",
+  "limitations": [
+    "signed-in browser walkthrough not automated (no test Supabase account); covered by bundle + API + test evidence",
+    "CASL gate live-write proof uses local TestClient (prod admin token not available to operator); prod gate presence proven via 401s"
+  ],
+  "remaining_non_blockers": [
+    "prod test candidate rows from health probes (pa-diag-*, pa-scores-*, pa-overlong-*@example.com) \u2014 archive via scripts/archive_partner_access_test_candidates_v1.py",
+    "unrelated uncommitted SMTP deploy-script edit restored to working tree \u2014 founder decision pending (email defer remains ON)",
+    "ripgrep absent on this Mac \u2014 verifier now uses grep (portable)"
+  ],
+  "evidence": [
+    {
+      "claim": "package verifier PASS",
+      "kind": "script_run",
+      "detail": "reports/partner-access-platform-package-receipt-v1.json status=PLATFORM_PACKAGE_PASS"
+    },
+    {
+      "claim": "migration applied",
+      "kind": "script_run",
+      "detail": "railway logs upgrade line captured"
+    },
+    {
+      "claim": "program live",
+      "kind": "url_fetch",
+      "url": "https://api.trustfield.ca/api/partner-access/team-bench/program",
+      "status": 200
+    }
+  ],
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "deterministic deploys/probes; orchestration in session"
+  },
+  "accounting_note": "session-embedded orchestration; Railway/Cloudflare are the runtime",
+  "executor_route_note": "founder-authorized deploy executed from founder session; production runtime cloud-only (Railway API + Cloudflare worker)",
+  "commit_flag": "flag this receipt for next founder-visible SSOT commit"
+}

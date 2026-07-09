@@ -1,0 +1,36 @@
+{
+  "schema": "founder-judgment-patterns-milestone-lock-v1",
+  "action": "founder_judgment_patterns_milestone_lock",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:26:56Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "milestone": "ACTIVE_P0_CORE_LOCKED",
+  "status": "READY",
+  "final_status": {
+    "content": "valid P0 CORE founder-judgment seed",
+    "registry": "ACTIVE in SG",
+    "read_scope": "Base Live Brain + high decision agents only",
+    "worker_load": "forbidden",
+    "negative_proof": "PASS after ACTIVE confirmation",
+    "chronology": "reconciled; apparent inversion was registry receipt timestamp-labeling error",
+    "history": "preserved; no silent rewrite",
+    "worker_prompts": "unchanged",
+    "p0_core_file": "unchanged"
+  },
+  "doctrine_proven": [
+    "authority comes from registry + receipt, not file existence",
+    "protection is mechanical, not prose",
+    "negative proof validates the gate",
+    "P0 CORE can be rich because workers never load it"
+  ],
+  "next_status": "FOUNDER_JUDGMENT_PATTERNS_v1 ready for Base Live Brain / high-decision-agent use only",
+  "audit_chain": {
+    "registry_receipt": "receipts/founder-judgment-patterns-v1-registry-20260704T052100Z.json",
+    "read_scope": "data/founder_judgment_patterns_read_scope_v1.json",
+    "negative_proof_receipt": "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042435Z.json",
+    "chronology_reconciliation": "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json"
+  },
+  "library_path": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+  "policy_pass": true
+}

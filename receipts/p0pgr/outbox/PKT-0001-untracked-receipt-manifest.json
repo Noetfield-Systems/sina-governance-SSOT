@@ -1,0 +1,47 @@
+{
+  "schema": "p0_prompt_packet_v1.1",
+  "packet_id": "PKT-0001-untracked-receipt-manifest",
+  "created_at": "2026-07-08T16:16:59.558921+00:00",
+  "mission": "Produce a commit manifest of every untracked receipt so the next founder-visible commit carries tamper evidence",
+  "problem_statement": "Untracked receipts carry no tamper evidence; the working tree holds many unstaged governance receipts (M03 lesson).",
+  "deliverable": {
+    "type": "commit_manifest",
+    "destination": "receipts/p0pgr/",
+    "acceptance": "manifest lists every untracked receipt path with sha256 and embeds git HEAD; zero file mutations"
+  },
+  "route": "CLOUD_WORKER",
+  "gates": {
+    "cloud_only": true,
+    "read_only_or_reversible": true,
+    "roi_positive": true,
+    "no_deploy": true,
+    "no_external_send": true,
+    "no_legal_financial_commitment": true,
+    "no_p0_leakage": true,
+    "no_authority_change": true,
+    "founder_authorization_receipt": true
+  },
+  "roi": {
+    "revenue": 0,
+    "trust": 5,
+    "workload_relief": 3,
+    "cloud_now": 5,
+    "reversibility": 5,
+    "rationale": "trust: converts invisible receipts into auditable evidence; read-only"
+  },
+  "constraints": [
+    "read-only sweep; the commit itself stays FOUNDER_ONLY"
+  ],
+  "evidence_required": [
+    "git status --porcelain capture",
+    "per-file sha256 list"
+  ],
+  "confidence": "HIGH",
+  "status": "OUTBOX",
+  "labels": [
+    "authority_wiring"
+  ],
+  "source_findings": [
+    "census F1"
+  ]
+}

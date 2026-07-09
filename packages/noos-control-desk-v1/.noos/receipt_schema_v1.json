@@ -1,0 +1,29 @@
+{
+  "schema": "receipt_schema_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T03:30:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "package": "noos-control-desk-v1",
+  "layer": "P99",
+  "purpose": "Every submit, sync, or policy check must emit a receipt",
+  "required_fields": [
+    "action",
+    "repo",
+    "files_changed",
+    "commands_run",
+    "policy_pass",
+    "errors",
+    "timestamp",
+    "next_machine_action"
+  ],
+  "example": {
+    "action": "",
+    "repo": "",
+    "files_changed": [],
+    "commands_run": [],
+    "policy_pass": true,
+    "errors": [],
+    "timestamp": "",
+    "next_machine_action": ""
+  }
+}

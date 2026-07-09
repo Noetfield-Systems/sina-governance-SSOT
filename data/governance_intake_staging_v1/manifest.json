@@ -1,0 +1,737 @@
+{
+  "schema": "governance-intake-staging-manifest-v1",
+  "updated_at": "2026-07-04T01:38:23Z",
+  "dry_run": false,
+  "applied_count": 8,
+  "results": [
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/copilot_automation_cost_profile_locked/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "deep_research_report",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/deep_research_report/deep-research-report.md"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "founder_intent_filter",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/founder_intent_filter/FOUNDER_INTENT_FILTER.md"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "sourcea_brain_registry",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/sourcea_brain_registry/SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/sourcea_brain_registry_learning_gate/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/ssot_conflict_log_runtime_rules_domain_split/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md"
+    },
+    {
+      "action": "void_stale_duplicate_pointer",
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+      "result": "pointer_only_no_delete"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "ssot_proposal_artifact_versioning",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/ssot_proposal_artifact_versioning/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md"
+    },
+    {
+      "action": "stage_final_carrier_to_sg_intake",
+      "thread_id": "strategy_ssot_v6_split",
+      "mode": "applied",
+      "source_path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+      "dest_path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/data/governance_intake_staging_v1/strategy_ssot_v6_split/strategy-ssot-v6-split.md"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md'"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "2. Effort Lock",
+      "result": "skipped_exists"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "3. Trigger Lock",
+      "result": "skipped_exists"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "4. Mode Lock",
+      "result": "skipped_exists"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "5. Workflow Classes (Copilot-specific settings only \u2014 see Level 1 for class ownership/engine)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "6. NOOS Integrator Sync Rule (Copilot's role in it)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "8. Automation Inventory Requirement (feeds Level 1's `last_audited` field)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "copilot_automation_cost_profile_locked",
+      "mode": "applied",
+      "section": "10. UI Checklist for Every Copilot Automation",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Founding Instruction \u2014 Vocabulary Layer First",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Context",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Phase 2 Activation Guard",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (STUB \u2014 Phase 1 only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Founding Instruction \u2014 Vocabulary Layer First",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Context",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Phase 2 Activation Guard",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (STUB \u2014 Phase 1 only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Founding Instruction \u2014 Vocabulary Layer First",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (STUB \u2014 Phase 1 only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Founding Instruction \u2014 Vocabulary Layer First",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (STUB \u2014 Phase 1 only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Context",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "0. Purpose",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Context",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "SOURCEA_BRAIN_REGISTRY_LEARNING_GATE_v0.1_IMPLEMENTATION_PROMPT",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Context",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 1 \u2014 Asset Inventory (inspect only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 2 \u2014 Layer + Mutation Class Tagging",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 3 \u2014 Eval \u2194 Asset Binding",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 4 \u2014 Implement `learning_record` Schema (if missing)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5 \u2014 Prompt Forge Mutation Proposal Path (v0.1 lane only)",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 5b \u2014 Canvas Form Serializer for Human Gate Approval",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Task 6 \u2014 Receipt Schema for Promotions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Explicit Stop Conditions",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "Hard Boundaries \u2014 Do Not Build",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "0. Purpose",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "add_section_to_primary",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "mode": "applied",
+      "section": "0. Purpose",
+      "error": "[Errno 1] Operation not permitted: '/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md'"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "mode": "applied",
+      "section": "Proposed clarification",
+      "result": "skipped_exists"
+    },
+    {
+      "action": "adopt_section_into_primary",
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "mode": "applied",
+      "section": "Proposed clarification",
+      "result": "skipped_exists"
+    }
+  ],
+  "manual_actions_pending": 10
+}

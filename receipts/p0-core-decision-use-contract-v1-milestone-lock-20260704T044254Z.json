@@ -1,0 +1,28 @@
+{
+  "schema": "p0-core-decision-use-contract-milestone-lock-v1",
+  "action": "p0_core_decision_use_contract_milestone_lock",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:42:54Z",
+  "artifact_id": "p0-core-decision-use-contract-v1",
+  "milestone": "ACTIVE_P0_CORE_USE_CONTRACT_LOCKED",
+  "status": "READY",
+  "final_status": {
+    "registry": "ACTIVE in SG",
+    "governs": "founder-judgment-patterns-v1 (ACTIVE P0 CORE)",
+    "canonical_path": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+    "dependencies": "ALL ACTIVE",
+    "schema_alignment": "PASS",
+    "soup_wall_negative_proof": "PASS post-ACTIVE",
+    "dry_run_decision": "PASS post-ACTIVE",
+    "worker_prompts": "unchanged",
+    "p0_core": "unchanged (10 patterns, no Pattern 11)"
+  },
+  "audit_chain": {
+    "registry_receipt": "receipts/p0-core-decision-use-contract-v1-registry-20260704T044240Z.json",
+    "post_active_dry_run": "receipts/p0-core-decision-dryrun-post-active-20260704T044254Z.json",
+    "post_active_soup_wall": "receipts/p0-core-output-soup-wall-negative-proof-20260704T044254Z.json"
+  },
+  "ready_for": ["base_live_brain", "high_decision_agent"],
+  "policy_pass": true
+}

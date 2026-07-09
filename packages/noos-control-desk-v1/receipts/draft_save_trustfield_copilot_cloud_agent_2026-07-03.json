@@ -1,0 +1,23 @@
+{
+  "action": "attestation_draft",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [],
+  "policy_pass": false,
+  "errors": [
+    {
+      "workflow_id": "trustfield_copilot_cloud_agent",
+      "verdict": "BLOCKED",
+      "reasons": [
+        "observed_model 'unknown' is empty/unknown \u2014 Copilot UI attestation required.",
+        "observed_effort 'unknown' is forbidden by default."
+      ]
+    }
+  ],
+  "timestamp": "2026-07-04T05:08:58.360359+00:00",
+  "next_machine_action": "Continue attesting remaining workflows or run policy check.",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "policy_verdict": "BLOCKED"
+}

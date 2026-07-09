@@ -1,0 +1,224 @@
+{
+  "schema": "governance-intelligence-receipt-v1",
+  "receipt_id": "governance-intelligence-20260704T043356Z",
+  "recorded_at": "2026-07-04T04:33:56Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "command": "impact",
+  "ok": true,
+  "result": {
+    "classification": {
+      "path": "/Users/sinakazemnezhad/Projects/sina-governance-ssot/ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md",
+      "registry_path": "ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md",
+      "proposed_layer": "P0",
+      "proposed_domain": "governance_structure",
+      "proposed_status": "ACTIVE_AMENDMENT_TARGET",
+      "proposed_version": "1",
+      "saved_at": "2026-07-04T03:25:16Z",
+      "authority_rank": 1,
+      "affects_layers": [
+        "P0",
+        "P1",
+        "P2",
+        "P4",
+        "P99"
+      ],
+      "owner_repo": "sina-governance-ssot",
+      "confidence": 0.87,
+      "fingerprint": {
+        "exists": true,
+        "sha256_prefix": "0812317028b0875b",
+        "mtime_iso": "2026-07-04T03:25:16Z",
+        "size_bytes": 4161
+      }
+    },
+    "registry_match": {
+      "artifact_id": "gov-structure-authority-v1",
+      "path": "ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md",
+      "layer": "P0",
+      "domain": "governance_structure",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "authority_rank": 1,
+      "owner_repo": "sina-governance-ssot",
+      "saved_at": "2026-07-04T01:17:00Z",
+      "affects_layers": [
+        "P0",
+        "P1",
+        "P2",
+        "P4",
+        "P99"
+      ],
+      "depends_on": [],
+      "amends": [],
+      "must_point_here": [
+        "AGENTS.md",
+        ".github/copilot-instructions.md",
+        "ssot/FOUNDER_CANON_v1.md",
+        "data/founder_canon_v1.json",
+        "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md"
+      ]
+    },
+    "lineage": {
+      "depends_on": [],
+      "amends": [],
+      "amended_by": []
+    },
+    "downstream_artifacts": [
+      ".github/copilot-instructions.md",
+      "AGENTS.md",
+      "agent-layered-law-least-knowledge-v1",
+      "agents-entrypoint-v1",
+      "cloud-kernel-v1-2-base",
+      "cloud-kernel-v1-3-pdf",
+      "copilot-automation-cost-profile-v1",
+      "copilot-instructions-v1",
+      "data/founder_canon_v1.json",
+      "deep-research-founder-intent-v1",
+      "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md",
+      "founder-canon-json-v1",
+      "founder-canon-v1",
+      "founder-intent-filter-v1",
+      "founder-judgment-patterns-v1",
+      "governance-artifact-registry-v1",
+      "governance-intelligence-pipeline-v1",
+      "governance-structure-tree-v1",
+      "library-completeness-audit-v0-4",
+      "library-index-v1",
+      "library-ssot-index-v1",
+      "llm-agent-operating-law-v3",
+      "mac-cursor-venture-dispatch-v1",
+      "multi-repo-worker-registry-v1",
+      "noetfield-coherent-system-spec-v1",
+      "noos-control-desk-package-v1",
+      "noos-control-desk-v2",
+      "noos-copilot-dispatcher-v1",
+      "noos-integrator-rules-v1",
+      "noos-integrator-sync-rule-v1",
+      "noos-receipt-schema-v1",
+      "p0-foundation-manifest-v1",
+      "sina-os-ssot-locked",
+      "sina-os-ssot-locked-1",
+      "smart-production-cost-law-v2",
+      "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4",
+      "sourcea-brain-registry-learning-gate-v0-1-4",
+      "sourcea-ssot-v1-2-pdf",
+      "ssot-conflict-log-runtime-rules-v0-1-2",
+      "ssot-proposal-artifact-versioning-v0-1-1",
+      "ssot/FOUNDER_CANON_v1.md"
+    ],
+    "must_update_pointers": [
+      ".github/copilot-instructions.md",
+      "AGENTS.md",
+      "data/founder_canon_v1.json",
+      "docs/MAC_CURSOR_VENTURE_DISPATCH_v1.md",
+      "ssot/FOUNDER_CANON_v1.md",
+      "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md"
+    ],
+    "related_domain_artifacts": [
+      {
+        "artifact_id": "governance-intelligence-pipeline-v1",
+        "path": "ssot/GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md",
+        "version": "1.1.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "governance-artifact-registry-v1",
+        "path": "data/governance_artifact_registry_v1.json",
+        "version": "1.1.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "agents-entrypoint-v1",
+        "path": "AGENTS.md",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "copilot-instructions-v1",
+        "path": ".github/copilot-instructions.md",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "library-completeness-audit-v0-4",
+        "path": "P99-LEDGER/COMPLETENESS_AUDIT_v0.4.md",
+        "version": "0.4.0",
+        "status": "ACTIVE",
+        "layer": "P99",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "governance-structure-tree-v1",
+        "path": "data/governance_structure_tree_v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "governance-registry-ops-v1",
+        "path": "scripts/governance_registry_ops_v1.py",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "ssot-conflict-log-runtime-rules-v0-1-2",
+        "path": "docs/governance_drafts_tag_v1/SSOT_CONFLICT_LOG_runtime_rules_domain_split_v0_1_2_20260629-1753.md",
+        "version": "0.1.2",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "ssot-proposal-artifact-versioning-v0-1-1",
+        "path": "docs/governance_drafts_tag_v1/SSOT_PROPOSAL_artifact_versioning_v0_1_1_20260629-1753.md",
+        "version": "0.1.1",
+        "status": "PROPOSED",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "work-order-noos-control-desk-mvp-v1",
+        "path": "packages/noos-control-desk-v1/WORK_ORDER_NOOS_CONTROL_DESK_MVP_v1.md",
+        "version": "1.0.0",
+        "status": "PROPOSED",
+        "layer": "P7",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "library-index-v1",
+        "path": "00-INDEX.md",
+        "version": "0.4.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      },
+      {
+        "artifact_id": "p0-foundation-manifest-v1",
+        "path": "P0-FOUNDATION-SPINE/P0_FOUNDATION_MANIFEST.md",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "layer": "P0",
+        "relationship": "same_domain"
+      }
+    ],
+    "stale_language_hits": [],
+    "recommended_actions": [
+      "Register or update row in data/governance_artifact_registry_v1.json",
+      "Confirm status=ACTIVE_AMENDMENT_TARGET with confidence=0.87",
+      "Review related domain artifacts for amendment-only override",
+      "Run: python3 scripts/validate_governance_intelligence_v1.py",
+      "Run: python3 scripts/governance_intelligence_engine_v1.py audit --json --write-receipt"
+    ]
+  }
+}

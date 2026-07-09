@@ -1,0 +1,62 @@
+{
+  "action": "sg_record_step6_repo_fences",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Repo-Fence-Worker",
+  "timestamp": "2026-07-04T04:45:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "step": 6,
+  "step_name": "Machine-Enforceable Repo Fences",
+  "step_status": "COMPLETE_PHASE_1",
+  "sg_role": "guard_authority_registry_package_pointer_controller",
+  "sg_did_not": [
+    "promote_package_ACTIVE",
+    "start_fleet_rollout",
+    "mutate_control_desk_frontend_backend",
+    "change_runtime_dispatcher"
+  ],
+  "delivered": {
+    "codeowners": ".github/CODEOWNERS",
+    "policy": "policy/repo_fences_v1.yaml",
+    "checker": "scripts/check_repo_fences_v1.py",
+    "ci_workflow": ".github/workflows/repo-fences-v1.yml",
+    "negative_tests": "tests/repo_fences/run_negative_tests.py"
+  },
+  "protected_zones": [
+    "ssot/",
+    "data/",
+    "policy/",
+    "scripts/",
+    ".noos/",
+    "packages/noos-control-desk-v1/"
+  ],
+  "enforcement_rules": [
+    "RF_RECEIPT_REQUIRED",
+    "RF_POLICY_LAW_MUTATION",
+    "RF1_package_status_active",
+    "RF2_operational_rollout_active",
+    "RF3_status_flip_from_audit_pending"
+  ],
+  "exempt_lanes": [
+    "draft branches",
+    "receipts/ publication",
+    "non-main targets"
+  ],
+  "ci_command": "python3 scripts/check_repo_fences_v1.py --base $BASE --head $HEAD --target-branch main --head-branch $BRANCH --pr-body \"$PR_BODY\"",
+  "negative_proof": "tests/repo_fences/run_negative_tests.py",
+  "receipt_refs": [
+    "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json"
+  ],
+  "next_step": {
+    "step": 7,
+    "name": "Real 23-Workflow Audit"
+  },
+  "remaining_gaps": [
+    "Branch protection on GitHub must require repo-fences-v1 + Code Owner review (manual UI)",
+    "@Noetfield-Systems/sg-governance team must exist for CODEOWNERS routing",
+    "Fleet rollout fences deferred to post-Step-10",
+    "Root .noos/ absent today — fence applies when path appears"
+  ],
+  "policy_pass": true
+}

@@ -1,0 +1,42 @@
+{
+  "action": "founder_judgment_patterns_chronology_reconciliation",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:24:43Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "verdict": "filename_timestamp_error_on_registry_receipt_not_receipt_order_defect",
+  "explanation": "Registry ACTIVE registration preceded negative-proof execution. Filesystem mtime order is authoritative. Registry receipt filename and embedded timestamp used incorrect future offset (~1h ahead of actual write time). Negative-proof filename and embedded timestamp match filesystem mtime and are chronologically after registry write.",
+  "evidence": {
+    "registry_receipt_path": "receipts/founder-judgment-patterns-v1-registry-20260704T052100Z.json",
+    "registry_receipt_embedded_timestamp": "2026-07-04T05:21:00Z",
+    "registry_receipt_filesystem_mtime_utc": "2026-07-04T04:21:37Z",
+    "negative_proof_receipt_path_initial": "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042325Z.json",
+    "negative_proof_embedded_timestamp": "2026-07-04T04:23:25Z",
+    "negative_proof_filesystem_mtime_utc": "2026-07-04T04:23:25Z",
+    "delta_registry_to_negative_proof_seconds": 108
+  },
+  "classification": {
+    "filename_timestamp_error": true,
+    "system_clock_issue": false,
+    "report_order_issue": false,
+    "actual_receipt_order_defect": false
+  },
+  "runtime_truth_at_negative_proof": "Registry JSON already ACTIVE when initial negative-proof ran; gate read live registry state correctly. Filename sort alone misorders chain.",
+  "linked_receipts": [
+    "receipts/founder-judgment-patterns-v1-registry-20260704T052100Z.json",
+    "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042325Z.json"
+  ],
+  "negative_proof_rerun_receipt": "receipts/founder-judgment-patterns-v1-negative-proof-20260704T042435Z.json",
+  "read_scope_path": "data/founder_judgment_patterns_read_scope_v1.json",
+  "remediation": [
+    "preserve original receipts unchanged",
+    "rerun negative-proof after ACTIVE confirmation",
+    "link reconciliation + rerun receipt in registry audit chain"
+  ],
+  "sg_did_not": [
+    "silently_rewrite_history",
+    "edit_p0_core_file",
+    "modify_worker_prompts"
+  ],
+  "policy_pass": true
+}

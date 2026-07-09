@@ -1,0 +1,14 @@
+--- text-pattern cases ---
+✅ bad_forbidden_model.md: expected FAIL (COST_forbidden_model), got FAIL
+✅ bad_forbidden_effort.md: expected FAIL (COST_forbidden_effort), got FAIL
+✅ bad_forbidden_trigger.md: expected FAIL (COST_forbidden_trigger), got FAIL
+✅ good_clean_config.md: expected PASS, got PASS
+
+--- registry-rule cases ---
+✅ bad_registry_rcp1.json: expected FAIL (RCP1_safe_fix_needs_receipt), got FAIL
+✅ bad_registry_rcp2.json: expected FAIL (RCP2_unique_workflow_id), got FAIL
+✅ bad_registry_rcp3.json: expected FAIL (RCP3_direct_write_only_for_deploy), got FAIL
+✅ bad_registry_rcp4.json: expected FAIL (RCP4_model_policy_value_locked), got FAIL
+✅ good_registry.json: expected PASS, got PASS
+
+ALL PASS: 9/9 cases match spec.

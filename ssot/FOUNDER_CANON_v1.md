@@ -85,6 +85,10 @@ Everything else — merge included once machine validation covers it — migrate
 
 Live source beats memory, summary, or compaction. Order: current SSOT file → current repo state → current dispatch → current receipt → prior chat. All state in-repo; hidden state is a wall violation. One canon per domain, extended by versioned pointer, never restated.
 
+**Governance structure and version law:** [GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md](GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md). Existing rules stay live; newer versions are amendments and win only on direct conflict. `Superseded` means not active for decisions and must not be used for a live base rule.
+
+**Governance intelligence pipeline:** [GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md](GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md) · registry `data/governance_artifact_registry_v1.json` · review queue `data/governance_review_queue_v1.json`
+
 **NOOS integrator:** repo-local runtime state beats home mirror (`~/.sina/noos-integrator-state-v1.json`) and cloud mirror unless promoted. See [NOOS_INTEGRATOR_RULES_v1.md](NOOS_INTEGRATOR_RULES_v1.md).
 
 ## 10. Violation law

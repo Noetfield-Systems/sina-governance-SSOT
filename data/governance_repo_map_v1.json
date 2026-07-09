@@ -1,0 +1,112 @@
+{
+  "schema": "governance_repo_map_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T02:15:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Where governance artifacts live, who owns writes, and where completed work should land",
+  "authority_order": [
+    "sg_canonical",
+    "sg_operational",
+    "sg_entrypoint",
+    "library_asset_surface",
+    "advisor_intake",
+    "venture_copy"
+  ],
+  "repos": [
+    {
+      "repo_id": "sg",
+      "name": "SG Governance SSOT",
+      "path": "~/Projects/sina-governance-ssot",
+      "authority_rank": 1,
+      "write_owner": "sg_sssot_cursor",
+      "role": "SG guard/authority registry and intake controller",
+      "live_paths": ["ssot/", "data/", "docs/", "scripts/", "receipts/"],
+      "staging_path": "data/governance_intake_staging_v1/",
+      "entry_points": ["AGENTS.md", ".github/copilot-instructions.md"]
+    },
+    {
+      "repo_id": "library",
+      "name": "Noetfield Library (asset/law surface)",
+      "path": "~/Desktop/SourceA/noetfield-library",
+      "authority_rank": 4,
+      "write_owner": "sg_sssot_cursor",
+      "role": "Asset/law surface repository by layer — file existence gives zero live authority; SG controls promotion and dispatch",
+      "live_paths": ["P0-FOUNDATION-SPINE/", "P2-SSOT/", "P4-CLOUD-KERNEL-L1-L8/", "P99-LEDGER/"]
+    },
+    {
+      "repo_id": "sourcea",
+      "name": "SourceA Brain / Worker",
+      "path": "~/Projects/SourceA",
+      "authority_rank": 5,
+      "write_owner": "sourcea_brain / sourcea_worker",
+      "role": "Product brain, deploy, contract pages, brain registry runtime",
+      "live_paths": ["ssot/", "scripts/", "reports/"]
+    },
+    {
+      "repo_id": "noos",
+      "name": "NOOS Doctrine",
+      "path": "~/Projects/noetfeld-os",
+      "authority_rank": 5,
+      "write_owner": "noos_agent",
+      "role": "Integrator doctrine and runtime state"
+    },
+    {
+      "repo_id": "trustfield",
+      "name": "TrustField Loops",
+      "path": "~/Desktop/trustfield-loops",
+      "authority_rank": 5,
+      "write_owner": "trustfield_worker",
+      "role": "Venture-owned watched surface"
+    },
+    {
+      "repo_id": "raw_ai_intake",
+      "name": "Advisor Intake (Raw AI)",
+      "path": "~/Desktop/Raw AI",
+      "authority_rank": 6,
+      "write_owner": "founder_session",
+      "role": "Unsorted advisor session exports — intake only, not live law until merged to SG",
+      "intake": true
+    }
+  ],
+  "founder_arc_patterns": [
+    {
+      "arc_id": "brain_vocabulary_governance",
+      "signals": ["brain registry", "r1", "r7", "domain split", "vocabulary", "runtime rules"],
+      "plain_summary": "You were separating control-panel chat rules from brain-agent vocabulary, so SourceA base model language stays D4-portable (R1/R2/R6/R7) without AUDIT/EXECUTE bleed."
+    },
+    {
+      "arc_id": "artifact_traceability",
+      "signals": ["versioning", "timestamp", "edit log", "traceability", "filename pattern"],
+      "plain_summary": "You were fixing a traceability gap: edited advisor artifacts were saving under duplicate filenames with no version or edit history."
+    },
+    {
+      "arc_id": "governance_intelligence_machine",
+      "signals": ["governance intelligence", "registry", "completeness", "thread", "selection"],
+      "plain_summary": "You were building SG-owned governance intelligence so the machine classifies, scores, and picks final versions without founder manual sorting."
+    },
+    {
+      "arc_id": "automation_cost_governance",
+      "signals": ["copilot", "automation cost", "github automation", "parallel automation"],
+      "plain_summary": "You were locking down Copilot/automation cost and lane boundaries so agents draft but do not silently promote."
+    }
+  ],
+  "merge_policy": {
+    "auto_allowed": [
+      "stage_final_carrier_to_sg_intake",
+      "adopt_section_no_conflict",
+      "void_stale_duplicate_pointer"
+    ],
+    "manual_required": [
+      "founder_ratification",
+      "registry_row_promotion",
+      "cross_repo_copy_to_sourcea",
+      "library_pointer_refresh",
+      "phase_unlock"
+    ],
+    "never_auto": [
+      "write_to_venture_repo",
+      "mark_superseded_on_live_base",
+      "promote_without_receipt"
+    ]
+  }
+}

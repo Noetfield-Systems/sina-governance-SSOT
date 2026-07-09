@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "data/prompt_registry_schema_v1.json",
+  "title": "TrustField cloud factory prompt registry record v1",
+  "type": "object",
+  "required": [
+    "prompt_id",
+    "version",
+    "lane",
+    "owner",
+    "input_contract",
+    "output_schema",
+    "model_tier",
+    "cost_class",
+    "run_trigger",
+    "receipt_path",
+    "rollback_rule",
+    "status"
+  ],
+  "properties": {
+    "prompt_id": {
+      "type": "string",
+      "pattern": "^(tb|pa|ops)\\.[a-z0-9-]+\\.[a-z0-9-]+$",
+      "description": "lane-prefixed stable id, e.g. tb.sourcing.r3, pa.eval.review-pack, ops.health.narrative"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "semver; immutable once activated"
+    },
+    "lane": { "type": "string", "enum": ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8"] },
+    "owner": { "type": "string", "enum": ["architect", "founder", "machine"] },
+    "prompt_body_ref": {
+      "type": "string",
+      "description": "path or table ref to the versioned prompt text (body never inlined in registry index)"
+    },
+    "input_contract": {
+      "type": "object",
+      "description": "JSON Schema of required inputs for a run"
+    },
+    "output_schema": {
+      "type": "object",
+      "description": "JSON Schema the run output MUST validate against; validation failure = retry then PARTIAL"
+    },
+    "model_tier": {
+      "type": "string",
+      "enum": ["determine", "fast", "standard", "judgment"],
+      "description": "determine = deterministic script, no LLM; judgment reserved for evaluation/architecture"
+    },
+    "cost_class": {
+      "type": "string",
+      "enum": ["zero", "cents", "dollars"],
+      "description": "dollars requires founder-activated budget line (L8 approval)"
+    },
+    "run_trigger": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["cron", "event", "manual"] },
+        "cron": { "type": "string" },
+        "event": { "type": "string" }
+      }
+    },
+    "receipt_path": {
+      "type": "string",
+      "description": "where runs land, e.g. ops_receipts.prompt_run (+ optional SSOT mirror path)"
+    },
+    "rollback_rule": {
+      "type": "string",
+      "description": "e.g. 'previous active version auto-restores on contract-test failure or founder rollback; two versions never active at once'"
+    },
+    "status": { "type": "string", "enum": ["draft", "testing", "active", "retired"] },
+    "founder_approval_required_to_activate": {
+      "type": "boolean",
+      "description": "true when the prompt touches candidates, public copy, or spends dollars"
+    },
+    "contract_tests_ref": { "type": "string", "description": "CI test path proving input/output contracts" },
+    "notes": { "type": "string" }
+  }
+}

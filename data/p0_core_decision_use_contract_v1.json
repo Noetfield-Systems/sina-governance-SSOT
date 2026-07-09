@@ -1,0 +1,183 @@
+{
+  "schema": "p0_core_decision_use_contract_v1",
+  "version": "1.0.1",
+  "saved_at": "2026-07-04T04:37:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "status": "ACTIVE",
+  "activated_at": "2026-07-04T04:42:40Z",
+  "registry_receipt": "receipts/p0-core-decision-use-contract-v1-registry-20260704T044240Z.json",
+  "contract_doc": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+  "governs_artifact_id": "founder-judgment-patterns-v1",
+  "read_scope": "data/founder_judgment_patterns_read_scope_v1.json",
+  "invocation_scope": "data/p0_core_invocation_scope_v1.json",
+  "mode": "read_only_judgment_source",
+  "allowed_readers": ["base_live_brain", "high_decision_agent"],
+  "forbidden_readers": [
+    "worker",
+    "normal_worker",
+    "tier_1_worker",
+    "tier_2_prompt_bundle"
+  ],
+  "invocation_triggers": [
+    "novel_case",
+    "lower_law_conflict",
+    "money_build_sell_sequencing",
+    "authority_registry_dispute",
+    "target_vs_blocker_dispute",
+    "no_tier1_rule_fits"
+  ],
+  "input_schema": {
+    "required": [
+      "case_id",
+      "invoking_actor",
+      "decision_question",
+      "lower_tier_facts",
+      "conflicting_rules",
+      "available_receipts",
+      "proposed_options",
+      "invocation_triggers"
+    ],
+    "properties": {
+      "case_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-_]*$"},
+      "invoking_actor": {"enum": ["base_live_brain", "high_decision_agent"]},
+      "decision_question": {"type": "string", "minLength": 10},
+      "lower_tier_facts": {"type": "array", "items": {"type": "string"}},
+      "conflicting_rules": {"type": "array", "items": {"type": "string"}},
+      "available_receipts": {"type": "array", "items": {"type": "string"}},
+      "proposed_options": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["option_id", "description"],
+          "properties": {
+            "option_id": {"type": "string"},
+            "description": {"type": "string"},
+            "risks": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      },
+      "invocation_triggers": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "enum": [
+            "novel_case",
+            "lower_law_conflict",
+            "money_build_sell_sequencing",
+            "authority_registry_dispute",
+            "target_vs_blocker_dispute",
+            "no_tier1_rule_fits"
+          ]
+        }
+      }
+    }
+  },
+  "output_schema": {
+    "required": [
+      "decision",
+      "matched_patterns",
+      "reasoning_summary",
+      "chosen_next_action",
+      "stop_continue_verdict",
+      "required_gate_or_receipt",
+      "harvest_proposed"
+    ],
+    "properties": {
+      "decision": {"type": "string"},
+      "matched_patterns": {"type": "array", "items": {"type": "string"}},
+      "reasoning_summary": {"type": "string"},
+      "chosen_next_action": {"type": "string"},
+      "stop_continue_verdict": {"enum": ["STOP", "CONTINUE", "ESCALATE_TO_SG"]},
+      "required_gate_or_receipt": {"type": "string"},
+      "harvest_proposed": {"type": "boolean"},
+      "harvest_note": {"type": "string"}
+    }
+  },
+  "no_match_handling": {
+    "decision": "ESCALATE_TO_FOUNDER",
+    "matched_patterns": [],
+    "harvest_proposed": true,
+    "fabricate_pattern_match": false,
+    "force_weak_similarity": false,
+    "stop_continue_verdict": "ESCALATE_TO_SG"
+  },
+  "output_soup_wall": {
+    "rule": "P0 reasoning must not propagate into worker prompts",
+    "worker_task_spec_allowed_keys": [
+      "goal",
+      "files",
+      "constraints",
+      "done_criteria",
+      "verify_method",
+      "receipts_required",
+      "decision_verdict"
+    ],
+    "forbidden_in_worker_bundle": [
+      "matched_patterns",
+      "reasoning_summary",
+      "p0_core_text",
+      "pattern_names",
+      "founder_judgment_language",
+      "internal_decision_analysis"
+    ],
+    "gate_script": "scripts/verify_p0_core_output_soup_wall_gate_v1.py"
+  },
+  "hard_limits": [
+    "p0_core_cannot_be_copied_into_worker_prompts",
+    "p0_core_cannot_directly_mutate_registry_code_gates_or_prompts",
+    "p0_core_output_is_decision_proposal_unless_actor_authority_allows_execution",
+    "new_patterns_require_real_case_plus_sg_founder_ratification",
+    "no_fabricated_pattern_match",
+    "no_pattern_11_without_ratification"
+  ],
+  "receipt_schema": {
+    "schema": "p0-core-decision-receipt-v1",
+    "path_pattern": "receipts/p0-core-decision-<case_id>-<timestamp>.json",
+    "required_fields": [
+      "artifact_id",
+      "contract_id",
+      "case_id",
+      "invoking_actor",
+      "timestamp",
+      "input",
+      "output",
+      "matched_patterns",
+      "harvest_proposed",
+      "dry_run",
+      "live_authority"
+    ]
+  },
+  "registry_proposal": {
+    "artifact_id": "p0-core-decision-use-contract-v1",
+    "path": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+    "machine_schema": "data/p0_core_decision_use_contract_v1.json",
+    "invocation_scope": "data/p0_core_invocation_scope_v1.json",
+    "layer": "P0",
+    "sub_layer": "P0_CORE_CONTRACT",
+    "domain": "founder_judgment",
+    "version": "1.0.0",
+    "proposed_status": "PROPOSED",
+    "authority_rank": 1,
+    "owner_repo": "sina-governance-ssot",
+    "depends_on": [
+      "founder-judgment-patterns-v1",
+      "agent-layered-law-least-knowledge-v1",
+      "gov-structure-authority-v1"
+    ],
+    "amends": [],
+    "affects_layers": ["P0", "P1"],
+    "governs": "founder-judgment-patterns-v1",
+    "read_scope_ref": "data/founder_judgment_patterns_read_scope_v1.json",
+    "invocation_scope_ref": "data/p0_core_invocation_scope_v1.json",
+    "activation_requires": [
+      "sg_review",
+      "registry-add_with_receipt",
+      "soup_wall_negative_proof_pass",
+      "no_worker_prompt_changes"
+    ],
+    "note": "Contract governs use of ACTIVE P0 CORE; does not modify P0 CORE content"
+  },
+  "dry_run_example_receipt": "receipts/p0-core-decision-dryrun-chronology-reconciliation-20260704T043502Z.json",
+  "soup_wall_negative_proof_receipt": "receipts/p0-core-output-soup-wall-negative-proof-20260704T043807Z.json"
+}

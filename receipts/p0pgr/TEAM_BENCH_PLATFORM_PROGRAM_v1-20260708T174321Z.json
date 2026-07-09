@@ -1,0 +1,76 @@
+{
+  "schema": "p0pgr_execution_receipt_v1",
+  "receipt_id": "TEAM_BENCH_PLATFORM_PROGRAM_v1-20260708T174321Z",
+  "recorded_at": "2026-07-08T17:43:21.224309+00:00",
+  "packet_id": "TEAM_BENCH_PLATFORM_PROGRAM_v1",
+  "mission": "Implement TEAM_BENCH_FORMATION as a live gated program inside Partner Access Platform (founder correction 2026-07-08)",
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "implementation": {
+    "backend": [
+      "app/team_bench_program.py (role lanes, gated materials, bench scoring, CASL status machine)",
+      "app/models.py TeamBenchProspect (team_bench_prospects table)",
+      "app/routers/team_bench.py (/api/partner-access/team-bench: program, interest, admin CRUD+actions, export)",
+      "app/partner_access_platform.py dashboard team_bench section (NDA-gated)",
+      "alembic/versions/20260708_0005_team_bench_prospects.py"
+    ],
+    "frontend": [
+      "web/lib/partner-access/types.ts + workspace-model.ts (Team Bench Formation panel)",
+      "web/components/partner-access/platform-workspace.tsx (5 role lane cards, min bench R1+R3+R4, locked/unlocked materials, express-interest)",
+      "web/app/api/partner-access/team-bench/interest/route.ts (BFF proxy)",
+      "web/components/partner-access/team-bench-admin.tsx + admin-wrapper.tsx (tracker table, scores, CASL field, founder decision buttons)"
+    ]
+  },
+  "verification": {
+    "platform_shows_program_when_signed_in": "PASS (code) \u2014 workspace panel + dashboard section; LIVE pending founder deploy",
+    "five_role_lanes_visible": "PASS (test)",
+    "min_credible_bench_R1_R3_R4_visible": "PASS (test)",
+    "admin_can_view_team_bench_tracker": "PASS \u2014 admin endpoints token-gated + UI wired into /admin/partner-access",
+    "candidate_rows_require_casl_basis": "PASS \u2014 casl_basis_missing risk flag + hard CASL gate on CONTACTED",
+    "no_contacted_without_founder_approval": "PASS (tests: illegal transition + CASL gate block)",
+    "gated_materials_locked_before_nda": "PASS (test: no comp figures pre-NDA)",
+    "gated_materials_unlock_after_nda": "PASS (test)",
+    "public_page_no_comp_equity_private": "PASS \u2014 no public-page edits; program endpoint carries titles only; package verifier leak-check untouched (ASSET_GATES still 7)",
+    "partner_access_health": "PASS \u2014 28/28 backend tests green (18 existing partner-access + 10 team-bench), web production build green, tsc clean (one pre-existing unrelated vitest typing error)"
+  },
+  "quality_state": "PARTIAL",
+  "limitations": [
+    "MISSING MODULE 1: production deploy \u2014 Railway API (alembic 20260708_0005) + web deploy; FOUNDER_ONLY, not executed",
+    "MISSING MODULE 2: SOURCED prospect rows \u2014 no real candidates fabricated; sourcing research or founder-named candidates required",
+    "MISSING MODULE 3: TrustField repo commit \u2014 changes uncommitted pending founder-visible commit (repo policy: one atomic lane commit)"
+  ],
+  "evidence": [
+    {
+      "claim": "backend tests green",
+      "kind": "script_run",
+      "detail": "pytest tests/test_team_bench_program_v1.py tests/test_partner_access_os_v1.py -q \u2192 28 passed"
+    },
+    {
+      "claim": "web build green",
+      "kind": "script_run",
+      "detail": "npm run build \u2192 compiled, static+dynamic routes emitted"
+    },
+    {
+      "claim": "public routing intact",
+      "kind": "script_run",
+      "detail": "landing contains 'Request Partner Access' + 'Sign in' + /auth/sign-in; no redesign"
+    }
+  ],
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "deterministic builds/tests; orchestration in session"
+  },
+  "accounting_note": "session-embedded LLM orchestration; scripts deterministic",
+  "executor_route_note": "SESSION_EMBEDDED build work (code authoring is not a runtime execution); production runtime stays Railway/Cloudflare per repo law",
+  "tf_changed_files": 15,
+  "commit_flag": "flag for next founder-visible commit (TrustField lane + SSOT receipts)"
+}

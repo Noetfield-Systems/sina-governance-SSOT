@@ -1,0 +1,38 @@
+{
+  "action": "sg_record_step5_noos_sync_mode_pointer",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:30:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "step": 5,
+  "step_name": "NOOS Sync Mode Patch",
+  "step_status": "COMPLETE_RECORDED",
+  "sg_role": "guard_authority_registry_package_pointer_controller",
+  "sg_did_not": [
+    "take_ownership_of_noos_sync_behavior",
+    "promote_package_ACTIVE",
+    "start_ci_runtime_enforcement"
+  ],
+  "recorded": {
+    "noos_copilot_layer": "P2",
+    "noos_copilot_role": "cross_repo_sync_dispatcher",
+    "sync_model": "mode_gated",
+    "integrator_owner": "NOOS"
+  },
+  "pointers_added": [
+    "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+    "data/noos-copilot-dispatcher-mode-v1.json",
+    "data/noos-integrator-role-v1.json"
+  ],
+  "receipt_refs": [
+    "receipts/noos-copilot-dispatcher-mode-patch-20260703T195800Z.json",
+    "receipts/noos-copilot-sync-mode-step5-report.md"
+  ],
+  "package_map_updated": "data/noos_control_desk_package_map_v1.json",
+  "next_step": {
+    "step": 6,
+    "name": "Machine-Enforceable Repo Fences"
+  },
+  "policy_pass": true
+}

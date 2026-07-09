@@ -1,0 +1,67 @@
+{
+  "schema": "p0-core-decision-use-contract-registry-v1",
+  "action": "p0_core_decision_use_contract_registry_activation",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T04:42:40Z",
+  "artifact_id": "p0-core-decision-use-contract-v1",
+  "verification_result": "PASS",
+  "policy_pass": true,
+  "pre_active_checks": {
+    "dependencies": {
+      "founder-judgment-patterns-v1": {"status": "ACTIVE", "verdict": "PASS"},
+      "agent-layered-law-least-knowledge-v1": {"status": "ACTIVE", "verdict": "PASS"},
+      "gov-structure-authority-v1": {"status": "ACTIVE", "verdict": "PASS"},
+      "verdict": "ALL_PASS"
+    },
+    "canonical_path": {
+      "human_contract": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+      "machine_schema": "data/p0_core_decision_use_contract_v1.json",
+      "invocation_scope": "data/p0_core_invocation_scope_v1.json",
+      "governed_p0_core_library": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+      "verdict": "ssot/ canonical for SG-owned P0 contracts; library path cross-ref only — single authority, no duplicate",
+      "pass": true
+    },
+    "schema_alignment": {
+      "invocation_triggers": "PASS",
+      "input_schema": "PASS",
+      "output_schema": "PASS",
+      "hard_limits": "PASS",
+      "receipt_requirement": "PASS",
+      "output_soup_wall": "PASS",
+      "no_match_handling": "PASS",
+      "verdict": "ALL_PASS"
+    },
+    "worker_prompts_unchanged": {
+      "founder_judgment_in_worker_prompts": false,
+      "contract_session_worker_prompt_edits": false,
+      "verdict": "PASS"
+    },
+    "p0_core_unchanged": {
+      "library_pattern_count": 10,
+      "pattern_11_exists": false,
+      "sg_repo_p0_core_file_edits": false,
+      "verdict": "PASS"
+    }
+  },
+  "registry_status": "ACTIVE",
+  "path": "ssot/P0_CORE_DECISION_USE_CONTRACT_v1.md",
+  "machine_schema": "data/p0_core_decision_use_contract_v1.json",
+  "invocation_scope": "data/p0_core_invocation_scope_v1.json",
+  "depends_on": [
+    "founder-judgment-patterns-v1",
+    "agent-layered-law-least-knowledge-v1",
+    "gov-structure-authority-v1"
+  ],
+  "governs": "founder-judgment-patterns-v1",
+  "sg_did_not": [
+    "edit_p0_core_file",
+    "modify_worker_prompts",
+    "create_pattern_11"
+  ],
+  "next_actions": [
+    "rerun post-ACTIVE dry-run decision receipt",
+    "rerun post-ACTIVE soup-wall negative proof",
+    "write milestone-lock receipt"
+  ]
+}

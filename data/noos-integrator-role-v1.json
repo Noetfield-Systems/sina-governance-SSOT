@@ -1,0 +1,13 @@
+{
+  "schema": "noos-integrator-role-pointer-v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-03T19:58:00Z",
+  "sg_role": "pointer_only",
+  "sg_does_not_own": "integrator/sync behavior",
+  "canonical_owner": "NOOS (noetfeld-os)",
+  "canonical_path": "~/Projects/noetfeld-os/data/noos-integrator-role-v1.json",
+  "canonical_schema": "noos-integrator-role-v1",
+  "pointer_reason": "SG guard registry points to NOOS-owned integrator role; behavior lives in noetfeld-os",
+  "recorded_at_step": 5,
+  "authority_doc": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md"
+}

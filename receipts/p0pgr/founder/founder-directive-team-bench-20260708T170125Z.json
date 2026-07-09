@@ -1,0 +1,22 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-directive-team-bench-20260708T170125Z",
+  "recorded_at": "2026-07-08T17:01:25.142885+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "Record PKT-0002 as SUPPORTING_TRUST_PROOF, not top ROI priority. Ranking over-weighted speed-to-receipt, under-weighted weekend business outcome. Weekend objective: build the minimum credible team layer before offer/outreach. New top lane: TEAM_BENCH_FORMATION. Re-rank priority: 1 team credibility capacity, 2 revenue-readiness after team, 3 founder workload reduction, 4 trust proof support, 5 cloud execution speed. Immediate next action: create the Team Bench Formation Package.",
+  "channel": "in-session founder message 2026-07-08, recorded per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "TEAM_BENCH_FORMATION as top lane",
+      "lane weights 35/25/15/15/10 mapped to the five founder criteria",
+      "Team Bench package drafting"
+    ],
+    "does_not_unlock": [
+      "external send/outreach",
+      "compensation offers (founder sign-off per offer)",
+      "publishing onboarding page",
+      "deploy"
+    ]
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

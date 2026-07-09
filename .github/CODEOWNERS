@@ -1,0 +1,16 @@
+# SG Phase 1 repo fences — protected governance/package paths require SG review.
+# Pair with branch protection: require review from Code Owners on main.
+# Team must exist in Noetfield-Systems org; fallback owner review still applies via branch rules.
+
+/ssot/                                   @Noetfield-Systems/sg-governance
+/data/                                   @Noetfield-Systems/sg-governance
+/policy/                                 @Noetfield-Systems/sg-governance
+/scripts/                                @Noetfield-Systems/sg-governance
+/.noos/                                  @Noetfield-Systems/sg-governance
+/packages/noos-control-desk-v1/          @Noetfield-Systems/sg-governance
+
+# Fence infrastructure — same owners
+/.github/CODEOWNERS                      @Noetfield-Systems/sg-governance
+/.github/workflows/repo-fences-v1.yml    @Noetfield-Systems/sg-governance
+/policy/repo_fences_v1.yaml              @Noetfield-Systems/sg-governance
+/scripts/check_repo_fences_v1.py         @Noetfield-Systems/sg-governance

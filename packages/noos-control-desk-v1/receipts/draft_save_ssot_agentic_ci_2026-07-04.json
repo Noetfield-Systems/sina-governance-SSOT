@@ -1,0 +1,23 @@
+{
+  "action": "attestation_draft",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/registry_draft.json"
+  ],
+  "commands_run": [],
+  "policy_pass": false,
+  "errors": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "verdict": "FAIL",
+      "reasons": [
+        "observed_model 'gpt-5.4' is on the known-forbidden list.",
+        "observed_effort 'high' is forbidden by default."
+      ]
+    }
+  ],
+  "timestamp": "2026-07-04T03:00:59.720258+00:00",
+  "next_machine_action": "Continue attesting remaining workflows or run policy check.",
+  "workflow_id": "ssot_agentic_ci",
+  "policy_verdict": "FAIL"
+}

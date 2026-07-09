@@ -1,0 +1,115 @@
+{
+  "schema": "p0pgr-operator-check-receipt-v1",
+  "receipt_id": "p0pgr-checklist-20260708T144545Z",
+  "recorded_at": "2026-07-08T14:45:45.856849+00:00",
+  "operator": "claude-fable-5 (p0pgr-operator skill, session-embedded)",
+  "repo": "sina-governance-ssot",
+  "git_head": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "git_branch": "cursor/machine-autonomy-loops-v1",
+  "requested_checks": [
+    "scorecard",
+    "campaign_receipt",
+    "skills",
+    "cloud_only_roi_queue",
+    "schemas",
+    "packet_lint",
+    "write_receipt"
+  ],
+  "verdict": "RUNTIME_NOT_SCAFFOLDED",
+  "checks": {
+    "scorecard": {
+      "status": "MISSING",
+      "detail": "receipts/p0pgr/ does not exist; no phase1/phase2 scorecard in working tree or any git branch"
+    },
+    "campaign_receipt": {
+      "status": "MISSING",
+      "detail": "receipts/p0pgr/campaigns/ absent; zero campaign-named receipts under receipts/"
+    },
+    "skills": {
+      "status": "PRESENT",
+      "detail": "p0pgr-operator, p0pgr-packet-compiler, p0pgr-receipt-verifier all installed with SKILL.md",
+      "skills": {
+        "p0pgr-operator": true,
+        "p0pgr-packet-compiler": true,
+        "p0pgr-receipt-verifier": true,
+        "governed-autorun": true,
+        "signal-factory": true
+      }
+    },
+    "cloud_only_roi_queue": {
+      "status": "MISSING",
+      "detail": "receipts/p0pgr/phase2_queue_v1.json absent; nearest ROI artifacts are receipts/roi-heartbeat-*.json (brain-loop autorun system, not P0-PGR)"
+    },
+    "schemas": {
+      "status": "MISSING",
+      "detail": "p0-pgr/ directory absent entirely; packet, loop-state, and execution-receipt schemas not found"
+    },
+    "packet_lint": {
+      "status": "MISSING",
+      "detail": "scripts/p0pgr_packet_lint_v1.py absent; no lint or packet scripts under scripts/"
+    }
+  },
+  "path_census": {
+    "p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md": "MISSING",
+    "p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md": "MISSING",
+    "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json": "MISSING",
+    "p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json": "MISSING",
+    "p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json": "MISSING",
+    "p0-pgr/P0_PROMPT_COMPILER_MVP_PLAN_v1.md": "MISSING",
+    "scripts/p0pgr_cycle_v1.py": "MISSING",
+    "scripts/p0pgr_evidence_reader_v1.py": "MISSING",
+    "scripts/p0pgr_packet_lint_v1.py": "MISSING",
+    "scripts/p0pgr_campaign_planner_v1.py": "MISSING",
+    "scripts/p0pgr_phase2_rank_v1.py": "MISSING",
+    "receipts/p0pgr/outbox": "MISSING",
+    "receipts/p0pgr/campaigns": "MISSING",
+    "receipts/p0pgr/founder": "MISSING",
+    "receipts/p0pgr/phase1_scorecard_v1.json": "MISSING",
+    "receipts/p0pgr/phase2_scorecard_v1.json": "MISSING",
+    "receipts/p0pgr/phase2_queue_v1.json": "MISSING",
+    "tests/test_p0pgr_phase0.py": "MISSING"
+  },
+  "evidence": {
+    "method": "local filesystem stat + git history sweep, deterministic, zero LLM tool calls inside checks",
+    "git_history_sweep": "git log --all --diff-filter=A -- '*p0pgr*' 'p0-pgr/*' returned empty; git log --all --grep='p0' -i returned empty",
+    "sibling_repo_sweep": "no /Users/sinakazemnezhad/Projects/*/p0-pgr or */receipts/p0pgr found",
+    "adjacent_systems_present": [
+      "data/p0_core_decision_use_contract_v1.json (P0 CORE judgment contract, ACTIVE \u2014 distinct system)",
+      "data/p0_core_invocation_scope_v1.json",
+      "receipts/roi-heartbeat-*.json (brain loop autorun)",
+      "data/governance_review_queue_v1.json, data/governance_library_promote_queue_v1.json (governance intake, not P0-PGR)"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "STRUCTURAL",
+      "summary": "P0-PGR runtime absent: all 18 mapped runtime paths MISSING in working tree and full git history across all branches, while the three operator-side skills are installed and reference them as source of truth (skill<->repo drift).",
+      "next_pointer": "FOUNDER DECIDE: scaffold P0-PGR Phase 0 (contracts, schemas, linter, cycle runner, scorecards) in sina-governance-ssot, or re-point/retire the p0pgr skills. Scaffolding is a phase/authority event \u2014 FOUNDER_ONLY per contract."
+    },
+    {
+      "id": "F2",
+      "severity": "GATE",
+      "summary": "No founder authorization receipts directory (receipts/p0pgr/founder/). Even after scaffold, no packet can pass the nine execution gates until at least one in-repo founder authorization receipt exists (M03 lesson: chat-only authorization is not durable evidence).",
+      "next_pointer": "At scaffold time, founder records the unlocking directive as the first receipt in receipts/p0pgr/founder/."
+    },
+    {
+      "id": "F3",
+      "severity": "INTEGRATION",
+      "summary": "Adjacent live systems exist that a P0-PGR scaffold must integrate with rather than duplicate: P0 CORE decision contract (read-only judgment source with output soup wall), roi-heartbeat receipts, governance intake queues.",
+      "next_pointer": "Packet compiler and ROI ranker should consume these as inputs, not re-create parallel queues."
+    }
+  ],
+  "operating_mode_note": "Assumed era PHASE_2_CLOUD_ONLY_ROI_TRACK per operator skill; no scorecard exists to confirm or override. No execution, no send, no deploy, no Mac routing occurred in this cycle.",
+  "counters": {
+    "executions": 0,
+    "sends": 0,
+    "deploys": 0,
+    "leaks": 0,
+    "freezes": 0
+  },
+  "scorecard_update": "N/A \u2014 no scorecard exists; this receipt is the seed record for the next scorecard at scaffold time",
+  "accounting_note": "Checks themselves were deterministic shell/stat operations; orchestration cost sits in the session-embedded LLM operator run, not metered per-check.",
+  "executor_route_note": "Executed locally in-session on Mac filesystem as read-only inspection; no packet route existed to deviate from. No cloud execution surface touched.",
+  "commit_flag": "Flag this receipt for inclusion in the next founder-visible commit \u2014 untracked receipts carry no tamper evidence."
+}

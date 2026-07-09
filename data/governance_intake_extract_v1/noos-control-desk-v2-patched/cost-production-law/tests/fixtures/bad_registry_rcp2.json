@@ -1,0 +1,36 @@
+{
+  "workflows": [
+    {
+      "workflow_id": "duplicate_id",
+      "repo": "RepoA",
+      "class": "observe",
+      "owner": "github_actions",
+      "trigger": "schedule",
+      "model_policy": "model:none",
+      "writes": "artifacts_only",
+      "risk": "low",
+      "receipt_required": true,
+      "safe_fix_allowed": false,
+      "escalation": "log_only",
+      "single_owner_lock": true,
+      "last_audited": "2026-07-01",
+      "max_daily_runs": 1
+    },
+    {
+      "workflow_id": "duplicate_id",
+      "repo": "RepoB",
+      "class": "observe",
+      "owner": "cloudflare_worker",
+      "trigger": "schedule",
+      "model_policy": "model:none",
+      "writes": "artifacts_only",
+      "risk": "low",
+      "receipt_required": true,
+      "safe_fix_allowed": false,
+      "escalation": "log_only",
+      "single_owner_lock": true,
+      "last_audited": "2026-07-01",
+      "max_daily_runs": 1
+    }
+  ]
+}

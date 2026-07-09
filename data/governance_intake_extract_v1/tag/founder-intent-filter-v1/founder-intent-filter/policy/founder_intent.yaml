@@ -1,0 +1,100 @@
+# policy/founder_intent.yaml
+# Machine-readable form of FOUNDER_INTENT_FILTER.md.
+# The checker script (scripts/check_founder_runtime_dependency.py) loads this file
+# and applies each rule's patterns against governance/order/workflow files in the repo.
+#
+# If you edit a rule here, update FOUNDER_INTENT_FILTER.md to match — canon wins on conflict.
+
+version: 1
+
+scan:
+  # File types the checker will scan for violations.
+  include_globs:
+    - "**/*.md"
+    - "**/*.yaml"
+    - "**/*.yml"
+    - "**/*.mdc"
+    - "**/*.json"
+  exclude_globs:
+    - "node_modules/**"
+    - ".git/**"
+    - "tests/fixtures/**"        # fixtures intentionally contain violations for testing
+    - "tests/negative_cases/**"
+    - "FOUNDER_INTENT_FILTER.md" # canon describes violation language as examples; not itself a violation
+    - "policy/founder_intent.yaml" # policy file quotes violation patterns; not itself a violation
+
+rules:
+
+  - id: R1_no_founder_specific_approval
+    description: "No founder-specific approval on the normal path."
+    severity: red
+    # Matches phrases that make Sina personally required for routine flow.
+    violation_patterns:
+      - "(?i)\\bsina\\s+(must|has to|needs to)\\s+(approve|click|confirm|authorize)"
+      - "(?i)\\bwait(ing)?\\s+for\\s+sina"
+      - "(?i)\\brequires?\\s+sina'?s?\\s+(approval|signature|key|token)"
+      - "(?i)\\bfounder\\s+(must\\s+)?approve"
+      - "(?i)\\bonly\\s+sina\\s+can\\s+(merge|deploy|approve|unlock)"
+    allow_if_tagged: ["break-glass", "exception-logged"]
+
+  - id: R2_boundary_wall_not_permission_loop
+    description: "Controls must fire only at admission/capability/side-effect/audit, not as a routine pause."
+    severity: yellow
+    violation_patterns:
+      - "(?i)\\bpause\\s+(until|for)\\s+(review|approval)"
+      - "(?i)\\bawait(ing)?\\s+approval\\b(?!.*\\b(repair|reroute|escape|escalation)\\b)"
+      - "(?i)\\bmanual\\s+review\\s+required\\b(?!.*\\b(repair|reroute|escape|escalation)\\b)"
+    allow_if_tagged: ["break-glass", "protected-branch"]
+
+  - id: R3_denial_must_preserve_progress
+    description: "Denials must return repair, reroute, or a structured escape packet — never a bare stop."
+    severity: red
+    # Flags denial-shaped language with no accompanying repair/reroute/escape keyword nearby.
+    violation_patterns:
+      - "(?i)\\bnot\\s+allowed\\.?\\s*$"
+      - "(?i)\\bdenied\\.?\\s*$(?!.*\\b(repair|reroute|escape|escalation|retry|alternative)\\b)"
+      - "(?i)\\bblocked\\s+indefinitely\\b"
+      - "(?i)\\bmanual\\s+review\\s+required\\.?\\s*$"
+    require_nearby_any: ["repair", "reroute", "escape", "escalation", "alternative", "retry"]
+
+  - id: R4_L5_is_anomaly_only
+    description: "L5 (max-severity review) must be anomaly-triggered, not a normal workflow stage."
+    severity: red
+    violation_patterns:
+      - "(?i)\\bl5\\b.*\\b(every|each|all)\\s+(run|task|step|deploy|merge)"
+      - "(?i)\\b(step|stage)\\s*\\d*[:\\-]?\\s*l5\\s+review\\b(?!.*\\b(anomaly|break-glass|irreversible|unclassified)\\b)"
+    allow_if_tagged: ["anomaly-triggered", "break-glass"]
+
+  - id: R5_evidence_based_merge_and_phase_unlock
+    description: "Merge/phase transitions must be evidence-based, not founder-click-based."
+    severity: red
+    violation_patterns:
+      - "(?i)\\bsina\\s+merges?\\b"
+      - "(?i)\\bfounder\\s+merges?\\b"
+      - "(?i)\\bmanual\\s+merge\\s+by\\s+(sina|founder)"
+      - "(?i)\\bphase\\s+unlock(ed)?\\s+by\\s+sina\\b"
+
+  - id: R6_repeated_judgment_must_codify
+    description: "The same founder judgment requested 3+ times must become policy/parameter/exemplar."
+    severity: yellow
+    # This rule is evidence-driven (counts recurrences across receipts), not a single-file regex.
+    # The checker script implements this as a frequency check against receipts/*.json, not text patterns.
+    mode: "frequency-check"
+    threshold: 3
+    evidence_source: "receipts/*.json"
+
+  - id: R7_frozen_proof_targets_not_hard_blockers
+    description: "Zero-drift/proof-perfection targets must not freeze execution unless the sold claim depends on them."
+    severity: yellow
+    violation_patterns:
+      - "(?i)\\bzero[- ]drift\\s+required\\s+before\\s+(proceeding|continuing|merge)\\b(?!.*\\bsold\\s+claim\\b)"
+      - "(?i)\\b100%\\s+proof\\s+required\\s+before\\s+(proceeding|continuing)\\b(?!.*\\bsold\\s+claim\\b)"
+
+exceptions:
+  # Explicit, expiring exceptions live here — never silent overrides.
+  # Example shape (delete before use):
+  # - rule_id: R1_no_founder_specific_approval
+  #   scope: "governance/deploy-prod.md"
+  #   reason: "Prod deploy break-glass path, temporary until automated rollback health-check ships."
+  #   expires: "2026-08-01"
+  #   logged_by: "sina"

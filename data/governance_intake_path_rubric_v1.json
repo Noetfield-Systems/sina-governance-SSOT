@@ -1,0 +1,42 @@
+{
+  "schema": "governance_intake_path_rubric_v1",
+  "version": "2.0.0",
+  "saved_at": "2026-07-04T03:00:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Evidence-based intake path intelligence — NO hardcoded folder names; infer final sink from signals",
+  "design_note": "Raw AI / Tag was a test fixture only. This rubric works on any intake tree.",
+  "evidence_signals": {
+    "path_depth": 8,
+    "filename_timestamp": 25,
+    "edit_log_present": 20,
+    "filename_semantic_version": 15,
+    "progress_score_unit": 1,
+    "completeness_score_unit": 0.4,
+    "finder_duplicate_penalty": 20,
+    "undated_at_root_penalty": 15
+  },
+  "sink_detection": {
+    "min_files_in_folder": 2,
+    "min_dated_ratio": 0.25,
+    "confidence_weights": {
+      "avg_evidence": 0.45,
+      "dated_ratio": 0.25,
+      "depth": 0.15,
+      "file_count": 0.15
+    },
+    "min_confidence": 0.55
+  },
+  "second_pass_rules": {
+    "lower_evidence_role_override": "earlier_session_copy",
+    "evidence_margin_to_demote": 12,
+    "prefer_spec_role_within_margin": 5
+  },
+  "coherence_rules": {
+    "undated_root_loses_to_dated_deep": true,
+    "implementation_prompt_never_beats_spec_same_thread": true,
+    "min_sink_confidence": 0.5
+  },
+  "fixture_roots": {
+    "raw_ai_example": "~/Desktop/Raw AI"
+  }
+}

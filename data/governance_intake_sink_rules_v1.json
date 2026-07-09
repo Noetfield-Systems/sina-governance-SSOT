@@ -1,0 +1,148 @@
+{
+  "schema": "governance_intake_sink_rules_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T03:30:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "authority_doc": "ssot/GOVERNANCE_INTELLIGENCE_PIPELINE_v1.md",
+  "path_rubric": "data/governance_intake_path_rubric_v1.json",
+  "design_note": "Folder names (e.g. Tag in Raw AI test) are NOT rules. Evidence sink + artifact signatures are rules.",
+
+  "sink_detection": {
+    "method": "evidence_aggregate",
+    "source": "governance_intake_path_intelligence_v1.detect_probable_final_folder",
+    "min_confidence": 0.5,
+    "include_ranked_within_margin": 0.7,
+    "max_sink_dirs": 3,
+    "fallback": "intake_root"
+  },
+
+  "scan_scope": {
+    "file_types": [".md", ".zip"],
+    "scan_sink_dirs": true,
+    "scan_intake_root_md": true,
+    "root_md_patterns": [
+      "^SMART_PRODUCTION.*\\.md$",
+      "^NOETFIELD_COHERENT.*\\.md$",
+      "^COPILOT_AUTOMATION.*\\.md$",
+      "^CANONICAL_D4_PACKAGE.*\\.md$"
+    ]
+  },
+
+  "exclude_path_parts": [
+    "/tests/",
+    "/fixtures/",
+    "/test/",
+    "/prompts/",
+    "/prompts ",
+    "/.venv/",
+    "/site-packages/"
+  ],
+
+  "exclude_name_patterns": [
+    "deep-research",
+    "deep_research",
+    "discovery report prompt",
+    "linkedin-profile"
+  ],
+
+  "exclude_filename_regex": " \\\\d+\\\\.(md|zip)$",
+
+  "zip_bundle_rules": {
+    "zip_name_hints": ["control-desk", "smart-production", "founder-intent", "cost-production", "cost-law"],
+    "zip_priority_tokens": {
+      "patched": 100,
+      "batch": 70,
+      "mvp": 50,
+      "v2": 30
+    },
+    "inner_paths_by_artifact": {
+      "smart-production-cost-law-v2": [
+        "cost-production-law/SMART_PRODUCTION_COST_LAW_v2.md",
+        "SMART_PRODUCTION_COST_LAW_v2.md"
+      ],
+      "copilot-automation-cost-profile-v1": [
+        "cost-production-law/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md"
+      ],
+      "noos-control-desk-v2": [
+        "cost-production-law/control-desk/README.md",
+        "control-desk/README.md"
+      ],
+      "founder-intent-filter-v1": [
+        "founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+        "FOUNDER_INTENT_FILTER.md"
+      ]
+    }
+  },
+
+  "artifact_signatures": {
+    "sourcea-brain-registry-learning-gate-v0-1-4": {
+      "name_hints": ["learning gate"],
+      "exclude_name_hints": ["implementation"],
+      "layer": "P0",
+      "domain": "founder_canon",
+      "version": "0.1.4"
+    },
+    "sourcea-brain-registry-learning-gate-impl-prompt-v0-1-4": {
+      "name_hints": ["implementation prompt", "learning gate"],
+      "layer": "P0",
+      "domain": "founder_canon",
+      "version": "0.1.4",
+      "amends": "sourcea-brain-registry-learning-gate-v0-1-4"
+    },
+    "ssot-conflict-log-runtime-rules-v0-1-2": {
+      "name_hints": ["conflict log"],
+      "layer": "P0",
+      "domain": "governance_structure",
+      "version": "0.1.2"
+    },
+    "ssot-proposal-artifact-versioning-v0-1-1": {
+      "name_hints": ["artifact versioning", "versioning law"],
+      "layer": "P0",
+      "domain": "governance_structure",
+      "version": "0.1.1"
+    },
+    "copilot-automation-cost-profile-v1": {
+      "name_hints": ["copilot_automation_cost", "copilot automation cost"],
+      "layer": "P8",
+      "domain": "automation",
+      "version": "1.0.0"
+    },
+    "founder-intent-filter-v1": {
+      "name_hints": ["founder_intent", "founder intent filter"],
+      "layer": "P1",
+      "domain": "founder_canon",
+      "version": "1.0.0"
+    },
+    "smart-production-cost-law-v2": {
+      "name_hints": ["smart_production_cost_law"],
+      "layer": "P8",
+      "domain": "automation",
+      "version": "2.0.0",
+      "depends_on": ["copilot-automation-cost-profile-v1"]
+    },
+    "noos-control-desk-v2": {
+      "name_hints": ["noos_control_desk", "control desk"],
+      "text_hints": ["noos control desk", "workflow_registry"],
+      "layer": "P3",
+      "domain": "integrator",
+      "version": "2.0.0"
+    },
+    "noetfield-coherent-system-spec-v1": {
+      "name_hints": ["noetfield_coherent_system"],
+      "layer": "P10",
+      "domain": "product_boundary",
+      "version": "1.0.0"
+    }
+  },
+
+  "completion_states": {
+    "unregistered_governance_draft": "AWAITING_REGISTRY_ENTRY",
+    "registered_library_pending": "PENDING_LIBRARY_PROMOTE",
+    "upload_placeholder": "AWAITING_LIBRARY_UPLOAD"
+  },
+
+  "fixture_roots": {
+    "raw_ai_example": "~/Desktop/Raw AI"
+  }
+}

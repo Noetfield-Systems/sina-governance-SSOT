@@ -1,0 +1,12 @@
+{
+  "schema": "governance-registry-ops-receipt-v1",
+  "receipt_id": "governance-registry-ops-20260704T020345Z",
+  "recorded_at": "2026-07-04T02:03:45Z",
+  "command": "promote-tag-drafts-v2",
+  "ok": true,
+  "result": {
+    "promoted": 0,
+    "updated": 8,
+    "ok": true
+  }
+}

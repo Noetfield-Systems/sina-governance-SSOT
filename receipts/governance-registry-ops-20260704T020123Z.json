@@ -1,0 +1,11 @@
+{
+  "schema": "governance-registry-ops-receipt-v1",
+  "receipt_id": "governance-registry-ops-20260704T020123Z",
+  "recorded_at": "2026-07-04T02:01:23Z",
+  "command": "promote-intake-artifacts",
+  "ok": false,
+  "result": {
+    "promoted": 4,
+    "ok": false
+  }
+}

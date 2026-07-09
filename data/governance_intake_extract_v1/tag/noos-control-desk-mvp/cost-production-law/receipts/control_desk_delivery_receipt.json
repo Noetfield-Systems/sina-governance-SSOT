@@ -1,0 +1,32 @@
+{
+  "receipt_type": "noos_control_desk_mvp_delivery",
+  "date": "2026-07-03",
+  "decision": "Localhost web app first (Python stdlib http.server, zero pip installs), Electron/Tauri deferred to Phase 2+ per the reasoning in this thread.",
+  "files_added": [
+    "control-desk/app.py",
+    "control-desk/static/index.html",
+    "control-desk/README.md",
+    "scripts/noos_integrator_sync_v1.py"
+  ],
+  "real_endpoint_tests_run_this_session": [
+    "GET / -> 200",
+    "GET /api/registry -> 200, 23 entries",
+    "GET /api/dashboard -> 200, correct counts",
+    "POST /api/registry/attest valid -> SAVED, receipt written, file updated",
+    "POST /api/registry/attest invalid model_policy -> REJECTED, file untouched",
+    "POST /api/registry/attest injection attempt in workflow_id -> REJECTED before reaching subprocess",
+    "POST /api/validate -> real checker ran, full aggregated report returned",
+    "POST /api/sync -> real noos_integrator_sync_v1.py ran, honest summary returned",
+    "GET /api/receipts -> real file listing"
+  ],
+  "bug_found_and_fixed_during_real_verification": "control-desk/README.md documents 'gpt-5.4' and 'auto-scrape' as descriptive examples, tripping the same self-reference class of false positive seen twice before in this project. Fixed by adding control-desk/** to the checker's exclude_globs. Re-ran full suite after fix: 9/9 negative tests still pass, self-scan back to exactly 23 violations (all RCP5_audit_staleness), zero new false positives - confirmed via unique rule_ids in JSON, not eyeballed console output.",
+  "test_attestation_reverted": "During endpoint testing, ssot_agentic_ci was attested for real (to prove the write path works) then explicitly reverted back to last_audited=TODO before packaging - this delivery ships with the honest, fully-unaudited 23-entry registry.",
+  "explicitly_not_built": [
+    "Open PR / git branch+commit automation - Submit Queue reports real git status only",
+    "Home/cloud mirror sync - reports 'unconfigured' honestly rather than faking freshness",
+    "Copilot UI auto-scrape bridge (Phase 4) - attestation is manual-entry by design for now",
+    "Electron/Tauri wrapper - deferred per Phase 1/2 decision"
+  ],
+  "how_to_run": "python3 control-desk/app.py --port 17877 --repo-root . -- then open http://localhost:17877",
+  "status": "MVP_WORKING_LOCALLY_VERIFIED"
+}

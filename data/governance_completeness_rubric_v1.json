@@ -1,0 +1,108 @@
+{
+  "schema": "governance_completeness_rubric_v1",
+  "version": "1.1.0",
+  "saved_at": "2026-07-04T01:30:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Deterministic completeness and progress scoring for governance docs and advisor intake folders",
+  "status_weights": {
+    "ACTIVE": 100,
+    "ACTIVE_AMENDMENT": 95,
+    "ACTIVE_AMENDMENT_TARGET": 90,
+    "ACTIVE_BASE": 70,
+    "PROPOSED": 85,
+    "SUPERSEDED": 0
+  },
+  "document_signals": {
+    "version_declared": 10,
+    "saved_at_declared": 10,
+    "status_declared": 10,
+    "locked_filename": 15,
+    "registry_row": 20,
+    "sg_owner_rank_1": 20,
+    "sg_owner_rank_2": 15,
+    "sg_owner_rank_3": 10,
+    "lineage_declared": 10,
+    "authority_pointer": 10,
+    "no_stale_language": 10,
+    "structured_sections_ge_3": 10,
+    "cross_refs_ge_2": 5,
+    "word_count_ge_200": 10
+  },
+  "progress_signals": {
+    "filename_timestamp": 25,
+    "edit_log_present": 20,
+    "filename_semantic_version": 15,
+    "proposed_status_with_edit_log": 10,
+    "implementation_prompt_pair": 5
+  },
+  "section_signals": {
+    "word_count_ge_40": 10,
+    "has_bullets": 8,
+    "has_table": 8,
+    "has_code_or_paths": 10,
+    "has_version_or_status_words": 6,
+    "has_must_or_forbidden": 6
+  },
+  "final_selection_order": [
+    "authority_rank_asc",
+    "progress_score_desc",
+    "completeness_score_desc",
+    "saved_at_desc",
+    "filename_version_desc",
+    "body_version_desc",
+    "status_weight_desc",
+    "registry_match_desc"
+  ],
+  "intake_rules": {
+    "proposed_header_means": "ACTIVE_AMENDMENT",
+    "edit_log_means": "ACTIVE_AMENDMENT",
+    "undated_duplicate_penalty": 15,
+    "prefer_dated_over_undated_same_topic": true
+  },
+  "merge_rules": {
+    "adopt_section_margin": 5,
+    "add_section_min_score": 15,
+    "void_if_superseded": true,
+    "void_if_rank_ge": 5,
+    "void_if_completeness_below_primary_by": 25,
+    "void_if_progress_below_primary_by": 20,
+    "conflict_review_on_opposing_markers": true
+  },
+  "opposing_markers": [
+    ["must", "must not"],
+    ["active", "superseded"],
+    ["allow", "forbidden"],
+    ["yes", "no"]
+  ],
+  "e2e_fixtures": {
+    "raw_ai_root": "~/Desktop/Raw AI",
+    "cases": [
+      {
+        "id": "brain_gate_v014_wins",
+        "paths": [
+          "~/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+          "~/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+          "~/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md"
+        ],
+        "expect_primary_contains": "v0_1_4 20260629-1753"
+      },
+      {
+        "id": "conflict_log_v012_wins",
+        "paths": [
+          "~/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+          "~/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md"
+        ],
+        "expect_primary_contains": "v0_1_2 20260629-1753"
+      },
+      {
+        "id": "copilot_original_more_complete",
+        "paths": [
+          "~/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+          "~/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md"
+        ],
+        "expect_primary_contains": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+        "expect_primary_excludes": " 2.md"
+      }
+    ]
+  }
+}

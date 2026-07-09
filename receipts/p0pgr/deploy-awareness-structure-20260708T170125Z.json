@@ -1,0 +1,26 @@
+{
+  "schema": "p0pgr_deploy_awareness_v1",
+  "receipt_id": "deploy-awareness-structure-20260708T170125Z",
+  "recorded_at": "2026-07-08T17:01:25.142885+00:00",
+  "page": "https://www.noetfield.com/structure/",
+  "detected_live_at": "2026-07-08T16:46:27Z (execution-PKT-0002-20260708T164627Z, status 200, normalized-hash MATCH)",
+  "source_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/structure/index.html",
+  "source_file_mtime_utc": "2026-07-08T16:04:38.503263+00:00",
+  "git_evidence": {
+    "working_tree_status_structure": "?? structure/",
+    "last_commit_touching_structure": "NONE \u2014 never committed",
+    "remote": [
+      "origin\thttps://github.com/Noetfield-Systems/Noetfield.git (fetch)"
+    ]
+  },
+  "likely_deployment_route": "UNTRACKED-but-live: working-tree/watcher sync publish (bypasses git entirely)",
+  "review_point_exists": false,
+  "review_point_note": "page went live without founder review or PR; no human gate observed between working tree and production",
+  "recommended_visibility_fence": [
+    "keep noindex,nofollow on the page (already set) until approved",
+    "production deploys only from protected main via PR (founder merge); working-tree/watcher publishing disabled",
+    "branch previews for drafts; CODEOWNERS on site root",
+    "until fenced: treat the Noetfield working tree as PRODUCTION \u2014 no drafts placed there (onboarding page held in SSOT repo for this reason)"
+  ],
+  "commit_flag": "flag for next founder-visible commit"
+}

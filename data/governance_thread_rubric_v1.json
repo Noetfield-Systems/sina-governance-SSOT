@@ -1,0 +1,97 @@
+{
+  "schema": "governance_thread_rubric_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-04T02:00:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "purpose": "Thread recognition, completion state, change rationale, and change-quality scoring for advisory sessions",
+  "thread_roles": {
+    "spec": {"rank": 1, "description": "Primary carrier — the governing spec or rule body"},
+    "proposal": {"rank": 2, "description": "New rule proposal awaiting ratification"},
+    "conflict_log": {"rank": 3, "description": "Logged conflict / clarification thread"},
+    "implementation_prompt": {"rank": 4, "description": "Execution companion derived from a spec"},
+    "discovery_report": {"rank": 5, "description": "Research / inventory output"},
+    "prompt_companion": {"rank": 6, "description": "Prompt pack companion in Prompts folder"},
+    "duplicate_copy": {"rank": 99, "description": "Finder duplicate or stale copy"}
+  },
+  "completion_states": {
+    "COMPLETED": "Final carrier chosen; no open founder gate; no blocking thread dependency",
+    "AWAITING_REGISTRY_ENTRY": "New draft ready — waiting for SG registry + library promote",
+    "PENDING_LIBRARY_PROMOTE": "In SG registry as PROPOSED — library pointer promote still pending",
+    "AWAITING_LIBRARY_UPLOAD": "Placeholder or draft exists — canonical library copy not installed yet",
+    "PENDING_FOUNDER": "Founder action required before thread can close",
+    "PENDING_THREAD": "Blocked on another thread ratification or merge",
+    "IN_PROGRESS": "Active edit trail but not yet final",
+    "LEFT_ABANDONED": "Superseded undated/stale copies only — work moved elsewhere",
+    "STALE_DUPLICATE": "Duplicate copy with no unique progress"
+  },
+  "change_quality_signals": {
+    "good": {
+      "corrected": 20,
+      "fixed": 18,
+      "technical accuracy": 22,
+      "scoped": 15,
+      "clarifying": 12,
+      "excluded": 14,
+      "does not change": 8,
+      "already scoped correctly": 10,
+      "traceability": 12,
+      "domain split": 16,
+      "wording patch": 10
+    },
+    "bad": {
+      "false claim": -25,
+      "wholesale import": -20,
+      "regression": -22,
+      "removed guard": -18,
+      "introduced conflict": -20,
+      "competing definitions": -15,
+      "silent re-save": -12,
+      "superseded incorrectly": -18
+    },
+    "neutral": {
+      "initial": 0,
+      "initial draft": 0,
+      "initial spec": 0,
+      "formatting": 2,
+      "added": 5
+    }
+  },
+  "quality_bands": {
+    "good_min": 15,
+    "bad_max": -10,
+    "neutral_range": [-9, 14]
+  },
+  "thread_link_patterns": [
+    {"pattern": "brain registry learning gate", "thread_id": "sourcea_brain_registry_learning_gate"},
+    {"pattern": "ssot conflict log", "thread_id": "ssot_conflict_log_runtime_rules_domain_split"},
+    {"pattern": "artifact versioning", "thread_id": "ssot_proposal_artifact_versioning"},
+    {"pattern": "copilot_automation_cost", "thread_id": "copilot_automation_cost_profile_locked"}
+  ],
+  "role_primary_preference": ["spec", "proposal", "conflict_log", "implementation_prompt", "discovery_report"],
+  "e2e_thread_cases": [
+    {
+      "id": "brain_gate_thread_complete_spec",
+      "root": "~/Desktop/Raw AI",
+      "thread_id": "sourcea_brain_registry_learning_gate",
+      "expect_completion_state": "PENDING_THREAD",
+      "expect_final_role": "spec",
+      "expect_final_contains": "v0_1_4 20260629-1753",
+      "expect_pending_contains": "Phase 2"
+    },
+    {
+      "id": "conflict_log_pending_founder",
+      "root": "~/Desktop/Raw AI",
+      "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+      "expect_completion_state": "PENDING_FOUNDER",
+      "expect_final_role": "conflict_log",
+      "expect_change_quality_min": 10
+    },
+    {
+      "id": "versioning_proposal_pending_founder",
+      "root": "~/Desktop/Raw AI",
+      "thread_id": "ssot_proposal_artifact_versioning",
+      "expect_completion_state": "PENDING_FOUNDER",
+      "expect_final_role": "proposal"
+    }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "attestations": {
+    "ssot_agentic_ci": {
+      "automation_name": "ssot_agentic_ci",
+      "repo": "sina-governance-SSOT",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "Step 7F-A: merge_intended_branch_pending \u2014 agentic-ci.yml NOT on main (verified 2026-07-04; main has brain-loop-autorun-v1.yml only). PR #5 OPEN copilot/cost-locks-v1\u2192main. Agentic CI FAIL run 28695304453: ModuleNotFoundError yaml in cost_policy_enforcer.py. 7F-B incomplete (CI not green, not merged). Branch YAML also has hourly schedule cron \u2014 registry trigger=event; reconcile post-merge.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T05:08:58.361203+00:00"
+    },
+    "ssot_security_risk_assessment": {
+      "automation_name": "ssot_security_risk_assessment",
+      "repo": "sina-governance-SSOT",
+      "observed_trigger": "schedule",
+      "observed_mode": "code-scanning",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GitHub dynamic workflow dynamic/github-code-scanning/code-security-risk-assessment in Noetfield-Systems/sina-governance-ssot; CodeQL/security risk assessment \u2014 no LLM.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.421262+00:00"
+    },
+    "ssot_brain_loop_autorun_v1": {
+      "automation_name": "ssot_brain_loop_autorun_v1",
+      "repo": "sina-governance-SSOT",
+      "observed_trigger": "schedule",
+      "observed_mode": "integrator+gha",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "Owner noos_integrator: .noos/integrator_state.json sync_count=14 cross_ide_ready=true; GHA brain-loop-autorun-v1.yml cron */30 + workflow_dispatch; mac launchd scripts/brain_loop_launchd_entry_v1.sh. No Copilot surface.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.419556+00:00"
+    },
+    "ssot_cost_policy_receipt_validation": {
+      "automation_name": "ssot_cost_policy_receipt_validation",
+      "repo": "sina-governance-SSOT",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "Surfaced via Agentic CI promotion gate on copilot/cost-locks-v1 (run 28683011633 'Validate cost_policy receipt schema'); local checker scripts/check_cost_policy.py present. repo-fences-v1.yml exists locally unmerged on main.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.420459+00:00"
+    },
+    "noos_cost_policy_scan": {
+      "automation_name": "noos_cost_policy_scan",
+      "repo": "noetfeld-os",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "Step 7F-A: merge_intended_branch_pending \u2014 cost-policy-scan.yml NOT on main (verified 2026-07-04). PR #22 OPEN pr-10\u2192main. scan FAIL run 28683001606: cost_policy_scan.py exit 1. 7F-B incomplete (CI not green, not merged). Branch YAML push/PR triggers only; registry trigger=schedule \u2014 reconcile post-merge.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T05:08:58.362210+00:00"
+    },
+    "noos_factory_autorun": {
+      "automation_name": "noos_factory_autorun",
+      "repo": "noetfeld-os",
+      "observed_trigger": "schedule",
+      "observed_mode": "integrator+gha",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA noos-factory-autorun.yml cron 0,10,20,30,40,50 * * * * + repository_dispatch noos_factory_autorun_tick; CF worker noos-factory-autorun-tick-v1 bridges cron. No workflow_dispatch (by design). Owner noos_integrator.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.410890+00:00"
+    },
+    "noos_loop_health_checks": {
+      "automation_name": "noos_loop_health_checks",
+      "repo": "noetfeld-os",
+      "observed_trigger": "schedule",
+      "observed_mode": "cloudflare-cron",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "CF worker noos-loop-fleet-tick-v1 wrangler.toml crons */5 * * * *; /health endpoint in cloud/workers/noos-loop-fleet-tick-v1/src/index.js dispatches loop ticks. GHA loop workflows are separate dispatch targets.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.412271+00:00"
+    },
+    "noos_cross_repo_health": {
+      "automation_name": "noos_cross_repo_health",
+      "repo": "noetfeld-os",
+      "observed_trigger": "schedule",
+      "observed_mode": "integrator+gha",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA noos-cross-repo-orchestrator.yml cron 0 */3 * * * + workflow_dispatch; matrix repos noetfeld-os, Noetfield, TrustField. Owner noos_integrator.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.409520+00:00"
+    },
+    "sourcea_validate_boot": {
+      "automation_name": "sourcea_validate_boot",
+      "repo": "SourceA",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA validate-sourcea-boot-v1.yml on push/PR paths packages/sourcea-boot/**; Noetfield-Systems/SourceA workflow id 299504816.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.417463+00:00"
+    },
+    "sourcea_repo_policy_gate": {
+      "automation_name": "sourcea_repo_policy_gate",
+      "repo": "SourceA",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA repo-policy-gate.yml pull_request on AGENTS.md, repo-policy.json, scripts/check_sourcea_repo_policy.py paths.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.416591+00:00"
+    },
+    "sourcea_external_verify": {
+      "automation_name": "sourcea_external_verify",
+      "repo": "SourceA",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA external-verify.yml: workflow_dispatch, workflow_run after deploy-sourcea-buyer-surfaces-v1 (main success), path-filtered push. Step 7D: no schedule stanza in live YAML \u2014 primary surface is event/workflow_run chain.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.415482+00:00"
+    },
+    "sourcea_determinism_gate": {
+      "automation_name": "sourcea_determinism_gate",
+      "repo": "SourceA",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA determinism-gate.yml: workflow_dispatch, schedule 30 */6 * * *, push main on verify_autorun_determinism scripts. PR/push event class verify.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.414463+00:00"
+    },
+    "sourcea_deploy_buyer_surfaces_v1": {
+      "automation_name": "sourcea_deploy_buyer_surfaces_v1",
+      "repo": "SourceA",
+      "observed_trigger": "manual",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA deploy-sourcea-buyer-surfaces-v1.yml: workflow_dispatch + push main on landing paths; production environment gate. Manual promote path per registry.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.413314+00:00"
+    },
+    "noetfield_governance_console_e2e": {
+      "automation_name": "noetfield_governance_console_e2e",
+      "repo": "Noetfield",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA governance-console-e2e.yml PR/push on governance-console/** + workflow_dispatch.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.401448+00:00"
+    },
+    "noetfield_www_ci": {
+      "automation_name": "noetfield_www_ci",
+      "repo": "Noetfield",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA noetfield-www-ci.yml push/PR on html/assets/sitemap paths.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.407051+00:00"
+    },
+    "noetfield_platform_ci": {
+      "automation_name": "noetfield_platform_ci",
+      "repo": "Noetfield",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA platform-deploy.yml (Platform CI deploy-ready) push/PR on services/packages/infra paths.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.403191+00:00"
+    },
+    "noetfield_supabase_heartbeat": {
+      "automation_name": "noetfield_supabase_heartbeat",
+      "repo": "Noetfield",
+      "observed_trigger": "schedule",
+      "observed_mode": "gha-scheduled",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA supabase-heartbeat.yml cron 0 14 * * 1 (Mondays) + workflow_dispatch REST ping. Step 7D: registry owner corrected to github_actions (was cloudflare_worker seed error).",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.404396+00:00"
+    },
+    "noetfield_trust_ledger_ci": {
+      "automation_name": "noetfield_trust_ledger_ci",
+      "repo": "Noetfield",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA trust-ledger-ci.yml push/PR on services/governance/** and trust ledger migrations.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.405673+00:00"
+    },
+    "trustfield_autorun_24_7_health": {
+      "automation_name": "trustfield_autorun_24_7_health",
+      "repo": "TrustField-Technologies",
+      "observed_trigger": "schedule",
+      "observed_mode": "gha-scheduled",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA autorun-health.yml cron */30 + workflow_dispatch. Step 7D: registry owner corrected to github_actions (was cloudflare_worker seed error). cloud-loop-health.yml is separate backup.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.422116+00:00"
+    },
+    "trustfield_ci": {
+      "automation_name": "trustfield_ci",
+      "repo": "TrustField-Technologies",
+      "observed_trigger": "event",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA ci.yml push/PR on main|master branches.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.423021+00:00"
+    },
+    "trustfield_deploy_vercel": {
+      "automation_name": "trustfield_deploy_vercel",
+      "repo": "TrustField-Technologies",
+      "observed_trigger": "manual",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA vercel-deploy.yml workflow_dispatch only (CLI token deploy). Hook-based vercel-deploy-hook.yml is separate production path.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.425080+00:00"
+    },
+    "trustfield_e2e_production_smoke": {
+      "automation_name": "trustfield_e2e_production_smoke",
+      "repo": "TrustField-Technologies",
+      "observed_trigger": "schedule",
+      "observed_mode": "deterministic",
+      "observed_model": "model:none",
+      "observed_effort": "low",
+      "evidence_note": "GHA e2e-prod-smoke.yml workflow_dispatch + schedule cron 0 15 * * *.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "PASS",
+      "verdict_reasons": [
+        "Deterministic workflow: observed_model model:none matches registry model_policy."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T04:56:38.426151+00:00"
+    },
+    "trustfield_copilot_cloud_agent": {
+      "automation_name": "trustfield_copilot_cloud_agent",
+      "repo": "TrustField-Technologies",
+      "observed_trigger": "manual",
+      "observed_mode": "unknown",
+      "observed_model": "unknown",
+      "observed_effort": "unknown",
+      "evidence_note": "Step 7F-C refresh. Registry DISABLE (max_daily_runs=0). GH dynamic/copilot-swe-agent/copilot 'Copilot cloud agent' active (id 306444735); last observed success run 28640779314 on cursor/chatbot-audit-system 2026-07-03. Surface/registry mismatch: GH active vs registry DISABLE. Copilot Automations UI model/effort/mode not machine-readable \u2014 cannot attest beyond unknown.",
+      "desired_trigger": "manual",
+      "desired_model": "gpt-5-mini",
+      "desired_effort": "low",
+      "policy_verdict": "BLOCKED",
+      "verdict_reasons": [
+        "observed_model 'unknown' is empty/unknown \u2014 Copilot UI attestation required.",
+        "observed_effort 'unknown' is forbidden by default."
+      ],
+      "last_audited": "2026-07-03",
+      "updated_at": "2026-07-04T05:08:58.359795+00:00"
+    }
+  }
+}

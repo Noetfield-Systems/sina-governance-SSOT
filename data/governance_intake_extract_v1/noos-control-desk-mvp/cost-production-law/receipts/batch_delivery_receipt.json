@@ -1,0 +1,25 @@
+{
+  "receipt_type": "smart_production_cost_law_v2_batch_delivery",
+  "date": "2026-07-03",
+  "patches_applied": [
+    "Wording patch 1: 'human-attested UI configurations' -> 'UI-attested configurations, bootstrapped manually until a machine-readable Copilot automation inventory bridge exists.' (applied in section 5 callout and Step 3 of rollout sequence)",
+    "Wording patch 2: 'production-ready extraction loop' -> 'candidate failure-aggregating checker loop' (applied in section 7)",
+    "Status grounding: executive summary corrected to 'machine-enforced scaffold' not 'completed reality'",
+    "Receipt scope demotion: 'cryptographic receipt' language removed/corrected to 'schema-validated receipt' with explicit note that no HMAC/ledger-anchoring exists yet",
+    "NOOS boundary correction: 'absolute authority' replaced with 'coordination authority for repo-local/home-mirror/configured-cloud-mirror state'",
+    "Policy hierarchy formalized: Level 1 (this law) / Level 2 (COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md, now added as a real file, not just referenced) / Level 3 (workflow_registry_v1.json)"
+  ],
+  "files_in_batch": [
+    "SMART_PRODUCTION_COST_LAW_v2.md (patched)",
+    "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md (new - Level 2 sub-policy, added as a real file)",
+    "policy/cost_policy.yaml (unchanged from prior version, still valid)",
+    ".noos/workflow_registry_v1.json (unchanged, 23 entries, all last_audited=TODO by design)",
+    "scripts/check_cost_policy.py (one real fix: added the new sub-policy file to exclude_globs)",
+    "tests/* (unchanged, still 9/9)"
+  ],
+  "bug_found_and_fixed_during_real_verification": "Adding COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md as a real file caused 50 false-positive violations on first run, because that file documents forbidden model/effort/trigger terms as its own content (a 'forbidden list' necessarily contains the forbidden words). Same self-reference class of bug as the canon file hit in the previous batch. Fixed by adding it to exclude_globs. Re-ran and confirmed: self-scan now shows exactly 23 violations, all RCP5_audit_staleness, nothing else - proven by inspecting unique rule_ids in the JSON report, not just eyeballing console output.",
+  "tests_run": "tests/run_negative_tests.py",
+  "tests_result": "9/9 PASS - see receipts/batch_test_output.txt",
+  "self_scan_result": "FAIL (by design) - 23/23 entries flagged RCP5_audit_staleness (last_audited=TODO). Zero other violations. See receipts/self_scan_v2.json.",
+  "status": "SCAFFOLD_READY_AUDIT_PENDING"
+}

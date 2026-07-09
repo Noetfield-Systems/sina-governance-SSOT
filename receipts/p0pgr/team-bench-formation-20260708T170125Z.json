@@ -1,0 +1,26 @@
+{
+  "schema": "p0pgr_team_bench_formation_v1",
+  "receipt_id": "team-bench-formation-20260708T170125Z",
+  "recorded_at": "2026-07-08T17:01:25.142885+00:00",
+  "lane": "TEAM_BENCH_FORMATION",
+  "authorized_by": "founder-directive-team-bench-20260708T170125Z",
+  "artifacts": [
+    {
+      "path": "docs/TEAM_BENCH_FORMATION_PACKAGE_v1.md",
+      "sha256": "d4be9936a91e8ce14a8efaafd923996af3623aae1ed8a3418d99274a2d1eb791"
+    },
+    {
+      "path": "data/team_bench_tracker_v1.json",
+      "sha256": "de864f9d5630180465016203a0139e16da663691c9cf20c0642e211418307e3d"
+    }
+  ],
+  "status": "DRAFT-ACTIVE \u2014 founder sign-off required before any offer or external send",
+  "counters": {
+    "executions": 0,
+    "sends": 0,
+    "deploys": 0,
+    "leaks": 0,
+    "freezes": 0
+  },
+  "commit_flag": "flag for next founder-visible commit"
+}

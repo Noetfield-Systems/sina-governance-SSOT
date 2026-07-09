@@ -1,0 +1,20 @@
+{
+  "workflows": [
+    {
+      "workflow_id": "bad_direct_write_not_deploy",
+      "repo": "TestRepo",
+      "class": "safe_fix",
+      "owner": "copilot_manual",
+      "trigger": "manual",
+      "model_policy": "gpt-5-mini-low",
+      "writes": "direct",
+      "risk": "high",
+      "receipt_required": true,
+      "safe_fix_allowed": true,
+      "escalation": "halt_and_escalate_to_founder",
+      "single_owner_lock": true,
+      "last_audited": "2026-07-01",
+      "max_daily_runs": 1
+    }
+  ]
+}

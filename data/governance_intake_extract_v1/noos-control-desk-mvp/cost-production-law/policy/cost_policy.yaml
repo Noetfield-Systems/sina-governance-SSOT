@@ -1,0 +1,117 @@
+# policy/cost_policy.yaml
+# Machine-readable form of SMART_PRODUCTION_COST_LAW_v2.md.
+# scripts/check_cost_policy.py loads this and validates:
+#   (a) the workflow registry (.noos/workflow_registry_v1.json) against registry_schema + registry_rules
+#   (b) free-text workflow/automation config files against forbidden_patterns
+# Canon (the .md file) wins on any conflict with this file.
+
+policy_version: "2.0"
+
+# --- 10.1 model drift guard: single canonical string, change here only ---
+allowed_model: "gpt-5-mini"
+allowed_model_policy_values:
+  - "model:none"
+  - "gpt-5-mini-low"
+
+forbidden_model_patterns:
+  - "(?i)\\bauto\\b"
+  - "(?i)gpt-5\\.4"
+  - "(?i)gpt-5\\.3-codex"
+  - "(?i)\\bclaude\\b"
+  - "(?i)\\bcodex\\b"
+  - "(?i)\\bgemini\\b"
+  - "(?i)\\bkimi\\b"
+  - "(?i)mai-code"
+  - "(?i)coding agent model"
+  - "(?i)unknown model"
+  - "(?i)fallback model"
+
+forbidden_effort_patterns:
+  - "(?i)\\bhigh\\b\\s*effort"
+  - "(?i)effort\\s*[:=]\\s*high"
+  - "(?i)extra\\s*high"
+  - "(?i)unknown\\s*effort"
+  - "(?i)auto\\s*effort"
+
+forbidden_trigger_patterns:
+  - "(?i)copilot.*\\b(hourly|daily|weekly)\\b"
+  - "(?i)\\b(hourly|daily|weekly)\\b.*copilot"
+  - "(?i)background\\s+trigger"
+  - "(?i)keep\\s+awake"
+  - "(?i)unpinned\\s+schedule"
+  - "(?i)autopilot\\s+recurring"
+
+# --- 10.3 aggregate budgets / circuit breaker inputs ---
+budgets:
+  copilot_daily_task_cap: 20
+  copilot_daily_cost_cap_usd: 5.0
+  github_actions_daily_minutes_cap: 500
+  safe_fixer_daily_pr_cap: 10
+
+# --- registry schema contract (§5) ---
+registry_schema:
+  required_fields:
+    - workflow_id
+    - repo
+    - class
+    - owner
+    - trigger
+    - model_policy
+    - writes
+    - risk
+    - receipt_required
+    - safe_fix_allowed
+    - escalation
+    - single_owner_lock
+    - last_audited
+    - max_daily_runs
+  enums:
+    class: [observe, triage, safe_fix, verify, deploy, reconcile]
+    owner: [github_actions, cloudflare_worker, copilot_manual, noos_integrator]
+    trigger: [schedule, manual, event]
+    writes: [artifacts_only, branch_pr, direct]
+    risk: [low, medium, high]
+
+registry_rules:
+  # 10.2: safe_fix_allowed=true requires receipt_required=true
+  - id: RCP1_safe_fix_needs_receipt
+    description: "Any entry with safe_fix_allowed=true must have receipt_required=true."
+    condition: "safe_fix_allowed == true and receipt_required != true"
+    severity: red
+
+  # 10.1: workflow_id must be globally unique
+  - id: RCP2_unique_workflow_id
+    description: "workflow_id must be unique across the entire registry, not just per-repo."
+    check: "global_uniqueness"
+    field: "workflow_id"
+    severity: red
+
+  # writes:direct only valid for class=deploy
+  - id: RCP3_direct_write_only_for_deploy
+    description: "writes=direct is only valid when class=deploy (must reference a gate)."
+    condition: "writes == 'direct' and class != 'deploy'"
+    severity: red
+
+  # model_policy must be one of the two allowed exact strings
+  - id: RCP4_model_policy_value_locked
+    description: "model_policy must be exactly 'model:none' or 'gpt-5-mini-low'."
+    check: "enum_strict"
+    field: "model_policy"
+    allowed: ["model:none", "gpt-5-mini-low"]
+    severity: red
+
+  # 10.6: staleness check
+  - id: RCP5_audit_staleness
+    description: "last_audited must be within 30 days, since Copilot UI settings can't be read by script."
+    check: "date_within_days"
+    field: "last_audited"
+    max_days: 30
+    severity: yellow
+
+exceptions:
+  # Same shape as FOUNDER_INTENT_FILTER exceptions - explicit, scoped, expiring, logged.
+  # - rule_id: RCP4_model_policy_value_locked
+  #   scope: "some-workflow-id"
+  #   reason: "..."
+  #   expires: "2026-08-01"
+  #   logged_by: "sina"

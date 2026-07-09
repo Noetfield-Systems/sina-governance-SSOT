@@ -1,0 +1,642 @@
+{
+  "schema": "governance-intelligence-receipt-v1",
+  "receipt_id": "governance-intelligence-20260704T013325Z",
+  "recorded_at": "2026-07-04T01:33:25Z",
+  "canon_version": "founder_canon_v1.0.0",
+  "command": "thread-audit",
+  "ok": true,
+  "result": {
+    "schema": "governance-thread-audit-v1",
+    "thread_count": 8,
+    "threads": [
+      {
+        "thread_id": "copilot_automation_cost_profile_locked",
+        "display_name": "COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1",
+        "domain": "automation",
+        "completion_state": "COMPLETED",
+        "progress_pct": 100,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+          "role": "spec",
+          "version": "1",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 15,
+          "completeness_score": 70,
+          "pending_items": []
+        },
+        "companions": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          }
+        ],
+        "pending_items": [],
+        "left_abandoned": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1 2.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          }
+        ],
+        "change_timeline": [],
+        "change_quality_summary": {
+          "good_changes": 0,
+          "bad_changes": 0,
+          "neutral_changes": 0,
+          "net_quality_score": 0
+        },
+        "thread_links": [],
+        "artifact_count": 2
+      },
+      {
+        "thread_id": "deep_research_report",
+        "display_name": "deep-research-report",
+        "domain": "founder_canon",
+        "completion_state": "COMPLETED",
+        "progress_pct": 100,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+          "role": "spec",
+          "version": null,
+          "status": "ACTIVE_AMENDMENT_TARGET",
+          "progress_score": 0,
+          "completeness_score": 55,
+          "pending_items": []
+        },
+        "companions": [],
+        "pending_items": [],
+        "left_abandoned": [],
+        "change_timeline": [],
+        "change_quality_summary": {
+          "good_changes": 0,
+          "bad_changes": 0,
+          "neutral_changes": 0,
+          "net_quality_score": 0
+        },
+        "thread_links": [],
+        "artifact_count": 1
+      },
+      {
+        "thread_id": "founder_intent_filter",
+        "display_name": "FOUNDER_INTENT_FILTER",
+        "domain": "founder_canon",
+        "completion_state": "COMPLETED",
+        "progress_pct": 100,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+          "role": "spec",
+          "version": null,
+          "status": "ACTIVE",
+          "progress_score": 0,
+          "completeness_score": 45,
+          "pending_items": []
+        },
+        "companions": [],
+        "pending_items": [],
+        "left_abandoned": [],
+        "change_timeline": [],
+        "change_quality_summary": {
+          "good_changes": 0,
+          "bad_changes": 0,
+          "neutral_changes": 0,
+          "net_quality_score": 0
+        },
+        "thread_links": [],
+        "artifact_count": 1
+      },
+      {
+        "thread_id": "sourcea_brain_registry",
+        "display_name": "SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT",
+        "domain": "venture_routing",
+        "completion_state": "IN_PROGRESS",
+        "progress_pct": 50,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md",
+          "role": "discovery_report",
+          "version": "1",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 60,
+          "completeness_score": 65,
+          "pending_items": []
+        },
+        "companions": [],
+        "pending_items": [],
+        "left_abandoned": [],
+        "change_timeline": [
+          {
+            "version": "0.1.1",
+            "rationale": "initial discovery prompt, corrected from advisor draft: added vocabulary load, R1/R2 crawl-truth instruction, aligned output taxonomy to Brain Registry Task 1\u20133 format",
+            "quality_score": 25,
+            "quality_verdict": "good",
+            "quality_breakdown": {
+              "good:corrected": 20,
+              "neutral:initial": 0,
+              "neutral:added": 5
+            }
+          }
+        ],
+        "change_quality_summary": {
+          "good_changes": 1,
+          "bad_changes": 0,
+          "neutral_changes": 0,
+          "net_quality_score": 25
+        },
+        "thread_links": [
+          {
+            "to_thread": "ssot_proposal_artifact_versioning",
+            "relation": "resolved_by",
+            "evidence": "mentions 'artifact versioning'"
+          }
+        ],
+        "artifact_count": 1
+      },
+      {
+        "thread_id": "sourcea_brain_registry_learning_gate",
+        "display_name": "SOURCEA BRAIN REGISTRY LEARNING GATE",
+        "domain": "venture_routing",
+        "completion_state": "PENDING_THREAD",
+        "progress_pct": 80,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md",
+          "role": "spec",
+          "version": "0.1",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 60,
+          "completeness_score": 65,
+          "pending_items": [
+            {
+              "type": "phase_gate",
+              "text": "Phase 2+ not opened"
+            }
+          ]
+        },
+        "companions": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "role": "implementation_prompt",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "role": "spec",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "role": "implementation_prompt",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "role": "spec",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "role": "implementation_prompt",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "role": "spec",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT.md",
+            "role": "implementation_prompt",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1.md",
+            "role": "spec",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 IMPLEMENTATION PROMPT 20260629-1753.md",
+            "role": "implementation_prompt",
+            "artifact_state": "active"
+          }
+        ],
+        "pending_items": [
+          {
+            "type": "phase_gate",
+            "text": "Phase 2+ not opened"
+          }
+        ],
+        "left_abandoned": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 3.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 IMPLEMENTATION PROMPT 2.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 3.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1 2.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          }
+        ],
+        "change_timeline": [
+          {
+            "version": "0.1.1",
+            "rationale": "initial spec (registry, layer map, mutation classes, learning_record schema)",
+            "quality_score": 0,
+            "quality_verdict": "neutral",
+            "quality_breakdown": {
+              "neutral:initial": 0,
+              "neutral:initial spec": 0
+            }
+          },
+          {
+            "version": "0.1.2",
+            "rationale": "added Phase 1/2/3 sequencing, base-model vocabulary founding principle, living-system framing",
+            "quality_score": 5,
+            "quality_verdict": "neutral",
+            "quality_breakdown": {
+              "neutral:added": 5
+            }
+          },
+          {
+            "version": "0.1.3",
+            "rationale": "corrected \"no competing definitions\" \u2192 \"subordinate to statistical priors\" (technical accuracy fix)",
+            "quality_score": 27,
+            "quality_verdict": "good",
+            "quality_breakdown": {
+              "good:corrected": 20,
+              "good:technical accuracy": 22,
+              "bad:competing definitions": -15
+            }
+          },
+          {
+            "version": "0.1.4",
+            "rationale": "fixed R1\u2013R7 domain conflict: scoped vocabulary layer to D4-portable R1/R2/R6/R7 only, excluded R3/R4/R5 and AUDIT/EXECUTE from brain vocabulary",
+            "quality_score": 47,
+            "quality_verdict": "good",
+            "quality_breakdown": {
+              "good:fixed": 18,
+              "good:scoped": 15,
+              "good:excluded": 14
+            }
+          }
+        ],
+        "change_quality_summary": {
+          "good_changes": 2,
+          "bad_changes": 0,
+          "neutral_changes": 2,
+          "net_quality_score": 79
+        },
+        "thread_links": [],
+        "artifact_count": 14
+      },
+      {
+        "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+        "display_name": "SSOT CONFLICT LOG runtime rules domain split",
+        "domain": "venture_routing",
+        "completion_state": "PENDING_FOUNDER",
+        "progress_pct": 60,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md",
+          "role": "conflict_log",
+          "version": "0.1",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 70,
+          "completeness_score": 65,
+          "pending_items": [
+            {
+              "type": "founder_action",
+              "text": "Founder action required"
+            },
+            {
+              "type": "founder_approval",
+              "text": "Awaiting founder approval"
+            },
+            {
+              "type": "ratification",
+              "text": "Not yet ratified"
+            },
+            {
+              "type": "dependent_patch",
+              "text": "Dependent wording patch required"
+            }
+          ]
+        },
+        "companions": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/SSOT CONFLICT LOG runtime rules domain split.md",
+            "role": "conflict_log",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split.md",
+            "role": "conflict_log",
+            "artifact_state": "active"
+          },
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+            "role": "duplicate_copy",
+            "artifact_state": "stale_duplicate"
+          }
+        ],
+        "pending_items": [
+          {
+            "type": "founder_action",
+            "text": "Founder action required"
+          },
+          {
+            "type": "founder_approval",
+            "text": "Awaiting founder approval"
+          },
+          {
+            "type": "ratification",
+            "text": "Not yet ratified"
+          },
+          {
+            "type": "dependent_patch",
+            "text": "Dependent wording patch required"
+          }
+        ],
+        "left_abandoned": [
+          {
+            "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/SSOT CONFLICT LOG runtime rules domain split 2.md",
+            "reason": "superseded by newer dated/progress carrier in same thread"
+          }
+        ],
+        "change_timeline": [
+          {
+            "version": "0.1.1",
+            "rationale": "initial conflict log (R1\u2013R7 domain split observation + proposed clarification)",
+            "quality_score": 16,
+            "quality_verdict": "good",
+            "quality_breakdown": {
+              "good:domain split": 16,
+              "neutral:initial": 0
+            }
+          },
+          {
+            "version": "0.1.2",
+            "rationale": "corrected false claim that no existing artifact needed modification; flagged Founding Instruction as requiring a wording patch",
+            "quality_score": 5,
+            "quality_verdict": "neutral",
+            "quality_breakdown": {
+              "good:corrected": 20,
+              "good:wording patch": 10,
+              "bad:false claim": -25
+            }
+          }
+        ],
+        "change_quality_summary": {
+          "good_changes": 1,
+          "bad_changes": 0,
+          "neutral_changes": 1,
+          "net_quality_score": 21
+        },
+        "thread_links": [],
+        "artifact_count": 4
+      },
+      {
+        "thread_id": "ssot_proposal_artifact_versioning",
+        "display_name": "SSOT PROPOSAL artifact versioning",
+        "domain": "governance_structure",
+        "completion_state": "PENDING_FOUNDER",
+        "progress_pct": 70,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md",
+          "role": "proposal",
+          "version": "0.1.10",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 70,
+          "completeness_score": 65,
+          "pending_items": [
+            {
+              "type": "founder_action",
+              "text": "Founder action required"
+            },
+            {
+              "type": "founder_approval",
+              "text": "Awaiting founder approval"
+            }
+          ]
+        },
+        "companions": [],
+        "pending_items": [
+          {
+            "type": "founder_action",
+            "text": "Founder action required"
+          },
+          {
+            "type": "founder_approval",
+            "text": "Awaiting founder approval"
+          }
+        ],
+        "left_abandoned": [],
+        "change_timeline": [
+          {
+            "version": "0.1.1",
+            "rationale": "initial draft",
+            "quality_score": 0,
+            "quality_verdict": "neutral",
+            "quality_breakdown": {
+              "neutral:initial": 0,
+              "neutral:initial draft": 0
+            }
+          },
+          {
+            "version": "0.1.2",
+            "rationale": "added Phase 2 activation guard",
+            "quality_score": 5,
+            "quality_verdict": "neutral",
+            "quality_breakdown": {
+              "neutral:added": 5
+            }
+          },
+          {
+            "version": "0.1.3",
+            "rationale": "fixed R1\u2013R7 domain-split conflict (R3/R4/R5 excluded from brain vocabulary)",
+            "quality_score": 32,
+            "quality_verdict": "good",
+            "quality_breakdown": {
+              "good:fixed": 18,
+              "good:excluded": 14
+            }
+          }
+        ],
+        "change_quality_summary": {
+          "good_changes": 1,
+          "bad_changes": 0,
+          "neutral_changes": 2,
+          "net_quality_score": 37
+        },
+        "thread_links": [],
+        "artifact_count": 1
+      },
+      {
+        "thread_id": "strategy_ssot_v6_split",
+        "display_name": "strategy-ssot-v6-split",
+        "domain": "venture_routing",
+        "completion_state": "COMPLETED",
+        "progress_pct": 100,
+        "final_carrier": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+          "role": "spec",
+          "version": "6",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 15,
+          "completeness_score": 55,
+          "pending_items": []
+        },
+        "companions": [],
+        "pending_items": [],
+        "left_abandoned": [],
+        "change_timeline": [],
+        "change_quality_summary": {
+          "good_changes": 0,
+          "bad_changes": 0,
+          "neutral_changes": 0,
+          "net_quality_score": 0
+        },
+        "thread_links": [],
+        "artifact_count": 1
+      }
+    ],
+    "summary": {
+      "completed": 4,
+      "pending_founder": 2,
+      "pending_thread": 1,
+      "in_progress": 1,
+      "left_abandoned": 0
+    },
+    "completed_threads": [
+      {
+        "thread_id": "copilot_automation_cost_profile_locked",
+        "final": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+          "role": "spec",
+          "version": "1",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 15,
+          "completeness_score": 70,
+          "pending_items": []
+        }
+      },
+      {
+        "thread_id": "deep_research_report",
+        "final": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/deep-research-report.md",
+          "role": "spec",
+          "version": null,
+          "status": "ACTIVE_AMENDMENT_TARGET",
+          "progress_score": 0,
+          "completeness_score": 55,
+          "pending_items": []
+        }
+      },
+      {
+        "thread_id": "founder_intent_filter",
+        "final": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/founder-intent-filter/FOUNDER_INTENT_FILTER.md",
+          "role": "spec",
+          "version": null,
+          "status": "ACTIVE",
+          "progress_score": 0,
+          "completeness_score": 45,
+          "pending_items": []
+        }
+      },
+      {
+        "thread_id": "strategy_ssot_v6_split",
+        "final": {
+          "path": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/strategy-ssot-v6-split.md",
+          "role": "spec",
+          "version": "6",
+          "status": "ACTIVE_AMENDMENT",
+          "progress_score": 15,
+          "completeness_score": 55,
+          "pending_items": []
+        }
+      }
+    ],
+    "open_threads": [
+      {
+        "thread_id": "sourcea_brain_registry",
+        "state": "IN_PROGRESS",
+        "pending_items": [],
+        "final_carrier": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/Prompts /SOURCEA BRAIN REGISTRY DISCOVERY REPORT PROMPT v0_1_1 20260629-1758.md"
+      },
+      {
+        "thread_id": "sourcea_brain_registry_learning_gate",
+        "state": "PENDING_THREAD",
+        "pending_items": [
+          {
+            "type": "phase_gate",
+            "text": "Phase 2+ not opened"
+          }
+        ],
+        "final_carrier": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SOURCEA BRAIN REGISTRY LEARNING GATE v0_1_4 20260629-1753.md"
+      },
+      {
+        "thread_id": "ssot_conflict_log_runtime_rules_domain_split",
+        "state": "PENDING_FOUNDER",
+        "pending_items": [
+          {
+            "type": "founder_action",
+            "text": "Founder action required"
+          },
+          {
+            "type": "founder_approval",
+            "text": "Awaiting founder approval"
+          },
+          {
+            "type": "ratification",
+            "text": "Not yet ratified"
+          },
+          {
+            "type": "dependent_patch",
+            "text": "Dependent wording patch required"
+          }
+        ],
+        "final_carrier": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT CONFLICT LOG runtime rules domain split v0_1_2 20260629-1753.md"
+      },
+      {
+        "thread_id": "ssot_proposal_artifact_versioning",
+        "state": "PENDING_FOUNDER",
+        "pending_items": [
+          {
+            "type": "founder_action",
+            "text": "Founder action required"
+          },
+          {
+            "type": "founder_approval",
+            "text": "Awaiting founder approval"
+          }
+        ],
+        "final_carrier": "/Users/sinakazemnezhad/Desktop/Raw AI/untitled folder/New/1/Tag/SSOT PROPOSAL artifact versioning v0_1_1 20260629-1753.md"
+      }
+    ],
+    "ok": true
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "action": "sg_record_step7fb_partial_ui_attestation",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Registry-Package-Recorder",
+  "timestamp": "2026-07-04T05:37:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "amends": "receipts/sg-record-step7fb-unresolved-20260704T051000Z.json",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "substep": "7F-B",
+  "substep_status": "PARTIAL",
+  "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED",
+  "prior_classification": "BLOCKED_UI_ATTESTATION_REQUIRED",
+  "ui_evidence_attested": {
+    "require_approval": "ON",
+    "allow_automations": "OFF",
+    "firewall": "ON",
+    "recommended_allowlist": "ON"
+  },
+  "evidence_pointers": {
+    "sanitized_receipt": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+    "tracked_pointer": "reports/trustfield-copilot-ui-attestation-pointer-v1.json",
+    "raw_receipt_gitignored": "reports/improvement-receipt-v2.jsonl"
+  },
+  "draft_verdict": {
+    "status": "BLOCKED",
+    "pass_not_granted": true,
+    "reason": "Partial UI attestation only — Control Desk backend must accept re-attestation before PASS"
+  },
+  "draft_verdict_summary_unchanged": {
+    "pass_count": 22,
+    "fail_count": 0,
+    "blocked_count": 1,
+    "todo_count": 0,
+    "blocked_ids": ["trustfield_copilot_cloud_agent"]
+  },
+  "next_required": "POST /api/attestation/save re-attestation for trustfield_copilot_cloud_agent; backend verdict must accept before PASS",
+  "step_8": {
+    "status": "BLOCKED",
+    "advance_blocked": true,
+    "reason": "Final re-attestation not complete; draft still 22 PASS / 1 BLOCKED"
+  },
+  "lock_candidate": {
+    "status": "BLOCKED"
+  },
+  "sg_did_not": [
+    "mark_workflow_PASS_without_backend",
+    "mark_package_ACTIVE",
+    "start_step_8",
+    "submit_lock_candidate",
+    "commit_gitignored_raw_receipt",
+    "rewrite_noos_sync_behavior",
+    "edit_control_desk_frontend_backend"
+  ],
+  "receipt_refs": [
+    "receipts/sg-record-step7fb-unresolved-20260704T051000Z.json",
+    "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+    "reports/trustfield-copilot-ui-attestation-pointer-v1.json",
+    "reports/trustfield-copilot-agent-resolution-v1.jsonl"
+  ],
+  "policy_pass": false,
+  "active_promotion": false
+}

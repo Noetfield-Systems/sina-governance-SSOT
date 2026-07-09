@@ -1,0 +1,117 @@
+{
+  "schema": "noos_copilot_dispatcher_v1",
+  "version": "1.1.0",
+  "saved_at": "2026-07-04T04:00:00Z",
+  "owner": "SG (sina-governance-ssot)",
+  "authority_doc": "ssot/NOOS_COPILOT_DISPATCHER_v1.md",
+  "layer": "P2",
+  "domain": "integrator",
+  "role_id": "noos_copilot_dispatcher",
+  "display_name": "NOOS Copilot",
+  "purpose": "P2 cross-repo sync dispatcher for root repositories",
+  "status": "ACTIVE",
+
+  "root_repositories": [
+    "sina-governance-ssot",
+    "noetfeld-os",
+    "SourceA",
+    "Noetfield",
+    "TrustField-Technologies"
+  ],
+
+  "allowed_actions": [
+    "integrator_status_read",
+    "integrator_sync_repo_local",
+    "receipt_write",
+    "status_publish",
+    "drift_report_publish",
+    "draft_branch_pr_prep",
+    "home_mirror_readout",
+    "cloud_mirror_readout_read_only"
+  ],
+
+  "forbidden_actions": [
+    "promote_active",
+    "write_policy",
+    "amend_policy",
+    "propagate_audit_pending_registry_to_fleet",
+    "propagate_audit_pending_registry_to_cloud",
+    "fleet_rollout",
+    "direct_main_merge",
+    "policy_law_mutation",
+    "cloud_write_unrestricted",
+    "recurring_copilot_automation"
+  ],
+
+  "api_routes_allowed": [
+    "GET /api/integrator/status",
+    "POST /api/integrator/sync",
+    "GET /api/receipts/list"
+  ],
+
+  "api_contract": "data/noos_control_desk_api_contract_v1.json",
+  "integrator_script_canonical": "noetfeld-os/scripts/noos_integrator_sync_v1.py",
+  "integrator_script_ssot_adapter": "packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py",
+
+  "sync_mode_model": "data/noos-copilot-dispatcher-mode-v1.json",
+  "authority_pointer_doc": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+  "integrator_role_pointer": "data/noos-integrator-role-v1.json",
+  "integrator_role_canonical": "noetfeld-os/data/noos-integrator-role-v1.json",
+  "sync_model": "mode_gated",
+  "allowed_modes_before_full_pass": [
+    "read_status",
+    "publish_receipt",
+    "publish_status",
+    "publish_drift_report",
+    "prepare_draft_branch",
+    "prepare_pr"
+  ],
+  "blocked_modes_before_full_pass": [
+    "fleet_rollout",
+    "active_promotion",
+    "direct_main_write",
+    "policy_law_mutation",
+    "publish_audit_pending_registry_as_active_fleet_truth"
+  ],
+
+  "cloud_write_scope_gate": {
+    "rule": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked.",
+    "allowed_before_full_pass": [
+      "receipts",
+      "status",
+      "drift_reports",
+      "draft_branch_pr_prep"
+    ],
+    "blocked_before_full_pass": [
+      "fleet_rollout",
+      "active_promotion",
+      "direct_main_write",
+      "policy_law_mutation",
+      "audit_pending_registry_propagation"
+    ],
+    "cloud_write_unrestricted_allowed_before_full_pass": false
+  },
+
+  "step_5_sync_mode": {
+    "status": "COMPLETE_RECORDED",
+    "sg_record_only": true,
+    "noos_owns_behavior": true,
+    "receipt": "receipts/sg-record-step5-noos-sync-mode-20260704T043000Z.json",
+    "noos_patch_receipt": "receipts/noos-copilot-dispatcher-mode-patch-20260703T195800Z.json",
+    "recorded_at": "2026-07-04T04:30:00Z"
+  },
+
+  "step_4_verifier": {
+    "status": "ACCEPTED",
+    "checks_passed": 13,
+    "checks_total": 13,
+    "receipt": "packages/noos-control-desk-v1/receipts/integrator_step4_verifier_v1.json",
+    "accepted_at": "2026-07-04T02:44:18Z"
+  },
+
+  "distinction": {
+    "noos_copilot": "P2 cross-repo sync dispatcher — this record",
+    "github_copilot_ui": "P8 bounded manual helper — COPILOT_AUTOMATION_COST_PROFILE_LOCKED_v1.md",
+    "cursor_builder": "Primary code builder — sina-governance-ssot Phase 1"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "action": "integrator_sync",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    ".noos/integrator_state.json"
+  ],
+  "commands_run": [
+    "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 /Users/sinakazemnezhad/Projects/sina-governance-ssot/packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py sync",
+    "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 /Users/sinakazemnezhad/Projects/sina-governance-ssot/packages/noos-control-desk-v1/scripts/noos_integrator_sync_v1.py summary --json"
+  ],
+  "policy_pass": true,
+  "errors": [],
+  "timestamp": "2026-07-04T03:00:59.846441+00:00",
+  "next_machine_action": "Review integrator summary; scoped cloud writes only per NOOS Copilot gate.",
+  "summary": {
+    "repo_local": "fresh",
+    "repo_local_age_hours": 0.0,
+    "home_mirror": "synced",
+    "home_mirror_age_hours": 4.53,
+    "home_mirror_path": "/Users/sinakazemnezhad/.sina/noos-integrator-state-v1.json",
+    "cloud_mirror": {
+      "status": "unconfigured",
+      "path": null,
+      "last_seen": null,
+      "age_hours": null,
+      "cloud_write_unrestricted_allowed": false,
+      "cloud_write_scope": "gated",
+      "cloud_write_scope_gate": {
+        "rule": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked.",
+        "allowed_before_full_pass": [
+          "receipts",
+          "status",
+          "drift_reports",
+          "draft_branch_pr_prep"
+        ],
+        "blocked_before_full_pass": [
+          "fleet_rollout",
+          "active_promotion",
+          "direct_main_write",
+          "policy_law_mutation",
+          "audit_pending_registry_propagation"
+        ]
+      }
+    },
+    "cross_ide_ready": true,
+    "sync_count": 14,
+    "cloud_write_scope": "gated",
+    "cloud_write_unrestricted_allowed": false,
+    "cloud_write_scope_gate": {
+      "rule": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked.",
+      "allowed_before_full_pass": [
+        "receipts",
+        "status",
+        "drift_reports",
+        "draft_branch_pr_prep"
+      ],
+      "blocked_before_full_pass": [
+        "fleet_rollout",
+        "active_promotion",
+        "direct_main_write",
+        "policy_law_mutation",
+        "audit_pending_registry_propagation"
+      ]
+    },
+    "gate_note": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked."
+  },
+  "cloud_write_unrestricted_allowed": false,
+  "cloud_write_scope_gate": {
+    "rule": "Cloud writes are scope-gated. Before full PASS, NOOS Copilot may publish receipts, status, drift reports, and prepare draft branches/PRs. Fleet rollout, ACTIVE promotion, direct main write, and policy/law mutation remain blocked.",
+    "allowed_before_full_pass": [
+      "receipts",
+      "status",
+      "drift_reports",
+      "draft_branch_pr_prep"
+    ],
+    "blocked_before_full_pass": [
+      "fleet_rollout",
+      "active_promotion",
+      "direct_main_write",
+      "policy_law_mutation",
+      "audit_pending_registry_propagation"
+    ]
+  }
+}

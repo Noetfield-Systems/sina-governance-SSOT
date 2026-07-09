@@ -1,0 +1,75 @@
+{
+  "action": "sg_record_step7de_update",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Registry-Package-Recorder",
+  "timestamp": "2026-07-04T05:11:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "amends": "receipts/sg-record-step7de-complete-20260704T045800Z.json",
+  "substeps_recorded": {
+    "7D_registry_drift_patch": {
+      "status": "COMPLETE",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+      "summary": "Safe registry drift patch applied (3 workflows)"
+    },
+    "7E_repost_attestations": {
+      "status": "COMPLETE",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+      "summary": "Re-posted all 23 attestations after backend verdict patch"
+    }
+  },
+  "draft_verdict_summary": {
+    "total": 23,
+    "pass_count": 22,
+    "fail_count": 0,
+    "blocked_count": 1,
+    "todo_count": 0,
+    "ready_for_lock_candidate": false,
+    "blocked_ids": [
+      "trustfield_copilot_cloud_agent"
+    ]
+  },
+  "remaining_verdict_blocker": {
+    "workflow_id": "trustfield_copilot_cloud_agent",
+    "verdict": "BLOCKED"
+  },
+  "branch_only_notes_recorded": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "draft_verdict": "PASS",
+      "not_live_main": true,
+      "fake_main_presence": false,
+      "note": "Draft PASS on model:none only; agentic-ci.yml not on main — branch-only gap documented, not faked"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "draft_verdict": "PASS",
+      "not_live_main": true,
+      "fake_main_presence": false,
+      "note": "Draft PASS on model:none only; cost-policy-scan.yml not on main — branch-only gap documented, not faked"
+    }
+  ],
+  "branch_only_evidence_ref": "packages/noos-control-desk-v1/receipts/step7f_a_branch_surface_verifier_2026-07-04.json",
+  "step_8": {
+    "status": "BLOCKED",
+    "advance_blocked": true
+  },
+  "lock_candidate": {
+    "status": "BLOCKED"
+  },
+  "sg_did_not": [
+    "fake_main_presence",
+    "mark_package_ACTIVE",
+    "start_step_8",
+    "submit_lock_candidate",
+    "rewrite_noos_sync_behavior"
+  ],
+  "receipt_refs": [
+    "receipts/sg-record-step7bc-accepted-20260704T045600Z.json",
+    "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+    "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json"
+  ],
+  "policy_pass": false,
+  "active_promotion": false
+}

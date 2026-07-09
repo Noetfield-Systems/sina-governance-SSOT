@@ -1,0 +1,90 @@
+{
+  "schema": "p0_execution_receipt_v1",
+  "receipt_id": "execution-PKT-0002-20260708T164627Z",
+  "recorded_at": "2026-07-08T16:46:27.979973+00:00",
+  "packet_id": "PKT-0002-noetfield-live-truth",
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "quality_state": "PASS",
+  "limitations": [
+    "hash comparison is whitespace-normalized; templating/shell-injected differences still read as MISMATCH",
+    "three key pages only \u2014 full-site sweep is a follow-up packet"
+  ],
+  "evidence": [
+    {
+      "claim": "live state of https://www.noetfield.com/ vs /Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/index.html",
+      "kind": "url_fetch",
+      "url": "https://www.noetfield.com/",
+      "status": 200,
+      "sha256": "ed832e565fe2fd16f594ab04a1445d1f5aaa8ba05fecfc983c84dc9e29e462a9",
+      "saved_path": "receipts/p0pgr/artifacts/execution-PKT-0002-20260708T164627Z/www.noetfield.com.html",
+      "normalized_sha256": "b3df9a49aa0efde42fa1b5293fbabd2d190a4b2cb85db6fbc7a09b07f79a1815",
+      "redirect_chain": [],
+      "repo_file_exists": true,
+      "repo_sha256": "ed832e565fe2fd16f594ab04a1445d1f5aaa8ba05fecfc983c84dc9e29e462a9",
+      "verdict": "MATCH"
+    },
+    {
+      "claim": "live state of https://www.noetfield.com/about/ vs /Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/about/index.html",
+      "kind": "url_fetch",
+      "url": "https://www.noetfield.com/about/",
+      "status": 200,
+      "sha256": "bfa2591c6621d369f87717e9f6ef1cb657835aef55f8f15535b794425eb0725a",
+      "saved_path": "receipts/p0pgr/artifacts/execution-PKT-0002-20260708T164627Z/about.html",
+      "normalized_sha256": "d9268cc881f64b1ab15534abcf6ef60f775d8b381de67d81fc5d3c883feb1303",
+      "redirect_chain": [],
+      "repo_file_exists": true,
+      "repo_sha256": "bfa2591c6621d369f87717e9f6ef1cb657835aef55f8f15535b794425eb0725a",
+      "verdict": "MATCH"
+    },
+    {
+      "claim": "live state of https://www.noetfield.com/structure/ vs /Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/structure/index.html",
+      "kind": "url_fetch",
+      "url": "https://www.noetfield.com/structure/",
+      "status": 200,
+      "sha256": "21c668b9d481139ec8388e909870bc450a2e5e8c291fb7102c5f85a42e0958cf",
+      "saved_path": "receipts/p0pgr/artifacts/execution-PKT-0002-20260708T164627Z/structure.html",
+      "normalized_sha256": "358eaf92ce72b1a27135c2e61cf31ca75b4d43d084f69fe84c127e15d62064a0",
+      "redirect_chain": [],
+      "repo_file_exists": true,
+      "repo_sha256": "21c668b9d481139ec8388e909870bc450a2e5e8c291fb7102c5f85a42e0958cf",
+      "verdict": "MATCH"
+    }
+  ],
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "deterministic fetch+hash; orchestration cost sits in the invoking session"
+  },
+  "accounting_note": "session-embedded LLM orchestration; script itself zero LLM calls",
+  "executor_route_note": "DECLARED DEVIATION: packet route CLOUD_RESEARCH executed SESSION_EMBEDDED \u2014 no cloud executor has access to the local repo copies yet; wiring cloud repo access is queued as follow-up",
+  "findings": [
+    {
+      "url": "https://www.noetfield.com/",
+      "verdict": "MATCH",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.noetfield.com/about/",
+      "verdict": "MATCH",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.noetfield.com/structure/",
+      "verdict": "MATCH",
+      "status": 200,
+      "error": null
+    }
+  ],
+  "commit_flag": "flag for next founder-visible commit"
+}

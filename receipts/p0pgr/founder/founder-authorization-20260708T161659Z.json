@@ -1,0 +1,29 @@
+{
+  "schema": "p0pgr_founder_authorization_v1",
+  "receipt_id": "founder-authorization-20260708T161659Z",
+  "recorded_at": "2026-07-08T16:16:59.558921+00:00",
+  "git_head_at_recording": "51a9ae97de230a8e26a118bd79363237521a53db",
+  "directive_verbatim": "Founder selection 2026-07-08 in-session: 'Scaffold P0-PGR Phase 0 (Recommended)' \u2014 answer to census F1 question 'The P0-PGR runtime doesn't exist in sina-governance-SSOT. What is the real job to execute now?' Context order: 'only focus on real job.'",
+  "channel": "in-session founder selection (AskUserQuestion), recorded to repo per M03 lesson",
+  "scope": {
+    "unlocks": [
+      "Phase 0 scaffold in sina-governance-ssot: contracts, schemas, scripts, scorecards, seed packets, tests",
+      "shadow cycles (compile + lint + route, zero execution)",
+      "campaign planning and ROI ranking (drafts only)"
+    ],
+    "does_not_unlock": [
+      "packet execution beyond shadow cycles",
+      "external send",
+      "deploy/promote",
+      "scheduled automation",
+      "phase unlock beyond Phase 0 scaffold",
+      "authority or gate changes"
+    ]
+  },
+  "source_findings": [
+    "F1",
+    "F2"
+  ],
+  "census_receipt": "p0pgr-checklist-20260708T144545Z",
+  "commit_flag": "flag for next founder-visible commit"
+}

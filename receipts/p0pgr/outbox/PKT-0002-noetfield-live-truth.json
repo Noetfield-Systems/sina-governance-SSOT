@@ -1,0 +1,49 @@
+{
+  "schema": "p0_prompt_packet_v1.1",
+  "packet_id": "PKT-0002-noetfield-live-truth",
+  "created_at": "2026-07-08T16:16:59.558921+00:00",
+  "mission": "Fetch key noetfield.com pages, hash bodies, and diff against repo static files to establish live truth",
+  "problem_statement": "Live site state is asserted from memory rather than evidence; drift between repo and production is undetected.",
+  "deliverable": {
+    "type": "truth_diff_report",
+    "destination": "receipts/p0pgr/artifacts/",
+    "acceptance": "per-URL status + body sha256 + match/mismatch verdict; bodies saved as artifacts; zero writes to the site"
+  },
+  "route": "CLOUD_RESEARCH",
+  "gates": {
+    "cloud_only": true,
+    "read_only_or_reversible": true,
+    "roi_positive": true,
+    "no_deploy": true,
+    "no_external_send": true,
+    "no_legal_financial_commitment": true,
+    "no_p0_leakage": true,
+    "no_authority_change": true,
+    "founder_authorization_receipt": true
+  },
+  "roi": {
+    "revenue": 2,
+    "trust": 5,
+    "workload_relief": 2,
+    "cloud_now": 5,
+    "reversibility": 5,
+    "rationale": "trust: replaces memory-claims about the public site with hashed evidence | founder 2026-07-08: supporting trust proof, not top ROI priority"
+  },
+  "constraints": [
+    "GET requests only",
+    "record full redirect chains"
+  ],
+  "evidence_required": [
+    "per-URL status + body sha256",
+    "saved bodies under receipts/p0pgr/artifacts/"
+  ],
+  "confidence": "HIGH",
+  "status": "DONE",
+  "labels": [
+    "SUPPORTING_TRUST_PROOF",
+    "live_truth"
+  ],
+  "source_findings": [
+    "census F3"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "workflows": [
+    {
+      "workflow_id": "bad_model_policy_value",
+      "repo": "TestRepo",
+      "class": "triage",
+      "owner": "copilot_manual",
+      "trigger": "manual",
+      "model_policy": "gpt-5-mini-medium",
+      "writes": "artifacts_only",
+      "risk": "low",
+      "receipt_required": true,
+      "safe_fix_allowed": false,
+      "escalation": "log_only",
+      "single_owner_lock": true,
+      "last_audited": "2026-07-01",
+      "max_daily_runs": 1
+    }
+  ]
+}

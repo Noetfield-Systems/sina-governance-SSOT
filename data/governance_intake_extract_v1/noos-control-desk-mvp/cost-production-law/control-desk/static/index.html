@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NOOS Control Desk</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #151b23; --border: #2a323c; --text: #d8dee9;
+    --muted: #7d8590; --green: #3fb950; --red: #f85149; --yellow: #d29922;
+    --accent: #58a6ff; --mono: 'SF Mono', 'Consolas', monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,sans-serif; }
+  header { padding:16px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  header h1 { font-size:15px; margin:0; letter-spacing:0.5px; color:var(--accent); font-weight:600; }
+  header .sub { font-size:12px; color:var(--muted); font-family:var(--mono); }
+  nav { display:flex; gap:2px; padding:0 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+  nav button { background:none; border:none; color:var(--muted); padding:12px 16px; cursor:pointer; font-size:13px; border-bottom:2px solid transparent; }
+  nav button.active { color:var(--text); border-bottom-color:var(--accent); }
+  main { padding:24px; max-width:980px; margin:0 auto; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:16px; margin-bottom:14px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+  .stat { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:14px; }
+  .stat .num { font-size:26px; font-weight:700; font-family:var(--mono); }
+  .stat .label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:4px; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-family:var(--mono); font-weight:600; }
+  .badge.pass { background:rgba(63,185,80,0.15); color:var(--green); }
+  .badge.fail { background:rgba(248,81,73,0.15); color:var(--red); }
+  .badge.todo { background:rgba(210,153,34,0.15); color:var(--yellow); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; color:var(--muted); font-size:11px; text-transform:uppercase; padding:8px; border-bottom:1px solid var(--border); }
+  td { padding:8px; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:12px; }
+  tr:hover { background:rgba(255,255,255,0.02); }
+  button.action { background:var(--accent); color:#04101f; border:none; border-radius:5px; padding:8px 14px; font-size:13px; cursor:pointer; font-weight:600; }
+  button.action.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
+  button.action:hover { opacity:0.85; }
+  button.small { padding:4px 10px; font-size:11px; border-radius:4px; background:var(--border); color:var(--text); border:none; cursor:pointer; }
+  pre { background:#0a0e14; border:1px solid var(--border); border-radius:6px; padding:12px; font-size:11px; overflow:auto; max-height:340px; }
+  input, select { background:#0a0e14; border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:4px; font-size:12px; font-family:var(--mono); }
+  .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; }
+  .modal-backdrop.open { display:flex; }
+  .modal { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:20px; width:420px; }
+  .modal h3 { margin-top:0; font-size:14px; }
+  .field { margin-bottom:10px; }
+  .field label { display:block; font-size:11px; color:var(--muted); margin-bottom:4px; }
+  .field input, .field select { width:100%; }
+  .row { display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+  .muted { color:var(--muted); font-size:12px; }
+  .flash { padding:10px 14px; border-radius:6px; font-size:12px; margin-bottom:12px; font-family:var(--mono); }
+  .flash.ok { background:rgba(63,185,80,0.12); color:var(--green); border:1px solid rgba(63,185,80,0.3); }
+  .flash.err { background:rgba(248,81,73,0.12); color:var(--red); border:1px solid rgba(248,81,73,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>NOOS CONTROL DESK</h1>
+  <span class="sub" id="repoLabel">localhost:17877</span>
+</header>
+
+<nav>
+  <button class="tab active" data-tab="dashboard">Dashboard</button>
+  <button class="tab" data-tab="registry">Workflow Registry</button>
+  <button class="tab" data-tab="cost">Cost Policy</button>
+  <button class="tab" data-tab="sync">NOOS Sync</button>
+  <button class="tab" data-tab="receipts">Receipts</button>
+  <button class="tab" data-tab="submit">Submit Queue</button>
+</nav>
+
+<main>
+
+  <div class="panel active" id="panel-dashboard">
+    <div class="grid" id="dashStats"></div>
+    <div class="card">
+      <strong>Git status</strong>
+      <div id="gitStatus" class="muted" style="margin-top:8px;">loading...</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-registry">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong>Workflow Registry (.noos/workflow_registry_v1.json)</strong>
+        <button class="action" onclick="loadRegistry()">Refresh</button>
+      </div>
+      <table>
+        <thead><tr><th>workflow_id</th><th>repo</th><th>class</th><th>model_policy</th><th>last_audited</th><th>status</th><th></th></tr></thead>
+        <tbody id="registryBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-cost">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Cost Policy Checker</strong>
+        <button class="action" onclick="runValidate()">Run policy check</button>
+      </div>
+      <p class="muted">Runs <code>scripts/check_cost_policy.py</code> for real - aggregates every violation, never stops at the first.</p>
+      <div id="validateFlash"></div>
+      <pre id="validateOutput">Not run yet this session.</pre>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-sync">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>NOOS Integrator Sync</strong>
+        <button class="action" onclick="runSync()">Sync NOOS Integrator</button>
+      </div>
+      <p class="muted">Runs <code>scripts/noos_integrator_sync_v1.py sync</code> then <code>summary --json</code>.</p>
+      <div id="syncFlash"></div>
+      <pre id="syncOutput">Not run yet this session.</pre>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-receipts">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong>Receipts</strong>
+        <button class="action" onclick="loadReceipts()">Refresh</button>
+      </div>
+      <ul id="receiptsList" class="muted" style="font-family:var(--mono); font-size:12px;"></ul>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-submit">
+    <div class="card">
+      <strong>Submit Queue</strong>
+      <p class="muted">This cockpit never merges to main. It writes local files + receipts. Opening a real PR requires an actual git repo with a remote - checked honestly below, not assumed.</p>
+      <div id="submitStatus" class="muted">loading...</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="modal-backdrop" id="attestModal">
+  <div class="modal">
+    <h3>UI Attestation</h3>
+    <p class="muted" id="attestWid"></p>
+    <div class="field">
+      <label>Model policy</label>
+      <select id="af_model_policy">
+        <option value="model:none">model:none</option>
+        <option value="gpt-5-mini-low">gpt-5-mini-low</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Trigger</label>
+      <select id="af_trigger">
+        <option value="manual">manual</option>
+        <option value="schedule">schedule</option>
+        <option value="event">event</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Last audited (YYYY-MM-DD)</label>
+      <input id="af_last_audited" type="text" placeholder="2026-07-04">
+    </div>
+    <div class="row">
+      <button class="action secondary" onclick="closeAttest()">Cancel</button>
+      <button class="action" onclick="submitAttest()">Attest & Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentAttestWid = null;
+
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'registry') loadRegistry();
+  if (name === 'receipts') loadReceipts();
+  if (name === 'submit') loadSubmit();
+}
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+async function loadDashboard() {
+  const res = await fetch('/api/dashboard');
+  const d = await res.json();
+  const stats = document.getElementById('dashStats');
+  stats.innerHTML = `
+    <div class="stat"><div class="num">${d.registry_entries}</div><div class="label">Registry entries</div></div>
+    <div class="stat"><div class="num" style="color:var(--yellow)">${d.todo_audits}</div><div class="label">TODO audits</div></div>
+    <div class="stat"><div class="num" style="color:var(--green)">${d.audited}</div><div class="label">Audited</div></div>
+    <div class="stat"><div class="num">${d.git.dirty_file_count ?? '-'}</div><div class="label">Dirty files</div></div>
+  `;
+  document.getElementById('gitStatus').textContent = JSON.stringify(d.git, null, 2);
+}
+
+async function loadRegistry() {
+  const res = await fetch('/api/registry');
+  const data = await res.json();
+  const body = document.getElementById('registryBody');
+  body.innerHTML = '';
+  (data.workflows || []).forEach(wf => {
+    const isTodo = !wf.last_audited || wf.last_audited === 'TODO';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${wf.workflow_id}</td>
+      <td>${wf.repo}</td>
+      <td>${wf.class}</td>
+      <td>${wf.model_policy}</td>
+      <td>${wf.last_audited}</td>
+      <td><span class="badge ${isTodo ? 'todo' : 'pass'}">${isTodo ? 'TODO' : 'audited'}</span></td>
+      <td><button class="small" onclick="openAttest('${wf.workflow_id}')">Attest</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function openAttest(wid) {
+  currentAttestWid = wid;
+  document.getElementById('attestWid').textContent = wid;
+  document.getElementById('af_last_audited').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('attestModal').classList.add('open');
+}
+function closeAttest() { document.getElementById('attestModal').classList.remove('open'); }
+
+async function submitAttest() {
+  const body = {
+    workflow_id: currentAttestWid,
+    model_policy: document.getElementById('af_model_policy').value,
+    trigger: document.getElementById('af_trigger').value,
+    last_audited: document.getElementById('af_last_audited').value
+  };
+  const res = await fetch('/api/registry/attest', { method: 'POST', body: JSON.stringify(body) });
+  const result = await res.json();
+  closeAttest();
+  if (res.ok) {
+    loadRegistry();
+  } else {
+    alert('Rejected: ' + JSON.stringify(result.errors || result.error));
+  }
+}
+
+async function runValidate() {
+  const flash = document.getElementById('validateFlash');
+  const out = document.getElementById('validateOutput');
+  flash.innerHTML = '<div class="flash ok">Running checker...</div>';
+  const res = await fetch('/api/validate', { method: 'POST', body: '{}' });
+  const data = await res.json();
+  if (data.status !== 'OK') {
+    flash.innerHTML = `<div class="flash err">Error: ${data.message || 'unknown'}</div>`;
+    out.textContent = data.stderr || '';
+    return;
+  }
+  const report = data.report;
+  flash.innerHTML = `<div class="flash ${report.status === 'PASS' ? 'ok' : 'err'}">${report.status}: ${report.violations_found} violation(s) found, ${report.violations_active.length} active.</div>`;
+  out.textContent = JSON.stringify(report, null, 2);
+}
+
+async function runSync() {
+  const flash = document.getElementById('syncFlash');
+  const out = document.getElementById('syncOutput');
+  flash.innerHTML = '<div class="flash ok">Syncing...</div>';
+  const res = await fetch('/api/sync', { method: 'POST', body: '{}' });
+  const data = await res.json();
+  if (data.status !== 'OK') {
+    flash.innerHTML = `<div class="flash err">Error: ${data.message || 'unknown'}</div>`;
+    out.textContent = data.stderr || '';
+    return;
+  }
+  flash.innerHTML = `<div class="flash ok">Synced. repo_local: ${data.summary.repo_local}, home_mirror: ${data.summary.home_mirror}</div>`;
+  out.textContent = JSON.stringify(data.summary, null, 2);
+}
+
+async function loadReceipts() {
+  const res = await fetch('/api/receipts');
+  const data = await res.json();
+  const list = document.getElementById('receiptsList');
+  list.innerHTML = data.receipts.map(r => `<li>${r}</li>`).join('') || '<li>none yet</li>';
+}
+
+async function loadSubmit() {
+  const res = await fetch('/api/dashboard');
+  const d = await res.json();
+  document.getElementById('submitStatus').textContent = JSON.stringify(d.git, null, 2);
+}
+
+loadDashboard();
+</script>
+</body>
+</html>

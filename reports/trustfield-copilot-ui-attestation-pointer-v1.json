@@ -1,0 +1,24 @@
+{
+  "schema": "trustfield_copilot_ui_evidence_pointer_v1",
+  "workflow_id": "trustfield_copilot_cloud_agent",
+  "classification": "AUTOMATIONS_DISABLED_UI_ATTESTED_PARTIAL",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-04T05:38:00+00:00",
+  "sanitized_receipt": "packages/noos-control-desk-v1/receipts/trustfield_copilot_ui_attestation_sanitized_2026-07-04.json",
+  "raw_receipt": {
+    "repo": "TrustField-Technologies",
+    "path": "reports/improvement-receipt-v2.jsonl",
+    "gitignored": true,
+    "committed": false,
+    "branch_push_note": "TrustField Copilot branch push confirmed; HEAD unchanged because reports/ is gitignored"
+  },
+  "ui_settings_summary": {
+    "require_approval_for_workflow_runs": "ON",
+    "allow_automations": "OFF",
+    "firewall": "ON",
+    "recommended_allowlist": "ON"
+  },
+  "pass_not_recorded": true,
+  "remaining_gap": "Control Desk re-attestation or accepted tracked sanitized receipt required before PASS",
+  "sg_record": "receipts/sg-record-step7fb-partial-ui-evidence-20260704T053800Z.json"
+}

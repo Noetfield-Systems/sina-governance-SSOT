@@ -1,0 +1,33 @@
+{
+  "receipt_type": "founder_intent_filter_v1_delivery",
+  "date": "2026-07-03",
+  "source_report": "deep-research-report.md (Founder Intent Filter for Sandbox-First Autonomy)",
+  "downscope_decision": "Implemented lightweight repo-local enforcement only. Did NOT introduce OPA, Kubernetes admission, Firecracker, gVisor, SLSA, or Sigstore, per the report's own downscope recommendation and the current repo's actual stack.",
+  "files_created": [
+    "FOUNDER_INTENT_FILTER.md",
+    "policy/founder_intent.yaml",
+    "scripts/check_founder_runtime_dependency.py",
+    "tests/fixtures/bad_founder_approval.md",
+    "tests/fixtures/bad_manual_merge.md",
+    "tests/fixtures/bad_l5_normal_stage.md",
+    "tests/fixtures/bad_blocker_no_repair.md",
+    "tests/fixtures/bad_frozen_proof_target.md",
+    "tests/fixtures/good_clean_policy.md",
+    "tests/run_negative_tests.py"
+  ],
+  "tests_run": "tests/run_negative_tests.py",
+  "tests_result": "6/6 PASS - see attached test_output.txt",
+  "rejected_examples": [
+    {"rule": "R1_no_founder_specific_approval", "example": "Sina must approve the release manually.", "result": "REJECTED"},
+    {"rule": "R5_evidence_based_merge_and_phase_unlock", "example": "All feature branches require Sina merges into main.", "result": "REJECTED"},
+    {"rule": "R4_L5_is_anomaly_only", "example": "L5 review happens for every run regardless of risk level.", "result": "REJECTED"},
+    {"rule": "R3_denial_must_preserve_progress", "example": "the response is: denied. (no repair/reroute keyword nearby)", "result": "REJECTED"},
+    {"rule": "R7_frozen_proof_targets_not_hard_blockers", "example": "Zero-drift required before proceeding, regardless of feature scope.", "result": "REJECTED"}
+  ],
+  "self_scan_result": "PASS - repo's own governance files, once fixtures/canon are correctly scoped, contain zero active violations",
+  "bugs_found_and_fixed_during_real_verification": [
+    "Exclude-glob pattern '**/tests/fixtures/**' did not match paths without a leading segment (fnmatch has no true recursive-glob support) - fixed to use root-relative patterns.",
+    "Canon file itself (FOUNDER_INTENT_FILTER.md) tripped its own R5 pattern because it quotes the violation language as a documented example - added explicit self-exclusion for canon/policy files."
+  ],
+  "status": "PASS"
+}

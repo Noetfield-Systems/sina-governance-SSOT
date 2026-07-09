@@ -2,6 +2,7 @@
 
 **Status:** LOCKED — 2026-07-02  
 **Authority:** SG (SSSOT) — this document lives in SG; it **routes**, it does **not** build venture workers.  
+**Structure/version authority:** `ssot/GOVERNANCE_STRUCTURE_AND_VERSION_AUTHORITY_v1.md` — SG-owned; other repos/libraries only reference it.
 **Rule:** Every worker is **repo-specific**. One actor · one repo · one scope. Mixed-scope orders are defects.
 
 ---
@@ -31,6 +32,8 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 | **NOOS (GEL runtime)** | `~/Projects/noetfeld-os/` | noetfeld-os | GEL gate/log/audit · `docs/_NOOS_AGENT/` · **integrator** | api.noetfield.com runtime truth | Website source · default save to SourceA · cloud integrator write without `cloud_owner` |
 
 **NOOS integrator (all NOOS sessions):** repo-local state authoritative unless `cloud_owner.enabled`. Session exit → `noos_integrator_sync_v1.py sync`. SG mirror: `ssot/NOOS_INTEGRATOR_RULES_v1.md`.
+
+**Version law (all lanes):** existing rules stay live; newer versions amend and win only on direct conflict. Do not label a live base rule `superseded`.
 
 **Signal Factory v1 (interim):** built at `~/.cursor/skills/signal-factory/` — SourceA-owned meaning; **SourceA Worker** packages to SourceA repo; **SourceA Brain** B-01 pointer register.
 

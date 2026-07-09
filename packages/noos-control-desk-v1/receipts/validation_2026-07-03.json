@@ -1,0 +1,227 @@
+{
+  "action": "policy_check",
+  "repo": "sina-governance-SSOT",
+  "files_changed": [
+    "receipts/control_desk_last_validate.json"
+  ],
+  "commands_run": [
+    "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 /Users/sinakazemnezhad/Projects/sina-governance-ssot/packages/noos-control-desk-v1/scripts/check_cost_policy.py /Users/sinakazemnezhad/Projects/sina-governance-ssot/packages/noos-control-desk-v1 --json /Users/sinakazemnezhad/Projects/sina-governance-ssot/packages/noos-control-desk-v1/receipts/control_desk_last_validate.json"
+  ],
+  "policy_pass": false,
+  "errors": [
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=ssot_agentic_ci: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=ssot_security_risk_assessment: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=ssot_brain_loop_autorun_v1: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=ssot_cost_policy_receipt_validation: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noos_cost_policy_scan: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noos_factory_autorun: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noos_loop_health_checks: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noos_cross_repo_health: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=sourcea_validate_boot: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=sourcea_repo_policy_gate: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=sourcea_external_verify: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=sourcea_determinism_gate: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=sourcea_deploy_buyer_surfaces_v1: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noetfield_governance_console_e2e: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noetfield_www_ci: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noetfield_platform_ci: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noetfield_supabase_heartbeat: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=noetfield_trust_ledger_ci: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=trustfield_autorun_24_7_health: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=trustfield_ci: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=trustfield_deploy_vercel: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=trustfield_e2e_production_smoke: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "workflow_id=trustfield_copilot_cloud_agent: last_audited is unset/TODO",
+      "rule_id": "RCP5_audit_staleness",
+      "severity": "yellow"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "Observed fields free-text (gpt-5.4, Auto, High allowed \u2014 record leaks, mark FAIL/BLOCKED)",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "Observed fields free-text (gpt-5.4, Auto, High allowed \u2014 record leaks, mark FAIL/BLOCKED)",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "- POST attestation with gpt-5.4 \u2192 SAVED + policy_verdict FAIL (not rejected)",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "- Hide observed bad values (gpt-5.4, Auto, High must be typeable and show FAIL/BLOCKED)",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "- Hide observed bad values (gpt-5.4, Auto, High must be typeable and show FAIL/BLOCKED)",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "- Enter gpt-5.4 + high + hourly \u2192 save \u2192 FAIL visible, not hidden",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    },
+    {
+      "workflow_id": null,
+      "kind": "policy_validation",
+      "message": "- Enter unknown model \u2192 BLOCKED visible",
+      "rule_id": "COST_forbidden_model",
+      "severity": "red"
+    }
+  ],
+  "timestamp": "2026-07-04T03:00:59.793823+00:00",
+  "next_machine_action": "Fix violations",
+  "checker_exit_code": 1,
+  "report_status": "FAIL"
+}

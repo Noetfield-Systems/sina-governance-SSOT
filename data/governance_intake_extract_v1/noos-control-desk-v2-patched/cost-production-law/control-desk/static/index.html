@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NOOS Control Desk</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #151b23; --border: #2a323c; --text: #d8dee9;
+    --muted: #7d8590; --green: #3fb950; --red: #f85149; --yellow: #d29922;
+    --accent: #58a6ff; --mono: 'SF Mono', 'Consolas', monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,sans-serif; }
+  header { padding:16px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  header h1 { font-size:15px; margin:0; letter-spacing:0.5px; color:var(--accent); font-weight:600; }
+  header .sub { font-size:12px; color:var(--muted); font-family:var(--mono); }
+  nav { display:flex; gap:2px; padding:0 24px; border-bottom:1px solid var(--border); background:var(--panel); overflow-x:auto; }
+  nav button { background:none; border:none; color:var(--muted); padding:12px 14px; cursor:pointer; font-size:13px; border-bottom:2px solid transparent; white-space:nowrap; }
+  nav button.active { color:var(--text); border-bottom-color:var(--accent); }
+  main { padding:24px; max-width:1040px; margin:0 auto; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:16px; margin-bottom:14px; }
+  .grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:16px; }
+  .stat { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:14px; }
+  .stat .num { font-size:24px; font-weight:700; font-family:var(--mono); }
+  .stat .label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:4px; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-family:var(--mono); font-weight:600; }
+  .badge.pass { background:rgba(63,185,80,0.15); color:var(--green); }
+  .badge.fail { background:rgba(248,81,73,0.15); color:var(--red); }
+  .badge.blocked { background:rgba(248,81,73,0.3); color:#fff; }
+  .badge.todo { background:rgba(210,153,34,0.15); color:var(--yellow); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; color:var(--muted); font-size:11px; text-transform:uppercase; padding:8px; border-bottom:1px solid var(--border); }
+  td { padding:8px; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:12px; }
+  tr:hover { background:rgba(255,255,255,0.02); }
+  button.action { background:var(--accent); color:#04101f; border:none; border-radius:5px; padding:8px 14px; font-size:13px; cursor:pointer; font-weight:600; }
+  button.action.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
+  button.action.danger { background:var(--red); color:#fff; }
+  button.action:hover { opacity:0.85; }
+  button.action:disabled { opacity:0.4; cursor:not-allowed; }
+  button.small { padding:4px 10px; font-size:11px; border-radius:4px; background:var(--border); color:var(--text); border:none; cursor:pointer; }
+  pre { background:#0a0e14; border:1px solid var(--border); border-radius:6px; padding:12px; font-size:11px; overflow:auto; max-height:340px; }
+  input, select, textarea { background:#0a0e14; border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:4px; font-size:12px; font-family:var(--mono); width:100%; }
+  .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; overflow-y:auto; }
+  .modal-backdrop.open { display:flex; }
+  .modal { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:20px; width:480px; margin:20px; }
+  .modal h3 { margin-top:0; font-size:14px; }
+  .field { margin-bottom:10px; }
+  .field label { display:block; font-size:11px; color:var(--muted); margin-bottom:4px; }
+  .field-row { display:flex; gap:10px; }
+  .field-row .field { flex:1; }
+  .row { display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+  .muted { color:var(--muted); font-size:12px; }
+  .flash { padding:10px 14px; border-radius:6px; font-size:12px; margin-bottom:12px; font-family:var(--mono); }
+  .flash.ok { background:rgba(63,185,80,0.12); color:var(--green); border:1px solid rgba(63,185,80,0.3); }
+  .flash.err { background:rgba(248,81,73,0.12); color:var(--red); border:1px solid rgba(248,81,73,0.3); }
+  .section-label { font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:0.5px; margin:14px 0 6px; border-top:1px solid var(--border); padding-top:12px; }
+  .verdict-box { padding:8px 10px; border-radius:5px; font-size:12px; margin-top:8px; font-family:var(--mono); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>NOOS CONTROL DESK</h1>
+  <span class="sub" id="repoLabel">localhost:17877</span>
+</header>
+
+<nav>
+  <button class="tab active" data-tab="dashboard">Dashboard</button>
+  <button class="tab" data-tab="registry">Workflow Registry</button>
+  <button class="tab" data-tab="cost">Policy Validator</button>
+  <button class="tab" data-tab="sync">NOOS Sync</button>
+  <button class="tab" data-tab="receipts">Receipts</button>
+  <button class="tab" data-tab="lock">Lock Candidate</button>
+</nav>
+
+<main>
+
+  <div class="panel active" id="panel-dashboard">
+    <div class="grid" id="dashStats"></div>
+    <div class="card">
+      <strong>Git status</strong>
+      <div id="gitStatus" class="muted" style="margin-top:8px;">loading...</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-registry">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong>Workflow Registry - Copilot UI Attestation</strong>
+        <button class="action" onclick="loadRegistry()">Refresh</button>
+      </div>
+      <p class="muted">Click "Attest" and enter what you actually observe in the live UI - including bad values. The form does not block GPT-5.4, Auto, Claude, or High effort. It records them and marks the workflow FAIL/BLOCKED.</p>
+      <table>
+        <thead><tr><th>workflow_id</th><th>repo</th><th>owner</th><th>verdict</th><th>last_audited</th><th></th></tr></thead>
+        <tbody id="registryBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-cost">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Cost Policy Checker</strong>
+        <button class="action" onclick="runValidate()">Run policy check</button>
+      </div>
+      <p class="muted">Runs <code>scripts/check_cost_policy.py</code> for real - aggregates every violation, never stops at the first.</p>
+      <div id="validateFlash"></div>
+      <pre id="validateOutput">Not run yet this session.</pre>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-sync">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>NOOS Integrator Sync</strong>
+        <button class="action" onclick="runSync()">Sync NOOS Integrator</button>
+      </div>
+      <p class="muted">Runs <code>scripts/noos_integrator_sync_v1.py sync</code> then <code>summary --json</code>.</p>
+      <div id="syncFlash"></div>
+      <pre id="syncOutput">Not run yet this session.</pre>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-receipts">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong>Receipts</strong>
+        <button class="action" onclick="loadReceipts()">Refresh</button>
+      </div>
+      <ul id="receiptsList" class="muted" style="font-family:var(--mono); font-size:12px;"></ul>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-lock">
+    <div class="card">
+      <strong>Lock Candidate</strong>
+      <p class="muted">Only submittable when all 23 workflows are attested PASS. Applies attested dates to the real registry, re-runs the checker, and - only on PASS - creates a bounded local branch + commit. Never pushes. Never opens a PR. Never touches main.</p>
+      <div id="lockStatus" class="muted" style="margin:10px 0;">loading...</div>
+      <button class="action" id="lockBtn" onclick="submitLockCandidate()" disabled>Submit Lock Candidate</button>
+      <div id="lockFlash" style="margin-top:10px;"></div>
+      <pre id="lockOutput" style="margin-top:10px;"></pre>
+    </div>
+  </div>
+
+</main>
+
+<div class="modal-backdrop" id="attestModal">
+  <div class="modal">
+    <h3>UI Attestation - <span id="attestWid"></span></h3>
+    <p class="muted">Enter exactly what you observe in the live UI. Bad values are allowed and expected here - do not soften them.</p>
+
+    <div class="section-label">Observed reality (what the UI actually shows)</div>
+    <div class="field-row">
+      <div class="field"><label>observed_model (free text, e.g. gpt-5.4, Auto, Claude)</label>
+        <input id="af_observed_model" type="text" placeholder="gpt-5-mini"></div>
+      <div class="field"><label>observed_effort</label>
+        <input id="af_observed_effort" type="text" placeholder="low / high / unknown"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>observed_trigger</label>
+        <input id="af_observed_trigger" type="text" placeholder="manual / hourly / daily"></div>
+      <div class="field"><label>observed_mode</label>
+        <input id="af_observed_mode" type="text" placeholder="autopilot / plan"></div>
+    </div>
+    <div class="field"><label>evidence_note (required if effort=medium, useful always)</label>
+      <textarea id="af_evidence_note" rows="2" placeholder="e.g. Observed leak: misconfigured to High effort on GPT-5.4."></textarea></div>
+
+    <div class="section-label">Desired policy (what it should be)</div>
+    <div class="field-row">
+      <div class="field"><label>desired_model</label>
+        <select id="af_desired_model"><option>gpt-5-mini</option></select></div>
+      <div class="field"><label>desired_effort</label>
+        <select id="af_desired_effort"><option>low</option><option>medium</option></select></div>
+      <div class="field"><label>desired_trigger</label>
+        <select id="af_desired_trigger"><option>manual</option><option>schedule</option><option>event</option></select></div>
+    </div>
+
+    <div class="field"><label>last_audited (YYYY-MM-DD)</label>
+      <input id="af_last_audited" type="text"></div>
+
+    <div id="verdictPreview"></div>
+
+    <div class="row">
+      <button class="action secondary" onclick="closeAttest()">Cancel</button>
+      <button class="action" onclick="submitDraft()">Save Draft Attestation</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentAttestWid = null;
+
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'registry') loadRegistry();
+  if (name === 'receipts') loadReceipts();
+  if (name === 'lock') loadLockPanel();
+}
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+function badgeFor(verdict) {
+  if (!verdict) return '<span class="badge todo">TODO</span>';
+  const cls = verdict === 'PASS' ? 'pass' : verdict === 'BLOCKED' ? 'blocked' : 'fail';
+  return `<span class="badge ${cls}">${verdict}</span>`;
+}
+
+async function loadDashboard() {
+  const res = await fetch('/api/dashboard');
+  const d = await res.json();
+  const stats = document.getElementById('dashStats');
+  stats.innerHTML = `
+    <div class="stat"><div class="num">${d.registry_entries}</div><div class="label">Total workflows</div></div>
+    <div class="stat"><div class="num" style="color:var(--green)">${d.pass_count}</div><div class="label">PASS</div></div>
+    <div class="stat"><div class="num" style="color:var(--red)">${d.fail_count}</div><div class="label">FAIL</div></div>
+    <div class="stat"><div class="num" style="color:var(--red)">${d.blocked_count}</div><div class="label">BLOCKED</div></div>
+    <div class="stat"><div class="num" style="color:var(--yellow)">${d.todo_count}</div><div class="label">TODO</div></div>
+  `;
+  document.getElementById('gitStatus').textContent = JSON.stringify(d.git, null, 2);
+}
+
+async function loadRegistry() {
+  const [regRes, draftRes] = await Promise.all([fetch('/api/registry'), fetch('/api/draft')]);
+  const data = await regRes.json();
+  const draft = await draftRes.json();
+  const body = document.getElementById('registryBody');
+  body.innerHTML = '';
+  (data.workflows || []).forEach(wf => {
+    const att = draft.attestations ? draft.attestations[wf.workflow_id] : null;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${wf.workflow_id}</td>
+      <td>${wf.repo}</td>
+      <td>${wf.owner}</td>
+      <td>${badgeFor(att ? att.policy_verdict : null)}</td>
+      <td>${wf.last_audited}</td>
+      <td><button class="small" onclick='openAttest(${JSON.stringify(wf.workflow_id)})'>Attest</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function openAttest(wid) {
+  currentAttestWid = wid;
+  document.getElementById('attestWid').textContent = wid;
+  document.getElementById('af_last_audited').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('af_observed_model').value = '';
+  document.getElementById('af_observed_effort').value = '';
+  document.getElementById('af_observed_trigger').value = '';
+  document.getElementById('af_observed_mode').value = '';
+  document.getElementById('af_evidence_note').value = '';
+  document.getElementById('verdictPreview').innerHTML = '';
+  document.getElementById('attestModal').classList.add('open');
+}
+function closeAttest() { document.getElementById('attestModal').classList.remove('open'); }
+
+async function submitDraft() {
+  const body = {
+    workflow_id: currentAttestWid,
+    observed_model: document.getElementById('af_observed_model').value,
+    observed_effort: document.getElementById('af_observed_effort').value,
+    observed_trigger: document.getElementById('af_observed_trigger').value,
+    observed_mode: document.getElementById('af_observed_mode').value,
+    evidence_note: document.getElementById('af_evidence_note').value,
+    desired_model: document.getElementById('af_desired_model').value,
+    desired_effort: document.getElementById('af_desired_effort').value,
+    desired_trigger: document.getElementById('af_desired_trigger').value,
+    last_audited: document.getElementById('af_last_audited').value
+  };
+  const res = await fetch('/api/draft/save', { method: 'POST', body: JSON.stringify(body) });
+  const result = await res.json();
+  if (!res.ok) {
+    alert('Rejected: ' + (result.error || JSON.stringify(result)));
+    return;
+  }
+  const box = document.getElementById('verdictPreview');
+  const cls = result.policy_verdict === 'PASS' ? 'ok' : 'err';
+  box.innerHTML = `<div class="verdict-box flash ${cls}">Verdict: ${result.policy_verdict}<br>${result.verdict_reasons.join('<br>')}</div>`;
+  setTimeout(() => { closeAttest(); loadRegistry(); loadDashboard(); }, 900);
+}
+
+async function runValidate() {
+  const flash = document.getElementById('validateFlash');
+  const out = document.getElementById('validateOutput');
+  flash.innerHTML = '<div class="flash ok">Running checker...</div>';
+  const res = await fetch('/api/validate', { method: 'POST', body: '{}' });
+  const data = await res.json();
+  if (data.status !== 'OK') {
+    flash.innerHTML = `<div class="flash err">Error: ${data.message || 'unknown'}</div>`;
+    out.textContent = data.stderr || '';
+    return;
+  }
+  const report = data.report;
+  flash.innerHTML = `<div class="flash ${report.status === 'PASS' ? 'ok' : 'err'}">${report.status}: ${report.violations_found} violation(s) found, ${report.violations_active.length} active.</div>`;
+  out.textContent = JSON.stringify(report, null, 2);
+}
+
+async function runSync() {
+  const flash = document.getElementById('syncFlash');
+  const out = document.getElementById('syncOutput');
+  flash.innerHTML = '<div class="flash ok">Syncing...</div>';
+  const res = await fetch('/api/sync', { method: 'POST', body: '{}' });
+  const data = await res.json();
+  if (data.status !== 'OK') {
+    flash.innerHTML = `<div class="flash err">Error: ${data.message || 'unknown'}</div>`;
+    out.textContent = data.stderr || '';
+    return;
+  }
+  flash.innerHTML = `<div class="flash ok">Synced. repo_local: ${data.summary.repo_local}, home_mirror: ${data.summary.home_mirror}</div>`;
+  out.textContent = JSON.stringify(data.summary, null, 2);
+}
+
+async function loadReceipts() {
+  const res = await fetch('/api/receipts');
+  const data = await res.json();
+  const list = document.getElementById('receiptsList');
+  list.innerHTML = data.receipts.map(r => `<li>${r}</li>`).join('') || '<li>none yet</li>';
+}
+
+async function loadLockPanel() {
+  const res = await fetch('/api/draft/status');
+  const s = await res.json();
+  const div = document.getElementById('lockStatus');
+  const btn = document.getElementById('lockBtn');
+  div.innerHTML = `
+    PASS: ${s.pass_count}/${s.total} &nbsp; FAIL: ${s.fail_count} &nbsp; BLOCKED: ${s.blocked_count} &nbsp; TODO: ${s.todo_count}<br>
+    ${s.fail_count ? 'Blocking (FAIL): ' + s.fail_ids.join(', ') + '<br>' : ''}
+    ${s.blocked_count ? 'Blocking (BLOCKED): ' + s.blocked_ids.join(', ') + '<br>' : ''}
+    ${s.todo_count ? 'Not yet attested: ' + s.todo_ids.join(', ') : ''}
+  `;
+  btn.disabled = !s.ready_for_lock_candidate;
+}
+
+async function submitLockCandidate() {
+  const flash = document.getElementById('lockFlash');
+  const out = document.getElementById('lockOutput');
+  flash.innerHTML = '<div class="flash ok">Submitting...</div>';
+  const res = await fetch('/api/lock-candidate/submit', { method: 'POST', body: '{}' });
+  const data = await res.json();
+  flash.innerHTML = `<div class="flash ${res.ok ? 'ok' : 'err'}">${data.status}</div>`;
+  out.textContent = JSON.stringify(data, null, 2);
+  loadDashboard();
+}
+
+loadDashboard();
+</script>
+</body>
+</html>

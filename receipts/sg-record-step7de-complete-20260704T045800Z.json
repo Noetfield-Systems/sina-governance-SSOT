@@ -1,0 +1,94 @@
+{
+  "action": "sg_record_step7de_complete",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "role": "SG-Registry-Package-Recorder",
+  "timestamp": "2026-07-04T04:58:00Z",
+  "package_id": "noos-control-desk-v1",
+  "package_status_after": "SCAFFOLD_READY_AUDIT_PENDING",
+  "amends": "receipts/sg-record-step7bc-accepted-20260704T045600Z.json",
+  "substeps_recorded": {
+    "7D_registry_drift_patch": {
+      "status": "COMPLETE",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+      "workflows_patched": 3,
+      "patched_ids": [
+        "noetfield_supabase_heartbeat",
+        "trustfield_autorun_24_7_health",
+        "sourcea_external_verify"
+      ]
+    },
+    "7E_repost_attestations": {
+      "status": "COMPLETE",
+      "receipt": "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json",
+      "workflows_attested": 23,
+      "patches_reflected": [
+        "7B verdict (model:none deterministic PASS)",
+        "7D registry drift (3 rows)"
+      ]
+    }
+  },
+  "draft_verdict_summary": {
+    "total": 23,
+    "pass_count": 22,
+    "fail_count": 0,
+    "blocked_count": 1,
+    "todo_count": 0,
+    "ready_for_lock_candidate": false,
+    "blocked_ids": [
+      "trustfield_copilot_cloud_agent"
+    ]
+  },
+  "remaining_blocker": {
+    "workflow_id": "trustfield_copilot_cloud_agent",
+    "verdict": "BLOCKED",
+    "kind": "surface_registry_mismatch",
+    "detail": "Registry DISABLE (max_daily_runs=0) vs GH Copilot cloud agent active; Copilot UI model/effort unread"
+  },
+  "branch_only_notes_unresolved": [
+    {
+      "workflow_id": "ssot_agentic_ci",
+      "kind": "branch_only_pending",
+      "detail": "agentic-ci.yml not on main — merge before lock candidate",
+      "draft_verdict": "PASS",
+      "note": "Draft PASS on model:none; branch-only gap remains documented"
+    },
+    {
+      "workflow_id": "noos_cost_policy_scan",
+      "kind": "branch_only_pending",
+      "detail": "cost-policy-scan.yml not on main — merge before lock candidate",
+      "draft_verdict": "PASS",
+      "note": "Draft PASS on model:none; branch-only gap remains documented"
+    }
+  ],
+  "step_8": {
+    "status": "BLOCKED",
+    "advance_blocked": true,
+    "reason": "22/23 PASS — trustfield_copilot_cloud_agent BLOCKED; 7F branch/Copilot resolution incomplete"
+  },
+  "lock_candidate": {
+    "status": "BLOCKED",
+    "reason": "ready_for_lock_candidate false — 1 BLOCKED workflow"
+  },
+  "next_substep": {
+    "substep": "7F",
+    "name": "Resolve branch-only workflows and Copilot cloud agent mismatch",
+    "status": "PENDING"
+  },
+  "sg_did_not": [
+    "mark_package_ACTIVE",
+    "start_step_8",
+    "submit_lock_candidate",
+    "rewrite_noos_sync_behavior",
+    "promote_operational_rollout_ACTIVE",
+    "fake_last_audited_dates"
+  ],
+  "receipt_refs": [
+    "receipts/sg-record-step7-workflow-audit-20260704T045000Z.json",
+    "receipts/sg-record-step7bc-accepted-20260704T045600Z.json",
+    "packages/noos-control-desk-v1/receipts/step7d_registry_drift_patch_applied_2026-07-04.json",
+    "packages/noos-control-desk-v1/receipts/step7e_repost_attestations_2026-07-03.json"
+  ],
+  "policy_pass": false,
+  "active_promotion": false
+}

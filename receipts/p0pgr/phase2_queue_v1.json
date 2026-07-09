@@ -1,0 +1,32 @@
+{
+  "schema": "p0pgr_phase2_queue_v1",
+  "generated_at": "2026-07-08T16:46:28.019326+00:00",
+  "weights": {
+    "revenue": 35,
+    "trust": 25,
+    "workload_relief": 15,
+    "cloud_now": 15,
+    "reversibility": 10
+  },
+  "queue": [
+    {
+      "packet_id": "PKT-0002-noetfield-live-truth",
+      "score": 70.0,
+      "route": "CLOUD_RESEARCH",
+      "status": "DONE",
+      "mission": "Fetch key noetfield.com pages, hash bodies, and diff against repo static files to establish live truth",
+      "path": "receipts/p0pgr/outbox/PKT-0002-noetfield-live-truth.json",
+      "rank": 1
+    },
+    {
+      "packet_id": "PKT-0001-untracked-receipt-manifest",
+      "score": 59.0,
+      "route": "CLOUD_WORKER",
+      "status": "OUTBOX",
+      "mission": "Produce a commit manifest of every untracked receipt so the next founder-visible commit carries tamper evidence",
+      "path": "receipts/p0pgr/outbox/PKT-0001-untracked-receipt-manifest.json",
+      "rank": 2
+    }
+  ],
+  "next_move": "PKT-0002-noetfield-live-truth"
+}

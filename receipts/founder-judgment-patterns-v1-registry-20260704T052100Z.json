@@ -1,0 +1,47 @@
+{
+  "action": "founder_judgment_patterns_registry_verification",
+  "repo": "sina-governance-ssot",
+  "agent": "sg_sssot_cursor",
+  "timestamp": "2026-07-04T05:21:00Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "verification_result": "PASS",
+  "policy_pass": true,
+  "path": {
+    "install_path": "P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "absolute_install_path": "/Users/sinakazemnezhad/Desktop/SourceA/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "source_intake": "/Users/sinakazemnezhad/Downloads/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "file_exists_at_install_path": true
+  },
+  "metadata_verified": {
+    "title": "P0 CORE — FOUNDER JUDGMENT PATTERNS v1",
+    "tier": "P0 CORE (protected judgment layer)",
+    "reads": "Base Live Brain + high decision agents ONLY",
+    "forbids": "worker load",
+    "growth_rule": "harvest from real decisions only; no speculative philosophy",
+    "version": "v1",
+    "locked_date": "2026-06-28",
+    "install_path_declared": "noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/FOUNDER_JUDGMENT_PATTERNS_v1.md",
+    "metadata_consistent": true
+  },
+  "registry_status": "ACTIVE",
+  "authority_rule": "file existence and LOCKED header are not authority; ACTIVE SG registry pointer + this receipt required",
+  "read_scope": {
+    "machine_marker": "data/founder_judgment_patterns_read_scope_v1.json",
+    "allowed_readers": ["base_live_brain", "high_decision_agent"],
+    "forbidden_readers": ["worker", "normal_worker", "tier_1_worker", "build_lane_worker", "integrator_worker"],
+    "inject_into_worker_prompts": false
+  },
+  "cross_refs_added": [
+    "00-INDEX.md",
+    "P0-FOUNDATION-SPINE/P0_FOUNDATION_MANIFEST.md",
+    "P0-FOUNDATION-SPINE/SOURCEA_SSOT_INDEX_LOCKED_v1.md"
+  ],
+  "sg_did_not": [
+    "modify_worker_prompts",
+    "distribute_p0_core_to_workers",
+    "treat_file_authoritative_before_receipt"
+  ],
+  "layer": "P0",
+  "sub_layer": "P0_CORE",
+  "next_machine_action": "Dispatchers must consult read_scope marker before any P0 CORE load"
+}

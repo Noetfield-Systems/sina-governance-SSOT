@@ -50,6 +50,7 @@ def main() -> int:
 
     for script in [
         "scripts/validate_parallel_automation_governance_v1.py",
+        "scripts/validate_governance_intelligence_v1.py",
         "scripts/audit_automation_drift_v1.py",
     ]:
         code, tail = run(["/usr/bin/python3", str(ROOT / script)])
@@ -73,9 +74,12 @@ def main() -> int:
     code, tail = run(["/usr/bin/python3", str(ROOT / "scripts/write_roi_heartbeat_v1.py")])
     steps.append({"loop": "L7-RECEIPT-PROOF", "step": "write_roi_heartbeat_v1", "ok": code == 0, "tail": tail})
 
-    # Founder canon E2E wiring
+    # Founder canon + governance intelligence wiring
     code, tail = run(["/usr/bin/python3", str(ROOT / "scripts/validate_founder_canon_e2e_v1.py")])
     steps.append({"loop": "L2-MACHINE-VALID", "step": "validate_founder_canon_e2e_v1", "ok": code == 0, "tail": tail})
+
+    code, tail = run(["/usr/bin/python3", str(ROOT / "scripts/governance_intelligence_engine_v1.py"), "audit", "--json", "--no-write-queue"])
+    steps.append({"loop": "L2-MACHINE-VALID", "step": "governance_intelligence_engine_v1 audit", "ok": code == 0, "tail": tail})
 
     failed = [s for s in steps if not s["ok"]]
     cycle_ok = len(failed) == 0

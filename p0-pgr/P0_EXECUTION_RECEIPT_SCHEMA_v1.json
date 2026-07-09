@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+  "title": "P0 execution receipt v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "receipt_id",
+    "recorded_at",
+    "packet_id",
+    "gates_checked",
+    "quality_state",
+    "evidence",
+    "cost",
+    "accounting_note",
+    "executor_route_note",
+    "commit_flag"
+  ],
+  "properties": {
+    "schema": { "const": "p0_execution_receipt_v1" },
+    "receipt_id": { "type": "string" },
+    "recorded_at": { "type": "string" },
+    "packet_id": { "type": "string" },
+    "gates_checked": {
+      "type": "object",
+      "required": [
+        "cloud_only",
+        "read_only_or_reversible",
+        "roi_positive",
+        "no_deploy",
+        "no_external_send",
+        "no_legal_financial_commitment",
+        "no_p0_leakage",
+        "no_authority_change",
+        "founder_authorization_receipt"
+      ],
+      "additionalProperties": { "type": "string", "enum": ["PASS", "FAIL"] }
+    },
+    "quality_state": { "type": "string", "enum": ["PASS", "PARTIAL", "PROVISIONAL", "FAIL"] },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "kind"],
+        "properties": {
+          "claim": { "type": "string" },
+          "kind": { "type": "string", "enum": ["url_fetch", "script_run", "file_stat", "hash"] },
+          "url": { "type": "string" },
+          "status": { "type": "integer" },
+          "sha256": { "type": "string" },
+          "saved_path": { "type": "string" }
+        }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "required": ["llm_calls", "metered_note"],
+      "properties": {
+        "llm_calls": { "type": "integer" },
+        "metered_note": { "type": "string" }
+      }
+    },
+    "accounting_note": { "type": "string" },
+    "executor_route_note": { "type": "string" },
+    "findings": { "type": "array" },
+    "commit_flag": { "type": "string" }
+  }
+}

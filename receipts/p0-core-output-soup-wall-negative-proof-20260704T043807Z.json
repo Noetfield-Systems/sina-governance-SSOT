@@ -1,0 +1,120 @@
+{
+  "schema": "p0-core-output-soup-wall-negative-proof-v1",
+  "action": "p0_core_output_soup_wall_negative_proof",
+  "repo": "sina-governance-ssot",
+  "timestamp": "2026-07-04T04:38:07Z",
+  "artifact_id": "founder-judgment-patterns-v1",
+  "contract_id": "p0-core-decision-use-contract-v1",
+  "contract_path": "data/p0_core_decision_use_contract_v1.json",
+  "verification_result": "PASS",
+  "policy_pass": true,
+  "soup_wall_rule": "P0 reasoning stays above gate; workers receive scoped task-spec only",
+  "allowed_worker_task_spec_keys": [
+    "constraints",
+    "decision_verdict",
+    "done_criteria",
+    "files",
+    "goal",
+    "receipts_required",
+    "verify_method"
+  ],
+  "forbidden_leakage_markers_sample": [
+    "matched_patterns",
+    "reasoning_summary",
+    "PATTERN 1",
+    "PATTERN 2",
+    "PATTERN 3",
+    "PATTERN 4",
+    "PATTERN 5",
+    "PATTERN 6"
+  ],
+  "tests": [
+    {
+      "name": "block_p0_reasoning_in_worker_bundle",
+      "bundle": {
+        "goal": "Fix receipt chain",
+        "matched_patterns": [
+          "PATTERN 4 \u2014 Negative Proof",
+          "PATTERN 9 \u2014 Authority from Registry"
+        ],
+        "reasoning_summary": "Apply negative proof and registry authority \u2014 founder judgment layer.",
+        "files": [
+          "receipts/foo.json"
+        ]
+      },
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "blocked": true,
+      "reason": "BLOCKED_WITH_REASON: worker bundle has forbidden keys ['matched_patterns', 'reasoning_summary']",
+      "pass": true
+    },
+    {
+      "name": "block_pattern_11_reference",
+      "bundle": {
+        "goal": "Harvest",
+        "decision_verdict": "ESCALATE",
+        "matched_patterns": [
+          "PATTERN 11 \u2014 fabricated"
+        ]
+      },
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "blocked": true,
+      "reason": "BLOCKED_WITH_REASON: worker bundle has forbidden keys ['matched_patterns']",
+      "pass": true
+    },
+    {
+      "name": "allow_scoped_task_spec_only",
+      "bundle": {
+        "goal": "Write chronology reconciliation receipt and link audit chain",
+        "files": [
+          "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json",
+          "data/governance_artifact_registry_v1.json"
+        ],
+        "constraints": [
+          "preserve original receipts",
+          "no P0 CORE edits",
+          "no worker prompt changes"
+        ],
+        "done_criteria": [
+          "reconciliation receipt on disk",
+          "registry audit pointers updated"
+        ],
+        "verify_method": "python3 scripts/verify_p0_core_read_scope_gate_v1.py",
+        "receipts_required": [
+          "receipts/founder-judgment-patterns-v1-chronology-reconciliation-20260704T043000Z.json"
+        ],
+        "decision_verdict": "CONTINUE \u2014 labeling error only; preserve history"
+      },
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "blocked": false,
+      "reason": "worker bundle contains only scoped execution task-spec",
+      "pass": true
+    },
+    {
+      "name": "block_founder_judgment_filename",
+      "bundle": {
+        "goal": "Load FOUNDER_JUDGMENT_PATTERNS_v1.md into worker",
+        "files": [],
+        "constraints": [],
+        "done_criteria": [],
+        "verify_method": "none",
+        "receipts_required": [],
+        "decision_verdict": "RUN"
+      },
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "blocked": true,
+      "reason": "BLOCKED_WITH_REASON: P0 leakage in goal: FOUNDER_JUDGMENT_PATTERNS",
+      "pass": true
+    }
+  ],
+  "expected_result": "BLOCK on P0 leakage; ALLOW on clean task-spec",
+  "actual_result": "PASS",
+  "sg_did_not": [
+    "edit_p0_core_file",
+    "modify_worker_prompts",
+    "create_pattern_11"
+  ]
+}
