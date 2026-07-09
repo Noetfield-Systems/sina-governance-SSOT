@@ -1,6 +1,6 @@
 # SG (SSSOT) — Cursor agent lane
 
-**Agent:** `sg_sssot_cursor` · **Repo:** `~/Projects/sina-governance-ssot`  
+**Agent:** `sg_sssot_cursor` · **Repo:** `~/Desktop/Noetfield-Systems/sina-governance-SSOT`  
 **Registry:** `data/github_automation_registry_v1.json` · **Alive docs:** `data/agent_read_surfaces_v1.json` · **Staleness gate:** `scripts/verify_agent_read_staleness_v1.sh` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
 
 ## You edit (this repo)
@@ -13,10 +13,10 @@
 
 | Venture | Workspace | Owner agent |
 |---------|-----------|-------------|
-| SourceA Brain / Worker | `~/Projects/SourceA` | `sourcea_brain` / `sourcea_worker` |
+| SourceA Brain / Worker | `~/Desktop/Noetfield-Systems/SourceA` | `sourcea_brain` / `sourcea_worker` |
 | TrustField loops | `~/Desktop/trustfield-loops` | `trustfield_worker` |
-| NOOS doctrine | `~/Projects/noetfeld-os` | `noos_agent` |
-| Noetfield website | `~/Desktop/Noetfield/.../Noetfield/` | `noetfield_website` |
+| NOOS doctrine | `~/Desktop/Noetfield-Systems/noetfeld-OS` | `noos_agent` |
+| Noetfield website | `~/Desktop/Noetfield-Systems/Noetfield/` | `noetfield_website` |
 
 ## Mac founder session (INCIDENT-039)
 
