@@ -1,0 +1,34 @@
+{
+  "schema": "agent_worktree_lanes_v1",
+  "rule": "Every concurrent agent lane works in its OWN git worktree on its OWN branch. Never commit lane work to the shared main checkout (sina-governance-SSOT). See docs/AGENT_WORKTREE_ISOLATION_v1.md.",
+  "repo": "sina-governance-SSOT",
+  "main_checkout": {
+    "path": "~/Desktop/Noetfield-Systems/sina-governance-SSOT",
+    "role": "SHARED — do not do lane work here; reserve for integration/review only",
+    "note": "Historically collided: L0 + product-lock + sandbox agents all committed onto cursor/language-layer-v1 here. Drain to per-lane worktrees."
+  },
+  "lanes": [
+    {
+      "lane": "l0-repo-graph-maintenance",
+      "agent": "L0-maintenance",
+      "worktree": "~/Desktop/Noetfield-Systems/sg-l0-maintenance",
+      "branch": "cursor/l0-repo-graph-maintenance-v1",
+      "base": "3f61d41",
+      "owns": "L0 repo-graph template/registry/sync/playbook + rollout"
+    },
+    {
+      "lane": "product-category-lock",
+      "agent": "product-lock",
+      "worktree": "~/Desktop/Noetfield-Systems/sg-product-lock",
+      "branch": "cursor/product-category-lock-v1",
+      "owns": "commercial product category map + lock receipts"
+    },
+    {
+      "lane": "sandbox-build",
+      "agent": "sandbox-build",
+      "worktree": "~/Desktop/Noetfield-Systems/sg-sandbox",
+      "branch": "claude/sandbox-build",
+      "owns": "sandbox experiments / template test bed"
+    }
+  ]
+}
