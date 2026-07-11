@@ -263,6 +263,114 @@ IS NOT: agent claim of ready-to-send.
 **MALFORMED_DRAFT** — Dispatch check failure receipt with failed fields.
 
 
+## §11 — Founder reasoning motor + tier disambiguation (minted 2026-07-10)
+
+**FOUNDER_REASONING_PACKET** — Structured escalation bundle sent to founder; includes problem, evidence, cheap-route failures, exact question, options, verification contract, and return instruction.  
+IS NOT: a chat dump or bare `HANDOFF_REQUIRED`.  
+EX: `packet_id=frp-20260710-001` attached to `WAITING_FOR_FOUNDER_REASONING`.
+
+**FOUNDER_REASONING_QUEUE** — Integrator queue stage; holds packets; does **not** invoke expensive models.  
+IS NOT: automatic premium API worker.
+
+**WAITING_FOR_FOUNDER_REASONING** — Job state: dependent branch parked until `reasoning_result` ingested for `packet_id`.  
+IS NOT: global motor stop.
+
+**RESULT_INGESTION** — Motor stage validating and applying founder `reasoning_result` schema, then resuming automatic execution.  
+IS NOT: manual workflow restart by founder.
+
+**W-DET** — Deterministic work lane (no model).  
+**W-INTEL-LOW** — Low-cost intel lane (COST-T1 class).  
+**W-INTEL-BOUNDED** — Bounded API intel lane (COST-T2 class; capped bindings only).
+
+**COST-T0 / COST-T1 / COST-T2** — Motor cost execution tiers (P10).  
+IS NOT: `MERGE-T*` or `EXEC-T*`.
+
+**MERGE-T0 … MERGE-T3** — Merge authority tiers (P8); govern what may machine-merge vs founder-only.  
+IS NOT: motor cost or executor routing tiers.
+
+**EXEC-T0 … EXEC-T3** — Executor routing tiers (NOOS ROUTING_MATRIX); GHA / Copilot / Cursor / Codex.  
+IS NOT: merge authority or motor cost tiers.
+
+**HANDOFF_REQUIRED** — **Deprecated as terminal state.** Valid only with `packet_id` + queue stage; otherwise use `WAITING_FOR_FOUNDER_REASONING` or `FOUNDER_REASONING_QUEUE`.  
+IS NOT: permission to stop the motor without continuation contract.
+
+**SKIPPED_LLM** — Receipt reason: LLM layer skipped; deterministic path completed.  
+**LLM_PROVIDER_NOT_CONFIGURED** — Receipt reason: no approved provider binding; motor continues deterministically or queues.
+
+**PARTIAL** — Receipt quality: deterministic layer complete; LLM layer failed or absent.  
+IS NOT: loop hard-fail for deterministic-only loops.
+
+**Premium API automation** — Standing worker that auto-invokes expensive models.  
+IS NOT: founder subscription reasoning console.
+
+**Subscription-based founder reasoning** — Founder resolves heavy reasoning in paid subscription surfaces; result ingested once.  
+IS NOT: motor auto-spend on premium API.
+
+
+## §12 — Advisor-package harmonization (minted 2026-07-10)
+
+Absorbed from `FOUNDER_CONTINUATION_MOTOR_LOCKED_PACKAGE_v1` (advisor input) **into custody layers** — not as flat SSOT.  
+**Canonical receipts use the right column.** Left column is deprecated alias unless noted.
+
+### Cost execution classes
+
+| Advisor alias | Canonical (receipts) | Lane |
+|---|---|---|
+| `C0` / deterministic class | `COST-T0` | `W-DET` family |
+| `C1` / free or near-free callable | `COST-T1` | `W-INTEL-LOW` |
+| `C2` / bounded low-cost callable | `COST-T2` | `W-INTEL-BOUNDED` |
+| `C3` / founder-operated reasoning | `FOUNDER_REASONING_QUEUE` | not a cost tier — queue stage |
+
+Bare `C0`–`C3` or bare `T0`–`T3` in motor receipts: **forbidden**.
+
+### Worker class aliases
+
+| Advisor worker class | Canonical lane | COST class |
+|---|---|---|
+| `W-DET-EXEC` | `W-DET` | `COST-T0` |
+| `W-DET-PATCH` | `W-DET` | `COST-T0` |
+| `W-INTEL-FREE` | `W-INTEL-LOW` | `COST-T1` |
+| `W-INTEL-LOW` | `W-INTEL-LOW` | `COST-T1` (may bind COST-T2 caps) |
+| `W-INTEL-BOUNDED` | `W-INTEL-BOUNDED` | `COST-T2` |
+| `W-HANDOFF` | `FOUNDER_REASONING_QUEUE` | handoff mode — not callable intel |
+| `W-VERIFY-RECOMPUTE` | verification plane | not motor cost tier |
+| `W-VERIFY-CI` | verification plane | not motor cost tier |
+| `W-VERIFY-EDGE` | verification plane | Level-3 independent (P8 commissioning) |
+
+### Job / heading state aliases
+
+| Advisor alias | Canonical |
+|---|---|
+| `REASONING_WAIT` | `WAITING_FOR_FOUNDER_REASONING` |
+| `reasoning_wait` | `WAITING_FOR_FOUNDER_REASONING` |
+| `reasoning_result_received` | `RESULT_INGESTION` (stage) then job `ready` |
+| `handoff_required` (terminal) | **invalid** — use queue + `packet_id` |
+| `THROTTLED` | budget exhaustion; reroute or `FOUNDER_REASONING_QUEUE` |
+
+### Schema field aliases (NOOS JSON)
+
+| Advisor / informal | Canonical schema field |
+|---|---|
+| `selected_action` | `chosen_action` |
+| `proposed_patch` | `proposed_change` |
+| `verification_steps` | `verification_requirements` |
+| `founder_authorization` | `founder_authority_statement` |
+
+Schemas: `noetfeld-OS/noetfield-org/schemas/` (see `SCHEMA_INDEX_v1.md`).
+
+### Design vs commissioning status
+
+| Status | Meaning |
+|---|---|
+| `DESIGN_LOCKED` | Custody + library + NOOS binding ratified |
+| `IMPLEMENTATION_IN_PROGRESS` | Components building; schemas wired |
+| `PARTIALLY_COMMISSIONED` | Some proof runs pass |
+| `FULLY_COMMISSIONED` | P8 acceptance standard cold proofs A+B |
+| `NOT_OPERATIONAL` | No runtime claim permitted |
+
+`DESIGN_LOCKED` never implies `FULLY_COMMISSIONED`.
+
+
 ## §8 — Versioning
 
 Terminology rows are **minted from** dictionary entries — never authored standalone.

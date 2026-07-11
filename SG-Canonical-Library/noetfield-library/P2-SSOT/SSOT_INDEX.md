@@ -15,6 +15,13 @@
 | **Living System doctrine** | `../P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` | P0-CORE organ law: LIVING vs STALE axis; dual circulatory systems; §8 machine rubric. Execution: `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md`. |
 | **CHESS reasoning machine** | `../P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` | P0 forecast-before-action machine: Forecast → Patch → Proceed → Verify; labels PROCEED / PROCEED_WITH_PATCH / ASK_IF_IRREVERSIBLE; template `../P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md`. |
 | **Versioning law** | `SSOT_VERSIONING_LAW_v0.1.1.md` | Every edited artifact carries `v{major}.{minor}.{edit}_{YYYYMMDD-HHMM}` in **filename + in-file header + edit-log**. major=scope/phase change; minor=founder-approved substantive change; edit=every saved pass. No silent re-saves. Superseded versions retained unless founder says clean up. |
+| **Library custody matrix** | `LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md` | Custody chain: Master SSOT → Library → NOOS → runtime → verifier. Tier namespace law. Invalid receipt patterns. |
+| **Founder reasoning authority graph** | `AUTHORITY_GRAPH_FOUNDER_REASONING_LOCKED_v1.md` | Authority routing for §0.7 motor; lane sequence; four required integrator components (names). |
+| **Founder reasoning continuation** | `../P8-MACHINE-LOOPS/founder-reasoning-continuation-doctrine-LOCKED_v1.md` | Escalation = continuation; park rules; packet + ingestion minimums; subscription vs API automation. |
+| **Cost execution doctrine** | `../P10-PRODUCT-LAYERS/COST_EXECUTION_DOCTRINE_LOCKED_v1.md` | COST-T0/T1/T2 lanes; caps; degradation vocabulary; deterministic loops without LLM. |
+| **Motor commissioning standard** | `../P8-MACHINE-LOOPS/MOTOR_COMMISSIONING_AND_ACCEPTANCE_STANDARD_LOCKED_v1.md` | Cold proof runs A+B; `FULLY_COMMISSIONED` acceptance law. Design ≠ commissioned. |
+| **NOOS operational binding** | `Noetfield-Systems/noetfeld-OS` → `noetfield-org/FOUNDER_REASONING_MOTOR_OPERATIONAL_BINDING_v1.md` | Full operational spec; commit-pinned via `CUSTODY_AUTHORITY_PINS_v1.json`. **Not library SSOT.** |
+| **NOOS motor schemas** | `Noetfield-Systems/noetfeld-OS` → `noetfield-org/schemas/` | Packet, result, job contract, private binding JSON schemas. P7 §12 harmonization. |
 
 ## QUICK-REFERENCE derivations (for agents)
 - `R_DOMAIN_SPLIT.md` — the R1–R7 portability table (which rules cross into brain contexts).
@@ -23,7 +30,8 @@
 - `../P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md` — mandatory short vocabulary (Tier 0).
 - `../P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md` — long-form word SSOT (escalation).
 - `../P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` — living vs stale axis (P0-CORE).
-- `../P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` — terminology vs dictionary vs doctrine routing.
+- `LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md` — who locks what (P2 custody law).
+- `AUTHORITY_GRAPH_FOUNDER_REASONING_LOCKED_v1.md` — §0.7 authority routing graph.
 
 ## The R1–R7 portability table (canonical)
 | Rule | Domain | Portable to agentic-brain? |
@@ -36,7 +44,13 @@
 | R6 — receipt law | D4 | ✅ yes |
 | R7 — agent cannot self-verify | D4 | ✅ yes |
 
+- `../P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` — terminology vs dictionary vs doctrine routing.
+
 ---
-*v0.2 (2026-07-07) — Living System doctrine indexed.
+*v0.4 (2026-07-10) — Option C: P7 §12 harmonization, P8 commissioning, NOOS schemas index.*
+
+*v0.3 (2026-07-10) — Founder reasoning custody chain: custody matrix, authority graph, P8 continuation, P10 cost execution, NOOS operational binding index.*
+
+*v0.2 (2026-07-07) — Living System doctrine indexed.*
 
 *v0.1 (2026-07-03 12:34 PDT) — first write. Indexes the two ratified SSOT items + portability table.*

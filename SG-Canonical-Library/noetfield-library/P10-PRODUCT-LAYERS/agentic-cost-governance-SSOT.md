@@ -1,5 +1,8 @@
 # AGENTIC COST GOVERNANCE — SSOT (Draft)
 
+> **Motor cost-execution law (binding):** `COST_EXECUTION_DOCTRINE_LOCKED_v1.md` in this folder.  
+> This draft covers **customer FinOps product vocabulary** only — not motor lane custody.
+
 **Version:** v0.1.0_draft_20260705  
 **Status:** DRAFT SSOT (pilot-ready vocabulary)  
 **Authority:** FOUNDER_CANON v1 → this SSOT → agentic-cost-governance-service.md  

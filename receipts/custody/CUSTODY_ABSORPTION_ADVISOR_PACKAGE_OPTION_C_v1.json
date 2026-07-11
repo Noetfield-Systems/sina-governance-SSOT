@@ -1,0 +1,84 @@
+{
+  "schema": "noetfield/custody-absorption-receipt-v1",
+  "receipt_id": "CUSTODY_ABSORPTION_ADVISOR_PACKAGE_OPTION_C_v1",
+  "issued_at": "2026-07-11T00:10:00-07:00",
+  "subject": "advisor_package_option_c_selective_absorption",
+  "status": "PASS",
+  "source_package": {
+    "name": "FOUNDER_CONTINUATION_MOTOR_LOCKED_PACKAGE_v1",
+    "path": "~/Downloads/FOUNDER_CONTINUATION_MOTOR_LOCKED_PACKAGE_v1",
+    "manifest_verified": true,
+    "adopted_as_flat_ssot": false
+  },
+  "custody_rule": "Master SSOT anchors → Library defines → NOOS operationalizes → runtime executes → verifier proves",
+  "absorption_map": [
+    {
+      "source": "02_COST_INTELLIGENCE_ROUTING_DOCTRINE",
+      "destination": "P10 COST_EXECUTION_DOCTRINE (already locked); P7 §12 C0–C3 alias table",
+      "action": "harmonize_only"
+    },
+    {
+      "source": "03_FOUNDER_REASONING_COCKPIT_CONTRACT",
+      "destination": "P8 continuation + NOOS operational binding + schemas",
+      "action": "split_operationalize"
+    },
+    {
+      "source": "04_WORKER_ADAPTER_AND_JOB_CONTRACT",
+      "destination": "noetfeld-OS/noetfield-org/schemas/motor_job_contract.v1.schema.json + private_worker_binding.v1.schema.json",
+      "action": "schema_install"
+    },
+    {
+      "source": "06_COMMISSIONING_AND_ACCEPTANCE_STANDARD",
+      "destination": "P8-MACHINE-LOOPS/MOTOR_COMMISSIONING_AND_ACCEPTANCE_STANDARD_LOCKED_v1.md",
+      "action": "acceptance_law_placement"
+    },
+    {
+      "source": "schemas/*.json",
+      "destination": "noetfeld-OS/noetfield-org/schemas/*.v1.schema.json",
+      "action": "harmonized_install"
+    },
+    {
+      "source": "config/*.example.yaml",
+      "destination": "noetfeld-OS/noetfield-org/config/examples/",
+      "action": "runtime_examples_canonical_lanes"
+    },
+    {
+      "source": "01_FOUNDER_CONTINUATION_MOTOR_SSOT",
+      "destination": "not copied to Master SSOT",
+      "action": "deferred_kernel_anchor_future"
+    },
+    {
+      "source": "05_STATE_VERIFICATION_BLUEPRINT",
+      "destination": "not duplicated into Library",
+      "action": "deferred_d4_p8_split_future"
+    },
+    {
+      "source": "07_INCIDENT_LEARNINGS",
+      "destination": "P7 §12 status taxonomy + anti-drift via harmonization",
+      "action": "partial_mint"
+    }
+  ],
+  "artifacts_created": [
+    "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md §12",
+    "P8-MACHINE-LOOPS/MOTOR_COMMISSIONING_AND_ACCEPTANCE_STANDARD_LOCKED_v1.md",
+    "noetfeld-OS/noetfield-org/schemas/SCHEMA_INDEX_v1.md",
+    "noetfeld-OS/noetfield-org/schemas/founder_reasoning_packet.v1.schema.json",
+    "noetfeld-OS/noetfield-org/schemas/founder_reasoning_result.v1.schema.json",
+    "noetfeld-OS/noetfield-org/schemas/motor_job_contract.v1.schema.json",
+    "noetfeld-OS/noetfield-org/schemas/private_worker_binding.v1.schema.json",
+    "noetfeld-OS/noetfield-org/config/examples/cost_policy.example.yaml",
+    "noetfeld-OS/noetfield-org/config/examples/deployment_bindings.private.example.yaml"
+  ],
+  "artifacts_updated": [
+    "P2-SSOT/SSOT_INDEX.md",
+    "P2-SSOT/LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md",
+    "noetfeld-OS/noetfield-org/FOUNDER_REASONING_MOTOR_OPERATIONAL_BINDING_v1.md",
+    "noetfeld-OS/noetfield-org/CUSTODY_AUTHORITY_PINS_v1.json",
+    "sina-governance-SSOT/scripts/verify_founder_reasoning_custody_chain_v1.py"
+  ],
+  "master_ssot_touched": false,
+  "verifier_result": "PASS",
+  "runtime_status": "DESIGN_LOCKED",
+  "commissioning_status": "NOT_OPERATIONAL",
+  "commissioning_note": "FULLY_COMMISSIONED requires P8 cold proof runs A+B with evidence."
+}
