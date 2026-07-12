@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Signal Factory Receipt v1",
+  "type": "object",
+  "required": [
+    "signal_id",
+    "timestamp",
+    "source",
+    "classification",
+    "decision",
+    "risk_score",
+    "action",
+    "status"
+  ],
+  "properties": {
+    "signal_id": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "source": {"type": "string"},
+    "classification": {"type": "string"},
+    "decision": {"type": "string"},
+    "scores": {
+      "type": "object",
+      "properties": {
+        "trust": {"type": "number"},
+        "risk": {"type": "number"},
+        "automation_value": {"type": "number"},
+        "commercial_value": {"type": "number"}
+      }
+    },
+    "risk_score": {"type": "number"},
+    "action": {"type": "string"},
+    "status": {"type": "string"},
+    "optional_sections": {
+      "type": "object",
+      "properties": {
+        "automation_recipe": {"type": "string"},
+        "commercial_idea": {"type": "string"}
+      }
+    },
+    "evidence": {"type": "object"}
+  }
+}

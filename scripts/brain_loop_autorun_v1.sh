@@ -15,6 +15,7 @@ SHIP_FLAG="${HOME}/.sina/asf-ship-window-v1.flag"
 RECEIPT_DIR="$ROOT/receipts"
 LOG_DIR="${HOME}/.sina/logs"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
+AUTORUN_START_EPOCH="$(date +%s)"
 AUTORUN_RECEIPT="$RECEIPT_DIR/brain-loop-autorun-${TS}.json"
 STEP_LOG="$LOG_DIR/brain-autorun-step-${TS}.log"
 
@@ -67,15 +68,44 @@ if [[ "$AUTONOMOUS" == "1" && "$HOLD_ACTIVE" == "1" ]]; then
   echo "brain_loop_autorun_v1: HOLD — autonomous deploy paused"
   "$BRAIN_PYTHON" - <<PY
 import json
+import sys
 from pathlib import Path
+sys.path.insert(0, "$ROOT")
+from scripts.brain_domain_registry_v1 import load_registry, workflow_health_targets
+
+targets = workflow_health_targets(load_registry())
 payload = {
     "receipt_type": "BRAIN_LOOP_AUTORUN",
     "recorded_at": "$TS",
     "autonomous": True,
     "hold_active": True,
     "gate_note": "autonomous_hold_active",
+    "heartbeat_at": "$TS",
+    "health_score": 80,
+    "health_state": "paused",
+    "health_threshold": targets["min_health_score"],
+    "freshness_target_minutes": targets["freshness_target_minutes"],
+    "success_rate_target": targets["success_rate_target"],
+    "latency_target_minutes": targets["latency_target_minutes"],
+    "heartbeat_max_age_minutes": targets["heartbeat_max_age_minutes"],
+    "freshness_age_minutes": 0.0,
+    "success_rate_pct": 100.0 if int($SELF_HEAL_RC) == 0 and int($PARALLEL_RC) == 0 and int($MATRIX_RC) == 0 and int($GATE_RC) == 0 else 0.0,
+    "latency_minutes": 0.0,
+    "freshness_score": 100.0,
+    "success_rate_score": 100.0 if int($SELF_HEAL_RC) == 0 and int($PARALLEL_RC) == 0 and int($MATRIX_RC) == 0 and int($GATE_RC) == 0 else 0.0,
+    "latency_score": 100.0,
+    "freshness_miss": False,
+    "success_rate_miss": bool(int($SELF_HEAL_RC) != 0 or int($PARALLEL_RC) != 0 or int($MATRIX_RC) != 0 or int($GATE_RC) != 0),
+    "latency_miss": False,
+    "slo_miss": bool(int($SELF_HEAL_RC) != 0 or int($PARALLEL_RC) != 0 or int($MATRIX_RC) != 0 or int($GATE_RC) != 0),
+    "score_breakdown": {
+        "freshness": 100.0,
+        "success_rate": 100.0 if int($SELF_HEAL_RC) == 0 and int($PARALLEL_RC) == 0 and int($MATRIX_RC) == 0 and int($GATE_RC) == 0 else 0.0,
+        "latency": 100.0,
+    },
+    "slo_targets": targets,
 }
-Path("$AUTORUN_RECEIPT").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+Path("$AUTORUN_RECEIPT").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 PY
   exit 2
 fi
@@ -124,6 +154,24 @@ if [[ "$RUN_MATRIX" == "1" ]]; then
   rm -f "$MATRIX_LOG"
 else
   echo "SKIP: e2e matrix (observe-only)"
+fi
+
+HEALTH_SCORE=100
+if [[ "$SELF_HEAL_RC" -ne 0 ]]; then HEALTH_SCORE=$((HEALTH_SCORE - 35)); fi
+if [[ "$PARALLEL_RC" -ne 0 ]]; then HEALTH_SCORE=$((HEALTH_SCORE - 25)); fi
+if [[ "$MATRIX_RC" -ne 0 ]]; then HEALTH_SCORE=$((HEALTH_SCORE - 25)); fi
+if [[ "$GATE_RC" -ne 0 ]]; then HEALTH_SCORE=$((HEALTH_SCORE - 10)); fi
+if [[ "$HOLD_ACTIVE" -eq 1 ]]; then HEALTH_SCORE=$((HEALTH_SCORE - 5)); fi
+if [[ "$HEALTH_SCORE" -lt 0 ]]; then HEALTH_SCORE=0; fi
+HEALTH_STATE=healthy
+if [[ "$HOLD_ACTIVE" -eq 1 ]]; then
+  HEALTH_STATE=deferred
+elif [[ "$HEALTH_SCORE" -lt 85 || "$SELF_HEAL_RC" -ne 0 || "$PARALLEL_RC" -ne 0 || "$MATRIX_RC" -ne 0 || "$GATE_RC" -ne 0 ]]; then
+  HEALTH_STATE=degraded
+fi
+SLO_MISS=0
+if [[ "$HEALTH_SCORE" -lt 85 || "$SELF_HEAL_RC" -ne 0 || "$PARALLEL_RC" -ne 0 || "$MATRIX_RC" -ne 0 || "$GATE_RC" -ne 0 ]]; then
+  SLO_MISS=1
 fi
 
 MUTATION_TRIALS=$("$BRAIN_PYTHON" - <<PY
@@ -191,7 +239,12 @@ fi
 
 "$BRAIN_PYTHON" - <<PY
 import json
+import sys
 from pathlib import Path
+sys.path.insert(0, "$ROOT")
+from scripts.brain_domain_registry_v1 import load_registry, workflow_health_targets
+
+targets = workflow_health_targets(load_registry())
 payload = {
     "receipt_type": "BRAIN_LOOP_AUTORUN",
     "recorded_at": "$TS",
@@ -208,10 +261,17 @@ payload = {
     "brain_python": "$BRAIN_PYTHON",
     "mac_sigkill": bool($MAC_SIGKILL),
     "step_log": "$STEP_LOG",
+    "heartbeat_at": "$TS",
+    "health_score": $HEALTH_SCORE,
+    "health_state": "$HEALTH_STATE",
+    "health_threshold": targets["min_health_score"],
+    "heartbeat_max_age_minutes": targets["heartbeat_max_age_minutes"],
+    "slo_miss": bool($SLO_MISS),
+    "slo_targets": targets,
 }
 out = Path("$AUTORUN_RECEIPT")
 out.parent.mkdir(parents=True, exist_ok=True)
-out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 print(json.dumps(payload, indent=2))
 print(f"autorun_receipt: {out}")
 PY

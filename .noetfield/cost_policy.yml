@@ -1,0 +1,20 @@
+allowed_models:
+  - gpt-5-mini
+  - workers_ai_open_source
+banned_model_patterns:
+  - gpt-5.5
+  - gpt-5.4
+  - gpt-5.3
+  - gpt-5
+  - gpt-4
+  - gpt4
+  - claude
+  - anthropic
+  - openai
+  - "gpt-"
+  - "CLAUDE"
+  - "GPT-"
+policy_enforcement:
+  enforce_in_ci: true
+  enforce_in_precommit: false
+  message: "Disallowed model reference detected. Use only gpt-5-mini or workers_ai_open_source. If a founder-trigger is needed, file a request."

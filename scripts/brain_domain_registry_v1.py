@@ -33,14 +33,38 @@ def resolve_sourcea_root(registry: dict[str, Any] | None = None) -> Path:
     env_root = os.environ.get("SOURCEA_ROOT")
     if env_root:
         return expand_root(env_root)
-    default = reg.get("sourcea_root_default", "~/Projects/SourceA")
-    return expand_root(default)
+
+    candidates = [
+        reg.get("sourcea_root_default", "~/Projects/SourceA"),
+        reg.get("sourcea_root_desktop", "~/Desktop/SourceA"),
+    ]
+    for candidate in candidates:
+        resolved = expand_root(str(candidate))
+        if resolved.exists():
+            return resolved
+    return expand_root(str(candidates[0]))
 
 
 def resolve_sandbox_repo(registry: dict[str, Any], sandbox: dict[str, Any]) -> Path:
     """Repo for verifier/heal — always SOURCEA_ROOT env, never stale Desktop path."""
     _ = sandbox
     return resolve_sourcea_root(registry)
+
+
+def workflow_health_targets(registry: dict[str, Any] | None = None) -> dict[str, Any]:
+    reg = registry or load_registry()
+    defaults = {
+        "freshness_target_minutes": 360,
+        "success_rate_target": 99,
+        "latency_target_minutes": 15,
+        "heartbeat_max_age_minutes": 360,
+        "min_health_score": 85,
+        "kaizen_proof_prefix": "receipts/improvement-receipt-v2-",
+    }
+    targets = reg.get("workflow_health_targets", {}).get("brain_loop", {})
+    if not isinstance(targets, dict):
+        return defaults
+    return {**defaults, **targets}
 
 
 def get_sandbox(registry: dict[str, Any], sandbox_id: str) -> dict[str, Any]:

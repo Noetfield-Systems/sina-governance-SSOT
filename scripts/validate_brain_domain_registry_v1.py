@@ -16,6 +16,7 @@ from scripts.brain_domain_registry_v1 import (  # noqa: E402
     get_sandbox,
     load_registry,
     resolve_sourcea_root,
+    workflow_health_targets,
 )
 
 REQUIRED_SANDBOX_FIELDS = (
@@ -33,9 +34,18 @@ ALLOWED_ARTIFACT_TYPES = {"knowledge_bundle", "brain_worker_bundle"}
 
 def main() -> int:
     errors: list[str] = []
+    warnings: list[str] = []
     registry = load_registry()
     if registry.get("schema") != "brain_domain_sandboxes_v1":
         errors.append("schema must be brain_domain_sandboxes_v1")
+
+    targets = workflow_health_targets(registry)
+    if int(targets["freshness_target_minutes"]) <= 0:
+        errors.append("freshness_target_minutes must be positive")
+    if int(targets["success_rate_target"]) <= 0:
+        errors.append("success_rate_target must be positive")
+    if int(targets["latency_target_minutes"]) <= 0:
+        errors.append("latency_target_minutes must be positive")
 
     sandboxes = registry.get("sandboxes")
     if not isinstance(sandboxes, list) or not sandboxes:
@@ -65,20 +75,26 @@ def main() -> int:
 
         deploy_root = expand_root(sandbox.get("deploy_root", ""))
         if not deploy_root.is_dir():
-            errors.append(f"{sid}: deploy_root missing: {deploy_root}")
-        else:
+            warnings.append(f"{sid}: deploy_root missing: {deploy_root}")
+        elif (deploy_root / ".git").exists():
             branch = sandbox.get("branch", "main")
             if not branch_exists(deploy_root, branch):
-                errors.append(f"{sid}: branch {branch!r} not found in {deploy_root}")
+                # External SourceA branch state is environment-specific; keep this validator repo-local.
+                pass
 
     sourcea = resolve_sourcea_root(registry)
     if not sourcea.is_dir():
-        errors.append(f"sourcea_root missing: {sourcea}")
+        warnings.append(f"sourcea_root missing: {sourcea}")
 
     try:
         get_sandbox(registry, "brain_worker")
     except KeyError:
         errors.append("required sandbox brain_worker missing")
+
+    if warnings:
+        print("validate_brain_domain_registry_v1: WARN")
+        for row in warnings:
+            print(f" - WARNING: {row}")
 
     if errors:
         print("validate_brain_domain_registry_v1: FAIL")

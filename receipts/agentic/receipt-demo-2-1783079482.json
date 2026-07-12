@@ -1,0 +1,17 @@
+{
+  "signal_id": "demo-2",
+  "timestamp": "2026-07-03T11:51:22.781975Z",
+  "source": "webform:contact",
+  "classification": "client",
+  "decision": "create_service_pattern",
+  "scores": {
+    "trust": 2,
+    "risk": 2,
+    "automation_value": 0,
+    "commercial_value": 0
+  },
+  "risk_score": 2,
+  "action": "create_service_pattern",
+  "status": "repaired_by_rerun",
+  "optional_sections": {}
+}
