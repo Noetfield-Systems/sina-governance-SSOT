@@ -1,0 +1,14 @@
+{
+  "receipt_type": "doctrine_lock_receipt_v1",
+  "doc": "docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md",
+  "status": "LOCKED",
+  "authority": "founder-authored (Sina Kazemnezhad)",
+  "locked_at": "2026-07-12",
+  "sha256": "cda3c2f6e2e64060ea04f7d70d310ac61c19591413c113e70cfc4ba969a60c9d",
+  "size_bytes": 26768,
+  "line_count": 237,
+  "doctrine_points": 150,
+  "scope": ["Noetfield", "SourceA", "SourceB", "NOOS motor runtime"],
+  "rule": "canonical; supersede with a new version + founder approval — never mutate in place",
+  "verify": "shasum -a 256 docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md  # must equal sha256 above"
+}
