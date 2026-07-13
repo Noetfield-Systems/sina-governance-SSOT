@@ -1,0 +1,55 @@
+{
+  "schema": "founder_linkedin_upgrade_plans_v1",
+  "version": "1.0.0",
+  "status": "LOCKED",
+  "saved_at": "2026-07-13T08:04:26Z",
+  "parent": "SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md",
+  "waves": [
+    {
+      "wave": "W0",
+      "name": "SG install",
+      "plans": [
+        "FL-001",
+        "FL-002",
+        "FL-003",
+        "FL-004",
+        "FL-005"
+      ],
+      "complete": true
+    },
+    {
+      "wave": "W1",
+      "name": "Repo voice alignment",
+      "plans": [
+        "FL-011",
+        "FL-012",
+        "FL-013",
+        "FL-014",
+        "FL-015",
+        "FL-016"
+      ],
+      "complete": false
+    },
+    {
+      "wave": "W2",
+      "name": "Workflow motors",
+      "plans": [
+        "FL-021",
+        "FL-022",
+        "FL-023",
+        "FL-024"
+      ],
+      "complete": false
+    },
+    {
+      "wave": "W3",
+      "name": "Verify",
+      "plans": [
+        "FL-031",
+        "FL-032",
+        "FL-033"
+      ],
+      "complete": false
+    }
+  ]
+}

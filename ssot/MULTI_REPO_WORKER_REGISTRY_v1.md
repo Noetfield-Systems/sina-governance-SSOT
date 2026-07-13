@@ -157,3 +157,12 @@ cd ~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield && make verify-live-ner
 ---
 
 *v1.0 — 2026-07-02 — SG authoritative worker/repo map. Amend only via SG append + receipt.*
+
+---
+
+## 8. Founder LinkedIn voice (all actors)
+
+**Authority:** `SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md`
+
+Every actor that writes public copy, outbound, or commercial language must load the LOCKED profile before drafting. Venture repos implement via `docs/dispatch/founder-linkedin-voice-all-repos.md` — SG holds canonical text only.
+

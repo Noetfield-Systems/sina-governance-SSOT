@@ -1,3 +1,9 @@
+# SUPERSEDED
+
+Use `SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md`.
+
+---
+
 # LinkedIn Profile Finalization v1 — Sina K. Nejad
 
 **Base decision (Advisor, accepted):** Profile/About #2. Positioning = AI Value Governance + Execution Infrastructure. Do not over-center "autonomous execution" or "tokenomics." Human-executed (LinkedIn edits are yours); this doc is the paste-ready spec.

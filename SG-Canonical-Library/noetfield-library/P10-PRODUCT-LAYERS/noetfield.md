@@ -16,6 +16,9 @@
 **Commercial services:**
 - **AI Spend Leak Audit + Premium Model Firewall** (Agentic Cost Governance) — governance audit + policy guidance for AI automation cost control. Pre-launch, pilot phase. See agentic-cost-governance-service.md and P99-LEDGER/SERVICE_REGISTRY_2026-07-05.md.
 
+
+**Founder voice:** `../P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md` (LinkedIn LOCKED — Investor Workflow + AI Value Governance).
+
 **Governance:** FOUNDER_CANON v1 is the operational master.
 
 ---

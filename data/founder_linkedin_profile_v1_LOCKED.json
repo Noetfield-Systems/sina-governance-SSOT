@@ -1,0 +1,55 @@
+{
+  "schema": "founder_linkedin_profile_v1",
+  "version": "1.0.0",
+  "status": "LOCKED",
+  "saved_at": "2026-07-13T08:04:26Z",
+  "authority": "SG (SSSOT) \u00b7 founder voice",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md",
+  "display_name": "Sina K. Nejad",
+  "full_name": "Sina Kazemnezhad",
+  "entity": "Noetfield Systems Inc.",
+  "credential": "LLB",
+  "headline": "AI-Native Systems Architect | Custom AI Motors & Investor Workflows | Evidence-Based Audits \u00b7 Governed Execution | LLB",
+  "about": "Enterprise AI is moving from experimentation to governed execution.\n\nThe challenge is no longer whether AI can produce useful output. It is whether organizations can turn human intent, business policy, institutional knowledge, and AI capabilities into reliable workflows that can act, verify, escalate, improve, and produce evidence.\n\nMost organizations are not short on AI tools. They are short on coherence.\n\nI founded Noetfield Systems Inc. to build custom AI motors and governed workflows that connect natural-language intent, organizational policy, AI agents, business applications, human approvals, verification, and measurable outcomes.\n\nOur work focuses on:\n\u2022 Custom AI motors and workflow infrastructure\n\u2022 Evidence-based audits and operational diagnosis\n\u2022 Policy-as-code and bounded machine authority\n\u2022 Receipt-backed execution and verification\n\u2022 Cost-to-value governance\n\u2022 Drift detection, escalation, and repair loops\n\u2022 Private AI command interfaces\n\nA major Noetfield product line is Investor Workflow.\n\nWe build private AI workflows for investors, funds, family offices, accelerators, and institutional operators. These systems support deal intake, thesis matching, company screening, due diligence, investment memos, evidence tracking, portfolio monitoring, and decision governance.\n\nThe workflow begins with an honest audit. It separates claims from verified evidence, existing capabilities from incomplete implementations, strengths from material gaps, and recommendations from actions actually completed.\n\nApproved findings can then become bounded work: a task is created, routed, executed, verified, and recorded through a receipt.\n\nWe apply the same discipline to Noetfield's own products. Investors and partners should be able to see what is live, what remains incomplete, what capital would unlock, and how our systems operate in practice.\n\nAudit us before you invest in us.\nThen use the same workflow to audit your own opportunities, portfolio companies, operating processes, or investment decisions.\n\nAlongside Investor Workflows, Noetfield develops AI Value Governance infrastructure to show where AI spending is going, what value is being created, and where drift, retries, poor routing, or cost leakage occur.\n\nMy legal background, including an LLB, informs the design philosophy: governance should function inside execution systems, not only in policies or after-the-fact documentation.\n\nOpen to conversations with investors, funds, enterprise AI teams, infrastructure partners, and institutional operators building governed AI workflows and custom execution systems.",
+  "top_skills": [
+    "AI Policy, Governance, and Regulation",
+    "System Architecture",
+    "Business Process Automation",
+    "Compliance & Audit Readiness",
+    "Investment Due Diligence"
+  ],
+  "product_lines": [
+    {
+      "id": "investor_workflow",
+      "label": "Investor Workflow",
+      "audience": "investors, funds, family offices, accelerators, institutional operators"
+    },
+    {
+      "id": "ai_value_governance",
+      "label": "AI Value Governance",
+      "focus": "spend visibility, value, drift, retries, routing leaks"
+    },
+    {
+      "id": "custom_ai_motors",
+      "label": "Custom AI motors",
+      "focus": "governed workflow infrastructure"
+    },
+    {
+      "id": "evidence_based_audit",
+      "label": "Evidence-based audit",
+      "cta": "Audit us before you invest in us."
+    }
+  ],
+  "signature_ctas": [
+    "Audit us before you invest in us.",
+    "Then use the same workflow to audit your own opportunities, portfolio companies, operating processes, or investment decisions."
+  ],
+  "forbidden_framing": [
+    "unsupervised autonomous redesign",
+    "licensed/certified without receipt",
+    "generic AI consulting without Investor Workflow anchor"
+  ],
+  "supersedes": [
+    "docs/LINKEDIN_PROFILE_FINALIZATION_v1.md"
+  ]
+}

@@ -378,6 +378,49 @@
       "tag": "RC2_GAP_FILL",
       "meaning": "CHESS action label: low-risk reversible execute.",
       "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "Investor Workflow",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Noetfield product line: private AI workflows for investors, funds, and institutional operators.",
+      "code_alias": [
+        "investor workflow",
+        "investor workflows"
+      ]
+    },
+    {
+      "term": "Custom AI motors",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Governed workflow infrastructure connecting intent, policy, agents, apps, approvals, and receipts.",
+      "code_alias": [
+        "custom ai motors",
+        "ai motors"
+      ]
+    },
+    {
+      "term": "Evidence-based audit",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Audit separating claims from verified evidence; founder CTA anchor.",
+      "code_alias": [
+        "evidence-based audits",
+        "evidence based audit"
+      ]
+    },
+    {
+      "term": "Sina K. Nejad",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Founder display name on LinkedIn and public surfaces.",
+      "code_alias": [
+        "sina k nejad"
+      ]
+    },
+    {
+      "term": "FOUNDER_LINKEDIN_PROFILE_LOCKED_v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Canonical locked founder LinkedIn voice document in P1-CANON.",
+      "code_alias": [
+        "founder linkedin locked"
+      ]
     }
   ],
   "structural_allowlist": [

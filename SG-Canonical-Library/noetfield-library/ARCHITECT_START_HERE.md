@@ -60,6 +60,13 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 **CLI:** `scripts/chess_pass_cli_v1.py` · **Verify:** `scripts/verify_chess_pattern_reasoning_v2_install_v1.sh`
 
 
+
+## 2e. FOUNDER LINKEDIN VOICE (P1-CANON — all outbound & public copy)
+`P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md` = **canonical founder public voice** (headline, About, skills, CTAs).  
+**Machine:** `data/founder_linkedin_profile_v1_LOCKED.json` · **Wiring:** `docs/dispatch/founder-linkedin-voice-all-repos.md`  
+Product anchors: **Investor Workflow** · **AI Value Governance** · **Custom AI motors** · **Evidence-based audit**  
+Signature CTA: *Audit us before you invest in us.*
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

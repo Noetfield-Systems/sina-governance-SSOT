@@ -32,6 +32,8 @@
 
 ## Skills (load at session start)
 
+0b. **Founder LinkedIn voice (LOCKED)** — `SG-Canonical-Library/noetfield-library/P1-CANON/FOUNDER_LINKEDIN_PROFILE_LOCKED_v1.md` before outbound/UX/commercial copy
+
 0. **CHESS v2.0 (full package)** — `P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` + templates + `SKILLS/SKILL_01`–`07` + `scripts/chess_pass_cli_v1.py`
 
 1. `skill-foundational-agentic-systems`
