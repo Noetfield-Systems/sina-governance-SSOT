@@ -25,6 +25,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Validate workflow health receipts
+        run: python3 scripts/validate_brain_loop_health_v1.py
+
       - name: Install wrangler
         run: npm install -g wrangler
 
@@ -51,5 +54,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: brain-loop-autorun-receipt
-          path: receipts/brain-loop-autorun-*.json
+          path: |
+            receipts/brain-loop-autorun-*.json
+            receipts/brain-self-heal-tick-*.json
+            receipts/brain-kaizen-proof-*.json
+            receipts/improvement-receipt-v2-*.json
           if-no-files-found: ignore

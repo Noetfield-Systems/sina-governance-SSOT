@@ -1,0 +1,16 @@
+{
+  "schema": "noos-copilot-dispatcher-mode-v1",
+  "version": "1.0.0",
+  "recorded_at": "2026-07-03T21:45:01Z",
+  "description": "NOOS Copilot Dispatcher mode record. Discovery/registration only.",
+  "governance_ssot": {
+    "repo": "Noetfield-Systems/sina-governance-SSOT",
+    "path": "data/brain_domain_sandboxes_v1.json"
+  },
+  "org_repo_registry_pointer": "noetfield-org/REPO_REGISTRY.md",
+  "dispatcher": {
+    "name": "noos-copilot-dispatcher",
+    "mode": "discovery-registered",
+    "integrator_role": "data/noos-integrator-role-v1.json"
+  }
+}

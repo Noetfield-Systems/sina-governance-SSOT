@@ -1,0 +1,31 @@
+{
+  "receipt_type": "NOOS_COPILOT_DISPATCHER_MODE_REGISTRATION",
+  "recorded_at": "2026-07-03T21:45:01Z",
+  "sg_pointer_update": {
+    "target": "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+    "result": "updated",
+    "details": "Added SG governance SSOT pointer to authority doc"
+  },
+  "repo_registry_pointer_update": {
+    "target": "data/noos-copilot-dispatcher-mode-v1.json",
+    "result": "updated",
+    "details": "Added noetfield-org/REPO_REGISTRY.md pointer in machine record"
+  },
+  "package_map_registration": {
+    "key": "noos-copilot-dispatcher-mode",
+    "path": "data/noos-copilot-dispatcher-mode-v1.json",
+    "result": "registered"
+  },
+  "discovery_verification": {
+    "method": "package_map lookup + file existence",
+    "result": "PASS",
+    "details": "data/package_map.json key resolves to existing file"
+  },
+  "files_changed": [
+    "docs/NOOS_COPILOT_DISPATCHER_AUTHORITY.md",
+    "data/noos-copilot-dispatcher-mode-v1.json",
+    "data/noos-integrator-role-v1.json",
+    "data/package_map.json",
+    "receipts/noos-copilot-dispatcher-mode-registration-20260703T214501Z.json"
+  ]
+}

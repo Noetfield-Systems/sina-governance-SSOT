@@ -118,6 +118,91 @@ def independence_refusal_reasons(args: argparse.Namespace) -> list[str]:
     return []
 
 
+def cost_policy_refusal_reasons(args: argparse.Namespace) -> list[str]:
+    """Enforce presence and schema of a cost policy pass receipt for deploy/autonomous flows.
+
+    Rules enforced:
+      - missing receipt => FAIL
+      - missing required fields => FAIL
+      - cost_policy_pass must be true => FAIL
+      - unknown or banned provider/model => FAIL unless exception_approved==True in receipt
+    """
+    if getattr(args, "skip_cost_policy_check", False):
+        return []
+    receipt_path = Path(getattr(args, "cost_policy_receipt_path", "receipts/cost_policy_pass.json"))
+    if not receipt_path.is_file():
+        return [f"cost policy receipt missing: {receipt_path}"]
+    try:
+        proof = load_json_file(receipt_path)
+    except Exception:
+        return [f"cost policy receipt unreadable: {receipt_path}"]
+
+    required_fields = [
+        "provider",
+        "model",
+        "tokens_in",
+        "tokens_out",
+        "estimated_cost",
+        "cost_policy_pass",
+        "cost_policy_version",
+        "checked_by_ci",
+    ]
+    missing = [f for f in required_fields if f not in proof]
+    if missing:
+        return [f"cost policy receipt missing fields: {', '.join(missing)}"]
+
+    if proof.get("cost_policy_pass") is not True:
+        return ["cost_policy_pass is not true"]
+
+    # Load machine policy to validate provider/model
+    policy_path = _REPO_ROOT / ".noetfield" / "cost_policy_machine.json"
+    policy = {}
+    if policy_path.is_file():
+        try:
+            policy = load_json_file(policy_path)
+        except Exception:
+            # If policy unreadable, be conservative and fail
+            return [f"cost policy machine unreadable: {policy_path}"]
+
+    allowed_providers = set(policy.get("allowed_providers", []))
+    banned_providers = set(policy.get("banned_providers", []))
+    allowed_models = set(policy.get("allowed_default_models", []))
+    banned_models = set(policy.get("banned_models", []))
+
+    provider = proof.get("provider")
+    model = proof.get("model")
+
+    # If explicitly banned provider or model -> fail unless exception_approved
+    if provider in banned_providers or model in banned_models:
+        if not proof.get("exception_approved"):
+            return [f"provider/model is banned by policy: {provider}/{model}"]
+
+    # Unknown provider -> fail unless exception
+    if allowed_providers and provider not in allowed_providers:
+        if not proof.get("exception_approved"):
+            return [f"unknown provider in cost receipt: {provider}"]
+
+    # Unknown model -> fail unless exception
+    if allowed_models and model not in allowed_models:
+        if not proof.get("exception_approved"):
+            return [f"unknown model in cost receipt: {model}"]
+
+    # basic tokens/cost sanity checks (non-negative numbers)
+    try:
+        if float(proof.get("tokens_in", 0)) < 0 or float(proof.get("tokens_out", 0)) < 0:
+            return ["tokens_in or tokens_out are negative"]
+        if float(proof.get("estimated_cost", 0)) < 0:
+            return ["estimated_cost is negative"]
+    except (TypeError, ValueError):
+        return ["tokens_in/tokens_out/estimated_cost must be numeric"]
+
+    # checked_by_ci must be truthy
+    if not proof.get("checked_by_ci"):
+        return ["cost policy receipt missing checked_by_ci claim"]
+
+    return []
+
+
 def autonomous_refusal_reasons(args: argparse.Namespace) -> list[str]:
     if not args.autonomous_deploy:
         return []
@@ -682,6 +767,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--independence-receipt-path", help="Verifier independence proof receipt JSON.")
     parser.add_argument("--independence-max-age-days", type=int, default=30)
     parser.add_argument("--skip-independence-check", action="store_true")
+    parser.add_argument("--cost-policy-receipt-path", help="Path to cost policy pass receipt JSON.", default="receipts/cost_policy_pass.json")
+    parser.add_argument("--skip-cost-policy-check", action="store_true", help="Skip cost policy receipt check (local testing only)")
     return parser.parse_args()
 
 
@@ -708,6 +795,8 @@ def main() -> int:
     if wants_deploy:
         reasons.extend(independence_refusal_reasons(args))
         reasons.extend(rollback_receipt_reasons(args))
+        # Enforce cost policy receipt for any deploy/autonomous flows
+        reasons.extend(cost_policy_refusal_reasons(args))
         if args.autonomous_deploy:
             reasons.extend(autonomous_refusal_reasons(args))
 

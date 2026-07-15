@@ -1,0 +1,10 @@
+{
+  "receipt_signal_id": "demo-1",
+  "timestamp": "2026-07-03T11:51:22.781782Z",
+  "note": "initial success",
+  "receipt_summary": {
+    "decision": "reply",
+    "status": "validated",
+    "risk_score": 1
+  }
+}

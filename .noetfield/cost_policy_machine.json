@@ -1,0 +1,15 @@
+{
+  "allowed_default_models": ["gpt-5-mini", "workers_ai_open_source"],
+  "banned_models": ["gpt-5", "gpt-4", "gpt-4o", "gpt-5o", "claude-2", "claude-3", "claude-4"],
+  "allowed_providers": ["workers_ai", "local_open_source"],
+  "banned_providers": ["openai", "anthropic", "google"] ,
+  "fail_closed_on_unknown_model": true,
+  "fail_closed_on_missing_cost_receipt": true,
+  "max_cost_per_cycle_usd": 1.0,
+  "max_retry_count": 1,
+  "scheduled_jobs_require_cost_policy_pass": true,
+  "background_jobs_require_model_none_or_allowed_cheap": true,
+  "require_founder_approval_for_premium": true,
+  "policy_version": "v1",
+  "policy_description": "Machine-enforceable cost policy: allow only gpt-5-mini or equivalent cheap Workers AI / open-source models. Unknown or premium providers blocked by default. Requires cost_policy_pass receipt for scheduled or deploy jobs."
+}
