@@ -1,0 +1,86 @@
+{
+  "id": "P0PGR-20260716-001",
+  "created_at": "2026-07-17T00:52:00Z",
+  "lane": "SG",
+  "problem_class": "architecture",
+  "owner_agent": "sg",
+  "model_tier": "cheap",
+  "roi_score": 68,
+  "roi_reason": "Every preventable founder escalation currently leaves no trace, so the same interventions repeat and the founder stays the bottleneck. Wiring the ledger makes escalations measurable and gives the queue a ranked kill-list. Mechanical edit work, cheap tier, bounded to three files plus one receipt.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "edit",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Founder decision: ADOPT FOR 30-DAY PILOT — logging, scoring, and evidence collection only; owner Noetfield; implementation executor SG/SourceA; no authority changes; founder execution duties none. Recorded at the decision_ref path; task step 1 verifies that receipt before any edit. The Founder Exception Ledger spec (v1.1, advisor-review corrections applied) sits at ledger/founder-exception-ledger.md with status DRAFT / SUBMITTED / UNVERIFIED. It defines: one CSV row per founder escalation (escalating agent, lane, trigger, missing capability, three stored 1-5 factor scores), priority computed as the product of the stored scores so any verifier can recompute it, paired guardrail metrics normalized per 100 tasks/decisions, and a closure definition-of-done requiring an independently verified receipt. Gap this packet closes: no canonical CSV exists, no agent logging rule fires at escalation time, no read-surface registration. Wiring only — this packet does not claim the system is live or enforced, and it changes no authority levels.",
+  "task": "1) Confirm the founder decision receipt named in decision_ref exists and authorizes a logging/measurement pilot; if it does not exist, stop and return NEEDS_REVIEW. 2) Read ledger/founder-exception-ledger.md (v1.1 spec) in full. 3) Create ledger/founder-exception-ledger.csv with exactly one header row and no data rows, columns exactly: id,date,escalating_agent,lane,exception,trigger,founder_input,missing_capability,recurrence,frequency_score,founder_cost_score,preventability_score,permanent_owner,closure_condition,priority_fxcxp,status. 4) Append a section to AGENTS.md titled 'Founder escalation logging rule': any agent that escalates a decision to the founder must first append one row to ledger/founder-exception-ledger.csv; date, escalating_agent, lane are auto-populated; the three factor scores are stored per row; priority_fxcxp is their product and never hand-entered; the CSV is append-only and closure is a new row with the same id and status CLOSED; a row must take under 30 seconds. 5) Read data/agent_read_surfaces_v1.json, then register ledger/founder-exception-ledger.md as a read surface following the existing entry shape; if the shape is ambiguous do not guess — propose the entry in the PR description and record that choice in the receipt. 6) If data/agent_read_surfaces_v1.json was touched, run scripts/verify_agent_read_staleness_v1.sh and capture raw output. 7) Open exactly one draft PR using .github/pull_request_template.md (motor_id + task_cell + lane) containing only these changes; leave the PR unmerged. 8) Write exactly one receipt to receipts/p0pgr/ with evidence, changed_files, commands_run, raw validator_output, pr_url, verifier_handoff, pass_fail, next_pointer. This executor may set pass_fail to at most PROVISIONAL (mechanical checks green) or NEEDS_REVIEW — never PASS. verifier_handoff must name the independent verifier lane (owner_agent: verifier, p0pgr receipt-verification flow) and list exactly what it inspects: changed_files vs the PR diff, raw validator output, CSV header byte-exactness, AGENTS.md rule text. Only that independent verifier may record PASS, in its own verification receipt. 9) Keep the ledger's DRAFT status header byte-identical — adoption or LOCK marking is reserved to the founder. next_pointer: candidate follow-up packet for the weekly paired guardrail-metrics report (normalized per 100).",
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "draft PR only — leave it unmerged, no direct push to the default branch",
+    "executor-authored PASS is prohibited: this executor's highest allowed pass_fail is PROVISIONAL or NEEDS_REVIEW; PASS is recorded only by the independent verifier",
+    "the three priority factor scores must be stored per row so any verifier can recompute priority_fxcxp",
+    "ledger DRAFT status header stays intact; adoption marking is founder-only",
+    "ledger CSV is append-only; closure is a new row with the same id, never a rewrite"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merging the PR",
+    "no marking the ledger ADOPTED or LOCKED",
+    "no self-verification — the executing agent must not certify its own receipt (author and subject must be structurally separate)",
+    "no edits outside AGENTS.md, ledger/, data/agent_read_surfaces_v1.json, receipts/p0pgr/",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after the draft PR is open and exactly one receipt is written to receipts/p0pgr/ with pass_fail no higher than PROVISIONAL. Independent verification, metrics reporting, and enforcement are separate future packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "pr_url",
+      "validator_output",
+      "verifier_handoff"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/FOUNDER-DECISION-20260716-founder-exception-ledger-pilot.json",
+    "ledger/founder-exception-ledger.md",
+    "AGENTS.md",
+    "data/agent_read_surfaces_v1.json",
+    "ledger/session-decision-ledger.md"
+  ],
+  "decision_ref": "receipts/FOUNDER-DECISION-20260716-founder-exception-ledger-pilot.json",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}
