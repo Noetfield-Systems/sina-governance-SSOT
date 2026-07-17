@@ -7,6 +7,9 @@
 - `NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1`
 - `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` (authority `dc6080d8519b8a83dcfaaeefb65392691ce3e33e`)
 
+**Canonical SG main SHA (post PR #18):** `b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0`  
+**Decision artifact SHA:** `792eb6c6fdbf9b063b29dd5672ab66d91f9da37b`
+
 **Status:** `IMPLEMENTATION_AUTHORIZED` · draft PR only · **no deploy**  
 **Laws:** FOUNDER_CANON v1 + governed-autorun v3 + Architecture Finalization Gate  
 **Receipts:** SUBMITTED for independent verification (author ≠ verifier)

@@ -34,5 +34,12 @@
   "unified_motor_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
   "deploy_in_foundation_commission": false,
   "saved_at": "2026-07-17T18:37:56Z",
-  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb"
+  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb",
+  "sg_authority_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "decision_artifact_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "canonical_main_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "doctrine_branch_head_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "merge_strategy": "merge_commit",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/18",
+  "wave0_merged_at": "2026-07-17T19:03:19Z"
 }

@@ -6,5 +6,11 @@
   ],
   "status": "SG_ACCEPTED",
   "locked_at": "2026-07-17T18:37:56Z",
-  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb"
+  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb",
+  "sg_authority_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "decision_artifact_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "canonical_main_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "merge_strategy": "merge_commit",
+  "pr": 18,
+  "merged_at": "2026-07-17T19:03:19Z"
 }
