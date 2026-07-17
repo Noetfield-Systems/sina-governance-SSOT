@@ -1,0 +1,14 @@
+{
+  "schema": "noetfield.sg-authority-ref.v1",
+  "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "sg_decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "authority_source": "Noetfield-Systems/sina-governance-SSOT",
+  "authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "sg_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "status": "ACTIVE",
+  "valid_only_when": "sg_authority_sha is an ancestor of sina-governance-SSOT@main",
+  "supersession_rule": "new jobs use the successor SHA; existing receipts retain the authority active when they ran",
+  "generated": true,
+  "wave0_pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/16",
+  "install_path_hint": "noetfeld-OS/data/sg-authority-ref-unified-motor-v1.json"
+}

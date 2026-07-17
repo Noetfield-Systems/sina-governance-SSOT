@@ -12,8 +12,8 @@
 **effective_at:** 2026-07-17  
 **proposed_by:** Founder + Brain/Architect (Advisor 2 architecture; Advisor 1 operating doctrine)  
 **sg_decision:** `SG_ACCEPTED` with three corrections and T0-first foundation commission  
-**sg_authority_sha:** *Wave 0 land commit on main (stamp after merge)*  
-**prior_accept_sha:** `8b476f721b1fe21f16036c84437f16de60434618` (historical SG-accept on bundled doctrine branch; not Wave 0 merge base)
+**sg_authority_sha:** `dc6080d8519b8a83dcfaaeefb65392691ce3e33e`
+**prior_accept_sha:** `8b476f721b1fe21f16036c84437f16de60434618` (historical bundled-branch accept; not main ancestor)
 **supersedes:** none as ACTIVE architecture (consolidates distributed Client-Zero Motor into a profile)
 
 ---
