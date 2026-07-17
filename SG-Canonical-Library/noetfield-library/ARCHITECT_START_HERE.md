@@ -67,6 +67,20 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 Product anchors: **Investor Workflow** · **AI Value Governance** · **Custom AI motors** · **Evidence-based audit**  
 Signature CTA: *Audit us before you invest in us.*
 
+## 2f. ARCHITECTURE FINALIZATION GATE (P8 — constitutionalizes major design)
+`P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` = **Brain designs; SG constitutionalizes; NOOS operationalizes; Motor executes; P99 remembers.**  
+**Machine:** `data/architecture_finalization_gate_v1_LOCKED.json`  
+Status path: `ARCHITECTURE_DRAFT` → `SG_REVIEW_REQUIRED` → `SG_ACCEPTED` → `IMPLEMENTATION_AUTHORIZED` → … → `P99_PRESERVED`.  
+Until SG accepts: do not call a design canonical / locked / final / Noetfield-wide policy.
+
+## 2g. UNIFIED MOTOR CORE (P0 — SG-accepted execution plane)
+`P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` = **decision** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` (`SG_ACCEPTED`).  
+**Machine:** `data/nf_unified_motor_architecture_v1_LOCKED.json` · **Waves:** `docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md`  
+**Split:** Cloudflare Agents = Resident Role owners · Cloudflare Workflows = Motor jobs · Client-Zero Motor = first profile (not discarded).  
+**Foundation:** `NF-UNIFIED-MOTOR-V1-FOUNDATION` is T0-first — no GPU in that commission.  
+**Wiring:** `docs/dispatch/nf-unified-motor-architecture-all-repos.md`
+
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

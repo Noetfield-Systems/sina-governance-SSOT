@@ -1,0 +1,94 @@
+{
+  "schema": "nf_unified_motor_architecture_v1",
+  "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "packet_id": "SG-FINALIZATION-NF-UNIFIED-MOTOR-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "implementation_scope": "NF-UNIFIED-MOTOR-V1-FOUNDATION",
+  "version": "v1.0.0_locked_20260717",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+  "gate": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+  "waves": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+  "motor": {
+    "name": "Noetfield Unified Motor Core",
+    "existing_motor": {
+      "role": "client_zero_profile",
+      "replacement": false,
+      "migration": "incremental"
+    }
+  },
+  "resident_role_runtime": {
+    "provider": "Cloudflare Agents SDK",
+    "substrate": "Durable Objects",
+    "deployment_model": "one_codebase_many_role_instances",
+    "instances": [
+      "noetfield:sg.registrar",
+      "noetfield:noos.portfolio-owner",
+      "noetfield:sourcea.dispatch-owner",
+      "noetfield:sandbox.builder-owner",
+      "noetfield:sandbox.verifier-owner"
+    ]
+  },
+  "durable_execution": {
+    "provider": "Cloudflare Workflows",
+    "purpose": [
+      "multi_step_jobs",
+      "retries",
+      "human_approval",
+      "promotion_waits",
+      "outcome_probes"
+    ]
+  },
+  "repository_identity": {
+    "provider": "GitHub App",
+    "app_count": 1
+  },
+  "sandbox": {
+    "interface": "SandboxAdapter",
+    "initial": [
+      "GitWorktreeSandbox",
+      "GitHubActionsSandbox"
+    ],
+    "future": [
+      "CloudflareSandbox"
+    ]
+  },
+  "model_policy": {
+    "T0": "deterministic",
+    "T1": "noetfield_controlled_open_model",
+    "T1S": "specialist_open_model",
+    "T2": "commercial_escalation",
+    "T3": "premium_escalation",
+    "commercial_requires": "ESCALATE_REQUIRED"
+  },
+  "open_model_runtime": {
+    "interface": "OpenModelRuntime_v1",
+    "first_adapter": "RunPod_vLLM",
+    "permanent_vendor_lock": false,
+    "foundation_includes_gpu": false
+  },
+  "control_plane": {
+    "noos": "observe_classify_route",
+    "sg": "authority",
+    "sourcea": "compile_dispatch"
+  },
+  "evidence": {
+    "canonical_sink": "P99",
+    "provider_compute_as_memory": "forbidden"
+  },
+  "mac": {
+    "production_dependency": false,
+    "permitted_use": [
+      "development",
+      "evaluation",
+      "benchmarking",
+      "diagnostics"
+    ]
+  },
+  "pointer_schemas": [
+    "noetfield.sg-authority-ref.v1",
+    "noetfield.repo-owner-ref.v1"
+  ],
+  "saved_at": "2026-07-17T08:23:47Z",
+  "base_head_before_commit": "4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8"
+}

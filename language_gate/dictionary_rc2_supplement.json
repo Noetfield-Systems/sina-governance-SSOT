@@ -421,6 +421,282 @@
       "code_alias": [
         "founder linkedin locked"
       ]
+    },
+    {
+      "term": "Architecture Finalization Gate",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG law that major architecture becomes canonical only after SSOT validation and recorded authority SHA.",
+      "code_alias": [
+        "architecture finalization gate",
+        "finalization gate"
+      ]
+    },
+    {
+      "term": "ARCHITECTURE_DRAFT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: draft proposal before SG review."
+    },
+    {
+      "term": "SG_REVIEW_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: submitted to SG for constitutional review."
+    },
+    {
+      "term": "SG_ACCEPTED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG accepted the decision as canonical."
+    },
+    {
+      "term": "IMPLEMENTATION_AUTHORIZED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG authorizes bounded implementation waves under the accepted decision."
+    },
+    {
+      "term": "IMPLEMENTED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: authorized implementation delivered with scoped evidence."
+    },
+    {
+      "term": "OPERATIONALLY_PROVEN",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: live operational proof satisfied beyond design lock."
+    },
+    {
+      "term": "P99_PRESERVED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: decision and evidence preserved in P99 ledger."
+    },
+    {
+      "term": "SG_REJECTED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG rejected the proposal."
+    },
+    {
+      "term": "SG_CONFLICT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: proposal conflicts with an ACTIVE decision."
+    },
+    {
+      "term": "SG_REVISION_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG requires revision before acceptance."
+    },
+    {
+      "term": "Unified Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Noetfield reusable governed execution runtime; profiles commission on a shared core.",
+      "code_alias": [
+        "unified motor",
+        "nf unified motor"
+      ]
+    },
+    {
+      "term": "Unified Motor Core",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Shared runtime: recipes, job state, resident roles, workflows, policy, sandbox, model router, verification, promotion, probes, evidence.",
+      "code_alias": [
+        "unified motor core",
+        "Noetfield Unified Motor Core"
+      ]
+    },
+    {
+      "term": "Client-Zero Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Existing Noetfield Motor preserved as the first profile on Unified Motor Core, not discarded.",
+      "code_alias": [
+        "client-zero",
+        "client zero motor",
+        "Noetfield Client-Zero Motor"
+      ]
+    },
+    {
+      "term": "Resident Role",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Persistent institutional owner hosted on Cloudflare Agents SDK with durable identity and state.",
+      "code_alias": [
+        "resident role",
+        "resident owner",
+        "institutional owner"
+      ]
+    },
+    {
+      "term": "Motor Workflow",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Durable multi-step Motor job executed on Cloudflare Workflows, not inside a long-running Agent method.",
+      "code_alias": [
+        "motor workflow",
+        "MotorJobWorkflow"
+      ]
+    },
+    {
+      "term": "SandboxAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Interface for bounded execution environments; initial adapters include Git worktree and GitHub Actions.",
+      "code_alias": [
+        "sandbox adapter",
+        "GitWorktreeSandbox",
+        "GitHubActionsSandbox"
+      ]
+    },
+    {
+      "term": "GitWorktreeSandbox",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First stable SandboxAdapter using Git worktrees for production-grade mutation."
+    },
+    {
+      "term": "OpenModelRuntime",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Replaceable interface for Noetfield-controlled open-model inference; first adapter RunPod vLLM.",
+      "code_alias": [
+        "open model runtime",
+        "OpenModelRuntime_v1"
+      ]
+    },
+    {
+      "term": "Model Router",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Routes T0 deterministic, T1/T1S open model, and T2/T3 commercial escalation with required receipts.",
+      "code_alias": [
+        "model router"
+      ]
+    },
+    {
+      "term": "ESCALATE_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Machine-readable gate status required before any proprietary commercial model call."
+    },
+    {
+      "term": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision id for Noetfield Unified Motor Core architecture v1.",
+      "code_alias": [
+        "NF_UNIFIED_MOTOR_ARCHITECTURE_V1"
+      ]
+    },
+    {
+      "term": "NF-UNIFIED-MOTOR-V1-FOUNDATION",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First commission: deterministic Unified Motor vertical slice without GPU deployment."
+    },
+    {
+      "term": "noetfield.sg-authority-ref.v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Generated cross-repo pointer schema to SG canonical authority SHA; does not duplicate full contracts."
+    },
+    {
+      "term": "noetfield.repo-owner-ref.v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Generated per-repository pointer to resident role runtime identity and SG authority source."
+    },
+    {
+      "term": "Cloudflare Agents",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Agents SDK hosting persistent Resident Role owners; not the full Motor job runner.",
+      "code_alias": [
+        "Agents SDK",
+        "Cloudflare Agents SDK"
+      ]
+    },
+    {
+      "term": "Cloudflare Workflows",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Durable execution substrate for Motor jobs: retries, approval waits, promotion, outcome probes.",
+      "code_alias": [
+        "Workflows"
+      ]
+    },
+    {
+      "term": "RunPod",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First OpenModelRuntime adapter host for vLLM; never institutional memory or job ledger.",
+      "code_alias": [
+        "RunPod/vLLM",
+        "RunPodVllmAdapter_v1"
+      ]
+    },
+    {
+      "term": "vLLM",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Open-model serving stack used behind the first RunPod adapter."
+    },
+    {
+      "term": "Motor Registry",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Recipe and job-truth contract layer for valid Motor work.",
+      "code_alias": [
+        "Fable Motor Registry",
+        "recipe registry"
+      ]
+    },
+    {
+      "term": "Policy Hub",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Authority and policy check surface integrated by Motor jobs before mutation and promotion."
+    },
+    {
+      "term": "SSSOT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Sina Governance Single Source of Truth repository / lane."
+    },
+    {
+      "term": "Sovereign AI",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture posture keeping model control, data, and evidence under institutional boundaries."
+    },
+    {
+      "term": "Customer Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Commissioned Motor profile for a customer vertical on Unified Motor Core."
+    },
+    {
+      "term": "Noetfield Unified Motor Core",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Canonical name of the shared governed execution runtime."
+    },
+    {
+      "term": "Durable Motor Workflow",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Workflows-backed multi-step Motor job execution."
+    },
+    {
+      "term": "GitHub App",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Single repository-bound machine identity for automation events and actions."
+    },
+    {
+      "term": "Cloudflare Sandbox",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Experimental sandbox capability; evaluate later behind SandboxAdapter."
+    },
+    {
+      "term": "Cloudflare Agents SDK",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SDK hosting Resident Role owners on Durable Objects."
+    },
+    {
+      "term": "Verifier Owner",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Resident Role that runs proportional verification and evidence-boundary checks."
+    },
+    {
+      "term": "Resident Role Agent",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Base agent class for NoetfieldResidentRoleAgent role instances."
+    },
+    {
+      "term": "Investor Workflow Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Motor profile for investor/fund/family-office workflow commissions."
+    },
+    {
+      "term": "Distributed Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Pre-consolidation Motor pieces across builders, CI, NOOS, SourceA, SG, and receipts."
+    },
+    {
+      "term": "Recipe Registry",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Loader/store of Motor recipes and job-truth contracts under Motor Registry."
     }
   ],
   "structural_allowlist": [
