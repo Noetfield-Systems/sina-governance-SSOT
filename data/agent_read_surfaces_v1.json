@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.4.0",
-  "saved_at": "2026-07-17T08:49:10Z",
+  "version": "1.5.0",
+  "saved_at": "2026-07-17T18:40:00Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -227,6 +227,36 @@
           "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
           "status": "ACTIVE",
           "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
         }
       ],
       "skills_resolve": [
@@ -375,6 +405,36 @@
           "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
           "status": "ACTIVE",
           "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
         }
       ]
     },
@@ -523,6 +583,36 @@
           "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
           "status": "ACTIVE",
           "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
         }
       ]
     },
@@ -669,6 +759,36 @@
           "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
           "status": "ACTIVE",
           "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
         }
       ],
       "skills_resolve": []
@@ -728,6 +848,36 @@
           "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
           "status": "ACTIVE",
           "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
         }
       ]
     }

@@ -1,0 +1,38 @@
+{
+  "schema": "nf_command_gateway_v2_architecture_v1",
+  "decision_id": "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1",
+  "packet_id": "SG-FINALIZATION-COMMAND-GATEWAY-V2-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "implementation_scope": "NF-COMMAND-GATEWAY-V2-MOTOR-CONTROL-001",
+  "preserve_v1": true,
+  "implementation_home": "noetfield-cloud-factory-infra",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+  "corrections": [
+    "founder_oauth_split",
+    "nl_to_commission_not_direct_execute",
+    "raw_workflow_dispatch_internal",
+    "seven_dimension_motor_truth"
+  ],
+  "auth": {
+    "read_gateway": "api_key",
+    "founder_command_gateway": "oauth_tied_to_sina"
+  },
+  "motor_truth_dimensions": [
+    "dispatch",
+    "execution",
+    "verification",
+    "evidence",
+    "authority",
+    "promotion",
+    "outcome"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1"
+  ],
+  "unified_motor_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "deploy_in_foundation_commission": false,
+  "saved_at": "2026-07-17T18:37:56Z",
+  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb"
+}

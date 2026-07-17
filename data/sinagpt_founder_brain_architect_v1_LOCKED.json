@@ -1,0 +1,24 @@
+{
+  "schema": "sinagpt_founder_brain_architect_v1",
+  "decision_id": "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "role_id": "founder.brain-architect",
+  "interface_id": "sinagpt",
+  "class": "HUMAN_FACING_COMMAND_COCKPIT",
+  "display_name": "SinaGPT \u2014 Founder Brain & Motor Command",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+  "forbidden_roles": [
+    "sg",
+    "noos.issue-manager",
+    "ci_daemon",
+    "motor_runtime",
+    "canonical_memory"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
+  ],
+  "saved_at": "2026-07-17T18:37:56Z",
+  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb"
+}

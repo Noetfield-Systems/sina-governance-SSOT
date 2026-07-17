@@ -72,6 +72,12 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Foundation:** `NF-UNIFIED-MOTOR-V1-FOUNDATION` is T0-first — no GPU in that commission.  
 **Wiring:** `docs/dispatch/nf-unified-motor-architecture-all-repos.md` · **Wave 0:** `docs/dispatch/wave-0-nf-unified-motor-merge-packet.md`
 
+## 2h. SINAGPT + COMMAND GATEWAY v2 (P1 cockpit · P0 API)
+`P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` = **SinaGPT** = `founder.brain-architect` cockpit — not Issue Manager, CI daemon, or Motor.  
+`P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` = keep `/v1`; add `/v2` Motor+Issues+CI+SG; OAuth founder split; seven-truth; draft-PR commission only.  
+**Machine:** `data/sinagpt_founder_brain_architect_v1_LOCKED.json` · `data/nf_command_gateway_v2_architecture_v1_LOCKED.json`  
+**Commission:** `docs/dispatch/nf-command-gateway-v2-motor-control-001.md` · **Wiring:** `docs/dispatch/sinagpt-command-gateway-v2-all-repos.md`
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

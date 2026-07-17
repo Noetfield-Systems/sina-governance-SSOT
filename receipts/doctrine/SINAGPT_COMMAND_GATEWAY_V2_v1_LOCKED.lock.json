@@ -1,0 +1,10 @@
+{
+  "receipt_type": "doctrine_lock_receipt_v1",
+  "decisions": [
+    "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
+  ],
+  "status": "SG_ACCEPTED",
+  "locked_at": "2026-07-17T18:37:56Z",
+  "base_head_before_commit": "49f175945db9b6fe2bbe0e32533d746c5f924ccb"
+}
