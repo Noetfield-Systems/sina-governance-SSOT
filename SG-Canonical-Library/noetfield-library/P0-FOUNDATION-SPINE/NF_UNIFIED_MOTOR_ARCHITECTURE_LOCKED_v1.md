@@ -12,7 +12,7 @@
 **effective_at:** 2026-07-17  
 **proposed_by:** Founder + Brain/Architect (Advisor 2 architecture; Advisor 1 operating doctrine)  
 **sg_decision:** `SG_ACCEPTED` with three corrections and T0-first foundation commission  
-**sg_authority_sha:** *set to commit SHA that lands this packet*  
+**sg_authority_sha:**   
 **supersedes:** none as ACTIVE architecture (consolidates distributed Client-Zero Motor into a profile)
 
 ---

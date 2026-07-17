@@ -90,5 +90,6 @@
     "noetfield.repo-owner-ref.v1"
   ],
   "saved_at": "2026-07-17T08:23:47Z",
-  "base_head_before_commit": "4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8"
+  "base_head_before_commit": "4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8",
+  "sg_authority_sha": "8b476f721b1fe21f16036c84437f16de60434618"
 }

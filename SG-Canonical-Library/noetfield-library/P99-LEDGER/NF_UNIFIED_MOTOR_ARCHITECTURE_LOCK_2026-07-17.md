@@ -3,7 +3,8 @@
 **Receipt id:** `P99-NF-UNIFIED-MOTOR-ARCH-2026-07-17`  
 **Verdict:** `PASS` — gate LOCKED; architecture `SG_ACCEPTED` + foundation `IMPLEMENTATION_AUTHORIZED`  
 **Saved at:** 2026-07-17T08:23:47Z  
-**Base HEAD before packet commit:** `4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8`
+**Base HEAD before packet commit:** 
+**sg_authority_sha:** `4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8`
 
 ## Locked
 
