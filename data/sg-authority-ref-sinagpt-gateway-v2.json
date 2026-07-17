@@ -1,0 +1,19 @@
+{
+  "schema": "noetfield.sg-authority-ref.v1",
+  "decision_id": "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1",
+  "sg_decision_id": "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1",
+  "also_decision_ids": [
+    "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1",
+    "NF-COMMAND-GATEWAY-V2-MOTOR-CONTROL-001"
+  ],
+  "authority_source": "Noetfield-Systems/sina-governance-SSOT",
+  "authority_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "sg_authority_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "decision_artifact_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "status": "ACTIVE",
+  "valid_only_when": "sg_authority_sha is an ancestor of sina-governance-SSOT@main",
+  "supersession_rule": "new jobs use the successor SHA; existing receipts retain the authority active when they ran",
+  "generated": true,
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/18",
+  "install_path_hint": "noetfeld-OS/data/sg-authority-ref-sinagpt-gateway-v2.json"
+}

@@ -11,7 +11,10 @@
 **effective_at:** 2026-07-17  
 **proposed_by:** Founder + Brain/Architect  
 **sg_decision:** `SG_ACCEPTED` — SinaGPT is the founder-facing Brain/Architect command cockpit; never SG, never persistent Issue Manager, never CI daemon, never Motor runtime  
-**sg_authority_sha:** *stamp after land on main*
+**sg_authority_sha:** `b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0`  
+**decision_artifact_sha:** `792eb6c6fdbf9b063b29dd5672ab66d91f9da37b`  
+**canonical_main_sha:** `b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0`  
+**merge_strategy:** merge_commit (PR #18)
 
 ---
 
