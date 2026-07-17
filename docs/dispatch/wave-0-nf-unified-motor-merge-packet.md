@@ -1,6 +1,6 @@
 # Wave 0 — NF Unified Motor Merge Packet (SG founder checklist)
 
-**Status:** READY_FOR_FOUNDER_MERGE (single-purpose branch)  
+**Status:** SG_COMPLETE — merged PR #16; authority `dc6080d8519b8a83dcfaaeefb65392691ce3e33e` · pending NOOS re-pin  
 **Purpose:** Land `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` on SG `main` so the authority SHA is an ancestor of canon and T0 foundation may build.  
 **Saved at:** 2026-07-17T08:49:38Z  
 **SG lane answer to NOOS:** Persist Wave 0 + T0 commission **here in SG** (`docs/dispatch/`). Do **not** treat `noetfeld-OS/docs/_NOOS_AGENT/` as authority. After merge, NOOS may add only `noetfield.sg-authority-ref.v1` + custody re-pin (founder-gated).

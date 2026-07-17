@@ -1,0 +1,26 @@
+{
+  "schema": "noetfield/sg-doctrine-merge-receipt-v1",
+  "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "prior_accept_sha": "8b476f721b1fe21f16036c84437f16de60434618",
+  "merged_from": "doctrine/nf-unified-motor-v1-wave0@a7ed3c0e",
+  "merged_into": "main",
+  "sg_main_before": "ed25f459ab9d92bdd91a644559a92be9e5e922e5",
+  "sg_main_after": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/16",
+  "merge_method": "squash",
+  "wiring_verifier": "verify_nf_unified_motor_wiring_v1.sh = PASS",
+  "bundled_decisions": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1"
+  ],
+  "excluded_from_this_merge": [
+    "founder_linkedin_upgrade_plans_v1",
+    "founder-exception-ledger-v1.1",
+    "P0PGR-20260716-001"
+  ],
+  "note": "Agentic Cost-Efficiency already on main via PR #14; squash land commit is the canonical authority SHA because branch tip is not an ancestor after squash.",
+  "merged_by": "founder",
+  "merged_at": "2026-07-17T08:59:33Z",
+  "wave0_sg_status": "COMPLETE_PENDING_NOOS_REPIN",
+  "t0_foundation": "AUTHORIZED_AFTER_NOOS_REPIN"
+}

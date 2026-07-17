@@ -3,6 +3,7 @@
 **Dispatch to:** SG-designated builders / sandbox implementation lane (**not** noetfeld-OS)  
 **When:** only after Wave 0 DONE (`docs/dispatch/wave-0-nf-unified-motor-merge-packet.md`)  
 **Canonical decision:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1`  
+**Authority SHA (main land):** `dc6080d8519b8a83dcfaaeefb65392691ce3e33e`  
 **Prior accept SHA (historical):** `8b476f721b1fe21f16036c84437f16de60434618`  
 **Authority SHA:** *must be ancestor of `sina-governance-SSOT@main` after Wave 0 — refuse if only on doctrine branch*  
 **Status:** `SG_ACCEPTED` · `IMPLEMENTATION_AUTHORIZED` (foundation wave only)  
