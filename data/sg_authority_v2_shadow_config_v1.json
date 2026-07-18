@@ -1,0 +1,54 @@
+{
+  "schema": "noetfield.sg-authority-v2-shadow-config.v1",
+  "version": "0.1.0",
+  "status": "IMPLEMENTED_NOT_DEPLOYED",
+  "sg_runtime": "NOT_COMMISSIONED",
+  "sg_enforcement": "NOT_ENABLED",
+  "autonomous_production_mutations": "HOLD",
+  "candidate_app": {
+    "slug": "noetfield-sg-authority",
+    "creation_status": "NOT_PROVEN",
+    "identity_status": "NOT_PROVEN",
+    "app_id": null,
+    "installation_id": null,
+    "allowed_repositories": [
+      "Noetfield-Systems/sina-governance-SSOT",
+      "Noetfield-Systems/noetfield-sandbox-private"
+    ],
+    "required_canary": "Noetfield-Systems/noetfield-sandbox-private",
+    "canary_approval": "FOUNDER_APPROVED_CURRENT_SESSION"
+  },
+  "worker": {
+    "path": "workers/sg-authority-v2-shadow",
+    "deployment_status": "NOT_DEPLOYED",
+    "webhook_enabled": false,
+    "check_run_publish_enabled": false,
+    "check_name": "Noetfield SG / P0 Authority",
+    "mode": "SHADOW",
+    "policy_hash": "12af65eb84d24db934b1ec3f1866306bc78b38abc327e0d005f3827fd8ea2784",
+    "schema_hash": "c8c4cbf4d62826b4d16b0584d4b9cbdd11f6af7d19d5b589e602dc5ff6c73c60",
+    "evaluator_hash": "acd411428fe809cd997f59ab38839c99694d04a39112e68c42495dd541767f1d",
+    "source_hash": "aecdf922a6e48176b3a13de4d4516e8ec43da60bc9a189bdfbe56668d7d9c996"
+  },
+  "proofs": {
+    "sg_v2_shadow_proofs": "PASS",
+    "typescript_negative_tests": 19,
+    "repository_contract_and_containment_tests": 16,
+    "total_tests": 35,
+    "source_hash_check": "PASS",
+    "dry_run_build": "PASS",
+    "dependency_audit": "0_VULNERABILITIES",
+    "live_identity_proof": "BLOCKED_INTERACTIVE_GITHUB_SIGN_IN"
+  },
+  "legacy_app": {
+    "preserved": true,
+    "authoritative": false
+  },
+  "forbidden_until_commissioning": [
+    "production_ruleset_enablement",
+    "motor_authorization",
+    "hold_lift",
+    "legacy_app_revocation",
+    "production_deploy"
+  ]
+}
