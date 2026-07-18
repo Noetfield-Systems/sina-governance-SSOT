@@ -1,0 +1,23 @@
+name = "nf-commissioning-specialist-tick-v1"
+main = "src/index.js"
+compatibility_date = "2026-07-18"
+account_id = "0d0b967b77e2e5535455d39ff3dae72c"
+workers_dev = true
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[vars]
+LOOP_ID = "nf-commissioning-specialist-tick-v1"
+INTERVAL_MINUTES = "5"
+MODE = "COMMISSIONING_SPECIALIST"
+AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
+ENFORCEMENT_ENABLED = "false"
+SG_SHADOW_HEALTH_URL = "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health"
+RUNTIME_REALITY_URL = "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/runtime_reality_v1.json"
+KEY_POINTER_URL = "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/sg_authority_key_pointer_v1.json"
+MAP_VERSION = "1.0.0"
+
+[[kv_namespaces]]
+binding = "RECEIPTS"
+id = "3999f420abc241399843ea796c3c042a"

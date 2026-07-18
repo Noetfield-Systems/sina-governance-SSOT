@@ -1,0 +1,23 @@
+{
+  "receipt_type": "nf_commissioning_specialist_commission_receipt_v1",
+  "captured_at": "2026-07-18T15:13:24Z",
+  "loop_id": "nf-commissioning-specialist-tick-v1",
+  "trigger_host": "cloud",
+  "cadence": "*/5 * * * *",
+  "worker": "nf-commissioning-specialist-tick-v1",
+  "url": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev",
+  "account_id": "0d0b967b77e2e5535455d39ff3dae72c",
+  "kv_namespace_id": "3999f420abc241399843ea796c3c042a",
+  "map": "data/nf_commissioning_specialist_map_v1.json",
+  "skill": "skills/commissioning-specialist/SKILL.md",
+  "models": [
+    "deepseek",
+    "glm",
+    "kimi",
+    "huggingface"
+  ],
+  "law": "Observe-Detect-Critique-Repair(allowlist)-ProposeImprove-ReObserve; HOLD; no unsupervised redesign",
+  "manual_tick_verdict": "PASS_SCOPED_TICK",
+  "autonomous_production_mutations": "HOLD",
+  "enforcement_enabled": false
+}
