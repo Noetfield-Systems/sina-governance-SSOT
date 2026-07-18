@@ -1,0 +1,30 @@
+{
+  "schema": "sg-cross-domain-auth-phase-live-v1",
+  "phase": 1,
+  "venture": "trustfield",
+  "status": "LIVE_VERIFIED",
+  "verified_at": "2026-07-18T11:20:28Z",
+  "sg_main_sha": "53ffd13b6350ac0d1bfc2da78650f75d9bb96e5b",
+  "trustfield_main_sha": "2e862346668dfeea2806055de62f8c6c5cc24155",
+  "cloud_run": {
+    "id": 29642379016,
+    "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/actions/runs/29642379016",
+    "conclusion": "success"
+  },
+  "proof": {
+    "tier_0_public": "12/12 PASS",
+    "partner_access_landing": "PASS public",
+    "partner_access_workspace": "PASS auth redirect",
+    "customer_portal": "PASS auth redirect",
+    "noetfield_auth_health": "PASS",
+    "trustfield_profiles": "PASS",
+    "hard_failures": [],
+    "register_portal_handoff": "PASS: live CTA \u2192 /en/auth/sign-up?next=/customer-portal"
+  },
+  "product_diff_required": true,
+  "remaining_warn": "portfolio_spine credentials are not configured in SG GitHub Actions; outside TrustField Phase 1 closure",
+  "next_action": "SourceA Phase 2",
+  "trustfield_product_pr": "https://github.com/Noetfield-Systems/TrustField-Technologies/pull/60",
+  "trustfield_deploy_run": "https://github.com/Noetfield-Systems/TrustField-Technologies/actions/runs/29642763388",
+  "product_commit": "9ed9e76"
+}

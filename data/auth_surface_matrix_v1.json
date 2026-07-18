@@ -1,7 +1,7 @@
 {
   "schema": "auth_surface_matrix_v1",
-  "version": "1.1.1",
-  "saved_at": "2026-07-18T11:15:00Z",
+  "version": "1.1.2",
+  "saved_at": "2026-07-18T11:21:00Z",
   "authority": "SG (SSSOT)",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
@@ -172,8 +172,9 @@
             200,
             302
           ],
-          "implementation": "partial",
-          "owner_repo": "TrustField-Technologies"
+          "implementation": "live_optional_auth_handoff",
+          "owner_repo": "TrustField-Technologies",
+          "note": "Public program intake hands completed users to /auth/sign-up?next=/customer-portal"
         },
         {
           "id": "tf_register_partner",
@@ -262,7 +263,8 @@
         "sourcea.app sign-in/up",
         "/auth/callback",
         "buyer sandbox"
-      ]
+      ],
+      "implementation_status": "pending"
     },
     "TrustField-Technologies": {
       "agent": "trustfield_worker",
@@ -272,7 +274,12 @@
         "Partner Access OS",
         "customer portal",
         "api.trustfield.ca JWT"
-      ]
+      ],
+      "implementation_status": "live_verified",
+      "completed_at": "2026-07-18T11:20:28Z",
+      "proof_receipt": "receipts/cross-domain-auth-trustfield-phase1-live-2026-07-18.json",
+      "deployed_sha": "2e862346668dfeea2806055de62f8c6c5cc24155",
+      "product_pr": "https://github.com/Noetfield-Systems/TrustField-Technologies/pull/60"
     },
     "Noetfield": {
       "agent": "noetfield_website",

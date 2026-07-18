@@ -27,7 +27,7 @@ class AuthSurfaceProbeTests(unittest.TestCase):
     def test_matrix_loads(self) -> None:
         matrix = load_matrix()
         self.assertEqual(matrix["schema"], "auth_surface_matrix_v1")
-        self.assertEqual(matrix["version"], "1.1.1")
+        self.assertEqual(matrix["version"], "1.1.2")
         self.assertIn("tier_0_public", matrix["tiers"])
 
     def test_is_auth_redirect(self) -> None:
@@ -239,6 +239,22 @@ class AuthSurfaceProbeTests(unittest.TestCase):
         )
         self.assertTrue(any("TrustField-Technologies" in action for action in actions))
         self.assertFalse(any("ratify" in action.lower() for action in actions))
+
+    def test_completed_trustfield_advances_to_sourcea(self) -> None:
+        _, _, actions = build_summaries(
+            [],
+            {
+                "repo_ownership": {
+                    "SourceA": {"phase": 2, "implementation_status": "pending"},
+                    "TrustField-Technologies": {
+                        "phase": 1,
+                        "implementation_status": "live_verified",
+                    },
+                },
+                "founder_decisions_pending": [{"id": 2}, {"id": 3}, {"id": 5}],
+            },
+        )
+        self.assertEqual(actions, ["SourceA: execute docs/dispatch/auth-phase-2-sourcea.md"])
 
     def test_fail_on_warn_exit_code(self) -> None:
         with patch("verify_auth_surfaces_e2e_v1.load_matrix") as lm:

@@ -443,11 +443,20 @@ def build_summaries(results: list[dict[str, Any]], matrix: dict[str, Any]) -> tu
         venture_summary[v] = venture_summary.get(v, 0) + (1 if row["status"] in ("PASS", "WARN") else 0)
 
     next_actions: list[str] = []
-    for _repo, spec in matrix.get("repo_ownership", {}).items():
-        phase = spec.get("phase")
-        if phase == 1:
-            next_actions.append("TrustField-Technologies: execute docs/dispatch/auth-phase-1-trustfield.md")
-            break
+    dispatches = {
+        "TrustField-Technologies": "docs/dispatch/auth-phase-1-trustfield.md",
+        "SourceA": "docs/dispatch/auth-phase-2-sourcea.md",
+        "noetfeld-os": "docs/dispatch/auth-phase-4-noos.md",
+    }
+    ownership = matrix.get("repo_ownership", {})
+    ordered = sorted(ownership.items(), key=lambda item: item[1].get("phase", 999))
+    for repo, spec in ordered:
+        if repo not in dispatches:
+            continue
+        if spec.get("implementation_status") in ("live_verified", "complete"):
+            continue
+        next_actions.append(f"{repo}: execute {dispatches[repo]}")
+        break
     pending = matrix.get("founder_decisions_pending", [])
     blocking = sorted(d.get("id") for d in pending if d.get("id") in (1, 4))
     if blocking:
