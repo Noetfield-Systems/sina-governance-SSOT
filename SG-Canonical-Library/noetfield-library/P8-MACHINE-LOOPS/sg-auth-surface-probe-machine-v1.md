@@ -36,7 +36,7 @@ Observe (auth_surface_matrix + live URLs)
 | `motor_id` | `gh_actions_sg_auth_surface_probe_v1` |
 | `loop_id` | `sg_auth_surface_probe_v1` |
 | Cadence | `0 */6 * * *` (6h) |
-| Deadman | `sourcea-deadman-v1` at 2× interval (12h) — pending LS-075 loop_registry upsert |
+| Deadman | `sourcea-deadman-v1` at 2× interval (12h) — pending LS-075 loop_registry upsert; workflow remains cloud-live and receipt-backed until the shared registry sink lands |
 | Receipt | `receipts/auth-surface-probe-*.json` |
 | Value class | GUARD |
 

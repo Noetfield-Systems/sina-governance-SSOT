@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import json
 import sys
+import threading
 import unittest
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from unittest.mock import patch
 
@@ -11,7 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from verify_auth_surfaces_e2e_v1 import (  # noqa: E402
+    build_summaries,
     check_surface,
+    http_probe,
     is_auth_redirect,
     lint_redirect_allow_list,
     load_matrix,
@@ -56,6 +60,64 @@ class AuthSurfaceProbeTests(unittest.TestCase):
             row = check_surface(spec, tier="tier_0_public")
         self.assertEqual(row["status"], "FAIL")
 
+    def test_tier0_follows_one_non_auth_redirect(self) -> None:
+        spec = {
+            "id": "x",
+            "url": "https://example.com",
+            "expect_http": [200],
+            "must_not_redirect_to_auth": True,
+        }
+        with patch(
+            "verify_auth_surfaces_e2e_v1.http_probe",
+            side_effect=[
+                {"http": 307, "location": "https://www.example.com/"},
+                {"http": 200, "location": None},
+                {"http": 200, "location": None},
+            ],
+        ):
+            row = check_surface(spec, tier="tier_0_public")
+        self.assertEqual(row["status"], "PASS")
+        self.assertEqual(row["http"], 200)
+
+    def test_http_probe_does_not_follow_redirect_by_default(self) -> None:
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self) -> None:
+                if self.path == "/public":
+                    self.send_response(302)
+                    self.send_header("Location", "/sign-in")
+                    self.end_headers()
+                else:
+                    self.send_response(200)
+                    self.end_headers()
+
+            def log_message(self, *_args: object) -> None:
+                pass
+
+        server = HTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            result = http_probe(f"http://127.0.0.1:{server.server_port}/public")
+        finally:
+            server.shutdown()
+            thread.join(timeout=2)
+            server.server_close()
+        self.assertEqual(result["http"], 302)
+        self.assertEqual(result["location"], "/sign-in")
+
+    def test_tier1_follows_one_canonical_redirect(self) -> None:
+        spec = {"id": "register", "url": "https://example.com/register", "expect_http": [200, 302]}
+        with patch(
+            "verify_auth_surfaces_e2e_v1.http_probe",
+            side_effect=[
+                {"http": 307, "location": "https://www.example.com/register"},
+                {"http": 200, "location": None},
+            ],
+        ):
+            row = check_surface(spec, tier="tier_1_optional")
+        self.assertEqual(row["status"], "PASS")
+        self.assertEqual(row["http"], 200)
+
     def test_tier2_planned_warns_on_public_200(self) -> None:
         spec = {
             "id": "gate",
@@ -93,6 +155,27 @@ class AuthSurfaceProbeTests(unittest.TestCase):
     def test_redirect_allow_list_lint_fail(self) -> None:
         bad = lint_redirect_allow_list({"supabase_redirect_allow_list": ["ftp://bad"]})
         self.assertEqual(bad["status"], "FAIL")
+
+    def test_redirect_allow_list_rejects_non_callback_localhost(self) -> None:
+        bad = lint_redirect_allow_list(
+            {"supabase_redirect_allow_list": ["http://localhost:3000/anything"]}
+        )
+        self.assertEqual(bad["status"], "FAIL")
+
+    def test_ratified_blockers_do_not_remain_in_next_actions(self) -> None:
+        _, _, actions = build_summaries(
+            [],
+            {
+                "repo_ownership": {"TrustField-Technologies": {"phase": 1}},
+                "founder_decisions_pending": [
+                    {"id": 2},
+                    {"id": 3},
+                    {"id": 5},
+                ],
+            },
+        )
+        self.assertTrue(any("TrustField-Technologies" in action for action in actions))
+        self.assertFalse(any("ratify" in action.lower() for action in actions))
 
     def test_fail_on_warn_exit_code(self) -> None:
         with patch("verify_auth_surfaces_e2e_v1.load_matrix") as lm:
