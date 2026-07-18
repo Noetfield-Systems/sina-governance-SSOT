@@ -360,6 +360,35 @@
       "note": "NOT_COMMISSIONED under HOLD. Prior LIVE_WIRED_T0 claim retracted; staging gateway stood down (worker deleted). SG live shadow NOT deployed; key-2 custody NOT_PROVEN. See NF_SG_V2_STANDDOWN_CORRECTION_RECEIPT_v1.json.",
       "commission_status": "NOT_COMMISSIONED",
       "live_url": null
+    },
+    {
+      "motor_id": "cf_nf_commissioning_specialist_tick_v1",
+      "kind": "cloudflare_cron",
+      "repo": "sina-governance-SSOT",
+      "health_url": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "cadence": "*/5",
+      "lane": "sg_commissioning_specialist",
+      "loop_id": "nf-commissioning-specialist-tick-v1",
+      "trigger_host": "cloud",
+      "deadman": "noos-deadman-v1_or_independent_cf_path",
+      "owns": [
+        "commissioning_observe_detect",
+        "allowlisted_self_heal",
+        "kaizen_propose_only",
+        "model_failover_deepseek_glm_kimi_hf"
+      ],
+      "must_not_own": [
+        "hold_lift",
+        "enforcement_enable",
+        "app_key_mint",
+        "unsupervised_architecture_redesign",
+        "production_deploy"
+      ],
+      "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*",
+      "conflicts_with": [],
+      "commissioned": false,
+      "scheduled": true,
+      "note": "5-min commissioning specialist closed loop. HOLD preserved. Models: DeepSeek/GLM/Kimi/HF failover. Propose improve only."
     }
   ],
   "agent_lanes": [
@@ -558,5 +587,8 @@
       ],
       "rule": "Registration scripts run from SG only after independent verify \u2014 not from GH Actions"
     }
-  ]
+  ],
+  "task_cell_map": {
+    "commissioning_specialist_loop": "sg_commissioning_specialist"
+  }
 }
