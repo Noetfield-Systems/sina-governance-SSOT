@@ -1,0 +1,60 @@
+{
+  "schema": "nf_sg_authority_identity_v2",
+  "decision_id": "NF-SG-AUTHORITY-IDENTITY-V2",
+  "status": "FOUNDER_DIRECTIVE_ACCEPTED",
+  "implementation_status": "CONTAINMENT_IMPLEMENTATION_AUTHORIZED",
+  "runtime_status": "NOT_COMMISSIONED",
+  "version": "1.0.0",
+  "as_of": "2026-07-18",
+  "supersedes": {
+    "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "field": "repository_identity.app_count",
+    "old": 1,
+    "replacement": {
+      "motor_execution_app_count": 1,
+      "sg_authority_app_count": 1,
+      "total_security_principals": 2
+    }
+  },
+  "identities": {
+    "motor": {
+      "slug": "noetfield-motor",
+      "role": "executor",
+      "may_issue_sg_decisions": false,
+      "may_execute_mutations": true
+    },
+    "sg": {
+      "slug": "noetfield-sg-authority",
+      "role": "deterministic_authority",
+      "may_issue_sg_decisions": true,
+      "may_execute_mutations": false
+    }
+  },
+  "custody": {
+    "credentials_disjoint": true,
+    "runtime_access_disjoint": true,
+    "candidate_sg_may_approve_itself": false,
+    "upgrade_chain": "SG-N authorizes SG-N+1",
+    "bootstrap_commissioner": "founder_or_threshold_custody"
+  },
+  "containment": {
+    "autonomous_production_mutations": "HOLD",
+    "legacy_app_authoritative": false,
+    "legacy_app_revocation": "DEFER_UNTIL_SG_V2_COMMISSIONED_AND_ROLLBACK_PROVEN"
+  },
+  "commissioning_requirements": [
+    "identity_attestation",
+    "webhook_hmac_verification",
+    "delivery_replay_rejection",
+    "permit_replay_rejection",
+    "merge_group_head_sha_evaluation",
+    "signed_exact_action_receipt",
+    "ruleset_expected_source_app",
+    "motor_permit_enforcement",
+    "cold_start_proofs",
+    "key_rotation_proof",
+    "rollback_proof"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+  "runtime_reality": "data/runtime_reality_v1.json"
+}

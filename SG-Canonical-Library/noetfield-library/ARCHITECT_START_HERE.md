@@ -15,6 +15,10 @@ Everything here is ONE continuous thread built layer-by-layer. **Do not re-deriv
 **Gate:** no new job, task, specialist, role, page, clause, or receipt field without dictionary entry.  
 Guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` · Audit: `P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`.
 
+## 0c. P0 RUNTIME REALITY (wins for live status)
+
+`data/runtime_reality_v1.json` = current machine truth. Incident `SG-AUTHORITY-IDENTITY-P0` is contained; autonomous production mutations are HOLD. `NF-SG-AUTHORITY-IDENTITY-V2` separates one Motor executor App from one SG authority App. Neither SG v2 nor Unified Motor Core is commissioned.
+
 ## 1. AUTHORITY ORDER (lower number wins on conflict)
 ```
 P0 FOUNDATION-SPINE  ← the constitution (SSOT v6) + index + L0 runtime + governed-autorun
@@ -71,6 +75,7 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Split:** Cloudflare Agents = Resident Role owners · Cloudflare Workflows = Motor jobs · Client-Zero Motor = first profile (not discarded).  
 **Foundation:** `NF-UNIFIED-MOTOR-V1-FOUNDATION` is T0-first — no GPU in that commission.  
 **Wiring:** `docs/dispatch/nf-unified-motor-architecture-all-repos.md` · **Wave 0:** `docs/dispatch/wave-0-nf-unified-motor-merge-packet.md`
+**Runtime correction:** `P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md` + `data/runtime_reality_v1.json`; `noetfield-motor` is executor identity only; Unified Motor Core and SG runtime are NOT commissioned.
 
 ## 2h. SINAGPT + COMMAND GATEWAY v2 (P1 cockpit · P0 API)
 `P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` = **SinaGPT** = `founder.brain-architect` cockpit — not Issue Manager, CI daemon, or Motor.  

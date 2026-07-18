@@ -878,6 +878,38 @@
     {
       "term": "REPEATABLE",
       "meaning": "Three consecutive real Jobs passed without manual intervention."
+    },
+    {
+      "term": "NF-SG-AUTHORITY-IDENTITY-V2",
+      "meaning": "Founder containment amendment separating Motor execution identity from deterministic SG authority identity."
+    },
+    {
+      "term": "SG-AUTHORITY-IDENTITY-P0",
+      "meaning": "P0 incident for absent commissioned SG authority and stale legacy advisory identity."
+    },
+    {
+      "term": "runtime reality",
+      "meaning": "Machine-readable current deployment and commissioning truth that overrides architecture prose for live status."
+    },
+    {
+      "term": "noetfield-sg-authority",
+      "meaning": "Planned organization-owned deterministic SG authority GitHub App."
+    },
+    {
+      "term": "BLOCKED_SG_NOT_COMMISSIONED",
+      "meaning": "Containment result when a production mutation is requested before SG runtime commissioning."
+    },
+    {
+      "term": "CONTAINMENT_ENFORCED",
+      "meaning": "State where autonomous production mutation paths are mechanically held."
+    },
+    {
+      "term": "BLOCKED_STALE_IDENTITY",
+      "meaning": "State where configured authority identity is legacy, stale, or not commissioned."
+    },
+    {
+      "term": "REMOTE_CHECK_ADVISORY",
+      "meaning": "Legacy advisory receipt type that cannot authorize production mutation."
     }
   ],
   "structural_allowlist": [

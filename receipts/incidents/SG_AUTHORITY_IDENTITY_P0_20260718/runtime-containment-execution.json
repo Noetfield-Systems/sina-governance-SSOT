@@ -1,0 +1,24 @@
+{
+  "schema": "sg_authority_identity_p0_runtime_containment_receipt_v1",
+  "incident_id": "SG-AUTHORITY-IDENTITY-P0",
+  "captured_at": "2026-07-18T07:57:23.627634+00:00",
+  "github_workflow": {
+    "id": 305897438,
+    "name": "brain-loop-autorun-v1",
+    "path": ".github/workflows/brain-loop-autorun-v1.yml",
+    "state": "disabled_manually",
+    "active_or_queued_run_ids": [],
+    "run_178_id": 29634036185
+  },
+  "mac": {
+    "hold_flag_present": true,
+    "hold_flag_path": "~/.sina/enforcement/brain-autonomous-hold-v1.flag",
+    "autonomous_deploy_flag_present": false,
+    "ship_window_flag_present": false,
+    "launchd_loaded": false,
+    "launchd_label": "com.sina.brain-loop-autorun-v1"
+  },
+  "legacy_app_revoked": false,
+  "legacy_installation_uninstalled": false,
+  "verdict": "CONTAINMENT_ENFORCED"
+}

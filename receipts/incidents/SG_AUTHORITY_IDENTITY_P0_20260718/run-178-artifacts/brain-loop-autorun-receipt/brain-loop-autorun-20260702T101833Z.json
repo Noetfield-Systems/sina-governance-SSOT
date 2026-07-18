@@ -1,0 +1,13 @@
+{
+  "autonomous": true,
+  "gate_note": "autonomous_promote_executed",
+  "gate_rc": 0,
+  "hold_active": false,
+  "matrix_rc": 0,
+  "mutation_trials": false,
+  "parallel_rc": 0,
+  "receipt_type": "BRAIN_LOOP_AUTORUN",
+  "recorded_at": "20260702T101833Z",
+  "self_heal_rc": 0,
+  "ship_window": false
+}

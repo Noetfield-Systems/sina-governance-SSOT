@@ -23,7 +23,7 @@
    ],
    "receipt_path": "receipts/workflow-census-*.json",
    "conflicts_with": [],
-   "note": "Judging layer — which receipt does each loop serve?"
+   "note": "Judging layer \u2014 which receipt does each loop serve?"
   },
   {
    "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
@@ -69,19 +69,18 @@
    "receipt_path": "receipts/auth-surface-probe-*.json",
    "deadman": "sourcea-deadman-v1",
    "conflicts_with": [],
-   "note": "GUARD — tiered auth surface probe; SG verifies venture workers implement UI"
+   "note": "GUARD \u2014 tiered auth surface probe; SG verifies venture workers implement UI"
   },
   {
    "motor_id": "gh_actions_brain_loop_autorun_v1",
    "kind": "github_actions",
    "repo": "sina-governance-ssot",
    "workflow_file": ".github/workflows/brain-loop-autorun-v1.yml",
-   "cadence": "*/30 * * * *",
-   "lane": "sourcea_brain_observe_promote",
+   "cadence": "founder-manual-observe-only",
+   "lane": "sg_containment_observation",
    "owns": [
-    "ci_self_heal",
-    "ci_parallel_verifier_batch",
-    "ci_e2e_matrix_when_tokens"
+    "read_only_containment_receipt",
+    "agent_read_staleness_observation"
    ],
    "must_not_own": [
     "trustfield_loops_build",
@@ -89,33 +88,29 @@
     "sg_guardrail_append",
     "external_send"
    ],
-   "requires_secrets": [
-    "CF_MAIN_TOKEN",
-    "CF_VERIFIER_TOKEN"
-   ],
-   "autonomous_promote": "only_when_BRAIN_CI_AUTONOMOUS_and_tokens_present",
+   "requires_secrets": [],
+   "autonomous_promote": "disabled_BLOCKED_SG_NOT_COMMISSIONED",
    "receipt_path": "receipts/brain-loop-autorun-*.json",
-   "conflicts_with": []
+   "conflicts_with": [],
+   "runtime_state": "DISABLED_MANUALLY_P0_CONTAINMENT",
+   "note": "Schedule removed; manual observe-only; secret presence never authorizes mutation."
   },
   {
    "motor_id": "mac_launchd_brain_loop_autorun_v1",
    "kind": "mac_launchd",
    "repo": "sina-governance-ssot",
    "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
-   "cadence": "1800s",
-   "lane": "sourcea_brain_observe_promote",
-   "owns": [
-    "mac_self_heal",
-    "mac_parallel_verifier_batch",
-    "mac_e2e_matrix_ship_window"
-   ],
+   "cadence": "disabled",
+   "lane": "sg_containment_observation",
+   "owns": [],
    "must_not_own": [
     "trustfield_loops_build",
     "ci_duplicate_when_ship_window"
    ],
    "receipt_path": "receipts/brain-loop-autorun-*.json",
    "conflicts_with": [],
-   "note": "Complement to GH Actions — Mac sleeps; GH is 24/7 cloud mirror"
+   "note": "Mac service booted out; installer fails closed on governance HOLD/runtime HOLD.",
+   "runtime_state": "BOOTED_OUT_P0_CONTAINMENT"
   },
   {
    "motor_id": "cf_loop_specialist_tick_v1",
@@ -229,7 +224,7 @@
    ],
    "receipt_path": "trustfield_loop_receipts",
    "conflicts_with": [],
-   "note": "W8 production — supersedes trustfield_loops_preview"
+   "note": "W8 production \u2014 supersedes trustfield_loops_preview"
   },
   {
    "motor_id": "trustfield_loops_preview",
@@ -245,7 +240,7 @@
    ],
    "receipt_path": ".receipt_ids/*.json",
    "conflicts_with": [],
-   "note": "Frozen preview — do not register new work against preview motor"
+   "note": "Frozen preview \u2014 do not register new work against preview motor"
   },
   {
    "motor_id": "gh_actions_sourcea_external_verify_v1",
@@ -282,7 +277,7 @@
    "conflicts_with": [
     "cf_auto_runtime_tick_v1"
    ],
-   "note": "NOOS lane — observe SourceA read-only via noos-sourcea-observe-loop"
+   "note": "NOOS lane \u2014 observe SourceA read-only via noos-sourcea-observe-loop"
   },
   {
    "motor_id": "p0pgr_shadow_cycle_v1",
@@ -490,7 +485,7 @@
     "gh_actions_brain_loop_autorun_v1",
     "mac_launchd_brain_loop_autorun_v1"
    ],
-   "rule": "CAS on promotion gate — second writer gets REJECTED receipt, not silent overwrite"
+   "rule": "CAS on promotion gate \u2014 second writer gets REJECTED receipt, not silent overwrite"
   },
   {
    "task": "trustfield_loops_implementation",
@@ -507,7 +502,7 @@
    "allowed_motors": [
     "sourcea_brain"
    ],
-   "rule": "Registration scripts run from SG only after independent verify — not from GH Actions"
+   "rule": "Registration scripts run from SG only after independent verify \u2014 not from GH Actions"
   }
  ]
 }

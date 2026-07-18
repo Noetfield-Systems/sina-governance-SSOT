@@ -1,55 +1,53 @@
 name: brain-loop-autorun-v1
 
 on:
-  schedule:
-    - cron: "*/30 * * * *"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Containment mode"
+        required: true
+        type: choice
+        default: observe-only
+        options:
+          - observe-only
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: brain-loop-autorun-v1-containment
+  cancel-in-progress: false
 
 jobs:
-  autorun:
+  observe-only:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
       - name: Checkout SG
         uses: actions/checkout@v4
-
-      - name: Checkout SourceA
-        uses: actions/checkout@v4
-        with:
-          repository: Noetfield-Systems/SourceA
-          path: SourceA
-          token: ${{ secrets.SOURCEA_GITHUB_PAT || secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install wrangler
-        run: npm install -g wrangler
-
-      - name: Brain 24/7 autorun
+      - name: Record observe-only containment receipt
         env:
           CI: "true"
-          SOURCEA_ROOT: ${{ github.workspace }}/SourceA
-          CF_MAIN_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
-          CF_VERIFIER_TOKEN: ${{ secrets.CF_VERIFIER_TOKEN }}
-        run: |
-          if [[ -n "${CF_MAIN_TOKEN:-}" && -n "${CF_VERIFIER_TOKEN:-}" ]]; then
-            export BRAIN_CI_AUTONOMOUS=1
-          fi
-          bash scripts/brain_loop_autorun_v1.sh
+          SG_OBSERVE_ONLY: "1"
+        run: bash scripts/brain_loop_autorun_v1.sh
 
-      - name: Agent read staleness gate (SG authority)
+      - name: Agent read staleness observation
         if: always()
         run: |
           chmod +x scripts/verify_agent_read_staleness_v1.sh
           ./scripts/verify_agent_read_staleness_v1.sh || true
 
-      - name: Upload autorun receipt
+      - name: Upload observe-only receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: brain-loop-autorun-receipt
+          name: brain-loop-observe-only-receipt
           path: receipts/brain-loop-autorun-*.json
-          if-no-files-found: ignore
+          if-no-files-found: error

@@ -30,6 +30,16 @@
 - Every PR: use `.github/pull_request_template.md` (motor_id + task_cell + lane)
 - Never: autonomous promote, brain register without independent verify, cross-repo PR
 
+## P0 runtime containment (read before architecture claims)
+
+`data/runtime_reality_v1.json` has precedence over architecture prose for current deployment, commissioning, ACTIVE, and authority status. Current incident: `SG-AUTHORITY-IDENTITY-P0`.
+
+- `noetfield-motor` = proven executor identity; not SG; not commissioned Unified Motor Core.
+- Legacy App `4179901` / installation `143449507` and `REMOTE_CHECK_ADVISORY` are forbidden authority sources.
+- Autonomous production mutation is HOLD until exact fresh signed permits from commissioned `noetfield-sg-authority` exist.
+- Architecture accepted ≠ implemented ≠ deployed ≠ proven ≠ commissioned ≠ active.
+- Agents may observe, test, propose, and open draft PRs; they may not lift HOLD, deploy, promote, mutate secrets/authority/verifiers, or revoke legacy identity under containment.
+
 ## Skills (load at session start)
 
 0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority
