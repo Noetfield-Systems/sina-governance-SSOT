@@ -5,15 +5,16 @@
 **Status:** `SG_ACCEPTED` · `IMPLEMENTATION_AUTHORIZED` (foundation wave only)  
 **Authority:** SG Architecture Finalization Gate  
 **Tier:** P0-FOUNDATION-SPINE (execution-plane architecture)  
-**Version:** v1.0.0_locked_20260717  
+**Version:** v1.1.0_locked_20260718  
 **Machine:** `data/nf_unified_motor_architecture_v1_LOCKED.json`  
 **Waves:** `docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md`  
 **Packet id:** `SG-FINALIZATION-NF-UNIFIED-MOTOR-V1`  
 **effective_at:** 2026-07-17  
+**amendment_at:** 2026-07-18 (scaling posture + W5 acceptance contract; same decision_id)  
 **proposed_by:** Founder + Brain/Architect (Advisor 2 architecture; Advisor 1 operating doctrine)  
 **sg_decision:** `SG_ACCEPTED` with three corrections and T0-first foundation commission  
-**sg_authority_sha:** `dc6080d8519b8a83dcfaaeefb65392691ce3e33e`
-**prior_accept_sha:** `8b476f721b1fe21f16036c84437f16de60434618` (historical bundled-branch accept; not main ancestor)
+**sg_authority_sha:** `dc6080d8519b8a83dcfaaeefb65392691ce3e33e` (Wave 0 squash land on main; remains valid ancestor until this amendment lands)  
+**prior_accept_sha:** `8b476f721b1fe21f16036c84437f16de60434618` (historical bundled-branch accept; not main ancestor)  
 **supersedes:** none as ACTIVE architecture (consolidates distributed Client-Zero Motor into a profile)
 
 ---
@@ -167,6 +168,46 @@ Each instance carries: `role_id`, `repo_bindings`, `authority_contract`, `event_
 
 ---
 
+
+---
+
+## scaling_posture (binding · amendment 2026-07-18)
+
+Accepted scaling verdict for this decision. Do not open a competing architecture packet.
+
+```text
+Cloudflare Agents + Workflows = Motor runway (Resident Roles + durable jobs)
+Workload splitting = behind Motor recipes / SandboxAdapter / OpenModelRuntime interfaces
+Provider hardening = W5 acceptance requirements only (separate commission)
+Activation Cycle WIP = Circuit A + Circuit B only
+```
+
+### Binding reject list (do not adopt as Motor substrate)
+
+- Temporal
+- Kafka + Flink
+- Ray
+- Restate
+
+Steal later patterns **inside adapters** only (ErrorClassifier, OutputNormalizer → CanonicalAction, error-rate breaker + min samples, SLO split, idempotency as trace/local-store truth). Do not replace the Cloudflare Agents + Workflows runway.
+
+### Activation Cycle floor
+
+Preserve `NF-ACTIVATION-CYCLE-V1`:
+
+- No new providers, roles, lanes, or major schemas in this amendment
+- WIP remains Circuit A (T0 deterministic) + Circuit B (one campaign)
+- No new DeepSeek / Kimi / GLM tiers this activation cycle
+- Foundation remains T0-first; GPU and commercial model calls stay out of W1/W2
+
+### Commission / HOLD floor
+
+- W1/W2 implementation home: builders / `noetfield-sandbox-private` (not `noetfeld-os` as Motor host)
+- End state for foundation build: `FOUNDATION_BUILT_FOR_FOCUSED_REVIEW` — not `FULLY_COMMISSIONED`
+- Preserve: `SG_RUNTIME=NOT_COMMISSIONED` · `SG_ENFORCEMENT=NOT_ENABLED` · `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD`
+- Loop `nf-unified-motor-foundation-v1` may be registered as cloud-ready / not commissioned; do not schedule or deploy under HOLD
+
+
 ## model_policy
 
 ```text
@@ -285,10 +326,11 @@ NOOS observes/classifies/routes; Motor executes; SG authorizes; P99 preserves.
 
 ## vendor_boundaries / portability / cost
 
-- Cloudflare: Resident Role + Workflow substrate; portable behind interfaces
+- Cloudflare: Resident Role + Workflow substrate; portable behind interfaces; **not** replaceable by Temporal / Kafka+Flink / Ray / Restate as Motor substrate
 - GitHub App: repository identity; app_count = 1
-- RunPod: first OpenModelRuntime only; `permanent_vendor_lock: false`
+- RunPod: first OpenModelRuntime only; `permanent_vendor_lock: false`; deferred to W5 commission
 - Cost: T0-first proof; T1 default; T2/T3 budget_policy PASS required
+- Scaling: recipe/workload split behind interfaces; provider breaker/SLO/idempotency patterns are W5 acceptance requirements, not foundation deliverables
 
 ---
 

@@ -5,7 +5,7 @@
   "status": "SG_ACCEPTED",
   "implementation_status": "IMPLEMENTATION_AUTHORIZED",
   "implementation_scope": "NF-UNIFIED-MOTOR-V1-FOUNDATION",
-  "version": "v1.0.0_locked_20260717",
+  "version": "v1.1.0_locked_20260718",
   "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
   "gate": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
   "waves": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
@@ -65,7 +65,22 @@
     "interface": "OpenModelRuntime_v1",
     "first_adapter": "RunPod_vLLM",
     "permanent_vendor_lock": false,
-    "foundation_includes_gpu": false
+    "foundation_includes_gpu": false,
+    "w5_acceptance_requirements": [
+      "canonical_output_normalization",
+      "error_classification_FATAL_SKIP_TIER_RETRY_VALIDATION_FAIL",
+      "rolling_error_rate_breaker_min_samples",
+      "local_idempotency_result_truth",
+      "slo_budgets",
+      "provider_rate_limit_dispatch",
+      "spend_kill_switch"
+    ],
+    "forbidden_until_w5_commission": [
+      "DeepSeek",
+      "Kimi",
+      "GLM",
+      "RunPod_production_calls_from_foundation"
+    ]
   },
   "control_plane": {
     "noos": "observe_classify_route",
@@ -89,8 +104,8 @@
     "noetfield.sg-authority-ref.v1",
     "noetfield.repo-owner-ref.v1"
   ],
-  "saved_at": "2026-07-17T08:59:33Z",
-  "base_head_before_commit": "4e8be0a28b77b0ecaebbde758c2b58f1e1b81ee8",
+  "saved_at": "2026-07-18T12:00:00Z",
+  "base_head_before_commit": "63ff2805fb6715e9a0e8c9e0f95aeeb318679f70",
   "sg_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
   "prior_accept_sha": "8b476f721b1fe21f16036c84437f16de60434618",
   "wave0_branch": "doctrine/nf-unified-motor-v1-wave0",
@@ -98,5 +113,42 @@
   "authority_sha_note": "Squash-merged via PR #16; authority SHA is main land commit (branch tip a7ed3c0 is not an ancestor after squash).",
   "wave0_branch_tip": "a7ed3c0ea3c62eaca2d3cbb0ed57971e0c2fbc83",
   "wave0_merge_commit": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
-  "wave0_status": "MERGED_TO_MAIN"
+  "wave0_status": "MERGED_TO_MAIN",
+  "amendment_at": "2026-07-18T12:00:00Z",
+  "scaling_posture": {
+    "runway": "cloudflare_agents_plus_workflows",
+    "reject_substrates": [
+      "Temporal",
+      "Kafka+Flink",
+      "Ray",
+      "Restate"
+    ],
+    "workload_split": "behind_motor_recipes_and_adapters",
+    "provider_hardening": "deferred_w5_acceptance_requirements",
+    "activation_cycle": "NF-ACTIVATION-CYCLE-V1",
+    "wip": [
+      "Circuit A",
+      "Circuit B"
+    ],
+    "forbidden_this_cycle": [
+      "DeepSeek_tier",
+      "Kimi_tier",
+      "GLM_tier",
+      "new_providers",
+      "new_roles",
+      "new_lanes"
+    ],
+    "foundation_end_state": "FOUNDATION_BUILT_FOR_FOCUSED_REVIEW",
+    "hold": {
+      "SYSTEM_STATUS": "SCOPED_LIVE_T0_AUTHORIZED",
+      "SG_RUNTIME": "NOT_COMMISSIONED",
+      "SG_REPLACEMENT": "SHADOW_LANDED",
+      "SG_ENFORCEMENT": "NOT_ENABLED",
+      "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD",
+      "FULLY_COMMISSIONED_CLAIM": false
+    },
+    "implementation_home": "noetfield-sandbox-private",
+    "loop_id": "nf-unified-motor-foundation-v1",
+    "loop_commissioned": false
+  }
 }

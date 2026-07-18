@@ -1,11 +1,13 @@
 # Runbook — SG Authority v2 commissioning
 
 **Decision:** `NF-SG-AUTHORITY-IDENTITY-V2`  
-**Current state:** `SG_V2=NOT_COMMISSIONED`
+**Current state:** `SG_V2_SHADOW=LANDED` (PR #28) · `SYSTEM_STATUS=SCOPED_LIVE_T0_AUTHORIZED` · `SG_RUNTIME=NOT_COMMISSIONED` until live deploy evidence
+
+Shadow worker landed at `workers/sg-authority-v2-shadow/` (merge commit `898d67e5ca9eab9ae6161658cfdef3b2c48e6360`). Production worker path prepared at `workers/sg-authority-v2/` (`noetfield-sg-authority-v2`, App `4330805`, installation `147378007`). Scoped live T0 commissioning authorized; `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains. Do not claim `FULLY_COMMISSIONED`.
 
 ## A. Containment
 
-Enforce `data/runtime_reality_v1.json`, disable autonomous mutation paths, preserve legacy evidence, and deny legacy App/installation/receipt identities. Do not revoke legacy credentials yet.
+Enforce `data/runtime_reality_v1.json`, disable autonomous mutation paths, preserve legacy evidence, and deny legacy App/installation/receipt identities. Do not revoke legacy credentials yet. Allowed under containment: event intake, T0 workflows, receipt writes, signed permit evaluation — not autonomous production merge/deploy/content publication.
 
 ## B. Identity
 

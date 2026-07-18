@@ -42,7 +42,7 @@
 
 ## Skills (load at session start)
 
-0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority
+0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority. Scaling posture: Cloudflare Agents+Workflows only; no Temporal/Kafka+Flink/Ray/Restate substrate; W5 provider hardening deferred; HOLD preserved
 
 0d. **SinaGPT + Command Gateway v2 (LOCKED)** — `P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` before cockpit/API redesign
 
