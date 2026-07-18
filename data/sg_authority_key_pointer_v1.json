@@ -1,0 +1,25 @@
+{
+  "schema": "noetfield.sg-authority-key-pointer.v1",
+  "as_of": "2026-07-18",
+  "rule": "LOOK_HERE_FIRST. Do not generate a new GitHub App private key because an agent cannot find one.",
+  "forbidden_default": "mint_new_app_private_key_when_lost",
+  "app_id": "4330805",
+  "app_slug": "noetfield-sg-authority",
+  "installation_id": "147378007",
+  "canonical_local_path": "~/.sina/secrets/noetfield-sg-authority.private-key.pem",
+  "local_pointer_file": "~/.sina/secrets/SG_AUTHORITY_KEY_POINTER.json",
+  "pem_file_sha256_prefix": "e3d33c169a1387d6",
+  "public_fingerprint_sha256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+  "cloudflare_custody": {
+    "account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "account_role": "independent_verifier_not_main",
+    "worker": "noetfield-sg-authority-v2-shadow",
+    "secret_name": "SG_APP_PRIVATE_KEY"
+  },
+  "if_missing": [
+    "Check ~/.sina/secrets/SG_AUTHORITY_KEY_POINTER.json",
+    "Check ~/.sina/secrets/noetfield-sg-authority.private-key.pem",
+    "Check verifier Worker secret SG_APP_PRIVATE_KEY on account b7282b4a\u2026",
+    "Only if ALL of the above are gone: escalate to founder. Do not mint key N+1."
+  ]
+}
