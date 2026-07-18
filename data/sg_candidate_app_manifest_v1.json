@@ -1,0 +1,20 @@
+{
+  "name": "noetfield-sg-authority",
+  "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT",
+  "description": "Noetfield SG advisory authority (candidate, NOT commissioned). Shadow-only. No production enforcement.",
+  "public": false,
+  "request_oauth_on_install": false,
+  "setup_on_update": false,
+  "hook_attributes": {
+    "active": false
+  },
+  "default_events": [],
+  "default_permissions": {
+    "metadata": "read",
+    "contents": "read",
+    "pull_requests": "read",
+    "actions": "read",
+    "checks": "write",
+    "statuses": "write"
+  }
+}

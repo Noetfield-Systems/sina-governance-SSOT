@@ -1,0 +1,45 @@
+{
+  "state_type": "sg_candidate_app_state_v1",
+  "updated_at_utc": "2026-07-18T10:00:15.067686+00:00",
+  "SG_CANDIDATE_APP": "CREATION_PENDING_FOUNDER_INTERACTION",
+  "SG_CANDIDATE_IDENTITY": "NOT_PROVEN",
+  "SG_RUNTIME": "NOT_COMMISSIONED",
+  "SG_ENFORCEMENT": "NOT_ENABLED",
+  "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD",
+  "candidate_app": {
+    "requested_name": "noetfield-sg-authority",
+    "requested_slug": "noetfield-sg-authority",
+    "owner_org": "Noetfield-Systems",
+    "public": false,
+    "webhook_active": false,
+    "authorized_permissions": {
+      "metadata": "read",
+      "contents": "read",
+      "pull_requests": "read",
+      "actions": "read",
+      "checks": "write",
+      "statuses": "write"
+    }
+  },
+  "authorized_installation_targets": [
+    "Noetfield-Systems/sina-governance-SSOT",
+    "Noetfield-Systems/noetfield-sandbox-private"
+  ],
+  "forbidden_installation_targets": [
+    "SANDBOX",
+    "NOETFIELD-RUNWAY",
+    "all repositories"
+  ],
+  "private_key_custody": {
+    "path": "~/.sina/secrets/noetfield-sg-authority.private-key.pem",
+    "in_repo": false
+  },
+  "not_authorized_by_this_approval": [
+    "SG commissioning",
+    "production ruleset enforcement",
+    "Motor production permits",
+    "HOLD removal",
+    "secret rotation outside candidate SG custody setup",
+    "legacy App revocation"
+  ]
+}
