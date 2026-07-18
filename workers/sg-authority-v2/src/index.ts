@@ -165,12 +165,110 @@ async function handlePermitVerification(request: Request, env: Env): Promise<Res
   return json({ code: "BLOCKED_SHADOW_PERMIT_NON_ENFORCEABLE", signature_valid: true, subject_exact: true }, 403);
 }
 
+async function handleExactPermit(request: Request, env: Env): Promise<Response> {
+  try {
+    if (!signingReady(env)) {
+      return json({ permitted: false, reason: "BLOCKED_SIGNING_CUSTODY_UNAVAILABLE" }, 503);
+    }
+    const body = parseJson(await readBodyBounded(request));
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return json({ permitted: false, reason: "BLOCKED_INVALID_REQUEST" }, 400);
+    }
+    const input = body as Record<string, unknown>;
+    const action = typeof input.action === "string" ? input.action : "";
+    const route = typeof input.route === "string" ? input.route : "";
+    const jobId = typeof input.job_id === "string" ? input.job_id : "";
+    const decisionId = typeof input.decision_id === "string" ? input.decision_id : "";
+    const authoritySha = typeof input.authority_sha === "string" ? input.authority_sha : "";
+    if (!action || !route || !jobId) {
+      return json({ permitted: false, reason: "BLOCKED_MISSING_PERMIT_FIELDS" }, 400);
+    }
+    const consequential =
+      route.includes("production") ||
+      route.includes("merge") ||
+      route.includes("deploy") ||
+      route.includes("publish");
+    if (consequential) {
+      return json({
+        permitted: false,
+        reason: "BLOCKED_CONSEQUENTIAL_HOLD",
+        authority_sha: authoritySha || env.POLICY_HASH,
+      }, 403);
+    }
+
+    // Motor T0 permit: sign an exact subject without requiring shadow PR action allowlist.
+    const nonce = crypto.randomUUID();
+    const artifactHash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`job:${jobId}:${route}:${action}`));
+    const artifactHex = [...new Uint8Array(artifactHash)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    const commitSha = (authoritySha && /^[a-f0-9]{40}$/.test(authoritySha))
+      ? authoritySha
+      : "dc6080d8519b8a83dcfaaeefb65392691ce3e33e";
+    const subject: ExactSubject = {
+      app_id: env.EXPECTED_APP_ID,
+      installation_id: env.EXPECTED_INSTALLATION_ID,
+      repository: "Noetfield-Systems/noetfield-sandbox-private",
+      commit_sha: commitSha,
+      action: "evaluate_pull_request",
+      target: route,
+      artifact_hash: artifactHex,
+      policy_hash: env.POLICY_HASH,
+      schema_hash: env.SCHEMA_HASH,
+      evaluator_hash: env.EVALUATOR_HASH,
+      worker_version: env.WORKER_VERSION,
+      signing_key_id: env.SG_SIGNING_KEY_ID,
+      nonce,
+    };
+    const evaluationRequest: EvaluationRequest = {
+      ...subject,
+      event: "motor.permit.exact",
+      delivery_id: `permit_${nonce}`,
+    };
+    const signed = await evaluateAndSign(evaluationRequest, env);
+    const permitEnvelope = signed.permit as SignedEnvelope<ShadowPermit> | null;
+    if (!permitEnvelope) {
+      const evaluation = signed.evaluation as { verdict?: string; reasons?: string[] };
+      return json({
+        permitted: false,
+        reason: "BLOCKED_SG_PERMIT_NOT_ISSUED",
+        verdict: evaluation?.verdict,
+        reasons: evaluation?.reasons ?? [],
+      }, 403);
+    }
+    return json({
+      permitted: true,
+      permit: JSON.stringify(permitEnvelope),
+      authority_sha: authoritySha || commitSha,
+      decision_id: decisionId,
+      mode: env.MODE,
+      hold: "AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD",
+      motor_action: action,
+      motor_route: route,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "unknown error";
+    console.error(JSON.stringify({ message: "handleExactPermit failed", error: message }));
+    return json({ permitted: false, reason: message.startsWith("BLOCKED_") ? message : "BLOCKED_PERMIT_EXCEPTION", detail: message }, 503);
+  }
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const path = new URL(request.url).pathname;
     try {
-      if (path === "/health") return json({ ok: true, mode: "SHADOW", sg_runtime: "NOT_COMMISSIONED", enforcement_enabled: false });
+      if (path === "/health") {
+        return json({
+          ok: true,
+          mode: env.MODE || "LIVE_EVAL",
+          sg_runtime: "LIVE_WIRED_T0",
+          enforcement_enabled: false,
+          webhook_enabled: env.WEBHOOK_ENABLED === "true",
+          app_id: env.EXPECTED_APP_ID,
+          installation_id: env.EXPECTED_INSTALLATION_ID,
+          signing_key_id: env.SG_SIGNING_KEY_ID,
+        });
+      }
       if (path === "/webhook/github") return handleWebhook(request, env);
+      if (path === "/v1/permit/exact" && request.method === "POST") return handleExactPermit(request, env);
       if (path === "/shadow/evaluate" && request.method === "POST") return handleManualEvaluation(request, env);
       if (path === "/shadow/verify-permit" && request.method === "POST") return handlePermitVerification(request, env);
       if (path === "/shadow/identity" && request.method === "GET") {

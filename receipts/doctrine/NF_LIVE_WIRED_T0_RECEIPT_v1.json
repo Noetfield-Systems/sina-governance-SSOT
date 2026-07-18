@@ -1,0 +1,160 @@
+{
+  "receipt_type": "live_wired_t0_commission_receipt_v1",
+  "status": "LIVE_WIRED_T0",
+  "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "autonomous_production_mutations": "HOLD",
+  "fully_commissioned_claim": false,
+  "captured_at": "2026-07-18T13:38:58Z",
+  "surfaces": {
+    "motor_staging": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+    "sg_authority": "https://noetfield-sg-authority-v2.sina-kazemnezhad-ca.workers.dev"
+  },
+  "proof": {
+    "health": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "service": "nf-unified-motor-foundation-v1",
+        "commission_status": "LIVE_WIRED_T0_CANDIDATE",
+        "foundation_status": "LIVE_WIRED_T0_CANDIDATE",
+        "sg_decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+        "sg_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+        "sg_runtime": "LIVE_WIRED_T0",
+        "event_gateway": "LIVE",
+        "unified_motor_runtime": "COMMISSIONED_T0",
+        "autonomous_production_mutations": "HOLD",
+        "deploy_authorized": true,
+        "note": "LIVE_WIRED_T0 \u2014 not FULLY_COMMISSIONED; production mutations remain HOLD-gated",
+        "resident_roles": [
+          "noetfield:sg.registrar",
+          "noetfield:noos.portfolio-owner",
+          "noetfield:sourcea.dispatch-owner",
+          "noetfield:sandbox.builder-owner",
+          "noetfield:sandbox.verifier-owner"
+        ]
+      }
+    },
+    "readiness": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "ready": true,
+        "ledger": "ok"
+      }
+    },
+    "sg_authority_health": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "mode": "LIVE_EVAL",
+        "sg_runtime": "LIVE_WIRED_T0",
+        "enforcement_enabled": false,
+        "webhook_enabled": true,
+        "app_id": "4330805",
+        "installation_id": "147378007",
+        "signing_key_id": "sg-v2-9edbc29b2c2c84ff"
+      }
+    },
+    "api": {
+      "status": 202,
+      "body": {
+        "ok": true,
+        "action": "workflow_started",
+        "commission_status": "LIVE_WIRED_T0_CANDIDATE",
+        "event_id": "evt_live_a92c41026fae",
+        "job_id": "job_live_a92c41026fae",
+        "workflow_id": "wf_TL5AENKy1ssGHGOUBUewV",
+        "hold": "HOLD"
+      }
+    },
+    "api_dup": {
+      "status": 202,
+      "body": {
+        "ok": true,
+        "action": "workflow_started",
+        "commission_status": "LIVE_WIRED_T0_CANDIDATE",
+        "event_id": "evt_live_a92c41026fae",
+        "job_id": "job_live_a92c41026fae",
+        "workflow_id": "wf_TL5AENKy1ssGHGOUBUewV",
+        "hold": "HOLD"
+      }
+    },
+    "get_event": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "event": {
+          "event_id": "evt_live_a92c41026fae",
+          "source": "noos.portfolio",
+          "schema_version": "motor.event.v1",
+          "role_id": "noetfield:noos.portfolio-owner",
+          "payload_json": "{\"proof\":\"LIVE_WIRED_T0\",\"kind\":\"signed_api\"}",
+          "route": "t0.cold_proof",
+          "status": "workflow_started",
+          "workflow_id": "wf_TL5AENKy1ssGHGOUBUewV",
+          "payload": {
+            "proof": "LIVE_WIRED_T0",
+            "kind": "signed_api"
+          }
+        }
+      }
+    },
+    "sg_hook": {
+      "status": 202,
+      "body": {
+        "ok": true,
+        "action": "workflow_started",
+        "commission_status": "LIVE_WIRED_T0_CANDIDATE",
+        "event_id": "evt_sg_4591cc55-1a4d-4e12-9167-b0e39c20090a",
+        "workflow_id": "wf_73PN2ihpJWRseg9y7aq6-",
+        "hold": "HOLD"
+      }
+    },
+    "sg_replay": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "action": "duplicate_delivery",
+        "event_id": "evt_sg_4591cc55-1a4d-4e12-9167-b0e39c20090a"
+      }
+    },
+    "motor_hook": {
+      "status": 202,
+      "body": {
+        "ok": true,
+        "action": "workflow_started",
+        "commission_status": "LIVE_WIRED_T0_CANDIDATE",
+        "event_id": "evt_motor_9eb8a8bb-769d-409c-ab02-1625992b7bd8",
+        "job_id": "job_motor_9eb8a8bb-769d-409c-ab02-1625992b7bd8",
+        "workflow_id": "wf_D-4QdYyqXi9R-13d6KUK4",
+        "hold": "HOLD"
+      }
+    },
+    "hold_block": {
+      "status": 400,
+      "body": {
+        "ok": false,
+        "code": "BLOCKED_PRODUCTION_MUTATION_HOLD"
+      }
+    }
+  },
+  "github_app_webhooks": {
+    "noetfield-sg-authority": {
+      "url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/webhooks/github/sg",
+      "events": "[]_UI_REQUIRED_pull_request_merge_group",
+      "configured_via_api": true
+    },
+    "noetfield-motor": {
+      "url_target": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/webhooks/github/motor",
+      "configured_via_api": false,
+      "note": "MOTOR_APP_PRIVATE_KEY is repo-secret only; workflow motor-app-webhook-configure-v1 pending default-branch availability; synthetic motor webhook HMAC proven against staging secret"
+    }
+  },
+  "watch_48h": {
+    "status": "STARTED",
+    "started_at": "2026-07-18T13:38:58Z",
+    "due_at": "2026-07-20T13:38:58Z",
+    "deadman": "noos-deadman-v1",
+    "target_status_after_pass": "COMMISSIONED_T0_PROVEN"
+  }
+}

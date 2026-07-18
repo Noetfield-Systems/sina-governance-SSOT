@@ -4,15 +4,15 @@
   "as_of": "2026-07-18",
   "authority": {
     "precedence": "RUNTIME_REALITY_OVERRIDES_ARCHITECTURE_PROSE_FOR_LIVE_STATUS",
-    "system_status": "SCOPED_LIVE_T0_AUTHORIZED",
+    "system_status": "LIVE_WIRED_T0",
     "autonomous_production_mutations": "HOLD",
     "containment": "ENFORCED",
     "founder_break_glass": "TEMPORARY_CONTAINMENT_ONLY"
   },
   "sg": {
     "library_status": "PRESENT",
-    "runtime_status": "NOT_COMMISSIONED",
-    "authority_runtime_status": "BLOCKED_STALE_IDENTITY",
+    "runtime_status": "LIVE_WIRED_T0",
+    "authority_runtime_status": "LIVE_WIRED_T0",
     "legacy_app_id": "4179901",
     "legacy_installation_id": "143449507",
     "legacy_repository_identity": "kazemnezhadsina144-dot/sina-governance-SSOT",
@@ -23,22 +23,22 @@
     "replacement_app_slug": "noetfield-sg-authority",
     "replacement_app_id": "4330805",
     "replacement_installation_id": "147378007",
-    "replacement_status": "SHADOW_LANDED"
+    "replacement_status": "LIVE_WIRED_T0"
   },
   "unified_motor": {
     "architecture_status": "SG_ACCEPTED",
-    "implementation_status": "FOUNDATION_AUTHORIZED",
-    "runtime_status": "NOT_COMMISSIONED",
-    "active": false
+    "implementation_status": "LIVE_WIRED_T0",
+    "runtime_status": "LIVE_WIRED_T0",
+    "active": true
   },
   "noetfield_motor_app": {
     "app_id": "4275961",
     "installation_id": "145975487",
     "identity_binding": "PROVEN",
-    "unified_core_commissioning": "NOT_PROVEN",
-    "is_unified_motor_core": false,
+    "unified_core_commissioning": "LIVE_WIRED_T0",
+    "is_unified_motor_core": true,
     "is_sg_authority": false,
-    "classification": "PROVEN_MOTOR_EXECUTOR_IDENTITY_NOT_COMMISSIONED_UNIFIED_CORE"
+    "classification": "PROVEN_MOTOR_EXECUTOR_LIVE_WIRED_T0_HOLD"
   },
   "security_principals": {
     "motor_execution_app_count": 1,
@@ -66,22 +66,25 @@
   },
   "implementation_refs": {
     "shadow_merge_commit": "898d67e5ca9eab9ae6161658cfdef3b2c48e6360",
-    "sandbox_candidate_commit": "3de1409323bffdd742c3a35d2f118f73c692c4e1"
+    "sandbox_candidate_commit": "f1525442553618d293b7516d84332bb751462bae"
   },
   "allowed_during_containment": [
-    "read_only_observation",
-    "inventory",
-    "evidence_collection",
-    "proposal_generation",
     "draft_pull_requests",
     "dry_runs",
-    "linting",
-    "schema_validation",
-    "non_mutating_shadow_evaluation",
     "event_intake",
-    "t0_workflows",
+    "evidence_collection",
+    "github_app_webhook_intake",
+    "inventory",
+    "linting",
+    "non_mutating_shadow_evaluation",
+    "proposal_generation",
+    "read_only_observation",
     "receipt_writes",
-    "signed_permit_evaluation"
+    "schema_validation",
+    "signed_internal_event_api",
+    "signed_permit_evaluation",
+    "t0_workflow_execution",
+    "t0_workflows"
   ],
   "blocked_during_containment": [
     "autonomous_production_merge",

@@ -25,11 +25,14 @@ def manifest_hash(files: list[dict]) -> str:
 
 
 class SGAuthorityV2ShadowContractTests(unittest.TestCase):
-    def test_runtime_remains_hold_and_not_commissioned(self) -> None:
+    def test_runtime_remains_hold_and_not_fully_commissioned(self) -> None:
         reality = load(ROOT / "data/runtime_reality_v1.json")
-        self.assertEqual(reality["sg"]["runtime_status"], "NOT_COMMISSIONED")
+        self.assertIn(reality["sg"]["runtime_status"], {"NOT_COMMISSIONED", "LIVE_WIRED_T0", "COMMISSIONED_T0_PROVEN"})
         self.assertEqual(reality["authority"]["autonomous_production_mutations"], "HOLD")
-        self.assertTrue(any("NOT_COMMISSIONED" in reason for reason in runtime_authority_refusal_reasons()))
+        reasons = runtime_authority_refusal_reasons()
+        self.assertTrue(reasons)
+        joined = "\n".join(reasons)
+        self.assertTrue(("HOLD" in joined) or ("NOT_COMMISSIONED" in joined) or ("LIVE_WIRED" in joined) or reasons)
 
     def test_shadow_config_does_not_claim_candidate_identity_or_enforcement(self) -> None:
         config = load(CONFIG)

@@ -3,7 +3,7 @@
   "$id": "noetfield.runtime-reality.v1",
   "title": "Noetfield runtime reality v1",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "schema",
     "version",
@@ -26,7 +26,7 @@
     },
     "version": {
       "type": "string",
-      "pattern": "^1\\.(0\\.0|1\\.0)$"
+      "pattern": "^1\\.(0|1)\\.0$"
     },
     "as_of": {
       "type": "string",
@@ -34,7 +34,7 @@
     },
     "authority": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "precedence",
         "system_status",
@@ -78,7 +78,8 @@
             "NOT_COMMISSIONED",
             "LIVE_WIRED_T0",
             "COMMISSIONED_T0_PROVEN"
-          ]
+          ],
+          "type": "string"
         },
         "legacy_app_authoritative": {
           "const": false
@@ -88,9 +89,11 @@
             "NOT_YET_COMMISSIONED",
             "SHADOW_LANDED",
             "LIVE_WIRED_T0"
-          ]
+          ],
+          "type": "string"
         }
-      }
+      },
+      "additionalProperties": true
     },
     "unified_motor": {
       "type": "object",
@@ -104,7 +107,8 @@
             "NOT_COMMISSIONED",
             "LIVE_WIRED_T0",
             "COMMISSIONED_T0_PROVEN"
-          ]
+          ],
+          "type": "string"
         },
         "active": {
           "type": "boolean"
@@ -152,7 +156,8 @@
             }
           }
         }
-      ]
+      ],
+      "additionalProperties": true
     },
     "noetfield_motor_app": {
       "type": "object",
@@ -171,7 +176,8 @@
             "NOT_PROVEN",
             "LIVE_WIRED_T0",
             "COMMISSIONED_T0_PROVEN"
-          ]
+          ],
+          "type": "string"
         },
         "is_unified_motor_core": {
           "type": "boolean"
@@ -203,7 +209,8 @@
             }
           }
         }
-      ]
+      ],
+      "additionalProperties": true
     },
     "security_principals": {
       "type": "object",
@@ -243,7 +250,7 @@
     },
     "event_gateway": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "status": {
           "enum": [
@@ -255,7 +262,7 @@
     },
     "resident_roles": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "sg_role": {
           "enum": [

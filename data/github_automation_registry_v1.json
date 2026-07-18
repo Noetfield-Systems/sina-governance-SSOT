@@ -338,7 +338,7 @@
       "kind": "cloudflare_worker_workflow",
       "repo": "noetfield-sandbox-private",
       "workflow_file": "motor/unified_core/cloudflare/",
-      "cadence": "event_driven_reserved",
+      "cadence": "event_driven",
       "lane": "unified_motor_foundation",
       "owns": [
         "motor_job_workflow",
@@ -357,8 +357,9 @@
       "trigger_host": "cloud",
       "last_fired_at_target": "noos_loop_registry",
       "deadman": "independent_cf_deadman_path",
-      "note": "Scoped live T0 authorized under HOLD. Event gateway and resident-role commissioning in progress; not FULLY_COMMISSIONED.",
-      "commission_status": "LIVE_WIRED_T0_PENDING"
+      "note": "LIVE_WIRED_T0 under HOLD. Event gateway/roles live; consequential production mutations remain founder-gated. 48h deadman watch started.",
+      "commission_status": "LIVE_WIRED_T0",
+      "live_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev"
     }
   ],
   "agent_lanes": [
