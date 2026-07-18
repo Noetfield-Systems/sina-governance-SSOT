@@ -140,21 +140,32 @@
   },
   "github_app_webhooks": {
     "noetfield-sg-authority": {
+      "configured_via_api": true,
       "url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/webhooks/github/sg",
-      "events": "[]_UI_REQUIRED_pull_request_merge_group",
-      "configured_via_api": true
+      "events": "[]_FOUNDER_UI_REQUIRED"
     },
     "noetfield-motor": {
-      "url_target": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/webhooks/github/motor",
       "configured_via_api": false,
-      "note": "MOTOR_APP_PRIVATE_KEY is repo-secret only; workflow motor-app-webhook-configure-v1 pending default-branch availability; synthetic motor webhook HMAC proven against staging secret"
+      "hook_attributes": null,
+      "url_target": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/webhooks/github/motor",
+      "events": "[]_FOUNDER_UI_REQUIRED",
+      "note": "PATCH /app/hook/config 404 because App webhook never enabled (hook_attributes null). Activate in GitHub App UI."
     }
   },
   "watch_48h": {
     "status": "STARTED",
-    "started_at": "2026-07-18T13:38:58Z",
-    "due_at": "2026-07-20T13:38:58Z",
-    "deadman": "noos-deadman-v1",
+    "started_at": "2026-07-18T13:41:27Z",
+    "due_at": "2026-07-20T13:41:27Z",
+    "deadman_worker": "noos-deadman-v1",
+    "deadman_url": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev",
+    "deadman_version_id": "a857e2a1-b641-42df-9bbb-3925282e90c5",
+    "gateway_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
     "target_status_after_pass": "COMMISSIONED_T0_PROVEN"
+  },
+  "merges": {
+    "sg_pr_28": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/28",
+    "sg_pr_34": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/34",
+    "sandbox_pr_34": "https://github.com/Noetfield-Systems/noetfield-sandbox-private/pull/34",
+    "noos_pr_88": "https://github.com/Noetfield-Systems/noetfeld-os/pull/88"
   }
 }
