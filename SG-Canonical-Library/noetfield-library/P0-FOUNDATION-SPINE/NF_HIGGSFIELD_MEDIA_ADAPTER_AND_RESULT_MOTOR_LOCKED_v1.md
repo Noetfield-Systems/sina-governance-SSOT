@@ -11,7 +11,10 @@
 **effective_at:** 2026-07-18  
 **proposed_by:** Founder + Brain/Architect (advisor activation assessment)  
 **sg_decision:** `SG_ACCEPTED` — Higgsfield is a replaceable `MediaGenerationAdapter`; not a lane; not Motor identity  
-**sg_authority_sha:** *stamp after land on main*  
+**sg_authority_sha:** `d2c2e6ab9de8d91179aed694abac649866950b33`  
+**decision_artifact_sha:** `0a4094321eb24497422f9239b935e7f395257e3c`  
+**canonical_main_sha:** `d2c2e6ab9de8d91179aed694abac649866950b33`  
+**merge_strategy:** merge_commit (PR #20)
 **supersedes:** none
 
 ---

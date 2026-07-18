@@ -25,5 +25,11 @@
   },
   "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
   "saved_at": "2026-07-18T00:36:23Z",
-  "base_head_before_commit": "fd62e7f5d6c1d4ef31a4d8137af84b313f378c25"
+  "base_head_before_commit": "fd62e7f5d6c1d4ef31a4d8137af84b313f378c25",
+  "sg_authority_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "decision_artifact_sha": "0a4094321eb24497422f9239b935e7f395257e3c",
+  "canonical_main_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "merge_strategy": "merge_commit",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/20",
+  "merged_at": "2026-07-18T00:53:06Z"
 }

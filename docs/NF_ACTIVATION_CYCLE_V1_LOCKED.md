@@ -6,7 +6,10 @@
 **Version:** v1.0.0_locked_20260718  
 **Machine:** `data/nf_activation_cycle_v1_LOCKED.json`  
 **Related:** `NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1` · Unified Motor · Gateway v2  
-**sg_authority_sha:** *stamp after land on main*
+**sg_authority_sha:** `d2c2e6ab9de8d91179aed694abac649866950b33`  
+**decision_artifact_sha:** `0a4094321eb24497422f9239b935e7f395257e3c`  
+**canonical_main_sha:** `d2c2e6ab9de8d91179aed694abac649866950b33`  
+**merge_strategy:** merge_commit (PR #20)
 
 ---
 
