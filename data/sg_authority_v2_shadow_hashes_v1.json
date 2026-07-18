@@ -1,0 +1,79 @@
+{
+  "schema": "noetfield.sg-authority-v2-shadow-hashes.v1",
+  "policy": {
+    "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+    "sha256": "12af65eb84d24db934b1ec3f1866306bc78b38abc327e0d005f3827fd8ea2784"
+  },
+  "schema_bundle": {
+    "sha256": "c8c4cbf4d62826b4d16b0584d4b9cbdd11f6af7d19d5b589e602dc5ff6c73c60",
+    "files": [
+      {
+        "path": "schemas/sg_decision_receipt_v1.schema.json",
+        "sha256": "cfd2fa14214d603be0b12931f770c66382d1117d441cb1d6dfbea9dd59f73550"
+      },
+      {
+        "path": "schemas/sg_signed_permit_v1.schema.json",
+        "sha256": "3ba6fe589b4c6c174077bf7b54b32700d6557b4b057a768823a9766cf5ea332e"
+      },
+      {
+        "path": "schemas/sg_webhook_delivery_v1.schema.json",
+        "sha256": "7007519bb12e960749d7229f875e10c62acb027fcd8a1fceb788c4bccf7e0104"
+      }
+    ]
+  },
+  "evaluator_bundle": {
+    "sha256": "acd411428fe809cd997f59ab38839c99694d04a39112e68c42495dd541767f1d",
+    "files": [
+      {
+        "path": "workers/sg-authority-v2-shadow/src/evaluator.ts",
+        "sha256": "59b92e731d35100160eab36ea5c383627672fa251236bcc90338864e92d633f7"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/types.ts",
+        "sha256": "bfe91806ca2fc3e492bfd750e0fa64cd6eae8d5f988acd39c7902cdf31851c8f"
+      }
+    ]
+  },
+  "worker_source_bundle": {
+    "sha256": "aecdf922a6e48176b3a13de4d4516e8ec43da60bc9a189bdfbe56668d7d9c996",
+    "files": [
+      {
+        "path": "workers/sg-authority-v2-shadow/src/canonical.ts",
+        "sha256": "46adc085d6f0b79df64c91c61448db1efa5cfb8ba4345c7d7d0efa494f58cd11"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/crypto.ts",
+        "sha256": "cac1ff934ee4eda328354a46d069fc0bb1f6a1d0437629bb15e8e585536e2ad9"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/evaluator.ts",
+        "sha256": "59b92e731d35100160eab36ea5c383627672fa251236bcc90338864e92d633f7"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/github.ts",
+        "sha256": "b91b299b3e190fc864ce60d465299247ab279345f4d432406bcee9b46e27b160"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/index.ts",
+        "sha256": "40678767ed9300c7dfc6f33e96fb41d48800f461790fb68144b4099b9558414d"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/permit.ts",
+        "sha256": "42a0e2d7f2a65f7d86ff4ec525ef97f3919bea2bfa9a970bd2fd6276f45acdec"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/replay.ts",
+        "sha256": "31b29c9427ec42d1a547644cfd9c12037e42e6a77190a1617451830046158941"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/types.ts",
+        "sha256": "bfe91806ca2fc3e492bfd750e0fa64cd6eae8d5f988acd39c7902cdf31851c8f"
+      },
+      {
+        "path": "workers/sg-authority-v2-shadow/src/webhook.ts",
+        "sha256": "89aab75fa9e8caf01f8b165ea6267d68c86dd990931fef6e5dbe178ccd0a0706"
+      }
+    ]
+  },
+  "generated_at": "2026-07-18T08:50:17Z"
+}

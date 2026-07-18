@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "noetfield-sg-authority-v2-shadow",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-18",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "vars": {
+    "MODE": "SHADOW",
+    "WEBHOOK_ENABLED": "false",
+    "CHECK_RUN_PUBLISH_ENABLED": "false",
+    "EXPECTED_APP_SLUG": "noetfield-sg-authority",
+    "EXPECTED_ORG": "Noetfield-Systems",
+    "EXPECTED_APP_ID": "UNSET",
+    "EXPECTED_INSTALLATION_ID": "UNSET",
+    "ALLOWED_REPOSITORIES": "[\"Noetfield-Systems/sina-governance-SSOT\"]",
+    "EXPECTED_CHECK_NAME": "Noetfield SG / P0 Authority",
+    "WORKER_VERSION": "sg-v2-shadow-v0.1.0",
+    "EVALUATOR_HASH": "acd411428fe809cd997f59ab38839c99694d04a39112e68c42495dd541767f1d",
+    "POLICY_HASH": "12af65eb84d24db934b1ec3f1866306bc78b38abc327e0d005f3827fd8ea2784",
+    "SCHEMA_HASH": "c8c4cbf4d62826b4d16b0584d4b9cbdd11f6af7d19d5b589e602dc5ff6c73c60",
+    "SG_SIGNING_KEY_ID": "UNSET"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "RECEIPTS",
+      "id": "REPLACE_BEFORE_SHADOW_DEPLOY"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "REPLAY_GUARD",
+        "class_name": "ReplayGuard"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "ReplayGuard"
+      ]
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "head_sampling_rate": 1
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01
+    }
+  }
+}

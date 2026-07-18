@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/sg_decision_receipt_v1.schema.json",
+  "title": "Signed SG v2 shadow decision receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "payload",
+    "signature"
+  ],
+  "properties": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "app_id",
+        "installation_id",
+        "repository",
+        "commit_sha",
+        "action",
+        "target",
+        "artifact_hash",
+        "policy_hash",
+        "schema_hash",
+        "evaluator_hash",
+        "worker_version",
+        "signing_key_id",
+        "nonce",
+        "receipt_type",
+        "mode",
+        "status",
+        "result",
+        "verdict",
+        "pass_claimed",
+        "enforcement_enabled",
+        "event",
+        "delivery_id",
+        "check_name",
+        "issued_at",
+        "expires_at",
+        "reasons"
+      ],
+      "properties": {
+        "app_id": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "installation_id": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "policy_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "schema_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evaluator_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "worker_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signing_key_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:-]{16,200}$"
+        },
+        "receipt_type": {
+          "const": "SG_DECISION"
+        },
+        "mode": {
+          "const": "SHADOW"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "BLOCKED",
+            "ESCALATE_REQUIRED"
+          ]
+        },
+        "result": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "BLOCKED",
+            "ESCALATE_REQUIRED"
+          ]
+        },
+        "verdict": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "BLOCKED",
+            "ESCALATE_REQUIRED"
+          ]
+        },
+        "pass_claimed": {
+          "type": "boolean"
+        },
+        "enforcement_enabled": {
+          "const": false
+        },
+        "event": {
+          "enum": [
+            "pull_request",
+            "merge_group"
+          ]
+        },
+        "delivery_id": {
+          "type": "string",
+          "minLength": 16
+        },
+        "check_name": {
+          "const": "Noetfield SG / P0 Authority"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ECDSA_P256_SHA256"
+        },
+        "key_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      }
+    }
+  }
+}
