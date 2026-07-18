@@ -365,8 +365,12 @@ def build_summaries(results: list[dict[str, Any]], matrix: dict[str, Any]) -> tu
             next_actions.append("TrustField-Technologies: execute docs/dispatch/auth-phase-1-trustfield.md")
             break
     pending = matrix.get("founder_decisions_pending", [])
-    if pending:
-        next_actions.append("Founder: ratify auth decisions #1 and #4 in matrix founder_decisions_ratified")
+    blocking = sorted(d.get("id") for d in pending if d.get("id") in (1, 4))
+    if blocking:
+        next_actions.append(
+            "Founder: ratify blocking auth decision(s) "
+            + ", ".join(f"#{decision_id}" for decision_id in blocking)
+        )
     return tier_summary, venture_summary, next_actions
 
 

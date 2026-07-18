@@ -1,7 +1,7 @@
 {
   "schema": "auth_surface_matrix_v1",
   "version": "1.1.0",
-  "saved_at": "2026-07-08T07:07:43Z",
+  "saved_at": "2026-07-18T10:45:00Z",
   "authority": "SG (SSSOT)",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
@@ -291,11 +291,6 @@
   },
   "founder_decisions_pending": [
     {
-      "id": 1,
-      "question": "Auth project",
-      "recommended": "portfolio_spine only"
-    },
-    {
       "id": 2,
       "question": "Cross-brand login",
       "recommended": "per-domain sessions"
@@ -306,17 +301,27 @@
       "recommended": "magic_link + email_password"
     },
     {
-      "id": 4,
-      "question": "First ship target",
-      "recommended": "TrustField /register + portal"
-    },
-    {
       "id": 5,
       "question": "Enterprise SSO",
       "recommended": "defer P2"
     }
   ],
-  "founder_decisions_ratified": [],
+  "founder_decisions_ratified": [
+    {
+      "id": 1,
+      "question": "Auth project",
+      "decision": "portfolio_spine only",
+      "ratified_by": "founder",
+      "ratified_at": "2026-07-18T10:45:00Z"
+    },
+    {
+      "id": 4,
+      "question": "First ship target",
+      "decision": "TrustField /register + portal",
+      "ratified_by": "founder",
+      "ratified_at": "2026-07-18T10:45:00Z"
+    }
+  ],
   "auth_routes": {
     "law": "Cache-Control private no-store on session routes",
     "routes": [

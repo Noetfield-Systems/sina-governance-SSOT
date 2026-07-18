@@ -29,7 +29,7 @@
   "external_pending": [
     "portfolio_spine profiles table migration in venture Phase 1",
     "LS-075 shared loop_registry last_fired_at upsert",
-    "founder decisions remain pending explicit lock before venture Phase 1"
+    "founder decisions #2, #3, and #5 remain pending; they do not block TrustField Phase 1"
   ],
   "closed_loop": "Observe -> Detect -> Critique -> Repair -> Re-deploy -> Observe",
   "secrets_recorded": false

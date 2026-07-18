@@ -1,8 +1,8 @@
 # Cross-Domain Auth Proposal v1.1 — SG SSOT (LOCKED)
 
-**Status:** LOCKED v1.1.0 · **Lock authority:** SG auth upgrade W11 · **Authority:** SG verifies; venture repos implement  
-**Refs:** [Supabase Auth](https://supabase.com/docs/guides/auth) · [Next.js SSR](https://supabase.com/docs/guides/auth/server-side/nextjs)  
-**Machine matrix:** `data/auth_surface_matrix_v1.json` (v1.1.0)  
+**Status:** LOCKED v1.1.0 · **Lock authority:** SG auth upgrade W11 · **Authority:** SG verifies; venture repos implement
+**Refs:** [Supabase Auth](https://supabase.com/docs/guides/auth) · [Next.js SSR](https://supabase.com/docs/guides/auth/server-side/nextjs)
+**Machine matrix:** `data/auth_surface_matrix_v1.json` (v1.1.0)
 **Probe:** `scripts/verify_auth_surfaces_e2e_v1.py` · motor `sg_auth_surface_probe_v1`
 
 ---
@@ -18,8 +18,8 @@
 | **2** | Gated | Partner Access OS, customer portal |
 | **3** | API / motors | JWT or service role — never user cookies on Workers |
 
-**Identity plane:** `portfolio_spine` Supabase (`ldfruywifqnfpwsfgmdl`) — sole Auth issuer.  
-**Factory project:** `tkgpapowwplupyekpivy` — runtime tables only, linked by `user_id`.  
+**Identity plane:** `portfolio_spine` Supabase (`ldfruywifqnfpwsfgmdl`) — sole Auth issuer.
+**Factory project:** `tkgpapowwplupyekpivy` — runtime tables only, linked by `user_id`.
 **Cross-domain:** Per-domain sessions (A). Same `user_id` when email matches; no shared cookie across `.app`/`.ca`/`.com`.
 
 ---
@@ -87,23 +87,28 @@ alter table public.profiles enable row level security;
 
 ---
 
-## Founder decisions (pick to unblock Phase 1)
+## Founder decisions
 
-1. **Auth project** → portfolio_spine only (recommended)  
-2. **Cross-brand login** → per-domain sessions (recommended)  
-3. **P0 methods** → magic link + email/password  
-4. **First ship** → TrustField `/register` + portal (recommended)  
-5. **Enterprise SSO** → defer P2  
+**Ratified 2026-07-18 (Phase 1 unblocked):**
+
+1. **Auth project** → `portfolio_spine` only
+4. **First ship** → TrustField `/register` + portal
+
+**Still pending:**
+
+2. **Cross-brand login** → per-domain sessions (recommended)
+3. **P0 methods** → magic link + email/password
+5. **Enterprise SSO** → defer P2
 
 ---
 
 ## What NOT to do
 
-1. Login wall on contract SKU pages  
-2. SourceA branding on trustfield.ca auth  
-3. Service role in browser  
-4. `getSession()` alone on server  
-5. Clerk/Auth0 alongside Supabase  
+1. Login wall on contract SKU pages
+2. SourceA branding on trustfield.ca auth
+3. Service role in browser
+4. `getSession()` alone on server
+5. Clerk/Auth0 alongside Supabase
 6. Auth UI in SG repo
 
 

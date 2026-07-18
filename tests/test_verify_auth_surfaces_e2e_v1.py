@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from verify_auth_surfaces_e2e_v1 import (  # noqa: E402
+    build_summaries,
     check_surface,
     http_probe,
     is_auth_redirect,
@@ -160,6 +161,21 @@ class AuthSurfaceProbeTests(unittest.TestCase):
             {"supabase_redirect_allow_list": ["http://localhost:3000/anything"]}
         )
         self.assertEqual(bad["status"], "FAIL")
+
+    def test_ratified_blockers_do_not_remain_in_next_actions(self) -> None:
+        _, _, actions = build_summaries(
+            [],
+            {
+                "repo_ownership": {"TrustField-Technologies": {"phase": 1}},
+                "founder_decisions_pending": [
+                    {"id": 2},
+                    {"id": 3},
+                    {"id": 5},
+                ],
+            },
+        )
+        self.assertTrue(any("TrustField-Technologies" in action for action in actions))
+        self.assertFalse(any("ratify" in action.lower() for action in actions))
 
     def test_fail_on_warn_exit_code(self) -> None:
         with patch("verify_auth_surfaces_e2e_v1.load_matrix") as lm:
