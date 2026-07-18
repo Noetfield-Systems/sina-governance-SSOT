@@ -740,6 +740,64 @@
       "term": "subject_version_conflict",
       "tag": "RC2_GAP_FILL",
       "meaning": "409 response when founder approval targets a stale subject version."
+    },
+    {
+      "term": "Higgsfield",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Third-party media generation provider; replaceable MediaGenerationAdapter only; never job truth or authority.",
+      "code_alias": [
+        "Higgsfield AI",
+        "Higgsfield CLI",
+        "Higgsfield MCP"
+      ]
+    },
+    {
+      "term": "MediaGenerationAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Replaceable Unified Motor adapter interface for image/video generation providers.",
+      "code_alias": [
+        "HiggsfieldCliMcpAdapter_v1"
+      ]
+    },
+    {
+      "term": "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision locking Higgsfield as adapter plus campaign Result Motor profile."
+    },
+    {
+      "term": "NF-MOTOR-HIGGSFIELD-CAMPAIGN-001",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Result-driven campaign Motor recipe profile using MediaGenerationAdapter."
+    },
+    {
+      "term": "Result-Driven Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Unified Motor mode: execute, verify, promote, observe outcome, attribute, learn."
+    },
+    {
+      "term": "Activation Cycle",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Execution period: no new lanes/roles/providers/major schemas; only proof circuits and small SG addenda."
+    },
+    {
+      "term": "Circuit A",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Deterministic internal Motor proof: CI or completion-evidence repair without founder."
+    },
+    {
+      "term": "Circuit B",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Result-driven revenue Motor proof: one product campaign with measurable conversion."
+    },
+    {
+      "term": "PublisherAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Separate adapter for approved publication; not part of media generation."
+    },
+    {
+      "term": "Outcome Probe",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "External measurement of engagement, conversion, or qualified demand after promotion."
     }
   ],
   "structural_allowlist": [

@@ -78,6 +78,12 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Machine:** `data/sinagpt_founder_brain_architect_v1_LOCKED.json` · `data/nf_command_gateway_v2_architecture_v1_LOCKED.json`  
 **Commission:** `docs/dispatch/nf-command-gateway-v2-motor-control-001.md` · **Wiring:** `docs/dispatch/sinagpt-command-gateway-v2-all-repos.md`
 
+## 2i. ACTIVATION CYCLE + HIGGSFIELD ADAPTER (P0 — proof over design)
+`docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` = **stop expansion**; WIP = Circuit A (T0 repair) + Circuit B (one campaign).  
+`P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` = Higgsfield = `MediaGenerationAdapter` (not a lane).  
+**Machine:** `data/nf_activation_cycle_v1_LOCKED.json` · `data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json`  
+**Dispatch:** `docs/dispatch/higgsfield-activation-cycle-all-repos.md`
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

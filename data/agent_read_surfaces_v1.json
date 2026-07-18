@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.5.0",
-  "saved_at": "2026-07-17T18:40:00Z",
+  "version": "1.6.0",
+  "saved_at": "2026-07-18T00:40:00Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -257,6 +257,41 @@
           "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
           "status": "ACTIVE",
           "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
         }
       ],
       "skills_resolve": [
@@ -435,6 +470,41 @@
           "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
           "status": "ACTIVE",
           "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
         }
       ]
     },
@@ -613,6 +683,41 @@
           "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
           "status": "ACTIVE",
           "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
         }
       ]
     },
@@ -789,6 +894,41 @@
           "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
           "status": "ACTIVE",
           "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
         }
       ],
       "skills_resolve": []
@@ -878,6 +1018,41 @@
           "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
           "status": "ACTIVE",
           "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
         }
       ]
     }
