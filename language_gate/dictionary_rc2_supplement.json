@@ -910,6 +910,98 @@
     {
       "term": "REMOTE_CHECK_ADVISORY",
       "meaning": "Legacy advisory receipt type that cannot authorize production mutation."
+    },
+    {
+      "term": "Core Runway",
+      "meaning": "Foundational Noetfield Runway recipe family on Unified Motor; not a separate engine."
+    },
+    {
+      "term": "Composite Runway",
+      "meaning": "Higher-value product path composed from two or more core Runway recipe families."
+    },
+    {
+      "term": "Data Runway",
+      "meaning": "Core Runway family: tabular/document data export to cleaned workbook, calculations, charts, findings, and downloadable decision report with cell lineage."
+    },
+    {
+      "term": "Document Runway",
+      "meaning": "Core Runway family: source documents/forms/policies to structured extract, completed templates, action lists, and finished document packs."
+    },
+    {
+      "term": "Web/Publish",
+      "meaning": "Core Runway family / adapter class for audit-to-fix, preview, and governed publication; PublisherAdapter may exist earlier for Circuit B."
+    },
+    {
+      "term": "recipe family",
+      "meaning": "Canonical technical grouping of Motor recipes that backs one Core Runway."
+    },
+    {
+      "term": "NF-RUNWAY-CORE-FAMILIES-COMPOSITION-V1",
+      "meaning": "SG lock: six core Runway families, composition law, Data as next family after future_runway_gate."
+    },
+    {
+      "term": "future_runway_gate",
+      "meaning": "Gate from NF-RUNWAY-EXECUTION-ASSIGNMENT-V1: fourth Runway only after Video, Software Repair, and Research each complete one real Job."
+    },
+    {
+      "term": "execution_queued",
+      "meaning": "UI/job status meaning work is queued; not a finished Runway result until Unified Motor Workflow returns artifacts and a receipt."
+    },
+    {
+      "term": "Research-to-Deck",
+      "meaning": "Composite output mode of Research Runway plus document renderer; not a seventh core family."
+    },
+    {
+      "term": "Website Audit-to-Fix",
+      "meaning": "Composite: Research + Software Repair + Web/Publish producing audit, patch, preview, and green PR."
+    },
+    {
+      "term": "Due Diligence",
+      "meaning": "Composite: Research + Document + Data producing evidence index, risk matrix, findings, and decision memo."
+    },
+    {
+      "term": "Knowledge-to-SOP",
+      "meaning": "Composite: Document + Research producing SOPs, checklists, training guides, and quizzes."
+    },
+    {
+      "term": "Meeting-to-Execution",
+      "meaning": "Composite: Document plus tool adapters producing decisions, tasks, follow-ups, and updated records."
+    },
+    {
+      "term": "Proposal/RFP",
+      "meaning": "Composite: Research + Document producing compliance matrix, evidence gaps, response draft, and submission pack."
+    },
+    {
+      "term": "Full App Builder",
+      "meaning": "Held product class (CAT-07); not an authorized next Runway."
+    },
+    {
+      "term": "SourceB",
+      "meaning": "Commercial/product UI surface that may host Runway intake and Result UI; not the Unified Motor executor."
+    },
+    {
+      "term": "Fourth Runway",
+      "meaning": "Any Runway family beyond the parallel first three; held until future_runway_gate."
+    },
+    {
+      "term": "SG-FINALIZATION-RUNWAY-CORE-FAMILIES-V1",
+      "meaning": "Architecture Finalization packet id for core families composition lock."
+    },
+    {
+      "term": "Content Repurposing",
+      "meaning": "B-tier composite path: long media to clips, article, posts, captions, newsletter."
+    },
+    {
+      "term": "Product Catalog",
+      "meaning": "B-tier Runway candidate: product files to listings, descriptions, feed, and image pack."
+    },
+    {
+      "term": "Landing Page",
+      "meaning": "Generic website/landing generation; B-tier and held behind Data/Document."
+    },
+    {
+      "term": "Software Repair",
+      "meaning": "Alias fragment for Software Repair Runway family."
     }
   ],
   "structural_allowlist": [
@@ -963,7 +1055,12 @@
     "update linkedin",
     "VIDEO_RUNWAY_PROVEN",
     "IMPLEMENTATION_AUTHORIZED",
-    "SG_ACCEPTED"
+    "SG_ACCEPTED",
+    "core runway families",
+    "composition law",
+    "decision package",
+    "cell lineage",
+    "downloadable workbook"
   ],
   "alias_map": {},
   "code_alias": [
