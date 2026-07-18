@@ -1,0 +1,89 @@
+{
+  "schema": "noetfield.runtime-reality.v1",
+  "version": "1.0.0",
+  "as_of": "2026-07-18",
+  "authority": {
+    "precedence": "RUNTIME_REALITY_OVERRIDES_ARCHITECTURE_PROSE_FOR_LIVE_STATUS",
+    "system_status": "BLOCKED_NOT_COMMISSIONED",
+    "autonomous_production_mutations": "HOLD",
+    "containment": "ENFORCED",
+    "founder_break_glass": "TEMPORARY_CONTAINMENT_ONLY"
+  },
+  "sg": {
+    "library_status": "PRESENT",
+    "runtime_status": "NOT_COMMISSIONED",
+    "authority_runtime_status": "BLOCKED_STALE_IDENTITY",
+    "legacy_app_id": "4179901",
+    "legacy_installation_id": "143449507",
+    "legacy_repository_identity": "kazemnezhadsina144-dot/sina-governance-SSOT",
+    "legacy_receipt_type": "REMOTE_CHECK_ADVISORY",
+    "legacy_app_authoritative": false,
+    "legacy_advisory_authority": "DENIED",
+    "legacy_decommission_status": "PENDING_REPLACEMENT_COMMISSIONING",
+    "replacement_app_slug": "noetfield-sg-authority",
+    "replacement_status": "NOT_YET_COMMISSIONED"
+  },
+  "unified_motor": {
+    "architecture_status": "SG_ACCEPTED",
+    "implementation_status": "FOUNDATION_AUTHORIZED",
+    "runtime_status": "NOT_COMMISSIONED",
+    "active": false
+  },
+  "noetfield_motor_app": {
+    "app_id": "4275961",
+    "installation_id": "145975487",
+    "identity_binding": "PROVEN",
+    "unified_core_commissioning": "NOT_PROVEN",
+    "is_unified_motor_core": false,
+    "is_sg_authority": false,
+    "classification": "PROVEN_MOTOR_EXECUTOR_IDENTITY_NOT_COMMISSIONED_UNIFIED_CORE"
+  },
+  "security_principals": {
+    "motor_execution_app_count": 1,
+    "sg_authority_app_count": 1,
+    "total_required": 2,
+    "credentials_disjoint": true,
+    "custody_disjoint": true,
+    "motor_may_issue_sg_decisions": false,
+    "sg_may_execute_mutations": false
+  },
+  "allowed_during_containment": [
+    "read_only_observation",
+    "inventory",
+    "evidence_collection",
+    "proposal_generation",
+    "draft_pull_requests",
+    "dry_runs",
+    "linting",
+    "schema_validation",
+    "non_mutating_shadow_evaluation"
+  ],
+  "blocked_during_containment": [
+    "autonomous_production_merge",
+    "autonomous_production_deploy",
+    "autonomous_brain_promotion",
+    "autonomous_policy_or_authority_mutation",
+    "autonomous_workflow_permission_escalation",
+    "autonomous_secret_mutation",
+    "autonomous_verifier_mutation",
+    "autonomous_production_rollback"
+  ],
+  "active_evidence_requirements": [
+    "deployed_commit_sha",
+    "deployment_id",
+    "runtime_identity",
+    "installation_id",
+    "cold_proof_receipt_ids",
+    "commissioning_decision_id",
+    "last_verified_at"
+  ],
+  "invalid_equivalences": [
+    "ARCHITECTURE_ACCEPTED != IMPLEMENTED",
+    "IMPLEMENTATION_AUTHORIZED != DEPLOYED",
+    "DEPLOYED != PROVEN",
+    "PROVEN != COMMISSIONED",
+    "COMMISSIONED != ACTIVE"
+  ],
+  "incident_id": "SG-AUTHORITY-IDENTITY-P0",
+  "architecture_amendment": "NF-SG-AUTHORITY-IDENTITY-V2"
+}

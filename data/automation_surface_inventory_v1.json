@@ -1,7 +1,7 @@
 {
   "schema": "automation_surface_inventory_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-08T06:47:10Z",
+  "version": "1.2.0",
+  "saved_at": "2026-07-18T07:54:49Z",
   "authority": "SG (SSSOT)",
   "parent": "data/github_automation_registry_v1.json",
   "repos": [
@@ -21,9 +21,10 @@
         {
           "file": "brain-loop-autorun-v1.yml",
           "motor_id": "gh_actions_brain_loop_autorun_v1",
-          "cadence": "*/30 * * * *",
-          "task_cell": "brain_promote_ci",
-          "copilot_safe": false
+          "cadence": "founder-manual-observe-only",
+          "task_cell": "sg_containment_observation",
+          "copilot_safe": false,
+          "state": "DISABLED_MANUALLY_P0_CONTAINMENT"
         },
         {
           "file": "agent-read-staleness-weekly-v1.yml",
@@ -44,8 +45,9 @@
         {
           "id": "mac_launchd_brain_loop_autorun_v1",
           "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
-          "cadence": "1800s",
-          "task_cell": "brain_promote_mac"
+          "cadence": "disabled",
+          "task_cell": "sg_containment_observation",
+          "state": "BOOTED_OUT_P0_CONTAINMENT"
         }
       ]
     },

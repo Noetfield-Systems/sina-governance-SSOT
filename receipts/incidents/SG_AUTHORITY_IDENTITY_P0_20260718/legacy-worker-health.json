@@ -1,0 +1,8 @@
+{
+  "service": "sina-governance-ssot-worker-advisory",
+  "endpoints": [
+    "/run",
+    "/receipt/latest"
+  ],
+  "pass_claimed": false
+}

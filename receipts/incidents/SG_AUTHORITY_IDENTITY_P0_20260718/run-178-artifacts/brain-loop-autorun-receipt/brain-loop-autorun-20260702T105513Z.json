@@ -1,0 +1,17 @@
+{
+  "autonomous": true,
+  "brain_python": "/usr/bin/python3",
+  "gate_note": "autonomous_promote_healed_brain_live_drift",
+  "gate_rc": 0,
+  "hold_active": false,
+  "mac_sigkill": false,
+  "matrix_rc": 1,
+  "mutation_trials": false,
+  "parallel_rc": 0,
+  "receipt_type": "BRAIN_LOOP_AUTORUN",
+  "recorded_at": "20260702T105513Z",
+  "self_heal_rc": 0,
+  "ship_window": false,
+  "sourcea_root": "/Users/sinakazemnezhad/Projects/SourceA",
+  "step_log": "/Users/sinakazemnezhad/.sina/logs/brain-autorun-step-20260702T105513Z.log"
+}
