@@ -1,0 +1,47 @@
+{
+  "receipt_type": "sg_candidate_app_creation_v1",
+  "generated_at_utc": "2026-07-18T10:04:02.901174+00:00",
+  "public_metadata_only": true,
+  "app": {
+    "id": 4330805,
+    "slug": "noetfield-sg-authority",
+    "node_id": "A_kwHOEdc-784AQhU1",
+    "name": "noetfield-sg-authority",
+    "html_url": "https://github.com/apps/noetfield-sg-authority",
+    "owner_login": "Noetfield-Systems",
+    "owner_type": "Organization",
+    "created_at": "2026-07-18T10:04:02Z",
+    "permissions": {
+      "metadata": "read",
+      "contents": "read",
+      "pull_requests": "read",
+      "actions": "read",
+      "checks": "write",
+      "statuses": "write"
+    },
+    "events": []
+  },
+  "private_key_custody": {
+    "path": "/Users/sinakazemnezhad/.sina/secrets/noetfield-sg-authority.private-key.pem",
+    "sha256_fingerprint": "1b3f3453a2ede302533223ff8616f1fcf272e69be99a5cbd382813b557406fa2",
+    "in_repo": false
+  },
+  "authorized_installation_targets": [
+    "Noetfield-Systems/sina-governance-SSOT",
+    "Noetfield-Systems/noetfield-sandbox-private"
+  ],
+  "not_authorized": [
+    "SG commissioning",
+    "production ruleset enforcement",
+    "Motor production permits",
+    "HOLD removal",
+    "legacy App revocation"
+  ],
+  "runtime_state": {
+    "SG_CANDIDATE_APP": "CREATED",
+    "SG_CANDIDATE_IDENTITY": "NOT_PROVEN",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  }
+}
