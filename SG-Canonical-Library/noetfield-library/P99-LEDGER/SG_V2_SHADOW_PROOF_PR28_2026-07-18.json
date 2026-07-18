@@ -27,12 +27,12 @@
   "check_run_publish": "DISABLED",
   "legacy_app": "PRESERVED_NOT_AUTHORITY",
   "blocking_dependencies": [
-    "INTERACTIVE_GITHUB_SIGN_IN",
-    "FOUNDER_APPROVED_CANARY_REPOSITORY_NOT_NAMED"
+    "INTERACTIVE_GITHUB_SIGN_IN"
   ],
   "forbidden_claims": [
     "ACTIVE",
     "AUTHORITY",
     "COMMISSIONED"
-  ]
+  ],
+  "approved_nonproduction_canary": "Noetfield-Systems/noetfield-sandbox-private"
 }

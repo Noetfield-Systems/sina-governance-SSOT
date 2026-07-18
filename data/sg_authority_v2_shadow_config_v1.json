@@ -12,9 +12,11 @@
     "app_id": null,
     "installation_id": null,
     "allowed_repositories": [
-      "Noetfield-Systems/sina-governance-SSOT"
+      "Noetfield-Systems/sina-governance-SSOT",
+      "Noetfield-Systems/noetfield-sandbox-private"
     ],
-    "required_canary": "FOUNDER_SELECTION_PENDING"
+    "required_canary": "Noetfield-Systems/noetfield-sandbox-private",
+    "canary_approval": "FOUNDER_APPROVED_CURRENT_SESSION"
   },
   "worker": {
     "path": "workers/sg-authority-v2-shadow",
@@ -36,7 +38,7 @@
     "source_hash_check": "PASS",
     "dry_run_build": "PASS",
     "dependency_audit": "0_VULNERABILITIES",
-    "live_identity_proof": "BLOCKED_INTERACTIVE_GITHUB_SIGN_IN_AND_CANARY_SELECTION"
+    "live_identity_proof": "BLOCKED_INTERACTIVE_GITHUB_SIGN_IN"
   },
   "legacy_app": {
     "preserved": true,

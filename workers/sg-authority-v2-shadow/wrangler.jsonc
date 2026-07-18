@@ -15,7 +15,7 @@
     "EXPECTED_ORG": "Noetfield-Systems",
     "EXPECTED_APP_ID": "UNSET",
     "EXPECTED_INSTALLATION_ID": "UNSET",
-    "ALLOWED_REPOSITORIES": "[\"Noetfield-Systems/sina-governance-SSOT\"]",
+    "ALLOWED_REPOSITORIES": "[\"Noetfield-Systems/sina-governance-SSOT\",\"Noetfield-Systems/noetfield-sandbox-private\"]",
     "EXPECTED_CHECK_NAME": "Noetfield SG / P0 Authority",
     "WORKER_VERSION": "sg-v2-shadow-v0.1.0",
     "EVALUATOR_HASH": "acd411428fe809cd997f59ab38839c99694d04a39112e68c42495dd541767f1d",

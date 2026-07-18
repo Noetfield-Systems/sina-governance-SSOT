@@ -35,7 +35,14 @@ class SGAuthorityV2ShadowContractTests(unittest.TestCase):
         config = load(CONFIG)
         self.assertEqual(config["status"], "IMPLEMENTED_NOT_DEPLOYED")
         self.assertEqual(config["candidate_app"]["identity_status"], "NOT_PROVEN")
-        self.assertEqual(config["candidate_app"]["required_canary"], "FOUNDER_SELECTION_PENDING")
+        self.assertEqual(
+            config["candidate_app"]["required_canary"],
+            "Noetfield-Systems/noetfield-sandbox-private",
+        )
+        self.assertEqual(
+            config["candidate_app"]["canary_approval"],
+            "FOUNDER_APPROVED_CURRENT_SESSION",
+        )
         self.assertEqual(config["sg_enforcement"], "NOT_ENABLED")
         self.assertEqual(config["autonomous_production_mutations"], "HOLD")
         self.assertTrue(config["legacy_app"]["preserved"])

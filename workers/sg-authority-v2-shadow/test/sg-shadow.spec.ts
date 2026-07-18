@@ -14,7 +14,7 @@ const SHA = "b".repeat(40);
 const CONFIG: EvaluatorConfig = {
   expectedAppId: "9000001",
   expectedInstallationId: "9000002",
-  allowedRepositories: new Set(["Noetfield-Systems/sina-governance-SSOT", "Noetfield-Systems/sg-canary"]),
+  allowedRepositories: new Set(["Noetfield-Systems/sina-governance-SSOT", "Noetfield-Systems/noetfield-sandbox-private"]),
   expectedPolicyHash: HASH,
   expectedSchemaHash: HASH,
   expectedEvaluatorHash: HASH,
@@ -225,7 +225,7 @@ describe("authenticated GitHub identity and expected-source check", () => {
       if (url.endsWith("/app/installations/9000002/access_tokens")) return response({ token: "installation-token" });
       return response({ repositories: [
         { full_name: "Noetfield-Systems/sina-governance-SSOT" },
-        { full_name: "Noetfield-Systems/sg-canary" },
+        { full_name: "Noetfield-Systems/noetfield-sandbox-private" },
       ] });
     };
     const identityEnv = {
@@ -233,7 +233,7 @@ describe("authenticated GitHub identity and expected-source check", () => {
       EXPECTED_INSTALLATION_ID: "9000002",
       EXPECTED_APP_SLUG: "noetfield-sg-authority",
       EXPECTED_ORG: "Noetfield-Systems",
-      ALLOWED_REPOSITORIES: JSON.stringify(["Noetfield-Systems/sina-governance-SSOT", "Noetfield-Systems/sg-canary"]),
+      ALLOWED_REPOSITORIES: JSON.stringify(["Noetfield-Systems/sina-governance-SSOT", "Noetfield-Systems/noetfield-sandbox-private"]),
       GITHUB_APP_PRIVATE_KEY: await rsaPem(),
     } as Env;
     const proof = await attestIdentity(identityEnv, fakeFetch);
