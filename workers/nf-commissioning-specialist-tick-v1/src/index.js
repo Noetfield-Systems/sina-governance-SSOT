@@ -272,6 +272,9 @@ async function runTick(env, meta = {}) {
         : "PASS_SCOPED_TICK",
   };
 
+  const runway_dispatch = await dispatchCommissioningRunway(env, receipt);
+  receipt.runway_dispatch = runway_dispatch;
+
   if (env.RECEIPTS) {
     const key = `tick:${at}`;
     await env.RECEIPTS.put(key, JSON.stringify(receipt), { expirationTtl: 60 * 60 * 24 * 14 });
@@ -280,6 +283,85 @@ async function runTick(env, meta = {}) {
   }
 
   return receipt;
+}
+
+
+async function mintMotorInstallationToken(env) {
+  const appId = String(env.MOTOR_APP_ID || "4275961").trim();
+  const pem = (env.MOTOR_APP_PRIVATE_KEY || "").trim();
+  if (!pem) return null;
+  const now = Math.floor(Date.now() / 1000);
+  const enc = new TextEncoder();
+  const toB64Url = (buf) => {
+    let s = "";
+    const bytes = buf instanceof ArrayBuffer ? new Uint8Array(buf) : buf;
+    for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
+    return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  };
+  const header = toB64Url(enc.encode(JSON.stringify({ alg: "RS256", typ: "JWT" })));
+  const payload = toB64Url(enc.encode(JSON.stringify({ iat: now - 60, exp: now + 540, iss: Number(appId) })));
+  const key = await crypto.subtle.importKey(
+    "pkcs8",
+    pemToArrayBuffer(pem),
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, enc.encode(`${header}.${payload}`));
+  const jwt = `${header}.${payload}.${toB64Url(sig)}`;
+  const installId = String(env.MOTOR_INSTALLATION_ID || "145975487").trim();
+  const tokRes = await fetch(`https://api.github.com/app/installations/${installId}/access_tokens`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": SCHEMA,
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+  if (!tokRes.ok) return null;
+  const tok = await tokRes.json();
+  return tok.token || null;
+}
+
+function pemToArrayBuffer(pem) {
+  const b64 = pem.replace(/-----BEGIN [^-]+-----/g, "").replace(/-----END [^-]+-----/g, "").replace(/\s+/g, "");
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes.buffer;
+}
+
+async function dispatchCommissioningRunway(env, receipt) {
+  const repo = (env.COMMISSIONING_RUNWAY_REPO || "Noetfield-Systems/NOETFIELD-RUNWAY").trim();
+  try {
+    const token = await mintMotorInstallationToken(env);
+    if (!token) {
+      return { ok: false, error: "MOTOR_APP_PRIVATE_KEY missing or mint failed — runway dispatch skipped" };
+    }
+    const resp = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+        "User-Agent": SCHEMA,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify({
+        event_type: "commissioning_tick",
+        client_payload: {
+          source: "cf-cron",
+          at: receipt.at,
+          verdict: receipt.verdict,
+          loop_id: receipt.loop_id,
+        },
+      }),
+    });
+    return { ok: resp.status === 204, status: resp.status, repo, event_type: "commissioning_tick" };
+  } catch (err) {
+    return { ok: false, error: String(err && err.message ? err.message : err) };
+  }
 }
 
 export default {
