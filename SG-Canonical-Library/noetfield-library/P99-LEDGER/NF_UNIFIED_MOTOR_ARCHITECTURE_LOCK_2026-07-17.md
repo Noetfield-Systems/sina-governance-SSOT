@@ -26,3 +26,11 @@
 ## Status note
 
 `OPERATIONALLY_PROVEN` and `FULLY_COMMISSIONED` remain future — foundation commission + cold proof required.
+
+
+## Drift correction (2026-07-18 · non-destructive)
+
+Historical `sg_authority_sha` on this receipt recorded the pre-Wave-0 accept SHA `8b476f72...`.  
+Wave 0 squash land on main made **`dc6080d8519b8a83dcfaaeefb65392691ce3e33e`** the authority SHA (ancestor of current main).  
+Do not rewrite the historical verdict above; use the Wave 0 merge P99 and `receipts/doctrine/NF_UNIFIED_MOTOR_ARCHITECTURE_v1_LOCKED.lock.json` for the post-land authority SHA.  
+Scaling-posture amendment: see `P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md`.
