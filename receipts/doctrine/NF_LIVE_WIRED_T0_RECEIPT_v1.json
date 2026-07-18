@@ -15,7 +15,7 @@
     }
   },
   "receipt_type": "live_wired_t0_commission_receipt_v1",
-  "status": "LIVE_WIRED_T0",
+  "status": "RETRACTED_SUPERSEDED",
   "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
   "autonomous_production_mutations": "HOLD",
   "fully_commissioned_claim": false,
