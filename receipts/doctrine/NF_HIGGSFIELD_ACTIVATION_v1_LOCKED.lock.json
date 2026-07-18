@@ -1,0 +1,10 @@
+{
+  "receipt_type": "doctrine_lock_receipt_v1",
+  "decisions": [
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+    "NF-ACTIVATION-CYCLE-V1"
+  ],
+  "status": "SG_ACCEPTED",
+  "locked_at": "2026-07-18T00:36:23Z",
+  "base_head_before_commit": "fd62e7f5d6c1d4ef31a4d8137af84b313f378c25"
+}
