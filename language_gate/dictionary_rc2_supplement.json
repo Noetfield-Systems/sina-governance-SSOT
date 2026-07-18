@@ -846,6 +846,38 @@
     {
       "term": "PARALLEL_SANDBOXES_PROVEN",
       "meaning": "Terminal status when \u22652 concurrent Jobs complete in separate sandboxes with independent results and no shared mutable state."
+    },
+    {
+      "term": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1",
+      "meaning": "SG execution assignment for the first three Runways."
+    },
+    {
+      "term": "Codex Local",
+      "meaning": "Research Runway implementation worker."
+    },
+    {
+      "term": "Codex Cloud",
+      "meaning": "Bounded cloud implementation and verification worker."
+    },
+    {
+      "term": "GPT Work Verifier on GitHub",
+      "meaning": "Independent verification worker."
+    },
+    {
+      "term": "GPT Advisor",
+      "meaning": "Product and architecture advisor."
+    },
+    {
+      "term": "noetfield.runway-core.v0.1",
+      "meaning": "Versioned shared interface contract for Unified Motor and Runways."
+    },
+    {
+      "term": "FIRST_COMMISSIONING_ACCEPTED",
+      "meaning": "First real Runway Job passed commissioning."
+    },
+    {
+      "term": "REPEATABLE",
+      "meaning": "Three consecutive real Jobs passed without manual intervention."
     }
   ],
   "structural_allowlist": [

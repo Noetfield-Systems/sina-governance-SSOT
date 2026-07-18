@@ -29,7 +29,7 @@
   "bootstrap_builders": {
     "Video": "Cursor",
     "Software Repair": "Claude",
-    "Research": "GPT"
+    "Research": "Codex Local"
   },
   "parallel_sandboxes": {
     "required": true,
@@ -126,11 +126,23 @@
     "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
   ],
   "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
-  "saved_at": "2026-07-18T03:39:45Z",
+  "saved_at": "2026-07-18T03:58:51Z",
   "base_head_before_commit": "a9c6748a7ba5588b436b72a1545521e29443a662",
   "founder_override": {
     "decision": "PARALLEL_EXECUTION",
     "reason": "First/second order does not matter; Motor must manage parallel isolated sandboxes",
     "supersedes": "serial Video-first or Software-Repair-first monopoly queues"
-  }
+  },
+  "research_product_architecture_input": [
+    "Founder",
+    "GPT Advisor"
+  ],
+  "research_first_commissioning_verifier": "GPT Work Verifier on GitHub",
+  "worker_distinctions": {
+    "Codex Local": "Research repository implementation",
+    "GPT Work Verifier on GitHub": "independent first commissioning",
+    "Codex Cloud": "separate bounded cloud worker",
+    "GPT Advisor": "product and architecture advice only"
+  },
+  "execution_assignment_decision": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1"
 }

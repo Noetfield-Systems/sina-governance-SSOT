@@ -115,16 +115,16 @@ Bootstrap builders may work in parallel too:
 |--------|-------------|-------------------------------|
 | **Video** | Brief/assets → finished playable + downloadable video | Cursor |
 | **Software Repair** | Issue/CI failure → green PR | Claude |
-| **Research** | Question → cited decision-ready report | GPT |
+| **Research** | Question → cited decision-ready report | Codex Local (Founder + GPT Advisor define product behavior) |
 
 ```text
-Claude / GPT / Cursor = Bootstrap Builders (not permanent runtime owners)
+Claude Code / Codex Local / Cursor = Bootstrap Builders (not permanent runtime owners)
 Unified Motor = Permanent runtime
 Cheap / cloud-hosted models = normal job intelligence
 Premium / Claude / Codex / Cursor = escalation or system build only
 ```
 
-**Execution preservation:** Do not stop Cursor Video, Claude Repair, or GPT Research to force a serial queue. Coordinate via isolated sandboxes + shared Motor contracts.
+**Execution preservation:** Do not stop Cursor Video, Claude Code Repair, or Codex Local Research to force a serial queue. Coordinate via isolated sandboxes + shared Motor contracts.
 
 ### Result contracts (Done)
 
