@@ -26,7 +26,7 @@ import sys
 import urllib.request
 import webbrowser
 from datetime import datetime, timezone
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 
@@ -209,7 +209,7 @@ class Handler(BaseHTTPRequestHandler):
         print(f"[bootstrap] CREATED app_id={app_id} slug={slug} fingerprint={fingerprint}")
         print(f"[bootstrap] receipt={receipt_path}")
         print(f"[bootstrap] install_url={install_url}")
-        print("[bootstrap] DONE_CREATION")
+        print("[bootstrap] DONE_CREATION", flush=True)
 
     def _respond_html(self, status, inner):
         body = f"<!doctype html><html><body style='font-family:system-ui;max-width:640px;margin:60px auto'>{inner}</body></html>".encode()
@@ -221,9 +221,9 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    print(f"[bootstrap] serving http://{HOST}:{PORT}/  (state={STATE[:8]}...)")
-    print(f"[bootstrap] new-app POST target: {NEW_APP_URL}")
-    server = HTTPServer((HOST, PORT), Handler)
+    print(f"[bootstrap] serving http://{HOST}:{PORT}/  (state={STATE[:8]}...)", flush=True)
+    print(f"[bootstrap] new-app POST target: {NEW_APP_URL}", flush=True)
+    server = ThreadingHTTPServer((HOST, PORT), Handler)
     try:
         webbrowser.open(f"http://{HOST}:{PORT}/")
     except Exception:
