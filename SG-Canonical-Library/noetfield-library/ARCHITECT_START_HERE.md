@@ -88,11 +88,12 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 
 `P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` = **decision** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.3 (`SG_ACCEPTED`).
 **Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json` · **Baseline:** `PRODUCT_CATEGORY@b9ce619`
-**Concurrency commission:** `docs/dispatch/nf-parallel-sandbox-manager-v1.md`
+**Execution assignment:** `P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` + `data/nf_runway_execution_assignment_v1_LOCKED.json`
 
 **Law:** Sell a finished result. Motor is infrastructure. Gateway ≠ Motor. Governance is not the product.
 **Execution:** **parallel** — Video · Software Repair · Research together; one Job ↔ one isolated sandbox.
-**Hold:** `GATEWAY_MODE=live` until five-check preflight.
+**Workers:** Claude Code (foundation/Repair) · Codex Local (Research) · Cursor (Video) · GPT Work Verifier on GitHub (Research commissioning) · Codex Cloud (separate cloud worker) · GPT Advisor (advice only).
+**Hold:** `GATEWAY_MODE=live` until five-check preflight; NOOS PR #82 autonomous routing not activated by the execution lock.
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.

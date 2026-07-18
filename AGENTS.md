@@ -38,6 +38,7 @@
 
 0e. **Activation cycle + Higgsfield adapter (LOCKED)** — `docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` + `P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` before new lanes/roles/providers
 0f. **Noetfield Runway product (LOCKED)** — `P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` before selling Motor/governance; parallel Video/Software Repair/Research; one Job↔one isolated sandbox; Gateway ≠ Motor
+0g. **Runway execution assignment (LOCKED)** — `P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` + `data/nf_runway_execution_assignment_v1_LOCKED.json`: Claude Code=foundation/Repair; Codex Local=Research impl; Cursor=Video; GPT Work Verifier on GitHub=Research commissioning; Codex Cloud=separate cloud worker; GPT Advisor=advice only; institutional owners remain Builder/Verifier
 
 0. **CHESS v2.0 (full package)** — `P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` + templates + `SKILLS/SKILL_01`–`07` + `scripts/chess_pass_cli_v1.py`
 
