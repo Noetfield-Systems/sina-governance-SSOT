@@ -84,6 +84,16 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Machine:** `data/nf_activation_cycle_v1_LOCKED.json` · `data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json`  
 **Dispatch:** `docs/dispatch/higgsfield-activation-cycle-all-repos.md`
 
+## 2j. NOETFIELD RUNWAY PRODUCT (P10 — sell finished results)
+
+`P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` = **decision** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.2 (`SG_ACCEPTED`).
+**Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json` · **Baseline:** `PRODUCT_CATEGORY@b9ce619`
+**Active commission:** `docs/dispatch/nf-video-runway-v1-first-vertical.md`
+
+**Law:** Sell a finished result. Motor is infrastructure. Gateway ≠ Motor. Governance is not the product.
+**Active order:** Video → Software Repair → Research. Preserve Cursor's current Video build; shared Motor interfaces stay provider-neutral.
+**Hold:** `GATEWAY_MODE=live` until five-check preflight.
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

@@ -798,6 +798,46 @@
       "term": "Outcome Probe",
       "tag": "RC2_GAP_FILL",
       "meaning": "External measurement of engagement, conversion, or qualified demand after promotion."
+    },
+    {
+      "term": "Noetfield Runway",
+      "meaning": "Sellable product surface: user picks a Runway and gets a finished deliverable in the UI. Motor and governance are infrastructure under it."
+    },
+    {
+      "term": "Video Runway",
+      "meaning": "Active first Noetfield Runway vertical: brief/assets to playable downloadable video. Cursor bootstrap build continues."
+    },
+    {
+      "term": "Result UI",
+      "meaning": "User-facing surface that shows Job status and the downloadable finished deliverable."
+    },
+    {
+      "term": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+      "meaning": "SG product lock: sell finished results; first vertical Video Runway; credits per completed Job."
+    },
+    {
+      "term": "VIDEO_RUNWAY_PROVEN",
+      "meaning": "Terminal status when Video Runway delivers the required real playable/downloadable Result UI Jobs."
+    },
+    {
+      "term": "Software Repair Runway",
+      "meaning": "Second initial Noetfield Runway plugin: failing issue/CI to green candidate PR. Reuses Unified Motor; not the active first build."
+    },
+    {
+      "term": "Research Runway",
+      "meaning": "Third initial Noetfield Runway plugin: question to cited downloadable decision-ready report."
+    },
+    {
+      "term": "FOUNDATION_VERTICAL_SLICE_BUILT",
+      "meaning": "Shared Unified Motor submit/status/result foundation state; may be bootstrapped by the active Video lane without provider-specific core assumptions."
+    },
+    {
+      "term": "GATEWAY_MODE",
+      "meaning": "Gateway runtime mode. live remains HOLD until five-check preflight PASSes."
+    },
+    {
+      "term": "runway doctor",
+      "meaning": "Stack health command for Gateway, Motor runtime, Prompt Compiler, job state, artifacts, model provider, and NOOS events."
     }
   ],
   "structural_allowlist": [
@@ -848,7 +888,10 @@
     "split",
     "supabase edge",
     "tamper",
-    "update linkedin"
+    "update linkedin",
+    "VIDEO_RUNWAY_PROVEN",
+    "IMPLEMENTATION_AUTHORIZED",
+    "SG_ACCEPTED"
   ],
   "alias_map": {},
   "code_alias": [

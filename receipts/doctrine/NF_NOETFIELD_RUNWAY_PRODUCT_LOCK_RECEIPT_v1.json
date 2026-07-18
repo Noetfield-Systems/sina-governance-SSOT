@@ -1,0 +1,21 @@
+{
+  "schema": "sg-doctrine-receipt-v1",
+  "receipt_id": "NF_NOETFIELD_RUNWAY_PRODUCT_LOCK_RECEIPT_v1",
+  "created_at": "2026-07-18T02:29:06Z",
+  "updated_at": "2026-07-18T03:29:40Z",
+  "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+  "version": "1.2.0",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "product_baseline_sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9",
+  "first_vertical": "Video",
+  "build_order": [
+    "Video",
+    "Software Repair",
+    "Research"
+  ],
+  "gateway_mode_live": "HOLD",
+  "supersedes": "Software-Repair-first order in PR #22 commit 2a64bc1",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+  "founder_override": "Preserve Cursor active video-generation build; Software-Repair-first not adopted"
+}

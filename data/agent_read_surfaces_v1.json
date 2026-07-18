@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.6.0",
-  "saved_at": "2026-07-18T00:40:00Z",
+  "version": "1.7.2",
+  "saved_at": "2026-07-18T03:29:40Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -292,6 +292,26 @@
           "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
           "status": "ACTIVE",
           "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
         }
       ],
       "skills_resolve": [
@@ -505,6 +525,26 @@
           "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
           "status": "ACTIVE",
           "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
         }
       ]
     },
@@ -718,6 +758,26 @@
           "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
           "status": "ACTIVE",
           "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
         }
       ]
     },
@@ -929,6 +989,26 @@
           "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
           "status": "ACTIVE",
           "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
         }
       ],
       "skills_resolve": []
@@ -1053,6 +1133,26 @@
           "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
           "status": "ACTIVE",
           "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
         }
       ]
     }

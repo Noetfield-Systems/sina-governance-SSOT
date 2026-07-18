@@ -1,0 +1,120 @@
+{
+  "schema": "nf_noetfield_runway_product_v1",
+  "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "1.2.0",
+  "product": "Noetfield Runway",
+  "sell": "finished_result_in_ui",
+  "not_the_product": [
+    "Motor",
+    "governance",
+    "SG",
+    "chat_tokens",
+    "Gateway"
+  ],
+  "product_baseline": {
+    "repo": "Noetfield-Systems/PRODUCT_CATEGORY",
+    "sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9"
+  },
+  "engine": "Unified Motor",
+  "engine_law": "Video lane may bootstrap shared interfaces; core stays provider-neutral and artifact-neutral",
+  "first_vertical": "Video",
+  "build_order": [
+    "Video",
+    "Software Repair",
+    "Research"
+  ],
+  "bootstrap_builders": {
+    "Video": "Cursor",
+    "Software Repair": "Claude",
+    "Research": "GPT"
+  },
+  "flow": [
+    "INPUT",
+    "INTELLIGENCE",
+    "EXECUTION",
+    "RESULT"
+  ],
+  "detailed_flow": [
+    "User input",
+    "Prompt Compiler",
+    "Plan",
+    "Model/Tool selection",
+    "Execution loop",
+    "Verification",
+    "Final result"
+  ],
+  "success_criteria": {
+    "foundation": "shared_submit_status_result_flow_visible_to_NOOS",
+    "video": "real_brief_to_playable_downloadable_video",
+    "software_repair": "real_failing_fixture_to_green_candidate_pr",
+    "research": "cited_downloadable_report"
+  },
+  "first_success": "Job from UI or SinaGPT yields playable downloadable video without manual intermediate dispatch",
+  "pricing_model": "credits_per_completed_job",
+  "gateway": {
+    "role": "entry_control_surface",
+    "not_equal_to": "Unified Motor",
+    "gateway_mode_live": "HOLD_UNTIL_FIVE_CHECK_PREFLIGHT"
+  },
+  "models": {
+    "build_router_interfaces_now": true,
+    "wait_for_api_keys": false,
+    "first_live_provider": "DeepSeek_OR_Kimi_one_only",
+    "huggingface": "disabled_adapter_until_endpoint_chosen",
+    "secret_store_only": [
+      "DEEPSEEK_API_KEY",
+      "MOONSHOT_API_KEY",
+      "HF_TOKEN"
+    ]
+  },
+  "stack_roles": {
+    "Runway": "product",
+    "Unified Motor": "shared_engine",
+    "SourceA": "prompt_job_compiler",
+    "NOOS": "runtime_control_plane",
+    "SG": "canon_authority",
+    "SinaGPT": "founder_cockpit",
+    "Railway": "long_running_workers",
+    "Cloudflare": "ui_gateway_workflows_edge",
+    "Cheap models": "default_operational_intelligence",
+    "Claude/Cursor/Codex": "bootstrap_and_escalation_only"
+  },
+  "required_stack_manifest": "noetfield.runway-stack.v1",
+  "required_doctor": "runway doctor",
+  "forbidden": [
+    "fourth_runway",
+    "new_lane",
+    "gpu_platform",
+    "three_live_model_providers",
+    "new_governance_framework",
+    "raw_github_dispatch_as_product",
+    "separate_engine_per_agent",
+    "gateway_mode_live_without_preflight",
+    "api_keys_in_chat_or_git",
+    "redirect_active_video_build",
+    "video_specific_motor_core"
+  ],
+  "waves": [
+    "SG_LOCK",
+    "VIDEO_ACTIVE_BUILD_SHARED_INTERFACES",
+    "VIDEO_REAL_JOBS",
+    "SOFTWARE_REPAIR_PLUGIN",
+    "RESEARCH_PLUGIN"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+  "saved_at": "2026-07-18T03:29:40Z",
+  "base_head_before_commit": "671ce2c10b62d74b2c0bfeca3b398b00ec05629b",
+  "founder_override": {
+    "decision": "VIDEO_FIRST_CONTINUES",
+    "reason": "Cursor is actively building video generation; preserve current work and do not redirect to Software Repair",
+    "supersedes_pr_commit": "2a64bc1d37a2e0603c734b0fe15918d7ae3df981"
+  }
+}
