@@ -5,20 +5,20 @@
 **Authority:** [CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md](../CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md)
 
 ## Task
-Wire `/register`, Partner Access OS, and customer portal to Supabase Auth on `portfolio_spine`.
+Wire `/register`, Partner Access OS, and customer portal to Supabase Auth on the `noetfield` Supabase project (`tkgpapowwplupyekpivy`).
 
 ## Path
 `TrustField-Technologies`
 
 ## Targets
 1. `/register` → Supabase Auth sign-up (magic link + email/password P0)
-2. `/partner-access` → middleware `getClaims()` gate
+2. `/partner-access` stays public; `/partner-access/workspace` → middleware `getClaims()` gate
 3. Customer portal route — gated 401/302 when `implementation: live`
 4. `api.trustfield.ca` — JWT on portal routes; service keys for loops only
 
 ## Env
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://ldfruywifqnfpwsfgmdl.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://tkgpapowwplupyekpivy.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<publishable key>
 ```
 Callback: `https://www.trustfield.ca/auth/callback`
@@ -26,8 +26,8 @@ Callback: `https://www.trustfield.ca/auth/callback`
 ## Action
 1. Add `@supabase/ssr` per `data/auth_core_interface_spec_v1.json`
 2. Auth routes: `/auth/sign-in`, `/auth/sign-up`, `/auth/callback`, `/auth/sign-out`
-3. Gate `/partner-access` with server `getClaims()`
-4. `profiles` migration on portfolio_spine if missing
+3. Keep `/partner-access` public and gate `/partner-access/workspace` with server `getClaims()`
+4. `trustfield_profiles` migration on noetfield if missing
 
 ## Check
 ```bash

@@ -91,8 +91,8 @@ alter table public.profiles enable row level security;
 
 **Ratified 2026-07-18 (Phase 1 unblocked):**
 
-1. **Auth project** → `portfolio_spine` only
-4. **First ship** → TrustField `/register` + portal
+1. **Auth projects** → venture-scoped: SourceA → `portfolio_spine`; Noetfield/TrustField → `noetfield`
+4. **First ship** → TrustField `/register` + portal (public `/partner-access`; gated `/partner-access/workspace`)
 
 **Still pending:**
 

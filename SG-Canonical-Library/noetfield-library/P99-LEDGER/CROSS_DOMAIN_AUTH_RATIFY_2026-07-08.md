@@ -17,12 +17,12 @@
 
 | # | Decision | State | Value |
 |---|----------|-------|-------|
-| 1 | Auth project | **RATIFIED 2026-07-18** | portfolio_spine only |
+| 1 | Auth projects | **RATIFIED 2026-07-18 · CORRECTED AFTER TRUSTFIELD PREFLIGHT** | SourceA → portfolio_spine; Noetfield/TrustField → noetfield |
 | 2 | Cross-brand login | PENDING | per-domain sessions (recommended) |
 | 3 | P0 methods | PENDING | magic_link + email_password (recommended) |
-| 4 | First ship | **RATIFIED 2026-07-18** | TrustField /register + portal |
+| 4 | First ship | **RATIFIED 2026-07-18** | TrustField /register + portal; public recruitment landing preserved, private workspace gated |
 | 5 | Enterprise SSO | PENDING | defer P2 (recommended) |
 
-Phase 1 TrustField dispatch is authorized. This does not authorize cross-repo edits from SG, production secret changes, or bypass of venture tests.
+Phase 1 TrustField dispatch is authorized. TrustField uses the `noetfield` Supabase project and gates `/partner-access/workspace` plus `/customer-portal`; `/partner-access` remains public. This does not authorize cross-repo edits from SG, production secret changes, or bypass of venture tests.
 
 **Signer:** Founder instruction executed through SG W11 auth upgrade.
