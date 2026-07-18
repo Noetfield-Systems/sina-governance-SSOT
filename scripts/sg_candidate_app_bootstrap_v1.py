@@ -145,7 +145,11 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def _serve_form(self):
+        import html as _html
         manifest = load_manifest()
+        # Use a visible textarea so the JSON is not mangled by attribute quoting.
+        # GitHub App Manifest API requires: name, url, redirect_url.
+        escaped = _html.escape(manifest, quote=True)
         html = f"""<!doctype html><html><head><meta charset=utf-8>
 <title>Create noetfield-sg-authority (candidate)</title></head>
 <body style="font-family:system-ui;max-width:640px;margin:60px auto">
@@ -153,9 +157,12 @@ class Handler(BaseHTTPRequestHandler):
 <p>Owner org: <b>{ORG}</b>. Permissions are pre-filled (read-mostly + checks/statuses write). Webhook disabled.</p>
 <p>Click the button, then confirm <b>Create GitHub App</b> on GitHub.</p>
 <form action="{NEW_APP_URL}" method="post">
-  <input type="hidden" name="manifest" value='{manifest.replace("'", "&#39;")}'>
+  <textarea name="manifest" style="display:none">{escaped}</textarea>
   <button type="submit" style="font-size:18px;padding:12px 20px">Create GitHub App</button>
 </form>
+<details style="margin-top:16px"><summary>Manifest preview</summary>
+<pre style="font-size:12px;background:#f6f8fa;padding:12px;overflow:auto">{escaped}</pre>
+</details>
 <p style="color:#666;margin-top:24px">After creation, return here; the callback records public metadata and stores the key in SG custody.</p>
 </body></html>"""
         body = html.encode()

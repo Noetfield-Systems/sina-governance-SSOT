@@ -1,11 +1,16 @@
 {
   "name": "noetfield-sg-authority",
   "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT",
+  "redirect_url": "http://127.0.0.1:8737/callback",
+  "callback_urls": [
+    "http://127.0.0.1:8737/callback"
+  ],
   "description": "Noetfield SG advisory authority (candidate, NOT commissioned). Shadow-only. No production enforcement.",
   "public": false,
   "request_oauth_on_install": false,
   "setup_on_update": false,
   "hook_attributes": {
+    "url": "https://example.com/webhook",
     "active": false
   },
   "default_events": [],
