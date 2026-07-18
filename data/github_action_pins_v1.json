@@ -1,0 +1,29 @@
+{
+  "schema": "github_action_pins_v1",
+  "repair_id": "SG-PRECOMMISSIONING-WORKFLOW-HYGIENE-01",
+  "verified_at": "2026-07-18T08:30:59Z",
+  "source": "GitHub commits API commit.verification",
+  "pins": [
+    {
+      "action": "actions/checkout",
+      "major_ref": "v4",
+      "commit_sha": "34e114876b0b11c390a56381ad16ebd13914f8d5",
+      "commit_signature_verified": true,
+      "verification_reason": "valid"
+    },
+    {
+      "action": "actions/setup-python",
+      "major_ref": "v5",
+      "commit_sha": "a26af69be951a213d495a4c3e4e4022e16d87065",
+      "commit_signature_verified": true,
+      "verification_reason": "valid"
+    },
+    {
+      "action": "actions/upload-artifact",
+      "major_ref": "v4",
+      "commit_sha": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "commit_signature_verified": true,
+      "verification_reason": "valid"
+    }
+  ]
+}

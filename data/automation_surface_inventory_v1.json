@@ -1,7 +1,7 @@
 {
   "schema": "automation_surface_inventory_v1",
-  "version": "1.2.0",
-  "saved_at": "2026-07-18T07:54:49Z",
+  "version": "1.3.0",
+  "saved_at": "2026-07-18T08:30:59Z",
   "authority": "SG (SSSOT)",
   "parent": "data/github_automation_registry_v1.json",
   "repos": [
@@ -39,6 +39,14 @@
           "cadence": "0 */6 * * *",
           "task_cell": "sg_auth_surface_probe",
           "copilot_safe": false
+        },
+        {
+          "file": "p0pgr-shadow-cycle-v1.yml",
+          "motor_id": "gh_actions_p0pgr_shadow_cycle_v1",
+          "cadence": "founder-manual-only",
+          "task_cell": "p0pgr_shadow_compile_lint_route",
+          "copilot_safe": false,
+          "state": "FOUNDER_MANUAL_ONLY"
         }
       ],
       "mac_motors": [
