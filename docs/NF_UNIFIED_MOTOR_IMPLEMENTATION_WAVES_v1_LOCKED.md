@@ -124,7 +124,7 @@ A single `GitHub App`; each repo gets generated `noetfield.repo-owner-ref.v1` po
 | `last_fired_at` target | `noos_loop_registry` / Motor job ledger (when commissioned) |
 | Deadman | independent CF deadman path (different Worker); 2× interval staleness → alert + one restart attempt + receipt |
 | Receipt | `receipts/doctrine/` + P99 Motor evidence |
-| Commission status | `SCOPED_LIVE_T0_AUTHORIZED` / `LIVE_WIRED_T0_PENDING` — event gateway and resident roles commissioning in progress; `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains |
+| Commission status | `NOT_COMMISSIONED` — offline implementation and offline proofs complete (candidate); live shadow NOT deployed; no live SG deployment before the SG_COMMISSIONING_KEY_2 custody gate; `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains |
 | 48h gate | commissioning acceptance requires laptop-closed cloud heartbeats still firing |
 
 Foundation implementation ends at `FOUNDATION_BUILT_FOR_FOCUSED_REVIEW`, not `FULLY_COMMISSIONED`.
