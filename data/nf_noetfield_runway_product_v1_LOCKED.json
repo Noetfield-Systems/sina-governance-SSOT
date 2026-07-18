@@ -3,7 +3,7 @@
   "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
   "status": "SG_ACCEPTED",
   "implementation_status": "IMPLEMENTATION_AUTHORIZED",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "product": "Noetfield Runway",
   "sell": "finished_result_in_ui",
   "not_the_product": [
@@ -18,17 +18,17 @@
     "sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9"
   },
   "engine": "Unified Motor",
-  "engine_law": "Repair bootstraps foundation; core stays provider-neutral and artifact-neutral",
-  "first_vertical": "Software Repair",
+  "engine_law": "Video lane may bootstrap shared interfaces; core stays provider-neutral and artifact-neutral",
+  "first_vertical": "Video",
   "build_order": [
+    "Video",
     "Software Repair",
-    "Research",
-    "Video"
+    "Research"
   ],
   "bootstrap_builders": {
+    "Video": "Cursor",
     "Software Repair": "Claude",
-    "Research": "GPT",
-    "Video": "Cursor"
+    "Research": "GPT"
   },
   "flow": [
     "INPUT",
@@ -46,12 +46,12 @@
     "Final result"
   ],
   "success_criteria": {
-    "foundation": "FOUNDATION_VERTICAL_SLICE_BUILT",
+    "foundation": "shared_submit_status_result_flow_visible_to_NOOS",
+    "video": "real_brief_to_playable_downloadable_video",
     "software_repair": "real_failing_fixture_to_green_candidate_pr",
-    "research": "cited_downloadable_report",
-    "video": "playable_downloadable_video"
+    "research": "cited_downloadable_report"
   },
-  "first_success": "Job from UI or SinaGPT yields real green PR without manual GitHub dispatch",
+  "first_success": "Job from UI or SinaGPT yields playable downloadable video without manual intermediate dispatch",
   "pricing_model": "credits_per_completed_job",
   "gateway": {
     "role": "entry_control_surface",
@@ -93,14 +93,15 @@
     "separate_engine_per_agent",
     "gateway_mode_live_without_preflight",
     "api_keys_in_chat_or_git",
-    "git_specific_motor_core"
+    "redirect_active_video_build",
+    "video_specific_motor_core"
   ],
   "waves": [
     "SG_LOCK",
-    "SHARED_MOTOR_FOUNDATION",
-    "SOFTWARE_REPAIR_REAL_JOB",
-    "RESEARCH_PLUGIN",
-    "VIDEO_PLUGIN"
+    "VIDEO_ACTIVE_BUILD_SHARED_INTERFACES",
+    "VIDEO_REAL_JOBS",
+    "SOFTWARE_REPAIR_PLUGIN",
+    "RESEARCH_PLUGIN"
   ],
   "depends_on": [
     "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
@@ -109,6 +110,11 @@
     "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
   ],
   "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
-  "saved_at": "2026-07-18T03:26:42Z",
-  "base_head_before_commit": "671ce2c10b62d74b2c0bfeca3b398b00ec05629b"
+  "saved_at": "2026-07-18T03:29:40Z",
+  "base_head_before_commit": "671ce2c10b62d74b2c0bfeca3b398b00ec05629b",
+  "founder_override": {
+    "decision": "VIDEO_FIRST_CONTINUES",
+    "reason": "Cursor is actively building video generation; preserve current work and do not redirect to Software Repair",
+    "supersedes_pr_commit": "2a64bc1d37a2e0603c734b0fe15918d7ae3df981"
+  }
 }
