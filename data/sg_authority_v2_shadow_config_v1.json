@@ -1,16 +1,16 @@
 {
   "schema": "noetfield.sg-authority-v2-shadow-config.v1",
   "version": "0.1.0",
-  "status": "IMPLEMENTED_NOT_DEPLOYED",
+  "status": "SHADOW_LANDED",
   "sg_runtime": "NOT_COMMISSIONED",
   "sg_enforcement": "NOT_ENABLED",
   "autonomous_production_mutations": "HOLD",
   "candidate_app": {
     "slug": "noetfield-sg-authority",
-    "creation_status": "NOT_PROVEN",
-    "identity_status": "NOT_PROVEN",
-    "app_id": null,
-    "installation_id": null,
+    "creation_status": "PROVEN",
+    "identity_status": "PROVEN_PENDING_LIVE_DEPLOY",
+    "app_id": "4330805",
+    "installation_id": "147378007",
     "allowed_repositories": [
       "Noetfield-Systems/sina-governance-SSOT",
       "Noetfield-Systems/noetfield-sandbox-private"
@@ -50,5 +50,6 @@
     "hold_lift",
     "legacy_app_revocation",
     "production_deploy"
-  ]
+  ],
+  "shadow_merge_commit": "898d67e5ca9eab9ae6161658cfdef3b2c48e6360"
 }

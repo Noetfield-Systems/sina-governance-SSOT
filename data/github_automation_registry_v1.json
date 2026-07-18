@@ -338,7 +338,7 @@
       "kind": "cloudflare_worker_workflow",
       "repo": "noetfield-sandbox-private",
       "workflow_file": "motor/unified_core/cloudflare/",
-      "cadence": "reserved_not_scheduled",
+      "cadence": "event_driven_reserved",
       "lane": "unified_motor_foundation",
       "owns": [
         "motor_job_workflow",
@@ -357,7 +357,8 @@
       "trigger_host": "cloud",
       "last_fired_at_target": "noos_loop_registry",
       "deadman": "independent_cf_deadman_path",
-      "note": "Cloud-ready foundation loop registered NOT_COMMISSIONED under HOLD. Do not deploy or schedule until founder commission."
+      "note": "Scoped live T0 authorized under HOLD. Event gateway and resident-role commissioning in progress; not FULLY_COMMISSIONED.",
+      "commission_status": "LIVE_WIRED_T0_PENDING"
     }
   ],
   "agent_lanes": [

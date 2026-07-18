@@ -1,10 +1,10 @@
 {
   "schema": "noetfield.runtime-reality.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "as_of": "2026-07-18",
   "authority": {
     "precedence": "RUNTIME_REALITY_OVERRIDES_ARCHITECTURE_PROSE_FOR_LIVE_STATUS",
-    "system_status": "BLOCKED_NOT_COMMISSIONED",
+    "system_status": "SCOPED_LIVE_T0_AUTHORIZED",
     "autonomous_production_mutations": "HOLD",
     "containment": "ENFORCED",
     "founder_break_glass": "TEMPORARY_CONTAINMENT_ONLY"
@@ -21,7 +21,9 @@
     "legacy_advisory_authority": "DENIED",
     "legacy_decommission_status": "PENDING_REPLACEMENT_COMMISSIONING",
     "replacement_app_slug": "noetfield-sg-authority",
-    "replacement_status": "NOT_YET_COMMISSIONED"
+    "replacement_app_id": "4330805",
+    "replacement_installation_id": "147378007",
+    "replacement_status": "SHADOW_LANDED"
   },
   "unified_motor": {
     "architecture_status": "SG_ACCEPTED",
@@ -47,6 +49,25 @@
     "motor_may_issue_sg_decisions": false,
     "sg_may_execute_mutations": false
   },
+  "event_gateway": {
+    "status": "LIVE"
+  },
+  "resident_roles": {
+    "sg_role": "LIVE",
+    "noos_role": "LIVE"
+  },
+  "commissioning_directive": {
+    "event_gateway": "LIVE",
+    "sg_role": "LIVE",
+    "noos_role": "LIVE",
+    "unified_motor_runtime": "COMMISSIONED_T0",
+    "autonomous_production_mutations": "HOLD",
+    "fully_commissioned_claim": false
+  },
+  "implementation_refs": {
+    "shadow_merge_commit": "898d67e5ca9eab9ae6161658cfdef3b2c48e6360",
+    "sandbox_candidate_commit": "3de1409323bffdd742c3a35d2f118f73c692c4e1"
+  },
   "allowed_during_containment": [
     "read_only_observation",
     "inventory",
@@ -56,7 +77,11 @@
     "dry_runs",
     "linting",
     "schema_validation",
-    "non_mutating_shadow_evaluation"
+    "non_mutating_shadow_evaluation",
+    "event_intake",
+    "t0_workflows",
+    "receipt_writes",
+    "signed_permit_evaluation"
   ],
   "blocked_during_containment": [
     "autonomous_production_merge",
@@ -66,7 +91,8 @@
     "autonomous_workflow_permission_escalation",
     "autonomous_secret_mutation",
     "autonomous_verifier_mutation",
-    "autonomous_production_rollback"
+    "autonomous_production_rollback",
+    "autonomous_content_publication"
   ],
   "active_evidence_requirements": [
     "deployed_commit_sha",
@@ -82,7 +108,9 @@
     "IMPLEMENTATION_AUTHORIZED != DEPLOYED",
     "DEPLOYED != PROVEN",
     "PROVEN != COMMISSIONED",
-    "COMMISSIONED != ACTIVE"
+    "COMMISSIONED != ACTIVE",
+    "SCOPED_LIVE_T0_AUTHORIZED != FULLY_COMMISSIONED",
+    "COMMISSIONED_T0 != AUTONOMOUS_PRODUCTION_ALLOWED"
   ],
   "incident_id": "SG-AUTHORITY-IDENTITY-P0",
   "architecture_amendment": "NF-SG-AUTHORITY-IDENTITY-V2"

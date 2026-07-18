@@ -33,8 +33,8 @@ class SGAuthorityV2ShadowContractTests(unittest.TestCase):
 
     def test_shadow_config_does_not_claim_candidate_identity_or_enforcement(self) -> None:
         config = load(CONFIG)
-        self.assertEqual(config["status"], "IMPLEMENTED_NOT_DEPLOYED")
-        self.assertEqual(config["candidate_app"]["identity_status"], "NOT_PROVEN")
+        self.assertEqual(config["status"], "SHADOW_LANDED")
+        self.assertEqual(config["candidate_app"]["identity_status"], "PROVEN_PENDING_LIVE_DEPLOY")
         self.assertEqual(
             config["candidate_app"]["required_canary"],
             "Noetfield-Systems/noetfield-sandbox-private",
@@ -115,6 +115,16 @@ class SGAuthorityV2ShadowContractTests(unittest.TestCase):
         self.assertTrue(list(receipt_validator.iter_errors(receipt)))
         self.assertTrue(list(permit_validator.iter_errors(permit)))
 
+
+    def test_production_worker_path_is_live_eval_not_shadow(self) -> None:
+        wrangler = load(ROOT / "workers/sg-authority-v2/wrangler.jsonc")
+        variables = wrangler["vars"]
+        self.assertEqual(wrangler["name"], "noetfield-sg-authority-v2")
+        self.assertEqual(variables["MODE"], "LIVE_EVAL")
+        self.assertEqual(variables["EXPECTED_APP_ID"], "4330805")
+        self.assertEqual(variables["EXPECTED_INSTALLATION_ID"], "147378007")
+        self.assertEqual(variables["CHECK_RUN_PUBLISH_ENABLED"], "false")
+        self.assertNotIn("routes", wrangler)
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,10 +20,18 @@ class SGAuthorityContainmentTests(unittest.TestCase):
     def test_runtime_reality_is_fail_closed(self) -> None:
         self.assertEqual(self.reality["authority"]["containment"], "ENFORCED")
         self.assertEqual(self.reality["authority"]["autonomous_production_mutations"], "HOLD")
+        self.assertEqual(self.reality["authority"]["system_status"], "SCOPED_LIVE_T0_AUTHORIZED")
         self.assertEqual(self.reality["sg"]["runtime_status"], "NOT_COMMISSIONED")
+        self.assertEqual(self.reality["sg"]["replacement_status"], "SHADOW_LANDED")
         self.assertEqual(self.reality["unified_motor"]["runtime_status"], "NOT_COMMISSIONED")
         self.assertFalse(self.reality["unified_motor"]["active"])
-        self.assertTrue(promotion_gate.runtime_authority_refusal_reasons())
+        directive = self.reality["commissioning_directive"]
+        self.assertEqual(directive["unified_motor_runtime"], "COMMISSIONED_T0")
+        self.assertFalse(directive["fully_commissioned_claim"])
+        reasons = promotion_gate.runtime_authority_refusal_reasons()
+        self.assertTrue(reasons)
+        self.assertTrue(any("HOLD" in reason for reason in reasons))
+        self.assertTrue(any("not commissioned" in reason for reason in reasons))
 
     def test_two_disjoint_security_principals(self) -> None:
         principals = self.reality["security_principals"]
