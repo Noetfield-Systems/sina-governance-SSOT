@@ -1,6 +1,6 @@
 {
   "state_type": "sg_candidate_app_state_v1",
-  "updated_at_utc": "2026-07-18T10:00:15.067686+00:00",
+  "updated_at_utc": "2026-07-18T14:00:00+00:00",
   "SG_CANDIDATE_APP": "CREATED",
   "SG_CANDIDATE_IDENTITY": "PROVEN",
   "SG_RUNTIME": "NOT_COMMISSIONED",
@@ -46,5 +46,13 @@
   "app_slug": "noetfield-sg-authority",
   "installation_id": 147378007,
   "proven_at_utc": "2026-07-18T10:05:59.239564+00:00",
-  "latest_proof_receipt": "identity_proof_20260718T100559Z.json"
+  "latest_proof_receipt": "identity_proof_20260718T100559Z.json",
+  "SG_KEY_CUSTODY": "BOOTSTRAP_LOCAL",
+  "SG_LIVE_SHADOW": "NOT_DEPLOYED",
+  "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY",
+  "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
+  "SG_COMMISSIONING_KEY_CUSTODY": "NOT_PROVEN",
+  "SG_COMMISSIONING_ELIGIBLE": false,
+  "merge_queues_read_permission": false,
+  "temporary_manifest_conversion_code": "DELETED (scripts/sg_candidate_app_bootstrap_v1.py removed; raw pem/webhook_secret/client_secret written only to ~/.sina/secrets, never committed)"
 }

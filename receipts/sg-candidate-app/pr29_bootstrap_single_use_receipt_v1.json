@@ -1,0 +1,47 @@
+{
+  "receipt_type": "sg_candidate_bootstrap_single_use_v1",
+  "single_use": true,
+  "nonce": "c42b61f22badd633d7fa30ab74cb4c98",
+  "pr": 29,
+  "pr_url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/29",
+  "identity_record_commit_sha": "9319d8c712bb8102677da8dce0cd7f2641164c3e",
+  "captured_at": "2026-07-18",
+  "scope": "candidate_identity_record_only",
+  "flags": {
+    "SG_CANDIDATE_APP": "CREATED",
+    "SG_CANDIDATE_APP_ID": "4330805",
+    "SG_CANDIDATE_INSTALLATION_ID": "147378007",
+    "SG_CANDIDATE_IDENTITY": "PROVEN",
+    "SG_KEY_CUSTODY": "BOOTSTRAP_LOCAL",
+    "SG_LIVE_SHADOW": "NOT_DEPLOYED",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  },
+  "order1_bootstrap_flow_proofs": {
+    "port_8737_listener": "CLOSED",
+    "server_binding": "127.0.0.1 (loopback only) [scripts/sg_candidate_app_bootstrap_v1.py L34,L226]",
+    "state_param": "secrets.token_urlsafe(24) unguessable; validated at callback (state != STATE -> 400 abort) [L44,L177-178]",
+    "one_shot": "NOT_STRICTLY_ONE_SHOT: server used serve_forever() and was stopped manually; single successful conversion effected; port now closed [L231]",
+    "temporary_manifest_conversion_code": "DELETED in this PR (scripts/sg_candidate_app_bootstrap_v1.py)",
+    "raw_response_data": "pem/webhook_secret/client_secret written only to ~/.sina/secrets (0600); never committed; receipts store sha256 fingerprint only",
+    "secret_leak_scan": {
+      "git_tracked": "CLEAN",
+      "git_history": "CLEAN",
+      "receipts": "CLEAN (fingerprint only)",
+      "workflow_artifacts": "NONE",
+      "shell_test_snapshots": "CLEAN"
+    }
+  },
+  "not_authorized_by_this_receipt": [
+    "deployment",
+    "enforcement",
+    "secret publication",
+    "HOLD removal",
+    "commissioning",
+    "production ruleset",
+    "Motor production permits",
+    "legacy App revocation",
+    "live shadow"
+  ]
+}
