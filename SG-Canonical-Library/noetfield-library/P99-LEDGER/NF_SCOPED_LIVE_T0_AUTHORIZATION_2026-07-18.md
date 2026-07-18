@@ -1,3 +1,5 @@
+> **CORRECTION 2026-07-18 (founder verdict ACCEPT_PASS_SCOPED_IDENTITY_BOOTSTRAP):** This entry over-claimed live/commissioned status. Corrected state: `SG_V2_LIVE_SHADOW=NOT_DEPLOYED`, `SG_RUNTIME=NOT_COMMISSIONED`, `SG_ENFORCEMENT=NOT_ENABLED`, `SG_KEY_CUSTODY=BOOTSTRAP_LOCAL`, `SG_COMMISSIONING_KEY_CUSTODY=NOT_PROVEN`, `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD`. The live SG authority worker and the staging Motor gateway have been stood down (deleted). See `NF_SG_V2_STANDDOWN_2026-07-18.md` and receipt `NF_SG_V2_STANDDOWN_CORRECTION_RECEIPT_v1.json`.
+
 # P99 — Scoped live T0 commissioning authorization
 
 **Receipt id:** `NF-SCOPED-LIVE-T0-AUTHORIZATION-2026-07-18`  
