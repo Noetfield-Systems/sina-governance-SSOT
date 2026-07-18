@@ -27,6 +27,21 @@ SUPABASE_VERIFY = ROOT / "scripts/verify_supabase_live_profiles_v1.py"
 AUTH_REDIRECT_PATTERNS = re.compile(r"/(sign-in|sign-up|login|auth)(/|$)", re.I)
 
 
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Expose redirects to policy checks instead of following them implicitly."""
+
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: Any,
+        code: int,
+        msg: str,
+        headers: Any,
+        newurl: str,
+    ) -> None:
+        return None
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -40,10 +55,18 @@ def http_probe(
     *,
     timeout: int = 25,
     follow_redirect: bool = False,
+    headers: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    req = urllib.request.Request(url, method="GET", headers={"User-Agent": "sg-auth-surface-probe-v1.1"})
+    request_headers = {"User-Agent": "sg-auth-surface-probe-v1.1"}
+    request_headers.update(headers or {})
+    req = urllib.request.Request(url, method="GET", headers=request_headers)
+    opener = (
+        urllib.request.build_opener()
+        if follow_redirect
+        else urllib.request.build_opener(_NoRedirectHandler())
+    )
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with opener.open(req, timeout=timeout) as resp:
             headers = {k.lower(): v for k, v in resp.headers.items()}
             return {
                 "ok": True,
@@ -112,6 +135,18 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
             row["status"] = "FAIL"
             row["reason"] = wall
             return row
+        # Canonical host/path redirects are allowed only after one explicit hop.
+        # The hop remains visible to the anti-login-wall check above.
+        if http in (301, 302, 307, 308) and probe.get("location"):
+            target = urljoin(url, probe["location"])
+            probe = http_probe(target, follow_redirect=False)
+            http = probe.get("http", 0)
+            row["http"] = http
+            row["redirected_once_to"] = target
+            if is_auth_redirect(target) or is_auth_redirect(probe.get("location")):
+                row["status"] = "FAIL"
+                row["reason"] = f"redirect chain leads to auth path: {target}"
+                return row
         allowed = spec.get("expect_http", [200])
         row["status"] = "PASS" if http in allowed else "FAIL"
         if row["status"] == "FAIL":
@@ -119,6 +154,18 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
         return row
 
     if tier == "tier_1_optional":
+        # Follow one canonical non-auth redirect; an auth redirect remains an
+        # acceptable optional-sign-up outcome and is evaluated as-is.
+        if (
+            http in (301, 302, 307, 308)
+            and probe.get("location")
+            and not is_auth_redirect(probe.get("location"))
+        ):
+            target = urljoin(url, probe["location"])
+            second = http_probe(target, follow_redirect=False)
+            http = second.get("http", 0)
+            row["http"] = http
+            row["redirected_once_to"] = target
         allowed = spec.get("expect_http", [200, 302])
         row["status"] = "PASS" if http in allowed else "WARN"
         if row["status"] != "PASS":
@@ -180,24 +227,35 @@ def _load_portfolio_spine_url() -> str | None:
     return None
 
 
+def _load_supabase_probe_key() -> str | None:
+    import os
+
+    key = (
+        os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+        or os.environ.get("SUPABASE_SERVICE_KEY")
+        or os.environ.get("SUPABASE_ANON_KEY")
+    )
+    if key:
+        return key.strip()
+    env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
+    if env_path.is_file():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if line.startswith(("SUPABASE_SERVICE_ROLE_KEY=", "SUPABASE_SERVICE_KEY=", "SUPABASE_ANON_KEY=")):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
+
 def probe_auth_health(base: str) -> dict[str, Any]:
     url = f"{base}/auth/v1/health"
-    probe = http_probe(url, timeout=15)
+    key = _load_supabase_probe_key()
+    headers = {"apikey": key, "Authorization": f"Bearer {key}"} if key else None
+    probe = http_probe(url, timeout=15, headers=headers)
     status = "PASS" if probe.get("http") == 200 else "WARN"
     return {"status": status, "url": url, "http": probe.get("http"), "error": probe.get("error")}
 
 
 def probe_profiles_table(base: str) -> dict[str, Any]:
-    import os
-
-    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_SERVICE_KEY")
-    if not key:
-        env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
-        if env_path.is_file():
-            for line in env_path.read_text(encoding="utf-8").splitlines():
-                if line.startswith("SUPABASE_SERVICE_ROLE_KEY=") or line.startswith("SUPABASE_SERVICE_KEY="):
-                    key = line.split("=", 1)[1].strip().strip('"').strip("'")
-                    break
+    key = _load_supabase_probe_key()
     if not key:
         return {"status": "WARN", "reason": "credentials_not_configured_for_profiles_probe"}
 
@@ -279,7 +337,7 @@ def lint_redirect_allow_list(matrix: dict[str, Any]) -> dict[str, Any]:
         if host not in venture_domains and not host.startswith("localhost"):
             mismatched.append(u)
             continue
-        if not parsed.path.endswith("/auth/callback") and not host.startswith("localhost"):
+        if parsed.path.rstrip("/") != "/auth/callback":
             mismatched.append(u)
     status = "PASS"
     if bad or mismatched:

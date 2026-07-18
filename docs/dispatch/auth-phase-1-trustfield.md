@@ -39,4 +39,7 @@ curl -sI https://www.trustfield.ca/partner-access | head -1
 Tier-0 still 200. Gated paths 401/302. Receipt in P99-LEDGER.
 
 ## Commit
-TrustField-Technologies only. Stop after SG probe tier-2 can flip to `live`.
+Stage and commit only TrustField auth targets. Do not touch SG or SourceA.
+
+## Stop
+Stop after SG probe tier-2 can flip to `live`; file the venture P99 receipt.

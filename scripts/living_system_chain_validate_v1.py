@@ -267,10 +267,10 @@ def check_membrane_or_external(subsystem: dict[str, Any] | None) -> RubricCheck:
         if "spine_live_probe" in schema.lower() or "spine-live-probe" in path.name:
             hits.append(rel)
             continue
-        if schema.startswith("sg-auth-surface-probe") and payload.get("status") in ("PASS", "WARN"):
+        if schema.startswith("sg-auth-surface-probe") and payload.get("status") == "PASS":
             hits.append(rel)
             continue
-        if "auth-surface-probe" in path.name and payload.get("status") in ("PASS", "WARN"):
+        if "auth-surface-probe" in path.name and payload.get("status") == "PASS":
             hits.append(rel)
             continue
         if payload.get("rung", 0) >= 2 or payload.get("metabolism_rung", 0) >= 2:

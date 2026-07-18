@@ -1,0 +1,36 @@
+{
+  "schema": "sg-cross-domain-auth-upgrade-acceptance-v1",
+  "generated_at": "2026-07-18T10:40:34.779707+00:00",
+  "scope": "CROSS_DOMAIN_AUTH_v1.1_SG_UPGRADE",
+  "verdict": "PASS_SCOPED_CHANGE",
+  "tests": {
+    "unit": "16/16 PASS",
+    "automation_governance": "PASS",
+    "automation_surface_audit": "PASS_WITH_EXISTING_WARNINGS",
+    "lints": "PASS"
+  },
+  "live_probe": {
+    "status": "WARN",
+    "tier_0_public": "11/11 PASS",
+    "surface_warnings": 0,
+    "hard_failures": [],
+    "auth_health": {
+      "status": "PASS",
+      "url": "https://ldfruywifqnfpwsfgmdl.supabase.co/auth/v1/health",
+      "http": 200,
+      "error": null
+    },
+    "profiles_table": {
+      "status": "WARN",
+      "http": 404,
+      "reason": "profiles table not migrated yet"
+    }
+  },
+  "external_pending": [
+    "portfolio_spine profiles table migration in venture Phase 1",
+    "LS-075 shared loop_registry last_fired_at upsert",
+    "founder decisions remain pending explicit lock before venture Phase 1"
+  ],
+  "closed_loop": "Observe -> Detect -> Critique -> Repair -> Re-deploy -> Observe",
+  "secrets_recorded": false
+}
