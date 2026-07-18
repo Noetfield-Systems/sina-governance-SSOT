@@ -805,7 +805,7 @@
     },
     {
       "term": "Video Runway",
-      "meaning": "First Noetfield Runway vertical: brief to downloadable final video package in Result UI. Success = 3 completed Jobs."
+      "meaning": "Third initial Noetfield Runway vertical (Wave 4 plugin): brief/assets to playable downloadable video. Not first."
     },
     {
       "term": "Result UI",
@@ -818,6 +818,26 @@
     {
       "term": "VIDEO_RUNWAY_PROVEN",
       "meaning": "Terminal status when three Video Runway Jobs have downloadable final videos in Result UI."
+    },
+    {
+      "term": "Software Repair Runway",
+      "meaning": "First Noetfield Runway vertical and foundation lane: failing issue/CI to green candidate PR. Bootstraps Unified Motor without making the core Git-specific."
+    },
+    {
+      "term": "Research Runway",
+      "meaning": "Second initial Noetfield Runway vertical (Wave 3 plugin): question to cited downloadable decision-ready report."
+    },
+    {
+      "term": "FOUNDATION_VERTICAL_SLICE_BUILT",
+      "meaning": "Terminal status when Shared Unified Motor foundation submit/status/result flow works with mock/deterministic adapters and stack doctor."
+    },
+    {
+      "term": "GATEWAY_MODE",
+      "meaning": "Gateway runtime mode. live remains HOLD until five-check preflight PASSes."
+    },
+    {
+      "term": "runway doctor",
+      "meaning": "Stack health command for Gateway, Motor runtime, Prompt Compiler, job state, artifacts, model provider, and NOOS events."
     }
   ],
   "structural_allowlist": [

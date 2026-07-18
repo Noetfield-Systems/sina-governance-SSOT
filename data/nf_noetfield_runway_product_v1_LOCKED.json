@@ -3,48 +3,112 @@
   "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
   "status": "SG_ACCEPTED",
   "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "1.1.0",
   "product": "Noetfield Runway",
   "sell": "finished_result_in_ui",
   "not_the_product": [
     "Motor",
     "governance",
     "SG",
-    "chat_tokens"
+    "chat_tokens",
+    "Gateway"
   ],
-  "first_vertical": "Video Runway",
+  "product_baseline": {
+    "repo": "Noetfield-Systems/PRODUCT_CATEGORY",
+    "sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9"
+  },
+  "engine": "Unified Motor",
+  "engine_law": "Repair bootstraps foundation; core stays provider-neutral and artifact-neutral",
+  "first_vertical": "Software Repair",
+  "build_order": [
+    "Software Repair",
+    "Research",
+    "Video"
+  ],
+  "bootstrap_builders": {
+    "Software Repair": "Claude",
+    "Research": "GPT",
+    "Video": "Cursor"
+  },
   "flow": [
     "INPUT",
     "INTELLIGENCE",
     "EXECUTION",
     "RESULT"
   ],
+  "detailed_flow": [
+    "User input",
+    "Prompt Compiler",
+    "Plan",
+    "Model/Tool selection",
+    "Execution loop",
+    "Verification",
+    "Final result"
+  ],
   "success_criteria": {
-    "kind": "completed_jobs_with_downloadable_video",
-    "count": 3,
-    "surface": "Result UI"
+    "foundation": "FOUNDATION_VERTICAL_SLICE_BUILT",
+    "software_repair": "real_failing_fixture_to_green_candidate_pr",
+    "research": "cited_downloadable_report",
+    "video": "playable_downloadable_video"
   },
+  "first_success": "Job from UI or SinaGPT yields real green PR without manual GitHub dispatch",
   "pricing_model": "credits_per_completed_job",
+  "gateway": {
+    "role": "entry_control_surface",
+    "not_equal_to": "Unified Motor",
+    "gateway_mode_live": "HOLD_UNTIL_FIVE_CHECK_PREFLIGHT"
+  },
+  "models": {
+    "build_router_interfaces_now": true,
+    "wait_for_api_keys": false,
+    "first_live_provider": "DeepSeek_OR_Kimi_one_only",
+    "huggingface": "disabled_adapter_until_endpoint_chosen",
+    "secret_store_only": [
+      "DEEPSEEK_API_KEY",
+      "MOONSHOT_API_KEY",
+      "HF_TOKEN"
+    ]
+  },
   "stack_roles": {
     "Runway": "product",
-    "Motor": "shared_engine",
-    "Recipe": "stage_list",
-    "NOOS": "queue_health_retry",
-    "SG": "authority_bounds",
-    "SinaGPT": "cockpit"
+    "Unified Motor": "shared_engine",
+    "SourceA": "prompt_job_compiler",
+    "NOOS": "runtime_control_plane",
+    "SG": "canon_authority",
+    "SinaGPT": "founder_cockpit",
+    "Railway": "long_running_workers",
+    "Cloudflare": "ui_gateway_workflows_edge",
+    "Cheap models": "default_operational_intelligence",
+    "Claude/Cursor/Codex": "bootstrap_and_escalation_only"
   },
-  "deferred_verticals": [
-    "Research Runway",
-    "App Runway",
-    "Campaign Runway",
-    "Software Repair",
-    "Proposal Runway"
+  "required_stack_manifest": "noetfield.runway-stack.v1",
+  "required_doctor": "runway doctor",
+  "forbidden": [
+    "fourth_runway",
+    "new_lane",
+    "gpu_platform",
+    "three_live_model_providers",
+    "new_governance_framework",
+    "raw_github_dispatch_as_product",
+    "separate_engine_per_agent",
+    "gateway_mode_live_without_preflight",
+    "api_keys_in_chat_or_git",
+    "git_specific_motor_core"
+  ],
+  "waves": [
+    "SG_LOCK",
+    "SHARED_MOTOR_FOUNDATION",
+    "SOFTWARE_REPAIR_REAL_JOB",
+    "RESEARCH_PLUGIN",
+    "VIDEO_PLUGIN"
   ],
   "depends_on": [
     "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
     "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
-    "NF-ACTIVATION-CYCLE-V1"
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
   ],
   "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
-  "saved_at": "2026-07-18T02:29:06Z",
-  "base_head_before_commit": "b3c3cde356087e232fdc100724be9f4557a8480e"
+  "saved_at": "2026-07-18T03:26:42Z",
+  "base_head_before_commit": "671ce2c10b62d74b2c0bfeca3b398b00ec05629b"
 }

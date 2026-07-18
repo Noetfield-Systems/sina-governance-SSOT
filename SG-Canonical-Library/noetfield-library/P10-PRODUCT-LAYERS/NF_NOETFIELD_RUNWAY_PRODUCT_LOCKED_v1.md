@@ -1,16 +1,25 @@
 # NF-NOETFIELD-RUNWAY-PRODUCT-V1 — SG FINALIZATION PACKET
 
 **decision_id:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1`  
-**Status:** `SG_ACCEPTED` · `IMPLEMENTATION_AUTHORIZED` (Video Runway first vertical only)  
+**Status:** `SG_ACCEPTED` · `IMPLEMENTATION_AUTHORIZED` (Software Repair first; shared Unified Motor foundation)  
 **Authority:** Architecture Finalization Gate (product surface lock — does **not** reopen Unified Motor architecture)  
 **Tier:** P10-PRODUCT-LAYERS  
-**Version:** v1.0.0_locked_20260718  
+**Version:** v1.1.0_locked_20260718  
 **Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json`  
-**Depends on:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` · `NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1` · `NF-ACTIVATION-CYCLE-V1`  
-**proposed_by:** Founder + NOOS product lock  
-**sg_decision:** `SG_ACCEPTED` — sell finished results; Motor and governance are infrastructure, not the SKU
+**Product baseline (docs):** `Noetfield-Systems/PRODUCT_CATEGORY@b9ce619cb575f74800bb56776f3d9acb5e7ebac9`  
+**Depends on:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` · `NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1` · `NF-ACTIVATION-CYCLE-V1` · `NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1`  
+**proposed_by:** Founder + NOOS + PRODUCT_CATEGORY baseline + advisor upgrade  
+**sg_decision:** `SG_ACCEPTED` — sell finished results; one Unified Motor; build order Software Repair → Research → Video
 
 ---
+
+## Distinction (binding)
+
+```text
+Docs committed (PRODUCT_CATEGORY b9ce619)
+≠ Architecture canonicalized (this SG packet on main)
+≠ Runtime operational (Motor foundation + real Jobs)
+```
 
 ## One line
 
@@ -23,7 +32,8 @@ Noetfield builds **Runways** that start agents, models, and tools for a real job
 | product | Noetfield Runway |
 | buyer | Founder / creator / small team who wants a finished result, not a model chat |
 | input | Goal + required assets (brief, repo, question, product, issue) |
-| result | A finished deliverable in the UI (video, app, report, campaign pack, PR) |
+| result | A finished deliverable in the UI (PR, report, video, campaign pack, app) |
+| flow | `User input → Prompt Compiler → Plan → Model/Tool selection → Execution loop → Verification → Final result` |
 | time_to_result | Minutes to a few hours depending on runway |
 | providers | Models + real tools (research, video, code, deploy, search, edit) |
 | human_intervention | Only at review / revise / approve checkpoints |
@@ -33,73 +43,129 @@ Noetfield builds **Runways** that start agents, models, and tools for a real job
 
 | Piece | Job |
 |-------|-----|
-| **Runway** | What the user picks and gets a result from (**the product**) |
-| **Motor** | Shared engine: Prompt Compiler → routers → execution loop (**infrastructure**) |
+| **Runway** | User-facing result path (**the product**) |
+| **Unified Motor** | Shared engine for all Runways (**infrastructure**) |
 | **Recipe** | Technical stage list for one Runway |
-| **NOOS** | Queue, health, retry, continue |
-| **SG** | Authority bounds / laws |
-| **SinaGPT** | Cockpit to command and watch results |
+| **SourceA** | Prompt / Job Compiler |
+| **NOOS** | Runtime control plane: issues · queues · stalled jobs · retries · health |
+| **SG** | Canon and final authority |
+| **SinaGPT** | Founder cockpit to command and watch results |
+| **Railway** | Long-running services and workers (Motor runtime, Prompt Compiler) |
+| **Cloudflare** | UI · Gateway · Workflows · Queues · storage edge |
+| **Cheap models** | Normal operational intelligence (default) |
+| **Claude / Cursor / Codex** | Bootstrap builders + escalation / system-building workers only |
 
-## First vertical decision
-
-**First vertical = Video Runway.**
-
-| Runway | Real output | Verdict |
-|--------|-------------|---------|
-| Video Runway | Final video package | **BEST FIRST** |
-| Research Runway | Decision report | Later / fast technical proof |
-| App Runway | Working preview app | Too heavy as first slice |
-| Campaign Runway | Ads + landing pack | Second vertical after Video |
-| Software Repair | Fixed PR | Strong internal; weaker consumer ads |
-| Proposal Runway | Ready proposal | Later |
-
-### Video Runway path
+## Gateway ≠ Motor (binding)
 
 ```text
-Live UI → brief → Prompt Compiler → research → script → video provider → Result UI
+Gateway = entry / control surface
+Unified Motor = actual execution runtime
 ```
 
-Flow: `INPUT → INTELLIGENCE → EXECUTION → RESULT`
+Gateway today may dispatch checks and track simple records. That is **not** a complete Runway Job (`input → intelligence → execution → artifact`).
 
-### Success (product, not infra)
+**`GATEWAY_MODE=live` HOLD** until five preflight checks PASS (authenticated `/v1/health`, required secrets, one read action, one idempotent dry-run write, clean worker logs). Do not merge live-mode config PRs without that preflight.
+
+## Engine law
+
+Repair lane **bootstraps** the foundation, but the core must stay:
+
+- artifact-neutral  
+- provider-neutral  
+- **not** a Software-Repair-only engine  
+
+Core (shared):
 
 ```text
-3 completed Jobs with downloadable final video in the Result UI
+Runway Definition · Job Intake · Prompt Compiler · Model Router · Tool/Provider Router
+Execution State Machine · Retry/Repair Loop · Artifact Store · Result Delivery
+Cost/Runtime Tracking · NOOS Events · Railway-inclusive stack manifest · runway doctor
 ```
 
-**Not** success: receipts-only demos · selling Motor · selling a shop · generation count without a downloadable package.
+Runway-specific pieces are **adapters/plugins** only (GitHub/worktree/PR; search/citations/report; video provider/media/delivery).
 
-## Relation to prior locks (no reopen)
+## Three initial Runways (build order)
 
-| Prior lock | Relationship |
-|------------|----------------|
-| Unified Motor | Remains the shared engine under every Runway |
-| Higgsfield adapter | A replaceable video provider behind Video Runway — not a lane, not the product |
-| Circuit A | Infra proof (deterministic T0) — keeps Motor trustworthy |
-| Circuit B | Media/result Motor pilot — feeds Video Runway providers; **does not redefine the SKU** |
-| Activation cycle WIP=2 | Remains binding for infra proofs; Video Runway product build is the commercial vertical |
+| Order | Runway | Real result | Bootstrap builder (temporary) |
+|------:|--------|-------------|-------------------------------|
+| 1 | **Software Repair** | Issue/CI failure → green PR | Claude |
+| 2 | **Research** | Question → cited decision-ready report | GPT |
+| 3 | **Video** | Brief/assets → finished playable video | Cursor |
+
+```text
+Claude / GPT / Cursor = Bootstrap Builders (not permanent runtime owners)
+Unified Motor = Permanent runtime
+Cheap / cloud-hosted models = normal job intelligence
+Premium / Claude / Codex / Cursor = escalation or system build only
+```
+
+### Result contracts (Done)
+
+| Runway | Done means |
+|--------|------------|
+| Shared Motor foundation | UI/API Job → Motor → plan → router → execute → retry/repair → artifact → Result UI → cost/runtime → NOOS visibility |
+| Software Repair | Real failing issue/test → sandbox patch → original failure fixed → relevant tests pass → real PR URL (no auto-merge) |
+| Research | Real question → live research → cited report → downloadable result → citations resolve |
+| Video | Real brief/assets → script/storyboard → provider generation → playable video → preview + download |
+
+## Model providers (start)
+
+```text
+Build ModelRouter interfaces now
+Enable only one live cheap provider first (DeepSeek OR Kimi)
+Keep Hugging Face and others as disabled adapters until a concrete endpoint is chosen
+Do not wait for API keys to build foundation (mock + deterministic adapters)
+Never put keys in chat or repository — runtime secret store only
+```
+
+## Waves (authorized)
+
+0. **SG lock** — this packet (Software-Repair-first) lands on SG `main`  
+1. **Shared Motor foundation** — interfaces, state machine, stack manifest, `runway doctor`, mock flow; **no deploy**  
+2. **Software Repair real job** — failing fixture → green candidate PR  
+3. **Research plugin** — no new engine  
+4. **Video plugin** — no new engine; providers (Higgsfield / others) are adapters only  
 
 ## Forbidden this cycle
 
-- Selling governance / SG / “operating system” as the consumer SKU
-- Selling Motor as the product
-- First vertical = App Runway or multi-brand Campaign Runway
-- Chat-token pricing as the primary commercial model
-- Declaring Video Runway done without 3 downloadable Result-UI Jobs
+- Fourth Runway / new lane / GPU platform  
+- Three live model providers at once  
+- New governance framework  
+- Raw GitHub dispatch as the product experience  
+- Separate engine per agent/builder  
+- `GATEWAY_MODE=live` without the five-check preflight  
+- API keys in chat or git  
+- Selling Motor or governance as the SKU  
+- Designing Motor core as Git/PR-specific  
+
+## Relation to prior locks (no reopen)
+
+| Prior | Relationship |
+|-------|----------------|
+| Unified Motor architecture | Remains the shared engine — still must be **built** as runtime |
+| PRODUCT_CATEGORY `b9ce619` | Product baseline docs; this packet is the SG canonicalization |
+| Higgsfield adapter | Video-provider adapter later — not the product, not Wave 1 |
+| Circuit A/B | Infra proofs — keep; not the commercial Done criteria |
+| Activation cycle WIP=2 | Infra proofs remain; commercial build order is Repair → Research → Video |
+
+## First commercial / foundation success
+
+> First success is when Sina submits a Job from UI or SinaGPT and receives a **real green PR** without hand-dispatching GitHub Actions.
 
 ## SG answers
 
-1. **P0 preserved?** Yes — Author≠Subject; providers ≠ memory; founder DECIDE at review checkpoints.  
-2. **Conflict?** No — product surface over existing Motor; does not redefine Gateway or Resident Roles.  
-3. **Superseded?** None. Clarifies commercial surface relative to Circuit B (infra pilot ≠ product SKU).  
-4. **Authority?** SG for product lock; builders implement Video Runway UI + Job path; founder for public publish/pricing.  
-5. **Machine-safe?** Jobs under recipes; credits per completed Job; providers behind adapters.  
-6. **Founder-only?** Pricing numbers; public launch; irreversible publish.  
-7. **Evidence → P99?** Three completed Video Jobs with downloadable artifact refs.  
-8. **Rollback?** Disable Video Runway UI; Motor/adapters remain.  
+1. **P0 preserved?** Yes.  
+2. **Conflict?** No — product + build-order upgrade; Motor architecture not redesigned.  
+3. **Supersedes?** Video-first order in v1.0.0 of this packet / prior PR #22 title.  
+4. **Authority?** SG for canon; builders implement foundation; founder for merge/publish/pricing.  
+5. **Machine-safe?** Mock-first foundation; one cheap live provider later; secrets in runtime store.  
+6. **Founder-only?** Live Gateway flip; irreversible merge/publish; pricing.  
+7. **Evidence → P99?** Foundation vertical slice + Software Repair green PR proof.  
+8. **Rollback?** Disable Runway UI; keep Motor adapters; revert live Gateway.  
 
 ## non_goals
 
 - Reopening Unified Motor architecture  
-- Replacing Operating Brain Install (SourceA B2B) — separate SKU family  
-- Building App/Campaign Runways before Video success criteria  
+- Replacing Operating Brain Install (SourceA B2B)  
+- Building Research/Video-specific logic into Motor core  
+- Declaring runtime Done because docs/CI are green  

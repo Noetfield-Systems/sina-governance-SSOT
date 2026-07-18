@@ -86,11 +86,13 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 
 ## 2j. NOETFIELD RUNWAY PRODUCT (P10 — sell finished results)
 
-`P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` = **decision** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` (`SG_ACCEPTED`).
-**Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json` · **Commission:** `docs/dispatch/nf-video-runway-v1-first-vertical.md`
+`P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` = **decision** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.1 (`SG_ACCEPTED`).
+**Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json` · **Baseline:** `PRODUCT_CATEGORY@b9ce619`
+**Foundation commission:** `docs/dispatch/nf-software-repair-runway-v1-foundation.md`
 
-**Law:** Sell a finished result. Motor is infrastructure. Governance is not the product.
-**First vertical:** Video Runway. Success = 3 completed Jobs with downloadable final video in Result UI.
+**Law:** Sell a finished result. Motor is infrastructure. Gateway ≠ Motor. Governance is not the product.
+**Build order:** Software Repair → Research → Video. Shared Unified Motor; Repair bootstraps, core stays provider-neutral.
+**Hold:** `GATEWAY_MODE=live` until five-check preflight.
 
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
