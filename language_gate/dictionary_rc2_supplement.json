@@ -798,6 +798,26 @@
       "term": "Outcome Probe",
       "tag": "RC2_GAP_FILL",
       "meaning": "External measurement of engagement, conversion, or qualified demand after promotion."
+    },
+    {
+      "term": "Noetfield Runway",
+      "meaning": "Sellable product surface: user picks a Runway and gets a finished deliverable in the UI. Motor and governance are infrastructure under it."
+    },
+    {
+      "term": "Video Runway",
+      "meaning": "First Noetfield Runway vertical: brief to downloadable final video package in Result UI. Success = 3 completed Jobs."
+    },
+    {
+      "term": "Result UI",
+      "meaning": "User-facing surface that shows Job status and the downloadable finished deliverable."
+    },
+    {
+      "term": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+      "meaning": "SG product lock: sell finished results; first vertical Video Runway; credits per completed Job."
+    },
+    {
+      "term": "VIDEO_RUNWAY_PROVEN",
+      "meaning": "Terminal status when three Video Runway Jobs have downloadable final videos in Result UI."
     }
   ],
   "structural_allowlist": [
@@ -848,7 +868,10 @@
     "split",
     "supabase edge",
     "tamper",
-    "update linkedin"
+    "update linkedin",
+    "VIDEO_RUNWAY_PROVEN",
+    "IMPLEMENTATION_AUTHORIZED",
+    "SG_ACCEPTED"
   ],
   "alias_map": {},
   "code_alias": [

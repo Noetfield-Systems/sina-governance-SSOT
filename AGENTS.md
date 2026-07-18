@@ -37,6 +37,7 @@
 0d. **SinaGPT + Command Gateway v2 (LOCKED)** — `P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` before cockpit/API redesign
 
 0e. **Activation cycle + Higgsfield adapter (LOCKED)** — `docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` + `P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` before new lanes/roles/providers
+0f. **Noetfield Runway product (LOCKED)** — `P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` before selling Motor/governance or picking a first consumer vertical
 
 0. **CHESS v2.0 (full package)** — `P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` + templates + `SKILLS/SKILL_01`–`07` + `scripts/chess_pass_cli_v1.py`
 

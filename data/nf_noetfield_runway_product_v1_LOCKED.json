@@ -1,0 +1,50 @@
+{
+  "schema": "nf_noetfield_runway_product_v1",
+  "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "product": "Noetfield Runway",
+  "sell": "finished_result_in_ui",
+  "not_the_product": [
+    "Motor",
+    "governance",
+    "SG",
+    "chat_tokens"
+  ],
+  "first_vertical": "Video Runway",
+  "flow": [
+    "INPUT",
+    "INTELLIGENCE",
+    "EXECUTION",
+    "RESULT"
+  ],
+  "success_criteria": {
+    "kind": "completed_jobs_with_downloadable_video",
+    "count": 3,
+    "surface": "Result UI"
+  },
+  "pricing_model": "credits_per_completed_job",
+  "stack_roles": {
+    "Runway": "product",
+    "Motor": "shared_engine",
+    "Recipe": "stage_list",
+    "NOOS": "queue_health_retry",
+    "SG": "authority_bounds",
+    "SinaGPT": "cockpit"
+  },
+  "deferred_verticals": [
+    "Research Runway",
+    "App Runway",
+    "Campaign Runway",
+    "Software Repair",
+    "Proposal Runway"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+    "NF-ACTIVATION-CYCLE-V1"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+  "saved_at": "2026-07-18T02:29:06Z",
+  "base_head_before_commit": "b3c3cde356087e232fdc100724be9f4557a8480e"
+}
