@@ -1,10 +1,19 @@
-# Commission — Software Repair Runway plugin (after Video vertical)
+# Commission — Software Repair Runway (parallel initial Runway)
 
-**commission_id:** `NF-SOFTWARE-REPAIR-RUNWAY-V1-PLUGIN`
-**Status:** `SPECIFIED` · build after active Video vertical
-**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.2
+**commission_id:** `NF-SOFTWARE-REPAIR-RUNWAY-V1`
+**Status:** `IMPLEMENTATION_AUTHORIZED` · may build in parallel with Video and Research
+**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.3
 **Bootstrap builder:** Claude
+**Concurrency:** one Job ↔ one isolated sandbox (git worktree)
 
-Plugin only; no new engine: GitHubIssueAdapter · GitWorktreeSandbox · CodingWorkerAdapter · TestRunner · PullRequestAdapter.
+## Objective
 
-Done: real failing issue/test → sandbox patch → relevant tests PASS → green candidate PR URL. No auto-merge.
+Plugin on shared Unified Motor: GitHubIssueAdapter · GitWorktreeSandbox · CodingWorkerAdapter · TestRunner · PullRequestAdapter.
+
+## Acceptance proof
+
+Real failing issue/test → isolated sandbox patch → relevant tests PASS → green candidate PR URL. No auto-merge. Must not mutate concurrent Video/Research sandboxes.
+
+## Final status
+
+`SOFTWARE_REPAIR_VERTICAL_SLICE_BUILT` or `SOFTWARE_REPAIR_BLOCKED_WITH_EXACT_CAUSE`

@@ -1,15 +1,13 @@
-# Commission — Video Runway v1 (active first vertical)
+# Commission — Video Runway v1 (parallel initial Runway)
 
-**commission_id:** `NF-VIDEO-RUNWAY-V1-FIRST-VERTICAL`
-**Status:** `IMPLEMENTATION_AUTHORIZED` · active Cursor build; continue, do not restart
-**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.2
+**commission_id:** `NF-VIDEO-RUNWAY-V1`
+**Status:** `IMPLEMENTATION_AUTHORIZED` · Cursor bootstrap may continue in parallel with other Runways
+**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.3
 **Product baseline:** `PRODUCT_CATEGORY@b9ce619`
 **Bootstrap builder:** Cursor
-**Target:** Video Runway Result UI + provider-neutral shared Motor interfaces
+**Concurrency:** one Job ↔ one isolated sandbox; may run beside Repair/Research Jobs
 
 ## Objective
-
-Continue the current video-generation build and close one complete product path:
 
 ```text
 Live UI → brief/assets → Prompt Compiler → script/storyboard
@@ -18,23 +16,11 @@ Live UI → brief/assets → Prompt Compiler → script/storyboard
 
 ## Shared-foundation requirement
 
-Video may bootstrap the interfaces needed now, but Motor core must stay artifact/provider-neutral:
-
-`RunwayDefinition` · `MotorJob` · `PromptCompiler` · `ModelRouter` · `ProviderAdapter` · execution state machine · artifact/result interfaces · NOOS events · stack manifest · `runway doctor`.
-
-Do not wait for new model API keys. Existing Higgsfield access stays behind `VideoProviderAdapter`.
+Video may use shared Motor interfaces. Core must stay provider-neutral and concurrency-capable. Do not claim exclusive Motor ownership.
 
 ## Acceptance proof
 
-Real brief/assets → real provider generation → verified media → playable preview + download in Result UI → cost/runtime recorded → NOOS sees state.
-
-## Forbidden
-
-- Restarting or redirecting Cursor's active Video work
-- Video/Higgsfield assumptions in Unified Motor core
-- `GATEWAY_MODE=live` without five-check preflight
-- Declaring done from generation receipt without Result UI delivery
-- Deploying from this commission without separate authority
+Real brief/assets → generation → verified media → Result UI preview/download → cost/runtime → NOOS state. Concurrent Jobs must not share this Job's sandbox.
 
 ## Final status
 
