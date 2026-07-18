@@ -27,7 +27,7 @@ class AuthSurfaceProbeTests(unittest.TestCase):
     def test_matrix_loads(self) -> None:
         matrix = load_matrix()
         self.assertEqual(matrix["schema"], "auth_surface_matrix_v1")
-        self.assertEqual(matrix["version"], "1.1.0")
+        self.assertEqual(matrix["version"], "1.1.1")
         self.assertIn("tier_0_public", matrix["tiers"])
 
     def test_is_auth_redirect(self) -> None:
@@ -105,6 +105,34 @@ class AuthSurfaceProbeTests(unittest.TestCase):
         self.assertEqual(result["http"], 302)
         self.assertEqual(result["location"], "/sign-in")
 
+    def test_http_probe_extracts_next_client_redirect(self) -> None:
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self) -> None:
+                body = (
+                    '<html><head><meta id="__next-page-redirect" http-equiv="refresh" '
+                    'content="1;url=/auth/sign-in?next=/private"/></head></html>'
+                ).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, *_args: object) -> None:
+                pass
+
+        server = HTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            result = http_probe(f"http://127.0.0.1:{server.server_port}/private")
+        finally:
+            server.shutdown()
+            thread.join(timeout=2)
+            server.server_close()
+        self.assertEqual(result["http"], 200)
+        self.assertEqual(result["client_redirect"], "/auth/sign-in?next=/private")
+
     def test_tier1_follows_one_canonical_redirect(self) -> None:
         spec = {"id": "register", "url": "https://example.com/register", "expect_http": [200, 302]}
         with patch(
@@ -129,6 +157,41 @@ class AuthSurfaceProbeTests(unittest.TestCase):
         with patch("verify_auth_surfaces_e2e_v1.http_probe", return_value={"http": 200}):
             row = check_surface(spec, tier="tier_2_gated")
         self.assertEqual(row["status"], "WARN")
+
+    def test_tier2_live_passes_next_client_auth_redirect(self) -> None:
+        spec = {
+            "id": "gate",
+            "url": "https://example.com/gated",
+            "implementation": "live",
+            "expect_when_gated": [401, 302, 307],
+        }
+        with patch(
+            "verify_auth_surfaces_e2e_v1.http_probe",
+            side_effect=[
+                {"http": 307, "location": "/en/gated"},
+                {"http": 200, "client_redirect": "/auth/sign-in?next=/gated"},
+            ],
+        ):
+            row = check_surface(spec, tier="tier_2_gated")
+        self.assertEqual(row["status"], "PASS")
+        self.assertEqual(row["auth_redirect"], "/auth/sign-in?next=/gated")
+
+    def test_tier2_locale_redirect_is_not_auth_proof(self) -> None:
+        spec = {
+            "id": "gate",
+            "url": "https://example.com/gated",
+            "implementation": "live",
+            "expect_when_gated": [401, 302, 307],
+        }
+        with patch(
+            "verify_auth_surfaces_e2e_v1.http_probe",
+            side_effect=[
+                {"http": 307, "location": "/en/gated"},
+                {"http": 200, "client_redirect": None},
+            ],
+        ):
+            row = check_surface(spec, tier="tier_2_gated")
+        self.assertEqual(row["status"], "FAIL")
 
     def test_tier2_live_fails_on_public_200(self) -> None:
         spec = {

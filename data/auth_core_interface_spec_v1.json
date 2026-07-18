@@ -1,13 +1,29 @@
 {
   "schema": "auth_core_interface_spec_v1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-08T07:00:00Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-18T11:15:00Z",
   "authority": "SG (SSSOT)",
   "package_name": "@noetfield/auth-core",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
-    "supabase_project": "portfolio_spine",
-    "supabase_ref": "ldfruywifqnfpwsfgmdl"
+    "strategy": "venture_scoped_supabase_projects",
+    "venture_project_map": {
+      "sourcea": {
+        "project": "portfolio_spine",
+        "supabase_ref": "ldfruywifqnfpwsfgmdl",
+        "profile_table": "profiles"
+      },
+      "noetfield": {
+        "project": "noetfield",
+        "supabase_ref": "tkgpapowwplupyekpivy"
+      },
+      "trustfield": {
+        "project": "noetfield",
+        "supabase_ref": "tkgpapowwplupyekpivy",
+        "profile_table": "trustfield_profiles"
+      }
+    },
+    "cross_project_rule": "async events only; no cross-project joins"
   },
   "exports": {
     "createBrowserClient": "@supabase/ssr browser adapter",
@@ -42,17 +58,17 @@
     "http://localhost:3000/auth/callback"
   ],
   "profiles_schema": {
-    "table": "public.profiles",
-    "columns": [
-      "id",
-      "venture",
-      "role",
-      "created_at"
-    ],
-    "venture_check": [
-      "sourcea",
-      "noetfield",
-      "trustfield"
-    ]
+    "portfolio_spine": {
+      "table": "public.profiles",
+      "ventures": [
+        "sourcea"
+      ]
+    },
+    "noetfield": {
+      "table": "public.trustfield_profiles",
+      "ventures": [
+        "trustfield"
+      ]
+    }
   }
 }
