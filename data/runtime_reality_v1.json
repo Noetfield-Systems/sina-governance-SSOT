@@ -68,7 +68,7 @@
   "sg_v2_state": {
     "SG_V2_IMPLEMENTATION": "READY_FOR_REVIEW",
     "SG_V2_OFFLINE_PROOFS": "35_PASS",
-    "SG_V2_LIVE_SHADOW": "NOT_DEPLOYED",
+    "SG_V2_LIVE_SHADOW": "WORKER_DEPLOYED_WEBHOOK_DISABLED",
     "SG_V2_LIVE_CANARY_PROOFS": "NOT_RUN",
     "SG_RUNTIME": "NOT_COMMISSIONED",
     "SG_ENFORCEMENT": "NOT_ENABLED",
@@ -83,14 +83,17 @@
     "merge_queues_read_permission": false
   },
   "key_custody": {
-    "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY",
+    "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY_STILL_ACTIVE",
     "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
-    "SG_KEY_CUSTODY": "BOOTSTRAP_LOCAL",
-    "SG_COMMISSIONING_KEY_CUSTODY": "NOT_PROVEN",
+    "SG_KEY_CUSTODY": "KEY2_IN_VERIFIER_ACCOUNT_KEY1_PENDING_REVOKE",
+    "SG_COMMISSIONING_KEY_CUSTODY": "IMPORTED_VERIFIER_ACCOUNT",
     "SG_COMMISSIONING_ELIGIBLE": false,
     "SG_COMMISSIONING_KEY_2_CUSTODY": "NOT_ESTABLISHED",
     "SG_BOOTSTRAP_KEY_1_REVOKED": false,
-    "custody_reason": "Local file mode 0600 does not establish independent SG custody; general founder/Cursor/local-agent execution identity may access the file."
+    "custody_reason": "Local file mode 0600 does not establish independent SG custody; general founder/Cursor/local-agent execution identity may access the file.",
+    "SG_COMMISSIONING_KEY_2_PUBLIC_FINGERPRINT_SHA256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+    "custody_cloudflare_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "custody_worker": "noetfield-sg-authority-v2-shadow"
   },
   "legacy_app": "PRESERVED_NOT_AUTHORITY",
   "implementation_refs": {
