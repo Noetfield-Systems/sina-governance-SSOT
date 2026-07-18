@@ -1,32 +1,33 @@
 # Dispatch — Noetfield Runway product lock (all repos)
 
-**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.2
+**Authority:** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.3
 **Product baseline:** `PRODUCT_CATEGORY@b9ce619`
-**Active order:** Video → Software Repair → Research
+**Execution model:** **parallel** — Video · Software Repair · Research together
 
 ## One line
 
-Sell finished results. One Unified Motor. Gateway ≠ Motor. Governance is not the product.
+Sell finished results. One Unified Motor. Parallel isolated sandboxes. Gateway ≠ Motor.
 
 ## Current instruction
 
-Cursor is actively building video generation. Continue that work; do not restart or redirect it. Video-specific work remains behind adapters; shared Motor interfaces remain provider-neutral.
+Do not serialize Runways into first/second/third queues. Bootstrap builders may work concurrently. Motor/NOOS must manage one-Job-one-sandbox isolation and learn from concurrency receipts.
 
 | Repo | Action |
 |------|--------|
-| sina-governance-SSOT | Canonical Video-first product lock |
+| sina-governance-SSOT | Canonical parallel Runway lock |
 | PRODUCT_CATEGORY | Product baseline docs at `b9ce619` |
-| noetfeld-OS | Queue/health/retry for Motor Jobs |
-| SourceA | Prompt/Job Compiler |
-| builders / sandbox | Active Video Result path + shared neutral interfaces |
-| Railway | Motor runtime + Prompt Compiler in stack manifest |
+| noetfeld-OS | Concurrent Job health / queue / stall / retry visibility |
+| SourceA | Prompt/Job Compiler for parallel Jobs |
+| builders / sandbox | Parallel Sandbox Manager + three Runway plugins |
+| Railway | Motor runtime workers sized for concurrent Jobs |
 | Cloudflare | UI · Gateway · Workflows · edge |
 
 ## Hold
 
 - `GATEWAY_MODE=live` until five-check preflight
-- No fourth Runway / no keys in chat / no separate engines per builder
+- No shared mutable sandbox across Jobs
+- No keys in chat / no separate engines per builder
 
-## First success
+## First system success
 
-Job from UI or SinaGPT → playable and downloadable final video without manual intermediate dispatch.
+Two concurrent isolated sandboxed Jobs complete independently with NOOS/UI visibility.

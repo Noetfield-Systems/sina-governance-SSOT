@@ -801,11 +801,11 @@
     },
     {
       "term": "Noetfield Runway",
-      "meaning": "Sellable product surface: user picks a Runway and gets a finished deliverable in the UI. Motor and governance are infrastructure under it."
+      "meaning": "Sellable product surface: parallel Runways deliver finished UI results; Motor manages concurrent isolated sandboxes."
     },
     {
       "term": "Video Runway",
-      "meaning": "Active first Noetfield Runway vertical: brief/assets to playable downloadable video. Cursor bootstrap build continues."
+      "meaning": "Initial Noetfield Runway (parallel): brief/assets to playable downloadable video. May run beside Repair/Research."
     },
     {
       "term": "Result UI",
@@ -813,7 +813,7 @@
     },
     {
       "term": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
-      "meaning": "SG product lock: sell finished results; first vertical Video Runway; credits per completed Job."
+      "meaning": "SG product lock: sell finished results; parallel Video/Software Repair/Research; credits per completed Job; Gateway \u2260 Motor."
     },
     {
       "term": "VIDEO_RUNWAY_PROVEN",
@@ -821,11 +821,11 @@
     },
     {
       "term": "Software Repair Runway",
-      "meaning": "Second initial Noetfield Runway plugin: failing issue/CI to green candidate PR. Reuses Unified Motor; not the active first build."
+      "meaning": "Initial Noetfield Runway (parallel): failing issue/CI to green candidate PR in an isolated sandbox."
     },
     {
       "term": "Research Runway",
-      "meaning": "Third initial Noetfield Runway plugin: question to cited downloadable decision-ready report."
+      "meaning": "Initial Noetfield Runway (parallel): question to cited downloadable report."
     },
     {
       "term": "FOUNDATION_VERTICAL_SLICE_BUILT",
@@ -838,6 +838,14 @@
     {
       "term": "runway doctor",
       "meaning": "Stack health command for Gateway, Motor runtime, Prompt Compiler, job state, artifacts, model provider, and NOOS events."
+    },
+    {
+      "term": "Parallel Sandbox Manager",
+      "meaning": "Motor capability: one Job \u2194 one isolated sandbox; concurrent Jobs without cross-contamination; NOOS visibility; create/run/destroy with leak detection."
+    },
+    {
+      "term": "PARALLEL_SANDBOXES_PROVEN",
+      "meaning": "Terminal status when \u22652 concurrent Jobs complete in separate sandboxes with independent results and no shared mutable state."
     }
   ],
   "structural_allowlist": [
