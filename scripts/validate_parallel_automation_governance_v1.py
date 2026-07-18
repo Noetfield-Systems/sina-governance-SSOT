@@ -77,12 +77,20 @@ def main() -> int:
             if not wf_path.is_file() and m.get("repo") == "sina-governance-ssot":
                 errors.append(f"{mid}: workflow missing {wf_path}")
 
-    if WORKFLOWS.is_dir():
-        for wf_file in WORKFLOWS.glob("*.yml"):
+    workflow_files = (
+        sorted((*WORKFLOWS.glob("*.yml"), *WORKFLOWS.glob("*.yaml")))
+        if WORKFLOWS.is_dir()
+        else []
+    )
+    if workflow_files:
+        for wf_file in workflow_files:
             rel = str(wf_file.relative_to(ROOT))
-            registered = any(m.get("workflow_file") == rel for m in motors)
-            if not registered:
-                errors.append(f"unregistered workflow: {rel}")
+            registrations = [m for m in motors if m.get("workflow_file") == rel]
+            if len(registrations) != 1:
+                errors.append(
+                    f"workflow must have exactly one registry entry: {rel} "
+                    f"(found {len(registrations)})"
+                )
 
     agent_ids: set[str] = set()
     for a in agents:
@@ -142,7 +150,7 @@ def main() -> int:
                 "motor_count": len(motors),
                 "agent_lane_count": len(agents),
                 "task_cell_count": len(task_owners),
-                "workflow_files": len(list(WORKFLOWS.glob("*.yml"))) if WORKFLOWS.is_dir() else 0,
+                "workflow_files": len(workflow_files),
             },
             indent=2,
         )

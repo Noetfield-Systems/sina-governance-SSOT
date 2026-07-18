@@ -1,7 +1,7 @@
 {
  "schema": "github_automation_registry_v1",
- "version": "1.1.0",
- "saved_at": "2026-07-08T13:11:47Z",
+ "version": "1.2.0",
+ "saved_at": "2026-07-18T08:30:59Z",
  "authority": "SG (SSSOT)",
  "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
  "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -307,6 +307,31 @@
    "status": "DECLARED",
    "phase": "phase0_shadow",
    "note": "P0 Dispatch Brain Runtime v1.1 shadow loop - compile+lint+route only, zero execution. Contract: p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md. Registered 2026-07-08 after 10/10 tests + shadow round-trip P0PGR-CYCLE-20260708T131111Z (bundle 72303b04fb900e71)."
+  },
+  {
+   "motor_id": "gh_actions_p0pgr_shadow_cycle_v1",
+   "kind": "github_actions",
+   "repo": "sina-governance-ssot",
+   "workflow_file": ".github/workflows/p0pgr-shadow-cycle-v1.yml",
+   "cadence": "founder-manual-only",
+   "lane": "p0pgr_shadow_observation",
+   "owns": [
+    "p0pgr_shadow_compile_lint_route"
+   ],
+   "must_not_own": [
+    "dispatch",
+    "deploy",
+    "external_send",
+    "merge",
+    "production_mutation",
+    "sg_authority_decision"
+   ],
+   "requires_secrets": [],
+   "receipt_path": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+   "conflicts_with": [],
+   "runtime_state": "FOUNDER_MANUAL_ONLY",
+   "security_repair_id": "SG-PRECOMMISSIONING-WORKFLOW-HYGIENE-01",
+   "note": "workflow_dispatch-only shadow compile/lint/route; validated p0-pgr/*.json input; zero execution."
   }
  ],
  "agent_lanes": [
@@ -475,7 +500,8 @@
   "independent_verifier_run": "sg_sssot_cursor",
   "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify",
   "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
-  "noos_gel_factory": "gh_actions_noos_factory_autorun_v1"
+  "noos_gel_factory": "gh_actions_noos_factory_autorun_v1",
+  "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1"
  },
  "duplication_forbidden": [
   {

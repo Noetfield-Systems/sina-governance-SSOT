@@ -10,7 +10,7 @@ on:
     inputs:
       packet:
         description: "Packet path to cycle (default: example packet)"
-        required: false
+        required: true
         default: "p0-pgr/EXAMPLE_PACKET_P0PGR-20260708-001.json"
   # schedule:                    # R3 — founder-gated, do not uncomment
   #   - cron: "0 9 * * *"        # without the R3 unlock receipt
@@ -23,9 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4, verified commit
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5, verified commit
         with:
           python-version: "3.12"
 
@@ -38,9 +40,15 @@ jobs:
       - name: Evidence read
         run: python scripts/p0pgr_evidence_reader_v1.py --stdout > /tmp/evidence.json && tail -5 /tmp/evidence.json
 
-      - name: Shadow cycle (compile + lint + route, zero execution)
+      - name: Validate packet path
+        env:
+          RAW_PACKET_INPUT: ${{ inputs.packet }}
         run: |
-          python scripts/p0pgr_cycle_v1.py --packet "${{ github.event.inputs.packet || 'p0-pgr/EXAMPLE_PACKET_P0PGR-20260708-001.json' }}" | tee /tmp/cycle_result.json
+          packet_path="$(python scripts/validate_p0pgr_packet_path_v1.py "$RAW_PACKET_INPUT")"
+          printf 'P0PGR_PACKET_PATH=%s\n' "$packet_path" >> "$GITHUB_ENV"
+
+      - name: Shadow cycle (compile + lint + route, zero execution)
+        run: python scripts/p0pgr_cycle_v1.py --packet "$P0PGR_PACKET_PATH" | tee /tmp/cycle_result.json
 
       - name: Independent receipt validation (never trust the cycle's own claim)
         run: |
@@ -56,7 +64,7 @@ jobs:
           EOF
 
       - name: Upload receipts as run artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, verified commit
         with:
           name: p0pgr-cycle-receipts-${{ github.run_id }}
           path: |
