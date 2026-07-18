@@ -1,8 +1,8 @@
 {
   "state_type": "sg_candidate_app_state_v1",
   "updated_at_utc": "2026-07-18T10:00:15.067686+00:00",
-  "SG_CANDIDATE_APP": "CREATION_PENDING_FOUNDER_INTERACTION",
-  "SG_CANDIDATE_IDENTITY": "NOT_PROVEN",
+  "SG_CANDIDATE_APP": "CREATED",
+  "SG_CANDIDATE_IDENTITY": "PROVEN",
   "SG_RUNTIME": "NOT_COMMISSIONED",
   "SG_ENFORCEMENT": "NOT_ENABLED",
   "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD",
@@ -41,5 +41,10 @@
     "HOLD removal",
     "secret rotation outside candidate SG custody setup",
     "legacy App revocation"
-  ]
+  ],
+  "app_id": 4330805,
+  "app_slug": "noetfield-sg-authority",
+  "installation_id": 147378007,
+  "proven_at_utc": "2026-07-18T10:05:59.239564+00:00",
+  "latest_proof_receipt": "identity_proof_20260718T100559Z.json"
 }
