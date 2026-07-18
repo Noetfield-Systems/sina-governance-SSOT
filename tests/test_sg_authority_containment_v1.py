@@ -22,7 +22,7 @@ class SGAuthorityContainmentTests(unittest.TestCase):
         self.assertEqual(self.reality["authority"]["autonomous_production_mutations"], "HOLD")
         self.assertIn(
             self.reality["authority"]["system_status"],
-            {"SCOPED_LIVE_T0_AUTHORIZED", "LIVE_WIRED_T0", "COMMISSIONED_T0_PROVEN"},
+            {"BLOCKED_NOT_COMMISSIONED", "SCOPED_LIVE_T0_AUTHORIZED", "LIVE_WIRED_T0", "COMMISSIONED_T0_PROVEN"},
         )
         self.assertIn(
             self.reality["sg"]["runtime_status"],
@@ -41,7 +41,7 @@ class SGAuthorityContainmentTests(unittest.TestCase):
         else:
             self.assertFalse(self.reality["unified_motor"]["active"])
         directive = self.reality["commissioning_directive"]
-        self.assertEqual(directive["unified_motor_runtime"], "COMMISSIONED_T0")
+        self.assertIn(directive["unified_motor_runtime"], {"NOT_COMMISSIONED", "COMMISSIONED_T0"})
         self.assertFalse(directive["fully_commissioned_claim"])
         reasons = promotion_gate.runtime_authority_refusal_reasons()
         self.assertTrue(reasons)

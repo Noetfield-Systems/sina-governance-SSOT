@@ -1,9 +1,9 @@
 # Runbook — SG Authority v2 commissioning
 
 **Decision:** `NF-SG-AUTHORITY-IDENTITY-V2`  
-**Current state:** `SG_V2_SHADOW=LANDED` (PR #28) · `SYSTEM_STATUS=SCOPED_LIVE_T0_AUTHORIZED` · `SG_RUNTIME=NOT_COMMISSIONED` until live deploy evidence
+**Current state:** `SG_V2_IMPLEMENTATION=READY_FOR_REVIEW` · `SG_V2_OFFLINE_PROOFS=35_PASS` · `SG_V2_LIVE_SHADOW=NOT_DEPLOYED` · `SG_V2_LIVE_CANARY_PROOFS=NOT_RUN` · `SG_RUNTIME=NOT_COMMISSIONED` · `SG_ENFORCEMENT=NOT_ENABLED` · `SG_KEY_CUSTODY=BOOTSTRAP_LOCAL` · `SG_COMMISSIONING_KEY_CUSTODY=NOT_PROVEN` · `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD`
 
-Shadow worker landed at `workers/sg-authority-v2-shadow/` (merge commit `898d67e5ca9eab9ae6161658cfdef3b2c48e6360`). Production worker path prepared at `workers/sg-authority-v2/` (`noetfield-sg-authority-v2`, App `4330805`, installation `147378007`). Scoped live T0 commissioning authorized; `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains. Do not claim `FULLY_COMMISSIONED`.
+Shadow worker landed at `workers/sg-authority-v2-shadow/` (merge commit `898d67e5ca9eab9ae6161658cfdef3b2c48e6360`). Production worker path prepared at `workers/sg-authority-v2/` (`noetfield-sg-authority-v2`, App `4330805`, installation `147378007`). Offline implementation and offline proofs are complete (candidate). Live shadow is NOT deployed and no live SG deployment is authorized before the SG_COMMISSIONING_KEY_2 custody gate passes. `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains. Do not claim `LIVE_WIRED_T0`, `SHADOW COMPLETE`, or `FULLY_COMMISSIONED`.
 
 ## A. Containment
 
