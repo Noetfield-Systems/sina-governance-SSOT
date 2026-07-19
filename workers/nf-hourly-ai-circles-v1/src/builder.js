@@ -69,14 +69,18 @@ async function fetchVerifierFeedback(env) {
 }
 
 async function snapshot(token, owner, repo, env) {
-  const [metadata, commits, issues, pulls, tree, verifierFeedback] = await Promise.all([
+  const [metadata, commits, issues, pulls, verifierFeedback] = await Promise.all([
     github(token, `/repos/${owner}/${repo}`),
     github(token, `/repos/${owner}/${repo}/commits?per_page=8`),
     github(token, `/repos/${owner}/${repo}/issues?state=open&per_page=15&sort=updated`),
     github(token, `/repos/${owner}/${repo}/pulls?state=open&per_page=15&sort=updated`),
-    github(token, `/repos/${owner}/${repo}/git/trees/main?recursive=1`),
     fetchVerifierFeedback(env),
   ]);
+  const defaultBranch = metadata.default_branch || "main";
+  const tree = await github(
+    token,
+    `/repos/${owner}/${repo}/git/trees/${encodeURIComponent(defaultBranch)}?recursive=1`,
+  );
   const openPrs = pulls.map((item) => ({
     number: item.number,
     title: item.title,
@@ -86,7 +90,7 @@ async function snapshot(token, owner, repo, env) {
   return {
     repo: metadata.full_name,
     description: metadata.description,
-    default_branch: metadata.default_branch,
+    default_branch: defaultBranch,
     pushed_at: metadata.pushed_at,
     recent_commits: commits.map((item) => ({
       sha: item.sha.slice(0, 12),
