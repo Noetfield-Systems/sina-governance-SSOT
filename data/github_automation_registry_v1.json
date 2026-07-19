@@ -357,9 +357,10 @@
       "trigger_host": "cloud",
       "last_fired_at_target": "noos_loop_registry",
       "deadman": "independent_cf_deadman_path",
-      "note": "NOT_COMMISSIONED under HOLD. Prior LIVE_WIRED_T0 claim retracted; staging gateway stood down (worker deleted). SG live shadow NOT deployed; key-2 custody NOT_PROVEN. See NF_SG_V2_STANDDOWN_CORRECTION_RECEIPT_v1.json.",
-      "commission_status": "NOT_COMMISSIONED",
-      "live_url": null
+      "note": "Staging deployed under five-gate plan; HOLD preserved; key2 ESTABLISHED still pending.",
+      "commission_status": "STAGING_COMMISSIONED",
+      "live_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+      "health_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
     },
     {
       "motor_id": "cf_nf_commissioning_specialist_tick_v1",

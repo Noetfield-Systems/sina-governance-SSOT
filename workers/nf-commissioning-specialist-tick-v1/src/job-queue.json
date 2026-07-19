@@ -13,6 +13,16 @@
   "progress_kv_key": "job_queue_progress",
   "jobs": [
     {
+      "id": "proof_b_founder_reasoning_ingest",
+      "class": "execute",
+      "proof": "B",
+      "machine_safe": true,
+      "acceptance": "staging POST /v1/reasoning-results resumes parked WAITING_FOR_FOUNDER_REASONING job",
+      "runway_action": "score_founder_reasoning_ingest_live",
+      "dispatch": null,
+      "live_probe": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
+    },
+    {
       "id": "proof_a_native_run",
       "class": "execute",
       "proof": "A",

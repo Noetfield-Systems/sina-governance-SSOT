@@ -1,0 +1,23 @@
+{
+  "receipt_type": "living_system_48h_test_start_v1",
+  "captured_at": "2026-07-19T02:29:40Z",
+  "verdict": "STARTED",
+  "protocol": "docs/LIVING_SYSTEM_48H_TEST_v1.md",
+  "ends_after_hours": 48,
+  "loops": [
+    {
+      "loop_id": "nf-commissioning-specialist-tick-v1",
+      "health": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "cadence_minutes": 5
+    },
+    {
+      "loop_id": "nf-unified-motor-foundation-v1-staging",
+      "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
+      "cadence_minutes": 5,
+      "note": "health probe target; no cron yet \u2014 deadman will GET /health"
+    }
+  ],
+  "deadman": "noos-deadman-v1_or_specialist_progress_kv",
+  "hold": "HOLD",
+  "gate1_residual": "key2_not_established_until_key1_ui_revoke"
+}
