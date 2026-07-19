@@ -473,7 +473,12 @@ export async function runBuilderTick(env, meta = {}) {
       role_results: Object.fromEntries(
         Object.entries(circle.transcript).map(([name, result]) => [
           name,
-          { ok: result.ok, provider: result.provider, content: clip(result.content, 2400) },
+          {
+            ok: result.ok,
+            provider: result.provider,
+            content: clip(result.content, 2400),
+            errors: result.ok ? [] : (result.errors || []).slice(0, 8),
+          },
         ]),
       ),
       role_quorum: circle.quorum,
@@ -484,7 +489,9 @@ export async function runBuilderTick(env, meta = {}) {
       verifier_feedback: repoSnapshot.verifier_feedback,
       verdict: delivery?.kind === "draft_pr"
         ? "PASS_PRODUCTION_DRAFT_JOB"
-        : "PASS_NO_SAFE_PRODUCTION_ACTION",
+        : circle.quorum < Number(env.MIN_ROLE_QUORUM || 4)
+          ? "DEGRADED_MODEL_RUNTIME"
+          : "PASS_NO_SAFE_PRODUCTION_ACTION",
     };
     await persist(env, receipt);
     await releaseTickLease(env, receiptId);
