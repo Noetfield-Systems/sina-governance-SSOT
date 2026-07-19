@@ -1,8 +1,11 @@
 name: nf-sg-key2-custody-watch-v1
 
+# The RECURRING custody watch runs on Cloudflare cron (nf-sg-loop-tick-v1). This
+# GHA is a ONE-SHOT apply/PR job fired by that CF motor via repository_dispatch
+# (key2_custody_established) once bootstrap key1 stops authenticating.
 on:
-  schedule:
-    - cron: "7 * * * *"
+  repository_dispatch:
+    types: [key2_custody_established]
   workflow_dispatch:
 
 permissions:
