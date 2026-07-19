@@ -941,7 +941,7 @@
     },
     {
       "term": "future_runway_gate",
-      "meaning": "Gate from NF-RUNWAY-EXECUTION-ASSIGNMENT-V1: fourth Runway only after Video, Software Repair, and Research each complete one real Job."
+      "meaning": "Corrected gate: Data remains held until Software Repair and Research have real Jobs and Gallery cost-supply has qualified reuse proof."
     },
     {
       "term": "execution_queued",
@@ -1002,6 +1002,14 @@
     {
       "term": "Software Repair",
       "meaning": "Alias fragment for Software Repair Runway family."
+    },
+    {
+      "term": "Gallery Cost Supply",
+      "meaning": "Operational capability that reuses qualified assets before deterministic composition or paid AI-video generation; not a product Runway."
+    },
+    {
+      "term": "AI-video",
+      "meaning": "Media output whose paid generation cost is reduced by qualified Gallery asset reuse."
     }
   ],
   "structural_allowlist": [
