@@ -194,6 +194,24 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
   } catch {
     // The review comment is canonical; labels are optional routing metadata.
   }
+  // Closed-loop repair signal only — verifier never edits the PR.
+  if (!rendered.pass) {
+    try {
+      await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
+        method: "POST",
+        body: JSON.stringify({
+          body:
+            `## Independent repair request\n\n` +
+            `Exact head \`${pr.head.sha}\` requires a **new** \`ai-circle/*\` draft (do not push over this head).\n` +
+            `Builder circle must open a bounded repair draft addressing the findings above.\n` +
+            `HOLD preserved. Verifier cannot edit, approve, merge, or deploy.\n` +
+            `Receipt: \`${receiptId}\``,
+        }),
+      });
+    } catch {
+      // Review comment remains the canonical signal.
+    }
+  }
   return {
     pr_number: pr.number,
     pr_url: pr.html_url,
@@ -202,6 +220,7 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
     deterministic,
     provider_diversity: rendered.provider_diversity,
     model: model.normalized,
+    repair_requested: !rendered.pass,
   };
 }
 

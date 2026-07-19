@@ -10,7 +10,13 @@ import {
   runRole,
   secretMatches,
 } from "./common.js";
-import { safePath, validateAction } from "./policy.js";
+import {
+  buildDeterministicJobPlanArtifact,
+  dispatchRunwayJob,
+  pickRotatingJob,
+  resolveJob,
+} from "./jobs.js";
+import { normalizeAction, safePath, validateAction } from "./policy.js";
 
 const SCHEMA = "nf-hourly-builder-circle-v1";
 
@@ -30,6 +36,12 @@ async function snapshot(token, owner, repo) {
     github(token, `/repos/${owner}/${repo}/pulls?state=open&per_page=15&sort=updated`),
     github(token, `/repos/${owner}/${repo}/git/trees/main?recursive=1`),
   ]);
+  const openPrs = pulls.map((item) => ({
+    number: item.number,
+    title: item.title,
+    draft: item.draft,
+    head: item.head?.ref,
+  }));
   return {
     repo: metadata.full_name,
     description: metadata.description,
@@ -42,12 +54,14 @@ async function snapshot(token, owner, repo) {
     open_issues: issues
       .filter((item) => !item.pull_request)
       .map((item) => ({ number: item.number, title: item.title, labels: item.labels?.map((x) => x.name) })),
-    open_prs: pulls.map((item) => ({
-      number: item.number,
-      title: item.title,
-      draft: item.draft,
-      head: item.head?.ref,
-    })),
+    open_prs: openPrs,
+    open_ai_circle_prs: openPrs.filter((pr) => String(pr.head || "").startsWith("ai-circle/")),
+    job_catalog: [
+      "motor_job",
+      "commissioning_tick",
+      "repair_run",
+      "live_model_smoke",
+    ],
     candidate_paths: (tree.tree || [])
       .filter((item) => item.type === "blob" && safePath(item.path))
       .map((item) => item.path)
@@ -79,16 +93,18 @@ function rolePrompt(role) {
     "Rank portfolio value by ECQR. Preserve CAT_07 and Data HOLD. Do not package operations as product SKUs. " +
     "For media supply, prefer qualified gallery reuse, then deterministic composition, then paid generation only when required. " +
     "The output is assist-only under AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD. " +
-    "Never merge, deploy, alter authority/secrets/workflows/locked architecture, or claim ratification.";
+    "Never merge, deploy, alter authority/secrets/workflows/locked architecture, or claim ratification. " +
+    "Prefer REAL work: draft_pr with code+tests, or dispatch_job into NOETFIELD-RUNWAY. Prefer issue only when blocked from both.";
   const prompts = {
-    scout: `${common} Find one concrete repo problem or momentum opportunity. Return JSON only: {"target_path":string|null,"problem":string,"evidence":[string],"value":"revenue|risk|reliability|velocity","recommended_action":"draft_pr|issue|noop"}.`,
-    researcher: `${common} Independently investigate the supplied snapshot and scout claim. Seek contradictory evidence and expansion/revenue value. Return JSON only: {"facts":[string],"contradictions":[string],"search_next":[string],"recommendation":string}.`,
+    scout: `${common} Find one concrete repo problem or momentum opportunity. Return JSON only: {"target_path":string|null,"problem":string,"evidence":[string],"value":"revenue|risk|reliability|velocity","recommended_action":"draft_pr|dispatch_job|issue|noop","job_id":"motor_job|commissioning_tick|repair_run|live_model_smoke"|null}.`,
+    researcher: `${common} Independently investigate the supplied snapshot and scout claim. Seek contradictory evidence and expansion/revenue value. Return JSON only: {"facts":[string],"contradictions":[string],"search_next":[string],"recommendation":string,"prefer_job_id":string|null}.`,
     critic: `${common} Attack the proposal. Identify duplication, stale assumptions, protected-surface risk, and work that merely creates governance theater. Return JSON only: {"fatal":[string],"nonfatal":[string],"minimum_real_work":string,"verifier_checks":[string]}.`,
-    frugal: `${common} Act as the cheap/free-model divergence role. Find the smallest useful change with measurable proof. Return JSON only: {"different_view":string,"smaller_change":string,"proof":string}.`,
-    planner: `${common} Reconcile evidence without hiding disagreement. Select at most one safe target path already present in candidate_paths, or choose an issue. Return JSON only: {"action":"draft_pr|issue|noop","target_path":string|null,"title":string,"why":string,"acceptance":[string],"unresolved_objections":[string]}.`,
+    frugal: `${common} Act as the cheap/free-model divergence role. Find the smallest useful change with measurable proof. Return JSON only: {"different_view":string,"smaller_change":string,"proof":string,"prefer_dispatch_job":boolean}.`,
+    planner: `${common} Reconcile evidence without hiding disagreement. Prefer draft_pr on a safe candidate_paths target with tests, else dispatch_job from job_catalog, else issue. Return JSON only: {"action":"draft_pr|dispatch_job|issue|noop","job_id":"motor_job|commissioning_tick|repair_run|live_model_smoke"|null,"target_path":string|null,"title":string,"why":string,"acceptance":[string],"unresolved_objections":[string]}.`,
     implementer:
-      `${common} Produce one bounded action. If editing, replace no more than 3 safe files and include complete UTF-8 content. ` +
-      `Do not edit protected paths. Return JSON only: {"action":"draft_pr|issue|noop","title":string,"rationale":string,"issue_body":string,"changes":[{"path":string,"content":string}],"tests":[string]}.`,
+      `${common} Produce one bounded REAL action. Prefer draft_pr with complete UTF-8 file contents (max 3 safe files, include tests) OR dispatch_job with job_id. ` +
+      `Do not edit protected paths. Avoid noop/issue unless both draft_pr and dispatch_job are unsafe. ` +
+      `Return JSON only: {"action":"draft_pr|dispatch_job|issue|noop","job_id":string|null,"title":string,"rationale":string,"issue_body":string,"changes":[{"path":string,"content":string}],"tests":[string]}.`,
   };
   return prompts[role];
 }
@@ -152,23 +168,30 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
     "implementer",
     "openai",
     rolePrompt("implementer"),
-    JSON.stringify({ snapshot: repoSnapshot, transcript, selected_target: target }),
+    JSON.stringify({
+      snapshot: repoSnapshot,
+      transcript,
+      selected_target: target,
+      preference: "Prefer draft_pr or dispatch_job. Real plans and jobs over issues.",
+    }),
     3000,
   );
   const quorum = Object.values(transcript).filter((result) => result.ok).length;
   const providerDiversity = new Set(
     Object.values(transcript).filter((result) => result.ok).map((result) => result.provider),
   ).size;
+  const rawAction =
+    quorum >= Number(env.MIN_ROLE_QUORUM || 4) &&
+    providerDiversity >= Number(env.MIN_PROVIDER_DIVERSITY || 3)
+      ? parseModelJson(transcript.implementer.content)
+      : { action: "noop", rationale: "role_or_provider_diversity_quorum_not_met" };
   return {
     transcript,
     quorum,
     providerDiversity,
     target,
-    action:
-      quorum >= Number(env.MIN_ROLE_QUORUM || 4) &&
-      providerDiversity >= Number(env.MIN_PROVIDER_DIVERSITY || 3)
-      ? parseModelJson(transcript.implementer.content)
-      : { action: "noop", rationale: "role_or_provider_diversity_quorum_not_met" },
+    planner,
+    action: normalizeAction(rawAction, planner),
   };
 }
 
@@ -258,6 +281,107 @@ async function persist(env, receipt) {
   });
   await env.RECEIPTS.put("last_fired_at", receipt.at);
   await env.RECEIPTS.put("last_receipt", JSON.stringify(receipt));
+  if (receipt.delivery?.job_id) {
+    await env.RECEIPTS.put("last_job_id", receipt.delivery.job_id);
+  }
+}
+
+function preferJobId(action, planner, at) {
+  return (
+    resolveJob(action?.job_id)?.id ||
+    resolveJob(planner?.job_id)?.id ||
+    pickRotatingJob(at).id
+  );
+}
+
+async function deliverRealWork({
+  env,
+  token,
+  owner,
+  repo,
+  base,
+  action,
+  planner,
+  repoSnapshot,
+  receiptId,
+  at,
+}) {
+  const deliveries = [];
+  let primary = null;
+  let validated = validateAction(action);
+
+  // Prefer draft_pr when models supplied usable patches.
+  if (validated.ok && action.action === "draft_pr") {
+    primary = await createDraftPr(token, owner, repo, base, action, receiptId);
+    deliveries.push(primary);
+  } else if (validated.ok && action.action === "dispatch_job") {
+    const job = resolveJob(action.job_id);
+    primary = await dispatchRunwayJob(token, env, job, { at, receipt_id: receiptId });
+    deliveries.push(primary);
+  } else if (validated.ok && action.action === "issue") {
+    // Issues are last-resort; still fire a companion runway job for real work.
+    primary = await createIssue(token, owner, repo, action, receiptId);
+    deliveries.push(primary);
+    const companion = await dispatchRunwayJob(
+      token,
+      env,
+      preferJobId(action, planner, at),
+      { at, receipt_id: receiptId },
+    );
+    deliveries.push(companion);
+    primary = { ...primary, companion_job: companion };
+  }
+
+  // If models failed validation, force a real job + deterministic plan draft PR.
+  if (!primary || primary.kind === "noop" || primary.ok === false) {
+    const jobId = preferJobId(action, planner, at);
+    const job = resolveJob(jobId);
+    const dispatch = await dispatchRunwayJob(token, env, job, { at, receipt_id: receiptId });
+    deliveries.push(dispatch);
+    primary = dispatch.ok ? dispatch : primary;
+
+    const alreadyHasAiCirclePr = (repoSnapshot.open_ai_circle_prs || []).length > 0;
+    if (!alreadyHasAiCirclePr) {
+      const artifact = buildDeterministicJobPlanArtifact(
+        job,
+        receiptId,
+        clip(action?.rationale || planner?.why || validated.reason || "invalid_model_action", 400),
+      );
+      const artifactValidation = validateAction(artifact);
+      if (artifactValidation.ok) {
+        const draft = await createDraftPr(token, owner, repo, base, artifact, receiptId);
+        deliveries.push(draft);
+        if (!primary || primary.ok === false) primary = draft;
+        else primary = { ...primary, companion_draft_pr: draft };
+      }
+    }
+  } else if (action.action === "draft_pr") {
+    // Companion runway job keeps the closed loop moving even when a draft PR is opened.
+    const jobId = preferJobId(action, planner, at);
+    const companion = await dispatchRunwayJob(token, env, jobId, { at, receipt_id: receiptId });
+    deliveries.push(companion);
+    primary = { ...primary, companion_job: companion };
+  } else if (action.action === "dispatch_job" && (repoSnapshot.open_ai_circle_prs || []).length === 0) {
+    // Ensure verifier always has at least one ai-circle draft to criticize.
+    const job = resolveJob(action.job_id) || pickRotatingJob(at);
+    const artifact = buildDeterministicJobPlanArtifact(
+      job,
+      receiptId,
+      clip(action.rationale || planner?.why || "dispatch_job without open ai-circle PR", 400),
+    );
+    if (validateAction(artifact).ok) {
+      const draft = await createDraftPr(token, owner, repo, base, artifact, receiptId);
+      deliveries.push(draft);
+      primary = { ...primary, companion_draft_pr: draft };
+    }
+  }
+
+  if (!primary) {
+    primary = { kind: "noop", reason: validated.reason || action?.rationale || "no_safe_action" };
+    deliveries.push(primary);
+  }
+
+  return { primary, deliveries, validated };
 }
 
 export async function runBuilderTick(env, meta = {}) {
@@ -269,20 +393,24 @@ export async function runBuilderTick(env, meta = {}) {
     const token = await mintInstallationToken(env, "builder");
     const repoSnapshot = await snapshot(token, owner, repo);
     const circle = await runCircle(env, repoSnapshot, token, owner, repo);
-    const validated = validateAction(circle.action);
-    let delivery = { kind: "noop", reason: circle.action?.rationale || validated.reason || "no_action" };
-    if (validated.ok && circle.action.action === "issue") {
-      delivery = await createIssue(token, owner, repo, circle.action, receiptId);
-    } else if (validated.ok && circle.action.action === "draft_pr") {
-      delivery = await createDraftPr(
-        token,
-        owner,
-        repo,
-        repoSnapshot.default_branch,
-        circle.action,
-        receiptId,
-      );
-    }
+    const delivered = await deliverRealWork({
+      env,
+      token,
+      owner,
+      repo,
+      base: repoSnapshot.default_branch,
+      action: circle.action,
+      planner: circle.planner,
+      repoSnapshot,
+      receiptId,
+      at,
+    });
+    const delivery = delivered.primary;
+    const realWork =
+      delivery?.kind === "draft_pr" ||
+      delivery?.kind === "dispatch_job" ||
+      delivery?.companion_draft_pr ||
+      delivery?.companion_job?.ok;
     const receipt = {
       schema: SCHEMA,
       receipt_id: receiptId,
@@ -293,7 +421,11 @@ export async function runBuilderTick(env, meta = {}) {
       mode: "ASSIST_ONLY",
       hold: "HOLD",
       peer_deadman: peer,
-      snapshot: { repo: repoSnapshot.repo, pushed_at: repoSnapshot.pushed_at },
+      snapshot: {
+        repo: repoSnapshot.repo,
+        pushed_at: repoSnapshot.pushed_at,
+        open_ai_circle_prs: (repoSnapshot.open_ai_circle_prs || []).length,
+      },
       role_results: Object.fromEntries(
         Object.entries(circle.transcript).map(([name, result]) => [
           name,
@@ -302,11 +434,15 @@ export async function runBuilderTick(env, meta = {}) {
       ),
       role_quorum: circle.quorum,
       provider_diversity: circle.providerDiversity,
-      action_validation: validated,
+      planner: circle.planner,
+      action_validation: delivered.validated,
       delivery,
-      verdict: delivery.kind === "draft_pr" || delivery.kind === "issue"
+      deliveries: delivered.deliveries,
+      verdict: realWork
         ? "PASS_ASSIST_ONLY_DELIVERY"
-        : "PASS_NO_SAFE_ACTION",
+        : delivery?.kind === "issue"
+          ? "PASS_ASSIST_ONLY_DELIVERY"
+          : "PASS_NO_SAFE_ACTION",
     };
     await persist(env, receipt);
     return receipt;
@@ -348,16 +484,20 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/health") {
       const last = env.RECEIPTS ? await env.RECEIPTS.get("last_fired_at") : null;
+      const lastJob = env.RECEIPTS ? await env.RECEIPTS.get("last_job_id") : null;
       return json({
         ok: true,
         schema: `${SCHEMA}-health`,
         loop_id: env.LOOP_ID || SCHEMA,
         cron: "0 * * * *",
         last_fired_at: last,
+        last_job_id: lastJob,
         mode: "ASSIST_ONLY",
         hold: "HOLD",
         execution_runtime: "cloudflare_workflows",
         live_activation_authorized: String(env.LIVE_ACTIVATION || "") === "true",
+        real_jobs_wired: true,
+        job_catalog: ["motor_job", "commissioning_tick", "repair_run", "live_model_smoke"],
         model_keys_present: {
           deepseek: Boolean((env.DEEPSEEK_API_KEY || "").trim()),
           glm: Boolean((env.GLM_API_KEY || "").trim()),
@@ -387,6 +527,12 @@ export default {
       return json(raw ? JSON.parse(raw) : { ok: false, error: "no_receipt_yet" });
     }
     if (url.pathname === "/map") return json(circleMap);
+    if (url.pathname === "/jobs") {
+      return json({
+        schema: `${SCHEMA}-jobs`,
+        jobs: circleMap.job_catalog || [],
+      });
+    }
     return json({ ok: false, error: "not_found" }, 404);
   },
 };

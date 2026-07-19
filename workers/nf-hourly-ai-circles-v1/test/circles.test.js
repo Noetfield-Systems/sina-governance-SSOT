@@ -2,7 +2,17 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { resolveGithubIdentity } from "../src/common.js";
-import { deterministicReview, safePath, validateAction } from "../src/policy.js";
+import {
+  buildDeterministicJobPlanArtifact,
+  pickRotatingJob,
+  resolveJob,
+} from "../src/jobs.js";
+import {
+  deterministicReview,
+  normalizeAction,
+  safePath,
+  validateAction,
+} from "../src/policy.js";
 
 test("builder blocks authority, workflow, secret, and self-edit paths", () => {
   assert.equal(safePath("scripts/useful_fix.py"), true);
@@ -136,4 +146,34 @@ test("verifier passes a bounded tested patch with healthy checks", () => {
   );
   assert.equal(verdict.pass, true);
   assert.deepEqual(verdict.findings, []);
+});
+
+test("normalizeAction coerces changes-only payloads into draft_pr", () => {
+  const action = normalizeAction({
+    title: "fix",
+    changes: [{ path: "scripts/x.py", content: "print(1)\n" }],
+  });
+  assert.equal(action.action, "draft_pr");
+  assert.equal(validateAction(action).ok, true);
+});
+
+test("dispatch_job validates allowlisted runway jobs only", () => {
+  assert.equal(validateAction({ action: "dispatch_job", job_id: "motor_job" }).ok, true);
+  assert.equal(validateAction({ action: "dispatch_job", job_id: "merge_main" }).ok, false);
+  assert.equal(resolveJob("repair_run")?.workflow, "repair-run.yml");
+  assert.equal(pickRotatingJob("2026-07-19T02:00:00.000Z").id, "repair_run");
+  assert.equal(pickRotatingJob("2026-07-19T00:00:00.000Z").id, "motor_job");
+});
+
+test("deterministic job plan artifact is a bounded tested draft_pr", () => {
+  const artifact = buildDeterministicJobPlanArtifact(
+    resolveJob("motor_job"),
+    "receipt-test",
+    "wire real jobs",
+  );
+  const validated = validateAction(artifact);
+  assert.equal(validated.ok, true);
+  assert.equal(artifact.changes.length, 2);
+  assert.ok(artifact.changes.every((change) => safePath(change.path)));
+  assert.ok(artifact.changes.some((change) => change.path.startsWith("tests/")));
 });

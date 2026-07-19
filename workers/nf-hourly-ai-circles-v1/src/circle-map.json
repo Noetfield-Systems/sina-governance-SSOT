@@ -1,6 +1,6 @@
 {
   "schema": "nf.hourly-ai-circles.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "LIVE_ASSIST_ONLY_HOLD",
   "authority_mode": "ASSIST_ONLY_HOLD",
   "trigger_host": "cloud",
@@ -9,6 +9,36 @@
     "builder_health": "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health",
     "verifier_health": "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health"
   },
+  "job_catalog": [
+    {
+      "id": "motor_job",
+      "kind": "workflow_dispatch",
+      "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+      "workflow": "motor-job.yml",
+      "value_class": "REVENUE"
+    },
+    {
+      "id": "commissioning_tick",
+      "kind": "repository_dispatch",
+      "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+      "event_type": "commissioning_tick",
+      "value_class": "GUARD"
+    },
+    {
+      "id": "repair_run",
+      "kind": "workflow_dispatch",
+      "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+      "workflow": "repair-run.yml",
+      "value_class": "REVENUE"
+    },
+    {
+      "id": "live_model_smoke",
+      "kind": "workflow_dispatch",
+      "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+      "workflow": "live-model-smoke.yml",
+      "value_class": "GUARD"
+    }
+  ],
   "groups": {
     "builder_circle": {
       "worker": "nf-hourly-builder-circle-v1",
@@ -21,9 +51,14 @@
         { "id": "planner", "preferred_model": "gemini_flash_lite" },
         { "id": "implementer", "preferred_model": "gpt-5-mini" }
       ],
-      "maximum_external_action_per_tick": 1,
-      "allowed_outputs": ["issue", "draft_pr", "noop"],
+      "maximum_external_action_per_tick": 2,
+      "allowed_outputs": ["draft_pr", "dispatch_job", "issue", "noop"],
+      "preferred_outputs": ["draft_pr", "dispatch_job"],
       "forbidden_outputs": ["approve", "merge", "deploy", "authority_change", "secret_change"],
+      "deterministic_fallback": {
+        "on_invalid_model_action": ["dispatch_rotating_runway_job", "draft_job_plan_artifact_pr"],
+        "on_dispatch_without_ai_circle_pr": ["draft_job_plan_artifact_pr"]
+      },
       "secret_bindings": [
         "MOTOR_APP_PRIVATE_KEY",
         "DEEPSEEK_API_KEY",
@@ -48,7 +83,7 @@
         { "id": "doctrine_verifier", "preferred_model": "workers_ai" },
         { "id": "skeptical_critic", "preferred_model": "glm" }
       ],
-      "allowed_outputs": ["pr_review_comment", "review_labels", "receipt"],
+      "allowed_outputs": ["pr_review_comment", "review_labels", "repair_request_comment", "receipt"],
       "forbidden_outputs": ["edit", "approve", "merge", "deploy", "ratify"],
       "secret_bindings": [
         "VERIFIER_GITHUB_APP_PRIVATE_KEY",
@@ -78,9 +113,10 @@
     "Detect",
     "Research",
     "Critique",
-    "ProposeOrDraft",
+    "Plan",
+    "DispatchRunwayJobOrDraftPr",
     "IndependentVerify",
-    "RepairByNewDraftOnly",
+    "RequestRepairByNewDraftOnly",
     "ReObserve"
   ],
   "portfolio_routing": {
@@ -101,7 +137,7 @@
     "cold_test": "48h laptop-closed heartbeats required before commissioning claim"
   },
   "activation_gate": {
-    "current": "BLOCKED_NOT_COMMISSIONED",
+    "current": "LIVE_ASSIST_ONLY_HOLD_NOT_COMMISSIONED",
     "requires": [
       "SG acceptance of this bounded extension",
       "separate KV namespaces",

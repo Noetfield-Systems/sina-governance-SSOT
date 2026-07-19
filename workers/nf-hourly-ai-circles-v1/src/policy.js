@@ -24,9 +24,52 @@ export function safePath(path) {
   return /^(scripts|tests|docs|workers|language_gate|decision_language_machine_v1)\//.test(path);
 }
 
+const ALLOWED_ACTIONS = new Set(["draft_pr", "dispatch_job", "issue", "noop"]);
+const ALLOWED_JOB_IDS = new Set([
+  "commissioning_tick",
+  "motor_job",
+  "repair_run",
+  "live_model_smoke",
+]);
+
+/**
+ * Coerce common model failures into a usable action shape before hard validation.
+ */
+export function normalizeAction(raw, planner = {}) {
+  if (!raw || typeof raw !== "object") {
+    if (planner?.action === "dispatch_job" && ALLOWED_JOB_IDS.has(planner.job_id)) {
+      return { action: "dispatch_job", job_id: planner.job_id, title: planner.title, rationale: planner.why };
+    }
+    return { action: "noop", rationale: "empty_implementer_payload" };
+  }
+  const action = { ...raw };
+  if (!action.action && Array.isArray(action.changes) && action.changes.length) {
+    action.action = "draft_pr";
+  }
+  if (!action.action && ALLOWED_JOB_IDS.has(action.job_id)) {
+    action.action = "dispatch_job";
+  }
+  if (!action.action && ["draft_pr", "dispatch_job", "issue", "noop"].includes(planner?.action)) {
+    action.action = planner.action;
+    if (planner.job_id && !action.job_id) action.job_id = planner.job_id;
+    if (planner.title && !action.title) action.title = planner.title;
+    if (planner.why && !action.rationale) action.rationale = planner.why;
+  }
+  if (action.action === "issue" && Array.isArray(action.changes) && action.changes.length >= 1) {
+    action.action = "draft_pr";
+  }
+  return action;
+}
+
 export function validateAction(action) {
-  if (!action || !["draft_pr", "issue", "noop"].includes(action.action)) {
+  if (!action || !ALLOWED_ACTIONS.has(action.action)) {
     return { ok: false, reason: "invalid_action" };
+  }
+  if (action.action === "dispatch_job") {
+    if (!ALLOWED_JOB_IDS.has(String(action.job_id || "").trim())) {
+      return { ok: false, reason: "unknown_or_missing_job_id" };
+    }
+    return { ok: true, action };
   }
   if (action.action !== "draft_pr") return { ok: true, action };
   if (!Array.isArray(action.changes) || action.changes.length < 1 || action.changes.length > 3) {

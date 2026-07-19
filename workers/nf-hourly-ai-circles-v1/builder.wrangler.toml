@@ -14,6 +14,8 @@ schedules = ["0 * * * *"]
 [vars]
 LOOP_ID = "nf-hourly-builder-circle-v1"
 TARGET_REPO = "Noetfield-Systems/sina-governance-SSOT"
+RUNWAY_REPO = "Noetfield-Systems/NOETFIELD-RUNWAY"
+RUNWAY_REF = "main"
 MOTOR_APP_ID = "4275961"
 MOTOR_INSTALLATION_ID = "145975487"
 MIN_ROLE_QUORUM = "4"
