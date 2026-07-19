@@ -1,0 +1,20 @@
+{
+  "receipt_type": "nf_sg_key2_custody_established_v1",
+  "captured_at": "2026-07-19T07:43:37Z",
+  "verdict": "ESTABLISHED",
+  "key2_fingerprint": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+  "key1_fingerprint": "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b",
+  "key1_auth_ok": false,
+  "key2_app_ok": true,
+  "key2_install_ok": true,
+  "shadow_health": {
+    "ok": true,
+    "mode": "SHADOW",
+    "sg_runtime": "NOT_COMMISSIONED",
+    "enforcement_enabled": false
+  },
+  "app": {
+    "id": 4330805,
+    "slug": "noetfield-sg-authority"
+  }
+}
