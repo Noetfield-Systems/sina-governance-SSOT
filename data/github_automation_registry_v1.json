@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
-  "version": "1.3.0",
-  "saved_at": "2026-07-19T06:50:00Z",
+  "version": "1.4.0",
+  "saved_at": "2026-07-19T23:08:53Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -415,6 +415,31 @@
       "note": "PR/main gate for Runtime Value Contract + parallel automation registry."
     },
     {
+      "motor_id": "gh_actions_site_flow_canaries_executor_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/site-flow-canaries-executor-v1.yml",
+      "cadence": "workflow_dispatch_only",
+      "lane": "sg_governance",
+      "owns": [
+        "site_flow_canaries_e2e_activation",
+        "meaningful_runtime_terminal_receipt"
+      ],
+      "must_not_own": [
+        "production_submission",
+        "autonomous_production_mutation",
+        "brain_promote",
+        "external_send",
+        "llm_call"
+      ],
+      "requires_secrets": [
+        "CF_MAIN_TOKEN"
+      ],
+      "receipt_path": "r2://noetfield-runway-results-staging/mrw/external/SITE_FLOW_CANARIES_V1.json",
+      "conflicts_with": [],
+      "note": "Class-C, workflow_dispatch-only executor for wo.e2e_activation:v1. One fixed synthetic command and one idempotent staging R2 receipt; production submissions remain HOLD."
+    },
+    {
       "motor_id": "gh_actions_nf_48h_liveness_closeout_v1",
       "kind": "github_actions",
       "repo": "sina-governance-ssot",
@@ -653,7 +678,8 @@
     "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify",
     "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
     "noos_gel_factory": "gh_actions_noos_factory_autorun_v1",
-    "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1"
+    "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1",
+    "site_flow_canaries_e2e_activation": "gh_actions_site_flow_canaries_executor_v1"
   },
   "duplication_forbidden": [
     {
