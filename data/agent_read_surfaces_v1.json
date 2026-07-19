@@ -1,9 +1,9 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.7.7",
-  "saved_at": "2026-07-19T00:41:47Z",
+  "version": "1.7.10",
+  "saved_at": "2026-07-19T22:52:56Z",
   "authority": "SG (SSSOT)",
-  "law": "Agents act only on ACTIVE read surfaces. SUPERSEDED/RETIRED pointers must not drive deploy or spend decisions.",
+  "law": "Agents act only on ACTIVE read surfaces. superseded/retired pointers must not drive deploy or spend decisions.",
   "status_model": {
     "ACTIVE": "Live authority",
     "READ_SURFACE": "Index only",
@@ -204,6 +204,26 @@
           "role": "unified_motor_architecture_machine"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -337,6 +357,21 @@
           "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
           "status": "ACTIVE",
           "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
@@ -512,6 +547,26 @@
           "role": "unified_motor_architecture_machine"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -645,6 +700,21 @@
           "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
           "status": "ACTIVE",
           "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
@@ -820,6 +890,26 @@
           "role": "unified_motor_architecture_machine"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -953,6 +1043,21 @@
           "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
           "status": "ACTIVE",
           "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
@@ -1126,6 +1231,26 @@
           "role": "unified_motor_architecture_machine"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -1259,6 +1384,21 @@
           "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
           "status": "ACTIVE",
           "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
@@ -1345,6 +1485,26 @@
           "role": "unified_motor_architecture_machine"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -1478,6 +1638,21 @@
           "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
           "status": "ACTIVE",
           "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",

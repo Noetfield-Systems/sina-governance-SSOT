@@ -101,6 +101,15 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Workers:** Claude Code (foundation/Repair) · Codex Local (Research) · Cursor (Video) · GPT Work Verifier on GitHub (Research commissioning) · Codex Cloud (separate cloud worker) · GPT Advisor (advice only).
 **Hold:** `GATEWAY_MODE=live` until five-check preflight; NOOS PR #82 autonomous routing not activated by the execution lock.
 
+## 2k. COMPUTE / ROI ALLOCATION (P0 — platform spend law)
+
+`P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md` = **decision** `NF-COMPUTE-ROI-ALLOCATION-V1` (`SG_ACCEPTED`).  
+**Machine:** `data/nf_compute_roi_allocation_v1_LOCKED.json` · **Pointer:** `data/sg-authority-ref-compute-roi-v1.json`  
+**Law:** enterprise plan pays governance minutes; Cloudflare Workers + Workflows and Railway run scale and margin; economical LLM matrix is Kernel policy.  
+**Actions budget:** 50,000 minutes / month — classes A merge · B deploy · C founder proof · D reserve. Not product schedule.  
+**Wake:** authenticated HTTP `job_id` only. HOLD preserved.  
+**Wiring:** `docs/dispatch/nf-compute-roi-allocation-all-repos.md`
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

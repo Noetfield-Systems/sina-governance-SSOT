@@ -1,0 +1,14 @@
+{
+  "receipt_type": "nf_sg_key2_custody_blocked_founder_v1",
+  "captured_at": "2026-07-19T02:29:40Z",
+  "verdict": "BLOCKED_FOUNDER",
+  "missing_decision": "delete_bootstrap_key1_in_github_app_4330805_ui",
+  "delete_fingerprint_sha256": "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b",
+  "keep_fingerprint_sha256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+  "url": "https://github.com/settings/apps/noetfield-sg-authority",
+  "prove_script": "scripts/prove_sg_key2_custody_established_v1.py",
+  "after_revoke": "python3 scripts/prove_sg_key2_custody_established_v1.py --apply",
+  "key2_already_imported_verifier": true,
+  "key2_auth_ok": true,
+  "key1_auth_ok": true
+}

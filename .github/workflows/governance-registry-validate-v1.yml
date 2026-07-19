@@ -1,0 +1,66 @@
+name: governance-registry-validate-v1
+
+on:
+  pull_request:
+    paths:
+      - "data/github_automation_registry_v1.json"
+      - "data/runtime_value_contracts_v1.json"
+      - "schemas/runtime_value_contract_v1.schema.json"
+      - "scripts/validate_runtime_value_contract_v1.py"
+      - "scripts/validate_parallel_automation_governance_v1.py"
+      - "tests/test_runtime_value_contract_v1.py"
+      - ".github/workflows/governance-registry-validate-v1.yml"
+      - ".github/workflows/site-flow-canaries-executor-v1.yml"
+      - "scripts/site_flow_canaries_receipt_v1.py"
+      - "tests/test_site_flow_canaries_receipt_v1.py"
+  push:
+    branches: [main]
+    paths:
+      - "data/github_automation_registry_v1.json"
+      - "data/runtime_value_contracts_v1.json"
+      - "schemas/runtime_value_contract_v1.schema.json"
+      - "scripts/validate_runtime_value_contract_v1.py"
+      - "scripts/validate_parallel_automation_governance_v1.py"
+      - "tests/test_runtime_value_contract_v1.py"
+      - ".github/workflows/governance-registry-validate-v1.yml"
+      - ".github/workflows/site-flow-canaries-executor-v1.yml"
+      - "scripts/site_flow_canaries_receipt_v1.py"
+      - "tests/test_site_flow_canaries_receipt_v1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: governance-registry-validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Install validator deps
+        run: pip install --disable-pip-version-check jsonschema==4.26.0
+
+      - name: Validate parallel automation registry
+        run: python3 scripts/validate_parallel_automation_governance_v1.py
+
+      - name: Validate runtime value contracts
+        run: python3 scripts/validate_runtime_value_contract_v1.py
+
+      - name: Unit tests for runtime value contracts
+        run: python3 -m unittest tests.test_runtime_value_contract_v1 -v
+
+      - name: Unit tests for the bounded canary receipt executor
+        run: python3 -m unittest tests.test_site_flow_canaries_receipt_v1 -v
+
+      - name: Prove synthetic site-flow canaries
+        run: python3 scripts/prove_site_flow_canaries_v1.py

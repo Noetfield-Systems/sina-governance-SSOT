@@ -1,0 +1,19 @@
+{
+  "receipt_type": "nf_event_gateway_commissioned_v1",
+  "captured_at": "2026-07-19T02:29:40Z",
+  "verdict": "STAGING_COMMISSIONED",
+  "live_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+  "health_ok": true,
+  "readiness_ok": true,
+  "hold": "HOLD",
+  "depends_on_gate1_key2": "NOT_ESTABLISHED_RESIDUAL",
+  "deadman": {
+    "watcher": "noos-deadman-v1",
+    "health_url": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "motor_event_gateway_ready": true,
+    "target": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+    "probed_at": "2026-07-19T02:33:29Z",
+    "note": "MOTOR_EVENT_GATEWAY_URL wired; /check returns unified_motor_gateway.ok"
+  },
+  "updated_at": "2026-07-19T02:33:29Z"
+}

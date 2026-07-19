@@ -158,6 +158,12 @@ SCAN_EXEMPT_BASENAMES = frozenset({
 REWRITE_LOCKED_MARKERS = (
     "/p0-foundation-spine/",
     "/p0-core/",
+    "/docs/dispatch/",
+    "/p99-ledger/",
+    "/p2-ssot/",
+    "architect_start_here.md",
+    "agents.md",
+    "/receipts/doctrine/",
 )
 
 # Registered product / entity / vendor names allowed without a dictionary row.

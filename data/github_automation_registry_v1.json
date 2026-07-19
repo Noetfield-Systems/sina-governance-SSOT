@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
-  "version": "1.2.0",
-  "saved_at": "2026-07-18T12:00:00Z",
+  "version": "1.4.0",
+  "saved_at": "2026-07-19T23:08:53Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -23,7 +23,7 @@
       ],
       "receipt_path": "receipts/workflow-census-*.json",
       "conflicts_with": [],
-      "note": "Judging layer \u2014 which receipt does each loop serve?"
+      "note": "Judging layer — which receipt does each loop serve?"
     },
     {
       "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
@@ -69,7 +69,7 @@
       "receipt_path": "receipts/auth-surface-probe-*.json",
       "deadman": "sourcea-deadman-v1",
       "conflicts_with": [],
-      "note": "GUARD \u2014 tiered auth surface probe; SG verifies venture workers implement UI"
+      "note": "GUARD — tiered auth surface probe; SG verifies venture workers implement UI"
     },
     {
       "motor_id": "gh_actions_brain_loop_autorun_v1",
@@ -224,7 +224,7 @@
       ],
       "receipt_path": "trustfield_loop_receipts",
       "conflicts_with": [],
-      "note": "W8 production \u2014 supersedes trustfield_loops_preview"
+      "note": "W8 production — supersedes trustfield_loops_preview"
     },
     {
       "motor_id": "trustfield_loops_preview",
@@ -240,7 +240,7 @@
       ],
       "receipt_path": ".receipt_ids/*.json",
       "conflicts_with": [],
-      "note": "Frozen preview \u2014 do not register new work against preview motor"
+      "note": "Frozen preview — do not register new work against preview motor"
     },
     {
       "motor_id": "gh_actions_sourcea_external_verify_v1",
@@ -277,7 +277,7 @@
       "conflicts_with": [
         "cf_auto_runtime_tick_v1"
       ],
-      "note": "NOOS lane \u2014 observe SourceA read-only via noos-sourcea-observe-loop"
+      "note": "NOOS lane — observe SourceA read-only via noos-sourcea-observe-loop"
     },
     {
       "motor_id": "p0pgr_shadow_cycle_v1",
@@ -357,21 +357,25 @@
       "trigger_host": "cloud",
       "last_fired_at_target": "noos_loop_registry",
       "deadman": "independent_cf_deadman_path",
-      "note": "NOT_COMMISSIONED under HOLD. Prior LIVE_WIRED_T0 claim retracted; staging gateway stood down (worker deleted). SG live shadow NOT deployed; key-2 custody NOT_PROVEN. See NF_SG_V2_STANDDOWN_CORRECTION_RECEIPT_v1.json.",
-      "commission_status": "NOT_COMMISSIONED",
-      "live_url": null
+      "note": "Staging deployed under five-gate plan; HOLD preserved; key2 ESTABLISHED still pending.",
+      "commission_status": "STAGING_COMMISSIONED",
+      "live_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+      "health_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
     },
     {
       "motor_id": "cf_nf_commissioning_specialist_tick_v1",
-      "kind": "cloudflare_cron",
+      "kind": "cloudflare_worker_workflow",
       "repo": "sina-governance-SSOT",
       "health_url": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/5",
+      "cadence": "on_demand",
       "lane": "sg_commissioning_specialist",
       "loop_id": "nf-commissioning-specialist-tick-v1",
-      "trigger_host": "cloud",
-      "deadman": "noos-deadman-v1_or_independent_cf_path",
+      "trigger_host": "on_demand",
+      "deadman": null,
       "owns": [
+        "authenticated_job_admission",
+        "durable_commissioning_job_lifecycle",
+        "direct_github_actions_dispatch",
         "commissioning_observe_detect",
         "allowlisted_self_heal",
         "kaizen_propose_only",
@@ -387,8 +391,124 @@
       "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*",
       "conflicts_with": [],
       "commissioned": false,
-      "scheduled": true,
-      "note": "5-min commissioning specialist closed loop. HOLD preserved. Models: DeepSeek/GLM/Kimi/HF failover. Propose improve only."
+      "scheduled": false,
+      "note": "On-demand commissioning only. Authenticated requests create idempotent Cloudflare Workflow instances, which dispatch one allowlisted GitHub Actions executor. Explicit unfinished or invalidated jobs produce evidence; completed unchanged jobs are not repeated. HOLD preserved."
+    },
+    {
+      "motor_id": "gh_actions_governance_registry_validate_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/governance-registry-validate-v1.yml",
+      "cadence": "pull_request_and_main_push",
+      "lane": "sg_governance",
+      "owns": [
+        "runtime_value_contract_validate",
+        "parallel_automation_registry_validate"
+      ],
+      "must_not_own": [
+        "brain_promote",
+        "venture_product_code",
+        "production_deploy"
+      ],
+      "receipt_path": "CI logs / unittest PASS",
+      "conflicts_with": [],
+      "note": "PR/main gate for Runtime Value Contract + parallel automation registry."
+    },
+    {
+      "motor_id": "gh_actions_site_flow_canaries_executor_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/site-flow-canaries-executor-v1.yml",
+      "cadence": "workflow_dispatch_only",
+      "lane": "sg_governance",
+      "owns": [
+        "site_flow_canaries_e2e_activation",
+        "meaningful_runtime_terminal_receipt"
+      ],
+      "must_not_own": [
+        "production_submission",
+        "autonomous_production_mutation",
+        "brain_promote",
+        "external_send",
+        "llm_call"
+      ],
+      "requires_secrets": [
+        "CF_MAIN_TOKEN"
+      ],
+      "receipt_path": "r2://noetfield-runway-results-staging/mrw/external/SITE_FLOW_CANARIES_V1.json",
+      "conflicts_with": [],
+      "note": "Class-C, workflow_dispatch-only executor for wo.e2e_activation:v1. One fixed synthetic command and one idempotent staging R2 receipt; production submissions remain HOLD."
+    },
+    {
+      "motor_id": "gh_actions_nf_48h_liveness_closeout_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/nf-48h-liveness-closeout-v1.yml",
+      "cadence": "repository_dispatch:liveness_48h_close",
+      "lane": "sg_governance",
+      "owns": [
+        "liveness_48h_closeout"
+      ],
+      "must_not_own": [
+        "brain_promote",
+        "production_deploy"
+      ],
+      "receipt_path": "receipts/48h-test-run1-*.json",
+      "conflicts_with": [],
+      "note": "One-shot closeout fired by CF motor; GitHub is not the recurring scheduler."
+    },
+    {
+      "motor_id": "gh_actions_nf_commissioning_specialist_deploy_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/nf-commissioning-specialist-deploy-v1.yml",
+      "cadence": "push_paths_or_manual",
+      "lane": "sg_commissioning_specialist",
+      "owns": [
+        "commissioning_specialist_worker_deploy"
+      ],
+      "must_not_own": [
+        "hold_lift",
+        "unsupervised_architecture_redesign"
+      ],
+      "receipt_path": "CF worker deploy logs",
+      "conflicts_with": [],
+      "note": "Deploys on-demand commissioning Worker; asserts crons=[]."
+    },
+    {
+      "motor_id": "gh_actions_nf_hourly_ai_circles_deploy_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/nf-hourly-ai-circles-deploy-v1.yml",
+      "cadence": "push_paths_or_manual",
+      "lane": "sg_governance",
+      "owns": [
+        "hourly_ai_circles_worker_deploy"
+      ],
+      "must_not_own": [
+        "brain_promote"
+      ],
+      "receipt_path": "CF worker deploy logs",
+      "conflicts_with": [],
+      "note": "Deploy path for hourly AI circles workers."
+    },
+    {
+      "motor_id": "gh_actions_nf_sg_key2_custody_watch_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/nf-sg-key2-custody-watch-v1.yml",
+      "cadence": "repository_dispatch:key2_custody_established",
+      "lane": "sg_governance",
+      "owns": [
+        "sg_key2_custody_apply"
+      ],
+      "must_not_own": [
+        "app_key_mint",
+        "hold_lift"
+      ],
+      "receipt_path": "receipts/sg-key2-custody-*.json",
+      "conflicts_with": [],
+      "note": "One-shot key2 custody apply/PR; recurring watch is CF."
     }
   ],
   "agent_lanes": [
@@ -558,7 +678,8 @@
     "pattern_export_tf_to_sourcea": "trustfield_worker_export_then_sourcea_brain_classify",
     "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
     "noos_gel_factory": "gh_actions_noos_factory_autorun_v1",
-    "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1"
+    "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1",
+    "site_flow_canaries_e2e_activation": "gh_actions_site_flow_canaries_executor_v1"
   },
   "duplication_forbidden": [
     {
@@ -568,7 +689,7 @@
         "gh_actions_brain_loop_autorun_v1",
         "mac_launchd_brain_loop_autorun_v1"
       ],
-      "rule": "CAS on promotion gate \u2014 second writer gets REJECTED receipt, not silent overwrite"
+      "rule": "CAS on promotion gate — second writer gets REJECTED receipt, not silent overwrite"
     },
     {
       "task": "trustfield_loops_implementation",
@@ -585,7 +706,7 @@
       "allowed_motors": [
         "sourcea_brain"
       ],
-      "rule": "Registration scripts run from SG only after independent verify \u2014 not from GH Actions"
+      "rule": "Registration scripts run from SG only after independent verify — not from GH Actions"
     }
   ],
   "task_cell_map": {

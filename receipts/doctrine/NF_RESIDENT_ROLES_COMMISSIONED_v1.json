@@ -1,0 +1,20 @@
+{
+  "receipt_type": "nf_resident_roles_commissioned_v1",
+  "captured_at": "2026-07-19T02:29:40Z",
+  "verdict": "STAGING_COMMISSIONED",
+  "sg_role": "STAGING_COMMISSIONED",
+  "noos_role": "STAGING_COMMISSIONED",
+  "cold_proofs": [
+    {
+      "role": "noetfield:sg.registrar",
+      "event_id": "evt-five-gate-sg.registrar-1784428121",
+      "action": "workflow_started"
+    },
+    {
+      "role": "noetfield:noos.portfolio-owner",
+      "event_id": "evt-five-gate-noos.portfolio-owner-1784428123",
+      "action": "workflow_started"
+    }
+  ],
+  "hold": "HOLD"
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "nf.commissioning-job-queue.v1",
+  "version": "2.1.0",
+  "purpose": "Real unified-core commissioning execution queue. Each authenticated request runs one named job through a durable Cloudflare Workflow. Score-only jobs are demoted after execute proofs.",
+  "law": [
+    "Prefer execute proof jobs over score-only jobs",
+    "Require an explicit job ID and idempotency request ID",
+    "Completed unchanged jobs do not repeat without a documented rerun reason",
+    "Dispatch then wait for conclusion before marking pass",
+    "Founder-gated gaps emit blocked_founder with exact missing decision",
+    "hold preserved until founder lifts",
+    "Never claim fully_commissioned while runtime_reality says not_commissioned"
+  ],
+  "progress_kv_key": "job_queue_progress",
+  "jobs": [
+    {
+      "id": "proof_b_founder_reasoning_ingest",
+      "class": "execute",
+      "proof": "B",
+      "machine_safe": true,
+      "acceptance": "staging POST /v1/reasoning-results resumes parked WAITING_FOR_FOUNDER_REASONING job",
+      "runway_action": "score_founder_reasoning_ingest_live",
+      "dispatch": null,
+      "live_probe": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
+    },
+    {
+      "id": "proof_a_native_run",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "motor-native workflow conclusion=success (Motor.run state machine + real python check)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-native.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function add(a, b) where add(2, 3) == 5 and add(10, 5) == 15",
+          "buggy_code": "def add(a, b):\n    return a - b"
+        }
+      }
+    },
+    {
+      "id": "proof_a_concurrent_jobs",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "two concurrent motor-job workflow runs both conclusion=success",
+      "runway_action": "dispatch_concurrent_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-job.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "count": 2,
+        "inputs": {
+          "failing_test": "assert add(2, 2) == 5  # currently returns 4",
+          "language": "python"
+        }
+      }
+    },
+    {
+      "id": "proof_a_durable_state",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "motor-db workflow conclusion=success (receipt write/read)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-db.yml",
+        "ref": "main",
+        "event": "workflow_dispatch"
+      }
+    },
+    {
+      "id": "proof_a_verify_edge",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "motor-verify workflow conclusion=success (diagnose fix verify)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-verify.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function add(a, b) where add(2, 3) == 5 and add(10, 5) == 15",
+          "buggy_code": "def add(a, b):\n    return a - b"
+        }
+      }
+    },
+    {
+      "id": "proof_a_real_repo_change",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "repair-run workflow conclusion=success (branch commit draft pr + exact-head ci)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "repair-run.yml",
+        "ref": "main",
+        "event": "workflow_dispatch"
+      }
+    },
+    {
+      "id": "proof_b_failure_repair_verify",
+      "class": "execute",
+      "proof": "B",
+      "machine_safe": true,
+      "acceptance": "motor-verify on known-bad code then success after repair path",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-verify.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function mul(a, b) where mul(3, 4) == 12",
+          "buggy_code": "def mul(a, b):\n    return a + b"
+        }
+      }
+    },
+    {
+      "id": "gallery_cost_supply_qualify",
+      "class": "execute",
+      "proof": "cost",
+      "machine_safe": true,
+      "acceptance": "gallery-foundation-tick conclusion=success",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "gallery-foundation-tick.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "query": "modern technology workspace",
+          "live_mode": "true"
+        }
+      }
+    },
+    {
+      "id": "key_custody_score",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score key custody; blocked_founder until key2 established",
+      "runway_action": "score_key_custody",
+      "dispatch": null,
+      "founder_gate_if": "key2_custody_not_established"
+    },
+    {
+      "id": "event_gateway_status",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "record event gateway status; blocked_founder until commissioned",
+      "runway_action": "score_event_gateway",
+      "dispatch": null,
+      "founder_gate_if": "event_gateway_not_commissioned"
+    },
+    {
+      "id": "credential_bootstrap_gap",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score bootstrap key1 revoke gap",
+      "runway_action": "score_credential_bootstrap",
+      "dispatch": null,
+      "founder_gate_if": "bootstrap_key1_not_revoked"
+    },
+    {
+      "id": "commissioning_directive_rollup",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "roll up directive; refuse fully_commissioned while any not_commissioned",
+      "runway_action": "rollup_commissioning_directive",
+      "dispatch": null
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "nf.independent-verifier.audit-targets.v1",
+  "version": "1.0.0",
+  "note": "Loops audited off-account by the independent verifier. All targets run on the MAIN account; this verifier runs on the VERIFIER account for true independence.",
+  "targets": [
+    {
+      "loop_id": "nf-commissioning-specialist-tick-v1",
+      "account": "main",
+      "health": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 5,
+      "last_fired_keys": ["last_fired_at"]
+    },
+    {
+      "loop_id": "nf-sg-loop-tick-v1",
+      "account": "main",
+      "health": "https://nf-sg-loop-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 10,
+      "last_fired_keys": ["last_fired_at"]
+    },
+    {
+      "loop_id": "noos-deadman-v1",
+      "account": "main",
+      "health": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 30,
+      "last_fired_keys": ["last_fired_at"]
+    },
+    {
+      "loop_id": "nf-unified-motor-foundation-v1-staging",
+      "account": "main",
+      "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 10,
+      "last_fired_keys": ["last_fired_at"]
+    }
+  ]
+}

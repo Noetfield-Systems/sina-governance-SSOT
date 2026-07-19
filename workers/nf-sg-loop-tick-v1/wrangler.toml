@@ -1,0 +1,25 @@
+name = "nf-sg-loop-tick-v1"
+main = "src/index.js"
+compatibility_date = "2026-07-18"
+account_id = "0d0b967b77e2e5535455d39ff3dae72c"
+workers_dev = true
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+[vars]
+LOOP_ID = "nf-sg-loop-tick-v1"
+INTERVAL_MINUTES = "10"
+CRON = "*/10 * * * *"
+AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
+SG_REPO = "Noetfield-Systems/sina-governance-SSOT"
+MOTOR_APP_ID = "4275961"
+MOTOR_INSTALLATION_ID = "145975487"
+# LIVENESS_48H_STARTED_AT set to receipts/48h-test-run1-START.json captured_at
+LIVENESS_48H_STARTED_AT = "2026-07-19T02:29:40Z"
+
+# Secrets (set via wrangler secret put): SG_BOOTSTRAP_KEY_1_PEM, SG_AUTHORITY_PRIVATE_KEY, MOTOR_APP_PRIVATE_KEY
+
+[[kv_namespaces]]
+binding = "RECEIPTS"
+id = "19787d20ba86435884752e29de9d4ca6"

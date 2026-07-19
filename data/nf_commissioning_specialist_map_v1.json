@@ -1,28 +1,34 @@
 {
   "schema": "nf.commissioning-specialist.map.v1",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "loop_id": "nf-commissioning-specialist-tick-v1",
-  "trigger_host": "cloud",
-  "cadence_cron": "*/5 * * * *",
-  "interval_minutes": 5,
-  "deadman": {
-    "watcher": "noos-deadman-v1",
-    "staleness_multiplier": 2,
-    "restart_path": "/tick"
+  "trigger_host": "on_demand",
+  "cadence_cron": null,
+  "interval_minutes": null,
+  "trigger": {
+    "mode": "on_demand",
+    "endpoint": "POST /jobs",
+    "auth": "Bearer COMMISSIONING_TRIGGER_SECRET",
+    "durable_workflow": "nf-commissioning-job-v1",
+    "requires_explicit_job": true,
+    "requires_request_id": true
   },
   "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_TICK_*.json",
   "law": [
     "Observe -> Detect -> Critique -> Repair -> ProposeImprove -> ReObserve",
-    "Machine may REPAIR only allowlisted actions",
+    "Machine may repair only allowlisted actions",
     "Machine may PROPOSE improvements only; founder ratifies architecture (no unsupervised redesign)",
-    "AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD until founder lifts",
-    "Unknown task_kind routes to T0 deterministic"
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=hold until founder lifts",
+    "Unknown task_kind routes to T0 deterministic",
+    "Each explicit run names one unfinished or invalidated job and must deliver real evidence for that job",
+    "Completed unchanged jobs are not repeated on a timer",
+    "Never stamp fully_commissioned while runtime_reality says not_commissioned"
   ],
   "skills": [
     "commissioning-specialist",
     "staleness-gate-auditor",
     "receipt-ledger-auditor",
-    "registry-motor-validator"
+    "registry-scheduler-and-executor-validator"
   ],
   "closed_loop_stages": [
     {
@@ -31,7 +37,8 @@
       "actions": [
         "probe_surfaces",
         "read_runtime_reality_flags",
-        "read_last_receipt"
+        "read_last_receipt",
+        "load_job_progress"
       ]
     },
     {
@@ -40,7 +47,8 @@
       "actions": [
         "diff_expected_vs_actual",
         "staleness_check",
-        "secret_presence_check"
+        "secret_presence_check",
+        "validate_explicit_job_and_idempotency_key"
       ]
     },
     {
@@ -49,10 +57,12 @@
       "actions": [
         "classify_defect",
         "rank_severity",
-        "choose_repair_or_propose"
+        "choose_repair_or_propose",
+        "plan_job_execution"
       ],
       "models": [
-        "deepseek",
+        "deepseek_flash",
+        "deepseek_pro",
         "glm",
         "kimi"
       ]
@@ -61,7 +71,9 @@
       "id": "repair",
       "tier": "T0",
       "actions": [
-        "allowlisted_heal_only"
+        "allowlisted_heal_only",
+        "execute_or_dispatch_selected_job",
+        "persist_explicit_job_result"
       ],
       "requires_founder_approval": false
     },
@@ -73,7 +85,8 @@
       ],
       "requires_founder_ratification": true,
       "models": [
-        "deepseek",
+        "deepseek_flash",
+        "deepseek_pro",
         "glm",
         "kimi",
         "huggingface"
@@ -84,7 +97,8 @@
       "tier": "T0",
       "actions": [
         "write_receipt",
-        "upsert_last_fired_at"
+        "upsert_last_fired_at",
+        "persist_job_progress"
       ]
     }
   ],
@@ -94,7 +108,7 @@
       "url": "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health",
       "expect": {
         "ok": true,
-        "mode": "SHADOW"
+        "mode": "shadow"
       }
     },
     {
@@ -114,6 +128,15 @@
       "expect": {
         "exists": true
       }
+    },
+    {
+      "id": "job_queue",
+      "kind": "github_raw",
+      "repo": "Noetfield-Systems/sina-governance-SSOT",
+      "path": "data/nf_commissioning_job_queue_v1.json",
+      "expect": {
+        "exists": true
+      }
     }
   ],
   "repair_allowlist": [
@@ -126,12 +149,20 @@
       "description": "Write last_fired_at to KV/loop registry"
     },
     {
-      "id": "rotate_stale_receipt_pointer",
-      "description": "Advance receipt cursor after successful tick"
-    },
-    {
       "id": "clear_false_live_claim",
       "description": "If truth file claims LIVE while worker 404, flag defect (no auto-edit of main)"
+    },
+    {
+      "id": "dispatch_workflow_job",
+      "description": "Cloudflare Workflow dispatches exactly one allowlisted GitHub Actions workflow for an execute-class job"
+    },
+    {
+      "id": "persist_job_progress",
+      "description": "Write explicit job progress and request identity to KV"
+    },
+    {
+      "id": "score_runtime_gaps",
+      "description": "Deterministic score of proof-a/b and custody gaps from runtime_reality"
     }
   ],
   "repair_forbidden": [
@@ -140,7 +171,8 @@
     "enable_enforcement",
     "production_deploy",
     "architecture_redesign",
-    "merge_to_main_without_pr"
+    "merge_to_main_without_pr",
+    "fake_fully_commissioned"
   ],
   "improve_map": {
     "queue": "kaizen",
@@ -153,20 +185,33 @@
   "model_router": {
     "default_tier": "T0",
     "providers": {
-      "deepseek": {
+      "deepseek_flash": {
         "env": "DEEPSEEK_API_KEY",
         "base": "https://api.deepseek.com/v1/chat/completions",
-        "model": "deepseek-chat"
+        "model": "deepseek-v4-flash",
+        "thinking": "disabled",
+        "max_output_tokens": 500,
+        "input_per_million_usd": 0.14,
+        "output_per_million_usd": 0.28
+      },
+      "deepseek_pro": {
+        "env": "DEEPSEEK_API_KEY",
+        "base": "https://api.deepseek.com/v1/chat/completions",
+        "model": "deepseek-v4-pro",
+        "thinking": "enabled",
+        "max_output_tokens": 1500,
+        "input_per_million_usd": 0.435,
+        "output_per_million_usd": 0.87
       },
       "glm": {
         "env": "GLM_API_KEY",
-        "base": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-        "model": "glm-4-flash"
+        "base": "https://api.z.ai/api/paas/v4/chat/completions",
+        "model": "glm-5.2"
       },
       "kimi": {
         "env": "MOONSHOT_API_KEY",
         "base": "https://api.moonshot.ai/v1/chat/completions",
-        "model": "moonshot-v1-8k"
+        "model": "kimi-k2.7-code"
       },
       "huggingface": {
         "env": "HF_TOKEN",
@@ -175,12 +220,16 @@
       }
     },
     "failover_order": [
-      "deepseek",
+      "deepseek_flash",
+      "deepseek_pro",
       "glm",
       "kimi",
       "huggingface"
     ],
-    "max_usd_per_tick": 0.02,
+    "max_llm_calls_per_job": 2,
+    "max_output_tokens_per_call": 1500,
+    "cost_basis": "provider usage tokens times configured current model rates; null when a provider rate is not configured",
     "on_all_fail": "continue_T0_deterministic"
-  }
+  },
+  "job_queue_ref": "data/nf_commissioning_job_queue_v1.json"
 }

@@ -1,0 +1,146 @@
+# Bounded Class-C canary proof executor for the Meaningful Runtime work order.
+# It cannot schedule itself, accept another command, call a model, submit a
+# production flow, or write anywhere except the one staging R2 receipt key.
+name: site-flow-canaries-executor-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      work_order_id:
+        description: "Fixed work order ID"
+        required: true
+        type: string
+      work_order_version:
+        description: "Fixed work order version"
+        required: true
+        type: string
+      idempotency_key:
+        description: "Fixed idempotency key"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wo-e2e-activation-v1
+  cancel-in-progress: false
+
+jobs:
+  execute-site-flow-canaries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      WORK_ORDER_ID: wo.e2e_activation
+      WORK_ORDER_VERSION: v1
+      IDEMPOTENCY_KEY: wo.e2e_activation:v1
+      SOURCE_REPOSITORY: Noetfield-Systems/sina-governance-SSOT
+      CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
+      R2_BUCKET: noetfield-runway-results-staging
+      R2_KEY: mrw/external/SITE_FLOW_CANARIES_V1.json
+      ENRICHED_RECEIPT: /tmp/SITE_FLOW_CANARIES_V1.enriched.json
+      R2_READ_BACK: /tmp/SITE_FLOW_CANARIES_V1.readback.json
+    steps:
+      - name: Checkout exact dispatched source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.0
+        with:
+          persist-credentials: false
+
+      - name: Enforce fixed work-order boundary
+        env:
+          INPUT_WORK_ORDER_ID: ${{ inputs.work_order_id }}
+          INPUT_WORK_ORDER_VERSION: ${{ inputs.work_order_version }}
+          INPUT_IDEMPOTENCY_KEY: ${{ inputs.idempotency_key }}
+        run: |
+          set -euo pipefail
+          test "$INPUT_WORK_ORDER_ID" = "$WORK_ORDER_ID"
+          test "$INPUT_WORK_ORDER_VERSION" = "$WORK_ORDER_VERSION"
+          test "$INPUT_IDEMPOTENCY_KEY" = "$IDEMPOTENCY_KEY"
+
+      - name: Check the exact R2 receipt key
+        id: preflight
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          set +e
+          npx --yes wrangler@4.112.0 r2 object get "$R2_BUCKET/$R2_KEY" \
+            --remote --file /tmp/SITE_FLOW_CANARIES_V1.existing.json \
+            >/tmp/r2-get.stdout 2>/tmp/r2-get.stderr
+          get_status=$?
+          set -e
+          if [ "$get_status" -eq 0 ]; then
+            python3 scripts/site_flow_canaries_receipt_v1.py preflight \
+              --receipt /tmp/SITE_FLOW_CANARIES_V1.existing.json \
+              --work-order-id "$WORK_ORDER_ID" \
+              --work-order-version "$WORK_ORDER_VERSION" \
+              --idempotency-key "$IDEMPOTENCY_KEY" \
+              --source-repository "$SOURCE_REPOSITORY"
+            echo "already_complete=true" >> "$GITHUB_OUTPUT"
+          elif grep -Fq "The specified key does not exist" /tmp/r2-get.stdout /tmp/r2-get.stderr \
+            || grep -Fq '"code": 10007' /tmp/r2-get.stdout /tmp/r2-get.stderr; then
+            echo "already_complete=false" >> "$GITHUB_OUTPUT"
+          else
+            cat /tmp/r2-get.stdout /tmp/r2-get.stderr >&2
+            exit "$get_status"
+          fi
+
+      - name: Prove synthetic site-flow canaries
+        if: steps.preflight.outputs.already_complete != 'true'
+        run: python3 scripts/prove_site_flow_canaries_v1.py
+
+      - name: Seal the terminal receipt
+        if: steps.preflight.outputs.already_complete != 'true'
+        env:
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 scripts/site_flow_canaries_receipt_v1.py finalize \
+            --input receipts/doctrine/SITE_FLOW_CANARIES_V1.json \
+            --output "$ENRICHED_RECEIPT" \
+            --work-order-id "$WORK_ORDER_ID" \
+            --work-order-version "$WORK_ORDER_VERSION" \
+            --idempotency-key "$IDEMPOTENCY_KEY" \
+            --source-repository "$SOURCE_REPOSITORY" \
+            --source-sha "$GITHUB_SHA" \
+            --run-url "$RUN_URL"
+
+      - name: Persist the one staging receipt
+        if: steps.preflight.outputs.already_complete != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          npx --yes wrangler@4.112.0 r2 object put "$R2_BUCKET/$R2_KEY" \
+            --remote --file "$ENRICHED_RECEIPT" --content-type application/json
+
+      - name: Read back and verify the terminal receipt
+        if: steps.preflight.outputs.already_complete != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          npx --yes wrangler@4.112.0 r2 object get "$R2_BUCKET/$R2_KEY" \
+            --remote --file "$R2_READ_BACK"
+          python3 scripts/site_flow_canaries_receipt_v1.py verify \
+            --receipt "$R2_READ_BACK" \
+            --expected "$ENRICHED_RECEIPT" \
+            --work-order-id "$WORK_ORDER_ID" \
+            --work-order-version "$WORK_ORDER_VERSION" \
+            --idempotency-key "$IDEMPOTENCY_KEY" \
+            --source-repository "$SOURCE_REPOSITORY"
+
+      - name: Record bounded outcome
+        env:
+          ALREADY_COMPLETE: ${{ steps.preflight.outputs.already_complete }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## wo.e2e_activation v1"
+            echo "- R2: r2://$R2_BUCKET/$R2_KEY"
+            echo "- Idempotency key: $IDEMPOTENCY_KEY"
+            echo "- Existing valid terminal receipt: $ALREADY_COMPLETE"
+            echo "- Production submissions: HOLD"
+            echo "- LLM/model calls: 0"
+          } >> "$GITHUB_STEP_SUMMARY"
