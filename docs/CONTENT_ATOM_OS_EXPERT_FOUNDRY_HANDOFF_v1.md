@@ -1,7 +1,9 @@
 # Content Atom OS and Expert Foundry handoff v1
 
-From: SG governance and authority pointer lane  
-Status: parked candidate; one manual cash-bridge pilot permitted  
+From: SG governance and authority pointer lane
+
+Status: parked candidate; one manual cash-bridge pilot permitted
+
 Scope: discovery and ownership handoff only; no product implementation or runtime authority
 
 ## Boundary
