@@ -55,7 +55,9 @@
     "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
     "readiness": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/readiness",
     "note": "Staging foundation deployed under five-gate plan. Production promote still HOLD. Key2 ESTABLISHED still pending founder key1 UI revoke.",
-    "commissioned_at": "2026-07-19T02:29:40Z"
+    "commissioned_at": "2026-07-19T02:29:40Z",
+    "deadman": "noos-deadman-v1",
+    "health_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
   },
   "resident_roles": {
     "sg_role": "STAGING_COMMISSIONED",
