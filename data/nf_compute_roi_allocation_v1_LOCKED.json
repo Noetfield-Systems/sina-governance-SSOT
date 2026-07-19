@@ -1,0 +1,133 @@
+{
+  "schema": "nf_compute_roi_allocation_v1",
+  "decision_id": "NF-COMPUTE-ROI-ALLOCATION-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "v1.0.0_locked_20260719",
+  "saved_at": "2026-07-19T22:45:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+  "enterprise_org_url": "https://github.com/enterprises/noetfield-systems-inc",
+  "one_line_law": "Enterprise pays governance minutes; Cloudflare and Railway run scale and margin; economical LLM matrix is Kernel policy.",
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1"
+  ],
+  "does_not_activate": [
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=RUN",
+    "cancel_enterprise_plan",
+    "unsupervised_promote"
+  ],
+  "platforms": {
+    "hot_api_job_dag": {
+      "host": "cloudflare_workers_workflows",
+      "owns": [
+        "auth",
+        "credits",
+        "kernel_gates",
+        "job_id_wake",
+        "llm_fetch",
+        "receipts"
+      ],
+      "must_not": [
+        "actions_cron_as_product_muscle",
+        "repository_dispatch_as_continuous_product_muscle"
+      ]
+    },
+    "heavy_long": {
+      "host": "railway",
+      "owns": [
+        "video",
+        "heavy_python",
+        "long_sandbox",
+        "worker_invoked_executors"
+      ],
+      "must_not": [
+        "replace_cloudflare_hot_path"
+      ]
+    },
+    "org_ci_budget": {
+      "host": "github_actions_enterprise_plan",
+      "owns": [
+        "pr_ci",
+        "main_deploy_gates",
+        "founder_manual_proofs",
+        "merge_gates"
+      ],
+      "must_not": [
+        "product_schedule",
+        "continuous_dispatch_muscle",
+        "feature_branch_ci_spam"
+      ]
+    },
+    "cognition": {
+      "host": "kernel_economical_llm_matrix",
+      "owns": [
+        "t0_first",
+        "deepseek_default",
+        "glm_repair",
+        "kimi_long_context",
+        "cost_ledger"
+      ],
+      "must_not": [
+        "idle_llm",
+        "llm_when_deterministic_suffices"
+      ]
+    }
+  },
+  "actions_minutes_budget": {
+    "monthly_total": 50000,
+    "alert_at_percent": 70,
+    "classes": {
+      "A_merge_gates": {
+        "share_percent": 55,
+        "minutes": 27500,
+        "triggers": ["pull_request", "push_main"]
+      },
+      "B_deploy_promote": {
+        "share_percent": 20,
+        "minutes": 10000,
+        "triggers": ["push_main", "workflow_dispatch"]
+      },
+      "C_founder_canary": {
+        "share_percent": 15,
+        "minutes": 7500,
+        "triggers": ["workflow_dispatch"]
+      },
+      "D_reserve_incident": {
+        "share_percent": 10,
+        "minutes": 5000,
+        "triggers": ["workflow_dispatch"]
+      }
+    }
+  },
+  "hard_bans": [
+    "schedule_on_product_runtimes",
+    "repository_dispatch_as_continuous_muscle",
+    "ci_on_every_feature_branch_push",
+    "high_frequency_gha_health_curl"
+  ],
+  "job_wake": "authenticated_http_job_id_only",
+  "economical_llm_matrix": [
+    "t0_first",
+    "deepseek_default_hot_path",
+    "glm_on_schema_repair_fail",
+    "kimi_on_long_context_escalate",
+    "cost_ledger_every_call",
+    "hard_stop_on_ceiling",
+    "zero_llm_on_idle"
+  ],
+  "wasm_posture": "typescript_kernel_now_wasm_after_cpu_bound_proof",
+  "holds_preserved": [
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD",
+    "SG_RUNTIME=NOT_COMMISSIONED",
+    "SG_ENFORCEMENT=NOT_ENABLED"
+  ],
+  "weekly_receipt_required": [
+    "actions_minutes_by_class",
+    "percent_of_50000",
+    "disabled_schedule_or_dispatch_runtimes",
+    "cloudflare_hot_path_deploy_sha",
+    "railway_heavy_job_count"
+  ]
+}
