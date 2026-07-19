@@ -1,0 +1,14 @@
+{
+  "file": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Authority SHA",
+      "line": 7,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

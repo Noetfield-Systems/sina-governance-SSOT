@@ -1,0 +1,24 @@
+{
+  "schema": "sg-doctrine-receipt-v1",
+  "receipt_id": "NF_CIRCUIT_B_CANDIDATE_RECEIPT_v1",
+  "created_at": "2026-07-18T01:23:00Z",
+  "commission_id": "NF-CIRCUIT-B-HIGGSFIELD-CAMPAIGN-PROOF-001",
+  "status": "CANDIDATE_PENDING_FOUNDER_PROMOTION",
+  "product": "Operating Brain Install",
+  "success_metric": "qualified_operating_brain_audit_request",
+  "noos_job_id": "MOTOR-CIRCUITB-001",
+  "higgsfield_job_id": "82c0f403-e278-470f-b3b4-a7f98e41b2fb",
+  "qualification": "PASS",
+  "provider_credits_spent": 9,
+  "marginal_usd_spent": 0.0,
+  "publication": "BLOCKED_AUTHENTICATION",
+  "outcome": "NOT_STARTED",
+  "not_claimed": [
+    "CIRCUIT_B_PROVEN",
+    "qualified result",
+    "cost per qualified result"
+  ],
+  "publication_policy": "FOUNDER_RATIFIED",
+  "blocker": "LinkedIn login required; no post created",
+  "updated_at": "2026-07-18T01:36:53Z"
+}

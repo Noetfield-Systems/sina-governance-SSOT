@@ -1,0 +1,14 @@
+{
+  "file": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Persist Wave",
+      "line": 5,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "file": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+  "agent_review": [
+    {
+      "type": "AGENT_REVIEW",
+      "line": 12,
+      "reason": "long sentence with multiple Title Case phrases \u2014 rewrite to plain English",
+      "hint": "Use short sentences. One idea per sentence. Prefer dictionary public phrasing."
+    }
+  ]
+}

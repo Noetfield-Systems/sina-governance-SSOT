@@ -1,0 +1,129 @@
+---
+description: NOETFIELD AUTONOMOUS CHANGE-PRESERVATION LAW v1.1 — execute autonomously; preserve unrelated work; stop only for destructive/irreversible risk
+alwaysApply: true
+---
+
+# NOETFIELD AUTONOMOUS CHANGE-PRESERVATION LAW v1.1
+
+Replaces the previous permission-heavy interpretation of the Universal Change-Preservation Law.
+
+## CORE PRINCIPLE
+
+Execute autonomously. Preserve unrelated work.
+
+Purpose: prevent agents from damaging, reverting, overwriting, or deploying stale versions of unrelated work. Not a requirement to ask the founder for permission before routine actions.
+
+## DO NOT ASK FOR ROUTINE PERMISSION
+
+Do not ask for permission before:
+
+- inspecting files or repository state
+- fetching origin
+- creating an isolated branch or worktree
+- editing files within the authorized task scope
+- running shell commands
+- installing already-declared project dependencies
+- running builds, tests, linters, formatters limited to authorized paths, or verification
+- retrying failed reversible operations
+- creating commits
+- opening or updating pull requests
+- producing manifests, reports, evidence, or receipts
+- repairing issues directly caused by the authorized change
+
+Perform required preflight checks automatically. Do not stop merely to report them. Include the results in the final receipt.
+
+## AUTHORIZED SCOPE
+
+The user’s task instruction is the authority for ordinary scoped work.
+
+Infer the smallest reasonable authorized scope from the task and proceed. Do not request a separate allowlist unless the task is genuinely ambiguous.
+
+Everything outside the inferred or explicit task scope is protected by default.
+
+Use:
+
+`VERIFIED BASELINE + AUTHORIZED CHANGESET = CANDIDATE STATE`
+
+Do not reconstruct the candidate from an older, cleaner, cached, or convenient snapshot.
+
+## WORKSPACE BEHAVIOR
+
+- Prefer an isolated branch and worktree.
+- Do not stash, reset, restore, clean, overwrite, reformat, regenerate, stage, or commit unrelated existing work.
+- Unrelated dirty files are protected, not blockers.
+- Do not downgrade newer local or live work merely because an older Git state is cleaner.
+- If the canonical workspace is dirty, continue safely in an isolated worktree.
+- Do not ask the founder to resolve ordinary Git hygiene that the agent can safely isolate from.
+
+## AUTONOMOUS RECOVERY
+
+When a reversible failure occurs: diagnose it; repair it within scope; retry; degrade gracefully where appropriate; record the result.
+
+Do not stop at the first error and ask what to do.
+
+A lower-quality scoped result with an honest receipt is preferable to unnecessary blocking, except for destructive or irreversible risk.
+
+## WHEN TO STOP
+
+Stop only when:
+
+1. The requested action would destroy or overwrite unrelated work.
+2. The task contains a material contradiction that cannot be safely resolved.
+3. A destructive migration, deletion, force-push, history rewrite, credential change, authority change, money movement, contract, legal action, or irreversible external send is required.
+4. Merge or production deployment is required but has not been authorized by the user’s current instruction or an existing standing authority.
+5. The exact production baseline cannot be established and continuing could cause a downgrade.
+
+Use an exact blocker verdict and explain the smallest missing decision.
+
+Do not manufacture blockers for routine work.
+
+## MERGE AND DEPLOY AUTHORITY
+
+If the user explicitly instructed the agent to merge, deploy, ship, publish, or make the change live, that instruction is authority. Do not ask for confirmation again.
+
+If the task only asks to build, fix, implement, prepare, inspect, or create a PR, do not infer merge or production-deployment authority.
+
+Builders may autonomously build, test, commit, and open PRs.
+
+Production promotion must use the exact verified candidate produced by the task and must preserve protected surfaces.
+
+## CHANGE PRESERVATION
+
+Before completing, verify automatically that:
+
+- changed files remain within the task’s reasonable scope
+- unrelated dirty files were untouched
+- protected routes, capabilities, configuration, pricing, terminology, and public surfaces did not regress
+- generated output did not restore stale content
+- the candidate preserves the verified baseline ancestry
+- any deployed result corresponds to the intended candidate
+- public functionality still works when deployment was authorized
+
+These are verification duties, not reasons to ask permission before execution.
+
+## COMMUNICATION RULE
+
+Do not repeatedly ask: “May I run this?”; “May I edit this file?”; “May I create a branch?”; “May I test?”; “May I commit?”; “Which of these routine implementation options do you want?”
+
+Make the safest reasonable implementation decision and proceed.
+
+Ask the founder only for a real product decision, irreversible authority, or unresolved material ambiguity.
+
+## TERMINAL VERDICTS
+
+Use:
+
+- `PASS_SCOPED_CHANGE`
+- `CANDIDATE_PENDING_FOUNDER_PROMOTION`
+- `BLOCKED_BASELINE_CONFLICT`
+- `BLOCKED_SCOPE_BREACH`
+- `BLOCKED_DESTRUCTIVE_AUTHORITY`
+- `BLOCKED_MATERIAL_AMBIGUITY`
+- `BLOCKED_STALE_RELEASE`
+- `BLOCKED_PROTECTED_SURFACE_REGRESSION`
+
+Do not use a blocker merely because approval was not requested for a routine reversible action.
+
+## WORKER POSTURE
+
+Worker executes or reports blocked. Worker does not ratify, reinterpret, or ask routine permission.
