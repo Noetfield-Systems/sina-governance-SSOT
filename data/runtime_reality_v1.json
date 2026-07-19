@@ -103,20 +103,19 @@
     "merge_queues_read_permission": false
   },
   "key_custody": {
-    "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY_STILL_ACTIVE",
+    "SG_BOOTSTRAP_KEY_1": "REVOKED",
     "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
-    "SG_KEY_CUSTODY": "KEY2_IN_VERIFIER_ACCOUNT_KEY1_PENDING_REVOKE",
+    "SG_KEY_CUSTODY": "KEY2_INDEPENDENT_VERIFIER_ONLY",
     "SG_COMMISSIONING_KEY_CUSTODY": "IMPORTED_VERIFIER_ACCOUNT",
-    "SG_COMMISSIONING_ELIGIBLE": false,
-    "SG_COMMISSIONING_KEY_2_CUSTODY": "NOT_ESTABLISHED",
-    "SG_BOOTSTRAP_KEY_1_REVOKED": false,
-    "custody_reason": "Local file mode 0600 does not establish independent SG custody; general founder/Cursor/local-agent execution identity may access the file.",
+    "SG_COMMISSIONING_ELIGIBLE": true,
+    "SG_COMMISSIONING_KEY_2_CUSTODY": "ESTABLISHED",
+    "SG_BOOTSTRAP_KEY_1_REVOKED": true,
+    "custody_reason": "Key2 only in verifier CF account; bootstrap key1 revoked in GitHub and removed from agent-local use.",
     "SG_COMMISSIONING_KEY_2_PUBLIC_FINGERPRINT_SHA256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
     "custody_cloudflare_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
     "custody_worker": "noetfield-sg-authority-v2-shadow",
-    "gate1_blocker": "founder_must_delete_bootstrap_key1_in_github_app_ui",
-    "gate1_delete_fingerprint": "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b",
-    "gate1_keep_fingerprint": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8"
+    "gate1_keep_fingerprint": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+    "established_at": "2026-07-19T07:42:37Z"
   },
   "legacy_app": "PRESERVED_NOT_AUTHORITY",
   "implementation_refs": {
