@@ -1,13 +1,16 @@
 {
   "receipt_type": "nf_founder_reasoning_ingest_proof_b_v1",
-  "captured_at": "2026-07-19T02:29:40Z",
+  "captured_at": "2026-07-19T02:35:24Z",
   "verdict": "STAGING_PROVEN",
-  "event_id": "evt-proofb-1784428141",
-  "packet_id": "frp-five-gate-001",
+  "event_id": "proofb-50b8897fc3",
+  "packet_id": "frp-c69a0568a21c",
   "ingest_action": "workflow_resumed",
   "path": "REASONING_RESULT_INGESTOR",
   "park_state": "WAITING_FOR_FOUNDER_REASONING",
   "no_workflow_restart": true,
   "hold": "HOLD",
-  "sandbox_pr": "https://github.com/Noetfield-Systems/noetfield-sandbox-private/pull/43"
+  "sandbox_pr": "https://github.com/Noetfield-Systems/noetfield-sandbox-private/pull/43",
+  "job_id": "job_proofb-50b8897fc3",
+  "workflow_id": "wf_Zagf93Ns4I2r6mly2fzpU",
+  "reverify_note": "Fresh Proof B cycle after secret reset; sha256= HMAC"
 }

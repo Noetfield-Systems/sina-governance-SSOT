@@ -15,9 +15,19 @@
       "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
       "cadence_minutes": 5,
       "note": "health probe target; no cron yet \u2014 deadman will GET /health"
+    },
+    {
+      "loop_id": "noos-deadman-v1",
+      "health": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "cadence_minutes": 30
     }
   ],
-  "deadman": "noos-deadman-v1_or_specialist_progress_kv",
+  "deadman": {
+    "watcher": "noos-deadman-v1",
+    "health": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "motor_event_gateway_ready": true,
+    "armed_at": "2026-07-19T02:35:34Z"
+  },
   "hold": "HOLD",
   "gate1_residual": "key2_not_established_until_key1_ui_revoke"
 }
