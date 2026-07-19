@@ -1,0 +1,49 @@
+name = "nf-hourly-builder-circle-v1"
+main = "src/builder.js"
+compatibility_date = "2026-07-18"
+compatibility_flags = ["nodejs_compat"]
+account_id = "0d0b967b77e2e5535455d39ff3dae72c"
+workers_dev = true
+
+[[workflows]]
+name = "nf-hourly-builder-circle-v1"
+binding = "BUILDER_WORKFLOW"
+class_name = "BuilderCircleWorkflow"
+schedules = ["0 * * * *"]
+
+[vars]
+LOOP_ID = "nf-hourly-builder-circle-v1"
+TARGET_REPO = "Noetfield-Systems/sina-governance-SSOT"
+MOTOR_APP_ID = "4275961"
+MOTOR_INSTALLATION_ID = "145975487"
+MIN_ROLE_QUORUM = "4"
+MIN_PROVIDER_DIVERSITY = "3"
+MODE = "ASSIST_ONLY"
+AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
+VERIFIER_HEALTH_URL = "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health"
+VERIFIER_TICK_URL = "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/tick"
+LIVE_ACTIVATION = "true"
+OPENAI_MODEL = "gpt-5-mini"
+GEMINI_MODEL = "gemini-2.5-flash-lite"
+DEEPSEEK_MODEL = "deepseek-chat"
+GLM_MODEL = "glm-4-flash"
+KIMI_MODEL = "moonshot-v1-8k"
+HF_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "RECEIPTS"
+id = "5035eef5ef50491ea9642683cb3b11ac"
+
+[observability]
+enabled = true
+
+[observability.logs]
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.05

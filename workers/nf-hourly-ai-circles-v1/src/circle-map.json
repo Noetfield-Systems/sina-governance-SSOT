@@ -1,0 +1,113 @@
+{
+  "schema": "nf.hourly-ai-circles.v1",
+  "version": "1.0.0",
+  "status": "LIVE_ASSIST_ONLY_HOLD",
+  "authority_mode": "ASSIST_ONLY_HOLD",
+  "trigger_host": "cloud",
+  "execution_runtime": "cloudflare_workflows",
+  "live_urls": {
+    "builder_health": "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "verifier_health": "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health"
+  },
+  "groups": {
+    "builder_circle": {
+      "worker": "nf-hourly-builder-circle-v1",
+      "cron": "0 * * * *",
+      "roles": [
+        { "id": "scout", "preferred_model": "deepseek" },
+        { "id": "researcher", "preferred_model": "kimi" },
+        { "id": "critic", "preferred_model": "glm" },
+        { "id": "frugal_divergence", "preferred_model": "workers_ai_or_huggingface" },
+        { "id": "planner", "preferred_model": "gemini_flash_lite" },
+        { "id": "implementer", "preferred_model": "gpt-5-mini" }
+      ],
+      "maximum_external_action_per_tick": 1,
+      "allowed_outputs": ["issue", "draft_pr", "noop"],
+      "forbidden_outputs": ["approve", "merge", "deploy", "authority_change", "secret_change"],
+      "secret_bindings": [
+        "MOTOR_APP_PRIVATE_KEY",
+        "DEEPSEEK_API_KEY",
+        "GLM_API_KEY",
+        "MOONSHOT_API_KEY",
+        "OPENAI_API_KEY",
+        "GEMINI_API_KEY",
+        "HF_TOKEN",
+        "TICK_SECRET",
+        "PEER_TICK_SECRET"
+      ]
+    },
+    "independent_verifier_circle": {
+      "worker": "nf-hourly-independent-verifier-circle-v1",
+      "execution_runtime": "cloudflare_cron_secondary_account_free_plan",
+      "cron": "30 * * * *",
+      "inputs": ["actual_pr_metadata", "actual_diff", "actual_check_runs"],
+      "excluded_inputs": ["builder_private_reasoning", "builder_self_verdict"],
+      "roles": [
+        { "id": "correctness_verifier", "preferred_model": "gpt-5-mini" },
+        { "id": "security_verifier", "preferred_model": "gemini_flash_lite" },
+        { "id": "doctrine_verifier", "preferred_model": "workers_ai" },
+        { "id": "skeptical_critic", "preferred_model": "glm" }
+      ],
+      "allowed_outputs": ["pr_review_comment", "review_labels", "receipt"],
+      "forbidden_outputs": ["edit", "approve", "merge", "deploy", "ratify"],
+      "secret_bindings": [
+        "VERIFIER_GITHUB_APP_PRIVATE_KEY",
+        "VERIFIER_OPENAI_API_KEY",
+        "VERIFIER_GEMINI_API_KEY",
+        "GLM_API_KEY",
+        "TICK_SECRET",
+        "PEER_TICK_SECRET"
+      ]
+    }
+  },
+  "independence": {
+    "separate_worker_deployments": true,
+    "separate_cloudflare_accounts": true,
+    "separate_kv_ledgers": true,
+    "fresh_context_from_pr_diff": true,
+    "verifier_cannot_author_changes": true,
+    "github_identity": {
+      "builder": "noetfield-motor 4275961 / 145975487",
+      "verifier": "noetfield-sg-authority candidate 4330805 / 147378007",
+      "denied": ["4179901", "143449507"]
+    },
+    "author_not_subject": "enforced_by_runtime_and_tool_boundary"
+  },
+  "closed_loop": [
+    "Observe",
+    "Detect",
+    "Research",
+    "Critique",
+    "ProposeOrDraft",
+    "IndependentVerify",
+    "RepairByNewDraftOnly",
+    "ReObserve"
+  ],
+  "portfolio_routing": {
+    "central_metric": "ECQR",
+    "cat_07": "HOLD",
+    "data_before_gate": "HOLD",
+    "ops_are_product_skus": false,
+    "media_supply_order": [
+      "GALLERY_REUSE",
+      "DETERMINISTIC_COMPOSE",
+      "PAID_GENERATION_ONLY_WHEN_REQUIRED"
+    ]
+  },
+  "liveness": {
+    "registry": "separate KV last_fired_at per worker",
+    "stale_after_minutes": 120,
+    "deadman": "reciprocal separate-worker health check and one authenticated tick restart",
+    "cold_test": "48h laptop-closed heartbeats required before commissioning claim"
+  },
+  "activation_gate": {
+    "current": "BLOCKED_NOT_COMMISSIONED",
+    "requires": [
+      "SG acceptance of this bounded extension",
+      "separate KV namespaces",
+      "separate worker secrets",
+      "negative proof that verifier cannot edit or merge",
+      "48h cloud-only liveness proof"
+    ]
+  }
+}
