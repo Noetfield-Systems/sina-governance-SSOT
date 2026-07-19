@@ -4,14 +4,21 @@
  * invalidated commissioning job from nf_commissioning_job_queue_v1.
  *
  * Observe → Detect → Critique → Repair(allowlist) → ProposeImprove → ReObserve
- * Models: DeepSeek → GLM → Kimi → Hugging Face
+ * Models: DeepSeek V4 Flash → DeepSeek V4 Pro → GLM → Kimi → Hugging Face
  * HOLD / no enforcement / no unsupervised redesign / no fake fully_commissioned
  */
+import { WorkflowEntrypoint } from "cloudflare:workers";
+
 import mapDoc from "./map.json";
 import jobQueue from "./job-queue.json";
+import {
+  authorized,
+  readJobRequest,
+  RequestError,
+  workflowInstanceId,
+} from "./control-plane.js";
 
 const SCHEMA = "nf-commissioning-specialist-tick-v1";
-const CURSOR_KEY = jobQueue.cursor_kv_key || "job_queue_cursor";
 const PROGRESS_KEY = jobQueue.progress_kv_key || "job_queue_progress";
 
 function json(body, status = 200) {
@@ -23,32 +30,50 @@ function json(body, status = 200) {
 
 function providers(env) {
   return {
-    deepseek: {
+    deepseek_flash: {
       key: (env.DEEPSEEK_API_KEY || "").trim(),
       url: "https://api.deepseek.com/v1/chat/completions",
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
+      thinking: "disabled",
+      temperature: 0.2,
+      max_tokens: 500,
+      input_per_million_usd: 0.14,
+      output_per_million_usd: 0.28,
+    },
+    deepseek_pro: {
+      key: (env.DEEPSEEK_API_KEY || "").trim(),
+      url: "https://api.deepseek.com/v1/chat/completions",
+      model: "deepseek-v4-pro",
+      thinking: "enabled",
+      max_tokens: 1500,
+      input_per_million_usd: 0.435,
+      output_per_million_usd: 0.87,
     },
     glm: {
       key: (env.GLM_API_KEY || "").trim(),
-      url: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-      model: "glm-4-flash",
+      url: "https://api.z.ai/api/paas/v4/chat/completions",
+      model: "glm-5.2",
+      temperature: 0.2,
     },
     kimi: {
       key: (env.MOONSHOT_API_KEY || "").trim(),
       url: "https://api.moonshot.ai/v1/chat/completions",
-      model: "moonshot-v1-8k",
+      model: "kimi-k2.7-code",
+      temperature: 1,
     },
     huggingface: {
       key: (env.HF_TOKEN || "").trim(),
       url: "https://router.huggingface.co/v1/chat/completions",
       model: "Qwen/Qwen2.5-7B-Instruct",
+      temperature: 0.2,
     },
   };
 }
 
 async function chatComplete(env, system, user) {
   const order = (mapDoc.model_router && mapDoc.model_router.failover_order) || [
-    "deepseek",
+    "deepseek_flash",
+    "deepseek_pro",
     "glm",
     "kimi",
     "huggingface",
@@ -71,8 +96,9 @@ async function chatComplete(env, system, user) {
         },
         body: JSON.stringify({
           model: p.model,
-          temperature: 0.2,
-          max_tokens: 500,
+          ...(p.temperature !== undefined ? { temperature: p.temperature } : {}),
+          ...(p.thinking ? { thinking: { type: p.thinking } } : {}),
+          max_tokens: p.max_tokens || 500,
           messages: [
             { role: "system", content: system },
             { role: "user", content: user },
@@ -98,7 +124,30 @@ async function chatComplete(env, system, user) {
         errors.push({ provider: name, error: "empty_content" });
         continue;
       }
-      return { ok: true, provider: name, model: p.model, content: String(content).slice(0, 2500) };
+      const promptTokens = Number(body?.usage?.prompt_tokens);
+      const completionTokens = Number(body?.usage?.completion_tokens);
+      const hasUsage =
+        Number.isFinite(promptTokens) &&
+        Number.isFinite(completionTokens) &&
+        promptTokens + completionTokens > 0;
+      const estimatedCost =
+        hasUsage &&
+        typeof p.input_per_million_usd === "number" &&
+        typeof p.output_per_million_usd === "number"
+          ? (promptTokens * p.input_per_million_usd +
+              completionTokens * p.output_per_million_usd) /
+            1_000_000
+          : null;
+      return {
+        ok: true,
+        provider: name,
+        model: p.model,
+        content: String(content).slice(0, 2500),
+        usage: hasUsage
+          ? { prompt_tokens: promptTokens, completion_tokens: completionTokens }
+          : null,
+        estimated_cost_usd: estimatedCost === null ? null : Number(estimatedCost.toFixed(8)),
+      };
     } catch (err) {
       errors.push({ provider: name, error: String(err && err.message ? err.message : err) });
     }
@@ -129,15 +178,6 @@ async function probe(url) {
   } catch (err) {
     return { ok: false, status: 0, ms: Date.now() - started, error: String(err) };
   }
-}
-
-function getByPath(obj, path) {
-  let cur = obj;
-  for (const part of String(path).split(".")) {
-    if (cur === null || typeof cur !== "object") return undefined;
-    cur = cur[part];
-  }
-  return cur;
 }
 
 function detect(observe) {
@@ -204,7 +244,7 @@ function allowlistedRepair(defect, observe) {
       result: "flagged_in_receipt_no_main_mutation",
     };
   }
-  if (defect.repair === "upsert_loop_liveness" || defect.repair === "rotate_stale_receipt_pointer") {
+  if (defect.repair === "upsert_loop_liveness") {
     return { applied: true, action: defect.repair, result: "deferred_to_receipt_write" };
   }
   return { applied: false, reason: "unknown_repair" };
@@ -381,42 +421,14 @@ function rollupDirective(reality) {
 }
 
 async function loadProgress(env) {
-  if (!env.RECEIPTS) return { cursor: 0, jobs: {} };
+  if (!env.RECEIPTS) return { jobs: {} };
   const raw = await env.RECEIPTS.get(PROGRESS_KEY);
-  if (!raw) return { cursor: 0, jobs: {} };
+  if (!raw) return { jobs: {} };
   try {
     return JSON.parse(raw);
   } catch {
-    return { cursor: 0, jobs: {} };
+    return { jobs: {} };
   }
-}
-
-function selectNextJob(progress) {
-  const jobs = jobQueue.jobs || [];
-  if (!jobs.length) return { index: 0, job: null };
-  // Prefer execute-class incomplete jobs first
-  const executeIdx = [];
-  const qualifyIdx = [];
-  for (let i = 0; i < jobs.length; i++) {
-    const job = jobs[i];
-    const prev = progress.jobs?.[job.id];
-    if (prev?.status === "pass" && prev?.cycle === progress.cycle) continue;
-    if (job.class === "execute") executeIdx.push(i);
-    else qualifyIdx.push(i);
-  }
-  const order = executeIdx.concat(qualifyIdx);
-  if (!order.length) {
-    const start = Number(progress.cursor || 0) % jobs.length;
-    return { index: start, job: jobs[start], wrapped: true };
-  }
-  const startCursor = Number(progress.cursor || 0);
-  const ranked = order.sort((a, b) => {
-    const da = (a - startCursor + jobs.length) % jobs.length;
-    const db = (b - startCursor + jobs.length) % jobs.length;
-    return da - db;
-  });
-  const idx = ranked[0];
-  return { index: idx, job: jobs[idx] };
 }
 
 async function mintMotorInstallationToken(env) {
@@ -451,7 +463,7 @@ async function mintMotorInstallationToken(env) {
       Authorization: `Bearer ${jwt}`,
       Accept: "application/vnd.github+json",
       "User-Agent": SCHEMA,
-      "X-GitHub-Api-Version": "2022-11-28",
+      "X-GitHub-Api-Version": "2026-03-10",
     },
   });
   if (!tokRes.ok) return null;
@@ -478,7 +490,7 @@ async function ghApi(token, path, method = "GET", body = null) {
       Accept: "application/vnd.github+json",
       "Content-Type": "application/json",
       "User-Agent": SCHEMA,
-      "X-GitHub-Api-Version": "2022-11-28",
+      "X-GitHub-Api-Version": "2026-03-10",
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -490,49 +502,6 @@ async function ghApi(token, path, method = "GET", body = null) {
     jsonBody = { raw: text.slice(0, 300) };
   }
   return { ok: resp.ok, status: resp.status, body: jsonBody };
-}
-
-async function dispatchCommissioningRunway(env, receipt, job) {
-  const repo = (env.COMMISSIONING_RUNWAY_REPO || "Noetfield-Systems/NOETFIELD-RUNWAY").trim();
-  try {
-    const token = await mintMotorInstallationToken(env);
-    if (!token) {
-      return { ok: false, error: "MOTOR_APP_PRIVATE_KEY missing or mint failed — runway dispatch skipped" };
-    }
-    const resp = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-        "User-Agent": SCHEMA,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-      body: JSON.stringify({
-        event_type: "commissioning_tick",
-        client_payload: {
-          source: "cf-cron",
-          at: receipt.at,
-          verdict: receipt.verdict,
-          loop_id: receipt.loop_id,
-          job_id: job?.id || null,
-          job_class: job?.class || null,
-          runway_action: job?.runway_action || null,
-          map_version: mapDoc.version,
-          queue_version: jobQueue.version,
-        },
-      }),
-    });
-    return {
-      ok: resp.status === 204,
-      status: resp.status,
-      repo,
-      event_type: "commissioning_tick",
-      job_id: job?.id || null,
-    };
-  } catch (err) {
-    return { ok: false, error: String(err && err.message ? err.message : err) };
-  }
 }
 
 function sleep(ms) {
@@ -549,15 +518,22 @@ async function dispatchWorkflowJob(env, job, tokenOverride = null) {
   const inputs = d.inputs || {};
   const before = new Date().toISOString();
   const path = `/repos/${repo}/actions/workflows/${d.workflow}/dispatches`;
-  const res = await ghApi(token, path, "POST", { ref, inputs });
+  const res = await ghApi(token, path, "POST", {
+    ref,
+    inputs,
+    return_run_details: true,
+  });
   return {
-    ok: res.status === 204 || res.ok,
+    ok: res.status === 200 || res.status === 204 || res.ok,
     status: res.status,
     repo,
     workflow: d.workflow,
     ref,
     job_id: job.id,
     dispatched_at: before,
+    workflow_run_id: res.body?.workflow_run_id || null,
+    run_url: res.body?.run_url || null,
+    html_url: res.body?.html_url || null,
     body: res.body,
   };
 }
@@ -637,13 +613,26 @@ async function executeDispatchAndWait(env, job, count = 1) {
     }
     if (i + 1 < count) await sleep(1_500);
   }
-  // Give Actions a moment to materialize runs
-  await sleep(5_000);
-  let runs = await findRecentWorkflowRuns(token, repo, workflow, dispatchedAt, count);
-  // Retry discovery briefly
-  for (let i = 0; i < 6 && runs.length < count; i++) {
+  const returnedRunIds = dispatches
+    .map((dispatch) => dispatch.workflow_run_id)
+    .filter(Boolean);
+  let runs = returnedRunIds.map((id, index) => ({
+    id,
+    status: "queued",
+    conclusion: null,
+    html_url: dispatches[index]?.html_url || null,
+    created_at: dispatches[index]?.dispatched_at || dispatchedAt,
+    head_sha: null,
+  }));
+  // The 2026-03-10 API returns exact run IDs. Keep discovery only as a
+  // compatibility fallback for GitHub installations that still answer 204.
+  if (runs.length < count) {
     await sleep(5_000);
     runs = await findRecentWorkflowRuns(token, repo, workflow, dispatchedAt, count);
+    for (let i = 0; i < 6 && runs.length < count; i++) {
+      await sleep(5_000);
+      runs = await findRecentWorkflowRuns(token, repo, workflow, dispatchedAt, count);
+    }
   }
   if (runs.length < count) {
     return {
@@ -666,7 +655,7 @@ async function executeDispatchAndWait(env, job, count = 1) {
     token,
     repo,
     runs.map((r) => r.id),
-    90_000,
+    20 * 60_000,
   );
   if (!waited.allDone) {
     return {
@@ -696,34 +685,6 @@ async function executeDispatchAndWait(env, job, count = 1) {
   };
 }
 
-async function resumePendingJob(env, progress) {
-  const pending = progress.pending;
-  if (!pending?.run_ids?.length) return null;
-  const token = await mintMotorInstallationToken(env);
-  if (!token) return { job_id: pending.job_id, status: "fail", error: "token_mint_failed" };
-  const waited = await waitForRuns(token, pending.repo, pending.run_ids, 90_000);
-  if (!waited.allDone) {
-    return {
-      job_id: pending.job_id,
-      status: "dispatched_pending",
-      proof: pending.proof || null,
-      runs: waited.results,
-      waited_ms: waited.waited_ms,
-      pending,
-      resumed: true,
-    };
-  }
-  return {
-    job_id: pending.job_id,
-    status: waited.allPass ? "pass" : "fail",
-    proof: pending.proof || null,
-    runs: waited.results,
-    waited_ms: waited.waited_ms,
-    resumed: true,
-    acceptance: pending.acceptance || null,
-  };
-}
-
 async function executeSelectedJob(env, job, observe, lastFiredAt) {
   const reality = observe.surfaces.runtime_reality?.body || {};
   const action = job?.runway_action;
@@ -743,6 +704,21 @@ async function executeSelectedJob(env, job, observe, lastFiredAt) {
         key_pointer: observe.surfaces.key_pointer?.ok,
         job_queue: observe.surfaces.job_queue?.ok,
       },
+    };
+  }
+  if (action === "score_founder_reasoning_ingest_live") {
+    const live = await probe(job.live_probe);
+    return {
+      job_id: job.id,
+      status: "blocked_founder",
+      live_probe: {
+        ok: live.ok,
+        status: live.status,
+        ms: live.ms,
+      },
+      missing_decision:
+        "submit an authorized founder reasoning result to the staging reasoning-results endpoint and provide its receipt",
+      note: "The commissioning Worker probes this founder-gated path but never fabricates or submits founder reasoning.",
     };
   }
   if (action === "score_key_custody") return scoreKeyCustody(reality);
@@ -768,17 +744,27 @@ async function executeSelectedJob(env, job, observe, lastFiredAt) {
 
 async function runTick(env, meta = {}) {
   const at = new Date().toISOString();
+  const requestedJobId = String(meta.jobId || "").trim();
+  const selectedIndex = (jobQueue.jobs || []).findIndex((job) => job.id === requestedJobId);
+  if (selectedIndex < 0) throw new Error(`unknown commissioning job_id: ${requestedJobId}`);
+  const job = jobQueue.jobs[selectedIndex];
   const queueUrl =
     env.JOB_QUEUE_URL ||
     "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/nf_commissioning_job_queue_v1.json";
 
+  const [sgShadow, runtimeReality, keyPointer, queueProbe] = await Promise.all([
+    probe(env.SG_SHADOW_HEALTH_URL),
+    probe(env.RUNTIME_REALITY_URL),
+    probe(env.KEY_POINTER_URL),
+    probe(queueUrl),
+  ]);
   const observe = {
     at,
     surfaces: {
-      sg_shadow: await probe(env.SG_SHADOW_HEALTH_URL),
-      runtime_reality: await probe(env.RUNTIME_REALITY_URL),
-      key_pointer: await probe(env.KEY_POINTER_URL),
-      job_queue: await probe(queueUrl),
+      sg_shadow: sgShadow,
+      runtime_reality: runtimeReality,
+      key_pointer: keyPointer,
+      job_queue: queueProbe,
     },
   };
 
@@ -789,31 +775,7 @@ async function runTick(env, meta = {}) {
   if (env.RECEIPTS) lastFiredAt = await env.RECEIPTS.get("last_fired_at");
 
   const progress = await loadProgress(env);
-  if (!progress.cycle) progress.cycle = 1;
-
-  let selected = { index: progress.cursor || 0, job: null };
-  let jobResult;
-
-  // Resume in-flight Motor proof runs before starting a new job
-  if (progress.pending?.run_ids?.length) {
-    jobResult = await resumePendingJob(env, progress);
-    const jobId = jobResult?.job_id || progress.pending.job_id;
-    selected = {
-      index: (jobQueue.jobs || []).findIndex((j) => j.id === jobId),
-      job: (jobQueue.jobs || []).find((j) => j.id === jobId) || {
-        id: jobId,
-        class: "execute",
-        runway_action: "dispatch_and_wait",
-        acceptance: progress.pending.acceptance,
-        proof: progress.pending.proof,
-      },
-    };
-    if (selected.index < 0) selected.index = progress.cursor || 0;
-  } else {
-    selected = selectNextJob(progress);
-    jobResult = await executeSelectedJob(env, selected.job, observe, lastFiredAt);
-  }
-  const job = selected.job;
+  const jobResult = await executeSelectedJob(env, job, observe, lastFiredAt);
 
   repairs.push({
     defect: `job:${job?.id || "none"}`,
@@ -861,38 +823,42 @@ async function runTick(env, meta = {}) {
         schema: "nf.kaizen-proposal.v1",
         status: "PROPOSED_PENDING_FOUNDER",
         provider: improve.provider,
+        model: improve.model,
         content: improve.content,
+        usage: improve.usage || null,
+        estimated_cost_usd: improve.estimated_cost_usd,
       };
     }
   }
 
-  // Advance cursor only when job finished (pass/fail/blocked); hold cursor while pending
-  const jobsLen = (jobQueue.jobs || []).length || 1;
-  if (jobResult.status === "dispatched_pending") {
-    progress.pending = {
-      ...(jobResult.pending || {}),
-      job_id: job?.id,
-      proof: job?.proof || jobResult.proof || null,
-      acceptance: job?.acceptance || null,
-    };
-  } else {
-    progress.pending = null;
-    const nextCursor = (selected.index + 1) % jobsLen;
-    if (nextCursor === 0) progress.cycle = (progress.cycle || 1) + 1;
-    progress.cursor = nextCursor;
-  }
   progress.jobs = progress.jobs || {};
   if (job?.id) {
     progress.jobs[job.id] = {
       status: jobResult.status,
       at,
-      cycle: progress.cycle,
+      queue_version: jobQueue.version,
+      request_id: meta.requestId || null,
+      workflow_instance_id: meta.instanceId || null,
+      rerun_reason: meta.rerunReason || null,
       missing_decision: jobResult.missing_decision || null,
       runs: jobResult.runs || null,
       proof: jobResult.proof || job?.proof || null,
     };
   }
   progress.updated_at = at;
+
+  const successfulLlmResults = [critique, proposal].filter(
+    (result) => result && result.provider,
+  );
+  const meteredLlmResults = successfulLlmResults.filter(
+    (result) => result && typeof result.estimated_cost_usd === "number",
+  );
+  const knownLlmEstimatedCostUsd = Number(
+    meteredLlmResults
+      .reduce((sum, result) => sum + result.estimated_cost_usd, 0)
+      .toFixed(8),
+  );
+  const unmeteredLlmCalls = successfulLlmResults.length - meteredLlmResults.length;
 
   const verdict = defects.some((d) => d.severity === "P0")
     ? "FAIL_P0"
@@ -914,7 +880,10 @@ async function runTick(env, meta = {}) {
     schema: SCHEMA,
     loop_id: env.LOOP_ID || mapDoc.loop_id,
     at,
-    source: meta.source || "on_demand",
+    source: meta.source || "cloudflare_workflow",
+    request_id: meta.requestId || null,
+    workflow_instance_id: meta.instanceId || null,
+    rerun_reason: meta.rerunReason || null,
     cron: null,
     mode: env.MODE || "COMMISSIONING_ON_DEMAND",
     hold: env.AUTONOMOUS_PRODUCTION_MUTATIONS || "HOLD",
@@ -927,10 +896,8 @@ async function runTick(env, meta = {}) {
       : null,
     job_result: jobResult,
     job_progress: {
-      cursor: progress.cursor,
-      cycle: progress.cycle,
-      completed_this_cycle: Object.entries(progress.jobs || {})
-        .filter(([, v]) => v.cycle === progress.cycle && v.status === "pass")
+      completed_for_queue_version: Object.entries(progress.jobs || {})
+        .filter(([, value]) => value.queue_version === jobQueue.version && value.status === "pass")
         .map(([id]) => id),
     },
     observe,
@@ -938,6 +905,14 @@ async function runTick(env, meta = {}) {
     repairs,
     critique,
     propose_improve: proposal,
+    llm_cost: {
+      calls: successfulLlmResults.length,
+      metered_calls: meteredLlmResults.length,
+      unmetered_calls: unmeteredLlmCalls,
+      estimated_usd: unmeteredLlmCalls === 0 ? knownLlmEstimatedCostUsd : null,
+      known_estimated_usd: knownLlmEstimatedCostUsd,
+      basis: "provider usage tokens times configured current model rates",
+    },
     model_keys_present: {
       deepseek: Boolean((env.DEEPSEEK_API_KEY || "").trim()),
       glm: Boolean((env.GLM_API_KEY || "").trim()),
@@ -947,19 +922,9 @@ async function runTick(env, meta = {}) {
     verdict,
   };
 
-  const runway_dispatch = await dispatchCommissioningRunway(env, receipt, job);
-  receipt.runway_dispatch = runway_dispatch;
-  repairs.push({
-    defect: "runway_dispatch",
-    applied: runway_dispatch.ok === true,
-    action: "dispatch_commissioning_runway_job",
-    result: runway_dispatch,
-  });
-
   if (env.RECEIPTS) {
     await env.RECEIPTS.put(PROGRESS_KEY, JSON.stringify(progress));
-    await env.RECEIPTS.put(CURSOR_KEY, String(progress.cursor));
-    const key = `tick:${at}`;
+    const key = meta.instanceId ? `job:${meta.instanceId}` : `job:${at}`;
     await env.RECEIPTS.put(key, JSON.stringify(receipt), { expirationTtl: 60 * 60 * 24 * 14 });
     await env.RECEIPTS.put("last_fired_at", at);
     await env.RECEIPTS.put("last_receipt", JSON.stringify(receipt));
@@ -967,6 +932,54 @@ async function runTick(env, meta = {}) {
   }
 
   return receipt;
+}
+
+export class CommissioningJobWorkflow extends WorkflowEntrypoint {
+  async run(event, step) {
+    const payload = event?.payload || {};
+    const jobId = String(payload.jobId || "").trim();
+    const job = (jobQueue.jobs || []).find((candidate) => candidate.id === jobId);
+    if (!job || job.machine_safe !== true) {
+      throw new Error(`invalid or unsafe commissioning job_id: ${jobId || "missing"}`);
+    }
+
+    console.log(
+      JSON.stringify({
+        schema: SCHEMA,
+        event: "commissioning_job_started",
+        workflow_instance_id: payload.instanceId || null,
+        job_id: jobId,
+        request_id: payload.requestId || null,
+      }),
+    );
+
+    const receipt = await step.do(
+      `execute ${jobId}`,
+      {
+        retries: { limit: 1, delay: "1 second", backoff: "constant" },
+        timeout: "30 minutes",
+      },
+      () =>
+        runTick(this.env, {
+          source: "cloudflare_workflow",
+          jobId,
+          requestId: payload.requestId,
+          instanceId: payload.instanceId,
+          rerunReason: payload.rerunReason,
+        }),
+    );
+
+    console.log(
+      JSON.stringify({
+        schema: SCHEMA,
+        event: "commissioning_job_finished",
+        workflow_instance_id: payload.instanceId || null,
+        job_id: jobId,
+        verdict: receipt.verdict,
+      }),
+    );
+    return receipt;
+  }
 }
 
 export default {
@@ -996,7 +1009,7 @@ export default {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Headers": "Authorization, Content-Type",
         },
       });
     }
@@ -1004,11 +1017,9 @@ export default {
     if (url.pathname === "/health") {
       let last = null;
       let lastJob = null;
-      let cursor = null;
       if (env.RECEIPTS) {
         last = await env.RECEIPTS.get("last_fired_at");
         lastJob = await env.RECEIPTS.get("last_job_id");
-        cursor = await env.RECEIPTS.get(CURSOR_KEY);
       }
       return json({
         ok: true,
@@ -1017,12 +1028,12 @@ export default {
         trigger_mode: "on_demand",
         cron: null,
         schedule_enabled: false,
-        dispatch_path:
-          "NOETFIELD-RUNWAY/.github/workflows/commissioning-run.yml (workflow_dispatch or authorized repository_dispatch with job_id)",
+        dispatch_path: "POST /jobs (Bearer auth, explicit job_id and request_id)",
+        execution_owner: "Cloudflare Workflow -> one allowlisted GitHub Actions workflow",
+        workflow_binding_present: Boolean(env.COMMISSIONING_JOB),
         loop_id: env.LOOP_ID,
         last_fired_at: last,
         last_job_id: lastJob,
-        job_queue_cursor: cursor,
         queue_version: jobQueue.version,
         job_count: (jobQueue.jobs || []).length,
         hold: env.AUTONOMOUS_PRODUCTION_MUTATIONS || "HOLD",
@@ -1036,14 +1047,157 @@ export default {
         },
       });
     }
+    if (url.pathname === "/jobs" && request.method === "POST") {
+      const auth = await authorized(request, env.COMMISSIONING_TRIGGER_SECRET);
+      if (auth.unavailable) {
+        return json({ ok: false, error: "commissioning_trigger_secret_not_configured" }, 503);
+      }
+      if (!auth.ok) return json({ ok: false, error: "unauthorized" }, 401);
+      if (!env.COMMISSIONING_JOB) {
+        return json({ ok: false, error: "commissioning_workflow_binding_missing" }, 503);
+      }
+
+      try {
+        const parsed = await readJobRequest(request, jobQueue.jobs || []);
+        const instanceId = await workflowInstanceId(parsed.requestId);
+        let existing = null;
+        try {
+          existing = await env.COMMISSIONING_JOB.get(instanceId);
+          const existingStatus = await existing.status();
+          const requestRecord = env.RECEIPTS
+            ? await env.RECEIPTS.get(`request:${instanceId}`, "json")
+            : null;
+          if (requestRecord?.job_id && requestRecord.job_id !== parsed.jobId) {
+            return json(
+              {
+                ok: false,
+                error: "request_id_payload_conflict",
+                instance_id: instanceId,
+                original_job_id: requestRecord.job_id,
+              },
+              409,
+            );
+          }
+          return json(
+            {
+              ok: true,
+              replay: true,
+              instance_id: instanceId,
+              job_id: requestRecord?.job_id || parsed.jobId,
+              details: existingStatus,
+            },
+            200,
+          );
+        } catch {
+          existing = null;
+        }
+
+        const progress = await loadProgress(env);
+        const previous = progress.jobs?.[parsed.jobId];
+        if (
+          previous?.status === "pass" &&
+          previous?.queue_version === jobQueue.version &&
+          !parsed.rerunReason
+        ) {
+          return json(
+            {
+              ok: false,
+              error: "completed_job_unchanged",
+              job_id: parsed.jobId,
+              queue_version: jobQueue.version,
+              completed_at: previous.at,
+              action: "Provide a new request_id and a 12-500 character rerun_reason to reverify.",
+            },
+            409,
+          );
+        }
+
+        let instance;
+        let replay = false;
+        try {
+          instance = await env.COMMISSIONING_JOB.create({
+            id: instanceId,
+            params: {
+              instanceId,
+              jobId: parsed.jobId,
+              requestId: parsed.requestId,
+              rerunReason: parsed.rerunReason,
+              requestedAt: new Date().toISOString(),
+            },
+          });
+        } catch (createError) {
+          try {
+            instance = await env.COMMISSIONING_JOB.get(instanceId);
+            await instance.status();
+            replay = true;
+          } catch {
+            throw createError;
+          }
+        }
+        if (env.RECEIPTS) {
+          await env.RECEIPTS.put(
+            `request:${instanceId}`,
+            JSON.stringify({
+              job_id: parsed.jobId,
+              request_id: parsed.requestId,
+              rerun_reason: parsed.rerunReason,
+              queue_version: jobQueue.version,
+              created_at: new Date().toISOString(),
+            }),
+            { expirationTtl: 60 * 60 * 24 * 14 },
+          );
+        }
+        return json(
+          {
+            ok: true,
+            replay,
+            instance_id: instance.id,
+            job_id: parsed.jobId,
+            details: await instance.status(),
+          },
+          replay ? 200 : 202,
+        );
+      } catch (error) {
+        if (error instanceof RequestError) {
+          return json({ ok: false, error: error.code, message: error.message }, error.status);
+        }
+        console.error(
+          JSON.stringify({
+            schema: SCHEMA,
+            event: "commissioning_job_create_failed",
+            error: String(error?.message || error),
+          }),
+        );
+        return json({ ok: false, error: "commissioning_job_create_failed" }, 503);
+      }
+    }
+    if (url.pathname.startsWith("/jobs/") && request.method === "GET") {
+      const auth = await authorized(request, env.COMMISSIONING_TRIGGER_SECRET);
+      if (auth.unavailable) {
+        return json({ ok: false, error: "commissioning_trigger_secret_not_configured" }, 503);
+      }
+      if (!auth.ok) return json({ ok: false, error: "unauthorized" }, 401);
+      if (!env.COMMISSIONING_JOB) {
+        return json({ ok: false, error: "commissioning_workflow_binding_missing" }, 503);
+      }
+      const instanceId = decodeURIComponent(url.pathname.slice("/jobs/".length));
+      if (!/^commission-[a-f0-9]{48}$/.test(instanceId)) {
+        return json({ ok: false, error: "invalid_instance_id" }, 400);
+      }
+      try {
+        const instance = await env.COMMISSIONING_JOB.get(instanceId);
+        return json({ ok: true, instance_id: instance.id, details: await instance.status() });
+      } catch {
+        return json({ ok: false, error: "workflow_instance_not_found" }, 404);
+      }
+    }
     if (url.pathname === "/tick" && request.method === "POST") {
       return json(
         {
           ok: false,
           error: "perpetual_tick_disabled",
           trigger_mode: "on_demand",
-          action:
-            "Dispatch an explicit commissioning job through NOETFIELD-RUNWAY commissioning-run workflow.",
+          action: "POST an explicit authenticated request to /jobs.",
         },
         410,
       );
@@ -1052,7 +1206,7 @@ export default {
     if (url.pathname === "/queue") return json(jobQueue);
     if (url.pathname === "/progress" && env.RECEIPTS) {
       const raw = await env.RECEIPTS.get(PROGRESS_KEY);
-      return json(raw ? JSON.parse(raw) : { cursor: 0, jobs: {} });
+      return json(raw ? JSON.parse(raw) : { jobs: {} });
     }
     if (url.pathname === "/last" && env.RECEIPTS) {
       const raw = await env.RECEIPTS.get("last_receipt");
