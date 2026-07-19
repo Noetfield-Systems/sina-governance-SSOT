@@ -110,6 +110,14 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Wake:** authenticated HTTP `job_id` only. HOLD preserved.  
 **Wiring:** `docs/dispatch/nf-compute-roi-allocation-all-repos.md`
 
+## 2l. DETERMINISTIC API PRODUCT & GTM (P10 — external commercial surface)
+
+`P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md` = **decision** `NF-DETERMINISTIC-API-PRODUCT-AND-GTM-V1` (`LOCKED`).
+**Machine:** `data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json`
+**Law:** Clients buy a deterministic API that returns guaranteed usable outcomes — not a model, agents, Runways, or the Motor.
+**Flagship:** `POST /v1/chat/completions` first; do not build extract/webhooks SKUs before flagship ships and sells.
+**Hold:** internal Motor/Runway/NOOS vocabulary off buyer surfaces; cheap-first cost doctrine preserved.
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.
