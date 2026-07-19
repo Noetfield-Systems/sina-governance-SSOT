@@ -177,21 +177,41 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
   );
   const model = await modelReview(env, reviewPayload);
   const rendered = renderReview(deterministic, model, receiptId, pr.head.sha);
-  let reviewChannel = "pulls_reviews";
+  // GitHub write may be unavailable for the SG-candidate verifier app.
+  // Judgment is still recorded in the independent KV receipt for the builder closed loop.
+  const deliveryAttempts = [];
+  let reviewChannel = "kv_receipt_only";
   try {
     await github(token, `/repos/${owner}/${repo}/pulls/${pr.number}/reviews`, {
       method: "POST",
       body: JSON.stringify({ event: "COMMENT", body: rendered.body }),
     });
+    reviewChannel = "pulls_reviews";
+    deliveryAttempts.push({ channel: "pulls_reviews", ok: true });
   } catch (error) {
-    // SG candidate app may lack pull-request review write; issue comments preserve independence.
-    reviewChannel = "issue_comment_fallback";
-    await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
-      method: "POST",
-      body: JSON.stringify({
-        body: `${rendered.body}\n\n_Posted as issue comment because PR review API was unavailable: ${clip(String(error?.message || error), 180)}_`,
-      }),
+    deliveryAttempts.push({
+      channel: "pulls_reviews",
+      ok: false,
+      error: clip(String(error?.message || error), 240),
     });
+    try {
+      await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
+        method: "POST",
+        body: JSON.stringify({
+          body:
+            `${rendered.body}\n\n` +
+            `_Posted as issue comment because PR review API was unavailable._`,
+        }),
+      });
+      reviewChannel = "issue_comment_fallback";
+      deliveryAttempts.push({ channel: "issue_comment_fallback", ok: true });
+    } catch (commentError) {
+      deliveryAttempts.push({
+        channel: "issue_comment_fallback",
+        ok: false,
+        error: clip(String(commentError?.message || commentError), 240),
+      });
+    }
   }
   try {
     await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/labels`, {
@@ -203,26 +223,13 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
         ],
       }),
     });
-  } catch {
-    // The review comment is canonical; labels are optional routing metadata.
-  }
-  // Closed-loop repair signal only — verifier never edits the PR.
-  if (!rendered.pass) {
-    try {
-      await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
-        method: "POST",
-        body: JSON.stringify({
-          body:
-            `## Independent repair request\n\n` +
-            `Exact head \`${pr.head.sha}\` requires a **new** \`ai-circle/*\` draft (do not push over this head).\n` +
-            `Builder circle must open a bounded repair draft addressing the findings above.\n` +
-            `HOLD preserved. Verifier cannot edit, approve, merge, or deploy.\n` +
-            `Receipt: \`${receiptId}\``,
-        }),
-      });
-    } catch {
-      // Review comment remains the canonical signal.
-    }
+    deliveryAttempts.push({ channel: "labels", ok: true });
+  } catch (labelError) {
+    deliveryAttempts.push({
+      channel: "labels",
+      ok: false,
+      error: clip(String(labelError?.message || labelError), 240),
+    });
   }
   return {
     pr_number: pr.number,
@@ -234,6 +241,8 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
     model: model.normalized,
     repair_requested: !rendered.pass,
     review_channel: reviewChannel,
+    review_body: rendered.body,
+    github_delivery: deliveryAttempts,
   };
 }
 

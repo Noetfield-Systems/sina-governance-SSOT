@@ -28,13 +28,49 @@ function repoParts(env) {
   return { owner, repo };
 }
 
-async function snapshot(token, owner, repo) {
-  const [metadata, commits, issues, pulls, tree] = await Promise.all([
+async function fetchVerifierFeedback(env) {
+  const url = String(env.VERIFIER_LAST_URL || "").trim() ||
+    String(env.VERIFIER_HEALTH_URL || "").replace(/\/health$/, "/last");
+  if (!url) return { ok: false, reason: "verifier_last_url_missing" };
+  try {
+    const resp = await fetch(url, { headers: { Accept: "application/json", "User-Agent": SCHEMA } });
+    const body = await resp.json();
+    const reviews = body.reviews || [];
+    return {
+      ok: resp.ok,
+      at: body.at || null,
+      verdict: body.verdict || null,
+      reviews: reviews.map((review) => ({
+        pr_number: review.pr_number,
+        head_sha: review.head_sha,
+        verdict: review.verdict,
+        review_channel: review.review_channel,
+        review_body: review.review_body || null,
+        github_delivery: review.github_delivery || [],
+        findings: review.deterministic?.findings || [],
+      })),
+      repairs: reviews
+        .filter((review) => review.verdict === "REQUEST_CHANGES")
+        .map((review) => ({
+          pr_number: review.pr_number,
+          head_sha: review.head_sha,
+          review_channel: review.review_channel,
+          findings: review.deterministic?.findings || [],
+        })),
+    };
+  } catch (error) {
+    return { ok: false, reason: String(error?.message || error) };
+  }
+}
+
+async function snapshot(token, owner, repo, env) {
+  const [metadata, commits, issues, pulls, tree, verifierFeedback] = await Promise.all([
     github(token, `/repos/${owner}/${repo}`),
     github(token, `/repos/${owner}/${repo}/commits?per_page=8`),
     github(token, `/repos/${owner}/${repo}/issues?state=open&per_page=15&sort=updated`),
     github(token, `/repos/${owner}/${repo}/pulls?state=open&per_page=15&sort=updated`),
     github(token, `/repos/${owner}/${repo}/git/trees/main?recursive=1`),
+    fetchVerifierFeedback(env),
   ]);
   const openPrs = pulls.map((item) => ({
     number: item.number,
@@ -56,6 +92,7 @@ async function snapshot(token, owner, repo) {
       .map((item) => ({ number: item.number, title: item.title, labels: item.labels?.map((x) => x.name) })),
     open_prs: openPrs,
     open_ai_circle_prs: openPrs.filter((pr) => String(pr.head || "").startsWith("ai-circle/")),
+    verifier_feedback: verifierFeedback,
     job_catalog: [
       "motor_job",
       "commissioning_tick",
@@ -274,6 +311,52 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
   };
 }
 
+/**
+ * Motor is a dumb delivery bus for verifier-computed text when the SG-candidate
+ * app lacks Issues/PR write. Judgment remains verifier-owned in KV.
+ */
+async function publishVerifierReviewsViaMotor(token, owner, repo, verifierFeedback) {
+  const published = [];
+  for (const review of verifierFeedback?.reviews || []) {
+    if (!review.review_body || !review.pr_number) continue;
+    if (review.review_channel && review.review_channel !== "kv_receipt_only") continue;
+    const marker = `ai-circle-verifier-receipt:${review.head_sha}`;
+    try {
+      const existing = await github(
+        token,
+        `/repos/${owner}/${repo}/issues/${review.pr_number}/comments?per_page=30`,
+      );
+      if ((existing || []).some((comment) => String(comment.body || "").includes(marker))) {
+        published.push({ pr_number: review.pr_number, reused: true, marker });
+        continue;
+      }
+      const comment = await github(token, `/repos/${owner}/${repo}/issues/${review.pr_number}/comments`, {
+        method: "POST",
+        body: JSON.stringify({
+          body:
+            `${review.review_body}\n\n` +
+            `---\nDelivery bus: Motor posted verifier-computed text. ` +
+            `Judgment source remains the independent verifier KV receipt.\n` +
+            `Marker: \`${marker}\``,
+        }),
+      });
+      published.push({
+        pr_number: review.pr_number,
+        ok: true,
+        comment_id: comment.id,
+        marker,
+      });
+    } catch (error) {
+      published.push({
+        pr_number: review.pr_number,
+        ok: false,
+        error: clip(String(error?.message || error), 240),
+      });
+    }
+  }
+  return published;
+}
+
 async function persist(env, receipt) {
   if (!env.RECEIPTS) return;
   await env.RECEIPTS.put(`tick:${receipt.at}`, JSON.stringify(receipt), {
@@ -391,8 +474,14 @@ export async function runBuilderTick(env, meta = {}) {
   try {
     const { owner, repo } = repoParts(env);
     const token = await mintInstallationToken(env, "builder");
-    const repoSnapshot = await snapshot(token, owner, repo);
+    const repoSnapshot = await snapshot(token, owner, repo, env);
     const circle = await runCircle(env, repoSnapshot, token, owner, repo);
+    const verifierPublish = await publishVerifierReviewsViaMotor(
+      token,
+      owner,
+      repo,
+      repoSnapshot.verifier_feedback,
+    );
     const delivered = await deliverRealWork({
       env,
       token,
@@ -438,6 +527,8 @@ export async function runBuilderTick(env, meta = {}) {
       action_validation: delivered.validated,
       delivery,
       deliveries: delivered.deliveries,
+      verifier_feedback: repoSnapshot.verifier_feedback,
+      verifier_publish: verifierPublish,
       verdict: realWork
         ? "PASS_ASSIST_ONLY_DELIVERY"
         : delivery?.kind === "issue"
