@@ -1,7 +1,8 @@
 {
   "schema": "nf.receipt.v1",
   "receipt_id": "NF_DETERMINISTIC_RUNWAY_PRODUCTION_POINTER_v1",
-  "observed_at": "2026-07-19T08:40:00Z",
+  "observed_at": "2026-07-19T09:50:46Z",
   "verdict": "CANDIDATE_PENDING_FOUNDER_PROMOTION",
-  "pointer": "data/nf_runway_deterministic_production_pointer_v1.json"
+  "pointer": "data/nf_runway_deterministic_production_pointer_v1.json",
+  "candidate_sha": "0a65da690481e57c94a37b430249902ff519c4f1"
 }

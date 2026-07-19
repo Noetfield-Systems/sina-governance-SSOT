@@ -1,9 +1,11 @@
 {
   "schema": "nf.runway-deterministic-production-pointer.v1",
-  "updated_at": "2026-07-19T08:40:00Z",
+  "updated_at": "2026-07-19T09:50:46Z",
   "status": "candidate_pending_founder_promotion",
   "autonomous_production_mutations": "HOLD",
-  "runway_pr": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/45",
+  "runway_pr": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/46",
+  "runway_candidate_sha": "0a65da690481e57c94a37b430249902ff519c4f1",
+  "superseded_runway_pr": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/45",
   "site_prs": {
     "sourceb": "https://github.com/Noetfield-Systems/SourceB/pull/53",
     "noetfield": "https://github.com/Noetfield-Systems/Noetfield/pull/126",
@@ -27,6 +29,6 @@
     "spreadsheet-kpi-pack",
     "rfp-response-pack"
   ],
-  "private_proof": "PASS_PRIVATE_PROOF",
+  "private_proof": "PASS_FIXTURE_QUALIFICATION_AND_LIVE_ARTIFACT_INTEGRITY_NOT_PAYMENT_OR_CUSTOMER_ACCEPTANCE",
   "independent_48h": "PENDING_LIVE_WINDOW"
 }

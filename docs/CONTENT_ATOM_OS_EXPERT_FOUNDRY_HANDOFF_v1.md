@@ -28,6 +28,8 @@ These are candidate modules, not accepted architecture or validated offers.
 
 Cloud implementation remains on hold until the deterministic artifact Mo&#116;or has real artifact-acceptance evidence: an actual artifact traverses the intended acceptance path and records deterministic verification plus an explicit accepted or rejected result. Architecture prose, mock output, structural tests, or a deployment alone do not clear this gate.
 
+Current dependency pointer: `NOETFIELD-RUNWAY` PR #46 at `0a65da690481e57c94a37b430249902ff519c4f1`. PR #45 is superseded and closed after its frozen-contract lineage check failed. Current evidence proves fixture qualification and authenticated live artifact integrity, not payment or customer acceptance.
+
 After that evidence exists, SG may evaluate a separate ratification packet. This handoff does not ratify implementation.
 
 ## Optional manual cash-bridge pilot
