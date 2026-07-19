@@ -3,10 +3,10 @@
   "decision_id": "NF-COMPUTE-ROI-ALLOCATION-V1",
   "sg_decision_id": "NF-COMPUTE-ROI-ALLOCATION-V1",
   "authority_source": "Noetfield-Systems/sina-governance-SSOT",
-  "authority_sha": "7735826e5b153be8c062790ea83c3a4f123299e7",
-  "sg_authority_sha": "7735826e5b153be8c062790ea83c3a4f123299e7",
-  "status": "CANDIDATE",
-  "valid_only_when": "merged to sina-governance-SSOT@main and sg_authority_sha is an ancestor of main",
+  "authority_sha": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d",
+  "sg_authority_sha": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d",
+  "status": "ACTIVE",
+  "valid_only_when": "sg_authority_sha is an ancestor of sina-governance-SSOT@main",
   "supersession_rule": "new jobs use the successor SHA; existing receipts retain the authority active when they ran",
   "generated": true,
   "sg_pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62",
@@ -14,5 +14,7 @@
   "machine_json": "data/nf_compute_roi_allocation_v1_LOCKED.json",
   "dispatch": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
   "one_line_law": "Enterprise pays governance minutes; Cloudflare and Railway run scale and margin; economical LLM matrix is Kernel policy.",
-  "install_path_hint": "data/sg-authority-ref-compute-roi-v1.json"
+  "install_path_hint": "data/sg-authority-ref-compute-roi-v1.json",
+  "activated_at": "2026-07-19T22:59:02Z",
+  "wave0_merge_commit": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d"
 }

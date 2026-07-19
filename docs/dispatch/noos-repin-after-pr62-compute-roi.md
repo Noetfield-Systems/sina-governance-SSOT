@@ -2,7 +2,7 @@
 
 **decision_id:** `NF-COMPUTE-ROI-ALLOCATION-V1`  
 **PR:** https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62  
-**candidate_sha:** `7735826e5b153be8c062790ea83c3a4f123299e7`  
+**candidate_sha:** `389b85ff1ad6892a6da680e5f91c9397f9c8f44d`  
 **merge_strategy:** merge_commit after green CI
 
 1. After SG PR #62 merges to `main`, re-read SG `main` and set `sg_authority_sha` to that merge commit (must be ancestor of `main`).
