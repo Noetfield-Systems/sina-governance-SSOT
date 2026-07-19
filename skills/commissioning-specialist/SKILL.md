@@ -1,16 +1,20 @@
 ---
 name: commissioning-specialist
-description: Run the NF commissioning specialist closed loop and advance one real job from data/nf_commissioning_job_queue_v1.json per tick. Use when activating commissioning, healing SG/core liveness, dispatching qualification jobs, or ranking kaizen proposals. Never mint App keys, lift hold, redesign architecture unsupervised, or claim fully_commissioned while runtime_reality says not_commissioned.
+description: Run one explicit NF commissioning job from data/nf_commissioning_job_queue_v1.json. Use when activating commissioning, re-proving an invalidated capability, healing SG/core liveness, dispatching qualification jobs, or ranking kaizen proposals. Never repeat completed unchanged jobs, mint App keys, lift hold, redesign architecture unsupervised, or claim fully_commissioned while runtime_reality says not_commissioned.
 ---
 # Commissioning Specialist
 
 ## Trigger
-Cloudflare cron `*/5` → worker `nf-commissioning-specialist-tick-v1`.
+On demand only: dispatch `NOETFIELD-RUNWAY/.github/workflows/commissioning-run.yml`
+with an explicit job ID. The former Cloudflare `*/5` cron is disabled.
 
 ## Closed loop (machine law)
 Observe → Detect → Critique → repair(allowlist) → ProposeImprove → ReObserve
 
-Each tick must select the next incomplete job from `data/nf_commissioning_job_queue_v1.json` and produce real evidence for that job (score, dispatch, or blocked_founder with exact missing decision).
+Each run must name an incomplete or invalidated job from
+`data/nf_commissioning_job_queue_v1.json` and produce real evidence for it
+(score, dispatch, or blocked_founder with exact missing decision). Completed,
+unchanged jobs are not repeated.
 
 ## Job queue
 - Cursor + progress in KV (`job_queue_cursor`, `job_queue_progress`)
@@ -31,8 +35,9 @@ IDs listed in `data/nf_commissioning_specialist_map_v1.json` under `repair_allow
 - Unsupervised architecture redesign (propose only; founder ratifies)
 - Fake `fully_commissioned`
 
-## Manual tick
-`POST https://nf-commissioning-specialist-tick-v1.<subdomain>.workers.dev/tick`
+## Manual run
+Use GitHub `workflow_dispatch` for `commissioning-run.yml`. The Worker's old
+public `POST /tick` endpoint returns `410 perpetual_tick_disabled`.
 
 ## Receipts
 KV `last_fired_at` + `last_receipt` + `last_job_id` + job progress; repo receipts under `receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*`.

@@ -1,7 +1,7 @@
 /**
- * NF Commissioning Specialist Tick v2
- * Cloudflare cron every 5 minutes — closed loop that advances one real
- * commissioning job per tick from nf_commissioning_job_queue_v1.
+ * NF Commissioning Specialist v2.1
+ * On-demand only: each explicit run advances one named, unfinished or
+ * invalidated commissioning job from nf_commissioning_job_queue_v1.
  *
  * Observe → Detect → Critique → Repair(allowlist) → ProposeImprove → ReObserve
  * Models: DeepSeek → GLM → Kimi → Hugging Face
@@ -914,9 +914,9 @@ async function runTick(env, meta = {}) {
     schema: SCHEMA,
     loop_id: env.LOOP_ID || mapDoc.loop_id,
     at,
-    source: meta.source || "cf-cron",
-    cron: meta.cron || "*/5 * * * *",
-    mode: env.MODE || "COMMISSIONING_SPECIALIST",
+    source: meta.source || "on_demand",
+    cron: null,
+    mode: env.MODE || "COMMISSIONING_ON_DEMAND",
     hold: env.AUTONOMOUS_PRODUCTION_MUTATIONS || "HOLD",
     enforcement_enabled: false,
     map_version: mapDoc.version,
@@ -971,15 +971,18 @@ async function runTick(env, meta = {}) {
 
 export default {
   async scheduled(event, env, ctx) {
+    // Safety stop for any stale Cloudflare schedule event during deployment propagation.
+    // Commissioning is finite work and must be explicitly dispatched with a chosen job.
     ctx.waitUntil(
-      runTick(env, { source: "cf-cron", cron: event?.cron || "*/5 * * * *" }).then((r) => {
+      Promise.resolve().then(() => {
         console.log(
           JSON.stringify({
             schema: SCHEMA,
             ok: true,
-            verdict: r.verdict,
-            job_id: r.selected_job?.id,
-            at: r.at,
+            verdict: "SCHEDULE_DISABLED",
+            trigger_mode: "on_demand",
+            cron: event?.cron || null,
+            at: new Date().toISOString(),
           }),
         );
       }),
@@ -1011,7 +1014,11 @@ export default {
         ok: true,
         schema: SCHEMA + "-health",
         service: "nf-commissioning-specialist-tick-v1",
-        cron: "*/5 * * * *",
+        trigger_mode: "on_demand",
+        cron: null,
+        schedule_enabled: false,
+        dispatch_path:
+          "NOETFIELD-RUNWAY/.github/workflows/commissioning-run.yml (workflow_dispatch or authorized repository_dispatch with job_id)",
         loop_id: env.LOOP_ID,
         last_fired_at: last,
         last_job_id: lastJob,
@@ -1030,8 +1037,16 @@ export default {
       });
     }
     if (url.pathname === "/tick" && request.method === "POST") {
-      const receipt = await runTick(env, { source: "http_tick" });
-      return json(receipt, receipt.verdict === "FAIL_P0" ? 500 : 200);
+      return json(
+        {
+          ok: false,
+          error: "perpetual_tick_disabled",
+          trigger_mode: "on_demand",
+          action:
+            "Dispatch an explicit commissioning job through NOETFIELD-RUNWAY commissioning-run workflow.",
+        },
+        410,
+      );
     }
     if (url.pathname === "/map") return json(mapDoc);
     if (url.pathname === "/queue") return json(jobQueue);

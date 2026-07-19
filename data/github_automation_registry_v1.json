@@ -364,14 +364,14 @@
     },
     {
       "motor_id": "cf_nf_commissioning_specialist_tick_v1",
-      "kind": "cloudflare_cron",
+      "kind": "cloudflare_worker",
       "repo": "sina-governance-SSOT",
       "health_url": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
-      "cadence": "*/5",
+      "cadence": "on_demand",
       "lane": "sg_commissioning_specialist",
       "loop_id": "nf-commissioning-specialist-tick-v1",
-      "trigger_host": "cloud",
-      "deadman": "noos-deadman-v1_or_independent_cf_path",
+      "trigger_host": "on_demand",
+      "deadman": null,
       "owns": [
         "commissioning_observe_detect",
         "allowlisted_self_heal",
@@ -388,8 +388,8 @@
       "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*",
       "conflicts_with": [],
       "commissioned": false,
-      "scheduled": true,
-      "note": "5-min commissioning specialist closed loop. HOLD preserved. Models: DeepSeek/GLM/Kimi/HF failover. Propose improve only."
+      "scheduled": false,
+      "note": "On-demand commissioning only. Explicit unfinished or invalidated jobs produce evidence; completed unchanged jobs are not repeated. HOLD preserved."
     }
   ],
   "agent_lanes": [
