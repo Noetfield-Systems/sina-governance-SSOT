@@ -552,6 +552,7 @@ export default {
         mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
         hold: "HOLD",
         execution_runtime: "cloudflare_workflows",
+        workflow_name: env.WORKFLOW_NAME || "nf-hourly-production-repository-jobs-v2",
         production_phase: true,
         production_job_kind: "repository_patch",
         commissioned: false,

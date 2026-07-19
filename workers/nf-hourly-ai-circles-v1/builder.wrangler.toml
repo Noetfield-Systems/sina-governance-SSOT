@@ -6,13 +6,14 @@ account_id = "0d0b967b77e2e5535455d39ff3dae72c"
 workers_dev = true
 
 [[workflows]]
-name = "nf-hourly-builder-circle-v1"
+name = "nf-hourly-production-repository-jobs-v2"
 binding = "BUILDER_WORKFLOW"
 class_name = "BuilderCircleWorkflow"
 schedules = ["0 * * * *"]
 
 [vars]
 LOOP_ID = "nf-hourly-builder-circle-v1"
+WORKFLOW_NAME = "nf-hourly-production-repository-jobs-v2"
 TARGET_REPO = "Noetfield-Systems/sina-governance-SSOT"
 MOTOR_APP_ID = "4275961"
 MOTOR_INSTALLATION_ID = "145975487"
