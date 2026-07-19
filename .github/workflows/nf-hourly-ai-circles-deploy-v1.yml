@@ -43,18 +43,21 @@ jobs:
           set -euo pipefail
           put() {
             local n="$1"; local v="$2"
-            if [ -n "${v:-}" ]; then printf '%s' "$v" | npx wrangler secret put "$n" --config builder.wrangler.toml
+            if [ -n "${v:-}" ]; then
+              printf '%s' "$v" | npx wrangler secret put "$n" --config builder.wrangler.toml || \
+              printf '%s' "$v" | npx wrangler versions secret put "$n" --config builder.wrangler.toml
             else echo "skip $n (empty)"; fi
           }
-          put DEEPSEEK_API_KEY "$DEEPSEEK_API_KEY"
-          put GLM_API_KEY "$GLM_API_KEY"
-          put MOONSHOT_API_KEY "$MOONSHOT_API_KEY"
-          put HF_TOKEN "$HF_TOKEN"
-          put MOTOR_APP_PRIVATE_KEY "$MOTOR_APP_PRIVATE_KEY"
-          put OPENAI_API_KEY "$OPENAI_API_KEY"
-          put GEMINI_API_KEY "$GEMINI_API_KEY"
-          put TICK_SECRET "$TICK_SECRET"
-          put PEER_TICK_SECRET "$PEER_TICK_SECRET"
+          # Prefer repo/org secrets when present; empty is non-fatal (local/runway injector may already have set them).
+          put DEEPSEEK_API_KEY "${DEEPSEEK_API_KEY:-}"
+          put GLM_API_KEY "${GLM_API_KEY:-}"
+          put MOONSHOT_API_KEY "${MOONSHOT_API_KEY:-}"
+          put HF_TOKEN "${HF_TOKEN:-}"
+          put MOTOR_APP_PRIVATE_KEY "${MOTOR_APP_PRIVATE_KEY:-}"
+          put OPENAI_API_KEY "${OPENAI_API_KEY:-}"
+          put GEMINI_API_KEY "${GEMINI_API_KEY:-}"
+          put TICK_SECRET "${TICK_SECRET:-}"
+          put PEER_TICK_SECRET "${PEER_TICK_SECRET:-}"
       - name: Deploy independent verifier circle (secondary account)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_VERIFIER_TOKEN }}
