@@ -1,15 +1,16 @@
 {
   "schema": "nf.commissioning-job-queue.v1",
-  "version": "2.0.0",
-  "purpose": "Real unified-core commissioning execution queue. Each tick runs or waits on a live proof workflow. Score-only jobs are demoted after execute proofs.",
+  "version": "2.1.0",
+  "purpose": "Real unified-core commissioning execution queue. Each authenticated request runs one named job through a durable Cloudflare Workflow. Score-only jobs are demoted after execute proofs.",
   "law": [
     "Prefer execute proof jobs over score-only jobs",
+    "Require an explicit job ID and idempotency request ID",
+    "Completed unchanged jobs do not repeat without a documented rerun reason",
     "Dispatch then wait for conclusion before marking pass",
     "Founder-gated gaps emit blocked_founder with exact missing decision",
     "hold preserved until founder lifts",
     "Never claim fully_commissioned while runtime_reality says not_commissioned"
   ],
-  "cursor_kv_key": "job_queue_cursor",
   "progress_kv_key": "job_queue_progress",
   "jobs": [
     {

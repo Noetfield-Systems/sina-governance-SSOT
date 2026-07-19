@@ -364,7 +364,7 @@
     },
     {
       "motor_id": "cf_nf_commissioning_specialist_tick_v1",
-      "kind": "cloudflare_worker",
+      "kind": "cloudflare_worker_workflow",
       "repo": "sina-governance-SSOT",
       "health_url": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
       "cadence": "on_demand",
@@ -373,6 +373,9 @@
       "trigger_host": "on_demand",
       "deadman": null,
       "owns": [
+        "authenticated_job_admission",
+        "durable_commissioning_job_lifecycle",
+        "direct_github_actions_dispatch",
         "commissioning_observe_detect",
         "allowlisted_self_heal",
         "kaizen_propose_only",
@@ -389,7 +392,7 @@
       "conflicts_with": [],
       "commissioned": false,
       "scheduled": false,
-      "note": "On-demand commissioning only. Explicit unfinished or invalidated jobs produce evidence; completed unchanged jobs are not repeated. HOLD preserved."
+      "note": "On-demand commissioning only. Authenticated requests create idempotent Cloudflare Workflow instances, which dispatch one allowlisted GitHub Actions executor. Explicit unfinished or invalidated jobs produce evidence; completed unchanged jobs are not repeated. HOLD preserved."
     },
     {
       "motor_id": "gh_actions_governance_registry_validate_v1",

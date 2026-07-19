@@ -5,8 +5,10 @@ description: Run one explicit NF commissioning job from data/nf_commissioning_jo
 # Commissioning Specialist
 
 ## Trigger
-On demand only: dispatch `NOETFIELD-RUNWAY/.github/workflows/commissioning-run.yml`
-with an explicit job ID. The former Cloudflare `*/5` cron is disabled.
+On demand only: send an authenticated `POST /jobs` request to the commissioning
+Worker with an explicit job ID and idempotency request ID. The Worker creates a
+durable Cloudflare Workflow instance. The former Cloudflare `*/5` cron is
+disabled.
 
 ## Closed loop (machine law)
 Observe → Detect → Critique → repair(allowlist) → ProposeImprove → ReObserve
@@ -17,13 +19,16 @@ Each run must name an incomplete or invalidated job from
 unchanged jobs are not repeated.
 
 ## Job queue
-- Cursor + progress in KV (`job_queue_cursor`, `job_queue_progress`)
-- Execute-class jobs dispatch allowlisted runway verify / repair / gallery foundation workflows
+- Explicit job progress and request identity in KV (`job_queue_progress`, `request:<instance_id>`)
+- Cloudflare Workflows own durable job execution and status
+- Execute-class jobs dispatch exactly one allowlisted runway verify / repair / gallery foundation workflow
 - Qualify-class jobs score proof-a/b, custody, gateway, roles, rollup
-- Always repository_dispatch `commissioning_tick` with `job_id` to the commissioning runway product path
+- GitHub Actions execute jobs; they do not own queue selection or scheduling
 
 ## Models (failover)
-DeepSeek → GLM → Kimi (Moonshot) → huggingface. If all fail, continue T0 deterministic.
+DeepSeek V4 Flash → DeepSeek V4 Pro → GLM → Kimi (Moonshot) → Hugging Face.
+LLM calls occur only for observed defects, failed jobs, or founder-blocked jobs;
+passing T0 work stays deterministic. If all models fail, continue T0.
 
 ## Allowed repairs
 IDs listed in `data/nf_commissioning_specialist_map_v1.json` under `repair_allowlist`.
@@ -36,8 +41,10 @@ IDs listed in `data/nf_commissioning_specialist_map_v1.json` under `repair_allow
 - Fake `fully_commissioned`
 
 ## Manual run
-Use GitHub `workflow_dispatch` for `commissioning-run.yml`. The Worker's old
-public `POST /tick` endpoint returns `410 perpetual_tick_disabled`.
+Use the Worker's authenticated `POST /jobs` endpoint. Query
+`GET /jobs/<instance_id>` with the same Bearer credential for status. GitHub's
+`commissioning-run.yml` remains manual break-glass only. The old public
+`POST /tick` endpoint returns `410 perpetual_tick_disabled`.
 
 ## Receipts
 KV `last_fired_at` + `last_receipt` + `last_job_id` + job progress; repo receipts under `receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*`.

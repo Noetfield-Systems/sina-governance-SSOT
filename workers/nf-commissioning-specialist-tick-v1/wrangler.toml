@@ -4,9 +4,14 @@ compatibility_date = "2026-07-18"
 account_id = "0d0b967b77e2e5535455d39ff3dae72c"
 workers_dev = true
 
+[[workflows]]
+binding = "COMMISSIONING_JOB"
+name = "nf-commissioning-job-v1"
+class_name = "CommissioningJobWorkflow"
+
 [triggers]
 # Commissioning is finite, evidence-producing work—not a perpetual monitor.
-# Run explicit jobs through NOETFIELD-RUNWAY's commissioning-run workflow.
+# Run explicit jobs through the authenticated Worker API and durable Workflow.
 crons = []
 
 [vars]
@@ -18,7 +23,7 @@ ENFORCEMENT_ENABLED = "false"
 SG_SHADOW_HEALTH_URL = "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health"
 RUNTIME_REALITY_URL = "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/runtime_reality_v1.json"
 KEY_POINTER_URL = "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/sg_authority_key_pointer_v1.json"
-MAP_VERSION = "2.1.0"
+MAP_VERSION = "2.2.0"
 JOB_QUEUE_URL = "https://raw.githubusercontent.com/Noetfield-Systems/sina-governance-SSOT/main/data/nf_commissioning_job_queue_v1.json"
 MOTOR_APP_ID = "4275961"
 MOTOR_INSTALLATION_ID = "145975487"
@@ -28,3 +33,5 @@ COMMISSIONING_RUNWAY_REPO = "Noetfield-Systems/NOETFIELD-RUNWAY"
 binding = "RECEIPTS"
 id = "3999f420abc241399843ea796c3c042a"
 
+[observability]
+enabled = true
