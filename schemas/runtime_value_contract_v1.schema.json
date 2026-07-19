@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noetfield.runtime-value-contract.v1",
+  "title": "Noetfield Runtime Value Contract v1",
+  "description": "Every Worker, cron, Queue consumer, GitHub workflow, machine loop, and Runway must declare beneficiary, trigger, bounded action, output, completion, and idle behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "saved_at",
+    "law",
+    "contracts"
+  ],
+  "properties": {
+    "schema": {
+      "const": "runtime_value_contracts_v1"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "saved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "law": {
+      "type": "string",
+      "minLength": 16
+    },
+    "contracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/runtime_value_contract"
+      }
+    }
+  },
+  "$defs": {
+    "runtime_value_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_id",
+        "motor_id",
+        "owner_role",
+        "beneficiary",
+        "business_customer_goal",
+        "trigger",
+        "bounded_action",
+        "authority_ceiling",
+        "output",
+        "success_metric",
+        "completion_condition",
+        "idempotency_key",
+        "retry_backoff",
+        "no_work_behavior",
+        "cost_time_ceiling",
+        "review_date",
+        "receipt_location",
+        "rollback",
+        "status"
+      ],
+      "properties": {
+        "runtime_id": {
+          "type": "string",
+          "minLength": 3,
+          "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+        },
+        "motor_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "owner_role": {
+          "type": "string",
+          "minLength": 3
+        },
+        "beneficiary": {
+          "type": "string",
+          "enum": [
+            "customer.sourceb",
+            "customer.noetfield",
+            "customer.trustfield",
+            "operator.portfolio",
+            "operator.security",
+            "operator.governance",
+            "none.quarantined"
+          ]
+        },
+        "business_customer_goal": {
+          "type": "string",
+          "minLength": 8
+        },
+        "trigger": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "event",
+                "justified_schedule",
+                "manual",
+                "on_demand",
+                "disabled"
+              ]
+            },
+            "event": {
+              "type": "string"
+            },
+            "cadence": {
+              "type": "string"
+            },
+            "time_dependent_reason": {
+              "type": "string"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "event"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "required": ["event"]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "justified_schedule"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "required": ["cadence", "time_dependent_reason"]
+              }
+            }
+          ]
+        },
+        "bounded_action": {
+          "type": "string",
+          "minLength": 8
+        },
+        "authority_ceiling": {
+          "type": "string",
+          "enum": [
+            "observe",
+            "propose",
+            "customer_nonprod_output",
+            "customer_prod_output",
+            "merge_deploy_publish_hold"
+          ]
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schema", "destination", "visibility"],
+          "properties": {
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "destination": {
+              "type": "string",
+              "minLength": 3
+            },
+            "visibility": {
+              "type": "string",
+              "enum": [
+                "customer",
+                "operator",
+                "internal",
+                "none"
+              ]
+            }
+          }
+        },
+        "success_metric": {
+          "type": "string",
+          "minLength": 8
+        },
+        "completion_condition": {
+          "type": "string",
+          "minLength": 8
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 3
+        },
+        "retry_backoff": {
+          "type": "string",
+          "minLength": 3
+        },
+        "no_work_behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["no_write", "no_llm", "no_notification"],
+          "properties": {
+            "no_write": {
+              "type": "boolean"
+            },
+            "no_llm": {
+              "type": "boolean"
+            },
+            "no_notification": {
+              "type": "boolean"
+            }
+          }
+        },
+        "cost_time_ceiling": {
+          "type": "string",
+          "minLength": 3
+        },
+        "review_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "receipt_location": {
+          "type": "string",
+          "minLength": 3
+        },
+        "rollback": {
+          "type": "string",
+          "minLength": 8
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "quarantined",
+            "event_driven",
+            "manual_only",
+            "disabled"
+          ]
+        },
+        "site_flow": {
+          "type": "string",
+          "enum": [
+            "sourceb.workspace",
+            "noetfield.enterprise_intake",
+            "trustfield.evidence_assessment",
+            "none"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

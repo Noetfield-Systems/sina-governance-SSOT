@@ -1,0 +1,874 @@
+{
+  "schema": "runtime_value_contracts_v1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-19T06:50:00Z",
+  "law": "Every runtime must name a beneficiary, justified trigger, bounded action, useful output, completion condition, and idle no-op. No schedule without a time-dependent reason. No idle LLM. One claim owner per task cell.",
+  "contracts": [
+    {
+      "runtime_id": "sg.workflow_census_weekly",
+      "motor_id": "gh_actions_workflow_census_weekly_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Classify every registered loop by the receipt it serves so purposeless automation is visible.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 8 * * 1",
+        "time_dependent_reason": "Weekly freshness SLA for automation surface drift vs registry."
+      },
+      "bounded_action": "Enumerate workflows, assign value_class, write census receipt; no deploy or LLM.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "workflow_census_receipt_v1",
+        "destination": "receipts/workflow-census-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Census receipt published weekly with zero unregistered SG workflows.",
+      "completion_condition": "Census artifact written and validator exit 0.",
+      "idempotency_key": "workflow-census:{iso_week}",
+      "retry_backoff": "none; next weekly window",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/workflow-census-*.json",
+      "rollback": "Disable workflow schedule; retain last census artifact.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.agent_read_staleness_weekly",
+      "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Detect stale law pointers before agents execute against expired doctrine.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 9 * * 1",
+        "time_dependent_reason": "Weekly drift check for alive-doc registry freshness."
+      },
+      "bounded_action": "Diff alive docs vs registry pointers; emit staleness receipt.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "agent_read_staleness_receipt_v1",
+        "destination": "receipts/agent-read-staleness-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Staleness receipt lists zero high-severity stale law pointers.",
+      "completion_condition": "Receipt written for the ISO week.",
+      "idempotency_key": "agent-read-staleness:{iso_week}",
+      "retry_backoff": "none; next weekly window",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/agent-read-staleness-*.json",
+      "rollback": "Disable schedule; keep last receipt.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.auth_surface_probe",
+      "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+      "owner_role": "noetfield:sg.security-owner",
+      "beneficiary": "operator.security",
+      "business_customer_goal": "Prove auth surfaces still enforce redirect allow-lists and credential path rules.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 */6 * * *",
+        "time_dependent_reason": "Security freshness SLA — credential/auth regressions must surface within 6h."
+      },
+      "bounded_action": "Probe allow-listed auth surfaces; write GUARD receipt; no mutation.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "auth_surface_probe_receipt_v1",
+        "destination": "receipts/auth-surface-probe-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Probe PASS with no open redirect or credential-path defect.",
+      "completion_condition": "Probe receipt terminal PASS or FAIL recorded.",
+      "idempotency_key": "auth-surface-probe:{utc_6h_bucket}",
+      "retry_backoff": "exponential 15m x3 then dead-letter receipt",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "15m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/auth-surface-probe-*.json",
+      "rollback": "Disable schedule; leave surfaces online.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.brain_loop_autorun_ci",
+      "motor_id": "gh_actions_brain_loop_autorun_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "none.quarantined",
+      "business_customer_goal": "Containment observation only; must not promote or mutate while HOLD.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "Manual observe-only receipt; secret presence never authorizes mutation.",
+      "authority_ceiling": "merge_deploy_publish_hold",
+      "output": {
+        "schema": "brain_loop_autorun_receipt_v1",
+        "destination": "receipts/brain-loop-autorun-*.json",
+        "visibility": "internal"
+      },
+      "success_metric": "No autonomous promote while HOLD.",
+      "completion_condition": "Manual observe receipt written or workflow skipped.",
+      "idempotency_key": "brain-loop-autorun:{run_id}",
+      "retry_backoff": "none",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "5m wall / $0 LLM",
+      "review_date": "2026-08-15",
+      "receipt_location": "receipts/brain-loop-autorun-*.json",
+      "rollback": "Remain disabled; do not re-enable schedule under HOLD.",
+      "status": "quarantined",
+      "site_flow": "none",
+      "notes": "Schedule removed under P0 containment."
+    },
+    {
+      "runtime_id": "sg.brain_loop_autorun_mac",
+      "motor_id": "mac_launchd_brain_loop_autorun_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "none.quarantined",
+      "business_customer_goal": "Mac brain autorun remains booted out under containment.",
+      "trigger": {
+        "type": "disabled"
+      },
+      "bounded_action": "Installer fails closed on governance/runtime HOLD; no tick.",
+      "authority_ceiling": "merge_deploy_publish_hold",
+      "output": {
+        "schema": "brain_loop_autorun_receipt_v1",
+        "destination": "receipts/brain-loop-autorun-*.json",
+        "visibility": "none"
+      },
+      "success_metric": "LaunchAgent remains unloaded.",
+      "completion_condition": "Service not running.",
+      "idempotency_key": "brain-loop-mac:disabled",
+      "retry_backoff": "none",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "0 cost while disabled",
+      "review_date": "2026-08-15",
+      "receipt_location": "receipts/brain-loop-autorun-*.json",
+      "rollback": "Keep booted out.",
+      "status": "disabled",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sourcea.loop_specialist_tick",
+      "motor_id": "cf_loop_specialist_tick_v1",
+      "owner_role": "noetfield:sourcea.runtime-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Drain SourceA runtime plans / work orders on a freshness SLA without idle LLM.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "*/15",
+        "time_dependent_reason": "Lease recovery and work-order freshness for SourceA desired-state queue."
+      },
+      "bounded_action": "Claim pending work orders; no-op when queue empty; never call LLM on idle.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "loop_specialist_tick_receipt_v1",
+        "destination": "~/.sina/loop-specialist-tick-receipt-v1.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Pending work orders drain; idle ticks write nothing.",
+      "completion_condition": "Queue empty or claimed items terminal.",
+      "idempotency_key": "sourcea-loop:{work_order_id}",
+      "retry_backoff": "exponential 5m x5 then dead-letter",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "2m wall / $0 idle LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "~/.sina/loop-specialist-tick-receipt-v1.json",
+      "rollback": "Disable cron; leave queue intact.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sourcea.auto_runtime_tick",
+      "motor_id": "cf_auto_runtime_tick_v1",
+      "owner_role": "noetfield:sourcea.runtime-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Advance cloud forge queue items that are explicitly unfinished.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "*/10",
+        "time_dependent_reason": "Cloud forge queue lease recovery; empty queue must no-op."
+      },
+      "bounded_action": "Process unfinished forge jobs; idle = no write/LLM/notify.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "auto_runtime_tick_receipt_v1",
+        "destination": "cloud_forge_queue receipts",
+        "visibility": "operator"
+      },
+      "success_metric": "Unfinished jobs progress; zero receipt churn when empty.",
+      "completion_condition": "Job terminal or queue empty no-op.",
+      "idempotency_key": "auto-runtime:{job_id}",
+      "retry_backoff": "exponential 10m x5",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "3m wall / $0 idle LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "cloud_forge_queue",
+      "rollback": "Disable cron; preserve queue.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "trustfield.cf_fleet_tick",
+      "motor_id": "tf_cf_fleet_tick_v1",
+      "owner_role": "noetfield:trustfield.runtime-owner",
+      "beneficiary": "customer.trustfield",
+      "business_customer_goal": "Keep TrustField loop fleet healthy so assessment/evidence jobs can run when requested.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "*/5 * * * *",
+        "time_dependent_reason": "Fleet lease recovery and lane self-heal freshness for TrustField loops."
+      },
+      "bounded_action": "Health/self-heal fleet lanes; no assessment package without customer event.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "tf_cf_fleet_tick_receipt_v1",
+        "destination": "trustfield_loop_receipts",
+        "visibility": "operator"
+      },
+      "success_metric": "Fleet healthy; customer assessment jobs claimable when queued.",
+      "completion_condition": "Tick reports healthy or self-heal applied once.",
+      "idempotency_key": "tf-fleet:{lane}:{utc_5m}",
+      "retry_backoff": "next cadence",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "2m wall / $0 idle LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "trustfield_loop_receipts",
+      "rollback": "Disable fleet cron; leave production intake loop.",
+      "status": "active",
+      "site_flow": "trustfield.evidence_assessment"
+    },
+    {
+      "runtime_id": "trustfield.cf_deadman",
+      "motor_id": "tf_cf_deadman_v1",
+      "owner_role": "noetfield:trustfield.runtime-owner",
+      "beneficiary": "operator.security",
+      "business_customer_goal": "Detect silent TrustField loop death within 10 minutes.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "*/10 * * * *",
+        "time_dependent_reason": "Deadman freshness SLA for TrustField loop registry."
+      },
+      "bounded_action": "Probe registry freshness; alert only on transition to unhealthy.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "tf_cf_deadman_receipt_v1",
+        "destination": "trustfield_loop_registry",
+        "visibility": "operator"
+      },
+      "success_metric": "Deadman GREEN or single transition alert.",
+      "completion_condition": "Probe recorded.",
+      "idempotency_key": "tf-deadman:{utc_10m}",
+      "retry_backoff": "next cadence",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "1m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "trustfield_loop_registry",
+      "rollback": "Disable deadman; rely on manual health checks.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "trustfield.cf_verify_recipes",
+      "motor_id": "tf_cf_verify_recipes_v1",
+      "owner_role": "noetfield:trustfield.runtime-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Verify TrustField recipe runners remain executable for customer assessments.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "*/15 * * * *",
+        "time_dependent_reason": "Recipe executable freshness check; empty/no-change must no-op."
+      },
+      "bounded_action": "Verify recipe definitions; do not re-run completed customer assessments.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "tf_verify_recipe_run_v1",
+        "destination": "trustfield_verify_recipe_runs",
+        "visibility": "internal"
+      },
+      "success_metric": "Recipes verify PASS; no duplicate customer assessment runs.",
+      "completion_condition": "Verify run terminal.",
+      "idempotency_key": "tf-verify-recipes:{recipe_hash}:{utc_15m}",
+      "retry_backoff": "next cadence",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "3m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "trustfield_verify_recipe_runs",
+      "rollback": "Disable verify cron.",
+      "status": "active",
+      "site_flow": "trustfield.evidence_assessment"
+    },
+    {
+      "runtime_id": "trustfield.loops_production",
+      "motor_id": "trustfield_loops_production",
+      "owner_role": "noetfield:trustfield.runtime-owner",
+      "beneficiary": "customer.trustfield",
+      "business_customer_goal": "Process TrustField intake/receipt chain so registered programs become assessment packages.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 */6 * * *",
+        "time_dependent_reason": "Batched customer intake commitments; empty queue no-op."
+      },
+      "bounded_action": "Drain unfinished TF intake/receipt work; emit assessment when program.created queued.",
+      "authority_ceiling": "customer_nonprod_output",
+      "output": {
+        "schema": "trustfield_loop_receipt_v1",
+        "destination": "trustfield_loop_receipts",
+        "visibility": "customer"
+      },
+      "success_metric": "Queued program assessments reach package+status within SLA.",
+      "completion_condition": "Queue empty or items terminal with package refs.",
+      "idempotency_key": "tf-loops:{program_id}:{job_type}",
+      "retry_backoff": "exponential 30m x4 then dead-letter",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "15m wall / LLM only after deterministic admission",
+      "review_date": "2026-09-15",
+      "receipt_location": "trustfield_loop_receipts",
+      "rollback": "Disable production loop schedule; keep status pages.",
+      "status": "active",
+      "site_flow": "trustfield.evidence_assessment"
+    },
+    {
+      "runtime_id": "trustfield.loops_preview",
+      "motor_id": "trustfield_loops_preview",
+      "owner_role": "noetfield:trustfield.runtime-owner",
+      "beneficiary": "none.quarantined",
+      "business_customer_goal": "Frozen preview motor — no new customer work.",
+      "trigger": {
+        "type": "disabled"
+      },
+      "bounded_action": "No new work registered against preview motor.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "none",
+        "destination": ".receipt_ids/*.json",
+        "visibility": "none"
+      },
+      "success_metric": "Zero new jobs claimed by preview motor.",
+      "completion_condition": "Remains frozen.",
+      "idempotency_key": "tf-preview:frozen",
+      "retry_backoff": "none",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "0 cost while frozen",
+      "review_date": "2026-08-15",
+      "receipt_location": ".receipt_ids/*.json",
+      "rollback": "Remain frozen.",
+      "status": "quarantined",
+      "site_flow": "none",
+      "notes": "Superseded by trustfield_loops_production."
+    },
+    {
+      "runtime_id": "sourcea.external_verify",
+      "motor_id": "gh_actions_sourcea_external_verify_v1",
+      "owner_role": "noetfield:sourcea.runtime-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Prove SourceA public contract surfaces remain live and deterministic.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 */6 * * *",
+        "time_dependent_reason": "External uptime/determinism freshness for public contract pages."
+      },
+      "bounded_action": "Run L4 external verify; write GUARD receipt; no deploy.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "sourcea_external_verify_receipt_v1",
+        "destination": "SourceA external-verify receipts",
+        "visibility": "operator"
+      },
+      "success_metric": "External verify PASS every 6h.",
+      "completion_condition": "Verify receipt terminal.",
+      "idempotency_key": "sourcea-external-verify:{utc_6h}",
+      "retry_backoff": "one retry then fail receipt",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "20m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "SourceA receipts/external-verify",
+      "rollback": "Disable schedule; keep last PASS receipt.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "noos.factory_autorun",
+      "motor_id": "gh_actions_noos_factory_autorun_v1",
+      "owner_role": "noetfield:noos.portfolio-owner",
+      "beneficiary": "none.quarantined",
+      "business_customer_goal": "Finite factory ticks must not echo forever without customer/output beneficiary.",
+      "trigger": {
+        "type": "disabled"
+      },
+      "bounded_action": "Quarantined: do not restart completed factory cycles; convert remaining work to explicit events.",
+      "authority_ceiling": "merge_deploy_publish_hold",
+      "output": {
+        "schema": "noos_factory_cycle_receipt_v1",
+        "destination": "noetfield_factory_cycle_runs",
+        "visibility": "none"
+      },
+      "success_metric": "No purposeless 10-minute factory restarts.",
+      "completion_condition": "Schedule disabled or converted to event-driven unfinished jobs only.",
+      "idempotency_key": "noos-factory:{cycle_id}",
+      "retry_backoff": "none while quarantined",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "0 while quarantined",
+      "review_date": "2026-08-01",
+      "receipt_location": "noetfield_factory_cycle_runs",
+      "rollback": "Remain quarantined; require founder event to resume finite unfinished cycle.",
+      "status": "quarantined",
+      "site_flow": "none",
+      "notes": "Purposeless finite echo loop; conflicts with cf_auto_runtime_tick_v1."
+    },
+    {
+      "runtime_id": "sg.p0pgr_shadow_mac",
+      "motor_id": "p0pgr_shadow_cycle_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Compile/lint/route prompt packets in shadow with zero execution.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "Compile+lint+route only; never execute packets.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "p0pgr_cycle_receipt_v1",
+        "destination": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+        "visibility": "internal"
+      },
+      "success_metric": "Shadow cycle receipt with zero execution side effects.",
+      "completion_condition": "Cycle receipt written.",
+      "idempotency_key": "p0pgr-shadow:{packet_id}:{cycle_id}",
+      "retry_backoff": "manual",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 execution LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+      "rollback": "Stop launchd; keep last receipt.",
+      "status": "manual_only",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.p0pgr_shadow_gha",
+      "motor_id": "gh_actions_p0pgr_shadow_cycle_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Founder-manual shadow compile/lint/route for validated packets.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "workflow_dispatch shadow only; zero execution.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "p0pgr_cycle_receipt_v1",
+        "destination": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+        "visibility": "internal"
+      },
+      "success_metric": "Manual shadow PASS with validated packet path.",
+      "completion_condition": "Cycle receipt written.",
+      "idempotency_key": "p0pgr-gha:{packet_id}:{run_id}",
+      "retry_backoff": "manual",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "15m wall / $0 execution LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/p0pgr/P0PGR-CYCLE-*.json",
+      "rollback": "Leave workflow_dispatch-only.",
+      "status": "manual_only",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "motor.unified_foundation",
+      "motor_id": "nf-unified-motor-foundation-v1",
+      "owner_role": "noetfield:motor.control-plane-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Admit signed site/machine events once, claim once, execute mapped Runway once, emit receipt.",
+      "trigger": {
+        "type": "event",
+        "event": "motor.event.v2"
+      },
+      "bounded_action": "Validate event, persist ledger, claim, start mapped Runway/Workflow; HOLD blocks merge/deploy/publish.",
+      "authority_ceiling": "customer_nonprod_output",
+      "output": {
+        "schema": "motor_job_receipt_v1",
+        "destination": "receipts/doctrine/NF_UNIFIED_MOTOR_*",
+        "visibility": "operator"
+      },
+      "success_metric": "One event → one claim → one execution → one receipt; unknown routes fail closed.",
+      "completion_condition": "Job terminal succeeded/failed/cancelled with callback.",
+      "idempotency_key": "motor.event:{event_id}",
+      "retry_backoff": "exponential with dead-letter",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "per-route deadline; idle = 0 cost",
+      "review_date": "2026-09-15",
+      "receipt_location": "receipts/doctrine/NF_UNIFIED_MOTOR_*",
+      "rollback": "Disable site route contracts; keep ledger.",
+      "status": "event_driven",
+      "site_flow": "none",
+      "notes": "Shared spine for SourceB workspace, Noetfield enterprise intake, TrustField assessment."
+    },
+    {
+      "runtime_id": "sg.commissioning_specialist",
+      "motor_id": "cf_nf_commissioning_specialist_tick_v1",
+      "owner_role": "noetfield:sg.commissioning-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Run commissioning only for explicit unfinished/invalidated jobs; never repeat completed evidence.",
+      "trigger": {
+        "type": "on_demand"
+      },
+      "bounded_action": "Single Cloudflare claim owner dispatches one executor once; callback closes job; idle = no LLM.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "commissioning_specialist_receipt_v1",
+        "destination": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*",
+        "visibility": "operator"
+      },
+      "success_metric": "Explicit job reaches commissioned evidence without duplicate PR/LLM burn.",
+      "completion_condition": "Job terminal with single executor callback.",
+      "idempotency_key": "commissioning:{job_id}",
+      "retry_backoff": "resume pending only; no redispatch of same job",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "1 LLM diagnosis max per unfinished job",
+      "review_date": "2026-08-15",
+      "receipt_location": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_*",
+      "rollback": "Remain on-demand; cron stays empty.",
+      "status": "event_driven",
+      "site_flow": "none",
+      "notes": "Cron disabled; /tick returns 410; Cloudflare is sole claim owner."
+    },
+    {
+      "runtime_id": "site.sourceb.workspace_completion",
+      "motor_id": "nf-unified-motor-foundation-v1",
+      "owner_role": "noetfield:sourceb.workspace-owner",
+      "beneficiary": "customer.sourceb",
+      "business_customer_goal": "Authenticated SourceB OTP verify produces a completed workspace blueprint, preview, and receipt.",
+      "trigger": {
+        "type": "event",
+        "event": "sourceb.workspace.setup_verified"
+      },
+      "bounded_action": "Dispatch sourceb-workspace Motor job; project status to /workspace/[slug]; no GitHub churn.",
+      "authority_ceiling": "customer_nonprod_output",
+      "output": {
+        "schema": "noetfield.sourceb-workspace-receipt.v0.1",
+        "destination": "SourceB motor_jobs + workspace_receipts + preview URL",
+        "visibility": "customer"
+      },
+      "success_metric": "One OTP verify → one Motor job → succeeded preview+receipt.",
+      "completion_condition": "motor_jobs.status=succeeded with preview_url and receipt_json.",
+      "idempotency_key": "sourceb-workspace:{account_id}:{slug}:{prompt_hash}",
+      "retry_backoff": "Motor retry then dead-letter receipt in workspace UI",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "5m wall; LLM only inside admitted workspace compile if required",
+      "review_date": "2026-09-15",
+      "receipt_location": "SourceB workspace_receipts / motor_jobs.receipt_json",
+      "rollback": "Disable workspace Motor route; keep OTP/session and manual setup messaging.",
+      "status": "active",
+      "site_flow": "sourceb.workspace"
+    },
+    {
+      "runtime_id": "site.noetfield.enterprise_intake",
+      "motor_id": "nf-unified-motor-foundation-v1",
+      "owner_role": "noetfield:enterprise-intake-owner",
+      "beneficiary": "customer.noetfield",
+      "business_customer_goal": "Pilot intake becomes a persisted qualified enterprise record with next step and SLA.",
+      "trigger": {
+        "type": "event",
+        "event": "noetfield.enterprise_intake.received"
+      },
+      "bounded_action": "Deterministic qualify AI Value OS briefing intake; emit one transition notice; optional brief pack.",
+      "authority_ceiling": "customer_nonprod_output",
+      "output": {
+        "schema": "noetfield.enterprise-intake-qualified.v0.1",
+        "destination": "platform public_intakes.qualification_json + customer status ref",
+        "visibility": "customer"
+      },
+      "success_metric": "Qualified intake persisted with tier/next_step/SLA; one notify.",
+      "completion_condition": "qualification_json written and receipt emitted.",
+      "idempotency_key": "noetfield-intake:{request_id}",
+      "retry_backoff": "platform retry then operator dead-letter",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "30s qualify; LLM summary only after score",
+      "review_date": "2026-09-15",
+      "receipt_location": "platform public_intakes + ops receipt",
+      "rollback": "Disable qualifier emit; keep durable intake + email/Telegram fallback.",
+      "status": "active",
+      "site_flow": "noetfield.enterprise_intake"
+    },
+    {
+      "runtime_id": "sg.governance_registry_validate",
+      "motor_id": "gh_actions_governance_registry_validate_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Fail closed on PRs that add schedules or motors without a Runtime Value Contract.",
+      "trigger": {
+        "type": "event",
+        "event": "github.pull_request.paths_registry"
+      },
+      "bounded_action": "Validate registry + runtime value contracts + unit tests; no deploy.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "ci_check_result_v1",
+        "destination": "GitHub Actions check",
+        "visibility": "operator"
+      },
+      "success_metric": "PR cannot merge registry changes that break Runtime Value Contract.",
+      "completion_condition": "CI job terminal PASS/FAIL.",
+      "idempotency_key": "gov-registry-validate:{sha}",
+      "retry_backoff": "CI retry",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "5m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "GitHub Actions logs",
+      "rollback": "Disable workflow; validators remain runnable locally.",
+      "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "site.trustfield.evidence_assessment",
+      "motor_id": "nf-unified-motor-foundation-v1",
+      "owner_role": "noetfield:trustfield.assessment-owner",
+      "beneficiary": "customer.trustfield",
+      "business_customer_goal": "program.created yields a downloadable governance evidence package and status.",
+      "trigger": {
+        "type": "event",
+        "event": "trustfield.assessment.requested"
+      },
+      "bounded_action": "Assemble health+audit+reconciliation into versioned package; preparation support only.",
+      "authority_ceiling": "customer_nonprod_output",
+      "output": {
+        "schema": "trustfield.evidence-assessment-package.v0.1",
+        "destination": "TrustField assessment artifacts + /status/{ref}",
+        "visibility": "customer"
+      },
+      "success_metric": "One registration → one package with deterministic source refs.",
+      "completion_condition": "Package manifest stored; status shows download.",
+      "idempotency_key": "trustfield-assessment:{program_id}",
+      "retry_backoff": "exponential 15m x4 then dead-letter event",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "5m wall / $0 LLM default",
+      "review_date": "2026-09-15",
+      "receipt_location": "TrustField program events + assessment package",
+      "rollback": "Disable assessment emit; keep register/status/checklist.",
+      "status": "active",
+      "site_flow": "trustfield.evidence_assessment"
+    },
+    {
+      "runtime_id": "sg.liveness_48h_closeout",
+      "motor_id": "gh_actions_nf_48h_liveness_closeout_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Close a finite 48h liveness test once when the window ends.",
+      "trigger": {
+        "type": "event",
+        "event": "liveness_48h_close"
+      },
+      "bounded_action": "Evaluate start receipt and write closeout once; not a recurring scheduler.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "liveness_48h_closeout_v1",
+        "destination": "receipts/48h-test-run1-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "One closeout receipt per started 48h test.",
+      "completion_condition": "Closeout receipt written or skip if no start.",
+      "idempotency_key": "liveness-48h:{start_receipt_id}",
+      "retry_backoff": "manual redispatch",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "receipts/48h-test-run1-*.json",
+      "rollback": "Ignore repository_dispatch; leave start receipt.",
+      "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.commissioning_specialist_deploy",
+      "motor_id": "gh_actions_nf_commissioning_specialist_deploy_v1",
+      "owner_role": "noetfield:sg.commissioning-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Ship on-demand commissioning Worker changes without re-enabling perpetual cron.",
+      "trigger": {
+        "type": "event",
+        "event": "git.push.commissioning_worker"
+      },
+      "bounded_action": "Deploy Worker with crons=[] asserted; put model secrets.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "worker_deploy_receipt_v1",
+        "destination": "CF deploy logs",
+        "visibility": "operator"
+      },
+      "success_metric": "Worker health shows schedule_enabled=false after deploy.",
+      "completion_condition": "Deploy job terminal.",
+      "idempotency_key": "commissioning-deploy:{sha}",
+      "retry_backoff": "CI retry",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "15m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "CF deploy logs + /health",
+      "rollback": "Redeploy previous Worker version; keep cron empty.",
+      "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.hourly_ai_circles_deploy",
+      "motor_id": "gh_actions_nf_hourly_ai_circles_deploy_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.portfolio",
+      "business_customer_goal": "Deploy AI circle Workers only when their code changes.",
+      "trigger": {
+        "type": "event",
+        "event": "git.push.hourly_ai_circles"
+      },
+      "bounded_action": "Test + dry-run + deploy circle Workers on path push.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "worker_deploy_receipt_v1",
+        "destination": "CF deploy logs",
+        "visibility": "operator"
+      },
+      "success_metric": "Deploy PASS after tests.",
+      "completion_condition": "Deploy job terminal.",
+      "idempotency_key": "hourly-ai-circles-deploy:{sha}",
+      "retry_backoff": "CI retry",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "20m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "CF deploy logs",
+      "rollback": "Redeploy previous Worker configs.",
+      "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.key2_custody_watch_apply",
+      "motor_id": "gh_actions_nf_sg_key2_custody_watch_v1",
+      "owner_role": "noetfield:sg.security-owner",
+      "beneficiary": "operator.security",
+      "business_customer_goal": "Apply key2 custody stamp once when bootstrap key1 stops authenticating.",
+      "trigger": {
+        "type": "event",
+        "event": "key2_custody_established"
+      },
+      "bounded_action": "One-shot prove/apply custody; open PR if stamped; not recurring.",
+      "authority_ceiling": "propose",
+      "output": {
+        "schema": "sg_key2_custody_receipt_v1",
+        "destination": "receipts/sg-key2-custody-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Single custody transition applied when key1 dead.",
+      "completion_condition": "Prove script exit 0 or blocked_founder 3.",
+      "idempotency_key": "key2-custody:{stamp_hash}",
+      "retry_backoff": "manual redispatch",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-09-01",
+      "receipt_location": "receipts/sg-key2-custody-*.json",
+      "rollback": "Revert custody PR; keep key1 until founder decision.",
+      "status": "event_driven",
+      "site_flow": "none"
+    }
+  ]
+}
