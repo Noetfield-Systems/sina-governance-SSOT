@@ -32,7 +32,7 @@ DEEPSEEK_MODEL = "deepseek-chat"
 GLM_MODEL = "glm-4-flash"
 KIMI_MODEL = "moonshot-v1-8k"
 HF_MODEL = "Qwen/Qwen2.5-7B-Instruct"
-WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+WORKERS_AI_MODEL = "@cf/meta/llama-3.2-3b-instruct"
 
 [ai]
 binding = "AI"

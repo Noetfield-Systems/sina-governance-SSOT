@@ -203,7 +203,7 @@ function providerConfig(env, name) {
     },
     workers_ai: {
       kind: "workers_ai",
-      model: env.WORKERS_AI_MODEL || "@cf/meta/llama-3.1-8b-instruct",
+      model: env.WORKERS_AI_MODEL || "@cf/meta/llama-3.2-3b-instruct",
     },
   };
   return configs[name];
