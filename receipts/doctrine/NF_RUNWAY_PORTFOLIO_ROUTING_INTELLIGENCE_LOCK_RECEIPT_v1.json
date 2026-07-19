@@ -1,0 +1,9 @@
+{
+  "schema": "nf_doctrine_lock_receipt_v1",
+  "receipt_id": "NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCK_RECEIPT_v1",
+  "decision_id": "NF-RUNWAY-PORTFOLIO-ROUTING-INTELLIGENCE-V1",
+  "verdict": "PASS_SCOPED_CHANGE",
+  "status": "SG_ACCEPTED",
+  "saved_at": "2026-07-19T00:59:24Z",
+  "lane": "sg_governance"
+}

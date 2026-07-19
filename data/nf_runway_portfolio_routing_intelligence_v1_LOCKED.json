@@ -1,0 +1,18 @@
+{
+  "schema": "nf_runway_portfolio_routing_intelligence_v1",
+  "decision_id": "NF-RUNWAY-PORTFOLIO-ROUTING-INTELLIGENCE-V1",
+  "status": "SG_ACCEPTED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-19T00:59:24Z",
+  "base_head_before_commit": "7a63da6",
+  "central_metric": "ECQR",
+  "static_failover_policy": "SOFTWARE_REPAIR_STATIC_FAILOVER_POLICY_V0.1",
+  "static_failover_scope": "software_repair.edit_stage_cold_start_only",
+  "ladder_exhaustion_is_founder": false,
+  "ops_are_product_skus": false,
+  "cat_07": "HOLD",
+  "data_before_gate": "HOLD",
+  "level_3_bandit": "FORBIDDEN_ON_HIGH_RISK",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+  "implementation_repo": "Noetfield-Systems/NOETFIELD-RUNWAY"
+}
