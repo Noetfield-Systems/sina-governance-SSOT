@@ -50,6 +50,16 @@ test("builder permits bounded production patches only", () => {
     false,
   );
   assert.equal(validateAction(productionAction({ tests: [] })).ok, false);
+  assert.equal(
+    validateAction(productionAction({ tests: ["Investigate the production path"] })).ok,
+    false,
+  );
+  assert.equal(
+    validateAction(productionAction({
+      changes: [{ path: "scripts/useful_fix.py", content: "{}" }],
+    })).ok,
+    false,
+  );
   assert.equal(validateAction({ action: "dispatch_job", job_id: "motor_job" }).ok, false);
   assert.equal(validateAction({ action: "issue", title: "plan" }).ok, false);
 });

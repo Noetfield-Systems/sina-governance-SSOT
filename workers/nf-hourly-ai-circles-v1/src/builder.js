@@ -144,7 +144,8 @@ function rolePrompt(role) {
     planner: `${common} Reconcile evidence without hiding disagreement. Select one safe target already present in candidate_paths. Return JSON only: {"action":"draft_pr|noop","target_path":string|null,"title":string,"why":string,"acceptance":[string],"unresolved_objections":[string]}.`,
     implementer:
       `${common} Produce one bounded production patch with complete UTF-8 file contents (max 3 safe files; include or update executable tests for code). ` +
-      `Do not edit protected paths. Use noop if evidence is insufficient or no production patch is safe. ` +
+      `Every tests entry must be an executable shell command beginning with python, pytest, node, npm, npx, bash, or sh. ` +
+      `Never replace an existing file with empty/minimal content. Do not edit protected paths. Use noop if evidence is insufficient or no production patch is safe. ` +
       `Return JSON only: {"action":"draft_pr|noop","title":string,"rationale":string,"changes":[{"path":string,"content":string}],"tests":[string]}.`,
   };
   return prompts[role];
@@ -258,6 +259,19 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
     };
   } catch (error) {
     if (!String(error?.message || error).startsWith("github_404:")) throw error;
+  }
+  for (const change of action.changes) {
+    const existing = await readTarget(token, owner, repo, base, change.path);
+    if (
+      existing.content &&
+      existing.content.length >= 100 &&
+      change.content.length < existing.content.length * 0.5
+    ) {
+      return {
+        kind: "noop",
+        reason: `suspicious_file_truncation:${change.path}`,
+      };
+    }
   }
   const baseRef = await github(token, `/repos/${owner}/${repo}/git/ref/heads/${base}`);
   const baseCommit = await github(token, `/repos/${owner}/${repo}/git/commits/${baseRef.object.sha}`);

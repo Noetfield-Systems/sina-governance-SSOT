@@ -27,6 +27,7 @@ export function safePath(path) {
 }
 
 const ALLOWED_ACTIONS = new Set(["draft_pr", "noop"]);
+const EXECUTABLE_CHECK = /^(?:cd\s+\S+\s+&&\s+)?(?:python3?|pytest|node|npm|npx|bash|sh)\b/;
 
 /**
  * Coerce common model failures into a usable action shape before hard validation.
@@ -58,6 +59,9 @@ export function validateAction(action) {
   if (!Array.isArray(action.tests) || action.tests.length < 1 || action.tests.length > 8) {
     return { ok: false, reason: "acceptance_checks_required" };
   }
+  if (action.tests.some((test) => !EXECUTABLE_CHECK.test(String(test || "").trim()))) {
+    return { ok: false, reason: "acceptance_checks_must_be_executable_commands" };
+  }
   if (!Array.isArray(action.changes) || action.changes.length < 1 || action.changes.length > 3) {
     return { ok: false, reason: "changes_count_out_of_bounds" };
   }
@@ -66,6 +70,9 @@ export function validateAction(action) {
     if (!safePath(change.path)) return { ok: false, reason: `protected_path:${change.path}` };
     if (typeof change.content !== "string" || change.content.length > 24000) {
       return { ok: false, reason: `content_out_of_bounds:${change.path}` };
+    }
+    if (["", "{}", "[]", "null"].includes(change.content.trim())) {
+      return { ok: false, reason: `empty_or_non_substantive_content:${change.path}` };
     }
     total += change.content.length;
   }
