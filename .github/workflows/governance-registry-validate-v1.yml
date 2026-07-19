@@ -52,3 +52,7 @@ jobs:
 
       - name: Unit tests for runtime value contracts
         run: python3 -m unittest tests.test_runtime_value_contract_v1 -v
+
+      - name: Prove synthetic site-flow canaries
+        run: python3 scripts/prove_site_flow_canaries_v1.py
+

@@ -1,0 +1,52 @@
+{
+  "schema": "site_flow_canaries_v1",
+  "generated_at": "2026-07-19T06:57:27Z",
+  "mode": "synthetic",
+  "note": "Live production submissions remain HOLD-gated; synthetic canaries prove contracts + event spine readiness.",
+  "flows": [
+    {
+      "site_flow": "sourceb.workspace",
+      "runtime_id": "site.sourceb.workspace_completion",
+      "event": "sourceb.workspace.setup_verified",
+      "output_schema": "noetfield.sourceb-workspace-receipt.v0.1",
+      "beneficiary": "customer.sourceb",
+      "synthetic_proof": "contract_and_route_gate"
+    },
+    {
+      "site_flow": "noetfield.enterprise_intake",
+      "runtime_id": "site.noetfield.enterprise_intake",
+      "event": "noetfield.enterprise_intake.received",
+      "output_schema": "noetfield.enterprise-intake-qualified.v0.1",
+      "beneficiary": "customer.noetfield",
+      "synthetic_proof": "contract_and_route_gate"
+    },
+    {
+      "site_flow": "trustfield.evidence_assessment",
+      "runtime_id": "site.trustfield.evidence_assessment",
+      "event": "trustfield.assessment.requested",
+      "output_schema": "trustfield.evidence-assessment-package.v0.1",
+      "beneficiary": "customer.trustfield",
+      "synthetic_proof": "contract_and_route_gate"
+    }
+  ],
+  "metrics": {
+    "duplicate_executions": 0,
+    "idle_llm_calls": 0,
+    "customer_visible_failures": 0,
+    "flows_proven_synthetic": 3
+  },
+  "gates_activated": [
+    "runtime_value_contract_validator",
+    "governance-registry-validate-v1"
+  ],
+  "prs": {
+    "sg_runtime_value_contract": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/58",
+    "motor_event_v2": "https://github.com/Noetfield-Systems/noetfield-sandbox-private/pull/45",
+    "sourceb_workspace_motor": "https://github.com/Noetfield-Systems/SourceB/pull/52",
+    "noetfield_enterprise_intake": "https://github.com/Noetfield-Systems/Noetfield/pull/125",
+    "trustfield_assessment": "https://github.com/Noetfield-Systems/TrustField-Technologies/pull/63",
+    "noos_runtime_migration": "https://github.com/Noetfield-Systems/noetfeld-os/pull/91"
+  },
+  "errors": [],
+  "verdict": "PASS_SYNTHETIC_CANARIES"
+}
