@@ -142,7 +142,7 @@ def main() -> int:
     if key1_present and key1_app_ok:
         print("BLOCKED_FOUNDER: bootstrap key1 still authenticates on GitHub.")
         print("Delete OLD private key in App 4330805 UI (fingerprint 5d75d4e1...). Keep key2 22a9513a...")
-        print("URL: https://github.com/settings/apps/noetfield-sg-authority")
+        print("URL: https://github.com/organizations/Noetfield-Systems/settings/apps/noetfield-sg-authority")
         return 3
 
     # key1 absent locally OR key1 auth fails → ESTABLISHED path
