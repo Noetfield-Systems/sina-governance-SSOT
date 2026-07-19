@@ -35,7 +35,7 @@
 `data/runtime_reality_v1.json` has precedence over architecture prose for current deployment, commissioning, ACTIVE, and authority status. Current incident: `SG-AUTHORITY-IDENTITY-P0`.
 
 - `noetfield-motor` = proven executor identity; not SG; not commissioned Unified Motor Core.
-- Legacy App `4179901` / installation `143449507` and `REMOTE_CHECK_ADVISORY` are forbidden authority sources.
+- legacy app `4179901` / installation `143449507` and `REMOTE_CHECK_ADVISORY` are forbidden authority sources.
 - Autonomous production mutation is HOLD until exact fresh signed permits from commissioned `noetfield-sg-authority` exist.
 - Architecture accepted ≠ implemented ≠ deployed ≠ proven ≠ commissioned ≠ active.
 - Agents may observe, test, propose, and open draft PRs; they may not lift HOLD, deploy, promote, mutate secrets/authority/verifiers, or revoke legacy identity under containment.
@@ -48,7 +48,9 @@
 
 0e. **Activation cycle + Higgsfield adapter (LOCKED)** — `docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` + `P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` before new lanes/roles/providers
 0f. **Noetfield Runway product (LOCKED)** — `P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` before selling Motor/governance; parallel Video/Software Repair/Research; one Job↔one isolated sandbox; Gateway ≠ Motor
-0g. **Runway execution assignment (LOCKED)** — `P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` + `data/nf_runway_execution_assignment_v1_LOCKED.json`: Claude Code=foundation/Repair; Codex Local=Research impl; Cursor=Video; GPT Work Verifier on GitHub=Research commissioning; Codex Cloud=separate cloud worker; GPT Advisor=advice only; institutional owners remain Builder/Verifier
+0g. **Runway execution assignment (LOCKED)** — `P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` + `data/nf_runway_execution_assignment_v1_LOCKED.json`: Claude Code=foundation/Repair; Codex Local=Research impl; Cursor=Video; GPT work verifier on GitHub=Research commissioning; Codex Cloud=separate cloud worker; GPT Advisor=advice only; institutional owners remain Builder/Verifier
+
+0h. **compute / ROI allocation (LOCKED)** — read `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md` and `data/nf_compute_roi_allocation_v1_LOCKED.json` before changing Actions minute spend, Cloudflare hot path, Railway heavy jobs, or kernel llm matrix. enterprise plan kept; classes A-D on 50k minutes; wake = authenticated HTTP `job_id` only; HOLD preserved
 
 0. **CHESS v2.0 (full package)** — `P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` + templates + `SKILLS/SKILL_01`–`07` + `scripts/chess_pass_cli_v1.py`
 
