@@ -1,6 +1,6 @@
 name: nf-commissioning-specialist-deploy-v1
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   push:
     paths:
       - "workers/nf-commissioning-specialist-tick-v1/**"
@@ -22,29 +22,14 @@ jobs:
         with:
           node-version: "22"
       - run: npm install
-      - name: Create KV if needed + deploy
+      - name: Deploy on-demand commissioning Worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
         run: |
           set -euo pipefail
-          # Ensure KV binding id in wrangler.toml
-          if grep -q REPLACE_ON_DEPLOY wrangler.toml; then
-            OUT=$(npx wrangler kv namespace create COMMISSIONING_SPECIALIST_RECEIPTS 2>&1 || true)
-            echo "$OUT"
-            ID=$(echo "$OUT" | sed -n 's/.*id = "\([a-f0-9]*\)".*/\1/p' | tail -1)
-            if [ -z "$ID" ]; then
-              # list existing
-              ID=$(npx wrangler kv namespace list 2>/dev/null | python3 -c 'import sys,json,re; t=sys.stdin.read();
-try:
-  d=json.loads(t); 
-  print(next((x["id"] for x in d if "COMMISSIONING" in x.get("title","")),""))
-except Exception:
-  m=re.search(r"([a-f0-9]{32})", t); print(m.group(1) if m else "")')
-            fi
-            test -n "$ID"
-            sed -i "s/REPLACE_ON_DEPLOY/$ID/" wrangler.toml
-          fi
+          test -n "$CLOUDFLARE_API_TOKEN"
+          grep -q 'crons = \[\]' wrangler.toml
           npx wrangler deploy
       - name: Put model API secrets
         env:
