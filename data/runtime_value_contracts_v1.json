@@ -1,7 +1,7 @@
 {
   "schema": "runtime_value_contracts_v1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-19T06:50:00Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-19T23:08:53Z",
   "law": "Every runtime must name a beneficiary, justified trigger, bounded action, useful output, completion condition, and idle no-op. No schedule without a time-dependent reason. No idle LLM. One claim owner per task cell.",
   "contracts": [
     {
@@ -704,6 +704,39 @@
       "rollback": "Disable workflow; validators remain runnable locally.",
       "status": "event_driven",
       "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.site_flow_canaries_executor",
+      "motor_id": "gh_actions_site_flow_canaries_executor_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Produce one terminal synthetic proof that the three site-flow contracts are activation-ready without live submissions.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "Run the fixed site-flow canary proof once, seal it, and persist one staging R2 receipt key.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "site_flow_canaries_v1",
+        "destination": "r2://noetfield-runway-results-staging/mrw/external/SITE_FLOW_CANARIES_V1.json",
+        "visibility": "operator"
+      },
+      "success_metric": "One hash-verified PASS_SYNTHETIC_CANARIES receipt for all three flows and zero model calls.",
+      "completion_condition": "A matching valid receipt is read from R2 after upload, or an existing matching valid receipt causes a no-op.",
+      "idempotency_key": "wo.e2e_activation:v1",
+      "retry_backoff": "manual or controller redispatch; queued concurrency never cancels an active run",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM / one staging R2 object",
+      "review_date": "2026-09-01",
+      "receipt_location": "r2://noetfield-runway-results-staging/mrw/external/SITE_FLOW_CANARIES_V1.json",
+      "rollback": "Disable the dispatch-only workflow; retain the immutable staging receipt for audit.",
+      "status": "manual_only",
+      "site_flow": "none",
+      "notes": "Production submissions remain HOLD; CF_MAIN_TOKEN is the only Cloudflare credential accepted."
     },
     {
       "runtime_id": "site.trustfield.evidence_assessment",

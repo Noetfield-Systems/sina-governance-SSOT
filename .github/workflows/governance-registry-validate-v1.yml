@@ -10,6 +10,9 @@ on:
       - "scripts/validate_parallel_automation_governance_v1.py"
       - "tests/test_runtime_value_contract_v1.py"
       - ".github/workflows/governance-registry-validate-v1.yml"
+      - ".github/workflows/site-flow-canaries-executor-v1.yml"
+      - "scripts/site_flow_canaries_receipt_v1.py"
+      - "tests/test_site_flow_canaries_receipt_v1.py"
   push:
     branches: [main]
     paths:
@@ -20,6 +23,9 @@ on:
       - "scripts/validate_parallel_automation_governance_v1.py"
       - "tests/test_runtime_value_contract_v1.py"
       - ".github/workflows/governance-registry-validate-v1.yml"
+      - ".github/workflows/site-flow-canaries-executor-v1.yml"
+      - "scripts/site_flow_canaries_receipt_v1.py"
+      - "tests/test_site_flow_canaries_receipt_v1.py"
   workflow_dispatch:
 
 permissions:
@@ -53,6 +59,8 @@ jobs:
       - name: Unit tests for runtime value contracts
         run: python3 -m unittest tests.test_runtime_value_contract_v1 -v
 
+      - name: Unit tests for the bounded canary receipt executor
+        run: python3 -m unittest tests.test_site_flow_canaries_receipt_v1 -v
+
       - name: Prove synthetic site-flow canaries
         run: python3 scripts/prove_site_flow_canaries_v1.py
-
