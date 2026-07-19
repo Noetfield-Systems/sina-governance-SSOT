@@ -14,5 +14,21 @@
   "data_before_gate": "HOLD",
   "level_3_bandit": "FORBIDDEN_ON_HIGH_RISK",
   "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
-  "implementation_repo": "Noetfield-Systems/NOETFIELD-RUNWAY"
+  "implementation_repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+  "founder_correction": {
+    "video_product_upgrade": "STOP",
+    "gallery_cost_supply": "AUTHORIZED",
+    "purpose": "qualified_reuse_before_paid_ai_video_generation",
+    "route_order": [
+      "GALLERY_REUSE",
+      "DETERMINISTIC_COMPOSE",
+      "PAID_GENERATION_ONLY_WHEN_REQUIRED"
+    ]
+  },
+  "future_runway_gate_correction": {
+    "software_repair": "real_job_required",
+    "research": "real_job_required",
+    "gallery_cost_supply": "qualified_reuse_proof_required",
+    "video_product_job": "not_required"
+  }
 }

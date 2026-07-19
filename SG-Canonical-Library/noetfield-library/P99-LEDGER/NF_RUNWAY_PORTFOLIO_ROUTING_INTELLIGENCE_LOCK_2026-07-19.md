@@ -19,3 +19,7 @@
 - CAT-07
 - Data before future_runway_gate
 - Global model ladder doctrine
+
+## Founder correction
+
+Video product upgrade stopped. Gallery cost-supply is the media-economics capability and must report avoided generation cost.

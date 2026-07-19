@@ -10,7 +10,7 @@ ECQR + task markets + failure healing on one Motor. No global ladder. No 20 engi
 
 | Repo | Action |
 |------|--------|
-| NOETFIELD-RUNWAY | Implement `routing/roi`, failure classifier, `_ops` canaries |
+| NOETFIELD-RUNWAY | Implement `routing/roi`, failure classifier, `_ops` canaries, Gallery cost-supply |
 | SourceA | Compile stage graphs with task_class fingerprints |
 | NOOS | Observe ECQR / qualification / provider concentration |
 | SourceB | Catalog · estimate · progress · qualified result · ROI summary only |
@@ -21,3 +21,7 @@ ECQR + task markets + failure healing on one Motor. No global ladder. No 20 engi
 - Founder page on mere ladder exhaustion
 - Data before future_runway_gate
 - App builder / generic agent
+
+## Founder correction
+
+No Video product upgrade. Build Gallery asset supply to reduce paid AI-video generation: reuse → deterministic compose → paid generation only when required.

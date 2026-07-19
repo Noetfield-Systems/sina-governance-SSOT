@@ -9,7 +9,7 @@
 **Packet id:** `SG-FINALIZATION-RUNWAY-PORTFOLIO-ROUTING-V1`
 **effective_at:** 2026-07-19
 **proposed_by:** Founder + Brain/Architect (Runway Portfolio OS advisor) + SG analysis
-**sg_decision:** `SG_ACCEPTED` — ECQR + task markets + failure healing on one Motor; no 20-engine expansion; no CAT-07 unlock
+**sg_decision:** `SG_ACCEPTED` — ECQR + task markets + failure healing on one Motor; Gallery cost-supply replaces the proposed Video upgrade; no 20-engine expansion; no CAT-07 unlock
 **Depends on:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` · `NF-NOETFIELD-RUNWAY-PRODUCT-V1` · `NF-RUNWAY-CORE-FAMILIES-COMPOSITION-V1` · `NF-RUNWAY-EXECUTION-ASSIGNMENT-V1`
 **supersedes:** none (demotes global four-model ladder as doctrine only)
 
@@ -36,6 +36,7 @@ ECQR ≈ Expected Total Job Cost ÷ P(qualification)
 5. App/Feature Build (advisor R10) remains **HOLD** (CAT-07).
 6. Commercial model use remains under locked Unified Motor envelopes: founder-approved budget/data/premium ceilings; `ESCALATE_REQUIRED` is not erased — envelope-approved automatic commercial ≠ ungoverned free-for-all.
 7. Data family remains behind `future_runway_gate`.
+8. **Founder correction:** no new Video product upgrade. Gallery is the active media-economics capability: qualified asset reuse first, deterministic composition second, paid AI-video generation only when required.
 
 ## Architecture (intelligence behind existing Motor)
 
@@ -68,7 +69,7 @@ Every Runway stage has its own route market. Software Repair stages (reproduce, 
 | Ops id | Maps to |
 |--------|---------|
 | O1 Intake & Planning | SourceA + Motor intake |
-| O2 Gallery / Asset Supply | Video gallery motors |
+| O2 Gallery / Asset Supply | Gallery cost-supply recipe; reuse assets before paid AI-video generation |
 | O3 Provider Benchmark | `runways/_ops/provider-benchmark` |
 | O4 Price & Availability | `runways/_ops/price-health` |
 | O5 Qualification | Per-Runway qualify gates |
@@ -92,6 +93,7 @@ Runway catalog · price/latency estimate · job progress · qualified result · 
 - CAT-07 Full App Builder unlock
 - Unsupervised Level-3 bandit on high-risk tasks
 - Data implementation before `future_runway_gate`
+- New Video product Runway work; Gallery is the authorized media-cost capability
 
 ## Implementation home
 
