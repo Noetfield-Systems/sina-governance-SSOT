@@ -1,0 +1,142 @@
+{
+  "schema": "nf_runway_core_families_composition_v1",
+  "decision_id": "NF-RUNWAY-CORE-FAMILIES-COMPOSITION-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "TAXONOMY_LOCKED_DATA_BUILD_HELD",
+  "version": "1.0.0",
+  "saved_at": "2026-07-18T11:42:15Z",
+  "base_head_before_commit": "63ff2805fb6715e9a0e8c9e0f95aeeb318679f70",
+  "one_line_law": "Few Core Runway families on one Unified Motor; everything else is composition; no separate engines",
+  "engine_law": "cores_are_recipe_families_not_separate_motors",
+  "core_families": [
+    "Research",
+    "Software Repair",
+    "Video",
+    "Data",
+    "Document",
+    "Web/Publish"
+  ],
+  "initial_active_parallel": [
+    "Video",
+    "Software Repair",
+    "Research"
+  ],
+  "next_new_family": "Data",
+  "next_family_gate": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1.future_runway_gate",
+  "build_order_after_gate": [
+    "Data",
+    "Document",
+    "Web/Publish"
+  ],
+  "tiers": {
+    "S": [
+      "Data",
+      "Document",
+      "Research",
+      "Software Repair"
+    ],
+    "A_composites": [
+      "Website Audit-to-Fix",
+      "Proposal/RFP",
+      "Research-to-Deck",
+      "Knowledge-to-SOP",
+      "Meeting-to-Execution",
+      "Due Diligence"
+    ],
+    "B": [
+      "Content Repurposing",
+      "Website/Landing Page",
+      "Product Catalog",
+      "Podcast",
+      "Customer Support Resolution",
+      "Business Presentation",
+      "Training/Course"
+    ],
+    "HOLD": [
+      "Full App Builder",
+      "Generic AI Agent Builder",
+      "Generic Chatbot",
+      "Fully generative video as default",
+      "Autonomous legal/medical/financial decisions",
+      "Autonomous ad-spend optimizer",
+      "General do-anything Runway"
+    ]
+  },
+  "compositions": {
+    "Website Audit-to-Fix": [
+      "Research",
+      "Software Repair",
+      "Web/Publish"
+    ],
+    "Proposal/RFP": [
+      "Research",
+      "Document"
+    ],
+    "Research-to-Deck": [
+      "Research",
+      "Document renderer"
+    ],
+    "Knowledge-to-SOP": [
+      "Document",
+      "Research"
+    ],
+    "Meeting-to-Execution": [
+      "Document",
+      "tool adapters"
+    ],
+    "Due Diligence": [
+      "Research",
+      "Document",
+      "Data"
+    ],
+    "Content Repurposing": [
+      "Video",
+      "Document",
+      "deterministic media tools"
+    ]
+  },
+  "research_to_deck_is_seventh_core": false,
+  "research_to_deck_is_research_output_mode": true,
+  "differentiation": "finished_reproducible_decision_package_not_chat",
+  "data_acceptance_proof": [
+    "real_csv_xlsx_uploaded",
+    "schema_profiled",
+    "errors_and_missing_detected",
+    "calculations_reproduced",
+    "charts_generated",
+    "findings_produced",
+    "workbook_downloadable",
+    "report_downloadable",
+    "lineage_to_source_cells",
+    "receipt_closed"
+  ],
+  "executor_gap": {
+    "observation": "commercial_ui_may_stop_at_execution_queued",
+    "priority": "close_unified_motor_executor_before_fourth_runway_plugin",
+    "ui_queue_status_is_not_finished_job": true
+  },
+  "holds": [
+    "data_runway_build_before_future_runway_gate",
+    "document_before_data_authorization",
+    "generic_landing_page_before_data_document",
+    "composites_as_independent_engines",
+    "cat_07_full_app_builder",
+    "fourth_runway_before_first_three_real_jobs"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1",
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+  "dispatch": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+  "p99": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCK_2026-07-18.md",
+  "sg_authority_sha": null,
+  "decision_artifact_sha": null,
+  "canonical_main_sha": null,
+  "merge_strategy": "merge_commit",
+  "pr": null,
+  "merged_at": null
+}
