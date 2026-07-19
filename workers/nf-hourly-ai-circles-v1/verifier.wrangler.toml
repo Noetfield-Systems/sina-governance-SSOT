@@ -1,0 +1,50 @@
+name = "nf-hourly-independent-verifier-circle-v1"
+main = "src/verifier.js"
+compatibility_date = "2026-07-18"
+compatibility_flags = ["nodejs_compat"]
+account_id = "b7282b4a5c17b84d62e3ef8866b878f8"
+workers_dev = true
+
+# Free plan on secondary account cannot use Workflow schedules.
+# Independence is preserved via separate account + GitHub identity + KV.
+[triggers]
+crons = ["30 * * * *"]
+
+[vars]
+LOOP_ID = "nf-hourly-independent-verifier-circle-v1"
+TARGET_REPO = "Noetfield-Systems/sina-governance-SSOT"
+VERIFIER_GITHUB_APP_ID = "4330805"
+VERIFIER_GITHUB_INSTALLATION_ID = "147378007"
+SG_CANDIDATE_APP_ID = "4330805"
+SG_CANDIDATE_INSTALLATION_ID = "147378007"
+MAX_PRS_PER_TICK = "3"
+MODE = "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD"
+AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
+BUILDER_HEALTH_URL = "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health"
+BUILDER_TICK_URL = "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/tick"
+LIVE_ACTIVATION = "true"
+OPENAI_MODEL = "gpt-5-mini"
+GEMINI_MODEL = "gemini-2.5-flash-lite"
+GLM_MODEL = "glm-4-flash"
+WORKERS_AI_FAST_MODEL = "@cf/meta/llama-3.2-3b-instruct"
+WORKERS_AI_REASONING_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+
+[ai]
+binding = "AI"
+
+[version_metadata]
+binding = "CF_VERSION_METADATA"
+
+[[kv_namespaces]]
+binding = "RECEIPTS"
+id = "2d730ba584a243698f8fb148b98aa502"
+
+[observability]
+enabled = true
+
+[observability.logs]
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.05

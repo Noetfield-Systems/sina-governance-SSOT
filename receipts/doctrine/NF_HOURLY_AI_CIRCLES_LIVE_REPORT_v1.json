@@ -1,0 +1,71 @@
+{
+  "receipt_type": "nf_hourly_ai_circles_live_report_v1",
+  "at": "2026-07-19T02:01:39Z",
+  "verdict": "PASS_LIVE_ASSIST_ONLY_HOLD",
+  "builder": {
+    "worker": "nf-hourly-builder-circle-v1",
+    "account": "0d0b967b77e2e5535455d39ff3dae72c",
+    "health": "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "cron": "0 * * * *",
+    "runtime": "cloudflare_workflows",
+    "github_app": "4275961/145975487",
+    "first_tick": {
+      "workflow_instance_id": "182d5631-2f53-4e88-abb0-2dbe739d26d7",
+      "receipt_id": "builder-20260719015612-13ef0704",
+      "verdict": "PASS_ASSIST_ONLY_DELIVERY",
+      "delivery": {
+        "kind": "issue",
+        "number": 47,
+        "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/issues/47"
+      },
+      "role_quorum": 6,
+      "provider_diversity": 3,
+      "providers_observed": [
+        "deepseek"
+      ]
+    },
+    "model_keys_present": {
+      "deepseek": true,
+      "glm": true,
+      "kimi": true,
+      "openai": true,
+      "gemini": true,
+      "huggingface": true,
+      "workers_ai": true,
+      "motor_app": true
+    }
+  },
+  "verifier": {
+    "worker": "nf-hourly-independent-verifier-circle-v1",
+    "account": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "health": "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health",
+    "cron": "30 * * * *",
+    "runtime": "cloudflare_cron_secondary_account_free_plan",
+    "github_app": "4330805/147378007",
+    "first_tick": {
+      "receipt_id": "verifier-20260719020115-9cff8760",
+      "verdict": "PASS_VERIFIER_TICK",
+      "candidates_seen": 0,
+      "note": "no ai-circle/* draft PR yet; builder chose issue delivery on first tick"
+    },
+    "model_keys_present": {
+      "openai": true,
+      "gemini": true,
+      "glm": true,
+      "workers_ai": true,
+      "verifier_github_app": true
+    }
+  },
+  "holds_preserved": [
+    "merge",
+    "deploy_prod",
+    "authority_change",
+    "secret_mint",
+    "architecture_ratification"
+  ],
+  "notes": [
+    "Secondary account free plan cannot use Workflow schedules; verifier uses Worker cron.",
+    "DeepSeek/GLM/Kimi/HF injected via NOETFIELD-RUNWAY one-shot workflow because org secrets were empty on SG repo workflow context.",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS remains HOLD."
+  ]
+}

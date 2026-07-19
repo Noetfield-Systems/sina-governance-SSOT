@@ -1,0 +1,97 @@
+name: nf-hourly-ai-circles-deploy-v1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "workers/nf-hourly-ai-circles-v1/**"
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workers/nf-hourly-ai-circles-v1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - name: Production unit tests
+        run: npm test
+      - name: Validate Worker bundles
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
+        run: |
+          set -euo pipefail
+          npx wrangler deploy --dry-run --config builder.wrangler.toml
+          CLOUDFLARE_API_TOKEN="${{ secrets.CF_VERIFIER_TOKEN }}" \
+          CLOUDFLARE_ACCOUNT_ID="b7282b4a5c17b84d62e3ef8866b878f8" \
+            npx wrangler deploy --dry-run --config verifier.wrangler.toml
+      - name: Deploy builder circle (main account)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
+        run: npx wrangler deploy --config builder.wrangler.toml
+      - name: Put builder secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
+          MOTOR_APP_PRIVATE_KEY: ${{ secrets.MOTOR_APP_PRIVATE_KEY }}
+          TICK_SECRET: ${{ secrets.HOURLY_AI_CIRCLE_TICK_SECRET }}
+          PEER_TICK_SECRET: ${{ secrets.HOURLY_AI_CIRCLE_TICK_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$MOTOR_APP_PRIVATE_KEY"
+          test -n "$TICK_SECRET"
+          printf '%s' "$MOTOR_APP_PRIVATE_KEY" | npx wrangler secret put MOTOR_APP_PRIVATE_KEY --config builder.wrangler.toml
+          printf '%s' "$TICK_SECRET" | npx wrangler secret put TICK_SECRET --config builder.wrangler.toml
+          printf '%s' "$PEER_TICK_SECRET" | npx wrangler secret put PEER_TICK_SECRET --config builder.wrangler.toml
+      - name: Deploy independent verifier circle (secondary account)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_VERIFIER_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b7282b4a5c17b84d62e3ef8866b878f8
+        run: npx wrangler deploy --config verifier.wrangler.toml
+      - name: Put verifier secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_VERIFIER_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b7282b4a5c17b84d62e3ef8866b878f8
+          VERIFIER_GITHUB_APP_PRIVATE_KEY: ${{ secrets.SG_AUTHORITY_PRIVATE_KEY }}
+          TICK_SECRET: ${{ secrets.HOURLY_AI_CIRCLE_TICK_SECRET }}
+          PEER_TICK_SECRET: ${{ secrets.HOURLY_AI_CIRCLE_TICK_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$VERIFIER_GITHUB_APP_PRIVATE_KEY"
+          test -n "$TICK_SECRET"
+          printf '%s' "$VERIFIER_GITHUB_APP_PRIVATE_KEY" | npx wrangler secret put VERIFIER_GITHUB_APP_PRIVATE_KEY --config verifier.wrangler.toml
+          printf '%s' "$TICK_SECRET" | npx wrangler secret put TICK_SECRET --config verifier.wrangler.toml
+          printf '%s' "$PEER_TICK_SECRET" | npx wrangler secret put PEER_TICK_SECRET --config verifier.wrangler.toml
+          # Free secondary account uses Worker cron, not Workflow schedules.
+      - name: Live health probe
+        run: |
+          set -euo pipefail
+          curl -fsS https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health | tee /tmp/builder-health.json
+          curl -fsS https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health | tee /tmp/verifier-health.json
+          python3 - <<'PY'
+          import json
+          b=json.load(open("/tmp/builder-health.json"))
+          v=json.load(open("/tmp/verifier-health.json"))
+          assert b.get("ok") is True
+          assert v.get("ok") is True
+          assert b.get("production_phase") is True
+          assert v.get("production_phase") is True
+          assert b.get("production_job_kind") == "repository_patch"
+          assert v.get("delivery") == "github_check_run"
+          assert b.get("version_id")
+          assert v.get("version_id")
+          print("LIVE_PRODUCTION_HEALTH_PASS")
+          PY
+          test "$(curl -sS -o /dev/null -w '%{http_code}' \
+            https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/last)" = "401"
+          test "$(curl -sS -o /dev/null -w '%{http_code}' \
+            https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/last)" = "401"
