@@ -14,13 +14,12 @@ schedules = ["0 * * * *"]
 [vars]
 LOOP_ID = "nf-hourly-builder-circle-v1"
 TARGET_REPO = "Noetfield-Systems/sina-governance-SSOT"
-RUNWAY_REPO = "Noetfield-Systems/NOETFIELD-RUNWAY"
-RUNWAY_REF = "main"
 MOTOR_APP_ID = "4275961"
 MOTOR_INSTALLATION_ID = "145975487"
 MIN_ROLE_QUORUM = "4"
-MIN_PROVIDER_DIVERSITY = "3"
-MODE = "ASSIST_ONLY"
+MIN_PROVIDER_DIVERSITY = "1"
+MAX_OPEN_CANDIDATES = "2"
+MODE = "PRODUCTION_REPOSITORY_JOBS_HOLD"
 AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
 VERIFIER_HEALTH_URL = "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health"
 VERIFIER_TICK_URL = "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/tick"
@@ -36,6 +35,9 @@ WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
 
 [ai]
 binding = "AI"
+
+[version_metadata]
+binding = "CF_VERSION_METADATA"
 
 [[kv_namespaces]]
 binding = "RECEIPTS"

@@ -11,10 +11,8 @@ import {
   secretMatches,
 } from "./common.js";
 import {
-  buildDeterministicJobPlanArtifact,
-  dispatchRunwayJob,
-  pickRotatingJob,
-  resolveJob,
+  buildProductionJobContract,
+  productionJobBody,
 } from "./jobs.js";
 import { normalizeAction, safePath, validateAction } from "./policy.js";
 
@@ -33,7 +31,14 @@ async function fetchVerifierFeedback(env) {
     String(env.VERIFIER_HEALTH_URL || "").replace(/\/health$/, "/last");
   if (!url) return { ok: false, reason: "verifier_last_url_missing" };
   try {
-    const resp = await fetch(url, { headers: { Accept: "application/json", "User-Agent": SCHEMA } });
+    const resp = await fetch(url, {
+      signal: AbortSignal.timeout(10_000),
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${env.PEER_TICK_SECRET || ""}`,
+        "User-Agent": SCHEMA,
+      },
+    });
     const body = await resp.json();
     const reviews = body.reviews || [];
     return {
@@ -91,14 +96,12 @@ async function snapshot(token, owner, repo, env) {
       .filter((item) => !item.pull_request)
       .map((item) => ({ number: item.number, title: item.title, labels: item.labels?.map((x) => x.name) })),
     open_prs: openPrs,
-    open_ai_circle_prs: openPrs.filter((pr) => String(pr.head || "").startsWith("ai-circle/")),
+    open_ai_circle_prs: openPrs.filter((pr) => {
+      const head = String(pr.head || "");
+      return head.startsWith("ai-circle/") || head.startsWith("production-job/");
+    }),
     verifier_feedback: verifierFeedback,
-    job_catalog: [
-      "motor_job",
-      "commissioning_tick",
-      "repair_run",
-      "live_model_smoke",
-    ],
+    production_job_kind: "repository_patch",
     candidate_paths: (tree.tree || [])
       .filter((item) => item.type === "blob" && safePath(item.path))
       .map((item) => item.path)
@@ -126,22 +129,23 @@ async function readTarget(token, owner, repo, branch, path) {
 
 function rolePrompt(role) {
   const common =
-    "You are in the Noetfield hourly builder circle. Evidence beats confidence. " +
+    "You are in the Noetfield production repository-job builder. Evidence beats confidence. " +
     "Rank portfolio value by ECQR. Preserve CAT_07 and Data HOLD. Do not package operations as product SKUs. " +
     "For media supply, prefer qualified gallery reuse, then deterministic composition, then paid generation only when required. " +
-    "The output is assist-only under AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD. " +
+    "Execute only real repository work under AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD. " +
     "Never merge, deploy, alter authority/secrets/workflows/locked architecture, or claim ratification. " +
-    "Prefer REAL work: draft_pr with code+tests, or dispatch_job into NOETFIELD-RUNWAY. Prefer issue only when blocked from both.";
+    "Never emit demos, fixtures, placeholders, sample jobs, planning artifacts, or issue-only work. " +
+    "The only external action is a draft_pr containing an actual bounded repair or improvement with executable acceptance checks.";
   const prompts = {
-    scout: `${common} Find one concrete repo problem or momentum opportunity. Return JSON only: {"target_path":string|null,"problem":string,"evidence":[string],"value":"revenue|risk|reliability|velocity","recommended_action":"draft_pr|dispatch_job|issue|noop","job_id":"motor_job|commissioning_tick|repair_run|live_model_smoke"|null}.`,
-    researcher: `${common} Independently investigate the supplied snapshot and scout claim. Seek contradictory evidence and expansion/revenue value. Return JSON only: {"facts":[string],"contradictions":[string],"search_next":[string],"recommendation":string,"prefer_job_id":string|null}.`,
+    scout: `${common} Find one concrete, evidenced production defect or momentum opportunity in candidate_paths. Return JSON only: {"target_path":string|null,"problem":string,"evidence":[string],"value":"revenue|risk|reliability|velocity","recommended_action":"draft_pr|noop"}.`,
+    researcher: `${common} Independently investigate the supplied snapshot and scout claim. Seek contradictory evidence and expansion/revenue value. Return JSON only: {"facts":[string],"contradictions":[string],"search_next":[string],"recommendation":string}.`,
     critic: `${common} Attack the proposal. Identify duplication, stale assumptions, protected-surface risk, and work that merely creates governance theater. Return JSON only: {"fatal":[string],"nonfatal":[string],"minimum_real_work":string,"verifier_checks":[string]}.`,
-    frugal: `${common} Act as the cheap/free-model divergence role. Find the smallest useful change with measurable proof. Return JSON only: {"different_view":string,"smaller_change":string,"proof":string,"prefer_dispatch_job":boolean}.`,
-    planner: `${common} Reconcile evidence without hiding disagreement. Prefer draft_pr on a safe candidate_paths target with tests, else dispatch_job from job_catalog, else issue. Return JSON only: {"action":"draft_pr|dispatch_job|issue|noop","job_id":"motor_job|commissioning_tick|repair_run|live_model_smoke"|null,"target_path":string|null,"title":string,"why":string,"acceptance":[string],"unresolved_objections":[string]}.`,
+    frugal: `${common} Find the smallest production change with measurable proof. Return JSON only: {"different_view":string,"smaller_change":string,"proof":string}.`,
+    planner: `${common} Reconcile evidence without hiding disagreement. Select one safe target already present in candidate_paths. Return JSON only: {"action":"draft_pr|noop","target_path":string|null,"title":string,"why":string,"acceptance":[string],"unresolved_objections":[string]}.`,
     implementer:
-      `${common} Produce one bounded REAL action. Prefer draft_pr with complete UTF-8 file contents (max 3 safe files, include tests) OR dispatch_job with job_id. ` +
-      `Do not edit protected paths. Avoid noop/issue unless both draft_pr and dispatch_job are unsafe. ` +
-      `Return JSON only: {"action":"draft_pr|dispatch_job|issue|noop","job_id":string|null,"title":string,"rationale":string,"issue_body":string,"changes":[{"path":string,"content":string}],"tests":[string]}.`,
+      `${common} Produce one bounded production patch with complete UTF-8 file contents (max 3 safe files; include or update executable tests for code). ` +
+      `Do not edit protected paths. Use noop if evidence is insufficient or no production patch is safe. ` +
+      `Return JSON only: {"action":"draft_pr|noop","title":string,"rationale":string,"changes":[{"path":string,"content":string}],"tests":[string]}.`,
   };
   return prompts[role];
 }
@@ -151,21 +155,21 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.scout = await runRole(
     env,
     "scout",
-    "deepseek",
+    "workers_ai",
     rolePrompt("scout"),
     JSON.stringify(repoSnapshot),
   );
   transcript.researcher = await runRole(
     env,
     "researcher",
-    "kimi",
+    "workers_ai",
     rolePrompt("researcher"),
     JSON.stringify({ snapshot: repoSnapshot, scout: transcript.scout.content }),
   );
   transcript.critic = await runRole(
     env,
     "critic",
-    "glm",
+    "workers_ai",
     rolePrompt("critic"),
     JSON.stringify({
       snapshot: repoSnapshot,
@@ -187,7 +191,7 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.planner = await runRole(
     env,
     "planner",
-    "gemini",
+    "workers_ai",
     rolePrompt("planner"),
     JSON.stringify({ snapshot: repoSnapshot, transcript }),
     1100,
@@ -203,13 +207,14 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.implementer = await runRole(
     env,
     "implementer",
-    "openai",
+    "workers_ai",
     rolePrompt("implementer"),
     JSON.stringify({
       snapshot: repoSnapshot,
       transcript,
       selected_target: target,
-      preference: "Prefer draft_pr or dispatch_job. Real plans and jobs over issues.",
+      verifier_feedback: repoSnapshot.verifier_feedback,
+      preference: "Production repository patch only. No demos, fixtures, placeholders, issues, or external synthetic workflows.",
     }),
     8000,
   );
@@ -232,25 +237,28 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   };
 }
 
-async function createIssue(token, owner, repo, action, receiptId) {
-  const title = clip(action.title || "Hourly AI circle proposal", 180);
-  const existing = await github(token, `/repos/${owner}/${repo}/issues?state=open&per_page=50`);
-  const duplicate = existing.find((item) => item.title === title);
-  if (duplicate) return { kind: "issue", reused: true, number: duplicate.number, url: duplicate.html_url };
-  const issue = await github(token, `/repos/${owner}/${repo}/issues`, {
-    method: "POST",
-    body: JSON.stringify({
-      title,
-      body:
-        `${clip(action.issue_body || action.rationale || "", 8000)}\n\n` +
-        `---\nGenerated by the bounded hourly builder circle. Receipt: \`${receiptId}\`. ` +
-        `This is a proposal, not an SG decision.\n\nMarker: \`ai-circle-proposal\``,
-    }),
-  });
-  return { kind: "issue", reused: false, number: issue.number, url: issue.html_url };
-}
-
 async function createDraftPr(token, owner, repo, base, action, receiptId) {
+  const branch = `production-job/${receiptId.replace(/[^a-zA-Z0-9._-]/g, "-")}`;
+  try {
+    const existingRef = await github(
+      token,
+      `/repos/${owner}/${repo}/git/ref/heads/${encodeURIComponent(branch)}`,
+    );
+    const pulls = await github(
+      token,
+      `/repos/${owner}/${repo}/pulls?state=open&head=${encodeURIComponent(`${owner}:${branch}`)}`,
+    );
+    return {
+      kind: "draft_pr",
+      reused: true,
+      number: pulls[0]?.number || null,
+      url: pulls[0]?.html_url || null,
+      branch,
+      head_sha: existingRef.object.sha,
+    };
+  } catch (error) {
+    if (!String(error?.message || error).startsWith("github_404:")) throw error;
+  }
   const baseRef = await github(token, `/repos/${owner}/${repo}/git/ref/heads/${base}`);
   const baseCommit = await github(token, `/repos/${owner}/${repo}/git/commits/${baseRef.object.sha}`);
   const treeEntries = [];
@@ -265,6 +273,16 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
     method: "POST",
     body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree: treeEntries }),
   });
+  if (tree.sha === baseCommit.tree.sha) {
+    return { kind: "noop", reason: "no_effective_repository_change" };
+  }
+  const contract = buildProductionJobContract({
+    receiptId,
+    repo: `${owner}/${repo}`,
+    base,
+    baseSha: baseRef.object.sha,
+    action,
+  });
   const commit = await github(token, `/repos/${owner}/${repo}/git/commits`, {
     method: "POST",
     body: JSON.stringify({
@@ -273,8 +291,6 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
       parents: [baseRef.object.sha],
     }),
   });
-  const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 11);
-  const branch = `ai-circle/${stamp}-${commit.sha.slice(0, 8)}`;
   await github(token, `/repos/${owner}/${repo}/git/refs`, {
     method: "POST",
     body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: commit.sha }),
@@ -286,18 +302,15 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
       head: branch,
       base,
       draft: true,
-      body:
-        `## Machine proposal\n${clip(action.rationale || "", 5000)}\n\n` +
-        `## Proposed checks\n${(action.tests || []).map((item) => `- ${item}`).join("\n") || "- Independent verifier required"}\n\n` +
-        `## Authority boundary\n- lane: assist_only\n- motor_id_or_human_gate: cf_nf_hourly_builder_circle_v1\n` +
-        `- receipt_id: ${receiptId}\n- HOLD preserved; this PR cannot merge or deploy autonomously.\n` +
-        `- A separate verifier runtime must review the exact head SHA.`,
+      body: productionJobBody(contract),
     }),
   });
   try {
     await github(token, `/repos/${owner}/${repo}/issues/${pull.number}/labels`, {
       method: "POST",
-      body: JSON.stringify({ labels: ["ai-circle-candidate", "assist-only", "independent-review-required"] }),
+      body: JSON.stringify({
+        labels: ["ai-circle-candidate", "production-job", "independent-review-required"],
+      }),
     });
   } catch {
     // Branch namespace remains the machine-readable candidate marker when labels are absent.
@@ -308,53 +321,9 @@ async function createDraftPr(token, owner, repo, base, action, receiptId) {
     url: pull.html_url,
     branch,
     head_sha: commit.sha,
+    exact_base_sha: baseRef.object.sha,
+    job_contract: contract,
   };
-}
-
-/**
- * Motor is a dumb delivery bus for verifier-computed text when the SG-candidate
- * app lacks Issues/PR write. Judgment remains verifier-owned in KV.
- */
-async function publishVerifierReviewsViaMotor(token, owner, repo, verifierFeedback) {
-  const published = [];
-  for (const review of verifierFeedback?.reviews || []) {
-    if (!review.review_body || !review.pr_number) continue;
-    if (review.review_channel && review.review_channel !== "kv_receipt_only") continue;
-    const marker = `ai-circle-verifier-receipt:${review.head_sha}`;
-    try {
-      const existing = await github(
-        token,
-        `/repos/${owner}/${repo}/issues/${review.pr_number}/comments?per_page=30`,
-      );
-      if ((existing || []).some((comment) => String(comment.body || "").includes(marker))) {
-        published.push({ pr_number: review.pr_number, reused: true, marker });
-        continue;
-      }
-      const comment = await github(token, `/repos/${owner}/${repo}/issues/${review.pr_number}/comments`, {
-        method: "POST",
-        body: JSON.stringify({
-          body:
-            `${review.review_body}\n\n` +
-            `---\nDelivery bus: Motor posted verifier-computed text. ` +
-            `Judgment source remains the independent verifier KV receipt.\n` +
-            `Marker: \`${marker}\``,
-        }),
-      });
-      published.push({
-        pr_number: review.pr_number,
-        ok: true,
-        comment_id: comment.id,
-        marker,
-      });
-    } catch (error) {
-      published.push({
-        pr_number: review.pr_number,
-        ok: false,
-        error: clip(String(error?.message || error), 240),
-      });
-    }
-  }
-  return published;
 }
 
 async function persist(env, receipt) {
@@ -364,142 +333,128 @@ async function persist(env, receipt) {
   });
   await env.RECEIPTS.put("last_fired_at", receipt.at);
   await env.RECEIPTS.put("last_receipt", JSON.stringify(receipt));
-  if (receipt.delivery?.job_id) {
-    await env.RECEIPTS.put("last_job_id", receipt.delivery.job_id);
+  if (receipt.receipt_id) {
+    await env.RECEIPTS.put(`job:${receipt.receipt_id}`, JSON.stringify({
+      job_id: receipt.receipt_id,
+      state: receipt.delivery?.kind === "draft_pr" ? "DRAFT_PR_OPENED" : receipt.verdict,
+      exact_head_sha: receipt.delivery?.head_sha || null,
+      pr_number: receipt.delivery?.number || null,
+      updated_at: receipt.at,
+    }), { expirationTtl: 60 * 60 * 24 * 90 });
   }
 }
 
-function preferJobId(action, planner, at) {
-  return (
-    resolveJob(action?.job_id)?.id ||
-    resolveJob(planner?.job_id)?.id ||
-    pickRotatingJob(at).id
+async function claimTickLease(env, receiptId) {
+  if (!env.RECEIPTS) return { claimed: true, reason: "ledger_unavailable" };
+  const current = await env.RECEIPTS.get("active_tick", "json");
+  if (current?.expires_at && Date.parse(current.expires_at) > Date.now()) {
+    return { claimed: false, active: current };
+  }
+  const expiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+  await env.RECEIPTS.put(
+    "active_tick",
+    JSON.stringify({ receipt_id: receiptId, expires_at: expiresAt }),
+    { expirationTtl: 30 * 60 },
   );
+  return { claimed: true, expires_at: expiresAt };
 }
 
-async function deliverRealWork({
-  env,
+async function releaseTickLease(env, receiptId) {
+  if (!env.RECEIPTS) return;
+  const current = await env.RECEIPTS.get("active_tick", "json");
+  if (current?.receipt_id === receiptId) await env.RECEIPTS.delete("active_tick");
+}
+
+async function deliverProductionJob({
   token,
   owner,
   repo,
   base,
   action,
-  planner,
-  repoSnapshot,
   receiptId,
-  at,
 }) {
-  const deliveries = [];
-  let primary = null;
-  let validated = validateAction(action);
-
-  // Prefer draft_pr when models supplied usable patches.
-  if (validated.ok && action.action === "draft_pr") {
-    primary = await createDraftPr(token, owner, repo, base, action, receiptId);
-    deliveries.push(primary);
-  } else if (validated.ok && action.action === "dispatch_job") {
-    const job = resolveJob(action.job_id);
-    primary = await dispatchRunwayJob(token, env, job, { at, receipt_id: receiptId });
-    deliveries.push(primary);
-  } else if (validated.ok && action.action === "issue") {
-    // Issues are last-resort; still fire a companion runway job for real work.
-    primary = await createIssue(token, owner, repo, action, receiptId);
-    deliveries.push(primary);
-    const companion = await dispatchRunwayJob(
-      token,
-      env,
-      preferJobId(action, planner, at),
-      { at, receipt_id: receiptId },
-    );
-    deliveries.push(companion);
-    primary = { ...primary, companion_job: companion };
+  const validated = validateAction(action);
+  if (!validated.ok) {
+    return {
+      delivery: { kind: "noop", reason: validated.reason },
+      validated,
+    };
   }
-
-  // If models failed validation, force a real job + deterministic plan draft PR.
-  if (!primary || primary.kind === "noop" || primary.ok === false) {
-    const jobId = preferJobId(action, planner, at);
-    const job = resolveJob(jobId);
-    const dispatch = await dispatchRunwayJob(token, env, job, { at, receipt_id: receiptId });
-    deliveries.push(dispatch);
-    primary = dispatch.ok ? dispatch : primary;
-
-    const alreadyHasAiCirclePr = (repoSnapshot.open_ai_circle_prs || []).length > 0;
-    if (!alreadyHasAiCirclePr) {
-      const artifact = buildDeterministicJobPlanArtifact(
-        job,
-        receiptId,
-        clip(action?.rationale || planner?.why || validated.reason || "invalid_model_action", 400),
-      );
-      const artifactValidation = validateAction(artifact);
-      if (artifactValidation.ok) {
-        const draft = await createDraftPr(token, owner, repo, base, artifact, receiptId);
-        deliveries.push(draft);
-        if (!primary || primary.ok === false) primary = draft;
-        else primary = { ...primary, companion_draft_pr: draft };
-      }
-    }
-  } else if (action.action === "draft_pr") {
-    // Companion runway job keeps the closed loop moving even when a draft PR is opened.
-    const jobId = preferJobId(action, planner, at);
-    const companion = await dispatchRunwayJob(token, env, jobId, { at, receipt_id: receiptId });
-    deliveries.push(companion);
-    primary = { ...primary, companion_job: companion };
-  } else if (action.action === "dispatch_job" && (repoSnapshot.open_ai_circle_prs || []).length === 0) {
-    // Ensure verifier always has at least one ai-circle draft to criticize.
-    const job = resolveJob(action.job_id) || pickRotatingJob(at);
-    const artifact = buildDeterministicJobPlanArtifact(
-      job,
-      receiptId,
-      clip(action.rationale || planner?.why || "dispatch_job without open ai-circle PR", 400),
-    );
-    if (validateAction(artifact).ok) {
-      const draft = await createDraftPr(token, owner, repo, base, artifact, receiptId);
-      deliveries.push(draft);
-      primary = { ...primary, companion_draft_pr: draft };
-    }
+  if (action.action !== "draft_pr") {
+    return {
+      delivery: { kind: "noop", reason: action.rationale || "no_production_patch" },
+      validated,
+    };
   }
-
-  if (!primary) {
-    primary = { kind: "noop", reason: validated.reason || action?.rationale || "no_safe_action" };
-    deliveries.push(primary);
-  }
-
-  return { primary, deliveries, validated };
+  return {
+    delivery: await createDraftPr(token, owner, repo, base, action, receiptId),
+    validated,
+  };
 }
 
 export async function runBuilderTick(env, meta = {}) {
   const at = new Date().toISOString();
-  const receiptId = `builder-${at.replace(/\D/g, "").slice(0, 14)}-${crypto.randomUUID().slice(0, 8)}`;
+  const executionId = String(meta.instance_id || crypto.randomUUID())
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(0, 24);
+  const receiptId = `builder-${executionId}`;
   const peer = await checkPeerAndRestart(env, env.VERIFIER_HEALTH_URL, env.VERIFIER_TICK_URL);
+  const lease = await claimTickLease(env, receiptId);
+  if (!lease.claimed) {
+    return {
+      schema: SCHEMA,
+      receipt_id: receiptId,
+      at,
+      mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
+      hold: "HOLD",
+      verdict: "SKIP_DUPLICATE_TICK",
+      active_tick: lease.active,
+    };
+  }
   try {
     const { owner, repo } = repoParts(env);
     const token = await mintInstallationToken(env, "builder");
     const repoSnapshot = await snapshot(token, owner, repo, env);
-    const circle = await runCircle(env, repoSnapshot, token, owner, repo);
-    const verifierPublish = await publishVerifierReviewsViaMotor(
-      token,
-      owner,
-      repo,
-      repoSnapshot.verifier_feedback,
+    const openCandidateNumbers = new Set(
+      (repoSnapshot.open_ai_circle_prs || []).map((pr) => pr.number),
     );
-    const delivered = await deliverRealWork({
-      env,
+    const actionableRepairs = (repoSnapshot.verifier_feedback?.repairs || [])
+      .filter((repair) => openCandidateNumbers.has(repair.pr_number));
+    const maxOpenCandidates = Number(env.MAX_OPEN_CANDIDATES || 2);
+    if (
+      openCandidateNumbers.size >= maxOpenCandidates ||
+      (openCandidateNumbers.size > 0 && actionableRepairs.length === 0)
+    ) {
+      const receipt = {
+        schema: SCHEMA,
+        receipt_id: receiptId,
+        loop_id: env.LOOP_ID || SCHEMA,
+        at,
+        source: meta.source || "cf-cron",
+        cron: meta.cron || "0 * * * *",
+        mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
+        hold: "HOLD",
+        peer_deadman: peer,
+        open_candidates: [...openCandidateNumbers],
+        actionable_repairs: actionableRepairs,
+        verdict: openCandidateNumbers.size >= maxOpenCandidates
+          ? "WAIT_WIP_CAP"
+          : "WAIT_INDEPENDENT_VERIFICATION",
+      };
+      await persist(env, receipt);
+      await releaseTickLease(env, receiptId);
+      return receipt;
+    }
+    const circle = await runCircle(env, repoSnapshot, token, owner, repo);
+    const delivered = await deliverProductionJob({
       token,
       owner,
       repo,
       base: repoSnapshot.default_branch,
       action: circle.action,
-      planner: circle.planner,
-      repoSnapshot,
       receiptId,
-      at,
     });
-    const delivery = delivered.primary;
-    const realWork =
-      delivery?.kind === "draft_pr" ||
-      delivery?.kind === "dispatch_job" ||
-      delivery?.companion_draft_pr ||
-      delivery?.companion_job?.ok;
+    const delivery = delivered.delivery;
     const receipt = {
       schema: SCHEMA,
       receipt_id: receiptId,
@@ -507,7 +462,7 @@ export async function runBuilderTick(env, meta = {}) {
       at,
       source: meta.source || "cf-cron",
       cron: meta.cron || "0 * * * *",
-      mode: "ASSIST_ONLY",
+      mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
       hold: "HOLD",
       peer_deadman: peer,
       snapshot: {
@@ -526,16 +481,13 @@ export async function runBuilderTick(env, meta = {}) {
       planner: circle.planner,
       action_validation: delivered.validated,
       delivery,
-      deliveries: delivered.deliveries,
       verifier_feedback: repoSnapshot.verifier_feedback,
-      verifier_publish: verifierPublish,
-      verdict: realWork
-        ? "PASS_ASSIST_ONLY_DELIVERY"
-        : delivery?.kind === "issue"
-          ? "PASS_ASSIST_ONLY_DELIVERY"
-          : "PASS_NO_SAFE_ACTION",
+      verdict: delivery?.kind === "draft_pr"
+        ? "PASS_PRODUCTION_DRAFT_JOB"
+        : "PASS_NO_SAFE_PRODUCTION_ACTION",
     };
     await persist(env, receipt);
+    await releaseTickLease(env, receiptId);
     return receipt;
   } catch (error) {
     const receipt = {
@@ -544,13 +496,14 @@ export async function runBuilderTick(env, meta = {}) {
       loop_id: env.LOOP_ID || SCHEMA,
       at,
       source: meta.source || "cf-cron",
-      mode: "ASSIST_ONLY",
+      mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
       hold: "HOLD",
       peer_deadman: peer,
       verdict: "FAIL_SCOPED_TICK",
       error: String(error?.message || error),
     };
     await persist(env, receipt);
+    await releaseTickLease(env, receiptId);
     return receipt;
   }
 }
@@ -559,7 +512,7 @@ export class BuilderCircleWorkflow extends WorkflowEntrypoint {
   async run(event, step) {
     return step.do(
       "bounded builder circle",
-      { timeout: "20 minutes", retries: { limit: 0, delay: "1 second" } },
+      { timeout: "20 minutes", retries: { limit: 2, delay: "30 seconds", backoff: "exponential" } },
       async () =>
         runBuilderTick(this.env, {
           source: event.schedule ? "workflow_schedule" : event.payload?.source || "workflow_api",
@@ -570,58 +523,61 @@ export class BuilderCircleWorkflow extends WorkflowEntrypoint {
   }
 }
 
+async function requestAuthorized(request, env) {
+  const provided = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  return secretMatches(provided, env.TICK_SECRET);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/health") {
       const last = env.RECEIPTS ? await env.RECEIPTS.get("last_fired_at") : null;
-      const lastJob = env.RECEIPTS ? await env.RECEIPTS.get("last_job_id") : null;
+      const raw = env.RECEIPTS ? await env.RECEIPTS.get("last_receipt") : null;
+      const lastReceipt = raw ? JSON.parse(raw) : null;
       return json({
         ok: true,
         schema: `${SCHEMA}-health`,
         loop_id: env.LOOP_ID || SCHEMA,
         cron: "0 * * * *",
         last_fired_at: last,
-        last_job_id: lastJob,
-        mode: "ASSIST_ONLY",
+        last_verdict: lastReceipt?.verdict || null,
+        mode: "PRODUCTION_REPOSITORY_JOBS_HOLD",
         hold: "HOLD",
         execution_runtime: "cloudflare_workflows",
-        live_activation_authorized: String(env.LIVE_ACTIVATION || "") === "true",
-        real_jobs_wired: true,
-        job_catalog: ["motor_job", "commissioning_tick", "repair_run", "live_model_smoke"],
-        model_keys_present: {
-          deepseek: Boolean((env.DEEPSEEK_API_KEY || "").trim()),
-          glm: Boolean((env.GLM_API_KEY || "").trim()),
-          kimi: Boolean((env.MOONSHOT_API_KEY || "").trim()),
-          openai: Boolean((env.OPENAI_API_KEY || "").trim()),
-          gemini: Boolean((env.GEMINI_API_KEY || "").trim()),
-          huggingface: Boolean((env.HF_TOKEN || "").trim()),
-          workers_ai: Boolean(env.AI),
-          motor_app: Boolean((env.MOTOR_APP_PRIVATE_KEY || "").trim()),
-        },
+        production_phase: true,
+        production_job_kind: "repository_patch",
+        commissioned: false,
+        version_id: env.CF_VERSION_METADATA?.id || null,
       });
     }
     if (url.pathname === "/tick" && request.method === "POST") {
-      const provided = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-      if (!(await secretMatches(provided, env.TICK_SECRET))) return json({ ok: false }, 401);
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       const instance = await env.BUILDER_WORKFLOW.create({
         params: { source: "authenticated_http_tick" },
       });
       return json({ accepted: true, workflow_instance_id: instance.id }, 202);
     }
     if (url.pathname === "/status" && url.searchParams.get("id")) {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       const instance = await env.BUILDER_WORKFLOW.get(url.searchParams.get("id"));
       return json({ id: instance.id, status: await instance.status() });
     }
     if (url.pathname === "/last" && env.RECEIPTS) {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       const raw = await env.RECEIPTS.get("last_receipt");
       return json(raw ? JSON.parse(raw) : { ok: false, error: "no_receipt_yet" });
     }
-    if (url.pathname === "/map") return json(circleMap);
+    if (url.pathname === "/map") {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
+      return json(circleMap);
+    }
     if (url.pathname === "/jobs") {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       return json({
         schema: `${SCHEMA}-jobs`,
-        jobs: circleMap.job_catalog || [],
+        job_kind: "repository_patch",
+        mutation_boundary: "draft_pr_only",
       });
     }
     return json({ ok: false, error: "not_found" }, 404);

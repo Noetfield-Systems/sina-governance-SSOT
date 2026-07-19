@@ -18,7 +18,7 @@ VERIFIER_GITHUB_INSTALLATION_ID = "147378007"
 SG_CANDIDATE_APP_ID = "4330805"
 SG_CANDIDATE_INSTALLATION_ID = "147378007"
 MAX_PRS_PER_TICK = "3"
-MODE = "INDEPENDENT_REVIEW_ONLY"
+MODE = "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD"
 AUTONOMOUS_PRODUCTION_MUTATIONS = "HOLD"
 BUILDER_HEALTH_URL = "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health"
 BUILDER_TICK_URL = "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/tick"
@@ -30,6 +30,9 @@ WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
 
 [ai]
 binding = "AI"
+
+[version_metadata]
+binding = "CF_VERSION_METADATA"
 
 [[kv_namespaces]]
 binding = "RECEIPTS"

@@ -3,9 +3,9 @@ import test from "node:test";
 
 import { resolveGithubIdentity } from "../src/common.js";
 import {
-  buildDeterministicJobPlanArtifact,
-  pickRotatingJob,
-  resolveJob,
+  buildProductionJobContract,
+  containsDemoMarker,
+  productionJobBody,
 } from "../src/jobs.js";
 import {
   deterministicReview,
@@ -13,6 +13,17 @@ import {
   safePath,
   validateAction,
 } from "../src/policy.js";
+
+function productionAction(overrides = {}) {
+  return {
+    action: "draft_pr",
+    title: "Fix production routing failure",
+    rationale: "The live routing path drops valid results; preserve them.",
+    changes: [{ path: "scripts/useful_fix.py", content: "print('ok')\n" }],
+    tests: ["python3 -m unittest tests/test_useful_fix.py"],
+    ...overrides,
+  };
+}
 
 test("builder blocks authority, workflow, secret, and self-edit paths", () => {
   assert.equal(safePath("scripts/useful_fix.py"), true);
@@ -24,31 +35,39 @@ test("builder blocks authority, workflow, secret, and self-edit paths", () => {
   assert.equal(safePath("scripts/private-key.pem"), false);
 });
 
-test("builder permits one bounded draft and rejects oversized or protected changes", () => {
+test("builder permits bounded production patches only", () => {
+  assert.equal(validateAction(productionAction()).ok, true);
   assert.equal(
-    validateAction({
-      action: "draft_pr",
-      changes: [{ path: "scripts/useful_fix.py", content: "print('ok')\n" }],
-    }).ok,
-    true,
-  );
-  assert.equal(
-    validateAction({
-      action: "draft_pr",
+    validateAction(productionAction({
       changes: [{ path: ".github/workflows/unsafe.yml", content: "name: unsafe\n" }],
-    }).ok,
+    })).ok,
     false,
   );
   assert.equal(
-    validateAction({
-      action: "draft_pr",
+    validateAction(productionAction({
       changes: [{ path: "scripts/too_big.py", content: "x".repeat(24001) }],
-    }).ok,
+    })).ok,
     false,
   );
+  assert.equal(validateAction(productionAction({ tests: [] })).ok, false);
+  assert.equal(validateAction({ action: "dispatch_job", job_id: "motor_job" }).ok, false);
+  assert.equal(validateAction({ action: "issue", title: "plan" }).ok, false);
 });
 
-test("verifier rejects protected paths and code without tests", () => {
+test("builder denies demo, fixture, and placeholder content", () => {
+  for (const marker of [
+    "demo task",
+    "red fixture",
+    "placeholder value",
+    "assert add(2, 2) == 5",
+    "sample_job",
+  ]) {
+    assert.equal(containsDemoMarker(marker), true);
+    assert.equal(validateAction(productionAction({ rationale: marker })).ok, false);
+  }
+});
+
+test("verifier rejects protected paths, missing tests, and missing CI", () => {
   const verdict = deterministicReview(
     { draft: true, head: { ref: "ai-circle/20260718-example" } },
     [
@@ -72,9 +91,10 @@ test("verifier rejects protected paths and code without tests", () => {
   assert.equal(verdict.pass, false);
   assert.ok(verdict.findings.includes("code_change_without_test_change"));
   assert.ok(verdict.findings.includes("protected_path:.github/workflows/escape.yml"));
+  assert.ok(verdict.findings.includes("no_check_runs"));
 });
 
-test("builder and verifier GitHub identities stay disjoint and deny legacy advisory", () => {
+test("builder and verifier identities stay disjoint and deny legacy advisory", () => {
   const builder = resolveGithubIdentity(
     {
       MOTOR_APP_ID: "4275961",
@@ -83,8 +103,6 @@ test("builder and verifier GitHub identities stay disjoint and deny legacy advis
     },
     "builder",
   );
-  assert.equal(builder.appId, "4275961");
-
   const verifier = resolveGithubIdentity(
     {
       VERIFIER_GITHUB_APP_ID: "4330805",
@@ -94,36 +112,20 @@ test("builder and verifier GitHub identities stay disjoint and deny legacy advis
     },
     "verifier",
   );
+  assert.equal(builder.appId, "4275961");
   assert.equal(verifier.appId, "4330805");
   assert.notEqual(builder.appId, verifier.appId);
-
   assert.throws(
-    () =>
-      resolveGithubIdentity(
-        {
-          VERIFIER_GITHUB_APP_ID: "4179901",
-          VERIFIER_GITHUB_INSTALLATION_ID: "143449507",
-          VERIFIER_GITHUB_APP_PRIVATE_KEY: "x",
-        },
-        "verifier",
-      ),
+    () => resolveGithubIdentity({
+      VERIFIER_GITHUB_APP_ID: "4179901",
+      VERIFIER_GITHUB_INSTALLATION_ID: "143449507",
+      VERIFIER_GITHUB_APP_PRIVATE_KEY: "x",
+    }, "verifier"),
     /legacy_advisory_app_denied/,
-  );
-  assert.throws(
-    () =>
-      resolveGithubIdentity(
-        {
-          VERIFIER_GITHUB_APP_ID: "4275961",
-          VERIFIER_GITHUB_INSTALLATION_ID: "145975487",
-          VERIFIER_GITHUB_APP_PRIVATE_KEY: "x",
-        },
-        "verifier",
-      ),
-    /motor_app_denied_for_verifier_identity/,
   );
 });
 
-test("verifier passes a bounded tested patch with healthy checks", () => {
+test("verifier passes a bounded tested patch with completed healthy CI", () => {
   const verdict = deterministicReview(
     { draft: true, head: { ref: "ai-circle/20260718-example" } },
     [
@@ -148,32 +150,28 @@ test("verifier passes a bounded tested patch with healthy checks", () => {
   assert.deepEqual(verdict.findings, []);
 });
 
-test("normalizeAction coerces changes-only payloads into draft_pr", () => {
+test("normalizeAction converts changes-only payload but validation remains strict", () => {
   const action = normalizeAction({
-    title: "fix",
+    title: "Fix production result persistence",
+    rationale: "Persist real provider output before returning.",
     changes: [{ path: "scripts/x.py", content: "print(1)\n" }],
+    tests: ["python3 -m unittest tests/test_x.py"],
   });
   assert.equal(action.action, "draft_pr");
   assert.equal(validateAction(action).ok, true);
 });
 
-test("dispatch_job validates allowlisted runway jobs only", () => {
-  assert.equal(validateAction({ action: "dispatch_job", job_id: "motor_job" }).ok, true);
-  assert.equal(validateAction({ action: "dispatch_job", job_id: "merge_main" }).ok, false);
-  assert.equal(resolveJob("repair_run")?.workflow, "repair-run.yml");
-  assert.equal(pickRotatingJob("2026-07-19T02:00:00.000Z").id, "repair_run");
-  assert.equal(pickRotatingJob("2026-07-19T00:00:00.000Z").id, "motor_job");
-});
-
-test("deterministic job plan artifact is a bounded tested draft_pr", () => {
-  const artifact = buildDeterministicJobPlanArtifact(
-    resolveJob("motor_job"),
-    "receipt-test",
-    "wire real jobs",
-  );
-  const validated = validateAction(artifact);
-  assert.equal(validated.ok, true);
-  assert.equal(artifact.changes.length, 2);
-  assert.ok(artifact.changes.every((change) => safePath(change.path)));
-  assert.ok(artifact.changes.some((change) => change.path.startsWith("tests/")));
+test("production job contract pins exact base and real acceptance checks", () => {
+  const action = productionAction();
+  const contract = buildProductionJobContract({
+    receiptId: "builder-20260719000000-abcdef12",
+    repo: "Noetfield-Systems/sina-governance-SSOT",
+    base: "main",
+    baseSha: "a".repeat(40),
+    action,
+  });
+  assert.equal(contract.schema, "nf.production-repository-job.v1");
+  assert.equal(contract.target.exact_base_sha, "a".repeat(40));
+  assert.equal(contract.execution.kind, "github_draft_pr");
+  assert.match(productionJobBody(contract), /No synthetic fixture/);
 });

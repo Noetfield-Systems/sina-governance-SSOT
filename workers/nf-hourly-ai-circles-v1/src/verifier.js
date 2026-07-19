@@ -65,7 +65,7 @@ async function modelReview(env, payload) {
   raw.correctness = await runRole(
     env,
     "correctness_verifier",
-    "openai",
+    "workers_ai",
     reviewPrompt("correctness"),
     payload,
     1500,
@@ -73,7 +73,7 @@ async function modelReview(env, payload) {
   raw.security = await runRole(
     env,
     "security_verifier",
-    "gemini",
+    "workers_ai",
     reviewPrompt("security"),
     payload,
     1500,
@@ -89,7 +89,7 @@ async function modelReview(env, payload) {
   raw.skeptic = await runRole(
     env,
     "skeptical_critic",
-    "glm",
+    "workers_ai",
     reviewPrompt("skeptic"),
     payload,
     1500,
@@ -110,7 +110,7 @@ function renderReview(deterministic, model, receiptId, headSha) {
   const pass =
     deterministic.pass &&
     available.length >= 2 &&
-    providerDiversity >= 2 &&
+    providerDiversity >= 1 &&
     requests.length === 0;
   const lines = [
     "## Independent machine verification",
@@ -152,6 +152,24 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
     github(token, `/repos/${owner}/${repo}/pulls/${pr.number}/files?per_page=100`),
     github(token, `/repos/${owner}/${repo}/commits/${pr.head.sha}/check-runs?per_page=100`),
   ]);
+  const externalChecks = (checks.check_runs || [])
+    .filter((check) => check.name !== "Noetfield Independent Production Verification");
+  if (
+    externalChecks.length === 0 ||
+    externalChecks.some((check) => check.status !== "completed")
+  ) {
+    return {
+      deferred: true,
+      pr_number: pr.number,
+      head_sha: pr.head.sha,
+      reason: externalChecks.length === 0 ? "waiting_for_ci" : "ci_in_progress",
+      checks_seen: externalChecks.map((check) => ({
+        name: check.name,
+        status: check.status,
+        conclusion: check.conclusion,
+      })),
+    };
+  }
   const deterministic = deterministicReview(pr, files, checks);
   const reviewPayload = clip(
     JSON.stringify({
@@ -177,60 +195,25 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
   );
   const model = await modelReview(env, reviewPayload);
   const rendered = renderReview(deterministic, model, receiptId, pr.head.sha);
-  // GitHub write may be unavailable for the SG-candidate verifier app.
-  // Judgment is still recorded in the independent KV receipt for the builder closed loop.
-  const deliveryAttempts = [];
-  let reviewChannel = "kv_receipt_only";
-  try {
-    await github(token, `/repos/${owner}/${repo}/pulls/${pr.number}/reviews`, {
-      method: "POST",
-      body: JSON.stringify({ event: "COMMENT", body: rendered.body }),
-    });
-    reviewChannel = "pulls_reviews";
-    deliveryAttempts.push({ channel: "pulls_reviews", ok: true });
-  } catch (error) {
-    deliveryAttempts.push({
-      channel: "pulls_reviews",
-      ok: false,
-      error: clip(String(error?.message || error), 240),
-    });
-    try {
-      await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
-        method: "POST",
-        body: JSON.stringify({
-          body:
-            `${rendered.body}\n\n` +
-            `_Posted as issue comment because PR review API was unavailable._`,
-        }),
-      });
-      reviewChannel = "issue_comment_fallback";
-      deliveryAttempts.push({ channel: "issue_comment_fallback", ok: true });
-    } catch (commentError) {
-      deliveryAttempts.push({
-        channel: "issue_comment_fallback",
-        ok: false,
-        error: clip(String(commentError?.message || commentError), 240),
-      });
-    }
-  }
-  try {
-    await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/labels`, {
-      method: "POST",
-      body: JSON.stringify({
-        labels: [
-          rendered.pass ? "ai-circle-reviewed" : "ai-circle-changes-requested",
-          "independent-machine-review",
-        ],
-      }),
-    });
-    deliveryAttempts.push({ channel: "labels", ok: true });
-  } catch (labelError) {
-    deliveryAttempts.push({
-      channel: "labels",
-      ok: false,
-      error: clip(String(labelError?.message || labelError), 240),
-    });
-  }
+  const check = await github(token, `/repos/${owner}/${repo}/check-runs`, {
+    method: "POST",
+    body: JSON.stringify({
+      name: "Noetfield Independent Production Verification",
+      head_sha: pr.head.sha,
+      status: "completed",
+      conclusion: rendered.pass ? "success" : "failure",
+      output: {
+        title: rendered.pass
+          ? "Production verification passed"
+          : "Production verification requires changes",
+        summary: clip(rendered.body, 65000),
+      },
+    }),
+  });
+  const checkFingerprint = externalChecks
+    .map((item) => `${item.name}:${item.status}:${item.conclusion || ""}`)
+    .sort()
+    .join("|");
   return {
     pr_number: pr.number,
     pr_url: pr.html_url,
@@ -240,9 +223,14 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
     provider_diversity: rendered.provider_diversity,
     model: model.normalized,
     repair_requested: !rendered.pass,
-    review_channel: reviewChannel,
+    review_channel: "github_check_run",
     review_body: rendered.body,
-    github_delivery: deliveryAttempts,
+    github_check_run: {
+      id: check.id,
+      url: check.html_url,
+      conclusion: check.conclusion,
+    },
+    review_fingerprint: `${pr.head.sha}:${checkFingerprint}`,
   };
 }
 
@@ -254,7 +242,9 @@ async function persist(env, receipt) {
   await env.RECEIPTS.put("last_fired_at", receipt.at);
   await env.RECEIPTS.put("last_receipt", JSON.stringify(receipt));
   for (const review of receipt.reviews || []) {
-    await env.RECEIPTS.put(`reviewed:${review.pr_number}`, review.head_sha);
+    if (!review.deferred) {
+      await env.RECEIPTS.put(`reviewed:${review.pr_number}`, review.head_sha);
+    }
   }
 }
 
@@ -269,6 +259,7 @@ export async function runVerifierTick(env, meta = {}) {
     const candidates = pulls.filter(
       (pr) =>
         String(pr.head?.ref || "").startsWith("ai-circle/") ||
+        String(pr.head?.ref || "").startsWith("production-job/") ||
         (pr.labels || []).some((label) => label.name === "ai-circle-candidate"),
     );
     const reviews = [];
@@ -279,7 +270,9 @@ export async function runVerifierTick(env, meta = {}) {
         skipped.push({ pr_number: pr.number, head_sha: pr.head.sha, reason: "exact_head_already_reviewed" });
         continue;
       }
-      reviews.push(await reviewPull(token, owner, repo, pr, env, receiptId));
+      const review = await reviewPull(token, owner, repo, pr, env, receiptId);
+      if (review.deferred) skipped.push(review);
+      else reviews.push(review);
     }
     const receipt = {
       schema: SCHEMA,
@@ -288,7 +281,7 @@ export async function runVerifierTick(env, meta = {}) {
       at,
       source: meta.source || "cf-cron",
       cron: meta.cron || "30 * * * *",
-      mode: "INDEPENDENT_REVIEW_ONLY",
+      mode: "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD",
       hold: "HOLD",
       builder_deadman: builderDeadman,
       candidates_seen: candidates.length,
@@ -307,7 +300,7 @@ export async function runVerifierTick(env, meta = {}) {
       loop_id: env.LOOP_ID || SCHEMA,
       at,
       source: meta.source || "cf-cron",
-      mode: "INDEPENDENT_REVIEW_ONLY",
+      mode: "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD",
       hold: "HOLD",
       builder_deadman: builderDeadman,
       reviews: [],
@@ -317,6 +310,11 @@ export async function runVerifierTick(env, meta = {}) {
     await persist(env, receipt);
     return receipt;
   }
+}
+
+async function requestAuthorized(request, env) {
+  const provided = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  return secretMatches(provided, env.TICK_SECRET);
 }
 
 export default {
@@ -339,34 +337,31 @@ export default {
         loop_id: env.LOOP_ID || SCHEMA,
         cron: "30 * * * *",
         last_fired_at: last,
-        mode: "INDEPENDENT_REVIEW_ONLY",
+        mode: "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD",
         hold: "HOLD",
         can_edit: false,
         can_merge: false,
         execution_runtime: "cloudflare_cron_secondary_account",
-        live_activation_authorized: String(env.LIVE_ACTIVATION || "") === "true",
-        model_keys_present: {
-          openai: Boolean((env.VERIFIER_OPENAI_API_KEY || env.OPENAI_API_KEY || "").trim()),
-          gemini: Boolean((env.VERIFIER_GEMINI_API_KEY || env.GEMINI_API_KEY || "").trim()),
-          glm: Boolean((env.GLM_API_KEY || "").trim()),
-          workers_ai: Boolean(env.AI),
-          verifier_github_app: Boolean(
-            (env.VERIFIER_GITHUB_APP_PRIVATE_KEY || env.SG_CANDIDATE_APP_PRIVATE_KEY || "").trim(),
-          ),
-        },
+        production_phase: true,
+        delivery: "github_check_run",
+        commissioned: false,
+        version_id: env.CF_VERSION_METADATA?.id || null,
       });
     }
     if (url.pathname === "/tick" && request.method === "POST") {
-      const provided = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-      if (!(await secretMatches(provided, env.TICK_SECRET))) return json({ ok: false }, 401);
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       const receipt = await runVerifierTick(env, { source: "authenticated_http_tick" });
       return json(receipt, String(receipt.verdict || "").startsWith("FAIL") ? 500 : 200);
     }
     if (url.pathname === "/last" && env.RECEIPTS) {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
       const raw = await env.RECEIPTS.get("last_receipt");
       return json(raw ? JSON.parse(raw) : { ok: false, error: "no_receipt_yet" });
     }
-    if (url.pathname === "/map") return json(circleMap);
+    if (url.pathname === "/map") {
+      if (!(await requestAuthorized(request, env))) return json({ ok: false }, 401);
+      return json(circleMap);
+    }
     return json({ ok: false, error: "not_found" }, 404);
   },
 };

@@ -1,3 +1,5 @@
+import { containsDemoMarker } from "./jobs.js";
+
 const PROTECTED_PREFIXES = [
   ".github/",
   ".cursor/",
@@ -24,39 +26,23 @@ export function safePath(path) {
   return /^(scripts|tests|docs|workers|language_gate|decision_language_machine_v1)\//.test(path);
 }
 
-const ALLOWED_ACTIONS = new Set(["draft_pr", "dispatch_job", "issue", "noop"]);
-const ALLOWED_JOB_IDS = new Set([
-  "commissioning_tick",
-  "motor_job",
-  "repair_run",
-  "live_model_smoke",
-]);
+const ALLOWED_ACTIONS = new Set(["draft_pr", "noop"]);
 
 /**
  * Coerce common model failures into a usable action shape before hard validation.
  */
 export function normalizeAction(raw, planner = {}) {
   if (!raw || typeof raw !== "object") {
-    if (planner?.action === "dispatch_job" && ALLOWED_JOB_IDS.has(planner.job_id)) {
-      return { action: "dispatch_job", job_id: planner.job_id, title: planner.title, rationale: planner.why };
-    }
     return { action: "noop", rationale: "empty_implementer_payload" };
   }
   const action = { ...raw };
   if (!action.action && Array.isArray(action.changes) && action.changes.length) {
     action.action = "draft_pr";
   }
-  if (!action.action && ALLOWED_JOB_IDS.has(action.job_id)) {
-    action.action = "dispatch_job";
-  }
-  if (!action.action && ["draft_pr", "dispatch_job", "issue", "noop"].includes(planner?.action)) {
+  if (!action.action && ["draft_pr", "noop"].includes(planner?.action)) {
     action.action = planner.action;
-    if (planner.job_id && !action.job_id) action.job_id = planner.job_id;
     if (planner.title && !action.title) action.title = planner.title;
     if (planner.why && !action.rationale) action.rationale = planner.why;
-  }
-  if (action.action === "issue" && Array.isArray(action.changes) && action.changes.length >= 1) {
-    action.action = "draft_pr";
   }
   return action;
 }
@@ -65,13 +51,13 @@ export function validateAction(action) {
   if (!action || !ALLOWED_ACTIONS.has(action.action)) {
     return { ok: false, reason: "invalid_action" };
   }
-  if (action.action === "dispatch_job") {
-    if (!ALLOWED_JOB_IDS.has(String(action.job_id || "").trim())) {
-      return { ok: false, reason: "unknown_or_missing_job_id" };
-    }
-    return { ok: true, action };
-  }
   if (action.action !== "draft_pr") return { ok: true, action };
+  if (containsDemoMarker(action)) return { ok: false, reason: "demo_or_placeholder_content_denied" };
+  if (!String(action.title || "").trim()) return { ok: false, reason: "title_required" };
+  if (!String(action.rationale || "").trim()) return { ok: false, reason: "rationale_required" };
+  if (!Array.isArray(action.tests) || action.tests.length < 1 || action.tests.length > 8) {
+    return { ok: false, reason: "acceptance_checks_required" };
+  }
   if (!Array.isArray(action.changes) || action.changes.length < 1 || action.changes.length > 3) {
     return { ok: false, reason: "changes_count_out_of_bounds" };
   }
@@ -90,7 +76,13 @@ export function validateAction(action) {
 export function deterministicReview(pr, files, checks) {
   const findings = [];
   if (!pr.draft) findings.push("candidate_is_not_draft");
-  if (!String(pr.head?.ref || "").startsWith("ai-circle/")) findings.push("unexpected_head_namespace");
+  const headRef = String(pr.head?.ref || "");
+  if (
+    !headRef.startsWith("production-job/") &&
+    !headRef.startsWith("ai-circle/")
+  ) {
+    findings.push("unexpected_head_namespace");
+  }
   if (files.length > 3) findings.push("file_count_exceeds_3");
   const delta = files.reduce(
     (sum, file) => sum + Number(file.additions || 0) + Number(file.deletions || 0),
@@ -113,6 +105,8 @@ export function deterministicReview(pr, files, checks) {
   const testChanged = files.some((file) => /(^|\/)(test|tests)\//.test(file.filename));
   if (codeChanged && !testChanged) findings.push("code_change_without_test_change");
   const checkRuns = checks?.check_runs || [];
+  if (checkRuns.length === 0) findings.push("no_check_runs");
+  if (checkRuns.some((check) => check.status !== "completed")) findings.push("checks_incomplete");
   const completedFailures = checkRuns.filter(
     (check) => check.status === "completed" && !["success", "neutral", "skipped"].includes(check.conclusion),
   );

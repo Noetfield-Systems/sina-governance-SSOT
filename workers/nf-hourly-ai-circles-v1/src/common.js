@@ -3,7 +3,10 @@ const encoder = new TextEncoder();
 export function json(body, status = 200) {
   return Response.json(body, {
     status,
-    headers: { "Access-Control-Allow-Origin": "*", "Cache-Control": "no-store" },
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+    },
   });
 }
 
@@ -133,6 +136,7 @@ export async function mintInstallationToken(env, role = "builder") {
 export async function github(token, path, init = {}) {
   const response = await fetch(`https://api.github.com${path}`, {
     ...init,
+    signal: init.signal || AbortSignal.timeout(30_000),
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/vnd.github+json",
@@ -142,7 +146,10 @@ export async function github(token, path, init = {}) {
       ...(init.headers || {}),
     },
   });
+  const declaredSize = Number(response.headers.get("content-length") || 0);
+  if (declaredSize > 2_000_000) throw new Error("github_response_too_large");
   const text = await response.text();
+  if (text.length > 2_000_000) throw new Error("github_response_too_large");
   let body = null;
   if (text) {
     try {
@@ -217,6 +224,12 @@ async function invokeProvider(env, name, system, user, maxTokens) {
     });
     return output?.response || output?.result?.response || JSON.stringify(output);
   }
+  if (
+    String(env.MODE || "").startsWith("PRODUCTION_") &&
+    !String(env.COMMERCIAL_MODEL_ESCALATION_RECEIPT_ID || "").trim()
+  ) {
+    throw new Error("commercial_model_requires_escalation_receipt");
+  }
   if (!String(cfg.key || "").trim()) throw new Error("missing_key");
   let url = cfg.url;
   let body;
@@ -247,6 +260,7 @@ async function invokeProvider(env, name, system, user, maxTokens) {
   }
   const response = await fetch(url, {
     method: "POST",
+    signal: AbortSignal.timeout(45_000),
     headers: {
       ...(cfg.kind === "gemini" ? {} : { Authorization: `Bearer ${cfg.key}` }),
       "Content-Type": "application/json",
@@ -297,6 +311,7 @@ export async function checkPeerAndRestart(env, healthUrl, tickUrl) {
   if (!healthUrl) return { checked: false, reason: "peer_not_configured" };
   try {
     const healthResponse = await fetch(healthUrl, {
+      signal: AbortSignal.timeout(10_000),
       headers: { Accept: "application/json", "User-Agent": "nf-hourly-ai-circles-v1" },
     });
     const health = await healthResponse.json();
@@ -308,6 +323,7 @@ export async function checkPeerAndRestart(env, healthUrl, tickUrl) {
     }
     const restart = await fetch(tickUrl, {
       method: "POST",
+      signal: AbortSignal.timeout(10_000),
       headers: {
         Authorization: `Bearer ${env.PEER_TICK_SECRET}`,
         "Content-Type": "application/json",
