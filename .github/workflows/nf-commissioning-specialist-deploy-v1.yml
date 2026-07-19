@@ -26,9 +26,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 0d0b967b77e2e5535455d39ff3dae72c
+          COMMISSIONING_TRIGGER_SECRET: ${{ secrets.COMMISSIONING_TRIGGER_SECRET }}
         run: |
           set -euo pipefail
           test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$COMMISSIONING_TRIGGER_SECRET"
           grep -q 'crons = \[\]' wrangler.toml
           npx wrangler deploy
       - name: Put model API secrets
@@ -39,6 +41,7 @@ jobs:
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          COMMISSIONING_TRIGGER_SECRET: ${{ secrets.COMMISSIONING_TRIGGER_SECRET }}
         run: |
           set -euo pipefail
           put() { local n="$1"; local v="$2"; if [ -n "$v" ]; then printf '%s' "$v" | npx wrangler secret put "$n"; else echo "skip $n (empty)"; fi; }
@@ -46,3 +49,4 @@ jobs:
           put GLM_API_KEY "$GLM_API_KEY"
           put MOONSHOT_API_KEY "$MOONSHOT_API_KEY"
           put HF_TOKEN "$HF_TOKEN"
+          put COMMISSIONING_TRIGGER_SECRET "$COMMISSIONING_TRIGGER_SECRET"
