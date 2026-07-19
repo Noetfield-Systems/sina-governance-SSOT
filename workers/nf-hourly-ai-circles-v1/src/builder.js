@@ -174,7 +174,7 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
       selected_target: target,
       preference: "Prefer draft_pr or dispatch_job. Real plans and jobs over issues.",
     }),
-    3000,
+    8000,
   );
   const quorum = Object.values(transcript).filter((result) => result.ok).length;
   const providerDiversity = new Set(

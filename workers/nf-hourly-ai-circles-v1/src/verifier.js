@@ -177,10 +177,22 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
   );
   const model = await modelReview(env, reviewPayload);
   const rendered = renderReview(deterministic, model, receiptId, pr.head.sha);
-  await github(token, `/repos/${owner}/${repo}/pulls/${pr.number}/reviews`, {
-    method: "POST",
-    body: JSON.stringify({ event: "COMMENT", body: rendered.body }),
-  });
+  let reviewChannel = "pulls_reviews";
+  try {
+    await github(token, `/repos/${owner}/${repo}/pulls/${pr.number}/reviews`, {
+      method: "POST",
+      body: JSON.stringify({ event: "COMMENT", body: rendered.body }),
+    });
+  } catch (error) {
+    // SG candidate app may lack pull-request review write; issue comments preserve independence.
+    reviewChannel = "issue_comment_fallback";
+    await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/comments`, {
+      method: "POST",
+      body: JSON.stringify({
+        body: `${rendered.body}\n\n_Posted as issue comment because PR review API was unavailable: ${clip(String(error?.message || error), 180)}_`,
+      }),
+    });
+  }
   try {
     await github(token, `/repos/${owner}/${repo}/issues/${pr.number}/labels`, {
       method: "POST",
@@ -221,6 +233,7 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
     provider_diversity: rendered.provider_diversity,
     model: model.normalized,
     repair_requested: !rendered.pass,
+    review_channel: reviewChannel,
   };
 }
 
