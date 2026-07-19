@@ -1,0 +1,58 @@
+name: nf-sg-key2-custody-watch-v1
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cryptography
+        run: python3 -m pip install cryptography -q
+      - name: Prove and apply if key1 dead
+        id: prove
+        env:
+          SG_AUTHORITY_PRIVATE_KEY: ${{ secrets.SG_AUTHORITY_PRIVATE_KEY }}
+          SG_BOOTSTRAP_KEY_1_PEM: ${{ secrets.SG_BOOTSTRAP_KEY_1_PEM }}
+        run: |
+          set +e
+          python3 scripts/prove_sg_key2_custody_established_v1.py --apply
+          code=$?
+          echo "code=$code"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" = "0" ]; then exit 0; fi
+          if [ "$code" = "3" ]; then echo "still blocked_founder"; exit 0; fi
+          exit "$code"
+      - name: Open PR if stamped
+        if: steps.prove.outputs.code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet && git diff --cached --quiet; then
+            # prove --apply may have written files
+            git status -sb
+          fi
+          if [ ! -f receipts/doctrine/NF_SG_KEY2_CUSTODY_ESTABLISHED_v1.json ]; then
+            echo "no established receipt"; exit 0
+          fi
+          branch="auto/key2-custody-established"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add data/runtime_reality_v1.json data/sg_candidate_app_state_v1.json \
+            receipts/doctrine/NF_SG_KEY2_CUSTODY_ESTABLISHED_v1.json || true
+          git diff --cached --quiet && echo "nothing to commit" && exit 0
+          git commit -m "Establish SG key2 custody after bootstrap key1 revoke."
+          git push -u origin "$branch" --force
+          gh pr list --head "$branch" --json number --jq '.[0].number' | grep -q . \
+            || gh pr create --title "Gate1: SG key2 custody ESTABLISHED" \
+              --body "Cloud watch: key1 auth dead, key2 live, runtime_reality stamped. HOLD preserved."
