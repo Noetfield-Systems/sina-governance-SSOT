@@ -1,11 +1,13 @@
 name: nf-48h-liveness-closeout-v1
 
 # Closes the Living System 48h test started by receipts/48h-test-run1-START.json.
-# Cloud-first: runs without Mac session. Files PASS/FAIL receipt after window.
+# Cloud-first: the RECURRING tick lives on Cloudflare (nf-sg-loop-tick-v1). This
+# GHA is a ONE-SHOT apply job fired by that CF motor via repository_dispatch
+# (liveness_48h_close) — GitHub is never the recurring scheduler here.
 
 on:
-  schedule:
-    - cron: "17 * * * *"
+  repository_dispatch:
+    types: [liveness_48h_close]
   workflow_dispatch:
     inputs:
       force_close:

@@ -1,0 +1,9 @@
+{
+  "name": "nf-sg-loop-tick-v1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare cron motor for SG loop ticks (key2 custody + 48h liveness). Cloud-first; replaces GHA cron.",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  }
+}

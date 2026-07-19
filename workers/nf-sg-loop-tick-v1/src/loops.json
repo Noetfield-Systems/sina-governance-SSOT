@@ -1,0 +1,25 @@
+{
+  "schema": "nf.loop-registry.tick.v1",
+  "version": "1.0.0",
+  "note": "Loops the Cloudflare tick motor observes each cron. Cloud-first trigger; replaces GHA cron for key2-custody + 48h liveness.",
+  "loops": [
+    {
+      "loop_id": "nf-commissioning-specialist-tick-v1",
+      "health": "https://nf-commissioning-specialist-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 5,
+      "last_fired_key": "last_fired_at"
+    },
+    {
+      "loop_id": "noos-deadman-v1",
+      "health": "https://noos-deadman-v1.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 30,
+      "last_fired_key": null
+    },
+    {
+      "loop_id": "nf-unified-motor-foundation-v1-staging",
+      "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
+      "interval_minutes": 10,
+      "last_fired_key": null
+    }
+  ]
+}
