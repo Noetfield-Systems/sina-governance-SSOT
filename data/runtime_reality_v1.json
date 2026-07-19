@@ -50,20 +50,40 @@
     "sg_may_execute_mutations": false
   },
   "event_gateway": {
-    "status": "NOT_COMMISSIONED",
-    "note": "Over-scoped staging gateway from prior turn was stood down (worker deleted). Redeployable only after key-2 custody gate."
+    "status": "STAGING_COMMISSIONED",
+    "live_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev",
+    "health": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health",
+    "readiness": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/readiness",
+    "note": "Staging foundation deployed under five-gate plan. Production promote still HOLD. Key2 ESTABLISHED still pending founder key1 UI revoke.",
+    "commissioned_at": "2026-07-19T02:29:40Z",
+    "deadman": "noos-deadman-v1",
+    "health_url": "https://nf-unified-motor-foundation-v1-staging.sina-kazemnezhad-ca.workers.dev/health"
   },
   "resident_roles": {
-    "sg_role": "NOT_COMMISSIONED",
-    "noos_role": "NOT_COMMISSIONED"
+    "sg_role": "STAGING_COMMISSIONED",
+    "noos_role": "STAGING_COMMISSIONED",
+    "live_role_ids": [
+      "noetfield:sg.registrar",
+      "noetfield:noos.portfolio-owner",
+      "noetfield:sourcea.dispatch-owner",
+      "noetfield:sandbox.builder-owner",
+      "noetfield:sandbox.verifier-owner"
+    ],
+    "cold_proof_event_ids": [
+      "evt-five-gate-sg.registrar-1784428121",
+      "evt-five-gate-noos.portfolio-owner-1784428123"
+    ],
+    "note": "Staging Agent DO routes proven via /v1/events workflow_started under HOLD.",
+    "commissioned_at": "2026-07-19T02:29:40Z"
   },
   "commissioning_directive": {
-    "event_gateway": "NOT_COMMISSIONED",
-    "sg_role": "NOT_COMMISSIONED",
-    "noos_role": "NOT_COMMISSIONED",
-    "unified_motor_runtime": "NOT_COMMISSIONED",
+    "event_gateway": "STAGING_COMMISSIONED",
+    "sg_role": "STAGING_COMMISSIONED",
+    "noos_role": "STAGING_COMMISSIONED",
+    "unified_motor_runtime": "STAGING_CANDIDATE",
     "autonomous_production_mutations": "HOLD",
-    "fully_commissioned_claim": false
+    "fully_commissioned_claim": false,
+    "founder_reasoning_ingest": "STAGING_PROVEN"
   },
   "sg_v2_state": {
     "SG_V2_IMPLEMENTATION": "READY_FOR_REVIEW",
@@ -93,7 +113,10 @@
     "custody_reason": "Local file mode 0600 does not establish independent SG custody; general founder/Cursor/local-agent execution identity may access the file.",
     "SG_COMMISSIONING_KEY_2_PUBLIC_FINGERPRINT_SHA256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
     "custody_cloudflare_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
-    "custody_worker": "noetfield-sg-authority-v2-shadow"
+    "custody_worker": "noetfield-sg-authority-v2-shadow",
+    "gate1_blocker": "founder_must_delete_bootstrap_key1_in_github_app_ui",
+    "gate1_delete_fingerprint": "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b",
+    "gate1_keep_fingerprint": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8"
   },
   "legacy_app": "PRESERVED_NOT_AUTHORITY",
   "implementation_refs": {
