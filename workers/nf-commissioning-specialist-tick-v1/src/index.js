@@ -394,16 +394,29 @@ async function loadProgress(env) {
 function selectNextJob(progress) {
   const jobs = jobQueue.jobs || [];
   if (!jobs.length) return { index: 0, job: null };
-  const start = Number(progress.cursor || 0) % jobs.length;
+  // Prefer execute-class incomplete jobs first
+  const executeIdx = [];
+  const qualifyIdx = [];
   for (let i = 0; i < jobs.length; i++) {
-    const idx = (start + i) % jobs.length;
-    const job = jobs[idx];
+    const job = jobs[i];
     const prev = progress.jobs?.[job.id];
-    // Revisit pass jobs after full cycle; skip only if completed this cycle marker
     if (prev?.status === "pass" && prev?.cycle === progress.cycle) continue;
-    return { index: idx, job };
+    if (job.class === "execute") executeIdx.push(i);
+    else qualifyIdx.push(i);
   }
-  return { index: start, job: jobs[start], wrapped: true };
+  const order = executeIdx.concat(qualifyIdx);
+  if (!order.length) {
+    const start = Number(progress.cursor || 0) % jobs.length;
+    return { index: start, job: jobs[start], wrapped: true };
+  }
+  const startCursor = Number(progress.cursor || 0);
+  const ranked = order.sort((a, b) => {
+    const da = (a - startCursor + jobs.length) % jobs.length;
+    const db = (b - startCursor + jobs.length) % jobs.length;
+    return da - db;
+  });
+  const idx = ranked[0];
+  return { index: idx, job: jobs[idx] };
 }
 
 async function mintMotorInstallationToken(env) {
@@ -522,14 +535,19 @@ async function dispatchCommissioningRunway(env, receipt, job) {
   }
 }
 
-async function dispatchWorkflowJob(env, job) {
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function dispatchWorkflowJob(env, job, tokenOverride = null) {
   const d = job?.dispatch;
   if (!d || !d.workflow) return { ok: false, skipped: true, reason: "no_dispatch" };
-  const token = await mintMotorInstallationToken(env);
+  const token = tokenOverride || (await mintMotorInstallationToken(env));
   if (!token) return { ok: false, error: "token_mint_failed" };
   const repo = d.repo || env.COMMISSIONING_RUNWAY_REPO || "Noetfield-Systems/NOETFIELD-RUNWAY";
   const ref = d.ref || "main";
   const inputs = d.inputs || {};
+  const before = new Date().toISOString();
   const path = `/repos/${repo}/actions/workflows/${d.workflow}/dispatches`;
   const res = await ghApi(token, path, "POST", { ref, inputs });
   return {
@@ -539,57 +557,170 @@ async function dispatchWorkflowJob(env, job) {
     workflow: d.workflow,
     ref,
     job_id: job.id,
+    dispatched_at: before,
     body: res.body,
   };
 }
 
-async function scoreResearchPackage(env) {
-  const token = await mintMotorInstallationToken(env);
-  if (!token) {
-    return { job_id: "research_package_ready", status: "fail", error: "token_mint_failed" };
+async function findRecentWorkflowRuns(token, repo, workflow, sinceIso, want = 1) {
+  const sinceMs = Date.parse(sinceIso) - 15_000;
+  const res = await ghApi(
+    token,
+    `/repos/${repo}/actions/workflows/${workflow}/runs?event=workflow_dispatch&per_page=20`,
+  );
+  const runs = (res.body?.workflow_runs || []).filter((r) => Date.parse(r.created_at) >= sinceMs);
+  return runs.slice(0, want).map((r) => ({
+    id: r.id,
+    status: r.status,
+    conclusion: r.conclusion,
+    html_url: r.html_url,
+    created_at: r.created_at,
+    head_sha: r.head_sha,
+  }));
+}
+
+async function waitForRuns(token, repo, runIds, maxWaitMs = 90_000) {
+  const started = Date.now();
+  const results = [];
+  while (Date.now() - started < maxWaitMs) {
+    results.length = 0;
+    let pending = 0;
+    for (const id of runIds) {
+      const res = await ghApi(token, `/repos/${repo}/actions/runs/${id}`);
+      const r = res.body || {};
+      const row = {
+        id: r.id || id,
+        status: r.status || "unknown",
+        conclusion: r.conclusion || null,
+        html_url: r.html_url || null,
+      };
+      results.push(row);
+      if (row.status !== "completed") pending += 1;
+    }
+    if (pending === 0) break;
+    await sleep(8_000);
   }
-  const repo = "Noetfield-Systems/NOETFIELD-RUNWAY";
-  const paths = ["runways/research", "packages/research", "runways/research/package.json"];
-  const checks = [];
-  for (const p of paths) {
-    const res = await ghApi(token, `/repos/${repo}/contents/${p}?ref=main`);
-    checks.push({ path: p, ok: res.ok, status: res.status });
-  }
-  const ok = checks.some((c) => c.ok);
+  const allDone = results.length === runIds.length && results.every((r) => r.status === "completed");
+  const allPass = allDone && results.every((r) => r.conclusion === "success");
+  const anyFail =
+    allDone && results.some((r) => r.conclusion && r.conclusion !== "success");
   return {
-    job_id: "research_package_ready",
-    status: ok ? "pass" : "fail",
-    checks,
+    allDone,
+    allPass,
+    anyFail,
+    results,
+    waited_ms: Date.now() - started,
   };
 }
 
-async function scoreLevelCPacket(env) {
+async function executeDispatchAndWait(env, job, count = 1) {
   const token = await mintMotorInstallationToken(env);
   if (!token) {
+    return { job_id: job.id, status: "fail", error: "token_mint_failed" };
+  }
+  const d = job.dispatch || {};
+  const repo = d.repo || "Noetfield-Systems/NOETFIELD-RUNWAY";
+  const workflow = d.workflow;
+  const dispatchedAt = new Date().toISOString();
+  const dispatches = [];
+  for (let i = 0; i < count; i++) {
+    const one = await dispatchWorkflowJob(env, job, token);
+    dispatches.push(one);
+    if (!one.ok) {
+      return {
+        job_id: job.id,
+        status: "fail",
+        proof: job.proof || null,
+        error: "dispatch_failed",
+        dispatches,
+      };
+    }
+    if (i + 1 < count) await sleep(1_500);
+  }
+  // Give Actions a moment to materialize runs
+  await sleep(5_000);
+  let runs = await findRecentWorkflowRuns(token, repo, workflow, dispatchedAt, count);
+  // Retry discovery briefly
+  for (let i = 0; i < 6 && runs.length < count; i++) {
+    await sleep(5_000);
+    runs = await findRecentWorkflowRuns(token, repo, workflow, dispatchedAt, count);
+  }
+  if (runs.length < count) {
     return {
-      job_id: "level_c_first_commissioning_packet",
-      status: "fail",
-      error: "token_mint_failed",
+      job_id: job.id,
+      status: "dispatched_pending",
+      proof: job.proof || null,
+      dispatches,
+      runs,
+      note: "workflow dispatched; runs not visible yet — next tick will poll",
+      pending: {
+        repo,
+        workflow,
+        since: dispatchedAt,
+        want: count,
+        run_ids: runs.map((r) => r.id),
+      },
     };
   }
-  const repo = "Noetfield-Systems/NOETFIELD-RUNWAY";
-  const candidates = [
-    "receipts/level-c",
-    "commissioning-target/evidence/LEVEL_C.json",
-    "_ops/level-c",
-    "packages/runway-core/receipts/FIRST_COMMISSIONING_ACCEPTED.json",
-  ];
-  const checks = [];
-  for (const p of candidates) {
-    const res = await ghApi(token, `/repos/${repo}/contents/${p}?ref=main`);
-    checks.push({ path: p, ok: res.ok, status: res.status });
+  const waited = await waitForRuns(
+    token,
+    repo,
+    runs.map((r) => r.id),
+    90_000,
+  );
+  if (!waited.allDone) {
+    return {
+      job_id: job.id,
+      status: "dispatched_pending",
+      proof: job.proof || null,
+      dispatches,
+      runs: waited.results,
+      waited_ms: waited.waited_ms,
+      pending: {
+        repo,
+        workflow,
+        since: dispatchedAt,
+        want: count,
+        run_ids: waited.results.map((r) => r.id),
+      },
+    };
   }
-  const found = checks.some((c) => c.ok);
   return {
-    job_id: "level_c_first_commissioning_packet",
-    status: found ? "pass" : "fail",
-    checks,
-    note: found ? null : "countersign_needed_or_packet_missing",
+    job_id: job.id,
+    status: waited.allPass ? "pass" : "fail",
+    proof: job.proof || null,
+    dispatches,
+    runs: waited.results,
+    waited_ms: waited.waited_ms,
+    acceptance: job.acceptance,
+  };
+}
+
+async function resumePendingJob(env, progress) {
+  const pending = progress.pending;
+  if (!pending?.run_ids?.length) return null;
+  const token = await mintMotorInstallationToken(env);
+  if (!token) return { job_id: pending.job_id, status: "fail", error: "token_mint_failed" };
+  const waited = await waitForRuns(token, pending.repo, pending.run_ids, 90_000);
+  if (!waited.allDone) {
+    return {
+      job_id: pending.job_id,
+      status: "dispatched_pending",
+      proof: pending.proof || null,
+      runs: waited.results,
+      waited_ms: waited.waited_ms,
+      pending,
+      resumed: true,
+    };
+  }
+  return {
+    job_id: pending.job_id,
+    status: waited.allPass ? "pass" : "fail",
+    proof: pending.proof || null,
+    runs: waited.results,
+    waited_ms: waited.waited_ms,
+    resumed: true,
+    acceptance: pending.acceptance || null,
   };
 }
 
@@ -625,16 +756,12 @@ async function executeSelectedJob(env, job, observe, lastFiredAt) {
     return score48hLiveness(lastFiredAt, Number(env.INTERVAL_MINUTES || mapDoc.interval_minutes || 5));
   }
   if (action === "rollup_commissioning_directive") return rollupDirective(reality);
-  if (action === "score_research_package") return scoreResearchPackage(env);
-  if (action === "score_level_c_packet") return scoreLevelCPacket(env);
   if (action === "dispatch_and_wait") {
-    const dispatched = await dispatchWorkflowJob(env, job);
-    return {
-      job_id: job.id,
-      status: dispatched.ok ? "dispatched" : "fail",
-      dispatch: dispatched,
-      note: "runway/workflow execution requested; conclusion recorded on follow-up ticks via GH Actions",
-    };
+    return executeDispatchAndWait(env, job, 1);
+  }
+  if (action === "dispatch_concurrent_and_wait") {
+    const count = Number(job.dispatch?.count || 2);
+    return executeDispatchAndWait(env, job, count);
   }
   return { job_id: job.id, status: "fail", error: `unknown_runway_action:${action}` };
 }
@@ -663,10 +790,31 @@ async function runTick(env, meta = {}) {
 
   const progress = await loadProgress(env);
   if (!progress.cycle) progress.cycle = 1;
-  const selected = selectNextJob(progress);
+
+  let selected = { index: progress.cursor || 0, job: null };
+  let jobResult;
+
+  // Resume in-flight Motor proof runs before starting a new job
+  if (progress.pending?.run_ids?.length) {
+    jobResult = await resumePendingJob(env, progress);
+    const jobId = jobResult?.job_id || progress.pending.job_id;
+    selected = {
+      index: (jobQueue.jobs || []).findIndex((j) => j.id === jobId),
+      job: (jobQueue.jobs || []).find((j) => j.id === jobId) || {
+        id: jobId,
+        class: "execute",
+        runway_action: "dispatch_and_wait",
+        acceptance: progress.pending.acceptance,
+        proof: progress.pending.proof,
+      },
+    };
+    if (selected.index < 0) selected.index = progress.cursor || 0;
+  } else {
+    selected = selectNextJob(progress);
+    jobResult = await executeSelectedJob(env, selected.job, observe, lastFiredAt);
+  }
   const job = selected.job;
 
-  const jobResult = await executeSelectedJob(env, job, observe, lastFiredAt);
   repairs.push({
     defect: `job:${job?.id || "none"}`,
     applied: true,
@@ -718,11 +866,21 @@ async function runTick(env, meta = {}) {
     }
   }
 
-  // Advance cursor every tick so 5-min fires rotate through real jobs
+  // Advance cursor only when job finished (pass/fail/blocked); hold cursor while pending
   const jobsLen = (jobQueue.jobs || []).length || 1;
-  const nextCursor = (selected.index + 1) % jobsLen;
-  if (nextCursor === 0) progress.cycle = (progress.cycle || 1) + 1;
-  progress.cursor = nextCursor;
+  if (jobResult.status === "dispatched_pending") {
+    progress.pending = {
+      ...(jobResult.pending || {}),
+      job_id: job?.id,
+      proof: job?.proof || jobResult.proof || null,
+      acceptance: job?.acceptance || null,
+    };
+  } else {
+    progress.pending = null;
+    const nextCursor = (selected.index + 1) % jobsLen;
+    if (nextCursor === 0) progress.cycle = (progress.cycle || 1) + 1;
+    progress.cursor = nextCursor;
+  }
   progress.jobs = progress.jobs || {};
   if (job?.id) {
     progress.jobs[job.id] = {
@@ -730,21 +888,27 @@ async function runTick(env, meta = {}) {
       at,
       cycle: progress.cycle,
       missing_decision: jobResult.missing_decision || null,
+      runs: jobResult.runs || null,
+      proof: jobResult.proof || job?.proof || null,
     };
   }
   progress.updated_at = at;
 
   const verdict = defects.some((d) => d.severity === "P0")
     ? "FAIL_P0"
-    : jobResult.status === "fail" && defects.length
-      ? "DEGRADED_HEALING"
-      : jobResult.status === "blocked_founder"
-        ? "BLOCKED_FOUNDER_JOB"
-        : jobResult.status === "dispatched"
-          ? "JOB_DISPATCHED"
-          : jobResult.status === "pass"
-            ? "PASS_JOB_TICK"
-            : "PASS_SCOPED_TICK";
+    : jobResult.status === "dispatched_pending"
+      ? "PROOF_PENDING"
+      : jobResult.status === "fail" && job?.class === "execute"
+        ? "PROOF_FAIL"
+        : jobResult.status === "fail" && defects.length
+          ? "DEGRADED_HEALING"
+          : jobResult.status === "blocked_founder"
+            ? "BLOCKED_FOUNDER_JOB"
+            : jobResult.status === "pass" && job?.class === "execute"
+              ? "PASS_PROOF_TICK"
+              : jobResult.status === "pass"
+                ? "PASS_JOB_TICK"
+                : "PASS_SCOPED_TICK";
 
   const receipt = {
     schema: SCHEMA,

@@ -1,93 +1,92 @@
 {
   "schema": "nf.commissioning-job-queue.v1",
-  "version": "1.0.0",
-  "purpose": "Ordered qualification jobs for the commissioning specialist closed loop and the commissioning runway product path. Each tick advances one incomplete job and must produce real evidence.",
+  "version": "2.0.0",
+  "purpose": "Real unified-core commissioning execution queue. Each tick runs or waits on a live proof workflow. Score-only jobs are demoted after execute proofs.",
   "law": [
-    "One primary job per tick",
-    "Machine executes machine_safe steps only",
-    "Founder-gated jobs emit blocked_founder with exact missing decision — never fake fully_commissioned",
+    "Prefer execute proof jobs over score-only jobs",
+    "Dispatch then wait for conclusion before marking pass",
+    "Founder-gated gaps emit blocked_founder with exact missing decision",
     "hold preserved until founder lifts",
-    "No mint_new_github_app_private_key / lift_hold / production_deploy / unsupervised redesign"
+    "Never claim fully_commissioned while runtime_reality says not_commissioned"
   ],
   "cursor_kv_key": "job_queue_cursor",
   "progress_kv_key": "job_queue_progress",
   "jobs": [
     {
-      "id": "surface_liveness",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "sg_shadow + commissioning_specialist + runtime hold all probe pass",
-      "runway_action": "probe_required_surfaces",
-      "dispatch": null
-    },
-    {
-      "id": "key_custody_score",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "score sg key custody fields from runtime_reality and emit gap receipt",
-      "runway_action": "score_key_custody",
-      "dispatch": null,
-      "founder_gate_if": "key2_custody_not_established"
-    },
-    {
-      "id": "unified_core_status_score",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "score unified_motor architecture / implementation / runtime / active fields",
-      "runway_action": "score_unified_core",
-      "dispatch": null
-    },
-    {
-      "id": "event_gateway_status",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "record event_gateway.status exactly; never claim commissioned without live worker",
-      "runway_action": "score_event_gateway",
-      "dispatch": null,
-      "founder_gate_if": "event_gateway_not_commissioned"
-    },
-    {
-      "id": "resident_roles_status",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "score resident_roles.sg_role and noos_role",
-      "runway_action": "score_resident_roles",
-      "dispatch": null
-    },
-    {
-      "id": "proof_a_checklist",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "score every proof-a item pass|fail|unknown|blocked_founder with evidence pointers",
-      "runway_action": "score_proof_a",
-      "dispatch": null
-    },
-    {
-      "id": "proof_b_checklist",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "score every proof-b item pass|fail|unknown|blocked_founder with evidence pointers",
-      "runway_action": "score_proof_b",
-      "dispatch": null
-    },
-    {
-      "id": "software_repair_live_verify",
+      "id": "proof_a_native_run",
       "class": "execute",
+      "proof": "A",
       "machine_safe": true,
-      "acceptance": "dispatch motor-verify workflow; record conclusion as evidence",
+      "acceptance": "motor-native workflow conclusion=success (Motor.run state machine + real python check)",
       "runway_action": "dispatch_and_wait",
       "dispatch": {
         "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
-        "workflow": "motor-verify.yml",
+        "workflow": "motor-native.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function add(a, b) where add(2, 3) == 5 and add(10, 5) == 15",
+          "buggy_code": "def add(a, b):\n    return a - b"
+        }
+      }
+    },
+    {
+      "id": "proof_a_concurrent_jobs",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "two concurrent motor-job workflow runs both conclusion=success",
+      "runway_action": "dispatch_concurrent_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-job.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "count": 2,
+        "inputs": {
+          "failing_test": "assert add(2, 2) == 5  # currently returns 4",
+          "language": "python"
+        }
+      }
+    },
+    {
+      "id": "proof_a_durable_state",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "motor-db workflow conclusion=success (receipt write/read)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-db.yml",
         "ref": "main",
         "event": "workflow_dispatch"
       }
     },
     {
-      "id": "software_repair_green_pr",
+      "id": "proof_a_verify_edge",
       "class": "execute",
+      "proof": "A",
       "machine_safe": true,
-      "acceptance": "dispatch repair-run workflow; record draft pr / ci outcome",
+      "acceptance": "motor-verify workflow conclusion=success (diagnose fix verify)",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-verify.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function add(a, b) where add(2, 3) == 5 and add(10, 5) == 15",
+          "buggy_code": "def add(a, b):\n    return a - b"
+        }
+      }
+    },
+    {
+      "id": "proof_a_real_repo_change",
+      "class": "execute",
+      "proof": "A",
+      "machine_safe": true,
+      "acceptance": "repair-run workflow conclusion=success (branch commit draft pr + exact-head ci)",
       "runway_action": "dispatch_and_wait",
       "dispatch": {
         "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
@@ -97,10 +96,29 @@
       }
     },
     {
+      "id": "proof_b_failure_repair_verify",
+      "class": "execute",
+      "proof": "B",
+      "machine_safe": true,
+      "acceptance": "motor-verify on known-bad code then success after repair path",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-verify.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "spec": "a Python function mul(a, b) where mul(3, 4) == 12",
+          "buggy_code": "def mul(a, b):\n    return a + b"
+        }
+      }
+    },
+    {
       "id": "gallery_cost_supply_qualify",
       "class": "execute",
+      "proof": "cost",
       "machine_safe": true,
-      "acceptance": "dispatch gallery-foundation-tick; record package qualify + foundation outcome",
+      "acceptance": "gallery-foundation-tick conclusion=success",
       "runway_action": "dispatch_and_wait",
       "dispatch": {
         "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
@@ -114,43 +132,37 @@
       }
     },
     {
-      "id": "research_package_ready",
+      "id": "key_custody_score",
       "class": "qualify",
       "machine_safe": true,
-      "acceptance": "confirm research runway package/tests present on main; score ready|missing",
-      "runway_action": "score_research_package",
-      "dispatch": null
+      "acceptance": "score key custody; blocked_founder until key2 established",
+      "runway_action": "score_key_custody",
+      "dispatch": null,
+      "founder_gate_if": "key2_custody_not_established"
     },
     {
-      "id": "level_c_first_commissioning_packet",
+      "id": "event_gateway_status",
       "class": "qualify",
       "machine_safe": true,
-      "acceptance": "locate level-c / first-commissioning packet; score ready|missing|countersign_needed",
-      "runway_action": "score_level_c_packet",
-      "dispatch": null
+      "acceptance": "record event gateway status; blocked_founder until commissioned",
+      "runway_action": "score_event_gateway",
+      "dispatch": null,
+      "founder_gate_if": "event_gateway_not_commissioned"
     },
     {
       "id": "credential_bootstrap_gap",
       "class": "qualify",
       "machine_safe": true,
-      "acceptance": "score bootstrap key1 still active vs key2 custody; founder gate for revoke",
+      "acceptance": "score bootstrap key1 revoke gap",
       "runway_action": "score_credential_bootstrap",
       "dispatch": null,
       "founder_gate_if": "bootstrap_key1_not_revoked"
     },
     {
-      "id": "specialist_48h_liveness",
-      "class": "qualify",
-      "machine_safe": true,
-      "acceptance": "last_fired_at age under 2x interval; deadman restart path if stale",
-      "runway_action": "score_48h_liveness",
-      "dispatch": null
-    },
-    {
       "id": "commissioning_directive_rollup",
       "class": "qualify",
       "machine_safe": true,
-      "acceptance": "roll up commissioning_directive fields; refuse fully_commissioned while any not_commissioned",
+      "acceptance": "roll up directive; refuse fully_commissioned while any not_commissioned",
       "runway_action": "rollup_commissioning_directive",
       "dispatch": null
     }
