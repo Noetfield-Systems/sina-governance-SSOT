@@ -1,0 +1,65 @@
+{
+  "receipt_type": "sg_v2_standdown_correction_receipt_v1",
+  "verdict": "ACCEPT_PASS_SCOPED_IDENTITY_BOOTSTRAP",
+  "captured_at": "2026-07-18",
+  "scope": "candidate_identity_only",
+  "sg_v2_state": {
+    "SG_V2_IMPLEMENTATION": "READY_FOR_REVIEW",
+    "SG_V2_OFFLINE_PROOFS": "35_PASS",
+    "SG_V2_LIVE_SHADOW": "NOT_DEPLOYED",
+    "SG_V2_LIVE_CANARY_PROOFS": "NOT_RUN",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  },
+  "sg_candidate_app": {
+    "SG_CANDIDATE_APP": "CREATED",
+    "SG_CANDIDATE_APP_ID": "4330805",
+    "SG_CANDIDATE_INSTALLATION_ID": "147378007",
+    "SG_CANDIDATE_IDENTITY": "PROVEN",
+    "merge_queues_read_permission": false
+  },
+  "key_custody": {
+    "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY",
+    "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
+    "SG_KEY_CUSTODY": "BOOTSTRAP_LOCAL",
+    "SG_COMMISSIONING_KEY_CUSTODY": "NOT_PROVEN",
+    "SG_COMMISSIONING_ELIGIBLE": false,
+    "SG_BOOTSTRAP_KEY_1_REVOKED": false,
+    "bootstrap_pem_path": "~/.sina/secrets/noetfield-sg-authority.private-key.pem",
+    "bootstrap_pem_retained": true,
+    "retention_reason": "Founder order: do not delete bootstrap key 1 until key 2 is proven."
+  },
+  "standdown_actions": [
+    "Deleted Cloudflare worker noetfield-sg-authority-v2 (bootstrap-key signer).",
+    "Deleted Cloudflare worker nf-unified-motor-foundation-v1-staging (over-claimed LIVE_WIRED_T0 gateway).",
+    "Reverted noetfield-sg-authority GitHub App webhook config to inert (url disconnected, secret rotated-and-discarded); App events remain []."
+  ],
+  "order1_bootstrap_flow": {
+    "port_8737_listener": "CLOSED",
+    "manifest_or_oauth_server_this_session": "NONE_RUN",
+    "unguessable_state_param_proof": "NOT_APPLICABLE_THIS_SESSION_NO_OAUTH_FLOW_RUN_BY_AGENT",
+    "loopback_one_shot_proof": "NOT_APPLICABLE_THIS_SESSION",
+    "secret_leak_scan": {
+      "git_tracked": "CLEAN",
+      "git_history_last_60": "CLEAN (only PEM-formatter helper delimiters in worker source, no key material)",
+      "receipts": "CLEAN (signatures/HMAC hex only, no private keys or plaintext secrets)",
+      "workflow_artifacts": "NONE_PUBLISHED",
+      "shell_or_test_snapshots": "CLEAN"
+    }
+  },
+  "orders_status": {
+    "ORDER_1_close_bootstrap_flow": "DONE (verify + scan; no OAuth flow was run by agent this session)",
+    "ORDER_2_finalize_pr29": "IN_PROGRESS",
+    "ORDER_3_real_sg_custody": "BLOCKED_FOUNDER_CUSTODY_PLANE_REQUIRED",
+    "ORDER_4_correct_and_merge_pr28": "FOLLOW_UP (PR #28 already merged; terminology correction on main)",
+    "ORDER_5_permission_event_review": "BLOCKED_FOUNDER_APP_AMENDMENT (merge_queues=read not present; no silent alteration)",
+    "ORDER_6_live_shadow": "BLOCKED_UNTIL_KEY2_CUSTODY_PROVEN_AND_SEPARATE_ACCOUNT"
+  },
+  "legacy_app": "PRESERVED_NOT_AUTHORITY",
+  "supersedes": [
+    "NF_LIVE_WIRED_T0_RECEIPT_v1.json",
+    "NF_LIVE_WIRED_T0_PROOF_v1.json",
+    "NF_SCOPED_LIVE_T0_AUTHORIZATION_v1.json"
+  ]
+}

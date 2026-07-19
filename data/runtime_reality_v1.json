@@ -1,6 +1,6 @@
 {
   "schema": "noetfield.runtime-reality.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "as_of": "2026-07-18",
   "authority": {
     "precedence": "RUNTIME_REALITY_OVERRIDES_ARCHITECTURE_PROSE_FOR_LIVE_STATUS",
@@ -12,20 +12,22 @@
   "sg": {
     "library_status": "PRESENT",
     "runtime_status": "NOT_COMMISSIONED",
-    "authority_runtime_status": "BLOCKED_STALE_IDENTITY",
+    "authority_runtime_status": "NOT_COMMISSIONED",
     "legacy_app_id": "4179901",
     "legacy_installation_id": "143449507",
     "legacy_repository_identity": "kazemnezhadsina144-dot/sina-governance-SSOT",
     "legacy_receipt_type": "REMOTE_CHECK_ADVISORY",
     "legacy_app_authoritative": false,
     "legacy_advisory_authority": "DENIED",
-    "legacy_decommission_status": "PENDING_REPLACEMENT_COMMISSIONING",
+    "legacy_decommission_status": "PRESERVED_NOT_AUTHORITY_PENDING_KEY2_CUSTODY",
     "replacement_app_slug": "noetfield-sg-authority",
+    "replacement_app_id": "4330805",
+    "replacement_installation_id": "147378007",
     "replacement_status": "NOT_YET_COMMISSIONED"
   },
   "unified_motor": {
     "architecture_status": "SG_ACCEPTED",
-    "implementation_status": "FOUNDATION_AUTHORIZED",
+    "implementation_status": "OFFLINE_IMPLEMENTATION_PROVEN",
     "runtime_status": "NOT_COMMISSIONED",
     "active": false
   },
@@ -36,7 +38,7 @@
     "unified_core_commissioning": "NOT_PROVEN",
     "is_unified_motor_core": false,
     "is_sg_authority": false,
-    "classification": "PROVEN_MOTOR_EXECUTOR_IDENTITY_NOT_COMMISSIONED_UNIFIED_CORE"
+    "classification": "PROVEN_MOTOR_EXECUTOR_IDENTITY_NOT_COMMISSIONED_HOLD"
   },
   "security_principals": {
     "motor_execution_app_count": 1,
@@ -47,16 +49,69 @@
     "motor_may_issue_sg_decisions": false,
     "sg_may_execute_mutations": false
   },
+  "event_gateway": {
+    "status": "NOT_COMMISSIONED",
+    "note": "Over-scoped staging gateway from prior turn was stood down (worker deleted). Redeployable only after key-2 custody gate."
+  },
+  "resident_roles": {
+    "sg_role": "NOT_COMMISSIONED",
+    "noos_role": "NOT_COMMISSIONED"
+  },
+  "commissioning_directive": {
+    "event_gateway": "NOT_COMMISSIONED",
+    "sg_role": "NOT_COMMISSIONED",
+    "noos_role": "NOT_COMMISSIONED",
+    "unified_motor_runtime": "NOT_COMMISSIONED",
+    "autonomous_production_mutations": "HOLD",
+    "fully_commissioned_claim": false
+  },
+  "sg_v2_state": {
+    "SG_V2_IMPLEMENTATION": "READY_FOR_REVIEW",
+    "SG_V2_OFFLINE_PROOFS": "35_PASS",
+    "SG_V2_LIVE_SHADOW": "WORKER_DEPLOYED_WEBHOOK_DISABLED",
+    "SG_V2_LIVE_CANARY_PROOFS": "NOT_RUN",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  },
+  "sg_candidate_app": {
+    "SG_CANDIDATE_APP": "CREATED",
+    "SG_CANDIDATE_APP_ID": "4330805",
+    "SG_CANDIDATE_INSTALLATION_ID": "147378007",
+    "SG_CANDIDATE_IDENTITY": "PROVEN",
+    "identity_proof_scope": "candidate_identity_only",
+    "merge_queues_read_permission": false
+  },
+  "key_custody": {
+    "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY_STILL_ACTIVE",
+    "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
+    "SG_KEY_CUSTODY": "KEY2_IN_VERIFIER_ACCOUNT_KEY1_PENDING_REVOKE",
+    "SG_COMMISSIONING_KEY_CUSTODY": "IMPORTED_VERIFIER_ACCOUNT",
+    "SG_COMMISSIONING_ELIGIBLE": false,
+    "SG_COMMISSIONING_KEY_2_CUSTODY": "NOT_ESTABLISHED",
+    "SG_BOOTSTRAP_KEY_1_REVOKED": false,
+    "custody_reason": "Local file mode 0600 does not establish independent SG custody; general founder/Cursor/local-agent execution identity may access the file.",
+    "SG_COMMISSIONING_KEY_2_PUBLIC_FINGERPRINT_SHA256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+    "custody_cloudflare_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "custody_worker": "noetfield-sg-authority-v2-shadow"
+  },
+  "legacy_app": "PRESERVED_NOT_AUTHORITY",
+  "implementation_refs": {
+    "shadow_merge_commit": "898d67e5ca9eab9ae6161658cfdef3b2c48e6360",
+    "sandbox_candidate_commit": "f1525442553618d293b7516d84332bb751462bae"
+  },
   "allowed_during_containment": [
-    "read_only_observation",
-    "inventory",
-    "evidence_collection",
-    "proposal_generation",
     "draft_pull_requests",
     "dry_runs",
+    "evidence_collection",
+    "inventory",
     "linting",
-    "schema_validation",
-    "non_mutating_shadow_evaluation"
+    "non_mutating_shadow_evaluation",
+    "offline_proofs",
+    "proposal_generation",
+    "read_only_observation",
+    "receipt_writes",
+    "schema_validation"
   ],
   "blocked_during_containment": [
     "autonomous_production_merge",
@@ -66,7 +121,10 @@
     "autonomous_workflow_permission_escalation",
     "autonomous_secret_mutation",
     "autonomous_verifier_mutation",
-    "autonomous_production_rollback"
+    "autonomous_production_rollback",
+    "autonomous_content_publication",
+    "live_sg_deployment_before_key2_custody",
+    "sg_bootstrap_key_1_as_commissioning_authority"
   ],
   "active_evidence_requirements": [
     "deployed_commit_sha",
@@ -82,7 +140,10 @@
     "IMPLEMENTATION_AUTHORIZED != DEPLOYED",
     "DEPLOYED != PROVEN",
     "PROVEN != COMMISSIONED",
-    "COMMISSIONED != ACTIVE"
+    "COMMISSIONED != ACTIVE",
+    "CANDIDATE_IDENTITY_PROVEN != CUSTODY_PROVEN",
+    "BOOTSTRAP_LOCAL_KEY != INDEPENDENT_SG_CUSTODY",
+    "OFFLINE_PROOFS_PASS != LIVE_SHADOW_DEPLOYED"
   ],
   "incident_id": "SG-AUTHORITY-IDENTITY-P0",
   "architecture_amendment": "NF-SG-AUTHORITY-IDENTITY-V2"

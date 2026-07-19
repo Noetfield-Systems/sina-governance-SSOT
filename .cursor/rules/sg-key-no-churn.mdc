@@ -1,0 +1,13 @@
+---
+description: SG App private key — look up, do not mint a new one
+alwaysApply: true
+---
+# SG key — no churn
+
+Before asking the founder for a new GitHub App private key, or generating one:
+
+1. Read `data/sg_authority_key_pointer_v1.json`
+2. Read `~/.sina/secrets/SG_AUTHORITY_KEY_POINTER.json`
+3. Use `~/.sina/secrets/noetfield-sg-authority.private-key.pem`
+
+If the key is missing from all of the above, escalate. Do **not** mint a replacement key as the default fix.

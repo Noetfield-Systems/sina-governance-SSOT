@@ -2,7 +2,8 @@
 
 **Authority:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1`  
 **Status:** `IMPLEMENTATION_AUTHORIZED` for foundation; later waves separate commissions  
-**Version:** v1.0.0_locked_20260717
+**Version:** v1.1.0_locked_20260718  
+**Amendment:** scaling posture locked; W5 acceptance contract expanded; WIP = Circuit A + Circuit B
 
 ---
 
@@ -68,6 +69,10 @@ Founder instruction → SourceA owner → WEB-PUBLISH recipe → Builder sandbox
 
 ### W5 — `NF-OPEN-MODEL-RUNTIME-ADAPTER-V1` (separate commission)
 
+Deliver only after dedicated commission. Do **not** implement providers in W1/W2.
+
+Base requirements:
+
 - `OpenModelRuntime` interface
 - pinned model revision
 - RunPod/vLLM adapter
@@ -76,6 +81,20 @@ Founder instruction → SourceA owner → WEB-PUBLISH recipe → Builder sandbox
 - time and cost controls
 - model identity in every receipt
 - explicit commercial escalation path
+
+#### W5 acceptance requirements (provider hardening — deferred)
+
+Encode as acceptance gates for the W5 commission. Forbidden to satisfy these by calling DeepSeek / Kimi / GLM / RunPod in W1–W4:
+
+1. **Canonical output normalization** — provider outputs map through `OutputNormalizer` → `CanonicalAction` before Motor state mutation
+2. **Error classification** — every provider failure classified as `FATAL` | `SKIP_TIER` | `RETRY` | `VALIDATION_FAIL`
+3. **Rolling error-rate breaker** — open breaker only after minimum sample count; never trip on a single sample
+4. **Local idempotency / result truth** — idempotency keys and result truth live in Noetfield-controlled store / trace, never only on the provider
+5. **SLO budgets** — separate latency / cost / success budgets per tier; budget_policy PASS required before T2/T3
+6. **Provider rate-limit dispatch** — queue-aware dispatch respects provider limits without Motor ledger on provider compute
+7. **Spend kill-switch** — hard stop on budget breach; no silent continue
+
+**Forbidden in W5 until commissioned:** DeepSeek / Kimi / GLM tier additions; production RunPod calls from foundation Workers.
 
 ### W6 — Repository embodiment
 
@@ -91,3 +110,21 @@ A single `GitHub App`; each repo gets generated `noetfield.repo-owner-ref.v1` po
 | W2–W3 | cloud (Cloudflare Worker + Workflows) | first Motor vertical slice |
 | W4+ | cloud | promotion waits + probes |
 | Mac | complement only | never sole production motor |
+
+
+---
+
+## Cloud-first liveness contract (inactive until commissioning)
+
+| Field | Value |
+|-------|-------|
+| `loop_id` | `nf-unified-motor-foundation-v1` |
+| Trigger host | `cloud` (Cloudflare Worker + Workflows); Mac = development complement only |
+| Cadence | reserved; not scheduled under HOLD |
+| `last_fired_at` target | `noos_loop_registry` / Motor job ledger (when commissioned) |
+| Deadman | independent CF deadman path (different Worker); 2× interval staleness → alert + one restart attempt + receipt |
+| Receipt | `receipts/doctrine/` + P99 Motor evidence |
+| Commission status | `NOT_COMMISSIONED` — offline implementation and offline proofs complete (candidate); live shadow NOT deployed; no live SG deployment before the SG_COMMISSIONING_KEY_2 custody gate; `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD` remains |
+| 48h gate | commissioning acceptance requires laptop-closed cloud heartbeats still firing |
+
+Foundation implementation ends at `FOUNDATION_BUILT_FOR_FOCUSED_REVIEW`, not `FULLY_COMMISSIONED`.

@@ -74,6 +74,7 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Machine:** `data/nf_unified_motor_architecture_v1_LOCKED.json` · **Waves:** `docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md`  
 **Split:** Cloudflare Agents = Resident Role owners · Cloudflare Workflows = Motor jobs · Client-Zero Motor = first profile (not discarded).  
 **Foundation:** `NF-UNIFIED-MOTOR-V1-FOUNDATION` is T0-first — no GPU in that commission.  
+**Scaling posture (v1.1):** Cloudflare Agents+Workflows runway; reject Temporal/Kafka+Flink/Ray/Restate substrate; provider hardening deferred to W5; WIP=Circuit A+B; HOLD preserved.  
 **Wiring:** `docs/dispatch/nf-unified-motor-architecture-all-repos.md` · **Wave 0:** `docs/dispatch/wave-0-nf-unified-motor-merge-packet.md`
 **Runtime correction:** `P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md` + `data/runtime_reality_v1.json`; `noetfield-motor` is executor identity only; Unified Motor Core and SG runtime are NOT commissioned.
 

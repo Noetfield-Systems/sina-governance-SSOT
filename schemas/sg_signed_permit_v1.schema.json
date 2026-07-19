@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/sg_signed_permit_v1.schema.json",
+  "title": "Signed exact-subject SG v2 shadow permit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "payload",
+    "signature"
+  ],
+  "properties": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permit_type",
+        "mode",
+        "enforceable",
+        "authorization",
+        "verdict",
+        "subject",
+        "issued_at",
+        "expires_at"
+      ],
+      "properties": {
+        "permit_type": {
+          "const": "SG_EXACT_SUBJECT_PERMIT"
+        },
+        "mode": {
+          "const": "SHADOW"
+        },
+        "enforceable": {
+          "const": false
+        },
+        "authorization": {
+          "const": "NONE"
+        },
+        "verdict": {
+          "const": "PASS"
+        },
+        "subject": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "app_id",
+            "installation_id",
+            "repository",
+            "commit_sha",
+            "action",
+            "target",
+            "artifact_hash",
+            "policy_hash",
+            "schema_hash",
+            "evaluator_hash",
+            "worker_version",
+            "signing_key_id",
+            "nonce"
+          ],
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "pattern": "^[0-9]+$"
+            },
+            "installation_id": {
+              "type": "string",
+              "pattern": "^[0-9]+$"
+            },
+            "repository": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+            },
+            "commit_sha": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "action": {
+              "type": "string",
+              "minLength": 1
+            },
+            "target": {
+              "type": "string",
+              "minLength": 1
+            },
+            "artifact_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "policy_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "schema_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "evaluator_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "worker_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "signing_key_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nonce": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._:-]{16,200}$"
+            }
+          }
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ECDSA_P256_SHA256"
+        },
+        "key_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      }
+    }
+  }
+}

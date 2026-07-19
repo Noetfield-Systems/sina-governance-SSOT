@@ -42,7 +42,7 @@
 
 ## Skills (load at session start)
 
-0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority
+0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority. Scaling posture: Cloudflare Agents+Workflows only; no Temporal/Kafka+Flink/Ray/Restate substrate; W5 provider hardening deferred; HOLD preserved
 
 0d. **SinaGPT + Command Gateway v2 (LOCKED)** — `P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` before cockpit/API redesign
 
@@ -59,3 +59,5 @@
 5. `skills/staleness-gate-auditor` (in-repo) — run before trusting any "alive doc" as current; wraps `scripts/verify_agent_read_staleness_v1.sh`. Desktop app: `desktop-app/Staleness-Gate-Auditor.app`
 6. `skills/receipt-ledger-auditor` (in-repo) — run after any multi-Scheduler and executor/multi-agent session to catch dual-claim collisions in `receipts/`; wraps `scripts/audit_receipt_ledger_v1.py`. Desktop app: `desktop-app/Receipt-Ledger-Auditor.app`
 7. `skills/registry-Scheduler and executor-validator` (in-repo) — run before registering any new GH Action/worker/Copilot workflow, or after touching `data/github_automation_registry_v1.json`; wraps `scripts/validate_parallel_automation_governance_v1.py` + `scripts/audit_automation_surface_v1.py`. Desktop app: `desktop-app/Registry-Scheduler and executor-Validator.app`
+
+8. `skills/commissioning-specialist` — 5-min CF cron commissioning closed loop (heal allowlist + kaizen propose; DeepSeek/GLM/Kimi/HF)

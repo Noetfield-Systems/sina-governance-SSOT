@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/sg_webhook_delivery_v1.schema.json",
+  "title": "SG v2 webhook delivery replay record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "delivery_id",
+    "event",
+    "repository",
+    "commit_sha",
+    "claimed_at",
+    "expires_at",
+    "hmac_verified"
+  ],
+  "properties": {
+    "delivery_id": {
+      "type": "string",
+      "minLength": 16
+    },
+    "event": {
+      "enum": [
+        "pull_request",
+        "merge_group"
+      ]
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "claimed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hmac_verified": {
+      "const": true
+    }
+  }
+}
