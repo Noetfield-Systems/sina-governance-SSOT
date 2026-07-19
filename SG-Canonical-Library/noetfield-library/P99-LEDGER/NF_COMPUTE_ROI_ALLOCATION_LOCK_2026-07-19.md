@@ -4,7 +4,7 @@
 **Verdict:** `PASS` — architecture `SG_ACCEPTED` + `IMPLEMENTATION_AUTHORIZED`  
 **Saved at:** 2026-07-19T22:52:47Z  
 **decision_id:** `NF-COMPUTE-ROI-ALLOCATION-V1`  
-**candidate_sha:** `8ce1e22ac1354dff33254c0d6742d3499250ce45`  
+**candidate_sha:** `7735826e5b153be8c062790ea83c3a4f123299e7`  
 **PR:** https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62
 
 ## Locked

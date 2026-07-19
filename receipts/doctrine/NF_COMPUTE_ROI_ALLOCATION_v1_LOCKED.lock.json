@@ -9,7 +9,7 @@
     "architecture_md_sha256": "bb0cd0a6fd50869b5a176e3d9a8d9b27006e3fcd2ac4e4126429e35c5e4b2b2a",
     "machine_json_sha256": "568ab37b19ce4738929e742dbf06ccf85722eed46275011fc94c315b9757d22d"
   },
-  "candidate_sha": "8ce1e22ac1354dff33254c0d6742d3499250ce45",
+  "candidate_sha": "7735826e5b153be8c062790ea83c3a4f123299e7",
   "sg_pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62",
   "note": "sg_authority_sha becomes the merge commit on main after PR #62 lands"
 }
