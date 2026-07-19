@@ -1,0 +1,158 @@
+{
+  "schema": "nf.commissioning-job-queue.v1",
+  "version": "1.0.0",
+  "purpose": "Ordered qualification jobs for the commissioning specialist closed loop and the commissioning runway product path. Each tick advances one incomplete job and must produce real evidence.",
+  "law": [
+    "One primary job per tick",
+    "Machine executes machine_safe steps only",
+    "Founder-gated jobs emit blocked_founder with exact missing decision — never fake fully_commissioned",
+    "hold preserved until founder lifts",
+    "No mint_new_github_app_private_key / lift_hold / production_deploy / unsupervised redesign"
+  ],
+  "cursor_kv_key": "job_queue_cursor",
+  "progress_kv_key": "job_queue_progress",
+  "jobs": [
+    {
+      "id": "surface_liveness",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "sg_shadow + commissioning_specialist + runtime hold all probe pass",
+      "runway_action": "probe_required_surfaces",
+      "dispatch": null
+    },
+    {
+      "id": "key_custody_score",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score sg key custody fields from runtime_reality and emit gap receipt",
+      "runway_action": "score_key_custody",
+      "dispatch": null,
+      "founder_gate_if": "key2_custody_not_established"
+    },
+    {
+      "id": "unified_core_status_score",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score unified_motor architecture / implementation / runtime / active fields",
+      "runway_action": "score_unified_core",
+      "dispatch": null
+    },
+    {
+      "id": "event_gateway_status",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "record event_gateway.status exactly; never claim commissioned without live worker",
+      "runway_action": "score_event_gateway",
+      "dispatch": null,
+      "founder_gate_if": "event_gateway_not_commissioned"
+    },
+    {
+      "id": "resident_roles_status",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score resident_roles.sg_role and noos_role",
+      "runway_action": "score_resident_roles",
+      "dispatch": null
+    },
+    {
+      "id": "proof_a_checklist",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score every proof-a item pass|fail|unknown|blocked_founder with evidence pointers",
+      "runway_action": "score_proof_a",
+      "dispatch": null
+    },
+    {
+      "id": "proof_b_checklist",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score every proof-b item pass|fail|unknown|blocked_founder with evidence pointers",
+      "runway_action": "score_proof_b",
+      "dispatch": null
+    },
+    {
+      "id": "software_repair_live_verify",
+      "class": "execute",
+      "machine_safe": true,
+      "acceptance": "dispatch motor-verify workflow; record conclusion as evidence",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "motor-verify.yml",
+        "ref": "main",
+        "event": "workflow_dispatch"
+      }
+    },
+    {
+      "id": "software_repair_green_pr",
+      "class": "execute",
+      "machine_safe": true,
+      "acceptance": "dispatch repair-run workflow; record draft pr / ci outcome",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "repair-run.yml",
+        "ref": "main",
+        "event": "workflow_dispatch"
+      }
+    },
+    {
+      "id": "gallery_cost_supply_qualify",
+      "class": "execute",
+      "machine_safe": true,
+      "acceptance": "dispatch gallery-foundation-tick; record package qualify + foundation outcome",
+      "runway_action": "dispatch_and_wait",
+      "dispatch": {
+        "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+        "workflow": "gallery-foundation-tick.yml",
+        "ref": "main",
+        "event": "workflow_dispatch",
+        "inputs": {
+          "query": "modern technology workspace",
+          "live_mode": "true"
+        }
+      }
+    },
+    {
+      "id": "research_package_ready",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "confirm research runway package/tests present on main; score ready|missing",
+      "runway_action": "score_research_package",
+      "dispatch": null
+    },
+    {
+      "id": "level_c_first_commissioning_packet",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "locate level-c / first-commissioning packet; score ready|missing|countersign_needed",
+      "runway_action": "score_level_c_packet",
+      "dispatch": null
+    },
+    {
+      "id": "credential_bootstrap_gap",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "score bootstrap key1 still active vs key2 custody; founder gate for revoke",
+      "runway_action": "score_credential_bootstrap",
+      "dispatch": null,
+      "founder_gate_if": "bootstrap_key1_not_revoked"
+    },
+    {
+      "id": "specialist_48h_liveness",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "last_fired_at age under 2x interval; deadman restart path if stale",
+      "runway_action": "score_48h_liveness",
+      "dispatch": null
+    },
+    {
+      "id": "commissioning_directive_rollup",
+      "class": "qualify",
+      "machine_safe": true,
+      "acceptance": "roll up commissioning_directive fields; refuse fully_commissioned while any not_commissioned",
+      "runway_action": "rollup_commissioning_directive",
+      "dispatch": null
+    }
+  ]
+}

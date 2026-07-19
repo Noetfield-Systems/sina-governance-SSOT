@@ -1,6 +1,6 @@
 {
   "schema": "nf.commissioning-specialist.map.v1",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "loop_id": "nf-commissioning-specialist-tick-v1",
   "trigger_host": "cloud",
   "cadence_cron": "*/5 * * * *",
@@ -13,16 +13,18 @@
   "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_TICK_*.json",
   "law": [
     "Observe -> Detect -> Critique -> Repair -> ProposeImprove -> ReObserve",
-    "Machine may REPAIR only allowlisted actions",
+    "Machine may repair only allowlisted actions",
     "Machine may PROPOSE improvements only; founder ratifies architecture (no unsupervised redesign)",
-    "AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD until founder lifts",
-    "Unknown task_kind routes to T0 deterministic"
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=hold until founder lifts",
+    "Unknown task_kind routes to T0 deterministic",
+    "Each tick selects the next incomplete job from nf_commissioning_job_queue_v1 and must deliver real evidence for that job",
+    "Never stamp fully_commissioned while runtime_reality says not_commissioned"
   ],
   "skills": [
     "commissioning-specialist",
     "staleness-gate-auditor",
     "receipt-ledger-auditor",
-    "registry-motor-validator"
+    "registry-scheduler-and-executor-validator"
   ],
   "closed_loop_stages": [
     {
@@ -31,7 +33,8 @@
       "actions": [
         "probe_surfaces",
         "read_runtime_reality_flags",
-        "read_last_receipt"
+        "read_last_receipt",
+        "load_job_queue_cursor"
       ]
     },
     {
@@ -40,7 +43,8 @@
       "actions": [
         "diff_expected_vs_actual",
         "staleness_check",
-        "secret_presence_check"
+        "secret_presence_check",
+        "select_next_incomplete_job"
       ]
     },
     {
@@ -49,7 +53,8 @@
       "actions": [
         "classify_defect",
         "rank_severity",
-        "choose_repair_or_propose"
+        "choose_repair_or_propose",
+        "plan_job_execution"
       ],
       "models": [
         "deepseek",
@@ -61,7 +66,9 @@
       "id": "repair",
       "tier": "T0",
       "actions": [
-        "allowlisted_heal_only"
+        "allowlisted_heal_only",
+        "execute_or_dispatch_selected_job",
+        "advance_job_queue_cursor_on_progress"
       ],
       "requires_founder_approval": false
     },
@@ -84,7 +91,8 @@
       "tier": "T0",
       "actions": [
         "write_receipt",
-        "upsert_last_fired_at"
+        "upsert_last_fired_at",
+        "persist_job_progress"
       ]
     }
   ],
@@ -94,7 +102,7 @@
       "url": "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health",
       "expect": {
         "ok": true,
-        "mode": "SHADOW"
+        "mode": "shadow"
       }
     },
     {
@@ -111,6 +119,15 @@
       "kind": "github_raw",
       "repo": "Noetfield-Systems/sina-governance-SSOT",
       "path": "data/sg_authority_key_pointer_v1.json",
+      "expect": {
+        "exists": true
+      }
+    },
+    {
+      "id": "job_queue",
+      "kind": "github_raw",
+      "repo": "Noetfield-Systems/sina-governance-SSOT",
+      "path": "data/nf_commissioning_job_queue_v1.json",
       "expect": {
         "exists": true
       }
@@ -132,6 +149,30 @@
     {
       "id": "clear_false_live_claim",
       "description": "If truth file claims LIVE while worker 404, flag defect (no auto-edit of main)"
+    },
+    {
+      "id": "select_next_job",
+      "description": "Advance to next incomplete job in commissioning job queue"
+    },
+    {
+      "id": "dispatch_commissioning_runway_job",
+      "description": "repository_dispatch commissioning_tick with job_id payload"
+    },
+    {
+      "id": "dispatch_workflow_job",
+      "description": "workflow_dispatch allowlisted runway workflows for execute-class jobs"
+    },
+    {
+      "id": "persist_job_progress",
+      "description": "Write job progress and cursor to KV"
+    },
+    {
+      "id": "score_runtime_gaps",
+      "description": "Deterministic score of proof-a/b and custody gaps from runtime_reality"
+    },
+    {
+      "id": "restart_stale_tick",
+      "description": "POST /tick when last_fired_at exceeds 2x interval"
     }
   ],
   "repair_forbidden": [
@@ -140,7 +181,8 @@
     "enable_enforcement",
     "production_deploy",
     "architecture_redesign",
-    "merge_to_main_without_pr"
+    "merge_to_main_without_pr",
+    "fake_fully_commissioned"
   ],
   "improve_map": {
     "queue": "kaizen",
@@ -180,7 +222,8 @@
       "kimi",
       "huggingface"
     ],
-    "max_usd_per_tick": 0.02,
+    "max_usd_per_tick": 0.05,
     "on_all_fail": "continue_T0_deterministic"
-  }
+  },
+  "job_queue_ref": "data/nf_commissioning_job_queue_v1.json"
 }
