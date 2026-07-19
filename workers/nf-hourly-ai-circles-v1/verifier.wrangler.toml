@@ -26,7 +26,8 @@ LIVE_ACTIVATION = "true"
 OPENAI_MODEL = "gpt-5-mini"
 GEMINI_MODEL = "gemini-2.5-flash-lite"
 GLM_MODEL = "glm-4-flash"
-WORKERS_AI_MODEL = "@cf/meta/llama-3.2-3b-instruct"
+WORKERS_AI_FAST_MODEL = "@cf/meta/llama-3.2-3b-instruct"
+WORKERS_AI_REASONING_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
 [ai]
 binding = "AI"

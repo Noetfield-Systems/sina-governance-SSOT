@@ -155,21 +155,21 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.scout = await runRole(
     env,
     "scout",
-    "workers_ai",
+    "workers_ai_fast",
     rolePrompt("scout"),
     JSON.stringify(repoSnapshot),
   );
   transcript.researcher = await runRole(
     env,
     "researcher",
-    "workers_ai",
+    "workers_ai_fast",
     rolePrompt("researcher"),
     JSON.stringify({ snapshot: repoSnapshot, scout: transcript.scout.content }),
   );
   transcript.critic = await runRole(
     env,
     "critic",
-    "workers_ai",
+    "workers_ai_fast",
     rolePrompt("critic"),
     JSON.stringify({
       snapshot: repoSnapshot,
@@ -180,7 +180,7 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.frugal = await runRole(
     env,
     "frugal_divergence",
-    "workers_ai",
+    "workers_ai_fast",
     rolePrompt("frugal"),
     JSON.stringify({
       scout: transcript.scout.content,
@@ -191,7 +191,7 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.planner = await runRole(
     env,
     "planner",
-    "workers_ai",
+    "workers_ai_reasoning",
     rolePrompt("planner"),
     JSON.stringify({ snapshot: repoSnapshot, transcript }),
     1100,
@@ -207,7 +207,7 @@ async function runCircle(env, repoSnapshot, token, owner, repo) {
   transcript.implementer = await runRole(
     env,
     "implementer",
-    "workers_ai",
+    "workers_ai_reasoning",
     rolePrompt("implementer"),
     JSON.stringify({
       snapshot: repoSnapshot,

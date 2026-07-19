@@ -201,9 +201,19 @@ function providerConfig(env, name) {
       key: env.GEMINI_API_KEY || env.VERIFIER_GEMINI_API_KEY,
       model: env.GEMINI_MODEL || "gemini-2.5-flash-lite",
     },
+    workers_ai_fast: {
+      kind: "workers_ai",
+      model: env.WORKERS_AI_FAST_MODEL || "@cf/meta/llama-3.2-3b-instruct",
+    },
+    workers_ai_reasoning: {
+      kind: "workers_ai",
+      model:
+        env.WORKERS_AI_REASONING_MODEL ||
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    },
     workers_ai: {
       kind: "workers_ai",
-      model: env.WORKERS_AI_MODEL || "@cf/meta/llama-3.2-3b-instruct",
+      model: env.WORKERS_AI_FAST_MODEL || "@cf/meta/llama-3.2-3b-instruct",
     },
   };
   return configs[name];
@@ -292,7 +302,10 @@ async function invokeProvider(env, name, system, user, maxTokens) {
 }
 
 export async function runRole(env, role, preferred, system, user, maxTokens = 900) {
-  const order = [preferred, ..."deepseek,glm,kimi,openai,gemini,huggingface,workers_ai".split(",")]
+  const order = [
+    preferred,
+    ..."workers_ai_fast,workers_ai_reasoning,deepseek,glm,kimi,openai,gemini,huggingface".split(","),
+  ]
     .filter((name, index, all) => name && all.indexOf(name) === index);
   const errors = [];
   for (const provider of order) {

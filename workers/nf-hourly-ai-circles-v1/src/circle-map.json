@@ -42,7 +42,10 @@
         "planner",
         "implementer"
       ],
-      "default_model_runtime": "workers_ai",
+      "default_model_runtime": [
+        "@cf/meta/llama-3.2-3b-instruct",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      ],
       "commercial_model_policy": "requires_explicit_escalation_receipt",
       "maximum_open_candidates": 2,
       "maximum_files_per_job": 3,
@@ -67,7 +70,10 @@
       "inputs": ["actual_pr_metadata", "actual_diff", "actual_completed_check_runs"],
       "excluded_inputs": ["builder_private_reasoning", "builder_self_verdict"],
       "delivery": "github_check_run",
-      "default_model_runtime": "workers_ai",
+      "default_model_runtime": [
+        "@cf/meta/llama-3.2-3b-instruct",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      ],
       "commercial_model_policy": "requires_explicit_escalation_receipt",
       "allowed_outputs": ["independent_check_run", "durable_receipt"],
       "forbidden_outputs": ["edit", "approve", "merge", "deploy", "ratify"]

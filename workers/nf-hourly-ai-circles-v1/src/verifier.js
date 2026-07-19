@@ -65,7 +65,7 @@ async function modelReview(env, payload) {
   raw.correctness = await runRole(
     env,
     "correctness_verifier",
-    "workers_ai",
+    "workers_ai_reasoning",
     reviewPrompt("correctness"),
     payload,
     1500,
@@ -73,7 +73,7 @@ async function modelReview(env, payload) {
   raw.security = await runRole(
     env,
     "security_verifier",
-    "workers_ai",
+    "workers_ai_fast",
     reviewPrompt("security"),
     payload,
     1500,
@@ -81,7 +81,7 @@ async function modelReview(env, payload) {
   raw.doctrine = await runRole(
     env,
     "doctrine_verifier",
-    "workers_ai",
+    "workers_ai_fast",
     reviewPrompt("doctrine"),
     payload,
     1500,
@@ -89,7 +89,7 @@ async function modelReview(env, payload) {
   raw.skeptic = await runRole(
     env,
     "skeptical_critic",
-    "workers_ai",
+    "workers_ai_reasoning",
     reviewPrompt("skeptic"),
     payload,
     1500,
@@ -110,7 +110,7 @@ function renderReview(deterministic, model, receiptId, headSha) {
   const pass =
     deterministic.pass &&
     available.length >= 2 &&
-    providerDiversity >= 1 &&
+    providerDiversity >= 2 &&
     requests.length === 0;
   const lines = [
     "## Independent machine verification",
