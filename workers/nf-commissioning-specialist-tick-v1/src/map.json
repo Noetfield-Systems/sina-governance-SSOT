@@ -1,14 +1,14 @@
 {
   "schema": "nf.commissioning-specialist.map.v1",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "loop_id": "nf-commissioning-specialist-tick-v1",
-  "trigger_host": "cloud",
-  "cadence_cron": "*/5 * * * *",
-  "interval_minutes": 5,
-  "deadman": {
-    "watcher": "noos-deadman-v1",
-    "staleness_multiplier": 2,
-    "restart_path": "/tick"
+  "trigger_host": "on_demand",
+  "cadence_cron": null,
+  "interval_minutes": null,
+  "trigger": {
+    "mode": "on_demand",
+    "workflow": "NOETFIELD-RUNWAY/.github/workflows/commissioning-run.yml",
+    "requires_explicit_job": true
   },
   "receipt_path": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_TICK_*.json",
   "law": [
@@ -17,7 +17,8 @@
     "Machine may PROPOSE improvements only; founder ratifies architecture (no unsupervised redesign)",
     "AUTONOMOUS_PRODUCTION_MUTATIONS=hold until founder lifts",
     "Unknown task_kind routes to T0 deterministic",
-    "Each tick selects the next incomplete job from nf_commissioning_job_queue_v1 and must deliver real evidence for that job",
+    "Each explicit run names one unfinished or invalidated job and must deliver real evidence for that job",
+    "Completed unchanged jobs are not repeated on a timer",
     "Never stamp fully_commissioned while runtime_reality says not_commissioned"
   ],
   "skills": [
@@ -169,10 +170,6 @@
     {
       "id": "score_runtime_gaps",
       "description": "Deterministic score of proof-a/b and custody gaps from runtime_reality"
-    },
-    {
-      "id": "restart_stale_tick",
-      "description": "POST /tick when last_fired_at exceeds 2x interval"
     }
   ],
   "repair_forbidden": [
