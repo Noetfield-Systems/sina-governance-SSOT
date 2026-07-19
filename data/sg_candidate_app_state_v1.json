@@ -51,8 +51,8 @@
   "SG_LIVE_SHADOW": "NOT_DEPLOYED",
   "SG_BOOTSTRAP_KEY_1": "LOCAL_TEMPORARY",
   "SG_BOOTSTRAP_KEY_1_COMMISSIONING_ELIGIBLE": false,
-  "SG_COMMISSIONING_KEY_CUSTODY": "NOT_PROVEN",
-  "SG_COMMISSIONING_ELIGIBLE": false,
+  "SG_COMMISSIONING_KEY_CUSTODY": "ESTABLISHED",
+  "SG_COMMISSIONING_ELIGIBLE": true,
   "merge_queues_read_permission": false,
   "temporary_manifest_conversion_code": "DELETED (scripts/sg_candidate_app_bootstrap_v1.py removed; raw pem/webhook_secret/client_secret written only to ~/.sina/secrets, never committed)"
 }
