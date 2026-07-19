@@ -4,7 +4,7 @@
 **Verdict:** `PASS` — architecture `SG_ACCEPTED` + `IMPLEMENTATION_AUTHORIZED`  
 **Saved at:** 2026-07-19T22:52:47Z  
 **decision_id:** `NF-COMPUTE-ROI-ALLOCATION-V1`  
-**candidate_sha:** `7735826e5b153be8c062790ea83c3a4f123299e7`  
+**candidate_sha:** `389b85ff1ad6892a6da680e5f91c9397f9c8f44d`  
 **PR:** https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62
 
 ## Locked
@@ -27,3 +27,10 @@
 
 - `AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD`
 - Enterprise plan kept; Actions not product runtime
+
+
+## Wave 0 land
+
+**sg_authority_sha / merge:** `389b85ff1ad6892a6da680e5f91c9397f9c8f44d`  
+**merged_at:** 2026-07-19T22:56:53Z  
+**pointer status:** ACTIVE
