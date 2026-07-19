@@ -39,6 +39,15 @@ KEY1_FP = "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b"
 SECRETS = Path.home() / ".sina" / "secrets"
 KEY2_PEM = SECRETS / "noetfield-sg-authority.commissioning-key-2.private-key.pem"
 KEY1_PEM = SECRETS / "noetfield-sg-authority.bootstrap-key-1.ARCHIVED.pem"
+
+# GHA / cloud overrides (write temp files from secrets)
+import os as _os
+import tempfile as _tempfile
+_tmp_paths = []
+if _os.environ.get("SG_AUTHORITY_PRIVATE_KEY"):
+    _p = Path(_tempfile.mkstemp(suffix=".pem")[1]); _p.write_text(_os.environ["SG_AUTHORITY_PRIVATE_KEY"]); KEY2_PEM = _p; _tmp_paths.append(_p)
+if _os.environ.get("SG_BOOTSTRAP_KEY_1_PEM"):
+    _p = Path(_tempfile.mkstemp(suffix=".pem")[1]); _p.write_text(_os.environ["SG_BOOTSTRAP_KEY_1_PEM"]); KEY1_PEM = _p; _tmp_paths.append(_p)
 CANONICAL_PEM = SECRETS / "noetfield-sg-authority.private-key.pem"
 SHADOW_HEALTH = "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health"
 
