@@ -28,11 +28,34 @@ from motor_learning.event_registry import EventRegistry
 from motor_learning.errors import IllegalTransition, GovernanceBlock, SchemaError, MotorLearningError
 from motor_learning.shadow import evaluate_shadow, assert_shadow_independence
 from motor_learning.validated import ValidatedReceipt, ValidatedECQR
-from motor_learning.artifacts import validate_shadow_report, validate_confidence_artifact
+from motor_learning.artifacts import validate_shadow_report, validate_confidence_artifact, mining_evidence_manifest
 from motor_learning.paths import assert_paths_disjoint
 from motor_learning.hashutil import content_hash
 
 FIX = ROOT / "fixtures" / "motor_learning_w1"
+
+
+def _mine_hash(obs):
+    _, h = mining_evidence_manifest(obs["entity"], obs["mining_events_normalized"])
+    return h
+
+
+def _compile_and_validate(obs, template):
+    compiled = fixture_compile_ecqr(
+        template, candidate=obs["entity"], shadow=obs["shadow_report"], confidence=obs["confidence"],
+        mining_event_ids=list(obs["entity"]["source_event_ids"]),
+        shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
+        shadow_events=obs["shadow_events_normalized"],
+        confidence_inputs=obs["confidence_inputs"],
+        mining_events=obs["mining_events_normalized"],
+    )
+    vecqr = validate_ecqr_decision(
+        compiled, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
+        shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
+    )
+    return compiled, vecqr
+
 
 
 def _receipt(**over):
@@ -196,17 +219,7 @@ class TestExactCrossBind(unittest.TestCase):
             events=events, shadow_events=shadow, store=store, out_dir=td / "out",
             ledger_path=td / "out" / "ledger.json",
         )
-        compiled = fixture_compile_ecqr(
-            template, candidate=obs["entity"], shadow=obs["shadow_report"], confidence=obs["confidence"],
-            mining_event_ids=list(obs["entity"]["source_event_ids"]),
-            shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
-            shadow_events=obs["shadow_events_normalized"],
-            confidence_inputs=obs["confidence_inputs"],
-        )
-        vecqr = validate_ecqr_decision(
-            compiled, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
-            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
-        )
+        compiled, vecqr = _compile_and_validate(obs, template)
         return obs, compiled, vecqr
 
     def test_E_F_G_H_receipt_hash_mismatches_blocked(self):
@@ -232,6 +245,7 @@ class TestExactCrossBind(unittest.TestCase):
             confidence_hash=obs["confidence"]["content_hash"],
             ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
         )
         entity2 = transition(
             dict(entity), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
@@ -253,6 +267,7 @@ class TestExactCrossBind(unittest.TestCase):
             prior=prior, learning_receipt=receipt, ecqr_decision=vecqr,
             candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
             expected_version=1,
         )
         # Remake store and tamper each field
@@ -274,7 +289,7 @@ class TestExactCrossBind(unittest.TestCase):
                 confidence_after=obs2["confidence"]["confidence_after"],
                 affected_loops=list(compiled2["affected_loops"]),
                 applicable_runways=list(compiled2["applicable_runways"]),
-                repositories=[],
+                repositories=list(compiled2.get("repositories") or []),
                 origin_event=entity["source_event_ids"][0],
                 decision_timestamp=compiled2["effective_at"],
                 shadow_id=obs2["shadow_report"]["shadow_id"],
@@ -283,6 +298,7 @@ class TestExactCrossBind(unittest.TestCase):
                 confidence_hash=obs2["confidence"]["content_hash"],
                 ecqr_decision_hash=vecqr2.decision_hash,
                 candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
             )
             # Tamper after build by reconstructing with wrong field via validate bypass attempt
             body = dict(r)
@@ -314,7 +330,7 @@ class TestExactCrossBind(unittest.TestCase):
                 confidence_after=obs2["confidence"]["confidence_after"],
                 affected_loops=list(compiled2["affected_loops"]),
                 applicable_runways=list(compiled2["applicable_runways"]),
-                repositories=[],
+                repositories=list(compiled2.get("repositories") or []),
                 origin_event=entity["source_event_ids"][0],
                 decision_timestamp=compiled2["effective_at"],
                 shadow_id=obs2["shadow_report"]["shadow_id"],
@@ -323,10 +339,11 @@ class TestExactCrossBind(unittest.TestCase):
                 confidence_hash=obs2["confidence"]["content_hash"] if field != "confidence_hash" else "0" * 64,
                 ecqr_decision_hash=vecqr2.decision_hash if field != "ecqr_decision_hash" else "0" * 64,
                 candidate_hash=candidate_content_hash(entity) if field != "candidate_hash" else "0" * 64,
+                mining_evidence_manifest_hash=_mine_hash(obs2),
             )
             # transition with bad receipt still validates structurally but bindings wrong at persist
             ent_bad = transition(
-                {**entity, "state": SHADOW, "transition_history": []}, RATIFIED,
+                dict(entity), RATIFIED,
                 actor=compiled2["reviewer"], reason="ok",
                 evidence=compiled2["evidence_reviewed"], learning_receipt=bad_receipt,
                 timestamp=compiled2["effective_at"],
@@ -340,6 +357,7 @@ class TestExactCrossBind(unittest.TestCase):
                     prior=prior_bad, learning_receipt=bad_receipt, ecqr_decision=vecqr2,
                     candidate=entity, shadow=obs2["shadow_report"], confidence=obs2["confidence"],
                 shadow_events=obs2["shadow_events_normalized"], confidence_inputs=obs2["confidence_inputs"],
+                mining_events=obs2["mining_events_normalized"],
                     expected_version=1,
                 )
             shutil.rmtree(td2)
@@ -358,10 +376,12 @@ class TestAtomicPriorStore(unittest.TestCase):
                                         mining_event_ids=list(obs["entity"]["source_event_ids"]),
                                         shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
                                         shadow_events=obs["shadow_events_normalized"],
-                                        confidence_inputs=obs["confidence_inputs"])
+                                        confidence_inputs=obs["confidence_inputs"],
+                                        mining_events=obs["mining_events_normalized"])
         vecqr = validate_ecqr_decision(
             compiled, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
             shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
         )
         from motor_learning.artifacts import candidate_content_hash
         entity = obs["entity"]
@@ -372,14 +392,16 @@ class TestAtomicPriorStore(unittest.TestCase):
             confidence_before=obs["confidence"]["confidence_before"],
             confidence_after=obs["confidence"]["confidence_after"],
             affected_loops=list(compiled["affected_loops"]),
-            applicable_runways=list(compiled["applicable_runways"]), repositories=[],
+            applicable_runways=list(compiled["applicable_runways"]),
+            repositories=list(compiled.get("repositories") or []),
             origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
             shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
         )
-        ent = transition({**entity, "state": SHADOW, "transition_history": []}, RATIFIED,
+        ent = transition(dict(entity), RATIFIED,
                          actor=compiled["reviewer"], reason="ok", evidence=compiled["evidence_reviewed"],
                          learning_receipt=r, timestamp=compiled["effective_at"])
         prior = {
@@ -396,6 +418,7 @@ class TestAtomicPriorStore(unittest.TestCase):
             prior=prior, learning_receipt=r, ecqr_decision=vecqr,
             candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
             expected_version=1,
         )
         mid = store_tree_hash(td / "store")
@@ -405,6 +428,7 @@ class TestAtomicPriorStore(unittest.TestCase):
                 prior=prior, learning_receipt=r, ecqr_decision=vecqr,
                 candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
                 shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
                 allow_duplicate=False, expected_version=1,
             )
         after = store_tree_hash(td / "store")
@@ -425,10 +449,12 @@ class TestAtomicPriorStore(unittest.TestCase):
                                         mining_event_ids=list(obs["entity"]["source_event_ids"]),
                                         shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
                                         shadow_events=obs["shadow_events_normalized"],
-                                        confidence_inputs=obs["confidence_inputs"])
+                                        confidence_inputs=obs["confidence_inputs"],
+                                        mining_events=obs["mining_events_normalized"])
         vecqr = validate_ecqr_decision(
             compiled, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
             shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
         )
         from motor_learning.artifacts import candidate_content_hash
         entity = obs["entity"]
@@ -439,12 +465,14 @@ class TestAtomicPriorStore(unittest.TestCase):
             confidence_before=obs["confidence"]["confidence_before"],
             confidence_after=obs["confidence"]["confidence_after"],
             affected_loops=list(compiled["affected_loops"]),
-            applicable_runways=list(compiled["applicable_runways"]), repositories=[],
+            applicable_runways=list(compiled["applicable_runways"]),
+            repositories=list(compiled.get("repositories") or []),
             origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
             shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
         )
         # Create existing prior version 1 nonterminal then try terminal with expected 99
         store._persist_nonterminal({
@@ -453,7 +481,7 @@ class TestAtomicPriorStore(unittest.TestCase):
             "recommended_action": entity["recommended_action"], "scope": entity["scope"],
         }, allow_duplicate=False, expected_version=None)
         before = store_tree_hash(td / "store")
-        ent = transition({**entity, "state": SHADOW, "transition_history": []}, RATIFIED,
+        ent = transition(dict(entity), RATIFIED,
                          actor=compiled["reviewer"], reason="ok", evidence=compiled["evidence_reviewed"],
                          learning_receipt=r, timestamp=compiled["effective_at"])
         prior = {
@@ -470,6 +498,7 @@ class TestAtomicPriorStore(unittest.TestCase):
                 prior=prior, learning_receipt=r, ecqr_decision=vecqr,
                 candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
                 shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
                 allow_duplicate=True, expected_version=99,
             )
         after = store_tree_hash(td / "store")
@@ -576,7 +605,8 @@ class TestPathDisjointness(unittest.TestCase):
                                         mining_event_ids=list(obs["entity"]["source_event_ids"]),
                                         shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
                                         shadow_events=obs["shadow_events_normalized"],
-                                        confidence_inputs=obs["confidence_inputs"])
+                                        confidence_inputs=obs["confidence_inputs"],
+                                        mining_events=obs["mining_events_normalized"])
         missing_store = td / "never-created-store"
         self.assertFalse(missing_store.exists())
         with self.assertRaises(MotorLearningError):
@@ -629,7 +659,8 @@ class TestPipelineFixtures(unittest.TestCase):
                                         mining_event_ids=list(obs["entity"]["source_event_ids"]),
                                         shadow_event_ids=list(obs["shadow_report"]["shadow_event_ids"]),
                                         shadow_events=obs["shadow_events_normalized"],
-                                        confidence_inputs=obs["confidence_inputs"])
+                                        confidence_inputs=obs["confidence_inputs"],
+                                        mining_events=obs["mining_events_normalized"])
         with self.assertRaises(GovernanceBlock):
             run_pipeline(events=events, shadow_events=shadow, store_dir=td / "s", out_dir=td / "out",
                          ecqr_decision=compiled, dry_run=False)
@@ -674,7 +705,7 @@ class TestLifecycleReplayProbes(unittest.TestCase):
         from motor_learning.artifacts import candidate_content_hash
         from motor_learning.lifecycle import validate_transition_history
         bad_hist = [
-            {"from_state": "OBSERVED", "to_state": "RATIFIED", "actor": "x", "timestamp": "t",
+            {"from_state": "OBSERVED", "to_state": "RATIFIED", "actor": "x", "timestamp": "2026-07-10T12:00:00Z",
              "reason": "illegal", "evidence": ["e"], "learning_receipt_id": "lr-x"},
         ]
         with self.assertRaises(GovernanceBlock):
@@ -686,12 +717,14 @@ class TestLifecycleReplayProbes(unittest.TestCase):
             confidence_before=obs["confidence"]["confidence_before"],
             confidence_after=obs["confidence"]["confidence_after"],
             affected_loops=list(compiled["affected_loops"]),
-            applicable_runways=list(compiled["applicable_runways"]), repositories=[],
+            applicable_runways=list(compiled["applicable_runways"]),
+            repositories=list(compiled.get("repositories") or []),
             origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
             shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
         )
         prior = {
             "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
@@ -707,6 +740,7 @@ class TestLifecycleReplayProbes(unittest.TestCase):
                 prior=prior, learning_receipt=r, ecqr_decision=vecqr,
                 candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
                shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
                 expected_version=1,
             )
         shutil.rmtree(td)
@@ -714,10 +748,10 @@ class TestLifecycleReplayProbes(unittest.TestCase):
     def test_discontinuous_transition_history_blocked(self):
         from motor_learning.lifecycle import validate_transition_history
         hist = [
-            {"from_state": "OBSERVED", "to_state": "PROPOSED", "actor": "a", "timestamp": "t1",
+            {"from_state": "OBSERVED", "to_state": "PROPOSED", "actor": "a", "timestamp": "2026-07-10T10:00:00Z",
              "reason": "r", "evidence": [], "learning_receipt_id": None},
-            {"from_state": "SHADOW", "to_state": "RATIFIED", "actor": "a", "timestamp": "t2",
-             "reason": "r", "evidence": [], "learning_receipt_id": "lr"},
+            {"from_state": "SHADOW", "to_state": "RATIFIED", "actor": "a", "timestamp": "2026-07-10T12:00:00Z",
+             "reason": "r", "evidence": ["e"], "learning_receipt_id": "lr"},
         ]
         with self.assertRaises(GovernanceBlock) as cm:
             validate_transition_history(hist, entity_status="active")
@@ -816,6 +850,7 @@ class TestFullyBoundECQRProbes(unittest.TestCase):
             validate_ecqr_decision(
                 d, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
                 shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
             )
         self.assertIn("candidate_hash", str(cm.exception))
         shutil.rmtree(td)
@@ -830,6 +865,7 @@ class TestFullyBoundECQRProbes(unittest.TestCase):
             validate_ecqr_decision(
                 d, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
                 shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
             )
         self.assertIn("shadow_id", str(cm.exception))
         shutil.rmtree(td)
@@ -844,6 +880,7 @@ class TestFullyBoundECQRProbes(unittest.TestCase):
             validate_ecqr_decision(
                 d, confidence=obs["confidence"], shadow=obs["shadow_report"], candidate=obs["entity"],
                 shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"],
             )
         self.assertIn("confidence_hash", str(cm.exception))
         shutil.rmtree(td)
@@ -965,9 +1002,10 @@ class TestRollbackBindingProbes(unittest.TestCase):
         }
         store._write_index(idx)
         ecqr = json.loads((FIX / "07_rollback" / "ecqr_decision.json").read_text())
-        # dry_run uses expected from loaded prior — inject failure by calling commit with wrong version after building
-        # Public API: rollback_prior uses loaded version. Force stale by mutating store version after load path:
-        # Call commit_terminal_bundle directly simulating rollback with expected_version=1 while store has 3.
+        ecqr["rollback_target_prior_content_hash"] = body["content_hash"]
+        ecqr["rollback_target_version"] = 3
+        ecqr["prior_ratification_receipt_id"] = body["learning_receipt_id"]
+        ecqr["repositories"] = list(ecqr.get("repositories") or [])
         from motor_learning.receipt import build_learning_receipt, validate_and_mint_receipt
         from motor_learning.ecqr import validate_ecqr_decision
         from motor_learning.lifecycle import transition as tr
@@ -979,11 +1017,15 @@ class TestRollbackBindingProbes(unittest.TestCase):
             confidence_before=float(ed.as_dict()["confidence_before"]),
             confidence_after=float(ed.as_dict()["confidence_after"]),
             affected_loops=list(ed.as_dict()["affected_loops"]),
-            applicable_runways=list(ed.as_dict()["applicable_runways"]), repositories=[],
+            applicable_runways=list(ed.as_dict()["applicable_runways"]),
+            repositories=list(ed.as_dict().get("repositories") or []),
             origin_event=ed.as_dict()["evidence_reviewed"][0],
             decision_timestamp=ed.as_dict()["effective_at"],
             rollback_target=body["prior_id"], snapshot_id=body["prior_id"],
             ecqr_decision_hash=ed.decision_hash,
+            rollback_target_prior_content_hash=body["content_hash"],
+            rollback_target_version=3,
+            prior_ratification_receipt_id=body["learning_receipt_id"],
         )
         vr = validate_and_mint_receipt(receipt)
         entity = {"state": "RATIFIED", "status": "active", "prior_id": body["prior_id"],
@@ -1021,6 +1063,603 @@ class TestStoreIdentityProbes(unittest.TestCase):
         with self.assertRaises(GovernanceBlock) as cm:
             PriorStore(td / "fx", create=False, store_kind="w1_reference")
         self.assertIn("store identity mismatch", str(cm.exception))
+        shutil.rmtree(td)
+
+
+
+class TestGap1LifecycleAnchor(unittest.TestCase):
+    def test_new_prior_shadow_to_ratified_only_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        obs, compiled, vecqr = TestExactCrossBind()._ready_bundle(td)
+        entity = obs["entity"]
+        from motor_learning.artifacts import candidate_content_hash
+        r = build_learning_receipt(
+            decision="RATIFIED", prior_id=f"prior-{entity['candidate_id']}",
+            candidate_id=entity["candidate_id"], reviewer=compiled["reviewer"],
+            rationale=compiled["rationale"], evidence_links=list(compiled["evidence_reviewed"]),
+            confidence_before=obs["confidence"]["confidence_before"],
+            confidence_after=obs["confidence"]["confidence_after"],
+            affected_loops=list(compiled["affected_loops"]),
+            applicable_runways=list(compiled["applicable_runways"]), repositories=list(compiled.get("repositories") or []),
+            origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
+            shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
+            shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
+            confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
+            candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+        )
+        bad_hist = [{
+            "from_state": "SHADOW", "to_state": "RATIFIED", "actor": compiled["reviewer"],
+            "timestamp": compiled["effective_at"], "reason": compiled["rationale"],
+            "evidence": list(compiled["evidence_reviewed"]), "learning_receipt_id": r["receipt_id"],
+        }]
+        prior = {
+            "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
+            "action_attempted": entity["fingerprint"].get("action_attempted"),
+            "recommended_action": entity["recommended_action"], "scope": entity["scope"],
+            "candidate_id": entity["candidate_id"], "learning_receipt_id": r["receipt_id"],
+            "transition_history": bad_hist, "fingerprint": entity["fingerprint"],
+            "evidence_refs": entity["evidence_refs"], "source_event_ids": entity["source_event_ids"],
+        }
+        store = PriorStore(td / "store", create=True, store_kind="w1_reference", allow_persist=True)
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=prior, learning_receipt=r, ecqr_decision=vecqr,
+                candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+                shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+                mining_events=obs["mining_events_normalized"], expected_version=1,
+            )
+        shutil.rmtree(td)
+
+    def test_rollback_ratified_only_no_prefix_blocked(self):
+        from motor_learning.lifecycle import validate_transition_history
+        # New prior must start at OBSERVED — RATIFIED→ROLLED_BACK alone is incomplete
+        with self.assertRaises(GovernanceBlock):
+            validate_transition_history(
+                [{
+                    "from_state": "RATIFIED", "to_state": "ROLLED_BACK", "actor": "a",
+                    "timestamp": "2026-07-11T12:00:00Z", "reason": "r", "evidence": ["e"],
+                    "learning_receipt_id": "lr-x",
+                }],
+                entity_status="rolled_back",
+                require_observed_origin=True,
+            )
+        # Explicit update without stored prefix
+        with self.assertRaises(GovernanceBlock):
+            validate_transition_history(
+                [{
+                    "from_state": "RATIFIED", "to_state": "ROLLED_BACK", "actor": "a",
+                    "timestamp": "2026-07-11T12:00:00Z", "reason": "r", "evidence": ["e"],
+                    "learning_receipt_id": "lr-x",
+                }],
+                entity_status="rolled_back",
+                existing_history=[],
+                existing_state="RATIFIED",
+            )
+
+    def test_truncated_and_modified_prefix_blocked(self):
+        from motor_learning.lifecycle import assert_history_prefix_preserved
+        base = [
+            {"from_state": "OBSERVED", "to_state": "PROPOSED", "actor": "a", "timestamp": "2026-07-10T10:00:00Z",
+             "reason": "r", "evidence": [], "learning_receipt_id": None},
+            {"from_state": "PROPOSED", "to_state": "SHADOW", "actor": "a", "timestamp": "2026-07-10T11:00:00Z",
+             "reason": "r", "evidence": [], "learning_receipt_id": None},
+            {"from_state": "SHADOW", "to_state": "RATIFIED", "actor": "a", "timestamp": "2026-07-10T12:00:00Z",
+             "reason": "r", "evidence": ["e"], "learning_receipt_id": "lr-1"},
+        ]
+        truncated = base[:-1] + [{
+            "from_state": "RATIFIED", "to_state": "ROLLED_BACK", "actor": "a",
+            "timestamp": "2026-07-11T12:00:00Z", "reason": "rb", "evidence": ["e"],
+            "learning_receipt_id": "lr-2",
+        }]
+        # truncated drops last ratified — prefix mismatch
+        with self.assertRaises(GovernanceBlock):
+            assert_history_prefix_preserved(base, truncated, existing_state="RATIFIED")
+        modified = [dict(base[0], reason="CHANGED")] + base[1:] + [{
+            "from_state": "RATIFIED", "to_state": "ROLLED_BACK", "actor": "a",
+            "timestamp": "2026-07-11T12:00:00Z", "reason": "rb", "evidence": ["e"],
+            "learning_receipt_id": "lr-2",
+        }]
+        with self.assertRaises(GovernanceBlock):
+            assert_history_prefix_preserved(base, modified, existing_state="RATIFIED")
+
+    def test_active_overwrite_with_new_ratification_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        obs, compiled, vecqr = TestExactCrossBind()._ready_bundle(td)
+        entity = obs["entity"]
+        from motor_learning.artifacts import candidate_content_hash
+        r = build_learning_receipt(
+            decision="RATIFIED", prior_id=f"prior-{entity['candidate_id']}",
+            candidate_id=entity["candidate_id"], reviewer=compiled["reviewer"],
+            rationale=compiled["rationale"], evidence_links=list(compiled["evidence_reviewed"]),
+            confidence_before=obs["confidence"]["confidence_before"],
+            confidence_after=obs["confidence"]["confidence_after"],
+            affected_loops=list(compiled["affected_loops"]),
+            applicable_runways=list(compiled["applicable_runways"]), repositories=list(compiled.get("repositories") or []),
+            origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
+            shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
+            shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
+            confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
+            candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+        )
+        ent = transition(dict(entity), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
+                         evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
+        prior = {
+            "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
+            "action_attempted": entity["fingerprint"].get("action_attempted"),
+            "recommended_action": entity["recommended_action"], "scope": entity["scope"],
+            "candidate_id": entity["candidate_id"], "learning_receipt_id": r["receipt_id"],
+            "transition_history": ent["transition_history"], "fingerprint": entity["fingerprint"],
+            "evidence_refs": entity["evidence_refs"], "source_event_ids": entity["source_event_ids"],
+        }
+        store = PriorStore(td / "store", create=True, store_kind="w1_reference", allow_persist=True)
+        store.commit_terminal_bundle(
+            prior=prior, learning_receipt=r, ecqr_decision=vecqr,
+            candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"], expected_version=1,
+        )
+        # Fresh short history overwrite attempt
+        fresh = [{
+            "from_state": "SHADOW", "to_state": "RATIFIED", "actor": compiled["reviewer"],
+            "timestamp": compiled["effective_at"], "reason": "overwrite",
+            "evidence": list(compiled["evidence_reviewed"]), "learning_receipt_id": r["receipt_id"],
+        }]
+        prior2 = dict(prior)
+        prior2["transition_history"] = fresh
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=prior2, learning_receipt=r, ecqr_decision=vecqr,
+                candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+                shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+                mining_events=obs["mining_events_normalized"],
+                allow_duplicate=True, expected_version=1,
+            )
+        shutil.rmtree(td)
+
+    def test_exact_prefix_plus_one_legal_transition_pass(self):
+        from motor_learning.lifecycle import assert_history_prefix_preserved
+        base = [
+            {"from_state": "OBSERVED", "to_state": "PROPOSED", "actor": "a", "timestamp": "2026-07-10T10:00:00Z",
+             "reason": "r", "evidence": [], "learning_receipt_id": None},
+            {"from_state": "PROPOSED", "to_state": "SHADOW", "actor": "a", "timestamp": "2026-07-10T11:00:00Z",
+             "reason": "r", "evidence": [], "learning_receipt_id": None},
+            {"from_state": "SHADOW", "to_state": "RATIFIED", "actor": "a", "timestamp": "2026-07-10T12:00:00Z",
+             "reason": "r", "evidence": ["e"], "learning_receipt_id": "lr-1"},
+        ]
+        new = base + [{
+            "from_state": "RATIFIED", "to_state": "ROLLED_BACK", "actor": "a",
+            "timestamp": "2026-07-11T12:00:00Z", "reason": "rb", "evidence": ["e"],
+            "learning_receipt_id": "lr-2",
+        }]
+        assert_history_prefix_preserved(base, new, existing_state="RATIFIED")
+
+
+class TestGap2RollbackMetadata(unittest.TestCase):
+    def _active_store(self, td):
+        obs, compiled, vecqr = TestExactCrossBind()._ready_bundle(td)
+        entity = obs["entity"]
+        from motor_learning.artifacts import candidate_content_hash
+        r = build_learning_receipt(
+            decision="RATIFIED", prior_id=f"prior-{entity['candidate_id']}",
+            candidate_id=entity["candidate_id"], reviewer=compiled["reviewer"],
+            rationale=compiled["rationale"], evidence_links=list(compiled["evidence_reviewed"]),
+            confidence_before=obs["confidence"]["confidence_before"],
+            confidence_after=obs["confidence"]["confidence_after"],
+            affected_loops=list(compiled["affected_loops"]),
+            applicable_runways=list(compiled["applicable_runways"]), repositories=list(compiled.get("repositories") or []),
+            origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
+            shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
+            shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
+            confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
+            candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+        )
+        ent = transition(dict(entity), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
+                         evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
+        prior = {
+            "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
+            "action_attempted": entity["fingerprint"].get("action_attempted"),
+            "recommended_action": entity["recommended_action"], "scope": entity["scope"],
+            "candidate_id": entity["candidate_id"], "learning_receipt_id": r["receipt_id"],
+            "transition_history": ent["transition_history"], "fingerprint": entity["fingerprint"],
+            "evidence_refs": entity["evidence_refs"], "source_event_ids": entity["source_event_ids"],
+        }
+        store = PriorStore(td / "store", create=True, store_kind="w1_reference", allow_persist=True)
+        stored = store.commit_terminal_bundle(
+            prior=prior, learning_receipt=r, ecqr_decision=vecqr,
+            candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"], expected_version=1,
+        )
+        return store, stored, compiled
+
+    def _rb_bundle(self, stored, compiled, **over):
+        from motor_learning.ecqr import ECQR_DECISION_SCHEMA
+        ed = {
+            "schema": ECQR_DECISION_SCHEMA, "kind": "ECQR_DECISION",
+            "decision": "ROLLED_BACK",
+            "candidate_id": stored["candidate_id"],
+            "prior_id": stored["prior_id"],
+            "reviewer": "test_reviewer:rollback",
+            "rationale": "rollback after regression",
+            "evidence_reviewed": ["rollback-evidence"],
+            "shadow_result_ref": "shadow:rollback",
+            "confidence_before": 0.8, "confidence_after": 0.4,
+            "affected_loops": list(compiled["affected_loops"]),
+            "applicable_runways": list(compiled["applicable_runways"]),
+            "repositories": list(compiled.get("repositories") or []),
+            "effective_at": "2026-07-11T12:00:00Z",
+            "policy_versions": {"organ": "NF-MOTOR-LEARNING-ORGAN-V1"},
+            "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        }
+        ed.update(over)
+        return ed
+
+    def test_wrong_target_hash_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = self._active_store(td)
+        ed = self._rb_bundle(stored, compiled, rollback_target_prior_content_hash="WRONG-HASH")
+        entity = {"state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+                  "candidate_id": stored["candidate_id"],
+                  "transition_history": list(stored["transition_history"])}
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"], evidence_links=ed["evidence_reviewed"],
+            confidence_before=ed["confidence_before"], confidence_after=ed["confidence_after"],
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=ed["repositories"], origin_event=ed["evidence_reviewed"][0],
+            decision_timestamp=ed["effective_at"], rollback_target=stored["prior_id"],
+            snapshot_id=stored["prior_id"], ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash="WRONG-HASH",
+            rollback_target_version=int(stored["version"]),
+            prior_ratification_receipt_id=stored["learning_receipt_id"],
+        )
+        ent = transition(entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+                         evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"])
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"], "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"], "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": "WRONG-HASH",
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        })
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+                allow_duplicate=True, expected_version=int(stored["version"]),
+            )
+        shutil.rmtree(td)
+
+    def test_wrong_target_version_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = self._active_store(td)
+        ed = self._rb_bundle(stored, compiled, rollback_target_version=999)
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"], evidence_links=ed["evidence_reviewed"],
+            confidence_before=ed["confidence_before"], confidence_after=ed["confidence_after"],
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=ed["repositories"], origin_event=ed["evidence_reviewed"][0],
+            decision_timestamp=ed["effective_at"], rollback_target=stored["prior_id"],
+            snapshot_id=stored["prior_id"], ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash=stored["content_hash"],
+            rollback_target_version=999,
+            prior_ratification_receipt_id=stored["learning_receipt_id"],
+        )
+        entity = {"state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+                  "candidate_id": stored["candidate_id"],
+                  "transition_history": list(stored["transition_history"])}
+        ent = transition(entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+                         evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"])
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"], "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"], "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": 999,
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        })
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+                allow_duplicate=True, expected_version=int(stored["version"]),
+            )
+        shutil.rmtree(td)
+
+    def test_wrong_prior_receipt_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = self._active_store(td)
+        ed = self._rb_bundle(stored, compiled, prior_ratification_receipt_id="WRONG-RECEIPT")
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"], evidence_links=ed["evidence_reviewed"],
+            confidence_before=ed["confidence_before"], confidence_after=ed["confidence_after"],
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=ed["repositories"], origin_event=ed["evidence_reviewed"][0],
+            decision_timestamp=ed["effective_at"], rollback_target=stored["prior_id"],
+            snapshot_id=stored["prior_id"], ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash=stored["content_hash"],
+            rollback_target_version=int(stored["version"]),
+            prior_ratification_receipt_id="WRONG-RECEIPT",
+        )
+        entity = {"state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+                  "candidate_id": stored["candidate_id"],
+                  "transition_history": list(stored["transition_history"])}
+        ent = transition(entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+                         evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"])
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"], "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"], "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": "WRONG-RECEIPT",
+        })
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+                allow_duplicate=True, expected_version=int(stored["version"]),
+            )
+        shutil.rmtree(td)
+
+    def test_correct_target_bundle_pass(self):
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = self._active_store(td)
+        ed = self._rb_bundle(stored, compiled)
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"], evidence_links=ed["evidence_reviewed"],
+            confidence_before=ed["confidence_before"], confidence_after=ed["confidence_after"],
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=ed["repositories"], origin_event=ed["evidence_reviewed"][0],
+            decision_timestamp=ed["effective_at"], rollback_target=stored["prior_id"],
+            snapshot_id=stored["prior_id"], ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash=stored["content_hash"],
+            rollback_target_version=int(stored["version"]),
+            prior_ratification_receipt_id=stored["learning_receipt_id"],
+        )
+        entity = {"state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+                  "candidate_id": stored["candidate_id"],
+                  "transition_history": list(stored["transition_history"])}
+        ent = transition(entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+                         evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"])
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"], "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"], "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        })
+        out = store.commit_terminal_bundle(
+            prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+            allow_duplicate=True, expected_version=int(stored["version"]),
+        )
+        self.assertEqual(out["status"], "rolled_back")
+        self.assertFalse(out["live_consumable"])
+        shutil.rmtree(td)
+
+
+class TestGap3EvidenceDerivation(unittest.TestCase):
+    def test_identical_mining_shadow_ids_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        obs, compiled, vecqr = TestExactCrossBind()._ready_bundle(td)
+        # Force overlapping IDs
+        mine = list(obs["mining_events_normalized"])
+        shadow = [dict(e, event_id=mine[i % len(mine)]["event_id"]) for i, e in enumerate(obs["shadow_events_normalized"])]
+        with self.assertRaises(MotorLearningError):
+            # Build receipt/prior normally then commit with overlapping shadow events
+            entity = obs["entity"]
+            from motor_learning.artifacts import candidate_content_hash
+            r = build_learning_receipt(
+                decision="RATIFIED", prior_id=f"prior-{entity['candidate_id']}",
+                candidate_id=entity["candidate_id"], reviewer=compiled["reviewer"],
+                rationale=compiled["rationale"], evidence_links=list(compiled["evidence_reviewed"]),
+                confidence_before=obs["confidence"]["confidence_before"],
+                confidence_after=obs["confidence"]["confidence_after"],
+                affected_loops=list(compiled["affected_loops"]),
+                applicable_runways=list(compiled["applicable_runways"]), repositories=list(compiled.get("repositories") or []),
+                origin_event=entity["source_event_ids"][0], decision_timestamp=compiled["effective_at"],
+                shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
+                shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
+                confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
+                candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            )
+            ent = transition(dict(entity), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
+                             evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
+            prior = {
+                "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
+                "action_attempted": entity["fingerprint"].get("action_attempted"),
+                "recommended_action": entity["recommended_action"], "scope": entity["scope"],
+                "candidate_id": entity["candidate_id"], "learning_receipt_id": r["receipt_id"],
+                "transition_history": ent["transition_history"], "fingerprint": entity["fingerprint"],
+                "evidence_refs": entity["evidence_refs"], "source_event_ids": entity["source_event_ids"],
+            }
+            store = PriorStore(td / "store", create=True, store_kind="w1_reference", allow_persist=True)
+            store.commit_terminal_bundle(
+                prior=prior, learning_receipt=r, ecqr_decision=vecqr,
+                candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+                shadow_events=shadow, confidence_inputs=obs["confidence_inputs"],
+                mining_events=mine, expected_version=1,
+            )
+        shutil.rmtree(td)
+
+    def test_phantom_confidence_ids_and_inflated_occurrence_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        obs, compiled, vecqr = TestExactCrossBind()._ready_bundle(td)
+        bad = dict(obs["confidence_inputs"])
+        bad["mining_evidence_ids"] = ["phantom-m1", "phantom-m2", "phantom-m3"]
+        with self.assertRaises(GovernanceBlock):
+            from motor_learning.artifacts import assert_confidence_inputs_canonical
+            assert_confidence_inputs_canonical(bad, candidate=obs["entity"], shadow=obs["shadow_report"])
+        bad2 = dict(obs["confidence_inputs"])
+        bad2["shadow_evidence_ids"] = ["phantom-s1"]
+        with self.assertRaises(GovernanceBlock):
+            from motor_learning.artifacts import assert_confidence_inputs_canonical
+            assert_confidence_inputs_canonical(bad2, candidate=obs["entity"], shadow=obs["shadow_report"])
+        bad3 = dict(obs["confidence_inputs"])
+        bad3["occurrence_count"] = int(obs["entity"]["occurrence_count"]) + 10
+        with self.assertRaises(GovernanceBlock):
+            from motor_learning.artifacts import assert_confidence_inputs_canonical
+            assert_confidence_inputs_canonical(bad3, candidate=obs["entity"], shadow=obs["shadow_report"])
+        bad4 = dict(obs["confidence_inputs"])
+        bad4["outcomes_seen"] = ["failure"]
+        with self.assertRaises(GovernanceBlock):
+            from motor_learning.artifacts import assert_confidence_inputs_canonical
+            assert_confidence_inputs_canonical(bad4, candidate=obs["entity"], shadow=obs["shadow_report"])
+        # canonical pass
+        from motor_learning.artifacts import assert_confidence_inputs_canonical
+        assert_confidence_inputs_canonical(
+            obs["confidence_inputs"], candidate=obs["entity"], shadow=obs["shadow_report"]
+        )
+        shutil.rmtree(td)
+
+    def test_same_evidence_renamed_ids_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        events = json.loads((FIX / "01_repeated_success_ratify" / "events.json").read_text())
+        shadow = json.loads((FIX / "01_repeated_success_ratify" / "shadow_events.json").read_text())
+        # Clone mining evidence refs into renamed shadow events
+        renamed = []
+        for i, ev in enumerate(shadow):
+            e = dict(ev)
+            e["event_id"] = f"renamed-{i}"
+            e["evidence_refs"] = list(events[i % len(events)].get("evidence_refs") or events[i % len(events)].get("evidence_ref") or [])
+            if not e["evidence_refs"]:
+                # copy raw if present
+                src = events[i % len(events)]
+                if src.get("raw_evidence_ref"):
+                    e["raw_evidence_ref"] = src["raw_evidence_ref"]
+            renamed.append(e)
+        store = PriorStore(td / "e", create=True)
+        # observe with overlapping evidence should block
+        obs = observe_phase(events=events, shadow_events=renamed, store=store,
+                            out_dir=td / "out", ledger_path=td / "out" / "l.json")
+        self.assertTrue(obs.get("blocked_reason"))
+        shutil.rmtree(td)
+
+
+class TestGap4TerminalReceiptECQR(unittest.TestCase):
+    def test_rejected_mismatches_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        # Minimal REJECTED path via fixture 06 then tamper receipt vs ECQR at commit
+        s = run_from_fixture_dir(FIX / "06_rejected_candidate", out_dir=td / "out", store_dir=td / "store", dry_run=True)
+        self.assertEqual(s.get("ecqr_decision"), "REJECTED")
+        # Direct commit with mismatched evidence
+        from motor_learning.ecqr import ECQR_DECISION_SCHEMA, validate_ecqr_decision
+        ed = {
+            "schema": ECQR_DECISION_SCHEMA, "kind": "ECQR_DECISION",
+            "decision": "REJECTED", "candidate_id": "c-rej", "prior_id": "p-rej",
+            "reviewer": "test_reviewer:x", "rationale": "ecqr-rationale",
+            "evidence_reviewed": ["ecqr-only"], "shadow_result_ref": "shadow:x",
+            "confidence_before": 0.9, "confidence_after": 0.1,
+            "affected_loops": ["motor_learning_organ_v1"],
+            "applicable_runways": ["Software Repair"], "repositories": [],
+            "effective_at": "2026-07-10T12:00:00Z", "policy_versions": {"organ": "X"},
+        }
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        # evidence mismatch
+        r = build_learning_receipt(
+            decision="REJECTED", prior_id="p-rej", candidate_id="c-rej",
+            reviewer=ed["reviewer"], rationale=ed["rationale"],
+            evidence_links=["receipt-only"], confidence_before=0.9, confidence_after=0.1,
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=[], origin_event="ecqr-only", decision_timestamp=ed["effective_at"],
+            ecqr_decision_hash=vecqr.decision_hash,
+        )
+        hist = [
+            {"from_state": "OBSERVED", "to_state": "PROPOSED", "actor": "a", "timestamp": "2026-07-10T10:00:00Z",
+             "reason": "r", "evidence": [], "learning_receipt_id": None},
+            {"from_state": "PROPOSED", "to_state": "REJECTED", "actor": ed["reviewer"],
+             "timestamp": ed["effective_at"], "reason": ed["rationale"], "evidence": ed["evidence_reviewed"],
+             "learning_receipt_id": r["receipt_id"]},
+        ]
+        prior = {
+            "prior_id": "p-rej", "status": "rejected", "state": "REJECTED",
+            "action_attempted": "x", "recommended_action": "y", "scope": {"loop_id": "motor_learning_organ_v1"},
+            "candidate_id": "c-rej", "learning_receipt_id": r["receipt_id"],
+            "transition_history": hist,
+        }
+        store = PriorStore(td / "s2", create=True, store_kind="w1_reference", allow_persist=True)
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(prior=prior, learning_receipt=r, ecqr_decision=vecqr, expected_version=1)
+        # confidence mismatch
+        r2 = build_learning_receipt(
+            decision="REJECTED", prior_id="p-rej", candidate_id="c-rej",
+            reviewer=ed["reviewer"], rationale=ed["rationale"],
+            evidence_links=ed["evidence_reviewed"], confidence_before=0.2, confidence_after=0.2,
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=[], origin_event="ecqr-only", decision_timestamp=ed["effective_at"],
+            ecqr_decision_hash=vecqr.decision_hash,
+        )
+        hist2 = list(hist)
+        hist2[-1] = dict(hist2[-1], learning_receipt_id=r2["receipt_id"])
+        prior2 = dict(prior, learning_receipt_id=r2["receipt_id"], transition_history=hist2)
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(prior=prior2, learning_receipt=r2, ecqr_decision=vecqr, expected_version=1)
+        # rationale mismatch
+        r3 = build_learning_receipt(
+            decision="REJECTED", prior_id="p-rej", candidate_id="c-rej",
+            reviewer=ed["reviewer"], rationale="different-rationale",
+            evidence_links=ed["evidence_reviewed"], confidence_before=0.9, confidence_after=0.1,
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=[], origin_event="ecqr-only", decision_timestamp=ed["effective_at"],
+            ecqr_decision_hash=vecqr.decision_hash,
+        )
+        hist3 = list(hist)
+        hist3[-1] = dict(hist3[-1], learning_receipt_id=r3["receipt_id"], reason="different-rationale")
+        prior3 = dict(prior, learning_receipt_id=r3["receipt_id"], transition_history=hist3)
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(prior=prior3, learning_receipt=r3, ecqr_decision=vecqr, expected_version=1)
+        shutil.rmtree(td)
+
+    def test_rollback_evidence_mismatch_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = TestGap2RollbackMetadata()._active_store(td)
+        ed = TestGap2RollbackMetadata()._rb_bundle(stored, compiled)
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"],
+            evidence_links=["receipt-only"],  # mismatch
+            confidence_before=ed["confidence_before"], confidence_after=ed["confidence_after"],
+            affected_loops=ed["affected_loops"], applicable_runways=ed["applicable_runways"],
+            repositories=ed["repositories"], origin_event="rollback-evidence",
+            decision_timestamp=ed["effective_at"], rollback_target=stored["prior_id"],
+            snapshot_id=stored["prior_id"], ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash=stored["content_hash"],
+            rollback_target_version=int(stored["version"]),
+            prior_ratification_receipt_id=stored["learning_receipt_id"],
+        )
+        entity = {"state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+                  "candidate_id": stored["candidate_id"],
+                  "transition_history": list(stored["transition_history"])}
+        ent = transition(entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+                         evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"])
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"], "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"], "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        })
+        with self.assertRaises(MotorLearningError):
+            store.commit_terminal_bundle(
+                prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+                allow_duplicate=True, expected_version=int(stored["version"]),
+            )
         shutil.rmtree(td)
 
 

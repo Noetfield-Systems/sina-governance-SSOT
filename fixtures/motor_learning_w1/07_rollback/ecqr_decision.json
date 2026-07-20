@@ -1,30 +1,33 @@
 {
-  "decision": "ROLLED_BACK",
-  "candidate_id": "cand-rollback-fixture",
-  "prior_id": "prior-to-rollback",
-  "reviewer": "test_reviewer:rollback",
-  "rationale": "Rollback after regression evidence",
-  "evidence_reviewed": [
-    "evt-001",
-    "rollback-evidence"
-  ],
-  "shadow_result_ref": "shadow:rollback-fixture",
-  "confidence_before": 0.8,
-  "confidence_after": 0.4,
   "affected_loops": [
     "motor_learning_organ_v1"
   ],
   "applicable_runways": [
     "Software Repair"
   ],
+  "candidate_id": "cand-rollback-fixture",
+  "confidence_after": 0.4,
+  "confidence_before": 0.8,
+  "decision": "ROLLED_BACK",
+  "effective_at": "2026-07-11T12:00:00Z",
+  "evidence_reviewed": [
+    "evt-001",
+    "rollback-evidence"
+  ],
+  "expires_at": null,
+  "policy_versions": {
+    "organ": "NF-MOTOR-LEARNING-ORGAN-V1"
+  },
+  "prior_id": "prior-to-rollback",
+  "prior_ratification_receipt_id": "lr-fixture-ratify-prior-to-rollback",
+  "rationale": "Rollback after regression evidence",
   "repositories": [
     "sina-governance-SSOT"
   ],
-  "effective_at": "2026-07-11T12:00:00Z",
-  "expires_at": null,
-  "supersedes": null,
+  "reviewer": "test_reviewer:rollback",
   "rollback_target": "prior-to-rollback",
-  "policy_versions": {
-    "organ": "NF-MOTOR-LEARNING-ORGAN-V1"
-  }
+  "rollback_target_prior_content_hash": "f7e7d03eac4e1c698a14e853ea9cd0e2666ca43f44c94fc26c777c3b0f86988b",
+  "rollback_target_version": 1,
+  "shadow_result_ref": "shadow:rollback-fixture",
+  "supersedes": null
 }

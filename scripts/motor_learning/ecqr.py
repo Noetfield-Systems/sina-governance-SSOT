@@ -30,6 +30,7 @@ REQUIRED_RATIFIED_BINDINGS = (
     "shadow_id",
     "shadow_hash",
     "shadow_evidence_manifest_hash",
+    "mining_evidence_manifest_hash",
     "confidence_hash",
     "algorithm_versions",
 )
@@ -71,6 +72,7 @@ def fixture_compile_ecqr(
     shadow_event_ids: list[str] | None = None,
     shadow_events: list[dict] | None = None,
     confidence_inputs: dict | None = None,
+    mining_events: list[dict] | None = None,
 ) -> dict[str, Any]:
     """Separate pre-review compiler. Emits a fully bound ECQR_DECISION."""
     if not isinstance(template, dict):
@@ -111,6 +113,14 @@ def fixture_compile_ecqr(
     else:
         out["evidence_reviewed"] = list(dict.fromkeys(existing + mine + sh_ids))
 
+    from .artifacts import mining_evidence_manifest
+    from .shadow import assert_shadow_independence
+    if mining_events is None:
+        raise GovernanceBlock("fixture_compile_ecqr requires mining_events")
+    assert_shadow_independence(candidate=cand, mining_events=mining_events, shadow_events=shadow_events)
+    _, mine_hash = mining_evidence_manifest(cand, mining_events)
+    out["mining_evidence_manifest_hash"] = mine_hash
+
     out["algorithm_versions"] = {
         "pipeline": ALGORITHM_VERSION,
         "confidence": CONFIDENCE_VERSION,
@@ -128,6 +138,7 @@ def validate_ecqr_decision(
     candidate: dict | None = None,
     shadow_events: list[dict] | None = None,
     confidence_inputs: dict | None = None,
+    mining_events: list[dict] | None = None,
     require_bound_artifacts: bool = True,
 ) -> ValidatedECQR:
     """
@@ -192,10 +203,22 @@ def validate_ecqr_decision(
         if confidence_inputs is None:
             raise GovernanceBlock("RATIFIED requires canonical confidence_inputs for derivation proof")
 
+        from .artifacts import mining_evidence_manifest, assert_confidence_inputs_canonical
+        from .shadow import assert_shadow_independence
+
+        if mining_events is None:
+            raise GovernanceBlock("RATIFIED requires concrete mining_events for evidence binding")
+
         cand = unwrap_candidate(candidate)
+        assert_shadow_independence(
+            candidate=cand, mining_events=mining_events, shadow_events=shadow_events,
+        )
         sh = unwrap_shadow(shadow, candidate=cand, shadow_events=shadow_events, require_derivation=True)
+        cin = assert_confidence_inputs_canonical(
+            confidence_inputs, candidate=cand, shadow=sh,
+        )
         conf = unwrap_confidence(
-            confidence, shadow=sh, confidence_inputs=confidence_inputs, require_derivation=True,
+            confidence, shadow=sh, confidence_inputs=cin, require_derivation=True,
         )
 
         if decision["candidate_id"] != cand.get("candidate_id"):
@@ -226,19 +249,36 @@ def validate_ecqr_decision(
         if not sh.get("ratifiable"):
             raise GovernanceBlock("RATIFIED blocked: shadow not ratifiable")
 
-        reviewed = set(decision.get("evidence_reviewed") or [])
+        mine_manifest, mine_hash = mining_evidence_manifest(cand, mining_events)
+        if decision.get("mining_evidence_manifest_hash") != mine_hash:
+            raise GovernanceBlock(
+                "RATIFIED ECQR missing or mismatched mining_evidence_manifest_hash"
+            )
+
+        reviewed = list(decision.get("evidence_reviewed") or [])
+        reviewed_set = set(reviewed)
+        mine_need = set(cand.get("source_event_ids") or [])
+        shadow_need = set(sh.get("shadow_event_ids") or [])
+        # Complete manifest coverage OR explicit manifest hashes reviewed
+        hash_ok = (
+            mine_hash in reviewed_set and sh["evidence_manifest_hash"] in reviewed_set
+        )
+        if not hash_ok:
+            if not mine_need.issubset(reviewed_set):
+                raise GovernanceBlock(
+                    "ECQR evidence_reviewed missing complete mining source_event_id coverage"
+                )
+            if not shadow_need.issubset(reviewed_set):
+                raise GovernanceBlock(
+                    "ECQR evidence_reviewed missing complete shadow_event_id coverage"
+                )
+        if not reviewed:
+            raise GovernanceBlock("RATIFIED requires nonempty evidence_reviewed")
         allowed = set(conf.get("evidence_ids") or []) | set(sh.get("evidence_refs") or [])
         allowed |= set(sh.get("shadow_event_ids") or [])
         allowed |= set(cand.get("evidence_refs") or []) | set(cand.get("source_event_ids") or [])
-        mine_need = set(cand.get("source_event_ids") or [])
-        shadow_need = set(sh.get("shadow_event_ids") or [])
-        if mine_need and not (mine_need & reviewed):
-            raise GovernanceBlock("ECQR evidence_reviewed missing mining manifest coverage")
-        if shadow_need and not (shadow_need & reviewed):
-            raise GovernanceBlock("ECQR evidence_reviewed missing shadow manifest coverage")
-        if not reviewed:
-            raise GovernanceBlock("RATIFIED requires nonempty evidence_reviewed")
-        extra = reviewed - allowed
+        allowed |= {mine_hash, sh["evidence_manifest_hash"]}
+        extra = reviewed_set - allowed
         if extra:
             raise GovernanceBlock(f"ECQR evidence_reviewed contains unbound IDs: {sorted(extra)}")
 
@@ -267,6 +307,13 @@ def validate_ecqr_decision(
             raise GovernanceBlock("ROLLED_BACK requires evidence_reviewed")
         if source.get("decision") != "ROLLED_BACK":
             raise GovernanceBlock("rollback ECQR must already have decision=ROLLED_BACK")
+        for k in (
+            "rollback_target_prior_content_hash",
+            "rollback_target_version",
+            "prior_ratification_receipt_id",
+        ):
+            if k not in decision or decision.get(k) in (None, ""):
+                raise GovernanceBlock(f"ROLLED_BACK ECQR missing required binding: {k}")
 
     # Append decision_hash only
     decision_hash = content_hash({

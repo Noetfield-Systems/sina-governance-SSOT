@@ -14,13 +14,13 @@ from .similarity import rank as rank_similarity
 from .confidence import compute_confidence
 from .shadow import evaluate_shadow, assert_shadow_independence, require_ratifiable_shadow
 from .ecqr import validate_ecqr_decision, fixture_compile_ecqr, is_ecqr_template
-from .lifecycle import transition, PROPOSED, SHADOW, RATIFIED, REJECTED, ROLLED_BACK
+from .lifecycle import transition, OBSERVED, PROPOSED, SHADOW, RATIFIED, REJECTED, ROLLED_BACK
 from .receipt import build_learning_receipt, validate_and_mint_receipt, write_receipt
 from .event_registry import EventRegistry
 from .errors import GovernanceBlock, MotorLearningError, SchemaError
 from .hashutil import content_hash
 from .atomic import write_failed_attempt
-from .artifacts import validate_candidate_artifact, validate_shadow_report, validate_confidence_artifact, candidate_content_hash
+from .artifacts import validate_candidate_artifact, validate_shadow_report, validate_confidence_artifact, candidate_content_hash, mining_evidence_manifest
 from .paths import assert_paths_disjoint
 from . import ALGORITHM_VERSION, CONFIDENCE_VERSION
 
@@ -94,12 +94,23 @@ def observe_phase(
         return result
 
     entity = dict(primary)
+    # Anchor complete lifecycle: OBSERVED → PROPOSED → SHADOW
+    if not entity.get("transition_history"):
+        entity["state"] = OBSERVED
+        entity = transition(
+            entity, PROPOSED,
+            actor="motor_learning_w1_orchestrator",
+            reason="meets_mining_threshold",
+            evidence=entity.get("evidence_refs") or [],
+            timestamp="2026-07-10T10:00:00Z",
+        )
     if entity["state"] == PROPOSED:
         entity = transition(
             entity, SHADOW,
             actor="motor_learning_w1_orchestrator",
             reason="enter_shadow_evaluation",
             evidence=entity["evidence_refs"],
+            timestamp="2026-07-10T11:00:00Z",
         )
     result["entity"] = entity
 
@@ -182,6 +193,7 @@ def observe_phase(
         "shadow_report": shadow_report,
         "confidence": confidence,
         "shadow_events_normalized": sh_accepted,
+        "mining_events_normalized": accepted,
         "confidence_inputs": confidence_inputs,
         "similarity_rankings": similarity_rankings,
         "near_duplicate": near_duplicate,
@@ -289,6 +301,7 @@ def run_pipeline(
                     candidate=entity,
                     shadow_events=obs.get("shadow_events_normalized"),
                     confidence_inputs=obs.get("confidence_inputs"),
+                    mining_events=obs.get("mining_events_normalized"),
                 )
                 # Prove input unchanged
                 if ecqr_original_bytes is not None:
@@ -308,6 +321,7 @@ def run_pipeline(
             prior_id = ed.get("prior_id") or f"prior-{entity['candidate_id']}"
             try:
                 cand_hash = candidate_content_hash(entity)
+                _, mine_hash = mining_evidence_manifest(entity, obs.get("mining_events_normalized") or [])
                 receipt = build_learning_receipt(
                     decision=decision,
                     prior_id=prior_id,
@@ -333,6 +347,7 @@ def run_pipeline(
                     similarity_score=(similarity_rankings[0]["total_score"] if similarity_rankings else None),
                     ecqr_decision_hash=ecqr_validated.decision_hash,
                     candidate_hash=cand_hash,
+                    mining_evidence_manifest_hash=mine_hash,
                 )
                 validated_receipt = validate_and_mint_receipt(receipt)
                 target_state = RATIFIED if decision == "RATIFIED" else REJECTED
@@ -399,6 +414,7 @@ def run_pipeline(
                         confidence=confidence,
                         shadow_events=obs.get("shadow_events_normalized"),
                         confidence_inputs=obs.get("confidence_inputs"),
+                        mining_events=obs.get("mining_events_normalized"),
                         allow_duplicate=False,
                         expected_version=1,
                         inject_failure_after=inject_failure_after,
@@ -578,13 +594,26 @@ def rollback_prior(
         target_version = int(prior.get("version") or 1)
         target_content_hash = prior.get("content_hash")
         if not target_content_hash:
-            # compute if missing (fixture seeds)
             from .hashutil import content_hash as _ch
             tmp = {k: prior[k] for k in sorted(prior) if k != "content_hash"}
             target_content_hash = _ch(tmp)
         prior_ratification_receipt = prior.get("learning_receipt_id")
         if not prior_ratification_receipt:
             raise GovernanceBlock("rollback target prior missing prior ratification receipt (learning_receipt_id)")
+
+        # Immutable ECQR must already bind exact stored prior metadata
+        for k, want in (
+            ("rollback_target_prior_content_hash", target_content_hash),
+            ("rollback_target_version", target_version),
+            ("prior_ratification_receipt_id", prior_ratification_receipt),
+        ):
+            if k not in ecqr_decision or ecqr_decision.get(k) in (None, ""):
+                raise GovernanceBlock(f"rollback ECQR missing required binding: {k}")
+            if k == "rollback_target_version":
+                if int(ecqr_decision.get(k)) != int(want):
+                    raise GovernanceBlock(f"rollback ECQR {k} mismatches existing prior")
+            elif ecqr_decision.get(k) != want:
+                raise GovernanceBlock(f"rollback ECQR {k} mismatches existing prior")
 
         ecqr_validated = validate_ecqr_decision(ecqr_decision, require_bound_artifacts=False)
         if json.dumps(ecqr_decision, sort_keys=True).encode() != original_bytes:
@@ -611,10 +640,12 @@ def rollback_prior(
             rollback_target=ed["rollback_target"],
             snapshot_id=prior_id,
             ecqr_decision_hash=ecqr_validated.decision_hash,
-            # rollback receipts: bind ECQR hash; shadow/confidence optional
             shadow_id=ed.get("shadow_id"),
             shadow_hash=ed.get("shadow_hash"),
             confidence_hash=ed.get("confidence_hash"),
+            rollback_target_prior_content_hash=ed["rollback_target_prior_content_hash"],
+            rollback_target_version=int(ed["rollback_target_version"]),
+            prior_ratification_receipt_id=ed["prior_ratification_receipt_id"],
         )
         # For rolled_back, build_learning_receipt may not require shadow — check receipt.py
         validated_receipt = validate_and_mint_receipt(receipt)
@@ -754,6 +785,17 @@ def run_from_fixture_dir(
         ecqr_path = fixture_dir / "ecqr_decision.json"
         ecqr = _load_json(ecqr_path) if ecqr_path.exists() else {}
         prior_id = ecqr.get("rollback_target") or ecqr.get("prior_id")
+        # Fixture harness binds immutable rollback metadata from the seeded prior
+        # (simulates reviewer lookup). Governed rollback_prior never fills these.
+        loaded = PriorStore(effective_store, create=False, store_kind="fixture").get(prior_id)
+        if not loaded:
+            raise GovernanceBlock(f"rollback fixture prior not found: {prior_id}")
+        ecqr = dict(ecqr)
+        ecqr["rollback_target"] = prior_id
+        ecqr["prior_id"] = prior_id
+        ecqr["rollback_target_prior_content_hash"] = loaded["content_hash"]
+        ecqr["rollback_target_version"] = int(loaded.get("version") or 1)
+        ecqr["prior_ratification_receipt_id"] = loaded["learning_receipt_id"]
         return rollback_prior(
             prior_id=prior_id,
             store_dir=effective_store,
@@ -800,6 +842,7 @@ def run_from_fixture_dir(
                 shadow_event_ids=list(obs["shadow_report"].get("shadow_event_ids") or []),
                 shadow_events=obs.get("shadow_events_normalized"),
                 confidence_inputs=obs.get("confidence_inputs"),
+                mining_events=obs.get("mining_events_normalized") or obs.get("accepted"),
             )
             _write_json(out_dir / "ecqr_decision.compiled.json", compiled)
             ecqr = compiled

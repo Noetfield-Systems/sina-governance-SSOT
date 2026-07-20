@@ -156,6 +156,11 @@ def main() -> int:
         "immutable_fully_bound_ecqr",
         "path_fail_before_write",
         "rollback_target_binding",
+        "complete_lifecycle_history",
+        "immutable_history_prefix",
+        "shadow_independence_at_persistence",
+        "confidence_input_binding",
+        "all_terminal_receipt_ecqr_binding",
     ):
         val = maturity.get(key)
         if val not in ("IMPLEMENTED", "PARTIAL"):

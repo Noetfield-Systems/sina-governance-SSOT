@@ -208,6 +208,7 @@ class PriorStore:
         confidence: dict | None = None,
         shadow_events: list | None = None,
         confidence_inputs: dict | None = None,
+        mining_events: list | None = None,
         allow_duplicate: bool = False,
         expected_version: int | None = None,
         inject_failure_after: str | None = None,
@@ -249,15 +250,99 @@ class PriorStore:
 
             stage_store = PriorStore(staging, create=True, store_kind="w1_reference", allow_persist=True)
 
-            # Validate receipt + ECQR + exact cross-binds + lifecycle replay BEFORE writes
+            # Load existing BEFORE history/cross-bind (rollback + prefix require it)
+            existing = stage_store.get(pid)
+
             from .receipt import validate_and_mint_receipt
             from .ecqr import validate_ecqr_decision
-            from .lifecycle import validate_transition_history
-
-            validate_transition_history(
-                body.get("transition_history"),
-                entity_status=status,
+            from .lifecycle import validate_transition_history, normalize_state
+            from .shadow import assert_shadow_independence
+            from .artifacts import (
+                assert_confidence_inputs_canonical,
+                mining_evidence_manifest,
             )
+
+            if existing and existing.get("status") == "active" and status == "active":
+                raise GovernanceBlock(
+                    "active prior overwrite with a new ratification history is forbidden; "
+                    "use rollback/supersede paths"
+                )
+
+            if existing:
+                if status in TERMINAL_STATUS and expected_version is None:
+                    raise GovernanceBlock(
+                        "existing terminal update requires expected_version (CAS)"
+                    )
+                cur_ver = int(existing.get("version") or 1)
+                if expected_version is not None and expected_version != cur_ver:
+                    raise GovernanceBlock(
+                        f"CAS failure: expected_version={expected_version} current={cur_ver}"
+                    )
+                # Rollback target metadata must match stored prior exactly
+                if status == "rolled_back":
+                    if expected_version != cur_ver:
+                        raise GovernanceBlock(
+                            f"rollback expected_version must equal existing.version={cur_ver}"
+                        )
+                    want_hash = existing.get("content_hash")
+                    want_receipt = existing.get("learning_receipt_id")
+                    if body.get("rollback_target_prior_content_hash") != want_hash:
+                        raise GovernanceBlock(
+                            "rollback_target_prior_content_hash mismatches existing.content_hash"
+                        )
+                    if int(body.get("rollback_target_version")) != cur_ver:
+                        raise GovernanceBlock(
+                            "rollback_target_version mismatches existing.version"
+                        )
+                    if body.get("prior_ratification_receipt_id") != want_receipt:
+                        raise GovernanceBlock(
+                            "prior_ratification_receipt_id mismatches existing.learning_receipt_id"
+                        )
+                validate_transition_history(
+                    body.get("transition_history"),
+                    entity_status=status,
+                    require_observed_origin=False,
+                    existing_history=existing.get("transition_history"),
+                    existing_state=existing.get("state") or existing.get("status"),
+                    candidate_id=body.get("candidate_id"),
+                    prior_id=pid,
+                )
+            else:
+                if expected_version not in (None, 0, 1):
+                    raise GovernanceBlock(f"CAS failure: new prior expected_version={expected_version}")
+                # New terminal prior must prove complete OBSERVED origin
+                validate_transition_history(
+                    body.get("transition_history"),
+                    entity_status=status,
+                    require_observed_origin=True,
+                    candidate_id=body.get("candidate_id"),
+                    prior_id=pid,
+                )
+
+            # Active: re-validate mining/shadow independence + canonical confidence inputs
+            if status == "active":
+                if candidate is None or shadow is None or confidence is None:
+                    raise GovernanceBlock("active prior requires candidate+shadow+confidence")
+                if mining_events is None or not isinstance(mining_events, list) or not mining_events:
+                    raise GovernanceBlock(
+                        "active terminal commit requires concrete normalized mining_events"
+                    )
+                if shadow_events is None or not isinstance(shadow_events, list) or not shadow_events:
+                    raise GovernanceBlock(
+                        "active terminal commit requires concrete normalized shadow_events"
+                    )
+                cand0 = unwrap_candidate(candidate)
+                assert_shadow_independence(
+                    candidate=cand0, mining_events=mining_events, shadow_events=shadow_events,
+                )
+                # Derive/check confidence inputs against candidate+shadow (not unconstrained)
+                # Shadow artifact must already be present; equality checked after unwrap below
+                if confidence_inputs is None:
+                    raise GovernanceBlock("active terminal commit requires confidence_inputs")
+                # provisional canonical check against submitted shadow fields before full unwrap
+                confidence_inputs = assert_confidence_inputs_canonical(
+                    confidence_inputs, candidate=cand0, shadow=shadow if isinstance(shadow, dict) else shadow.as_dict(),
+                )
 
             if isinstance(learning_receipt, ValidatedReceipt):
                 receipt_body = learning_receipt.as_dict()
@@ -269,6 +354,26 @@ class PriorStore:
                 ecqr_body = ecqr_decision.as_dict()
             else:
                 ecqr_body = dict(ecqr_decision)
+
+            # For rollback: ECQR must already carry exact target bindings matching body/existing
+            if status == "rolled_back":
+                for k in (
+                    "rollback_target_prior_content_hash",
+                    "rollback_target_version",
+                    "prior_ratification_receipt_id",
+                ):
+                    if k not in ecqr_body or ecqr_body.get(k) in (None, ""):
+                        raise GovernanceBlock(f"ROLLED_BACK ECQR missing required binding: {k}")
+                    if body.get(k) != ecqr_body.get(k):
+                        raise GovernanceBlock(f"rollback prior.{k} mismatches ECQR.{k}")
+                if existing:
+                    if ecqr_body.get("rollback_target_prior_content_hash") != existing.get("content_hash"):
+                        raise GovernanceBlock("ECQR rollback_target_prior_content_hash mismatches existing")
+                    if int(ecqr_body.get("rollback_target_version")) != int(existing.get("version") or 1):
+                        raise GovernanceBlock("ECQR rollback_target_version mismatches existing")
+                    if ecqr_body.get("prior_ratification_receipt_id") != existing.get("learning_receipt_id"):
+                        raise GovernanceBlock("ECQR prior_ratification_receipt_id mismatches existing")
+
             vecqr = validate_ecqr_decision(
                 ecqr_body,
                 confidence=confidence,
@@ -276,6 +381,7 @@ class PriorStore:
                 candidate=candidate,
                 shadow_events=shadow_events,
                 confidence_inputs=confidence_inputs,
+                mining_events=mining_events,
                 require_bound_artifacts=(status == "active"),
             )
 
@@ -288,25 +394,12 @@ class PriorStore:
                 confidence=confidence,
                 shadow_events=shadow_events,
                 confidence_inputs=confidence_inputs,
+                mining_events=mining_events,
+                existing=existing,
             )
 
-            existing = stage_store.get(pid)
-            if existing and not allow_duplicate:
+            if existing and not allow_duplicate and status != "rolled_back":
                 raise SchemaError(f"duplicate prior_id: {pid}")
-            if existing:
-                # Existing terminal updates must require expected_version
-                if status in TERMINAL_STATUS and expected_version is None:
-                    raise GovernanceBlock(
-                        "existing terminal update requires expected_version (CAS)"
-                    )
-                cur_ver = int(existing.get("version") or 1)
-                if expected_version is not None and expected_version != cur_ver:
-                    raise GovernanceBlock(
-                        f"CAS failure: expected_version={expected_version} current={cur_ver}"
-                    )
-            else:
-                if expected_version not in (None, 0, 1):
-                    raise GovernanceBlock(f"CAS failure: new prior expected_version={expected_version}")
 
             if inject_failure_after == "pre_write_checks":
                 raise MotorLearningError("injected failure after pre_write_checks")
@@ -412,8 +505,10 @@ class PriorStore:
         confidence: dict | None,
         shadow_events: list | None = None,
         confidence_inputs: dict | None = None,
+        mining_events: list | None = None,
+        existing: dict | None = None,
     ) -> None:
-        """Presence-only checks forbidden — exact hash equality required."""
+        """Exact receipt↔ECQR equality for every terminal decision; artifact binds for active."""
         status = body.get("status")
         ed = ecqr.as_dict()
         hist = body.get("transition_history") or []
@@ -425,16 +520,6 @@ class PriorStore:
             raise GovernanceBlock(f"transition_history last state {last.get('to_state')} != {expected_state}")
         if last.get("learning_receipt_id") != receipt.get("receipt_id"):
             raise GovernanceBlock("transition learning_receipt_id mismatches receipt")
-        if body.get("prior_id") != receipt.get("prior_id"):
-            raise GovernanceBlock("prior_id mismatches receipt.prior_id")
-        if receipt.get("candidate_id") and body.get("candidate_id"):
-            if receipt["candidate_id"] != body["candidate_id"]:
-                raise GovernanceBlock("candidate_id mismatches receipt")
-        if ed.get("candidate_id") and body.get("candidate_id"):
-            if ed["candidate_id"] != body["candidate_id"]:
-                raise GovernanceBlock("candidate_id mismatches ecqr")
-        if ed.get("reviewer") and receipt.get("reviewer") and ed["reviewer"] != receipt["reviewer"]:
-            raise GovernanceBlock("reviewer mismatches between ECQR and receipt")
 
         # Decision mapping
         dec_map = {"active": "accepted", "rejected": "rejected", "rolled_back": "rolled_back"}
@@ -443,7 +528,34 @@ class PriorStore:
         if ed.get("decision") != expected_state:
             raise GovernanceBlock("ECQR decision mismatches prior status")
 
-        # ECQR decision hash must match exactly
+        # ALL terminal decisions: receipt and ECQR may never disagree
+        if body.get("prior_id") != receipt.get("prior_id"):
+            raise GovernanceBlock("prior_id mismatches receipt.prior_id")
+        if ed.get("prior_id") not in (None, body.get("prior_id")) and ed.get("prior_id") != body.get("prior_id"):
+            raise GovernanceBlock("ECQR prior_id mismatches prior")
+        if receipt.get("candidate_id") != ed.get("candidate_id"):
+            raise GovernanceBlock("receipt.candidate_id mismatches ECQR.candidate_id")
+        if body.get("candidate_id") and receipt.get("candidate_id") != body.get("candidate_id"):
+            raise GovernanceBlock("candidate_id mismatches receipt")
+        if receipt.get("reviewer") != ed.get("reviewer"):
+            raise GovernanceBlock("receipt.reviewer mismatches ECQR.reviewer")
+        if receipt.get("rationale") != ed.get("rationale"):
+            raise GovernanceBlock("receipt.rationale mismatches ECQR.rationale")
+        if list(receipt.get("evidence_links") or []) != list(ed.get("evidence_reviewed") or []):
+            raise GovernanceBlock("receipt evidence_links mismatch ECQR evidence_reviewed")
+        if float(receipt.get("confidence_before")) != float(ed.get("confidence_before")):
+            raise GovernanceBlock("receipt.confidence_before mismatches ECQR")
+        if float(receipt.get("confidence_after")) != float(ed.get("confidence_after")):
+            raise GovernanceBlock("receipt.confidence_after mismatches ECQR")
+        if list(receipt.get("affected_loops") or []) != list(ed.get("affected_loops") or []):
+            raise GovernanceBlock("receipt.affected_loops mismatches ECQR")
+        if list(receipt.get("applicable_runways") or []) != list(ed.get("applicable_runways") or []):
+            raise GovernanceBlock("receipt.applicable_runways mismatches ECQR")
+        if list(receipt.get("repositories") or []) != list(ed.get("repositories") or []):
+            raise GovernanceBlock("receipt.repositories mismatches ECQR")
+        if receipt.get("decision_timestamp") != ed.get("effective_at"):
+            raise GovernanceBlock("receipt.decision_timestamp mismatches ECQR.effective_at")
+
         if not receipt.get("ecqr_decision_hash"):
             raise GovernanceBlock("receipt missing ecqr_decision_hash")
         if receipt["ecqr_decision_hash"] != ecqr.decision_hash:
@@ -455,21 +567,33 @@ class PriorStore:
         if status == "active":
             if candidate is None or shadow is None or confidence is None:
                 raise GovernanceBlock("active prior requires candidate+shadow+confidence")
-            if shadow_events is None or confidence_inputs is None:
-                raise GovernanceBlock("active prior requires shadow_events+confidence_inputs for derivation proof")
+            if shadow_events is None or confidence_inputs is None or mining_events is None:
+                raise GovernanceBlock(
+                    "active prior requires mining_events+shadow_events+confidence_inputs"
+                )
+            from .artifacts import mining_evidence_manifest, assert_confidence_inputs_canonical
+            from .shadow import assert_shadow_independence
             cand = unwrap_candidate(candidate)
+            assert_shadow_independence(
+                candidate=cand, mining_events=mining_events, shadow_events=shadow_events,
+            )
             sh = unwrap_shadow(
                 shadow, candidate=cand, shadow_events=shadow_events, require_derivation=True,
             )
-            conf = unwrap_confidence(
-                confidence, shadow=sh, confidence_inputs=confidence_inputs, require_derivation=True,
+            cin = assert_confidence_inputs_canonical(
+                confidence_inputs, candidate=cand, shadow=sh,
             )
+            conf = unwrap_confidence(
+                confidence, shadow=sh, confidence_inputs=cin, require_derivation=True,
+            )
+            mine_manifest, mine_hash = mining_evidence_manifest(cand, mining_events)
 
             checks = [
                 ("candidate_hash", cand["content_hash"]),
                 ("shadow_hash", sh["content_hash"]),
                 ("shadow_evidence_manifest_hash", sh["evidence_manifest_hash"]),
                 ("confidence_hash", conf["content_hash"]),
+                ("mining_evidence_manifest_hash", mine_hash),
             ]
             for field, expected in checks:
                 got = receipt.get(field)
@@ -477,14 +601,12 @@ class PriorStore:
                     raise GovernanceBlock(
                         f"receipt.{field} mismatch: receipt={got!r} artifact={expected!r}"
                     )
+                if ed.get(field) not in (None, expected) and ed.get(field) != expected:
+                    raise GovernanceBlock(f"ECQR.{field} mismatches artifact")
+            if ed.get("mining_evidence_manifest_hash") != mine_hash:
+                raise GovernanceBlock("ECQR mining_evidence_manifest_hash mismatches mining manifest")
             if receipt.get("shadow_id") != sh.get("shadow_id"):
                 raise GovernanceBlock("receipt.shadow_id mismatches shadow")
-            if receipt.get("candidate_id") != cand.get("candidate_id"):
-                raise GovernanceBlock("receipt.candidate_id mismatches candidate")
-            # Evidence reviewed must match ECQR
-            if set(receipt.get("evidence_links") or []) != set(ed.get("evidence_reviewed") or []):
-                raise GovernanceBlock("receipt evidence_links mismatch ECQR evidence_reviewed")
-            # ECQR bindings must already match (no material fill-in)
             if ed.get("candidate_hash") != cand["content_hash"]:
                 raise GovernanceBlock("ECQR candidate_hash mismatches candidate")
             if ed.get("shadow_id") != sh["shadow_id"]:
@@ -492,27 +614,32 @@ class PriorStore:
             if ed.get("confidence_hash") != conf["content_hash"]:
                 raise GovernanceBlock("ECQR confidence_hash mismatches confidence")
 
-        elif status in ("rejected", "rolled_back"):
-            if status == "rolled_back":
-                rb = ed.get("rollback_target")
-                if not rb:
-                    raise GovernanceBlock("rollback ECQR missing rollback_target")
-                if receipt.get("rollback_target") != rb:
-                    raise GovernanceBlock("rollback_target mismatch receipt/ECQR")
-                if body.get("prior_id") != rb:
-                    raise GovernanceBlock("rollback_target mismatch prior_id/ECQR")
-                if body.get("rollback_target") not in (None, rb) and body.get("rollback_target") != rb:
-                    raise GovernanceBlock("prior.rollback_target mismatches ECQR")
-                # Exact binding: target content hash, version, ratification receipt
-                if not body.get("rollback_target_prior_content_hash"):
-                    raise GovernanceBlock("rollback missing rollback_target_prior_content_hash")
-                if body.get("rollback_target_version") is None:
-                    raise GovernanceBlock("rollback missing rollback_target_version")
-                if not body.get("prior_ratification_receipt_id"):
-                    raise GovernanceBlock("rollback missing prior_ratification_receipt_id")
-                last = hist[-1]
-                if last.get("to_state") != "ROLLED_BACK":
-                    raise GovernanceBlock("transition history must end at ROLLED_BACK")
+        elif status == "rolled_back":
+            rb = ed.get("rollback_target")
+            if not rb:
+                raise GovernanceBlock("rollback ECQR missing rollback_target")
+            if receipt.get("rollback_target") != rb:
+                raise GovernanceBlock("rollback_target mismatch receipt/ECQR")
+            if body.get("prior_id") != rb:
+                raise GovernanceBlock("rollback_target mismatch prior_id/ECQR")
+            for k in (
+                "rollback_target_prior_content_hash",
+                "rollback_target_version",
+                "prior_ratification_receipt_id",
+            ):
+                if body.get(k) != ed.get(k):
+                    raise GovernanceBlock(f"rollback {k} mismatch prior/ECQR")
+                if receipt.get(k) != ed.get(k):
+                    raise GovernanceBlock(f"rollback {k} mismatch receipt/ECQR")
+            if existing is not None:
+                if ed.get("rollback_target_prior_content_hash") != existing.get("content_hash"):
+                    raise GovernanceBlock("rollback hash binding mismatches existing prior")
+                if int(ed.get("rollback_target_version")) != int(existing.get("version") or 1):
+                    raise GovernanceBlock("rollback version binding mismatches existing prior")
+                if ed.get("prior_ratification_receipt_id") != existing.get("learning_receipt_id"):
+                    raise GovernanceBlock("rollback receipt binding mismatches existing prior")
+            if last.get("to_state") != "ROLLED_BACK":
+                raise GovernanceBlock("transition history must end at ROLLED_BACK")
 
     def _persist_nonterminal(
         self,

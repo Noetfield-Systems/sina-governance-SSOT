@@ -208,33 +208,114 @@ def transition(
     return out
 
 
+def _parse_hist_ts(value: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise GovernanceBlock("transition timestamp must be non-empty ISO8601 string")
+    v = value.strip().replace(" ", "T")
+    try:
+        if v.endswith("Z"):
+            dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+        else:
+            dt = datetime.fromisoformat(v)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+    except ValueError as exc:
+        raise GovernanceBlock(f"transition timestamp invalid ISO8601: {value!r}") from exc
+    return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def assert_history_prefix_preserved(
+    existing_history: list[dict] | None,
+    new_history: list[dict] | None,
+    *,
+    existing_state: str | None = None,
+) -> None:
+    """New history must preserve existing history as an immutable exact prefix + one legal step."""
+    old = list(existing_history or [])
+    new = list(new_history or [])
+    if not old:
+        raise GovernanceBlock("existing prior update requires nonempty stored transition_history")
+    if len(new) != len(old) + 1:
+        raise GovernanceBlock(
+            f"existing history update must append exactly one transition; "
+            f"stored_len={len(old)} new_len={len(new)}"
+        )
+    from .hashutil import canonical_json
+    if canonical_json(new[: len(old)]) != canonical_json(old):
+        # Distinguish truncate vs modify
+        if len(new) <= len(old) or canonical_json(new[: min(len(new), len(old))]) != canonical_json(old[: min(len(new), len(old))]):
+            raise GovernanceBlock("existing transition_history modified or truncated (immutable prefix required)")
+        raise GovernanceBlock("existing transition_history prefix mismatch (immutable prefix required)")
+    # Legal next transition from existing state
+    cur = normalize_state(existing_state or old[-1]["to_state"])
+    nxt_from = normalize_state(new[-1]["from_state"])
+    nxt_to = normalize_state(new[-1]["to_state"])
+    if nxt_from != cur:
+        raise GovernanceBlock(
+            f"update transition from_state={nxt_from} does not continue existing state={cur}"
+        )
+    if (cur, nxt_to) in FORBIDDEN or nxt_to not in ALLOWED.get(cur, set()):
+        raise GovernanceBlock(f"illegal next transition from existing state: {cur}→{nxt_to}")
+
+
 def validate_transition_history(
     history: list[dict] | None,
     *,
     final_state: str | None = None,
     entity_status: str | None = None,
+    require_observed_origin: bool = False,
+    existing_history: list[dict] | None = None,
+    existing_state: str | None = None,
+    candidate_id: str | None = None,
+    prior_id: str | None = None,
 ) -> None:
     """
     Replay every recorded transition through ALLOWED/FORBIDDEN.
-    Rejects illegal jumps (OBSERVED→RATIFIED, PROPOSED→RATIFIED), discontinuous
-    histories, and histories whose final state merely appears correct.
+    Rejects illegal jumps, discontinuous histories, incomplete origins,
+    and updates that do not preserve the stored history as an immutable prefix.
     """
     if not history:
         raise GovernanceBlock("terminal commit requires nonempty transition_history")
     if not isinstance(history, list):
         raise GovernanceBlock("transition_history must be a list")
 
-    # Seed state from first record's from_state
+    if existing_history is not None:
+        assert_history_prefix_preserved(
+            existing_history, history, existing_state=existing_state,
+        )
+    elif require_observed_origin:
+        first_from = normalize_state(history[0].get("from_state"))
+        if first_from != OBSERVED:
+            raise GovernanceBlock(
+                f"new terminal prior transition_history must begin at OBSERVED; "
+                f"got first from_state={first_from}"
+            )
+
     first = history[0]
     if "from_state" not in first or "to_state" not in first:
         raise GovernanceBlock("transition record missing from_state/to_state")
     state = normalize_state(first["from_state"])
+    prev_ts: str | None = None
 
     for i, rec in enumerate(history):
         if not isinstance(rec, dict):
             raise GovernanceBlock(f"transition_history[{i}] must be object")
-        if "from_state" not in rec or "to_state" not in rec:
-            raise GovernanceBlock(f"transition_history[{i}] missing from_state/to_state")
+        for req in ("from_state", "to_state", "actor", "timestamp", "reason", "evidence"):
+            if req not in rec:
+                raise GovernanceBlock(f"transition_history[{i}] missing {req}")
+        if not isinstance(rec["actor"], str) or not rec["actor"].strip():
+            raise GovernanceBlock(f"transition_history[{i}] actor must be non-empty string")
+        if not isinstance(rec["reason"], str) or not rec["reason"].strip():
+            raise GovernanceBlock(f"transition_history[{i}] reason must be non-empty string")
+        if not isinstance(rec["evidence"], list):
+            raise GovernanceBlock(f"transition_history[{i}] evidence must be a list")
+        ts = _parse_hist_ts(rec["timestamp"])
+        if prev_ts is not None and ts < prev_ts:
+            raise GovernanceBlock(
+                f"transition_history[{i}] timestamp not monotonic: {ts} < {prev_ts}"
+            )
+        prev_ts = ts
+
         from_s = normalize_state(rec["from_state"])
         to_s = normalize_state(rec["to_state"])
         if from_s != state:
@@ -252,6 +333,24 @@ def validate_transition_history(
                 f"illegal transition in history at index {i}: {from_s}→{to_s}; "
                 f"allowed={sorted(allowed)}"
             )
+        # Terminal steps require receipt id
+        if to_s in TERMINAL_RECEIPT_STATES:
+            rid = rec.get("learning_receipt_id")
+            if not rid or not isinstance(rid, str):
+                raise GovernanceBlock(
+                    f"transition_history[{i}] {from_s}→{to_s} requires learning_receipt_id"
+                )
+        # Bind ids when represented
+        if candidate_id is not None and rec.get("candidate_id") not in (None, candidate_id):
+            raise GovernanceBlock(
+                f"transition_history[{i}] candidate_id mismatch: "
+                f"{rec.get('candidate_id')!r} != {candidate_id!r}"
+            )
+        if prior_id is not None and rec.get("prior_id") not in (None, prior_id):
+            raise GovernanceBlock(
+                f"transition_history[{i}] prior_id mismatch: "
+                f"{rec.get('prior_id')!r} != {prior_id!r}"
+            )
         state = to_s
 
     if final_state is not None:
@@ -261,7 +360,6 @@ def validate_transition_history(
                 f"transition history ends at {state} but claimed final_state={want}"
             )
     if entity_status is not None:
-        # Map store status to lifecycle state
         status_to_state = {
             "active": RATIFIED,
             "rejected": REJECTED,

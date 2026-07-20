@@ -109,6 +109,10 @@ def build_learning_receipt(
     ecqr_decision_id: str | None = None,
     ecqr_decision_hash: str | None = None,
     candidate_hash: str | None = None,
+    mining_evidence_manifest_hash: str | None = None,
+    rollback_target_prior_content_hash: str | None = None,
+    rollback_target_version: int | None = None,
+    prior_ratification_receipt_id: str | None = None,
 ) -> dict[str, Any]:
     mapped = DECISION_MAP.get(decision)
     if not mapped:
@@ -136,6 +140,16 @@ def build_learning_receipt(
             raise SchemaError("ratification requires ecqr_decision_hash")
         if not candidate_hash:
             raise SchemaError("ratification requires candidate_hash")
+        if not mining_evidence_manifest_hash:
+            raise SchemaError("ratification requires mining_evidence_manifest_hash")
+
+    if mapped == "rolled_back":
+        if not rollback_target_prior_content_hash:
+            raise SchemaError("rollback requires rollback_target_prior_content_hash")
+        if rollback_target_version is None:
+            raise SchemaError("rollback requires rollback_target_version")
+        if not prior_ratification_receipt_id:
+            raise SchemaError("rollback requires prior_ratification_receipt_id")
 
     body = {
         "schema": "nf_motor_learning_receipt_v1",
@@ -169,6 +183,10 @@ def build_learning_receipt(
         "ecqr_decision_id": ecqr_decision_id,
         "ecqr_decision_hash": ecqr_decision_hash,
         "candidate_hash": candidate_hash,
+        "mining_evidence_manifest_hash": mining_evidence_manifest_hash,
+        "rollback_target_prior_content_hash": rollback_target_prior_content_hash,
+        "rollback_target_version": rollback_target_version,
+        "prior_ratification_receipt_id": prior_ratification_receipt_id,
         "schema_versions": {
             "receipt": "nf_motor_learning_receipt_v1",
             "organ": "nf_motor_learning_organ_v1",

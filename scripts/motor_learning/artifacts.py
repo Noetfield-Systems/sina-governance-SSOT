@@ -278,3 +278,75 @@ def unwrap_candidate(obj: Any) -> dict:
     if isinstance(obj, dict):
         return validate_candidate_artifact(obj).as_dict()
     raise GovernanceBlock("candidate artifact required")
+
+
+def mining_evidence_manifest(candidate: dict[str, Any], mining_events: list[dict]) -> tuple[dict, str]:
+    """Canonical mining evidence manifest + hash for ECQR/receipt binding."""
+    if not isinstance(mining_events, list) or not mining_events:
+        raise GovernanceBlock("mining_events required for mining evidence manifest")
+    hashes = []
+    for ev in mining_events:
+        h = ev.get("content_hash") or ev.get("provenance_fingerprint")
+        if not h:
+            raise GovernanceBlock("mining event missing content_hash/provenance_fingerprint")
+        hashes.append(h)
+    manifest = {
+        "source_event_ids": list(candidate.get("source_event_ids") or []),
+        "evidence_refs": list(candidate.get("evidence_refs") or []),
+        "normalized_event_hashes": sorted(hashes),
+        "occurrence_count": int(candidate.get("occurrence_count") or 0),
+        "outcomes_seen": list(candidate.get("outcomes_seen") or []),
+    }
+    return manifest, content_hash(manifest)
+
+
+def assert_confidence_inputs_canonical(
+    confidence_inputs: dict[str, Any],
+    *,
+    candidate: dict[str, Any],
+    shadow: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Do not accept unconstrained confidence_inputs.
+    Enforce exact equality with canonical candidate/shadow fields.
+    """
+    if not isinstance(confidence_inputs, dict):
+        raise GovernanceBlock("confidence_inputs must be object")
+    canonical = {
+        "occurrence_count": int(candidate["occurrence_count"]),
+        "outcomes_seen": list(candidate.get("outcomes_seen") or []),
+        "evidence_refs": list(candidate.get("evidence_refs") or []),
+        "confidence_before": float(confidence_inputs.get("confidence_before", 0.0)),
+        "scope": dict(candidate.get("scope") or {}),
+        "mining_evidence_ids": list(candidate.get("source_event_ids") or []),
+        "shadow_evidence_ids": list(shadow.get("shadow_event_ids") or []),
+        "expired_evidence": bool(confidence_inputs.get("expired_evidence", False)),
+    }
+    checks = (
+        ("occurrence_count", canonical["occurrence_count"], confidence_inputs.get("occurrence_count")),
+        ("evidence_refs", canonical["evidence_refs"], list(confidence_inputs.get("evidence_refs") or [])),
+        ("scope", canonical["scope"], dict(confidence_inputs.get("scope") or {})),
+        ("mining_evidence_ids", canonical["mining_evidence_ids"], list(confidence_inputs.get("mining_evidence_ids") or [])),
+        ("shadow_evidence_ids", canonical["shadow_evidence_ids"], list(confidence_inputs.get("shadow_evidence_ids") or [])),
+        ("outcomes_seen", canonical["outcomes_seen"], list(confidence_inputs.get("outcomes_seen") or [])),
+    )
+    for name, want, got in checks:
+        if name in ("evidence_refs", "mining_evidence_ids", "shadow_evidence_ids", "outcomes_seen"):
+            if list(want) != list(got):
+                raise GovernanceBlock(
+                    f"confidence_inputs.{name} not canonical: got={got!r} want={want!r}"
+                )
+        elif name == "scope":
+            if not _canonical_equal(want, got):
+                raise GovernanceBlock(f"confidence_inputs.scope not canonical vs candidate.scope")
+        else:
+            if int(got) != int(want):
+                raise GovernanceBlock(
+                    f"confidence_inputs.{name} not canonical: got={got!r} want={want!r}"
+                )
+    # Return canonical form with caller confidence_before / expired preserved after equality on others
+    return {
+        **canonical,
+        "confidence_before": float(confidence_inputs.get("confidence_before", 0.0)),
+        "expired_evidence": bool(confidence_inputs.get("expired_evidence", False)),
+    }
