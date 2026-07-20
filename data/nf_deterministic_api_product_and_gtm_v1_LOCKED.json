@@ -1,0 +1,27 @@
+{
+  "schema": "nf_deterministic_api_product_and_gtm_v1",
+  "decision_id": "NF-DETERMINISTIC-API-PRODUCT-AND-GTM-V1",
+  "status": "LOCKED",
+  "version": "v1.0.0_locked_20260719",
+  "flagship_endpoint": "POST /v1/chat/completions",
+  "product": "deterministic_api",
+  "sell": "guaranteed_usable_outcomes_via_openai_compatible_api",
+  "forbidden": [
+    "sell_motor_runways_or_governance_as_sku",
+    "expose_internal_vocabulary_on_buyer_surfaces",
+    "build_api_2_or_3_before_api_1_ships_and_sells",
+    "brand_awareness_ads",
+    "cash_referral_payout",
+    "frontier_models_on_automatic_hot_path",
+    "api_keys_in_chat_or_git",
+    "reopen_unified_motor_architecture_or_runway_taxonomy"
+  ],
+  "depends_on": [
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "COST_EXECUTION_DOCTRINE_LOCKED_v1",
+    "AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+  "saved_at": "2026-07-19T23:57:31Z",
+  "base_head_before_commit": "2fe75894531abb3e9b04dc47a5b93171ccf7b94e"
+}
