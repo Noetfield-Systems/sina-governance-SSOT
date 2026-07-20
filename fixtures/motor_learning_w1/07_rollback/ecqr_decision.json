@@ -26,7 +26,7 @@
   ],
   "reviewer": "test_reviewer:rollback",
   "rollback_target": "prior-to-rollback",
-  "rollback_target_prior_content_hash": "f7e7d03eac4e1c698a14e853ea9cd0e2666ca43f44c94fc26c777c3b0f86988b",
+  "rollback_target_prior_content_hash": "889d5b1093ab8c81a5adf2972ec2cd56fba5a0aaece96c2e948e13742df57243",
   "rollback_target_version": 1,
   "shadow_result_ref": "shadow:rollback-fixture",
   "supersedes": null

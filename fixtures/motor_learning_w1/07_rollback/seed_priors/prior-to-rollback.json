@@ -1,7 +1,7 @@
 {
   "action_attempted": "ci_retry_deploy",
   "candidate_id": "cand-rollback-fixture",
-  "content_hash": "f7e7d03eac4e1c698a14e853ea9cd0e2666ca43f44c94fc26c777c3b0f86988b",
+  "content_hash": "889d5b1093ab8c81a5adf2972ec2cd56fba5a0aaece96c2e948e13742df57243",
   "error_class": "cloudflare_timeout",
   "evidence_refs": [
     "legacy"
@@ -56,11 +56,13 @@
     },
     {
       "actor": "fixture:ratify",
+      "candidate_id": "cand-rollback-fixture",
       "evidence": [
         "legacy"
       ],
       "from_state": "SHADOW",
       "learning_receipt_id": "lr-fixture-ratify-prior-to-rollback",
+      "prior_id": "prior-to-rollback",
       "reason": "ratified",
       "timestamp": "2026-07-10T12:00:00Z",
       "to_state": "RATIFIED"

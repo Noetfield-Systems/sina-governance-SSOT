@@ -350,3 +350,96 @@ def assert_confidence_inputs_canonical(
         "confidence_before": float(confidence_inputs.get("confidence_before", 0.0)),
         "expired_evidence": bool(confidence_inputs.get("expired_evidence", False)),
     }
+
+
+def assert_mining_events_canonical(mining_events: list[dict]) -> list[dict]:
+    """Validate every normalized mining event carries identity/provenance fields."""
+    if not isinstance(mining_events, list) or not mining_events:
+        raise GovernanceBlock("mining_events must be a nonempty list")
+    out = []
+    for i, ev in enumerate(mining_events):
+        if not isinstance(ev, dict):
+            raise GovernanceBlock(f"mining_events[{i}] must be object")
+        for req in (
+            "event_id", "content_hash", "provenance_fingerprint",
+            "evidence_refs", "schema",
+        ):
+            if req not in ev or ev.get(req) in (None, ""):
+                raise GovernanceBlock(f"mining_events[{i}] missing {req}")
+        if not isinstance(ev.get("evidence_refs"), list):
+            raise GovernanceBlock(f"mining_events[{i}] evidence_refs must be list")
+        # raw evidence ref required (may be derived form)
+        if not ev.get("raw_evidence_ref"):
+            raise GovernanceBlock(f"mining_events[{i}] missing raw_evidence_ref")
+        out.append(ev)
+    return out
+
+
+def assert_candidate_derived_from_mining(
+    candidate: dict[str, Any],
+    mining_events: list[dict],
+) -> dict[str, Any]:
+    """
+    Re-run extract_many → mine_patterns from concrete mining events and require
+    the submitted candidate to be canonically identical to the derived candidate.
+    """
+    from .extract import extract_many
+    from .mine import mine_patterns
+
+    events = assert_mining_events_canonical(mining_events)
+    event_ids = sorted({e["event_id"] for e in events})
+    signals = extract_many(events)
+    min_occ = int(candidate.get("min_occurrences_required") or 3)
+    derived_list = mine_patterns(signals, min_occurrences=min_occ)
+    if not derived_list:
+        raise GovernanceBlock("mining events produced no derived candidates")
+
+    # Prefer exact candidate_id match, else primary meeting threshold
+    derived = None
+    for d in derived_list:
+        if d.get("candidate_id") == candidate.get("candidate_id"):
+            derived = d
+            break
+    if derived is None:
+        for d in derived_list:
+            if d.get("meets_threshold"):
+                derived = d
+                break
+    if derived is None:
+        derived = derived_list[0]
+
+    # Exact equality on identity-bearing fields
+    sub_ids = list(candidate.get("source_event_ids") or [])
+    der_ids = list(derived.get("source_event_ids") or [])
+    if sorted(sub_ids) != sorted(event_ids):
+        raise GovernanceBlock(
+            f"candidate.source_event_ids must equal mining event IDs used for derivation; "
+            f"candidate={sorted(sub_ids)!r} mining={event_ids!r}"
+        )
+    if sorted(sub_ids) != sorted(der_ids):
+        raise GovernanceBlock(
+            "candidate.source_event_ids mismatch derived mining pattern source_event_ids"
+        )
+    if int(candidate.get("occurrence_count") or 0) != len(event_ids):
+        raise GovernanceBlock(
+            "candidate.occurrence_count must equal unique mining-event count"
+        )
+    if int(candidate.get("occurrence_count") or 0) != int(derived.get("occurrence_count") or 0):
+        raise GovernanceBlock("candidate.occurrence_count mismatch derived occurrence_count")
+    if list(candidate.get("evidence_refs") or []) != list(derived.get("evidence_refs") or []):
+        raise GovernanceBlock("candidate.evidence_refs mismatch derived mining evidence refs")
+    if list(candidate.get("outcomes_seen") or []) != list(derived.get("outcomes_seen") or []):
+        raise GovernanceBlock("candidate.outcomes_seen mismatch derived outcomes")
+    if not _canonical_equal(candidate.get("fingerprint"), derived.get("fingerprint")):
+        raise GovernanceBlock("candidate.fingerprint mismatch derived fingerprint")
+    if not _canonical_equal(candidate.get("scope") or {}, derived.get("scope") or {}):
+        raise GovernanceBlock("candidate.scope mismatch derived scope")
+    # recommended_action / recovery coherence
+    if candidate.get("recommended_action") != derived.get("recommended_action"):
+        raise GovernanceBlock("candidate.recommended_action mismatch derived recommended_action")
+    fp = candidate.get("fingerprint") or {}
+    dfp = derived.get("fingerprint") or {}
+    for k in ("action_attempted", "recovery_path", "error_class"):
+        if fp.get(k) != dfp.get(k):
+            raise GovernanceBlock(f"candidate.fingerprint.{k} mismatch derived mining pattern")
+    return validate_candidate_artifact(candidate).as_dict()

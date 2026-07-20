@@ -30,6 +30,8 @@ def main() -> int:
     ap.add_argument("--rollback-prior", type=str)
     ap.add_argument("--regression-evidence", type=str, nargs="*")
     ap.add_argument("--inject-failure-after", type=str, default=None)
+    ap.add_argument("--event-ledger", type=Path, default=None,
+                    help="Working event ledger; persist runs seed from store ledger")
     args = ap.parse_args()
 
     dry_run = not args.no_dry_run
@@ -56,13 +58,13 @@ def main() -> int:
                 ecqr_decision=ecqr,
                 regression_evidence=list(args.regression_evidence or []),
                 dry_run=dry_run,
-                allow_store_persist=allow_persist,
+                allow_store_persist=allow_persist, event_ledger_path=args.event_ledger,
                 inject_failure_after=args.inject_failure_after,
             )
         elif args.fixture:
             summary = run_from_fixture_dir(
                 args.fixture, out_dir=args.out, store_dir=store, dry_run=dry_run,
-                allow_store_persist=allow_persist,
+                allow_store_persist=allow_persist, event_ledger_path=args.event_ledger,
                 inject_failure_after=args.inject_failure_after,
             )
         else:
@@ -74,7 +76,7 @@ def main() -> int:
             summary = run_pipeline(
                 events=events, shadow_events=shadow, store_dir=store, out_dir=args.out,
                 ecqr_decision=ecqr, min_occurrences=args.min_occurrences, dry_run=dry_run,
-                allow_store_persist=allow_persist,
+                allow_store_persist=allow_persist, event_ledger_path=args.event_ledger,
                 inject_failure_after=args.inject_failure_after,
             )
     except MotorLearningError as exc:

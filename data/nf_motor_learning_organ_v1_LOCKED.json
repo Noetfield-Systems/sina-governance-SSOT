@@ -2,8 +2,8 @@
   "schema": "nf_motor_learning_organ_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
   "status": "SG_ACCEPTED",
-  "version": "1.3.1",
-  "saved_at": "2026-07-20T11:45:00Z",
+  "version": "1.3.2",
+  "saved_at": "2026-07-20T23:30:00Z",
   "base_head_before_commit": "c7eb116",
   "one_line_law": "Mine receipts and patterns into ECQR priors via propose-shadow-ratify; improve Motor and Runways without silent self-mutation",
   "central_metric": "ECQR",
@@ -142,7 +142,15 @@
     "immutable_history_prefix": "IMPLEMENTED",
     "shadow_independence_at_persistence": "IMPLEMENTED",
     "confidence_input_binding": "IMPLEMENTED",
-    "all_terminal_receipt_ecqr_binding": "IMPLEMENTED"
+    "all_terminal_receipt_ecqr_binding": "IMPLEMENTED",
+    "lifecycle_anchoring_in_terminal_commit": "IMPLEMENTED",
+    "immutable_history_across_public_apis": "IMPLEMENTED",
+    "rollback_existing_target_requirement": "IMPLEMENTED",
+    "candidate_mining_derivation": "IMPLEMENTED",
+    "terminal_transition_ecqr_receipt_binding": "IMPLEMENTED",
+    "ecqr_prior_identity_binding": "IMPLEMENTED",
+    "durable_cross_run_event_identity": "IMPLEMENTED",
+    "concurrent_cas_enforcement": "IMPLEMENTED"
   },
   "learning_receipt_schema": "data/nf_motor_learning_receipt_v1.json",
   "next_milestone": {

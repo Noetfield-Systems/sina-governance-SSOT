@@ -1,6 +1,7 @@
 """File-backed prior repository — W1 reference / fixture stores; transactional terminal writes."""
 from __future__ import annotations
 
+import fcntl
 import json
 import shutil
 import tempfile
@@ -29,6 +30,9 @@ def store_tree_hash(root: Path) -> str:
     for p in sorted(root.rglob("*")):
         if p.is_file():
             rel = str(p.relative_to(root))
+            # Operational lock is not part of authoritative store content.
+            if rel == ".mlo_writer.lock" or rel.endswith("/.mlo_writer.lock"):
+                continue
             parts.append({"path": rel, "bytes": p.read_bytes().hex()})
     return content_hash(parts)
 
@@ -95,6 +99,8 @@ class PriorStore:
             "store_kind": self.store_kind,
             "live_consumable_authority": False,
             "priors": {},
+            "ecqr_decisions": {},
+            "active_candidate_scopes": {},
         }
 
     def _ensure_dirs(self) -> None:
@@ -176,8 +182,9 @@ class PriorStore:
         confidence: dict | None = None,
     ) -> dict:
         """
-        Public create. Terminal statuses MUST use commit_terminal_bundle.
-        Non-terminal may persist directly. Terminal via create raises.
+        Create NEW nonterminal records only.
+        Existing priors cannot be rewritten through create/update.
+        Terminal statuses MUST use commit_terminal_bundle.
         """
         if not self._allow_persist and self.store_kind == "w1_reference":
             raise GovernanceBlock(
@@ -190,12 +197,48 @@ class PriorStore:
                 "terminal prior create must use commit_terminal_bundle() "
                 "(transactional); nontransactional terminal _persist is inaccessible"
             )
+        pid = prior.get("prior_id")
+        if pid and self.get(pid) is not None:
+            raise GovernanceBlock(
+                "existing prior cannot be mutated through create/update; "
+                "use commit_terminal_bundle for legal terminal transitions "
+                "(active→shadow/proposed/observed and terminal rewrites are forbidden)"
+            )
         return self._persist_nonterminal(
-            prior, allow_duplicate=allow_duplicate, expected_version=expected_version
+            prior, allow_duplicate=False, expected_version=expected_version
         )
 
     def update(self, prior: dict[str, Any], **kwargs) -> dict:
-        return self.create(prior, allow_duplicate=True, **kwargs)
+        """Blocked for existing records — not an unconstrained rewrite API."""
+        pid = prior.get("prior_id")
+        if pid and self.get(pid) is not None:
+            raise GovernanceBlock(
+                "PriorStore.update cannot rewrite existing records; "
+                "illegal transitions such as active→shadow must not pass through update()"
+            )
+        return self.create(prior, allow_duplicate=False, **kwargs)
+
+    def _lock_path(self) -> Path:
+        return self.root / ".mlo_writer.lock"
+
+    def _acquire_writer_lock(self):
+        """Exclusive filesystem lock around terminal mutate (single-writer safety)."""
+        self._ensure_dirs()
+        lf = open(self._lock_path(), "a+", encoding="utf-8")
+        try:
+            fcntl.flock(lf.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            lf.close()
+            raise GovernanceBlock(
+                "store writer lock held; concurrent commit rejected (CAS/lock failure)"
+            ) from exc
+        return lf
+
+    def _release_writer_lock(self, lf) -> None:
+        try:
+            fcntl.flock(lf.fileno(), fcntl.LOCK_UN)
+        finally:
+            lf.close()
 
     def commit_terminal_bundle(
         self,
@@ -209,6 +252,7 @@ class PriorStore:
         shadow_events: list | None = None,
         confidence_inputs: dict | None = None,
         mining_events: list | None = None,
+        event_ledger_update: dict | None = None,
         allow_duplicate: bool = False,
         expected_version: int | None = None,
         inject_failure_after: str | None = None,
@@ -223,6 +267,7 @@ class PriorStore:
         if not self._allow_persist:
             raise GovernanceBlock("terminal commit requires allow_persist=True")
 
+        lock_f = self._acquire_writer_lock()
         existed = self.root.exists()
         hash_before = store_tree_hash(self.root)
         backup = Path(tempfile.mkdtemp(prefix="mlo-ps-bak-"))
@@ -268,6 +313,12 @@ class PriorStore:
                     "use rollback/supersede paths"
                 )
 
+            if status == "rolled_back" and existing is None:
+                raise GovernanceBlock(
+                    "rollback requires an existing RATIFIED/active prior; "
+                    "a prior may never be created initially in ROLLED_BACK state"
+                )
+
             if existing:
                 if status in TERMINAL_STATUS and expected_version is None:
                     raise GovernanceBlock(
@@ -280,12 +331,30 @@ class PriorStore:
                     )
                 # Rollback target metadata must match stored prior exactly
                 if status == "rolled_back":
+                    if existing.get("status") != "active" and existing.get("state") not in ("RATIFIED", "active"):
+                        raise GovernanceBlock(
+                            "rollback requires existing status/state == active/RATIFIED"
+                        )
                     if expected_version != cur_ver:
                         raise GovernanceBlock(
                             f"rollback expected_version must equal existing.version={cur_ver}"
                         )
                     want_hash = existing.get("content_hash")
                     want_receipt = existing.get("learning_receipt_id")
+                    if not want_receipt:
+                        raise GovernanceBlock("existing prior missing learning_receipt_id")
+                    rpath = stage_store.receipts_dir / f"{want_receipt}.json"
+                    if not rpath.exists():
+                        raise GovernanceBlock(
+                            f"missing prior ratification receipt in ledger: {want_receipt}"
+                        )
+                    prior_receipt = json.loads(rpath.read_text())
+                    from .receipt import validate_and_mint_receipt as _vmr
+                    _vmr(prior_receipt)
+                    if prior_receipt.get("decision") != "accepted":
+                        raise GovernanceBlock("prior ratification receipt must be decision=accepted")
+                    if prior_receipt.get("receipt_id") != want_receipt:
+                        raise GovernanceBlock("prior ratification receipt id mismatch")
                     if body.get("rollback_target_prior_content_hash") != want_hash:
                         raise GovernanceBlock(
                             "rollback_target_prior_content_hash mismatches existing.content_hash"
@@ -319,7 +388,7 @@ class PriorStore:
                     prior_id=pid,
                 )
 
-            # Active: re-validate mining/shadow independence + canonical confidence inputs
+            # Active: re-derive candidate from mining events + independence + confidence inputs
             if status == "active":
                 if candidate is None or shadow is None or confidence is None:
                     raise GovernanceBlock("active prior requires candidate+shadow+confidence")
@@ -331,15 +400,15 @@ class PriorStore:
                     raise GovernanceBlock(
                         "active terminal commit requires concrete normalized shadow_events"
                     )
+                from .artifacts import assert_candidate_derived_from_mining
                 cand0 = unwrap_candidate(candidate)
+                cand0 = assert_candidate_derived_from_mining(cand0, mining_events)
+                candidate = cand0
                 assert_shadow_independence(
                     candidate=cand0, mining_events=mining_events, shadow_events=shadow_events,
                 )
-                # Derive/check confidence inputs against candidate+shadow (not unconstrained)
-                # Shadow artifact must already be present; equality checked after unwrap below
                 if confidence_inputs is None:
                     raise GovernanceBlock("active terminal commit requires confidence_inputs")
-                # provisional canonical check against submitted shadow fields before full unwrap
                 confidence_inputs = assert_confidence_inputs_canonical(
                     confidence_inputs, candidate=cand0, shadow=shadow if isinstance(shadow, dict) else shadow.as_dict(),
                 )
@@ -446,6 +515,29 @@ class PriorStore:
             idx = stage_store._read_index()
             idx["store_kind"] = "w1_reference"
             idx["live_consumable_authority"] = False
+            idx.setdefault("ecqr_decisions", {})
+            idx.setdefault("active_candidate_scopes", {})
+            dhash = vecqr.decision_hash
+            mapped = idx["ecqr_decisions"].get(dhash)
+            if mapped is not None and mapped != pid:
+                raise GovernanceBlock(
+                    f"ECQR decision hash already bound to prior_id={mapped!r}; "
+                    f"cannot mint second prior_id={pid!r}"
+                )
+            idx["ecqr_decisions"][dhash] = pid
+            if status == "active" and candidate is not None:
+                cand = unwrap_candidate(candidate)
+                scope_key = content_hash({
+                    "candidate_hash": cand["content_hash"],
+                    "scope": cand.get("scope") or body.get("scope") or {},
+                })
+                prev_pid = idx["active_candidate_scopes"].get(scope_key)
+                if prev_pid and prev_pid != pid:
+                    raise GovernanceBlock(
+                        f"duplicate unsuperseded prior for candidate_hash+scope; "
+                        f"existing={prev_pid!r} new={pid!r}"
+                    )
+                idx["active_candidate_scopes"][scope_key] = pid
             idx["priors"][pid] = {
                 "status": body["status"],
                 "path": stage_store._prior_path(pid).name,
@@ -455,6 +547,10 @@ class PriorStore:
                 "fixture_seeded": False,
             }
             stage_store._write_index(idx)
+
+            if event_ledger_update is not None:
+                ledger_path = stage_store.root / "event_identity_ledger.json"
+                ledger_path.write_text(canonical_json(event_ledger_update) + "\n")
 
             if inject_failure_after == "after_index":
                 raise MotorLearningError("injected failure after index")
@@ -469,6 +565,7 @@ class PriorStore:
             if live_tmp.exists():
                 shutil.rmtree(live_tmp)
             shutil.rmtree(backup, ignore_errors=True)
+            self._release_writer_lock(lock_f)
             return body
 
         except Exception as exc:
@@ -490,6 +587,10 @@ class PriorStore:
             else:
                 if self.root.exists():
                     shutil.rmtree(self.root)
+            try:
+                self._release_writer_lock(lock_f)
+            except Exception:
+                pass
             if isinstance(exc, MotorLearningError):
                 raise
             raise MotorLearningError(f"terminal store commit failed: {exc}") from exc
@@ -520,6 +621,24 @@ class PriorStore:
             raise GovernanceBlock(f"transition_history last state {last.get('to_state')} != {expected_state}")
         if last.get("learning_receipt_id") != receipt.get("receipt_id"):
             raise GovernanceBlock("transition learning_receipt_id mismatches receipt")
+        if last.get("actor") != ed.get("reviewer") or last.get("actor") != receipt.get("reviewer"):
+            raise GovernanceBlock("terminal transition.actor mismatches ECQR/receipt reviewer")
+        if last.get("reason") != ed.get("rationale") or last.get("reason") != receipt.get("rationale"):
+            raise GovernanceBlock("terminal transition.reason mismatches ECQR/receipt rationale")
+        if list(last.get("evidence") or []) != list(ed.get("evidence_reviewed") or []):
+            raise GovernanceBlock("terminal transition.evidence mismatches ECQR evidence_reviewed")
+        if list(last.get("evidence") or []) != list(receipt.get("evidence_links") or []):
+            raise GovernanceBlock("terminal transition.evidence mismatches receipt evidence_links")
+        if last.get("timestamp") != ed.get("effective_at") or last.get("timestamp") != receipt.get("decision_timestamp"):
+            raise GovernanceBlock("terminal transition.timestamp mismatches ECQR/receipt timestamp")
+        if last.get("prior_id") != body.get("prior_id"):
+            raise GovernanceBlock("terminal transition missing/mismatched prior_id")
+        if last.get("candidate_id") != body.get("candidate_id"):
+            raise GovernanceBlock("terminal transition missing/mismatched candidate_id")
+        if last.get("prior_id") != ed.get("prior_id") or last.get("prior_id") != receipt.get("prior_id"):
+            raise GovernanceBlock("terminal transition.prior_id mismatches ECQR/receipt")
+        if last.get("candidate_id") != ed.get("candidate_id") or last.get("candidate_id") != receipt.get("candidate_id"):
+            raise GovernanceBlock("terminal transition.candidate_id mismatches ECQR/receipt")
 
         # Decision mapping
         dec_map = {"active": "accepted", "rejected": "rejected", "rolled_back": "rolled_back"}
@@ -531,8 +650,12 @@ class PriorStore:
         # ALL terminal decisions: receipt and ECQR may never disagree
         if body.get("prior_id") != receipt.get("prior_id"):
             raise GovernanceBlock("prior_id mismatches receipt.prior_id")
-        if ed.get("prior_id") not in (None, body.get("prior_id")) and ed.get("prior_id") != body.get("prior_id"):
+        if not ed.get("prior_id"):
+            raise GovernanceBlock("terminal ECQR missing prior_id")
+        if ed.get("prior_id") != body.get("prior_id"):
             raise GovernanceBlock("ECQR prior_id mismatches prior")
+        if ed.get("prior_id") != receipt.get("prior_id"):
+            raise GovernanceBlock("ECQR prior_id mismatches receipt.prior_id")
         if receipt.get("candidate_id") != ed.get("candidate_id"):
             raise GovernanceBlock("receipt.candidate_id mismatches ECQR.candidate_id")
         if body.get("candidate_id") and receipt.get("candidate_id") != body.get("candidate_id"):
@@ -672,11 +795,32 @@ class PriorStore:
         if self.store_kind == "fixture":
             body["fixture_seeded"] = True
 
-        if existing and not allow_duplicate:
-            raise SchemaError(f"duplicate prior_id: {pid}")
-        if existing:
+        if existing is not None:
+            if self.store_kind == "w1_reference":
+                raise GovernanceBlock(
+                    "existing prior cannot be mutated through nonterminal persist; "
+                    "blocked transitions include active→shadow/proposed/observed and "
+                    "any rewrite of rejected/rolled_back"
+                )
+            old_st = existing.get("status")
+            new_st = body.get("status")
+            forbidden = {
+                ("active", "shadow"), ("active", "proposed"), ("active", "observed"),
+                ("rejected", "proposed"), ("rejected", "observed"), ("rejected", "shadow"),
+                ("rejected", "active"),
+                ("rolled_back", "observed"), ("rolled_back", "proposed"),
+                ("rolled_back", "shadow"), ("rolled_back", "active"),
+            }
+            if (old_st, new_st) in forbidden:
+                raise GovernanceBlock(f"forbidden status rewrite: {old_st}→{new_st}")
+            if old_st in TERMINAL_STATUS and new_st != old_st:
+                raise GovernanceBlock(
+                    f"terminal record status={old_st} is immutable except via governed transition API"
+                )
+            if expected_version is None:
+                raise GovernanceBlock("existing update requires expected_version (CAS)")
             cur_ver = int(existing.get("version") or 1)
-            if expected_version is not None and expected_version != cur_ver:
+            if expected_version != cur_ver:
                 raise GovernanceBlock(
                     f"CAS failure: expected_version={expected_version} current={cur_ver}"
                 )

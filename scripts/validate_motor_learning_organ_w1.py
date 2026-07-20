@@ -161,10 +161,18 @@ def main() -> int:
         "shadow_independence_at_persistence",
         "confidence_input_binding",
         "all_terminal_receipt_ecqr_binding",
+        "lifecycle_anchoring_in_terminal_commit",
+        "immutable_history_across_public_apis",
+        "rollback_existing_target_requirement",
+        "candidate_mining_derivation",
+        "terminal_transition_ecqr_receipt_binding",
+        "ecqr_prior_identity_binding",
+        "durable_cross_run_event_identity",
+        "concurrent_cas_enforcement",
     ):
         val = maturity.get(key)
-        if val not in ("IMPLEMENTED", "PARTIAL"):
-            fail(f"maturity.{key} must be IMPLEMENTED or PARTIAL, got {val}")
+        if val != "IMPLEMENTED":
+            fail(f"maturity.{key} must be IMPLEMENTED, got {val}")
     if maturity.get("executable_reference_pipeline") not in ("IMPLEMENTED", None):
         # optional key
         if maturity.get("executable_reference_pipeline") != "IMPLEMENTED":

@@ -196,7 +196,14 @@ def transition(
         "reason": reason,
         "evidence": list(evidence or []),
         "learning_receipt_id": rid,
+        "prior_id": entity.get("prior_id"),
+        "candidate_id": entity.get("candidate_id"),
     }
+    if to_state in TERMINAL_RECEIPT_STATES:
+        if not record.get("prior_id"):
+            raise GovernanceBlock(f"{to_state} transition requires entity.prior_id")
+        if not record.get("candidate_id"):
+            raise GovernanceBlock(f"{to_state} transition requires entity.candidate_id")
     out = dict(entity)
     out["state"] = to_state
     out["status"] = STATUS_MAP.get(to_state, to_state.lower())
@@ -333,12 +340,20 @@ def validate_transition_history(
                 f"illegal transition in history at index {i}: {from_s}→{to_s}; "
                 f"allowed={sorted(allowed)}"
             )
-        # Terminal steps require receipt id
+        # Terminal steps require receipt id + identity binds
         if to_s in TERMINAL_RECEIPT_STATES:
             rid = rec.get("learning_receipt_id")
             if not rid or not isinstance(rid, str):
                 raise GovernanceBlock(
                     f"transition_history[{i}] {from_s}→{to_s} requires learning_receipt_id"
+                )
+            if not rec.get("prior_id"):
+                raise GovernanceBlock(
+                    f"transition_history[{i}] terminal record requires prior_id"
+                )
+            if not rec.get("candidate_id"):
+                raise GovernanceBlock(
+                    f"transition_history[{i}] terminal record requires candidate_id"
                 )
         # Bind ids when represented
         if candidate_id is not None and rec.get("candidate_id") not in (None, candidate_id):

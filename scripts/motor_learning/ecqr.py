@@ -102,6 +102,8 @@ def fixture_compile_ecqr(
     out["confidence_after"] = conf["confidence_after"]
     out["confidence_hash"] = conf["content_hash"]
     out["candidate_hash"] = cand["content_hash"]
+    if out.get("prior_id") in AUTO_PLACEHOLDERS or out.get("prior_id") is None:
+        out["prior_id"] = f"prior-{cand['candidate_id']}"
 
     mine = list(mining_event_ids or cand.get("source_event_ids") or [])
     sh_ids = list(shadow_event_ids or sh.get("shadow_event_ids") or [])
@@ -168,6 +170,8 @@ def validate_ecqr_decision(
     d = decision["decision"]
     if d not in ("RATIFIED", "REJECTED", "ROLLED_BACK"):
         raise SchemaError(f"invalid decision: {d}")
+    if not decision.get("prior_id") or decision.get("prior_id") in AUTO_PLACEHOLDERS:
+        raise GovernanceBlock("terminal ECQR requires prior_id (bound before review issuance)")
 
     if d == "RATIFIED":
         for k in REQUIRED_RATIFIED_BINDINGS:

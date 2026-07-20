@@ -223,6 +223,11 @@ def run_pipeline(
     # Resolve → assert disjoint → only then mkdir/write
     assert_paths_disjoint(store_dir=store_dir, out_dir=out_dir, event_ledger_path=ledger_path)
     out_dir.mkdir(parents=True, exist_ok=True)
+    # Persistent runs seed working ledger from durable store ledger (cross-run identity)
+    durable_ledger = store_dir / "event_identity_ledger.json"
+    if allow_store_persist and not dry_run and durable_ledger.exists() and not ledger_path.exists():
+        import shutil as _sh0
+        _sh0.copy2(durable_ledger, ledger_path)
 
     store_existed, store_hash_before = _snapshot_existence(store_dir)
     import shutil, tempfile
@@ -318,7 +323,10 @@ def run_pipeline(
             decision = ecqr_validated.decision
             ed = ecqr_validated.as_dict()
             ts = ed["effective_at"]
-            prior_id = ed.get("prior_id") or f"prior-{entity['candidate_id']}"
+            if not ed.get("prior_id"):
+                raise GovernanceBlock("terminal ECQR missing prior_id")
+            prior_id = ed["prior_id"]
+            entity["prior_id"] = prior_id
             try:
                 cand_hash = candidate_content_hash(entity)
                 _, mine_hash = mining_evidence_manifest(entity, obs.get("mining_events_normalized") or [])
@@ -405,6 +413,9 @@ def run_pipeline(
                     persist_store = PriorStore(
                         store_dir, create=True, store_kind="w1_reference", allow_persist=True
                     )
+                    ledger_update = None
+                    if ledger_path.exists():
+                        ledger_update = json.loads(ledger_path.read_text())
                     persist_store.commit_terminal_bundle(
                         prior=prior,
                         learning_receipt=validated_receipt,
@@ -415,13 +426,11 @@ def run_pipeline(
                         shadow_events=obs.get("shadow_events_normalized"),
                         confidence_inputs=obs.get("confidence_inputs"),
                         mining_events=obs.get("mining_events_normalized"),
+                        event_ledger_update=ledger_update,
                         allow_duplicate=False,
                         expected_version=1,
                         inject_failure_after=inject_failure_after,
                     )
-                    # promote durable ledger into store only after success
-                    dest = store_dir / "event_identity_ledger.json"
-                    shutil.copy2(ledger_path, dest)
                     write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
                     _write_json(out_dir / "prior.json", prior)
                     final_state = entity["state"]
