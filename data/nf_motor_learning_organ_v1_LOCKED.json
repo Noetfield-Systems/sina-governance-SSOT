@@ -131,7 +131,13 @@
     "w2_activation": "NOT_IMPLEMENTED",
     "reviewer_authentication": "NOT_IMPLEMENTED",
     "executable_reference_pipeline": "IMPLEMENTED",
-    "atomic_terminal_persistence": "IMPLEMENTED"
+    "atomic_terminal_persistence": "IMPLEMENTED",
+    "full_lifecycle_history_enforcement": "IMPLEMENTED",
+    "shadow_artifact_provenance": "IMPLEMENTED",
+    "confidence_artifact_provenance": "IMPLEMENTED",
+    "immutable_fully_bound_ecqr": "IMPLEMENTED",
+    "path_fail_before_write": "IMPLEMENTED",
+    "rollback_target_binding": "IMPLEMENTED"
   },
   "learning_receipt_schema": "data/nf_motor_learning_receipt_v1.json",
   "next_milestone": {

@@ -112,33 +112,35 @@ def observe_phase(
         return result
 
     shadow_report = evaluate_shadow(entity, sh_accepted)
-    # Authoritative validate
-    shadow_report = validate_shadow_report(shadow_report).as_dict()
+    shadow_report = validate_shadow_report(
+        shadow_report, candidate=entity, shadow_events=sh_accepted, require_derivation=True,
+    ).as_dict()
     _write_json(out_dir / "shadow_report.json", shadow_report)
 
+    confidence_inputs = {
+        "occurrence_count": int(entity["occurrence_count"]),
+        "outcomes_seen": list(entity.get("outcomes_seen") or []),
+        "evidence_refs": list(entity.get("evidence_refs") or []),
+        "confidence_before": 0.0,
+        "scope": dict(entity.get("scope") or {}),
+        "mining_evidence_ids": list(entity.get("source_event_ids") or []),
+        "shadow_evidence_ids": list(shadow_report.get("shadow_event_ids") or []),
+        "expired_evidence": False,
+    }
     confidence = compute_confidence(
-        occurrence_count=entity["occurrence_count"],
-        outcomes_seen=entity.get("outcomes_seen") or [],
-        evidence_refs=entity.get("evidence_refs") or [],
+        occurrence_count=confidence_inputs["occurrence_count"],
+        outcomes_seen=confidence_inputs["outcomes_seen"],
+        evidence_refs=confidence_inputs["evidence_refs"],
         shadow_report=shadow_report,
-        confidence_before=0.0,
-        scope=entity.get("scope") or {},
-        mining_evidence_ids=list(entity.get("source_event_ids") or []),
-        shadow_evidence_ids=list(shadow_report.get("shadow_event_ids") or []),
+        expired_evidence=confidence_inputs["expired_evidence"],
+        confidence_before=confidence_inputs["confidence_before"],
+        scope=confidence_inputs["scope"],
+        mining_evidence_ids=confidence_inputs["mining_evidence_ids"],
+        shadow_evidence_ids=confidence_inputs["shadow_evidence_ids"],
     )
-    mine_refs = set(entity.get("evidence_refs") or [])
-    sh_refs = set(shadow_report.get("evidence_refs") or [])
-    if mine_refs & sh_refs:
-        confidence["meets_ratify_threshold"] = False
-        confidence["shadow_contaminated_by_mining_overlap"] = True
-        # recompute hash after mutation
-        confidence.pop("content_hash", None)
-        confidence["content_hash"] = content_hash({k: confidence[k] for k in sorted(confidence) if k != "content_hash"})
-    if not shadow_report.get("ratifiable"):
-        confidence["meets_ratify_threshold"] = False
-        confidence.pop("content_hash", None)
-        confidence["content_hash"] = content_hash({k: confidence[k] for k in sorted(confidence) if k != "content_hash"})
-    confidence = validate_confidence_artifact(confidence, shadow=shadow_report).as_dict()
+    confidence = validate_confidence_artifact(
+        confidence, shadow=shadow_report, confidence_inputs=confidence_inputs, require_derivation=True,
+    ).as_dict()
     _write_json(out_dir / "confidence.json", confidence)
 
     entity_v = validate_candidate_artifact(entity).as_dict()
@@ -179,6 +181,8 @@ def observe_phase(
         "entity": entity,
         "shadow_report": shadow_report,
         "confidence": confidence,
+        "shadow_events_normalized": sh_accepted,
+        "confidence_inputs": confidence_inputs,
         "similarity_rankings": similarity_rankings,
         "near_duplicate": near_duplicate,
         "machine_veto": machine_veto,
@@ -203,10 +207,10 @@ def run_pipeline(
 ) -> dict[str, Any]:
     out_dir = Path(out_dir)
     store_dir = Path(store_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
-
     ledger_path = Path(event_ledger_path) if event_ledger_path else (out_dir / "event_identity_ledger.json")
+    # Resolve → assert disjoint → only then mkdir/write
     assert_paths_disjoint(store_dir=store_dir, out_dir=out_dir, event_ledger_path=ledger_path)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     store_existed, store_hash_before = _snapshot_existence(store_dir)
     import shutil, tempfile
@@ -283,6 +287,8 @@ def run_pipeline(
                     confidence=confidence,
                     shadow=shadow_report,
                     candidate=entity,
+                    shadow_events=obs.get("shadow_events_normalized"),
+                    confidence_inputs=obs.get("confidence_inputs"),
                 )
                 # Prove input unchanged
                 if ecqr_original_bytes is not None:
@@ -391,6 +397,8 @@ def run_pipeline(
                         candidate=entity,
                         shadow=shadow_report,
                         confidence=confidence,
+                        shadow_events=obs.get("shadow_events_normalized"),
+                        confidence_inputs=obs.get("confidence_inputs"),
                         allow_duplicate=False,
                         expected_version=1,
                         inject_failure_after=inject_failure_after,
@@ -508,8 +516,9 @@ def rollback_prior(
     """Rollback requires an already-complete ROLLED_BACK ECQR_DECISION. No rewriting."""
     out_dir = Path(out_dir)
     store_dir = Path(store_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    # Resolve → assert disjoint → only then mkdir/write
     assert_paths_disjoint(store_dir=store_dir, out_dir=out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     store_existed, store_hash_before = _snapshot_existence(store_dir)
     import shutil, tempfile
@@ -537,15 +546,20 @@ def rollback_prior(
             raise GovernanceBlock("rollback ECQR missing rollback_target")
         if not ecqr_decision.get("evidence_reviewed"):
             raise GovernanceBlock("rollback ECQR missing evidence_reviewed")
-        if regression_evidence and list(regression_evidence) != list(ecqr_decision.get("evidence_reviewed") or []):
-            # optional consistency check — do not overwrite
-            pass
+        if ecqr_decision.get("rollback_target") != prior_id:
+            raise GovernanceBlock(
+                f"rollback_target {ecqr_decision.get('rollback_target')!r} different from prior_id {prior_id!r}"
+            )
+        if regression_evidence is not None:
+            if list(regression_evidence) != list(ecqr_decision.get("evidence_reviewed") or []):
+                raise GovernanceBlock("regression evidence mismatch vs ECQR evidence_reviewed")
 
         kind = "w1_reference"
         if store_dir.exists() and (store_dir / "index.json").exists():
             import json as _json
             kind = _json.loads((store_dir / "index.json").read_text()).get("store_kind") or "w1_reference"
         if store_dir.exists():
+            # Never silently reopen fixture as governed reference
             store = PriorStore(
                 store_dir, create=False, store_kind=kind,
                 allow_persist=allow_store_persist and not dry_run and kind == "w1_reference",
@@ -556,14 +570,29 @@ def rollback_prior(
         prior = store.get(prior_id)
         if not prior:
             raise GovernanceBlock(f"prior not found: {prior_id}")
+        if prior.get("prior_id") != prior_id:
+            raise GovernanceBlock("loaded prior.prior_id mismatches API prior_id")
         if prior.get("status") != "active" and prior.get("state") != RATIFIED:
             raise GovernanceBlock(f"prior {prior_id} is not RATIFIED/active")
+
+        target_version = int(prior.get("version") or 1)
+        target_content_hash = prior.get("content_hash")
+        if not target_content_hash:
+            # compute if missing (fixture seeds)
+            from .hashutil import content_hash as _ch
+            tmp = {k: prior[k] for k in sorted(prior) if k != "content_hash"}
+            target_content_hash = _ch(tmp)
+        prior_ratification_receipt = prior.get("learning_receipt_id")
+        if not prior_ratification_receipt:
+            raise GovernanceBlock("rollback target prior missing prior ratification receipt (learning_receipt_id)")
 
         ecqr_validated = validate_ecqr_decision(ecqr_decision, require_bound_artifacts=False)
         if json.dumps(ecqr_decision, sort_keys=True).encode() != original_bytes:
             raise GovernanceBlock("ECQR decision mutated during rollback (forbidden)")
 
         ed = ecqr_validated.as_dict()
+        if ed.get("rollback_target") != prior_id:
+            raise GovernanceBlock("ECQR rollback_target mismatches API prior_id")
         evidence = list(ed["evidence_reviewed"])
         receipt = build_learning_receipt(
             decision="ROLLED_BACK",
@@ -589,6 +618,8 @@ def rollback_prior(
         )
         # For rolled_back, build_learning_receipt may not require shadow — check receipt.py
         validated_receipt = validate_and_mint_receipt(receipt)
+        if validated_receipt.as_dict().get("rollback_target") != prior_id:
+            raise GovernanceBlock("receipt rollback_target mismatches API prior_id")
         entity = {
             "state": RATIFIED,
             "status": "active",
@@ -604,6 +635,8 @@ def rollback_prior(
             learning_receipt=validated_receipt,
             timestamp=ed["effective_at"],
         )
+        if entity.get("prior_id") != prior_id:
+            raise GovernanceBlock("transition prior_id mismatches API prior_id")
         updated = dict(prior)
         updated["state"] = entity["state"]
         updated["status"] = entity["status"]
@@ -612,18 +645,27 @@ def rollback_prior(
         updated["live_consumable"] = False
         updated["store_kind"] = "w1_reference"
         updated["activation_authority"] = False
+        updated["rollback_target"] = prior_id
+        updated["rollback_target_prior_content_hash"] = target_content_hash
+        updated["rollback_target_version"] = target_version
+        updated["prior_ratification_receipt_id"] = prior_ratification_receipt
 
         if dry_run:
             write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
             _write_json(out_dir / "prior.dry_run_rollback_preview.json", updated)
         else:
+            if store.store_kind != "w1_reference":
+                raise GovernanceBlock(
+                    f"rollback persist refused: store_kind={store.store_kind!r}; "
+                    f"fixture stores must never be opened as governed reference stores"
+                )
             persist = PriorStore(store_dir, create=True, store_kind="w1_reference", allow_persist=True)
             persist.commit_terminal_bundle(
                 prior=updated,
                 learning_receipt=validated_receipt,
                 ecqr_decision=ecqr_validated,
                 allow_duplicate=True,
-                expected_version=int(prior.get("version") or 1),
+                expected_version=target_version,
                 inject_failure_after=inject_failure_after,
             )
             write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
@@ -675,8 +717,8 @@ def run_from_fixture_dir(
     fixture_dir = Path(fixture_dir)
     out_dir = Path(out_dir)
     store_dir = Path(store_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
     assert_paths_disjoint(store_dir=store_dir, out_dir=out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     events = _load_json(fixture_dir / "events.json")
     shadow_path = fixture_dir / "shadow_events.json"
@@ -756,6 +798,8 @@ def run_from_fixture_dir(
                 confidence=obs["confidence"],
                 mining_event_ids=list(obs["entity"].get("source_event_ids") or []),
                 shadow_event_ids=list(obs["shadow_report"].get("shadow_event_ids") or []),
+                shadow_events=obs.get("shadow_events_normalized"),
+                confidence_inputs=obs.get("confidence_inputs"),
             )
             _write_json(out_dir / "ecqr_decision.compiled.json", compiled)
             ecqr = compiled
@@ -797,6 +841,8 @@ def run_from_fixture_dir(
                     confidence=obs["confidence"],
                     mining_event_ids=list(obs["entity"].get("source_event_ids") or []),
                     shadow_event_ids=list(obs["shadow_report"].get("shadow_event_ids") or []),
+                    shadow_events=obs.get("shadow_events_normalized"),
+                    confidence_inputs=obs.get("confidence_inputs"),
                 )
                 _write_json(out_dir / "ecqr_decision.compiled.json", ecqr)
 

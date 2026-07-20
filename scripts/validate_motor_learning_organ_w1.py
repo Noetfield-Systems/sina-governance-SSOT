@@ -150,6 +150,12 @@ def main() -> int:
         "persistence_governance_gate",
         "ecqr_artifact_binding",
         "atomic_terminal_persistence",
+        "full_lifecycle_history_enforcement",
+        "shadow_artifact_provenance",
+        "confidence_artifact_provenance",
+        "immutable_fully_bound_ecqr",
+        "path_fail_before_write",
+        "rollback_target_binding",
     ):
         val = maturity.get(key)
         if val not in ("IMPLEMENTED", "PARTIAL"):

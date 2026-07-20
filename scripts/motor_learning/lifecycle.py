@@ -206,3 +206,75 @@ def transition(
     if rid:
         out["learning_receipt_id"] = rid
     return out
+
+
+def validate_transition_history(
+    history: list[dict] | None,
+    *,
+    final_state: str | None = None,
+    entity_status: str | None = None,
+) -> None:
+    """
+    Replay every recorded transition through ALLOWED/FORBIDDEN.
+    Rejects illegal jumps (OBSERVED→RATIFIED, PROPOSED→RATIFIED), discontinuous
+    histories, and histories whose final state merely appears correct.
+    """
+    if not history:
+        raise GovernanceBlock("terminal commit requires nonempty transition_history")
+    if not isinstance(history, list):
+        raise GovernanceBlock("transition_history must be a list")
+
+    # Seed state from first record's from_state
+    first = history[0]
+    if "from_state" not in first or "to_state" not in first:
+        raise GovernanceBlock("transition record missing from_state/to_state")
+    state = normalize_state(first["from_state"])
+
+    for i, rec in enumerate(history):
+        if not isinstance(rec, dict):
+            raise GovernanceBlock(f"transition_history[{i}] must be object")
+        if "from_state" not in rec or "to_state" not in rec:
+            raise GovernanceBlock(f"transition_history[{i}] missing from_state/to_state")
+        from_s = normalize_state(rec["from_state"])
+        to_s = normalize_state(rec["to_state"])
+        if from_s != state:
+            raise GovernanceBlock(
+                f"discontinuous transition history at index {i}: "
+                f"expected from_state={state} got {from_s}"
+            )
+        if (from_s, to_s) in FORBIDDEN:
+            raise GovernanceBlock(
+                f"forbidden transition in history at index {i}: {from_s}→{to_s}"
+            )
+        allowed = ALLOWED.get(from_s, set())
+        if to_s not in allowed:
+            raise GovernanceBlock(
+                f"illegal transition in history at index {i}: {from_s}→{to_s}; "
+                f"allowed={sorted(allowed)}"
+            )
+        state = to_s
+
+    if final_state is not None:
+        want = normalize_state(final_state)
+        if state != want:
+            raise GovernanceBlock(
+                f"transition history ends at {state} but claimed final_state={want}"
+            )
+    if entity_status is not None:
+        # Map store status to lifecycle state
+        status_to_state = {
+            "active": RATIFIED,
+            "rejected": REJECTED,
+            "rolled_back": ROLLED_BACK,
+            "shadow": SHADOW,
+            "proposed": PROPOSED,
+            "observed": OBSERVED,
+            "superseded": SUPERSEDED,
+            "expired": EXPIRED,
+        }
+        want = status_to_state.get(entity_status, normalize_state(entity_status))
+        if state != want:
+            raise GovernanceBlock(
+                f"transition history ends at {state} but prior status={entity_status} "
+                f"implies {want}"
+            )
