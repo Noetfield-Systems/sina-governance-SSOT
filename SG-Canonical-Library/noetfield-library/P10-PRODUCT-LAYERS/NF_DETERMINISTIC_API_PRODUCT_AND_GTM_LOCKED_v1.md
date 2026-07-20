@@ -1,11 +1,19 @@
 # NF — DETERMINISTIC API PRODUCT & GTM — LOCKED v1
 
-**Version:** v1.0.0_locked_20260719
-**Status:** LOCKED / RATIFIED
-**Authority:** Founder order ("SAVE AND LOCK")
+**Version:** v1.1.0_locked_20260719
+**Status:** LOCKED / RATIFIED · **COMMERCIAL PLANE LIVE**
+**Authority:** Founder order ("SAVE AND LOCK") + founder order to ship standalone Cloudflare landing
 **Tier:** P10-PRODUCT-LAYERS (external product surface + go-to-market)
 **Depends on:** `NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` · `COST_EXECUTION_DOCTRINE_LOCKED_v1.md` · `AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED`
 **Relationship:** External commercial framing of the same Unified Motor. Does **not** reopen Motor architecture or Runway internal taxonomy.
+
+**Live commercial plane (independent):**
+- Landing: https://nf-deterministic-api.pages.dev/
+- Adapt playbook: https://nf-deterministic-api.pages.dev/adapt/
+- Catalog: https://nf-deterministic-api.pages.dev/catalog.json
+- Product JSON: https://nf-deterministic-api.pages.dev/v1/product
+- API (staging): https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev
+- Source: `NOETFIELD-RUNWAY` → `sites/nf-deterministic-api-commercial/`
 
 ---
 
@@ -103,3 +111,4 @@ Intent ads → API landing → key + credits → ship traffic → refer friends 
 ---
 
 *v1.0.0_locked_20260719 — first write. Founder "SAVE AND LOCK". Margin figures cite measured Motor replay fixtures ($0.000050 / $0.000060 qualified; $0.000210 not-qualified), not advisor estimates.*
+*v1.1.0_locked_20260719 — standalone Cloudflare Pages commercial plane live at nf-deterministic-api.pages.dev with /adapt/ + catalog for sister sites; staging API Worker linked.*
