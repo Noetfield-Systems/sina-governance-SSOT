@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
   "version": "1.7.11",
-  "saved_at": "2026-07-19T23:57:31Z",
+  "saved_at": "2026-07-20T04:17:59Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. superseded/retired pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -384,6 +384,31 @@
           "role": "runway_portfolio_routing_dispatch"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
           "status": "ACTIVE",
           "role": "runway_core_families_dispatch"
@@ -735,6 +760,31 @@
           "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
           "status": "ACTIVE",
           "role": "runway_portfolio_routing_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
@@ -1090,6 +1140,31 @@
           "role": "runway_portfolio_routing_dispatch"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
           "status": "ACTIVE",
           "role": "runway_core_families_dispatch"
@@ -1441,6 +1516,31 @@
           "role": "runway_portfolio_routing_dispatch"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
           "status": "ACTIVE",
           "role": "runway_core_families_dispatch"
@@ -1703,6 +1803,31 @@
           "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
           "status": "ACTIVE",
           "role": "runway_portfolio_routing_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
         },
         {
           "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",

@@ -1,0 +1,87 @@
+{
+  "schema": "nf_motor_learning_organ_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "status": "SG_ACCEPTED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-20T04:17:59Z",
+  "base_head_before_commit": "c7eb116",
+  "one_line_law": "Mine receipts and patterns into ECQR priors via propose-shadow-ratify; improve Motor and Runways without silent self-mutation",
+  "central_metric": "ECQR",
+  "learning_mode": "deterministic_pattern_mining_plus_policy_priors",
+  "not_learning_mode": [
+    "base_model_finetune",
+    "unsupervised_architecture_redesign",
+    "level_3_bandit_high_risk"
+  ],
+  "ops_home": ["O6", "O8", "O10"],
+  "product_sku": false,
+  "permanent_resident_role": false,
+  "data_runway_unlock": "HOLD",
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "NF-RUNWAY-PORTFOLIO-ROUTING-INTELLIGENCE-V1",
+    "BRAIN_REGISTRY_LEARNING_GATE_v0.1.4"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+  "contracts_path": "data/nf_motor_learning_organ_contracts_v1.json",
+  "pass_checks_path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+  "dispatch_path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+  "implementation_repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+  "pattern_source_repo": "SourceA",
+  "mutation_classes": {
+    "OPEN": ["receipts_append", "pattern_export", "learning_record_draft"],
+    "GATED": ["policy_snapshot_promote", "kaizen_routing_prior_accept"],
+    "LOCKED": ["ssot_vocabulary", "unified_motor_architecture", "hold_authority_secrets"]
+  },
+  "auto_apply_allowlist": {
+    "enabled": true,
+    "targets": [
+      "stage_market_cold_start_reliability",
+      "stage_market_cold_start_est_cost",
+      "failure_signature_suppression_weight"
+    ],
+    "min_samples": 30,
+    "min_ecqr_improve_pct": 5,
+    "forbidden": [
+      "architecture",
+      "secrets",
+      "promote_merge_deploy",
+      "level_3_bandit_high_risk",
+      "locked_ssot_vocabulary"
+    ]
+  },
+  "first_improvement_targets": [
+    "recompute_router_reliability_est_cost_from_receipts",
+    "failure_signature_suppression_to_recovery_policy",
+    "distill_expensive_fix_to_reusable_cheap_artifact"
+  ],
+  "closed_loop": {
+    "loop_id": "motor_learning_organ_v1",
+    "trigger_host": "cloud",
+    "cadence_daily_mine": "0 6 * * *",
+    "cadence_weekly_roi_snapshot": "0 7 * * 1",
+    "last_fired_at_target": "loop_registry",
+    "deadman": "sourcea-deadman-v1",
+    "staleness_multiplier": 2,
+    "receipt_path": "receipts/learning/motor-learning-organ-*.json",
+    "registry_motor_id": "gh_actions_motor_learning_organ_v1"
+  },
+  "waves": {
+    "W0": "sina-governance-SSOT lock contracts pass_checks registry dispatch",
+    "W1": "SourceA pattern export learning_record drafts",
+    "W2": "NOETFIELD-RUNWAY routing roi shadow live prior",
+    "W3": "NOOS ECQR observe kaizen surface",
+    "W4": "cloud miner deadman 48h liveness"
+  },
+  "forbidden": [
+    "unsupervised_architecture_redesign",
+    "data_runway_before_future_runway_gate",
+    "base_model_training_phase1",
+    "level_3_bandit_high_risk",
+    "bypass_hold_or_sg_authority",
+    "new_product_sku_or_resident_role",
+    "video_product_upgrade"
+  ],
+  "rollback": "disable_live_roi_selection_fall_back_stage_local_static_failover"
+}

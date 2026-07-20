@@ -1,0 +1,19 @@
+{
+  "schema": "nf_doctrine_lock_receipt_v1",
+  "receipt_id": "NF_MOTOR_LEARNING_ORGAN_LOCK_RECEIPT_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "verdict": "PASS_SCOPED_CHANGE",
+  "status": "SG_ACCEPTED",
+  "saved_at": "2026-07-20T04:17:59Z",
+  "lane": "sg_governance",
+  "base_head": "c7eb116",
+  "artifacts": [
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+    "data/nf_motor_learning_organ_v1_LOCKED.json",
+    "data/nf_motor_learning_organ_contracts_v1.json",
+    "data/nf_motor_learning_organ_pass_checks_v1.json",
+    "docs/dispatch/nf-motor-learning-organ-all-repos.md"
+  ],
+  "loop_id": "motor_learning_organ_v1",
+  "w0_status": "PASS_W0_PACKET"
+}

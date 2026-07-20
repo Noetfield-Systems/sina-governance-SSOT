@@ -1,0 +1,70 @@
+{
+  "schema": "nf_motor_learning_organ_pass_checks_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "version": "1.0.0",
+  "saved_at": "2026-07-20T04:17:59Z",
+  "verdict_when_all_pass": "PASS_MOTOR_LEARNING_ORGAN_V1",
+  "checks": [
+    {
+      "check_id": "MLO-01_shadow_prior_load",
+      "description": "Motor can load a shadow policy snapshot derived from real job receipts",
+      "requires": {
+        "min_receipt_samples": 30,
+        "snapshot_status": "shadow",
+        "consumer": "packages/runway-core/src/routing/roi"
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-shadow.json",
+      "status": "DEFINED_PENDING_W2"
+    },
+    {
+      "check_id": "MLO-02_kaizen_ecqr_delta",
+      "description": "Kaizen queue shows ranked learning proposals with ECQR delta estimate",
+      "requires": {
+        "kaizen_status": "queued",
+        "fields": ["kaizen_id", "ecqr_delta_estimate", "rank_score", "record_ids"]
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-kaizen.json",
+      "status": "DEFINED_PENDING_W1_W3"
+    },
+    {
+      "check_id": "MLO-03_ratified_live_prior",
+      "description": "After founder/gate ratify, live prior changes stage routing and receipt proves before/after ECQR",
+      "requires": {
+        "snapshot_status": "live",
+        "receipt_fields": [
+          "snapshot_id",
+          "stage_market_id",
+          "ecqr_before",
+          "ecqr_after",
+          "ratified_by"
+        ]
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-live-promote.json",
+      "status": "DEFINED_PENDING_RATIFY"
+    },
+    {
+      "check_id": "MLO-04_deadman_heartbeat",
+      "description": "Deadman sees motor_learning_organ_v1 heartbeats within 2x cadence",
+      "requires": {
+        "loop_id": "motor_learning_organ_v1",
+        "deadman": "sourcea-deadman-v1",
+        "staleness_multiplier": 2,
+        "last_fired_at_fresh": true
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-heartbeat.json",
+      "status": "DEFINED_PENDING_W4"
+    }
+  ],
+  "w0_acceptance": {
+    "description": "SG lock packet complete — contracts, pass checks, registry stub, dispatch filed",
+    "artifacts": [
+      "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "data/nf_motor_learning_organ_contracts_v1.json",
+      "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "data/github_automation_registry_v1.json"
+    ],
+    "status": "PASS_W0_PACKET"
+  }
+}

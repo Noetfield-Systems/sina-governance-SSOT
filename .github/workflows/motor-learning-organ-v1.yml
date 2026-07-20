@@ -1,0 +1,55 @@
+name: motor-learning-organ-v1
+
+# Authorized by NF-MOTOR-LEARNING-ORGAN-V1.
+# W0/W4 stub: heartbeat + receipt only. No live prior promote. No architecture mutate.
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily mine slot
+    - cron: "0 7 * * 1"   # weekly ROI snapshot slot
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Tick mode"
+        required: true
+        default: "heartbeat"
+        type: choice
+        options:
+          - heartbeat
+          - daily_mine
+          - weekly_roi
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Motor learning organ tick (observe/heartbeat stub)
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [[ -z "$MODE" ]]; then
+            # cron: Mon 07:00 UTC → weekly_roi; else daily_mine
+            DOW=$(date -u +%u)
+            HOUR=$(date -u +%H)
+            if [[ "$DOW" == "1" && "$HOUR" == "07" ]]; then
+              MODE=weekly_roi
+            else
+              MODE=daily_mine
+            fi
+          fi
+          python3 scripts/motor_learning_organ_tick_v1.py --mode "$MODE" --write-receipt \
+            > "receipts/learning/motor-learning-organ-latest-summary.json"
+
+      - name: Upload learning receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motor-learning-organ-receipt
+          path: |
+            receipts/learning/motor-learning-organ-*.json
+          if-no-files-found: ignore
