@@ -4,9 +4,12 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac
 import json
+import os
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -17,10 +20,34 @@ SOURCE_REPOSITORY = "Noetfield-Systems/sina-governance-SSOT"
 SCHEMA = "site_flow_canaries_v1"
 VERDICT = "PASS_SYNTHETIC_CANARIES"
 EXPECTED_FLOWS = {
-    "sourceb.workspace",
-    "noetfield.enterprise_intake",
-    "trustfield.evidence_assessment",
+    "sourceb.workspace": {
+        "runtime_id": "site.sourceb.workspace_completion",
+        "event": "sourceb.workspace.setup_verified",
+        "output_schema": "noetfield.sourceb-workspace-receipt.v0.1",
+        "beneficiary": "customer.sourceb",
+        "synthetic_proof": "contract_and_route_gate",
+    },
+    "noetfield.enterprise_intake": {
+        "runtime_id": "site.noetfield.enterprise_intake",
+        "event": "noetfield.enterprise_intake.received",
+        "output_schema": "noetfield.enterprise-intake-qualified.v0.1",
+        "beneficiary": "customer.noetfield",
+        "synthetic_proof": "contract_and_route_gate",
+    },
+    "trustfield.evidence_assessment": {
+        "runtime_id": "site.trustfield.evidence_assessment",
+        "event": "trustfield.assessment.requested",
+        "output_schema": "trustfield.evidence-assessment-package.v0.1",
+        "beneficiary": "customer.trustfield",
+        "synthetic_proof": "contract_and_route_gate",
+    },
 }
+EXPECTED_GATES = [
+    "runtime_value_contract_validator",
+    "governance-registry-validate-v1",
+]
+HMAC_ENV_NAME = "SITE_FLOW_CANARIES_HMAC_SECRET"
+HMAC_FIELD = "receipt_hmac_sha256"
 ENVELOPE_FIELDS = (
     "work_order_id",
     "work_order_version",
@@ -29,6 +56,7 @@ ENVELOPE_FIELDS = (
     "source_sha",
     "run_url",
     "receipt_sha256",
+    HMAC_FIELD,
 )
 
 
@@ -53,6 +81,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 def canonical_receipt_bytes(receipt: dict[str, Any]) -> bytes:
     payload = dict(receipt)
     payload.pop("receipt_sha256", None)
+    payload.pop(HMAC_FIELD, None)
     return json.dumps(
         payload,
         ensure_ascii=False,
@@ -63,6 +92,16 @@ def canonical_receipt_bytes(receipt: dict[str, Any]) -> bytes:
 
 def receipt_sha256(receipt: dict[str, Any]) -> str:
     return hashlib.sha256(canonical_receipt_bytes(receipt)).hexdigest()
+
+
+def receipt_hmac_sha256(receipt: dict[str, Any], secret: str) -> str:
+    if not isinstance(secret, str) or len(secret) < 32:
+        _fail(f"{HMAC_ENV_NAME} must contain at least 32 characters")
+    claimed_hash = receipt.get("receipt_sha256")
+    if not isinstance(claimed_hash, str) or re.fullmatch(r"[0-9a-f]{64}", claimed_hash) is None:
+        _fail("receipt_sha256 is required before HMAC signing")
+    message = f"{SCHEMA}:{claimed_hash}".encode("utf-8")
+    return hmac.new(secret.encode("utf-8"), message, hashlib.sha256).hexdigest()
 
 
 def validate_dispatch_constants(
@@ -85,6 +124,15 @@ def validate_base_receipt(receipt: dict[str, Any]) -> None:
         _fail("mode must be synthetic")
     if receipt.get("errors") != []:
         _fail("errors must be an empty list")
+    generated_at = receipt.get("generated_at")
+    if not isinstance(generated_at, str):
+        _fail("generated_at must be an ISO timestamp")
+    try:
+        parsed_generated_at = datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
+    except ValueError:
+        _fail("generated_at must be an ISO timestamp")
+    if parsed_generated_at.tzinfo is None:
+        _fail("generated_at must include a timezone")
 
     flows = receipt.get("flows")
     if not isinstance(flows, list) or len(flows) != len(EXPECTED_FLOWS):
@@ -94,8 +142,18 @@ def validate_base_receipt(receipt: dict[str, Any]) -> None:
         for row in flows
         if isinstance(row, dict) and isinstance(row.get("site_flow"), str)
     }
-    if names != EXPECTED_FLOWS:
+    if names != set(EXPECTED_FLOWS):
         _fail(f"flows must be exactly {sorted(EXPECTED_FLOWS)}")
+    for row in flows:
+        if not isinstance(row, dict):
+            _fail("each flow must be an object")
+        site_flow = row.get("site_flow")
+        expected = {"site_flow": site_flow, **EXPECTED_FLOWS.get(str(site_flow), {})}
+        if row != expected:
+            _fail(f"flow {site_flow} must match its exact bounded synthetic proof")
+
+    if receipt.get("gates_activated") != EXPECTED_GATES:
+        _fail("gates_activated must match the exact bounded gate set")
 
     metrics = receipt.get("metrics")
     if not isinstance(metrics, dict):
@@ -111,7 +169,9 @@ def validate_base_receipt(receipt: dict[str, Any]) -> None:
             _fail(f"metrics.{key} must be {expected}")
 
 
-def validate_enriched_receipt(receipt: dict[str, Any]) -> None:
+def validate_enriched_receipt(
+    receipt: dict[str, Any], *, hmac_secret: str | None = None, require_hmac: bool = False
+) -> None:
     validate_base_receipt(receipt)
     validate_dispatch_constants(
         work_order_id=str(receipt.get("work_order_id", "")),
@@ -136,16 +196,48 @@ def validate_enriched_receipt(receipt: dict[str, Any]) -> None:
     actual_hash = receipt_sha256(receipt)
     if claimed_hash != actual_hash:
         _fail(f"receipt_sha256 mismatch: expected {actual_hash}, got {claimed_hash}")
+    claimed_hmac = receipt.get(HMAC_FIELD)
+    if require_hmac or claimed_hmac is not None:
+        if not isinstance(claimed_hmac, str) or re.fullmatch(r"[0-9a-f]{64}", claimed_hmac) is None:
+            _fail(f"{HMAC_FIELD} must be a lowercase HMAC-SHA-256 digest")
+        if hmac_secret is None:
+            _fail(f"{HMAC_ENV_NAME} is required to verify the receipt HMAC")
+        expected_hmac = receipt_hmac_sha256(receipt, hmac_secret)
+        if not hmac.compare_digest(claimed_hmac, expected_hmac):
+            _fail(f"{HMAC_FIELD} mismatch")
+
+
+def sign_receipt(receipt: dict[str, Any], secret: str) -> dict[str, Any]:
+    validate_enriched_receipt(receipt)
+    signed = dict(receipt)
+    signed[HMAC_FIELD] = receipt_hmac_sha256(signed, secret)
+    validate_enriched_receipt(signed, hmac_secret=secret, require_hmac=True)
+    return signed
+
+
+def rebind_receipt(
+    receipt: dict[str, Any], *, source_sha: str, run_url: str, hmac_secret: str | None = None
+) -> dict[str, Any]:
+    validate_enriched_receipt(
+        receipt,
+        hmac_secret=hmac_secret,
+        require_hmac=HMAC_FIELD in receipt,
+    )
+    base = {key: value for key, value in receipt.items() if key not in ENVELOPE_FIELDS}
+    return finalize_receipt(base, source_sha=source_sha, run_url=run_url)
 
 
 def finalize_receipt(
-    base: dict[str, Any], *, source_sha: str, run_url: str
+    base: dict[str, Any], *, source_sha: str, run_url: str, generated_at: str | None = None
 ) -> dict[str, Any]:
     validate_base_receipt(base)
     present = sorted(field for field in ENVELOPE_FIELDS if field in base)
     if present:
         _fail(f"generated receipt already contains executor envelope fields: {present}")
     enriched = dict(base)
+    enriched["generated_at"] = generated_at or datetime.now(timezone.utc).isoformat().replace(
+        "+00:00", "Z"
+    )
     enriched.update(
         {
             "work_order_id": WORK_ORDER_ID,
@@ -194,6 +286,18 @@ def _build_parser() -> argparse.ArgumentParser:
     verify.add_argument("--expected", type=Path, required=True)
     verify.add_argument("--source-repository", required=True)
     _dispatch_args(verify)
+
+    sign = subparsers.add_parser("sign")
+    sign.add_argument("--receipt", type=Path, required=True)
+    sign.add_argument("--output", type=Path, required=True)
+
+    rebind = subparsers.add_parser("rebind")
+    rebind.add_argument("--receipt", type=Path, required=True)
+    rebind.add_argument("--output", type=Path, required=True)
+    rebind.add_argument("--source-repository", required=True)
+    rebind.add_argument("--source-sha", required=True)
+    rebind.add_argument("--run-url", required=True)
+    _dispatch_args(rebind)
     return parser
 
 
@@ -210,10 +314,15 @@ def _validate_cli_bounds(args: argparse.Namespace) -> None:
 def main() -> int:
     args = _build_parser().parse_args()
     try:
-        _validate_cli_bounds(args)
+        if args.command != "sign":
+            _validate_cli_bounds(args)
         if args.command == "preflight":
             receipt = _read_json(args.receipt)
-            validate_enriched_receipt(receipt)
+            validate_enriched_receipt(
+                receipt,
+                hmac_secret=os.environ.get(HMAC_ENV_NAME),
+                require_hmac=False,
+            )
             print(
                 json.dumps(
                     {
@@ -227,6 +336,26 @@ def main() -> int:
             )
             return 0
 
+        if args.command == "sign":
+            secret = os.environ.get(HMAC_ENV_NAME)
+            if secret is None:
+                _fail(f"{HMAC_ENV_NAME} is required")
+            signed = sign_receipt(_read_json(args.receipt), secret)
+            _write_json(args.output, signed)
+            print(json.dumps({"status": "HMAC_SIGNED", "receipt_sha256": signed["receipt_sha256"]}))
+            return 0
+
+        if args.command == "rebind":
+            rebound = rebind_receipt(
+                _read_json(args.receipt),
+                source_sha=args.source_sha,
+                run_url=args.run_url,
+                hmac_secret=os.environ.get(HMAC_ENV_NAME),
+            )
+            _write_json(args.output, rebound)
+            print(json.dumps({"status": "REBOUND", "receipt_sha256": rebound["receipt_sha256"]}))
+            return 0
+
         if args.command == "finalize":
             receipt = finalize_receipt(
                 _read_json(args.input), source_sha=args.source_sha, run_url=args.run_url
@@ -237,8 +366,9 @@ def main() -> int:
 
         receipt = _read_json(args.receipt)
         expected = _read_json(args.expected)
-        validate_enriched_receipt(receipt)
-        validate_enriched_receipt(expected)
+        secret = os.environ.get(HMAC_ENV_NAME)
+        validate_enriched_receipt(receipt, hmac_secret=secret, require_hmac=True)
+        validate_enriched_receipt(expected, hmac_secret=secret, require_hmac=True)
         if receipt != expected:
             _fail("R2 read-back content differs from the uploaded receipt")
         print(json.dumps({"status": "READ_BACK_VERIFIED", "receipt_sha256": receipt["receipt_sha256"]}))

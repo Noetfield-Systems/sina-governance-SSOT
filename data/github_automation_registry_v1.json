@@ -433,7 +433,8 @@
         "llm_call"
       ],
       "requires_secrets": [
-        "CF_MAIN_TOKEN"
+        "CF_MAIN_TOKEN",
+        "SITE_FLOW_CANARIES_HMAC_SECRET"
       ],
       "receipt_path": "r2://noetfield-runway-results-staging/mrw/external/SITE_FLOW_CANARIES_V1.json",
       "conflicts_with": [],
