@@ -4,13 +4,16 @@ compatibility_date = "2026-07-18"
 account_id = "b7282b4a5c17b84d62e3ef8866b878f8"
 workers_dev = true
 
+# KV free-tier cutback on secondary account (b7282b4a): slower cron + fewer writes.
+# GHA posture unchanged: Enterprise 50k minutes = ROI classes A–D; this is CF KV
+# free tier on the secondary account, NOT "kill GHA".
 [triggers]
-crons = ["*/30 * * * *"]
+crons = ["0 */2 * * *"]
 
 [vars]
 LOOP_ID = "nf-independent-loop-verifier-v1"
-INTERVAL_MINUTES = "30"
-CRON = "*/30 * * * *"
+INTERVAL_MINUTES = "120"
+CRON = "0 */2 * * *"
 VERIFIER_ACCOUNT_ID = "b7282b4a"
 
 # Optional secrets: VERIFIER_TELEGRAM_BOT_TOKEN, VERIFIER_TELEGRAM_CHAT_ID

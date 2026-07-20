@@ -234,11 +234,13 @@ async function reviewPull(token, owner, repo, pr, env, receiptId) {
   };
 }
 
+/** In-isolate last tick time for /health. Avoids KV on every health poll. */
+let memLastFiredAt = null;
+
 async function persist(env, receipt) {
   if (!env.RECEIPTS) return;
-  await env.RECEIPTS.put(`tick:${receipt.at}`, JSON.stringify(receipt), {
-    expirationTtl: 60 * 60 * 24 * 30,
-  });
+  // KV free-tier: no tick:${at} history key; keep last_fired_at + last_receipt
+  // (+ reviewed:* only when needed).
   await env.RECEIPTS.put("last_fired_at", receipt.at);
   await env.RECEIPTS.put("last_receipt", JSON.stringify(receipt));
   for (const review of receipt.reviews || []) {
@@ -246,6 +248,7 @@ async function persist(env, receipt) {
       await env.RECEIPTS.put(`reviewed:${review.pr_number}`, review.head_sha);
     }
   }
+  memLastFiredAt = receipt.at;
 }
 
 export async function runVerifierTick(env, meta = {}) {
@@ -330,12 +333,17 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/health") {
-      const last = env.RECEIPTS ? await env.RECEIPTS.get("last_fired_at") : null;
+      // Prefer in-isolate last tick; cold start may KV-read once.
+      let last = memLastFiredAt;
+      if (!last && env.RECEIPTS) {
+        last = await env.RECEIPTS.get("last_fired_at");
+        if (last) memLastFiredAt = last;
+      }
       return json({
         ok: true,
         schema: `${SCHEMA}-health`,
         loop_id: env.LOOP_ID || SCHEMA,
-        cron: "30 * * * *",
+        cron: "",
         last_fired_at: last,
         mode: "PRODUCTION_INDEPENDENT_VERIFICATION_HOLD",
         hold: "HOLD",
