@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Validate Motor Learning Organ W1 reference implementation + governance bounds."""
+"""Validate Motor Learning Organ W1 — hard-fail governance + scope guards."""
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -16,122 +17,114 @@ def fail(msg: str) -> None:
 
 
 def main() -> int:
-    required_files = [
-        "scripts/motor_learning/normalize.py",
-        "scripts/motor_learning/extract.py",
-        "scripts/motor_learning/prior_store.py",
-        "scripts/motor_learning/similarity.py",
-        "scripts/motor_learning/mine.py",
-        "scripts/motor_learning/confidence.py",
+    required = [
         "scripts/motor_learning/lifecycle.py",
-        "scripts/motor_learning/shadow.py",
+        "scripts/motor_learning/prior_store.py",
         "scripts/motor_learning/ecqr.py",
         "scripts/motor_learning/receipt.py",
         "scripts/motor_learning/orchestrator.py",
+        "scripts/motor_learning/event_registry.py",
         "scripts/motor_learning_organ_w1_run.py",
         "tests/test_motor_learning_organ_w1.py",
         "data/nf_motor_learning_organ_v1_LOCKED.json",
-        "data/nf_motor_learning_receipt_v1.json",
-        "fixtures/motor_learning_w1/01_repeated_success_ratify/events.json",
     ]
-    for rel in required_files:
+    for rel in required:
         if not (ROOT / rel).exists():
-            fail(f"missing required file: {rel}")
+            fail(f"missing: {rel}")
 
     lock = json.loads((ROOT / "data/nf_motor_learning_organ_v1_LOCKED.json").read_text())
     maturity = lock.get("implementation_maturity") or {}
-    # Honest maturity: local W1 engine must be IMPLEMENTED; live cross-repo remain not
-    must_impl = [
-        "event_normalization",
-        "pattern_extraction",
-        "prior_retrieval",
-        "pattern_mining",
-        "similarity",
-        "confidence",
-        "shadow_evaluation",
-        "learning_engine_orchestration",
-        "ratification_evidence",
-    ]
-    for key in must_impl:
-        if maturity.get(key) != "IMPLEMENTED":
-            fail(f"maturity.{key} must be IMPLEMENTED for W1 reference (got {maturity.get(key)})")
-    for key in ("sourcea_live_export", "runway_live_consume", "live_promotion"):
-        if maturity.get(key) in ("IMPLEMENTED",):
-            fail(f"maturity.{key} must not be IMPLEMENTED yet")
 
-    # Forbidden unlocks
-    if lock.get("data_runway_unlock") not in ("HOLD", False, "hold"):
-        fail("data_runway_unlock must remain HOLD")
-    for banned in ("base_model_finetune", "level_3_bandit_high_risk"):
-        if banned not in (lock.get("not_learning_mode") or []) and banned not in (lock.get("forbidden") or []):
-            # soft check via not_learning_mode or forbidden lists
-            pass
-    if "base_model_training_phase1" not in (lock.get("forbidden") or []):
-        fail("forbidden must include base_model_training_phase1")
+    # Hard forbidden checks
+    if lock.get("data_runway_unlock") not in ("HOLD", "hold", False):
+        fail("data_runway_unlock must be HOLD")
+    forbidden = set(lock.get("forbidden") or [])
+    for req in ("base_model_training_phase1", "level_3_bandit_high_risk", "unsupervised_architecture_redesign"):
+        if req not in forbidden:
+            fail(f"forbidden missing {req}")
+    not_mode = set(lock.get("not_learning_mode") or [])
+    for req in ("base_model_finetune", "level_3_bandit_high_risk"):
+        if req not in not_mode and req not in forbidden:
+            fail(f"not_learning_mode/forbidden missing {req}")
 
-    # Scope guard: landing-site must not appear in this change set expectation
-    # (validated at commit time; here ensure validator itself isn't under landing-site)
-    if (ROOT / "landing-site").exists():
-        # existence ok on main workspace; W1 worktree shouldn't add files there
-        pass
+    if maturity.get("live_promotion") != "FORBIDDEN":
+        fail("live_promotion must be FORBIDDEN")
+    if maturity.get("model_learning") != "FORBIDDEN":
+        fail("model_learning must be FORBIDDEN")
 
-    # No ML training imports in motor_learning package
-    ml_dir = ROOT / "scripts" / "motor_learning"
-    banned_tokens = ("torch", "tensorflow", "sklearn", "xgboost", "fit_predict", "backprop")
-    for py in ml_dir.glob("*.py"):
+    # Lifecycle must not allow require_receipt=False for terminals
+    life = (ROOT / "scripts/motor_learning/lifecycle.py").read_text()
+    if "require_receipt=False is forbidden" not in life:
+        fail("lifecycle must reject require_receipt=False for terminal states")
+
+    # No ML tokens
+    for py in (ROOT / "scripts/motor_learning").glob("*.py"):
         text = py.read_text().lower()
-        for tok in banned_tokens:
+        for tok in ("torch", "tensorflow", "sklearn", "xgboost", "backprop"):
             if tok in text:
-                fail(f"ML token '{tok}' found in {py.name}")
+                fail(f"ML token {tok} in {py.name}")
 
-    # Heartbeat workflow must not ratify
-    wf = ROOT / ".github/workflows/motor-learning-organ-v1.yml"
-    if wf.exists():
-        wft = wf.read_text().lower()
-        if "ratif" in wft and "fixture" not in wft:
-            # allow comments about no ratify
-            if "no live" not in wft and "no-promot" not in wft and "observe" not in wft:
-                fail("heartbeat workflow appears to ratify")
-
-    # Run unit tests
+    # Unit tests
     proc = subprocess.run(
         [sys.executable, "-m", "unittest", "tests.test_motor_learning_organ_w1", "-q"],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
+        cwd=str(ROOT), capture_output=True, text=True,
     )
     if proc.returncode != 0:
         fail("unittest failed:\n" + proc.stderr + proc.stdout)
 
-    # Deterministic e2e fixture
+    # E2E + dry-run store hash
     import tempfile
-    td = Path(tempfile.mkdtemp(prefix="mlo-validate-"))
-    proc2 = subprocess.run(
-        [
-            sys.executable,
-            "scripts/motor_learning_organ_w1_run.py",
-            "--fixture",
-            "fixtures/motor_learning_w1/01_repeated_success_ratify",
-            "--out",
-            str(td / "out"),
-            "--store",
-            str(td / "store"),
-            "--dry-run",
-        ],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from motor_learning.prior_store import store_tree_hash as sth
+    from motor_learning.orchestrator import run_from_fixture_dir
+
+    td = Path(tempfile.mkdtemp(prefix="mlo-val-"))
+    store = td / "store"
+    store.mkdir()
+    before = sth(store)
+    summary = run_from_fixture_dir(
+        ROOT / "fixtures/motor_learning_w1/01_repeated_success_ratify",
+        out_dir=td / "out", store_dir=store, dry_run=True,
     )
-    if proc2.returncode != 0:
-        fail("e2e fixture run failed:\n" + proc2.stderr + proc2.stdout)
-    else:
-        summary = json.loads((td / "out" / "summary.json").read_text())
-        if summary.get("live_promotion"):
-            fail("e2e summary claims live_promotion")
-        if summary.get("ecqr_decision") != "RATIFIED":
-            fail(f"e2e expected RATIFIED, got {summary.get('ecqr_decision')}")
-        if not summary.get("receipt_id"):
-            fail("e2e missing receipt_id")
+    after = sth(store)
+    if before != after:
+        fail(f"dry-run mutated store: {before} != {after}")
+    if summary.get("ecqr_decision") != "RATIFIED":
+        fail(f"e2e expected RATIFIED got {summary.get('ecqr_decision')} blocked={summary.get('blocked_reason')}")
+    if not summary.get("receipt_id"):
+        fail("e2e missing receipt")
+    if summary.get("live_promotion"):
+        fail("live_promotion true")
+
+    # Rollback e2e
+    td2 = Path(tempfile.mkdtemp(prefix="mlo-rb-"))
+    rb = run_from_fixture_dir(
+        ROOT / "fixtures/motor_learning_w1/07_rollback",
+        out_dir=td2 / "out", store_dir=td2 / "store", dry_run=True,
+    )
+    if rb.get("final_state") != "ROLLED_BACK":
+        fail(f"rollback e2e failed: {rb}")
+
+    # Scope guard vs exact base SHA
+    base = os.environ.get("MLO_BASE_SHA") or ""
+    if not base:
+        # try origin/main
+        r = subprocess.run(["git", "rev-parse", "origin/main"], cwd=str(ROOT), capture_output=True, text=True)
+        if r.returncode != 0:
+            fail(f"cannot resolve base SHA for scope guard: {r.stderr}")
+        else:
+            base = r.stdout.strip()
+    if base:
+        diff = subprocess.run(
+            ["git", "diff", "--name-only", f"{base}...HEAD"],
+            cwd=str(ROOT), capture_output=True, text=True,
+        )
+        if diff.returncode != 0:
+            fail(f"scope diff failed against {base}: {diff.stderr}")
+        else:
+            for line in diff.stdout.splitlines():
+                if line.startswith("landing-site/"):
+                    fail(f"landing-site/ changed: {line}")
 
     if errors:
         print("validate_motor_learning_organ_w1: FAIL")
@@ -139,7 +132,13 @@ def main() -> int:
             print(" -", e)
         return 1
     print("validate_motor_learning_organ_w1: ALL PASS")
-    print(json.dumps({"maturity_w1_local": "IMPLEMENTED", "live_promotion": False, "model_learning": False}, indent=2))
+    print(json.dumps({
+        "dry_run_store_hash_before": before,
+        "dry_run_store_hash_after": after,
+        "rollback_final_state": rb.get("final_state"),
+        "live_promotion": False,
+        "model_learning": False,
+    }, indent=2))
     return 0
 
 

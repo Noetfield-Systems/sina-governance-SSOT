@@ -1,3 +1,4 @@
 {
-  "min_occurrences": 3
+  "min_occurrences": 3,
+  "mode": "rollback"
 }

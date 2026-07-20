@@ -1,8 +1,9 @@
-
-"""learning_receipt emission and validation — mandatory for ratify/reject/rollback."""
+"""learning_receipt emission and validation — mandatory for terminal states."""
 from __future__ import annotations
 
 import json
+import math
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +47,29 @@ DECISION_MAP = {
 }
 
 
+def _parse_ts(value: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise SchemaError("timestamp must be non-empty ISO8601 string")
+    v = value.strip().replace(" ", "T")
+    if v.endswith("Z"):
+        dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+    else:
+        dt = datetime.fromisoformat(v)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _finite_unit(x: Any, name: str) -> float:
+    try:
+        v = float(x)
+    except (TypeError, ValueError) as exc:
+        raise SchemaError(f"{name} must be float") from exc
+    if not math.isfinite(v) or v < 0.0 or v > 1.0:
+        raise SchemaError(f"{name} must be finite in [0,1], got {v}")
+    return v
+
+
 def build_learning_receipt(
     *,
     decision: str,
@@ -67,7 +91,11 @@ def build_learning_receipt(
     rollback_target: str | None = None,
     snapshot_id: str | None = None,
     shadow_evidence_path: str | None = None,
+    shadow_id: str | None = None,
+    shadow_hash: str | None = None,
+    confidence_hash: str | None = None,
     similarity_score: float | None = None,
+    ecqr_decision_id: str | None = None,
 ) -> dict[str, Any]:
     mapped = DECISION_MAP.get(decision)
     if not mapped:
@@ -78,14 +106,20 @@ def build_learning_receipt(
         raise SchemaError("reviewer required")
     if not evidence_links:
         raise SchemaError("evidence_links required")
-    if not decision_timestamp:
-        raise SchemaError("decision_timestamp required")
+    ts = _parse_ts(decision_timestamp)
+    cb = _finite_unit(confidence_before, "confidence_before")
+    ca = _finite_unit(confidence_after, "confidence_after")
+
+    if mapped == "rolled_back" and not rollback_target:
+        raise SchemaError("rollback requires rollback_target")
+    if mapped == "accepted" and not (shadow_id or shadow_evidence_path):
+        raise SchemaError("ratification requires shadow binding")
 
     rid = "lr-" + content_hash({
         "d": mapped,
         "p": prior_id,
         "c": candidate_id,
-        "t": decision_timestamp,
+        "t": ts,
         "r": reviewer,
     })[:20]
 
@@ -95,13 +129,13 @@ def build_learning_receipt(
         "learning_receipt_id": rid,
         "decision": mapped,
         "decision_outcome": mapped,
-        "decision_timestamp": decision_timestamp,
+        "decision_timestamp": ts,
         "prior_id": prior_id,
         "candidate_id": candidate_id,
         "origin_event": origin_event,
         "evidence_links": list(evidence_links),
-        "confidence_before": confidence_before,
-        "confidence_after": confidence_after,
+        "confidence_before": cb,
+        "confidence_after": ca,
         "reviewer": reviewer,
         "rationale": rationale,
         "why_accepted_or_rejected": rationale,
@@ -112,10 +146,14 @@ def build_learning_receipt(
         "supersedes": supersedes,
         "superseded_by": superseded_by,
         "rollback_target": rollback_target,
-        "ratified_at": decision_timestamp,
+        "ratified_at": ts,
         "snapshot_id": snapshot_id or prior_id,
         "shadow_evidence_path": shadow_evidence_path,
+        "shadow_id": shadow_id,
+        "shadow_hash": shadow_hash,
+        "confidence_hash": confidence_hash,
         "similarity_score": similarity_score,
+        "ecqr_decision_id": ecqr_decision_id,
         "schema_versions": {
             "receipt": "nf_motor_learning_receipt_v1",
             "organ": "nf_motor_learning_organ_v1",
@@ -128,6 +166,7 @@ def build_learning_receipt(
         "policy_versions": {
             "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
         },
+        "integrity_hash_note": "content integrity over receipt fields; not reviewer authentication",
     }
     body["integrity_hash"] = integrity_hash({k: body[k] for k in sorted(body) if k != "integrity_hash"})
     return body
@@ -139,20 +178,54 @@ def validate_learning_receipt(receipt: dict[str, Any]) -> dict:
     missing = [k for k in REQUIRED if k not in receipt]
     if missing:
         raise GovernanceBlock(f"learning_receipt missing required fields: {missing}")
+
+    if receipt.get("receipt_id") != receipt.get("learning_receipt_id"):
+        raise GovernanceBlock("receipt_id must equal learning_receipt_id")
+
     if receipt["decision"] not in ("accepted", "rejected", "rolled_back"):
         raise GovernanceBlock(f"invalid receipt decision: {receipt['decision']}")
     if not receipt.get("reviewer"):
         raise GovernanceBlock("receipt reviewer required")
     if not receipt.get("evidence_links"):
         raise GovernanceBlock("receipt evidence_links required")
-    if not receipt.get("decision_timestamp") and not receipt.get("ratified_at"):
-        raise GovernanceBlock("receipt decision_timestamp required")
+    if not isinstance(receipt["evidence_links"], list) or not all(isinstance(x, str) and x for x in receipt["evidence_links"]):
+        raise GovernanceBlock("evidence_links must be nonempty list of strings")
+
+    _parse_ts(receipt.get("decision_timestamp") or receipt.get("ratified_at") or "")
+    _finite_unit(receipt["confidence_before"], "confidence_before")
+    _finite_unit(receipt["confidence_after"], "confidence_after")
+
+    for field in ("affected_loops", "applicable_runways", "repositories"):
+        val = receipt.get(field)
+        if not isinstance(val, list) or not all(isinstance(x, str) and x.strip() for x in val):
+            # repositories may be empty list for global, but must be a list
+            if field == "repositories" and isinstance(val, list) and all(isinstance(x, str) for x in val):
+                continue
+            if field != "repositories":
+                raise GovernanceBlock(f"{field} must be nonempty list of nonempty strings")
+            raise GovernanceBlock(f"{field} must be a list of strings")
+    if not receipt["affected_loops"] or not receipt["applicable_runways"]:
+        raise GovernanceBlock("affected_loops and applicable_runways must be nonempty")
+
     if not receipt.get("why_accepted_or_rejected") and not receipt.get("rationale"):
         raise GovernanceBlock("receipt rationale required")
-    # verify integrity if present
+
+    if receipt["decision"] == "rolled_back" and not receipt.get("rollback_target"):
+        raise GovernanceBlock("rollback receipt requires rollback_target")
+    if receipt["decision"] == "accepted":
+        if not (receipt.get("shadow_id") or receipt.get("shadow_evidence_path") or receipt.get("shadow_hash")):
+            raise GovernanceBlock("ratification receipt requires shadow binding")
+        if receipt.get("confidence_hash") is None and receipt.get("confidence_after") is None:
+            raise GovernanceBlock("ratification receipt requires confidence binding")
+    if receipt["decision"] == "rejected":
+        if not receipt.get("rationale") and not receipt.get("why_accepted_or_rejected"):
+            raise GovernanceBlock("rejection requires rationale")
+        if not receipt.get("evidence_links"):
+            raise GovernanceBlock("rejection requires reviewed evidence")
+
     expected = integrity_hash({k: receipt[k] for k in sorted(receipt) if k != "integrity_hash"})
     if receipt.get("integrity_hash") and receipt["integrity_hash"] != expected:
-        raise GovernanceBlock("receipt integrity_hash mismatch")
+        raise GovernanceBlock("receipt integrity_hash mismatch (content integrity, not auth)")
     return receipt
 
 

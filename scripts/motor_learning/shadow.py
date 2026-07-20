@@ -80,4 +80,5 @@ def evaluate_shadow(candidate: dict, events: list[dict]) -> dict[str, Any]:
         "details": details,
         "evidence_refs": list(candidate.get("evidence_refs") or []),
     }
+    report["content_hash"] = content_hash({k: report[k] for k in sorted(report) if k != "content_hash"})
     return report

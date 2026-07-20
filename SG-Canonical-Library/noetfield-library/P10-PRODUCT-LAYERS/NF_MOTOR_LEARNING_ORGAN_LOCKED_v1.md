@@ -4,7 +4,7 @@
 **Status:** `SG_ACCEPTED` · learning-organ addendum (does **not** reopen Unified Motor architecture or Runway product locks)
 **Authority:** Architecture Finalization Gate
 **Tier:** P10-PRODUCT-LAYERS
-**Version:** v1.2.0_locked_20260720
+**Version:** v1.3.0_locked_20260720
 **Machine:** `data/nf_motor_learning_organ_v1_LOCKED.json`
 **Contracts:** `data/nf_motor_learning_organ_contracts_v1.json`
 **Learning receipt:** `data/nf_motor_learning_receipt_v1.json`
@@ -35,6 +35,11 @@
 | ECQR gate + lifecycle | IMPLEMENTED (W1 SG reference) |
 | learning_receipt on ratify/reject/rollback | IMPLEMENTED (W1 SG reference) |
 | End-to-end orchestrator (fixture/dry-run) | IMPLEMENTED (W1 SG reference) |
+| Terminal receipt non-bypassable | IMPLEMENTED |
+| Dry-run store immutability | IMPLEMENTED |
+| Persistence governance gate | IMPLEMENTED |
+| Independent shadow evidence | IMPLEMENTED |
+| Rollback e2e | IMPLEMENTED |
 | SourceA live pattern export | NOT_IMPLEMENTED (dispatch W1→SourceA) |
 | NOETFIELD-RUNWAY live prior consume | NOT_IMPLEMENTED (W2) |
 | NOOS Kaizen surface | NOT_IMPLEMENTED (W3) |

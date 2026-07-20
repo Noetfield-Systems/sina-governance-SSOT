@@ -2,8 +2,8 @@
   "schema": "nf_motor_learning_organ_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
   "status": "SG_ACCEPTED",
-  "version": "1.2.0",
-  "saved_at": "2026-07-20T09:10:00Z",
+  "version": "1.3.0",
+  "saved_at": "2026-07-20T11:30:00Z",
   "base_head_before_commit": "c7eb116",
   "one_line_law": "Mine receipts and patterns into ECQR priors via propose-shadow-ratify; improve Motor and Runways without silent self-mutation",
   "central_metric": "ECQR",
@@ -102,13 +102,21 @@
   "implementation_maturity": {
     "w0": "GOVERNANCE_SCAFFOLD_COMPLETE",
     "event_normalization": "IMPLEMENTED",
+    "event_identity_collision_detection": "IMPLEMENTED",
     "pattern_extraction": "IMPLEMENTED",
     "prior_retrieval": "IMPLEMENTED",
+    "prior_versioning_cas_expiry": "IMPLEMENTED",
     "pattern_mining": "IMPLEMENTED",
     "similarity": "IMPLEMENTED",
     "confidence": "IMPLEMENTED",
+    "independent_shadow_evidence": "IMPLEMENTED",
     "shadow_evaluation": "IMPLEMENTED",
     "learning_engine_orchestration": "IMPLEMENTED",
+    "terminal_receipt_enforcement": "IMPLEMENTED",
+    "persistence_governance_gate": "IMPLEMENTED",
+    "dry_run_store_immutability": "IMPLEMENTED",
+    "ecqr_artifact_binding": "IMPLEMENTED",
+    "rollback_e2e": "IMPLEMENTED",
     "ratification_evidence": "IMPLEMENTED",
     "sourcea_live_export": "NOT_IMPLEMENTED",
     "runway_live_consume": "NOT_IMPLEMENTED",
@@ -125,12 +133,21 @@
       "W1_SG_REFERENCE"
     ]
   },
-  "w1_status": "REFERENCE_IMPLEMENTATION_IN_SG",
+  "w1_status": "GOVERNANCE_BOUNDARY_ENFORCED_SG_REFERENCE",
   "w1_reference": {
     "package": "scripts/motor_learning/",
     "cli": "scripts/motor_learning_organ_w1_run.py",
     "validator": "scripts/validate_motor_learning_organ_w1.py",
     "tests": "tests/test_motor_learning_organ_w1.py",
     "fixtures": "fixtures/motor_learning_w1/"
-  }
+  },
+  "governance_bypasses_closed": [
+    "terminal_require_receipt_false",
+    "dry_run_store_mutation",
+    "ungoverned_terminal_persist",
+    "ecqr_unbound_shadow_string",
+    "reviewer_decision_rewrite",
+    "shadow_mining_overlap",
+    "event_identity_collision"
+  ]
 }

@@ -36,18 +36,50 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Unit tests
-        run: python3 -m unittest tests.test_motor_learning_organ_w1 -v
-      - name: W1 validator (contracts + e2e fixture + no-live-promo)
-        run: python3 scripts/validate_motor_learning_organ_w1.py
-      - name: Scope guard — no landing-site changes in this workflow tree
+
+      - name: Ensure base SHA available
+        shell: bash
         run: |
-          if git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^landing-site/'; then
-            echo "FAIL: landing-site/ must not change in Motor Learning PRs"
+          set -euo pipefail
+          git fetch origin main --depth=1 || git fetch origin main
+          BASE=$(git merge-base HEAD origin/main || git rev-parse origin/main)
+          echo "MLO_BASE_SHA=$BASE" >> "$GITHUB_ENV"
+          echo "base=$BASE"
+
+      - name: Unit tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest tests.test_motor_learning_organ_w1 -v
+
+      - name: W1 validator
+        shell: bash
+        env:
+          MLO_BASE_SHA: ${{ env.MLO_BASE_SHA }}
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_motor_learning_organ_w1.py
+
+      - name: Scope guard vs exact base SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${MLO_BASE_SHA:?base sha required}"
+          if ! git diff --name-only "${BASE}...HEAD" > /tmp/mlo-scope.txt; then
+            echo "FAIL: cannot compute diff against base $BASE"
             exit 1
           fi
-          echo "scope ok"
+          if grep -E '^landing-site/' /tmp/mlo-scope.txt; then
+            echo "FAIL: landing-site/ must not change"
+            exit 1
+          fi
+          echo "scope ok vs $BASE"

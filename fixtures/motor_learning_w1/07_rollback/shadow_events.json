@@ -1,0 +1,74 @@
+[
+  {
+    "event_id": "shadow-evt-001",
+    "event_type": "recovery_success",
+    "source": "fixture",
+    "occurred_at": "2026-07-08T18:01:00Z",
+    "actor": "test_actor",
+    "loop_id": "motor_learning_organ_v1",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair",
+    "action_attempted": "ci_retry_deploy",
+    "outcome": "success",
+    "error_class": "cloudflare_timeout",
+    "recovery_path": "route_B_retry",
+    "stage": "deploy",
+    "evidence_refs": [
+      "receipts/fixture/1.json"
+    ]
+  },
+  {
+    "event_id": "shadow-evt-002",
+    "event_type": "recovery_success",
+    "source": "fixture",
+    "occurred_at": "2026-07-08T18:02:00Z",
+    "actor": "test_actor",
+    "loop_id": "motor_learning_organ_v1",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair",
+    "action_attempted": "ci_retry_deploy",
+    "outcome": "success",
+    "error_class": "cloudflare_timeout",
+    "recovery_path": "route_B_retry",
+    "stage": "deploy",
+    "evidence_refs": [
+      "receipts/fixture/2.json"
+    ]
+  },
+  {
+    "event_id": "shadow-evt-003",
+    "event_type": "recovery_success",
+    "source": "fixture",
+    "occurred_at": "2026-07-08T18:03:00Z",
+    "actor": "test_actor",
+    "loop_id": "motor_learning_organ_v1",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair",
+    "action_attempted": "ci_retry_deploy",
+    "outcome": "success",
+    "error_class": "cloudflare_timeout",
+    "recovery_path": "route_B_retry",
+    "stage": "deploy",
+    "evidence_refs": [
+      "receipts/fixture/3.json"
+    ]
+  },
+  {
+    "event_id": "shadow-evt-004",
+    "event_type": "recovery_success",
+    "source": "fixture",
+    "occurred_at": "2026-07-08T18:04:00Z",
+    "actor": "test_actor",
+    "loop_id": "motor_learning_organ_v1",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair",
+    "action_attempted": "ci_retry_deploy",
+    "outcome": "success",
+    "error_class": "cloudflare_timeout",
+    "recovery_path": "route_B_retry",
+    "stage": "deploy",
+    "evidence_refs": [
+      "receipts/fixture/4.json"
+    ]
+  }
+]

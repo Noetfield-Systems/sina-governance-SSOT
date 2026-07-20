@@ -91,17 +91,33 @@ def normalize_event(raw: dict[str, Any], *, observed_at: str | None = None) -> d
     return normalized
 
 
-def normalize_many(raws: list[dict], *, seen_keys: set[str] | None = None) -> tuple[list[dict], list[dict]]:
-    """Return (accepted, duplicates). Duplicates are skipped (idempotent)."""
+def normalize_many(
+    raws: list[dict],
+    *,
+    seen_keys: set[str] | None = None,
+    event_registry=None,
+) -> tuple[list[dict], list[dict]]:
+    """Return (accepted, duplicates). Same id+hash=duplicate; same id+diff hash=collision."""
     seen = seen_keys if seen_keys is not None else set()
     accepted: list[dict] = []
     duplicates: list[dict] = []
     for raw in raws:
         n = normalize_event(raw)
+        if event_registry is not None:
+            status = event_registry.register(n["event_id"], n["content_hash"])
+            if status == "duplicate":
+                duplicates.append(n)
+                continue
         key = n["idempotency_key"]
         if key in seen:
             duplicates.append(n)
             continue
+        # Also detect same event_id already accepted with same hash via seen by id
+        id_key = f"id:{n['event_id']}:{n['content_hash']}"
+        if id_key in seen:
+            duplicates.append(n)
+            continue
         seen.add(key)
+        seen.add(id_key)
         accepted.append(n)
     return accepted, duplicates
