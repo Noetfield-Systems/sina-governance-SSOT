@@ -334,6 +334,21 @@
           "role": "product_lock"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
           "status": "ACTIVE",
           "role": "commission"
@@ -700,6 +715,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
           "status": "ACTIVE",
           "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
         },
         {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
@@ -1070,6 +1100,21 @@
           "role": "product_lock"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
           "status": "ACTIVE",
           "role": "commission"
@@ -1436,6 +1481,21 @@
           "role": "product_lock"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
+        },
+        {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
           "status": "ACTIVE",
           "role": "commission"
@@ -1713,6 +1773,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
           "status": "ACTIVE",
           "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
         },
         {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",

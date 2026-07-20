@@ -52,6 +52,8 @@
 
 0h. **compute / ROI allocation (LOCKED)** — read `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md` and `data/nf_compute_roi_allocation_v1_LOCKED.json` before changing Actions minute spend, Cloudflare hot path, Railway heavy jobs, or kernel llm matrix. enterprise plan kept; classes A-D on 50k minutes; wake = authenticated HTTP `job_id` only; HOLD preserved
 
+0i. **Company New (LOCKED)** — read `SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md` and `data/nf_company_new_product_v1_LOCKED.json` before changing `/new`, recipes (marketing_site / deterministic_api / crud_saas), T0–T3 dispatch for Company New, or CF Pages `nf-company-new`; Polsia UX benchmark only; HOLD preserved
+
 0. **CHESS v2.0 (full package)** — `P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` + templates + `SKILLS/SKILL_01`–`07` + `scripts/chess_pass_cli_v1.py`
 
 1. `skill-foundational-agentic-systems`
