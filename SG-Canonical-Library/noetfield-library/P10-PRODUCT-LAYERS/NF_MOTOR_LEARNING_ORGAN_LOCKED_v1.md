@@ -244,3 +244,14 @@ Machine truth: `data/nf_motor_learning_organ_pass_checks_v1.json`.
 3. **Superseded?** None.
 4. **Authority?** SG for this packet; Motor executes live priors; founder for envelopes and consequential promote.
 5. **Rollback?** Disable live ROI selection; fall back to stage-local static failover prior; mark snapshot `rolled_back`.
+
+## W1 authority boundary (audit-hardened)
+
+W1 produces governed, auditable reference priors and receipts but cannot activate or mark a prior live-consumable. Terminal decisions require immutable ECQR records, independent shadow evidence, and fully validated receipts. W2 alone may import and activate a W1 prior through a separate governed activation receipt. No live promotion, Model Learning, silent mutation, or Data Runway unlock is authorized.
+
+- `auto_apply_allowlist.enabled=false`
+- `auto_apply` status=`FUTURE_W2`
+- `live_promotion=FORBIDDEN`
+- `model_learning=FORBIDDEN`
+- `data_runway=HOLD`
+- W1 never sets `live_consumable=true`

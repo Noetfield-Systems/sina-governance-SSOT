@@ -14,8 +14,10 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/1.json"
-    ]
+      "receipts/shadow-holdout/1.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/shadow-evt-001",
+    "provider": "shadow_holdout_fixture"
   },
   {
     "event_id": "shadow-evt-002",
@@ -32,7 +34,9 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/2.json"
-    ]
+      "receipts/shadow-holdout/2.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/shadow-evt-002",
+    "provider": "shadow_holdout_fixture"
   }
 ]

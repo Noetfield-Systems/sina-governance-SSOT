@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .errors import IllegalTransition, GovernanceBlock
+from .validated import ValidatedReceipt, is_validated_receipt
 
 OBSERVED = "OBSERVED"
 PROPOSED = "PROPOSED"
@@ -46,6 +47,12 @@ STATUS_MAP = {
     EXPIRED: "expired",
 }
 
+DECISION_FOR_STATE = {
+    RATIFIED: "accepted",
+    REJECTED: "rejected",
+    ROLLED_BACK: "rolled_back",
+}
+
 
 def normalize_state(raw: str | None) -> str:
     if not raw:
@@ -68,6 +75,67 @@ def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _require_validated_receipt(
+    *,
+    to_state: str,
+    learning_receipt: Any,
+    learning_receipt_id: str | None,
+    entity: dict[str, Any],
+    receipt_resolver=None,
+) -> ValidatedReceipt:
+    """
+    Terminal transitions require a complete validated receipt object.
+    A raw receipt ID string is never proof.
+    """
+    if learning_receipt is None and learning_receipt_id and receipt_resolver is not None:
+        loaded = receipt_resolver(learning_receipt_id)
+        if loaded is None:
+            raise GovernanceBlock(f"{to_state}: receipt_resolver returned nothing for id={learning_receipt_id}")
+        learning_receipt = loaded
+
+    if learning_receipt is None:
+        raise GovernanceBlock(
+            f"{to_state} requires a complete validated learning_receipt object; "
+            f"raw learning_receipt_id alone is never proof"
+        )
+
+    if isinstance(learning_receipt, dict):
+        # Plain dict must be fully validated and minted into opaque type
+        from .receipt import validate_and_mint_receipt
+        vr = validate_and_mint_receipt(learning_receipt)
+    elif is_validated_receipt(learning_receipt):
+        vr = learning_receipt
+    else:
+        raise GovernanceBlock(f"{to_state}: learning_receipt must be ValidatedReceipt or validated dict")
+
+    body = vr.as_dict()
+    expected = DECISION_FOR_STATE[to_state]
+    if body.get("decision") != expected:
+        raise GovernanceBlock(
+            f"receipt decision {body.get('decision')!r} mismatches transition {to_state}"
+        )
+
+    # Cross-bind candidate / prior when present on entity
+    if entity.get("candidate_id") and body.get("candidate_id"):
+        if entity["candidate_id"] != body["candidate_id"]:
+            raise GovernanceBlock("receipt.candidate_id mismatches entity.candidate_id")
+    if entity.get("prior_id") and body.get("prior_id"):
+        if entity["prior_id"] != body["prior_id"]:
+            raise GovernanceBlock("receipt.prior_id mismatches entity.prior_id")
+
+    if not body.get("reviewer"):
+        raise GovernanceBlock("receipt missing reviewer")
+    if not body.get("evidence_links"):
+        raise GovernanceBlock("receipt missing evidence_links")
+
+    if to_state == RATIFIED:
+        for req in ("shadow_id", "shadow_hash", "shadow_evidence_manifest_hash", "confidence_hash", "ecqr_decision_hash", "candidate_hash"):
+            if not body.get(req):
+                raise GovernanceBlock(f"ratification receipt missing binding field: {req}")
+
+    return vr
+
+
 def transition(
     entity: dict[str, Any],
     to_state: str,
@@ -76,7 +144,8 @@ def transition(
     reason: str,
     evidence: list[str] | None = None,
     learning_receipt_id: str | None = None,
-    learning_receipt: dict | None = None,
+    learning_receipt: Any = None,
+    receipt_resolver=None,
     require_receipt: bool | None = None,
     timestamp: str | None = None,
 ) -> dict[str, Any]:
@@ -84,8 +153,9 @@ def transition(
     Transition entity state.
 
     For RATIFIED / REJECTED / ROLLED_BACK:
-    - receipt is ALWAYS required (require_receipt cannot disable this).
-    - learning_receipt object (validated) or learning_receipt_id+validated receipt must be present.
+    - A complete validated receipt object (or resolver returning one) is REQUIRED.
+    - A raw learning_receipt_id string alone always raises GovernanceBlock.
+    - require_receipt=False is forbidden for terminals.
     """
     from_state = normalize_state(entity.get("state") or entity.get("status"))
     to_state = to_state.upper()
@@ -96,31 +166,31 @@ def transition(
     if to_state not in allowed:
         raise IllegalTransition(f"illegal transition {from_state}→{to_state}; allowed={sorted(allowed)}")
 
-    # Terminal receipt is NON-BYPASSABLE. require_receipt=False is ignored for terminals.
+    rid = None
     if to_state in TERMINAL_RECEIPT_STATES:
         if require_receipt is False:
-            # Explicit adversarial attempt — still fail closed
             raise GovernanceBlock(
                 f"{to_state} requires validated learning_receipt; require_receipt=False is forbidden"
             )
-        rid = learning_receipt_id
-        if learning_receipt is not None:
-            from .receipt import validate_learning_receipt
-            validate_learning_receipt(learning_receipt)
-            rid = learning_receipt.get("receipt_id") or learning_receipt.get("learning_receipt_id")
-            # decision must match target
-            expected = {"RATIFIED": "accepted", "REJECTED": "rejected", "ROLLED_BACK": "rolled_back"}[to_state]
-            if learning_receipt.get("decision") != expected:
-                raise GovernanceBlock(
-                    f"receipt decision {learning_receipt.get('decision')} mismatches transition {to_state}"
-                )
-        if not rid:
-            raise GovernanceBlock(f"{to_state} requires validated learning_receipt / learning_receipt_id")
-        learning_receipt_id = rid
+        # ID-only path: if only learning_receipt_id provided without object/resolver → block
+        if learning_receipt is None and receipt_resolver is None and learning_receipt_id:
+            raise GovernanceBlock(
+                f"{to_state}: learning_receipt_id alone is never proof; "
+                f"supply validated learning_receipt object or receipt_resolver"
+            )
+        vr = _require_validated_receipt(
+            to_state=to_state,
+            learning_receipt=learning_receipt,
+            learning_receipt_id=learning_receipt_id,
+            entity=entity,
+            receipt_resolver=receipt_resolver,
+        )
+        rid = vr.receipt_id
+        if learning_receipt_id and learning_receipt_id != rid:
+            raise GovernanceBlock("learning_receipt_id mismatches validated receipt.receipt_id")
     else:
-        # Non-terminal: require_receipt may force a receipt but is not used today
-        if require_receipt and not learning_receipt_id:
-            raise GovernanceBlock(f"{to_state} require_receipt=True but no learning_receipt_id")
+        if require_receipt and not (learning_receipt or learning_receipt_id):
+            raise GovernanceBlock(f"{to_state} require_receipt=True but no learning_receipt")
 
     ts = timestamp or _now()
     record = {
@@ -130,7 +200,7 @@ def transition(
         "timestamp": ts,
         "reason": reason,
         "evidence": list(evidence or []),
-        "learning_receipt_id": learning_receipt_id,
+        "learning_receipt_id": rid,
     }
     out = dict(entity)
     out["state"] = to_state
@@ -138,6 +208,6 @@ def transition(
     hist = list(out.get("transition_history") or [])
     hist.append(record)
     out["transition_history"] = hist
-    if learning_receipt_id:
-        out["learning_receipt_id"] = learning_receipt_id
+    if rid:
+        out["learning_receipt_id"] = rid
     return out

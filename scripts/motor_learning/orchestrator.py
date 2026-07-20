@@ -1,6 +1,7 @@
-"""End-to-end W1 Motor Learning pipeline. Dry-run is store-immutable."""
+"""End-to-end W1 Motor Learning pipeline. Reference artifacts only; never live-consumable."""
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 from typing import Any
@@ -8,16 +9,18 @@ from typing import Any
 from .normalize import normalize_many
 from .extract import extract_many
 from .mine import mine_patterns
-from .prior_store import PriorStore, store_tree_hash
+from .prior_store import PriorStore, store_tree_hash, W2_ACTIVATION_CONTRACT
 from .similarity import rank as rank_similarity
 from .confidence import compute_confidence
-from .shadow import evaluate_shadow
-from .ecqr import validate_ecqr_decision
-from .lifecycle import transition, PROPOSED, SHADOW, RATIFIED, REJECTED, ROLLED_BACK, OBSERVED
-from .receipt import build_learning_receipt, validate_learning_receipt, write_receipt
+from .shadow import evaluate_shadow, assert_shadow_independence, require_ratifiable_shadow
+from .ecqr import validate_ecqr_decision, fixture_compile_ecqr
+from .lifecycle import transition, PROPOSED, SHADOW, RATIFIED, REJECTED, ROLLED_BACK
+from .receipt import build_learning_receipt, validate_and_mint_receipt, write_receipt
 from .event_registry import EventRegistry
 from .errors import GovernanceBlock, MotorLearningError, SchemaError
-from .hashutil import canonical_json, content_hash
+from .hashutil import content_hash
+from .atomic import atomic_terminal_commit, write_failed_attempt
+from .validated import mint_w1_reference_store_capability, is_w1_reference_store_capability
 from . import ALGORITHM_VERSION, CONFIDENCE_VERSION
 
 
@@ -28,6 +31,16 @@ def _load_json(path: Path) -> Any:
 def _write_json(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n")
+
+
+def _candidate_hash(entity: dict) -> str:
+    return content_hash({
+        "candidate_id": entity.get("candidate_id"),
+        "fingerprint": entity.get("fingerprint"),
+        "recommended_action": entity.get("recommended_action"),
+        "source_event_ids": entity.get("source_event_ids"),
+        "evidence_refs": entity.get("evidence_refs"),
+    })
 
 
 def run_pipeline(
@@ -41,14 +54,46 @@ def run_pipeline(
     dry_run: bool = True,
     merge_near_duplicate_threshold: float = 0.92,
     as_of: str | None = None,
+    store_capability=None,
+    allow_store_persist: bool = False,
+    inject_failure_after: str | None = None,
+    event_ledger_path: Path | None = None,
 ) -> dict[str, Any]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     store_dir = Path(store_dir)
     store_hash_before = store_tree_hash(store_dir)
 
-    store = PriorStore(store_dir, create=False) if dry_run else PriorStore(store_dir, create=True)
-    registry = EventRegistry(out_dir / "event_registry.json")
+    # Event identity ledger: never write into live store_dir until atomic commit.
+    # Persistence-capable callers may pass a durable shared ledger path for cross-run collisions.
+    if event_ledger_path is not None:
+        ledger_path = Path(event_ledger_path)
+    else:
+        ledger_path = out_dir / "event_identity_ledger.json"
+        # If a durable store ledger already exists, load from a working copy under out_dir
+        durable = store_dir / "event_identity_ledger.json"
+        if durable.exists() and not dry_run:
+            import shutil as _shutil
+            _shutil.copy2(durable, ledger_path)
+
+    if not dry_run:
+        if not allow_store_persist or not is_w1_reference_store_capability(store_capability):
+            raise GovernanceBlock(
+                "run_pipeline(dry_run=False) requires allow_store_persist=True and "
+                "mint_w1_reference_store_capability(); W1 never mints live_consumable authority"
+            )
+        # Do not create/mutate store_dir until atomic commit
+        store = PriorStore(store_dir, create=False) if store_dir.exists() else PriorStore(
+            out_dir / "_ephemeral_search_store", create=True
+        )
+    else:
+        # Dry-run must never create files under store_dir
+        if store_dir.exists():
+            store = PriorStore(store_dir, create=False)
+        else:
+            store = PriorStore(out_dir / "_ephemeral_search_store", create=True)
+
+    registry = EventRegistry(ledger_path)
 
     accepted, duplicates = normalize_many(events, event_registry=registry)
     signals = extract_many(accepted)
@@ -72,7 +117,9 @@ def run_pipeline(
     final_state = None
     blocked_reason = None
     ecqr_validated = None
-    ecqr_original = dict(ecqr_decision) if ecqr_decision else None
+    ecqr_original = copy.deepcopy(ecqr_decision) if ecqr_decision else None
+    ecqr_original_bytes = json.dumps(ecqr_decision, sort_keys=True).encode() if ecqr_decision else None
+    ok = True
 
     if primary and primary.get("meets_threshold") and not primary.get("contradiction"):
         entity = dict(primary)
@@ -84,19 +131,24 @@ def run_pipeline(
                 evidence=entity["evidence_refs"],
             )
 
-        # Independent shadow stream
         if shadow_events is None:
             blocked_reason = "shadow_events_required"
             final_state = entity.get("state")
+            ok = False
         else:
-            sh_accepted, _ = normalize_many(shadow_events, event_registry=EventRegistry(out_dir / "shadow_event_registry.json"))
-            mine_ids = set(entity.get("source_event_ids") or [])
-            shadow_ids = {e["event_id"] for e in sh_accepted}
-            overlap = sorted(mine_ids & shadow_ids)
-            if overlap:
-                blocked_reason = f"shadow_mining_event_overlap:{overlap}"
+            sh_reg = EventRegistry(out_dir / "shadow_event_registry.json")
+            sh_accepted, _ = normalize_many(shadow_events, event_registry=sh_reg)
+            try:
+                assert_shadow_independence(
+                    candidate=entity,
+                    mining_events=accepted,
+                    shadow_events=sh_accepted,
+                )
+            except GovernanceBlock as exc:
+                blocked_reason = str(exc)
                 final_state = entity.get("state")
-                _write_json(out_dir / "overlap_reject.json", {"overlap": overlap})
+                ok = False
+                _write_json(out_dir / "independence_reject.json", {"blocked_reason": blocked_reason})
             else:
                 shadow_report = evaluate_shadow(entity, sh_accepted)
                 _write_json(out_dir / "shadow_report.json", shadow_report)
@@ -109,8 +161,16 @@ def run_pipeline(
                     confidence_before=0.0,
                     scope=entity.get("scope") or {},
                     mining_evidence_ids=list(entity.get("source_event_ids") or []),
-                    shadow_evidence_ids=list(shadow_ids),
+                    shadow_evidence_ids=list(shadow_report.get("shadow_event_ids") or []),
                 )
+                # Also block on evidence-ref overlap via confidence
+                mine_refs = set(entity.get("evidence_refs") or [])
+                sh_refs = set(shadow_report.get("evidence_refs") or [])
+                if mine_refs & sh_refs:
+                    confidence["meets_ratify_threshold"] = False
+                    confidence["shadow_contaminated_by_mining_overlap"] = True
+                if not shadow_report.get("ratifiable"):
+                    confidence["meets_ratify_threshold"] = False
                 _write_json(out_dir / "confidence.json", confidence)
 
                 searchable = store.search(
@@ -126,7 +186,6 @@ def run_pipeline(
                     as_of=as_of,
                     live_consumable_only=False,
                 )
-                # Conflict detection includes fixture-seeded actives; they remain non-consumable.
                 active_for_conflict = [p for p in active_like if p.get("effective_status") == "active"]
                 active_rankings = rank_similarity(primary, active_for_conflict)
                 if active_rankings and active_rankings[0]["total_score"] >= merge_near_duplicate_threshold:
@@ -143,72 +202,81 @@ def run_pipeline(
                         }
                         _write_json(out_dir / "machine_policy_veto.json", machine_veto)
 
-                if ecqr_decision and not machine_veto:
+                if ecqr_decision and not machine_veto and not blocked_reason:
                     try:
-                        ed = dict(ecqr_decision)
-                        if ed.get("candidate_id") in (None, "", "auto"):
-                            ed["candidate_id"] = entity["candidate_id"]
-                        elif ed.get("candidate_id") != entity["candidate_id"]:
-                            # Bind to computed candidate; fixture placeholders must yield
-                            ed["candidate_id"] = entity["candidate_id"]
-                        ed["shadow_result_ref"] = f"shadow:{shadow_report['shadow_id']}"
-                        ed["shadow_hash"] = shadow_report["content_hash"]
-                        ed["confidence_before"] = confidence["confidence_before"]
-                        ed["confidence_after"] = confidence["confidence_after"]
-                        ed.setdefault("evidence_reviewed", list(entity["source_event_ids"]) + list(shadow_ids))
-                        ed.setdefault("algorithm_versions", {
-                            "pipeline": ALGORITHM_VERSION,
-                            "confidence": CONFIDENCE_VERSION,
-                        })
-                        ecqr_validated = validate_ecqr_decision(
-                            ed, confidence=confidence, shadow=shadow_report, candidate=entity
+                        # Compile fixture placeholders into a NEW dict; never mutate original
+                        compiled = fixture_compile_ecqr(
+                            ecqr_decision,
+                            candidate=entity,
+                            shadow=shadow_report,
+                            confidence=confidence,
+                            mining_event_ids=list(entity.get("source_event_ids") or []),
+                            shadow_event_ids=list(shadow_report.get("shadow_event_ids") or []),
                         )
+                        # Prove original fixture unchanged
+                        if ecqr_original_bytes is not None:
+                            now_bytes = json.dumps(ecqr_decision, sort_keys=True).encode()
+                            if now_bytes != ecqr_original_bytes:
+                                raise GovernanceBlock("ECQR fixture mutated during pipeline (forbidden)")
+
+                        ecqr_validated = validate_ecqr_decision(
+                            compiled,
+                            confidence=confidence,
+                            shadow=shadow_report,
+                            candidate=entity,
+                        )
+                        if ecqr_validated.decision == "RATIFIED":
+                            require_ratifiable_shadow(shadow_report)
                     except (GovernanceBlock, SchemaError) as exc:
                         blocked_reason = str(exc)
                         ecqr_validated = None
+                        ok = False
                 elif machine_veto and ecqr_decision:
-                    # Preserve reviewer decision; block commit
                     blocked_reason = "DUPLICATE_CONFLICT_REVIEW_REQUIRED"
+                    ok = False
                     _write_json(out_dir / "preserved_reviewer_decision.json", ecqr_original)
 
-                if ecqr_validated and ecqr_validated["decision"] in ("RATIFIED", "REJECTED"):
-                    decision = ecqr_validated["decision"]
-                    ts = ecqr_validated["effective_at"]
-                    prior_id = ecqr_validated.get("prior_id") or f"prior-{entity['candidate_id']}"
-                    receipt = None
-                    receipt_path = out_dir / "learning_receipt_pending.json"
+                if ecqr_validated and ecqr_validated.decision in ("RATIFIED", "REJECTED"):
+                    decision = ecqr_validated.decision
+                    ed = ecqr_validated.as_dict()
+                    ts = ed["effective_at"]
+                    prior_id = ed.get("prior_id") or f"prior-{entity['candidate_id']}"
                     try:
+                        cand_hash = _candidate_hash(entity)
                         receipt = build_learning_receipt(
                             decision=decision,
                             prior_id=prior_id,
                             candidate_id=entity["candidate_id"],
-                            reviewer=ecqr_validated["reviewer"],
-                            rationale=ecqr_validated["rationale"],
-                            evidence_links=list(ecqr_validated["evidence_reviewed"]),
+                            reviewer=ed["reviewer"],
+                            rationale=ed["rationale"],
+                            evidence_links=list(ed["evidence_reviewed"]),
                             confidence_before=confidence["confidence_before"],
                             confidence_after=confidence["confidence_after"],
-                            affected_loops=list(ecqr_validated["affected_loops"]),
-                            applicable_runways=list(ecqr_validated["applicable_runways"]),
-                            repositories=list(ecqr_validated.get("repositories") or []),
+                            affected_loops=list(ed["affected_loops"]),
+                            applicable_runways=list(ed["applicable_runways"]),
+                            repositories=list(ed.get("repositories") or []),
                             origin_event=entity["source_event_ids"][0],
                             decision_timestamp=ts,
-                            expiry=ecqr_validated.get("expires_at"),
-                            supersedes=ecqr_validated.get("supersedes"),
+                            expiry=ed.get("expires_at"),
+                            supersedes=ed.get("supersedes"),
                             snapshot_id=prior_id,
                             shadow_evidence_path=str(out_dir / "shadow_report.json"),
                             shadow_id=shadow_report["shadow_id"],
                             shadow_hash=shadow_report["content_hash"],
+                            shadow_evidence_manifest_hash=shadow_report["evidence_manifest_hash"],
                             confidence_hash=confidence["content_hash"],
                             similarity_score=(similarity_rankings[0]["total_score"] if similarity_rankings else None),
+                            ecqr_decision_hash=ecqr_validated.decision_hash,
+                            candidate_hash=cand_hash,
                         )
-                        validate_learning_receipt(receipt)
+                        validated_receipt = validate_and_mint_receipt(receipt)
                         target_state = RATIFIED if decision == "RATIFIED" else REJECTED
                         entity = transition(
                             entity, target_state,
-                            actor=ecqr_validated["reviewer"],
-                            reason=ecqr_validated["rationale"],
-                            evidence=ecqr_validated["evidence_reviewed"],
-                            learning_receipt=receipt,
+                            actor=ed["reviewer"],
+                            reason=ed["rationale"],
+                            evidence=ed["evidence_reviewed"],
+                            learning_receipt=validated_receipt,
                             timestamp=ts,
                         )
                         prior = {
@@ -227,59 +295,112 @@ def run_pipeline(
                             "learning_receipt_id": receipt["receipt_id"],
                             "candidate_id": entity["candidate_id"],
                             "confidence_after": confidence["confidence_after"],
-                            "expires_at": ecqr_validated.get("expires_at"),
-                            "supersedes": ecqr_validated.get("supersedes"),
+                            "expires_at": ed.get("expires_at"),
+                            "supersedes": ed.get("supersedes"),
                             "version": 1,
                             "transition_history": entity.get("transition_history"),
                             "dry_run": dry_run,
                             "live_promotion": False,
-                            "live_consumable": not dry_run,
+                            "live_consumable": False,  # W1 never mints live authority
                             "fixture_seeded": False,
+                            "store_kind": "w1_reference",
+                            "w2_activation_required": True,
+                            "activation_authority": False,
+                            "w2_activation_contract": W2_ACTIVATION_CONTRACT,
                         }
-                        # Atomic-ish: write receipt to out_dir first; only then store if not dry_run
-                        write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
-                        if not dry_run:
-                            store.create(
-                                prior,
-                                allow_duplicate=False,
-                                expected_version=1,
-                                ecqr_decision=ecqr_validated,
-                                learning_receipt=receipt,
-                            )
-                            _write_json(out_dir / "prior.json", prior)
-                        else:
-                            # diagnostics only under out_dir
+                        # Reference bundle always under out_dir
+                        _write_json(out_dir / "reference_bundle.json", {
+                            "schema": "nf_motor_learning_w1_reference_bundle_v1",
+                            "prior": prior,
+                            "receipt": receipt,
+                            "ecqr_decision_hash": ecqr_validated.decision_hash,
+                            "shadow_evidence_manifest_hash": shadow_report["evidence_manifest_hash"],
+                            "live_consumable": False,
+                            "w2_activation_required": True,
+                        })
+
+                        if dry_run:
+                            write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
                             _write_json(out_dir / "prior.dry_run_preview.json", prior)
-                        final_state = entity["state"]
+                            final_state = entity["state"]
+                        else:
+                            def _commit(staging_root: Path) -> None:
+                                st = PriorStore(
+                                    staging_root,
+                                    create=True,
+                                    store_kind="w1_reference",
+                                    store_capability=store_capability,
+                                    allow_persist=True,
+                                )
+                                st.create(
+                                    prior,
+                                    allow_duplicate=False,
+                                    expected_version=1,
+                                    ecqr_decision=ecqr_validated,
+                                    learning_receipt=validated_receipt,
+                                    candidate=entity,
+                                    shadow=shadow_report,
+                                    confidence=confidence,
+                                )
+                                # Promote durable event identity ledger into store only on commit
+                                import shutil as _shutil
+                                dest = Path(staging_root) / "event_identity_ledger.json"
+                                _shutil.copy2(ledger_path, dest)
+
+                            atomic_terminal_commit(
+                                store_dir=store_dir,
+                                out_dir=out_dir,
+                                receipt=receipt,
+                                prior=prior,
+                                transition_record=(entity.get("transition_history") or [None])[-1],
+                                commit_fn=_commit,
+                                inject_failure_after=inject_failure_after,
+                            )
+                            final_state = entity["state"]
                     except Exception as exc:
-                        # Failed terminal transition: ensure no orphan receipt in store; delete pending out receipt if transition failed before write
+                        ok = False
                         blocked_reason = f"terminal_commit_failed:{exc}"
+                        write_failed_attempt(out_dir, stage="terminal", error=str(exc))
+                        # Remove any authoritative receipt leftovers
+                        for p in out_dir.glob("learning_receipt-*.json"):
+                            p.unlink(missing_ok=True)
                         receipt = None
-                        # remove any receipt files written if store write failed
-                        if not dry_run:
-                            # If store write failed after receipt write, leave receipt in out_dir as diagnostic but store unchanged
-                            pass
+                        prior = None
                         final_state = entity.get("state")
+                        if not dry_run:
+                            raise MotorLearningError(blocked_reason) from exc
                 else:
                     final_state = entity.get("state")
                     if not blocked_reason:
                         blocked_reason = "no_ecqr_decision_or_blocked"
+                        ok = False
     elif primary:
         final_state = primary.get("state")
         blocked_reason = primary.get("not_ratifiable_reason") or "candidate_not_ready"
+        ok = False
     else:
         blocked_reason = "no_candidates"
+        ok = False
 
     store_hash_after = store_tree_hash(store_dir)
     if dry_run and store_hash_before != store_hash_after:
         raise GovernanceBlock("dry-run mutated prior store (forbidden)")
 
+    # Prove ECQR original unchanged
+    if ecqr_original_bytes is not None and ecqr_decision is not None:
+        if json.dumps(ecqr_decision, sort_keys=True).encode() != ecqr_original_bytes:
+            raise GovernanceBlock("ECQR decision mutated after pipeline (forbidden)")
+
     summary = {
         "schema": "nf_motor_learning_w1_run_summary_v1",
         "algorithm_version": ALGORITHM_VERSION,
         "dry_run": dry_run,
+        "ok": ok and (blocked_reason is None or (receipt is not None and final_state in (RATIFIED, REJECTED))),
         "live_promotion": False,
+        "live_consumable": False,
         "model_learning": False,
+        "store_kind": "w1_reference",
+        "w2_activation_required": True,
         "events_in": len(events),
         "events_accepted": len(accepted),
         "events_duplicate": len(duplicates),
@@ -295,7 +416,7 @@ def run_pipeline(
         "reviewer_decision_preserved": ecqr_original.get("decision") if ecqr_original else None,
         "shadow_result": shadow_report["result"] if shadow_report else None,
         "confidence_after": confidence["confidence_after"] if confidence else None,
-        "ecqr_decision": ecqr_validated["decision"] if ecqr_validated else None,
+        "ecqr_decision": ecqr_validated.decision if ecqr_validated else None,
         "final_state": final_state,
         "prior_id": prior["prior_id"] if prior else None,
         "receipt_id": receipt["receipt_id"] if receipt else None,
@@ -305,6 +426,9 @@ def run_pipeline(
         "store_unchanged": store_hash_before == store_hash_after,
         "out_dir": str(out_dir),
     }
+    # ok true only when requested terminal op succeeded OR non-terminal observe succeeded without governance failure claiming success
+    if blocked_reason and receipt is None:
+        summary["ok"] = False
     _write_json(out_dir / "summary.json", summary)
     _write_json(out_dir / "candidates.json", candidates)
     if similarity_rankings:
@@ -320,20 +444,35 @@ def rollback_prior(
     ecqr_decision: dict,
     regression_evidence: list[str],
     dry_run: bool = True,
+    store_capability=None,
+    allow_store_persist: bool = False,
+    inject_failure_after: str | None = None,
 ) -> dict[str, Any]:
-    """End-to-end rollback of an existing RATIFIED prior."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     store_dir = Path(store_dir)
     store_hash_before = store_tree_hash(store_dir)
-    store = PriorStore(store_dir, create=not dry_run)
+
+    if not dry_run:
+        if not allow_store_persist or not is_w1_reference_store_capability(store_capability):
+            raise GovernanceBlock("rollback dry_run=False requires w1_reference store capability")
+        store = PriorStore(
+            store_dir, create=True, store_kind="w1_reference",
+            store_capability=store_capability, allow_persist=True,
+        )
+    else:
+        store = PriorStore(store_dir, create=not dry_run) if store_dir.exists() else PriorStore(store_dir, create=True)
+
     prior = store.get(prior_id)
     if not prior:
+        # dry-run seed path may have prior only after seed
         raise GovernanceBlock(f"prior not found: {prior_id}")
     if prior.get("status") != "active" and prior.get("state") != RATIFIED:
         raise GovernanceBlock(f"prior {prior_id} is not RATIFIED/active")
 
-    ed = dict(ecqr_decision)
+    # Compile without mutating original
+    original_bytes = json.dumps(ecqr_decision, sort_keys=True).encode()
+    ed = copy.deepcopy(ecqr_decision)
     ed["decision"] = "ROLLED_BACK"
     ed.setdefault("rollback_target", prior_id)
     ed.setdefault("prior_id", prior_id)
@@ -342,33 +481,36 @@ def rollback_prior(
     ed.setdefault("evidence_reviewed", list(regression_evidence))
     if not regression_evidence:
         raise GovernanceBlock("rollback requires regression_evidence")
-
-    # Bind confidence placeholders from prior
     ed.setdefault("confidence_before", float(prior.get("confidence_after") or 0.8))
     ed.setdefault("confidence_after", float(ed.get("confidence_after") or 0.4))
     ed.setdefault("algorithm_versions", {"pipeline": ALGORITHM_VERSION, "confidence": CONFIDENCE_VERSION})
-    ecqr_validated = validate_ecqr_decision(ed, require_bound_artifacts=False)
 
-    receipt = None
+    ecqr_validated = validate_ecqr_decision(ed, require_bound_artifacts=False)
+    if json.dumps(ecqr_decision, sort_keys=True).encode() != original_bytes:
+        raise GovernanceBlock("ECQR decision mutated during rollback (forbidden)")
+
     try:
         receipt = build_learning_receipt(
             decision="ROLLED_BACK",
             prior_id=prior_id,
             candidate_id=ed["candidate_id"],
-            reviewer=ecqr_validated["reviewer"],
-            rationale=ecqr_validated["rationale"],
+            reviewer=ecqr_validated.as_dict()["reviewer"],
+            rationale=ecqr_validated.as_dict()["rationale"],
             evidence_links=list(regression_evidence),
-            confidence_before=float(ecqr_validated["confidence_before"]),
-            confidence_after=float(ecqr_validated["confidence_after"]),
-            affected_loops=list(ecqr_validated["affected_loops"]),
-            applicable_runways=list(ecqr_validated["applicable_runways"]),
-            repositories=list(ecqr_validated.get("repositories") or prior.get("scope", {}).get("repository") and [prior["scope"]["repository"]] or []),
+            confidence_before=float(ecqr_validated.as_dict()["confidence_before"]),
+            confidence_after=float(ecqr_validated.as_dict()["confidence_after"]),
+            affected_loops=list(ecqr_validated.as_dict()["affected_loops"]),
+            applicable_runways=list(ecqr_validated.as_dict()["applicable_runways"]),
+            repositories=list(
+                ecqr_validated.as_dict().get("repositories")
+                or ([prior["scope"]["repository"]] if prior.get("scope", {}).get("repository") else [])
+            ),
             origin_event=regression_evidence[0],
-            decision_timestamp=ecqr_validated["effective_at"],
+            decision_timestamp=ecqr_validated.as_dict()["effective_at"],
             rollback_target=prior_id,
             snapshot_id=prior_id,
         )
-        validate_learning_receipt(receipt)
+        validated_receipt = validate_and_mint_receipt(receipt)
         entity = {
             "state": RATIFIED,
             "status": "active",
@@ -378,11 +520,11 @@ def rollback_prior(
         }
         entity = transition(
             entity, ROLLED_BACK,
-            actor=ecqr_validated["reviewer"],
-            reason=ecqr_validated["rationale"],
+            actor=ecqr_validated.as_dict()["reviewer"],
+            reason=ecqr_validated.as_dict()["rationale"],
             evidence=regression_evidence,
-            learning_receipt=receipt,
-            timestamp=ecqr_validated["effective_at"],
+            learning_receipt=validated_receipt,
+            timestamp=ecqr_validated.as_dict()["effective_at"],
         )
         updated = dict(prior)
         updated["state"] = entity["state"]
@@ -390,24 +532,41 @@ def rollback_prior(
         updated["transition_history"] = entity["transition_history"]
         updated["learning_receipt_id"] = receipt["receipt_id"]
         updated["live_consumable"] = False
-        # Atomic: write receipt to out_dir, then update store if not dry_run
-        write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
-        if not dry_run:
-            store.update(
-                updated,
-                expected_version=int(prior.get("version") or 1),
-                ecqr_decision=ecqr_validated,
-                learning_receipt=receipt,
-            )
-        else:
+        updated["store_kind"] = "w1_reference"
+        updated["activation_authority"] = False
+
+        if dry_run:
+            write_receipt(receipt, out_dir / f"learning_receipt-{receipt['receipt_id']}.json")
             _write_json(out_dir / "prior.dry_run_rollback_preview.json", updated)
-    except Exception:
-        # No store mutation on failure; remove receipt if we want zero orphans in out_dir for failed transitions
+        else:
+            def _commit(staging_root: Path) -> None:
+                st = PriorStore(
+                    staging_root, create=True, store_kind="w1_reference",
+                    store_capability=store_capability, allow_persist=True,
+                )
+                st.update(
+                    updated,
+                    expected_version=int(prior.get("version") or 1),
+                    ecqr_decision=ecqr_validated,
+                    learning_receipt=validated_receipt,
+                )
+
+            atomic_terminal_commit(
+                store_dir=store_dir,
+                out_dir=out_dir,
+                receipt=receipt,
+                prior=updated,
+                transition_record=(entity.get("transition_history") or [None])[-1],
+                commit_fn=_commit,
+                inject_failure_after=inject_failure_after,
+            )
+    except Exception as exc:
         for p in out_dir.glob("learning_receipt-*.json"):
-            # Only delete if store wasn't updated
-            if dry_run or store.get(prior_id) == prior:
-                p.unlink(missing_ok=True)
-        raise
+            p.unlink(missing_ok=True)
+        write_failed_attempt(out_dir, stage="rollback", error=str(exc))
+        if isinstance(exc, MotorLearningError):
+            raise
+        raise MotorLearningError(f"rollback failed: {exc}") from exc
 
     store_hash_after = store_tree_hash(store_dir)
     if dry_run and store_hash_before != store_hash_after:
@@ -415,10 +574,12 @@ def rollback_prior(
 
     summary = {
         "schema": "nf_motor_learning_w1_rollback_summary_v1",
+        "ok": True,
         "dry_run": dry_run,
         "prior_id": prior_id,
         "final_state": ROLLED_BACK,
-        "receipt_id": receipt["receipt_id"] if receipt else None,
+        "receipt_id": receipt["receipt_id"],
+        "live_consumable": False,
         "store_hash_before": store_hash_before,
         "store_hash_after": store_hash_after,
         "store_unchanged": store_hash_before == store_hash_after,
@@ -427,26 +588,28 @@ def rollback_prior(
     return summary
 
 
-def run_from_fixture_dir(fixture_dir: Path, *, out_dir: Path, store_dir: Path, dry_run: bool = True) -> dict:
+def run_from_fixture_dir(
+    fixture_dir: Path,
+    *,
+    out_dir: Path,
+    store_dir: Path,
+    dry_run: bool = True,
+    store_capability=None,
+    allow_store_persist: bool = False,
+    inject_failure_after: str | None = None,
+) -> dict:
     fixture_dir = Path(fixture_dir)
     events = _load_json(fixture_dir / "events.json")
     shadow_path = fixture_dir / "shadow_events.json"
-    if shadow_path.exists():
-        shadow_events = _load_json(shadow_path)
+    if not shadow_path.exists():
+        # No clone fallback — missing shadow blocks ratification paths
+        shadow_events = None
     else:
-        # Derive independent shadow stream by cloning events with new IDs (temporal holdout)
-        shadow_events = []
-        for i, e in enumerate(events):
-            s = dict(e)
-            s["event_id"] = f"shadow-{e['event_id']}"
-            s["occurred_at"] = e["occurred_at"].replace("2026-07-01", "2026-07-08")
-            shadow_events.append(s)
+        shadow_events = _load_json(shadow_path)
     ecqr_path = fixture_dir / "ecqr_decision.json"
     ecqr = _load_json(ecqr_path) if ecqr_path.exists() else None
     meta = _load_json(fixture_dir / "meta.json") if (fixture_dir / "meta.json").exists() else {}
 
-    # Seed priors via restricted API only.
-    # dry-run: seed into out_dir/fixture_seed_store (never mutate supplied store_dir).
     seed = fixture_dir / "seed_priors"
     effective_store = Path(store_dir)
     if seed.exists():
@@ -458,7 +621,12 @@ def run_from_fixture_dir(fixture_dir: Path, *, out_dir: Path, store_dir: Path, d
                 terminal = prior.get("status") in {"active", "rejected", "rolled_back"}
                 seed_store.seed_fixture(prior, allow_duplicate=True, allow_terminal_seed=terminal)
         else:
-            seed_store = PriorStore(store_dir, create=True)
+            if not allow_store_persist or not is_w1_reference_store_capability(store_capability):
+                raise GovernanceBlock("fixture seed persist requires w1_reference capability")
+            seed_store = PriorStore(
+                store_dir, create=True, store_kind="w1_reference",
+                store_capability=store_capability, allow_persist=True,
+            )
             for f in seed.glob("*.json"):
                 prior = _load_json(f)
                 terminal = prior.get("status") in {"active", "rejected", "rolled_back"}
@@ -474,6 +642,9 @@ def run_from_fixture_dir(fixture_dir: Path, *, out_dir: Path, store_dir: Path, d
             ecqr_decision=ecqr or {},
             regression_evidence=list((ecqr or {}).get("evidence_reviewed") or ["rollback-evidence"]),
             dry_run=dry_run,
+            store_capability=store_capability,
+            allow_store_persist=allow_store_persist,
+            inject_failure_after=inject_failure_after,
         )
 
     supplied_hash_before = store_tree_hash(store_dir)
@@ -486,6 +657,9 @@ def run_from_fixture_dir(fixture_dir: Path, *, out_dir: Path, store_dir: Path, d
         min_occurrences=int(meta.get("min_occurrences", 3)),
         dry_run=dry_run,
         as_of=meta.get("as_of"),
+        store_capability=store_capability,
+        allow_store_persist=allow_store_persist,
+        inject_failure_after=inject_failure_after,
     )
     if dry_run:
         supplied_hash_after = store_tree_hash(store_dir)

@@ -125,7 +125,8 @@
       "promote_merge_deploy",
       "level_3_bandit_high_risk",
       "ssot_vocabulary_edit"
-    ]
+    ],
+    "enabled": false
   },
   "sourcea_export": {
     "live_path": "~/.sina/execution_patterns.json",

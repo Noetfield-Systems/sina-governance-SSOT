@@ -108,23 +108,65 @@ def main() -> int:
     # Scope guard vs exact base SHA
     base = os.environ.get("MLO_BASE_SHA") or ""
     if not base:
-        # try origin/main
         r = subprocess.run(["git", "rev-parse", "origin/main"], cwd=str(ROOT), capture_output=True, text=True)
         if r.returncode != 0:
             fail(f"cannot resolve base SHA for scope guard: {r.stderr}")
         else:
             base = r.stdout.strip()
     if base:
-        diff = subprocess.run(
-            ["git", "diff", "--name-only", f"{base}...HEAD"],
+        # Prefer merge-base so shallow/unrelated tips cannot break the guard
+        mb = subprocess.run(
+            ["git", "merge-base", "HEAD", base],
             cwd=str(ROOT), capture_output=True, text=True,
         )
-        if diff.returncode != 0:
-            fail(f"scope diff failed against {base}: {diff.stderr}")
-        else:
-            for line in diff.stdout.splitlines():
-                if line.startswith("landing-site/"):
-                    fail(f"landing-site/ changed: {line}")
+        diff_base = mb.stdout.strip() if mb.returncode == 0 and mb.stdout.strip() else base
+        if mb.returncode != 0:
+            # Fetch origin/main and retry once
+            subprocess.run(["git", "fetch", "origin", "main", "--depth=0"], cwd=str(ROOT), capture_output=True)
+            mb2 = subprocess.run(
+                ["git", "merge-base", "HEAD", "origin/main"],
+                cwd=str(ROOT), capture_output=True, text=True,
+            )
+            if mb2.returncode != 0:
+                fail(f"scope diff failed against {base}: no merge base ({mb.stderr or mb2.stderr})")
+                diff_base = None
+            else:
+                diff_base = mb2.stdout.strip()
+        if diff_base:
+            diff = subprocess.run(
+                ["git", "diff", "--name-only", f"{diff_base}...HEAD"],
+                cwd=str(ROOT), capture_output=True, text=True,
+            )
+            if diff.returncode != 0:
+                fail(f"scope diff failed against {diff_base}: {diff.stderr}")
+            else:
+                for line in diff.stdout.splitlines():
+                    if line.startswith("landing-site/"):
+                        fail(f"landing-site/ changed: {line}")
+
+    # Maturity honesty
+    for key in (
+        "terminal_receipt_enforcement",
+        "persistence_governance_gate",
+        "ecqr_artifact_binding",
+        "independent_shadow_evidence",
+        "ratification_evidence",
+    ):
+        # After adversarial suite these may be IMPLEMENTED; PARTIAL also accepted until proven
+        val = maturity.get(key)
+        if val not in ("IMPLEMENTED", "PARTIAL"):
+            fail(f"maturity.{key} must be IMPLEMENTED or PARTIAL, got {val}")
+    if maturity.get("live_promotion") != "FORBIDDEN":
+        fail("live_promotion must be FORBIDDEN")
+    if maturity.get("model_learning") != "FORBIDDEN":
+        fail("model_learning must be FORBIDDEN")
+    if maturity.get("data_runway") not in ("HOLD", "FORBIDDEN"):
+        fail("data_runway must be HOLD")
+    aa = lock.get("auto_apply_allowlist") or {}
+    if aa.get("enabled") is not False:
+        fail("auto_apply_allowlist.enabled must be false")
+    if maturity.get("auto_apply") not in ("FUTURE_W2", "NOT_IMPLEMENTED"):
+        fail("maturity.auto_apply must be FUTURE_W2 or NOT_IMPLEMENTED")
 
     if errors:
         print("validate_motor_learning_organ_w1: FAIL")
@@ -137,6 +179,7 @@ def main() -> int:
         "dry_run_store_hash_after": after,
         "rollback_final_state": rb.get("final_state"),
         "live_promotion": False,
+        "live_consumable": False,
         "model_learning": False,
     }, indent=2))
     return 0

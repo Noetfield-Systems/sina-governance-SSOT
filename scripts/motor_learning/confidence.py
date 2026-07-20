@@ -115,6 +115,13 @@ def compute_confidence(
     sh_ids = list(shadow_evidence_ids or [])
     overlap = sorted(set(mine_ids) & set(sh_ids))
 
+    shadow_ok = True
+    if shadow_report is not None:
+        if shadow_report.get("ratifiable") is False:
+            shadow_ok = False
+        if shadow_report.get("evaluated", 0) < 3:
+            shadow_ok = False
+
     out = {
         "schema": "nf_motor_learning_confidence_v1",
         "algorithm_version": CONFIDENCE_VERSION,
@@ -122,11 +129,18 @@ def compute_confidence(
         "confidence_after": after,
         "component_contributions": components,
         "threshold_references": {"ratify_min": RATIFY_THRESHOLD},
-        "meets_ratify_threshold": after >= RATIFY_THRESHOLD and contrad_score == 1.0 and not expired_evidence and not overlap,
+        "meets_ratify_threshold": (
+            after >= RATIFY_THRESHOLD
+            and contrad_score == 1.0
+            and not expired_evidence
+            and not overlap
+            and shadow_ok
+        ),
         "explanation": (
             f"confidence {before}->{after} via {CONFIDENCE_VERSION}; "
             f"evidence_n={occurrence_count}; outcomes={sorted(uniq)}; "
-            f"shadow={shadow_val:.2f}; expired={expired_evidence}; overlap={len(overlap)}"
+            f"shadow={shadow_val:.2f}; expired={expired_evidence}; overlap={len(overlap)}; "
+            f"shadow_ok={shadow_ok}"
         ),
         "evidence_ids": list(evidence_refs or []),
         "mining_evidence_ids": mine_ids,

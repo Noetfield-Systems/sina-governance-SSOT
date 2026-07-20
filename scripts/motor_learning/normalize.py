@@ -1,5 +1,4 @@
-
-"""Event ingestion and deterministic normalization."""
+"""Event ingestion and deterministic normalization with provenance fingerprint."""
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -24,7 +23,6 @@ SUPPORTED_OUTCOMES = frozenset({"success", "failure", "abstain", "partial"})
 def _parse_ts(value: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise SchemaError("timestamp must be non-empty ISO8601 string")
-    # Accept Z or offset; normalize to Z
     v = value.strip().replace(" ", "T")
     if v.endswith("Z"):
         dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
@@ -33,6 +31,38 @@ def _parse_ts(value: str) -> str:
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
     return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _canon_refs(refs: list[Any] | None) -> list[str]:
+    out = [str(x) for x in (refs or []) if x is not None and str(x).strip()]
+    return sorted(out)
+
+
+def provenance_fingerprint(raw: dict[str, Any], *, occurred_at: str, observed_at: str) -> str:
+    """
+    Immutable provenance fingerprint — includes all fields whose modification
+    changes evidentiary meaning.
+    """
+    body = {
+        "event_id": str(raw["event_id"]),
+        "event_type": raw["event_type"],
+        "source": str(raw["source"]),
+        "occurred_at": occurred_at,
+        "observed_at": observed_at,
+        "actor": raw.get("actor"),
+        "stage": raw.get("stage"),
+        "provider": raw.get("provider"),
+        "action_attempted": str(raw["action_attempted"]),
+        "outcome": raw["outcome"],
+        "error_class": raw.get("error_class") or raw.get("error") or None,
+        "recovery_path": raw.get("recovery_path"),
+        "repository": raw.get("repository"),
+        "runway": raw.get("runway"),
+        "loop_id": raw.get("loop_id") or raw.get("actor_loop"),
+        "evidence_refs": _canon_refs(raw.get("evidence_refs") or raw.get("evidence")),
+        "raw_evidence_ref": raw.get("raw_evidence_ref") or f"raw://{raw['event_id']}",
+    }
+    return content_hash(body)
 
 
 def normalize_event(raw: dict[str, Any], *, observed_at: str | None = None) -> dict[str, Any]:
@@ -48,22 +78,9 @@ def normalize_event(raw: dict[str, Any], *, observed_at: str | None = None) -> d
 
     occurred_at = _parse_ts(raw["occurred_at"])
     observed = _parse_ts(observed_at or raw.get("observed_at") or occurred_at)
-
-    # Stable identity for idempotency: prefer explicit event_id + content fingerprint of core fields
-    core = {
-        "event_id": str(raw["event_id"]),
-        "event_type": raw["event_type"],
-        "source": str(raw["source"]),
-        "occurred_at": occurred_at,
-        "action_attempted": str(raw["action_attempted"]),
-        "outcome": raw["outcome"],
-        "error_class": raw.get("error_class") or raw.get("error") or None,
-        "recovery_path": raw.get("recovery_path"),
-        "repository": raw.get("repository"),
-        "runway": raw.get("runway"),
-        "loop_id": raw.get("loop_id") or raw.get("actor_loop"),
-    }
-    ch = content_hash(core)
+    evidence_refs = _canon_refs(raw.get("evidence_refs") or raw.get("evidence"))
+    raw_evidence_ref = raw.get("raw_evidence_ref") or f"raw://{raw['event_id']}"
+    ch = provenance_fingerprint(raw, occurred_at=occurred_at, observed_at=observed)
 
     normalized = {
         "schema": SCHEMA_VERSION,
@@ -74,18 +91,19 @@ def normalize_event(raw: dict[str, Any], *, observed_at: str | None = None) -> d
         "occurred_at": occurred_at,
         "observed_at": observed,
         "actor": raw.get("actor"),
-        "loop_id": core["loop_id"] or "motor_learning_organ_v1",
+        "loop_id": raw.get("loop_id") or raw.get("actor_loop") or "motor_learning_organ_v1",
         "repository": raw.get("repository"),
         "runway": raw.get("runway"),
         "action_attempted": str(raw["action_attempted"]),
         "outcome": raw["outcome"],
-        "error_class": core["error_class"],
+        "error_class": raw.get("error_class") or raw.get("error") or None,
         "recovery_path": raw.get("recovery_path"),
         "stage": raw.get("stage"),
         "provider": raw.get("provider"),
-        "evidence_refs": list(raw.get("evidence_refs") or raw.get("evidence") or []),
-        "raw_evidence_ref": raw.get("raw_evidence_ref") or f"raw://{raw['event_id']}",
+        "evidence_refs": evidence_refs,
+        "raw_evidence_ref": raw_evidence_ref,
         "content_hash": ch,
+        "provenance_fingerprint": ch,
         "idempotency_key": f"{raw['event_id']}:{ch}",
     }
     return normalized
@@ -104,7 +122,11 @@ def normalize_many(
     for raw in raws:
         n = normalize_event(raw)
         if event_registry is not None:
-            status = event_registry.register(n["event_id"], n["content_hash"])
+            status = event_registry.register(
+                n["event_id"],
+                n["content_hash"],
+                provenance=n.get("provenance_fingerprint"),
+            )
             if status == "duplicate":
                 duplicates.append(n)
                 continue
@@ -112,7 +134,6 @@ def normalize_many(
         if key in seen:
             duplicates.append(n)
             continue
-        # Also detect same event_id already accepted with same hash via seen by id
         id_key = f"id:{n['event_id']}:{n['content_hash']}"
         if id_key in seen:
             duplicates.append(n)

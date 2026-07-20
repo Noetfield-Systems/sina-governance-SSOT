@@ -19,6 +19,9 @@ on:
           - daily_mine
           - weekly_roi
 
+permissions:
+  contents: read
+
 jobs:
   tick:
     runs-on: ubuntu-latest
@@ -31,10 +34,13 @@ jobs:
           python-version: "3.12"
 
       - name: Motor learning organ tick (observe/heartbeat stub)
+        shell: bash
+        env:
+          MLO_TICK_MODE: ${{ github.event.inputs.mode }}
         run: |
-          MODE="${{ github.event.inputs.mode }}"
+          set -euo pipefail
+          MODE="${MLO_TICK_MODE:-}"
           if [[ -z "$MODE" ]]; then
-            # cron: Mon 07:00 UTC → weekly_roi; else daily_mine
             DOW=$(date -u +%u)
             HOUR=$(date -u +%H)
             if [[ "$DOW" == "1" && "$HOUR" == "07" ]]; then
@@ -43,14 +49,19 @@ jobs:
               MODE=daily_mine
             fi
           fi
+          mkdir -p receipts/learning
+          OUT="receipts/learning/motor-learning-organ-heartbeat-$(date -u +%Y%m%dT%H%M%SZ).json"
           python3 scripts/motor_learning_organ_tick_v1.py --mode "$MODE" --write-receipt \
-            > "receipts/learning/motor-learning-organ-latest-summary.json"
+            > "$OUT"
+          cp "$OUT" receipts/learning/motor-learning-organ-latest-summary.json
+          echo "MLO_RECEIPT_PATH=$OUT" >> "$GITHUB_ENV"
 
       - name: Upload learning receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: motor-learning-organ-receipt
+          name: motor-learning-organ-receipt-${{ github.run_id }}
           path: |
-            receipts/learning/motor-learning-organ-*.json
+            receipts/learning/motor-learning-organ-latest-summary.json
+            ${{ env.MLO_RECEIPT_PATH }}
           if-no-files-found: ignore

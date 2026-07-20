@@ -6,22 +6,37 @@ on:
     paths:
       - "scripts/motor_learning/**"
       - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/motor_learning_organ_tick_v1.py"
       - "scripts/validate_motor_learning_organ_w1.py"
       - "tests/test_motor_learning_organ_w1.py"
       - "fixtures/motor_learning_w1/**"
       - "data/nf_motor_learning_organ*.json"
       - "data/nf_motor_learning_receipt_v1.json"
+      - "data/github_automation_registry_v1.json"
+      - "data/automation_surface_inventory_v1.json"
+      - "data/agent_read_surfaces_v1.json"
+      - "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md"
+      - "docs/dispatch/nf-motor-learning-organ-all-repos.md"
       - ".github/workflows/motor-learning-organ-w1-validate.yml"
+      - ".github/workflows/motor-learning-organ-v1.yml"
   push:
     branches: [main, feat/nf-motor-learning-organ-v1]
     paths:
       - "scripts/motor_learning/**"
       - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/motor_learning_organ_tick_v1.py"
       - "scripts/validate_motor_learning_organ_w1.py"
       - "tests/test_motor_learning_organ_w1.py"
       - "fixtures/motor_learning_w1/**"
       - "data/nf_motor_learning_organ*.json"
       - "data/nf_motor_learning_receipt_v1.json"
+      - "data/github_automation_registry_v1.json"
+      - "data/automation_surface_inventory_v1.json"
+      - "data/agent_read_surfaces_v1.json"
+      - "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md"
+      - "docs/dispatch/nf-motor-learning-organ-all-repos.md"
+      - ".github/workflows/motor-learning-organ-w1-validate.yml"
+      - ".github/workflows/motor-learning-organ-v1.yml"
   workflow_dispatch:
 
 permissions:
@@ -50,8 +65,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main --depth=1 || git fetch origin main
-          BASE=$(git merge-base HEAD origin/main || git rev-parse origin/main)
+          git fetch origin main --no-tags --prune
+          BASE=$(git merge-base HEAD origin/main)
           echo "MLO_BASE_SHA=$BASE" >> "$GITHUB_ENV"
           echo "base=$BASE"
 
@@ -79,7 +94,16 @@ jobs:
             exit 1
           fi
           if grep -E '^landing-site/' /tmp/mlo-scope.txt; then
-            echo "FAIL: landing-site/ must not change"
+            echo "FAIL: landing-site/ changed"
             exit 1
           fi
-          echo "scope ok vs $BASE"
+          echo "scope guard PASS against $BASE"
+          wc -l /tmp/mlo-scope.txt
+
+      - name: Upload W1 validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motor-learning-w1-validate-${{ github.run_id }}
+          path: /tmp/mlo-scope.txt
+          if-no-files-found: ignore

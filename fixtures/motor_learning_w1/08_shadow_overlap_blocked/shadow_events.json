@@ -14,8 +14,10 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/1.json"
-    ]
+      "receipts/shadow-holdout/1.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/evt-001",
+    "provider": "shadow_holdout_fixture"
   },
   {
     "event_id": "evt-002",
@@ -32,8 +34,10 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/2.json"
-    ]
+      "receipts/shadow-holdout/2.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/evt-002",
+    "provider": "shadow_holdout_fixture"
   },
   {
     "event_id": "evt-003",
@@ -50,8 +54,10 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/3.json"
-    ]
+      "receipts/shadow-holdout/3.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/evt-003",
+    "provider": "shadow_holdout_fixture"
   },
   {
     "event_id": "evt-004",
@@ -68,7 +74,9 @@
     "recovery_path": "route_B_retry",
     "stage": "deploy",
     "evidence_refs": [
-      "receipts/fixture/4.json"
-    ]
+      "receipts/shadow-holdout/4.json"
+    ],
+    "raw_evidence_ref": "raw://shadow/evt-004",
+    "provider": "shadow_holdout_fixture"
   }
 ]

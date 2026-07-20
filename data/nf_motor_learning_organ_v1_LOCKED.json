@@ -50,7 +50,7 @@
     ]
   },
   "auto_apply_allowlist": {
-    "enabled": true,
+    "enabled": false,
     "targets": [
       "stage_market_cold_start_reliability",
       "stage_market_cold_start_est_cost",
@@ -125,7 +125,11 @@
     "model_learning": "FORBIDDEN",
     "data_runway": "HOLD",
     "seed_fixture_terminal_gate": "IMPLEMENTED",
-    "store_persist_explicit_allow": "IMPLEMENTED"
+    "store_persist_explicit_allow": "IMPLEMENTED",
+    "auto_apply": "FUTURE_W2",
+    "w1_live_consumable": "FORBIDDEN",
+    "w2_activation": "NOT_IMPLEMENTED",
+    "reviewer_authentication": "NOT_IMPLEMENTED"
   },
   "learning_receipt_schema": "data/nf_motor_learning_receipt_v1.json",
   "next_milestone": {
@@ -135,7 +139,7 @@
       "W1_SG_REFERENCE"
     ]
   },
-  "w1_status": "GOVERNANCE_BOUNDARY_ENFORCED_SG_REFERENCE",
+  "w1_status": "REFERENCE_ONLY_GOVERNANCE_HARDENED",
   "w1_reference": {
     "package": "scripts/motor_learning/",
     "cli": "scripts/motor_learning_organ_w1_run.py",
