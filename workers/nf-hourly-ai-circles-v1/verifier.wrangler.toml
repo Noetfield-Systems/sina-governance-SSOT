@@ -7,8 +7,10 @@ workers_dev = true
 
 # Free plan on secondary account cannot use Workflow schedules.
 # Independence is preserved via separate account + GitHub identity + KV.
+# KV free-tier cutback while HOLD; re-enable when Paid or after quota OK.
+# Builder can still POST /tick; independence preserved via account separation.
 [triggers]
-crons = ["30 * * * *"]
+crons = []
 
 [vars]
 LOOP_ID = "nf-hourly-independent-verifier-circle-v1"

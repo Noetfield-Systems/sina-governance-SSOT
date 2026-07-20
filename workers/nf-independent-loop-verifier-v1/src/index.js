@@ -13,11 +13,17 @@
  *   - persist verdict to its own KV (this account) + expose /verify, /health
  *   - optional Telegram alert on FAIL (independent lane)
  *
+ * KV free-tier cutback: 3 writes per tick (last_fired_at, last_verdict,
+ * last_receipt). History key verify:${at} is not written.
+ *
  * Read-only auditor. Never mutates the loops. Never lifts HOLD.
  */
 import auditDoc from "./audit-targets.json";
 
 const SCHEMA = "nf-independent-loop-verifier-v1";
+
+/** In-isolate cache for /health. Cold start may KV-read once. */
+let memCache = null;
 
 function json(body, status = 200) {
   return Response.json(body, {
@@ -139,16 +145,14 @@ async function runVerify(env, source) {
     hold: "HOLD",
   };
 
+  // KV free-tier: 3 writes only (no verify:${at} history key).
   if (env.VERIFIER_KV) {
     await env.VERIFIER_KV.put("last_fired_at", at);
     await env.VERIFIER_KV.put("last_verdict", verdict);
     await env.VERIFIER_KV.put("last_receipt", JSON.stringify(receipt));
-    await env.VERIFIER_KV.put(
-      `verify:${at}`,
-      JSON.stringify(receipt),
-      { expirationTtl: 60 * 60 * 24 * 14 },
-    );
   }
+
+  memCache = { last_fired_at: at, last_verdict: verdict, at };
 
   if (verdict === "FAIL") {
     receipt.alert = await telegramAlert(
@@ -168,11 +172,19 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/health") {
-      let last = null;
-      let verdict = null;
-      if (env.VERIFIER_KV) {
-        last = await env.VERIFIER_KV.get("last_fired_at");
-        verdict = await env.VERIFIER_KV.get("last_verdict");
+      // Prefer in-isolate memCache; cold start may KV-read once.
+      let last = memCache?.last_fired_at ?? null;
+      let verdict = memCache?.last_verdict ?? null;
+      if ((!last || !verdict) && env.VERIFIER_KV) {
+        last = last || (await env.VERIFIER_KV.get("last_fired_at"));
+        verdict = verdict || (await env.VERIFIER_KV.get("last_verdict"));
+        if (last || verdict) {
+          memCache = {
+            last_fired_at: last,
+            last_verdict: verdict,
+            at: last,
+          };
+        }
       }
       return json({
         ok: true,
@@ -181,8 +193,8 @@ export default {
         loop_id: env.LOOP_ID || SCHEMA,
         verifier_account: env.VERIFIER_ACCOUNT_ID || "b7282b4a",
         audited_account: "0d0b967b (main)",
-        cron: env.CRON || "*/30 * * * *",
-        interval_minutes: Number(env.INTERVAL_MINUTES || 30),
+        cron: env.CRON || "0 */2 * * *",
+        interval_minutes: Number(env.INTERVAL_MINUTES || 120),
         last_fired_at: last,
         last_verdict: verdict,
         trigger_host: "cloud",
