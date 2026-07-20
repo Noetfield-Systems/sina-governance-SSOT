@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .errors import IllegalTransition, GovernanceBlock
-from .validated import ValidatedReceipt, is_validated_receipt
+from .validated import ValidatedReceipt
 
 OBSERVED = "OBSERVED"
 PROPOSED = "PROPOSED"
@@ -84,8 +84,8 @@ def _require_validated_receipt(
     receipt_resolver=None,
 ) -> ValidatedReceipt:
     """
-    Terminal transitions require a complete validated receipt object.
-    A raw receipt ID string is never proof.
+    Terminal transitions require a complete canonically revalidated receipt.
+    Wrapper possession never bypasses validation — always revalidate as_dict().
     """
     if learning_receipt is None and learning_receipt_id and receipt_resolver is not None:
         loaded = receipt_resolver(learning_receipt_id)
@@ -99,23 +99,24 @@ def _require_validated_receipt(
             f"raw learning_receipt_id alone is never proof"
         )
 
-    if isinstance(learning_receipt, dict):
-        # Plain dict must be fully validated and minted into opaque type
-        from .receipt import validate_and_mint_receipt
-        vr = validate_and_mint_receipt(learning_receipt)
-    elif is_validated_receipt(learning_receipt):
-        vr = learning_receipt
+    # ALWAYS extract dict and revalidate — even for ValidatedReceipt wrappers
+    if isinstance(learning_receipt, ValidatedReceipt):
+        body = learning_receipt.as_dict()
+    elif isinstance(learning_receipt, dict):
+        body = learning_receipt
     else:
-        raise GovernanceBlock(f"{to_state}: learning_receipt must be ValidatedReceipt or validated dict")
+        raise GovernanceBlock(f"{to_state}: learning_receipt must be ValidatedReceipt or dict")
 
-    body = vr.as_dict()
+    from .receipt import validate_and_mint_receipt
+    vr = validate_and_mint_receipt(body)
+
     expected = DECISION_FOR_STATE[to_state]
-    if body.get("decision") != expected:
+    if vr.as_dict().get("decision") != expected:
         raise GovernanceBlock(
-            f"receipt decision {body.get('decision')!r} mismatches transition {to_state}"
+            f"receipt decision {vr.as_dict().get('decision')!r} mismatches transition {to_state}"
         )
 
-    # Cross-bind candidate / prior when present on entity
+    body = vr.as_dict()
     if entity.get("candidate_id") and body.get("candidate_id"):
         if entity["candidate_id"] != body["candidate_id"]:
             raise GovernanceBlock("receipt.candidate_id mismatches entity.candidate_id")
@@ -129,7 +130,10 @@ def _require_validated_receipt(
         raise GovernanceBlock("receipt missing evidence_links")
 
     if to_state == RATIFIED:
-        for req in ("shadow_id", "shadow_hash", "shadow_evidence_manifest_hash", "confidence_hash", "ecqr_decision_hash", "candidate_hash"):
+        for req in (
+            "shadow_id", "shadow_hash", "shadow_evidence_manifest_hash",
+            "confidence_hash", "ecqr_decision_hash", "candidate_hash",
+        ):
             if not body.get(req):
                 raise GovernanceBlock(f"ratification receipt missing binding field: {req}")
 
@@ -149,14 +153,6 @@ def transition(
     require_receipt: bool | None = None,
     timestamp: str | None = None,
 ) -> dict[str, Any]:
-    """
-    Transition entity state.
-
-    For RATIFIED / REJECTED / ROLLED_BACK:
-    - A complete validated receipt object (or resolver returning one) is REQUIRED.
-    - A raw learning_receipt_id string alone always raises GovernanceBlock.
-    - require_receipt=False is forbidden for terminals.
-    """
     from_state = normalize_state(entity.get("state") or entity.get("status"))
     to_state = to_state.upper()
 
@@ -172,7 +168,6 @@ def transition(
             raise GovernanceBlock(
                 f"{to_state} requires validated learning_receipt; require_receipt=False is forbidden"
             )
-        # ID-only path: if only learning_receipt_id provided without object/resolver → block
         if learning_receipt is None and receipt_resolver is None and learning_receipt_id:
             raise GovernanceBlock(
                 f"{to_state}: learning_receipt_id alone is never proof; "

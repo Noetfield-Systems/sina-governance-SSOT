@@ -1,4 +1,4 @@
-"""ECQR decision gate — immutable after issuance; bind computed artifacts exactly."""
+"""ECQR decision gate — immutable after issuance; templates compile separately."""
 from __future__ import annotations
 
 import copy
@@ -7,10 +7,11 @@ from typing import Any
 from .errors import GovernanceBlock, SchemaError
 from .confidence import RATIFY_THRESHOLD
 from .hashutil import content_hash
-from .validated import mint_validated_ecqr, ValidatedECQR, is_validated_ecqr
+from .artifacts import unwrap_shadow, unwrap_confidence, unwrap_candidate
+from .validated import ValidatedECQR, _mint_ecqr
 from . import ALGORITHM_VERSION, CONFIDENCE_VERSION
 
-REQUIRED = (
+REQUIRED_DECISION = (
     "decision",
     "candidate_id",
     "reviewer",
@@ -24,12 +25,37 @@ REQUIRED = (
     "effective_at",
     "policy_versions",
 )
+REQUIRED_RATIFIED_EXTRA = (
+    "shadow_hash",
+    "shadow_evidence_manifest_hash",
+)
 
 AUTO_PLACEHOLDERS = frozenset({"auto", "AUTO", ""})
 
+ECQR_TEMPLATE_SCHEMA = "nf_motor_learning_ecqr_template_v1"
+ECQR_DECISION_SCHEMA = "nf_motor_learning_ecqr_decision_v1"
+
+
+def is_ecqr_template(obj: dict[str, Any]) -> bool:
+    if not isinstance(obj, dict):
+        return False
+    if obj.get("schema") == ECQR_TEMPLATE_SCHEMA:
+        return True
+    if obj.get("kind") == "ECQR_TEMPLATE":
+        return True
+    # Heuristic: unresolved auto placeholders
+    if obj.get("candidate_id") in AUTO_PLACEHOLDERS:
+        return True
+    if obj.get("shadow_result_ref") in AUTO_PLACEHOLDERS:
+        return True
+    if "shadow_hash" not in obj or obj.get("shadow_hash") in AUTO_PLACEHOLDERS:
+        if obj.get("decision") == "RATIFIED":
+            return True
+    return False
+
 
 def fixture_compile_ecqr(
-    fixture: dict[str, Any],
+    template: dict[str, Any],
     *,
     candidate: dict,
     shadow: dict,
@@ -38,46 +64,55 @@ def fixture_compile_ecqr(
     shadow_event_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     """
-    Expand fixture "auto" placeholders into a NEW decision dict.
-    Never mutates the original fixture object.
+    Separate pre-review compiler. Expands ECQR_TEMPLATE into a NEW ECQR_DECISION dict.
+    Never mutates the template. Must NOT be called from governed run_pipeline.
     """
-    out = copy.deepcopy(fixture)
+    if not isinstance(template, dict):
+        raise SchemaError("ECQR template must be object")
+    out = copy.deepcopy(template)
+    out.pop("kind", None)
+    if out.get("schema") == ECQR_TEMPLATE_SCHEMA:
+        out["schema"] = ECQR_DECISION_SCHEMA
+    else:
+        out.setdefault("schema", ECQR_DECISION_SCHEMA)
+
+    # Validate/normalize artifacts first
+    cand = unwrap_candidate(candidate)
+    sh = unwrap_shadow(shadow)
+    conf = unwrap_confidence(confidence, shadow=sh)
+
     if out.get("candidate_id") in AUTO_PLACEHOLDERS or out.get("candidate_id") is None:
-        out["candidate_id"] = candidate["candidate_id"]
+        out["candidate_id"] = cand["candidate_id"]
     if out.get("shadow_result_ref") in AUTO_PLACEHOLDERS or out.get("shadow_result_ref") is None:
-        out["shadow_result_ref"] = f"shadow:{shadow['shadow_id']}"
-    if out.get("shadow_hash") in AUTO_PLACEHOLDERS or out.get("shadow_hash") is None:
-        out["shadow_hash"] = shadow.get("content_hash")
-    # confidence auto: only when both are exactly 0.0 placeholder convention OR missing
-    if "confidence_before" not in out or out.get("_auto_confidence"):
-        out["confidence_before"] = confidence["confidence_before"]
-        out["confidence_after"] = confidence["confidence_after"]
-    elif float(out.get("confidence_before", 0)) == 0.0 and float(out.get("confidence_after", 0)) == 0.0:
-        # Fixture convention: 0.0/0.0 means auto-fill (compile step only)
-        out["confidence_before"] = confidence["confidence_before"]
-        out["confidence_after"] = confidence["confidence_after"]
-    mine = list(mining_event_ids or candidate.get("source_event_ids") or [])
-    sh = list(shadow_event_ids or shadow.get("shadow_event_ids") or [])
+        out["shadow_result_ref"] = f"shadow:{sh['shadow_id']}"
+    out["shadow_hash"] = sh["content_hash"]
+    out["shadow_id"] = sh["shadow_id"]
+    out["shadow_evidence_manifest_hash"] = sh["evidence_manifest_hash"]
+    out["confidence_before"] = conf["confidence_before"]
+    out["confidence_after"] = conf["confidence_after"]
+    out["confidence_hash"] = conf["content_hash"]
+
+    mine = list(mining_event_ids or cand.get("source_event_ids") or [])
+    sh_ids = list(shadow_event_ids or sh.get("shadow_event_ids") or [])
     existing = list(out.get("evidence_reviewed") or [])
     if not existing or existing == ["auto"]:
         out["evidence_reviewed"] = list(dict.fromkeys(
-            mine + sh + list(shadow.get("evidence_refs") or []) + list(candidate.get("evidence_refs") or [])
+            mine + sh_ids + list(sh.get("evidence_refs") or []) + list(cand.get("evidence_refs") or [])
         ))
     else:
-        # Preserve reviewer list but ensure both manifests are covered (compile-time only)
-        out["evidence_reviewed"] = list(dict.fromkeys(existing + mine + sh))
+        out["evidence_reviewed"] = list(dict.fromkeys(existing + mine + sh_ids))
+
     out.setdefault("algorithm_versions", {
         "pipeline": ALGORITHM_VERSION,
         "confidence": CONFIDENCE_VERSION,
     })
-    if shadow.get("evidence_manifest_hash"):
-        out.setdefault("shadow_evidence_manifest_hash", shadow["evidence_manifest_hash"])
+    out["kind"] = "ECQR_DECISION"
     out["_compiled_from_fixture"] = True
     return out
 
 
 def validate_ecqr_decision(
-    decision: dict[str, Any],
+    decision: dict[str, Any] | ValidatedECQR,
     *,
     confidence: dict | None = None,
     shadow: dict | None = None,
@@ -85,110 +120,110 @@ def validate_ecqr_decision(
     require_bound_artifacts: bool = True,
 ) -> ValidatedECQR:
     """
-    Validate an ECQR decision WITHOUT mutating it.
-    Returns an opaque ValidatedECQR. Callers cannot forge via plain dict markers.
+    Validate an ECQR_DECISION WITHOUT mutating the caller object.
+    Always revalidates even if a ValidatedECQR wrapper is supplied.
+    Rejects ECQR_TEMPLATE / auto placeholders.
     """
-    if is_validated_ecqr(decision):
-        return decision
+    if isinstance(decision, ValidatedECQR):
+        decision = decision.as_dict()
     if not isinstance(decision, dict):
         raise SchemaError("ECQR decision must be object")
 
-    # Refuse unresolved auto placeholders — must be compiled first
-    if decision.get("candidate_id") in AUTO_PLACEHOLDERS:
-        raise GovernanceBlock("ECQR candidate_id is unresolved auto placeholder; compile fixture first")
-    if decision.get("shadow_result_ref") in AUTO_PLACEHOLDERS:
-        raise GovernanceBlock("ECQR shadow_result_ref is unresolved auto placeholder; compile fixture first")
+    # Work on a copy — never mutate caller
+    source_bytes_check = copy.deepcopy(decision)
 
-    missing = [k for k in REQUIRED if k not in decision]
+    if is_ecqr_template(decision) or decision.get("kind") == "ECQR_TEMPLATE":
+        raise GovernanceBlock(
+            "ECQR_TEMPLATE is not a governed decision; compile separately before review issuance"
+        )
+    if decision.get("candidate_id") in AUTO_PLACEHOLDERS:
+        raise GovernanceBlock("ECQR candidate_id unresolved; missing binding fails closed")
+    if decision.get("shadow_result_ref") in AUTO_PLACEHOLDERS:
+        raise GovernanceBlock("ECQR shadow_result_ref unresolved; missing binding fails closed")
+
+    missing = [k for k in REQUIRED_DECISION if k not in decision]
     if missing:
         raise SchemaError(f"ECQR decision missing: {missing}")
+
     d = decision["decision"]
+    if d == "RATIFIED":
+        missing_r = [k for k in REQUIRED_RATIFIED_EXTRA if k not in decision or decision.get(k) in AUTO_PLACEHOLDERS]
+        if missing_r:
+            raise SchemaError(f"ECQR RATIFIED missing bindings: {missing_r}")
     if d not in ("RATIFIED", "REJECTED", "ROLLED_BACK"):
         raise SchemaError(f"invalid decision: {d}")
     reviewer = decision["reviewer"]
     if not str(reviewer).startswith(("test_reviewer:", "fixture:", "founder:", "gated_policy:", "machine_policy:")):
-        raise GovernanceBlock(f"reviewer must be explicit fixture/founder/gated_policy/machine_policy; got {reviewer}")
+        raise GovernanceBlock(f"reviewer must be explicit; got {reviewer}")
 
-    if decision.get("promoted_by_similarity"):
-        raise GovernanceBlock("similarity has no promotion authority")
-    if decision.get("promoted_by_confidence_alone"):
-        raise GovernanceBlock("confidence has no promotion authority")
+    if decision.get("promoted_by_similarity") or decision.get("promoted_by_confidence_alone"):
+        raise GovernanceBlock("similarity/confidence have no promotion authority")
 
-    # Build validated payload as a copy — never mutate caller decision
     out = copy.deepcopy(decision)
-    out.setdefault("schema", "nf_motor_learning_ecqr_decision_v1")
+    out.setdefault("schema", ECQR_DECISION_SCHEMA)
     out.setdefault("expires_at", None)
     out.setdefault("supersedes", None)
     out.setdefault("repositories", decision.get("repositories") or [])
-    # Strip any caller-supplied internal markers — they are never trust
     out.pop("_artifacts_bound", None)
-    out.pop("_bound_confidence_version", None)
-    out.pop("_bound_shadow_id", None)
 
     if d == "RATIFIED":
-        if require_bound_artifacts:
-            if shadow is None:
-                raise GovernanceBlock("RATIFIED requires non-None validated shadow artifact")
-            if confidence is None:
-                raise GovernanceBlock("RATIFIED requires non-None validated confidence artifact")
+        if require_bound_artifacts and (shadow is None or confidence is None or candidate is None):
+            raise GovernanceBlock("RATIFIED requires validated candidate+shadow+confidence artifacts")
         if shadow is None or confidence is None:
             raise GovernanceBlock("RATIFIED requires shadow and confidence artifacts")
 
-        # Explicit mismatch → GovernanceBlock (no overwrite)
-        if candidate and decision["candidate_id"] != candidate.get("candidate_id"):
+        cand = unwrap_candidate(candidate) if candidate is not None else None
+        sh = unwrap_shadow(shadow)
+        conf = unwrap_confidence(confidence, shadow=sh)
+
+        if cand and decision["candidate_id"] != cand.get("candidate_id"):
             raise GovernanceBlock(
                 f"ECQR candidate_id mismatch: decision={decision['candidate_id']!r} "
-                f"candidate={candidate.get('candidate_id')!r}"
+                f"candidate={cand.get('candidate_id')!r}"
             )
-        if shadow.get("candidate_id") and decision["candidate_id"] != shadow["candidate_id"]:
+        if sh.get("candidate_id") and decision["candidate_id"] != sh["candidate_id"]:
             raise GovernanceBlock("ECQR candidate_id mismatches shadow.candidate_id")
 
-        shadow_id = shadow.get("shadow_id")
-        shadow_hash = shadow.get("content_hash") or shadow.get("shadow_hash")
+        shadow_id = sh.get("shadow_id")
+        shadow_hash = sh.get("content_hash")
         ref = decision.get("shadow_result_ref")
-        if not shadow_id:
-            raise GovernanceBlock("shadow artifact missing shadow_id")
         if ref not in (f"shadow:{shadow_id}", shadow_id, f"hash:{shadow_hash}"):
             raise GovernanceBlock(
-                f"shadow_result_ref {ref!r} does not bind to shadow_id={shadow_id} hash={shadow_hash}"
+                f"shadow_result_ref {ref!r} does not bind to shadow_id={shadow_id}"
             )
-        # Missing binding
-        if "shadow_hash" not in decision or decision.get("shadow_hash") in (None, *AUTO_PLACEHOLDERS):
+        if decision.get("shadow_hash") in (None, *AUTO_PLACEHOLDERS):
             raise GovernanceBlock("ECQR missing shadow_hash binding")
         if decision["shadow_hash"] != shadow_hash:
             raise GovernanceBlock(
                 f"ECQR shadow_hash mismatch: decision={decision['shadow_hash']!r} computed={shadow_hash!r}"
             )
+        manifest_hash = sh["evidence_manifest_hash"]
+        if decision.get("shadow_evidence_manifest_hash") not in (None, *AUTO_PLACEHOLDERS):
+            if decision["shadow_evidence_manifest_hash"] != manifest_hash:
+                raise GovernanceBlock("ECQR shadow_evidence_manifest_hash mismatch")
+        else:
+            raise GovernanceBlock("ECQR missing shadow_evidence_manifest_hash binding")
 
-        # Manifest binding
-        manifest_hash = shadow.get("evidence_manifest_hash")
-        if not manifest_hash:
-            raise GovernanceBlock("shadow missing evidence_manifest_hash")
-        if decision.get("shadow_evidence_manifest_hash") and decision["shadow_evidence_manifest_hash"] != manifest_hash:
-            raise GovernanceBlock("ECQR shadow_evidence_manifest_hash mismatch")
-        out["shadow_evidence_manifest_hash"] = manifest_hash
-
-        if float(decision["confidence_before"]) != float(confidence["confidence_before"]):
+        if float(decision["confidence_before"]) != float(conf["confidence_before"]):
             raise GovernanceBlock("ECQR confidence_before mismatches computed confidence")
-        if float(decision["confidence_after"]) != float(confidence["confidence_after"]):
+        if float(decision["confidence_after"]) != float(conf["confidence_after"]):
             raise GovernanceBlock("ECQR confidence_after mismatches computed confidence")
-        if not confidence.get("meets_ratify_threshold"):
-            raise GovernanceBlock("RATIFIED blocked: confidence below threshold or contradictions")
-        if confidence["confidence_after"] < RATIFY_THRESHOLD:
+        if decision.get("confidence_hash") and decision["confidence_hash"] != conf["content_hash"]:
+            raise GovernanceBlock("ECQR confidence_hash mismatches confidence artifact")
+        if not conf.get("meets_ratify_threshold"):
+            raise GovernanceBlock("RATIFIED blocked: confidence below threshold")
+        if conf["confidence_after"] < RATIFY_THRESHOLD:
             raise GovernanceBlock("RATIFIED blocked: confidence_after below ratify threshold")
-        if not shadow.get("ratifiable"):
-            raise GovernanceBlock(f"RATIFIED blocked: shadow not ratifiable result={shadow.get('result')}")
-        if shadow.get("result") not in ("success", "mixed"):
-            raise GovernanceBlock(f"RATIFIED blocked: shadow result={shadow.get('result')}")
+        if not sh.get("ratifiable"):
+            raise GovernanceBlock("RATIFIED blocked: shadow not ratifiable")
 
         reviewed = set(decision.get("evidence_reviewed") or [])
-        allowed = set(confidence.get("evidence_ids") or []) | set(shadow.get("evidence_refs") or [])
-        allowed |= set(shadow.get("shadow_event_ids") or [])
-        if candidate:
-            allowed |= set(candidate.get("evidence_refs") or []) | set(candidate.get("source_event_ids") or [])
-        # Must cover both mining and shadow manifests
-        mine_need = set(candidate.get("source_event_ids") or []) if candidate else set()
-        shadow_need = set(shadow.get("shadow_event_ids") or [])
+        allowed = set(conf.get("evidence_ids") or []) | set(sh.get("evidence_refs") or [])
+        allowed |= set(sh.get("shadow_event_ids") or [])
+        if cand:
+            allowed |= set(cand.get("evidence_refs") or []) | set(cand.get("source_event_ids") or [])
+        mine_need = set(cand.get("source_event_ids") or []) if cand else set()
+        shadow_need = set(sh.get("shadow_event_ids") or [])
         if mine_need and not (mine_need & reviewed):
             raise GovernanceBlock("ECQR evidence_reviewed missing mining manifest coverage")
         if shadow_need and not (shadow_need & reviewed):
@@ -200,23 +235,32 @@ def validate_ecqr_decision(
             raise GovernanceBlock(f"ECQR evidence_reviewed contains unbound IDs: {sorted(extra)}")
 
         alg = (decision.get("algorithm_versions") or {})
+        if not alg:
+            raise GovernanceBlock("ECQR algorithm_versions required")
         if alg.get("pipeline") and alg["pipeline"] != ALGORITHM_VERSION:
             raise GovernanceBlock("ECQR algorithm_versions.pipeline mismatch")
         if alg.get("confidence") and alg["confidence"] != CONFIDENCE_VERSION:
             raise GovernanceBlock("ECQR algorithm_versions.confidence mismatch")
-        pol = decision.get("policy_versions") or {}
-        if not pol:
+        if not (decision.get("policy_versions") or {}):
             raise GovernanceBlock("ECQR policy_versions required")
 
         out["shadow_hash"] = shadow_hash
         out["shadow_id"] = shadow_id
-        out["confidence_hash"] = confidence.get("content_hash")
+        out["shadow_evidence_manifest_hash"] = manifest_hash
+        out["confidence_hash"] = conf["content_hash"]
+        if cand:
+            out["candidate_hash"] = cand["content_hash"]
 
     elif d == "REJECTED":
         if not decision.get("rationale"):
             raise GovernanceBlock("REJECTED requires rationale")
         if not decision.get("evidence_reviewed"):
             raise GovernanceBlock("REJECTED requires evidence_reviewed")
+        # Rejected may optionally bind artifacts if supplied
+        if shadow is not None:
+            unwrap_shadow(shadow)
+        if confidence is not None:
+            unwrap_confidence(confidence, shadow=shadow)
 
     elif d == "ROLLED_BACK":
         if not decision.get("rollback_target"):
@@ -225,10 +269,13 @@ def validate_ecqr_decision(
             raise GovernanceBlock("ROLLED_BACK requires rationale")
         if not decision.get("evidence_reviewed"):
             raise GovernanceBlock("ROLLED_BACK requires evidence_reviewed")
+        # Must already be ROLLED_BACK — caller must not rewrite
+        if source_bytes_check.get("decision") != "ROLLED_BACK":
+            raise GovernanceBlock("rollback ECQR must already have decision=ROLLED_BACK")
 
     decision_hash = content_hash({
         k: out[k] for k in sorted(out)
         if not str(k).startswith("_") and k != "decision_hash"
     })
     out["decision_hash"] = decision_hash
-    return mint_validated_ecqr(out, decision_hash)
+    return _mint_ecqr(out, decision_hash)

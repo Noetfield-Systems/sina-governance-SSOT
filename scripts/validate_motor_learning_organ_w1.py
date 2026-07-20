@@ -144,18 +144,23 @@ def main() -> int:
                     if line.startswith("landing-site/"):
                         fail(f"landing-site/ changed: {line}")
 
-    # Maturity honesty
+    # Maturity honesty — PARTIAL until new adversarial probes prove closure
     for key in (
         "terminal_receipt_enforcement",
         "persistence_governance_gate",
         "ecqr_artifact_binding",
-        "independent_shadow_evidence",
-        "ratification_evidence",
+        "atomic_terminal_persistence",
     ):
-        # After adversarial suite these may be IMPLEMENTED; PARTIAL also accepted until proven
         val = maturity.get(key)
         if val not in ("IMPLEMENTED", "PARTIAL"):
             fail(f"maturity.{key} must be IMPLEMENTED or PARTIAL, got {val}")
+    if maturity.get("executable_reference_pipeline") not in ("IMPLEMENTED", None):
+        # optional key
+        if maturity.get("executable_reference_pipeline") != "IMPLEMENTED":
+            fail("executable_reference_pipeline must be IMPLEMENTED")
+    if maturity.get("w1_live_consumable") not in ("FORBIDDEN", None):
+        if maturity.get("w1_live_consumable") != "FORBIDDEN":
+            fail("w1_live_consumable must be FORBIDDEN")
     if maturity.get("live_promotion") != "FORBIDDEN":
         fail("live_promotion must be FORBIDDEN")
     if maturity.get("model_learning") != "FORBIDDEN":

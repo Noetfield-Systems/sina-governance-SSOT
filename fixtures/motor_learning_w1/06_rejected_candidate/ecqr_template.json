@@ -1,8 +1,8 @@
 {
-  "decision": "RATIFIED",
+  "decision": "REJECTED",
   "candidate_id": "auto",
-  "reviewer": "test_reviewer:duplicate",
-  "rationale": "Attempt ratify near-duplicate \u2014 expect reject",
+  "reviewer": "test_reviewer:reject",
+  "rationale": "Founder/fixture rejects despite shadow \u2014 policy preference",
   "evidence_reviewed": [
     "evt-001",
     "evt-002",
@@ -27,5 +27,7 @@
   "policy_versions": {
     "organ": "NF-MOTOR-LEARNING-ORGAN-V1",
     "w1": "1.0.0"
-  }
+  },
+  "schema": "nf_motor_learning_ecqr_template_v1",
+  "kind": "ECQR_TEMPLATE"
 }

@@ -27,5 +27,7 @@
   "policy_versions": {
     "organ": "NF-MOTOR-LEARNING-ORGAN-V1",
     "w1": "1.0.0"
-  }
+  },
+  "schema": "nf_motor_learning_ecqr_template_v1",
+  "kind": "ECQR_TEMPLATE"
 }

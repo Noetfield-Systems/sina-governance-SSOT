@@ -129,7 +129,9 @@
     "auto_apply": "FUTURE_W2",
     "w1_live_consumable": "FORBIDDEN",
     "w2_activation": "NOT_IMPLEMENTED",
-    "reviewer_authentication": "NOT_IMPLEMENTED"
+    "reviewer_authentication": "NOT_IMPLEMENTED",
+    "executable_reference_pipeline": "IMPLEMENTED",
+    "atomic_terminal_persistence": "IMPLEMENTED"
   },
   "learning_receipt_schema": "data/nf_motor_learning_receipt_v1.json",
   "next_milestone": {

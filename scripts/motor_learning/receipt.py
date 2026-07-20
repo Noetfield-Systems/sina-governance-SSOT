@@ -9,7 +9,7 @@ from typing import Any
 
 from .errors import GovernanceBlock, SchemaError
 from .hashutil import content_hash, integrity_hash
-from .validated import mint_validated_receipt, ValidatedReceipt, is_validated_receipt
+from .validated import _mint_receipt, ValidatedReceipt
 from . import ALGORITHM_VERSION, CONFIDENCE_VERSION, SIMILARITY_VERSION
 
 REQUIRED = (
@@ -265,7 +265,7 @@ def validate_learning_receipt(receipt: dict[str, Any]) -> dict:
 
 def validate_and_mint_receipt(receipt: dict[str, Any]) -> ValidatedReceipt:
     validate_learning_receipt(receipt)
-    return mint_validated_receipt(receipt)
+    return _mint_receipt(receipt)
 
 
 def write_receipt(receipt: dict, path: Path, *, append_only: bool = True) -> Path:
