@@ -39,6 +39,7 @@ jobs:
       R2_BUCKET: noetfield-runway-results-staging
       R2_KEY: mrw/external/SITE_FLOW_CANARIES_V1.json
       ENRICHED_RECEIPT: /tmp/SITE_FLOW_CANARIES_V1.enriched.json
+      SIGNED_RECEIPT: /tmp/SITE_FLOW_CANARIES_V1.signed.json
       R2_READ_BACK: /tmp/SITE_FLOW_CANARIES_V1.readback.json
     steps:
       - name: Checkout exact dispatched source
@@ -61,6 +62,7 @@ jobs:
         id: preflight
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          SITE_FLOW_CANARIES_HMAC_SECRET: ${{ secrets.SITE_FLOW_CANARIES_HMAC_SECRET }}
         run: |
           set -euo pipefail
           test -n "$CLOUDFLARE_API_TOKEN"
@@ -78,13 +80,40 @@ jobs:
               --idempotency-key "$IDEMPOTENCY_KEY" \
               --source-repository "$SOURCE_REPOSITORY"
             echo "already_complete=true" >> "$GITHUB_OUTPUT"
+            if python3 -c 'import json,sys; sys.exit(0 if json.load(open("/tmp/SITE_FLOW_CANARIES_V1.existing.json")).get("receipt_hmac_sha256") else 1)'; then
+              echo "needs_hmac_upgrade=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "needs_hmac_upgrade=true" >> "$GITHUB_OUTPUT"
+            fi
           elif grep -Fq "The specified key does not exist" /tmp/r2-get.stdout /tmp/r2-get.stderr \
             || grep -Fq '"code": 10007' /tmp/r2-get.stdout /tmp/r2-get.stderr; then
             echo "already_complete=false" >> "$GITHUB_OUTPUT"
+            echo "needs_hmac_upgrade=false" >> "$GITHUB_OUTPUT"
           else
             cat /tmp/r2-get.stdout /tmp/r2-get.stderr >&2
             exit "$get_status"
           fi
+
+      - name: Stage the existing valid terminal receipt
+        if: steps.preflight.outputs.already_complete == 'true' && steps.preflight.outputs.needs_hmac_upgrade != 'true'
+        run: cp /tmp/SITE_FLOW_CANARIES_V1.existing.json "$ENRICHED_RECEIPT"
+
+      - name: Rebind the exact legacy sealed receipt to this upgrade run
+        if: steps.preflight.outputs.needs_hmac_upgrade == 'true'
+        env:
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SITE_FLOW_CANARIES_HMAC_SECRET: ${{ secrets.SITE_FLOW_CANARIES_HMAC_SECRET }}
+        run: |
+          set -euo pipefail
+          python3 scripts/site_flow_canaries_receipt_v1.py rebind \
+            --receipt /tmp/SITE_FLOW_CANARIES_V1.existing.json \
+            --output "$ENRICHED_RECEIPT" \
+            --work-order-id "$WORK_ORDER_ID" \
+            --work-order-version "$WORK_ORDER_VERSION" \
+            --idempotency-key "$IDEMPOTENCY_KEY" \
+            --source-repository "$SOURCE_REPOSITORY" \
+            --source-sha "$GITHUB_SHA" \
+            --run-url "$RUN_URL"
 
       - name: Prove synthetic site-flow canaries
         if: steps.preflight.outputs.already_complete != 'true'
@@ -106,8 +135,20 @@ jobs:
             --source-sha "$GITHUB_SHA" \
             --run-url "$RUN_URL"
 
+      - name: Authenticate the exact terminal receipt
+        if: steps.preflight.outputs.already_complete != 'true' || steps.preflight.outputs.needs_hmac_upgrade == 'true'
+        env:
+          SITE_FLOW_CANARIES_HMAC_SECRET: ${{ secrets.SITE_FLOW_CANARIES_HMAC_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$SITE_FLOW_CANARIES_HMAC_SECRET"
+          python3 scripts/site_flow_canaries_receipt_v1.py sign \
+            --receipt "$ENRICHED_RECEIPT" \
+            --output "$SIGNED_RECEIPT"
+          mv "$SIGNED_RECEIPT" "$ENRICHED_RECEIPT"
+
       - name: Persist the one staging receipt
-        if: steps.preflight.outputs.already_complete != 'true'
+        if: steps.preflight.outputs.already_complete != 'true' || steps.preflight.outputs.needs_hmac_upgrade == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
         run: |
@@ -116,9 +157,9 @@ jobs:
             --remote --file "$ENRICHED_RECEIPT" --content-type application/json
 
       - name: Read back and verify the terminal receipt
-        if: steps.preflight.outputs.already_complete != 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_MAIN_TOKEN }}
+          SITE_FLOW_CANARIES_HMAC_SECRET: ${{ secrets.SITE_FLOW_CANARIES_HMAC_SECRET }}
         run: |
           set -euo pipefail
           npx --yes wrangler@4.112.0 r2 object get "$R2_BUCKET/$R2_KEY" \
