@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.7.11",
-  "saved_at": "2026-07-19T23:57:31Z",
+  "version": "1.7.12",
+  "saved_at": "2026-07-20T03:42:00Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. superseded/retired pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -222,6 +222,21 @@
           "path": "data/sg-authority-ref-compute-roi-v1.json",
           "status": "ACTIVE",
           "role": "compute_roi_allocation_authority_ref"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
         },
         {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
@@ -577,6 +592,21 @@
           "role": "compute_roi_allocation_authority_ref"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -930,6 +960,21 @@
           "role": "compute_roi_allocation_authority_ref"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -1281,6 +1326,21 @@
           "role": "compute_roi_allocation_authority_ref"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -1543,6 +1603,21 @@
           "path": "data/sg-authority-ref-compute-roi-v1.json",
           "status": "ACTIVE",
           "role": "compute_roi_allocation_authority_ref"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
         },
         {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",

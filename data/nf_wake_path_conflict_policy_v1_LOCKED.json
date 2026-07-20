@@ -1,0 +1,87 @@
+{
+  "schema": "nf_wake_path_conflict_policy_v1",
+  "decision_id": "NF-WAKE-PATH-CONFLICT-POLICY-V1",
+  "status": "SG_ACCEPTED",
+  "version": "v1.0.0_locked_20260720",
+  "saved_at": "2026-07-20T03:42:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+  "one_line_law": "Event-driven authenticated HTTP job_id wake is default; cron / Workflow / poll / GHA schedule are allowed when a schedule passport exists — never invent MOTOR_PRODUCTION_PATH_BLOCKED solely because a schedule exists.",
+  "amends_interpretation_of": "NF-COMPUTE-ROI-ALLOCATION-V1",
+  "does_not_cancel": [
+    "enterprise_plan",
+    "roi_classes_A_D",
+    "cloudflare_workers_first_hot_path"
+  ],
+  "does_not_activate": [
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=RUN",
+    "unsupervised_promote"
+  ],
+  "default_wake_path": {
+    "order": [
+      "authenticated_http_job_id",
+      "cloudflare_worker_hot_path_first",
+      "cloudflare_workflow_if_multi_step",
+      "receipt",
+      "sleep"
+    ]
+  },
+  "allowed_exceptions_with_passport": [
+    "cloudflare_cron_scheduled",
+    "cloudflare_workflow_schedules",
+    "railway_poll",
+    "github_actions_schedule"
+  ],
+  "hard_ban_remains": [
+    "gha_as_continuous_unpaid_product_muscle_without_roi_class",
+    "feature_branch_ci_spam",
+    "idle_llm_ticks"
+  ],
+  "schedule_passport_required_fields": [
+    "purpose",
+    "expected_value",
+    "estimated_monthly_cost_or_minutes",
+    "frequency",
+    "why_not_event_driven",
+    "why_not_manual",
+    "fallback",
+    "stop_condition",
+    "owner_loop_id"
+  ],
+  "agent_conflict_resolution_table_AUTO": [
+    {
+      "situation": "cron_exists_passport_present_hold_preserved",
+      "verdict": "PASS_ALLOW_SCHEDULE",
+      "rule": "do_not_block_production_path_for_event_only"
+    },
+    {
+      "situation": "cron_exists_no_passport",
+      "verdict": "WARN_SCHEDULE_PASSPORT_MISSING",
+      "rule": "require_passport_pr_do_not_invent_MOTOR_PRODUCTION_PATH_BLOCKED"
+    },
+    {
+      "situation": "merge_conflict_markers_on_main",
+      "verdict": "BLOCKED_MERGE_MARKERS",
+      "rule": "fix_yaml_or_code_first_separate_from_wake_policy"
+    },
+    {
+      "situation": "agent_claims_event_only_forbids_all_cron",
+      "verdict": "REJECT",
+      "rule": "cite_this_lock_default_is_not_absolute_ban"
+    },
+    {
+      "situation": "product_job_wake_without_job_id_http_when_one_exists",
+      "verdict": "PREFER_EVENT_PATH",
+      "rule": "cron_may_complement_for_deadman_heal_only"
+    }
+  ],
+  "forbidden_agent_behavior": [
+    "treating_empty_cron_as_sacred_forever",
+    "blocking_founder_authorized_commercial_loops_solely_for_scheduled",
+    "emitting_MOTOR_PRODUCTION_PATH_BLOCKED_solely_because_schedule_exists",
+    "claiming_event_only_as_absolute_ban_on_all_schedules"
+  ],
+  "holds_preserved": [
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD",
+    "promote_founder_gated"
+  ]
+}
