@@ -71,12 +71,18 @@ class PriorStore:
                 out.append(prior)
         return out
 
-    def seed_fixture(self, prior: dict[str, Any], *, allow_duplicate: bool = False) -> dict:
+    def seed_fixture(
+        self,
+        prior: dict[str, Any],
+        *,
+        allow_duplicate: bool = False,
+        allow_terminal_seed: bool = False,
+    ) -> dict:
         """
         Restricted seeding API for fixtures/migrations only.
         Seeded objects are tagged fixture_seeded=True and live_consumable=False.
-        Terminal statuses (active/rejected/rolled_back) are allowed ONLY as non-consumable seeds
-        for rollback/lineage fixtures — never live-consumable.
+        Terminal statuses (active/rejected/rolled_back) require allow_terminal_seed=True
+        (rollback/lineage fixtures only) and remain non-consumable.
         """
         body = dict(prior)
         body["fixture_seeded"] = True
@@ -84,6 +90,11 @@ class PriorStore:
         body.setdefault("schema", "nf_motor_learning_prior_v1")
         if body.get("status") not in VALID_STATUS:
             raise SchemaError(f"invalid status: {body.get('status')}")
+        if body["status"] in TERMINAL_STATUS and not allow_terminal_seed:
+            raise GovernanceBlock(
+                f"seed_fixture status={body['status']} requires allow_terminal_seed=True "
+                "(rollback/lineage fixtures only); never live-consumable"
+            )
         return self._persist(body, allow_duplicate=allow_duplicate, expected_version=None, governed=False)
 
     def create(

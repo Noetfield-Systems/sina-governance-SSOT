@@ -126,6 +126,14 @@ class TestPriorStoreGovernance(unittest.TestCase):
     def test_seed_fixture_tagged_not_consumable(self):
         td = Path(tempfile.mkdtemp())
         store = PriorStore(td)
+        with self.assertRaises(GovernanceBlock):
+            store.seed_fixture({
+                "prior_id": "p-seed-blocked",
+                "status": "active",
+                "action_attempted": "x",
+                "recommended_action": "y",
+                "scope": {"loop_id": "motor_learning_organ_v1"},
+            })
         p = store.seed_fixture({
             "prior_id": "p-seed",
             "status": "active",
@@ -133,7 +141,7 @@ class TestPriorStoreGovernance(unittest.TestCase):
             "recommended_action": "y",
             "scope": {"loop_id": "motor_learning_organ_v1"},
             "fingerprint": {"action_attempted": "x", "outcome": "success"},
-        })
+        }, allow_terminal_seed=True)
         self.assertTrue(p["fixture_seeded"])
         self.assertFalse(p["live_consumable"])
         live = store.search(status="active", live_consumable_only=True)
@@ -151,7 +159,7 @@ class TestPriorStoreGovernance(unittest.TestCase):
             "recommended_action": "route_B_retry",
             "scope": {"loop_id": "motor_learning_organ_v1", "runway": "Software Repair", "repository": "sina-governance-SSOT"},
             "fingerprint": {"action_attempted": "ci_retry_deploy", "outcome": "success"},
-        })
+        }, allow_terminal_seed=True)
         active = store.search(status="active", as_of="2026-07-01T00:00:00Z")
         self.assertEqual(active, [])
         expired = store.search(status="expired", include_expired=True, as_of="2026-07-01T00:00:00Z")
@@ -370,6 +378,23 @@ class TestSimilarityConfidence(unittest.TestCase):
         )
         self.assertTrue(c["shadow_contaminated_by_mining_overlap"])
         self.assertFalse(c["meets_ratify_threshold"])
+
+
+
+class TestPersistGate(unittest.TestCase):
+    def test_no_dry_run_requires_allow_persist(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "motor_learning_organ_w1_run",
+            ROOT / "scripts" / "motor_learning_organ_w1_run.py",
+        )
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        with self.assertRaises(GovernanceBlock):
+            mod._assert_persist_allowed(Path("/tmp/mlo-store"), False)
+        mod._assert_persist_allowed(Path("/tmp/mlo-store"), True)
+        with self.assertRaises(GovernanceBlock):
+            mod._assert_persist_allowed(Path("/tmp/production/priors"), True)
 
 
 if __name__ == "__main__":

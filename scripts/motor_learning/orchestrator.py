@@ -454,11 +454,15 @@ def run_from_fixture_dir(fixture_dir: Path, *, out_dir: Path, store_dir: Path, d
             effective_store = Path(out_dir) / "fixture_seed_store"
             seed_store = PriorStore(effective_store, create=True)
             for f in seed.glob("*.json"):
-                seed_store.seed_fixture(_load_json(f), allow_duplicate=True)
+                prior = _load_json(f)
+                terminal = prior.get("status") in {"active", "rejected", "rolled_back"}
+                seed_store.seed_fixture(prior, allow_duplicate=True, allow_terminal_seed=terminal)
         else:
             seed_store = PriorStore(store_dir, create=True)
             for f in seed.glob("*.json"):
-                seed_store.seed_fixture(_load_json(f), allow_duplicate=True)
+                prior = _load_json(f)
+                terminal = prior.get("status") in {"active", "rejected", "rolled_back"}
+                seed_store.seed_fixture(prior, allow_duplicate=True, allow_terminal_seed=terminal)
 
     mode = meta.get("mode")
     if mode == "rollback":

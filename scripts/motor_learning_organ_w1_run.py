@@ -11,7 +11,26 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from motor_learning.orchestrator import run_from_fixture_dir, run_pipeline, rollback_prior  # noqa: E402
-from motor_learning.errors import MotorLearningError  # noqa: E402
+from motor_learning.errors import MotorLearningError, GovernanceBlock  # noqa: E402
+
+FORBIDDEN_STORE_MARKERS = (
+    "/production/",
+    "/prod/",
+    "routing/roi",
+    "live_priors",
+)
+
+
+def _assert_persist_allowed(store: Path, allow: bool) -> None:
+    if not allow:
+        raise GovernanceBlock(
+            "--no-dry-run requires explicit --allow-store-persist "
+            "(local reference persist only; not a live promote channel)"
+        )
+    s = str(store.resolve()).lower()
+    for m in FORBIDDEN_STORE_MARKERS:
+        if m in s:
+            raise GovernanceBlock(f"refusing persist into forbidden store path marker: {m}")
 
 
 def main() -> int:
@@ -24,7 +43,12 @@ def main() -> int:
     ap.add_argument("--store", type=Path, help="Prior store directory")
     ap.add_argument("--min-occurrences", type=int, default=3)
     ap.add_argument("--dry-run", action="store_true", default=True)
-    ap.add_argument("--no-dry-run", action="store_true", help="Persist to store (still no live promo channel)")
+    ap.add_argument("--no-dry-run", action="store_true", help="Persist to store (requires --allow-store-persist)")
+    ap.add_argument(
+        "--allow-store-persist",
+        action="store_true",
+        help="Required with --no-dry-run; local reference store only",
+    )
     ap.add_argument("--rollback-prior", type=str, help="Prior ID to roll back")
     ap.add_argument("--regression-evidence", type=str, nargs="*", help="Evidence IDs for rollback")
     args = ap.parse_args()
@@ -32,6 +56,8 @@ def main() -> int:
     dry_run = not args.no_dry_run
     store = args.store or (args.out / "prior_store")
     try:
+        if not dry_run:
+            _assert_persist_allowed(Path(store), args.allow_store_persist)
         if args.rollback_prior:
             if not args.ecqr:
                 ap.error("--ecqr required with --rollback-prior")
