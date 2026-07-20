@@ -1,0 +1,53 @@
+name: motor-learning-organ-w1-validate
+
+# Validates W1 reference pipeline. NEVER ratifies or promotes live priors.
+on:
+  pull_request:
+    paths:
+      - "scripts/motor_learning/**"
+      - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/validate_motor_learning_organ_w1.py"
+      - "tests/test_motor_learning_organ_w1.py"
+      - "fixtures/motor_learning_w1/**"
+      - "data/nf_motor_learning_organ*.json"
+      - "data/nf_motor_learning_receipt_v1.json"
+      - ".github/workflows/motor-learning-organ-w1-validate.yml"
+  push:
+    branches: [main, feat/nf-motor-learning-organ-v1]
+    paths:
+      - "scripts/motor_learning/**"
+      - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/validate_motor_learning_organ_w1.py"
+      - "tests/test_motor_learning_organ_w1.py"
+      - "fixtures/motor_learning_w1/**"
+      - "data/nf_motor_learning_organ*.json"
+      - "data/nf_motor_learning_receipt_v1.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motor-learning-w1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python3 -m unittest tests.test_motor_learning_organ_w1 -v
+      - name: W1 validator (contracts + e2e fixture + no-live-promo)
+        run: python3 scripts/validate_motor_learning_organ_w1.py
+      - name: Scope guard — no landing-site changes in this workflow tree
+        run: |
+          if git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^landing-site/'; then
+            echo "FAIL: landing-site/ must not change in Motor Learning PRs"
+            exit 1
+          fi
+          echo "scope ok"

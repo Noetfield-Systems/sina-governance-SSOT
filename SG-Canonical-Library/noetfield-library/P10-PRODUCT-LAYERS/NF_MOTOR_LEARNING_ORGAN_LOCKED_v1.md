@@ -4,7 +4,7 @@
 **Status:** `SG_ACCEPTED` · learning-organ addendum (does **not** reopen Unified Motor architecture or Runway product locks)
 **Authority:** Architecture Finalization Gate
 **Tier:** P10-PRODUCT-LAYERS
-**Version:** v1.1.0_locked_20260720
+**Version:** v1.2.0_locked_20260720
 **Machine:** `data/nf_motor_learning_organ_v1_LOCKED.json`
 **Contracts:** `data/nf_motor_learning_organ_contracts_v1.json`
 **Learning receipt:** `data/nf_motor_learning_receipt_v1.json`
@@ -12,7 +12,7 @@
 **Packet id:** `SG-FINALIZATION-MOTOR-LEARNING-ORGAN-V1`
 **effective_at:** 2026-07-20
 **proposed_by:** Founder + SG (Motor Learning Organ plan)
-**sg_decision:** `SG_ACCEPTED` — W0 **governance scaffold** for Motor Learning Organ (not the learning engine itself); propose→shadow→ratify; learning_receipt required on ratify; no unsupervised redesign; no Data Runway unlock
+**sg_decision:** `SG_ACCEPTED` — W0 scaffold + W1 **SG reference implementation** (fixture/dry-run); propose→shadow→ratify + mandatory learning_receipt; no live promote; no Model Learning; no Data Runway unlock
 **Depends on:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` · `NF-NOETFIELD-RUNWAY-PRODUCT-V1` · `NF-RUNWAY-PORTFOLIO-ROUTING-INTELLIGENCE-V1` · `BRAIN_REGISTRY_LEARNING_GATE_v0.1.4` (learning_record shape)
 **supersedes:** none (closes the “patterns exist but unwired to Motor” gap named in `AGENTIC_DOCTRINE_DISK_AUDIT_v1`)
 
@@ -21,21 +21,47 @@
 
 ## Implementation maturity (binding honesty)
 
-W0 delivers the **governance scaffold**, not the learning organ's brain.
+| Capability | Status |
+|------------|--------|
+| Canon / contracts / loop identity / dispatch / deadman | COMPLETE (W0) |
+| Heartbeat stub (non-promotional) | COMPLETE (W0) |
+| Event normalize + idempotency | IMPLEMENTED (W1 SG reference) |
+| Signal/pattern extraction | IMPLEMENTED (W1 SG reference) |
+| Prior repository + retrieval | IMPLEMENTED (W1 file-backed reference) |
+| Pattern mining | IMPLEMENTED (W1 SG reference) |
+| Similarity (explainable field Jaccard) | IMPLEMENTED (W1 SG reference) |
+| Confidence (versioned components) | IMPLEMENTED (W1 SG reference) |
+| Shadow evaluation | IMPLEMENTED (W1 SG reference) |
+| ECQR gate + lifecycle | IMPLEMENTED (W1 SG reference) |
+| learning_receipt on ratify/reject/rollback | IMPLEMENTED (W1 SG reference) |
+| End-to-end orchestrator (fixture/dry-run) | IMPLEMENTED (W1 SG reference) |
+| SourceA live pattern export | NOT_IMPLEMENTED (dispatch W1→SourceA) |
+| NOETFIELD-RUNWAY live prior consume | NOT_IMPLEMENTED (W2) |
+| NOOS Kaizen surface | NOT_IMPLEMENTED (W3) |
+| Live production promotion from heartbeat | FORBIDDEN |
+| Model Learning / ML training / deep learning | FORBIDDEN |
 
-| Capability | W0 status |
-|------------|-----------|
-| Canon / contracts / loop identity / dispatch / deadman | COMPLETE |
-| Heartbeat stub | COMPLETE |
-| Learning engine (retrieve similar priors) | NOT_IMPLEMENTED |
-| Prior retrieval + similarity scoring | NOT_IMPLEMENTED |
-| Pattern mining classes | NOT_IMPLEMENTED |
-| Confidence evolution | NOT_IMPLEMENTED |
-| Ratification evidence | SCHEMA_ONLY (`learning_receipt`) |
+**Boundary:** Motor Learning improves governed execution priors. It does **not** train models.
 
-Do **not** claim "Motor Learning Organ is live" until W1+ PASS checks for retrieval, shadow evidence, and at least one real `learning_receipt` with non-example evidence.
+### W1 local commands
 
-Learning mode remains: governed mining into ECQR priors (`propose → shadow → ratify`) — deterministic evidence learning, **not** model training.
+```bash
+python3 -m unittest tests.test_motor_learning_organ_w1 -v
+python3 scripts/validate_motor_learning_organ_w1.py
+python3 scripts/motor_learning_organ_w1_run.py \
+  --fixture fixtures/motor_learning_w1/01_repeated_success_ratify \
+  --out /tmp/mlo-w1-out --store /tmp/mlo-w1-store --dry-run
+```
+
+### State machine
+
+```text
+OBSERVED → PROPOSED → SHADOW → RATIFIED | REJECTED
+RATIFIED → SUPERSEDED | EXPIRED | ROLLED_BACK
+```
+
+Illegal: OBSERVED→RATIFIED, PROPOSED→RATIFIED (fail closed).  
+RATIFIED/REJECTED/ROLLED_BACK always require a valid `learning_receipt`.
 
 ## One-line law
 
@@ -171,7 +197,11 @@ Minimum fields:
 
 This turns every learned behavior into auditable institutional memory.
 
-## Next milestone (W1 — where learning starts)
+## W1 pipeline (SG reference — implemented)
+
+See `scripts/motor_learning/` and fixtures. Cross-repo live wiring remains next.
+
+## Next milestone (W2 — Runway live consume)
 
 ```text
 Motor Event → Normalizer → Pattern Extractor → Prior Search → Similarity Score

@@ -1,8 +1,8 @@
 {
   "schema": "nf_motor_learning_organ_pass_checks_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-20T04:25:00Z",
+  "version": "1.2.0",
+  "saved_at": "2026-07-20T09:10:00Z",
   "verdict_when_all_pass": "PASS_MOTOR_LEARNING_ORGAN_V1",
   "checks": [
     {
@@ -14,7 +14,7 @@
         "consumer": "packages/runway-core/src/routing/roi"
       },
       "evidence": "receipts/learning/motor-learning-organ-*-shadow.json",
-      "status": "DEFINED_PENDING_W2"
+      "status": "PASS_FIXTURE_W1"
     },
     {
       "check_id": "MLO-02_kaizen_ecqr_delta",
@@ -29,7 +29,7 @@
         ]
       },
       "evidence": "receipts/learning/motor-learning-organ-*-kaizen.json",
-      "status": "DEFINED_PENDING_W1_W3"
+      "status": "PARTIAL_FIXTURE_ONLY"
     },
     {
       "check_id": "MLO-03_ratified_live_prior",
@@ -52,7 +52,7 @@
         "learning_receipt_required": true
       },
       "evidence": "receipts/learning/learning_receipt-*.json",
-      "status": "DEFINED_PENDING_RATIFY"
+      "status": "PASS_FIXTURE_W1"
     },
     {
       "check_id": "MLO-04_deadman_heartbeat",
@@ -64,7 +64,7 @@
         "last_fired_at_fresh": true
       },
       "evidence": "receipts/learning/motor-learning-organ-*-heartbeat.json",
-      "status": "DEFINED_PENDING_W4"
+      "status": "PARTIAL_HEARTBEAT_STUB"
     },
     {
       "check_id": "MLO-05_learning_receipt_audit",
@@ -88,7 +88,7 @@
         ]
       },
       "evidence": "receipts/learning/learning_receipt-*.json",
-      "status": "SCHEMA_DEFINED_PENDING_FIRST_RATIFY"
+      "status": "PASS_FIXTURE_W1"
     }
   ],
   "w0_acceptance": {
@@ -104,5 +104,10 @@
     ],
     "status": "PASS_W0_GOVERNANCE_SCAFFOLD"
   },
-  "scaffold_note": "W0 PASS = governance scaffold complete. Learning capability checks remain PENDING until W1+."
+  "scaffold_note": "W0 scaffold complete. W1 SG reference implementation executable under fixtures/dry-run.",
+  "w1_acceptance": {
+    "status": "PASS_W1_SG_REFERENCE",
+    "validator": "scripts/validate_motor_learning_organ_w1.py",
+    "note": "Local reference pipeline proven. Cross-repo live consume remains NOT_IMPLEMENTED."
+  }
 }

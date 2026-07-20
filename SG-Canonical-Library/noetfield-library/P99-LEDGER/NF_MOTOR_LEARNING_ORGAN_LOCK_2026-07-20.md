@@ -2,32 +2,25 @@
 
 **Receipt id:** `P99-MOTOR-LEARNING-ORGAN-2026-07-20`
 **decision_id:** `NF-MOTOR-LEARNING-ORGAN-V1`
-**Verdict:** `PASS` — W0 **governance scaffold** `SG_ACCEPTED` (v1.1.0)
-**Saved at:** 2026-07-20T04:25:00Z
-**Base HEAD:** `c7eb116`
+**Verdict:** `PASS` — W0 scaffold + W1 SG reference `SG_ACCEPTED` (v1.2.0)
+**Saved at:** 2026-07-20T09:10:00Z
 
-## Locked
+## Locked / proven in SG
 
-- W0 = governance scaffold (canon, contracts, loop, dispatch, deadman, heartbeat stub)
-- learning_record → Kaizen → policy_snapshot → **learning_receipt** → Motor consume
-- Narrow auto-apply allowlist (sample_n ≥ 30, ECQR improve ≥ 5%)
-- Closed loop: `motor_learning_organ_v1` · cloud · `sourcea-deadman-v1`
-- PASS checks MLO-01..05 defined (runtime evidence still pending for learning)
+- W0 governance scaffold
+- W1 executable reference: normalize→extract→mine→prior search→similarity→shadow→confidence→ECQR→receipt
+- learning_receipt mandatory on ratify/reject/rollback
+- Similarity + confidence advisory only (no promotion authority)
+- Heartbeat workflow non-promotional
 
-## Explicitly not claimed
+## Not claimed
 
-- Learning engine / prior retrieval / similarity scoring
-- Pattern class intelligence
-- Confidence evolution
-- Motor Advisor
+- SourceA live export
+- Runway live prior consume
+- NOOS Kaizen surface
+- Live production promotion
+- Model Learning / ML training
 
-## Next milestone
+## Next
 
-W1 — retrieval, similarity, shadow evidence, ratified prior + real `learning_receipt`
-
-## Not unlocked
-
-- Data Runway before `future_runway_gate`
-- Base-model training / Level-3 high-risk bandit
-- Unsupervised architecture redesign
-- HOLD lift / autonomous promote
+W2 — NOETFIELD-RUNWAY routing/roi consume of ratified priors

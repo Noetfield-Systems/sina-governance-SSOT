@@ -1,8 +1,8 @@
 {
   "schema": "nf_motor_learning_organ_contracts_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-20T04:25:00Z",
+  "version": "1.2.0",
+  "saved_at": "2026-07-20T09:10:00Z",
   "pipeline": [
     "learning_record",
     "kaizen_item",
@@ -176,7 +176,7 @@
     "notes": "Every ratification must produce an auditable learning_receipt. This is institutional memory \u2014 not optional logging."
   },
   "w1_intelligence_pipeline": {
-    "status": "NEXT_MILESTONE_NOT_IMPLEMENTED",
+    "status": "IMPLEMENTED_SG_REFERENCE_FIXTURE_MODE",
     "steps": [
       "motor_event",
       "normalizer",
@@ -193,5 +193,6 @@
       "model_training",
       "unsupervised_architecture_redesign"
     ]
-  }
+  },
+  "w1_package": "scripts/motor_learning/"
 }

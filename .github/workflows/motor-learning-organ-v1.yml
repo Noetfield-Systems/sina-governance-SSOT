@@ -1,7 +1,8 @@
 name: motor-learning-organ-v1
 
 # Authorized by NF-MOTOR-LEARNING-ORGAN-V1.
-# W0/W4 stub: heartbeat + receipt only. No live prior promote. No architecture mutate.
+# W0/W4 stub: heartbeat + receipt only. NEVER ratifies or promotes live priors.
+# W1 validation lives in motor-learning-organ-w1-validate.yml (fixture/dry-run only).
 on:
   schedule:
     - cron: "0 6 * * *"   # daily mine slot

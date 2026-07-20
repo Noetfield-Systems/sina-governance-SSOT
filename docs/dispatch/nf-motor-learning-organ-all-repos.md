@@ -8,7 +8,7 @@
 
 ## One line
 
-W0 = **governance scaffold** (not the learning engine). Pattern → prior → improve: mine receipts into ECQR routing/recovery priors via propose → shadow → ratify. No unsupervised redesign. No Data Runway unlock.
+W0 = governance scaffold. **W1 SG reference pipeline is executable** (fixture/dry-run). Pattern → prior → improve: mine receipts into ECQR routing/recovery priors via propose → shadow → ratify. No unsupervised redesign. No Data Runway unlock.
 
 ## Instruction by repo
 
@@ -44,7 +44,27 @@ W0 = **governance scaffold** (not the learning engine). Pattern → prior → im
 3. Distill one expensive verified fix → one reusable cheap artifact referenced by Motor.
 
 
-## Next milestone — W1 retrieval intelligence (not done in W0)
+
+## W1 SG reference (landed in this repo)
+
+| Artifact | Path |
+|----------|------|
+| Package | `scripts/motor_learning/` |
+| CLI | `scripts/motor_learning_organ_w1_run.py` |
+| Validator | `scripts/validate_motor_learning_organ_w1.py` |
+| Tests | `tests/test_motor_learning_organ_w1.py` |
+| Fixtures | `fixtures/motor_learning_w1/` |
+
+Cross-repo still outstanding:
+
+| Owner | Status |
+|-------|--------|
+| SourceA live export | NOT_IMPLEMENTED — consume `~/.sina/execution_patterns.json` into learning_record drafts |
+| NOETFIELD-RUNWAY | NOT_IMPLEMENTED — load `routing/roi/*.live.json` from ratified priors |
+| NOOS | NOT_IMPLEMENTED — Kaizen/ECQR operator surface |
+| Cloud heartbeat | PARTIAL — observe-only; must never ratify/promote |
+
+## Next milestone — W2 Runway live consume (not done)
 
 W0 is approved as foundational scaffold only. W1 must implement:
 

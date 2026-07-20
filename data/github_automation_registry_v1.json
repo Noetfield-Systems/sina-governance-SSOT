@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
   "version": "1.4.1",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "saved_at": "2026-07-20T09:10:00Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -545,6 +545,31 @@
       "scheduled": true,
       "runtime_state": "STUB_OBSERVE_HEARTBEAT_ONLY",
       "note": "Cloud GHA stub \u2014 daily/weekly cron writes heartbeat receipts only; no live prior promote until W1-W3 consume path + gate. Deadman sourcea-deadman-v1 at 2x cadence."
+    },
+    {
+      "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/motor-learning-organ-w1-validate.yml",
+      "cadence": "pull_request_and_push",
+      "lane": "sg_governance",
+      "loop_id": "motor_learning_organ_v1",
+      "owns": [
+        "motor_learning_w1_validate",
+        "fixture_e2e",
+        "no_live_promo_guard"
+      ],
+      "must_not_own": [
+        "live_prior_promote",
+        "model_training",
+        "data_runway_build",
+        "brain_promote"
+      ],
+      "receipt_path": "CI logs / unittest PASS",
+      "conflicts_with": [],
+      "commissioned": false,
+      "scheduled": false,
+      "note": "CI-only W1 validator. Never ratifies or promotes live priors."
     }
   ],
   "agent_lanes": [

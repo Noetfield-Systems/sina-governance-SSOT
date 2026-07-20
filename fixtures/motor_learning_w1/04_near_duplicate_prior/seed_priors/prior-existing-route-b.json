@@ -1,0 +1,28 @@
+{
+  "prior_id": "prior-existing-route-b",
+  "status": "active",
+  "state": "RATIFIED",
+  "action_attempted": "ci_retry_deploy",
+  "recommended_action": "route_B_retry",
+  "expected_outcome": "success",
+  "error_class": "cloudflare_timeout",
+  "recovery_path": "route_B_retry",
+  "fingerprint": {
+    "action_attempted": "ci_retry_deploy",
+    "outcome": "success",
+    "error_class": "cloudflare_timeout",
+    "recovery_path": "route_B_retry",
+    "runway": "Software Repair",
+    "repository": "sina-governance-SSOT",
+    "stage": "deploy",
+    "loop_id": "motor_learning_organ_v1"
+  },
+  "scope": {
+    "loop_id": "motor_learning_organ_v1",
+    "runway": "Software Repair",
+    "repository": "sina-governance-SSOT"
+  },
+  "evidence_refs": [
+    "legacy"
+  ]
+}
