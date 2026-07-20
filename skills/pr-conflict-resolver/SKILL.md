@@ -143,3 +143,12 @@ Default posture for any agent (Copilot, Coding Agent, or you) opening PRs
 here is `assist_only`: draft the PR, suggest the resolution, but merging to
 `main` is a human decision unless a specific motor is registered and gated
 for that promotion path.
+
+## 6. Wake-path / schedule conflicts
+
+When a conflict or review claim is about Motor/API wake path vs cron / `scheduled()` / Workflow schedule / Railway poll / GHA schedule, apply **auto** table in:
+
+- `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md`
+- `data/nf_wake_path_conflict_policy_v1_LOCKED.json`
+
+Default = event-driven authenticated HTTP `job_id` (Cloudflare Workers first). Schedules are **allowed** with a schedule passport. Do **not** invent `MOTOR_PRODUCTION_PATH_BLOCKED` solely because a schedule exists. Missing passport → `WARN_SCHEDULE_PASSPORT_MISSING` (require passport PR). Merge conflict markers on main → `BLOCKED_MERGE_MARKERS` (fix YAML/code first; separate from wake policy). Claims that "event-only" forbids all cron → `REJECT` (cite this lock).
