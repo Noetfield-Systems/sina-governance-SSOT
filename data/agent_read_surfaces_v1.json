@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
   "version": "1.7.11",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "saved_at": "2026-07-20T04:25:00Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. superseded/retired pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -399,6 +399,11 @@
           "role": "motor_learning_organ_contracts"
         },
         {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
+        },
+        {
           "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
           "status": "ACTIVE",
           "role": "motor_learning_organ_pass_checks"
@@ -775,6 +780,11 @@
           "path": "data/nf_motor_learning_organ_contracts_v1.json",
           "status": "ACTIVE",
           "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
         },
         {
           "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
@@ -1155,6 +1165,11 @@
           "role": "motor_learning_organ_contracts"
         },
         {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
+        },
+        {
           "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
           "status": "ACTIVE",
           "role": "motor_learning_organ_pass_checks"
@@ -1531,6 +1546,11 @@
           "role": "motor_learning_organ_contracts"
         },
         {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
+        },
+        {
           "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
           "status": "ACTIVE",
           "role": "motor_learning_organ_pass_checks"
@@ -1818,6 +1838,11 @@
           "path": "data/nf_motor_learning_organ_contracts_v1.json",
           "status": "ACTIVE",
           "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
         },
         {
           "path": "data/nf_motor_learning_organ_pass_checks_v1.json",

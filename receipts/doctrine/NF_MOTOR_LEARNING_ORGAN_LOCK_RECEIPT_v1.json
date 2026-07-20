@@ -2,9 +2,9 @@
   "schema": "nf_doctrine_lock_receipt_v1",
   "receipt_id": "NF_MOTOR_LEARNING_ORGAN_LOCK_RECEIPT_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
-  "verdict": "PASS_SCOPED_CHANGE",
+  "verdict": "PASS_W0_GOVERNANCE_SCAFFOLD",
   "status": "SG_ACCEPTED",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "saved_at": "2026-07-20T04:25:00Z",
   "lane": "sg_governance",
   "base_head": "c7eb116",
   "artifacts": [
@@ -12,8 +12,12 @@
     "data/nf_motor_learning_organ_v1_LOCKED.json",
     "data/nf_motor_learning_organ_contracts_v1.json",
     "data/nf_motor_learning_organ_pass_checks_v1.json",
-    "docs/dispatch/nf-motor-learning-organ-all-repos.md"
+    "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+    "data/nf_motor_learning_receipt_v1.json"
   ],
   "loop_id": "motor_learning_organ_v1",
-  "w0_status": "PASS_W0_PACKET"
+  "w0_status": "PASS_W0_GOVERNANCE_SCAFFOLD",
+  "version": "1.1.0",
+  "implementation_maturity": "GOVERNANCE_SCAFFOLD_NOT_LEARNING_ENGINE",
+  "next_milestone": "W1_RETRIEVAL_AND_SIMILARITY"
 }

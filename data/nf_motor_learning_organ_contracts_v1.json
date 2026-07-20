@@ -1,12 +1,13 @@
 {
   "schema": "nf_motor_learning_organ_contracts_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-20T04:25:00Z",
   "pipeline": [
     "learning_record",
     "kaizen_item",
     "policy_snapshot",
+    "learning_receipt",
     "motor_consume"
   ],
   "learning_record": {
@@ -131,5 +132,66 @@
     "decisions_path": "~/.sina/execution_decisions.jsonl",
     "durable_export_target": "SourceA/data/motor_learning/pattern_export_*.json",
     "emits": "learning_record.status=draft"
+  },
+  "learning_receipt": {
+    "schema_ref": "data/nf_motor_learning_receipt_v1.json",
+    "required_on": [
+      "policy_snapshot_promote",
+      "policy_snapshot_reject",
+      "policy_snapshot_rollback"
+    ],
+    "mutation_class": "GATED",
+    "required": [
+      "learning_receipt_id",
+      "prior_id",
+      "origin_event",
+      "evidence_links",
+      "confidence_before",
+      "confidence_after",
+      "why_accepted_or_rejected",
+      "reviewer",
+      "decision",
+      "affected_loops",
+      "applicable_runways",
+      "ratified_at",
+      "snapshot_id"
+    ],
+    "optional": [
+      "applicable_customers",
+      "expiry",
+      "supersedes",
+      "superseded_by",
+      "ecqr_before",
+      "ecqr_after",
+      "stage_market_id",
+      "similarity_score",
+      "shadow_evidence_path"
+    ],
+    "decision_enum": [
+      "accepted",
+      "rejected",
+      "rolled_back"
+    ],
+    "store_path": "receipts/learning/learning_receipt-*.json",
+    "notes": "Every ratification must produce an auditable learning_receipt. This is institutional memory \u2014 not optional logging."
+  },
+  "w1_intelligence_pipeline": {
+    "status": "NEXT_MILESTONE_NOT_IMPLEMENTED",
+    "steps": [
+      "motor_event",
+      "normalizer",
+      "pattern_extractor",
+      "prior_search",
+      "similarity_score",
+      "candidate_improvements",
+      "shadow_execution",
+      "evidence",
+      "ecqr_review",
+      "ratified_prior_plus_learning_receipt"
+    ],
+    "explicitly_not": [
+      "model_training",
+      "unsupervised_architecture_redesign"
+    ]
   }
 }

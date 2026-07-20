@@ -2,8 +2,8 @@
   "schema": "nf_motor_learning_organ_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
   "status": "SG_ACCEPTED",
-  "version": "1.0.0",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-20T04:25:00Z",
   "base_head_before_commit": "c7eb116",
   "one_line_law": "Mine receipts and patterns into ECQR priors via propose-shadow-ratify; improve Motor and Runways without silent self-mutation",
   "central_metric": "ECQR",
@@ -13,7 +13,11 @@
     "unsupervised_architecture_redesign",
     "level_3_bandit_high_risk"
   ],
-  "ops_home": ["O6", "O8", "O10"],
+  "ops_home": [
+    "O6",
+    "O8",
+    "O10"
+  ],
   "product_sku": false,
   "permanent_resident_role": false,
   "data_runway_unlock": "HOLD",
@@ -30,9 +34,20 @@
   "implementation_repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
   "pattern_source_repo": "SourceA",
   "mutation_classes": {
-    "OPEN": ["receipts_append", "pattern_export", "learning_record_draft"],
-    "GATED": ["policy_snapshot_promote", "kaizen_routing_prior_accept"],
-    "LOCKED": ["ssot_vocabulary", "unified_motor_architecture", "hold_authority_secrets"]
+    "OPEN": [
+      "receipts_append",
+      "pattern_export",
+      "learning_record_draft"
+    ],
+    "GATED": [
+      "policy_snapshot_promote",
+      "kaizen_routing_prior_accept"
+    ],
+    "LOCKED": [
+      "ssot_vocabulary",
+      "unified_motor_architecture",
+      "hold_authority_secrets"
+    ]
   },
   "auto_apply_allowlist": {
     "enabled": true,
@@ -83,5 +98,27 @@
     "new_product_sku_or_resident_role",
     "video_product_upgrade"
   ],
-  "rollback": "disable_live_roi_selection_fall_back_stage_local_static_failover"
+  "rollback": "disable_live_roi_selection_fall_back_stage_local_static_failover",
+  "implementation_maturity": {
+    "w0": "GOVERNANCE_SCAFFOLD_COMPLETE",
+    "learning_engine": "NOT_IMPLEMENTED",
+    "prior_retrieval": "NOT_IMPLEMENTED",
+    "pattern_mining": "NOT_IMPLEMENTED",
+    "confidence_evolution": "NOT_IMPLEMENTED",
+    "ratification_evidence": "SCHEMA_ONLY"
+  },
+  "learning_receipt_schema": "data/nf_motor_learning_receipt_v1.json",
+  "next_milestone": {
+    "id": "W1_RETRIEVAL_AND_SIMILARITY",
+    "goal": "Answer: have we seen something like this before?",
+    "deliverables": [
+      "normalizer",
+      "pattern_extractor",
+      "prior_search",
+      "similarity_score",
+      "candidate_improvements",
+      "shadow_execution",
+      "learning_receipt_on_ratify"
+    ]
+  }
 }

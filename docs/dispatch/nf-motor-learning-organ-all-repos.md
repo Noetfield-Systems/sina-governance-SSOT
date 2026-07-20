@@ -8,7 +8,7 @@
 
 ## One line
 
-Pattern → prior → improve: mine receipts into ECQR routing/recovery priors via propose → shadow → ratify. No unsupervised redesign. No Data Runway unlock.
+W0 = **governance scaffold** (not the learning engine). Pattern → prior → improve: mine receipts into ECQR routing/recovery priors via propose → shadow → ratify. No unsupervised redesign. No Data Runway unlock.
 
 ## Instruction by repo
 
@@ -43,6 +43,34 @@ Pattern → prior → improve: mine receipts into ECQR routing/recovery priors v
 2. Failure-signature suppression → recovery policy.
 3. Distill one expensive verified fix → one reusable cheap artifact referenced by Motor.
 
+
+## Next milestone — W1 retrieval intelligence (not done in W0)
+
+W0 is approved as foundational scaffold only. W1 must implement:
+
+```text
+Motor Event → Normalizer → Pattern Extractor → Prior Search → Similarity Score
+→ Candidate Improvements → Shadow Execution → Evidence → ECQR Review
+→ Ratified Prior + learning_receipt
+```
+
+| Owner | W1 deliverable |
+|-------|----------------|
+| SourceA | Normalizer + pattern extractor from live `execution_patterns`; emit draft learning_records |
+| NOETFIELD-RUNWAY | Prior search + similarity score over `routing/roi/*`; shadow execution hook |
+| NOOS | Surface similarity candidates + Kaizen ECQR review queue |
+| All | On every ratify/reject: write `learning_receipt` per `data/nf_motor_learning_receipt_v1.json` |
+
+Do not claim learning-organ liveness until MLO-01..05 have real (non-example) evidence.
+
+## learning_receipt (add immediately — schema locked)
+
+Path: `receipts/learning/learning_receipt-*.json`  
+Schema: `data/nf_motor_learning_receipt_v1.json`
+
+Required: prior_id, origin_event, evidence_links, confidence_before/after, why_accepted_or_rejected, reviewer, decision, affected_loops, applicable_runways, ratified_at, snapshot_id.  
+Optional: applicable_customers, expiry, supersedes, superseded_by.
+
 ## Hold / forbidden
 
 - Data Runway before `future_runway_gate`
@@ -61,6 +89,7 @@ Pattern → prior → improve: mine receipts into ECQR routing/recovery priors v
 | MLO-02 | Kaizen ranked with ECQR delta |
 | MLO-03 | Ratified live prior + before/after ECQR receipt |
 | MLO-04 | Deadman heartbeat within `2×` cadence |
+| MLO-05 | Complete `learning_receipt` on every ratify/reject/rollback |
 
 ## Loop registry
 

@@ -4,18 +4,38 @@
 **Status:** `SG_ACCEPTED` · learning-organ addendum (does **not** reopen Unified Motor architecture or Runway product locks)
 **Authority:** Architecture Finalization Gate
 **Tier:** P10-PRODUCT-LAYERS
-**Version:** v1.0.0_locked_20260720
+**Version:** v1.1.0_locked_20260720
 **Machine:** `data/nf_motor_learning_organ_v1_LOCKED.json`
 **Contracts:** `data/nf_motor_learning_organ_contracts_v1.json`
+**Learning receipt:** `data/nf_motor_learning_receipt_v1.json`
 **Pass checks:** `data/nf_motor_learning_organ_pass_checks_v1.json`
 **Packet id:** `SG-FINALIZATION-MOTOR-LEARNING-ORGAN-V1`
 **effective_at:** 2026-07-20
 **proposed_by:** Founder + SG (Motor Learning Organ plan)
-**sg_decision:** `SG_ACCEPTED` — governed pattern→prior→improve loop under O6/O8/O10; propose→shadow→ratify; no unsupervised redesign; no Data Runway unlock
+**sg_decision:** `SG_ACCEPTED` — W0 **governance scaffold** for Motor Learning Organ (not the learning engine itself); propose→shadow→ratify; learning_receipt required on ratify; no unsupervised redesign; no Data Runway unlock
 **Depends on:** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` · `NF-NOETFIELD-RUNWAY-PRODUCT-V1` · `NF-RUNWAY-PORTFOLIO-ROUTING-INTELLIGENCE-V1` · `BRAIN_REGISTRY_LEARNING_GATE_v0.1.4` (learning_record shape)
 **supersedes:** none (closes the “patterns exist but unwired to Motor” gap named in `AGENTIC_DOCTRINE_DISK_AUDIT_v1`)
 
 ---
+
+
+## Implementation maturity (binding honesty)
+
+W0 delivers the **governance scaffold**, not the learning organ's brain.
+
+| Capability | W0 status |
+|------------|-----------|
+| Canon / contracts / loop identity / dispatch / deadman | COMPLETE |
+| Heartbeat stub | COMPLETE |
+| Learning engine (retrieve similar priors) | NOT_IMPLEMENTED |
+| Prior retrieval + similarity scoring | NOT_IMPLEMENTED |
+| Pattern mining classes | NOT_IMPLEMENTED |
+| Confidence evolution | NOT_IMPLEMENTED |
+| Ratification evidence | SCHEMA_ONLY (`learning_receipt`) |
+
+Do **not** claim "Motor Learning Organ is live" until W1+ PASS checks for retrieval, shadow evidence, and at least one real `learning_receipt` with non-example evidence.
+
+Learning mode remains: governed mining into ECQR priors (`propose → shadow → ratify`) — deterministic evidence learning, **not** model training.
 
 ## One-line law
 
@@ -135,6 +155,33 @@ Fields (minimum):
 
 Dispatch: `docs/dispatch/nf-motor-learning-organ-all-repos.md`
 
+
+## learning_receipt (institutional memory)
+
+Every accept / reject / rollback of a prior **must** emit `receipts/learning/learning_receipt-*.json` per `data/nf_motor_learning_receipt_v1.json`.
+
+Minimum fields:
+
+- `prior_id` · `origin_event` · `evidence_links`
+- `confidence_before` · `confidence_after`
+- `why_accepted_or_rejected` · `reviewer` · `decision`
+- `affected_loops` · `applicable_runways` · `applicable_customers` (optional)
+- `expiry` · `supersedes` · `superseded_by`
+- `snapshot_id` · `ratified_at`
+
+This turns every learned behavior into auditable institutional memory.
+
+## Next milestone (W1 — where learning starts)
+
+```text
+Motor Event → Normalizer → Pattern Extractor → Prior Search → Similarity Score
+→ Candidate Improvements → Shadow Execution → Evidence → ECQR Review
+→ Ratified Prior + learning_receipt
+```
+
+Goal question: **"Have we seen something like this before?"**  
+Zero model training. Everything is evidence.
+
 ## PASS checks
 
 Machine truth: `data/nf_motor_learning_organ_pass_checks_v1.json`.
@@ -143,6 +190,7 @@ Machine truth: `data/nf_motor_learning_organ_pass_checks_v1.json`.
 2. Kaizen queue shows ranked learning proposals with ECQR delta estimate.
 3. After founder/gate ratify, live prior changes stage routing and a receipt proves before/after ECQR.
 4. Deadman sees `motor_learning_organ_v1` heartbeats within `2×` cadence.
+5. Every accept/reject/rollback emits a complete `learning_receipt` (MLO-05).
 
 ## Forbidden
 

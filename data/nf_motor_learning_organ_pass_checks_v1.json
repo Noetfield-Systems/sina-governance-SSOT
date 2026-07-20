@@ -1,8 +1,8 @@
 {
   "schema": "nf_motor_learning_organ_pass_checks_v1",
   "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
-  "version": "1.0.0",
-  "saved_at": "2026-07-20T04:17:59Z",
+  "version": "1.1.0",
+  "saved_at": "2026-07-20T04:25:00Z",
   "verdict_when_all_pass": "PASS_MOTOR_LEARNING_ORGAN_V1",
   "checks": [
     {
@@ -21,7 +21,12 @@
       "description": "Kaizen queue shows ranked learning proposals with ECQR delta estimate",
       "requires": {
         "kaizen_status": "queued",
-        "fields": ["kaizen_id", "ecqr_delta_estimate", "rank_score", "record_ids"]
+        "fields": [
+          "kaizen_id",
+          "ecqr_delta_estimate",
+          "rank_score",
+          "record_ids"
+        ]
       },
       "evidence": "receipts/learning/motor-learning-organ-*-kaizen.json",
       "status": "DEFINED_PENDING_W1_W3"
@@ -36,10 +41,17 @@
           "stage_market_id",
           "ecqr_before",
           "ecqr_after",
-          "ratified_by"
-        ]
+          "ratified_by",
+          "learning_receipt_id",
+          "prior_id",
+          "confidence_before",
+          "confidence_after",
+          "why_accepted_or_rejected",
+          "reviewer"
+        ],
+        "learning_receipt_required": true
       },
-      "evidence": "receipts/learning/motor-learning-organ-*-live-promote.json",
+      "evidence": "receipts/learning/learning_receipt-*.json",
       "status": "DEFINED_PENDING_RATIFY"
     },
     {
@@ -53,18 +65,44 @@
       },
       "evidence": "receipts/learning/motor-learning-organ-*-heartbeat.json",
       "status": "DEFINED_PENDING_W4"
+    },
+    {
+      "check_id": "MLO-05_learning_receipt_audit",
+      "description": "Every accept/reject/rollback of a prior emits a complete learning_receipt with evidence links and confidence before/after",
+      "requires": {
+        "schema": "nf_motor_learning_receipt_v1",
+        "required_fields": [
+          "learning_receipt_id",
+          "prior_id",
+          "origin_event",
+          "evidence_links",
+          "confidence_before",
+          "confidence_after",
+          "why_accepted_or_rejected",
+          "reviewer",
+          "decision",
+          "affected_loops",
+          "applicable_runways",
+          "ratified_at",
+          "snapshot_id"
+        ]
+      },
+      "evidence": "receipts/learning/learning_receipt-*.json",
+      "status": "SCHEMA_DEFINED_PENDING_FIRST_RATIFY"
     }
   ],
   "w0_acceptance": {
-    "description": "SG lock packet complete — contracts, pass checks, registry stub, dispatch filed",
+    "description": "SG governance scaffold complete (canon, contracts, loop, dispatch, deadman, learning_receipt schema). Learning engine not yet claimed.",
     "artifacts": [
       "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
       "data/nf_motor_learning_organ_v1_LOCKED.json",
       "data/nf_motor_learning_organ_contracts_v1.json",
       "data/nf_motor_learning_organ_pass_checks_v1.json",
       "docs/dispatch/nf-motor-learning-organ-all-repos.md",
-      "data/github_automation_registry_v1.json"
+      "data/github_automation_registry_v1.json",
+      "data/nf_motor_learning_receipt_v1.json"
     ],
-    "status": "PASS_W0_PACKET"
-  }
+    "status": "PASS_W0_GOVERNANCE_SCAFFOLD"
+  },
+  "scaffold_note": "W0 PASS = governance scaffold complete. Learning capability checks remain PENDING until W1+."
 }
