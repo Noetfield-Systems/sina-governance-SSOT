@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Noetfield Runway for teams that execute real AI work: deterministic runs, verification receipts, and predictable costs."
+    />
+    <meta
+      name="keywords"
+      content="deterministic AI execution, AI receipts, AI governance, runways, cost control, Cloudflare"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Noetfield Runway - From Goal to Verified Output" />
+    <meta
+      property="og:description"
+      content="Deterministic, receipted AI runtime infrastructure. Define, plan, execute, verify, and prove."
+    />
+    <meta name="theme-color" content="#040818" />
+    <title>Noetfield Runway | From Goal to Verified Output</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-left" aria-hidden="true"></div>
+    <div class="bg-orb orb-right" aria-hidden="true"></div>
+
+    <div class="trust-strip" role="status" aria-live="polite">
+      <div class="container trust-strip-inner">
+        <span class="trust-pill">Live proof included</span>
+        <span class="trust-pill">Cost preflight before run</span>
+        <span class="trust-pill">Machine receipts for proof</span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <nav class="container nav-shell">
+        <a class="brand" href="#top">Noetfield Runway</a>
+        <div class="nav-links">
+          <a href="#pain">Pain → Solution</a>
+          <a href="#proof">Live proof</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#proof-layer">Proof</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a class="btn btn-soft" href="#commission">Commission</a>
+          <a class="btn" href="#proof">Start job</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container hero-grid" id="top">
+        <div class="hero-copy reveal" data-reveal>
+          <p class="eyebrow">Execution-first infrastructure</p>
+          <h1>From goal to verified output.</h1>
+          <p class="promise-ladder">
+            <span>Live proof included.</span>
+            <span>Deterministic runways.</span>
+            <span>Cost-capped by design.</span>
+          </p>
+          <p class="lead">
+            Noetfield Runway gives teams a governed runtime layer: deterministic execution,
+            auditable checkpoints, and receipts that prove what succeeded, what recovered,
+            and what needs human escalation.
+          </p>
+          <ul class="audience-grid" aria-label="Audience fit">
+            <li>
+              <strong>Operators:</strong> execute business workflows and stop silent failure.
+            </li>
+            <li>
+              <strong>Engineers:</strong> deterministic execution graph + verification.
+            </li>
+            <li>
+              <strong>Buyers:</strong> predictable cost with auditable outcomes.
+            </li>
+          </ul>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>2-3</strong>
+              <span>LLM calls for most jobs</span>
+            </div>
+            <div class="hero-stat">
+              <strong>PASS/FAIL</strong>
+              <span>receipts by default</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Cost preflight</strong>
+              <span>before every run</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn" href="#proof">Start a Demo Job</a>
+            <a class="btn btn-soft" href="#commission">Commission a Runway</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section reveal" id="pain">
+        <div class="section-title">
+          <p class="eyebrow">Pain to solution</p>
+          <h2>Why complex AI tasks fail and how we make them operational</h2>
+        </div>
+        <div class="problem-solution">
+          <article class="problem-card">
+            <h3>The real pain</h3>
+            <p>
+              Complex jobs touch many systems. One schema drift, one partial timeout, or one
+              stale dependency can produce silent partial output that breaks downstream decisions.
+            </p>
+          </article>
+          <article class="problem-card">
+            <h3>Why this matters commercially</h3>
+            <p>
+              Leadership can't optimize around outputs they cannot audit. Our proof model ties each
+              operation to replayable gates and receipts.
+            </p>
+          </article>
+          <article class="problem-card">
+            <h3>The solution pattern</h3>
+            <p>
+              Define contracts, execute bounded phases with retry and fallback, then verify each
+              gate before finalizing any output artifact.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section reveal" id="proof">
+        <div class="section-title">
+          <p class="eyebrow">Live proof</p>
+          <h2>Runway cockpit output</h2>
+        </div>
+        <aside class="control-surface" data-reveal>
+          <div class="surface-head">
+            <span class="dot"></span>
+            <h2>Live runway cockpit</h2>
+            <span class="status-indicator">
+              <i id="statusDot" class="pulse"></i>
+              <strong id="statusText">Ready</strong>
+            </span>
+            <span class="trust-pill" id="runwayModeBadge">DEMO</span>
+          </div>
+          <p class="muted" id="scenarioSummary">
+            Pick a scenario and run it to see a real-time stream of gates, retries, recovery,
+            and the final proof receipt.
+          </p>
+          <p class="trust-line" id="trustLine">
+            What you see is produced by this same UI and this same job state.
+          </p>
+          <p class="muted">
+            Mode is explicit: <strong>LIVE</strong> (authoritative runway.v1 API + SSE), <strong>DEMO</strong>
+            (deterministic simulator), or <strong>OFFLINE</strong> (live requested but API not configured).
+          </p>
+
+          <div class="scenario-meta">
+            <p><strong>Real problem:</strong> <span id="scenarioPain"></span></p>
+            <p><strong>Reliability solution:</strong> <span id="scenarioSolution"></span></p>
+            <div class="scenario-meta-grid">
+              <div class="scenario-metric">
+                <small>Reliability target</small>
+                <strong id="scenarioTarget">--</strong>
+              </div>
+              <div class="scenario-metric">
+                <small>Spend cap</small>
+                <strong id="scenarioCost">--</strong>
+              </div>
+              <div class="scenario-metric">
+                <small>Expected retries</small>
+                <strong id="scenarioRetries">--</strong>
+              </div>
+              <div class="scenario-metric">
+                <small>Expected tokens</small>
+                <strong id="scenarioTokens">--</strong>
+              </div>
+              <div class="scenario-metric">
+                <small>Model calls</small>
+                <strong id="scenarioCalls">--</strong>
+              </div>
+              <div class="scenario-metric">
+                <small>Risk envelope</small>
+                <strong id="scenarioRisk">--</strong>
+              </div>
+            </div>
+            <p class="muted">
+              <strong>Fallback policy:</strong>
+              <span id="scenarioFallback">--</span>
+            </p>
+          </div>
+
+          <p class="scenario-legend">
+            Complex jobs fail on purpose; the value is in recovery policy and transparent receipts.
+          </p>
+          <div class="scenario-row" role="group" aria-label="Choose scenario">
+            <button class="scenario-btn active" data-scenario="decision" type="button">Decision brief</button>
+            <button class="scenario-btn" data-scenario="rfp" type="button">RFP response pack</button>
+            <button class="scenario-btn" data-scenario="spreadsheet" type="button">Spreadsheet + policy cleanup</button>
+            <button class="scenario-btn" data-scenario="complex_api" type="button">Complex API workflow</button>
+            <button class="scenario-btn" data-scenario="webpage" type="button">Webpage build + deploy</button>
+          </div>
+          <div class="control-row">
+            <button id="runwayRun" class="btn" type="button">Run sample runway</button>
+            <button id="runwayReset" class="btn btn-soft" type="button">Clear logs</button>
+          </div>
+
+          <div class="run-kpi-grid" id="runKpis">
+            <article class="run-kpi-card">
+              <small>Run state</small>
+              <strong id="runState">Idle</strong>
+            </article>
+            <article class="run-kpi-card">
+              <small>Nodes executed</small>
+              <strong id="runNodes">0 / 0</strong>
+            </article>
+            <article class="run-kpi-card">
+              <small>Checks passed</small>
+              <strong id="runChecksPassed">0 / 0</strong>
+            </article>
+            <article class="run-kpi-card">
+              <small>Retries used</small>
+              <strong id="runRetriesUsed">0</strong>
+            </article>
+            <article class="run-kpi-card">
+              <small>Confidence</small>
+              <strong id="runConfidence">--%</strong>
+            </article>
+            <article class="run-kpi-card">
+              <small>Latency</small>
+              <strong id="runLatency">--ms</strong>
+            </article>
+          </div>
+
+          <div class="stream" id="jobStream" aria-live="polite" role="log"></div>
+
+          <div class="receipt-panel" id="receiptPanel">
+            <div class="receipt-head">
+              <h3>Verification Receipt</h3>
+              <span class="muted" id="runIdBadge">Run ID: --</span>
+            </div>
+            <pre id="receiptBody">No active run. Start a scenario to render a signed output proof.</pre>
+            <div class="receipt-meta" id="snapshotLine"></div>
+            <div class="receipt-actions">
+              <button id="copyReceipt" class="btn btn-soft" type="button">Copy receipt JSON</button>
+              <span class="muted" id="copyReceiptHint" aria-live="polite"></span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="container section reveal" id="workflow">
+        <div class="section-title">
+          <p class="eyebrow">How it works</p>
+          <h2>Define → Plan → Execute → Verify → Receipt</h2>
+        </div>
+        <div class="workflow-rail">
+          <article class="rail-step" data-step="01">
+            <h3>Define</h3>
+            <p>Pin objective, acceptance criteria, and governance boundaries.</p>
+          </article>
+          <article class="rail-step" data-step="02">
+            <h3>Plan</h3>
+            <p>Build a deterministic graph and freeze all execution assumptions.</p>
+          </article>
+          <article class="rail-step" data-step="03">
+            <h3>Execute</h3>
+            <p>Bounded operations with controlled retries and fallback policies.</p>
+          </article>
+          <article class="rail-step" data-step="04">
+            <h3>Verify</h3>
+            <p>Replay checks, validate schema integrity, and attach lineage.</p>
+          </article>
+          <article class="rail-step" data-step="05">
+            <h3>Receipt</h3>
+            <p>Emit signed proof with cost, checks, and recovery details.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section reveal" id="proof-layer">
+        <div class="section-title">
+          <p class="eyebrow">Proof and control</p>
+          <h2>Commercial proof you can verify</h2>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <h3>PASS/FAIL comparison</h3>
+            <p>
+              Each run ends with machine-readable outcomes. Teams can compare successful and
+              recovered steps before accepting the final output.
+            </p>
+            <ul>
+              <li>PASS: contract-compliant and replayable</li>
+              <li>PASS_WITH_WARN: accepted with controlled fallback</li>
+              <li>FAIL: needs escalation and re-run policy</li>
+            </ul>
+          </article>
+          <article class="proof-card">
+            <h3>Failure & redo path</h3>
+            <p>
+              Recovery is explicit, not hidden: a failed partition is isolated, retried with
+              corrected policy, then replay-verified before receipt emit.
+            </p>
+            <ul>
+              <li>Timestamped checkpoints</li>
+              <li>Retry event and failover trace</li>
+              <li>Evidence hash for audit export</li>
+            </ul>
+          </article>
+        </div>
+        <article class="proof-contract">
+          <h3>External verifier contract</h3>
+          <p class="muted">
+            External parties can verify this deployment and runtime contract from these immutable routes:
+          </p>
+          <div class="proof-contract-grid">
+            <a href="/verifier.json" target="_blank" rel="noopener noreferrer">GET /verifier.json</a>
+            <a href="/verifier.txt" target="_blank" rel="noopener noreferrer">GET /verifier.txt</a>
+            <a href="/verifier.html" target="_blank" rel="noopener noreferrer">GET /verifier.html</a>
+            <a href="/v1/runway/runtime" target="_blank" rel="noopener noreferrer">GET /v1/runway/runtime</a>
+            <a href="/v1/runway/runs/{runId}/receipt" target="_blank" rel="noopener noreferrer">GET /v1/runway/runs/:runId/receipt</a>
+            <a href="/v1/runway/receipts/verify" target="_blank" rel="noopener noreferrer">POST /v1/runway/receipts/verify</a>
+          </div>
+          <p class="muted">
+            Every simulation run emits <code>runwayRun</code> events and a final structured receipt with
+            deterministic fields.
+            LIVE mode projects real runway.v1 snapshots and receipt verification signals.
+          </p>
+        </article>
+      </section>
+
+      <section class="container section pricing" id="pricing">
+        <div class="section-title">
+          <p class="eyebrow">Commercial model</p>
+          <h2>Simple paths to production use</h2>
+        </div>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Pay per job</h3>
+            <p class="price">Starter</p>
+            <ul>
+              <li>Immediate pilot usage</li>
+              <li>Receipt + cost preflight on every run</li>
+              <li>Good for validation and tests</li>
+            </ul>
+          </article>
+          <article class="price-card best">
+            <span>Most popular</span>
+            <h3>Prepaid credits</h3>
+            <p class="price">Forecasting</p>
+            <ul>
+              <li>Predictable monthly budget</li>
+              <li>Higher volume + governance dashboards</li>
+              <li>Recovery policy and export controls</li>
+            </ul>
+          </article>
+          <article class="price-card">
+            <h3>Enterprise</h3>
+            <p class="price">Private contract</p>
+            <ul>
+              <li>Dedicated controls and policy hooks</li>
+              <li>Audit-ready signed receipt archive</li>
+              <li>Dedicated implementation support</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section faq" id="faq">
+        <div class="section-title">
+          <p class="eyebrow">Risk + FAQ</p>
+          <h2>Built for teams that need truth, not marketing promises</h2>
+        </div>
+        <div class="faq-grid">
+          <article>
+            <h3>Can this be trusted for external execution?</h3>
+            <p>
+              Every run is structured with contracts and receipts. Every receipt carries pass,
+              warning, and fail state with cost and recovery context.
+            </p>
+          </article>
+          <article>
+            <h3>How are receipts protected?</h3>
+            <p>
+              Receipts include immutable timeline IDs and hashes so teams can verify no
+              silent mutation after execution.
+            </p>
+          </article>
+          <article>
+            <h3>How is cost controlled?</h3>
+            <p>
+              You get an explicit preflight cap before each job, with real-time spend tracking
+              and risk scoring in the cockpit.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section final-cta reveal" data-reveal id="commission">
+        <h2>Ship with a verifiable runway, not unverified output.</h2>
+        <p>
+          Start with one demo job, validate receipts, then commission a production-grade runway.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#proof">Start a Demo Job</a>
+          <a class="btn btn-soft" href="https://noetfield-runway-standalone.pages.dev">View live deployment</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="runway-bootstrap.js"></script>
+    <script src="runway-config.js"></script>
+    <script src="providers/demo-runway-provider.js"></script>
+    <script src="providers/live-runway-provider.js"></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
