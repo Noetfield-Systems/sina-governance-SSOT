@@ -2,35 +2,9 @@
   "project": "noetfield-runway-standalone",
   "branch": "main",
   "environment": "production",
-  "commit": "c7eb116",
+  "commit": "070a71f",
   "runtime": "cloudflare-pages-standalone",
-  "deployed_at_utc": "2026-07-21T08:46:37Z",
-  "proof_contract_version": "runway-proof-v1",
-  "verifier_routes": {
-    "deployment": "https://noetfield-runway-standalone.pages.dev/",
-    "verifier_json": "https://noetfield-runway-standalone.pages.dev/verifier.json",
-    "verifier_txt": "https://noetfield-runway-standalone.pages.dev/verifier.txt",
-    "verifier_html": "https://noetfield-runway-standalone.pages.dev/verifier.html"
-  },
-  "events": {
-    "runwayRun": [
-      "runId",
-      "scenarioId",
-      "phase",
-      "status",
-      "stepIndex",
-      "elapsedMs",
-      "cost"
-    ],
-    "receipt": [
-      "run_id",
-      "result",
-      "outputs",
-      "checks",
-      "costActual",
-      "costEstimated",
-      "verifiedAt"
-    ]
-  },
-  "expected_mode": "oauth"
+  "deployed_at_utc": "2026-07-21T12:01:28Z",
+  "verifier_page": "https://noetfield-runway-standalone.pages.dev/verifier.json",
+  "expected_mode": "token"
 }
