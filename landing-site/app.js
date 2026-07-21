@@ -405,7 +405,76 @@
 
   function hasLiveBackendConnection(stateValue) {
     const state = String(stateValue || "").toLowerCase();
-    return state === "connected" || state === "ok" || state === "healthy";
+    return (
+      state === "connected" ||
+      state === "ok" ||
+      state === "healthy" ||
+      state === "live" ||
+      state === "true" ||
+      state === "1"
+    );
+  }
+
+  function deriveContractVersions(payload) {
+    const fallback = {
+      frontend: runwayConfig.contractVersion || "runway.v1",
+      kernel: "runway.v1"
+    };
+
+    if (!payload || typeof payload !== "object") {
+      return fallback;
+    }
+
+    if (typeof payload.contract_version === "string" && payload.contract_version.trim()) {
+      fallback.frontend = payload.contract_version;
+    }
+    if (typeof payload.contractVersion === "string" && payload.contractVersion.trim()) {
+      fallback.frontend = payload.contractVersion;
+    }
+    if (typeof payload.contracts === "object" && payload.contracts && typeof payload.contracts.frontend === "string") {
+      fallback.frontend = payload.contracts.frontend;
+    }
+
+    if (Array.isArray(payload.runway_contract_versions) && payload.runway_contract_versions.length) {
+      fallback.kernel = String(payload.runway_contract_versions[0] || "runway.v1");
+      return fallback;
+    }
+    if (Array.isArray(payload.runwayContractVersions) && payload.runwayContractVersions.length) {
+      fallback.kernel = String(payload.runwayContractVersions[0] || "runway.v1");
+      return fallback;
+    }
+    if (Array.isArray(payload.contractVersions) && payload.contractVersions.length) {
+      fallback.kernel = String(payload.contractVersions[0] || "runway.v1");
+      return fallback;
+    }
+
+    if (typeof payload.kernel === "string" && payload.kernel.trim()) {
+      fallback.kernel = payload.kernel;
+    }
+    if (typeof payload.runway_contract_version === "string" && payload.runway_contract_version.trim()) {
+      fallback.kernel = payload.runway_contract_version;
+    }
+
+    return fallback;
+  }
+
+  function deriveContractVersion(payload) {
+    if (!payload || typeof payload !== "object") {
+      return runwayConfig.contractVersion || "runway.v1";
+    }
+
+    if (typeof payload.contract_version === "string" && payload.contract_version.trim()) {
+      return payload.contract_version;
+    }
+    if (typeof payload.contractVersion === "string" && payload.contractVersion.trim()) {
+      return payload.contractVersion;
+    }
+    if (typeof payload.contract === "string" && payload.contract.trim()) {
+      return payload.contract;
+    }
+
+    const versions = deriveContractVersions(payload);
+    return versions.frontend || runwayConfig.contractVersion || "runway.v1";
   }
 
   function makeLiveProvider(apiBaseUrl, contractVersion, tenantId) {
@@ -919,10 +988,10 @@
     return "fail";
   }
 
-  async function fetchRunwayRuntimeContract() {
+  async function fetchRunwayRuntimeContract(requestedMode) {
     try {
       const runtimeSearch = new URLSearchParams(window.location.search || "");
-      const baseMode = runwayConfig.mode || "demo";
+      const baseMode = requestedMode || runwayConfig.mode || "demo";
       const baseApiBase = runwayConfig.apiBaseUrl || "";
       const baseContractVersion = runwayConfig.contractVersion || "runway.v1";
 
@@ -945,9 +1014,7 @@
         method: "GET",
         headers: {
           Accept: "application/json",
-          "x-runway-mode": runwayConfig.mode || "demo",
-          "x-runway-contract-version": runwayConfig.contractVersion || "runway.v1",
-          ...(runwayConfig.apiBaseUrl ? { "x-runway-api-base-url": runwayConfig.apiBaseUrl } : {})
+          "x-tenant-id": runwayConfig.tenantId || "tenant-runway-staging"
         }
       });
       const contentType = String(response.headers.get("content-type") || "").toLowerCase();
@@ -957,13 +1024,19 @@
         return {
           mode: payload.mode || payload.runway_mode || "unknown",
           liveBackendConnected:
-            payload.live_backend_connection_status || payload.live_backend_status || "unknown",
-          contractVersion: payload.contract_version || runwayConfig.contractVersion || "runway.v1",
-          backendApiBaseUrl: payload.backend?.configured_api_base || runwayConfig.apiBaseUrl || null,
-          contractVersions: payload.runway_contract_versions || {
-            frontend: runwayConfig.contractVersion || "runway.v1",
-            kernel: "runway.v1"
-          },
+            payload.live_backend_connection_status ||
+            payload.live_backend_status ||
+            payload.liveBackendConnectionStatus ||
+            payload.status ||
+            "unknown",
+          contractVersion: deriveContractVersion(payload),
+          backendApiBaseUrl:
+            payload.backend?.configured_api_base ||
+            payload.backend_api_base ||
+            payload.backendApiBaseUrl ||
+            runwayConfig.apiBaseUrl ||
+            null,
+          contractVersions: deriveContractVersions(payload),
           ...payload
         };
       }
@@ -981,9 +1054,14 @@
           if (probe.ok) {
             const payload = await probe.json();
             return {
-              mode: "live",
-              liveBackendConnected: "connected",
-              contractVersion: payload.contract || payload.contract_version || baseContractVersion,
+              mode: payload.mode || "live",
+              liveBackendConnected:
+                payload.liveBackendConnectionStatus ||
+                payload.live_backend_connection_status ||
+                payload.status ||
+                "connected",
+              contractVersion: deriveContractVersion(payload),
+              contractVersions: deriveContractVersions(payload),
               backendApiBaseUrl: baseApiBase,
               ...payload
             };
@@ -1019,34 +1097,65 @@
       return { passed: false, error: "missing_run_id" };
     }
 
-    const verifyMode = normalizeMode(options.mode || runwayConfig.mode || "demo");
     const verifyContract = options.contractVersion || runwayConfig.contractVersion || "runway.v1";
     const verifyApiBase = options.apiBaseUrl || runwayConfig.apiBaseUrl || "";
+    const tenantId = runwayConfig.tenantId || "tenant-runway-staging";
+    const backends = [];
+    backends.push("");
+    if (verifyApiBase) {
+      backends.push(verifyApiBase.replace(/\/+$/, ""));
+    }
 
     try {
-      const response = await fetch("/v1/runway/receipts/verify", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Accept: "application/json",
-          "x-runway-mode": verifyMode,
-          "x-runway-contract-version": verifyContract,
-          ...(verifyApiBase ? { "x-runway-api-base-url": verifyApiBase } : {})
-        },
-        body: JSON.stringify({
-          runId,
-          contractVersion: verifyContract
-        })
-      });
-      if (!response.ok) {
-        return {
-          passed: false,
-          status: response.status,
-          error: `receipt_verify_${response.status}`
-        };
+      let lastError = null;
+      for (const backendBase of backends) {
+        const verifyUrl = backendBase
+          ? `${backendBase}/v1/runway/receipts/verify`
+          : "/v1/runway/receipts/verify";
+        try {
+          const response = await fetch(verifyUrl, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              Accept: "application/json",
+              "x-tenant-id": tenantId
+            },
+            body: JSON.stringify({
+              runId,
+              contractVersion: verifyContract
+            })
+          });
+
+          if (!response.ok) {
+            lastError = `receipt_verify_${response.status}`;
+            try {
+              const errorPayload = await response.json();
+              if (errorPayload && typeof errorPayload === "object" && errorPayload.code) {
+                lastError = `${lastError}:${errorPayload.code}`;
+              }
+            } catch (_) {
+              // no structured error payload available
+            }
+            continue;
+          }
+
+          const payload = await response.json();
+          return {
+            ...payload,
+            backend_target: backendBase || "pages"
+          };
+        } catch (error) {
+          lastError = String(error && error.message ? error.message : error);
+          continue;
+        }
       }
 
-      return await response.json();
+      return {
+        passed: false,
+        error: lastError || "receipt_verify_failed",
+        backend_target: backends.length > 1 ? "pages_or_backend" : (backends[0] || "pages"),
+        checked_backends: backends.map((backend) => (backend || "pages"))
+      };
     } catch (error) {
       return { passed: false, error: String(error && error.message ? error.message : error) };
     }
@@ -1057,28 +1166,43 @@
       return null;
     }
 
-    const apiMode = normalizeMode(options.mode || runwayConfig.mode || "demo");
-    const apiContract = options.contractVersion || runwayConfig.contractVersion || "runway.v1";
-
-    try {
-      const response = await fetch(`/v1/runway/runs/${encodeURIComponent(runId)}/receipt`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "x-runway-mode": apiMode,
-          "x-runway-contract-version": apiContract,
-          ...(options.apiBaseUrl ? { "x-runway-api-base-url": options.apiBaseUrl } : {})
-        }
-      });
-
-      if (!response.ok) {
-        return null;
-      }
-
-      return await response.json();
-    } catch (_) {
-      return null;
+    const apiBase = options.apiBaseUrl || "";
+    const tenantId = runwayConfig.tenantId || "tenant-runway-staging";
+    const endpoints = [];
+    endpoints.push(`/v1/runway/runs/${encodeURIComponent(runId)}/receipt`);
+    if (apiBase) {
+      endpoints.push(`${apiBase.replace(/\/+$/, "")}/v1/runway/runs/${encodeURIComponent(runId)}/receipt`);
     }
+
+    const headers = {
+      Accept: "application/json",
+      "x-tenant-id": tenantId,
+    };
+
+    for (const endpoint of endpoints) {
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers
+        });
+        if (!response.ok) {
+          continue;
+        }
+
+        const payload = await response.json();
+        if (!payload) {
+          continue;
+        }
+
+        if (payload.outputs || payload.checks || payload.receipt_id || payload.result || payload.signed_receipt_id) {
+          return payload;
+        }
+      } catch (_) {
+        continue;
+      }
+    }
+
+    return null;
   }
 
   function setScenarioForRunMode(mode, context) {
@@ -1086,13 +1210,7 @@
       return;
     }
 
-    const backendStatus = String(context?.liveBackendConnected || "").toLowerCase();
-    const runtimeConnected =
-      backendStatus === "connected" ||
-      backendStatus === "ok" ||
-      backendStatus === "healthy" ||
-      backendStatus === "true" ||
-      backendStatus === "1";
+    const runtimeConnected = hasLiveBackendConnection(context?.liveBackendConnected || context?.status);
 
     if (mode === "live") {
       if (runtimeConnected) {
@@ -1267,7 +1385,7 @@
     let runMode = executionContext.mode;
     const requestedMode = runMode;
     let provider = executionContext.provider;
-    const runtimeContract = await fetchRunwayRuntimeContract();
+    const runtimeContract = await fetchRunwayRuntimeContract(requestedMode).catch(() => null);
     const runtimeContext = {
       requestedMode: runMode,
       mode: runtimeContract?.mode || runMode,
@@ -1348,6 +1466,7 @@
         let snapshot = {};
         let elapsedMs = 0;
         const liveStepCounts = { ok: 0, warn: 0, fail: 0 };
+        const liveTimelineIds = new Set();
 
         const liveResult = await provider.run(scenarioToRun, {
           delay: sleep,
@@ -1360,8 +1479,19 @@
               elapsedMs: Number.isFinite(Number(rawStep?.elapsedMs))
                 ? Number(rawStep.elapsedMs)
                 : 500,
-              recovered: rawStep?.recovered === true
+              recovered: rawStep?.recovered === true,
+              timeline_id: rawStep?.timeline_id || rawStep?.hdir_sequence || rawStep?.event_id || rawStep?.eventId || null,
+              hdir_sequence: Number.isFinite(Number(rawStep?.hdir_sequence || rawStep?.sequence)) ? Number(rawStep.hdir_sequence || rawStep.sequence) : null
             };
+
+            const eventId = step.timeline_id
+              ? `timeline:${step.timeline_id}`
+              : `hdir:${step.hdir_sequence !== null && step.hdir_sequence !== undefined ? step.hdir_sequence : "na"}:${step.phase}:${step.step}`;
+            if (liveTimelineIds.has(eventId)) {
+              return;
+            }
+            liveTimelineIds.add(eventId);
+
             liveTimeline.push(step);
             liveStepCounts[step.status] += 1;
             const countLength = liveTimeline.length;
@@ -1991,7 +2121,7 @@
 
   (async () => {
     const requestedMode = resolveModeRequested();
-    const runtimeContext = await fetchRunwayRuntimeContract().catch(() => null);
+    const runtimeContext = await fetchRunwayRuntimeContract(requestedMode).catch(() => null);
     const runtimeConnected = runtimeContext && hasLiveBackendConnection(runtimeContext.liveBackendConnected);
     const runtimeApiConfigured = Boolean(
       (runtimeContext?.backendApiBaseUrl || runtimeContext?.backend?.configured_api_base || runwayConfig.apiBaseUrl)
