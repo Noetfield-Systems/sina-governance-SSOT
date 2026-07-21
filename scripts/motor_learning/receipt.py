@@ -113,6 +113,7 @@ def build_learning_receipt(
     rollback_target_prior_content_hash: str | None = None,
     rollback_target_version: int | None = None,
     prior_ratification_receipt_id: str | None = None,
+    prior_payload_hash: str | None = None,
 ) -> dict[str, Any]:
     mapped = DECISION_MAP.get(decision)
     if not mapped:
@@ -142,6 +143,8 @@ def build_learning_receipt(
             raise SchemaError("ratification requires candidate_hash")
         if not mining_evidence_manifest_hash:
             raise SchemaError("ratification requires mining_evidence_manifest_hash")
+        if not prior_payload_hash:
+            raise SchemaError("ratification requires prior_payload_hash")
 
     if mapped == "rolled_back":
         if not rollback_target_prior_content_hash:
@@ -187,6 +190,7 @@ def build_learning_receipt(
         "rollback_target_prior_content_hash": rollback_target_prior_content_hash,
         "rollback_target_version": rollback_target_version,
         "prior_ratification_receipt_id": prior_ratification_receipt_id,
+        "prior_payload_hash": prior_payload_hash,
         "schema_versions": {
             "receipt": "nf_motor_learning_receipt_v1",
             "organ": "nf_motor_learning_organ_v1",
@@ -257,7 +261,7 @@ def validate_learning_receipt(receipt: dict[str, Any]) -> dict:
     if receipt["decision"] == "rolled_back" and not receipt.get("rollback_target"):
         raise GovernanceBlock("rollback receipt requires rollback_target")
     if receipt["decision"] == "accepted":
-        for req in ("shadow_id", "shadow_hash", "shadow_evidence_manifest_hash", "confidence_hash", "ecqr_decision_hash", "candidate_hash"):
+        for req in ("shadow_id", "shadow_hash", "shadow_evidence_manifest_hash", "confidence_hash", "ecqr_decision_hash", "candidate_hash", "prior_payload_hash"):
             if not receipt.get(req):
                 raise GovernanceBlock(f"ratification receipt requires {req}")
         # confidence_after alone is NOT a confidence-artifact binding

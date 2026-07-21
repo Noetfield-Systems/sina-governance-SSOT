@@ -33,6 +33,7 @@ REQUIRED_RATIFIED_BINDINGS = (
     "mining_evidence_manifest_hash",
     "confidence_hash",
     "algorithm_versions",
+    "prior_payload_hash",
 )
 
 AUTO_PLACEHOLDERS = frozenset({"auto", "AUTO", ""})
@@ -127,6 +128,15 @@ def fixture_compile_ecqr(
         "pipeline": ALGORITHM_VERSION,
         "confidence": CONFIDENCE_VERSION,
     }
+    from .artifacts import compute_prior_payload_hash
+    status = "active" if out.get("decision") == "RATIFIED" else (
+        "rejected" if out.get("decision") == "REJECTED" else None
+    )
+    state = out.get("decision") if out.get("decision") in ("RATIFIED", "REJECTED") else None
+    if status and state:
+        out["prior_payload_hash"] = compute_prior_payload_hash(
+            candidate=cand, prior_id=out["prior_id"], status=status, state=state,
+        )
     out["kind"] = "ECQR_DECISION"
     out["_compiled_from_fixture"] = True
     return out
@@ -224,6 +234,16 @@ def validate_ecqr_decision(
         conf = unwrap_confidence(
             confidence, shadow=sh, confidence_inputs=cin, require_derivation=True,
         )
+
+        from .artifacts import compute_prior_payload_hash
+        pid = decision.get("prior_id")
+        if not pid:
+            raise GovernanceBlock("RATIFIED ECQR requires prior_id")
+        want_pph = compute_prior_payload_hash(
+            candidate=cand, prior_id=pid, status="active", state="RATIFIED",
+        )
+        if decision.get("prior_payload_hash") != want_pph:
+            raise GovernanceBlock("ECQR prior_payload_hash mismatches canonical prior payload")
 
         if decision["candidate_id"] != cand.get("candidate_id"):
             raise GovernanceBlock("ECQR candidate_id mismatches candidate")

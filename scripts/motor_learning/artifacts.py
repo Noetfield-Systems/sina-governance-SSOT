@@ -352,27 +352,71 @@ def assert_confidence_inputs_canonical(
     }
 
 
+def recompute_normalized_event_hashes(ev: dict[str, Any]) -> tuple[str, str]:
+    """Recompute content_hash and provenance_fingerprint from substantive normalized fields."""
+    body = {
+        "event_id": str(ev.get("event_id")),
+        "event_type": ev.get("event_type"),
+        "source": str(ev.get("source")),
+        "occurred_at": ev.get("occurred_at"),
+        "observed_at": ev.get("observed_at"),
+        "actor": ev.get("actor"),
+        "stage": ev.get("stage"),
+        "provider": ev.get("provider"),
+        "action_attempted": str(ev.get("action_attempted")),
+        "outcome": ev.get("outcome"),
+        "error_class": ev.get("error_class"),
+        "recovery_path": ev.get("recovery_path"),
+        "repository": ev.get("repository"),
+        "runway": ev.get("runway"),
+        "loop_id": ev.get("loop_id"),
+        "evidence_refs": list(ev.get("evidence_refs") or []),
+        "raw_evidence_ref": ev.get("raw_evidence_ref") or f"raw://{ev.get('event_id')}",
+    }
+    # evidence_refs must be canonical-sorted for stable hash
+    body["evidence_refs"] = sorted(str(x) for x in body["evidence_refs"] if x is not None and str(x).strip())
+    h = content_hash(body)
+    return h, h
+
+
+def assert_normalized_event_provenance(ev: dict[str, Any], *, label: str = "event") -> dict[str, Any]:
+    """Reject stale content_hash / provenance_fingerprint after substantive field changes."""
+    if not isinstance(ev, dict):
+        raise GovernanceBlock(f"{label} must be object")
+    for req in (
+        "event_id", "content_hash", "provenance_fingerprint",
+        "evidence_refs", "schema", "action_attempted", "outcome",
+        "event_type", "source", "occurred_at",
+    ):
+        if req not in ev or ev.get(req) in (None, ""):
+            raise GovernanceBlock(f"{label} missing {req}")
+    if not isinstance(ev.get("evidence_refs"), list):
+        raise GovernanceBlock(f"{label} evidence_refs must be list")
+    if not ev.get("raw_evidence_ref"):
+        raise GovernanceBlock(f"{label} missing raw_evidence_ref")
+    want_ch, want_pf = recompute_normalized_event_hashes(ev)
+    if ev.get("content_hash") != want_ch:
+        raise GovernanceBlock(
+            f"{label} content_hash stale after substantive field change "
+            f"(stored={ev.get('content_hash')!r} recomputed={want_ch!r})"
+        )
+    if ev.get("provenance_fingerprint") != want_pf:
+        raise GovernanceBlock(
+            f"{label} provenance_fingerprint stale after substantive field change "
+            f"(stored={ev.get('provenance_fingerprint')!r} recomputed={want_pf!r})"
+        )
+    return ev
+
+
+def assert_normalized_events_provenance(events: list[dict], *, label: str) -> list[dict]:
+    if not isinstance(events, list) or not events:
+        raise GovernanceBlock(f"{label} must be a nonempty list")
+    return [assert_normalized_event_provenance(ev, label=f"{label}[{i}]") for i, ev in enumerate(events)]
+
+
 def assert_mining_events_canonical(mining_events: list[dict]) -> list[dict]:
-    """Validate every normalized mining event carries identity/provenance fields."""
-    if not isinstance(mining_events, list) or not mining_events:
-        raise GovernanceBlock("mining_events must be a nonempty list")
-    out = []
-    for i, ev in enumerate(mining_events):
-        if not isinstance(ev, dict):
-            raise GovernanceBlock(f"mining_events[{i}] must be object")
-        for req in (
-            "event_id", "content_hash", "provenance_fingerprint",
-            "evidence_refs", "schema",
-        ):
-            if req not in ev or ev.get(req) in (None, ""):
-                raise GovernanceBlock(f"mining_events[{i}] missing {req}")
-        if not isinstance(ev.get("evidence_refs"), list):
-            raise GovernanceBlock(f"mining_events[{i}] evidence_refs must be list")
-        # raw evidence ref required (may be derived form)
-        if not ev.get("raw_evidence_ref"):
-            raise GovernanceBlock(f"mining_events[{i}] missing raw_evidence_ref")
-        out.append(ev)
-    return out
+    """Validate every normalized mining event carries identity/provenance fields and fresh hashes."""
+    return assert_normalized_events_provenance(mining_events, label="mining_events")
 
 
 def assert_candidate_derived_from_mining(
@@ -381,7 +425,8 @@ def assert_candidate_derived_from_mining(
 ) -> dict[str, Any]:
     """
     Re-run extract_many → mine_patterns from concrete mining events and require
-    the submitted candidate to be canonically identical to the derived candidate.
+    the submitted candidate to be canonically identical to the derived candidate,
+    including candidate_id. No fallback to a different derived candidate.
     """
     from .extract import extract_many
     from .mine import mine_patterns
@@ -394,21 +439,22 @@ def assert_candidate_derived_from_mining(
     if not derived_list:
         raise GovernanceBlock("mining events produced no derived candidates")
 
-    # Prefer exact candidate_id match, else primary meeting threshold
+    want_id = candidate.get("candidate_id")
     derived = None
     for d in derived_list:
-        if d.get("candidate_id") == candidate.get("candidate_id"):
+        if d.get("candidate_id") == want_id:
             derived = d
             break
     if derived is None:
-        for d in derived_list:
-            if d.get("meets_threshold"):
-                derived = d
-                break
-    if derived is None:
-        derived = derived_list[0]
+        raise GovernanceBlock(
+            f"candidate_id {want_id!r} not among derived mining candidates; "
+            f"renamed/alternate candidate IDs are rejected "
+            f"(derived={[d.get('candidate_id') for d in derived_list]!r})"
+        )
 
-    # Exact equality on identity-bearing fields
+    # Exact equality on identity-bearing fields including candidate_id
+    if candidate.get("candidate_id") != derived.get("candidate_id"):
+        raise GovernanceBlock("candidate.candidate_id mismatch derived candidate_id")
     sub_ids = list(candidate.get("source_event_ids") or [])
     der_ids = list(derived.get("source_event_ids") or [])
     if sorted(sub_ids) != sorted(event_ids):
@@ -434,7 +480,6 @@ def assert_candidate_derived_from_mining(
         raise GovernanceBlock("candidate.fingerprint mismatch derived fingerprint")
     if not _canonical_equal(candidate.get("scope") or {}, derived.get("scope") or {}):
         raise GovernanceBlock("candidate.scope mismatch derived scope")
-    # recommended_action / recovery coherence
     if candidate.get("recommended_action") != derived.get("recommended_action"):
         raise GovernanceBlock("candidate.recommended_action mismatch derived recommended_action")
     fp = candidate.get("fingerprint") or {}
@@ -442,4 +487,157 @@ def assert_candidate_derived_from_mining(
     for k in ("action_attempted", "recovery_path", "error_class"):
         if fp.get(k) != dfp.get(k):
             raise GovernanceBlock(f"candidate.fingerprint.{k} mismatch derived mining pattern")
+    if candidate.get("fingerprint_hash") not in (None, derived.get("fingerprint_hash")):
+        if candidate.get("fingerprint_hash") != derived.get("fingerprint_hash"):
+            raise GovernanceBlock("candidate.fingerprint_hash mismatch derived fingerprint_hash")
     return validate_candidate_artifact(candidate).as_dict()
+
+
+def prior_payload_material(
+    *,
+    candidate: dict[str, Any],
+    prior_id: str,
+    status: str,
+    state: str,
+) -> dict[str, Any]:
+    cand = unwrap_candidate(candidate)
+    fp = cand.get("fingerprint") or {}
+    return {
+        "prior_id": prior_id,
+        "status": status,
+        "state": state,
+        "candidate_id": cand.get("candidate_id"),
+        "action_attempted": fp.get("action_attempted"),
+        "recommended_action": cand.get("recommended_action"),
+        "recovery_path": fp.get("recovery_path"),
+        "error_class": fp.get("error_class"),
+        "fingerprint": fp,
+        "scope": cand.get("scope") or {},
+        "evidence_refs": list(cand.get("evidence_refs") or []),
+        "source_event_ids": list(cand.get("source_event_ids") or []),
+        "expected_outcome": cand.get("expected_outcome"),
+    }
+
+
+def compute_prior_payload_hash(
+    *,
+    candidate: dict[str, Any],
+    prior_id: str,
+    status: str,
+    state: str,
+) -> str:
+    return content_hash(prior_payload_material(
+        candidate=candidate, prior_id=prior_id, status=status, state=state,
+    ))
+
+
+def build_canonical_prior(
+    *,
+    candidate: dict[str, Any],
+    prior_id: str,
+    status: str,
+    state: str,
+    learning_receipt_id: str,
+    transition_history: list,
+    prior_payload_hash: str,
+    existing: dict | None = None,
+    extra: dict | None = None,
+) -> dict[str, Any]:
+    """Build reference prior internally from validated candidate — ignore caller semantics."""
+    cand = unwrap_candidate(candidate)
+    fp = cand.get("fingerprint") or {}
+    body: dict[str, Any] = {
+        "schema": "nf_motor_learning_prior_v1",
+        "prior_id": prior_id,
+        "status": status,
+        "state": state,
+        "action_attempted": fp.get("action_attempted"),
+        "recommended_action": cand.get("recommended_action"),
+        "expected_outcome": cand.get("expected_outcome") or "success",
+        "error_class": fp.get("error_class"),
+        "recovery_path": fp.get("recovery_path"),
+        "fingerprint": fp,
+        "scope": cand.get("scope") or {},
+        "evidence_refs": list(cand.get("evidence_refs") or []),
+        "source_event_ids": list(cand.get("source_event_ids") or []),
+        "learning_receipt_id": learning_receipt_id,
+        "candidate_id": cand.get("candidate_id"),
+        "transition_history": list(transition_history or []),
+        "prior_payload_hash": prior_payload_hash,
+        "live_consumable": False,
+        "store_kind": "w1_reference",
+        "w2_activation_required": True,
+        "activation_authority": False,
+        "fixture_seeded": False,
+        "supersedes": None,
+        "superseded_by": None,
+        "expires_at": None,
+    }
+    if extra:
+        # Only allow governed metadata keys, never semantic overrides
+        for k in (
+            "confidence_after", "expires_at", "supersedes", "dry_run",
+            "live_promotion", "w2_activation_contract",
+            "rollback_target", "rollback_target_prior_content_hash",
+            "rollback_target_version", "prior_ratification_receipt_id",
+        ):
+            if k in extra and extra[k] is not None:
+                body[k] = extra[k]
+    want = compute_prior_payload_hash(
+        candidate=cand, prior_id=prior_id, status=status, state=state,
+    )
+    if prior_payload_hash != want:
+        raise GovernanceBlock("prior_payload_hash mismatches canonical prior payload")
+    return body
+
+
+def merge_event_identity_ledger(
+    durable: dict | None,
+    update: dict | None,
+) -> dict[str, Any]:
+    """
+    Monotonic merge: never replace/remove historic identities.
+    Reject changed historic records and updates that omit durable history.
+    """
+    empty = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {}}
+    base = dict(durable or empty)
+    base.setdefault("schema", empty["schema"])
+    base_events = dict(base.get("events") or {})
+    if update is None:
+        return {"schema": base.get("schema", empty["schema"]), "events": base_events}
+    if not isinstance(update, dict):
+        raise GovernanceBlock("event_ledger_update must be object")
+    upd_events = update.get("events")
+    if upd_events is None:
+        return {"schema": base.get("schema", empty["schema"]), "events": base_events}
+    if not isinstance(upd_events, dict):
+        raise GovernanceBlock("event_ledger_update.events must be object")
+    # Full-ledger snapshots must preserve every historic identity
+    durable_ids = set(base_events)
+    update_ids = set(upd_events)
+    missing = durable_ids - update_ids
+    if missing:
+        raise GovernanceBlock(
+            f"ledger update removes historic event identities: {sorted(missing)!r}"
+        )
+    out = dict(base_events)
+    for eid, rec in upd_events.items():
+        if eid in out:
+            prev = out[eid]
+            # Normalize string legacy form
+            if isinstance(prev, str):
+                prev = {"content_hash": prev, "provenance_fingerprint": prev}
+            if isinstance(rec, str):
+                rec = {"content_hash": rec, "provenance_fingerprint": rec}
+            if prev.get("content_hash") != rec.get("content_hash") or \
+               prev.get("provenance_fingerprint") != rec.get("provenance_fingerprint"):
+                raise GovernanceBlock(
+                    f"ledger update changes historic identity for event_id={eid!r}"
+                )
+            out[eid] = prev
+        else:
+            if isinstance(rec, str):
+                rec = {"content_hash": rec, "provenance_fingerprint": rec}
+            out[eid] = rec
+    return {"schema": update.get("schema") or base.get("schema") or empty["schema"], "events": out}
+

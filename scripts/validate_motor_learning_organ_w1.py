@@ -169,6 +169,12 @@ def main() -> int:
         "ecqr_prior_identity_binding",
         "durable_cross_run_event_identity",
         "concurrent_cas_enforcement",
+        "canonical_candidate_identity",
+        "prior_payload_candidate_binding",
+        "normalized_event_provenance_validation",
+        "event_ledger_monotonicity",
+        "failed_direct_commit_restoration",
+        "stable_cross_root_writer_lock",
     ):
         val = maturity.get(key)
         if val != "IMPLEMENTED":

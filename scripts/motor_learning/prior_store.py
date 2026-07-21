@@ -219,11 +219,13 @@ class PriorStore:
         return self.create(prior, allow_duplicate=False, **kwargs)
 
     def _lock_path(self) -> Path:
-        return self.root / ".mlo_writer.lock"
+        """Lock lives outside the replaced store root so inode survives rename."""
+        return self.root.parent / f".{self.root.name}.mlo-writer.lock"
 
     def _acquire_writer_lock(self):
         """Exclusive filesystem lock around terminal mutate (single-writer safety)."""
-        self._ensure_dirs()
+        # Parent only — never mkdir the store root here (missing-store restoration).
+        self.root.parent.mkdir(parents=True, exist_ok=True)
         lf = open(self._lock_path(), "a+", encoding="utf-8")
         try:
             fcntl.flock(lf.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -267,8 +269,9 @@ class PriorStore:
         if not self._allow_persist:
             raise GovernanceBlock("terminal commit requires allow_persist=True")
 
-        lock_f = self._acquire_writer_lock()
+        # Existence BEFORE any mkdir / lock side-effects on store root
         existed = self.root.exists()
+        lock_f = self._acquire_writer_lock()
         hash_before = store_tree_hash(self.root)
         backup = Path(tempfile.mkdtemp(prefix="mlo-ps-bak-"))
         if existed:
@@ -388,7 +391,7 @@ class PriorStore:
                     prior_id=pid,
                 )
 
-            # Active: re-derive candidate from mining events + independence + confidence inputs
+            # Active: provenance-revalidate events, re-derive candidate (exact ID)
             if status == "active":
                 if candidate is None or shadow is None or confidence is None:
                     raise GovernanceBlock("active prior requires candidate+shadow+confidence")
@@ -400,7 +403,16 @@ class PriorStore:
                     raise GovernanceBlock(
                         "active terminal commit requires concrete normalized shadow_events"
                     )
-                from .artifacts import assert_candidate_derived_from_mining
+                from .artifacts import (
+                    assert_candidate_derived_from_mining,
+                    assert_normalized_events_provenance,
+                )
+                mining_events = assert_normalized_events_provenance(
+                    mining_events, label="mining_events"
+                )
+                shadow_events = assert_normalized_events_provenance(
+                    shadow_events, label="shadow_events"
+                )
                 cand0 = unwrap_candidate(candidate)
                 cand0 = assert_candidate_derived_from_mining(cand0, mining_events)
                 candidate = cand0
@@ -469,6 +481,53 @@ class PriorStore:
 
             if existing and not allow_duplicate and status != "rolled_back":
                 raise SchemaError(f"duplicate prior_id: {pid}")
+
+            # Canonical prior payload from candidate+ECQR+receipt — ignore caller semantics
+            if status in ("active", "rejected") and candidate is not None:
+                from .artifacts import build_canonical_prior, compute_prior_payload_hash
+                expected_state = {"active": "RATIFIED", "rejected": "REJECTED"}[status]
+                pph = compute_prior_payload_hash(
+                    candidate=candidate, prior_id=pid, status=status, state=expected_state,
+                )
+                ed_dict = vecqr.as_dict()
+                if ed_dict.get("prior_payload_hash") != pph:
+                    raise GovernanceBlock(
+                        "ECQR prior_payload_hash mismatches canonical prior payload"
+                    )
+                if vr.as_dict().get("prior_payload_hash") != pph:
+                    raise GovernanceBlock(
+                        "receipt prior_payload_hash mismatches canonical prior payload"
+                    )
+                cand = unwrap_candidate(candidate)
+                if body.get("recommended_action") not in (None, cand.get("recommended_action")):
+                    if body.get("recommended_action") != cand.get("recommended_action"):
+                        raise GovernanceBlock(
+                            "caller-authored prior.recommended_action rejected; "
+                            "prior payload is derived from candidate"
+                        )
+                if body.get("state") not in (None, expected_state) and body.get("state") != expected_state:
+                    raise GovernanceBlock("caller-authored prior.state rejected")
+                if body.get("status") not in (None, status) and body.get("status") != status:
+                    raise GovernanceBlock("caller-authored prior.status rejected")
+                hist = body.get("transition_history") or []
+                body = build_canonical_prior(
+                    candidate=candidate,
+                    prior_id=pid,
+                    status=status,
+                    state=expected_state,
+                    learning_receipt_id=vr.receipt_id,
+                    transition_history=hist,
+                    prior_payload_hash=pph,
+                    existing=existing,
+                    extra={
+                        "confidence_after": body.get("confidence_after"),
+                        "expires_at": body.get("expires_at") or ed_dict.get("expires_at"),
+                        "supersedes": body.get("supersedes") or ed_dict.get("supersedes"),
+                        "dry_run": body.get("dry_run"),
+                        "live_promotion": False,
+                        "w2_activation_contract": body.get("w2_activation_contract"),
+                    },
+                )
 
             if inject_failure_after == "pre_write_checks":
                 raise MotorLearningError("injected failure after pre_write_checks")
@@ -548,9 +607,15 @@ class PriorStore:
             }
             stage_store._write_index(idx)
 
-            if event_ledger_update is not None:
-                ledger_path = stage_store.root / "event_identity_ledger.json"
-                ledger_path.write_text(canonical_json(event_ledger_update) + "\n")
+            # Monotonic durable ledger merge under writer lock — never full replace
+            from .artifacts import merge_event_identity_ledger
+            ledger_path = stage_store.root / "event_identity_ledger.json"
+            durable = None
+            if ledger_path.exists():
+                durable = json.loads(ledger_path.read_text())
+            merged = merge_event_identity_ledger(durable, event_ledger_update)
+            if event_ledger_update is not None or durable is not None:
+                ledger_path.write_text(canonical_json(merged) + "\n")
 
             if inject_failure_after == "after_index":
                 raise MotorLearningError("injected failure after index")
@@ -569,20 +634,18 @@ class PriorStore:
             return body
 
         except Exception as exc:
-            # Restore exact pre-state
+            # Restore exact pre-state (including nonexistence — nothing under store path)
             if self.root.exists():
                 shutil.rmtree(self.root)
-            if (backup / "MISSING").exists():
-                # store must remain nonexistent
-                pass
+            if (backup / "MISSING").exists() or not existed:
+                if self.root.exists():
+                    shutil.rmtree(self.root)
             elif (backup / "tree").exists():
                 shutil.copytree(backup / "tree", self.root)
             shutil.rmtree(backup, ignore_errors=True)
             shutil.rmtree(staging, ignore_errors=True)
-            # Verify hash / existence
             if existed:
                 if store_tree_hash(self.root) != hash_before:
-                    # best-effort already restored
                     pass
             else:
                 if self.root.exists():

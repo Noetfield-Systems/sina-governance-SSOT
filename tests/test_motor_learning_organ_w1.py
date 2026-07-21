@@ -46,6 +46,16 @@ def _mine_hash(obs):
     return h
 
 
+def _pph(compiled, entity, status="active", state="RATIFIED"):
+    from motor_learning.artifacts import compute_prior_payload_hash
+    if compiled.get("prior_payload_hash"):
+        return compiled["prior_payload_hash"]
+    return compute_prior_payload_hash(
+        candidate=entity, prior_id=compiled.get("prior_id") or f"prior-{entity['candidate_id']}",
+        status=status, state=state,
+    )
+
+
 def _compile_and_validate(obs, template):
     compiled = fixture_compile_ecqr(
         template, candidate=obs["entity"], shadow=obs["shadow_report"], confidence=obs["confidence"],
@@ -252,6 +262,7 @@ class TestExactCrossBind(unittest.TestCase):
             ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         entity2 = transition(
             _entity_with_prior(entity, compiled), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
@@ -305,6 +316,7 @@ class TestExactCrossBind(unittest.TestCase):
                 ecqr_decision_hash=vecqr2.decision_hash,
                 candidate_hash=candidate_content_hash(entity),
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
             )
             # Tamper after build by reconstructing with wrong field via validate bypass attempt
             body = dict(r)
@@ -346,6 +358,7 @@ class TestExactCrossBind(unittest.TestCase):
                 ecqr_decision_hash=vecqr2.decision_hash if field != "ecqr_decision_hash" else "0" * 64,
                 candidate_hash=candidate_content_hash(entity) if field != "candidate_hash" else "0" * 64,
                 mining_evidence_manifest_hash=_mine_hash(obs2),
+                prior_payload_hash=_pph(compiled2, entity),
             )
             # transition with bad receipt still validates structurally but bindings wrong at persist
             ent_bad = transition(
@@ -406,6 +419,7 @@ class TestAtomicPriorStore(unittest.TestCase):
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         ent = transition(_entity_with_prior(entity, compiled), RATIFIED,
                          actor=compiled["reviewer"], reason=compiled["rationale"], evidence=compiled["evidence_reviewed"],
@@ -479,6 +493,7 @@ class TestAtomicPriorStore(unittest.TestCase):
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         # Create existing prior version 1 nonterminal then try terminal with expected 99
         pid = compiled["prior_id"]
@@ -503,6 +518,7 @@ class TestAtomicPriorStore(unittest.TestCase):
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         ent = transition(_entity_with_prior(entity, compiled), RATIFIED,
                          actor=compiled["reviewer"], reason=compiled["rationale"], evidence=compiled["evidence_reviewed"],
@@ -749,6 +765,7 @@ class TestLifecycleReplayProbes(unittest.TestCase):
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity),
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         prior = {
             "prior_id": r["prior_id"], "status": "active", "state": "RATIFIED",
@@ -1111,6 +1128,7 @@ class TestGap1LifecycleAnchor(unittest.TestCase):
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         bad_hist = [{
             "from_state": "SHADOW", "to_state": "RATIFIED", "actor": compiled["reviewer"],
@@ -1207,6 +1225,7 @@ class TestGap1LifecycleAnchor(unittest.TestCase):
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         ent = transition(_entity_with_prior(entity, compiled), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
                          evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
@@ -1281,6 +1300,7 @@ class TestGap2RollbackMetadata(unittest.TestCase):
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         ent = transition(_entity_with_prior(entity, compiled), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
                          evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
@@ -1504,6 +1524,7 @@ class TestGap3EvidenceDerivation(unittest.TestCase):
                 shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
                 confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
                 candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
             )
             ent = transition(_entity_with_prior(entity, compiled), RATIFIED, actor=compiled["reviewer"], reason=compiled["rationale"],
                              evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"])
@@ -2006,6 +2027,7 @@ class TestPublicBoundaryGapsAQ(unittest.TestCase):
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity) if entity.get("fingerprint") else "x",
             mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         ent = transition(
             _entity_with_prior(entity, compiled), RATIFIED,
@@ -2077,6 +2099,7 @@ class TestPublicBoundaryGapsAQ(unittest.TestCase):
             shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
         )
         kwargs = dict(
             actor=compiled["reviewer"], reason=compiled["rationale"],
@@ -2163,6 +2186,7 @@ class TestPublicBoundaryGapsAQ(unittest.TestCase):
             shadow_evidence_manifest_hash=obs1["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs1["confidence"]["content_hash"], ecqr_decision_hash=vecqr1.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs1),
+            prior_payload_hash=_pph(compiled1, entity),
         )
         # Pre-bind this decision hash to a different prior_id
         idx = store._read_index()
@@ -2170,6 +2194,10 @@ class TestPublicBoundaryGapsAQ(unittest.TestCase):
         store._write_index(idx)
         compiled1 = dict(compiled1)
         compiled1["prior_id"] = "prior-two"
+        from motor_learning.artifacts import compute_prior_payload_hash
+        compiled1["prior_payload_hash"] = compute_prior_payload_hash(
+            candidate=entity, prior_id="prior-two", status="active", state="RATIFIED",
+        )
         # Revalidate ECQR with prior-two
         vecqr2 = validate_ecqr_decision(
             compiled1, confidence=obs1["confidence"], shadow=obs1["shadow_report"], candidate=entity,
@@ -2194,6 +2222,7 @@ class TestPublicBoundaryGapsAQ(unittest.TestCase):
             shadow_evidence_manifest_hash=obs1["shadow_report"]["evidence_manifest_hash"],
             confidence_hash=obs1["confidence"]["content_hash"], ecqr_decision_hash=vecqr2.decision_hash,
             candidate_hash=candidate_content_hash(entity), mining_evidence_manifest_hash=_mine_hash(obs1),
+            prior_payload_hash=_pph(compiled1, entity),
         )
         ent = transition(
             _entity_with_prior(entity, compiled1, prior_id="prior-two"), RATIFIED,
@@ -2414,6 +2443,329 @@ class TestMaturityPromotionGate(unittest.TestCase):
             "terminal_transition_ecqr_receipt_binding": "IMPLEMENTED",
             "ecqr_prior_identity_binding": "IMPLEMENTED",
             "durable_cross_run_event_identity": "IMPLEMENTED",
+            "concurrent_cas_enforcement": "IMPLEMENTED",
+            "w1_live_consumable": "FORBIDDEN",
+            "reviewer_authentication": "NOT_IMPLEMENTED",
+            "w2_activation": "NOT_IMPLEMENTED",
+            "model_learning": "FORBIDDEN",
+            "data_runway": "HOLD",
+        }
+        for k, v in required.items():
+            self.assertEqual(m.get(k), v, f"maturity.{k}")
+
+
+
+class TestFreshnessPatchSetSix(unittest.TestCase):
+    """Required probes for canonical identity, prior payload, provenance, ledger, missing-store, lock."""
+
+    def _ready(self, td):
+        return TestExactCrossBind()._ready_bundle(td)
+
+    def _commit_kwargs(self, obs, compiled, vecqr, entity, prior, receipt):
+        return dict(
+            prior=prior, learning_receipt=receipt, ecqr_decision=vecqr,
+            candidate=entity, shadow=obs["shadow_report"], confidence=obs["confidence"],
+            shadow_events=obs["shadow_events_normalized"], confidence_inputs=obs["confidence_inputs"],
+            mining_events=obs["mining_events_normalized"], expected_version=1,
+        )
+
+    def _build_active_attempt(self, td, mut_prior=None):
+        obs, compiled, vecqr = self._ready(td)
+        entity = obs["entity"]
+        from motor_learning.artifacts import candidate_content_hash
+        r = build_learning_receipt(
+            decision="RATIFIED", prior_id=compiled["prior_id"], candidate_id=entity["candidate_id"],
+            reviewer=compiled["reviewer"], rationale=compiled["rationale"],
+            evidence_links=list(compiled["evidence_reviewed"]),
+            confidence_before=obs["confidence"]["confidence_before"],
+            confidence_after=obs["confidence"]["confidence_after"],
+            affected_loops=list(compiled["affected_loops"]),
+            applicable_runways=list(compiled["applicable_runways"]),
+            repositories=list(compiled.get("repositories") or []),
+            origin_event=entity["source_event_ids"][0],
+            decision_timestamp=compiled["effective_at"],
+            shadow_id=obs["shadow_report"]["shadow_id"], shadow_hash=obs["shadow_report"]["content_hash"],
+            shadow_evidence_manifest_hash=obs["shadow_report"]["evidence_manifest_hash"],
+            confidence_hash=obs["confidence"]["content_hash"], ecqr_decision_hash=vecqr.decision_hash,
+            candidate_hash=candidate_content_hash(entity),
+            mining_evidence_manifest_hash=_mine_hash(obs),
+            prior_payload_hash=_pph(compiled, entity),
+        )
+        ent = transition(
+            _entity_with_prior(entity, compiled), RATIFIED,
+            actor=compiled["reviewer"], reason=compiled["rationale"],
+            evidence=compiled["evidence_reviewed"], learning_receipt=r, timestamp=compiled["effective_at"],
+        )
+        prior = {
+            "prior_id": compiled["prior_id"], "status": "active", "state": "RATIFIED",
+            "action_attempted": entity["fingerprint"].get("action_attempted"),
+            "recommended_action": entity["recommended_action"],
+            "scope": entity["scope"], "candidate_id": entity["candidate_id"],
+            "learning_receipt_id": r["receipt_id"], "transition_history": ent["transition_history"],
+            "fingerprint": entity["fingerprint"], "evidence_refs": entity["evidence_refs"],
+            "source_event_ids": entity["source_event_ids"],
+        }
+        if mut_prior:
+            mut_prior(prior)
+        store = PriorStore(td / "store", create=True, store_kind="w1_reference", allow_persist=True)
+        return store, obs, compiled, vecqr, entity, prior, r
+
+    def test_renamed_canonical_candidate_blocked(self):
+        from motor_learning.artifacts import assert_candidate_derived_from_mining
+        td = Path(tempfile.mkdtemp())
+        obs, compiled, vecqr = self._ready(td)
+        entity = dict(obs["entity"])
+        entity["candidate_id"] = "cand-RENAMED-ATTACKER"
+        with self.assertRaises(GovernanceBlock) as cm:
+            assert_candidate_derived_from_mining(entity, obs["mining_events_normalized"])
+        self.assertIn("not among derived", str(cm.exception))
+        store, _o, _c, _v, _e, prior, r = self._build_active_attempt(td / "ok")
+        with self.assertRaises((GovernanceBlock, MotorLearningError)):
+            store.commit_terminal_bundle(**self._commit_kwargs(obs, compiled, vecqr, entity, prior, r))
+        shutil.rmtree(td)
+
+    def test_alternate_candidate_id_same_pattern_blocked(self):
+        from motor_learning.artifacts import assert_candidate_derived_from_mining
+        td = Path(tempfile.mkdtemp())
+        obs, _, _ = self._ready(td)
+        bad = dict(obs["entity"])
+        bad["candidate_id"] = "cand-" + ("0" * 16)
+        with self.assertRaises(GovernanceBlock) as cm:
+            assert_candidate_derived_from_mining(bad, obs["mining_events_normalized"])
+        self.assertIn("not among derived", str(cm.exception))
+        shutil.rmtree(td)
+
+    def test_modified_prior_recommended_action_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, obs, compiled, vecqr, entity, prior, r = self._build_active_attempt(
+            td, mut_prior=lambda p: p.update({"recommended_action": "EVIL_OVERRIDE"}),
+        )
+        with self.assertRaises(MotorLearningError) as cm:
+            store.commit_terminal_bundle(**self._commit_kwargs(obs, compiled, vecqr, entity, prior, r))
+        self.assertIn("recommended_action", str(cm.exception).lower())
+        shutil.rmtree(td)
+
+    def test_modified_prior_state_status_blocked(self):
+        td = Path(tempfile.mkdtemp())
+        store, obs, compiled, vecqr, entity, prior, r = self._build_active_attempt(
+            td, mut_prior=lambda p: p.update({"state": "PROPOSED", "status": "active"}),
+        )
+        with self.assertRaises(MotorLearningError) as cm:
+            store.commit_terminal_bundle(**self._commit_kwargs(obs, compiled, vecqr, entity, prior, r))
+        self.assertIn("state", str(cm.exception).lower())
+        shutil.rmtree(td)
+
+    def test_stale_content_hash_after_field_change_blocked(self):
+        from motor_learning.artifacts import assert_normalized_event_provenance
+        td = Path(tempfile.mkdtemp())
+        obs, _, _ = self._ready(td)
+        ev = dict(obs["mining_events_normalized"][0])
+        ev["action_attempted"] = "totally-different-action"
+        with self.assertRaises(GovernanceBlock) as cm:
+            assert_normalized_event_provenance(ev, label="mining")
+        self.assertIn("stale", str(cm.exception).lower())
+        shutil.rmtree(td)
+
+    def test_stale_provenance_fingerprint_blocked(self):
+        from motor_learning.artifacts import assert_normalized_event_provenance
+        td = Path(tempfile.mkdtemp())
+        obs, _, _ = self._ready(td)
+        ev = dict(obs["shadow_events_normalized"][0])
+        ev["recovery_path"] = "evil-recovery"
+        with self.assertRaises(GovernanceBlock):
+            assert_normalized_event_provenance(ev, label="shadow")
+        shutil.rmtree(td)
+
+    def test_ledger_update_removing_history_blocked(self):
+        from motor_learning.artifacts import merge_event_identity_ledger
+        durable = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {
+            "e1": {"content_hash": "a", "provenance_fingerprint": "a"},
+            "e2": {"content_hash": "b", "provenance_fingerprint": "b"},
+        }}
+        update = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {
+            "e1": {"content_hash": "a", "provenance_fingerprint": "a"},
+        }}
+        with self.assertRaises(GovernanceBlock) as cm:
+            merge_event_identity_ledger(durable, update)
+        self.assertIn("removes", str(cm.exception).lower())
+
+    def test_ledger_update_changing_historic_identity_blocked(self):
+        from motor_learning.artifacts import merge_event_identity_ledger
+        durable = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {
+            "e1": {"content_hash": "a", "provenance_fingerprint": "a"},
+        }}
+        update = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {
+            "e1": {"content_hash": "CHANGED", "provenance_fingerprint": "CHANGED"},
+        }}
+        with self.assertRaises(GovernanceBlock) as cm:
+            merge_event_identity_ledger(durable, update)
+        self.assertIn("historic", str(cm.exception).lower())
+
+    def test_concurrent_distinct_prior_ledger_union(self):
+        import threading
+        import time
+        td = Path(tempfile.mkdtemp())
+        store_root = td / "store"
+        store = PriorStore(store_root, create=True, store_kind="w1_reference", allow_persist=True)
+        (store_root / "event_identity_ledger.json").write_text(json.dumps({
+            "schema": "nf_motor_learning_event_identity_ledger_v1",
+            "events": {"seed": {"content_hash": "s", "provenance_fingerprint": "s"}},
+        }, sort_keys=True) + "\n")
+        from motor_learning.artifacts import merge_event_identity_ledger
+        results = []
+        barrier = threading.Barrier(2)
+
+        def worker(eid):
+            barrier.wait()
+            lf = None
+            for _ in range(200):
+                try:
+                    lf = store._acquire_writer_lock()
+                    break
+                except GovernanceBlock:
+                    time.sleep(0.01)
+            assert lf is not None
+            try:
+                durable2 = json.loads((store_root / "event_identity_ledger.json").read_text())
+                upd = {"schema": "nf_motor_learning_event_identity_ledger_v1", "events": {
+                    **durable2["events"],
+                    eid: {"content_hash": eid, "provenance_fingerprint": eid},
+                }}
+                merged2 = merge_event_identity_ledger(durable2, upd)
+                (store_root / "event_identity_ledger.json").write_text(json.dumps(merged2, sort_keys=True) + "\n")
+                results.append(eid)
+            finally:
+                store._release_writer_lock(lf)
+
+        t1 = threading.Thread(target=worker, args=("a1",))
+        t2 = threading.Thread(target=worker, args=("b2",))
+        t1.start(); t2.start(); t1.join(); t2.join()
+        final = json.loads((store_root / "event_identity_ledger.json").read_text())["events"]
+        self.assertIn("seed", final)
+        self.assertIn("a1", final)
+        self.assertIn("b2", final)
+        shutil.rmtree(td)
+
+    def test_failed_direct_commit_missing_store_stays_missing(self):
+        td = Path(tempfile.mkdtemp())
+        store_path = td / "never-created-store"
+        store = PriorStore(store_path, create=False, store_kind="w1_reference", allow_persist=True)
+        self.assertFalse(store_path.exists())
+        with self.assertRaises((GovernanceBlock, MotorLearningError, SchemaError)):
+            store.commit_terminal_bundle(
+                prior={"prior_id": "p", "status": "active", "state": "RATIFIED",
+                       "transition_history": [], "candidate_id": "c"},
+                learning_receipt={"receipt_id": "x"},
+                ecqr_decision={"decision": "RATIFIED"},
+                expected_version=1,
+            )
+        self.assertFalse(store_path.exists(), "store must remain nonexistent")
+        kids = list(store_path.parent.glob("never-created-store*"))
+        self.assertEqual(kids, [])
+        shutil.rmtree(td)
+
+    def test_writer_B_after_root_swap_before_release_blocked(self):
+        import threading
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = TestGap2RollbackMetadata()._active_store(td)
+        lf = store._acquire_writer_lock()
+        live_tmp = Path(str(store.root) + ".mlo_replacing")
+        store.root.rename(live_tmp)
+        staging = Path(tempfile.mkdtemp(prefix="mlo-stage-"))
+        shutil.copytree(live_tmp, staging, dirs_exist_ok=True)
+        staging.rename(store.root)
+        shutil.rmtree(live_tmp)
+        results = []
+
+        def try_b():
+            try:
+                store._acquire_writer_lock()
+                results.append("acquired")
+            except Exception as exc:
+                results.append(f"blocked:{exc}")
+
+        t = threading.Thread(target=try_b)
+        t.start(); t.join()
+        store._release_writer_lock(lf)
+        self.assertTrue(results and results[0].startswith("blocked"), results)
+        self.assertEqual(store._lock_path(), store.root.parent / f".{store.root.name}.mlo-writer.lock")
+        shutil.rmtree(td)
+
+    def test_same_prior_concurrency_one_version_increment(self):
+        import threading
+        td = Path(tempfile.mkdtemp())
+        store, stored, compiled = TestGap2RollbackMetadata()._active_store(td)
+        ed = TestGap2RollbackMetadata()._rb_bundle(stored, compiled)
+        from motor_learning.ecqr import validate_ecqr_decision
+        vecqr = validate_ecqr_decision(ed, require_bound_artifacts=False)
+        receipt = build_learning_receipt(
+            decision="ROLLED_BACK", prior_id=stored["prior_id"], candidate_id=stored["candidate_id"],
+            reviewer=ed["reviewer"], rationale=ed["rationale"],
+            evidence_links=list(ed["evidence_reviewed"]),
+            confidence_before=float(ed["confidence_before"]),
+            confidence_after=float(ed["confidence_after"]),
+            affected_loops=list(ed["affected_loops"]),
+            applicable_runways=list(ed["applicable_runways"]),
+            repositories=list(ed.get("repositories") or []),
+            origin_event=ed["evidence_reviewed"][0], decision_timestamp=ed["effective_at"],
+            rollback_target=stored["prior_id"], snapshot_id=stored["prior_id"],
+            ecqr_decision_hash=vecqr.decision_hash,
+            rollback_target_prior_content_hash=stored["content_hash"],
+            rollback_target_version=int(stored["version"]),
+            prior_ratification_receipt_id=stored["learning_receipt_id"],
+        )
+        entity = {
+            "state": "RATIFIED", "status": "active", "prior_id": stored["prior_id"],
+            "candidate_id": stored["candidate_id"],
+            "transition_history": list(stored["transition_history"]),
+        }
+        ent = transition(
+            entity, ROLLED_BACK, actor=ed["reviewer"], reason=ed["rationale"],
+            evidence=ed["evidence_reviewed"], learning_receipt=receipt, timestamp=ed["effective_at"],
+        )
+        updated = dict(stored)
+        updated.update({
+            "state": ent["state"], "status": ent["status"],
+            "transition_history": ent["transition_history"],
+            "learning_receipt_id": receipt["receipt_id"],
+            "rollback_target": stored["prior_id"],
+            "rollback_target_prior_content_hash": stored["content_hash"],
+            "rollback_target_version": int(stored["version"]),
+            "prior_ratification_receipt_id": stored["learning_receipt_id"],
+        })
+        results = []
+        barrier = threading.Barrier(2)
+
+        def worker(label):
+            barrier.wait()
+            try:
+                store.commit_terminal_bundle(
+                    prior=updated, learning_receipt=receipt, ecqr_decision=vecqr,
+                    allow_duplicate=True, expected_version=int(stored["version"]),
+                )
+                results.append((label, "success"))
+            except Exception as exc:
+                results.append((label, f"fail:{exc}"))
+
+        t1 = threading.Thread(target=worker, args=("A",))
+        t2 = threading.Thread(target=worker, args=("B",))
+        t1.start(); t2.start(); t1.join(); t2.join()
+        self.assertEqual(sum(1 for r in results if r[1] == "success"), 1, results)
+        self.assertEqual(int(store.get(stored["prior_id"])["version"]), int(stored["version"]) + 1)
+        shutil.rmtree(td)
+
+
+class TestMaturityFreshnessSix(unittest.TestCase):
+    def test_maturity_six_patch_rows(self):
+        lock = json.loads((ROOT / "data" / "nf_motor_learning_organ_v1_LOCKED.json").read_text())
+        m = lock["implementation_maturity"]
+        required = {
+            "canonical_candidate_identity": "IMPLEMENTED",
+            "prior_payload_candidate_binding": "IMPLEMENTED",
+            "normalized_event_provenance_validation": "IMPLEMENTED",
+            "event_ledger_monotonicity": "IMPLEMENTED",
+            "failed_direct_commit_restoration": "IMPLEMENTED",
+            "stable_cross_root_writer_lock": "IMPLEMENTED",
             "concurrent_cas_enforcement": "IMPLEMENTED",
             "w1_live_consumable": "FORBIDDEN",
             "reviewer_authentication": "NOT_IMPLEMENTED",

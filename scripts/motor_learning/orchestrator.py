@@ -330,6 +330,14 @@ def run_pipeline(
             try:
                 cand_hash = candidate_content_hash(entity)
                 _, mine_hash = mining_evidence_manifest(entity, obs.get("mining_events_normalized") or [])
+                from .artifacts import compute_prior_payload_hash
+                status_map = {"RATIFIED": ("active", "RATIFIED"), "REJECTED": ("rejected", "REJECTED")}
+                st, ste = status_map[decision]
+                pph = ed.get("prior_payload_hash") or compute_prior_payload_hash(
+                    candidate=entity, prior_id=prior_id, status=st, state=ste,
+                )
+                if ed.get("prior_payload_hash") and ed.get("prior_payload_hash") != pph:
+                    raise GovernanceBlock("ECQR prior_payload_hash mismatches canonical prior payload")
                 receipt = build_learning_receipt(
                     decision=decision,
                     prior_id=prior_id,
@@ -356,6 +364,7 @@ def run_pipeline(
                     ecqr_decision_hash=ecqr_validated.decision_hash,
                     candidate_hash=cand_hash,
                     mining_evidence_manifest_hash=mine_hash,
+                    prior_payload_hash=pph,
                 )
                 validated_receipt = validate_and_mint_receipt(receipt)
                 target_state = RATIFIED if decision == "RATIFIED" else REJECTED
