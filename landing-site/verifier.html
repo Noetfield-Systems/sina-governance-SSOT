@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noetfield Runway Verifier</title>
+    <style>
+      :root {
+        color: #f5f9ff;
+        background: #090f25;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 2rem;
+        background: radial-gradient(circle at top, #131d4a, #090f25);
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <pre id="verifier-payload">{
+  "project": "noetfield-runway-standalone",
+  "branch": "main",
+  "environment": "production",
+  "commit": "c7eb116",
+  "runtime": "cloudflare-pages-standalone",
+  "deployed_at_utc": "2026-07-21T08:46:37Z",
+  "proof_contract_version": "runway-proof-v1",
+  "verifier_routes": {
+    "deployment": "https://noetfield-runway-standalone.pages.dev/",
+    "verifier_json": "https://noetfield-runway-standalone.pages.dev/verifier.json",
+    "verifier_txt": "https://noetfield-runway-standalone.pages.dev/verifier.txt",
+    "verifier_html": "https://noetfield-runway-standalone.pages.dev/verifier.html"
+  },
+  "events": {
+    "runwayRun": [
+      "runId",
+      "scenarioId",
+      "phase",
+      "status",
+      "stepIndex",
+      "elapsedMs",
+      "cost"
+    ],
+    "receipt": [
+      "run_id",
+      "result",
+      "outputs",
+      "checks",
+      "costActual",
+      "costEstimated",
+      "verifiedAt"
+    ]
+  },
+  "expected_mode": "oauth"
+}</pre>
+  </body>
+</html>

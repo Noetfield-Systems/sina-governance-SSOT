@@ -1,0 +1,10 @@
+{
+  "project": "noetfield-runway-standalone",
+  "branch": "main",
+  "environment": "production",
+  "commit": "c7eb116",
+  "runtime": "cloudflare-pages-standalone",
+  "deployed_at_utc": "2026-07-21T08:46:37Z",
+  "verifier_page": "https://noetfield-runway-standalone.pages.dev/verifier.json",
+  "expected_mode": "oauth"
+}
