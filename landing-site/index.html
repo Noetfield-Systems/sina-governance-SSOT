@@ -148,11 +148,15 @@
             <span class="trust-pill" id="runwayModeBadge">DEMO</span>
           </div>
           <p class="muted" id="scenarioSummary">
-            Pick a scenario and run the demo to see a real-time stream of gates, retries, recovery,
+            Pick a scenario and run it to see a real-time stream of gates, retries, recovery,
             and the final proof receipt.
           </p>
           <p class="trust-line" id="trustLine">
             What you see is produced by this same UI and this same job state.
+          </p>
+          <p class="muted">
+            Mode is explicit: <strong>LIVE</strong> (authoritative runway.v1 API + SSE), <strong>DEMO</strong>
+            (deterministic simulator), or <strong>OFFLINE</strong> (live requested but API not configured).
           </p>
 
           <div class="scenario-meta">
@@ -193,7 +197,7 @@
           <p class="scenario-legend">
             Complex jobs fail on purpose; the value is in recovery policy and transparent receipts.
           </p>
-          <div class="scenario-row" role="group" aria-label="Choose demo scenario">
+          <div class="scenario-row" role="group" aria-label="Choose scenario">
             <button class="scenario-btn active" data-scenario="decision" type="button">Decision brief</button>
             <button class="scenario-btn" data-scenario="rfp" type="button">RFP response pack</button>
             <button class="scenario-btn" data-scenario="spreadsheet" type="button">Spreadsheet + policy cleanup</button>
@@ -239,7 +243,7 @@
               <h3>Verification Receipt</h3>
               <span class="muted" id="runIdBadge">Run ID: --</span>
             </div>
-            <pre id="receiptBody">No active run. Start a simulation to render a signed output proof.</pre>
+            <pre id="receiptBody">No active run. Start a scenario to render a signed output proof.</pre>
             <div class="receipt-meta" id="snapshotLine"></div>
             <div class="receipt-actions">
               <button id="copyReceipt" class="btn btn-soft" type="button">Copy receipt JSON</button>
@@ -312,16 +316,20 @@
         <article class="proof-contract">
           <h3>External verifier contract</h3>
           <p class="muted">
-            External parties can verify this deployment and simulation output from these immutable routes:
+            External parties can verify this deployment and runtime contract from these immutable routes:
           </p>
           <div class="proof-contract-grid">
             <a href="/verifier.json" target="_blank" rel="noopener noreferrer">GET /verifier.json</a>
             <a href="/verifier.txt" target="_blank" rel="noopener noreferrer">GET /verifier.txt</a>
             <a href="/verifier.html" target="_blank" rel="noopener noreferrer">GET /verifier.html</a>
+            <a href="/v1/runway/runtime" target="_blank" rel="noopener noreferrer">GET /v1/runway/runtime</a>
+            <a href="/v1/runway/runs/{runId}/receipt" target="_blank" rel="noopener noreferrer">GET /v1/runway/runs/:runId/receipt</a>
+            <a href="/v1/runway/receipts/verify" target="_blank" rel="noopener noreferrer">POST /v1/runway/receipts/verify</a>
           </div>
           <p class="muted">
             Every simulation run emits <code>runwayRun</code> events and a final structured receipt with
             deterministic fields.
+            LIVE mode projects real runway.v1 snapshots and receipt verification signals.
           </p>
         </article>
       </section>
@@ -405,6 +413,7 @@
       </section>
     </main>
 
+    <script src="runway-bootstrap.js"></script>
     <script src="runway-config.js"></script>
     <script src="providers/demo-runway-provider.js"></script>
     <script src="providers/live-runway-provider.js"></script>

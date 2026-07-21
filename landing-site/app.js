@@ -376,9 +376,10 @@
   };
 
   const runwayConfig = window.__RUNWAY__ || { mode: "demo", apiBaseUrl: "", contractVersion: "runway.v1" };
+  const runwayModeBadge = document.getElementById("runwayModeBadge");
   const demoProvider =
     typeof window.DemoRunwayProvider === "function" ? new window.DemoRunwayProvider(scenarioFeed) : null;
-  const liveProvider =
+  let liveProvider =
     typeof window.LiveRunwayProvider === "function"
       ? new window.LiveRunwayProvider({
           apiBaseUrl: runwayConfig.apiBaseUrl,
@@ -387,17 +388,87 @@
         })
       : null;
 
-  function resolveProvider(scenarioName) {
-    const requested = String(runwayConfig.mode || "demo").toLowerCase();
-    const modeBadge = document.getElementById("runwayModeBadge");
-    if (requested === "live" && scenarioName === "webpage" && liveProvider && runwayConfig.apiBaseUrl) {
-      if (modeBadge) modeBadge.textContent = liveProvider.getModeLabel();
+  function normalizeMode(value) {
+    const candidate = String(value || "").toLowerCase();
+    if (candidate === "live") return "live";
+    if (candidate === "offline") return "offline";
+    return "demo";
+  }
+
+  function resolveModeRequested() {
+    const urlMode = new URLSearchParams(window.location.search).get("runwayMode") ||
+      new URLSearchParams(window.location.search).get("runway_mode") ||
+      new URLSearchParams(window.location.search).get("mode");
+
+    return normalizeMode(urlMode || runwayConfig.mode || "demo");
+  }
+
+  function hasLiveBackendConnection(stateValue) {
+    const state = String(stateValue || "").toLowerCase();
+    return state === "connected" || state === "ok" || state === "healthy";
+  }
+
+  function makeLiveProvider(apiBaseUrl, contractVersion, tenantId) {
+    if (!apiBaseUrl || typeof window.LiveRunwayProvider !== "function") {
+      return null;
+    }
+
+    if (
+      liveProvider &&
+      !liveProvider.offline &&
+      liveProvider.apiBaseUrl === apiBaseUrl &&
+      (liveProvider.contractVersion || "runway.v1") === (contractVersion || "runway.v1") &&
+      liveProvider.tenantId === (tenantId || "tenant-runway-staging")
+    ) {
       return liveProvider;
     }
-    if (modeBadge) {
-      modeBadge.textContent = !runwayConfig.apiBaseUrl && requested === "live" ? "OFFLINE" : "DEMO";
+
+    liveProvider = new window.LiveRunwayProvider({
+      apiBaseUrl,
+      contractVersion: contractVersion || "runway.v1",
+      tenantId: tenantId || "tenant-runway-staging"
+    });
+
+    return liveProvider;
+  }
+
+  function applyModeBadge(mode) {
+    if (!runwayModeBadge) {
+      return;
     }
-    return demoProvider;
+
+    const normalized = normalizeMode(mode);
+    const modeText = normalized === "live" ? "LIVE" : normalized === "offline" ? "OFFLINE" : "DEMO";
+    runwayModeBadge.textContent = modeText;
+
+    runwayModeBadge.classList.remove("mode-live", "mode-demo", "mode-offline");
+    runwayModeBadge.classList.add(
+      modeText === "LIVE" ? "mode-live" : modeText === "OFFLINE" ? "mode-offline" : "mode-demo"
+    );
+  }
+
+  function getExecutionContext() {
+    const requestedMode = resolveModeRequested();
+    const liveRuntimeProvider = requestedMode === "live"
+      ? makeLiveProvider(
+          runwayConfig.apiBaseUrl,
+          runwayConfig.contractVersion || "runway.v1",
+          runwayConfig.tenantId || "tenant-runway-staging"
+        )
+      : null;
+
+    if (requestedMode === "live" && liveRuntimeProvider && !liveRuntimeProvider.offline) {
+      applyModeBadge("live");
+      return { mode: "live", provider: liveRuntimeProvider, source: "hdir-gateway", sourceInfo: liveRuntimeProvider.getModeLabel() };
+    }
+
+    if (requestedMode === "live") {
+      applyModeBadge("offline");
+      return { mode: "offline", provider: null, source: "local-simulator", sourceInfo: "OFFLINE" };
+    }
+
+    applyModeBadge("demo");
+    return { mode: "demo", provider: demoProvider, source: "local-simulator", sourceInfo: "local-simulator" };
   }
 
   let activeScenario = "decision";
@@ -420,6 +491,31 @@
     }
 
     return "ok";
+  }
+
+  function modeLabel(value) {
+    const normalized = normalizeMode(value);
+    if (normalized === "live") {
+      return "LIVE";
+    }
+    if (normalized === "offline") {
+      return "OFFLINE";
+    }
+    return "DEMO";
+  }
+
+  function toVerificationFlag(value) {
+    if (!value || typeof value !== "object") {
+      return null;
+    }
+
+    return {
+      ...(value.passed !== undefined ? { passed: value.passed } : {}),
+      ...(value.verifiedAt ? { verifiedAt: value.verifiedAt } : {}),
+      ...(value.runId ? { runId: value.runId } : {}),
+      status: value.status || value.verdict || (value.passed ? "PASS" : "UNKNOWN"),
+      source: value.source || "runway.v1"
+    };
   }
 
   function eventStatusFromStep(stepStatus, isRecoveredFailure) {
@@ -537,6 +633,158 @@
     row.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
+  function countTimelineStatus(timeline) {
+    const counts = { ok: 0, warn: 0, fail: 0, total: timeline.length };
+    timeline.forEach((entry) => {
+      if (entry && entry.status === "warn") {
+        counts.warn += 1;
+      } else if (entry && entry.status === "fail") {
+        if (entry.recovered) {
+          counts.warn += 1;
+        } else {
+          counts.fail += 1;
+        }
+      } else {
+        counts.ok += 1;
+      }
+    });
+    return counts;
+  }
+
+  function resolveReceiptCostFromKernel(receiptPayload, snapshot, feed, profile) {
+    const fallback = Number(profile && profile.cost_cap_usd ? profile.cost_cap_usd : snapshot.estimated_cost_usd || 0);
+    const payload =
+      receiptPayload && typeof receiptPayload === "object"
+        ? (receiptPayload.payload || receiptPayload)
+        : {};
+
+    const candidate =
+      Number(payload.costActual) ||
+      Number(payload.cost_actual_usd) ||
+      Number(payload.cost?.actual_usd) ||
+      Number(payload.cost?.spent_usd) ||
+      Number(payload.cost?.amount) ||
+      Number(payload.spent_usd) ||
+      Number(payload.amount) ||
+      fallback;
+
+    return Number(Number.isFinite(candidate) ? candidate : fallback);
+  }
+
+  function deriveLiveOutcome(snapshot, counts) {
+    if (!snapshot || !snapshot.status) {
+      return counts.fail > 0 ? "FAIL" : counts.warn > 0 ? "PASS_WITH_WARN" : "PASS";
+    }
+
+    if (snapshot.status === "COMPLETED") {
+      return counts.fail > 0 ? "PASS_WITH_WARN" : "PASS";
+    }
+
+    if (snapshot.status === "FAILED" || snapshot.status === "BLOCKED") {
+      return "FAIL";
+    }
+
+    if (snapshot.status === "REVIEW_REQUIRED") {
+      return "PASS_WITH_WARN";
+    }
+
+    return "PASS_WITH_WARN";
+  }
+
+  function buildLiveKernelReceipt(runId, snapshot, timeline, profile, runResult) {
+    const baseProfile = profile || scenarioFeed.webpage;
+    const safeTimeline = Array.isArray(timeline) ? timeline : [];
+    const counts = countTimelineStatus(safeTimeline);
+    const verifiedAt = snapshot.updated_at ? new Date(snapshot.updated_at).toISOString() : new Date().toISOString();
+    const expectedCost = Number(snapshot.estimated_cost_usd || baseProfile.cost_cap_usd || 0);
+    const costActual = resolveReceiptCostFromKernel(runResult, snapshot, safeTimeline, baseProfile);
+    const receiptPayload =
+      runResult && typeof runResult === "object" && typeof runResult.payload === "object" ? runResult.payload : runResult;
+    const artifactUrl = snapshot.artifact_url || (Array.isArray(snapshot.artifact_urls) ? snapshot.artifact_urls[0] : null);
+    const artifactHash = snapshot.artifact_hash || snapshot.artifacts_hash || null;
+    const artifactNames = Array.isArray(snapshot.artifact_names) ? snapshot.artifact_names : [];
+    const checksIdentified = Array.isArray(receiptPayload?.checks_identified)
+      ? receiptPayload.checks_identified
+      : Array.isArray(receiptPayload?.checks)
+        ? receiptPayload.checks
+        : baseProfile.failure_modes || [];
+    const outcome = deriveLiveOutcome(snapshot, counts);
+    const rawReliability = Number.isFinite(Number(snapshot.reliability)) ? Number(snapshot.reliability) : null;
+    const profileReliability = Number.isFinite(Number(baseProfile.reliability_target))
+      ? Number(baseProfile.reliability_target)
+      : null;
+    const snapshotReliability01 =
+      rawReliability === null || !Number.isFinite(rawReliability)
+        ? null
+        : rawReliability > 1
+          ? rawReliability / 100
+          : rawReliability;
+    const reliabilityTarget01 =
+      profileReliability === null || !Number.isFinite(profileReliability)
+        ? null
+        : profileReliability > 1
+          ? profileReliability / 100
+          : profileReliability;
+    const effectiveReliability01 = snapshotReliability01 === null ? reliabilityTarget01 || 0 : snapshotReliability01;
+
+    return {
+      run_id: runId,
+      runId,
+      scenario_id: baseProfile.id,
+      result: outcome,
+      outputs: {
+        label: baseProfile.runType || baseProfile.summary,
+        summary: snapshot.goal || baseProfile.summary,
+        checks_identified: checksIdentified,
+        timeline_count: safeTimeline.length,
+        artifact: artifactUrl || null,
+        artifact_url: artifactUrl || null,
+        artifact_hash: artifactHash || null,
+        artifacts: artifactNames,
+        artifact_count: artifactNames.length
+      },
+      hdir_execution_id: snapshot.hdir_execution_id || null,
+      checks: {
+        total: Number.isFinite(snapshot.jobs_total) && snapshot.jobs_total > 0 ? snapshot.jobs_total : safeTimeline.length || 0,
+        passed: Number.isFinite(snapshot.jobs_completed)
+          ? snapshot.jobs_completed
+          : Math.max(0, Math.max(snapshot.jobs_total || 0, safeTimeline.length) - counts.fail - counts.warn),
+        recoverable: counts.warn,
+        failed: counts.fail,
+        recovered_failures: safeTimeline.filter((entry) => entry.status === "fail" && entry.recovered).length,
+      },
+      costEstimated: Number(expectedCost.toFixed(4)),
+      cost_estimated: Number(expectedCost.toFixed(4)),
+      costActual: Number(costActual.toFixed ? costActual.toFixed(4) : costActual),
+      cost_actual: Number(costActual.toFixed ? costActual.toFixed(4) : costActual),
+      verifiedAt,
+      source: "hdir",
+      receipt_id: snapshot.receipt_id || undefined,
+      contract_version: snapshot.contract_version || runwayConfig.contractVersion || "runway.v1",
+      runway_contract_versions: snapshot.runway_contract_versions || {
+        frontend: runwayConfig.contractVersion || "runway.v1",
+        kernel: "runway.v1"
+      },
+      reliability: {
+        target: Number(((reliabilityTarget01 || effectiveReliability01 || 0) * 100).toFixed(2)),
+        achieved: Number((Math.max(0, Math.min(1, effectiveReliability01 || 0)) * 100).toFixed(2)),
+      },
+      risk: baseProfile.risk_envelope,
+      fallback_policy: baseProfile.fallback_policy,
+      timeline: safeTimeline.map((entry, idx) => ({
+        timeline_id: `${runId}-n${idx + 1}`,
+        step_index: idx,
+        phase: entry.phase,
+        step: entry.step,
+        status: entry.status === "ok" ? "pass" : entry.status === "warn" ? "recoverable_issue" : "fail",
+        note: entry.text,
+        recovered: !!entry.recovered,
+        elapsed_ms: Number.isFinite(entry.elapsedMs) ? entry.elapsedMs : 0,
+      })),
+      signed_receipt_id: snapshot.receipt_id || `hdir-${simpleHash(`${runId}|${safeTimeline.length}|${Date.now()}`)}`,
+    };
+  }
+
   function buildReceipt(timeline, startTime, elapsedSeconds, counts, runId, profile, sourceInfo) {
     const recoveredFailureCount = timeline.filter((entry) => entry.status === "fail" && entry.recovered).length;
     const terminalFailCount = timeline.filter((entry) => entry.status === "fail" && !entry.recovered).length;
@@ -595,8 +843,11 @@
         recovered_failures: recoveredFailureCount
       },
       costEstimated: Number(expectedCost.toFixed(4)),
+      cost_estimated: Number(expectedCost.toFixed(4)),
       costActual,
+      cost_actual: costActual,
       verifiedAt: new Date(startTime).toISOString(),
+      verified_at: new Date(startTime).toISOString(),
       source: sourceInfo,
       reliability,
       risk: profile.risk_envelope,
@@ -636,6 +887,235 @@
     return finalReceipt;
   }
 
+  function buildRunwayOfflineFailureReceipt(runId, startTime, elapsedSeconds, profile, reason, sourceInfo) {
+    const failTimeline = [
+      {
+        status: "fail",
+        phase: "Control plane",
+        step: "control_plane",
+        text: reason || "Live control plane unavailable",
+        elapsedMs: 120
+      }
+    ];
+
+    return buildReceipt(
+      failTimeline,
+      startTime,
+      elapsedSeconds,
+      { total: 1, passed: 0, warn: 0, failed: 1 },
+      runId,
+      profile,
+      sourceInfo
+    );
+  }
+
+  function runwayEventStatusFromOutcome(outcome) {
+    if (outcome === "PASS") {
+      return "ok";
+    }
+    if (outcome === "PASS_WITH_WARN") {
+      return "warn";
+    }
+    return "fail";
+  }
+
+  async function fetchRunwayRuntimeContract() {
+    try {
+      const runtimeSearch = new URLSearchParams(window.location.search || "");
+      const baseMode = runwayConfig.mode || "demo";
+      const baseApiBase = runwayConfig.apiBaseUrl || "";
+      const baseContractVersion = runwayConfig.contractVersion || "runway.v1";
+
+      if (!runtimeSearch.has("runwayMode") && baseMode) {
+        runtimeSearch.set("runwayMode", baseMode);
+      }
+
+      if (!runtimeSearch.has("runwayApiBaseUrl") && baseApiBase) {
+        runtimeSearch.set("runwayApiBaseUrl", baseApiBase);
+      }
+
+      if (!runtimeSearch.has("runwayContractVersion") && baseContractVersion) {
+        runtimeSearch.set("runwayContractVersion", baseContractVersion);
+      }
+
+      const queryString = runtimeSearch.toString();
+      const runtimeEndpoint = "/v1/runway/runtime" + (queryString ? `?${queryString}` : "");
+
+      const response = await fetch(runtimeEndpoint, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "x-runway-mode": runwayConfig.mode || "demo",
+          "x-runway-contract-version": runwayConfig.contractVersion || "runway.v1",
+          ...(runwayConfig.apiBaseUrl ? { "x-runway-api-base-url": runwayConfig.apiBaseUrl } : {})
+        }
+      });
+      const contentType = String(response.headers.get("content-type") || "").toLowerCase();
+      const pagesRuntimeUsable = response.ok && contentType.includes("application/json");
+      if (pagesRuntimeUsable) {
+        const payload = await response.json();
+        return {
+          mode: payload.mode || payload.runway_mode || "unknown",
+          liveBackendConnected:
+            payload.live_backend_connection_status || payload.live_backend_status || "unknown",
+          contractVersion: payload.contract_version || runwayConfig.contractVersion || "runway.v1",
+          backendApiBaseUrl: payload.backend?.configured_api_base || runwayConfig.apiBaseUrl || null,
+          contractVersions: payload.runway_contract_versions || {
+            frontend: runwayConfig.contractVersion || "runway.v1",
+            kernel: "runway.v1"
+          },
+          ...payload
+        };
+      }
+
+      // When Pages Functions are unavailable, probe the configured Kernel directly for LIVE.
+      if (baseMode === "live" && baseApiBase) {
+        try {
+          const probe = await fetch(`${baseApiBase.replace(/\/+$/, "")}/v1/runway/runtime`, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "x-tenant-id": runwayConfig.tenantId || "tenant-runway-staging"
+            }
+          });
+          if (probe.ok) {
+            const payload = await probe.json();
+            return {
+              mode: "live",
+              liveBackendConnected: "connected",
+              contractVersion: payload.contract || payload.contract_version || baseContractVersion,
+              backendApiBaseUrl: baseApiBase,
+              ...payload
+            };
+          }
+        } catch (probeError) {
+          return {
+            mode: "offline",
+            liveBackendConnected: "disconnected",
+            contractVersion: baseContractVersion,
+            backendApiBaseUrl: baseApiBase,
+            error: String(probeError && probeError.message ? probeError.message : probeError)
+          };
+        }
+      }
+
+      return {
+        mode: "unknown",
+        liveBackendConnected: response.status === 503 ? "not_configured" : "disconnected",
+        contractVersion: runwayConfig.contractVersion || "runway.v1"
+      };
+    } catch (error) {
+      return {
+        mode: "unknown",
+        liveBackendConnected: "error",
+        contractVersion: runwayConfig.contractVersion || "runway.v1",
+        error: String(error && error.message ? error.message : error)
+      };
+    }
+  }
+
+  async function verifyRunwayReceipt(runId, options = {}) {
+    if (!runId) {
+      return { passed: false, error: "missing_run_id" };
+    }
+
+    const verifyMode = normalizeMode(options.mode || runwayConfig.mode || "demo");
+    const verifyContract = options.contractVersion || runwayConfig.contractVersion || "runway.v1";
+    const verifyApiBase = options.apiBaseUrl || runwayConfig.apiBaseUrl || "";
+
+    try {
+      const response = await fetch("/v1/runway/receipts/verify", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+          "x-runway-mode": verifyMode,
+          "x-runway-contract-version": verifyContract,
+          ...(verifyApiBase ? { "x-runway-api-base-url": verifyApiBase } : {})
+        },
+        body: JSON.stringify({
+          runId,
+          contractVersion: verifyContract
+        })
+      });
+      if (!response.ok) {
+        return {
+          passed: false,
+          status: response.status,
+          error: `receipt_verify_${response.status}`
+        };
+      }
+
+      return await response.json();
+    } catch (error) {
+      return { passed: false, error: String(error && error.message ? error.message : error) };
+    }
+  }
+
+  async function fetchLiveReceiptFromContract(runId, options = {}) {
+    if (!runId) {
+      return null;
+    }
+
+    const apiMode = normalizeMode(options.mode || runwayConfig.mode || "demo");
+    const apiContract = options.contractVersion || runwayConfig.contractVersion || "runway.v1";
+
+    try {
+      const response = await fetch(`/v1/runway/runs/${encodeURIComponent(runId)}/receipt`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "x-runway-mode": apiMode,
+          "x-runway-contract-version": apiContract,
+          ...(options.apiBaseUrl ? { "x-runway-api-base-url": options.apiBaseUrl } : {})
+        }
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      return await response.json();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function setScenarioForRunMode(mode, context) {
+    if (!trustLine) {
+      return;
+    }
+
+    const backendStatus = String(context?.liveBackendConnected || "").toLowerCase();
+    const runtimeConnected =
+      backendStatus === "connected" ||
+      backendStatus === "ok" ||
+      backendStatus === "healthy" ||
+      backendStatus === "true" ||
+      backendStatus === "1";
+
+    if (mode === "live") {
+      if (runtimeConnected) {
+        trustLine.textContent = "Live backend contract is connected. This UI reflects same runway job state in realtime.";
+      } else {
+        trustLine.textContent =
+          "Live backend unavailable in this session. OFFLINE mode is active; live state is not available.";
+      }
+
+      return;
+    }
+
+    if (mode === "offline") {
+      trustLine.textContent =
+        String(context?.requestedMode === "live")
+          ? "Live backend unavailable. OFFLINE mode is active; no live authority is available."
+          : "OFFLINE mode is active.";
+      return;
+    }
+
+    trustLine.textContent = "DEMO mode: deterministic local replay is simulated in this browser session.";
+  }
+
   function setRunKpiState(progress, total, checks, retryCount, startTime, profile, state) {
     if (runNodes) {
       runNodes.textContent = `${progress} / ${total}`;
@@ -664,7 +1144,7 @@
     }
   }
 
-  function setMetaFromScenario(profile) {
+  function setMetaFromScenario(profile, runtimeContext = null) {
     if (scenarioSummary) {
       scenarioSummary.textContent = profile.summary;
     }
@@ -686,7 +1166,9 @@
     scenarioFallback.textContent = profile.fallback_policy || "--";
 
     if (trustLine) {
-      trustLine.textContent = `What you see is produced by this same UI and this same job state (${profile.runType}).`;
+      const resolvedMode = runtimeContext?.requestedMode || resolveModeRequested();
+      const payload = runtimeContext || { mode: resolvedMode, liveBackendConnected: "unknown" };
+      setScenarioForRunMode(resolvedMode, payload);
     }
 
     scenarioButtons.forEach((button) => {
@@ -696,7 +1178,7 @@
 
   function chooseScenario(nextScenario) {
     activeScenario = scenarioFeed[nextScenario] ? nextScenario : "decision";
-    setMetaFromScenario(scenarioFeed[activeScenario]);
+    setMetaFromScenario(scenarioFeed[activeScenario], { requestedMode: resolveModeRequested() });
   }
 
   function applyEndpointMetadata(payload, fallback) {
@@ -781,11 +1263,54 @@
     resetButton.disabled = true;
 
     const baseline = scenarioFeed[activeScenario] || scenarioFeed.decision;
-    let runId = `NR-${Date.now()}`;
+    const executionContext = getExecutionContext();
+    let runMode = executionContext.mode;
+    const requestedMode = runMode;
+    let provider = executionContext.provider;
+    const runtimeContract = await fetchRunwayRuntimeContract();
+    const runtimeContext = {
+      requestedMode: runMode,
+      mode: runtimeContract?.mode || runMode,
+      liveBackendConnected: runtimeContract?.liveBackendConnected || "unknown",
+      ...runtimeContract
+    };
+    const liveBackendConnected = hasLiveBackendConnection(runtimeContext.liveBackendConnected);
+    let adjustedContextMode = runtimeContext.mode;
+
+    if (runMode === "live") {
+      if (liveBackendConnected) {
+        const liveApiBase = runtimeContext.backendApiBaseUrl || runwayConfig.apiBaseUrl;
+        const liveContractVersion =
+          runtimeContext.contract_version || runtimeContext.contractVersion || runwayConfig.contractVersion || "runway.v1";
+        const tenantId = runtimeContext.tenant_id || runwayConfig.tenantId || "tenant-runway-staging";
+        const liveRuntimeProvider = makeLiveProvider(liveApiBase, liveContractVersion, tenantId);
+
+        if (!liveRuntimeProvider) {
+          adjustedContextMode = "offline";
+          runMode = "offline";
+          provider = null;
+        } else {
+          provider = liveRuntimeProvider;
+          adjustedContextMode = "live";
+          runMode = "live";
+        }
+      } else {
+        adjustedContextMode = "offline";
+        runMode = "offline";
+        provider = null;
+      }
+    }
+
+    runtimeContext.mode = adjustedContextMode;
+
+    if (runMode !== executionContext.mode) {
+      setScenarioForRunMode(runMode, runtimeContext);
+      applyModeBadge(runMode);
+    }
     let scenarioToRun = baseline;
-    let sourceInfo = "local-simulator";
+    let sourceInfo = executionContext.sourceInfo;
     const startTime = Date.now();
-    const provider = resolveProvider(activeScenario);
+    let runId = `NR-${startTime}`;
 
     clearLogs();
     streamRoot.classList.add("loading");
@@ -793,9 +1318,17 @@
     streamSkeleton.className = "stream-skeleton";
     streamSkeleton.textContent = "Initializing deterministic runway...";
     streamRoot.appendChild(streamSkeleton);
-    setStatus("Running", "ok");
+    setStatus(
+      runMode === "live"
+        ? "Starting live runway..."
+        : runMode === "offline"
+          ? "Starting offline demonstration mode..."
+          : "Starting demo runway...",
+      runMode === "offline" ? "warn" : "ok"
+    );
     runIdBadge.textContent = `Run ID: ${runId}`;
     snapshotLine.textContent = "";
+    setScenarioForRunMode(runMode, runtimeContext);
 
     emitRunEvent({
       runId,
@@ -808,89 +1341,244 @@
     });
 
     try {
-      if (provider && (activeScenario === "webpage" || String(runwayConfig.mode || "").toLowerCase() === "live")) {
-        const liveResult = await provider.run(activeScenario, {
+      if (runMode === "live" && provider) {
+        setMetaFromScenario(scenarioToRun, runtimeContext);
+
+        const liveTimeline = [];
+        let snapshot = {};
+        let elapsedMs = 0;
+        const liveStepCounts = { ok: 0, warn: 0, fail: 0 };
+
+        const liveResult = await provider.run(scenarioToRun, {
           delay: sleep,
-          onStep: async (step) => {
-            createEntry(step, streamRoot.querySelectorAll(".stream-entry").length, Math.max(1, (scenarioToRun.steps || []).length), startTime);
+          onStep: async (rawStep) => {
+            const step = {
+              status: normalizeStatus(rawStep && rawStep.status ? rawStep.status : "ok"),
+              phase: rawStep?.phase || rawStep?.step || "Execute",
+              step: rawStep?.step || "run-step",
+              text: rawStep?.text || "Kernel event received",
+              elapsedMs: Number.isFinite(Number(rawStep?.elapsedMs))
+                ? Number(rawStep.elapsedMs)
+                : 500,
+              recovered: rawStep?.recovered === true
+            };
+            liveTimeline.push(step);
+            liveStepCounts[step.status] += 1;
+            const countLength = liveTimeline.length;
+            createEntry(step, countLength - 1, Math.max(1, liveTimeline.length), startTime);
+            emitRunEvent({
+              runId,
+              scenarioId: scenarioToRun.id,
+              phase: step.phase,
+              status: eventStatusFromStep(step.status, step.recovered),
+              stepIndex: countLength,
+              elapsedMs: step.elapsedMs,
+              cost: Number(((scenarioToRun.cost_cap_usd || 0) / Math.max(countLength, 1)).toFixed(4))
+            });
+        setRunKpiState(
+          countLength,
+          Math.max(1, countLength),
+          {
+                total: countLength,
+                passed: countLength - liveStepCounts.warn - liveStepCounts.fail,
+                warn: liveStepCounts.warn,
+                failed: liveStepCounts.fail
+              },
+              snapshot.retries || 0,
+              startTime,
+              scenarioToRun,
+              "Live running"
+            );
           },
-          onSnapshot: async (snapshot) => {
+          onSnapshot: async (nextSnapshot) => {
+            if (!nextSnapshot || typeof nextSnapshot !== "object") {
+              return;
+            }
+            snapshot = nextSnapshot;
+            elapsedMs = Number(nextSnapshot.elapsed_ms || nextSnapshot.elapsedMs || elapsedMs || 0);
             if (runNodes) {
               runNodes.textContent = `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || 0}`;
             }
             if (runChecksPassed) {
-              runChecksPassed.textContent = `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || 0}`;
+              runChecksPassed.textContent = `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || liveTimeline.length || 0}`;
             }
             if (runRetriesUsed) {
               runRetriesUsed.textContent = String(snapshot.retries || 0);
             }
-            if (runConfidence) {
-              runConfidence.textContent = `${Math.round((snapshot.reliability || 0) * 1000) / 10}%`;
+            if (runConfidence && scenarioToRun) {
+              const reliability = computeReliability(scenarioToRun, countTimelineStatus(liveTimeline), (Date.now() - startTime) / 1000);
+              runConfidence.textContent = `${reliability.achieved.toFixed(1)}%`;
             }
             if (runLatency) {
               runLatency.textContent = formatMs(Date.now() - startTime);
             }
-            setStatus(snapshot.status || "Running", snapshot.status === "FAILED" ? "bad" : "ok");
+
+            if (snapshot.status === "FAILED") {
+              setStatus("Live run failed; waiting for terminal event", "bad");
+            } else if (snapshot.status === "REVIEW_REQUIRED") {
+              setStatus("Live run requires review", "warn");
+            } else if (snapshot.status === "COMPLETED") {
+              setStatus("Live run completed", "ok");
+            } else {
+              setStatus("Live run in progress", "ok");
+            }
           }
         });
 
-        runId = liveResult.runId;
+        runId = liveResult.runId || runId;
         runIdBadge.textContent = `Run ID: ${runId}`;
-        sourceInfo = liveResult.source;
-        scenarioToRun = liveResult.profile || baseline;
-        setMetaFromScenario(scenarioToRun);
+        sourceInfo = liveResult.source || sourceInfo;
+        scenarioToRun = liveResult.profile || scenarioToRun;
+        setMetaFromScenario(scenarioToRun, { ...runtimeContext, requestedMode: runMode, runId, mode: "live" });
 
-        const counts = { ok: 0, warn: 0, fail: 0 };
-        (liveResult.feed || []).forEach((step) => {
-          counts[step.status] = (counts[step.status] || 0) + 1;
+        const timeline = Array.isArray(liveResult.feed) && liveResult.feed.length > 0 ? liveResult.feed : liveTimeline;
+        const counts = countTimelineStatus(timeline);
+        snapshot = liveResult.snapshot || snapshot || {};
+        elapsedMs = Number(liveResult.elapsedMs || elapsedMs || Date.now() - startTime);
+
+        if (runMode !== "offline") {
+          applyModeBadge("live");
+        }
+
+        const liveReceipt = buildLiveKernelReceipt(runId, snapshot, timeline, scenarioToRun, liveResult.receipt);
+        if (!liveResult.receipt) {
+          const fetchedReceipt = await fetchLiveReceiptFromContract(runId, {
+            mode: runMode,
+            contractVersion: runtimeContext.contract_version || runtimeContext.contractVersion || runwayConfig.contractVersion || "runway.v1",
+            apiBaseUrl: runtimeContext.backendApiBaseUrl || runwayConfig.apiBaseUrl || ""
+          });
+          if (fetchedReceipt && typeof fetchedReceipt === "object") {
+            liveResult.receipt = fetchedReceipt;
+          }
+        }
+
+        const receiptToRender = liveResult.receipt ? buildLiveKernelReceipt(runId, snapshot, timeline, scenarioToRun, liveResult.receipt) : liveReceipt;
+        const verified = await verifyRunwayReceipt(runId, {
+          mode: runMode,
+          contractVersion: runtimeContext.contract_version || runtimeContext.contractVersion || runwayConfig.contractVersion || "runway.v1",
+          apiBaseUrl: runtimeContext.backendApiBaseUrl || runwayConfig.apiBaseUrl || ""
         });
-        const elapsedSeconds = Math.max(1, Math.round((liveResult.elapsedMs || Date.now() - startTime) / 1000));
-        const snapshot = liveResult.snapshot || {};
-        if (runNodes) runNodes.textContent = `${snapshot.jobs_completed || counts.ok} / ${snapshot.jobs_total || (liveResult.feed || []).length}`;
-        if (runChecksPassed) runChecksPassed.textContent = `${snapshot.jobs_completed || counts.ok} / ${snapshot.jobs_total || (liveResult.feed || []).length}`;
-        if (runRetriesUsed) runRetriesUsed.textContent = String(snapshot.retries || 0);
-        if (runConfidence) runConfidence.textContent = `${Math.round((snapshot.reliability || computeReliability(scenarioToRun, counts, elapsedSeconds) / 100) * 1000) / 10}%`;
-        if (runLatency) runLatency.textContent = formatMs(liveResult.elapsedMs || Date.now() - startTime);
-
-        const receiptPayload = liveResult.receipt || buildReceipt(
-          liveResult.feed || [],
-          startTime,
-          elapsedSeconds,
-          counts,
-          runId,
-          scenarioToRun,
-          sourceInfo
+        if (verified) {
+          receiptToRender.verification = {
+            ...toVerificationFlag(verified),
+            contract_version: runtimeContext.contract_version || runtimeContext.contractVersion || runwayConfig.contractVersion || "runway.v1",
+            backend_contracts: runtimeContext.contractVersions || null,
+            verifier_contract: {
+              path: "POST /v1/runway/receipts/verify",
+              route: "/v1/runway/receipts/verify"
+            }
+          };
+        }
+        latestReceiptText = JSON.stringify(
+          {
+            runwayRun: {
+              runId,
+              scenarioId: scenarioToRun.id,
+              phase: "receipt",
+              status: runwayEventStatusFromOutcome(receiptToRender.result),
+              stepIndex: timeline.length,
+              elapsedMs,
+              cost: receiptToRender.costActual
+            },
+            receipt: receiptToRender
+          },
+          null,
+          2
         );
-        latestReceiptText = JSON.stringify(receiptPayload, null, 2);
-        if (receiptBody) receiptBody.textContent = latestReceiptText;
-        snapshotLine.textContent = `source=${sourceInfo}; contract=${runwayConfig.contractVersion || "runway.v1"}; mode=${liveResult.mode}`;
-        setStatus(snapshot.status === "COMPLETED" || liveResult.mode === "demo" ? "Completed" : snapshot.status || "Completed", "ok");
-        streamRoot.classList.remove("loading");
-        running = false;
-        runButton.disabled = false;
-        resetButton.disabled = false;
+        receiptBody.classList.add("receipt-fade");
+        setTimeout(() => receiptBody.classList.add("visible"), 60);
+        receiptBody.textContent = latestReceiptText;
+        snapshotLine.textContent = JSON.stringify({
+          runId,
+          source: sourceInfo,
+          mode: modeLabel("live"),
+          contract: runwayConfig.contractVersion || "runway.v1",
+          contractVersions: runtimeContext?.contractVersions || null,
+          result: receiptToRender.result,
+          timeline_ids: (receiptToRender.timeline || []).map((entry) => entry.timeline_id),
+          costEstimated: receiptToRender.costEstimated,
+          costActual: receiptToRender.costActual,
+          artifact_url: receiptToRender.outputs?.artifact_url || null,
+          outcome: receiptToRender.result,
+          verified_by_route: Boolean(receiptToRender.verification),
+          verification: receiptToRender.verification || null
+        });
+
+        const outcome = receiptToRender.result;
+        if (outcome === "PASS") {
+          setStatus("Completed", "ok");
+        } else if (outcome === "PASS_WITH_WARN") {
+          setStatus("Completed with warning", "warn");
+        } else {
+          setStatus("Completed with failure", "bad");
+        }
+
+        setRunKpiState(
+          timeline.length,
+          timeline.length,
+          {
+            total: Math.max(timeline.length, 1),
+            passed: counts.ok,
+            warn: counts.warn,
+            failed: counts.fail
+          },
+          snapshot.retries || 0,
+          startTime,
+          scenarioToRun,
+          outcome
+        );
+
         emitRunEvent({
           runId,
           scenarioId: scenarioToRun.id,
-          phase: "complete",
-          status: "ok",
-          stepIndex: (liveResult.feed || []).length,
-          elapsedMs: liveResult.elapsedMs || Date.now() - startTime,
-          cost: snapshot.estimated_cost_usd || scenarioToRun.cost_cap_usd || 0,
-          receipt: receiptPayload
+          phase: "receipt",
+          status: runwayEventStatusFromOutcome(outcome),
+          stepIndex: timeline.length,
+          elapsedMs,
+          cost: receiptToRender.costActual || 0,
+          receipt: receiptToRender
         });
         return;
       }
 
+      const demoResult = demoProvider ? await demoProvider.run(activeScenario, {
+        onStep: async (step) => {
+          const normalized = {
+            status: normalizeStatus(step.status),
+            phase: step.phase || step.step || "Execute",
+            step: step.step || "run-step",
+            text: step.text || "Step completed",
+            elapsedMs: Number.isFinite(Number(step.elapsedMs)) ? Number(step.elapsedMs) : 700,
+            recovered: step.recovered === true
+          };
+          createEntry(normalized, streamRoot.querySelectorAll(".stream-entry").length, scenarioToRun.steps.length, startTime);
+          emitRunEvent({
+            runId,
+            scenarioId: scenarioToRun.id,
+            phase: normalized.phase,
+            status: eventStatusFromStep(normalized.status, normalized.recovered),
+            stepIndex: streamRoot.querySelectorAll(".stream-entry").length,
+            elapsedMs: normalized.elapsedMs,
+            cost: Number(((scenarioToRun.cost_cap_usd || 0) / Math.max(scenarioToRun.steps.length, 1)).toFixed(4))
+          });
+        }
+      }) : null;
+
+      if (!demoResult) {
+        throw new Error("No local provider available.");
+      }
+
+      scenarioToRun = demoResult.profile || scenarioToRun || baseline;
+      runId = demoResult.runId || runId;
+      runIdBadge.textContent = `Run ID: ${runId}`;
       const endpoint = runButton.dataset.endpoint;
       if (endpoint) {
-        const remotePayload = await fetchRemoteFeed(endpoint, activeScenario);
-        if (remotePayload.id) {
-          runId = `NR-${remotePayload.id}-${Date.now()}`;
-          runIdBadge.textContent = `Run ID: ${runId}`;
-        }
+        sourceInfo = "remote-api";
+      }
 
-        sourceInfo = remotePayload.source_info || "remote-api";
+      const remotePayload = endpoint ? await fetchRemoteFeed(endpoint, activeScenario).catch(() => null) : null;
+      if (remotePayload) {
+        sourceInfo = remotePayload.source_info || sourceInfo;
         scenarioToRun = applyEndpointMetadata(
           {
             ...remotePayload,
@@ -902,20 +1590,23 @@
               remotePayload.runType || activeScenario
             ).steps
           },
-          baseline
+          scenarioToRun
         );
       }
 
-      const timeline = scenarioToRun.steps.map((entry, idx) => ({
-        status: normalizeStatus(entry.status),
-        phase: entry.phase || "Execute",
-        step: entry.step || `step-${idx + 1}`,
-        text: entry.text || "Execution checkpoint",
-        elapsedMs: Number(entry.elapsedMs) || 700,
-        recovered: entry.recovered === true && normalizeStatus(entry.status) === "fail"
-      }));
+      const timeline = Array.isArray(demoResult.feed) && demoResult.feed.length > 0
+        ? demoResult.feed
+        : (scenarioToRun.steps || []).map((entry, idx) => ({
+            status: normalizeStatus(entry.status),
+            phase: entry.phase || "Execute",
+            step: entry.step || `step-${idx + 1}`,
+            text: entry.text || "Execution checkpoint",
+            elapsedMs: Number(entry.elapsedMs) || 700,
+            recovered: entry.recovered === true && normalizeStatus(entry.status) === "fail"
+          }));
 
-      setRunKpiState(0, timeline.length, { total: timeline.length, passed: 0, warn: 0, failed: 0 }, 0, startTime, scenarioToRun, "Starting");
+      setMetaFromScenario(scenarioToRun, { requestedMode: runMode });
+      setRunKpiState(0, timeline.length, { total: timeline.length, passed: 0, warn: 0, failed: 0 }, 0, startTime, scenarioToRun, runMode === "offline" ? "OFFLINE" : "Demo");
 
       let okCount = 0;
       let warnCount = 0;
@@ -924,8 +1615,6 @@
 
       for (let i = 0; i < timeline.length; i += 1) {
         const entry = timeline[i];
-        createEntry(entry, i, timeline.length, startTime);
-
         if (entry.status === "ok") {
           okCount += 1;
         }
@@ -949,20 +1638,8 @@
           retryCount,
           startTime,
           scenarioToRun,
-          "Running"
+          runMode === "offline" ? "Offline replay" : "Demo running"
         );
-
-        emitRunEvent({
-          runId,
-          scenarioId: scenarioToRun.id,
-          phase: entry.phase,
-          status: eventStatusFromStep(entry.status, entry.recovered),
-          stepIndex: i + 1,
-          elapsedMs: entry.elapsedMs,
-          cost: Number(((scenarioToRun.cost_cap_usd || 0) / Math.max(timeline.length, 1)).toFixed(4))
-        });
-
-        await sleep(Number(entry.elapsedMs) || 700);
       }
 
       const elapsedSeconds = (Date.now() - startTime) / 1000;
@@ -981,6 +1658,11 @@
         sourceInfo
       );
 
+      latestReceiptText = JSON.stringify(finalized, null, 2);
+      if (receiptBody) {
+        receiptBody.textContent = latestReceiptText;
+      }
+
       if (failCount > 0) {
         setStatus("Completed with failures", "bad");
       } else if (warnCount > 0) {
@@ -988,6 +1670,16 @@
       } else {
         setStatus("Completed", "ok");
       }
+
+      snapshotLine.textContent = JSON.stringify({
+        runId,
+        timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+        result: finalized.receipt.result,
+        costEstimated: finalized.receipt.costEstimated,
+        costActual: finalized.receipt.costActual,
+        source: sourceInfo,
+        mode: runMode
+      });
 
       emitRunEvent({
         runId,
@@ -1001,7 +1693,8 @@
               : "warn",
         stepIndex: timeline.length,
         elapsedMs: Math.round(elapsedSeconds * 1000),
-        cost: finalized?.receipt?.costActual || 0
+        cost: finalized?.receipt?.costActual || 0,
+        receipt: finalized.receipt
       });
 
       setRunKpiState(
@@ -1014,16 +1707,79 @@
         finalized?.receipt?.result || "Completed"
       );
     } catch (error) {
+      if (requestedMode === "live") {
+        runMode = "offline";
+        runtimeContext.mode = "offline";
+        runtimeContext.requestedMode = requestedMode;
+        setScenarioForRunMode("offline", runtimeContext);
+        applyModeBadge("offline");
+        sourceInfo = "OFFLINE";
+
+        const fallbackReason = String(error && error.message ? error.message : "unknown_error");
+        const elapsedSeconds = (Date.now() - startTime) / 1000;
+        const failureReason = `Live backend unavailable: ${fallbackReason}`;
+        const finalized = buildRunwayOfflineFailureReceipt(
+          runId,
+          startTime,
+          elapsedSeconds,
+          baseline,
+          failureReason,
+          sourceInfo
+        );
+
+        latestReceiptText = JSON.stringify(finalized, null, 2);
+        if (receiptBody) {
+          receiptBody.textContent = latestReceiptText;
+        }
+
+        snapshotLine.textContent = JSON.stringify({
+          runId,
+          timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+          result: finalized.receipt.result,
+          costEstimated: finalized.receipt.costEstimated,
+          costActual: finalized.receipt.costActual,
+          source: sourceInfo,
+          mode: modeLabel(runMode),
+          offline: true
+        });
+
+        setStatus("Live backend unavailable. Run blocked in OFFLINE mode.", "bad");
+        emitRunEvent({
+          runId,
+          scenarioId: baseline.id,
+          phase: "receipt",
+          status: "fail",
+          stepIndex: 1,
+          elapsedMs: Math.round(elapsedSeconds * 1000),
+          cost: finalized?.receipt?.costActual || 0,
+          receipt: finalized.receipt
+        });
+
+        setRunKpiState(
+          1,
+          1,
+          { total: 1, passed: 0, warn: 0, failed: 1 },
+          0,
+          startTime,
+          baseline,
+          finalized?.receipt?.result || "Offline blocked"
+        );
+
+        return;
+      }
+
       const fallbackReason = String(error && error.message ? error.message : "unknown_error");
       setStatus("Fallback to local simulator", "warn");
-      sourceInfo = "local-simulator";
+      if (sourceInfo === "local-simulator") {
+        sourceInfo = "OFFLINE";
+      }
 
       const fallbackTimeline = [
         {
           status: "warn",
           phase: "Plan",
           step: "control_plane",
-          text: `Live API unavailable (${fallbackReason}). Using deterministic local scenario profile.`,
+          text: `${runMode === "live" ? "Live API unavailable" : "Execution interrupted"}: ${fallbackReason}. Using deterministic local scenario replay.`,
           elapsedMs: 320
         },
         ...baseline.steps
@@ -1095,6 +1851,20 @@
         baseline,
         sourceInfo
       );
+      latestReceiptText = JSON.stringify(finalized, null, 2);
+      if (receiptBody) {
+        receiptBody.textContent = latestReceiptText;
+      }
+
+      snapshotLine.textContent = JSON.stringify({
+        runId,
+        timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+        result: finalized.receipt.result,
+        costEstimated: finalized.receipt.costEstimated,
+        costActual: finalized.receipt.costActual,
+        source: sourceInfo,
+        mode: modeLabel(runMode)
+      });
 
       setStatus("Fallback completed", "warn");
       emitRunEvent({
@@ -1109,7 +1879,8 @@
               : "warn",
         stepIndex: fallbackTimeline.length,
         elapsedMs: Math.round(elapsedSeconds * 1000),
-        cost: finalized?.receipt?.costActual || 0
+        cost: finalized?.receipt?.costActual || 0,
+        receipt: finalized.receipt
       });
 
       setRunKpiState(
@@ -1132,7 +1903,7 @@
   function clearLogs() {
     streamRoot.classList.remove("loading");
     streamRoot.textContent = "";
-    receiptBody.textContent = "No active run. Start a simulation to render a signed output proof.";
+    receiptBody.textContent = "No active run. Start a scenario to render a signed output proof.";
     receiptBody.classList.remove("receipt-fade", "visible");
     snapshotLine.textContent = "";
     latestReceiptText = "";
@@ -1217,6 +1988,32 @@
   });
 
   setRevealAnimation();
-  setMetaFromScenario(scenarioFeed[activeScenario]);
-  clearLogs();
+
+  (async () => {
+    const requestedMode = resolveModeRequested();
+    const runtimeContext = await fetchRunwayRuntimeContract().catch(() => null);
+    const runtimeConnected = runtimeContext && hasLiveBackendConnection(runtimeContext.liveBackendConnected);
+    const runtimeApiConfigured = Boolean(
+      (runtimeContext?.backendApiBaseUrl || runtimeContext?.backend?.configured_api_base || runwayConfig.apiBaseUrl)
+    );
+    const startupMode =
+      requestedMode === "live"
+        ? runtimeConnected
+          ? "live"
+          : "offline"
+        : requestedMode;
+
+    const seedContext = {
+      requestedMode: startupMode,
+      mode: startupMode,
+      liveBackendConnected: runtimeContext?.liveBackendConnected || (runtimeConnected ? "connected" : "unknown"),
+      contractVersion: runtimeContext?.contractVersion || runwayConfig.contractVersion,
+      backendApiBaseUrl: runtimeContext?.backendApiBaseUrl || runwayConfig.apiBaseUrl || null,
+      ...runtimeContext
+    };
+
+    setMetaFromScenario(scenarioFeed[activeScenario], seedContext);
+    applyModeBadge(startupMode);
+    clearLogs();
+  })();
 })();

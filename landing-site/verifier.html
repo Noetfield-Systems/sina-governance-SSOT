@@ -7,14 +7,52 @@
   </head>
   <body>
     <pre id="verifier-payload">{
+  \"schema_version\": \"runway-frontend-attestation.v1\",
+  \"attestation_scope\": \"frontend-deployment-only\",
   \"project\": \"noetfield-runway-standalone\",
-  \"branch\": \"main\",
+  \"product\": \"noetfield-runway\",
+  \"branch\": \"feature/runway-live-v1\",
   \"environment\": \"production\",
-  \"commit\": \"070a71f\",
+  \"commit\": {
+    \"full\": \"9d2854b7af1753c77a570b7d11accd66a030840e\",
+    \"short\": \"9d2854b\"
+  },
+  \"source_repository\": \"https://github.com/Noetfield-Systems/sina-governance-SSOT\",
+  \"commit_url\": \"https://github.com/Noetfield-Systems/sina-governance-SSOT/tree/9d2854b7af1753c77a570b7d11accd66a030840e\",
   \"runtime\": \"cloudflare-pages-standalone\",
-  \"deployed_at_utc\": \"2026-07-21T12:01:28Z\",
-  \"verifier_page\": \"https://noetfield-runway-standalone.pages.dev/verifier.html\",
-  \"expected_mode\": \"token\"
+  \"deployed_at_utc\": \"2026-07-21T13:04:43Z\",
+  \"deployment_id\": \"unknown\",
+  \"deployment_url\": \"https://noetfield-runway-standalone.pages.dev\",
+  \"frontend_artifact_sha256\": \"9717073ff58daded035f4a783fd54bde8feebb16ea825cd41f126eeda64c5c1f\",
+  \"configured_mode\": \"live\",
+  \"runway_mode\": \"live\",
+  \"runway_api_base_url\": \"https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev\",
+  \"runway_api_base_url_configured\": \"https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev\",
+  \"runway_contracts\": {
+    \"runtime\": \"GET /v1/runway/runtime\",
+    \"receipt\": \"GET /v1/runway/runs/:runId/receipt\",
+    \"verify\": \"POST /v1/runway/receipts/verify\"
+  },
+  \"runway_contract_versions\": {
+    \"frontend\": \"runway.v1\",
+    \"kernel\": \"runway.v1\"
+  },
+  \"runway_kernel_runtime_attestation_url\": \"https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runtime\",
+  \"runway_runtime_connection_status\": \"connected\",
+  \"live_backend_connected\": true,
+  \"live_backend_status\": \"connected\",
+  \"runway_contract_version\": \"runway.v1\",
+  \"runway_runtime_attestation_url\": \"https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runtime\",
+  \"hdir_release_sha\": \"e89a3bce6948ae532bf585ab546aa68221cbe1c8\",
+  \"runway_kernel_repository\": \"https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY\",
+  \"runway_kernel_branch\": \"fix/remove-48h-wallclock-gate-v1\",
+  \"runway_kernel_release_sha\": \"15fdcc3e4ab9d2239e9efe0704ad38c71da56b1d\",
+  \"runway_kernel_commit_url\": \"https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/tree/15fdcc3e4ab9d2239e9efe0704ad38c71da56b1d\",
+  \"attestation_signature_scope\": \"This file identifies frontend deployment identity only; backend HDIR truth is kernel-authoritative.\",
+  \"expected_mode\": \"live\",
+  \"signature\": null,
+  \"public_key\": null,
+  \"signature_algorithm\": null
 }</pre>
   </body>
 </html>
