@@ -19,7 +19,7 @@
 ## Proof
 
 ```bash
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_parallel_automation_governance_v1.py
 ```
 
 Pass: `validate_parallel_automation_governance_v1: ALL PASS`

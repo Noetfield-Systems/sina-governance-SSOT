@@ -235,13 +235,13 @@ Lanes A–E run **in parallel**. Lane F (LS1) after B-04 register PASS.
 /usr/bin/python3 ~/.cursor/skills/signal-factory/scripts/verify_signal_factory_v1.py
 
 # Brain domain registry
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_registry_v1.py
 
 # Full matrix (when ship window)
-bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1.sh
+bash ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_e2e_matrix_v1.sh
 
 # B2 draft present
-test -f ~/Projects/sina-governance-ssot/data/regulated-term-hardstop-v1.json && echo B2_DRAFT_OK
+test -f ~/Desktop/Noetfield-Systems/sina-governance-SSOT/data/regulated-term-hardstop-v1.json && echo B2_DRAFT_OK
 
 # TrustField Worker Phase 1 (TrustField repo — NOT SourceA)
 cd ~/Desktop/trustfield-loops && npm run test:phase1

@@ -6,7 +6,7 @@
 |------|-------------|-------|-------------|
 | A | `~/Projects/SourceA` | SourceA Brain | B-01/B-02/B-03 SF pointers — see `docs/SOURCEA_BRAIN_HANDOFF_SIGNAL_FACTORY_TRUSTFIELD_v1.md` |
 | B | `~/Desktop/trustfield-loops` | TrustField Worker | Phase 2 prep (after B2 SG sign-off) |
-| C | `~/Projects/sina-governance-ssot` | SG | B2 sign-off on `data/regulated-term-hardstop-v1.json` |
+| C | `~/Desktop/Noetfield-Systems/sina-governance-SSOT` | SG | B2 sign-off on `data/regulated-term-hardstop-v1.json` |
 | D | `~/Projects/SourceA` | SourceA Worker | 7 paste inbox fixtures |
 | E | `~/Projects/noetfeld-os` | NOOS agent | Doctrine append (canonical in NOOS repo) |
 

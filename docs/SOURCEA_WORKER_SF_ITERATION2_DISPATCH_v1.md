@@ -1,7 +1,7 @@
 # SourceA Worker — Signal Factory Iteration 2 dispatch
 
 **Status:** DISPATCHED 2026-07-03  
-**Spec:** `~/Projects/sina-governance-ssot/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md`  
+**Spec:** `~/Desktop/Noetfield-Systems/sina-governance-SSOT/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md`  
 **PR #2:** CLOSED — SF skill does not belong in SG repo
 
 ## Task (SourceA Worker)

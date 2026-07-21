@@ -1,0 +1,81 @@
+{
+  "id": "P0PGR-20260716-001",
+  "created_at": "2026-07-16T21:57:00Z",
+  "lane": "SG",
+  "problem_class": "architecture",
+  "owner_agent": "sg",
+  "model_tier": "cheap",
+  "roi_score": 68,
+  "roi_reason": "Every preventable founder escalation currently leaves no trace, so the same interventions repeat and the founder stays the bottleneck. Wiring the ledger makes escalations measurable and gives the queue a ranked kill-list. Mechanical edit work, cheap tier, bounded to three files plus one receipt.",
+  "value_class": "risk_reduction",
+  "cost_limit_usd": 2.0,
+  "authority_scope": "edit",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "github_action",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": false,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_RETRY",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Founder adopted (2026-07-16, Cowork session) a Founder Exception Ledger compiled from an advisor spec: every escalation to the founder gets one logged row (what stopped, trigger, founder input, missing capability, recurrence, permanent owner, closure condition), priority = frequency x founder cost x preventability, paired guardrail metrics (founder exception rate vs unsafe autonomy/reversal rate), and a closure definition-of-done requiring receipt-verified artifacts. File is committed at ledger/founder-exception-ledger.md with status DRAFT / SUBMITTED / UNVERIFIED. Gap: nothing wires it into daily operation — no machine-appendable mirror, no agent instruction to log rows at escalation time, no read-surface registration. This packet does the wiring only; it does not claim the exception-budget system is live or enforced, and it changes no authority levels.",
+  "task": "1) Read ledger/founder-exception-ledger.md (DRAFT v1.0) in full. 2) Create ledger/founder-exception-ledger.csv as a machine-appendable mirror with a header row only, columns exactly: id,date,exception,trigger,founder_input,missing_capability,recurrence,permanent_owner,closure_condition,priority_fxcxp,status. 3) Append a short section to AGENTS.md titled 'Founder escalation logging rule': any agent that escalates a decision to the founder must first append one row to ledger/founder-exception-ledger.csv (and mirror it into the md table) — agent-authored, under 30 seconds, append-only, existing rows are never rewritten. 4) Read data/agent_read_surfaces_v1.json, then register ledger/founder-exception-ledger.md as a read surface following the file's existing entry shape; if the shape is ambiguous, do not guess — propose the entry in the PR description instead and record that choice in the receipt. 5) If data/agent_read_surfaces_v1.json was touched, run scripts/verify_agent_read_staleness_v1.sh and capture raw output. 6) Open exactly one draft PR using .github/pull_request_template.md (motor_id + task_cell + lane) containing only these changes; leave the PR unmerged. 7) Write exactly one receipt to receipts/p0pgr/ with changed_files, commands_run, raw validator output, pr_url, pass_fail computed from evidence, and next_pointer naming the candidate follow-up packet (weekly paired guardrail-metrics report). 8) Keep the ledger's DRAFT status header byte-identical — adoption or LOCK marking is reserved to the founder.",
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "draft PR only — leave it unmerged, no direct push to the default branch",
+    "ledger DRAFT status header stays intact; adoption marking is founder-only",
+    "ledger files are append-only; never rewrite or delete existing rows"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy",
+    "no merging the PR",
+    "no marking the ledger ADOPTED or LOCKED",
+    "no edits outside AGENTS.md, ledger/, data/agent_read_surfaces_v1.json, receipts/p0pgr/",
+    "no PASS based on self-report or prose-as-proof"
+  ],
+  "stop_rule": "Stop after the draft PR is open and exactly one receipt is written to receipts/p0pgr/. Metrics reporting and enforcement are separate future packets.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "pr_url",
+      "validator_output"
+    ],
+    "external_verification_required": true,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "ledger/founder-exception-ledger.md",
+    "AGENTS.md",
+    "data/agent_read_surfaces_v1.json",
+    "ledger/session-decision-ledger.md"
+  ],
+  "decision_ref": "FOUNDER-ADOPTION-20260716-COWORK-founder-exception-ledger",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

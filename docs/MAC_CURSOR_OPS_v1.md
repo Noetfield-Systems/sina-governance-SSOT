@@ -5,23 +5,23 @@
 ## Monthly audit (15 min)
 
 ```bash
-bash ~/Projects/sina-governance-ssot/scripts/repair_sourcea_worktree_v1.sh  # if sourcea_head=unknown
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_surface_v1.py
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_drift_v1.py
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_copilot_pr_template_v1.py
+bash ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/repair_sourcea_worktree_v1.sh  # if sourcea_head=unknown
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_parallel_automation_governance_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/audit_automation_surface_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/audit_automation_drift_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_copilot_pr_template_v1.py
 ```
 
 ## Weekly ROI heartbeat
 
 ```bash
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/write_roi_heartbeat_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/write_roi_heartbeat_v1.py
 ```
 
 ## Gate alignment (before promote)
 
 ```bash
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/diagnose_gate_candidate_alignment_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/diagnose_gate_candidate_alignment_v1.py
 ```
 
 Pass lines: both `ALL PASS`. Receipt auto-written to `receipts/automation-surface-audit-<timestamp>.json`.

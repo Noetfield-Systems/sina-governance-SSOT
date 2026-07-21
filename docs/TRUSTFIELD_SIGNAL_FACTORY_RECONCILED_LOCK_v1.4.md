@@ -32,7 +32,7 @@
 ## Proof
 
 ```bash
-cat ~/Projects/sina-governance-ssot/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md | head -5
+cat ~/Desktop/Noetfield-Systems/sina-governance-SSOT/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md | head -5
 ```
 
 Must show: `**Status:** LOCKED`
