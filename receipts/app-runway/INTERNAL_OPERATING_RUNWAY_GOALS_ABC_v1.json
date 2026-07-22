@@ -1,0 +1,100 @@
+{
+  "schema": "nf.internal-operating-runway.v1",
+  "gate_a": "PASS_PRODUCTION_RUNTIME_ENFORCEMENT_V1",
+  "goal_a": "goal_acae07fed90b427fb58d24",
+  "goal_b_stuck": "goal_ebc474e06c464a22bd6b68",
+  "goal_b2": {
+    "project_id": "prj_caa3e0274ce4437392119d5f",
+    "goal_id": "goal_5a559e5f1ff8404a90c954",
+    "status": "PASSED",
+    "receipt_id": "grcp_c5e79da0df46462d861043",
+    "receipt_hash": "08ed61be04c8781fee21d63b8b8321f29595af9b86dfbbd0fbf05a2258412015",
+    "child_runs": [
+      {
+        "purpose": "initial_webpage_build",
+        "run_id": "run_4315c1c464fd43af823d20",
+        "hdir_execution_id": "prj_57fc6c2546af"
+      },
+      {
+        "purpose": "repair_links_valid",
+        "run_id": "run_f22c9c257501441ba2851e",
+        "hdir_execution_id": "prj_12105a4f8d89"
+      },
+      {
+        "purpose": "staging_verify_finalize",
+        "run_id": "run_95cf43730aac4322bc4e28",
+        "hdir_execution_id": "prj_30693429e4c7"
+      }
+    ],
+    "prior_stuck_goal": "goal_ebc474e06c464a22bd6b68",
+    "repair_reason": "GoalPursuitWorkflow DO storage reset; cancelled and continued outcome as B2"
+  },
+  "goal_c": {
+    "project_id": "prj_a47ac7c1fc6a483d80bd5fdd",
+    "goal_id": "goal_0e791466584e43d19ec0dd",
+    "status": "PASSED",
+    "receipt_id": "grcp_43a390da9ec249f78a7f02",
+    "receipt_hash": "7dcce7ca0c87033f5bc9ba47f7077b5080a6b19611700e6890f731c0c1359fe1",
+    "child_runs": [
+      {
+        "purpose": "initial_webpage_build",
+        "run_id": "run_83b47bab65084cd1acdaff",
+        "hdir_execution_id": "prj_6e28ca3c232b"
+      },
+      {
+        "purpose": "repair_links_valid",
+        "run_id": "run_2a4bc9d62af74bfba0fb98",
+        "hdir_execution_id": "prj_bf7d8b4fab62"
+      },
+      {
+        "purpose": "staging_verify_finalize",
+        "run_id": "run_14e2a35d4c6143cc82a85c",
+        "hdir_execution_id": "prj_6fac92e3ef4c"
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "prompt_fidelity",
+        "status": "PASS",
+        "detail": "run_completed_with_builder",
+        "updated_at": "2026-07-22T15:06:30.779Z"
+      },
+      {
+        "id": "artifact_available",
+        "status": "PASS",
+        "detail": "index.html",
+        "updated_at": "2026-07-22T15:06:30.779Z"
+      },
+      {
+        "id": "required_sections",
+        "status": "PASS",
+        "detail": "sections_checked_in_hdir_verify",
+        "updated_at": "2026-07-22T15:06:30.779Z"
+      },
+      {
+        "id": "links_valid",
+        "status": "PASS",
+        "detail": "repaired",
+        "updated_at": "2026-07-22T15:06:30.797Z"
+      },
+      {
+        "id": "receipt_verified",
+        "status": "PASS",
+        "detail": "rcp_5f15b3d44ac4",
+        "updated_at": "2026-07-22T15:06:30.779Z"
+      },
+      {
+        "id": "staging_deployed",
+        "status": "PASS",
+        "detail": "staging_verified",
+        "updated_at": "2026-07-22T15:06:30.779Z"
+      }
+    ]
+  },
+  "promoted_shas": {
+    "hdir_main": "fdb6763c82b8f91c3871a699be9602cd42b0088e",
+    "runway_main": "3f0e6c89edf2766ac485eb04f94a17af7f3f8ffc",
+    "sg_pr77": "6e0516d0acf88e32c46f1ad236566b472864c2c6"
+  },
+  "offer": "First project free"
+}
