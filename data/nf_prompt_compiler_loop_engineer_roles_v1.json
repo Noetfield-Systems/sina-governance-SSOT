@@ -1,6 +1,6 @@
 {
   "schema": "nf.prompt-compiler-loop-engineer-roles.v1",
-  "status": "RUNTIME_ENFORCEMENT_PROVEN_V1",
+  "status": "PASS_PRODUCTION_RUNTIME_ENFORCEMENT_V1",
   "source_repo": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
   "findings_doc": "docs/specialists/PROMPT_COMPILER_AND_LOOP_ENGINEER_INDUSTRY_FINDINGS_v1.md",
   "roles": {
@@ -77,5 +77,152 @@
     "hdir_sha": "c6744b6",
     "runway_sha": "c39198d",
     "note": "Staging Kernel is the live bind for app.noetfield.com; no App production promotion required for this proof."
+  },
+  "production_proof": {
+    "gate": "PASS_PRODUCTION_RUNTIME_ENFORCEMENT_V1",
+    "email": "noetfield-internal-1784732129@example.com",
+    "project_id": "prj_98f1d83746894ed29f30b9d6",
+    "goal_id": "goal_acae07fed90b427fb58d24",
+    "status": "PASSED",
+    "receipt_id": "grcp_4ba2bff8336b4767afacf4",
+    "receipt_hash": "ece3346297c8654402b69275cfa35cb5b8dc20412439bc8af327adf78bfed250",
+    "child_runs": [
+      {
+        "run_id": "run_f216adedf0954309af50eb",
+        "purpose": "initial_webpage_build",
+        "status": "COMPLETED",
+        "hdir_execution_id": "prj_13fb3d87c7b4",
+        "receipt_id": "rcp_30fda1ae655b"
+      },
+      {
+        "run_id": "run_2f493dfbc98e44358001b5",
+        "purpose": "repair_links_valid",
+        "status": "COMPLETED",
+        "hdir_execution_id": "prj_75525aab760c",
+        "receipt_id": "rcp_fe56737a5944"
+      },
+      {
+        "run_id": "run_731ed845b6eb496789d894",
+        "purpose": "staging_verify_finalize",
+        "status": "COMPLETED",
+        "hdir_execution_id": "prj_91351a39160d",
+        "receipt_id": "rcp_5324e1d83bf7"
+      }
+    ],
+    "acceptance_results": [
+      {
+        "id": "prompt_fidelity",
+        "status": "PASS",
+        "detail": "run_completed_with_builder",
+        "updated_at": "2026-07-22T14:58:43.847Z"
+      },
+      {
+        "id": "artifact_available",
+        "status": "PASS",
+        "detail": "index.html",
+        "updated_at": "2026-07-22T14:58:43.847Z"
+      },
+      {
+        "id": "required_sections",
+        "status": "PASS",
+        "detail": "sections_checked_in_hdir_verify",
+        "updated_at": "2026-07-22T14:58:43.847Z"
+      },
+      {
+        "id": "links_valid",
+        "status": "PASS",
+        "detail": "repaired",
+        "updated_at": "2026-07-22T14:58:43.873Z"
+      },
+      {
+        "id": "receipt_verified",
+        "status": "PASS",
+        "detail": "rcp_5324e1d83bf7",
+        "updated_at": "2026-07-22T14:58:43.847Z"
+      },
+      {
+        "id": "staging_deployed",
+        "status": "PASS",
+        "detail": "staging_verified",
+        "updated_at": "2026-07-22T14:58:43.847Z"
+      }
+    ],
+    "packet_hashes": {
+      "initial_webpage_build": {
+        "hdir_execution_id": "prj_13fb3d87c7b4",
+        "run_id": "run_f216adedf0954309af50eb",
+        "prompt_packet_hash": "1b60d90f98c610eb87476b03323755ac405db26e31331f0cabc83c887224f856",
+        "prompt_packet_hashes": [
+          "1b60d90f98c610eb87476b03323755ac405db26e31331f0cabc83c887224f856"
+        ],
+        "receipt_id": "rcp_30fda1ae655b"
+      },
+      "repair_links_valid": {
+        "hdir_execution_id": "prj_75525aab760c",
+        "run_id": "run_2f493dfbc98e44358001b5",
+        "prompt_packet_hash": "edf96d5620e467d135155a28d9c6a2b9e102fcb8811802d0286e9b7ae0f562d1",
+        "prompt_packet_hashes": [
+          "edf96d5620e467d135155a28d9c6a2b9e102fcb8811802d0286e9b7ae0f562d1"
+        ],
+        "receipt_id": "rcp_fe56737a5944"
+      },
+      "staging_verify_finalize": {
+        "hdir_execution_id": "prj_91351a39160d",
+        "run_id": "run_731ed845b6eb496789d894",
+        "prompt_packet_hash": "55f63131b843dcec047f1968eca466ce532384cd8a2b1aa094868d0dd61502f6",
+        "prompt_packet_hashes": [
+          "55f63131b843dcec047f1968eca466ce532384cd8a2b1aa094868d0dd61502f6"
+        ],
+        "receipt_id": "rcp_5324e1d83bf7"
+      }
+    },
+    "packet_hash_initial": "1b60d90f98c610eb87476b03323755ac405db26e31331f0cabc83c887224f856",
+    "packet_hash_repair": "edf96d5620e467d135155a28d9c6a2b9e102fcb8811802d0286e9b7ae0f562d1",
+    "packet_hashes_distinct": true,
+    "pause_resume_events": [
+      {
+        "event_id": "gev_82d92b01f3de42839f878f",
+        "goal_id": "goal_acae07fed90b427fb58d24",
+        "sequence": 3,
+        "type": "GOAL_PAUSED",
+        "timestamp": "2026-07-22T14:55:48.666Z",
+        "message": "paused",
+        "metadata": {}
+      },
+      {
+        "event_id": "gev_b2a984ed4096472481eb21",
+        "goal_id": "goal_acae07fed90b427fb58d24",
+        "sequence": 4,
+        "type": "GOAL_RESUMED",
+        "timestamp": "2026-07-22T14:55:52.790Z",
+        "message": "resumed",
+        "metadata": {}
+      }
+    ],
+    "loop_engineer_bound": true,
+    "reauth_status": "PASSED",
+    "reauth_receipt_id": "grcp_4ba2bff8336b4767afacf4",
+    "promoted_shas": {
+      "hdir_main": "fdb6763c82b8f91c3871a699be9602cd42b0088e",
+      "runway_main": "3f0e6c89edf2766ac485eb04f94a17af7f3f8ffc",
+      "sg_pr77": "6e0516d0acf88e32c46f1ad236566b472864c2c6"
+    },
+    "artifact_candidates": [
+      "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_f216adedf0954309af50eb/artifacts/index.html",
+      "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_2f493dfbc98e44358001b5/artifacts/index.html",
+      "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_731ed845b6eb496789d894/artifacts/index.html"
+    ],
+    "checks": {
+      "1_new_goal_after_promote": true,
+      "2_packet_hash_on_receipt": true,
+      "3_intentional_failed_check": true,
+      "4_distinct_repair_packet": true,
+      "5_pause_resume": true,
+      "6_artifact_url": true,
+      "7_receipt_after_reauth": true,
+      "8_passed": true,
+      "loop_engineer_bound": true
+    },
+    "all_pass": true
   }
 }
