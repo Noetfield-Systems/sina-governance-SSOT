@@ -96,7 +96,7 @@ After each deploy, this project writes proof files at:
 
 - `https://noetfield-runway-standalone.pages.dev/verifier.json`
 - `https://noetfield-runway-standalone.pages.dev/verifier.txt`
-- `https://noetfield-runway-standalone.pages.dev/verifier.html`
+- `https://noetfield-runway-standalone.pages.dev/verifier`
 
 It contains:
 
@@ -112,7 +112,26 @@ Use these commands to confirm they are reachable:
 ```sh
 curl -fsSL "https://noetfield-runway-standalone.pages.dev/verifier.json" | jq
 curl -fsSL "https://noetfield-runway-standalone.pages.dev/verifier.txt"
-curl -fsSL "https://noetfield-runway-standalone.pages.dev/verifier.html"
+curl -fsSL "https://noetfield-runway-standalone.pages.dev/verifier"
+```
+
+## Conversion endpoint checks
+
+The lead capture form now posts to `/lead` and returns JSON with a generated `leadId`.
+
+After successful lead submit, users are redirected to `/thank-you` with plan/usecase context so the funnel is complete without dead-ends.
+
+`/thank-you` and form-confirmation route:
+
+```sh
+curl -sS https://noetfield-runway-standalone.pages.dev/thank-you
+```
+
+```sh
+curl -i -X GET https://noetfield-runway-standalone.pages.dev/lead
+curl -i -X POST https://noetfield-runway-standalone.pages.dev/lead \
+  -H 'content-type: application/json' \
+  -d '{"email":"buyer@acme.com","company":"Acme","usecase":"decision-support","goal":"Pilot launch"}'
 ```
 
 ## Reuse for other ventures

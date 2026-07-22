@@ -28,6 +28,148 @@
   const runLatency = document.getElementById("runLatency");
   const copyReceipt = document.getElementById("copyReceipt");
   const copyReceiptHint = document.getElementById("copyReceiptHint");
+  const leadForm = document.getElementById("leadCaptureForm");
+  const leadStatus = document.getElementById("leadStatus");
+  const stickyCta = document.getElementById("stickyCta");
+  const urgencyBanner = document.getElementById("urgencyBanner");
+  const trackEvents = Array.from(document.querySelectorAll("[data-track-event]"));
+  const bootstrapNotice = document.getElementById("landingBootstrapNotice");
+
+  const statusTargets = {
+    statusText,
+    scenarioSummary,
+    scenarioPain,
+    scenarioSolution,
+    scenarioTarget,
+    scenarioCost,
+    scenarioRetries,
+    scenarioTokens,
+    scenarioCalls,
+    scenarioRisk,
+    scenarioFallback,
+    trustLine,
+    runState,
+    runNodes,
+    runChecksPassed,
+    runRetriesUsed,
+    runConfidence,
+    runLatency,
+    receiptBody,
+    snapshotLine,
+    runIdBadge,
+    copyReceipt,
+    copyReceiptHint
+  };
+
+  function getStreamEntryCount() {
+    if (!streamRoot) {
+      return 0;
+    }
+
+    return streamRoot.querySelectorAll(".stream-entry").length;
+  }
+
+
+  function ensurePageRootVisible() {
+    const marker = document.getElementById("landingFatalMessage");
+    if (marker) {
+      return marker;
+    }
+
+    const fallback = document.createElement("div");
+    fallback.id = "landingFatalMessage";
+    fallback.style.position = "fixed";
+    fallback.style.left = "0.75rem";
+    fallback.style.right = "0.75rem";
+    fallback.style.top = "0.75rem";
+    fallback.style.zIndex = "9999";
+    fallback.style.borderRadius = "0.7rem";
+    fallback.style.padding = "0.8rem 1rem";
+    fallback.style.background = "rgba(38, 14, 22, 0.96)";
+    fallback.style.color = "#ffd6dc";
+    fallback.style.border = "1px solid rgba(255, 134, 162, 0.55)";
+    fallback.style.fontFamily = '"Manrope", Arial, sans-serif';
+    fallback.style.fontSize = "0.86rem";
+    fallback.style.display = "none";
+    fallback.textContent = "";
+    const shell = document.body || document.documentElement;
+    if (shell) {
+      if (typeof shell.prepend === "function") {
+        shell.prepend(fallback);
+      } else if (typeof shell.insertBefore === "function" && shell.firstChild) {
+        shell.insertBefore(fallback, shell.firstChild);
+      } else if (typeof shell.appendChild === "function") {
+        shell.appendChild(fallback);
+      }
+    }
+    return fallback;
+  }
+
+  const landingFatalMessage = ensurePageRootVisible();
+
+  function showFatalError(message, detail) {
+    if (!landingFatalMessage) {
+      return;
+    }
+
+    landingFatalMessage.textContent = `${message}${detail ? `: ${String(detail)}` : ""}`;
+    landingFatalMessage.style.display = "block";
+  }
+
+  function clearFatalError() {
+    if (landingFatalMessage) {
+      landingFatalMessage.style.display = "none";
+      landingFatalMessage.textContent = "";
+    }
+  }
+
+  function hideBootstrapNotice() {
+    if (bootstrapNotice) {
+      bootstrapNotice.classList.add("hidden");
+    }
+  }
+
+  function setText(node, value) {
+    if (node) {
+      node.textContent = value;
+    }
+  }
+
+  function setClass(node, className, add = true) {
+    if (!node || !node.classList) {
+      return;
+    }
+
+    if (add) {
+      node.classList.add(className);
+      return;
+    }
+
+    node.classList.remove(className);
+  }
+
+  function safeStyle(node, prop, value) {
+    if (!node || !node.style) {
+      return;
+    }
+
+    node.style[prop] = value;
+  }
+
+  function renderUrgencyBanner() {
+    if (!urgencyBanner) {
+      return;
+    }
+
+    const day = new Date().toISOString().slice(0, 10);
+    const cycle = Date.now() % 86400000;
+    const urgencyMessage =
+      cycle > 0
+        ? `Promo offer live today ${day}: priority pilot slots remaining`
+        : "Promo offer active: launch pilot slots refreshed daily.";
+
+    setText(urgencyBanner, urgencyMessage);
+  }
 
   const scenarioFeed = {
     decision: {
@@ -508,11 +650,15 @@
 
     const normalized = normalizeMode(mode);
     const modeText = normalized === "live" ? "LIVE" : normalized === "offline" ? "OFFLINE" : "DEMO";
-    runwayModeBadge.textContent = modeText;
+    setText(runwayModeBadge, modeText);
 
-    runwayModeBadge.classList.remove("mode-live", "mode-demo", "mode-offline");
-    runwayModeBadge.classList.add(
-      modeText === "LIVE" ? "mode-live" : modeText === "OFFLINE" ? "mode-offline" : "mode-demo"
+    setClass(runwayModeBadge, "mode-live", false);
+    setClass(runwayModeBadge, "mode-demo", false);
+    setClass(runwayModeBadge, "mode-offline", false);
+    setClass(
+      runwayModeBadge,
+      modeText === "LIVE" ? "mode-live" : modeText === "OFFLINE" ? "mode-offline" : "mode-demo",
+      true
     );
   }
 
@@ -630,10 +776,8 @@
   }
 
   function setStatus(message, tone = "ok") {
-    statusText.textContent = message;
-    if (runState) {
-      runState.textContent = message;
-    }
+    setText(statusText, message);
+    setText(runState, message);
 
     const toneColor =
       tone === "ok"
@@ -642,8 +786,10 @@
           ? "var(--warning)"
           : "var(--bad)";
 
-    statusDot.style.background = toneColor;
-    statusDot.style.boxShadow = `0 0 12px ${toneColor}`;
+    if (statusDot) {
+      safeStyle(statusDot, "background", toneColor);
+      safeStyle(statusDot, "boxShadow", `0 0 12px ${toneColor}`);
+    }
   }
 
   function emitRunEvent(detail) {
@@ -672,6 +818,10 @@
   }
 
   function createEntry(entry, index, total, startMs) {
+    if (!streamRoot) {
+      return;
+    }
+
     if (streamRoot.classList.contains("loading")) {
       const skeleton = streamRoot.querySelector(".stream-skeleton");
       if (skeleton) {
@@ -939,20 +1089,27 @@
     };
 
     const serializedReceipt = JSON.stringify(finalReceipt, null, 2);
-    receiptBody.classList.add("receipt-fade");
+    if (receiptBody) {
+      receiptBody.classList.add("receipt-fade");
+    }
     setTimeout(() => {
-      receiptBody.classList.add("visible");
+      if (receiptBody) {
+        receiptBody.classList.add("visible");
+      }
     }, 60);
-    receiptBody.textContent = serializedReceipt;
+    setText(receiptBody, serializedReceipt);
     latestReceiptText = serializedReceipt;
-    snapshotLine.textContent = JSON.stringify({
-      runId,
-      timeline_ids: stepTrace.map((entry) => entry.timeline_id),
-      result: outcomeSummary.result,
-      costEstimated: outcomeSummary.costEstimated,
-      costActual: outcomeSummary.costActual,
-      artifact: outcomeSummary.signed_receipt_id
-    });
+    setText(
+      snapshotLine,
+      JSON.stringify({
+        runId,
+        timeline_ids: stepTrace.map((entry) => entry.timeline_id),
+        result: outcomeSummary.result,
+        costEstimated: outcomeSummary.costEstimated,
+        costActual: outcomeSummary.costActual,
+        artifact: outcomeSummary.signed_receipt_id
+      })
+    );
     return finalReceipt;
   }
 
@@ -1214,74 +1371,64 @@
 
     if (mode === "live") {
       if (runtimeConnected) {
-        trustLine.textContent = "Live backend contract is connected. This UI reflects same runway job state in realtime.";
+        setText(
+          trustLine,
+          "Live backend contract is connected. This UI reflects same runway job state in realtime."
+        );
       } else {
-        trustLine.textContent =
-          "Live backend unavailable in this session. OFFLINE mode is active; live state is not available.";
+        setText(
+          trustLine,
+          "Live backend unavailable in this session. OFFLINE mode is active; live state is not available."
+        );
       }
 
       return;
     }
 
     if (mode === "offline") {
-      trustLine.textContent =
+      setText(
+        trustLine,
         String(context?.requestedMode === "live")
           ? "Live backend unavailable. OFFLINE mode is active; no live authority is available."
-          : "OFFLINE mode is active.";
+          : "OFFLINE mode is active."
+      );
       return;
     }
 
-    trustLine.textContent = "DEMO mode: deterministic local replay is simulated in this browser session.";
+    setText(trustLine, "DEMO mode: deterministic local replay is simulated in this browser session.");
   }
 
   function setRunKpiState(progress, total, checks, retryCount, startTime, profile, state) {
-    if (runNodes) {
-      runNodes.textContent = `${progress} / ${total}`;
-    }
+    setText(runNodes, `${progress} / ${total}`);
 
-    if (runChecksPassed) {
-      const passedCount = checks.passed || 0;
-      runChecksPassed.textContent = `${passedCount} / ${checks.total || total}`;
-    }
+    const passedCount = checks.passed || 0;
+    setText(runChecksPassed, `${passedCount} / ${checks.total || total}`);
 
-    if (runRetriesUsed) {
-      runRetriesUsed.textContent = String(retryCount || 0);
-    }
-
-    if (runLatency) {
-      runLatency.textContent = formatMs(Date.now() - startTime);
-    }
+    setText(runRetriesUsed, String(retryCount || 0));
+    setText(runLatency, formatMs(Date.now() - startTime));
 
     if (runConfidence && profile) {
       const reliability = computeReliability(profile, checks, Math.max(0, (Date.now() - startTime) / 1000));
-      runConfidence.textContent = `${reliability.achieved.toFixed(1)}%`;
+      setText(runConfidence, `${reliability.achieved.toFixed(1)}%`);
     }
 
     if (state && runState) {
-      runState.textContent = state;
+      setText(runState, state);
     }
   }
 
   function setMetaFromScenario(profile, runtimeContext = null) {
-    if (scenarioSummary) {
-      scenarioSummary.textContent = profile.summary;
-    }
+    setText(scenarioSummary, profile.summary);
+    setText(scenarioPain, profile.pain);
+    setText(scenarioSolution, profile.solution);
 
-    if (scenarioPain) {
-      scenarioPain.textContent = profile.pain;
-    }
-
-    if (scenarioSolution) {
-      scenarioSolution.textContent = profile.solution;
-    }
-
-    scenarioTarget.textContent = `${Number(profile.reliability_target || 0).toFixed(1)}%`;
-    scenarioCost.textContent = formatCurrency(profile.cost_cap_usd || 0);
-    scenarioRetries.textContent = String(profile.expected_retries || 0);
-    scenarioTokens.textContent = String(profile.expected_tokens || 0);
-    scenarioCalls.textContent = String(profile.expected_model_calls || 0);
-    scenarioRisk.textContent = profile.risk_envelope || "--";
-    scenarioFallback.textContent = profile.fallback_policy || "--";
+    setText(scenarioTarget, `${Number(profile.reliability_target || 0).toFixed(1)}%`);
+    setText(scenarioCost, formatCurrency(profile.cost_cap_usd || 0));
+    setText(scenarioRetries, String(profile.expected_retries || 0));
+    setText(scenarioTokens, String(profile.expected_tokens || 0));
+    setText(scenarioCalls, String(profile.expected_model_calls || 0));
+    setText(scenarioRisk, profile.risk_envelope || "--");
+    setText(scenarioFallback, profile.fallback_policy || "--");
 
     if (trustLine) {
       const resolvedMode = runtimeContext?.requestedMode || resolveModeRequested();
@@ -1377,8 +1524,12 @@
     }
 
     running = true;
-    runButton.disabled = true;
-    resetButton.disabled = true;
+    if (runButton) {
+      runButton.disabled = true;
+    }
+    if (resetButton) {
+      resetButton.disabled = true;
+    }
 
     const baseline = scenarioFeed[activeScenario] || scenarioFeed.decision;
     const executionContext = getExecutionContext();
@@ -1431,11 +1582,15 @@
     let runId = `NR-${startTime}`;
 
     clearLogs();
-    streamRoot.classList.add("loading");
+    if (streamRoot) {
+      streamRoot.classList.add("loading");
+    }
     const streamSkeleton = document.createElement("p");
     streamSkeleton.className = "stream-skeleton";
     streamSkeleton.textContent = "Initializing deterministic runway...";
-    streamRoot.appendChild(streamSkeleton);
+    if (streamRoot) {
+      streamRoot.appendChild(streamSkeleton);
+    }
     setStatus(
       runMode === "live"
         ? "Starting live runway..."
@@ -1444,8 +1599,8 @@
           : "Starting demo runway...",
       runMode === "offline" ? "warn" : "ok"
     );
-    runIdBadge.textContent = `Run ID: ${runId}`;
-    snapshotLine.textContent = "";
+    setText(runIdBadge, `Run ID: ${runId}`);
+    setText(snapshotLine, "");
     setScenarioForRunMode(runMode, runtimeContext);
 
     emitRunEvent({
@@ -1527,20 +1682,19 @@
             snapshot = nextSnapshot;
             elapsedMs = Number(nextSnapshot.elapsed_ms || nextSnapshot.elapsedMs || elapsedMs || 0);
             if (runNodes) {
-              runNodes.textContent = `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || 0}`;
+              setText(runNodes, `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || 0}`);
             }
-            if (runChecksPassed) {
-              runChecksPassed.textContent = `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || liveTimeline.length || 0}`;
-            }
-            if (runRetriesUsed) {
-              runRetriesUsed.textContent = String(snapshot.retries || 0);
-            }
+            setText(
+              runChecksPassed,
+              `${snapshot.jobs_completed || 0} / ${snapshot.jobs_total || liveTimeline.length || 0}`
+            );
+            setText(runRetriesUsed, String(snapshot.retries || 0));
             if (runConfidence && scenarioToRun) {
               const reliability = computeReliability(scenarioToRun, countTimelineStatus(liveTimeline), (Date.now() - startTime) / 1000);
-              runConfidence.textContent = `${reliability.achieved.toFixed(1)}%`;
+              setText(runConfidence, `${reliability.achieved.toFixed(1)}%`);
             }
             if (runLatency) {
-              runLatency.textContent = formatMs(Date.now() - startTime);
+              setText(runLatency, formatMs(Date.now() - startTime));
             }
 
             if (snapshot.status === "FAILED") {
@@ -1556,7 +1710,7 @@
         });
 
         runId = liveResult.runId || runId;
-        runIdBadge.textContent = `Run ID: ${runId}`;
+    setText(runIdBadge, `Run ID: ${runId}`);
         sourceInfo = liveResult.source || sourceInfo;
         scenarioToRun = liveResult.profile || scenarioToRun;
         setMetaFromScenario(scenarioToRun, { ...runtimeContext, requestedMode: runMode, runId, mode: "live" });
@@ -1615,24 +1769,36 @@
           null,
           2
         );
-        receiptBody.classList.add("receipt-fade");
-        setTimeout(() => receiptBody.classList.add("visible"), 60);
-        receiptBody.textContent = latestReceiptText;
-        snapshotLine.textContent = JSON.stringify({
-          runId,
-          source: sourceInfo,
-          mode: modeLabel("live"),
-          contract: runwayConfig.contractVersion || "runway.v1",
-          contractVersions: runtimeContext?.contractVersions || null,
-          result: receiptToRender.result,
-          timeline_ids: (receiptToRender.timeline || []).map((entry) => entry.timeline_id),
-          costEstimated: receiptToRender.costEstimated,
-          costActual: receiptToRender.costActual,
-          artifact_url: receiptToRender.outputs?.artifact_url || null,
-          outcome: receiptToRender.result,
-          verified_by_route: Boolean(receiptToRender.verification),
-          verification: receiptToRender.verification || null
-        });
+    if (receiptBody) {
+      receiptBody.classList.add("receipt-fade");
+    }
+    setTimeout(() => {
+      if (receiptBody) {
+        receiptBody.classList.add("visible");
+      }
+    }, 60);
+    setText(
+      receiptBody,
+      latestReceiptText
+    );
+    setText(
+      snapshotLine,
+      JSON.stringify({
+        runId,
+        source: sourceInfo,
+        mode: modeLabel("live"),
+        contract: runwayConfig.contractVersion || "runway.v1",
+        contractVersions: runtimeContext?.contractVersions || null,
+        result: receiptToRender.result,
+        timeline_ids: (receiptToRender.timeline || []).map((entry) => entry.timeline_id),
+        costEstimated: receiptToRender.costEstimated,
+        costActual: receiptToRender.costActual,
+        artifact_url: receiptToRender.outputs?.artifact_url || null,
+        outcome: receiptToRender.result,
+        verified_by_route: Boolean(receiptToRender.verification),
+        verification: receiptToRender.verification || null
+      })
+    );
 
         const outcome = receiptToRender.result;
         if (outcome === "PASS") {
@@ -1681,13 +1847,14 @@
             elapsedMs: Number.isFinite(Number(step.elapsedMs)) ? Number(step.elapsedMs) : 700,
             recovered: step.recovered === true
           };
-          createEntry(normalized, streamRoot.querySelectorAll(".stream-entry").length, scenarioToRun.steps.length, startTime);
+          const entryIndex = getStreamEntryCount();
+          createEntry(normalized, entryIndex, scenarioToRun.steps.length, startTime);
           emitRunEvent({
             runId,
             scenarioId: scenarioToRun.id,
             phase: normalized.phase,
             status: eventStatusFromStep(normalized.status, normalized.recovered),
-            stepIndex: streamRoot.querySelectorAll(".stream-entry").length,
+            stepIndex: entryIndex,
             elapsedMs: normalized.elapsedMs,
             cost: Number(((scenarioToRun.cost_cap_usd || 0) / Math.max(scenarioToRun.steps.length, 1)).toFixed(4))
           });
@@ -1700,7 +1867,7 @@
 
       scenarioToRun = demoResult.profile || scenarioToRun || baseline;
       runId = demoResult.runId || runId;
-      runIdBadge.textContent = `Run ID: ${runId}`;
+      setText(runIdBadge, `Run ID: ${runId}`);
       const endpoint = runButton.dataset.endpoint;
       if (endpoint) {
         sourceInfo = "remote-api";
@@ -1789,9 +1956,7 @@
       );
 
       latestReceiptText = JSON.stringify(finalized, null, 2);
-      if (receiptBody) {
-        receiptBody.textContent = latestReceiptText;
-      }
+      setText(receiptBody, latestReceiptText);
 
       if (failCount > 0) {
         setStatus("Completed with failures", "bad");
@@ -1801,15 +1966,18 @@
         setStatus("Completed", "ok");
       }
 
-      snapshotLine.textContent = JSON.stringify({
-        runId,
-        timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
-        result: finalized.receipt.result,
-        costEstimated: finalized.receipt.costEstimated,
-        costActual: finalized.receipt.costActual,
-        source: sourceInfo,
-        mode: runMode
-      });
+      setText(
+        snapshotLine,
+        JSON.stringify({
+          runId,
+          timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+          result: finalized.receipt.result,
+          costEstimated: finalized.receipt.costEstimated,
+          costActual: finalized.receipt.costActual,
+          source: sourceInfo,
+          mode: runMode
+        })
+      );
 
       emitRunEvent({
         runId,
@@ -1858,20 +2026,20 @@
         );
 
         latestReceiptText = JSON.stringify(finalized, null, 2);
-        if (receiptBody) {
-          receiptBody.textContent = latestReceiptText;
-        }
-
-        snapshotLine.textContent = JSON.stringify({
-          runId,
-          timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
-          result: finalized.receipt.result,
-          costEstimated: finalized.receipt.costEstimated,
-          costActual: finalized.receipt.costActual,
-          source: sourceInfo,
-          mode: modeLabel(runMode),
-          offline: true
-        });
+        setText(receiptBody, latestReceiptText);
+        setText(
+          snapshotLine,
+          JSON.stringify({
+            runId,
+            timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+            result: finalized.receipt.result,
+            costEstimated: finalized.receipt.costEstimated,
+            costActual: finalized.receipt.costActual,
+            source: sourceInfo,
+            mode: modeLabel(runMode),
+            offline: true
+          })
+        );
 
         setStatus("Live backend unavailable. Run blocked in OFFLINE mode.", "bad");
         emitRunEvent({
@@ -1982,19 +2150,19 @@
         sourceInfo
       );
       latestReceiptText = JSON.stringify(finalized, null, 2);
-      if (receiptBody) {
-        receiptBody.textContent = latestReceiptText;
-      }
-
-      snapshotLine.textContent = JSON.stringify({
-        runId,
-        timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
-        result: finalized.receipt.result,
-        costEstimated: finalized.receipt.costEstimated,
-        costActual: finalized.receipt.costActual,
-        source: sourceInfo,
-        mode: modeLabel(runMode)
-      });
+      setText(receiptBody, latestReceiptText);
+      setText(
+        snapshotLine,
+        JSON.stringify({
+          runId,
+          timeline_ids: finalized.receipt.timeline.map((entry) => entry.timeline_id),
+          result: finalized.receipt.result,
+          costEstimated: finalized.receipt.costEstimated,
+          costActual: finalized.receipt.costActual,
+          source: sourceInfo,
+          mode: modeLabel(runMode)
+        })
+      );
 
       setStatus("Fallback completed", "warn");
       emitRunEvent({
@@ -2022,33 +2190,45 @@
         baseline,
         finalized?.receipt?.result || "Fallback complete"
       );
-    } finally {
+  } finally {
       running = false;
-      runButton.disabled = false;
-      resetButton.disabled = false;
-      streamRoot.classList.remove("loading");
+      if (runButton) {
+        runButton.disabled = false;
+      }
+      if (resetButton) {
+        resetButton.disabled = false;
+      }
+      if (streamRoot) {
+        streamRoot.classList.remove("loading");
+      }
     }
   }
 
   function clearLogs() {
-    streamRoot.classList.remove("loading");
-    streamRoot.textContent = "";
-    receiptBody.textContent = "No active run. Start a scenario to render a signed output proof.";
-    receiptBody.classList.remove("receipt-fade", "visible");
-    snapshotLine.textContent = "";
+    if (streamRoot) {
+      streamRoot.classList.remove("loading");
+      streamRoot.textContent = "";
+    }
+
+    setText(receiptBody, "No active run. Start a scenario to render a signed output proof.");
+    if (receiptBody) {
+      receiptBody.classList.remove("receipt-fade", "visible");
+    }
+
+    setText(snapshotLine, "");
     latestReceiptText = "";
-    runIdBadge.textContent = "Run ID: --";
+    setText(runIdBadge, "Run ID: --");
     setStatus("Ready", "ok");
 
-    runNodes.textContent = "0 / 0";
-    runChecksPassed.textContent = "0 / 0";
-    runRetriesUsed.textContent = "0";
-    runLatency.textContent = "--ms";
-    runConfidence.textContent = "--%";
+    setText(runNodes, "0 / 0");
+    setText(runChecksPassed, "0 / 0");
+    setText(runRetriesUsed, "0");
+    setText(runLatency, "--ms");
+    setText(runConfidence, "--%");
 
     if (copyReceiptHint) {
-      copyReceiptHint.textContent = "";
-      copyReceiptHint.style.color = "";
+      setText(copyReceiptHint, "");
+      safeStyle(copyReceiptHint, "color", "");
     }
   }
 
@@ -2057,25 +2237,133 @@
       return;
     }
 
-    copyReceiptHint.textContent = message;
-    copyReceiptHint.style.color =
+    setText(copyReceiptHint, message);
+    safeStyle(
+      copyReceiptHint,
+      "color",
       tone === "bad"
         ? "#ff8c9f"
         : tone === "warn"
           ? "#ffce7a"
-          : "#95ffbc";
+          : "#95ffbc"
+    );
 
     setTimeout(() => {
       if (copyReceiptHint.textContent === message) {
-        copyReceiptHint.textContent = "";
-        copyReceiptHint.style.color = "";
+        setText(copyReceiptHint, "");
+        safeStyle(copyReceiptHint, "color", "");
       }
     }, 1600);
+  }
+
+  function readUtmMeta() {
+    const query = new URLSearchParams(window.location.search || "");
+    return {
+      utm_source: query.get("utm_source") || "",
+      utm_medium: query.get("utm_medium") || "",
+      utm_campaign: query.get("utm_campaign") || "",
+      utm_term: query.get("utm_term") || "",
+      utm_content: query.get("utm_content") || ""
+    };
+  }
+
+  function initScrollDepthTracking() {
+    const thresholds = [25, 50, 75, 90];
+    const maxTracked = new Set();
+
+    const onScroll = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) {
+        return;
+      }
+
+      const ratio = (window.scrollY / docHeight) * 100;
+      thresholds.forEach((threshold) => {
+        if (!maxTracked.has(threshold) && ratio >= threshold) {
+          maxTracked.add(threshold);
+          trackLandingEvent("scroll_depth", { threshold: `${threshold}%`, px: Math.round(window.scrollY) });
+        }
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function initSectionTracking() {
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    if (typeof IntersectionObserver === "undefined" || sections.length === 0) {
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          trackLandingEvent("section_view", { section: id || "unknown" });
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach((section) => io.observe(section));
+  }
+
+  function trackLandingEvent(eventName, payload = {}) {
+    const record = {
+      event: eventName,
+      at: new Date().toISOString(),
+      path: window.location.pathname,
+      ...payload
+    };
+
+    if (typeof window !== "undefined") {
+      const events = window.__landingEvents || [];
+      events.push(record);
+      window.__landingEvents = events;
+      if (events.length > 40) {
+        window.__landingEvents = events.slice(-40);
+      }
+    }
+
+    try {
+      const key = "runway_landing_events";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      const merged = Array.isArray(existing) ? existing : [];
+      merged.push(record);
+      localStorage.setItem(key, JSON.stringify(merged.slice(-60)));
+    } catch (error) {
+      // local persistence optional and best-effort
+    }
+  }
+
+  function setLeadCaptureStatus(message, tone = "ok") {
+    if (!leadStatus) {
+      return;
+    }
+
+    setText(leadStatus, message);
+    safeStyle(
+      leadStatus,
+      "color",
+      tone === "bad" ? "#ff8c9f" : tone === "warn" ? "#ffce7a" : "#9cf4c9"
+    );
+    setTimeout(() => {
+      if (leadStatus.textContent === message) {
+        setText(leadStatus, "");
+        safeStyle(leadStatus, "color", "");
+      }
+    }, 2400);
   }
 
   function setRevealAnimation() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
+      revealTargets.forEach((el) => el.classList.add("show"));
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
       revealTargets.forEach((el) => el.classList.add("show"));
       return;
     }
@@ -2092,8 +2380,12 @@
     revealTargets.forEach((target) => io.observe(target));
   }
 
-  runButton.addEventListener("click", runScenario);
-  resetButton.addEventListener("click", clearLogs);
+  if (runButton) {
+    runButton.addEventListener("click", runScenario);
+  }
+  if (resetButton) {
+    resetButton.addEventListener("click", clearLogs);
+  }
 
   if (copyReceipt) {
     copyReceipt.addEventListener("click", async () => {
@@ -2117,9 +2409,127 @@
     });
   });
 
+  trackEvents.forEach((el) => {
+    const eventName = el.getAttribute("data-track-event");
+    if (!eventName) {
+      return;
+    }
+
+    el.addEventListener("click", () => {
+      trackLandingEvent(eventName, {
+        anchor: el.getAttribute("href") || "",
+        text: (el.textContent || "").trim()
+      });
+    });
+  });
+
+  trackLandingEvent("page_view", {
+    source: "landing",
+    theme: "runway-v1",
+    utm: readUtmMeta()
+  });
+
+  if (leadForm) {
+    leadForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(leadForm);
+      const data = Object.fromEntries(formData.entries());
+      if (!data.email || !data.company || !data.usecase) {
+        setLeadCaptureStatus("Please complete the required fields.", "warn");
+        return;
+      }
+
+      const payload = {
+        ...data,
+        utm: readUtmMeta(),
+        source: "noetfield-runway-standalone",
+        captured_at: new Date().toISOString(),
+        page: window.location.pathname
+      };
+
+      trackLandingEvent("lead_submit", payload);
+
+      const endpoint = leadForm.dataset.endpoint || "";
+      if (endpoint) {
+        try {
+          const resp = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!resp.ok) {
+            const detail = await resp.text();
+            throw new Error(`status_${resp.status}:${detail || "non_ok"}`);
+          }
+
+          let leadPayload = null;
+          try {
+            leadPayload = await resp.json();
+          } catch (_) {
+            leadPayload = null;
+          }
+
+          const leadId = leadPayload && leadPayload.leadId ? leadPayload.leadId : "";
+          const leadUsecase = data.usecase || "";
+          const planHint = leadUsecase === "rfp" ? "Growth" : leadUsecase === "web" ? "Growth" : "Starter";
+          const nextPath =
+            leadPayload && leadPayload.next && leadPayload.next.nextPage ? leadPayload.next.nextPage : "/thank-you";
+          const query = new URLSearchParams({
+            leadId: leadId,
+            plan: planHint,
+            usecase: leadUsecase
+          });
+          window.location.href = `${nextPath}?${query.toString()}`;
+          return;
+        } catch (error) {
+          setLeadCaptureStatus(`Lead capture temporary offline: ${String(error?.message || error)}`, "warn");
+        }
+      } else {
+        setLeadCaptureStatus("Thanks — we captured your request. We will follow up manually.");
+        leadForm.reset();
+      }
+    });
+  }
+
+  if (stickyCta) {
+    let lastKnownY = 0;
+    let raf = 0;
+    window.addEventListener("scroll", () => {
+      if (raf) {
+        return;
+      }
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        const direction = window.scrollY > lastKnownY ? "down" : "up";
+        lastKnownY = window.scrollY;
+        trackLandingEvent("sticky_scroll", { direction, y: Math.round(window.scrollY) });
+      });
+    });
+  }
+
+  window.addEventListener("error", (event) => {
+    const details = event && (event.message || event.error || event.reason || "Runtime error");
+    showFatalError("Landing script encountered an error", details);
+    setTimeout(clearFatalError, 20000);
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    const details = event && (event.reason || event.message || "Unhandled promise rejection");
+    showFatalError("Landing script encountered an async error", details);
+    setTimeout(clearFatalError, 20000);
+  });
+
   setRevealAnimation();
+  renderUrgencyBanner();
+  initScrollDepthTracking();
+  initSectionTracking();
 
   (async () => {
+    clearFatalError();
+    hideBootstrapNotice();
     const requestedMode = resolveModeRequested();
     const runtimeContext = await fetchRunwayRuntimeContract(requestedMode).catch(() => null);
     const runtimeConnected = runtimeContext && hasLiveBackendConnection(runtimeContext.liveBackendConnected);
@@ -2145,5 +2555,8 @@
     setMetaFromScenario(scenarioFeed[activeScenario], seedContext);
     applyModeBadge(startupMode);
     clearLogs();
-  })();
+  })().catch(() => {
+    hideBootstrapNotice();
+    // Keep content visible and non-fatal even if startup checks fail.
+  });
 })();
