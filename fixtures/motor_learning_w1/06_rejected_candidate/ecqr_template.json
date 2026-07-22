@@ -1,0 +1,33 @@
+{
+  "decision": "REJECTED",
+  "candidate_id": "auto",
+  "reviewer": "test_reviewer:reject",
+  "rationale": "Founder/fixture rejects despite shadow \u2014 policy preference",
+  "evidence_reviewed": [
+    "evt-001",
+    "evt-002",
+    "evt-003",
+    "evt-004"
+  ],
+  "shadow_result_ref": "auto",
+  "confidence_before": 0.0,
+  "confidence_after": 0.0,
+  "affected_loops": [
+    "motor_learning_organ_v1"
+  ],
+  "applicable_runways": [
+    "Software Repair"
+  ],
+  "repositories": [
+    "sina-governance-SSOT"
+  ],
+  "effective_at": "2026-07-10T12:00:00Z",
+  "expires_at": null,
+  "supersedes": null,
+  "policy_versions": {
+    "organ": "NF-MOTOR-LEARNING-ORGAN-V1",
+    "w1": "1.0.0"
+  },
+  "schema": "nf_motor_learning_ecqr_template_v1",
+  "kind": "ECQR_TEMPLATE"
+}

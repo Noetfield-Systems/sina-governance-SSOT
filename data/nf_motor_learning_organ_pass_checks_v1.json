@@ -1,0 +1,113 @@
+{
+  "schema": "nf_motor_learning_organ_pass_checks_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "version": "1.2.0",
+  "saved_at": "2026-07-20T09:10:00Z",
+  "verdict_when_all_pass": "PASS_MOTOR_LEARNING_ORGAN_V1",
+  "checks": [
+    {
+      "check_id": "MLO-01_shadow_prior_load",
+      "description": "Motor can load a shadow policy snapshot derived from real job receipts",
+      "requires": {
+        "min_receipt_samples": 30,
+        "snapshot_status": "shadow",
+        "consumer": "packages/runway-core/src/routing/roi"
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-shadow.json",
+      "status": "PASS_FIXTURE_W1"
+    },
+    {
+      "check_id": "MLO-02_kaizen_ecqr_delta",
+      "description": "Kaizen queue shows ranked learning proposals with ECQR delta estimate",
+      "requires": {
+        "kaizen_status": "queued",
+        "fields": [
+          "kaizen_id",
+          "ecqr_delta_estimate",
+          "rank_score",
+          "record_ids"
+        ]
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-kaizen.json",
+      "status": "PARTIAL_FIXTURE_ONLY"
+    },
+    {
+      "check_id": "MLO-03_ratified_live_prior",
+      "description": "After founder/gate ratify, live prior changes stage routing and receipt proves before/after ECQR",
+      "requires": {
+        "snapshot_status": "live",
+        "receipt_fields": [
+          "snapshot_id",
+          "stage_market_id",
+          "ecqr_before",
+          "ecqr_after",
+          "ratified_by",
+          "learning_receipt_id",
+          "prior_id",
+          "confidence_before",
+          "confidence_after",
+          "why_accepted_or_rejected",
+          "reviewer"
+        ],
+        "learning_receipt_required": true
+      },
+      "evidence": "receipts/learning/learning_receipt-*.json",
+      "status": "PASS_FIXTURE_W1"
+    },
+    {
+      "check_id": "MLO-04_deadman_heartbeat",
+      "description": "Deadman sees motor_learning_organ_v1 heartbeats within 2x cadence",
+      "requires": {
+        "loop_id": "motor_learning_organ_v1",
+        "deadman": "sourcea-deadman-v1",
+        "staleness_multiplier": 2,
+        "last_fired_at_fresh": true
+      },
+      "evidence": "receipts/learning/motor-learning-organ-*-heartbeat.json",
+      "status": "PARTIAL_HEARTBEAT_STUB"
+    },
+    {
+      "check_id": "MLO-05_learning_receipt_audit",
+      "description": "Every accept/reject/rollback of a prior emits a complete learning_receipt with evidence links and confidence before/after",
+      "requires": {
+        "schema": "nf_motor_learning_receipt_v1",
+        "required_fields": [
+          "learning_receipt_id",
+          "prior_id",
+          "origin_event",
+          "evidence_links",
+          "confidence_before",
+          "confidence_after",
+          "why_accepted_or_rejected",
+          "reviewer",
+          "decision",
+          "affected_loops",
+          "applicable_runways",
+          "ratified_at",
+          "snapshot_id"
+        ]
+      },
+      "evidence": "receipts/learning/learning_receipt-*.json",
+      "status": "PASS_FIXTURE_W1"
+    }
+  ],
+  "w0_acceptance": {
+    "description": "SG governance scaffold complete (canon, contracts, loop, dispatch, deadman, learning_receipt schema). Learning engine not yet claimed.",
+    "artifacts": [
+      "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "data/nf_motor_learning_organ_contracts_v1.json",
+      "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "data/github_automation_registry_v1.json",
+      "data/nf_motor_learning_receipt_v1.json"
+    ],
+    "status": "PASS_W0_GOVERNANCE_SCAFFOLD"
+  },
+  "scaffold_note": "W0 scaffold complete. W1 SG reference implementation executable under fixtures/dry-run.",
+  "w1_acceptance": {
+    "status": "PASS_W1_SG_REFERENCE",
+    "validator": "scripts/validate_motor_learning_organ_w1.py",
+    "note": "Local reference pipeline proven. Cross-repo live consume remains NOT_IMPLEMENTED."
+  }
+}

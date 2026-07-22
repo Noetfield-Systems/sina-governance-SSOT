@@ -1,0 +1,72 @@
+{
+  "action_attempted": "ci_retry_deploy",
+  "candidate_id": "cand-rollback-fixture",
+  "content_hash": "889d5b1093ab8c81a5adf2972ec2cd56fba5a0aaece96c2e948e13742df57243",
+  "error_class": "cloudflare_timeout",
+  "evidence_refs": [
+    "legacy"
+  ],
+  "expected_outcome": "success",
+  "fingerprint": {
+    "action_attempted": "ci_retry_deploy",
+    "error_class": "cloudflare_timeout",
+    "loop_id": "motor_learning_organ_v1",
+    "outcome": "success",
+    "recovery_path": "route_B_retry",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair",
+    "stage": "deploy"
+  },
+  "fixture_seeded": true,
+  "learning_receipt_id": "lr-fixture-ratify-prior-to-rollback",
+  "live_consumable": false,
+  "prior_id": "prior-to-rollback",
+  "recommended_action": "route_B_retry",
+  "recovery_path": "route_B_retry",
+  "scope": {
+    "loop_id": "motor_learning_organ_v1",
+    "repository": "sina-governance-SSOT",
+    "runway": "Software Repair"
+  },
+  "state": "RATIFIED",
+  "status": "active",
+  "store_kind": "fixture",
+  "transition_history": [
+    {
+      "actor": "fixture",
+      "evidence": [
+        "legacy"
+      ],
+      "from_state": "OBSERVED",
+      "learning_receipt_id": null,
+      "reason": "mined",
+      "timestamp": "2026-07-10T10:00:00Z",
+      "to_state": "PROPOSED"
+    },
+    {
+      "actor": "fixture",
+      "evidence": [
+        "legacy"
+      ],
+      "from_state": "PROPOSED",
+      "learning_receipt_id": null,
+      "reason": "shadow",
+      "timestamp": "2026-07-10T11:00:00Z",
+      "to_state": "SHADOW"
+    },
+    {
+      "actor": "fixture:ratify",
+      "candidate_id": "cand-rollback-fixture",
+      "evidence": [
+        "legacy"
+      ],
+      "from_state": "SHADOW",
+      "learning_receipt_id": "lr-fixture-ratify-prior-to-rollback",
+      "prior_id": "prior-to-rollback",
+      "reason": "ratified",
+      "timestamp": "2026-07-10T12:00:00Z",
+      "to_state": "RATIFIED"
+    }
+  ],
+  "version": 1
+}

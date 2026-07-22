@@ -1,7 +1,7 @@
 {
   "schema": "runtime_value_contracts_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-19T23:08:53Z",
+  "version": "1.1.1",
+  "saved_at": "2026-07-22T23:07:14Z",
   "law": "Every runtime must name a beneficiary, justified trigger, bounded action, useful output, completion condition, and idle no-op. No schedule without a time-dependent reason. No idle LLM. One claim owner per task cell.",
   "contracts": [
     {
@@ -81,7 +81,7 @@
       "trigger": {
         "type": "justified_schedule",
         "cadence": "0 */6 * * *",
-        "time_dependent_reason": "Security freshness SLA — credential/auth regressions must surface within 6h."
+        "time_dependent_reason": "Security freshness SLA \u2014 credential/auth regressions must surface within 6h."
       },
       "bounded_action": "Probe allow-listed auth surfaces; write GUARD receipt; no mutation.",
       "authority_ceiling": "observe",
@@ -380,7 +380,7 @@
       "motor_id": "trustfield_loops_preview",
       "owner_role": "noetfield:trustfield.runtime-owner",
       "beneficiary": "none.quarantined",
-      "business_customer_goal": "Frozen preview motor — no new customer work.",
+      "business_customer_goal": "Frozen preview motor \u2014 no new customer work.",
       "trigger": {
         "type": "disabled"
       },
@@ -556,7 +556,7 @@
         "destination": "receipts/doctrine/NF_UNIFIED_MOTOR_*",
         "visibility": "operator"
       },
-      "success_metric": "One event → one claim → one execution → one receipt; unknown routes fail closed.",
+      "success_metric": "One event \u2192 one claim \u2192 one execution \u2192 one receipt; unknown routes fail closed.",
       "completion_condition": "Job terminal succeeded/failed/cancelled with callback.",
       "idempotency_key": "motor.event:{event_id}",
       "retry_backoff": "exponential with dead-letter",
@@ -623,7 +623,7 @@
         "destination": "SourceB motor_jobs + workspace_receipts + preview URL",
         "visibility": "customer"
       },
-      "success_metric": "One OTP verify → one Motor job → succeeded preview+receipt.",
+      "success_metric": "One OTP verify \u2192 one Motor job \u2192 succeeded preview+receipt.",
       "completion_condition": "motor_jobs.status=succeeded with preview_url and receipt_json.",
       "idempotency_key": "sourceb-workspace:{account_id}:{slug}:{prompt_hash}",
       "retry_backoff": "Motor retry then dead-letter receipt in workspace UI",
@@ -755,7 +755,7 @@
         "destination": "TrustField assessment artifacts + /status/{ref}",
         "visibility": "customer"
       },
-      "success_metric": "One registration → one package with deterministic source refs.",
+      "success_metric": "One registration \u2192 one package with deterministic source refs.",
       "completion_condition": "Package manifest stored; status shows download.",
       "idempotency_key": "trustfield-assessment:{program_id}",
       "retry_backoff": "exponential 15m x4 then dead-letter event",
@@ -900,6 +900,74 @@
       "review_date": "2026-09-01",
       "receipt_location": "receipts/sg-key2-custody-*.json",
       "rollback": "Revert custody PR; keep key1 until founder decision.",
+      "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.motor_learning_organ_heartbeat",
+      "motor_id": "gh_actions_motor_learning_organ_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Keep the Motor Learning Organ cloud loop alive with observe-only heartbeat receipts until W1\u2013W3 consume path is gated.",
+      "trigger": {
+        "type": "justified_schedule",
+        "cadence": "0 6 * * *; weekly ROI 0 7 * * 1",
+        "time_dependent_reason": "Daily liveness + weekly ROI prior freshness for the learning organ stub; deadman expects 2x cadence heartbeats."
+      },
+      "bounded_action": "Write observe-only heartbeat / ROI prior receipts; no live prior promote, no model training, no HOLD lift.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "motor_learning_organ_receipt_v1",
+        "destination": "receipts/learning/motor-learning-organ-*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Scheduled heartbeat receipt lands; loop_registry last_fired_at updates; no promote claim.",
+      "completion_condition": "Heartbeat or ROI receipt written for the cadence window.",
+      "idempotency_key": "motor-learning-organ:{utc_day}",
+      "retry_backoff": "none; next cron window",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/learning/motor-learning-organ-*.json",
+      "rollback": "Disable workflow schedule; retain last heartbeat receipts.",
+      "status": "active",
+      "site_flow": "none",
+      "notes": "STUB_OBSERVE_HEARTBEAT_ONLY \u2014 does not unlock live Model Learning promotion."
+    },
+    {
+      "runtime_id": "sg.motor_learning_organ_w1_validate",
+      "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Fail closed on PRs that break the Motor Learning Organ W1 reference pipeline or attempt live prior promotion.",
+      "trigger": {
+        "type": "event",
+        "event": "github.pull_request_and_push.motor_learning_w1"
+      },
+      "bounded_action": "Run W1 fixture E2E + no-live-promo guards; no deploy, no prior promote.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "ci_check_result_v1",
+        "destination": "GitHub Actions check",
+        "visibility": "operator"
+      },
+      "success_metric": "W1 validate CI PASS; live promo paths remain blocked.",
+      "completion_condition": "CI job terminal PASS/FAIL.",
+      "idempotency_key": "motor-learning-w1-validate:{sha}",
+      "retry_backoff": "CI retry",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "GitHub Actions logs",
+      "rollback": "Disable workflow; validators remain runnable locally.",
       "status": "event_driven",
       "site_flow": "none"
     }

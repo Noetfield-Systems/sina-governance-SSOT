@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
-  "version": "1.4.0",
-  "saved_at": "2026-07-19T23:08:53Z",
+  "version": "1.4.1",
+  "saved_at": "2026-07-20T09:10:00Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -23,7 +23,7 @@
       ],
       "receipt_path": "receipts/workflow-census-*.json",
       "conflicts_with": [],
-      "note": "Judging layer — which receipt does each loop serve?"
+      "note": "Judging layer \u2014 which receipt does each loop serve?"
     },
     {
       "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
@@ -69,7 +69,7 @@
       "receipt_path": "receipts/auth-surface-probe-*.json",
       "deadman": "sourcea-deadman-v1",
       "conflicts_with": [],
-      "note": "GUARD — tiered auth surface probe; SG verifies venture workers implement UI"
+      "note": "GUARD \u2014 tiered auth surface probe; SG verifies venture workers implement UI"
     },
     {
       "motor_id": "gh_actions_brain_loop_autorun_v1",
@@ -224,7 +224,7 @@
       ],
       "receipt_path": "trustfield_loop_receipts",
       "conflicts_with": [],
-      "note": "W8 production — supersedes trustfield_loops_preview"
+      "note": "W8 production \u2014 supersedes trustfield_loops_preview"
     },
     {
       "motor_id": "trustfield_loops_preview",
@@ -240,7 +240,7 @@
       ],
       "receipt_path": ".receipt_ids/*.json",
       "conflicts_with": [],
-      "note": "Frozen preview — do not register new work against preview motor"
+      "note": "Frozen preview \u2014 do not register new work against preview motor"
     },
     {
       "motor_id": "gh_actions_sourcea_external_verify_v1",
@@ -277,7 +277,7 @@
       "conflicts_with": [
         "cf_auto_runtime_tick_v1"
       ],
-      "note": "NOOS lane — observe SourceA read-only via noos-sourcea-observe-loop"
+      "note": "NOOS lane \u2014 observe SourceA read-only via noos-sourcea-observe-loop"
     },
     {
       "motor_id": "p0pgr_shadow_cycle_v1",
@@ -510,6 +510,66 @@
       "receipt_path": "receipts/sg-key2-custody-*.json",
       "conflicts_with": [],
       "note": "One-shot key2 custody apply/PR; recurring watch is CF."
+    },
+    {
+      "motor_id": "gh_actions_motor_learning_organ_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/motor-learning-organ-v1.yml",
+      "cadence": "0 6 * * *; weekly ROI 0 7 * * 1",
+      "lane": "sg_governance",
+      "loop_id": "motor_learning_organ_v1",
+      "trigger_host": "cloud",
+      "last_fired_at_target": "loop_registry",
+      "deadman": "sourcea-deadman-v1",
+      "owns": [
+        "motor_learning_pattern_mine",
+        "learning_record_draft_emit",
+        "policy_snapshot_shadow_propose",
+        "kaizen_ecqr_rank",
+        "roi_prior_receipt"
+      ],
+      "must_not_own": [
+        "brain_promote",
+        "unsupervised_architecture_redesign",
+        "data_runway_build",
+        "base_model_training",
+        "level_3_bandit_high_risk",
+        "hold_lift",
+        "production_promote_merge",
+        "secret_mutate"
+      ],
+      "receipt_path": "receipts/learning/motor-learning-organ-*.json",
+      "conflicts_with": [],
+      "commissioned": false,
+      "scheduled": true,
+      "runtime_state": "STUB_OBSERVE_HEARTBEAT_ONLY",
+      "note": "Cloud GHA stub \u2014 daily/weekly cron writes heartbeat receipts only; no live prior promote until W1-W3 consume path + gate. Deadman sourcea-deadman-v1 at 2x cadence."
+    },
+    {
+      "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/motor-learning-organ-w1-validate.yml",
+      "cadence": "pull_request_and_push",
+      "lane": "sg_governance",
+      "loop_id": "motor_learning_organ_v1",
+      "owns": [
+        "motor_learning_w1_validate",
+        "fixture_e2e",
+        "no_live_promo_guard"
+      ],
+      "must_not_own": [
+        "live_prior_promote",
+        "model_training",
+        "data_runway_build",
+        "brain_promote"
+      ],
+      "receipt_path": "CI logs / unittest PASS",
+      "conflicts_with": [],
+      "commissioned": false,
+      "scheduled": false,
+      "note": "CI-only W1 validator. Never ratifies or promotes live priors."
     }
   ],
   "agent_lanes": [
@@ -680,7 +740,8 @@
     "sourcea_autorun_l4_verify": "gh_actions_sourcea_external_verify_v1",
     "noos_gel_factory": "gh_actions_noos_factory_autorun_v1",
     "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1",
-    "site_flow_canaries_e2e_activation": "gh_actions_site_flow_canaries_executor_v1"
+    "site_flow_canaries_e2e_activation": "gh_actions_site_flow_canaries_executor_v1",
+    "motor_learning_organ": "gh_actions_motor_learning_organ_v1"
   },
   "duplication_forbidden": [
     {
@@ -690,7 +751,7 @@
         "gh_actions_brain_loop_autorun_v1",
         "mac_launchd_brain_loop_autorun_v1"
       ],
-      "rule": "CAS on promotion gate — second writer gets REJECTED receipt, not silent overwrite"
+      "rule": "CAS on promotion gate \u2014 second writer gets REJECTED receipt, not silent overwrite"
     },
     {
       "task": "trustfield_loops_implementation",
@@ -707,10 +768,11 @@
       "allowed_motors": [
         "sourcea_brain"
       ],
-      "rule": "Registration scripts run from SG only after independent verify — not from GH Actions"
+      "rule": "Registration scripts run from SG only after independent verify \u2014 not from GH Actions"
     }
   ],
   "task_cell_map": {
-    "commissioning_specialist_loop": "sg_commissioning_specialist"
+    "commissioning_specialist_loop": "sg_commissioning_specialist",
+    "motor_learning_organ_loop": "sg_governance"
   }
 }

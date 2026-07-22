@@ -1,7 +1,7 @@
 {
   "schema": "automation_surface_inventory_v1",
-  "version": "1.4.0",
-  "saved_at": "2026-07-19T23:08:53Z",
+  "version": "1.4.1",
+  "saved_at": "2026-07-20T09:10:00Z",
   "authority": "SG (SSSOT)",
   "parent": "data/github_automation_registry_v1.json",
   "repos": [
@@ -55,6 +55,24 @@
           "task_cell": "site_flow_canaries_e2e_activation",
           "copilot_safe": false,
           "state": "BOUNDED_STAGING_EXECUTOR"
+        },
+        {
+          "file": "motor-learning-organ-v1.yml",
+          "motor_id": "gh_actions_motor_learning_organ_v1",
+          "cadence": "0 6 * * *; 0 7 * * 1",
+          "task_cell": "motor_learning_organ",
+          "copilot_safe": false,
+          "state": "STUB_OBSERVE_HEARTBEAT_ONLY",
+          "loop_id": "motor_learning_organ_v1",
+          "deadman": "sourcea-deadman-v1"
+        },
+        {
+          "file": "motor-learning-organ-w1-validate.yml",
+          "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+          "cadence": "pull_request_and_push",
+          "task_cell": "motor_learning_organ",
+          "copilot_safe": false,
+          "state": "CI_VALIDATE_ONLY_NO_PROMOTE"
         }
       ],
       "mac_motors": [
