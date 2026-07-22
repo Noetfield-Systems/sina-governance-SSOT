@@ -1,0 +1,80 @@
+{
+  "schema": "nf_company_new_product_v1",
+  "decision_id": "NF-COMPANY-NEW-PRODUCT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "v1.0.0_locked_20260720",
+  "saved_at": "2026-07-20T14:10:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+  "one_line_law": "Polsia-class /new is the UX benchmark; Noetfield delivers idea to verified staging via recipes, T0-first Motor dispatch, and deterministic acceptance.",
+  "benchmark_ux": "https://polsia.com/new",
+  "product_surface": {
+    "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+    "path": "sites/company-new",
+    "pages_project": "nf-company-new",
+    "public_entry": "/new"
+  },
+  "depends_on": [
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-COMPUTE-ROI-ALLOCATION-V1",
+    "NF-WAKE-PATH-CONFLICT-POLICY-V1",
+    "NF-DETERMINISTIC-API-PRODUCT-AND-GTM-V1"
+  ],
+  "does_not_activate": [
+    "AUTONOMOUS_PRODUCTION_MUTATIONS=RUN",
+    "unsupervised_marketing_sales_support_loops",
+    "frontier_model_as_default",
+    "agent_swarm_sku"
+  ],
+  "goals": {
+    "cheap": ["t0_maximize", "deepseek_default", "glm_repair", "kimi_long_context", "prompt_compress", "semantic_cache"],
+    "fast": ["recipe_library", "job_id_wake", "isolated_worktrees", "cf_hot_path", "repair_budget_caps"],
+    "high_quality": ["acceptance_contract_object", "deterministic_gates", "t3_irreversible_risk", "hold_preserved"]
+  },
+  "dispatcher_tiers": {
+    "T0": "code_tool_scaffold_no_llm",
+    "T1": "cheap_fast_model",
+    "T2": "strong_model_hard_work",
+    "T3": "human_critical_risk"
+  },
+  "recipes_v1": [
+    {
+      "recipe_id": "marketing_site",
+      "label": "Marketing site",
+      "deliverable": "CF Pages/Workers landing + contact + smoke 200s"
+    },
+    {
+      "recipe_id": "deterministic_api",
+      "label": "Deterministic API",
+      "deliverable": "OpenAI-compatible chat completions staging plane"
+    },
+    {
+      "recipe_id": "crud_saas",
+      "label": "CRUD SaaS",
+      "deliverable": "auth + one table + one UI + staging health"
+    }
+  ],
+  "v1_milestone": "idea_via_new_to_verified_staging",
+  "deferred": [
+    "marketing_automation",
+    "sales",
+    "support",
+    "continuous_company_operation"
+  ],
+  "pipeline": [
+    "project_specification",
+    "deterministic_contract_plan",
+    "repo_sandbox_worktrees",
+    "kernel_motor",
+    "sg_runway_gates",
+    "planner_role_assignment",
+    "dispatch_t0_t3",
+    "build_test_bounded_repair",
+    "provision",
+    "staging_deploy",
+    "evidence_acceptance",
+    "stop"
+  ],
+  "hold": "HOLD"
+}

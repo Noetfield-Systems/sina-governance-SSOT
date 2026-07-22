@@ -12,7 +12,7 @@
 |------|---------|
 | **SG** | Sina Governance — governance function |
 | **SSSOT** | Sina Single Source of Truth — same as SG repo role |
-| **This chat / this repo** | `~/Projects/sina-governance-ssot` — verifier, gate, registry, mirrors, receipts |
+| **This chat / this repo** | `~/Desktop/Noetfield-Systems/sina-governance-SSOT` — verifier, gate, registry, mirrors, receipts |
 
 SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 
@@ -22,7 +22,7 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 
 | Actor | Repo (canonical path) | Remote (when known) | Worker / role | Builds | Must NEVER |
 |-------|----------------------|---------------------|-----------------|--------|------------|
-| **SG (SSSOT)** | `~/Projects/sina-governance-ssot` | `kazemnezhadsina144-dot/sina-governance-SSOT` | Independent verifier · promotion gate · brain domain registry · SG guardrail **mirrors** | Governance scripts, lock docs, receipts | Venture workers, product doctrine, SourceA bundle |
+| **SG (SSSOT)** | `~/Desktop/Noetfield-Systems/sina-governance-SSOT` | `kazemnezhadsina144-dot/sina-governance-SSOT` | Independent verifier · promotion gate · brain domain registry · SG guardrail **mirrors** | Governance scripts, lock docs, receipts | Venture workers, product doctrine, SourceA bundle |
 | **SourceA Brain** | `~/Projects/SourceA` | `kazemnezhadsina144-dot/SourceA` | Live brain worker `sourcea-brain-chat-v1` · bundle · locked-defs · **register** verified artifacts | Routes, memory lines, collision checks | TF/Noetfield/NOOS implementation code |
 | **SourceA Worker** | `~/Projects/SourceA` | same | SA deploy scripts · skill packaging · brain CLI | SourceA workers, Signal Factory **packaging into SA** | `trustfield-loops` code · NOOS `_NOOS_AGENT` docs |
 | **SourceA Loop Specialist** | `~/Projects/SourceA` + CF tick | same | `loop_specialist_tick_v1` · runtime plans · work orders | Desired-state plans, dispatch receipts | Deploy TF workers · external send |
@@ -123,10 +123,10 @@ SG is **not** SourceA Brain, **not** TrustField Worker, **not** NOOS.
 
 ```bash
 # SG registry
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_registry_v1.py
 
 # Parallel automation (GitHub Actions / Copilot / agents)
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_parallel_automation_governance_v1.py
 
 # Signal Factory (SourceA-owned skill, any repo context)
 /usr/bin/python3 ~/.cursor/skills/signal-factory/scripts/verify_signal_factory_v1.py

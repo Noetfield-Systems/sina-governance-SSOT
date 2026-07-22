@@ -110,6 +110,13 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Wake:** authenticated HTTP `job_id` only. HOLD preserved.  
 **Wiring:** `docs/dispatch/nf-compute-roi-allocation-all-repos.md`
 
+## 2k-bis. WAKE-PATH CONFLICT POLICY (P0 — schedule vs event auto table)
+
+`P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md` = **decision** `NF-WAKE-PATH-CONFLICT-POLICY-V1` (`SG_ACCEPTED`).
+**Machine:** `data/nf_wake_path_conflict_policy_v1_LOCKED.json`
+**Law:** event-driven authenticated HTTP `job_id` wake is default (Cloudflare Workers first); cron / Workflow schedule / Railway poll / GHA schedule allowed with schedule passport. Do not emit `MOTOR_PRODUCTION_PATH_BLOCKED` solely because a schedule exists. Missing passport = warn + passport PR. HOLD preserved.
+**Wiring:** `docs/dispatch/nf-wake-path-conflict-policy-all-repos.md`
+
 ## 2l. DETERMINISTIC API PRODUCT & GTM (P10 — external commercial surface)
 
 `P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md` = **decision** `NF-DETERMINISTIC-API-PRODUCT-AND-GTM-V1` (`LOCKED`).

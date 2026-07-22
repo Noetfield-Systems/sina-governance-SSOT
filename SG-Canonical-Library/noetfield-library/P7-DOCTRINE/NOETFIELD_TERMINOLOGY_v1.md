@@ -2,7 +2,7 @@
 
 **Wording authority · daily · mandatory · machine-enforceable · Tier 0**
 
-Status: `v1.2-living-system-w1` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
+Status: `v1.3-motor-engine-nesting` · Load on **every output** before any doctrine edit, receipt field, job spec, specialist brief, or customer-facing text.
 
 Answers: **“What word do I write, right now?”** — one line per term.  
 Meaning source: `NOETFIELD_DICTIONARY_v1.md` (terminology is **minted from** dictionary — never the reverse).  
@@ -50,11 +50,19 @@ IS NOT: vague category.
 **Kernel** — The core running system that other modules connect to.  
 IS NOT: any script that runs once.
 
-**Motor** — A cloud scheduler that starts loops. Examples include Cloudflare cron or a Railway executor.  
-IS NOT: the loop body itself.
+**Scheduler and executor** — Cloud scheduler + process runner that starts loops (CF cron, Railway). Ops sense of “motor.”  
+IS NOT: the loop body; the product **AI Motor**.
+
+**AI Motor** — Deterministic execution engine (Vehicle Controller / Tool Runtime / Step Functions / Agent Runtime): contract in → verified workflows → evidence + auditable receipts. Complements LLM reasoning.  
+IS NOT: an AI engine; Brain; the whole Tesla-class / governed system car; a chatbot; unbounded autonomy.  
+EX: Option A LOCKED — Motor executes authorized contracts; does not contain Brain.
+
+**AI engine** — Intelligence power unit inside Brain only (model, critic, classifier, retrieval, scorer, draft; Llama/GPT/Gemini/…).  
+IS NOT: Brain; the AI Motor; promotion authority; the whole product.  
+EX: many AI engines inside Brain; Motor executes contracts separately.
 
 **Loop** — A recurring task that runs on a schedule with a set interval, cost cap, kill path, and a receipt for each run.  
-IS NOT: unbounded “always-on,” Cursor session, or Mac launchd without motor receipt.
+IS NOT: unbounded “always-on,” Cursor session, or Mac launchd without scheduler/executor receipt.
 
 **Reconciler** — The single component that resolves conflicts and decides the final state.  
 IS NOT: any component that touches state.
@@ -158,10 +166,15 @@ free API (as ask)             → commercial alignment
 client base (unprovable)      → governed reference environment
 log / it worked               → receipt (if fielded) else claim
 the latest file               → SSOT
-always-on / full auto 24/7    → governed loop + motor + receipt (or say what is NOT 24/7)
+always-on / full auto 24/7    → governed loop + scheduler/executor + receipt (or say what is NOT 24/7)
 alive / living (generic)        → Living System (§8 receipt) or name homeostasis vs metabolism axis
 governed (decorative)           → governed (only if stoppable + measured)
-24/7 (marketing)              → name the motor + receipt or downgrade claim
+24/7 (marketing)              → name the scheduler/executor + receipt or downgrade claim
+AI engine (as whole product)  → governed system + Brain (AI engines) + Motor (execution)
+engine (when meaning the whole car / system) → SourceA/Noetfield governed system (not Motor)
+Motor (when meaning whole-car container) → RETIRED Option B → Motor = execution engine only
+Motor (ops/fleet/census only) → Scheduler and executor
+Plus One                      → Scheduler and executor
 ```
 
 ---
@@ -369,6 +382,22 @@ Schemas: `noetfeld-OS/noetfield-org/schemas/` (see `SCHEMA_INDEX_v1.md`).
 | `NOT_OPERATIONAL` | No runtime claim permitted |
 
 `DESIGN_LOCKED` never implies `FULLY_COMMISSIONED`.
+
+
+
+## §13 — AI Motor / AI engine (minted 2026-07-22 · LIVE_LOCKED · Option A)
+
+Minted from `NOETFIELD_DICTIONARY_v1.md` + A-Z batch. Long-form story: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
+
+**Lock** — Option A LOCKED · Option B RETIRED (Motor as whole-car container).  
+**Motor** — Deterministic execution engine. CTO: receives governed execution contracts, orchestrates verified workflows, produces evidence, returns auditable receipts; complements LLM reasoning.  
+**AI engines** — Many inside Brain only; never = Brain; never = Motor.  
+**Stack** — Sensors → Brain → Contract → Kernel → Motor → Evidence → Eval → Learning.  
+**Tesla teaching** — Whole car = full governed system (not Motor); Motor = Vehicle Controller.  
+**Public line** — Engines (in Brain) reason and draft. Motors execute. Models generate. Agents participate under contract.
+
+**Runway** — Productized path that delivers a qualified outcome via Motor execution under contract.  
+IS NOT: raw chat; one-off prompt.
 
 
 ## §8 — Versioning

@@ -1,7 +1,7 @@
 {
   "schema": "agent_read_surfaces_v1",
-  "version": "1.7.11",
-  "saved_at": "2026-07-20T09:10:00Z",
+  "version": "1.7.13",
+  "saved_at": "2026-07-22T23:03:50Z",
   "authority": "SG (SSSOT)",
   "law": "Agents act only on ACTIVE read surfaces. superseded/retired pointers must not drive deploy or spend decisions.",
   "status_model": {
@@ -18,7 +18,813 @@
       "note": "TrustField W1 closed on CF Worker. Legacy preview-host GHA motors are retire candidates."
     }
   ],
+  "scan_roots_authority": [
+    "AGENTS.md",
+    "ssot/",
+    "data/github_automation_registry_v1.json",
+    "data/agent_read_surfaces_v1.json",
+    "data/automation_surface_inventory_v1.json",
+    ".cursor/rules/",
+    ".github/copilot-instructions.md",
+    "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+    "data/living_system_110_plans_v1_LOCKED.json",
+    "skills/pr-conflict-resolver/",
+    "data/pr_conflict_skill_lock_v1.json",
+    "data/auth_surface_matrix_v1.json",
+    "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
+    "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+    "scripts/chess_pass_cli_v1.py",
+    "scripts/verify_chess_pattern_reasoning_v2_install_v1.sh"
+  ],
+  "scan_roots_read_surface_only": [
+    "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md"
+  ],
+  "exclude_globs": [
+    "decision_language_machine_v1/**",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL*",
+    "receipts/**"
+  ],
   "lanes": {
+    "noetfield_website": {
+      "agent_id": "noetfield_website",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry",
+          "repo": "Noetfield",
+          "optional": true
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "architecture_finalization_gate"
+        },
+        {
+          "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "architecture_finalization_gate_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_architecture"
+        },
+        {
+          "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "unified_motor_architecture_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
+          "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_implementation_waves"
+        },
+        {
+          "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_dispatch"
+        },
+        {
+          "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_wave0_merge_packet"
+        },
+        {
+          "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_t0_foundation_commission"
+        },
+        {
+          "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+          "status": "ACTIVE",
+          "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_execution_assignment"
+        },
+        {
+          "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_execution_assignment_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "deterministic_api_product"
+        },
+        {
+          "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "deterministic_api_product_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_core_families_composition"
+        },
+        {
+          "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
+        },
+        {
+          "path": "tests/test_motor_learning_organ_w1.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_tests"
+        },
+        {
+          "path": "scripts/validate_motor_learning_organ_w1.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_validator"
+        },
+        {
+          "path": "scripts/motor_learning_organ_w1_run.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_cli"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_core_families_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "data/runtime_reality_v1.json",
+          "status": "ACTIVE",
+          "role": "highest_precedence_runtime_truth"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "sg_identity_architecture_amendment"
+        },
+        {
+          "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+          "status": "ACTIVE",
+          "role": "runtime_semantic_supersession"
+        },
+        {
+          "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+          "status": "ACTIVE",
+          "role": "p0_incident_containment"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+          "role": "unified_motor_scaling_posture",
+          "why": "Accepted scaling runway + reject list + HOLD floor"
+        }
+      ],
+      "skills_resolve": []
+    },
+    "noos_agent": {
+      "agent_id": "noos_agent",
+      "tier": 1,
+      "must_read": [
+        {
+          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
+          "status": "ACTIVE",
+          "role": "lane_entry",
+          "repo": "noetfeld-OS",
+          "alt_paths": [
+            "~/Projects/noetfeld-os/AGENTS.md"
+          ]
+        },
+        {
+          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+          "status": "ACTIVE",
+          "role": "integrator_checklist",
+          "repo": "noetfeld-OS"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_reasoning_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_pass_template"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_execution_contract"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_receipt_template"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_01"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_02"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_03"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_04"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_05"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_06"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_07"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_live_site"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_deploy_drift"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_tf_restore"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+          "status": "ACTIVE",
+          "role": "chess_schema_pass"
+        },
+        {
+          "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+          "status": "ACTIVE",
+          "role": "chess_manifest"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "architecture_finalization_gate"
+        },
+        {
+          "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "architecture_finalization_gate_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_architecture"
+        },
+        {
+          "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "unified_motor_architecture_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation"
+        },
+        {
+          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_dispatch"
+        },
+        {
+          "path": "data/sg-authority-ref-compute-roi-v1.json",
+          "status": "ACTIVE",
+          "role": "compute_roi_allocation_authority_ref"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
+          "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_implementation_waves"
+        },
+        {
+          "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_dispatch"
+        },
+        {
+          "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_wave0_merge_packet"
+        },
+        {
+          "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+          "status": "ACTIVE",
+          "role": "unified_motor_t0_foundation_commission"
+        },
+        {
+          "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+          "status": "ACTIVE",
+          "role": "sg_to_noos_wave0_answer"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain"
+        },
+        {
+          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "sinagpt_founder_brain_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture"
+        },
+        {
+          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_architecture_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+          "status": "ACTIVE",
+          "role": "command_gateway_v2_commission"
+        },
+        {
+          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+          "status": "ACTIVE",
+          "role": "sinagpt_gateway_v2_dispatch"
+        },
+        {
+          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "activation_cycle"
+        },
+        {
+          "path": "data/nf_activation_cycle_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "activation_cycle_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter"
+        },
+        {
+          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "higgsfield_media_adapter_machine"
+        },
+        {
+          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+          "status": "ACTIVE",
+          "role": "higgsfield_activation_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_a_commission"
+        },
+        {
+          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+          "status": "ACTIVE",
+          "role": "circuit_b_commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_execution_assignment"
+        },
+        {
+          "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_execution_assignment_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "deterministic_api_product"
+        },
+        {
+          "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "deterministic_api_product_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_core_families_composition"
+        },
+        {
+          "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_core_families_composition_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing"
+        },
+        {
+          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_portfolio_routing_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_machine"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_contracts_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_contracts"
+        },
+        {
+          "path": "data/nf_motor_learning_receipt_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_receipt_schema"
+        },
+        {
+          "path": "tests/test_motor_learning_organ_w1.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_tests"
+        },
+        {
+          "path": "scripts/validate_motor_learning_organ_w1.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_validator"
+        },
+        {
+          "path": "scripts/motor_learning_organ_w1_run.py",
+          "status": "ACTIVE",
+          "role": "motor_learning_w1_cli"
+        },
+        {
+          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_pass_checks"
+        },
+        {
+          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+          "status": "ACTIVE",
+          "role": "motor_learning_organ_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+          "status": "ACTIVE",
+          "role": "runway_core_families_dispatch"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+          "status": "ACTIVE",
+          "role": "commission"
+        },
+        {
+          "path": "data/runtime_reality_v1.json",
+          "status": "ACTIVE",
+          "role": "highest_precedence_runtime_truth"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+          "status": "ACTIVE",
+          "role": "sg_identity_architecture_amendment"
+        },
+        {
+          "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+          "status": "ACTIVE",
+          "role": "runtime_semantic_supersession"
+        },
+        {
+          "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+          "status": "ACTIVE",
+          "role": "p0_incident_containment"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+          "role": "unified_motor_scaling_posture",
+          "why": "Accepted scaling runway + reject list + HOLD floor"
+        }
+      ],
+      "skills_resolve": []
+    },
     "sg_sssot_cursor": {
       "agent_id": "sg_sssot_cursor",
       "tier": 0,
@@ -87,11 +893,6 @@
           "path": "data/auth_surface_matrix_v1.json",
           "status": "ACTIVE",
           "role": "auth_surface_matrix"
-        },
-        {
-          "path": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "cross_domain_auth_proposal_locked"
         },
         {
           "path": "data/auth_core_interface_spec_v1.json",
@@ -224,6 +1025,21 @@
           "role": "compute_roi_allocation_authority_ref"
         },
         {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
+        },
+        {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
           "status": "ACTIVE",
           "role": "unified_motor_implementation_waves"
@@ -317,6 +1133,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
           "status": "ACTIVE",
           "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
         },
         {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
@@ -622,402 +1453,19 @@
           "role": "compute_roi_allocation_authority_ref"
         },
         {
-          "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
           "status": "ACTIVE",
-          "role": "unified_motor_implementation_waves"
+          "role": "wake_path_conflict_policy"
         },
         {
-          "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
           "status": "ACTIVE",
-          "role": "unified_motor_dispatch"
+          "role": "wake_path_conflict_policy_machine"
         },
         {
-          "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
           "status": "ACTIVE",
-          "role": "unified_motor_wave0_merge_packet"
-        },
-        {
-          "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_t0_foundation_commission"
-        },
-        {
-          "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
-          "status": "ACTIVE",
-          "role": "sg_to_noos_wave0_answer"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "sinagpt_founder_brain"
-        },
-        {
-          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "sinagpt_founder_brain_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_architecture"
-        },
-        {
-          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_architecture_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_commission"
-        },
-        {
-          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
-          "status": "ACTIVE",
-          "role": "sinagpt_gateway_v2_dispatch"
-        },
-        {
-          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "activation_cycle"
-        },
-        {
-          "path": "data/nf_activation_cycle_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "activation_cycle_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "higgsfield_media_adapter"
-        },
-        {
-          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "higgsfield_media_adapter_machine"
-        },
-        {
-          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
-          "status": "ACTIVE",
-          "role": "higgsfield_activation_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
-          "status": "ACTIVE",
-          "role": "circuit_a_commission"
-        },
-        {
-          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
-          "status": "ACTIVE",
-          "role": "circuit_b_commission"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "product_lock"
-        },
-        {
-          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_execution_assignment"
-        },
-        {
-          "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_execution_assignment_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "deterministic_api_product"
-        },
-        {
-          "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "deterministic_api_product_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_core_families_composition"
-        },
-        {
-          "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_core_families_composition_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing"
-        },
-        {
-          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing_dispatch"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_machine"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_contracts_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_contracts"
-        },
-        {
-          "path": "data/nf_motor_learning_receipt_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_receipt_schema"
-        },
-        {
-          "path": "tests/test_motor_learning_organ_w1.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_tests"
-        },
-        {
-          "path": "scripts/validate_motor_learning_organ_w1.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_validator"
-        },
-        {
-          "path": "scripts/motor_learning_organ_w1_run.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_cli"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_pass_checks"
-        },
-        {
-          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
-          "status": "ACTIVE",
-          "role": "runway_core_families_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "data/runtime_reality_v1.json",
-          "status": "ACTIVE",
-          "role": "highest_precedence_runtime_truth"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "sg_identity_architecture_amendment"
-        },
-        {
-          "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
-          "status": "ACTIVE",
-          "role": "runtime_semantic_supersession"
-        },
-        {
-          "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
-          "status": "ACTIVE",
-          "role": "p0_incident_containment"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
-          "role": "unified_motor_scaling_posture",
-          "why": "Accepted scaling runway + reject list + HOLD floor"
-        }
-      ]
-    },
-    "trustfield_worker": {
-      "agent_id": "trustfield_worker",
-      "tier": 1,
-      "must_read": [
-        {
-          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
-          "status": "ACTIVE",
-          "role": "deploy_truth",
-          "repo": "TrustField-Technologies"
-        },
-        {
-          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
-          "status": "ACTIVE",
-          "role": "automation_law",
-          "repo": "TrustField-Technologies"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_reasoning_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_pass_template"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_trustfield_overlay"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_execution_contract"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_receipt_template"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_01"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_02"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_03"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_04"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_05"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_06"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_07"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_live_site"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_deploy_drift"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_tf_restore"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
-          "status": "ACTIVE",
-          "role": "chess_schema_pass"
-        },
-        {
-          "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
-          "status": "ACTIVE",
-          "role": "chess_manifest"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "architecture_finalization_gate"
-        },
-        {
-          "path": "data/architecture_finalization_gate_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "architecture_finalization_gate_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_architecture"
-        },
-        {
-          "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "unified_motor_architecture_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation"
-        },
-        {
-          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_dispatch"
-        },
-        {
-          "path": "data/sg-authority-ref-compute-roi-v1.json",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_authority_ref"
+          "role": "wake_path_conflict_policy_dispatch"
         },
         {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
@@ -1115,400 +1563,19 @@
           "role": "product_lock"
         },
         {
-          "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
           "status": "ACTIVE",
-          "role": "commission"
+          "role": "company_new_product_lock"
         },
         {
-          "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
           "status": "ACTIVE",
-          "role": "commission"
+          "role": "company_new_product_machine"
         },
         {
-          "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
           "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_execution_assignment"
-        },
-        {
-          "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_execution_assignment_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "deterministic_api_product"
-        },
-        {
-          "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "deterministic_api_product_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_core_families_composition"
-        },
-        {
-          "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_core_families_composition_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing"
-        },
-        {
-          "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
-          "status": "ACTIVE",
-          "role": "runway_portfolio_routing_dispatch"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_machine"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_contracts_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_contracts"
-        },
-        {
-          "path": "data/nf_motor_learning_receipt_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_receipt_schema"
-        },
-        {
-          "path": "tests/test_motor_learning_organ_w1.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_tests"
-        },
-        {
-          "path": "scripts/validate_motor_learning_organ_w1.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_validator"
-        },
-        {
-          "path": "scripts/motor_learning_organ_w1_run.py",
-          "status": "ACTIVE",
-          "role": "motor_learning_w1_cli"
-        },
-        {
-          "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_pass_checks"
-        },
-        {
-          "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
-          "status": "ACTIVE",
-          "role": "motor_learning_organ_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
-          "status": "ACTIVE",
-          "role": "runway_core_families_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
-          "status": "ACTIVE",
-          "role": "commission"
-        },
-        {
-          "path": "data/runtime_reality_v1.json",
-          "status": "ACTIVE",
-          "role": "highest_precedence_runtime_truth"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "sg_identity_architecture_amendment"
-        },
-        {
-          "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
-          "status": "ACTIVE",
-          "role": "runtime_semantic_supersession"
-        },
-        {
-          "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
-          "status": "ACTIVE",
-          "role": "p0_incident_containment"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
-          "role": "unified_motor_scaling_posture",
-          "why": "Accepted scaling runway + reject list + HOLD floor"
-        }
-      ]
-    },
-    "noos_agent": {
-      "agent_id": "noos_agent",
-      "tier": 1,
-      "must_read": [
-        {
-          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
-          "status": "ACTIVE",
-          "role": "lane_entry",
-          "repo": "noetfeld-OS",
-          "alt_paths": [
-            "~/Projects/noetfeld-os/AGENTS.md"
-          ]
-        },
-        {
-          "path": "~/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
-          "status": "ACTIVE",
-          "role": "integrator_checklist",
-          "repo": "noetfeld-OS"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_reasoning_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_pass_template"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_execution_contract"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_receipt_template"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_01"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_02"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_03"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_04"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_05"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_06"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
-          "status": "ACTIVE",
-          "role": "chess_skill_07"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_live_site"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_deploy_drift"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
-          "status": "ACTIVE",
-          "role": "chess_playbook_tf_restore"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
-          "status": "ACTIVE",
-          "role": "chess_schema_pass"
-        },
-        {
-          "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
-          "status": "ACTIVE",
-          "role": "chess_manifest"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "architecture_finalization_gate"
-        },
-        {
-          "path": "data/architecture_finalization_gate_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "architecture_finalization_gate_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_architecture"
-        },
-        {
-          "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "unified_motor_architecture_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation"
-        },
-        {
-          "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_dispatch"
-        },
-        {
-          "path": "data/sg-authority-ref-compute-roi-v1.json",
-          "status": "ACTIVE",
-          "role": "compute_roi_allocation_authority_ref"
-        },
-        {
-          "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_implementation_waves"
-        },
-        {
-          "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_dispatch"
-        },
-        {
-          "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_wave0_merge_packet"
-        },
-        {
-          "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
-          "status": "ACTIVE",
-          "role": "unified_motor_t0_foundation_commission"
-        },
-        {
-          "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
-          "status": "ACTIVE",
-          "role": "sg_to_noos_wave0_answer"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "sinagpt_founder_brain"
-        },
-        {
-          "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "sinagpt_founder_brain_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_architecture"
-        },
-        {
-          "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_architecture_machine"
-        },
-        {
-          "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
-          "status": "ACTIVE",
-          "role": "command_gateway_v2_commission"
-        },
-        {
-          "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
-          "status": "ACTIVE",
-          "role": "sinagpt_gateway_v2_dispatch"
-        },
-        {
-          "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
-          "status": "ACTIVE",
-          "role": "activation_cycle"
-        },
-        {
-          "path": "data/nf_activation_cycle_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "activation_cycle_machine"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "higgsfield_media_adapter"
-        },
-        {
-          "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
-          "status": "ACTIVE",
-          "role": "higgsfield_media_adapter_machine"
-        },
-        {
-          "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
-          "status": "ACTIVE",
-          "role": "higgsfield_activation_dispatch"
-        },
-        {
-          "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
-          "status": "ACTIVE",
-          "role": "circuit_a_commission"
-        },
-        {
-          "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
-          "status": "ACTIVE",
-          "role": "circuit_b_commission"
-        },
-        {
-          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
-          "status": "ACTIVE",
-          "role": "product_lock"
+          "role": "company_new_product_dispatch"
         },
         {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
@@ -1673,16 +1740,106 @@
       ],
       "skills_resolve": []
     },
-    "noetfield_website": {
-      "agent_id": "noetfield_website",
+    "trustfield_worker": {
+      "agent_id": "trustfield_worker",
       "tier": 1,
       "must_read": [
         {
-          "path": "~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/AGENTS.md",
+          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
           "status": "ACTIVE",
-          "role": "lane_entry",
-          "repo": "Noetfield",
-          "optional": true
+          "role": "deploy_truth",
+          "repo": "TrustField-Technologies"
+        },
+        {
+          "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
+          "status": "ACTIVE",
+          "role": "automation_law",
+          "repo": "TrustField-Technologies"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_reasoning_machine"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_pass_template"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_trustfield_overlay"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_execution_contract"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_receipt_template"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_01"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_02"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_03"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_04"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_05"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_06"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+          "status": "ACTIVE",
+          "role": "chess_skill_07"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_live_site"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_deploy_drift"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+          "status": "ACTIVE",
+          "role": "chess_playbook_tf_restore"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+          "status": "ACTIVE",
+          "role": "chess_schema_pass"
+        },
+        {
+          "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+          "status": "ACTIVE",
+          "role": "chess_manifest"
         },
         {
           "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
@@ -1723,6 +1880,21 @@
           "path": "data/sg-authority-ref-compute-roi-v1.json",
           "status": "ACTIVE",
           "role": "compute_roi_allocation_authority_ref"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy"
+        },
+        {
+          "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+          "status": "ACTIVE",
+          "role": "wake_path_conflict_policy_dispatch"
         },
         {
           "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
@@ -1818,6 +1990,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
           "status": "ACTIVE",
           "role": "product_lock"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_lock"
+        },
+        {
+          "path": "data/nf_company_new_product_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "company_new_product_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+          "status": "ACTIVE",
+          "role": "company_new_product_dispatch"
         },
         {
           "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
@@ -1979,47 +2166,8 @@
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
         }
-      ]
+      ],
+      "skills_resolve": []
     }
-  },
-  "scan_roots_authority": [
-    "AGENTS.md",
-    "ssot/",
-    "data/github_automation_registry_v1.json",
-    "data/agent_read_surfaces_v1.json",
-    "data/automation_surface_inventory_v1.json",
-    ".cursor/rules/",
-    ".github/copilot-instructions.md",
-    "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
-    "data/living_system_110_plans_v1_LOCKED.json",
-    "skills/pr-conflict-resolver/",
-    "data/pr_conflict_skill_lock_v1.json",
-    "data/auth_surface_matrix_v1.json",
-    "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
-    "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
-    "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
-    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
-    "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
-    "scripts/chess_pass_cli_v1.py",
-    "scripts/verify_chess_pattern_reasoning_v2_install_v1.sh"
-  ],
-  "scan_roots_read_surface_only": [
-    "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md"
-  ],
-  "exclude_globs": [
-    "decision_language_machine_v1/**",
-    "SG-Canonical-Library/noetfield-library/P99-LEDGER/FORM_OFFICIAL*",
-    "receipts/**"
-  ]
+  }
 }

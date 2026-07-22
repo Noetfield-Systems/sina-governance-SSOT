@@ -26,11 +26,11 @@ git fetch origin main && git log origin/main -1 --oneline
 gh run list --workflow=brain-loop-autorun-v1.yml --repo Noetfield-Systems/sina-governance-SSOT --branch main --limit 3
 
 # 3. Local Mac still healthy
-bash ~/Projects/sina-governance-ssot/scripts/brain_loop_health_check_v1.sh
+bash ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/brain_loop_health_check_v1.sh
 launchctl list | grep brain-loop-autorun
 
 # 4. Drift audit
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_drift_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/audit_automation_drift_v1.py
 ```
 
 ## Pass criteria

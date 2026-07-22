@@ -1,0 +1,48 @@
+{
+  "schema_version": "runway-frontend-verification.v1",
+  "attestation_scope": "frontend-deployment-only",
+  "project": "noetfield-runway-standalone",
+  "branch": "main",
+  "environment": "production",
+  "commit": {
+    "full": "5b4b817a978a74e864dfddf40c55bf8c79457878",
+    "short": "5b4b817"
+  },
+  "source_repository": "https://github.com/Noetfield-Systems/sina-governance-SSOT",
+  "commit_url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/tree/5b4b817a978a74e864dfddf40c55bf8c79457878",
+  "runtime": "cloudflare-pages-standalone",
+  "deployed_at_utc": "2026-07-22T03:17:38Z",
+  "deployment_id": "unknown",
+  "deployment_url": "https://noetfield-runway-standalone.pages.dev",
+  "frontend_artifact_sha256": "a87cb4772a4b8ad93a80a4fabbd5ff782909352c0c39c75adae557a9d79445a1",
+  "configured_mode": "demo",
+  "runway_mode": "demo",
+  "runway_api_base_url": "not_configured",
+  "runway_api_base_url_configured": "not_configured",
+  "runway_contract_versions": {
+    "frontend": "runway.v1",
+    "kernel": "runway.v1"
+  },
+  "runway_contracts": {
+    "runtime": "GET /v1/runway/runtime",
+    "receipt": "GET /v1/runway/runs/:runId/receipt",
+    "verify": "POST /v1/runway/receipts/verify"
+  },
+  "runway_v1": "runway.v1",
+  "runway_kernel_deployment_id": "unknown",
+  "runway_kernel_runtime_attestation_url": "not_configured",
+  "runway_runtime_connection_status": "not_configured",
+  "live_backend_connected": false,
+  "live_backend_status": "not_configured",
+  "runway_runtime_attestation_url": "not_configured",
+  "hdir_release_sha": "1a784e4daa0a27af9939436465d6e58cd20f1b14",
+  "runway_kernel_repository": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY",
+  "runway_kernel_branch": "fix/remove-48h-wallclock-gate-v1",
+  "runway_kernel_release_sha": "15fdcc3e4ab9d2239e9efe0704ad38c71da56b1d",
+  "runway_kernel_commit_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/tree/15fdcc3e4ab9d2239e9efe0704ad38c71da56b1d",
+  "attestation_signature_scope": "This file identifies frontend deployment identity only; backend HDIR truth is kernel-authoritative.",
+  "expected_mode": "demo",
+  "signature": null,
+  "public_key": null,
+  "signature_algorithm": null
+}

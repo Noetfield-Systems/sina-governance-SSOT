@@ -32,3 +32,6 @@ language_gate/receipts/*.receipt.json
 *.private-key.pem
 *.webhook-secret.txt
 *.client-secret.txt
+
+# Relocated SG worktrees (git worktree checkouts; not repo content)
+worktrees/

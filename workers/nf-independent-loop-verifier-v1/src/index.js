@@ -68,6 +68,9 @@ function extractLastFired(body, keys) {
 }
 
 function staleness(lastFiredAt, intervalMinutes) {
+  if (!intervalMinutes || Number(intervalMinutes) <= 0) {
+    return { checkable: false, note: "on_demand_or_unscheduled_loop" };
+  }
   if (!lastFiredAt) return { checkable: false, note: "loop exposes no last_fired_at" };
   const last = Date.parse(lastFiredAt);
   if (Number.isNaN(last)) return { checkable: false, note: "unparseable last_fired_at" };
