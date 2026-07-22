@@ -93,7 +93,8 @@
           "motor_id": "gh_actions_sourcea_drain_disabled_v1",
           "cadence": "disabled_intentional",
           "task_cell": "none",
-          "note": "CF cron primary \u2014 GH drain disabled by design"
+          "status": "retired_inventory_only",
+          "note": "CF cron primary \u2014 GH drain disabled by design (Kaizen KZ-002)"
         },
         {
           "file": "determinism-gate.yml",
@@ -272,6 +273,24 @@
       ]
     },
     {
+      "repo_id": "trustfield-loops",
+      "path": "~/Desktop/trustfield-loops",
+      "lane": "trustfield_build",
+      "owner_agent": "trustfield_worker",
+      "workflows": [],
+      "cloud_motors": [
+        {
+          "motor_id": "trustfield_loops_production",
+          "cadence": "0 */6 * * *",
+          "task_cell": "trustfield_loops_intake",
+          "health_url": "https://trustfield-loops.sina-kazemnezhad-ca.workers.dev/health",
+          "loop_id": "tf_cf_trustfield_loops_v1",
+          "receipt_target": "trustfield_loop_receipts",
+          "note": "W8 production \u2014 supersedes trustfield_loops_preview"
+        }
+      ]
+    },
+    {
       "repo_id": "TrustField-Technologies",
       "path": "~/Desktop/Noetfield-Systems/TrustField-Technologies",
       "lane": "trustfield_build",
@@ -390,20 +409,47 @@
       ]
     },
     {
-      "repo_id": "trustfield-loops",
-      "path": "~/Desktop/trustfield-loops",
-      "lane": "trustfield_build",
-      "owner_agent": "trustfield_worker",
-      "workflows": [],
+      "repo_id": "sina-gateway",
+      "path": "~/Desktop/SINA GATEWAY",
+      "lane": "gateway_revenue",
+      "owner_agent": "founder_manual",
+      "workflows": [
+        {
+          "file": "railway-deadman-v1.yml",
+          "motor_id": "gh_gateway_railway_deadman_v1",
+          "cadence": "0 8,20 * * *",
+          "task_cell": "gateway_railway_deadman",
+          "copilot_safe": false
+        }
+      ],
       "cloud_motors": [
         {
-          "motor_id": "trustfield_loops_production",
-          "cadence": "0 */6 * * *",
-          "task_cell": "trustfield_loops_intake",
-          "health_url": "https://trustfield-loops.sina-kazemnezhad-ca.workers.dev/health",
-          "loop_id": "tf_cf_trustfield_loops_v1",
-          "receipt_target": "trustfield_loop_receipts",
-          "note": "W8 production \u2014 supersedes trustfield_loops_preview"
+          "motor_id": "cf_gateway_ops_v1",
+          "cadence": "*/15",
+          "task_cell": "gateway_health_probe",
+          "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=watchdog"
+        },
+        {
+          "motor_id": "cf_gateway_heartbeat_v1",
+          "cadence": "0 7 * * *",
+          "task_cell": "gateway_health_probe",
+          "health_url": "https://gateway-ops.sina-kazemnezhad-ca.workers.dev/run?mode=heartbeat"
+        }
+      ],
+      "mac_motors": [
+        {
+          "id": "gateway_outbound_log_v1",
+          "cadence": "founder_manual",
+          "task_cell": "gateway_outbound",
+          "note": "Founder sends \u2192 npm run channel:send \u2192 sync:heartbeat"
+        }
+      ],
+      "railway_services": [
+        {
+          "motor_id": "railway_sina_gateway_v1",
+          "cadence": "always_on",
+          "task_cell": "gateway_lead_capture",
+          "health_url": "https://sina-gateway-production.up.railway.app/ready"
         }
       ]
     }

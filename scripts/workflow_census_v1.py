@@ -207,6 +207,34 @@ def supabase_upsert_rows(base: str, key: str, table: str, rows: list[dict]) -> b
         return False
 
 
+def load_commercial_motion(ext: dict) -> dict:
+    """Read Gateway channel-receipts.json for UNLOCK §6 heartbeat fields."""
+    paths = ext.get("gateway_paths", {})
+    channel_path = os.path.expanduser(paths.get("channel_receipts", "~/Desktop/SINA GATEWAY/data/channel-receipts.json"))
+    p = Path(channel_path)
+    if not p.is_file():
+        return {"ok": False, "reason": "channel_receipts_missing", "path": channel_path}
+    data = json.loads(p.read_text(encoding="utf-8"))
+    return {
+        "ok": True,
+        "path": channel_path,
+        "offers_sent": int(data.get("sent") or 0),
+        "replies": int(data.get("replies") or 0),
+        "L1": int(data.get("L1") or 0),
+        "L2_receipts": int(data.get("L2_payments") or 0),
+        "price_usd": data.get("price_usd"),
+        "price_status": data.get("price_status"),
+        "last_send_at": data.get("last_send_at"),
+        "channel": data.get("channel"),
+        "campaign": data.get("campaign"),
+        "pipeline_by_level": {
+            "L0": int(data.get("sent") or 0),
+            "L1": int(data.get("L1") or 0),
+            "L2": int(data.get("L2_payments") or 0),
+        },
+    }
+
+
 def fetch_factory_last_receipts(base: str, key: str) -> dict[str, dict]:
     rows = supabase_get(
         base,
@@ -301,6 +329,8 @@ def collect_extension_loops(ext: dict) -> list[dict]:
         )
     for tp in ext.get("traffic_probes", []):
         loops.append({**tp, "repo_id": "traffic"})
+    for om in ext.get("outbound_motors", []):
+        loops.append({**om, "repo_id": om.get("repo", "sina-gateway")})
     return loops
 
 
@@ -488,6 +518,7 @@ def main() -> int:
 
     run_id = f"workflow-census-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
     raw_loops = collect_inventory_loops(inv) + collect_extension_loops(ext)
+    commercial_motion = load_commercial_motion(ext)
 
     cred = resolve_supabase_cred()
     factory_receipts: dict[str, dict] = {}
@@ -527,11 +558,16 @@ def main() -> int:
                 loop["value_class"] = "REVENUE"
                 loop["metadata"]["diagnosis"] = "traffic without intake conversion — fix funnel or bot filter"
 
-    # Enrich gateway capture
+    # Enrich gateway capture + outbound log
     for loop in loops:
         if loop["loop_id"] == "railway_sina_gateway_v1":
             loop["last_receipt_at"] = gateway_stats.get("last_lead_at")
             loop["metadata"]["non_test_leads_24h"] = gateway_stats.get("non_test_leads_24h")
+        if loop["loop_id"] == "gateway_outbound_log_v1" and commercial_motion.get("ok"):
+            loop["last_receipt_at"] = commercial_motion.get("last_send_at")
+            loop["metadata"]["commercial_motion"] = commercial_motion
+            if commercial_motion.get("offers_sent", 0) > 0:
+                loop["value_class"] = "REVENUE"
 
     audit_flags, audit_status = apply_standing_audit(loops, rules, ext)
 
@@ -555,6 +591,7 @@ def main() -> int:
         "audit_flags": audit_flags,
         "standing_audit_rules": rules.get("standing_audit_rules", []),
         "gateway_stats": gateway_stats,
+        "commercial_motion": commercial_motion,
         "loops": loops,
     }
 
@@ -601,7 +638,10 @@ def main() -> int:
                 "audit_flags": audit_flags,
                 "audit_status": audit_status,
                 "receipt_path": str(receipt_path) if receipt_path else None,
-                "metadata": {"gateway_stats": gateway_stats},
+                "metadata": {
+                    "gateway_stats": gateway_stats,
+                    "commercial_motion": commercial_motion,
+                },
             }
             ok_run = supabase_upsert_rows(base, key, "workflow_census_runs_v1", [run_row])
             report["supabase_write"] = ok_loops and ok_run

@@ -1,0 +1,32 @@
+{
+  "schema": "noos-loop-census-fix-receipt-v1",
+  "at": "2026-07-06T10:08:58Z",
+  "loop_id": "workflow_audit",
+  "event_type": "noos_workflow_audit_tick",
+  "factory_id": "loop-workflow-audit",
+  "interval_minutes": 15,
+  "census_verdict": "FIX",
+  "consumer_type": "GUARD",
+  "root_cause": "audit exit 1 on blocking findings blocked loop_runner ok path; findings file not written",
+  "fix_summary": "receipt-first exit 0 + --write-findings to data/noos-audit-findings-v1.json",
+  "verified_cycle": {
+    "status": "ok",
+    "exit_code": 0,
+    "state_after": "COMPLETE",
+    "supabase_sink_ok": true,
+    "supabase_op_key": "461750d6743d2f32208835eb",
+    "finished_at": "2026-07-06T10:08:58+00:00",
+    "findings_file": "data/noos-audit-findings-v1.json",
+    "findings_count": 22,
+    "blocking_count": 14
+  },
+  "schedule_gate": {
+    "script": "scripts/verify_noos_loop_schedule_registry_v1.py",
+    "ok": true,
+    "mismatch_count": 0,
+    "self_heal_cron_before": "0 */1 * * *",
+    "self_heal_cron_after": "*/10 * * * *",
+    "schedule_home": "data/noos-24-7-loops-v1.json"
+  },
+  "retire_proposed": ["inbox", "self_heal_safe_fixes", "researcher", "factory_autorun"]
+}
