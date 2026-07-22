@@ -24,11 +24,12 @@
       "tag": "CANONICAL",
       "meaning": "The cloud scheduler and the process runner that start loops on a timer.",
       "in_our_system": "Cloudflare cron dispatches to the Railway loop runner.",
-      "is_not": "The loop body itself or a one-off script.",
+      "is_not": "The loop body itself or a one-off script. Is NOT: the product category AI Motor (governed execution vehicle).",
       "example": "CF `*/5` cron fires; Railway runs the loop handler.",
       "aliases_retired": [
-        "Motor",
-        "motor"
+        "Plus One",
+        "plus one",
+        "fleet-motor nickname"
       ],
       "public_phrasing": "scheduled cloud runner",
       "conflict_rule": null,
@@ -38,8 +39,41 @@
       "doctrine_source_file": null,
       "code_alias": [
         "motor",
-        "noos-loop-fleet-tick-v1"
+        "noos-loop-fleet-tick-v1",
+        "ops-motor"
       ]
+    },
+    {
+      "term": "AI Motor",
+      "tag": "CANONICAL",
+      "meaning": "The governed execution vehicle that turns human intent or business events into verified operational outcomes. It coordinates AI engines, agents, tools, workflows or Runways, policy, knowledge, budget, and human authority; it verifies, repairs, escalates, recovers, and records receipts.",
+      "in_our_system": "product category on /motors/; Shared Runway Motor under runway-core; nesting law is one AI Motor with many AI engines inside.",
+      "is_not": "an AI engine; a chatbot; overnight chat left open; unbounded autonomy; the ops Scheduler and executor alone.",
+      "example": "Intent enters a gateway; the AI Motor applies policy and authority, routes engines and tools, verifies, then promotes or escalates with a receipt.",
+      "aliases_retired": null,
+      "public_phrasing": "AI Motor \u2014 governed execution vehicle (engines inside, not synonyms)",
+      "conflict_rule": "Never treat AI Motor and AI engine as interchangeable. Bare historical code token motor may mean Scheduler and executor \u2014 disambiguate by context.",
+      "allowed_surfaces": "internal, public, website, prompt, contract, receipt",
+      "banned_surfaces": null,
+      "related": null,
+      "doctrine_source_file": null,
+      "code_alias": null
+    },
+    {
+      "term": "AI engine",
+      "tag": "CANONICAL",
+      "meaning": "One intelligence, reasoning, or analysis power unit used inside or beside an AI Motor \u2014 a model, critic, classifier, retriever, scorer, draft generator, or decision-support function. Many AI engines may serve one AI Motor.",
+      "in_our_system": "cheap or open models, critics, and retrieval used under Motor routing; engines answer what should happen; the AI Motor keeps work moving with proof.",
+      "is_not": "the AI Motor; the whole product; promotion or deploy authority; continuous case progression by itself.",
+      "example": "An AI engine drafts an STR narrative; the AI Motor still owns intake, deadlines, escalation, approval, and audit-pack closure.",
+      "aliases_retired": null,
+      "public_phrasing": "AI engine \u2014 intelligence power unit inside an AI Motor",
+      "conflict_rule": "Prefer AI engine(s) for the intelligence slice; never call the whole product an AI engine.",
+      "allowed_surfaces": "internal, public, website, prompt, contract, receipt",
+      "banned_surfaces": null,
+      "related": null,
+      "doctrine_source_file": null,
+      "code_alias": null
     },
     {
       "term": "Need-to-know access",
@@ -3625,7 +3659,8 @@
     }
   ],
   "alias_map": {
-    "motor": "Scheduler and executor",
+    "plus one": "Scheduler and executor",
+    "fleet-motor nickname": "Scheduler and executor",
     "least-knowledge": "Need-to-know access",
     "least privilege": "Need-to-know access",
     "reserved commercial figure": "Confidential commercial terms",
@@ -3638,16 +3673,17 @@
   },
   "retired_terms": [
     "Least-knowledge",
-    "Motor",
+    "Plus One",
     "Reserved commercial figure",
     "TrustField Technologies",
     "TrustField Technologies Inc",
     "agnostic",
     "client base",
+    "fleet-motor nickname",
     "least privilege",
     "least-knowledge",
     "model-agnostic",
-    "motor",
+    "plus one",
     "reserved commercial figure",
     "the percentage"
   ],
@@ -3658,10 +3694,12 @@
   ],
   "code_alias": [
     "motor",
-    "noos-loop-fleet-tick-v1"
+    "noos-loop-fleet-tick-v1",
+    "ops-motor"
   ],
   "tombstone_map": {
-    "motor": "Scheduler and executor",
+    "plus one": "Scheduler and executor",
+    "fleet-motor nickname": "Scheduler and executor",
     "least-knowledge": "Need-to-know access",
     "least privilege": "Need-to-know access",
     "reserved commercial figure": "Confidential commercial terms",
