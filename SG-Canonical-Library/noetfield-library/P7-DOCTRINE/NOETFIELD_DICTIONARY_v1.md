@@ -122,7 +122,7 @@ Agents often call simple active chats or manual tasks 24/7. This hurts trust wit
 - Chat session open overnight  
 - GHA workflow with stale conclusion while Railway runs  
 - Marketing “always-on brain” without motor name + receipt age  
-- The product **AI Motor** category (vehicle for governed execution) — see next entry  
+- The product **AI Motor** category (deterministic execution engine) — see next entry  
 
 **Examples**  
 - “NOOS fleet motor GREEN; 8/14 loops RUNNING; inbox STALE” — honest  
@@ -136,40 +136,43 @@ Bare “Motor” in fleet/census/ops health = **Ops Motor / Scheduler and execut
 
 ---
 
-## AI Motor vs AI engine (vehicle nesting)
+## AI Motor vs AI engine (Option A · execution engine)
 
 **Meaning**  
-- **AI Motor:** The governed execution vehicle that turns human intent or business events into verified operational outcomes. It coordinates engines, agents, tools, workflows/runways, policy, knowledge, budget, and human authority; it verifies, repairs, escalates, recovers, and records receipts.  
-- **AI engine:** One intelligence / reasoning / analysis power unit *inside* (or beside) a Motor — model, critic, classifier, retriever, scorer, draft generator, decision-support function. Many engines may run inside one Motor.  
-- **Nesting law:** One Motor. Many engines. They are **not** synonyms. Engines answer “what should happen / what does this mean?” The Motor answers “how does work keep moving safely with proof?”
+- **AI Motor / Motor:** A deterministic **execution engine**. It receives governed execution contracts, orchestrates verified workflows, produces evidence, and returns auditable receipts. Industry class: Tesla Vehicle Controller / OpenAI Tool Runtime / Step Functions / Agent Runtime.  
+- **AI engine:** One intelligence / reasoning / analysis power unit that lives **inside Brain only** — model, critic, classifier, retriever, scorer, draft generator, decision-support function (Llama / GPT / Gemini / …). AI engines are never Brain and never Motor.  
+- **Stack law (siblings outside Motor):** Sensors → Brain → Contract → Kernel → Motor → Evidence → Eval → Learning.  
+- **Lock:** **Option A LOCKED** · **Option B RETIRED** (Motor as whole-car container with Brain/Kernel/engines inside Motor).
 
 **Why**  
-Calling the whole product an “AI engine” collapses Noetfield into a model wrapper. Treating Motor as slang for engine erases the operating vehicle.
+Calling Motor the whole car collapses the stack and hides Brain, Contract, Kernel, Evidence, Eval, and Learning. Calling an LLM “Brain” or “Motor” erases plane boundaries. Motor complements LLM reasoning; it does not replace it.
 
 **IS NOT**  
-- AI Motor = AI engine  
-- AI engine = the whole product, promotion authority, or continuous case progression alone  
+- AI Motor = AI engine / LLM  
+- AI Motor = whole Tesla-class car / full SourceA–Noetfield governed system  
+- AI engine = Brain (engines live *in* Brain)  
+- AI engine = Motor, the whole product, or promotion authority  
 - AI Motor = chatbot, overnight Cursor session, or unbounded autonomy  
-- Engines minting final truth without verification / human gates  
+- Option B “engines inside Motor / Motor = vehicle” teaching  
 
-**Car analogy (canonical story)**  
-**AI Motor ≅ Tesla-class car:** the whole vehicle that turns human intent into action and work. Engines (big and small), computers, pipelines = power and compute *inside* the car. Transmission = workflows/runways. Wheels = tools/APIs. Driver = human decision authority. Trip log = receipts. Not a lone engine on a stand. Full story SSOT: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
+**Tesla teaching (canonical)**  
+**Whole car ≅ full governed system** (do **not** call that Motor). **Motor ≅ Vehicle Controller** — deterministic execution only. Sensors include crawl/API/webhook/docs/human cmd/receipts; **crawler ≠ Brain**. Full story SSOT: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
 
-**Architecture sentence**  
-Deterministic Motor + bounded AI engines + human decision authority.
+**CTO sentence (exact)**  
+> Noetfield Motor is a deterministic execution engine. It receives governed execution contracts, orchestrates verified workflows, produces evidence, and returns auditable receipts. It complements LLM reasoning rather than replacing it.
 
 **Examples**  
-- TrustField: engines draft/classify/summarize; Motor runs intake → evidence → assignment → deadlines → escalate → approve → audit-pack close.  
-- Runways: shared Motor routes cheap engines + tools through plan → execute → verify → repair → receipt.  
-- Public chat: “ten business ideas” = engine-only. Persistent build sequence to payment = Motor around engines.
+- TrustField: AI engines inside Brain draft/classify/summarize; Motor executes authorized workflow steps and returns receipts.  
+- Runways: Contract authorizes; Motor executes tools/workflows; Evidence records the run.  
+- Public chat: “ten business ideas” = AI-engine output without Motor execution.
 
 **Conflict rule**  
-Never present Motor and engine as interchangeable. Product/customer copy uses **AI Motor** for the vehicle and **AI engine(s)** for intelligence components. Ops/fleet copy uses **Scheduler and executor** (ops motor) for schedulers.
+Never present Motor and AI engine as interchangeable. Never put Brain or AI engines inside Motor. Product/customer copy: **AI Motor** = execution engine; **AI engine(s)** = intelligence units in Brain. Ops/fleet copy: **Scheduler and executor** (ops motor) for schedulers.
 
 **Public rewrite**  
-> An AI Motor is like a Tesla-class car: it turns human intent into action and work. AI engines are the intelligence power units inside that vehicle — many engines can serve one Motor. Engines analyze and draft; the Motor advances, verifies, escalates, and records.
+> Noetfield Motor is a deterministic execution engine — like a vehicle controller or tool runtime. It runs authorized contracts and returns receipts. AI engines (models) live in Brain and complement Motor; they are not Motor.
 
-**Related:** Scheduler and executor · Loop · Runway · Receipt · Governed · vendor-neutral  
+**Related:** Scheduler and executor · Loop · Runway · Receipt · Governed · Brain · Contract · Kernel · vendor-neutral  
 **Doctrine:** `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md` · public `/motors/` · A-Z batch entries `AI Motor` / `AI engine`
 
 ---
@@ -426,5 +429,7 @@ Founder locks dictionary entry → bump dictionary version → **mint** terminol
 *v1.1 (2026-07-08) — Living System axis dictionary seed for W1 terminology mint.*
 
 *v1 (2026-07-06) — Initial dictionary seed: receipt family, census, motor/loop, commercial tone, deploy-truth, vendor-neutral, diagnostic/enforce split.*
+
+*v1.4 (2026-07-22) — LIVE_LOCK Option A: AI Motor = deterministic execution engine; Option B whole-car-as-Motor RETIRED; AI engines inside Brain only.*
 
 *v1.3 (2026-07-22) — LIVE_LOCK AI Motor vs AI engine nesting; ops motor disambiguated from product AI Motor; A-Z batch mint.*

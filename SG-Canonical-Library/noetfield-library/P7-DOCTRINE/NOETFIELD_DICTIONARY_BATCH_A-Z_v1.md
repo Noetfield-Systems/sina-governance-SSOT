@@ -8,7 +8,7 @@ Terminology rows are **minted from** this file. Rebuild index: `python3 language
 **Scheduler and executor** — CANONICAL
 Meaning: The cloud scheduler and the process runner that start loops on a timer.
 In our system: Cloudflare cron dispatches to the Railway loop runner.
-Is NOT: The loop body itself or a one-off script. Is NOT: the product category AI Motor (governed execution vehicle).
+Is NOT: The loop body itself or a one-off script. Is NOT: the product category AI Motor (deterministic execution engine).
 Example: CF `*/5` cron fires; Railway runs the loop handler.
 Aliases retired: Plus One, plus one, fleet-motor nickname
 Public phrasing: scheduled cloud runner
@@ -18,24 +18,24 @@ Code alias: motor, noos-loop-fleet-tick-v1, ops-motor
 ---
 
 **AI Motor** — CANONICAL
-Meaning: The governed execution vehicle that turns human intent or business events into verified operational outcomes. It coordinates AI engines, agents, tools, workflows or Runways, policy, knowledge, budget, and human authority; it verifies, repairs, escalates, recovers, and records receipts.
-In our system: product category on /motors/; Shared Runway Motor under runway-core; nesting law is one AI Motor with many AI engines inside.
-Is NOT: an AI engine; a chatbot; overnight chat left open; unbounded autonomy; the ops Scheduler and executor alone.
-Example: Intent enters a gateway; the AI Motor applies policy and authority, routes engines and tools, verifies, then promotes or escalates with a receipt.
-Public phrasing: AI Motor — governed execution vehicle (engines inside, not synonyms)
+Meaning: Deterministic execution engine. Receives governed execution contracts, orchestrates verified workflows, produces evidence, and returns auditable receipts. Complements LLM reasoning rather than replacing it. Industry: Tesla Vehicle Controller / OpenAI Tool Runtime / Step Functions / Agent Runtime.
+In our system: product category on /motors/; Shared Runway Motor under runway-core; stack sibling outside Brain — Sensors → Brain → Contract → Kernel → Motor → Evidence → Eval → Learning. Option A LOCKED; Option B (Motor as whole-car container) RETIRED.
+Is NOT: an AI engine; Brain; the whole Tesla-class / governed system car; a chatbot; overnight chat left open; unbounded autonomy; the ops Scheduler and executor alone.
+Example: An authorized contract reaches Motor; Motor orchestrates verified workflow steps and tools, emits evidence, and returns an auditable receipt.
+Public phrasing: AI Motor — deterministic execution engine (not the whole car; not the LLM)
 Allowed surfaces: internal, public, website, prompt, contract, receipt
-Conflict rule: Never treat AI Motor and AI engine as interchangeable. Bare historical code token motor may mean Scheduler and executor — disambiguate by context.
+Conflict rule: Never treat AI Motor and AI engine as interchangeable. Never place Brain or AI engines inside Motor. Bare historical code token motor may mean Scheduler and executor — disambiguate by context.
 
 ---
 
 **AI engine** — CANONICAL
-Meaning: One intelligence, reasoning, or analysis power unit used inside or beside an AI Motor — a model, critic, classifier, retriever, scorer, draft generator, or decision-support function. Many AI engines may serve one AI Motor.
-In our system: cheap or open models, critics, and retrieval used under Motor routing; engines answer what should happen; the AI Motor keeps work moving with proof.
-Is NOT: the AI Motor; the whole product; promotion or deploy authority; continuous case progression by itself.
-Example: An AI engine drafts an STR narrative; the AI Motor still owns intake, deadlines, escalation, approval, and audit-pack closure.
-Public phrasing: AI engine — intelligence power unit inside an AI Motor
+Meaning: One intelligence, reasoning, or analysis power unit — a model, critic, classifier, retriever, scorer, draft generator, or decision-support function (Llama / GPT / Gemini / …). Many AI engines live inside Brain.
+In our system: AI engines live inside Brain only; they answer what should happen / what this means; Motor executes authorized contracts and does not contain Brain or the engine fleet.
+Is NOT: Brain; the AI Motor; the whole product; promotion or deploy authority; continuous case progression by itself.
+Example: An AI engine inside Brain drafts an STR narrative; Motor executes the authorized follow-on workflow steps and returns a receipt.
+Public phrasing: AI engine — intelligence power unit inside Brain (not Motor)
 Allowed surfaces: internal, public, website, prompt, contract, receipt
-Conflict rule: Prefer AI engine(s) for the intelligence slice; never call the whole product an AI engine.
+Conflict rule: Prefer AI engine(s) for the intelligence slice inside Brain; never call the whole product or Motor an AI engine; never equate AI engine with Brain.
 
 ---
 
