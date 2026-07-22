@@ -1,39 +1,44 @@
 # NOETFIELD — Motor & Engine vocabulary + story v1
 
-**Status:** DRAFT · founder-corrected nesting (2026-07-22)  
+**Status:** `LIVE_LOCKED` · founder-corrected nesting (2026-07-22)  
 **Owner:** Founder meaning · Noetfield Systems  
 **Related:** `NOETFIELD_TERMINOLOGY_v1.md` · `NOETFIELD_DICTIONARY_v1.md` · public `/motors/` · runway-core Motor contract  
 **Law:** One Motor. Many engines. They are not synonyms.
+**Mint path:** A-Z batch + `NOETFIELD_DICTIONARY_v1.md` → terminology one-liners → this long-form story.
 
 ---
 
-## 1. The story (car / vehicle)
+## 1. The story (Tesla-class car / vehicle)
 
-Treat a **car** as the vehicle that turns **human intent into finished work**.
+Our **AI Motor** is like a **Tesla car**: a whole vehicle that turns **human intent into action and work** — not a single engine sitting on a bench.
 
-Inside a real car you do not find one mysterious “AI thing.” You find:
+You tell the car where to go (intent). The car continuously converts that intent into motion, corrections, stops, and safe recovery. Inside the car you still find many power units and computers — big and small — plus sensors, pipelines, controllers, and logs. The driver (or authorized override) keeps consequential control.
 
-- big engines and small engines
+Inside a Tesla-class car you do not find one mysterious “AI thing.” You find:
+
+- big engines / motors and small actuators
 - computers and controllers
 - pipelines and cooling
 - sensors and gauges
-- transmission, brakes, steering
-- a driver who still decides when to go, stop, or override
+- transmission / drive paths, brakes, steering
+- a driver (or authority) who still decides when to go, stop, or override
 
 Noetfield uses the same nesting:
 
 | Car part | Noetfield term | Job |
 | -------- | -------------- | --- |
-| The vehicle as a whole | **AI Motor** | Keeps intent moving into verified operational outcomes under policy and authority |
+| The Tesla-class vehicle as a whole | **AI Motor** | Turns human intent into continuous, governed action and verified work |
 | Power units inside | **AI engines** (plural) | Analyze, predict, generate, classify, score, draft, retrieve |
 | Transmission / gear paths | **Workflows / Runways** | Named paths from goal to acceptable result |
 | Wheels / contact with the world | **Tools & APIs** | Bounded writes, searches, sandboxes, deploys, tickets |
 | Driver / authority | **Human decision authority** | Approves consequential, legal, financial, or ambiguous moves |
 | Trip log / black box | **Receipts & evidence** | What ran, under what authority, with what checks |
 
-**Public line:** Models generate. Agents participate. Motors operate.
+**Intent line:** Human intent → AI Motor (vehicle) → action and verified work.
 
-**Nesting line:** Engines think and draft. The Motor advances the work.
+**Public line:** Engines think. Models generate. Agents participate. Motors operate.
+
+**Nesting line:** Engines think and draft. The Motor advances the work — like a car advancing the trip.
 
 ---
 
@@ -245,7 +250,7 @@ Avoid: treating Motor as informal slang — for Noetfield it is the category nam
 
 ## 7. One-paragraph story (use anywhere)
 
-An **AI engine** is a power unit: it analyzes, predicts, generates, classifies, or drafts. An organization may run many engines—large and small—with different specs. An **AI Motor** is the vehicle that turns human intent into finished work: it intakes events, applies policy and authority, routes engines and agents, calls tools, verifies and repairs, escalates to humans, and records receipts. Workflows and Runways are the paths; tools are the contact with the world; humans still drive consequential decisions. Public chat often sells an engine. Noetfield builds Motors that keep work moving until an outcome is verified or safely stopped.
+An **AI engine** is a power unit: it analyzes, predicts, generates, classifies, or drafts. An organization may run many engines—large and small—with different specs. An **AI Motor** is Tesla-class: the whole vehicle that turns human intent into action and work. It intakes events, applies policy and authority, routes engines and agents, calls tools, verifies and repairs, escalates to humans, and records receipts. Workflows and Runways are the paths; tools are the contact with the world; humans still hold consequential authority. Public chat often sells an engine on a stand. Noetfield builds Motors — cars that keep the trip moving until an outcome is verified or safely stopped.
 
 ---
 
@@ -269,3 +274,7 @@ Verified operational outcome
 ---
 
 *v1 (2026-07-22) — Founder correction: Motor ≠ engine. Car/vehicle story; engines plural inside Motor; TrustField / Polsia / Runway applications; naming guidance. Aligns public Motors page with nested power-unit language.*
+
+*v1.1 (2026-07-22) — LIVE_LOCKED into dictionary A-Z + DICTIONARY_v1 + TERMINOLOGY_v1.3; public /motors/ trim follows.*
+
+*v1.2 (2026-07-22) — Founder analogy lock: AI Motor ≅ Tesla-class car (intent → action/work); engines remain power units inside.*

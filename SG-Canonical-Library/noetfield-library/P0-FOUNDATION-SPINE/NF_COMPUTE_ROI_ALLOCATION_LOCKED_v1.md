@@ -123,7 +123,8 @@ File a weekly receipt with Actions minutes by class A/B/C/D, percent of 50,000, 
 
 ## relation_to_prior_locks
 
-Extends `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` scaling posture (Cloudflare Agents + Workflows runway). Clarifies the enterprise plan as org shell + ROI continuous-integration budget, not compute strategy.
+- Wake default is event-driven authenticated HTTP `job_id`; schedules are allowed under `NF-WAKE-PATH-CONFLICT-POLICY-V1` passport — do not hard-block production path solely for cron / `scheduled()`.
+- Extends `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` scaling posture (Cloudflare Agents + Workflows runway). Clarifies the enterprise plan as org shell + ROI continuous-integration budget, not compute strategy.
 
 ## sg_decision
 
