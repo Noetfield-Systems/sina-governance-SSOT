@@ -153,7 +153,7 @@ Calling the whole product an “AI engine” collapses Noetfield into a model wr
 - Engines minting final truth without verification / human gates  
 
 **Car analogy (canonical story)**  
-Car = vehicle for human intent → work. Engines (big and small), computers, pipelines = power and compute inside. Transmission = workflows/runways. Wheels = tools/APIs. Driver = human decision authority. Trip log = receipts. Full story SSOT: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
+**AI Motor ≅ Tesla-class car:** the whole vehicle that turns human intent into action and work. Engines (big and small), computers, pipelines = power and compute *inside* the car. Transmission = workflows/runways. Wheels = tools/APIs. Driver = human decision authority. Trip log = receipts. Not a lone engine on a stand. Full story SSOT: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
 
 **Architecture sentence**  
 Deterministic Motor + bounded AI engines + human decision authority.
@@ -167,7 +167,7 @@ Deterministic Motor + bounded AI engines + human decision authority.
 Never present Motor and engine as interchangeable. Product/customer copy uses **AI Motor** for the vehicle and **AI engine(s)** for intelligence components. Ops/fleet copy uses **Scheduler and executor** (ops motor) for schedulers.
 
 **Public rewrite**  
-> An AI Motor is the governed vehicle for work. AI engines are the intelligence power units inside it — many engines can serve one Motor. Engines analyze and draft; the Motor advances, verifies, escalates, and records.
+> An AI Motor is like a Tesla-class car: it turns human intent into action and work. AI engines are the intelligence power units inside that vehicle — many engines can serve one Motor. Engines analyze and draft; the Motor advances, verifies, escalates, and records.
 
 **Related:** Scheduler and executor · Loop · Runway · Receipt · Governed · vendor-neutral  
 **Doctrine:** `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md` · public `/motors/` · A-Z batch entries `AI Motor` / `AI engine`

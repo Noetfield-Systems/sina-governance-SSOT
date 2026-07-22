@@ -53,9 +53,9 @@ IS NOT: any script that runs once.
 **Scheduler and executor** — Cloud scheduler + process runner that starts loops (CF cron, Railway). Ops sense of “motor.”  
 IS NOT: the loop body; the product **AI Motor**.
 
-**AI Motor** — Governed execution vehicle: intent/event → verified outcome under policy, engines, agents, tools, workflows, and human authority.  
-IS NOT: an AI engine; a chatbot; unbounded autonomy.  
-EX: one AI Motor, many AI engines inside.
+**AI Motor** — Governed execution vehicle (Tesla-class car): human intent → action and verified work under policy, engines, agents, tools, workflows, and human authority.  
+IS NOT: an AI engine; a chatbot; unbounded autonomy; an engine on a stand.  
+EX: one AI Motor, many AI engines inside — like one car, many power units.
 
 **AI engine** — Intelligence power unit inside or beside an AI Motor (model, critic, classifier, retrieval, scorer, draft).  
 IS NOT: the AI Motor; promotion authority; the whole product.  
