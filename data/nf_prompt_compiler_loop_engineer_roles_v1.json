@@ -1,0 +1,81 @@
+{
+  "schema": "nf.prompt-compiler-loop-engineer-roles.v1",
+  "status": "RUNTIME_ENFORCEMENT_PROVEN_V1",
+  "source_repo": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+  "findings_doc": "docs/specialists/PROMPT_COMPILER_AND_LOOP_ENGINEER_INDUSTRY_FINDINGS_v1.md",
+  "roles": {
+    "Prompt Compiler Specialist": {
+      "skill": "skills/prompt-compiler-specialist/SKILL.md",
+      "owns": [
+        "sectioned compile",
+        "prompt packet lint",
+        "delivery_route fields"
+      ],
+      "binds_to": [
+        "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+        "scripts/p0pgr_packet_lint_v1.py"
+      ],
+      "forbids": [
+        "P0 leakage to workers",
+        "chat-as-runtime",
+        "second Scheduler and executor"
+      ]
+    },
+    "Loop Engineer Specialist": {
+      "skill": "skills/loop-engineer-specialist/SKILL.md",
+      "owns": [
+        "loop_id",
+        "cadence",
+        "deadman",
+        "last_fired_at",
+        "closed-loop wiring"
+      ],
+      "binds_to": [
+        ".cursor/rules/plans-24-7-cloud-loops.mdc",
+        "skills/commissioning-specialist/SKILL.md"
+      ],
+      "forbids": [
+        "mac-only without cloud mirror",
+        "unsupervised self-redesign",
+        "no external verify"
+      ]
+    }
+  },
+  "second_brain": {
+    "role": "optional founder knowledge capture",
+    "folders": [
+      "ideas",
+      "projects",
+      "sources"
+    ],
+    "binding": "evidence_refs only after receipts or allowlisted read surfaces",
+    "not": [
+      "Gateway",
+      "Scheduler and executor",
+      "Prompt Compiler core",
+      "loop registry"
+    ]
+  },
+  "status_prior": "FINDINGS_READY_FOR_SPECIALIST_USE_V1",
+  "runtime_proof": {
+    "goal_id": "goal_2aa45ebea60b4c15a7f123",
+    "tenant_id": "tenant-pc-le-proof",
+    "kernel": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev",
+    "hdir": "https://noetfield-hdir-staging.sina-kazemnezhad-ca.workers.dev",
+    "goal_receipt_id": "grcp_492df46a9bf54f4082790e",
+    "goal_receipt_hash": "64167578929a4fb207a6888569520042e30acfac6cf8442785646458196885fb",
+    "verify_passed": true,
+    "pause_resume": true,
+    "force_repair_once": true,
+    "links_valid": "repaired",
+    "prompt_packet_hashes": {
+      "initial_webpage_build": "cb362bf35b39c5c147794c667a6f6115176ba4ffd607c5f478f80c24d556f0ec",
+      "repair_links_valid": "092a6e55905936b1ba9a263539b3372d6697f8985531d1ac0c657c286400f327",
+      "staging_verify_finalize": "7aae926ead2ae94ede2f4efb8d04c35540458080bb43cd35447d0a777e32aeba"
+    },
+    "artifact": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_a66966e2489849c4b6a676/artifacts/index.html",
+    "hdir_sha": "c6744b6",
+    "runway_sha": "c39198d",
+    "note": "Staging Kernel is the live bind for app.noetfield.com; no App production promotion required for this proof."
+  }
+}
