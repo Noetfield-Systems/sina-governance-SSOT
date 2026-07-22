@@ -2,6 +2,7 @@
 set -euo pipefail
 
 PROJECT_NAME="${CLOUDFLARE_PAGES_PROJECT_NAME:-noetfield-runway-standalone}"
+CF_ACCOUNT_ID="${CLOUDFLARE_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID_FILE:-${CLOUDFLARE_PAGES_ACCOUNT_ID:-}}}"
 SITE_DIR="$(cd "$(dirname "$0")" && pwd)"
 DEFAULT_ENV="${CLOUDFLARE_ENV:-production}"
 PROJECT_BRANCH="${CLOUDFLARE_PAGES_BRANCH:-main}"
@@ -87,6 +88,36 @@ function repo_branch() {
   fi
 }
 
+function resolve_repo_directory() {
+  local start_dir="$1"
+  local candidate="$2"
+  local fallback_dir
+
+  if [ -z "$candidate" ]; then
+    echo ""
+    return
+  fi
+
+  if [ -d "$candidate" ] && git -C "$candidate" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "$candidate"
+    return
+  fi
+
+  fallback_dir="${start_dir}/../${candidate}"
+  if [ -d "$fallback_dir" ] && git -C "$fallback_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "$fallback_dir"
+    return
+  fi
+
+  fallback_dir="${start_dir}/../../${candidate}"
+  if [ -d "$fallback_dir" ] && git -C "$fallback_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "$fallback_dir"
+    return
+  fi
+
+  echo ""
+}
+
 function compute_artifact_sha256() {
   local tmp_file
   tmp_file="$(mktemp)"
@@ -98,6 +129,10 @@ function compute_artifact_sha256() {
     "$SITE_DIR/runway-config.js"
     "$SITE_DIR/providers/demo-runway-provider.js"
     "$SITE_DIR/providers/live-runway-provider.js"
+    "$SITE_DIR/functions/v1/runway/_proxy.js"
+    "$SITE_DIR/functions/v1/runway/runtime.js"
+    "$SITE_DIR/functions/v1/runway/receipts/verify.js"
+    "$SITE_DIR/functions/v1/runway/runs/[runId]/receipt.js"
     "$SITE_DIR/_worker.js"
     "$SITE_DIR/verification.json"
     "$SITE_DIR/verifier.json"
@@ -156,7 +191,6 @@ function detect_backend_status() {
   local probe_exit
   probe_exit="$(curl -sS -m 4 -o /tmp/noetfield-runway-standalone-curl-probe.out -w "%{http_code}" -X GET "$probe_url" \
     -H "x-tenant-id: tenant-runway-staging" \
-    -H "x-runway-contract-version: ${RUNWAY_CONTRACT_VERSION:-runway.v1}" \
     -H "accept: application/json" || echo "000")"
 
   case "$probe_exit" in
@@ -178,6 +212,9 @@ fi
 cd "$SITE_DIR"
 
 COMMAND=(wrangler pages deploy . --project-name "$PROJECT_NAME" --branch "$PROJECT_BRANCH")
+if [ -n "${CF_ACCOUNT_ID:-}" ]; then
+  echo "INFO: ignoring CF_ACCOUNT_ID for wrangler pages deploy v4.103 (account-id is not supported)."
+fi
 
 VERIFIER_FILE="${SITE_DIR}/verifier.json"
 VERIFIER_FILE_TEXT="${SITE_DIR}/verifier.txt"
@@ -262,8 +299,9 @@ fi
 
 HDIR_RELEASE_SHA="${HDIR_RELEASE_SHA:-}"
 if [ -z "$HDIR_RELEASE_SHA" ]; then
-  if git -C "$SITE_DIR/../NOETFIELD-RUNWAY/noetfield-hdir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    HDIR_RELEASE_SHA="$(git -C "$SITE_DIR/../NOETFIELD-RUNWAY/noetfield-hdir" rev-parse HEAD 2>/dev/null || echo unknown)"
+  HDIR_ROOT_CANDIDATE="$(resolve_repo_directory "$SITE_DIR" "NOETFIELD-RUNWAY")"
+  if [ -n "$HDIR_ROOT_CANDIDATE" ] && git -C "${HDIR_ROOT_CANDIDATE}/noetfield-hdir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    HDIR_RELEASE_SHA="$(git -C "${HDIR_ROOT_CANDIDATE}/noetfield-hdir" rev-parse HEAD 2>/dev/null || echo unknown)"
   else
     HDIR_RELEASE_SHA="unknown"
   fi
@@ -271,7 +309,10 @@ elif [ "$HDIR_RELEASE_SHA" = "" ]; then
   HDIR_RELEASE_SHA="unknown"
 fi
 
-RUNWAY_KERNEL_REPO_DIR="${SITE_DIR}/../NOETFIELD-RUNWAY"
+RUNWAY_KERNEL_REPO_DIR="${RUNWAY_KERNEL_REPO_DIR:-}"
+if [ -z "$RUNWAY_KERNEL_REPO_DIR" ]; then
+  RUNWAY_KERNEL_REPO_DIR="$(resolve_repo_directory "$SITE_DIR" "NOETFIELD-RUNWAY")"
+fi
 RUNWAY_KERNEL_RELEASE_SHA="${RUNWAY_KERNEL_RELEASE_SHA:-}"
 if [ -z "${RUNWAY_KERNEL_RELEASE_SHA}" ]; then
   RUNWAY_KERNEL_RELEASE_SHA="$(repo_sha "${RUNWAY_KERNEL_REPO_DIR}")"
@@ -286,6 +327,7 @@ if [ "${RUNWAY_KERNEL_RELEASE_SHA}" = "unknown" ] || [ "${RUNWAY_KERNEL_REPO}" =
 else
   RUNWAY_KERNEL_COMMIT_URL="${RUNWAY_KERNEL_REPO}/tree/${RUNWAY_KERNEL_RELEASE_SHA}"
 fi
+RUNWAY_KERNEL_DEPLOYMENT_ID="${RUNWAY_KERNEL_DEPLOYMENT_ID:-unknown}"
 
 echo "INFO: deploying ${PROJECT_NAME} (${PROJECT_BRANCH} / ${DEFAULT_ENV})"
 
@@ -342,6 +384,8 @@ cat > "$VERIFIER_FILE" <<EOF
     "receipt": "GET /v1/runway/runs/:runId/receipt",
     "verify": "POST /v1/runway/receipts/verify"
   },
+  "runway_v1": "${RUNWAY_CONTRACT_VERSION}",
+  "runway_kernel_deployment_id": "${RUNWAY_KERNEL_DEPLOYMENT_ID}",
   "hdir_release_sha": "${HDIR_RELEASE_SHA}",
   "runway_kernel_repository": "${RUNWAY_KERNEL_REPO}",
   "runway_kernel_branch": "${RUNWAY_KERNEL_BRANCH}",
@@ -386,6 +430,8 @@ runway_contracts_receipt=GET /v1/runway/runs/:runId/receipt
 runway_contracts_verify=POST /v1/runway/receipts/verify
 runway_contract_frontend=${RUNWAY_CONTRACT_VERSION}
 runway_contract_kernel=runway.v1
+runway_v1=${RUNWAY_CONTRACT_VERSION}
+runway_kernel_deployment_id=${RUNWAY_KERNEL_DEPLOYMENT_ID}
 runway_kernel_runtime_attestation_url=${RUNWAY_RUNTIME_ATTESTATION_URL}
 live_backend_status=${LIVE_BACKEND_STATUS}
 runway_runtime_connection_status=${LIVE_BACKEND_STATUS}
@@ -439,6 +485,8 @@ cat > "$VERIFIER_HTML" <<EOF
     \"receipt\": \"GET /v1/runway/runs/:runId/receipt\",
     \"verify\": \"POST /v1/runway/receipts/verify\"
   },
+  \"runway_v1\": \"${RUNWAY_CONTRACT_VERSION}\",
+  \"runway_kernel_deployment_id\": \"${RUNWAY_KERNEL_DEPLOYMENT_ID}\",
   \"runway_contract_versions\": {
     \"frontend\": \"${RUNWAY_CONTRACT_VERSION}\",
     \"kernel\": \"runway.v1\"
@@ -494,6 +542,8 @@ cat > "$VERIFICATION_FILE" <<EOF
     "receipt": "GET /v1/runway/runs/:runId/receipt",
     "verify": "POST /v1/runway/receipts/verify"
   },
+  "runway_v1": "${RUNWAY_CONTRACT_VERSION}",
+  "runway_kernel_deployment_id": "${RUNWAY_KERNEL_DEPLOYMENT_ID}",
   "runway_kernel_runtime_attestation_url": "${RUNWAY_RUNTIME_ATTESTATION_URL}",
   "runway_runtime_connection_status": "${LIVE_BACKEND_STATUS}",
   "live_backend_connected": ${LIVE_BACKEND_CONNECTED},

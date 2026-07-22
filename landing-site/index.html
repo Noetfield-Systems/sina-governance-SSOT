@@ -18,16 +18,35 @@
       content="Deterministic, receipted AI runtime infrastructure. Define, plan, execute, verify, and prove."
     />
     <meta name="theme-color" content="#040818" />
-    <title>Noetfield Runway | From Goal to Verified Output</title>
+    <title>Noetfield Runway | Verified AI Output for Real Work</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #050615;
+        color: #ecf2ff;
+        font-family: "Manrope", Arial, sans-serif;
+        text-rendering: geometricPrecision;
+      }
+    </style>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <noscript>
+      <div class="container" style="padding: 1rem 0; color: #ffe4a8; font-family: Arial, sans-serif">
+        JavaScript is currently required for live cockpit actions. The page content is still visible below.
+      </div>
+    </noscript>
+    <div id="landingBootstrapNotice" class="landing-bootstrap-notice container">
+      Rendering Noetfield Runway… If this is visible for long, hard-refresh and check your network.
+    </div>
     <div class="bg-orb orb-left" aria-hidden="true"></div>
     <div class="bg-orb orb-right" aria-hidden="true"></div>
 
@@ -38,12 +57,33 @@
         <span class="trust-pill">Machine receipts for proof</span>
       </div>
     </div>
+    <div class="sticky-cta" id="stickyCta">
+      <div class="container sticky-cta-inner">
+        <div class="urgency-pill" id="urgencyBanner" aria-live="polite"></div>
+        <p>
+          <strong>SourceA-style landing is now commission-ready:</strong>
+          run a demo in 30 seconds and get a proof-first quote in 24 hours.
+        </p>
+        <a
+          class="btn btn-small cta-track"
+          href="/?utm_source=direct&amp;utm_medium=sticky&amp;utm_campaign=landing&amp;utm_content=demo#proof"
+          data-track-event="sticky_cta_demo"
+          >Run demo</a
+        >
+        <a
+          class="btn btn-soft btn-small cta-track"
+          href="/?utm_source=direct&amp;utm_medium=sticky&amp;utm_campaign=landing&amp;utm_content=lead#leadCapture"
+          data-track-event="sticky_cta_lead"
+          >Get started</a
+        >
+      </div>
+    </div>
 
     <header class="site-header">
       <nav class="container nav-shell">
         <a class="brand" href="#top">Noetfield Runway</a>
         <div class="nav-links">
-          <a href="#pain">Pain → Solution</a>
+          <a href="#pain">Pain and Solution</a>
           <a href="#proof">Live proof</a>
           <a href="#workflow">Workflow</a>
           <a href="#proof-layer">Proof</a>
@@ -95,10 +135,20 @@
               <span>before every run</span>
             </div>
           </div>
-          <div class="hero-actions">
-            <a class="btn" href="#proof">Start a Demo Job</a>
-            <a class="btn btn-soft" href="#commission">Commission a Runway</a>
-          </div>
+        <div class="hero-actions">
+          <a
+            class="btn cta-track"
+            href="/?utm_source=direct&amp;utm_medium=hero&amp;utm_campaign=landing&amp;utm_content=demo#proof"
+            data-track-event="hero_demo"
+            >Start a Demo Job</a
+          >
+          <a
+            class="btn btn-soft cta-track"
+            href="/?utm_source=direct&amp;utm_medium=hero&amp;utm_campaign=landing&amp;utm_content=quote#leadCapture"
+            data-track-event="hero_quote"
+            >Get a pilot quote</a
+          >
+        </div>
         </div>
       </section>
 
@@ -301,7 +351,7 @@
             </ul>
           </article>
           <article class="proof-card">
-            <h3>Failure & redo path</h3>
+            <h3>Failure &amp; redo path</h3>
             <p>
               Recovery is explicit, not hidden: a failed partition is isolated, retried with
               corrected policy, then replay-verified before receipt emit.
@@ -312,7 +362,51 @@
               <li>Evidence hash for audit export</li>
             </ul>
           </article>
+          <article class="proof-card">
+            <h3>SourceA-style pilot offer</h3>
+            <p>
+              If you need a conversion-ready landing and intake flow this week, we can publish this pilot flow with
+              ad-safe variants and proof-first lead progression.
+            </p>
+            <ul>
+              <li>Launch-ready page sections + CTA flow</li>
+              <li>Ad-safe campaign variants with UTM tracking</li>
+              <li>Evidence-rich lead handoff for manual follow-up</li>
+            </ul>
+            <a
+              class="btn cta-track"
+            href="/?utm_source=site&amp;utm_medium=proof&amp;utm_campaign=pilot&amp;utm_content=sourcea#leadCapture"
+              data-track-event="proof_card_sourcea"
+              >Book a pilot</a
+            >
+          </article>
         </div>
+        <article class="proof-contract">
+          <h3>Distribution-ready ad variants</h3>
+          <p class="muted">Paid-channel copy variants (with UTM-safe links):</p>
+          <div class="proof-contract-grid">
+            <a
+              href="/?utm_source=google&amp;utm_medium=paid&amp;utm_campaign=sourcea&amp;utm_content=ad_headline_a"
+              data-track-event="ad_variant_headline_a"
+              >From goal to verified AI output in 30s</a
+            >
+            <a
+              href="/?utm_source=google&amp;utm_medium=paid&amp;utm_campaign=sourcea&amp;utm_content=ad_headline_b"
+              data-track-event="ad_variant_headline_b"
+              >Deterministic AI work with receipts, not demos</a
+            >
+            <a
+              href="/?utm_source=linkedin&amp;utm_medium=paid&amp;utm_campaign=sourcea&amp;utm_content=search_headline_a"
+              data-track-event="ad_variant_subhead_a"
+              >Stop silent AI failure with auditable receipts.</a
+            >
+            <a
+              href="/?utm_source=linkedin&amp;utm_medium=paid&amp;utm_campaign=sourcea&amp;utm_content=search_headline_b"
+              data-track-event="ad_variant_subhead_b"
+              >Launch a pilot now. Revenue first, automation second.</a
+            >
+          </div>
+        </article>
         <article class="proof-contract">
           <h3>External verifier contract</h3>
           <p class="muted">
@@ -321,7 +415,7 @@
           <div class="proof-contract-grid">
             <a href="/verifier.json" target="_blank" rel="noopener noreferrer">GET /verifier.json</a>
             <a href="/verifier.txt" target="_blank" rel="noopener noreferrer">GET /verifier.txt</a>
-            <a href="/verifier.html" target="_blank" rel="noopener noreferrer">GET /verifier.html</a>
+          <a href="/verifier" target="_blank" rel="noopener noreferrer">GET /verifier</a>
             <a href="/v1/runway/runtime" target="_blank" rel="noopener noreferrer">GET /v1/runway/runtime</a>
             <a href="/v1/runway/runs/{runId}/receipt" target="_blank" rel="noopener noreferrer">GET /v1/runway/runs/:runId/receipt</a>
             <a href="/v1/runway/receipts/verify" target="_blank" rel="noopener noreferrer">POST /v1/runway/receipts/verify</a>
@@ -339,36 +433,116 @@
           <p class="eyebrow">Commercial model</p>
           <h2>Simple paths to production use</h2>
         </div>
+        <p class="section-subtitle muted">
+          30-day refund on first paid milestone. No lock-in. No hidden setup fees.
+        </p>
         <div class="pricing-grid">
           <article class="price-card">
             <h3>Pay per job</h3>
             <p class="price">Starter</p>
+            <p class="price-value">$49 / launch</p>
             <ul>
               <li>Immediate pilot usage</li>
               <li>Receipt + cost preflight on every run</li>
               <li>Good for validation and tests</li>
             </ul>
+            <a
+              class="btn"
+              href="/?utm_source=direct&amp;utm_medium=pricing&amp;utm_campaign=landing&amp;utm_content=starter#leadCapture"
+              >Start pilot</a
+            >
           </article>
           <article class="price-card best">
             <span>Most popular</span>
             <h3>Prepaid credits</h3>
             <p class="price">Forecasting</p>
+            <p class="price-value">$599 / month</p>
             <ul>
               <li>Predictable monthly budget</li>
               <li>Higher volume + governance dashboards</li>
               <li>Recovery policy and export controls</li>
+              <li>Dedicated onboarding call (1x)</li>
             </ul>
+            <a
+              class="btn"
+              href="/?utm_source=direct&amp;utm_medium=pricing&amp;utm_campaign=landing&amp;utm_content=growth#leadCapture"
+              >Book quota</a
+            >
           </article>
           <article class="price-card">
             <h3>Enterprise</h3>
             <p class="price">Private contract</p>
+            <p class="price-value">Contact us</p>
             <ul>
               <li>Dedicated controls and policy hooks</li>
               <li>Audit-ready signed receipt archive</li>
               <li>Dedicated implementation support</li>
             </ul>
+            <a
+              class="btn btn-soft"
+              href="/?utm_source=direct&amp;utm_medium=pricing&amp;utm_campaign=landing&amp;utm_content=enterprise#leadCapture"
+              >Request enterprise plan</a
+            >
           </article>
         </div>
+        <div class="kpi-band pricing-trust" id="pricingTrust">
+          <article>
+            <h3>Risk reducer</h3>
+            <p>
+              30-day refund on first paid milestone. No lock-in. We define exact pilot scope before charging.
+            </p>
+          </article>
+          <article>
+            <h3>Service level</h3>
+            <p>
+              Pilot setup within 24 hours on business weekdays. Every request keeps a time-stamped handoff trail.
+            </p>
+          </article>
+          <article>
+            <h3>Security &amp; privacy</h3>
+            <p>
+              No raw payloads are persisted by this standalone UI. Retention + export policy is configurable at handoff.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section lead-capture" id="leadCapture">
+        <div class="section-title">
+          <p class="eyebrow">Pilot qualification</p>
+          <h2>Fast path to revenue: get your tailored quote</h2>
+        </div>
+        <p class="section-subtitle muted">
+          We keep your setup lightweight: 4 questions, no credit card. If you want a direct pilot, leave your
+          contact and use-case below.
+        </p>
+        <form class="lead-form" id="leadCaptureForm" data-endpoint="/lead" aria-label="Pilot lead capture">
+          <label for="leadEmail">
+            Work email
+            <input id="leadEmail" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+          </label>
+          <label for="leadCompany">Company
+            <input id="leadCompany" name="company" type="text" autocomplete="organization" placeholder="Acme Inc." required />
+          </label>
+          <label for="leadUsecase">Primary use case
+            <select id="leadUsecase" name="usecase" required>
+              <option value="">Select one</option>
+              <option value="decision-support">Decision support</option>
+              <option value="rfp">RFP response pack</option>
+              <option value="spreadsheet">Spreadsheet + policy clean-up</option>
+              <option value="api">API workflow reliability</option>
+              <option value="web">Webpage or document build</option>
+            </select>
+          </label>
+          <label for="leadMessage">Goal in 1 line
+            <textarea id="leadMessage" name="goal" rows="3" placeholder="What do you want to automate first?"></textarea>
+          </label>
+          <input id="leadPlan" name="plan" type="hidden" value="" />
+          <input id="leadSource" name="source" type="hidden" value="noetfield-runway-standalone" />
+          <p class="muted" id="leadPlanHint" aria-live="polite"></p>
+          <button class="btn" type="submit">Send pilot request</button>
+          <p class="muted" id="leadStatus" aria-live="polite"></p>
+        </form>
       </section>
 
       <section class="container section faq" id="faq">
@@ -407,16 +581,33 @@
           Start with one demo job, validate receipts, then commission a production-grade runway.
         </p>
         <div class="hero-actions">
-          <a class="btn" href="#proof">Start a Demo Job</a>
-          <a class="btn btn-soft" href="https://noetfield-runway-standalone.pages.dev">View live deployment</a>
+          <a
+            class="btn cta-track"
+            href="/?utm_source=direct&amp;utm_medium=final&amp;utm_campaign=landing&amp;utm_content=demo#proof"
+            data-track-event="final_cta_demo"
+            >Start a Demo Job</a
+          >
+          <a
+            class="btn btn-soft cta-track"
+            href="/?utm_source=direct&amp;utm_medium=final&amp;utm_campaign=landing&amp;utm_content=quote#leadCapture"
+            data-track-event="final_cta_quote"
+            >Start qualification</a
+          >
         </div>
       </section>
     </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+            <a href="/terms" data-track-event="footer_terms">Terms</a>
+            <a href="/privacy" data-track-event="footer_privacy">Privacy</a>
+        <a href="/?utm_source=site&amp;utm_medium=footer&amp;utm_campaign=landing&amp;utm_content=support" data-track-event="footer_support">Support</a>
+      </div>
+    </footer>
 
-    <script src="runway-bootstrap.js"></script>
-    <script src="runway-config.js"></script>
-    <script src="providers/demo-runway-provider.js"></script>
-    <script src="providers/live-runway-provider.js"></script>
-    <script src="app.js" defer></script>
+    <script src="/runway-bootstrap.js"></script>
+    <script src="/runway-config.js"></script>
+    <script src="/providers/demo-runway-provider.js"></script>
+    <script src="/providers/live-runway-provider.js"></script>
+    <script src="/app.js" defer></script>
   </body>
 </html>

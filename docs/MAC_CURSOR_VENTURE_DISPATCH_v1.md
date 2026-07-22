@@ -92,13 +92,13 @@ Stop: receipt; no production trustfield.ca webhook.
 
 ## Lane C — SG (B2)
 
-**Root:** `~/Projects/sina-governance-ssot`  
+**Root:** `~/Desktop/Noetfield-Systems/sina-governance-SSOT`  
 **Owner:** `sg_sssot_cursor`
 
 ```
 Task: B2 — SG sign-off on regulated-term-hardstop-v1.json.
 
-Path: ~/Projects/sina-governance-ssot
+Path: ~/Desktop/Noetfield-Systems/sina-governance-SSOT
 
 Target: data/regulated-term-hardstop-v1.json
 

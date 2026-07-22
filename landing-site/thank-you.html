@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thanks — Your Noetfield Runway request is queued</title>
+    <meta
+      name="description"
+      content="We received your Noetfield Runway qualification request. One of our operators will follow up with a pilot plan."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      body {
+        min-height: 100vh;
+      }
+      .thank-you-shell {
+        width: min(820px, 94vw);
+        margin: 0 auto;
+        padding: 3.4rem 0 2rem;
+      }
+      .thank-you-card {
+        background: var(--panel);
+        border: 1px solid rgba(139, 167, 255, 0.3);
+        border-radius: 0.95rem;
+        padding: 1.3rem;
+        backdrop-filter: blur(10px);
+      }
+      .thank-you-card h1 {
+        margin: 0 0 0.5rem;
+      }
+      .thank-you-steps {
+        margin: 0.9rem 0 0;
+        padding-left: 1.15rem;
+      }
+      .thank-you-meta {
+        margin-top: 0.85rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .lead-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1.2rem;
+      }
+      .kicker {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #c0e2ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thank-you-shell">
+      <p class="kicker">Lead request captured</p>
+      <div class="thank-you-card">
+        <h1>Thanks — you’re queued for a live pilot quote.</h1>
+        <p>
+          We received your request and a revenue-qualified rep will follow up with next-step timing, expected milestones, and
+          a fixed-scope pilot plan.
+        </p>
+        <ul class="thank-you-steps">
+          <li>We validate your use case and outcome target.</li>
+          <li>We map the right pilot scope and cost envelope.</li>
+          <li>We send a proposal within 24 hours.</li>
+        </ul>
+        <p class="thank-you-meta" id="thankYouMeta"></p>
+        <div class="lead-actions">
+          <a class="btn" href="/?utm_source=thankyou&amp;utm_medium=conversion&amp;utm_campaign=landing&amp;utm_content=runway">Back to homepage</a>
+          <a class="btn btn-soft" href="/#pricing">See pricing</a>
+          <a class="btn btn-soft" href="/?utm_source=thankyou&amp;utm_medium=conversion&amp;utm_campaign=landing&amp;utm_content=book-call" id="replayDemo">Run a live cockpit demo</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const leadId = params.get("leadId");
+        const plan = params.get("plan");
+        const usecase = params.get("usecase");
+        const meta = document.getElementById("thankYouMeta");
+        if (!meta) {
+          return;
+        }
+        const fragments = [];
+        if (leadId) {
+          fragments.push(`Lead ID: ${leadId}`);
+        }
+        if (plan) {
+          fragments.push(`Plan target: ${plan}`);
+        }
+        if (usecase) {
+          fragments.push(`Use case: ${usecase}`);
+        }
+        if (fragments.length === 0) {
+          meta.textContent = "Reference: your request is visible to our sales team.";
+          return;
+        }
+        meta.textContent = fragments.join(" · ");
+      })();
+    </script>
+  </body>
+</html>

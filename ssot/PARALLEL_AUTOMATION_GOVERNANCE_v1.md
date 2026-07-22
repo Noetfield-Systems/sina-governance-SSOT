@@ -209,8 +209,8 @@ receipt_id: (or "human merge only — no autorun claim")
 ## 9. Monthly audit (TARGET — 15 min)
 
 ```bash
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_surface_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_parallel_automation_governance_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/audit_automation_surface_v1.py
 ```
 
 Receipt: `receipts/parallel-automation-audit-<timestamp>.json`
@@ -221,13 +221,13 @@ Receipt: `receipts/parallel-automation-audit-<timestamp>.json`
 
 ```bash
 # Governance validator (SG repo motors)
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_parallel_automation_governance_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_parallel_automation_governance_v1.py
 
 # Full surface audit (all repos · GH Actions · CF · Copilot lanes)
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/audit_automation_surface_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/audit_automation_surface_v1.py
 
 # Worker registry
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_registry_v1.py
 ```
 
 Pass lines:

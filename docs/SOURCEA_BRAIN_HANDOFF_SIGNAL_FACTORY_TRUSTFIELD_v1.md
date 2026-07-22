@@ -264,7 +264,7 @@ Brain Brief weekly pass: one SG line + one NOOS line + correlated-agreement stre
 ### Autorun proof (Brain loop)
 
 ```bash
-bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1.sh
+bash ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_e2e_matrix_v1.sh
 # Pass: validate_brain_domain_e2e_matrix_v1: ALL PASS sandbox=all
 ```
 
@@ -333,10 +333,10 @@ bash ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_e2e_matrix_v1
 /usr/bin/python3 ~/.cursor/skills/signal-factory/scripts/verify_signal_factory_v1.py
 
 # Brain registry
-/usr/bin/python3 ~/Projects/sina-governance-ssot/scripts/validate_brain_domain_registry_v1.py
+/usr/bin/python3 ~/Desktop/Noetfield-Systems/sina-governance-SSOT/scripts/validate_brain_domain_registry_v1.py
 
 # Lock receipt
-cat ~/Projects/sina-governance-ssot/receipts/trustfield-signal-factory-lock-20260702T204000Z.json
+cat ~/Desktop/Noetfield-Systems/sina-governance-SSOT/receipts/trustfield-signal-factory-lock-20260702T204000Z.json
 
 # TF surface spot-check
 curl -sI https://www.trustfield.ca/ | head -3

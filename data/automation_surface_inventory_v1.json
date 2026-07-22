@@ -7,7 +7,7 @@
   "repos": [
     {
       "repo_id": "sina-governance-ssot",
-      "path": "~/Projects/sina-governance-ssot",
+      "path": "~/Desktop/Noetfield-Systems/sina-governance-SSOT",
       "lane": "sg_governance",
       "owner_agent": "sg_sssot_cursor",
       "workflows": [

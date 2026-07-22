@@ -37,14 +37,12 @@
       return `${this.apiBaseUrl}${normalized}`;
     }
 
-    _buildHeaders(incomingHeaders = {}) {
-      return {
-        "x-tenant-id": this.tenantId,
-        "x-runway-contract-version": this.contractVersion,
-        "x-runway-mode": this.modeHeader,
-        ...incomingHeaders
-      };
-    }
+  _buildHeaders(incomingHeaders = {}) {
+    return {
+      "x-tenant-id": this.tenantId,
+      ...incomingHeaders
+    };
+  }
 
     _runHeaders(sessionToken, incomingHeaders = {}) {
       const filtered = { ...incomingHeaders };

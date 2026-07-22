@@ -7,13 +7,13 @@
 **Depends on:** `NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` · `COST_EXECUTION_DOCTRINE_LOCKED_v1.md` · `AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED`
 **Relationship:** External commercial framing of the same Unified Motor. Does **not** reopen Motor architecture or Runway internal taxonomy.
 
-**Live commercial plane (independent):**
-- Landing: https://nf-deterministic-api.pages.dev/
-- Adapt playbook: https://nf-deterministic-api.pages.dev/adapt/
-- Catalog: https://nf-deterministic-api.pages.dev/catalog.json
-- Product JSON: https://nf-deterministic-api.pages.dev/v1/product
-- API (staging): https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev
-- Source: `NOETFIELD-RUNWAY` → `sites/nf-deterministic-api-commercial/`
+**Live commercial plane (canonical):**
+- Landing: https://www.noetfield.com/deterministic-api/
+- Catalog: https://www.noetfield.com/deterministic-api/catalog.json
+- API (production): https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev
+- Source: `Noetfield` → `deterministic-api/`
+
+**Retired (redirect-only):** `nf-deterministic-api.pages.dev` → www landing (temporary duplicate removed).
 
 ---
 
@@ -23,7 +23,7 @@
 
 ## What is sold (external product)
 
-**The Noetfield Deterministic API** — specialized, task-specific, OpenAI-compatible endpoints. Multi-model underneath (DeepSeek / Kimi / GLM / HF-open), with deterministic gates that guarantee schema / tool-call / structure correctness, auto-repair or escalate on failure before the response leaves the API.
+**The Noetfield API** — specialized, task-specific, OpenAI-compatible endpoints. Multi-model underneath (DeepSeek / Kimi / GLM / HF-open), with deterministic gates that guarantee schema / tool-call / structure correctness, auto-repair or escalate on failure before the response leaves the API.
 
 Internal names (Motor, Runway, NOOS, SourceA, DAG, recipe) are **not** buyer-facing.
 
@@ -66,10 +66,10 @@ If a client pays **$0.005** for a guaranteed result and fulfillment is **~$0.000
 - Headline: **drop-in OpenAI replacement · cheaper · guaranteed valid JSON / tool calls**
 - Proof: change one line — `base_url` → Noetfield endpoint
 - CTA: **Get API key** + starter credits
-- Referral line (public): **Refer a friend → you both get +$100 API credit**
+- Referral line (public): **Refer a friend → you both get +$10 Noetfield API credit**
 
 ### Referral economics
-$100 credit ≈ **~$1–$2 real fulfillment cost** if fully burned at measured qualified rate. Referral is free-to-cheap acquisition; it is a marketing line, not a cash payout.
+$10 credit ≈ **~$0.10–$0.20 real fulfillment cost** if fully burned at measured qualified rate. Referral is free-to-cheap acquisition; it is a marketing line, not a cash payout.
 
 ### Ads (intent-based only)
 Target buyers already searching to buy:
@@ -83,7 +83,7 @@ Landing target = the single API page. **No** "AI agent platform", **no** Motor/R
 
 ### Loop
 ```text
-Intent ads → API landing → key + credits → ship traffic → refer friends (+$100 each) → top-up
+Intent ads → API landing → key + credits → ship traffic → refer friends (+$10 each) → top-up
 ```
 
 ## Billing (minimal, no redesign)
@@ -112,3 +112,4 @@ Intent ads → API landing → key + credits → ship traffic → refer friends 
 
 *v1.0.0_locked_20260719 — first write. Founder "SAVE AND LOCK". Margin figures cite measured Motor replay fixtures ($0.000050 / $0.000060 qualified; $0.000210 not-qualified), not advisor estimates.*
 *v1.1.0_locked_20260719 — standalone Cloudflare Pages commercial plane live at nf-deterministic-api.pages.dev with /adapt/ + catalog for sister sites; staging API Worker linked.*
+*v1.2.0_locked_20260721 — canonical landing consolidated to www.noetfield.com/deterministic-api/; pages.dev redirect-only; $10 starter + referral credits; product name Noetfield API.*
