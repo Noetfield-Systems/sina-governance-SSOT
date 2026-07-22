@@ -1,0 +1,59 @@
+{
+  "schema": "nf.prompt-compiler-loop-engineer-roles.v1",
+  "status": "FINDINGS_READY_FOR_SPECIALIST_USE_V1",
+  "source_repo": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+  "findings_doc": "docs/specialists/PROMPT_COMPILER_AND_LOOP_ENGINEER_INDUSTRY_FINDINGS_v1.md",
+  "roles": {
+    "Prompt Compiler Specialist": {
+      "skill": "skills/prompt-compiler-specialist/SKILL.md",
+      "owns": [
+        "sectioned compile",
+        "prompt packet lint",
+        "delivery_route fields"
+      ],
+      "binds_to": [
+        "p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+        "scripts/p0pgr_packet_lint_v1.py"
+      ],
+      "forbids": [
+        "P0 leakage to workers",
+        "chat-as-runtime",
+        "second Scheduler and executor"
+      ]
+    },
+    "Loop Engineer Specialist": {
+      "skill": "skills/loop-engineer-specialist/SKILL.md",
+      "owns": [
+        "loop_id",
+        "cadence",
+        "deadman",
+        "last_fired_at",
+        "closed-loop wiring"
+      ],
+      "binds_to": [
+        ".cursor/rules/plans-24-7-cloud-loops.mdc",
+        "skills/commissioning-specialist/SKILL.md"
+      ],
+      "forbids": [
+        "mac-only without cloud mirror",
+        "unsupervised self-redesign",
+        "no external verify"
+      ]
+    }
+  },
+  "second_brain": {
+    "role": "optional founder knowledge capture",
+    "folders": [
+      "ideas",
+      "projects",
+      "sources"
+    ],
+    "binding": "evidence_refs only after receipts or allowlisted read surfaces",
+    "not": [
+      "Gateway",
+      "Scheduler and executor",
+      "Prompt Compiler core",
+      "loop registry"
+    ]
+  }
+}
