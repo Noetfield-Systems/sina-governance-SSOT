@@ -251,4 +251,7 @@ cd ~/Desktop/trustfield-loops && npm run test:phase1
 
 **Living System extension (2026-07-07):** `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md` — 110 plans for doctrine v1.1. TF/SF tracks run parallel; see LS-099.
 
-*v2.0 — 2026-07-02 — ROI-ranked waves; supersedes v1 scheduling only.*
+**Deterministic Sandbox + Runway-as-Project extension (2026-07-22):** [`docs/1111_UPGRADE_PLANS_v3_DETERMINISTIC_SANDBOX_RUNWAY_PROJECTS.md`](1111_UPGRADE_PLANS_v3_DETERMINISTIC_SANDBOX_RUNWAY_PROJECTS.md) — four new parallel tracks (sandbox · goal-pursuit days · runway day-projects · commercial/det-api). TF/SF tracks continue in parallel; v3 does not replace v2.
+
+*v2.0 — 2026-07-02 — ROI-ranked waves; supersedes v1 scheduling only.*  
+*v2.1 — 2026-07-22 — pointer to v3 deterministic sandbox / runway projects.*

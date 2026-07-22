@@ -25,6 +25,17 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap"
       rel="stylesheet"
     />
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #050615;
+        color: #ecf2ff;
+        font-family: "Manrope", Arial, sans-serif;
+        text-rendering: geometricPrecision;
+      }
+    </style>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -526,6 +537,9 @@
           <label for="leadMessage">Goal in 1 line
             <textarea id="leadMessage" name="goal" rows="3" placeholder="What do you want to automate first?"></textarea>
           </label>
+          <input id="leadPlan" name="plan" type="hidden" value="" />
+          <input id="leadSource" name="source" type="hidden" value="noetfield-runway-standalone" />
+          <p class="muted" id="leadPlanHint" aria-live="polite"></p>
           <button class="btn" type="submit">Send pilot request</button>
           <p class="muted" id="leadStatus" aria-live="polite"></p>
         </form>
