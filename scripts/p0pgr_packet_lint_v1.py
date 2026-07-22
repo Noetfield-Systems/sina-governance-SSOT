@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""P0-PGR Packet Lint v1 (Phase-0).
+"""P0-PGR Packet Lint v1 (Phase-0) + HDIR prompt packet / Loop Engineer contract.
 
-Validates prompt packets against P0_PROMPT_PACKET_SCHEMA_v1.json (internal
-version 1.1, delivery-aware) plus semantic rules the schema cannot express.
+Validates:
+  - P0 prompt packets against P0_PROMPT_PACKET_SCHEMA_v1.json (default / --kind p0pgr)
+  - HDIR compiled packets (--kind hdir) for runtime-shaped fields
+  - Loop Engineer contracts (--kind loop_engineer)
 
-RUNTIME_CONTINUITY_LAW_v1: a malformed packet NEVER freezes the lane.
+RUNTIME_CONTINUITY_LAW_v1 (P0-PGR only): a malformed P0 packet NEVER freezes the lane.
 Verdict is PASS or REPAIR_CANDIDATE — exit code is 0 either way; nonzero
 exit means the linter itself crashed, nothing else.
+
+For --kind hdir|loop_engineer: exit 1 on invalid (runtime reject mirror).
 """
 import argparse
 import json
@@ -36,6 +40,17 @@ AUTHORITY_CHANGE_HINTS = re.compile(
     r"\b(merge to main|flip authority|authority change|phase unlock|L5)\b", re.I
 )
 WORKER_TEXT_FIELDS = ("context_summary", "task")
+
+HDIR_REQUIRED_LISTS = (
+    "evidence_refs",
+    "constraints",
+    "allowed_tools",
+    "never_rules",
+    "acceptance_criteria",
+    "stop_conditions",
+)
+HDIR_SCHEMA = "hdir.prompt_packet.v1"
+LOOP_SCHEMA = "goal.loop_engineer.v1"
 
 
 def p0_fingerprints() -> list[str]:
@@ -116,11 +131,87 @@ def lint_packet(packet: dict) -> dict:
     }
 
 
+def lint_hdir_packet(packet: dict) -> dict:
+    reasons: list[str] = []
+    if packet.get("schema") != HDIR_SCHEMA:
+        reasons.append("schema_version_mismatch")
+    if not isinstance(packet.get("role"), str) or not str(packet.get("role")).strip():
+        reasons.append("role_required")
+    obj = packet.get("exact_objective")
+    if not isinstance(obj, str) or len(obj.strip()) < 8:
+        reasons.append("exact_objective_too_short")
+    for key in HDIR_REQUIRED_LISTS:
+        val = packet.get(key)
+        if not isinstance(val, list) or len(val) < 1:
+            reasons.append(f"{key}_required")
+    if not isinstance(packet.get("output_schema"), dict):
+        reasons.append("output_schema_required")
+    never = packet.get("never_rules") or []
+    if isinstance(never, list) and not any("NEVER" in str(r).upper() for r in never):
+        reasons.append("never_rules_must_include_NEVER")
+    ok = not reasons
+    return {
+        "schema": "hdir-prompt-packet-lint-result-v1",
+        "verdict": "PASS" if ok else "REJECT",
+        "reasons": reasons,
+        "runtime_action": "continue" if ok else "reject_packet",
+        "packet_hash_required_on_attempt": True,
+        "packet_hash_required_on_receipt": True,
+    }
+
+
+def lint_loop_engineer(contract: dict) -> dict:
+    reasons: list[str] = []
+    if contract.get("schema") != LOOP_SCHEMA:
+        reasons.append("schema_mismatch")
+    if not isinstance(contract.get("loop_id"), str) or not str(contract.get("loop_id")).strip():
+        reasons.append("loop_id_required")
+    max_i = contract.get("max_iterations")
+    if not isinstance(max_i, (int, float)) or max_i < 1:
+        reasons.append("max_iterations_invalid")
+    retry = contract.get("retry_limits") or {}
+    if not isinstance(retry, dict) or "max_child_run_failures" not in retry or "max_repair_purposes" not in retry:
+        reasons.append("retry_limits_required")
+    deadman = contract.get("deadman") or {}
+    hb = deadman.get("heartbeat_interval_seconds")
+    stale = deadman.get("stale_after_seconds")
+    if not isinstance(hb, (int, float)) or not isinstance(stale, (int, float)) or stale < 2 * hb:
+        reasons.append("deadman_invalid")
+    checkpoint = contract.get("checkpoint") or {}
+    if checkpoint.get("on_child_run_complete") is not True or checkpoint.get("before_approval") is not True:
+        reasons.append("checkpoint_required")
+    if not isinstance(contract.get("approval_points"), list) or not contract.get("approval_points"):
+        reasons.append("approval_points_required")
+    if not isinstance(contract.get("stop_conditions"), list) or not contract.get("stop_conditions"):
+        reasons.append("stop_conditions_required")
+    ok = not reasons
+    return {
+        "schema": "loop-engineer-lint-result-v1",
+        "verdict": "PASS" if ok else "REJECT",
+        "reasons": reasons,
+        "runtime_action": "continue" if ok else "reject_contract",
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("packet", type=Path)
+    ap.add_argument(
+        "--kind",
+        choices=("p0pgr", "hdir", "loop_engineer"),
+        default="p0pgr",
+        help="Packet/contract kind (default: p0pgr continuity lint)",
+    )
     args = ap.parse_args()
     packet = json.loads(args.packet.read_text())
+    if args.kind == "hdir":
+        result = lint_hdir_packet(packet)
+        print(json.dumps(result, indent=2))
+        return 0 if result["verdict"] == "PASS" else 1
+    if args.kind == "loop_engineer":
+        result = lint_loop_engineer(packet)
+        print(json.dumps(result, indent=2))
+        return 0 if result["verdict"] == "PASS" else 1
     result = lint_packet(packet)
     print(json.dumps(result, indent=2))
     return 0  # continuity: REPAIR_CANDIDATE is a result, not a failure
