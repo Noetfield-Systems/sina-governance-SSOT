@@ -1,0 +1,47 @@
+{
+  "apply": {
+    "url": "https://www.trustfield.ca/en/partner-access/apply",
+    "final_url": "https://www.trustfield.ca/en/partner-access/apply",
+    "http_status": 200,
+    "body_sha256": "f464a06ad13a4d1ac21541e48458dbd8f3d605b3401cf01b83101c3dbb8166df",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/apply.html",
+    "fetched_at": "2026-07-23T11:54:21Z",
+    "body_len": 40195
+  },
+  "apply-strategic": {
+    "url": "https://www.trustfield.ca/partner-access/apply?track=strategic_partner",
+    "final_url": "https://www.trustfield.ca/en/partner-access/apply?track=strategic_partner",
+    "http_status": 200,
+    "body_sha256": "5ee7ab674df7d9dddc19c36e3ab6709930d46ccc342975148d5fab3e56175e00",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/apply-strategic.html",
+    "fetched_at": "2026-07-23T11:54:21Z",
+    "body_len": 40107
+  },
+  "sign-in": {
+    "url": "https://www.trustfield.ca/auth/sign-in",
+    "final_url": "https://www.trustfield.ca/en/auth/sign-in",
+    "http_status": 200,
+    "body_sha256": "2005632823fb57de2f0de871684efe51123303007d6ff6af5d20d43e0fa92fbb",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/sign-in.html",
+    "fetched_at": "2026-07-23T11:54:22Z",
+    "body_len": 34301
+  },
+  "workspace-direct": {
+    "url": "https://www.trustfield.ca/partner-access/workspace",
+    "final_url": "https://www.trustfield.ca/en/auth/sign-in?next=%2Fpartner-access%2Fworkspace",
+    "http_status": 200,
+    "body_sha256": "c05a6d8f674969996018d51ae9c4f7f92bd7df569ee78a28da10f22ff54a2246",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/workspace-direct.html",
+    "fetched_at": "2026-07-23T11:54:22Z",
+    "body_len": 34385
+  },
+  "entity-status": {
+    "url": "https://www.trustfield.ca/en/entity-status",
+    "final_url": "https://www.trustfield.ca/en/entity-status",
+    "http_status": 200,
+    "body_sha256": "dde8e03662b2cc2184fbc4c03afda198c19090c549452ab3b2293f72c45254eb",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/entity-status.html",
+    "fetched_at": "2026-07-23T11:54:22Z",
+    "body_len": 42012
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "p0pgr-execution-receipt-v1",
+  "packet_id": "P0PGR-20260708-005",
+  "move_id": "M04",
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "executed_at": "2026-07-23T11:53:59Z",
+  "recorded_at": "2026-07-23T11:55:22Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executor": "claude_fable_session (interactive Claude Code, founder's Mac) via curl GET",
+  "executor_route_note": "Packet declared queue_cloud_worker/custom_script; actual executor is the interactive session agent using deterministic curl fetches \u2014 externally replicable, no Mac-local state. Same deviation class as M03/M05, noted per provenance rule.",
+  "authority_scope": "observe",
+  "founder_authorization_ref": "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723.json",
+  "quality_state": "PARTIAL",
+  "low_quality_labels": {
+    "confidence": "high on reachability, gating, and content-level parity (raw-byte sha256 artifacts stored per URL); zero on authenticated interior (not walked)",
+    "scope": "unauthenticated funnel surface: 8 routes, redirect-chain observation, content-marker parity diff",
+    "reversibility": "fully reversible \u2014 external GET only, zero accounts, zero form posts",
+    "next_improvement": "authenticated interior walk (apply submit -> email verify -> NDA -> briefing room) with a labeled sandbox identity by an executor authorized for account actions; routed to human_review_queue"
+  },
+  "l4_limitations": [
+    "executor safety floor: this agent class never creates accounts, submits forms, or signs agreements \u2014 '/register completes' and the post-apply interior are therefore certified for reachability and gating only",
+    "curl followed redirects; per-hop chain not captured, only final URL + status"
+  ],
+  "per_step_verdicts": {
+    "1_register_selfserve": "PASS (reachability) \u2014 HTTP 200 at /en/register, 4-step intake form present; form COMPLETION not exercised (safety floor), routed to review queue",
+    "2a_partner_apply": "PASS \u2014 /partner-access and /partner-access/apply HTTP 200; all three tracks live (strategic_partner, operating_lead, professional_contributor) incl. per-track apply params",
+    "2b_email_verify": "PRESENT_BY_DESIGN \u2014 email-verification step referenced on apply page; actual verification requires an account, not exercised",
+    "2c_nda_gate": "PRESENT_BY_DESIGN \u2014 NDA gate referenced on apply + partner-access pages; real signature forbidden by packet, not exercised",
+    "2d_briefing_room_gating": "PASS (gated-by-design) \u2014 direct GET on /partner-access/workspace redirects to /auth/sign-in with return-path preserved; interior NOT exposed unauthenticated. This is the packet's definition of intact gating.",
+    "3_parity_diff": "PASS 7/7 \u2014 playbook step-6 list all present at content level: Sign-in, Create-account, Partner Access Platform, View-application-status, Request-Partner-Access, three tracks, working apply routes. No silent downgrade detected.",
+    "4_evidence": "8 raw bodies + 2 fetch logs stored with sha256 under artifacts dir",
+    "5_receipt": "this file"
+  },
+  "findings": [
+    {
+      "id": "F6",
+      "severity": "LOW",
+      "finding": "Packet evidence_ref doc TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md does not exist at its declared P10 path \u2014 broken reference; parity audited against RESTORE_PLAYBOOK_v2.0 step-6 (labeled substitution)",
+      "next_pointer": "packet: restore or re-point the parity doc; align packet compiler evidence_refs lint"
+    },
+    {
+      "id": "F7",
+      "severity": "INFO",
+      "finding": "Site now locale-redirects all routes to /en/* (not observed in M03 on 2026-07-08) \u2014 benign drift marker, all 200",
+      "next_pointer": "note for next live-truth audit baseline"
+    }
+  ],
+  "test_identity_cleanup_note": "No test identity was created (safety floor) \u2014 zero cleanup required, zero residue on production.",
+  "evidence_artifacts": [
+    {
+      "claim": "route fetch: register -> HTTP 200 at https://www.trustfield.ca/en/register",
+      "url": "https://trustfield.ca/register",
+      "http_status": 200,
+      "body_sha256": "9da7edd48d6959dfaa871af68cc7f270d54052e8846e48cb5f786d0ed0b8edbc",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/register.html"
+    },
+    {
+      "claim": "route fetch: partner-access -> HTTP 200 at https://www.trustfield.ca/en/partner-access",
+      "url": "https://trustfield.ca/partner-access",
+      "http_status": 200,
+      "body_sha256": "e1908fc8041661d923c51c6741948c2c3e6818bb9aea8895ae43c52b0296b72d",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/partner-access.html"
+    },
+    {
+      "claim": "route fetch: home -> HTTP 200 at https://www.trustfield.ca/en",
+      "url": "https://trustfield.ca",
+      "http_status": 200,
+      "body_sha256": "52797ade92e336a87919268c00b619346dd4a4bc14b471ed62067f0cef6d8234",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/home.html"
+    },
+    {
+      "claim": "route fetch: apply -> HTTP 200 at https://www.trustfield.ca/en/partner-access/apply",
+      "url": "https://www.trustfield.ca/en/partner-access/apply",
+      "http_status": 200,
+      "body_sha256": "f464a06ad13a4d1ac21541e48458dbd8f3d605b3401cf01b83101c3dbb8166df",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/apply.html"
+    },
+    {
+      "claim": "route fetch: apply-strategic -> HTTP 200 at https://www.trustfield.ca/en/partner-access/apply?track=strategic_partner",
+      "url": "https://www.trustfield.ca/partner-access/apply?track=strategic_partner",
+      "http_status": 200,
+      "body_sha256": "5ee7ab674df7d9dddc19c36e3ab6709930d46ccc342975148d5fab3e56175e00",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/apply-strategic.html"
+    },
+    {
+      "claim": "route fetch: sign-in -> HTTP 200 at https://www.trustfield.ca/en/auth/sign-in",
+      "url": "https://www.trustfield.ca/auth/sign-in",
+      "http_status": 200,
+      "body_sha256": "2005632823fb57de2f0de871684efe51123303007d6ff6af5d20d43e0fa92fbb",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/sign-in.html"
+    },
+    {
+      "claim": "route fetch: workspace-direct -> HTTP 200 at https://www.trustfield.ca/en/auth/sign-in?next=%2Fpartner-access%2Fworkspace",
+      "url": "https://www.trustfield.ca/partner-access/workspace",
+      "http_status": 200,
+      "body_sha256": "c05a6d8f674969996018d51ae9c4f7f92bd7df569ee78a28da10f22ff54a2246",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/workspace-direct.html"
+    },
+    {
+      "claim": "route fetch: entity-status -> HTTP 200 at https://www.trustfield.ca/en/entity-status",
+      "url": "https://www.trustfield.ca/en/entity-status",
+      "http_status": 200,
+      "body_sha256": "dde8e03662b2cc2184fbc4c03afda198c19090c549452ab3b2293f72c45254eb",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/entity-status.html"
+    },
+    {
+      "claim": "parity source substituted: packet's evidence_ref doc absent; used canonical restore playbook step-6 list",
+      "artifact_path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "body_sha256": "1fa1a204d3e8d90f330bd553ef92f6261531f7e52c2b6648972b8ba135eee416"
+    }
+  ],
+  "pass_fail": "PARTIAL-PASS (surface + gating + parity verified; authenticated interior pending review-queue executor)",
+  "changed_files": [
+    "receipts/p0pgr/P0PGR-EXEC-M04-20260723.json",
+    "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/ (10 files)",
+    "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723.json",
+    "receipts/p0pgr/phase2_scorecard_v1.json"
+  ],
+  "commands_run": [
+    "curl -sL (GET only) x8 routes with status+final-url+sha256 capture",
+    "python3 content-marker parity scan (read-only)"
+  ],
+  "cost": {
+    "provider": "anthropic",
+    "model": "claude-fable-5 (interactive session)",
+    "total_usd": 0.0,
+    "accounting_note": "curl fetches metered $0; analysis LLM-authored inside founder's interactive session \u2014 session usage, not metered API"
+  },
+  "external_sends": 0,
+  "forms_submitted": 0,
+  "next_pointer": "Queue advances to M02 (P0PGR-20260708-003, registry evidence sweep, 58.5). Authenticated funnel interior sits in human_review_queue; F3 (revenue pipeline inputs) remains the highest-value open packet."
+}

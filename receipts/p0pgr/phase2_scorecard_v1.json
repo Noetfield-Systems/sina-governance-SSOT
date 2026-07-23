@@ -1,6 +1,6 @@
 {
   "schema": "p0pgr-phase2-scorecard-v1",
-  "updated_at": "2026-07-23T11:23:49Z",
+  "updated_at": "2026-07-23T11:55:22Z",
   "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
   "ranked_queue_receipt": "receipts/p0pgr/phase2_queue_v1.json",
   "queue_order": [
@@ -52,6 +52,18 @@
         "F5 STALE_GATE_SILENT: mandatory WORKER_IS_THE_STALE_GATE receipt missing 15d"
       ],
       "cost_usd": 0.0
+    },
+    {
+      "move_id": "M04",
+      "packet_id": "P0PGR-20260708-005",
+      "what": "TrustField partner-funnel conversion audit \u2014 8 routes, gating, 7/7 parity",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M04-20260723.json",
+      "quality_state": "PARTIAL",
+      "findings": [
+        "F6 BROKEN_EVIDENCE_REF: packet parity doc absent, playbook substituted",
+        "F7 INFO: /en locale redirect drift since M03"
+      ],
+      "cost_usd": 0.0
     }
   ],
   "deferred_mac_items": [
@@ -73,7 +85,7 @@
     }
   ],
   "counters": {
-    "cloud_executions": 3,
+    "cloud_executions": 4,
     "external_sends": 0,
     "forms_submitted": 0,
     "deploys": 0,
@@ -85,10 +97,10 @@
     "estimated_cost_usd": 0.0
   },
   "next_in_queue": {
-    "move_id": "M04",
-    "packet_id": "P0PGR-20260708-005",
-    "what": "trustfield.ca conversion audit (labeled test identity, gating care)",
-    "gates": "CLOUD_ONLY + reversible + ROI 73.75 \u2014 eligible; needs care on test-identity labeling"
+    "move_id": "M02",
+    "packet_id": "P0PGR-20260708-003",
+    "what": "registry trust evidence sweep (repo-internal)",
+    "gates": "CLOUD_ONLY + read-only + ROI 58.5 \u2014 eligible"
   },
   "new_candidate_packets_from_findings": [
     "F1: /pilot pricing copy-clarity fix (deploy-gated -> FOUNDER_ONLY)",

@@ -1,0 +1,29 @@
+{
+  "register": {
+    "url": "https://trustfield.ca/register",
+    "final_url": "https://www.trustfield.ca/en/register",
+    "http_status": 200,
+    "body_sha256": "9da7edd48d6959dfaa871af68cc7f270d54052e8846e48cb5f786d0ed0b8edbc",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/register.html",
+    "fetched_at": "2026-07-23T11:53:59Z",
+    "body_len": 32612
+  },
+  "partner-access": {
+    "url": "https://trustfield.ca/partner-access",
+    "final_url": "https://www.trustfield.ca/en/partner-access",
+    "http_status": 200,
+    "body_sha256": "e1908fc8041661d923c51c6741948c2c3e6818bb9aea8895ae43c52b0296b72d",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/partner-access.html",
+    "fetched_at": "2026-07-23T11:54:00Z",
+    "body_len": 88952
+  },
+  "home": {
+    "url": "https://trustfield.ca",
+    "final_url": "https://www.trustfield.ca/en",
+    "http_status": 200,
+    "body_sha256": "52797ade92e336a87919268c00b619346dd4a4bc14b471ed62067f0cef6d8234",
+    "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M04-20260723/home.html",
+    "fetched_at": "2026-07-23T11:54:00Z",
+    "body_len": 69592
+  }
+}

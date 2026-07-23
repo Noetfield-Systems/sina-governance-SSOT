@@ -1,0 +1,21 @@
+{
+  "schema": "p0pgr-founder-authorization-v1",
+  "id": "FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723",
+  "recorded_at": "2026-07-23T11:58:00Z",
+  "recorded_by": "session agent, transcribing founder directive received in chat 2026-07-23",
+  "founder": "Sina Kazemnezhad",
+  "unlocks": "Continued sequential execution of the Phase-2 ranked queue, starting with M04 (P0PGR-20260708-005, TrustField conversion/funnel audit), gates re-checked per execution",
+  "directive_verbatim_excerpt": "he queue's next move is a conversion audit of the TrustField website. keep executing",
+  "chain": [
+    "receipts/p0pgr/founder/FOUNDER-UNLOCK-PHASE2-CLOUD-ONLY-20260708.json",
+    "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-DO-REAL-WORK-20260723.json"
+  ],
+  "scope_limits": [
+    "inherits all Phase-2 scope limits unchanged: cloud-only, one candidate at a time, no external send, no deploy, no merge beyond receipt/scorecard recording, no authority change, no scheduled automation",
+    "executor-class safety floor (non-negotiable, above any packet text): the agent never creates accounts, never submits forms, never signs agreements; funnel portions requiring those route to human_review_queue per packet fallback",
+    "founder interruptions only for the eight closed-set gates"
+  ],
+  "executions_under_this_authorization": [
+    {"move_id": "M04", "packet_id": "P0PGR-20260708-005", "receipt": "receipts/p0pgr/P0PGR-EXEC-M04-20260723.json", "note": "declared ahead of execution"}
+  ]
+}
