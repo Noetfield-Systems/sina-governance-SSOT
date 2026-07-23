@@ -11,7 +11,7 @@ on:
       ref:
         description: "Branch/ref holding the registry to check"
         required: false
-        default: "cursor/product-category-lock-v1"
+        default: "main"
   # schedule:                    # founder-gated — do not uncomment without
   #   - cron: "49 8 * * 1"       # a FOUNDER-UNLOCK-DRIFT-CRON receipt
 
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.ref || 'cursor/product-category-lock-v1' }}
+          ref: ${{ github.event.inputs.ref || 'main' }}
 
       - uses: actions/setup-python@v5
         with:
