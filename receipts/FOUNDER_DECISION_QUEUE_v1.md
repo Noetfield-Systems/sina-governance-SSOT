@@ -40,6 +40,14 @@ To **loosen a gate permanently** instead: say so once, the contract gets edited 
 | 19 | **W5-14 — SourceB merges** (machine prepped everything; merge is your closed-set authority) | Merge [PR #81](https://github.com/Noetfield-Systems/SourceB/pull/81) (main catch-up, ff-shaped, zero conflict surface) then [PR #82](https://github.com/Noetfield-Systems/SourceB/pull/82) (upgrade delta → production; **merging #82 fires the sourceb.app deploy workflow**) | W5-14 receipt flips PARTIAL → PASS; unpushed upgrade delta already preserve-pushed |
 | 20 | **W5-06 — needs a real stranger** (not a founder decision — needs a human who isn't you) | Hand `NOETFIELD-RUNWAY/receipts/commissioning/TENANT_STRANGER_RUN_INSTRUCTIONS_v1.md` to any real third party | The stranger-tenant proof; machine verifies + writes the receipt afterward |
 
+## Machine debts (NOT founder work — a wider-permission session retries these; founder does nothing)
+
+| Item | State |
+|---|---|
+| W0-07 residue-dir removal | Founder-APPROVED (receipt exists); this session's harness classifier blocks rm/mv of the 8 dirs; queued for a session running with wider permissions or accept-edits mode. Dirs verified no-.git residue; nothing is lost by waiting. |
+| SG canonical `AGENTS.md` dirty edit | Belongs to another live session — left untouched. |
+| RUNWAY `machine-safe-merge.ts` dirty edit | Belongs to the blueprint-diagnosis session — left untouched; keeps W0-01 amber until that lane commits. |
+
 ## Added 2026-07-23 (blueprint e2e diagnosis)
 
 | # | Gate | Act | Unlocks |
