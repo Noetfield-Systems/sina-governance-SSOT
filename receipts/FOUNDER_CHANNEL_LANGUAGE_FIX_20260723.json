@@ -18,5 +18,14 @@
     ]
   },
   "first_outcome_report": "dispatched via founder-report run 30005368450 (today's digest: noise stopped, 3 security holes closed, daily money counter live, no-invented-gates law)",
+  "v2_correction": {
+    "observed": "v1 stopped the jargon relay (last old-format message 5:02 AM, single webhook confirmed — no duplicate sender) but still flooded: every merged PR announced in real time (7 messages in 12 min) and repeat failures re-alarmed per run",
+    "commit": "0e4a6c0 (NOETFIELD-RUNWAY)",
+    "behavior": [
+      "merged PRs: silent — accumulated in KV landed_today, shown as a count in the cockpit panel",
+      "failures: speak once per workflow, then silent until recovery (crashloop = 1 message)",
+      "global ceiling: max 4 founder messages/hour, overflow counted for digests"
+    ]
+  },
   "law": "ssot/FOUNDER_GATE_SCOPE_v1.md (founder-facing text: plain language, outcomes only)"
 }
