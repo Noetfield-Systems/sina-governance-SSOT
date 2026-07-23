@@ -1,0 +1,83 @@
+{
+  "schema": "p0pgr-execution-receipt-v1",
+  "packet_id": "P0PGR-20260708-007",
+  "move_id": "M06",
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "executed_at": "2026-07-23T12:24:00Z",
+  "recorded_at": "2026-07-23T12:42:11Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executor": "claude_fable_session (interactive Claude Code, founder's Mac), repo-evidence reads only",
+  "executor_route_note": "Packet declared github_action/claude_code_cli; executed by interactive session agent, repo-internal reads only \u2014 cloud-replicable (M03/M05/M04/M02 precedent).",
+  "authority_scope": "observe",
+  "founder_authorization_ref": "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723.json",
+  "quality_state": "PARTIAL",
+  "low_quality_labels": {
+    "confidence": "high on attribution/reconciliation (derived sums match census declared to the cent); medium on recovery amount (see limitation)",
+    "scope": "38 census loops attributed; governor computability assessed; kill candidates ranked, ZERO action taken",
+    "reversibility": "fully reversible \u2014 reads + receipt/artifact only",
+    "next_improvement": "per-worker Cloudflare billing receipt to confirm whether the four $5 charges are separate or one shared plan"
+  },
+  "l4_limitations": [
+    "cost basis is census-declared per-loop figures; repo contains no billing-account evidence to re-derive them \u2014 Cloudflare Workers pricing is often per-account, so real deletion savings may be less than the attributed $20/mo",
+    "session-embedded LLM costs are unmetered by design (accounting_note convention) and excluded from cap arithmetic"
+  ],
+  "task_results": {
+    "1_per_loop_attribution": "38 loops attributed by value class: REVENUE 3 loops $5.00 \u00b7 GUARD 5 loops $0.00 \u00b7 META 22 loops $10.00 \u00b7 NONE 8 loops $20.00 \u2014 full table in artifact",
+    "2_reconciliation": "PASS \u2014 derived class totals equal census costs_usd_month exactly (REVENUE 5.00 / GUARD 0 / META 10.00 / NONE 20.00)",
+    "3_none_class_spend": "All $20/mo of NONE spend sits in exactly 4 Cloudflare loops at $5 each, every one with zero receipts EVER: cf_brain_chat_v1, cf_gateway_ops_v1, cf_gateway_heartbeat_v1, trustfield_loops_preview. Critical cross-check vs M02: the first three were silently DEREGISTERED from the automation registry after the census \u2014 off the books but, per census billing attribution, still deployed and still billing. Deregistration is not decommissioning.",
+    "4_governor_computability": "NOT ENFORCEABLE TODAY. (a) Monthly cap ($1,500/mo pre-revenue, router rules): no monthly spend-rollup receipt exists anywhere; execution receipts carry per-run cost but nothing aggregates them; session-embedded LLM spend is unmetered \u2014 cap breach is undetectable from repo evidence. (b) THROTTLED_ROI (LS-078, trigger: >30% NONE): guard is w0_status PENDING, receipt target has zero receipts, and the 30% threshold is ambiguous \u2014 by loop COUNT the fleet is at 21.1% (8/38, under), by COST it is at 57.1% ($20/$35, over). Missing inputs: monthly spend aggregator receipt, metered session-cost feed, count-vs-cost threshold definition, LS-078 implementation.",
+    "5_kill_throttle_candidates_no_action": "Ranked, ZERO action: #1 cf_gateway_ops_v1 ($5, deregistered ghost) \u00b7 #2 cf_gateway_heartbeat_v1 ($5, deregistered ghost) \u00b7 #3 cf_brain_chat_v1 ($5, deregistered ghost) \u00b7 #4 trustfield_loops_preview ($5, still registered, zero receipts). All four exceed the 14-day NONE standing rule (17+ days) \u2014 retirement proposals are DUE under the census's own law; the kill itself is founder-gated. Secondary (zero spend recovery, registry hygiene only): mac_launchd_brain_loop_autorun_v1, gh_actions_noos_release_gate_v1, gh_actions_noos_publish_pypi_v1, gh_gateway_railway_deadman_v1.",
+    "6_receipt": "this file"
+  },
+  "findings": [
+    {
+      "id": "F12",
+      "severity": "HIGH",
+      "finding": "$20/mo (57% of all attributed loop spend) burns in 4 zero-receipt Cloudflare loops; 3 of them are deregistered ghosts \u2014 invisible to the registry yet still billing",
+      "next_pointer": "founder-gated retirement packet for the 4 loops, preceded by a Cloudflare-side existence/billing check to pin exact savings"
+    },
+    {
+      "id": "F13",
+      "severity": "HIGH",
+      "finding": "Spend governor is paper-only: neither the $1,500/mo cap nor THROTTLED_ROI is computable from existing receipts; count-vs-cost ambiguity flips today's verdict (21% vs 57%)",
+      "next_pointer": "packet: monthly spend-rollup receipt motor + LS-078 implementation + founder definition of the 30% basis"
+    }
+  ],
+  "evidence_artifacts": [
+    {
+      "claim": "per-loop attribution table reconciling to census totals",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M06-20260723/cost-attribution.json",
+      "body_sha256": "ad097cbc483bd929cb5d4963fdd7440b70bedc611b08c8f9860bf8a71341f5da"
+    },
+    {
+      "claim": "census source of costs and flags",
+      "artifact_path": "receipts/workflow-census-20260706T093358Z.json",
+      "body_sha256": "67181d9a346862892c5e385544142cd059bc7ed81f0daba6fa9669963ef086ed"
+    },
+    {
+      "claim": "M02 receipt proving 3 of the 4 paid NONE loops were deregistered post-census",
+      "artifact_path": "receipts/p0pgr/P0PGR-EXEC-M02-20260723.json",
+      "body_sha256": "ea67465bed72c64ffe01dd1fd90a905040914dbe143d03d3726dae5f236ce369"
+    }
+  ],
+  "pass_fail": "PARTIAL-PASS (attribution + reconciliation + ranking complete; recovery amount pending billing-side confirmation; governor confirmed unenforceable)",
+  "changed_files": [
+    "receipts/p0pgr/P0PGR-EXEC-M06-20260723.json",
+    "receipts/p0pgr/artifacts/P0PGR-EXEC-M06-20260723/cost-attribution.json",
+    "receipts/p0pgr/phase2_scorecard_v1.json",
+    "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723.json"
+  ],
+  "commands_run": [
+    "python3 census attribution + reconciliation (read-only)",
+    "grep router-rules governor thresholds + LS-078 plan state (read-only)"
+  ],
+  "cost": {
+    "provider": "anthropic",
+    "model": "claude-fable-5 (interactive session)",
+    "total_usd": 0.0,
+    "accounting_note": "deterministic reads metered $0; analysis LLM-authored in founder's interactive session \u2014 session usage, not metered API"
+  },
+  "external_sends": 0,
+  "forms_submitted": 0,
+  "next_pointer": "Queue advances to M07 (P0PGR-20260708-008, packet factory, 58.0). F12 retirement packet is the fastest real-dollar win on the board; F13 governor wiring must land before Phase-2 spends real model money."
+}

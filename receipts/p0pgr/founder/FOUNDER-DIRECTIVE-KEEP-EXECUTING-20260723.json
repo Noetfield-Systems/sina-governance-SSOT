@@ -16,6 +16,23 @@
     "founder interruptions only for the eight closed-set gates"
   ],
   "executions_under_this_authorization": [
-    {"move_id": "M04", "packet_id": "P0PGR-20260708-005", "receipt": "receipts/p0pgr/P0PGR-EXEC-M04-20260723.json", "note": "declared ahead of execution"}
+    {
+      "move_id": "M04",
+      "packet_id": "P0PGR-20260708-005",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M04-20260723.json",
+      "note": "executed"
+    },
+    {
+      "move_id": "M02",
+      "packet_id": "P0PGR-20260708-003",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M02-20260723.json",
+      "note": "executed"
+    },
+    {
+      "move_id": "M06",
+      "packet_id": "P0PGR-20260708-007",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M06-20260723.json",
+      "note": "executed; founder said 'continue' for this move explicitly"
+    }
   ]
 }

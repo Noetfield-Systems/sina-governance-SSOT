@@ -1,0 +1,286 @@
+{
+  "schema": "m06-cost-attribution-v1",
+  "built_at": "2026-07-23T12:42:11Z",
+  "source_census": "workflow-census-20260706T093358Z",
+  "per_loop": [
+    {
+      "loop_id": "gh_actions_workflow_census_weekly_v1",
+      "value_class": "GUARD",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T09:30:17Z"
+    },
+    {
+      "loop_id": "gh_actions_brain_loop_autorun_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T09:04:53Z"
+    },
+    {
+      "loop_id": "mac_launchd_brain_loop_autorun_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 0.0,
+      "host": "mac",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "gh_actions_sourcea_external_verify_v1",
+      "value_class": "GUARD",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:44:07Z"
+    },
+    {
+      "loop_id": "gh_actions_sourcea_boot_validate_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T12:34:50Z"
+    },
+    {
+      "loop_id": "gh_actions_sourcea_drain_disabled_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-03T21:16:51Z"
+    },
+    {
+      "loop_id": "gh_actions_sourcea_determinism_gate_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T18:05:43Z"
+    },
+    {
+      "loop_id": "gh_actions_sourcea_buyer_surfaces_deploy_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T08:00:49.181507+00:00"
+    },
+    {
+      "loop_id": "cf_auto_runtime_tick_v1",
+      "value_class": "META",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": "2026-07-06T06:30:49.514707+00:00"
+    },
+    {
+      "loop_id": "cf_loop_specialist_tick_v1",
+      "value_class": "META",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": "2026-07-06T06:28:10.261061+00:00"
+    },
+    {
+      "loop_id": "cf_brain_chat_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "gh_actions_noos_factory_autorun_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:30:57Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_inbox_loop_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:48.554877+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_runtime_loop_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:49.514707+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_chain_loop_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:50.480881+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_surface_loop_v1",
+      "value_class": "GUARD",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T08:00:49.181507+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_sourcea_observe_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:30:58Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_self_heal_loop_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:30:59Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_cross_repo_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T16:12:37Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_specialist_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:28:10.261061+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_researcher_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:28:09.671749+00:00"
+    },
+    {
+      "loop_id": "gh_actions_noos_workflow_audit_v1",
+      "value_class": "GUARD",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:16:21Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_gel_ci_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:03Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_cf_deploy_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:01Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_schedule_canary_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T16:32:12Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_post_deploy_verify_v1",
+      "value_class": "GUARD",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:05Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_release_gate_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "gh_actions_noos_agent_vault_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-06T06:30:01Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_self_heal_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T16:18:41Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_agent_nerve_loop_v1",
+      "value_class": "META",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": "2026-07-05T17:01:02Z"
+    },
+    {
+      "loop_id": "gh_actions_noos_publish_pypi_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "gh_gateway_railway_deadman_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 0.0,
+      "host": "github",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "cf_gateway_ops_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "cf_gateway_heartbeat_v1",
+      "value_class": "NONE",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "gateway_outbound_log_v1",
+      "value_class": "REVENUE",
+      "cost_usd_month": 0.0,
+      "host": "mac",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "trustfield_loops_preview",
+      "value_class": "NONE",
+      "cost_usd_month": 5.0,
+      "host": "cloudflare",
+      "last_receipt_at": null
+    },
+    {
+      "loop_id": "railway_sina_gateway_v1",
+      "value_class": "REVENUE",
+      "cost_usd_month": 5.0,
+      "host": "railway",
+      "last_receipt_at": "2026-07-06T09:09:22.874344+00:00"
+    },
+    {
+      "loop_id": "traffic_www_intake_conversion_v1",
+      "value_class": "REVENUE",
+      "cost_usd_month": 0.0,
+      "host": "traffic",
+      "last_receipt_at": "2026-07-06T09:09:22.874344+00:00"
+    }
+  ],
+  "totals_derived": {
+    "REVENUE": 5.0,
+    "GUARD": 0.0,
+    "META": 10.0,
+    "NONE": 20.0
+  },
+  "totals_census_declared": {
+    "REVENUE": 5.0,
+    "GUARD": 0,
+    "META": 10.0,
+    "NONE": 20.0
+  },
+  "reconciles": true
+}
