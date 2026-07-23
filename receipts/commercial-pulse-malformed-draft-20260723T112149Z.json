@@ -1,0 +1,15 @@
+{
+  "schema": "MALFORMED_DRAFT",
+  "receipt_type": "MALFORMED_DRAFT",
+  "saved_at": "2026-07-23T11:21:49Z",
+  "draft_id": "AUDIT-TEMPLATE-M05",
+  "failed_predicates": [
+    "named_icp_stranger",
+    "priced_offer_attached",
+    "casl_mailing_address",
+    "casl_unsubscribe",
+    "link_check_receipt_attached"
+  ],
+  "checker": "scripts/commercial_pulse_dispatch_check_v1.py",
+  "status": "FAIL"
+}

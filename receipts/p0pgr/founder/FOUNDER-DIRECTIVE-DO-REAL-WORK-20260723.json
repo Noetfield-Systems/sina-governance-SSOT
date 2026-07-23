@@ -1,0 +1,20 @@
+{
+  "schema": "p0pgr-founder-authorization-v1",
+  "id": "FOUNDER-DIRECTIVE-DO-REAL-WORK-20260723",
+  "recorded_at": "2026-07-23T11:32:00Z",
+  "recorded_by": "session agent, transcribing founder directive received in chat 2026-07-23",
+  "founder": "Sina Kazemnezhad",
+  "unlocks": "Continuation of PHASE_2_CLOUD_ONLY_ROI_TRACK queue execution — next top-ranked candidate (M05, P0PGR-20260708-006), gates re-checked per execution under FOUNDER-UNLOCK-PHASE2-CLOUD-ONLY-20260708",
+  "directive_verbatim_excerpt": "you never do the real work! if you did i was happy! the problem is you never do the real work",
+  "interpretation": "Founder demands forward execution of ranked queue work instead of meta/hygiene output. Same session also re-escalated the standing communication law: founder-facing replies contain zero commands, zero code formatting, zero clickable asks — outcomes only.",
+  "scope_limits": [
+    "inherits all scope limits of FOUNDER-UNLOCK-PHASE2-CLOUD-ONLY-20260708 unchanged",
+    "cloud-only; one candidate at a time; gates checked per execution",
+    "no external send, no deploy, no merge beyond receipt/scorecard recording, no authority change",
+    "founder interruptions only for the eight closed-set gates (ssot/FOUNDER_GATE_SCOPE_v1.md)"
+  ],
+  "executions_under_this_authorization": [
+    {"move_id": "M05", "packet_id": "P0PGR-20260708-006", "receipt": "receipts/p0pgr/P0PGR-EXEC-M05-20260723.json", "note": "recorded before execution; receipt path declared ahead"}
+  ],
+  "note": "Recorded per the M03 audit lesson: chat directives must exist as in-repo receipts before execution."
+}

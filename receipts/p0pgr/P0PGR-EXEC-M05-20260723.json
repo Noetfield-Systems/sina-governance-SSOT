@@ -1,0 +1,100 @@
+{
+  "schema": "p0pgr-execution-receipt-v1",
+  "packet_id": "P0PGR-20260708-006",
+  "move_id": "M05",
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "executed_at": "2026-07-23T11:21:49Z",
+  "recorded_at": "2026-07-23T11:23:32Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executor": "claude_fable_session (interactive Claude Code, founder's Mac)",
+  "executor_route_note": "Packet declared delivery_route=queue_cloud_worker/target_executor=claude_code_cli; actual executor is the interactive session agent on the founder's machine (same as M03 precedent). All evidence is repo-internal and cloud-replicable; no Mac-local state, secrets, or UI were touched, so CLOUD_ONLY content constraints hold despite the local seat.",
+  "authority_scope": "observe",
+  "founder_authorization_ref": "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-DO-REAL-WORK-20260723.json (chains to FOUNDER-UNLOCK-PHASE2-CLOUD-ONLY-20260708.json)",
+  "quality_state": "PASS",
+  "low_quality_labels": {
+    "confidence": "high \u2014 every verdict backed by checker output or file-existence evidence, zero prose-only claims",
+    "scope": "audit only; nothing sent, no state advanced, no fixes claimed",
+    "reversibility": "fully reversible \u2014 writes are receipts/artifacts only",
+    "next_improvement": "predicate inside_approval_window passes the checker only by absence of a flag; a real approval-window declaration is still NO_EVIDENCE"
+  },
+  "task_results": {
+    "1_predicate_verdicts": {
+      "named_icp_stranger": "FAIL \u2014 data/commercial_pulse_icp_v1.json (spec \u00a74, LS-052+) was never created; queue empty; template null",
+      "priced_offer_attached": "FAIL \u2014 data/commercial_pulse_offers_v1.json never created; no priced SKU on file",
+      "entity_hygiene_pass": "PASS \u2014 entity 'Noetfield Systems Inc.', no forbidden tokens (checker-verified)",
+      "casl_mailing_address": "FAIL/NO_EVIDENCE \u2014 null in template; no mailing address anywhere in data/",
+      "casl_unsubscribe": "FAIL/NO_EVIDENCE \u2014 null; no unsubscribe mechanism exists",
+      "link_check_receipt_attached": "FAIL \u2014 zero link-check receipts in receipts/",
+      "approval_metadata_present": "PASS \u2014 template carries approval.required=true, status='pending' (checker-verified)",
+      "inside_approval_window": "NO_EVIDENCE \u2014 checker passes it only because no expiry flag exists; stale_gate.last_evaluated_at is null, no window ever declared"
+    },
+    "2_why_zero_outbound_receipts": "Census rule-4 root cause: the pipeline was built to skeleton stage on 2026-07-07/08 (spec LS-051 + queue file + checker LS-053) and implementation stopped. The three upstream data artifacts (ICP strangers, priced offers, ladder state) were never created; none of the four cron motors (draft/stale-gate/classify/mutate, spec \u00a75) was ever registered \u2014 data/trigger-registry-v1.json does not exist. Zero inputs + zero motor = zero drafts = zero dispatchable drafts = zero approvals = zero sends = zero gateway_outbound_log_v1 receipts. Compounding: the spec's own mandatory watchdog (WORKER_IS_THE_STALE_GATE at 7 days of zero dispatchable drafts) never fired in 15 days because the watchdog motor was also never built \u2014 the stall detector itself is stalled. Corroborating census rule-2: META $20/mo > GUARD+REVENUE $15/mo \u2014 the machine spends more grooming itself than selling, which matches the founder's 2026-07-23 complaint verbatim.",
+    "3_sends_founder_blocked_confirmed": "CONFIRMED \u2014 queue is empty (no item in any state), draft_template.approval.required=true, checker FAILs the template on 5 predicates so nothing can reach queued_for_approval, no approved_pending_send or sent entry exists anywhere, and this audit advanced no state.",
+    "4_minimum_missing_for_one_compliant_draft": [
+      "one named real ICP stranger in data/commercial_pulse_icp_v1.json",
+      "one priced Noetfield offer in data/commercial_pulse_offers_v1.json",
+      "CASL block: Noetfield Systems Inc. mailing address + working unsubscribe URL",
+      "one link-check receipt covering every link used in the draft",
+      "then: machine drafts, checker PASS, queued_for_approval -> founder approval gate (legitimate closed-set gate: external send)"
+    ],
+    "5_receipt": "this file"
+  },
+  "findings": [
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "finding": "Revenue pipeline inputs never created (ICP list, priced offers, ladder state) \u2014 LS-052+ unimplemented",
+      "next_pointer": "compile packet: create the three data artifacts machine-side, NEEDS_REVIEW to founder only for offer price + mailing address accuracy"
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "finding": "No commercial-pulse motor registered; trigger-registry-v1.json absent \u2014 pipeline has no heartbeat",
+      "next_pointer": "compile packet: register cf_cron_commercial_pulse_draft_v1 + stale-gate motor per spec \u00a75 (scheduled automation = founder-gated unlock)"
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "finding": "Mandatory non-suppressible WORKER_IS_THE_STALE_GATE receipt absent 15 days after lane activation \u2014 spec \u00a72 violated by omission",
+      "next_pointer": "emit retro stale-gate receipt + wire its evaluator; separate packet, outside this packet's write scope"
+    }
+  ],
+  "evidence_artifacts": [
+    {
+      "claim": "Machine checker verdict on current draft template: FAIL on exactly 5 predicates",
+      "artifact_path": "receipts/commercial-pulse-malformed-draft-20260723T112149Z.json",
+      "body_sha256": "bb92bb753f512e7f32ee22983d1933b3710ef8732b708e10ee1778facc4ff9ee"
+    },
+    {
+      "claim": "Input-file inventory: which spec-required files exist (queue/docs/checker) vs never created (ICP/offers/ladder/trigger-registry)",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M05-20260723/input-inventory.json",
+      "body_sha256": "4e076f8af4994d67d8d314aefff5879c3fbbd5961c7340adffcccfaa9102ef5d"
+    },
+    {
+      "claim": "Census rule-4 zero-receipt REVENUE loop + rule-2 META>REVENUE cost inversion",
+      "artifact_path": "receipts/workflow-census-20260706T093358Z.json",
+      "body_sha256": "67181d9a346862892c5e385544142cd059bc7ed81f0daba6fa9669963ef086ed"
+    }
+  ],
+  "pass_fail": "PASS (audit complete; pipeline itself NOT ready: 5 of 8 predicates fail, 1 no-evidence)",
+  "changed_files": [
+    "receipts/p0pgr/P0PGR-EXEC-M05-20260723.json",
+    "receipts/p0pgr/artifacts/P0PGR-EXEC-M05-20260723/input-inventory.json",
+    "receipts/commercial-pulse-malformed-draft-20260723T112149Z.json",
+    "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-DO-REAL-WORK-20260723.json",
+    "receipts/p0pgr/phase2_scorecard_v1.json"
+  ],
+  "commands_run": [
+    "python3 scripts/commercial_pulse_dispatch_check_v1.py --json (stdin: queue draft_template, audit id AUDIT-TEMPLATE-M05)",
+    "file-inventory + census extraction via python3 (read-only)"
+  ],
+  "cost": {
+    "provider": "anthropic",
+    "model": "claude-fable-5 (interactive session)",
+    "total_usd": 0.0,
+    "accounting_note": "Deterministic script runs metered $0. Analysis was LLM-authored inside the founder's interactive Claude Code session \u2014 cost sits in session usage, not metered API; not a bare $0 claim."
+  },
+  "external_sends": 0,
+  "forms_submitted": 0,
+  "next_pointer": "Queue advances to M04 (P0PGR-20260708-005, conversion audit, 73.75). Findings F3/F4/F5 to packet compiler; F3 is the shortest path to the first compliant outbound draft."
+}

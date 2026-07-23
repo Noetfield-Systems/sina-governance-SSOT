@@ -1,10 +1,25 @@
 {
   "schema": "p0pgr-phase2-scorecard-v1",
-  "updated_at": "2026-07-08T13:32:00Z",
+  "updated_at": "2026-07-23T11:23:49Z",
   "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
   "ranked_queue_receipt": "receipts/p0pgr/phase2_queue_v1.json",
-  "queue_order": ["M03:86.0", "M05:74.0", "M04:73.75", "M02:58.5", "M06:58.5", "M07:58.0", "M01:54.5", "M09:50.5"],
-  "weights": {"direct_revenue": 35, "trust_proof": 25, "workload_reduction": 15, "cloud_now": 15, "reversibility": 10},
+  "queue_order": [
+    "M03:86.0",
+    "M05:74.0",
+    "M04:73.75",
+    "M02:58.5",
+    "M06:58.5",
+    "M07:58.0",
+    "M01:54.5",
+    "M09:50.5"
+  ],
+  "weights": {
+    "direct_revenue": 35,
+    "trust_proof": 25,
+    "workload_reduction": 15,
+    "cloud_now": 15,
+    "reversibility": 10
+  },
   "executions": [
     {
       "move_id": "M10",
@@ -16,20 +31,49 @@
     {
       "move_id": "M03",
       "packet_id": "P0PGR-20260708-004",
-      "what": "trustfield.ca live-truth audit — 6 GTM routes, claims diff",
+      "what": "trustfield.ca live-truth audit \u2014 6 GTM routes, claims diff",
       "receipt": "receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json",
       "quality_state": "PARTIAL",
-      "findings": ["F1 CLAIM_AMBIGUITY: CAD 4,000 vs CAD 3,500-prepay wording on /pilot", "F2 DOC_STALE: repo P10 doc cites build v71, live is v108"],
+      "findings": [
+        "F1 CLAIM_AMBIGUITY: CAD 4,000 vs CAD 3,500-prepay wording on /pilot",
+        "F2 DOC_STALE: repo P10 doc cites build v71, live is v108"
+      ],
+      "cost_usd": 0.0
+    },
+    {
+      "move_id": "M05",
+      "packet_id": "P0PGR-20260708-006",
+      "what": "CASL-safe commercial dispatch readiness audit \u2014 8 predicates evaluated, zero send",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M05-20260723.json",
+      "quality_state": "PASS",
+      "findings": [
+        "F3 PIPELINE_INPUTS_MISSING: ICP/offers/ladder data files never created (LS-052+)",
+        "F4 NO_MOTOR: no commercial-pulse cron registered, trigger-registry absent",
+        "F5 STALE_GATE_SILENT: mandatory WORKER_IS_THE_STALE_GATE receipt missing 15d"
+      ],
       "cost_usd": 0.0
     }
   ],
   "deferred_mac_items": [
-    {"move_id": "M08", "packet_id": "P0PGR-20260708-009", "status": "HOLD_CLOUD_UNSAFE", "action_taken": "none — labeled only, per founder directive"},
-    {"item": "Mac runner build (MVP Phase 3)", "status": "DEFERRED", "action_taken": "none"},
-    {"item": "mac_runner fallback_route on packets 002/003/007/008/010", "status": "REMOVED", "action_taken": "fallback_route -> human_review_queue, 10/10 re-linted PASS"}
+    {
+      "move_id": "M08",
+      "packet_id": "P0PGR-20260708-009",
+      "status": "HOLD_CLOUD_UNSAFE",
+      "action_taken": "none \u2014 labeled only, per founder directive"
+    },
+    {
+      "item": "Mac runner build (MVP Phase 3)",
+      "status": "DEFERRED",
+      "action_taken": "none"
+    },
+    {
+      "item": "mac_runner fallback_route on packets 002/003/007/008/010",
+      "status": "REMOVED",
+      "action_taken": "fallback_route -> human_review_queue, 10/10 re-linted PASS"
+    }
   ],
   "counters": {
-    "cloud_executions": 2,
+    "cloud_executions": 3,
     "external_sends": 0,
     "forms_submitted": 0,
     "deploys": 0,
@@ -41,13 +85,16 @@
     "estimated_cost_usd": 0.0
   },
   "next_in_queue": {
-    "move_id": "M05",
-    "packet_id": "P0PGR-20260708-006",
-    "what": "CASL-safe commercial dispatch readiness (predicate audit, zero send)",
-    "gates": "CLOUD_ONLY + read-only + ROI 74 + no send — eligible under Phase 2 rules"
+    "move_id": "M04",
+    "packet_id": "P0PGR-20260708-005",
+    "what": "trustfield.ca conversion audit (labeled test identity, gating care)",
+    "gates": "CLOUD_ONLY + reversible + ROI 73.75 \u2014 eligible; needs care on test-identity labeling"
   },
   "new_candidate_packets_from_findings": [
     "F1: /pilot pricing copy-clarity fix (deploy-gated -> FOUNDER_ONLY)",
-    "F2: P10 launch-credibility block refresh (hygiene, cloud-safe)"
+    "F2: P10 launch-credibility block refresh (hygiene, cloud-safe)",
+    "F3: create ICP + priced-offer + ladder-state data files (machine-drafted, founder reviews price+address only)",
+    "F4: register commercial-pulse draft + stale-gate motors (scheduled automation -> founder-gated unlock)",
+    "F5: retro WORKER_IS_THE_STALE_GATE receipt + evaluator wiring"
   ]
 }

@@ -1,0 +1,47 @@
+{
+  "schema": "m05-input-inventory-v1",
+  "captured_at": "2026-07-23T11:23:32Z",
+  "files": {
+    "data/commercial_pulse_queue_v1.json": {
+      "exists": true,
+      "sha256": "47424408e14d1f9b7713e0c4f5bbe39b637ace0bbd0a96d5837d6c0fda949d69",
+      "mtime": "2026-07-09T11:18:11Z"
+    },
+    "data/commercial_pulse_icp_v1.json": {
+      "exists": false,
+      "sha256": null,
+      "mtime": null
+    },
+    "data/commercial_pulse_offers_v1.json": {
+      "exists": false,
+      "sha256": null,
+      "mtime": null
+    },
+    "data/metabolism_ladder_state_v1.json": {
+      "exists": false,
+      "sha256": null,
+      "mtime": null
+    },
+    "data/trigger-registry-v1.json": {
+      "exists": false,
+      "sha256": null,
+      "mtime": null
+    },
+    "docs/commercial_pulse_loop_v0.1.md": {
+      "exists": true,
+      "sha256": "74d204360548d3b625f87521de5e83ef4af83ee5c5a207ee02bb1f7ca3d394fe",
+      "mtime": "2026-07-08T01:34:45Z"
+    },
+    "scripts/commercial_pulse_dispatch_check_v1.py": {
+      "exists": true,
+      "sha256": "250475ee55640def05a7bdc401fff4b44498532eee116b83907f5da976891b17",
+      "mtime": "2026-07-09T11:18:11Z"
+    }
+  },
+  "queue_state": {
+    "queue_len": 0,
+    "history_len": 0,
+    "stale_gate_last_evaluated_at": null,
+    "states_present": []
+  }
+}
