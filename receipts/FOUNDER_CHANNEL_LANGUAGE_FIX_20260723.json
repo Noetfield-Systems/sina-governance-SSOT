@@ -27,5 +27,16 @@
       "global ceiling: max 4 founder messages/hour, overflow counted for digests"
     ]
   },
+  "v3_founder_calibration": {
+    "founder_order": "'keep them back! those are mine to watch and see' — landed-change messages are founder news",
+    "commit": "a63a0ff (NOETFIELD-RUNWAY), deploy green",
+    "behavior": "merged-to-main announcements restored in real time; 4/hr ceiling removed; kept: work-branch/skip silence, plain names, failure-speaks-once-until-recovery"
+  },
+  "staging_break_diagnosis_20260723": {
+    "workflow": "Motor Exact-SHA Staging Deploy (run 30006866201)",
+    "finding": "all release gates passed; the deploy step failed instantly with Railway 'Unauthorized' — the RAILWAY_TOKEN repo secret is expired/invalid",
+    "classification": "LEGIT FOUNDER GATE (credential) per ssot/FOUNDER_GATE_SCOPE_v1.md — the machine cannot and must not mint or move credentials",
+    "impact": "staging copy of the heavy executor stays on its previous version; everything else green; cockpit will auto-announce recovery when the workflow next passes"
+  },
   "law": "ssot/FOUNDER_GATE_SCOPE_v1.md (founder-facing text: plain language, outcomes only)"
 }
