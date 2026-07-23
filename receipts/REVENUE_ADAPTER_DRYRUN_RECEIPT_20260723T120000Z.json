@@ -1,0 +1,55 @@
+{
+ "schema": "revenue_adapter_dryrun_receipt_v1",
+ "job_id": "W5-11",
+ "contract_ref": "product/WIRING_COMMISSIONING_CONTRACT_v1.json",
+ "verified_at": "2026-07-23T12:00:00Z",
+ "status": "PASS",
+ "offer": "Never Miss a Call",
+ "dry_run": {
+  "mode": "independent LOCAL dry-run — hand-built Stripe TEST-mode fixture (livemode:false), no Stripe API touched, claims no revenue",
+  "fixture": "checkout.session.completed, payment_status=paid, amount 9500 CAD, sourceb_kind=fit_call, evt_test_w511_localdryrun_02",
+  "command": "python3 scripts/revenue_receipt_adapter_v1.py --event-file <fixture> --out-dir <scratchpad>",
+  "adapter_stdout": {"status": "OK", "mode": "TEST_MODE_DRYRUN"},
+  "fail_closed_checks": [
+   "payment_status=unpaid -> REJECTED exit 1 (observed)",
+   "type=payment_intent.succeeded -> REJECTED exit 1 (observed)"
+  ],
+  "produced_receipt_embedded": {
+   "schema": "first_revenue_receipt_v1",
+   "job_id": "W5-11",
+   "mode": "TEST_MODE_DRYRUN",
+   "status": "DRYRUN_PASS",
+   "offer": "Never Miss a Call",
+   "amount_total_cents": 9500,
+   "currency": "CAD",
+   "event": {
+    "id": "evt_test_w511_localdryrun_02",
+    "type": "checkout.session.completed",
+    "livemode": false,
+    "created_utc": "2026-07-23T11:55:00Z",
+    "session_id_prefix": "cs_test_w511",
+    "payer_email_sha256_prefix": "8e505b2aee42a72d",
+    "sourceb_kind": "fit_call",
+    "lead_receipt_id": "sbiz_trial_dryrun_local_02"
+   },
+   "doctrine": "test-mode dry-run: proves the adapter path only, claims no revenue",
+   "generated_by": "scripts/revenue_receipt_adapter_v1.py"
+  }
+ },
+ "w4_audit_recheck_of_prior_lane": {
+  "prior_receipt": "receipts/REVENUE_ADAPTER_DRYRUN_RECEIPT_20260723T113454Z.json (tracked, SG main 377f06a, pushed)",
+  "verified_claims": [
+   "SG main 75c5a11 exists: scripts/revenue_receipt_adapter_v1.py + .github/workflows/nf-revenue-receipt-adapter-v1.yml + P99-LEDGER template offer corrected to 'Never Miss a Call' (template line observed)",
+   "SG main 39a4142 author is 'nf-revenue-receipt-adapter-v1 <actions@users.noreply.github.com>' — receipts/revenue/FIRST_REVENUE_RECEIPT_DRYRUN_20260723T114000Z.json was genuinely committed by the cloud workflow, not hand-faked",
+   "gh run 30003614649 (Noetfield-Systems/sina-governance-SSOT): name=nf-revenue-receipt-adapter-v1, event=workflow_dispatch, conclusion=success, createdAt=2026-07-23T11:34:00Z (queried live this session)",
+   "SourceB main 93eccc5 exists and is pushed: app/api/webhooks/stripe/route.ts fires lib/governance/revenue-receipt.ts dispatchRevenueReceiptToGovernance on checkout.session.completed + payment_status=paid; PII-minimized (email sha256 prefix, session id truncated to 12 chars); fail-safe no-op while GOVERNANCE_DISPATCH_TOKEN is unset",
+   "adapter fail-closed rule re-read in source: livemode=false can only mint DRYRUN files; livemode=true mints FOUNDER_VERIFY (never a victory claim) — W5-13 founder countersign still required"
+  ],
+  "discrepancies_found": "none"
+ },
+ "not_yet_true": [
+  "Stripe dashboard has no webhook endpoint registered for https://sourceb.ca/api/webhooks/stripe pointing at this wire — founder account action (queued)",
+  "GOVERNANCE_DISPATCH_TOKEN is not set on the live sourceb.ca worker — the deployed wire is a dormant no-op by design until W5-13 activation (queued)",
+  "no real revenue is claimed anywhere by this receipt; live-mode events would still stop at FOUNDER_VERIFY"
+ ]
+}

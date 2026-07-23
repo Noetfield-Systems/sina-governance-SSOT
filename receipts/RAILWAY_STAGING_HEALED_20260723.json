@@ -1,0 +1,20 @@
+{
+  "schema": "heal_receipt_v1",
+  "at": "2026-07-23",
+  "by": "claude_mac_session",
+  "resolves": "BLOCKED_RAILWAY_STAGING_HEAL_20260723 (deleted)",
+  "healed": {
+    "what": "Staging heavy executor re-shipped from the Mac lane after the machine's own key rotation killed both cloud Railway secrets",
+    "deployment_id": "4349184d-8ea5-4bab-bade-8d05293380d1",
+    "live_identity": "healthz ok=true, source_sha=08fecd6f7b044f3840338a9dba4bc22106e0d83a, config_digest=583a300f… (exact match to what today's candidates required)",
+    "authorization": "Founder's live Railway CLI session on the Mac; founder unlocked the session's deploy permission in-app; no tokens created, read, or moved"
+  },
+  "pipeline_self_heal": {
+    "commit": "8b48d15 (NOETFIELD-RUNWAY)",
+    "behavior": "Deploy workflow now probes the live engine first and reuses it with zero credentials when the exact heavy config digest already matches; CLI upload only when heavy source truly changed. Next natural machine run goes green; cockpit announces Fixed automatically."
+  },
+  "remaining_true_state": [
+    "Cloud Railway secrets are still dead — future heavy-SOURCE changes will fail deploy until the secret-sync lane (which broke them) writes valid ones. Typed follow-up belongs to that lane, not the founder, unless Railway proves dashboard-only.",
+    "No founder action outstanding."
+  ]
+}

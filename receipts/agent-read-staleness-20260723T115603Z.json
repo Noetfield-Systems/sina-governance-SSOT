@@ -1,0 +1,2937 @@
+{
+  "schema": "agent_read_staleness_receipt_v1",
+  "at": "2026-07-23T11:56:03Z",
+  "ok": true,
+  "alive_surfaces": 411,
+  "blocker_count": 0,
+  "warn_count": 0,
+  "alive": [
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/sg-authority-ref-compute-roi-v1.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_authority_ref",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_implementation_waves",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_wave0_merge_packet",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_t0_foundation_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+      "status": "ACTIVE",
+      "role": "sg_to_noos_wave0_answer",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_gateway_v2_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "activation_cycle",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_activation_cycle_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "activation_cycle_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_activation_dispatch",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_a_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_b_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "product_lock",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_lock",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_company_new_product_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "company_new_product_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product_machine",
+      "last_modified": "2026-07-20"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_motor_learning_organ_contracts_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_contracts",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_motor_learning_receipt_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_receipt_schema",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "tests/test_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_tests",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "scripts/validate_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_validator",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "scripts/motor_learning_organ_w1_run.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_cli",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_pass_checks",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "data/runtime_reality_v1.json",
+      "status": "ACTIVE",
+      "role": "highest_precedence_runtime_truth",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "sg_identity_architecture_amendment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+      "status": "ACTIVE",
+      "role": "runtime_semantic_supersession",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+      "status": "ACTIVE",
+      "role": "p0_incident_containment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noetfield_website",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_scaling_posture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-15"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+      "status": "ACTIVE",
+      "role": "integrator_checklist",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_reasoning_machine",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_pass_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_execution_contract",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_receipt_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_01",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_02",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_03",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_04",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_05",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_06",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_07",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_live_site",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_deploy_drift",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_tf_restore",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+      "status": "ACTIVE",
+      "role": "chess_schema_pass",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+      "status": "ACTIVE",
+      "role": "chess_manifest",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/sg-authority-ref-compute-roi-v1.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_authority_ref",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_implementation_waves",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_wave0_merge_packet",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_t0_foundation_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+      "status": "ACTIVE",
+      "role": "sg_to_noos_wave0_answer",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_gateway_v2_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "activation_cycle",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_activation_cycle_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "activation_cycle_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_activation_dispatch",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_a_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_b_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "product_lock",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_lock",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_company_new_product_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "company_new_product_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product_machine",
+      "last_modified": "2026-07-20"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_motor_learning_organ_contracts_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_contracts",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_motor_learning_receipt_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_receipt_schema",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "tests/test_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_tests",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "scripts/validate_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_validator",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "scripts/motor_learning_organ_w1_run.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_cli",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_pass_checks",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "data/runtime_reality_v1.json",
+      "status": "ACTIVE",
+      "role": "highest_precedence_runtime_truth",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "sg_identity_architecture_amendment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+      "status": "ACTIVE",
+      "role": "runtime_semantic_supersession",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+      "status": "ACTIVE",
+      "role": "p0_incident_containment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "noos_agent",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_scaling_posture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/github_automation_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_truth",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/agent_read_surfaces_v1.json",
+      "status": "ACTIVE",
+      "role": "alive_doc_registry",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "living_system_plans_human",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/living_system_110_plans_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "living_system_execution_matrix",
+      "last_modified": "2026-07-22"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "living_system_doctrine",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/stale_law_guard_patterns_v1.json",
+      "status": "ACTIVE",
+      "role": "stale_law_patterns",
+      "last_modified": "2026-07-07"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
+      "status": "ACTIVE",
+      "role": "parallel_automation_law",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "ssot/MULTI_REPO_WORKER_REGISTRY_v1.md",
+      "status": "ACTIVE",
+      "role": "worker_routing",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+      "status": "READ_SURFACE",
+      "role": "library_index",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/LIBRARY_REGISTRY.json",
+      "status": "ACTIVE",
+      "role": "library_version_truth",
+      "last_modified": "2026-07-06"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "cross_domain_auth_proposal_locked",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/auth_surface_matrix_v1.json",
+      "status": "ACTIVE",
+      "role": "auth_surface_matrix",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/auth_core_interface_spec_v1.json",
+      "status": "ACTIVE",
+      "role": "auth_core_interface",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/sg-auth-surface-probe-machine-v1.md",
+      "status": "ACTIVE",
+      "role": "auth_probe_machine_loop",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_reasoning_machine",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_pass_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_execution_contract",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_receipt_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_01",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_02",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_03",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_04",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_05",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_06",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_07",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_live_site",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_deploy_drift",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_tf_restore",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+      "status": "ACTIVE",
+      "role": "chess_schema_pass",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+      "status": "ACTIVE",
+      "role": "chess_manifest",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/sg-authority-ref-compute-roi-v1.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_authority_ref",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_implementation_waves",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_wave0_merge_packet",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_t0_foundation_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+      "status": "ACTIVE",
+      "role": "sg_to_noos_wave0_answer",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_gateway_v2_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "activation_cycle",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_activation_cycle_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "activation_cycle_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_activation_dispatch",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_a_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_b_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "product_lock",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_lock",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_company_new_product_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "company_new_product_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product_machine",
+      "last_modified": "2026-07-20"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_motor_learning_organ_contracts_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_contracts",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_motor_learning_receipt_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_receipt_schema",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "tests/test_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_tests",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "scripts/validate_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_validator",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "scripts/motor_learning_organ_w1_run.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_cli",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_pass_checks",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "data/runtime_reality_v1.json",
+      "status": "ACTIVE",
+      "role": "highest_precedence_runtime_truth",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "sg_identity_architecture_amendment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+      "status": "ACTIVE",
+      "role": "runtime_semantic_supersession",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+      "status": "ACTIVE",
+      "role": "p0_incident_containment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sg_sssot_cursor",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_scaling_posture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/SourceA/AGENTS.md",
+      "status": "ACTIVE",
+      "role": "lane_entry",
+      "last_modified": "2026-07-09"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/data/brain_external_artifact_registry_v1.json",
+      "status": "ACTIVE",
+      "role": "brain_pointer_registry",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_reasoning_machine",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_pass_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_execution_contract",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_receipt_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_01",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_02",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_03",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_04",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_05",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_06",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_07",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_live_site",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_deploy_drift",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_tf_restore",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+      "status": "ACTIVE",
+      "role": "chess_schema_pass",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+      "status": "ACTIVE",
+      "role": "chess_manifest",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/sg-authority-ref-compute-roi-v1.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_authority_ref",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_implementation_waves",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_wave0_merge_packet",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_t0_foundation_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+      "status": "ACTIVE",
+      "role": "sg_to_noos_wave0_answer",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_gateway_v2_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "activation_cycle",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_activation_cycle_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "activation_cycle_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_activation_dispatch",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_a_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_b_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "product_lock",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_lock",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_company_new_product_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "company_new_product_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product_machine",
+      "last_modified": "2026-07-20"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_motor_learning_organ_contracts_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_contracts",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_motor_learning_receipt_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_receipt_schema",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "tests/test_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_tests",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "scripts/validate_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_validator",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "scripts/motor_learning_organ_w1_run.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_cli",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_pass_checks",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "data/runtime_reality_v1.json",
+      "status": "ACTIVE",
+      "role": "highest_precedence_runtime_truth",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "sg_identity_architecture_amendment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+      "status": "ACTIVE",
+      "role": "runtime_semantic_supersession",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+      "status": "ACTIVE",
+      "role": "p0_incident_containment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "sourcea_brain",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_scaling_posture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/runtime_truth_sync_v1.json",
+      "status": "ACTIVE",
+      "role": "deploy_truth",
+      "last_modified": "2026-07-22"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/TrustField-Technologies/data/trustfield_parallel_automation_governance_v1.json",
+      "status": "ACTIVE",
+      "role": "automation_law",
+      "last_modified": "2026-07-22"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_reasoning_machine",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_pass_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_trustfield_overlay",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_execution_contract",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_receipt_template",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_01",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_02",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_03",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_04",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_05",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_06",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+      "status": "ACTIVE",
+      "role": "chess_skill_07",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_live_site",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_deploy_drift",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "status": "ACTIVE",
+      "role": "chess_playbook_tf_restore",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/SCHEMAS/chess_pass.schema.json",
+      "status": "ACTIVE",
+      "role": "chess_schema_pass",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/chess_pattern_reasoning_machine_v2_manifest.json",
+      "status": "ACTIVE",
+      "role": "chess_manifest",
+      "last_modified": "2026-07-08"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/architecture_finalization_gate_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "architecture_finalization_gate_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_unified_motor_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "unified_motor_architecture_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_compute_roi_allocation_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-compute-roi-allocation-all-repos.md",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/sg-authority-ref-compute-roi-v1.json",
+      "status": "ACTIVE",
+      "role": "compute_roi_allocation_authority_ref",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_wake_path_conflict_policy_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-wake-path-conflict-policy-all-repos.md",
+      "status": "ACTIVE",
+      "role": "wake_path_conflict_policy_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_implementation_waves",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-unified-motor-architecture-all-repos.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_wave0_merge_packet",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-unified-motor-v1-foundation-commission.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_t0_foundation_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/sg-to-noos-wave0-persistence-answer.md",
+      "status": "ACTIVE",
+      "role": "sg_to_noos_wave0_answer",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/sinagpt_founder_brain_architect_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "sinagpt_founder_brain_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_command_gateway_v2_architecture_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_architecture_machine",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-command-gateway-v2-motor-control-001.md",
+      "status": "ACTIVE",
+      "role": "command_gateway_v2_commission",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/sinagpt-command-gateway-v2-all-repos.md",
+      "status": "ACTIVE",
+      "role": "sinagpt_gateway_v2_dispatch",
+      "last_modified": "2026-07-17"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "activation_cycle",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_activation_cycle_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "activation_cycle_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "higgsfield_media_adapter_machine",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/higgsfield-activation-cycle-all-repos.md",
+      "status": "ACTIVE",
+      "role": "higgsfield_activation_dispatch",
+      "last_modified": "2026-07-18"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-circuit-a-deterministic-motor-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_a_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-circuit-b-higgsfield-campaign-proof-001.md",
+      "status": "ACTIVE",
+      "role": "circuit_b_commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "product_lock",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_COMPANY_NEW_PRODUCT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_lock",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_company_new_product_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "company_new_product_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-company-new-product-all-repos.md",
+      "status": "ACTIVE",
+      "role": "company_new_product_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-research-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-video-runway-v1-first-vertical.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-software-repair-runway-v1-plugin.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-parallel-sandbox-manager-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_runway_execution_assignment_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_execution_assignment_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "deterministic_api_product_machine",
+      "last_modified": "2026-07-20"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_runway_core_families_composition_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_core_families_composition_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_PORTFOLIO_ROUTING_INTELLIGENCE_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_runway_portfolio_routing_intelligence_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_machine",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-portfolio-routing-intelligence-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_portfolio_routing_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_motor_learning_organ_v1_LOCKED.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_machine",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_motor_learning_organ_contracts_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_contracts",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_motor_learning_receipt_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_receipt_schema",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "tests/test_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_tests",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "scripts/validate_motor_learning_organ_w1.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_validator",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "scripts/motor_learning_organ_w1_run.py",
+      "status": "ACTIVE",
+      "role": "motor_learning_w1_cli",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/nf_motor_learning_organ_pass_checks_v1.json",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_pass_checks",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-motor-learning-organ-all-repos.md",
+      "status": "ACTIVE",
+      "role": "motor_learning_organ_dispatch",
+      "last_modified": "2026-07-23"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+      "status": "ACTIVE",
+      "role": "runway_core_families_dispatch",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-research-codex-local-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-video-cursor-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md",
+      "status": "ACTIVE",
+      "role": "commission",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "data/runtime_reality_v1.json",
+      "status": "ACTIVE",
+      "role": "highest_precedence_runtime_truth",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md",
+      "status": "ACTIVE",
+      "role": "sg_identity_architecture_amendment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/runtime/SG_RUNTIME_AUTHORITY_SUPERSESSION_OVERLAY_v1.md",
+      "status": "ACTIVE",
+      "role": "runtime_semantic_supersession",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "docs/incidents/SG_AUTHORITY_IDENTITY_P0_20260718.md",
+      "status": "ACTIVE",
+      "role": "p0_incident_containment",
+      "last_modified": "2026-07-19"
+    },
+    {
+      "lane": "trustfield_worker",
+      "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
+      "status": "ACTIVE",
+      "role": "unified_motor_scaling_posture",
+      "last_modified": "2026-07-19"
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "warns": [],
+  "reasoning": {
+    "alive_doc_count": 411,
+    "authority_scan_roots": [
+      "AGENTS.md",
+      "ssot/",
+      "data/github_automation_registry_v1.json",
+      "data/agent_read_surfaces_v1.json",
+      "data/automation_surface_inventory_v1.json",
+      ".cursor/rules/",
+      ".github/copilot-instructions.md",
+      "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md",
+      "data/living_system_110_plans_v1_LOCKED.json",
+      "skills/pr-conflict-resolver/",
+      "data/pr_conflict_skill_lock_v1.json",
+      "data/auth_surface_matrix_v1.json",
+      "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.md",
+      "SG-Canonical-Library/noetfield-library/P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/AGENT_EXECUTION_CONTRACT_TEMPLATE_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/P0-TEMPLATES/RECEIPT_TEMPLATE_CHESS_PASS_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_01_CHESS_PASS.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_02_FEATURE_PARITY_LEDGER.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_03_PROMPT_PATCHER.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_04_LIVE_TRUTH_VERIFIER.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_05_RESTORE_PLAYBOOK.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_06_COMMERCIAL_CONSEQUENCE_SIMULATOR.md",
+      "SG-Canonical-Library/noetfield-library/SKILLS/SKILL_07_NON_BLOCKING_DECISION_ROUTER.md",
+      "SG-Canonical-Library/noetfield-library/PLAYBOOKS/LIVE_SITE_CHANGE_PLAYBOOK_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/PLAYBOOKS/DEPLOY_DRIFT_PLAYBOOK_v2.0.md",
+      "SG-Canonical-Library/noetfield-library/PLAYBOOKS/TRUSTFIELD_PARTNER_ACCESS_RESTORE_PLAYBOOK_v2.0.md",
+      "scripts/chess_pass_cli_v1.py",
+      "scripts/verify_chess_pattern_reasoning_v2_install_v1.sh"
+    ],
+    "retired_deploy_surfaces": [
+      "legacy_preview_host"
+    ],
+    "verdict": "AUTHORITY_CLEAN",
+    "next_actions": [],
+    "handoff_by_lane": {}
+  },
+  "queue_summary": {
+    "open": 0,
+    "open_p0": 0,
+    "path": "data/governance_stale_pointer_queue_v1.json"
+  },
+  "closure_token": "AGENT_READ_STALENESS: pass"
+}
