@@ -1,0 +1,218 @@
+[
+  {
+    "motor_id": "gh_actions_workflow_census_weekly_v1",
+    "workflow_file_exists": true,
+    "verdict": "STALE",
+    "age_days": 17,
+    "newest_receipt": "receipts/workflow-census-20260706T093358Z.json",
+    "receipt_count": 2
+  },
+  {
+    "motor_id": "gh_actions_agent_read_staleness_weekly_v1",
+    "workflow_file_exists": true,
+    "verdict": "CURRENT",
+    "age_days": 0,
+    "newest_receipt": "receipts/agent-read-staleness-20260723T115603Z.json",
+    "receipt_count": 7
+  },
+  {
+    "motor_id": "gh_actions_sg_auth_surface_probe_v1",
+    "workflow_file_exists": true,
+    "verdict": "STALE",
+    "age_days": 15,
+    "newest_receipt": "receipts/auth-surface-probe-20260708T071022Z.json",
+    "receipt_count": 1
+  },
+  {
+    "motor_id": "gh_actions_brain_loop_autorun_v1",
+    "workflow_file_exists": true,
+    "verdict": "STALE",
+    "age_days": 19,
+    "newest_receipt": "receipts/brain-loop-autorun-20260702T105003Z.json",
+    "receipt_count": 3
+  },
+  {
+    "motor_id": "mac_launchd_brain_loop_autorun_v1",
+    "workflow_file_exists": null,
+    "verdict": "STALE",
+    "age_days": 19,
+    "newest_receipt": "receipts/brain-loop-autorun-20260702T105003Z.json",
+    "receipt_count": 3
+  },
+  {
+    "motor_id": "cf_loop_specialist_tick_v1",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "cf_auto_runtime_tick_v1",
+    "workflow_file_exists": null,
+    "verdict": "NO_TARGET_DECLARED",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "tf_cf_fleet_tick_v1",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "tf_cf_deadman_v1",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "tf_cf_verify_recipes_v1",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "trustfield_loops_production",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "trustfield_loops_preview",
+    "workflow_file_exists": null,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_sourcea_external_verify_v1",
+    "workflow_file_exists": false,
+    "verdict": "NO_TARGET_DECLARED",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_noos_factory_autorun_v1",
+    "workflow_file_exists": false,
+    "verdict": "NO_TARGET_DECLARED",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "p0pgr_shadow_cycle_v1",
+    "workflow_file_exists": null,
+    "verdict": "STALE",
+    "age_days": 14,
+    "newest_receipt": "receipts/p0pgr/P0PGR-CYCLE-20260708T143639Z.json",
+    "receipt_count": 7
+  },
+  {
+    "motor_id": "gh_actions_p0pgr_shadow_cycle_v1",
+    "workflow_file_exists": true,
+    "verdict": "STALE",
+    "age_days": 14,
+    "newest_receipt": "receipts/p0pgr/P0PGR-CYCLE-20260708T143639Z.json",
+    "receipt_count": 7
+  },
+  {
+    "motor_id": "gh_actions_category_drift_guard_v1",
+    "workflow_file_exists": true,
+    "verdict": "CURRENT",
+    "age_days": 0,
+    "newest_receipt": "receipts/CATEGORY_DRIFT_CHECK_20260723T055918Z.json",
+    "receipt_count": 1
+  },
+  {
+    "motor_id": "nf-unified-motor-foundation-v1",
+    "workflow_file_exists": false,
+    "verdict": "CURRENT",
+    "age_days": 4,
+    "newest_receipt": "receipts/doctrine/NF_UNIFIED_MOTOR_SCALING_POSTURE_v1.lock.json",
+    "receipt_count": 3
+  },
+  {
+    "motor_id": "cf_nf_commissioning_specialist_tick_v1",
+    "workflow_file_exists": null,
+    "verdict": "CURRENT",
+    "age_days": 4,
+    "newest_receipt": "receipts/doctrine/NF_COMMISSIONING_SPECIALIST_DEPLOY_RECEIPT_v1.json",
+    "receipt_count": 1
+  },
+  {
+    "motor_id": "gh_actions_governance_registry_validate_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_site_flow_canaries_executor_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_nf_48h_liveness_closeout_v1",
+    "workflow_file_exists": true,
+    "verdict": "CURRENT",
+    "age_days": 3,
+    "newest_receipt": "receipts/48h-test-run1-START.json",
+    "receipt_count": 1
+  },
+  {
+    "motor_id": "gh_actions_nf_commissioning_specialist_deploy_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_nf_hourly_ai_circles_deploy_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_nf_sg_key2_custody_watch_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  },
+  {
+    "motor_id": "gh_actions_motor_learning_organ_v1",
+    "workflow_file_exists": true,
+    "verdict": "CURRENT",
+    "age_days": 0,
+    "newest_receipt": "receipts/learning/motor-learning-organ-w0-scaffold-critique-20260720.json",
+    "receipt_count": 3
+  },
+  {
+    "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+    "workflow_file_exists": true,
+    "verdict": "NO_RECEIPT",
+    "age_days": null,
+    "newest_receipt": null,
+    "receipt_count": 0
+  }
+]

@@ -1,0 +1,5 @@
+=== Agent read staleness (v1) ===
+  alive=411 blockers=0 warns=0 queue=0
+  reasoning: AUTHORITY_CLEAN
+AGENT_READ_STALENESS: pass
+verify_agent_read_staleness_v1: PASS

@@ -1,0 +1,89 @@
+{
+  "schema": "p0pgr-execution-receipt-v1",
+  "packet_id": "P0PGR-20260708-003",
+  "move_id": "M02",
+  "campaign": "P0PGR-CAMPAIGN-20260708-001",
+  "executed_at": "2026-07-23T12:07:00Z",
+  "recorded_at": "2026-07-23T11:58:24Z",
+  "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
+  "executor": "claude_fable_session (interactive Claude Code, founder's Mac), deterministic repo scripts",
+  "executor_route_note": "Packet declared github_action/claude_code_cli; executed by the interactive session agent with the same deterministic scripts a GHA runner would call. Repo-internal reads only; cloud-replicable.",
+  "authority_scope": "observe",
+  "founder_authorization_ref": "receipts/p0pgr/founder/FOUNDER-DIRECTIVE-KEEP-EXECUTING-20260723.json",
+  "quality_state": "PASS",
+  "low_quality_labels": {
+    "confidence": "high \u2014 every verdict is a script exit code, glob timestamp, or file-existence check",
+    "scope": "repo-internal wiring currency: staleness verifier, 27 registry motors, 108 read-surface pointers, census-flag diff",
+    "reversibility": "fully reversible \u2014 reads + receipt/artifacts only",
+    "next_improvement": "registry hygiene: prune or re-point the 3 motors with NO_TARGET_DECLARED and 2 with missing workflow files"
+  },
+  "per_surface_verdicts": {
+    "agent_read_staleness": "CURRENT \u2014 verifier PASS, alive=411, blockers=0, warns=0, reasoning AUTHORITY_CLEAN",
+    "read_surface_pointers": "106/108 CURRENT after glob-aware re-check; 1 DANGLING: data/pr_conflict_skill_lock_v1.json (referenced as scan-root authority but absent on disk; companion dir skills/pr-conflict-resolver/ exists)",
+    "registry_motors": "27 motors: 6 CURRENT (census-weekly-class receipts <=7d), 6 STALE (14-19d, incl. workflow-census 17d, auth-surface-probe 15d, brain-loop-autorun 19d, p0pgr-shadow-cycle 14d), 12 NO_RECEIPT, 3 NO_TARGET_DECLARED; 2 registered GHA motors point at MISSING workflow files (sourcea_external_verify_v1, noos_factory_autorun_v1)",
+    "census_flag_diff": "10 flags from 2026-07-06: RESOLVED-BY-DEREGISTRATION 6 (cf_brain_chat, noos_release_gate, noos_publish_pypi, gateway_railway_deadman, cf_gateway_ops, cf_gateway_heartbeat \u2014 no longer registered), CHANGED 1 (mac_launchd_brain_loop_autorun now HAS receipts but 19d stale), PERSISTING 3 (trustfield_loops_preview still zero receipts; rule-4 REVENUE gateway_outbound_log zero receipts \u2014 independently confirmed by M05; rule-2 META $20 > GUARD+REVENUE $15 cost inversion)"
+  },
+  "findings": [
+    {
+      "id": "F8",
+      "severity": "MEDIUM",
+      "finding": "6 registered motors stale 14-19d incl. the census motor itself (17d \u2014 weekly cadence missed 2 runs) and the P0-PGR shadow-cycle motor (14d)",
+      "next_pointer": "repair packet: investigate GHA schedule execution for the 4 stale gh_actions motors; census motor first (it is the judging layer)"
+    },
+    {
+      "id": "F9",
+      "severity": "MEDIUM",
+      "finding": "12 motors registered with receipt targets but zero receipts ever; 3 more declare no target at all (violates census standing rule: every loop must name receipt_target)",
+      "next_pointer": "repair packet: per-motor triage \u2014 wire, fix target glob, or propose retirement (founder-gated kill)"
+    },
+    {
+      "id": "F10",
+      "severity": "LOW",
+      "finding": "2 registered GHA motors point at workflow files that do not exist (sourcea_external_verify_v1, noos_factory_autorun_v1) \u2014 registry claims capability the repo does not have",
+      "next_pointer": "repair packet: deregister or restore the workflow files"
+    },
+    {
+      "id": "F11",
+      "severity": "LOW",
+      "finding": "Dangling authority pointer data/pr_conflict_skill_lock_v1.json in agent_read_surfaces scan roots",
+      "next_pointer": "repair packet: recreate lock file or remove pointer (authority hygiene)"
+    }
+  ],
+  "evidence_artifacts": [
+    {
+      "claim": "staleness verifier PASS output",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M02-20260723/staleness-output.txt",
+      "body_sha256": "09e96731e443aff413db9860a116d4139267691fa807814bc11a6111ef4789ee"
+    },
+    {
+      "claim": "27-motor receipt-currency map with ages",
+      "artifact_path": "receipts/p0pgr/artifacts/P0PGR-EXEC-M02-20260723/motor-receipt-map.json",
+      "body_sha256": "993275b901fe338d1437626c6aec48ffac947f9c25f4b1b616cd7a927f13dbd1"
+    },
+    {
+      "claim": "census flags baseline being diffed",
+      "artifact_path": "receipts/workflow-census-20260706T093358Z.json",
+      "body_sha256": "67181d9a346862892c5e385544142cd059bc7ed81f0daba6fa9669963ef086ed"
+    }
+  ],
+  "pass_fail": "PASS (audit complete; wiring itself MIXED: staleness core healthy, motor layer 6 CURRENT / 6 STALE / 15 unwired-or-untargeted)",
+  "changed_files": [
+    "receipts/p0pgr/P0PGR-EXEC-M02-20260723.json",
+    "receipts/p0pgr/artifacts/P0PGR-EXEC-M02-20260723/ (3 files)",
+    "receipts/p0pgr/phase2_scorecard_v1.json"
+  ],
+  "commands_run": [
+    "bash scripts/verify_agent_read_staleness_v1.sh (exit 0)",
+    "python3 glob/timestamp motor map (read-only)",
+    "python3 pointer existence sweep, glob-aware (read-only)"
+  ],
+  "cost": {
+    "provider": "anthropic",
+    "model": "claude-fable-5 (interactive session)",
+    "total_usd": 0.0,
+    "accounting_note": "deterministic scripts metered $0; analysis LLM-authored in founder's interactive session \u2014 session usage, not metered API"
+  },
+  "external_sends": 0,
+  "forms_submitted": 0,
+  "next_pointer": "Queue advances to M06 (P0PGR-20260708-007, ~$20/mo dead-spend recovery, 58.5) \u2014 directly attacks the persisting rule-2 cost inversion. Findings F8-F11 to packet compiler."
+}

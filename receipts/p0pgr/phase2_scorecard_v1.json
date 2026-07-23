@@ -1,6 +1,6 @@
 {
   "schema": "p0pgr-phase2-scorecard-v1",
-  "updated_at": "2026-07-23T11:55:22Z",
+  "updated_at": "2026-07-23T11:58:24Z",
   "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
   "ranked_queue_receipt": "receipts/p0pgr/phase2_queue_v1.json",
   "queue_order": [
@@ -64,6 +64,20 @@
         "F7 INFO: /en locale redirect drift since M03"
       ],
       "cost_usd": 0.0
+    },
+    {
+      "move_id": "M02",
+      "packet_id": "P0PGR-20260708-003",
+      "what": "registry wiring-currency sweep \u2014 27 motors mapped, 108 pointers checked, census diffed",
+      "receipt": "receipts/p0pgr/P0PGR-EXEC-M02-20260723.json",
+      "quality_state": "PASS",
+      "findings": [
+        "F8 6 motors stale 14-19d incl census motor itself",
+        "F9 15 motors unwired or untargeted",
+        "F10 2 motors point at missing workflows",
+        "F11 dangling authority pointer"
+      ],
+      "cost_usd": 0.0
     }
   ],
   "deferred_mac_items": [
@@ -85,7 +99,7 @@
     }
   ],
   "counters": {
-    "cloud_executions": 4,
+    "cloud_executions": 5,
     "external_sends": 0,
     "forms_submitted": 0,
     "deploys": 0,
@@ -97,16 +111,20 @@
     "estimated_cost_usd": 0.0
   },
   "next_in_queue": {
-    "move_id": "M02",
-    "packet_id": "P0PGR-20260708-003",
-    "what": "registry trust evidence sweep (repo-internal)",
-    "gates": "CLOUD_ONLY + read-only + ROI 58.5 \u2014 eligible"
+    "move_id": "M06",
+    "packet_id": "P0PGR-20260708-007",
+    "what": "~$20/mo dead-spend recovery + governor enforceability",
+    "gates": "CLOUD_ONLY + reversible + ROI 58.5 \u2014 eligible; attacks persisting rule-2 cost inversion"
   },
   "new_candidate_packets_from_findings": [
     "F1: /pilot pricing copy-clarity fix (deploy-gated -> FOUNDER_ONLY)",
     "F2: P10 launch-credibility block refresh (hygiene, cloud-safe)",
     "F3: create ICP + priced-offer + ladder-state data files (machine-drafted, founder reviews price+address only)",
     "F4: register commercial-pulse draft + stale-gate motors (scheduled automation -> founder-gated unlock)",
-    "F5: retro WORKER_IS_THE_STALE_GATE receipt + evaluator wiring"
+    "F5: retro WORKER_IS_THE_STALE_GATE receipt + evaluator wiring",
+    "F8: revive 4 stale GHA motors (census first)",
+    "F9: 15-motor wire-or-retire triage",
+    "F10: deregister/restore 2 ghost workflows",
+    "F11: pr-conflict lock pointer fix"
   ]
 }
