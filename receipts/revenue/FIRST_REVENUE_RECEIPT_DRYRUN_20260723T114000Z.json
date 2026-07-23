@@ -1,0 +1,21 @@
+{
+ "schema": "first_revenue_receipt_v1",
+ "job_id": "W5-11",
+ "mode": "TEST_MODE_DRYRUN",
+ "status": "DRYRUN_PASS",
+ "offer": "Never Miss a Call",
+ "amount_total_cents": 9500,
+ "currency": "CAD",
+ "event": {
+  "id": "evt_test_w511_clouddryrun_01",
+  "type": "checkout.session.completed",
+  "livemode": false,
+  "created_utc": "2026-07-23T11:40:00Z",
+  "session_id_prefix": "cs_test_w511",
+  "payer_email_sha256_prefix": "a77082856f83439d",
+  "sourceb_kind": "fit_call",
+  "lead_receipt_id": "sbiz_trial_dryrun_cloud"
+ },
+ "doctrine": "test-mode dry-run: proves the adapter path only, claims no revenue",
+ "generated_by": "scripts/revenue_receipt_adapter_v1.py"
+}
