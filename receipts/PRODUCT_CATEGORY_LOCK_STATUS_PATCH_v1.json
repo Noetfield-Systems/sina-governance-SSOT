@@ -1,0 +1,96 @@
+{
+  "schema": "product_category_lock_status_patch_receipt_v1",
+  "status": "PASS",
+  "patch_id": "PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1",
+  "applied_at": "2026-07-09T07:43:23Z",
+  "authority": "founder directive 2026-07-09",
+  "supersedes_status": "PRODUCT_CATEGORY_MAP_LOCKED",
+  "new_status": "PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION",
+  "verification_method": "Each corrected status was confirmed against the actual receipt file before patching (located the file, read its content, confirmed PASS/verdict) \u2014 not accepted on assertion. This is the same receipt-backed discipline the map enforces.",
+  "patches": [
+    {
+      "category": "CAT-03-PROMPT-GOVERNANCE-RUNTIME",
+      "change": "R2 cloud-manual upgraded PARTIAL -> PASS; r_ladder recorded R1 PASS / R2 PASS / R3 HOLD / R4 not-active / R5 not-active. Removed 'cloud loop never ran' and 'push + 2 cloud runs pending' language.",
+      "resulting_status": "built-not-activated (R3+ founder-gated)",
+      "evidence": [
+        {
+          "receipt_id": "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z",
+          "sha256": "8f43f2e8fb70bc3a11b65ad1e10ab8e5ae1c62f0858d9fd1c4789a615fd97b59",
+          "verdict": "R2 PASS \u2014 2 GitHub cloud runs 28984157746/28984159107 concluded success, in-cloud schema validation PASS, cron disabled/R3 founder-gated",
+          "location": "canonical receipts/p0pgr/ (recovered from git 2f2f38b via PRODUCT_CATEGORY_LOCK_SYNC_v1; archived clone deleted)"
+        }
+      ]
+    },
+    {
+      "category": "CAT-04-CLOUD-FACTORY-LINES",
+      "change": "Recorded: TrustField cloud loops built in PR #10; reconciliation RECONCILED_PASS; PR #11 merged + Railway deploy (DECLARED_ACTIVE). Held status at built-not-activated / NOT VERIFIED (24h scheduled window + secrets pending).",
+      "resulting_status": "built-not-activated, not VERIFIED",
+      "evidence": [
+        {
+          "receipt_id": "trustfield-cloud-loops-built-v1-20260709T001150Z",
+          "sha256": "2d0562372250e5d4f61262ccd723d30fe12b1c42da53ab8d1098134909ee4b88",
+          "verdict": "PR #10 loops BUILT/DECLARED",
+          "location": "canonical receipts/p0pgr/ (recovered from git 2f2f38b via PRODUCT_CATEGORY_LOCK_SYNC_v1; archived clone deleted)"
+        },
+        {
+          "receipt_id": "P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z",
+          "sha256": "891f49abf09263008d76434b744c1552be1767224a3be8cf0443fb56e595ce5a",
+          "verdict": "RECONCILED_PASS \u2014 zero p0-pgr schema duplication; TrustField = local adapter only",
+          "location": "canonical receipts/p0pgr/ (recovered from git 2f2f38b via PRODUCT_CATEGORY_LOCK_SYNC_v1; archived clone deleted)"
+        },
+        {
+          "receipt_id": "TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z",
+          "sha256": "38bf99e85ff1ce4a8541baa7bd10cb2afc6534b7f265a53a46d32684a60c5989",
+          "verdict": "DECLARED_ACTIVE \u2014 PR #11 merged + Railway deploy SUCCESS; VERIFIED pending 24h window",
+          "location": "canonical receipts/p0pgr/ (recovered from git 2f2f38b via PRODUCT_CATEGORY_LOCK_SYNC_v1; archived clone deleted)"
+        }
+      ]
+    },
+    {
+      "category": "CAT-06-AGENTIC-WORKFLOW-BUILDER",
+      "change": "Explicitly decoupled from the P0-PGR R2 proof. Kept partial-scaffold. Activation receipt now requires DIRECT workflow-builder evidence (a partner-authored governed workflow with an approval-gate receipt).",
+      "resulting_status": "partial-scaffold (unchanged)",
+      "evidence": [
+        {
+          "receipt_id": "N/A",
+          "sha256": "N/A",
+          "verdict": "No direct workflow-builder evidence exists; R2 PASS is CAT-03 runtime proof, not a builder proof",
+          "location": "n/a"
+        }
+      ]
+    }
+  ],
+  "reverse_drift_finding": {
+    "severity": "HIGH",
+    "detail": "All CAT-03/04 proving receipts \u2014 and the 2 cloud cycle receipts the R2 PASS depends on (P0PGR-CYCLE-20260709T000048Z/000050Z) \u2014 exist ONLY in the archived clone ~/Projects/sina-governance-ssot.MIGRATED-2026-07-08, not in canonical ~/Desktop/Noetfield-Systems/sina-governance-SSOT. Active P0-PGR/TrustField work is still landing in a clone the workspace treats as archived. Canonical is behind.",
+    "not_imported": "Per governance discipline (no autonomous laundering of stale-clone artifacts into canonical), these receipts were NOT copied in. They are referenced by id + sha256 with explicit ARCHIVED-CLONE provenance and flagged for founder-owned sync.",
+    "update": "Archived clone (all of ~/Projects) later DELETED. Proving receipts recovered byte-exact from git 2f2f38b (founder-ordered 'DO 1'); NOT laundered from a stale working tree \u2014 sourced from a version-controlled, hash-verified commit."
+  },
+  "ratification_preconditions": [
+    "Sync the 4 patch-evidence receipts + 2 cloud cycle receipts from the archived clone into canonical receipts/p0pgr/.",
+    "Founder ratifies product/ deliverables; commit on a governance branch (no merge/deploy).",
+    "Decide the reverse-drift root cause: move P0-PGR/TrustField work to canonical, or formally re-designate the clone."
+  ],
+  "boundaries_enforced": {
+    "did_not_build_code": true,
+    "did_not_buy_domains": true,
+    "did_not_create_public_claims": true,
+    "did_not_merge_or_deploy": true,
+    "did_not_import_from_archived_clone": true,
+    "did_not_let_workers_define_new_categories": true
+  },
+  "files_updated": [
+    "product/PRODUCT_CATEGORY_REGISTRY_v1.json",
+    "product/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md",
+    "product/COMMERCIAL_DOMAIN_STRATEGY_v1.md",
+    "product/CATEGORY_TO_PHASE_LADDER_v1.md",
+    "product/PRODUCT_MOAT_COMPARISON_v1.md",
+    "receipts/SG_PRODUCT_CATEGORY_LOCK_RECEIPT_v1.json",
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/PRODUCT_CATEGORY_REGISTRY_v1.json",
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NOETFIELD_CLOUD_FACTORY_PRODUCT_MAP_v1.md"
+  ],
+  "final_status": "PRODUCT_CATEGORY_MAP_READY_FOR_RATIFICATION",
+  "stop_after_receipt": true,
+  "precondition_1_status": "DONE_PARTIAL via PRODUCT_CATEGORY_LOCK_SYNC_v1 \u2014 4/6 receipts recovered from git into canonical; 2 cycle receipts unrecoverable (never committed).",
+  "sync_receipt": "receipts/PRODUCT_CATEGORY_LOCK_SYNC_v1.json"
+}

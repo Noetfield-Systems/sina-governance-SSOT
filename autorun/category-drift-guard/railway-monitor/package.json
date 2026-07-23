@@ -1,0 +1,14 @@
+{
+  "name": "category-drift-guard-railway-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dead-man's-switch monitor: polls category-drift-verifier on an independent Railway-hosted schedule and alerts on staleness.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

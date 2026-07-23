@@ -3,6 +3,23 @@
 **Agent:** `sg_sssot_cursor` · **Repo:** `~/Desktop/Noetfield-Systems/sina-governance-SSOT`  
 **Registry:** `data/github_automation_registry_v1.json` · **Alive docs:** `data/agent_read_surfaces_v1.json` · **Staleness gate:** `scripts/verify_agent_read_staleness_v1.sh` · **Governance:** `ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md`
 
+**L0 repo graph memory (read before broad reads):** `graph-out/GRAPH_REPORT.md` · query: `python3 scripts/query_repo_graph_v1.py <term>` · design: `docs/L0_REPO_GRAPH_MEMORY_v1.md`
+
+## L0 repo graph memory — broad-read gate
+
+Do not spawn a broad "understand the repo", "map subsystem X", "architecture
+review", or "audit Y" task (multi-agent or single-agent) by reading files
+directly as the first step. First read `graph-out/GRAPH_REPORT.md` (compact
+subsystem map, ~6KB) and, for anything it doesn't answer, run
+`python3 scripts/query_repo_graph_v1.py <subsystem-or-keyword>` (bounded output,
+no full file reads). Only open — or delegate reading of — the specific files the
+graph names as relevant. Token budget: the orientation step (the report plus a
+few targeted queries) should cost roughly 2k-6k tokens, not the ~371k a prior
+blind multi-agent understand pass cost. If the graph is missing or stale for what you need,
+rebuild it first with `python3 scripts/build_repo_graph_v1.py` rather than
+falling back to a blind repo-wide read. Full rationale and rollout plan:
+`docs/L0_REPO_GRAPH_MEMORY_v1.md`.
+
 ## You edit (this repo)
 
 - Governance registry, validators, independent-verify scripts
@@ -13,10 +30,10 @@
 
 | Venture | Workspace | Owner agent |
 |---------|-----------|-------------|
-| SourceA Brain / Worker | `~/Projects/SourceA` | `sourcea_brain` / `sourcea_worker` |
+| SourceA Brain / Worker | `~/Desktop/Noetfield-Systems/SourceA` | `sourcea_brain` / `sourcea_worker` |
 | TrustField loops | `~/Desktop/trustfield-loops` | `trustfield_worker` |
-| NOOS doctrine | `~/Projects/noetfeld-os` | `noos_agent` |
-| Noetfield website | `~/Desktop/Noetfield/.../Noetfield/` | `noetfield_website` |
+| NOOS doctrine | `~/Desktop/Noetfield-Systems/noetfeld-OS` | `noos_agent` |
+| Noetfield website | `~/Desktop/Noetfield-Systems/Noetfield/` | `noetfield_website` |
 
 ## Mac founder session (INCIDENT-039)
 

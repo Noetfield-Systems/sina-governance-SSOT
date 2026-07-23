@@ -1,0 +1,10 @@
+{
+ "schema": "wiring_commissioning_plan_lock_v1",
+ "locked_at": "2026-07-23T06:53:11Z",
+ "note": "sha256 of the three locked artifacts. Absence or mismatch = ENFORCEMENT_VIOLATION.",
+ "files": {
+  "product/WIRING_COMMISSIONING_PLAN_v1.md": "4e6e9ed0419e144e4e7d14958dfe5583a099f320c9658e03c29fc76350c90883",
+  "product/WIRING_COMMISSIONING_CONTRACT_v1.json": "56f103791f358136250cbf1fd6fbea527f1a7fd1b0a4bb82ff51ce671b673c1e",
+  "scripts/verify_wiring_commissioning_v1.py": "bd1834389831e0a28fca3aeb52def7be184a146cf0537c3a6185df6bb6341952"
+ }
+}

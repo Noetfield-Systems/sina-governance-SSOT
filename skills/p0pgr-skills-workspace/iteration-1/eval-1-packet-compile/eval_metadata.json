@@ -1,0 +1,12 @@
+{
+  "eval_id": 1,
+  "eval_name": "packet-compile",
+  "prompt": "Compile a p0pgr packet for finding F2 (P10 doc cites v71, live is v108); save to output dir; lint it.",
+  "assertions": [
+    "Packet lints PASS (lint_result.json verdict)",
+    "evidence_refs cite the M03 execution receipt",
+    "fallback_route is human_review_queue, not mac_runner",
+    "F1 pricing issue explicitly scoped out (not bundled)",
+    "dispatch_mode is shadow"
+  ]
+}

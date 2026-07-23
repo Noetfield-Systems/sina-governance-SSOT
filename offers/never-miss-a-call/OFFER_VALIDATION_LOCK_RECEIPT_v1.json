@@ -1,0 +1,73 @@
+{
+  "schema": "offer_validation_lock_receipt_v1",
+  "status": "LOCKED",
+  "offer": "Never Miss a Call \u2014 AI Receptionist for local service businesses",
+  "locked_at": "2026-07-09T09:35:52Z",
+  "authority": "Founder (Market Package Validator) directive 'SAVE AND LOCK' 2026-07-09",
+  "lane": "cursor/product-category-lock-v1 (isolated worktree ~/Desktop/Noetfield-Systems/sg-product-lock)",
+  "decision": {
+    "recommended_supplier": "My AI Front Desk (white-label / 'Frontdesk')",
+    "rationale": "Only supplier clearing all 3 hard gates: full white-label + resell-under-our-brand, Canada AND US numbers, turnkey ~5min/client. Framed as a validation pilot due to contractual/economic risk (MAP floor, revocable license, no-refund ToS, $0.25/min overage, wholesale sales-gated).",
+    "backups": [
+      "Synthflow (power/scale, cost-absorbable)",
+      "OnCallClerk / Trillet only after confirming Canadian numbers in writing"
+    ],
+    "eliminated": [
+      "ai-receptionist.com (no reseller program \u2014 cannot resell under our brand)",
+      "NextPhone (affiliate-only, not resellable)"
+    ]
+  },
+  "evidence_basis": {
+    "method": "10-agent research + adversarial-verify workflow",
+    "workflow_run_id": "wf_9efe2b46-1f1",
+    "live_web_fetches": 158,
+    "suppliers_assessed": 5,
+    "verification_note": "Trillet's adversarial verifier returned a placeholder ('Test summary.') \u2014 Trillet's claims are research-only, NOT adversarially verified; flagged in SUPPLIER_EVIDENCE_v1.json.",
+    "caveat": "Vendor pricing/reseller terms change and are partly sales-gated; wholesale/MAP/overage for MAFD are UNKNOWN until the reseller application returns a rate card."
+  },
+  "artifacts": [
+    {
+      "file": "offers/never-miss-a-call/MARKET_PACKAGE_VALIDATION_v1.md",
+      "bytes": 7532,
+      "sha256": "aeeeaf4063b98a022edfd577cd967f96d3f48f246ce54d8cca5682ac4dd35437"
+    },
+    {
+      "file": "offers/never-miss-a-call/SONNET_BUILD_PACKET_LANDING_v1.yaml",
+      "bytes": 2336,
+      "sha256": "22c3701471b5ce60fb91b9478de0870f871be5a8b2fa2c44481f63fa3464f458"
+    },
+    {
+      "file": "offers/never-miss-a-call/RESELLER_RATE_CARD_REQUEST_v1.md",
+      "bytes": 2337,
+      "sha256": "792b7f043423e844992dc9385f3230f1ff205b41e8594dc8e38d116aa1c08af7"
+    },
+    {
+      "file": "offers/never-miss-a-call/SUPPLIER_EVIDENCE_v1.json",
+      "bytes": 54393,
+      "sha256": "3a8470552101fffa5c7fc5784f7381a881e5e6383280dde5c19903c35755adc4"
+    }
+  ],
+  "open_next_action": "Send RESELLER_RATE_CARD_REQUEST_v1 to My AI Front Desk/Frontdesk; obtain wholesale + MAP + overage + termination terms in writing before pricing publicly or building a branded client book.",
+  "boundaries_enforced": {
+    "no_public_claim": true,
+    "no_domain_purchase": true,
+    "no_deploy": true,
+    "no_real_charges": true,
+    "no_merge_to_main": true,
+    "local_commit_isolated_lane_only": true
+  },
+  "execution_update_20260709": {
+    "authority": "Founder directive 'SAVE AND LOCK AND EXECUTE NEXT PLAN' 2026-07-09 (auto mode)",
+    "executed": [
+      "Verified live reseller contact/apply URLs (WebFetch of myaifrontdesk.com/white-label + WebSearch)",
+      "Staged the reseller inquiry as a real Gmail draft (id r-1920781617753950048) to support@myaifrontdesk.com — NOT sent",
+      "Filled sender name/email from known founder identity; phone left as explicit placeholder, not fabricated"
+    ],
+    "deliberately_not_executed": [
+      "Did not click Send — sending is an external, hard-to-reverse action representing SourceA/Noetfield to a vendor; requires founder review",
+      "Did not submit the reseller registration form (app.myaifrontdesk.com/reseller-registration-form) — requires business legal name/address/phone not available to this session; creates an account/agreement under our brand, a founder-only decision"
+    ],
+    "artifact_added": "offers/never-miss-a-call/RESELLER_EMAIL_READY_TO_SEND_v1.md"
+  },
+  "stop_after_receipt": true
+}

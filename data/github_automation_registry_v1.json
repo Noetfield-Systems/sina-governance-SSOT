@@ -334,6 +334,34 @@
       "note": "workflow_dispatch-only shadow compile/lint/route; validated p0-pgr/*.json input; zero execution."
     },
     {
+      "motor_id": "gh_actions_category_drift_guard_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/category-drift-guard-v1.yml",
+      "cadence": "founder-manual-only",
+      "lane": "product_category_governance",
+      "owns": [
+        "category_registry_drift_check"
+      ],
+      "must_not_own": [
+        "product_registry_mutation",
+        "deploy",
+        "external_send",
+        "merge",
+        "production_mutation",
+        "sg_authority_decision"
+      ],
+      "requires_secrets": [
+        "CATEGORY_DRIFT_VERIFIER_URL",
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_KEY"
+      ],
+      "receipt_path": "receipts/CATEGORY_DRIFT_CHECK_*.json",
+      "conflicts_with": [],
+      "runtime_state": "FOUNDER_MANUAL_ONLY",
+      "note": "workflow_dispatch-only, read-only drift check of product/PRODUCT_CATEGORY_REGISTRY_v1.json against evidence; contents:read only; schedule stays commented until a FOUNDER-UNLOCK-DRIFT-CRON receipt exists (mirrors p0pgr R3 gate). All three secrets optional at runtime (steps skip when unset). Registered during W0-05 land of PR #82: workflow shipped on branch without a registry entry and validate_parallel_automation_governance_v1 requires workflow-to-registry 1:1."
+    },
+    {
       "motor_id": "nf-unified-motor-foundation-v1",
       "kind": "cloudflare_worker_workflow",
       "repo": "noetfield-sandbox-private",
@@ -741,7 +769,8 @@
     "noos_gel_factory": "gh_actions_noos_factory_autorun_v1",
     "p0pgr_shadow_compile_lint_route": "gh_actions_p0pgr_shadow_cycle_v1",
     "site_flow_canaries_e2e_activation": "gh_actions_site_flow_canaries_executor_v1",
-    "motor_learning_organ": "gh_actions_motor_learning_organ_v1"
+    "motor_learning_organ": "gh_actions_motor_learning_organ_v1",
+    "category_registry_drift_check": "gh_actions_category_drift_guard_v1"
   },
   "duplication_forbidden": [
     {

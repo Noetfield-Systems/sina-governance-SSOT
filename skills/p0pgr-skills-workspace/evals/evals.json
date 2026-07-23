@@ -1,0 +1,26 @@
+{
+  "skill_name": "p0pgr-operator + p0pgr-packet-compiler + p0pgr-receipt-verifier",
+  "evals": [
+    {
+      "id": 0,
+      "skill": "p0pgr-operator",
+      "prompt": "In the repo at /Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT: what's the current state of the p0pgr system and what should run next? Check the execution gates for the next queued move and tell me if it's allowed to execute right now. Don't execute anything and don't modify any repo files — write your status report as status_report.md to the output directory.",
+      "expected_output": "Report identifying PHASE_2_CLOUD_ONLY_ROI_TRACK mode, next move M05 (packet P0PGR-20260708-006), the eight execution gates checked, cloud-only rules respected, no repo modification",
+      "files": []
+    },
+    {
+      "id": 1,
+      "skill": "p0pgr-packet-compiler",
+      "prompt": "In the repo at /Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT: compile a p0pgr prompt packet for finding F2 from the M03 execution receipt — the repo doc SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md cites site build v71 but the live site is on v108, so the launch-credibility block needs a refresh. For this test, save the packet JSON to the output directory instead of the outbox, then lint it and include the lint result. Don't modify any repo files.",
+      "expected_output": "A v1.1 packet JSON that passes scripts/p0pgr_packet_lint_v1.py with verdict PASS: hygiene/repair class, evidence_refs citing the M03 exec receipt, all required delivery fields, continuity-law quality_handling, no invented fields",
+      "files": []
+    },
+    {
+      "id": 2,
+      "skill": "p0pgr-receipt-verifier",
+      "prompt": "In the repo at /Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT: verify the execution receipt receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json. Can we trust it? Was its quality_state honest? Give a formal verdict with evidence. Don't modify any repo files — write your verification report as verdict.md to the output directory.",
+      "expected_output": "Formal verdict (ACCEPTED or ACCEPTED_PROVISIONAL) with anti-self-report checks: recognizes PARTIAL as honest given fetch-tool limitations, spot-checks evidence refs exist, confirms zero sends/forms, checks no fixed-claims, notes findings F1/F2 routed with next_pointers",
+      "files": []
+    }
+  ]
+}

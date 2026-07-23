@@ -1,0 +1,106 @@
+{
+  "schema": "p0pgr_execution_receipt_v1",
+  "receipt_id": "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z",
+  "recorded_at": "2026-07-09T00:15:40.898652+00:00",
+  "packet_id": "P0PGR_R2_CLOUD_MANUAL_PROOF_v1",
+  "upgrade": {
+    "from": "PARTIAL",
+    "to": "PASS",
+    "prior_receipt": "receipts/p0pgr/P0PGR-R2-CLOUD-MANUAL-PROOF-v1.json @ cursor/language-layer-v1",
+    "prior_receipt_present": true,
+    "founder_authorization": "receipts/p0pgr/founder/FOUNDER-APPROVE-R2-CLOUD-MANUAL-PROOF-20260708.json @ branch + in-session directive 2026-07-09"
+  },
+  "gates_checked": {
+    "cloud_only": "PASS",
+    "read_only_or_reversible": "PASS",
+    "roi_positive": "PASS",
+    "no_deploy": "PASS",
+    "no_external_send": "PASS",
+    "no_legal_financial_commitment": "PASS",
+    "no_p0_leakage": "PASS",
+    "no_authority_change": "PASS",
+    "founder_authorization_receipt": "PASS"
+  },
+  "verification": {
+    "both_runs_on_github_cloud_runner": "PASS \u2014 ubuntu-latest, runners 'GitHub Actions 1000005232/1000005233' (gh api jobs)",
+    "both_concluded_success": "PASS (gh run view, both runs)",
+    "both_event_workflow_dispatch": "PASS",
+    "both_branch_cursor_language_layer_v1": "PASS \u2014 identical headSha 3f61d41ef04a627442144cde3cb9f0c20ea3fa57",
+    "receipts_artifacts_present": "PASS \u2014 GitHub artifacts 15117/15178 bytes + local downloads verified",
+    "cycle_result_schema_validation": "PASS \u2014 in-cloud independent jsonschema (Draft202012) validation step passed inside both runs against branch schema (required: cycle_id, started_at, state, evidence, cost); local artifact re-check recorded per-run below",
+    "cron_disabled": "PASS \u2014 workflow file on branch: workflow_dispatch only; schedule commented with explicit R3 founder-gate note (FOUNDER-UNLOCK-R3-CRON-SHADOW required)",
+    "zero_dispatch": "PASS \u2014 'DISPATCH_CLOUD' in cycle_result is the routing DECISION of a shadow cycle; workflow permissions contents:read, no execution steps",
+    "zero_send": "PASS \u2014 no send-capable steps in workflow; email defer unaffected",
+    "zero_deploy": "PASS \u2014 no deploy steps; read-only token",
+    "no_mac_local_dependency": "PASS \u2014 checkout, tests, cycle, validation, artifact upload all executed on GitHub-hosted runner",
+    "per_run_checks": [
+      {
+        "run_id": "28984157746",
+        "cycle_result": {
+          "cycle_id": "P0PGR-CYCLE-20260709T000048Z",
+          "verdict": "PASS",
+          "decision": "DISPATCH_CLOUD",
+          "quality_state": "PASS",
+          "bundle_hash": "534092518338d9e37b3a525008750a305f1e1d00ca31bab19013d4b7f2119169",
+          "lint": "PASS",
+          "lint_reasons": [],
+          "receipt_path": "receipts/p0pgr/P0PGR-CYCLE-20260709T000048Z.json",
+          "receipt_schema_errors": [],
+          "cost_usd": 0.0
+        },
+        "full_receipt": "P0PGR-CYCLE-20260708T131048Z.json",
+        "schema_required_fields_missing": [],
+        "local_validation": "PASS"
+      },
+      {
+        "run_id": "28984159107",
+        "cycle_result": {
+          "cycle_id": "P0PGR-CYCLE-20260709T000050Z",
+          "verdict": "PASS",
+          "decision": "DISPATCH_CLOUD",
+          "quality_state": "PASS",
+          "bundle_hash": "ccbdf60fd2baa54b8f11e76e41488622f45b498e42d62f351fedbf526e2c69fc",
+          "lint": "PASS",
+          "lint_reasons": [],
+          "receipt_path": "receipts/p0pgr/P0PGR-CYCLE-20260709T000050Z.json",
+          "receipt_schema_errors": [],
+          "cost_usd": 0.0
+        },
+        "full_receipt": "P0PGR-CYCLE-20260708T131048Z.json",
+        "schema_required_fields_missing": [],
+        "local_validation": "PASS"
+      }
+    ]
+  },
+  "run_evidence": [
+    {
+      "run_id": "28984157746",
+      "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/actions/runs/28984157746",
+      "cycle_id": "P0PGR-CYCLE-20260709T000048Z",
+      "bundle_hash": "534092518338d9e37b3a525008750a305f1e1d00ca31bab19013d4b7f2119169",
+      "cost_usd": 0.0
+    },
+    {
+      "run_id": "28984159107",
+      "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/actions/runs/28984159107",
+      "cycle_id": "P0PGR-CYCLE-20260709T000050Z",
+      "bundle_hash": "ccbdf60fd2baa54b8f11e76e41488622f45b498e42d62f351fedbf526e2c69fc",
+      "cost_usd": 0.0
+    }
+  ],
+  "quality_state": "PASS",
+  "ladder_state": {
+    "R2": "PASS \u2014 cloud manual proof complete",
+    "R3": "HOLD per founder order \u2014 cron stays disabled until FOUNDER-UNLOCK-R3-CRON-SHADOW receipt"
+  },
+  "limitations": [
+    "parallel P0-PGR scaffolds exist: cursor/language-layer-v1 (branch, cloud-proven) and cursor/machine-autonomy-loops-v1 (local working tree) \u2014 reconciliation is a founder decision before either merges to main"
+  ],
+  "cost": {
+    "llm_calls": 0,
+    "metered_note": "determine \u2014 gh api verification only; cloud runs cost $0.00 per their own receipts"
+  },
+  "accounting_note": "verification session-embedded; the proven runtime is GitHub cloud",
+  "executor_route_note": "verifier role only \u2014 no packet executed in this session",
+  "commit_flag": "flag for next founder-visible commit"
+}

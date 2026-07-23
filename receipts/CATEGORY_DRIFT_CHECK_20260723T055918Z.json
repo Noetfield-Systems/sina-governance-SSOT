@@ -1,0 +1,235 @@
+{
+  "schema": "category_drift_check_v1",
+  "run_type": "weekly-drift-guard",
+  "checked_at": "2026-07-23T05:59:18Z",
+  "registry": "product/PRODUCT_CATEGORY_REGISTRY_v1.json",
+  "registry_locked_at": "2026-07-09T07:06:11Z",
+  "worktree": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-product-lock",
+  "branch": "cursor/product-category-lock-v1",
+  "mode": "read-only observation; no registry or product/ files modified; no fresh web research",
+  "path_resolution_note": "Proof-asset paths were checked in BOTH the canonical checkout (~/Desktop/Noetfield-Systems/sina-governance-SSOT, currently on branch chore/internal-operating-goals-abc) and this lock worktree (branch cursor/product-category-lock-v1). Files present on the lock branch but absent from the canonical checkout are counted PRESENT (branch divergence, not vanishing) and listed under canonical_checkout_absent.",
+  "summary": {
+    "categories_checked": 10,
+    "categories_drifted": 0,
+    "categories_missing_evidence": 2,
+    "vanished_assets_total": 4,
+    "notification_required": true,
+    "notification_reason": "No build-status drift, but 4 cited proof assets vanished from disk (CAT-05: sg-sandbox/.git, sg-sandbox/.noetfield/agent_manifest.yml, and SG-path verify_pr_conflict_skill_v1.py relocated; CAT-06: ssot-p0pgr-workflow-bootstrap/PHASE_LOOP_BUILD_PLAN_v0.1.md). Likely casualties of the 2026-07-09 local quarantine sweep; not found in the quarantine listing under their original names."
+  },
+  "categories": [
+    {
+      "category_id": "CAT-01-GOVERNED-AGENT-MEMORY",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "sina-governance-SSOT/data/agent_read_surfaces_v1.json",
+        "sina-governance-SSOT/scripts/agent_read_staleness_engine_v1.py",
+        "sina-governance-SSOT/receipts/agent-read-staleness-20260707T234651Z.json",
+        "sina-governance-SSOT/data/brain_external_artifact_registry_v1.json",
+        "sina-governance-SSOT/decision_language_machine_v1/",
+        "sina-governance-SSOT/data/brain_domain_sandboxes_v1.json",
+        "sina-governance-SSOT/gates/promotion_gate.py",
+        "docs/GRAPH_TOOL_DECISION_v1.md (present in lock worktree)"
+      ],
+      "missing_files": [],
+      "canonical_checkout_absent": ["docs/GRAPH_TOOL_DECISION_v1.md"],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No MEMORYGATE_COMPOSITE_GATE_RECEIPT found in receipts/ or receipts/p0pgr/."
+    },
+    {
+      "category_id": "CAT-02-REPO-CODE-GRAPH-MEMORY",
+      "registry_build_status": "live-running",
+      "observed_status": "live-running",
+      "drifted": false,
+      "evidence_checked": [
+        "scripts/build_repo_graph_v1.py (worktree)",
+        "scripts/query_repo_graph_v1.py (worktree)",
+        "graph-out/GRAPH_REPORT.md (worktree, locally modified)",
+        "graph-out/graph_index_v1.json (worktree, locally modified)",
+        "scripts/verify_l0_repo_graph_memory_v1.sh (worktree)",
+        "receipts/l0-repo-graph-verify-20260709T060304Z.json (worktree)",
+        "docs/L0_REPO_GRAPH_MEMORY_v1.md (worktree)",
+        "sina-governance-SSOT/AGENTS.md (canonical)"
+      ],
+      "missing_files": [],
+      "canonical_checkout_absent": [
+        "scripts/build_repo_graph_v1.py",
+        "scripts/query_repo_graph_v1.py",
+        "graph-out/GRAPH_REPORT.md",
+        "graph-out/graph_index_v1.json",
+        "scripts/verify_l0_repo_graph_memory_v1.sh",
+        "receipts/l0-repo-graph-verify-20260709T060304Z.json",
+        "docs/L0_REPO_GRAPH_MEMORY_v1.md"
+      ],
+      "newly_appeared_files": [
+        "receipts/l0-repo-graph-verify-20260709T121320Z.json (untracked)",
+        "receipts/l0-repo-graph-verify-20260709T122551Z.json (untracked)",
+        "receipts/l0-repo-graph-verify-20260709T122914Z.json (untracked)",
+        "receipts/l0-repo-graph-verify-20260709T123242Z.json (untracked)"
+      ],
+      "note": "Four post-lock verify receipts (2026-07-09T12xx) confirm the tool kept running after the lock — consistent with live-running. Registry caveat that this lane lives on a non-default branch remains true: none of the L0 graph tooling exists in the canonical checkout's current branch. No REPOGRAPH_TOKEN_TAX_RECEIPT found."
+    },
+    {
+      "category_id": "CAT-03-PROMPT-GOVERNANCE-RUNTIME",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md",
+        "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md",
+        "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json + P0_PROMPT_REGISTRY_SCHEMA_v1.json",
+        "sina-governance-SSOT/scripts/p0pgr_{cycle,packet_lint,evidence_reader,campaign_planner,phase2_rank}_v1.py",
+        "sina-governance-SSOT/tests/test_p0pgr_phase0.py",
+        "sina-governance-SSOT/.github/workflows/p0pgr-shadow-cycle-v1.yml",
+        "skills/p0pgr-skills-workspace (worktree)",
+        "receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json (worktree)"
+      ],
+      "missing_files": [],
+      "canonical_checkout_absent": [
+        "skills/p0pgr-skills-workspace",
+        "receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json"
+      ],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No FOUNDER-UNLOCK-R3-CRON-SHADOW receipt in receipts/p0pgr/founder/ (only R2 approval + Phase2 cloud-only unlock, both pre-lock). R-ladder unchanged."
+    },
+    {
+      "category_id": "CAT-04-CLOUD-FACTORY-LINES",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "sina-governance-SSOT/.github/workflows/p0pgr-shadow-cycle-v1.yml + brain-loop-autorun-v1.yml",
+        "sina-governance-SSOT/gates/promotion_gate.py + gates/cf_tokens.py",
+        "sina-governance-SSOT/workers/github-app-advisory/index.js",
+        "sina-governance-SSOT/receipts/p0pgr/P0PGR-R2-CLOUD-MANUAL-PROOF-v1.json",
+        "SourceA/apps/forge-core-governance/govern_cli.py",
+        "SourceA/apps/forge-governance/src/service/govern.ts",
+        "receipts/p0pgr/trustfield-cloud-loops-built-v1-20260709T001150Z.json (worktree)",
+        "receipts/p0pgr/P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z.json (worktree)",
+        "receipts/p0pgr/TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json (worktree)"
+      ],
+      "missing_files": [],
+      "canonical_checkout_absent": [
+        "receipts/p0pgr/trustfield-cloud-loops-built-v1-20260709T001150Z.json",
+        "receipts/p0pgr/P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z.json",
+        "receipts/p0pgr/TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json"
+      ],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No FACTORY_LINE_VERIFIED / 24h zero-manual window receipt found. The recovered CAT-04 proving receipts live on the lock branch but are still absent from the canonical checkout's current branch — the registry's open precondition #3 (reverse-drift root-cause) remains observably open."
+    },
+    {
+      "category_id": "CAT-05-SANDBOX-WORKTREE-EXECUTION",
+      "registry_build_status": "partial-scaffold",
+      "observed_status": "partial-scaffold",
+      "drifted": false,
+      "evidence_checked": [
+        "skills/pr-conflict-resolver/PR_CONFLICT_RESOLVER_SKILL_LOCKED_v1.md (worktree)",
+        "sina-governance-SSOT/receipts/step9-candidate-a-pass-receipt.json",
+        "docs/L0_GRAPH_FIRST_OPERATOR_RULE_v1.md (worktree)",
+        "sandbox/README.md (org root)",
+        "sina-governance-SSOT/gates/promotion_gate.py",
+        "sina-governance-SSOT/data/brain_domain_sandboxes_v1.json"
+      ],
+      "missing_files": [
+        "sg-sandbox/.git — VANISHED: sg-sandbox/ no longer exists anywhere under ~/Desktop/Noetfield-Systems; not found under its original name in ~/NOETFIELD_LOCAL_QUARANTINE_2026-07-09 (only a 'sg-sandbox-ops__cursor-rules-husk' folder)",
+        "sg-sandbox/.noetfield/agent_manifest.yml — VANISHED (same removal)",
+        "sina-governance-SSOT/scripts/verify_pr_conflict_skill_v1.py — absent at cited SG path (both canonical and worktree); a same-named file exists at SourceA/scripts/verify_pr_conflict_skill_v1.py (relocated or was always mis-cited)"
+      ],
+      "newly_appeared_files": [],
+      "note": "Status unchanged (still partial-scaffold — the vanished assets were auxiliary worktree/clone evidence, not the core scaffold), but 3 of 7 cited proof assets no longer resolve. Likely related to the 2026-07-09 quarantine sweep."
+    },
+    {
+      "category_id": "CAT-06-AGENTIC-WORKFLOW-BUILDER",
+      "registry_build_status": "partial-scaffold",
+      "observed_status": "partial-scaffold",
+      "drifted": false,
+      "evidence_checked": [
+        "sina-governance-SSOT/scripts/workflow_census_v1.py",
+        "sina-governance-SSOT/receipts/workflow-census-20260706T093358Z.json",
+        "sina-governance-SSOT/infrastructure/supabase/migrations/001_workflow_census_v1.sql",
+        "sina-governance-SSOT/receipts/p0pgr/P0PGR-CYCLE-20260708T143639Z.json",
+        "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md",
+        "Noetfield/AGENTIC_PROCESS_LOOPS.md"
+      ],
+      "missing_files": [
+        "ssot-p0pgr-workflow-bootstrap/PHASE_LOOP_BUILD_PLAN_v0.1.md — VANISHED: the bootstrap clone directory no longer exists at the org root and was not found under its original name in the 2026-07-09 quarantine listing"
+      ],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No WORKFLOW_GOVERNED_APPROVAL_RECEIPT found. Status unchanged; registry caveat about the bootstrap clone is now moot in the direction of deletion."
+    },
+    {
+      "category_id": "CAT-07-NOCODE-APP-BUILDER",
+      "registry_build_status": "concept-only",
+      "observed_status": "concept-only",
+      "drifted": false,
+      "evidence_checked": [
+        "buildmatch/index.html + README.md",
+        "SourceA/apps/README.md + SourceA/apps/newmatch/README.md",
+        "SourceA/.cursor/skills/forge-living-ui-modern-ide/SKILL.md",
+        "noetfield-studio-ide/README.md",
+        "Noetfield/OFFERINGS_LOCKED.md"
+      ],
+      "missing_files": [],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No APP_FACTORY_SPEC_LOCK_RECEIPT found."
+    },
+    {
+      "category_id": "CAT-08-STUDIO-IDE-CONTROL-COCKPIT",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "noetfield-studio-ide/src/app/page.tsx + src/app/api + src/lib",
+        "noetfield-studio-ide/.noetfield/receipts/gate-1783153935533.json + promote-1783153941164.json",
+        "noetfield-studio-ide/.noetfield/worktrees/agent-2df12a7f",
+        "noetfield-studio-ide/.noetfield/studio-store.json",
+        "noetfield-studio-ide/docs/demo/receipts/cursor-lite-loop-sample.json",
+        "noetfield-studio-ide/model-probe-latest.json",
+        "noetfield-studio-ide/vscode-extension",
+        "noetfield-studio-ide/e2e/v1-readiness.spec.ts"
+      ],
+      "missing_files": [],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No STUDIO_LOOP_GREEN_RECEIPT found (no new .noetfield/receipts beyond the 4 known dev smoke runs)."
+    },
+    {
+      "category_id": "CAT-09-RECEIPT-TRUST-AUDIT-LAYER",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "sina-governance-SSOT/receipts/ + receipts/p0pgr/campaigns/",
+        "sina-governance-SSOT/verifier/independent-verifier-birth-receipt-61d95d74.json",
+        "sina-governance-SSOT/scripts/audit_receipt_ledger_v1.py",
+        "sina-governance-SSOT/skills/receipt-ledger-auditor/SKILL.md",
+        "sina-governance-SSOT/desktop-app/Receipt-Ledger-Auditor.app",
+        "sina-governance-SSOT/ledger/session-decision-ledger.md",
+        "sina-governance-SSOT/language_gate/receipts/"
+      ],
+      "missing_files": [],
+      "newly_appeared_files": [
+        "receipts/receipt-ledger-audit-20260709T120325Z.json ... 123242Z.json — SEVEN receipt-ledger-audit receipts (worktree, five untracked), all 2026-07-09T12xx, post-lock"
+      ],
+      "note": "MATERIAL NEW EVIDENCE, but NOT status drift: the registry's caveat 'auditor has never been executed' is now stale — audit_receipt_ledger_v1.py has run 7 times and persisted receipts (latest scanned 73 receipts, 0 malformed, 25 missing timestamps). However the RECEIPTGRAPH_SELF_AUDIT activation receipt is NOT satisfied: scans cover only top-level receipts/ (73 files), not the unified three-store corpus, and there is no independent CF-Worker countersign. Stays built-not-activated."
+    },
+    {
+      "category_id": "CAT-10-VERTICAL-PROOF-PRODUCTS",
+      "registry_build_status": "built-not-activated",
+      "observed_status": "built-not-activated",
+      "drifted": false,
+      "evidence_checked": [
+        "TrustField-Technologies/reports/partner-access-bplus-live-truth-receipt-v1.json — present; checked_at 2026-07-08T09:45:32Z, status LIVE_BPLUS_PASS, expected_build == live_build (site-v92-partner-access-bplus-2026-07-08); receipt-attested, now 14 days old, not re-observed live per drift-guard scope",
+        "TrustField-Technologies/data/runtime_truth_sync_v1.json + README.md",
+        "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md",
+        "Noetfield/ai-value-governance-os/index.html + Noetfield/services/agentic-cost-governance/index.html",
+        "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/agentic-cost-governance-service.md",
+        "SourceA/PROGRAM_PROGRESS.json + SourceA/START_HERE.md",
+        "SourceA/witnessbc-site + SourceA/sites/WitnessBC-landing + SourceA/docs/WITNESSBC_TWO_LANE_OBSERVE_LOCKED_v1.md + SourceA/data/witnessbc-vercel-main-dns-cutover-v1.json"
+      ],
+      "missing_files": [],
+      "newly_appeared_files": [],
+      "activation_receipt_check": "No new PROOF_LANE_LIVE_TRUTH_RECEIPT (no WitnessBC cutover receipt, no AIVG live receipt) and no revenue receipt found for any lane."
+    }
+  ]
+}

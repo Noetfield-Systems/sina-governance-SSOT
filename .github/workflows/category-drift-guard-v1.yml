@@ -1,0 +1,116 @@
+# Category Registry Drift Guard — cloud execution layer.
+# workflow_dispatch ONLY. The schedule line below stays commented until the
+# founder records a FOUNDER-UNLOCK-DRIFT-CRON receipt (mirrors the exact R3
+# gate already used by p0pgr-shadow-cycle-v1.yml). Read-only: this job can
+# never edit product/PRODUCT_CATEGORY_REGISTRY_v1.json, deploy, merge, or send.
+name: category-drift-guard-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch/ref holding the registry to check"
+        required: false
+        default: "cursor/product-category-lock-v1"
+  # schedule:                    # founder-gated — do not uncomment without
+  #   - cron: "49 8 * * 1"       # a FOUNDER-UNLOCK-DRIFT-CRON receipt
+
+permissions:
+  contents: read
+
+jobs:
+  drift-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || 'cursor/product-category-lock-v1' }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Explicit isolated worktree for the check itself, even though the GHA
+      # runner is already a fresh ephemeral VM per run — this makes the
+      # "isolated worktree" property literal, not just implied by the runner,
+      # and protects the primary checkout from any accidental mutation.
+      - name: Create isolated worktree for the check
+        run: |
+          git worktree add /tmp/drift-check-worktree HEAD
+          echo "worktree_path=/tmp/drift-check-worktree" >> "$GITHUB_ENV"
+
+      - name: Run the drift check (read-only, single-repo scope)
+        id: check
+        run: |
+          cd "$worktree_path"
+          set +e
+          python3 scripts/category_registry_drift_check_v1.py \
+            --repo-root . \
+            --out /tmp/drift_receipt.json
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat /tmp/drift_receipt.json
+
+      - name: Independent verify via Cloudflare (never trust the job's own claim)
+        if: ${{ env.CATEGORY_DRIFT_VERIFIER_URL != '' }}
+        env:
+          CATEGORY_DRIFT_VERIFIER_URL: ${{ secrets.CATEGORY_DRIFT_VERIFIER_URL }}
+        run: |
+          curl -sf -X POST "$CATEGORY_DRIFT_VERIFIER_URL/category-drift/verify" \
+            -H "content-type: application/json" \
+            --data @/tmp/drift_receipt.json \
+            -o /tmp/verified_receipt.json
+          cat /tmp/verified_receipt.json
+
+      - name: Record run in Supabase (durable history)
+        if: ${{ env.SUPABASE_URL != '' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, urllib.request
+
+          receipt = json.load(open("/tmp/drift_receipt.json"))
+          url = os.environ["SUPABASE_URL"].rstrip("/") + "/rest/v1/category_drift_runs_v1"
+          body = json.dumps({
+              "run_id": f"CDG-{receipt['checked_at']}",
+              "recorded_at": receipt["checked_at"],
+              "categories_checked": receipt["categories_checked"],
+              "categories_drifted": receipt["categories_drifted"],
+              "categories_missing_evidence": receipt["categories_missing_evidence"],
+              "categories_with_out_of_scope_evidence": receipt["categories_with_out_of_scope_evidence"],
+              "github_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "receipt": receipt,
+          }).encode()
+          req = urllib.request.Request(url, data=body, method="POST", headers={
+              "apikey": os.environ["SUPABASE_SERVICE_KEY"],
+              "Authorization": f"Bearer {os.environ['SUPABASE_SERVICE_KEY']}",
+              "Content-Type": "application/json",
+              "Prefer": "return=minimal",
+          })
+          urllib.request.urlopen(req)
+          print("recorded in Supabase")
+          PYEOF
+
+      - name: Upload receipt as run artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-drift-receipt-${{ github.run_id }}
+          path: /tmp/drift_receipt.json
+
+      - name: Remove isolated worktree
+        if: always()
+        run: git worktree remove /tmp/drift-check-worktree --force || true
+
+      - name: Job summary
+        run: |
+          echo "## Category registry drift guard" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/drift_receipt.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "Read-only — zero writes to product/, zero deploy, zero merge, zero send." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail the job if drift or missing evidence was found
+        run: exit ${{ steps.check.outputs.exit_code }}

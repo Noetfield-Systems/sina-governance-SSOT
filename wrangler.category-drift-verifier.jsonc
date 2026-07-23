@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "category-drift-verifier",
+  "main": "workers/category-drift-verifier/index.js",
+  "compatibility_date": "2026-07-09",
+  // Reuses the SAME secondary Cloudflare account already used by
+  // sina-governance-ssot-advisory (wrangler.github-app-advisory.jsonc).
+  // That account's presence is what proves independent runtime/authority
+  // separation per this repo's own verifier doctrine — deliberately reused,
+  // not a new untested account.
+  "account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+  "vars": {
+    "CF_ACCOUNT_ID": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "WORKER_URL": "https://category-drift-verifier.kazemnezhadsina144.workers.dev"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "kv_namespaces": [
+    {
+      "binding": "DRIFT_RECEIPTS",
+      // NOT YET CREATED. Phase-2 founder action:
+      //   wrangler kv:namespace create DRIFT_RECEIPTS
+      // then paste the returned id here before first deploy.
+      "id": "REPLACE_WITH_REAL_KV_NAMESPACE_ID_AFTER_wrangler_kv_namespace_create"
+    }
+  ]
+}

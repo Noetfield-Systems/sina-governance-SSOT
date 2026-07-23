@@ -1,0 +1,82 @@
+{
+  "id": "P0PGR-20260708-012",
+  "created_at": "2026-07-08T14:05:00Z",
+  "lane": "TrustField",
+  "problem_class": "hygiene",
+  "owner_agent": "worker",
+  "model_tier": "cheap",
+  "roi_score": 42,
+  "roi_reason": "Stale build stamp (v71, 2026-07-07) in the P10 launch-credibility block vs live v108 (2026-07-08) weakens a doc used for partner diligence; a bounded doc refresh restores receipt-backed accuracy at trivial cost.",
+  "value_class": "hygiene",
+  "cost_limit_usd": 1.5,
+  "authority_scope": "edit",
+  "execution_mode": "CLOUD_ONLY",
+  "delivery_route": "queue_cloud_worker",
+  "target_executor": "claude_code_cli",
+  "repo": "sina-governance-ssot",
+  "worktree_required": true,
+  "local_secrets_required": false,
+  "cloud_safe": true,
+  "fallback_route": "human_review_queue",
+  "quality_handling": {
+    "default_on_low_quality": "provisional",
+    "allowed_result_states": [
+      "PASS",
+      "PARTIAL",
+      "PROVISIONAL",
+      "NEEDS_REVIEW"
+    ],
+    "hard_block_allowed_reasons": [],
+    "low_quality_required_labels": [
+      "confidence",
+      "scope",
+      "reversibility",
+      "next_improvement"
+    ]
+  },
+  "context_summary": "Execution receipt P0PGR-EXEC-M03-20260708T1330Z (trustfield.ca live-truth audit) recorded finding F2, class DOC_STALE: the repo doc SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md cites build stamp 'site-v71-partner-access-v1.1-2026-07-07' in its 'Launch credibility proof' block, while all six audited live routes carry marker 'site-v108-partner-premium-onboarding-2026-07-08' (37 builds newer). Live site is ahead of the committed doc — documentation drift only; the audit found no dead route and no public false claim. The stale stamp undermines the block's value as credibility proof for partner diligence. Scope: refresh the launch-credibility block of that one doc; the live site is not touched. Finding F1 (pricing wording on /pilot) is explicitly out of scope.",
+  "task": "1) Read receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json and confirm finding F2 (DOC_STALE) and the recorded live build marker. 2) HTTP GET https://trustfield.ca and record the build stamp currently visible; if it differs from site-v108-partner-premium-onboarding-2026-07-08, use the freshly observed stamp and note the delta in the receipt. 3) In SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md, update ONLY the 'Launch credibility proof' block: replace the stale 'site-v71-partner-access-v1.1-2026-07-07' entry with the verified current stamp, the verification date, and a pointer to receipt P0PGR-EXEC-M03-20260708T1330Z as source. 4) Change no other section, claim, or file. 5) Write exactly one receipt to receipts/p0pgr/ with old stamp, new stamp, evidence source, changed_files, commands_run, pass_fail, and next_pointer. 6) Stop.",
+  "allowed_actions": [
+    "read receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json",
+    "external HTTP GET on https://trustfield.ca (read-only)",
+    "edit the launch-credibility block of the named P10 doc in an isolated worktree",
+    "write one receipt to receipts/p0pgr/"
+  ],
+  "constraints": [
+    "no P0 leakage",
+    "no speculative PASS",
+    "receipt required",
+    "stop after completion",
+    "edits limited to the 'Launch credibility proof' block of the single named P10 doc",
+    "do not touch finding F1 (pricing wording) — that is a separate deploy-gated packet",
+    "work in an isolated worktree, never the live checkout"
+  ],
+  "forbidden_actions": [
+    "no repo moves",
+    "no authority flip",
+    "no deploy or live-site changes",
+    "no edits to any file other than the named P10 doc plus one new receipt",
+    "no changes to pricing, entity, or regulatory language anywhere"
+  ],
+  "stop_rule": "Stop after the launch-credibility block is refreshed and exactly one receipt is written; any additional drift discovered is reported in next_pointer, never fixed in this packet.",
+  "success_receipt": {
+    "required_fields": [
+      "evidence",
+      "changed_files",
+      "commands_run",
+      "pass_fail",
+      "next_pointer",
+      "old_stamp",
+      "new_stamp"
+    ],
+    "external_verification_required": false,
+    "cost_fields_required": true
+  },
+  "evidence_refs": [
+    "receipts/p0pgr/P0PGR-EXEC-M03-20260708T1330Z.json",
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/TRUSTFIELD_PARTNER_ACCESS_PLATFORM_v1.md"
+  ],
+  "decision_ref": "P0PGR-EXEC-M03-20260708T1330Z#F2",
+  "concurrency_key": "p0pgr-dispatch",
+  "dispatch_mode": "shadow"
+}

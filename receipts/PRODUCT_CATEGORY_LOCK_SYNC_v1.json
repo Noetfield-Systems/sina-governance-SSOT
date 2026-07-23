@@ -1,0 +1,62 @@
+{
+  "schema": "product_category_lock_sync_receipt_v1",
+  "status": "PARTIAL",
+  "sync_id": "PRODUCT_CATEGORY_LOCK_SYNC_v1",
+  "executed_at": "2026-07-09T07:52:16Z",
+  "authority": "founder directive 'DO 1' 2026-07-09 (ratification precondition #1)",
+  "intent": "Sync CAT-03/04 proving receipts + 2 cloud cycle receipts from the archived clone into canonical receipts/p0pgr/.",
+  "source_situation": "Before this ran, the archived clone ~/Projects/sina-governance-ssot.MIGRATED-2026-07-08 \u2014 indeed all of ~/Projects \u2014 had been DELETED. The named working-tree source no longer existed.",
+  "recovery_source": "git commit 2f2f38b ('WIP snapshot: preserve machine-autonomy-loops work before migrating to canonical Desktop clone', branch cursor/machine-autonomy-loops-v1), present in canonical's own object store.",
+  "method": "git show 2f2f38b:<path> -> sha256 compared to the anchors captured in PRODUCT_CATEGORY_LOCK_STATUS_PATCH_v1 -> on match, written verbatim to canonical receipts/p0pgr/ (uncommitted) -> re-hashed on disk.",
+  "synced": [
+    {
+      "file": "P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json",
+      "sha256": "8f43f2e8fb70bc3a11b65ad1e10ab8e5ae1c62f0858d9fd1c4789a615fd97b59",
+      "verified_on_disk": true,
+      "source": "git 2f2f38b:receipts/p0pgr/P0PGR_R2_CLOUD_MANUAL_PASS_v1-20260709T001540Z.json (branch cursor/machine-autonomy-loops-v1)"
+    },
+    {
+      "file": "P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z.json",
+      "sha256": "891f49abf09263008d76434b744c1552be1767224a3be8cf0443fb56e595ce5a",
+      "verified_on_disk": true,
+      "source": "git 2f2f38b:receipts/p0pgr/P0PGR_DUAL_SCAFFOLD_RECONCILIATION_v1-20260709T002144Z.json (branch cursor/machine-autonomy-loops-v1)"
+    },
+    {
+      "file": "trustfield-cloud-loops-built-v1-20260709T001150Z.json",
+      "sha256": "2d0562372250e5d4f61262ccd723d30fe12b1c42da53ab8d1098134909ee4b88",
+      "verified_on_disk": true,
+      "source": "git 2f2f38b:receipts/p0pgr/trustfield-cloud-loops-built-v1-20260709T001150Z.json (branch cursor/machine-autonomy-loops-v1)"
+    },
+    {
+      "file": "TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json",
+      "sha256": "38bf99e85ff1ce4a8541baa7bd10cb2afc6534b7f265a53a46d32684a60c5989",
+      "verified_on_disk": true,
+      "source": "git 2f2f38b:receipts/p0pgr/TRUSTFIELD_CLOUD_LOOPS_ACTIVATION_v1-20260709T011208Z.json (branch cursor/machine-autonomy-loops-v1)"
+    }
+  ],
+  "unrecoverable": [
+    {
+      "file": "P0PGR-CYCLE-20260709T000048Z.json",
+      "reason": "never committed to any git ref; only home was the deleted working tree",
+      "mitigation": "per-run evidence (cycle_id P0PGR-CYCLE-20260709T000048Z, verdict PASS, bundle_hash 534092..., schema check) is embedded in P0PGR_R2_CLOUD_MANUAL_PASS_v1 per_run_checks[0]"
+    },
+    {
+      "file": "P0PGR-CYCLE-20260709T000050Z.json",
+      "reason": "never committed to any git ref; only home was the deleted working tree",
+      "mitigation": "per-run evidence (cycle_id P0PGR-CYCLE-20260709T000050Z, verdict PASS, bundle_hash ccbdf6..., schema check) is embedded in P0PGR_R2_CLOUD_MANUAL_PASS_v1 per_run_checks[1]"
+    }
+  ],
+  "integrity": "All 4 written files re-hashed on disk == preserved sha256 anchors (byte-exact recovery).",
+  "no_fabrication": "The 2 unrecoverable receipts were NOT reconstructed from memory or transcript \u2014 a transcript-rebuilt receipt is a fabricated receipt. They are reported as gaps.",
+  "boundaries_enforced": {
+    "no_commit": true,
+    "no_deploy": true,
+    "no_merge": true,
+    "wrote_only_to_canonical_working_tree_as_drafts": true
+  },
+  "remaining_preconditions": [
+    "#2 Founder ratifies product/ deliverables; commit on a governance branch (no merge/deploy).",
+    "#3 Reconcile reverse-drift ROOT CAUSE: all of ~/Projects is gone. Confirm canonical is now the sole home for P0-PGR/TrustField work (no other active clone), and optionally regenerate the 2 cycle receipts by re-running the R2 cloud proof if standalone files are needed."
+  ],
+  "final_status": "PRECONDITION_1_DONE_PARTIAL (4/6 receipts now in canonical, byte-exact; 2 cycle receipts unrecoverable with evidence embedded)"
+}

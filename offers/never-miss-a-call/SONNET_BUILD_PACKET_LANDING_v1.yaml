@@ -1,0 +1,36 @@
+packet_id: LP-NEVER-MISS-A-CALL-v1
+status: LOCKED
+date: 2026-07-09
+role: Sonnet build agent (landing page only — do NOT wire the receptionist backend)
+brand: SourceA / Noetfield (single-brand, local-service positioning)
+objective: One high-converting landing page that books a "free missed-call audit" call.
+primary_cta: "Get my free missed-call audit" -> Cal.com/Calendly booking embed
+secondary_cta: sticky "Call our AI demo line" (use the live vendor demo # until ours is live)
+
+stack:
+  - Single static page (HTML + Tailwind) OR Next.js one-pager; mobile-first; <2s load
+  - Form -> webhook to our Google Sheet/CRM (Zapier); Stripe Payment Link for the $497 setup (TEST mode first)
+  - No backend receptionist logic in this packet
+
+sections:
+  1: Hero — headline "Never Miss Another Call." subhead "24/7 AI receptionist that answers, books the job, and texts you the lead — for less than one missed job a month." + primary CTA
+  2: Pain — "Every missed call is a missed job" — 3 stat cards (use ONLY cited/defensible stats; else phrase as questions)
+  3: How it works — 3 steps (Forward your line -> AI answers & books -> You get the text). 30–60s
+  4: What's included — the 5 deliverables from MARKET_PACKAGE_VALIDATION_v1 section 4
+  5: Pricing — $497 setup + $297/mo, 500 min, month-to-month, 14-day guarantee (exact copy from section 4)
+  6: Proof/FAQ — "Is it a real person? (No — a fast AI, disclosed on every call)"; recording-consent note; "Works in Canada & the US"; "Cancel anytime"
+  7: Final CTA + footer — business name, contact, privacy, AI-disclosure + call-recording consent line
+
+copy_rules_HONESTY_GATE:
+  - Disclose it is AI. Never imply a human receptionist.
+  - No HIPAA/medical/legal claims. No fabricated testimonials, logos, or star ratings.
+  - No uptime/number guarantees we can't back. "Up to 500 minutes" stated plainly with overage rate.
+  - Include call-recording + consent disclosure (TCPA-aware).
+
+acceptance_criteria:
+  - Booking CTA works end-to-end into our calendar; form writes to our Sheet/CRM
+  - Stripe setup-fee link works in TEST mode
+  - Mobile Lighthouse >90 perf/accessibility; zero fabricated claims
+  - Renders with only our brand (no vendor name anywhere)
+
+guardrails: no deploy to a live domain, no real charges, no public launch until founder approves copy.

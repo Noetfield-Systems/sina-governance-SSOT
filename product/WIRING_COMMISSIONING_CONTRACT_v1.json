@@ -1,0 +1,691 @@
+{
+  "schema": "noetfield_wiring_commissioning_contract_v1",
+  "title": "Noetfield Cloud Factory — Wiring & Commissioning Contract v1",
+  "version": "v1",
+  "locked_at": "2026-07-23T06:28:38Z",
+  "authority": "Founder order 2026-07-23: full plan, locked and machine-enforceable, for ONLY wiring and commissioning existing pieces, toward real delivery to users, all in sandbox, under the commissioning motor.",
+  "evidence_basis": "20-agent read-only inventory + downgrade-biased adversarial verify (workflow wf_a66ceb51-1b8, 2026-07-23), 10 pieces, 0 agent errors. Companion doc: product/WIRING_COMMISSIONING_PLAN_v1.md.",
+  "enforcement": {
+    "verify_script": "scripts/verify_wiring_commissioning_v1.py",
+    "rule_1": "A job is DONE only when the verify script computes its exit_gate as passing from artifacts on disk. Hand-assertions, doc claims, and agent reports NEVER count.",
+    "rule_2": "The verify script checks this contract's sha256 against receipts/WIRING_COMMISSIONING_PLAN_LOCK_v1.json before evaluating; mismatch = ENFORCEMENT_VIOLATION, exit 3, no statuses reported.",
+    "rule_3": "founder_gate.receipt_glob receipts are append-only artifacts created only by the founder or on the founder's explicit order; a job whose founder_gate.required is true and whose founder receipt is absent can NEVER compute DONE (even with a fabricated exit receipt) — it reports AWAITING_FOUNDER. DONE requires exit_gate AND founder receipt AND all deps DONE.",
+    "rule_4": "All statuses are computed, never stored. This contract contains no status fields by design.",
+    "rule_5": "The lock receipt (receipts/WIRING_COMMISSIONING_PLAN_LOCK_v1.json) is fail-closed: its ABSENCE, not only a mismatch, is an ENFORCEMENT_VIOLATION. Deleting the lock cannot re-open a fail-open hole.",
+    "rule_6": "Receipts are forgeable file artifacts; the defence is (a) high-value gates require externally-checkable IDs (GHA run_url, 40-hex commit_sha, PR number, verifier countersignature) via the 'matches' predicate, and (b) ALL receipts are append-only and re-audited by the W4 trust layer, so fabrication is detectable post-hoc. A green status from this script is a claim to be audited, not a final truth — W4 is the auditor."
+  },
+  "doctrine": {
+    "allowed_job_classes": [
+      "sync — fast-forward/reconcile an existing checkout to its own origin main; preserve-first for any dirty file",
+      "land — PR-merge an existing, already-pushed branch; no new feature commits beyond rebase conflicts",
+      "receipt — produce/commit a receipt for work already done, or re-run an existing check to refresh its receipt",
+      "adapter — thin glue bounded by two existing contracts (POST/poll/translate); no new business logic",
+      "config — secrets/env/DNS/schedule plumbing for artifacts that already exist; deploy of already-built artifacts through existing fences",
+      "verify — deterministic checks, canaries, crons on existing patterns",
+      "cleanup — remove verified-duplicate residue, prune merged worktrees, fix labels/pins"
+    ],
+    "forbidden": [
+      "New features, new products, new UIs, new scenarios, new categories (CAT-07 hard hold stands). A strictly read-only display or API of already-emitted state is glue, not a new UI — nothing that authors, edits, or originates state.",
+      "Overriding, weakening, or working around ANY existing founder gate, fence, HOLD, or not_now_boundary",
+      "Raising the motor router ceiling or enabling any auto-dispatch worker above W-INTEL-LOW (class_rank 1). The ceiling is STRUCTURAL (ADAPTER_REGISTRY_v2 has no rank-2 row; router MAX_AUTOMATIC_RANK=1); only the founder may lift it. No job here adds a rank-2 or W-HANDOFF adapter.",
+      "Extending the HDIR internal-service contract or its scenario enum (locked to 'webpage-build-deploy'); reuse runway.v1 as-is",
+      "Marking any job done without its named receipt existing on disk",
+      "Direct patch work on canonical mains — all patch-class execution flows through motor/sandbox lanes (sandbox-first law)",
+      "New directories at the org root; new worktrees outside session scratchpad",
+      "Deleting or gitignoring receipts (append-only law); deleting any unpushed/ahead work before it is preserved (preserve-first law)"
+    ],
+    "explicit_exclusions": [
+      "Runway founder-authority 'RECORDED, NOT ENFORCED' → ENFORCED (routing approval_required gates through resolveFounderAuthority) — this is design/feature work, out of wiring-v1 scope; tracked as a future founder gate, not a job here.",
+      "SG production commissioning (flipping runtime_reality sg.runtime_status→COMMISSIONED) is deliberately OUT OF SCOPE — every W6 cold-proof step runs sandbox/staging-only where the gate ALLOWS; the fail-closed exit-78 behaviour on production paths is correct and preserved.",
+      "The 5 of 8 GHA factory categories that executed but are NOT green (cat-01 2/3, cat-03 partial, etc.) are a separate greening effort, not commissioned by this plan; W2-08 only adds cat-08's first receipt.",
+      "HDIR non-durable idempotency (in-memory Map) is tolerated at staging scope for W2-06; durable idempotency is a backlog item, not wired here.",
+      "pureflow canonical remote/main establishment is a standing P0 FOUNDER gate that blocks all SITE-pureflow-source lanes; no pureflow lane is in v1 scope — surfaced in the founder queue, resolution deferred.",
+      "Studio IDE notarized-app distribution (DMG + Apple Developer ID) is a separate founder Apple-ID gate; W5-09 reaches .app+.vsix grade only."
+    ],
+    "precedence": "Where this contract and an existing founder gate disagree, the founder gate wins. Where this contract and the product registry disagree, the registry wins."
+  },
+  "roots": {
+    "org": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems",
+    "note": "All paths below are relative to roots.org unless absolute."
+  },
+  "jobs": [
+    {
+      "job_id": "W0-01",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Sync NOETFIELD-RUNWAY checkout to origin/main (currently ~201 behind on a merged chore branch)",
+      "class": "sync",
+      "pieces": ["runway"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "git_synced", "repo": "NOETFIELD-RUNWAY", "branch": "main" },
+      "category_refs": ["CAT-03", "CAT-04"]
+    },
+    {
+      "job_id": "W0-02",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Sync noetfield-sandbox-private checkout to origin/main (currently parked on feat/plan-intake-v1; origin/main carries unified_core + FULLY_COMMISSIONED receipt + 113 job receipts). Also reconcile the motor panel snapshot (red lane motor-commission-selftest-v1 / watchdog issue #10, unreconciled since 2026-07-12) against the later DURABLE PASS run",
+      "class": "sync",
+      "pieces": ["motor", "autorunner"],
+      "depends_on": ["W0-11"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "git_synced", "repo": "noetfield-sandbox-private", "branch": "main" },
+      "category_refs": ["CAT-04", "CAT-05"]
+    },
+    {
+      "job_id": "W0-03",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Sync sina-governance-SSOT canonical checkout to origin/main (currently side branch, 16 behind; preserve the 8 untracked receipts/app-runway/ files first)",
+      "class": "sync",
+      "pieces": ["sg-gates-p0pgr"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "git_synced", "repo": "sina-governance-SSOT", "branch": "main" },
+      "category_refs": ["CAT-01", "CAT-03", "CAT-09"]
+    },
+    {
+      "job_id": "W0-04",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Sync noetfield-cloud-factory-infra checkout to main and reconcile which branch GHA receipts were pushed to",
+      "class": "sync",
+      "pieces": ["factory-infra"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "git_synced", "repo": "noetfield-cloud-factory-infra", "branch": "main" },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W0-05",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Land the goal registry: merge cursor/product-category-lock-v1 (product/, offers/, drift-guard workflow, this contract) into SG main so canonical readers can see the locked goals",
+      "class": "land",
+      "pieces": ["sg-gates-p0pgr", "goals-offers"],
+      "depends_on": ["W0-03"],
+      "founder_gate": { "required": true, "receipt_glob": null, "note": "The PR merge itself is the founder act." },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "git_merged", "repo": "sina-governance-SSOT", "ref": "cursor/product-category-lock-v1", "into": "main", "merge_receipt_glob": "sina-governance-SSOT/receipts/LAND_*product-category-lock*.json" },
+        { "type": "file_exists", "paths": ["sina-governance-SSOT/product/PRODUCT_CATEGORY_REGISTRY_v1.json", "sina-governance-SSOT/product/WIRING_COMMISSIONING_CONTRACT_v1.json"] }
+      ] },
+      "category_refs": ["ALL"]
+    },
+    {
+      "job_id": "W0-06",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Close the SG gate-bypass drift: bring the lock worktree's promotion_gate.py to byte-parity with canonical main's fail-closed version (worktree copy predates the runtime-reality authority block)",
+      "class": "cleanup",
+      "pieces": ["sg-gates-p0pgr"],
+      "depends_on": ["W0-05"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "sha_match", "paths": ["sina-governance-SSOT/gates/promotion_gate.py", "sina-governance-SSOT/worktrees/_wt-sg-product-lock/gates/promotion_gate.py"] },
+        { "type": "file_contains", "path": "sina-governance-SSOT/gates/promotion_gate.py", "markers": ["BLOCKED_SG_NOT_COMMISSIONED", "runtime_reality"] },
+        { "type": "file_contains", "path": "sina-governance-SSOT/worktrees/_wt-sg-product-lock/gates/promotion_gate.py", "markers": ["BLOCKED_SG_NOT_COMMISSIONED", "runtime_reality"] }
+      ], "note": "Parity ALONE is insufficient — the file_contains markers force parity to be reached by UPGRADING the stale worktree copy to the fail-closed canonical, never by downgrading canonical." },
+      "category_refs": ["CAT-01", "CAT-04"]
+    },
+    {
+      "job_id": "W0-07",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Remove the 8 org-root orphan _wt-* residue dirs (verified byte-duplicates of consolidated worktrees) and prune merged/stranded worktree registrations",
+      "class": "cleanup",
+      "pieces": ["integration-worktrees"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/worktrees/_wt-sg-product-lock/receipts/FOUNDER-APPROVE-ORG-ROOT-CLEANUP*.json", "note": "Never-bulk-delete law: founder confirms the deletion list. NOTE: 3 files in orphan _wt-sandbox-motor-unified were re-touched Jul 22 22:44 (still byte-identical) — re-verify byte-parity at deletion time." },
+      "exit_gate": { "type": "file_absent", "paths": ["_wt-sandbox-motor-unified", "_wt-noos-runtime-migration", "_wt-sg-runtime-value-contract", "_wt-commissioning-dedupe", "_wt-commissioning-on-demand", "_wt-sourceb-plan-adapter", "_wt-mrw-runway", "_wt-runway-commissioning-explicit"] },
+      "category_refs": ["CAT-05"]
+    },
+    {
+      "job_id": "W0-08",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "P0 — Fix the LIVE auth outage: /auth/sign-in/ 404s at origin on www.noetfield.com (masked by edge cache). Ship the already-merged fix through the fenced deploy from a clean checkout",
+      "class": "config",
+      "pieces": ["consumer-surfaces", "autorunner"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-sandbox-private/products/sandbox-autorunner-v1/decisions/PDP-noetfield-smoke-1-G2*.json", "note": "Gate G2 of PDP-noetfield-smoke-1 (pending founder decision) + the FOUNDER_ONLY fenced deploy script." },
+      "exit_gate": { "type": "receipt_json", "glob": "Noetfield/receipts/AUTH_SIGNIN_LIVE_FIX_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W0-09",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Cron-truth reconciliation: video-runway-v1.yml carries an ACTIVE daily cron with no founder-unlock receipt (contradicts the fence doctrine) — founder either issues its retroactive unlock receipt or the cron is commented out",
+      "class": "config",
+      "pieces": ["factory-infra"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-cloud-factory-infra/receipts/FOUNDER-CRON-TRUTH-VERDICT*.json", "note": "Founder decides retro-unlock vs comment-out; the founder verdict receipt gates the job, the exit receipt records the outcome." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-cloud-factory-infra/receipts/CRON_TRUTH_RECONCILIATION*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W0-10",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "Receipt hygiene: stop gitignoring RUNWAY commissioning receipts (append-only law), remove the ~24 broken _wt-* gitlink entries from RUNWAY main, relocate the nested ops/ worktree out of the checkout",
+      "class": "cleanup",
+      "pieces": ["runway"],
+      "depends_on": ["W0-01"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/receipts/commissioning/RECEIPT_HYGIENE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "gitignore_removed", "op": "eq", "value": true }, { "path": "gitlinks_removed", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-04", "CAT-09"]
+    },
+    {
+      "job_id": "W0-11",
+      "phase": "W0-TRUTH-HYGIENE",
+      "title": "PRESERVE-FIRST: the local-only bench ~/Desktop/Noetfield-Systems/sandbox (main @ 8e27b25, no remote) is AHEAD of noetfield-sandbox-private and carries the private engine + receipts corpus (ancestor 269ce5f). Preserve/push it BEFORE any sync or cleanup touches sandbox state — must run before W0-02 lands anything that could shadow it",
+      "class": "receipt",
+      "pieces": ["autorunner", "motor"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-sandbox-private/products/sandbox-autorunner-v1/receipts/FOUNDER-APPROVE-BENCH-PRESERVE*.json", "note": "SHA-exact push of the ahead bench is founder-gated (it carries the private engine); preserve-first law forbids any destructive step until this receipt exists." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/products/sandbox-autorunner-v1/receipts/BENCH_PRESERVED_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "bench_head_sha", "op": "matches", "value": "^[0-9a-f]{40}$" }, { "path": "preserved_location", "op": "exists" } ] },
+      "category_refs": ["CAT-05"]
+    },
+    {
+      "job_id": "W1-01",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Land the motor half of the site event spine: rebase + merge feat/motor-event-v2-site-spine so the ALREADY-MERGED SG Runtime Value Contract (PR #58) governs a motor that exists on main",
+      "class": "land",
+      "pieces": ["motor", "integration-worktrees"],
+      "depends_on": ["W0-02"],
+      "founder_gate": { "required": true, "receipt_glob": null, "note": "PR merge is the founder act." },
+      "exit_gate": { "type": "git_merged", "repo": "noetfield-sandbox-private", "ref": "feat/motor-event-v2-site-spine", "into": "main", "merge_receipt_glob": "noetfield-sandbox-private/motor/state/receipts/LAND_*motor-event-v2*.json" },
+      "category_refs": ["CAT-04", "CAT-06"]
+    },
+    {
+      "job_id": "W1-02",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Land the plan-intake stack: merge feat/plan-intake-v1, then the 1-commit sourceb/plan-adapter-v1 on top; prune its stranded worktree registration",
+      "class": "land",
+      "pieces": ["motor", "integration-worktrees"],
+      "depends_on": ["W0-02"],
+      "founder_gate": { "required": true, "receipt_glob": null, "note": "PR merges are the founder act." },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "git_merged", "repo": "noetfield-sandbox-private", "ref": "feat/plan-intake-v1", "into": "main", "merge_receipt_glob": "noetfield-sandbox-private/motor/state/receipts/LAND_*plan-intake*.json" },
+        { "type": "git_merged", "repo": "noetfield-sandbox-private", "ref": "sourceb/plan-adapter-v1", "into": "main", "merge_receipt_glob": "noetfield-sandbox-private/motor/state/receipts/LAND_*plan-adapter*.json" }
+      ] },
+      "category_refs": ["CAT-03", "CAT-06"]
+    },
+    {
+      "job_id": "W1-03",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Land the NOOS half of the spine via the REMOTE branch feat/runtime-migration-quarantine-v1 (local copy is 4 behind its own origin — land the remote, do not commit on the stale local)",
+      "class": "land",
+      "pieces": ["integration-worktrees"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": null, "note": "PR merge is the founder act." },
+      "exit_gate": { "type": "git_merged", "repo": "noetfeld-OS", "ref": "feat/runtime-migration-quarantine-v1", "into": "main", "merge_receipt_glob": "noetfeld-OS/receipts/LAND_*runtime-migration*.json" },
+      "category_refs": ["CAT-06"]
+    },
+    {
+      "job_id": "W1-04",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Land www/motors-option-a-copy-v1 (1 pushed commit) into Noetfield main, then remove its org-root worktree (consolidation law)",
+      "class": "land",
+      "pieces": ["integration-worktrees", "consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": null, "note": "PR merge is the founder act; www copy changes also sit under the standing copy-verdict gate." },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "git_merged", "repo": "Noetfield", "ref": "www/motors-option-a-copy-v1", "into": "main", "merge_receipt_glob": "Noetfield/receipts/LAND_*motors-option-a*.json" },
+        { "type": "file_absent", "paths": ["_wt-motor-engine-vocab-lock"] }
+      ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W1-05",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "SHA-pin cross-repo work orders: MRW dispatch records must carry a pinned commit SHA + receipt backlink for the target repo (today: bare repo name + script path, unpinned)",
+      "class": "adapter",
+      "pieces": ["runway", "sg-gates-p0pgr"],
+      "depends_on": ["W0-01"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/receipts/commissioning/MRW_WORKORDER_PINNING_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-03", "CAT-04"]
+    },
+    {
+      "job_id": "W1-06",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "THE governance wire: motor executor + autorunner runners call SG promotion_gate.py as a deterministic pre-flight (dry-run mode) and read runtime_reality_v1.json before any deploy-class step; exit 78 = hard stop, recorded in the job receipt",
+      "class": "adapter",
+      "pieces": ["motor", "autorunner", "sg-gates-p0pgr"],
+      "depends_on": ["W0-02", "W0-03"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Fail-closed wiring needs no unlock — it can only STOP things." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/GATE_PREFLIGHT_WIRED_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "gate", "op": "contains", "value": "promotion_gate.py" }, { "path": "fails_closed", "op": "eq", "value": true }, { "path": "observed_exit_78_run_url", "op": "matches", "value": "^https://github.com/.+/actions/runs/[0-9]+" } ] },
+      "category_refs": ["CAT-01", "CAT-04", "CAT-05"]
+    },
+    {
+      "job_id": "W1-07",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Wire the motor's repository_dispatch sender to SG's two waiting event hooks (liveness_48h_close, key2_custody_established) — receivers already exist on SG main; sending is one authenticated POST",
+      "class": "adapter",
+      "pieces": ["motor", "sg-gates-p0pgr"],
+      "depends_on": ["W0-02", "W0-03"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/MOTOR_REPODISPATCH_WIRE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W1-08",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Map cf_tokens.py keys from GitHub Actions secrets for cloud jobs (loader already prefers env vars; this is secrets plumbing only)",
+      "class": "config",
+      "pieces": ["sg-gates-p0pgr", "factory-infra"],
+      "depends_on": ["W0-03"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/CF_TOKENS_CLOUD_ENV_RECEIPT*.json", "note": "Setting repo secrets is a founder account action; the receipt records it and doubles as the exit gate." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/CF_TOKENS_CLOUD_ENV_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W1-09",
+      "phase": "W1-CONTRACT-SPINE",
+      "title": "Runway Tier-2 persistence: apply db/migrations/001_motor_tier2.sql in Supabase + set MOTOR_DB_URL/MOTOR_DB_KEY so the runway's Tier-2 store stops being a logged no-op (a real founder-gated persistence hole in the user-facing product plane, distinct from the cloud-factory migrations in W2-07)",
+      "class": "config",
+      "pieces": ["runway", "motor"],
+      "depends_on": ["W0-01"],
+      "founder_gate": { "required": true, "receipt_glob": "NOETFIELD-RUNWAY/receipts/commissioning/FOUNDER-APPLY-TIER2-MIGRATION*.json", "note": "MOTOR_BUILD_PLAN gate: the Tier-2 migration must be applied by the founder in the SQL editor + the two secrets set before persistence goes strict." },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/receipts/commissioning/RUNWAY_TIER2_PERSISTENCE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "migration_applied", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-03", "CAT-04"]
+    },
+    {
+      "job_id": "W2-01",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Deploy the SourceA /v1/executions executor adapter (already merged to SourceA main) on a dedicated NON-production service with its secret set (SOURCEA_SANDBOX_EXECUTOR_SECRET, ARGV_JSON, App installation-token minting, ALLOWED_REPOSITORIES=Noetfield-Systems/SANDBOX)",
+      "class": "config",
+      "pieces": ["motor", "autorunner"],
+      "depends_on": ["W0-02"],
+      "founder_gate": { "required": true, "receipt_glob": "SourceA/receipts/FOUNDER-APPROVE-EXECUTOR-DEPLOY*.json", "note": "Independent review + deploy decision + secrets are founder/account-level actions (EVIDENCE_CORRECTION unblock list)." },
+      "exit_gate": { "type": "receipt_json", "glob": "SourceA/receipts/SOURCEA_EXECUTOR_DEPLOY_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "non_production", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-04", "CAT-05"]
+    },
+    {
+      "job_id": "W2-02",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Deploy the independent Cloudflare Worker verifier (the ONLY component allowed to mint PASS on sandbox receipts) — blocked on secondary CF account login (b7282b4a…)",
+      "class": "config",
+      "pieces": ["autorunner", "factory-infra"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-cloud-factory-infra/receipts/FOUNDER-APPROVE-CF-VERIFIER-DEPLOY*.json", "note": "Runbook A Step 0: founder logs wrangler into the secondary CF account (independence proof requires that account)." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-cloud-factory-infra/receipts/CF_INDEPENDENT_VERIFIER_LIVE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-05", "CAT-09"]
+    },
+    {
+      "job_id": "W2-03",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Build the motor-side SandboxJob POST/poll adapter to the SourceA executor endpoint (thin adapter bounded by the two existing contracts) and clear BLOCKED_EXECUTOR_ENDPOINT",
+      "class": "adapter",
+      "pieces": ["motor", "autorunner"],
+      "depends_on": ["W2-01"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/MOTOR_EXECUTOR_ADAPTER_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04", "CAT-05"]
+    },
+    {
+      "job_id": "W2-04",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "THE motor⇄sandbox commissioning proof: one founder heading → 2 motor-executor-v2 run IDs + 2 external executor run IDs + 2 real SANDBOX branches/PRs + target-CI URLs + edge-verified receipts + one Promotion Decision Packet + automatic terminal status",
+      "class": "receipt",
+      "pieces": ["motor", "autorunner", "sg-gates-p0pgr"],
+      "depends_on": ["W2-02", "W2-03", "W1-06"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "The heading is founder input; the run is machine work." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/MOTOR_SANDBOX_LINE_COMMISSIONED*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "verifier_status", "op": "eq", "value": "VERIFIED" }, { "path": "decision_packet", "op": "exists" }, { "path": "sandbox_pr_1_url", "op": "matches", "value": "^https://github.com/.+/pull/[0-9]+" }, { "path": "sandbox_pr_2_url", "op": "matches", "value": "^https://github.com/.+/pull/[0-9]+" }, { "path": "verifier_countersignature", "op": "exists" } ] },
+      "category_refs": ["CAT-04", "CAT-05"]
+    },
+    {
+      "job_id": "W2-05",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Upgrade P0-PGR R2 receipt PARTIAL→PASS: execute/hand back the 2 cloud dispatch run URLs (pure receipt wiring, zero new code)",
+      "class": "receipt",
+      "pieces": ["sg-gates-p0pgr"],
+      "depends_on": ["W0-03"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/p0pgr/founder/FOUNDER-APPROVE-R2-CLOUD-MANUAL-PROOF*.json", "note": "The existing founder approval receipt authorizes the 2 dispatch runs; the URL handback is the founder act." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/p0pgr/P0PGR-R2-CLOUD-MANUAL-PROOF-v1.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "run_url_1", "op": "matches", "value": "^https://github.com/.+/actions/runs/[0-9]+" }, { "path": "run_url_2", "op": "matches", "value": "^https://github.com/.+/actions/runs/[0-9]+" } ] },
+      "category_refs": ["CAT-03"]
+    },
+    {
+      "job_id": "W2-06",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "HDIR⇄motor wire v1: a motor job type that creates a runway.v1 run (existing webpage-build-deploy scenario ONLY — NO new scenario enum value, NO HDIR internal-service contract extension), advance/polls events, stores the canonical receipt — sandbox/staging targets only",
+      "class": "adapter",
+      "pieces": ["motor", "hdir-kernel", "runway"],
+      "depends_on": ["W0-01", "W0-02", "W1-06"],
+      "constraints": ["Reuse runway.v1 webpage-build-deploy as-is; extending the scenario enum or the internal-hdir-service contract is forbidden feature work.", "Respects the HDIR repo invariant 'no production integrations'; staging worker only.", "Inherits HDIR's non-durable (in-memory) idempotency — tolerated at staging scope; the motor must treat create as non-idempotent across HDIR restarts."],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Staging only; production promotion stays behind BLOCKED_until_explicit_approval_preflight." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/MOTOR_RUNWAY_JOB_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "runway_receipt_id", "op": "exists" } ] },
+      "category_refs": ["CAT-03", "CAT-04"]
+    },
+    {
+      "job_id": "W2-07",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Run the 9 per-category Supabase migrations (SQL already written, never applied) and deploy the 9 per-category CF verifiers once W2-02's account access exists",
+      "class": "config",
+      "pieces": ["factory-infra"],
+      "depends_on": ["W2-02", "W0-04"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Founder gate enforced TRANSITIVELY via dep W2-02, which holds the secondary-CF-account founder receipt; the same credential session runs the dashboard SQL. No separate gate needed — W2-07 cannot be READY until W2-02 is DONE." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-cloud-factory-infra/receipts/CAT_SUPABASE_MIGRATIONS_APPLIED_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "categories_applied", "op": "exists" } ] },
+      "category_refs": ["CAT-04", "CAT-09"]
+    },
+    {
+      "job_id": "W2-08",
+      "phase": "W2-EXECUTOR-LANE",
+      "title": "Prove cat-08's GHA leg (the only category with a workflow but zero cloud receipts): one workflow_dispatch run committing its first receipt",
+      "class": "receipt",
+      "pieces": ["factory-infra", "studio-ide"],
+      "depends_on": ["W0-04"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "workflow_dispatch is already sanctioned for category workflows (manual-green rung)." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-cloud-factory-infra/cat-08*/receipts/*.json", "mode": "any", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "run_url", "op": "matches", "value": "^https://github.com/.+/actions/runs/[0-9]+" } ] },
+      "category_refs": ["CAT-08"]
+    },
+    {
+      "job_id": "W3-01",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "R3 cron-shadow: founder unlock → uncomment the p0pgr cron → hold a 24h zero-manual green window → registry lane DECLARED→VERIFIED",
+      "class": "config",
+      "pieces": ["sg-gates-p0pgr"],
+      "depends_on": ["W2-05"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/p0pgr/founder/FOUNDER-UNLOCK-R3-CRON-SHADOW*.json", "note": "The R-ladder's own gate; does not exist today." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/p0pgr/R3_24H_ZERO_MANUAL_GREEN*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-03"]
+    },
+    {
+      "job_id": "W3-02",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "Motor plan-intake DECLARED→VERIFIED: one complete SCHEDULED heading→PR chain plus its 24h zero-manual window",
+      "class": "receipt",
+      "pieces": ["motor"],
+      "depends_on": ["W1-02", "W2-04"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Runs inside already-unlocked scheduled surfaces; new cron enables still need their own unlocks." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/PLAN_INTAKE_VERIFIED*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-03", "CAT-06"]
+    },
+    {
+      "job_id": "W3-03",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "Flip the motor GitHub App webhook toggle (App 'noetfield-motor', registered inactive) — event-driven continuation replaces workflow_run chaining",
+      "class": "config",
+      "pieces": ["motor"],
+      "depends_on": ["W2-04"],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-sandbox-private/motor/state/receipts/FOUNDER-APPROVE-WEBHOOK-ACTIVATION*.json", "note": "The standing 'remaining founder toggle' from the motor's commissioning." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/MOTOR_WEBHOOK_ACTIVE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W3-04",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "Autorunner standing loop on schedule (today workflow_dispatch-only, human-triggered)",
+      "class": "config",
+      "pieces": ["autorunner"],
+      "depends_on": ["W2-02", "W2-04"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/p0pgr/founder/FOUNDER-UNLOCK-AUTORUNNER-CRON*.json", "note": "R3-class unlock for the sandbox QA loop." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/products/sandbox-autorunner-v1/receipts/AUTORUNNER_STANDING_LOOP_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-05", "CAT-06"]
+    },
+    {
+      "job_id": "W3-05",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "TrustField cloud loops DECLARED_ACTIVE→VERIFIED: secrets wired, 24h zero-manual scheduled-receipt window (pa-health-cron + pa-deploy-truth) — the CAT-04 FACTORY_LINE_VERIFIED gate",
+      "class": "receipt",
+      "pieces": ["consumer-surfaces", "sg-gates-p0pgr"],
+      "depends_on": ["W1-08"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/p0pgr/founder/FOUNDER-PROVISION-TRUSTFIELD-SECRETS*.json", "note": "ANTHROPIC_API_KEY + remaining GH secrets are founder account actions provisioned BEFORE the 24h window (which is the exit action, not the gate)." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/p0pgr/FACTORY_LINE_VERIFIED*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-04"]
+    },
+    {
+      "job_id": "W3-06",
+      "phase": "W3-SCHEDULED-OPERATION",
+      "title": "Drift-guard on schedule: once W0-05 lands the workflow on SG main, founder unlock enables the weekly cron; this session's manual drift run becomes standing",
+      "class": "config",
+      "pieces": ["sg-gates-p0pgr", "goals-offers"],
+      "depends_on": ["W0-05"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/p0pgr/founder/FOUNDER-UNLOCK-DRIFT-CRON*.json", "note": "Named in the SG gates inventory as a missing required receipt." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/CATEGORY_DRIFT_CHECK_*.json", "mode": "newest", "all_of": [ { "path": "trigger", "op": "eq", "value": "schedule" } ] },
+      "category_refs": ["ALL"]
+    },
+    {
+      "job_id": "W4-01",
+      "phase": "W4-TRUST-LAYER",
+      "title": "Auditor unified corpus: point audit_receipt_ledger_v1.py at all three receipt stores recursively (top-level receipts/ + receipts/p0pgr/ + language_gate/receipts/ ≈ 4,700+ receipts; today it scans 73 top-level only)",
+      "class": "config",
+      "pieces": ["sg-gates-p0pgr"],
+      "depends_on": ["W0-03"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/receipt-ledger-audit-*.json", "mode": "newest", "all_of": [ { "path": "receipts_scanned", "op": "gte", "value": 1000 } ] },
+      "category_refs": ["CAT-09"]
+    },
+    {
+      "job_id": "W4-02",
+      "phase": "W4-TRUST-LAYER",
+      "title": "RECEIPTGRAPH_SELF_AUDIT: the unified audit receipt countersigned by the independent CF-Worker verifier — CAT-09's locked activation gate",
+      "class": "receipt",
+      "pieces": ["sg-gates-p0pgr", "factory-infra"],
+      "depends_on": ["W4-01", "W2-02"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/RECEIPTGRAPH_SELF_AUDIT_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "countersigned_by", "op": "exists" } ] },
+      "category_refs": ["CAT-09"]
+    },
+    {
+      "job_id": "W4-03",
+      "phase": "W4-TRUST-LAYER",
+      "title": "HDIR receipt-hash reproducibility: export the canonicalization path so an independent verifier can recompute receipt_hash (verify pass could NOT reproduce it from the receipt payload); prove on the next qualification run",
+      "class": "receipt",
+      "pieces": ["hdir-kernel"],
+      "depends_on": ["W0-01"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/noetfield-hdir/qualification/**/HDIR_RECEIPT_HASH_REPRO*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "independent_recompute_match", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-09", "CAT-03"]
+    },
+    {
+      "job_id": "W4-04",
+      "phase": "W4-TRUST-LAYER",
+      "title": "Fix Studio IDE receipt labels (its committed verify receipts say repo=sina-governance-ssot) AND prune the two stale Jul-4 demo sandbox worktrees still registered in-repo (.noetfield/worktrees/agent-2df12a7f, agent-ab6e523b) — W0-07 only covered org-root residue",
+      "class": "cleanup",
+      "pieces": ["studio-ide"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-studio-ide/receipts/*.json", "mode": "all", "all_of": [ { "path": "repo", "op": "eq", "value": "noetfield-studio-ide" } ] },
+      "category_refs": ["CAT-08", "CAT-09"]
+    },
+    {
+      "job_id": "W5-01",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "TrustField fresh live-truth: re-run the live-truth check against current main (last PASS is 2026-07-08/site-v92; code has advanced through PR #141) and commit the receipt; re-sync runtime_truth_sync_v1.json",
+      "class": "verify",
+      "pieces": ["consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Machine work; no gate identified in inventory." },
+      "exit_gate": { "type": "receipt_json", "glob": "TrustField-Technologies/reports/*live-truth*.json", "mode": "newest", "all_of": [ { "path": "checked_at", "op": "gte", "value": "2026-07-22" }, { "path": "status", "op": "eq", "value": "LIVE_BPLUS_PASS" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-02",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Recommission WitnessBC verification (broken/abandoned since 2026-06-26: CF account mismatch, zero scheduled checks, live state unknown): provision WITNESSBC_CF_API_TOKEN under the correct account, fix the wrangler binding, produce a live-truth receipt, add an uptime/deadman cron on the TrustField pattern",
+      "class": "config",
+      "pieces": ["consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "SourceA/receipts/FOUNDER-PROVISION-WITNESSBC-TOKEN*.json", "note": "witnessbc.com CF zone lives under a different account (witness.bc@gmail.com) — credential provisioning is founder-held." },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "receipt_json", "glob": "SourceA/receipts/WITNESSBC_LIVE_TRUTH*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+        { "type": "file_exists_glob", "glob": "SourceA/.github/workflows/witnessbc-*.yml" }
+      ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-03",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Close the noetfield.com apex-404 P1: the proxy worker now carries apex-redirect logic but no post-fix route-inventory receipt re-probes https://noetfield.com/ — produce it",
+      "class": "verify",
+      "pieces": ["consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfeld-OS/receipts/NF_APEX_ROUTE_CLOSE*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-04",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Burn down the 29 open P1 findings on the two noetfield.com product pages (CTA count, og:image, price canonicalization — commissioning polish, not features) after the pending founder copy verdict (CEM-001) resolves",
+      "class": "cleanup",
+      "pieces": ["consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "Noetfield/receipts/FOUNDER-COPY-VERDICT-CEM-001*.json", "note": "noos-nf-pub-claim-evidence-matrix-v1 is pending_founder_verdict; copy merges wait on it." },
+      "exit_gate": { "type": "receipt_json", "glob": "Noetfield/receipts/WWW_P1_BURNDOWN_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "remaining_p1", "op": "eq", "value": 0 } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-05",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "NOOS public_site gets a real deploy target (founder decision: own domain vs fold into www.noetfield.com) AND a durable intake sink + notification (today: gitignored container-local JSONL that loses submissions on restart) — no stranger-facing form before the sink is durable",
+      "class": "config",
+      "pieces": ["consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "noetfeld-OS/receipts/FOUNDER-DECIDE-NOOS-SITE-TARGET*.json", "note": "Deploys are founder-gated per noetfeld-OS CLAUDE.md; the domain decision is the founder's." },
+      "exit_gate": { "type": "all_of_gates", "gates": [
+        { "type": "receipt_json", "glob": "noetfeld-OS/receipts/NOOS_PUBLIC_SITE_DEPLOY_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+        { "type": "receipt_json", "glob": "noetfeld-OS/receipts/INTAKE_SINK_DURABLE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] }
+      ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-06",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Runway stranger-tenant proof: one full qualification run (create project → build/deploy → artifact + receipt) from a genuinely non-founder account on app.noetfield.com — every proven run so far is founder-adjacent",
+      "class": "receipt",
+      "pieces": ["runway", "hdir-kernel"],
+      "depends_on": ["W0-01"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Uses the existing live path; no new capability." },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/receipts/commissioning/TENANT_STRANGER_RUN_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "founder_adjacent", "op": "eq", "value": false } ] },
+      "category_refs": ["CAT-03", "CAT-10"]
+    },
+    {
+      "job_id": "W5-07",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Runway production payment: promote the nf-deterministic-api Stripe top-up from staging-e2e-receipt to a production payment receipt, through the existing founder fence",
+      "class": "config",
+      "pieces": ["runway", "goals-offers"],
+      "depends_on": ["W5-06"],
+      "founder_gate": { "required": true, "receipt_glob": "NOETFIELD-RUNWAY/receipts/commissioning/FOUNDER-APPROVE-PROD-PAYMENT*.json", "note": "Production mutations are HOLD-gated (AUTONOMOUS_PRODUCTION_MUTATIONS=HOLD); payment go-live is explicitly the founder's." },
+      "exit_gate": { "type": "receipt_json", "glob": "NOETFIELD-RUNWAY/receipts/commissioning/PROD_PAYMENT_E2E_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-08",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Studio IDE green loop: re-run the cursor-lite loop against a running Studio until verify.ok=true and commit non-null, commit the genuine receipt (today's only committed loop receipt is a synthesized failure); reconcile the 1/1 diverged main first",
+      "class": "receipt",
+      "pieces": ["studio-ide"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-studio-ide/docs/demo/receipts/STUDIO_LOOP_GREEN*.json", "mode": "newest", "all_of": [ { "path": "verify.ok", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-08"]
+    },
+    {
+      "job_id": "W5-09",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Studio IDE packaging: build the .app via the existing script + commit its :3005 smoke receipt; vsce-package the compiled VS Code extension into a .vsix. (DMG+notarization = separate founder Apple-ID gate, tracked inside this job's receipt as a flag.)",
+      "class": "config",
+      "pieces": ["studio-ide"],
+      "depends_on": ["W5-08"],
+      "founder_gate": { "required": true, "receipt_glob": "noetfield-studio-ide/receipts/FOUNDER-SESSION-SMOKE-SIGNOFF*.json", "note": "V1_LOCAL_READINESS sign-off table: founder session smoke + release tag are founder rows; notarization needs the founder's Apple Developer ID." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-studio-ide/receipts/STUDIO_APP_PACKAGE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "vsix_built", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-08"]
+    },
+    {
+      "job_id": "W5-10",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Studio→motor read-wire: a strictly read-only /api route in Studio that consumes the motor's already-emitted status.json / durable state (glue over the existing status contract — NO new interactive UI surface; dispatch wiring stays behind the webhook + STUDIO_GITHUB_TOKEN founder gates)",
+      "class": "adapter",
+      "pieces": ["studio-ide", "motor"],
+      "depends_on": ["W0-02"],
+      "constraints": ["Read-only API/adapter seam ONLY — surfaces already-emitted state, authors nothing. Any interactive panel/editor is new-UI feature work and is out of scope."],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Read-only display of already-emitted state is glue per doctrine; the dispatch direction is a separate, gated seam not in this contract v1." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-studio-ide/receipts/STUDIO_MOTOR_READWIRE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "read_only", "op": "eq", "value": true }, { "path": "writes_nothing", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-08"]
+    },
+    {
+      "job_id": "W5-14",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Reconcile SourceB production vs upgrade branches (materially divergent per 2026-07-19 audit: 39 vs 30 unique commits, no reconciliation receipt) and produce the Live-proven→Client-accepted delivery-bar receipt — sequenced BEFORE the doctrine endpoint runs through this repo",
+      "class": "receipt",
+      "pieces": ["goals-offers"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Reconciliation is machine work; the commercial-activation decision is W5-13's gate." },
+      "exit_gate": { "type": "receipt_json", "glob": "SourceB/receipts/SOURCEB_BRANCH_RECONCILIATION_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "reconciled_head_sha", "op": "matches", "value": "^[0-9a-f]{40}$" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-15",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "sourceb.ca live-truth: the doctrine endpoint assumes this Stripe storefront is live, but the inventory flagged it receipt-attested-not-observed (no live HTTP done). Re-probe: HTTP 200 on sourceb.ca + the Stripe checkout path reachable, committed as a live-truth receipt — a hard dependency of the revenue lane",
+      "class": "verify",
+      "pieces": ["goals-offers", "consumer-surfaces"],
+      "depends_on": [],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Read-only liveness probe." },
+      "exit_gate": { "type": "receipt_json", "glob": "SourceB/receipts/SOURCEB_CA_LIVE_TRUTH_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "http_status", "op": "eq", "value": 200 }, { "path": "checkout_reachable", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-16",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Founder decision-queue item: send RESELLER_RATE_CARD_REQUEST_v1 to My AI Front Desk (Gmail draft staged, NOT sent). Supplier margin is unknown until this is answered, so Never-Miss-a-Call offer economics — and pricing (W5-12) — cannot be finalized. External send is a founder-only action",
+      "class": "config",
+      "pieces": ["goals-offers"],
+      "depends_on": [],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/FOUNDER-SEND-RESELLER-RATECARD*.json", "note": "Prohibited-class external send — founder performs it; the receipt records the send + the rate card once received (OFFER_VALIDATION_LOCK)." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/RESELLER_RATECARD_RECEIVED_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "wholesale_terms_in_writing", "op": "eq", "value": true } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-11",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Revenue receipt adapter: Stripe checkout.session.completed (sourceb.ca) → FIRST_REVENUE_RECEIPT lands in SG receipts/ automatically; fix the template (currently names the wrong offer — must name Never Miss a Call); prove with a Stripe test-mode dry-run",
+      "class": "adapter",
+      "pieces": ["goals-offers", "sg-gates-p0pgr"],
+      "depends_on": ["W0-03", "W5-15"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "Test-mode dry-run only; real payment activation is W5-13." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/REVENUE_ADAPTER_DRYRUN_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "offer", "op": "contains", "value": "Never Miss a Call" } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-12",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "Pricing SSOT: one locked pricing source spanning the three sales surfaces (noetfield.com $497/$297 vs SourceB $199/$149 vs sourceb.ca CAD $149 currently diverge); surfaces re-pointed to it",
+      "class": "cleanup",
+      "pieces": ["goals-offers", "consumer-surfaces"],
+      "depends_on": ["W5-16"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/FOUNDER-PRICING-VERDICT*.json", "note": "Price setting is a founder commercial decision; gated downstream of W5-16 because the reseller rate card fixes the supplier margin the price depends on." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/PRICING_SSOT_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "surfaces_repointed", "op": "gte", "value": 3 } ] },
+      "category_refs": ["CAT-10"]
+    },
+    {
+      "job_id": "W5-13",
+      "phase": "W5-CONSUMER-SURFACES",
+      "title": "THE DOCTRINE ENDPOINT — first paid receipt from a stranger: one completed real checkout (sourceb.ca Stripe lane is nearest: traffic + one checkout away) recorded through the W5-11 adapter into SG",
+      "class": "receipt",
+      "pieces": ["goals-offers"],
+      "depends_on": ["W5-11", "W5-12", "W5-14", "W5-15"],
+      "founder_gate": { "required": true, "receipt_glob": "sina-governance-SSOT/receipts/FOUNDER-ACTIVATE-COMMERCIAL-LANE*.json", "note": "Commercial activation (P6) is always an explicit founder decision per the phase ladder; rate-card send + pricing verdict precede it." },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/FIRST_REVENUE_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PAID" }, { "path": "payer_type", "op": "eq", "value": "stranger" } ] },
+      "category_refs": ["CAT-10", "ALL"]
+    },
+    {
+      "job_id": "W6-01",
+      "phase": "W6-FULL-LINE-PROOF",
+      "title": "FULL-LINE COLD PROOF: one founder heading → P0-PGR packet → motor DAG → SourceA sandbox executor + HDIR runway job → SG gate preflight on every deploy-class step → independent verifier PASS → receipts visible to the unified auditor + drift-guard — cold start, zero manual steps inside unlocked windows",
+      "class": "receipt",
+      "pieces": ["motor", "autorunner", "hdir-kernel", "sg-gates-p0pgr", "factory-infra"],
+      "depends_on": ["W2-04", "W2-06", "W4-02", "W1-06"],
+      "constraints": ["Sandbox/staging steps ONLY — where a real deploy-class step invokes promotion_gate.py under runtime_reality NOT_COMMISSIONED it correctly hard-stops (exit 78); the cold proof exercises the ALLOWED paths and records the gate preflight, it does NOT flip SG production commissioning (out of scope).", "Motor auto-dispatch stays at/below router class_rank 1 (W-INTEL-LOW); the line does not raise the ceiling to complete."],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "The heading is the founder's only touch." },
+      "exit_gate": { "type": "receipt_json", "glob": "noetfield-sandbox-private/motor/state/receipts/FULL_LINE_COLD_PROOF_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "stage_receipt_ids", "op": "exists" }, { "path": "gate_preflight_run_url", "op": "matches", "value": "^https://github.com/.+/actions/runs/[0-9]+" }, { "path": "verifier_countersignature", "op": "exists" } ] },
+      "category_refs": ["ALL"]
+    },
+    {
+      "job_id": "W6-02",
+      "phase": "W6-FULL-LINE-PROOF",
+      "title": "STEADY STATE 7D: seven consecutive days of green scheduled receipts across every unlocked cron (drift-guard, plan-intake, TrustField loops, autorunner, deadmen) with zero founder interrupts outside the decision queue",
+      "class": "receipt",
+      "pieces": ["motor", "autorunner", "sg-gates-p0pgr", "consumer-surfaces"],
+      "depends_on": ["W6-01", "W3-01", "W3-02", "W3-05", "W3-06"],
+      "founder_gate": { "required": false, "receipt_glob": null, "note": "" },
+      "exit_gate": { "type": "receipt_json", "glob": "sina-governance-SSOT/receipts/STEADY_STATE_7D_RECEIPT*.json", "mode": "newest", "all_of": [ { "path": "status", "op": "eq", "value": "PASS" }, { "path": "days_green", "op": "gte", "value": 7 } ] },
+      "category_refs": ["ALL"]
+    }
+  ]
+}

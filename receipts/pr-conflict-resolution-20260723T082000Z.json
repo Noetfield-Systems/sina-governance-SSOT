@@ -1,0 +1,118 @@
+{
+  "schema": "pr_conflict_resolution_receipt_v1",
+  "receipt_id": "pr-conflict-resolution-20260723T082000Z",
+  "created_at": "2026-07-23T08:20:00Z",
+  "canon_version": "FOUNDER_CANON_v1+MACHINE_LOOPS_v1",
+  "pr": {
+    "number": 82,
+    "url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/82",
+    "head": "cursor/product-category-lock-v1",
+    "base": "main",
+    "founder_gate": "Founder GO 2026-07-23 (wiring plan W0-05); blanket approval recorded in noetfeld-OS Claude session f5da4b7f. Per contract W0-05 founder_gate.note: the PR merge itself is the founder act."
+  },
+  "merge": {
+    "merge_base": "b644f3452e3f2ebb26b0196dcd2c20a80a4e539a",
+    "branch_tip_premerge": "62f043c39cbe33cdbd58c65f4f5f52e77b9a97a3",
+    "note_unpushed_commits": "Branch tip was 7 commits ahead of origin/cursor/product-category-lock-v1 (incl. 9ec41c9 Wiring & Commissioning Plan v1 lock). These are the builder lane's committed work that the founder-approved deliverable description references (wiring contract + sha256 lock); they are included in the push that lands this PR.",
+    "resolution_merge_commit": "c6a935d",
+    "conflicted_files": 21
+  },
+  "classification_and_resolution": [
+    {
+      "class": "ordinary_code_or_workflow",
+      "resolution": "take origin/main (evidence-based supersession)",
+      "evidence": "For every file below, the branch-side blob (git rev-parse HEAD:<path>) appears verbatim in origin/main's history for the same path: main once contained exactly the branch's content (language-layer PR #13 lineage) and evolved past it (harden/ratify/align/close commits). Not a blind --theirs.",
+      "files": [
+        ".github/workflows/p0pgr-shadow-cycle-v1.yml",
+        ".github/workflows/sg-auth-surface-probe-v1.yml",
+        "scripts/p0pgr_packet_lint_v1.py",
+        "scripts/verify_auth_surfaces_e2e_v1.py",
+        "scripts/living_system_chain_validate_v1.py",
+        "tests/test_verify_auth_surfaces_e2e_v1.py"
+      ]
+    },
+    {
+      "class": "structured_registry",
+      "resolution": "take origin/main (blob-ancestry supersession); plus one additive registration, see registry_addition",
+      "evidence": "Branch blobs of all three registries appear verbatim in origin/main history; branch never held registry content absent from main's lineage, so no key union was required. Verified additionally that no data file on the branch (github_automation_registry, automation_surface_inventory, workflow_census_extensions) ever referenced category-drift-guard, so nothing was dropped.",
+      "files": [
+        "data/agent_read_surfaces_v1.json",
+        "data/auth_core_interface_spec_v1.json",
+        "data/auth_surface_matrix_v1.json",
+        "data/automation_surface_inventory_v1.json",
+        "data/github_automation_registry_v1.json"
+      ]
+    },
+    {
+      "class": "locked_canon",
+      "resolution": "take origin/main",
+      "evidence": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md branch blob is in main's history; main's current version carries the founder-side ratify/align evolution (9197390, f459d1a). No locked doctrine was edited; a stale duplicate of pre-evolution content was discarded.",
+      "files": [
+        "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md"
+      ]
+    },
+    {
+      "class": "append_only_proof_ledger",
+      "resolution": "take origin/main",
+      "evidence": "P99-LEDGER ratify doc: branch blob in main history; main's version includes later Phase-1-close appends (0d39f23). No receipt content was dropped; the branch side was an earlier strict subset state.",
+      "files": [
+        "SG-Canonical-Library/noetfield-library/P99-LEDGER/CROSS_DOMAIN_AUTH_RATIFY_2026-07-08.md"
+      ]
+    },
+    {
+      "class": "generated_artifact",
+      "resolution": "take origin/main",
+      "evidence": "language_gate/dictionary_rc2_supplement.json branch blob in main history; main regenerated/extended it (+641 lines).",
+      "files": [
+        "language_gate/dictionary_rc2_supplement.json"
+      ]
+    },
+    {
+      "class": "human_authored_docs",
+      "resolution": "take origin/main",
+      "evidence": "Library docs and dispatch docs: branch blobs in main history; main evolved them further.",
+      "files": [
+        "SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md",
+        "SG-Canonical-Library/noetfield-library/P2-SSOT/SSOT_INDEX.md",
+        "SG-Canonical-Library/noetfield-library/P8-MACHINE-LOOPS/sg-auth-surface-probe-machine-v1.md",
+        "docs/dispatch/auth-phase-1-trustfield.md",
+        "docs/dispatch/auth-phase-2-sourcea.md",
+        "docs/dispatch/auth-phase-4-noos.md"
+      ]
+    },
+    {
+      "class": "human_authored_lane_doc",
+      "resolution": "hand-merge (zdiff3), both hunks resolved to main's side; branch-unique content survives via clean auto-merge regions",
+      "evidence": "AGENTS.md hunk 1: base and branch empty at anchor, main added 0c-0i LOCKED skill entries -> kept main's. Hunk 2: branch deleted base's old item 4 (superseded by the 4-7 list both sides share); main also deleted it and added item 8 commissioning-specialist -> kept main's. Surviving branch-unique content: L0 repo-graph broad-read gate section and corrected venture workspace paths (~/Desktop/Noetfield-Systems/... replacing stale ~/Projects/...). Escalation class per skill 1; resolved under the founder's explicit W0-05 GO covering this PR's conflict resolution.",
+      "files": [
+        "AGENTS.md"
+      ]
+    }
+  ],
+  "registry_addition": {
+    "file": "data/github_automation_registry_v1.json",
+    "motor_id": "gh_actions_category_drift_guard_v1",
+    "task_cell": "category_registry_drift_check",
+    "reason": "Branch shipped .github/workflows/category-drift-guard-v1.yml (a named PR deliverable) with no registry entry in any branch data file; validate_parallel_automation_governance_v1 enforces workflow-to-registry 1:1 and FAILed on the merged tree. Entry mirrors gh_actions_p0pgr_shadow_cycle_v1 (workflow_dispatch-only, founder-gated cron, read-only). Fixes the system per canon rather than landing a red governance gate on main.",
+    "wake_path_note": "No active schedule (cron commented pending FOUNDER-UNLOCK-DRIFT-CRON receipt), so no schedule passport required under NF_WAKE_PATH_CONFLICT_POLICY."
+  },
+  "untracked_collision": {
+    "file": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "action": "untracked copy removed after byte-identical diff against origin/main's tracked version; scratchpad backup kept"
+  },
+  "preserved_state": {
+    "worktree_stash": "stash 'pre-W0-05-merge: builder lane graph-out generated churn (preserve)' holds uncommitted graph-out/GRAPH_REPORT.md + graph-out/graph_index_v1.json modifications (generated artifacts)"
+  },
+  "validators": [
+    {"cmd": "python3 scripts/validate_parallel_automation_governance_v1.py", "result": "PASS (after drift-guard registration; FAILed before it with 'workflow must have exactly one registry entry ... (found 0)', a defect pre-existing on the branch)"},
+    {"cmd": "python3 -m pytest tests/test_verify_auth_surfaces_e2e_v1.py -q", "result": "19 passed"},
+    {"cmd": "python3 scripts/verify_wiring_commissioning_v1.py", "result": "lock_check VERIFIED; W0-05 BLOCKED_DEPS pre-merge as expected; three sha256-locked artifacts untouched by merge, re-lock NOT required"},
+    {"cmd": "python3 scripts/audit_automation_surface_v1.py", "result": "exit 0; warnings about noetfeld-OS workflows missing from inventory are cross-repo and pre-existing"},
+    {"cmd": "python3 check.py --json", "result": "FAIL (SSOT drift advisory) — identical FAIL on untouched main checkout; pre-existing, not merge-caused"},
+    {"cmd": "json.load over all 176 staged *.json", "result": "all parse"},
+    {"cmd": "git diff --cached --check + marker grep", "result": "no conflict markers"}
+  ],
+  "verdict": "SUBMITTED for independent verification",
+  "author": "claude-code-noos (Claude Fable 5), dispatched by founder in noetfeld-OS session",
+  "laws": "LAWS: FOUNDER_CANON v1 + governed-autorun v3. Violations = BLOCKED_WITH_REASON."
+}
