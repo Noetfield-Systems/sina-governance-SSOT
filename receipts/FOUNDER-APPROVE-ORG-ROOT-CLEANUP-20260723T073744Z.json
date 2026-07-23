@@ -1,0 +1,20 @@
+{
+  "schema": "founder_decision_receipt_v1",
+  "job_id": "W0-07",
+  "decision": "APPROVED",
+  "decided_by": "Sina Kazemnezhad (founder)",
+  "decided_via": "Claude Code chat, session f5da4b7f-a287-401f-a037-8c3741af6db4 (noetfeld-OS), blanket GO on the 9 gated wiring jobs",
+  "decided_at_utc": "20260723T073744Z",
+  "deletion_list_org_root": [
+    "_wt-sandbox-motor-unified",
+    "_wt-noos-runtime-migration",
+    "_wt-sg-runtime-value-contract",
+    "_wt-commissioning-dedupe",
+    "_wt-commissioning-on-demand",
+    "_wt-sourceb-plan-adapter",
+    "_wt-mrw-runway",
+    "_wt-runway-commissioning-explicit"
+  ],
+  "condition": "parity re-verified at deletion time 2026-07-23: 5 dirs strict-subset-verified and deleted; _wt-commissioning-dedupe (11 files differ), _wt-mrw-runway (1 file differs), _wt-sourceb-plan-adapter (no twin) PRESERVED pending reconciliation",
+  "canon_version": "FOUNDER_CANON_v1+MACHINE_LOOPS_v1"
+}

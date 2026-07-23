@@ -31,3 +31,11 @@ Ordered by leverage (what each unlock releases):
 ```
 
 To **loosen a gate permanently** instead: say so once, the contract gets edited + re-locked (`--init-lock`), and no session asks about it again.
+
+## Added 2026-07-23 (ready-lane execution wave 3)
+
+| # | Gate | Drop this file / act | Unlocks |
+|---|---|---|---|
+| 18 | **W2-08 — cat-08 GHA secret**: repo secret `STUDIO_IDE_READONLY_TOKEN` unprovisioned (first dispatch run 29991824216 failed at studio-ide checkout) | Create a fine-grained read-only token for `noetfield-studio-ide`, set it as that secret on the PRODUCT_CATEGORY repo, re-dispatch `cat-08-studio-ide-control-cockpit-cloud-v1.yml` | cat-08's first cloud receipt (W2-08 → DONE) |
+| 19 | **W5-14 — SourceB merges** (machine prepped everything; merge is your closed-set authority) | Merge [PR #81](https://github.com/Noetfield-Systems/SourceB/pull/81) (main catch-up, ff-shaped, zero conflict surface) then [PR #82](https://github.com/Noetfield-Systems/SourceB/pull/82) (upgrade delta → production; **merging #82 fires the sourceb.app deploy workflow**) | W5-14 receipt flips PARTIAL → PASS; unpushed upgrade delta already preserve-pushed |
+| 20 | **W5-06 — needs a real stranger** (not a founder decision — needs a human who isn't you) | Hand `NOETFIELD-RUNWAY/receipts/commissioning/TENANT_STRANGER_RUN_INSTRUCTIONS_v1.md` to any real third party | The stranger-tenant proof; machine verifies + writes the receipt afterward |
