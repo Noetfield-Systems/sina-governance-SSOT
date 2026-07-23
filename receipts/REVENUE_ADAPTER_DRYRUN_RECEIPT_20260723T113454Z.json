@@ -1,0 +1,25 @@
+{
+ "schema": "revenue_adapter_dryrun_receipt_v1",
+ "job_id": "W5-11",
+ "contract_ref": "product/WIRING_COMMISSIONING_CONTRACT_v1.json",
+ "verified_at": "2026-07-23T11:34:54Z",
+ "status": "PASS",
+ "offer": "Never Miss a Call",
+ "dry_run": {
+  "mode": "Stripe TEST-MODE event (livemode:false) \u2014 claims no revenue",
+  "workflow_run_url": "https://github.com/Noetfield-Systems/sina-governance-SSOT/actions/runs/30003614649",
+  "workflow_conclusion": "success",
+  "landed_receipt": "receipts/revenue/FIRST_REVENUE_RECEIPT_DRYRUN_20260723T114000Z.json",
+  "landed_by_commit": "39a4142 (auto-committed by the workflow itself, not by a human or local run)"
+ },
+ "adapter": {
+  "deterministic_script": "scripts/revenue_receipt_adapter_v1.py (stdlib-only; test-mode can only mint DRYRUN files; live events mint FOUNDER_VERIFY \u2014 doctrine endpoint W5-13 still requires founder countersign)",
+  "cloud_workflow": ".github/workflows/nf-revenue-receipt-adapter-v1.yml (repository_dispatch sourceb_revenue_checkout + workflow_dispatch; NO cron \u2014 W3 founder-gated)",
+  "storefront_wire": "SourceB main 93eccc5: webhook checkout.session.completed fires the repository_dispatch, PII-minimized (email hashed, session id truncated); fail-safe no-op until GOVERNANCE_DISPATCH_TOKEN is set \u2014 that activation is the W5-13 founder step",
+  "template_fix": "P99-LEDGER FIRST_REVENUE_RECEIPT template offer corrected: ACG Tier 1 audit \u2192 Never Miss a Call (SG main 75c5a11)"
+ },
+ "not_yet_true": [
+  "sourceb.ca production worker does not yet run the storefront wire (deploy:ca was permission-blocked in this session; wire is committed on SourceB main and dormant-by-design without the token)",
+  "no real revenue is claimed anywhere by this receipt"
+ ]
+}
