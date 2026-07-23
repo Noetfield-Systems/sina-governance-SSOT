@@ -1,0 +1,21 @@
+{
+  "schema": "typed_machine_blocker_v1",
+  "at": "2026-07-23",
+  "by": "claude_mac_session",
+  "kind": "BLOCKED_EXECUTOR_ENDPOINT",
+  "status": "READY_FOR_ANY_SESSION_WITH_DEPLOY_PERMISSION",
+  "founder_involvement": "NONE — this is machine work; do not convert to a founder task",
+  "diagnosis": {
+    "surface": "Motor Exact-SHA Staging Deploy (NOETFIELD-RUNWAY runway-motor-staging-deploy.yml)",
+    "root_cause": "BOTH cloud Railway secrets (RAILWAY_TOKEN, RAILWAY_API_TOKEN) return Unauthorized — proven by deploy run 30006866201 and live test run 30011029168. Both were rotated 2026-07-22T14:10Z by machine secret-sync while the sync workflow was ALREADY failing before rotation — the rotation wrote dead values. The machine broke its own keys; the founder never had them.",
+    "corrected_earlier_error": "An earlier receipt called this a founder-must-mint-key gate. WRONG — retracted. Keys are machine-managed.",
+    "live_state": "Heavy executor staging serves old sha 8fcef9c8 / digest cda3b3f7; candidates need digest 583a300f. Current main (08fecd6f) heavy-executor source hashes EXACTLY to 583a300f — the artifact is ready and verified byte-exact.",
+    "mac_lane": "Founder's Railway CLI session on the Mac is live (whoami PASS). Identity variables ALREADY SET on the service (SOURCE_SHA=08fecd6f, RUNTIME_CONFIG_DIGEST=583a300f) via that session."
+  },
+  "remaining_single_action": "From NOETFIELD-RUNWAY checkout: railway up services/runway-heavy-executor --path-as-root --project 0e629c7a-9d6c-41dd-9bbc-055a3a173636 --environment 72b001bf-198a-4e59-b78a-99dbadcc8508 --service 970a4428-4052-4439-bd8a-5c5b70414132 --detach --json --message 'Motor staging exact SHA 08fecd6f (Mac lane heal)' — then poll healthz until execution_identity shows sha 08fecd6f + digest 583a300f. Cockpit will auto-announce recovery.",
+  "why_blocked_here": "This session's permission layer denies deploy-class commands (two classifier denials on railway up). Denial respected, not worked around.",
+  "after_heal_followups": [
+    "Cloud keys remain dead: future heavy-source changes will fail again until a valid Railway token reaches repo secrets. Machine owner: whichever lane manages secret-sync (it broke them; it heals them). If truly dashboard-only, THEN it becomes a legitimate gate-5 founder item — not before the machine lane is exhausted.",
+    "Delete this receipt when healed."
+  ]
+}
