@@ -1,0 +1,19 @@
+{
+  "schema": "noetfield.sg-authority-ref.v1",
+  "decision_id": "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+  "sg_decision_id": "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+  "also_decision_ids": [
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-CIRCUIT-A-DETERMINISTIC-MOTOR-PROOF-001",
+    "NF-CIRCUIT-B-HIGGSFIELD-CAMPAIGN-PROOF-001"
+  ],
+  "authority_source": "Noetfield-Systems/sina-governance-SSOT",
+  "authority_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "sg_authority_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "decision_artifact_sha": "0a4094321eb24497422f9239b935e7f395257e3c",
+  "status": "ACTIVE",
+  "valid_only_when": "sg_authority_sha is an ancestor of sina-governance-SSOT@main",
+  "generated": true,
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/20",
+  "install_path_hint": "noetfeld-OS/data/sg-authority-ref-higgsfield-activation-v1.json"
+}

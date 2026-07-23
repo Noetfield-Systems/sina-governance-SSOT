@@ -1,0 +1,14 @@
+{
+  "file": "docs/dispatch/wave-0-nf-unified-motor-merge-packet.md",
+  "agent_review": [],
+  "dictionary_warnings": [
+    {
+      "type": "UNDEFINED_TERM",
+      "term": "Persist Wave",
+      "line": 6,
+      "fix": null,
+      "reason": "no dictionary entry \u2014 add dictionary first, then mint terminology",
+      "auto_fixed": false
+    }
+  ]
+}

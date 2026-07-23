@@ -1,0 +1,67 @@
+name: motor-learning-organ-v1
+
+# Authorized by NF-MOTOR-LEARNING-ORGAN-V1.
+# W0/W4 stub: heartbeat + receipt only. NEVER ratifies or promotes live priors.
+# W1 validation lives in motor-learning-organ-w1-validate.yml (fixture/dry-run only).
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily mine slot
+    - cron: "0 7 * * 1"   # weekly ROI snapshot slot
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Tick mode"
+        required: true
+        default: "heartbeat"
+        type: choice
+        options:
+          - heartbeat
+          - daily_mine
+          - weekly_roi
+
+permissions:
+  contents: read
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Motor learning organ tick (observe/heartbeat stub)
+        shell: bash
+        env:
+          MLO_TICK_MODE: ${{ github.event.inputs.mode }}
+        run: |
+          set -euo pipefail
+          MODE="${MLO_TICK_MODE:-}"
+          if [[ -z "$MODE" ]]; then
+            DOW=$(date -u +%u)
+            HOUR=$(date -u +%H)
+            if [[ "$DOW" == "1" && "$HOUR" == "07" ]]; then
+              MODE=weekly_roi
+            else
+              MODE=daily_mine
+            fi
+          fi
+          mkdir -p receipts/learning
+          OUT="receipts/learning/motor-learning-organ-heartbeat-$(date -u +%Y%m%dT%H%M%SZ).json"
+          python3 scripts/motor_learning_organ_tick_v1.py --mode "$MODE" --write-receipt \
+            > "$OUT"
+          cp "$OUT" receipts/learning/motor-learning-organ-latest-summary.json
+          echo "MLO_RECEIPT_PATH=$OUT" >> "$GITHUB_ENV"
+
+      - name: Upload learning receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motor-learning-organ-receipt-${{ github.run_id }}
+          path: |
+            receipts/learning/motor-learning-organ-latest-summary.json
+            ${{ env.MLO_RECEIPT_PATH }}
+          if-no-files-found: ignore

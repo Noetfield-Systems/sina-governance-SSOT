@@ -1,0 +1,15 @@
+{
+  "schema": "motor_learning_organ_receipt_v1",
+  "receipt_id": "motor-learning-organ-w0-lock-20260720",
+  "loop_id": "motor_learning_organ_v1",
+  "phase": "W0",
+  "verdict": "PASS_W0_PACKET",
+  "saved_at": "2026-07-20T04:17:59Z",
+  "action": "sg_lock_packet_filed",
+  "runtime_checks": {
+    "MLO-01": "DEFINED_PENDING_W2",
+    "MLO-02": "DEFINED_PENDING_W1_W3",
+    "MLO-03": "DEFINED_PENDING_RATIFY",
+    "MLO-04": "DEFINED_PENDING_W4"
+  }
+}

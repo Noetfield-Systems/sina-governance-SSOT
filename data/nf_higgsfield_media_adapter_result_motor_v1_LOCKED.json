@@ -1,0 +1,35 @@
+{
+  "schema": "nf_higgsfield_media_adapter_result_motor_v1",
+  "decision_id": "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "adapter_role": "MediaGenerationAdapter",
+  "first_adapter": "HiggsfieldCliMcpAdapter_v1",
+  "is_lane": false,
+  "permanent_vendor_lock": false,
+  "motor_profile": "NF-MOTOR-HIGGSFIELD-CAMPAIGN-001",
+  "publication": "separate_PublisherAdapter",
+  "forbidden_ownership": [
+    "job_truth",
+    "organizational_memory",
+    "policy",
+    "authority",
+    "final_evidence",
+    "customer_data",
+    "outcome_attribution",
+    "canonical_asset_registry"
+  ],
+  "depends_on": {
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0"
+  },
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md",
+  "saved_at": "2026-07-18T00:36:23Z",
+  "base_head_before_commit": "fd62e7f5d6c1d4ef31a4d8137af84b313f378c25",
+  "sg_authority_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "decision_artifact_sha": "0a4094321eb24497422f9239b935e7f395257e3c",
+  "canonical_main_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "merge_strategy": "merge_commit",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/20",
+  "merged_at": "2026-07-18T00:53:06Z"
+}

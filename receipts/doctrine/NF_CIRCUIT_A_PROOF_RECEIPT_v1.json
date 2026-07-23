@@ -1,0 +1,18 @@
+{
+  "schema": "sg-doctrine-receipt-v1",
+  "receipt_id": "NF_CIRCUIT_A_PROOF_RECEIPT_v1",
+  "created_at": "2026-07-18T01:09:30Z",
+  "commission_id": "NF-CIRCUIT-A-DETERMINISTIC-MOTOR-PROOF-001",
+  "final_status": "CIRCUIT_A_PROVEN",
+  "sg_authority_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "noos_main_sha": "291789bc3d40dad8ea165f68a29ff026a000bd26",
+  "noos_proof_ref": "receipts/proof/nf-circuit-a-deterministic-motor-proof-001-v1.json",
+  "job_id": "MOTOR-CIRCUITA-001",
+  "checks": {
+    "before_after_pair": "PASS",
+    "no_execution_mutation": "PASS",
+    "idempotency": "PASS"
+  },
+  "recovery": "PROVEN",
+  "not_claimed": ["organic writer-B cron recovery", "Circuit B"]
+}

@@ -1,0 +1,18 @@
+{
+  "receipt_type": "doctrine_lock_receipt_v1",
+  "decision_id": "NF-COMPUTE-ROI-ALLOCATION-V1",
+  "packet_id": "SG-FINALIZATION-NF-COMPUTE-ROI-ALLOCATION-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "locked_at": "2026-07-19T22:52:47Z",
+  "artifacts": {
+    "architecture_md_sha256": "bb0cd0a6fd50869b5a176e3d9a8d9b27006e3fcd2ac4e4126429e35c5e4b2b2a",
+    "machine_json_sha256": "568ab37b19ce4738929e742dbf06ccf85722eed46275011fc94c315b9757d22d"
+  },
+  "candidate_sha": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d",
+  "sg_pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/62",
+  "note": "sg_authority_sha becomes the merge commit on main after PR #62 lands",
+  "sg_authority_sha": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d",
+  "wave0_merge_commit": "389b85ff1ad6892a6da680e5f91c9397f9c8f44d",
+  "wave0_merged_at": "2026-07-19T22:56:53Z"
+}

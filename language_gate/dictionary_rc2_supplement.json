@@ -378,6 +378,638 @@
       "tag": "RC2_GAP_FILL",
       "meaning": "CHESS action label: low-risk reversible execute.",
       "allowed_surfaces": "internal, prompt, receipt"
+    },
+    {
+      "term": "Architecture Finalization Gate",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG law that major architecture becomes canonical only after SSOT validation and recorded authority SHA.",
+      "code_alias": [
+        "architecture finalization gate",
+        "finalization gate"
+      ]
+    },
+    {
+      "term": "ARCHITECTURE_DRAFT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: draft proposal before SG review."
+    },
+    {
+      "term": "SG_REVIEW_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: submitted to SG for constitutional review."
+    },
+    {
+      "term": "SG_ACCEPTED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG accepted the decision as canonical."
+    },
+    {
+      "term": "IMPLEMENTATION_AUTHORIZED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG authorizes bounded implementation waves under the accepted decision."
+    },
+    {
+      "term": "OPERATIONALLY_PROVEN",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: live operational proof satisfied beyond design lock."
+    },
+    {
+      "term": "P99_PRESERVED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: decision and evidence preserved in P99 ledger."
+    },
+    {
+      "term": "SG_REJECTED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG rejected the proposal."
+    },
+    {
+      "term": "SG_CONFLICT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: proposal conflicts with an ACTIVE decision."
+    },
+    {
+      "term": "SG_REVISION_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture status: SG requires revision before acceptance."
+    },
+    {
+      "term": "Unified Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Noetfield reusable governed execution runtime; profiles commission on a shared core.",
+      "code_alias": [
+        "unified motor",
+        "nf unified motor"
+      ]
+    },
+    {
+      "term": "Unified Motor Core",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Shared runtime: recipes, job state, resident roles, workflows, policy, sandbox, model router, verification, promotion, probes, evidence.",
+      "code_alias": [
+        "unified motor core",
+        "Noetfield Unified Motor Core"
+      ]
+    },
+    {
+      "term": "Client-Zero Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Existing Noetfield Motor preserved as the first profile on Unified Motor Core, not discarded.",
+      "code_alias": [
+        "client-zero",
+        "client zero motor",
+        "Noetfield Client-Zero Motor"
+      ]
+    },
+    {
+      "term": "Resident Role",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Persistent institutional owner hosted on Cloudflare Agents SDK with durable identity and state.",
+      "code_alias": [
+        "resident role",
+        "resident owner",
+        "institutional owner"
+      ]
+    },
+    {
+      "term": "Motor Workflow",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Durable multi-step Motor job executed on Cloudflare Workflows, not inside a long-running Agent method.",
+      "code_alias": [
+        "motor workflow",
+        "MotorJobWorkflow"
+      ]
+    },
+    {
+      "term": "SandboxAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Interface for bounded execution environments; initial adapters include Git worktree and GitHub Actions.",
+      "code_alias": [
+        "sandbox adapter",
+        "GitWorktreeSandbox",
+        "GitHubActionsSandbox"
+      ]
+    },
+    {
+      "term": "GitWorktreeSandbox",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First stable SandboxAdapter using Git worktrees for production-grade mutation."
+    },
+    {
+      "term": "OpenModelRuntime",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Replaceable interface for Noetfield-controlled open-model inference; first adapter RunPod vLLM.",
+      "code_alias": [
+        "open model runtime",
+        "OpenModelRuntime_v1"
+      ]
+    },
+    {
+      "term": "Model Router",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Routes T0 deterministic, T1/T1S open model, and T2/T3 commercial escalation with required receipts.",
+      "code_alias": [
+        "model router"
+      ]
+    },
+    {
+      "term": "ESCALATE_REQUIRED",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Machine-readable gate status required before any proprietary commercial model call."
+    },
+    {
+      "term": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision id for Noetfield Unified Motor Core architecture v1.",
+      "code_alias": [
+        "NF_UNIFIED_MOTOR_ARCHITECTURE_V1"
+      ]
+    },
+    {
+      "term": "NF-UNIFIED-MOTOR-V1-FOUNDATION",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First commission: deterministic Unified Motor vertical slice without GPU deployment."
+    },
+    {
+      "term": "noetfield.sg-authority-ref.v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Generated cross-repo pointer schema to SG canonical authority SHA; does not duplicate full contracts."
+    },
+    {
+      "term": "noetfield.repo-owner-ref.v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Generated per-repository pointer to resident role runtime identity and SG authority source."
+    },
+    {
+      "term": "Cloudflare Agents",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Agents SDK hosting persistent Resident Role owners; not the full Motor job runner.",
+      "code_alias": [
+        "Agents SDK",
+        "Cloudflare Agents SDK"
+      ]
+    },
+    {
+      "term": "Cloudflare Workflows",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Durable execution substrate for Motor jobs: retries, approval waits, promotion, outcome probes.",
+      "code_alias": [
+        "Workflows"
+      ]
+    },
+    {
+      "term": "RunPod",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "First OpenModelRuntime adapter host for vLLM; never institutional memory or job ledger.",
+      "code_alias": [
+        "RunPod/vLLM",
+        "RunPodVllmAdapter_v1"
+      ]
+    },
+    {
+      "term": "vLLM",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Open-model serving stack used behind the first RunPod adapter."
+    },
+    {
+      "term": "Motor Registry",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Recipe and job-truth contract layer for valid Motor work.",
+      "code_alias": [
+        "Fable Motor Registry",
+        "recipe registry"
+      ]
+    },
+    {
+      "term": "Policy Hub",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Authority and policy check surface integrated by Motor jobs before mutation and promotion."
+    },
+    {
+      "term": "SSSOT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Sina Governance Single Source of Truth repository / lane."
+    },
+    {
+      "term": "Sovereign AI",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Architecture posture keeping model control, data, and evidence under institutional boundaries."
+    },
+    {
+      "term": "Customer Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Commissioned Motor profile for a customer vertical on Unified Motor Core."
+    },
+    {
+      "term": "Noetfield Unified Motor Core",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Canonical name of the shared governed execution runtime."
+    },
+    {
+      "term": "Durable Motor Workflow",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Workflows-backed multi-step Motor job execution."
+    },
+    {
+      "term": "GitHub App",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Single repository-bound machine identity for automation events and actions."
+    },
+    {
+      "term": "Cloudflare Sandbox",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Experimental sandbox capability; evaluate later behind SandboxAdapter."
+    },
+    {
+      "term": "Cloudflare Agents SDK",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SDK hosting Resident Role owners on Durable Objects."
+    },
+    {
+      "term": "Verifier Owner",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Resident Role that runs proportional verification and evidence-boundary checks."
+    },
+    {
+      "term": "Resident Role Agent",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Base agent class for NoetfieldResidentRoleAgent role instances."
+    },
+    {
+      "term": "Investor Workflow Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Motor profile for investor/fund/family-office workflow commissions."
+    },
+    {
+      "term": "Distributed Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Pre-consolidation Motor pieces across builders, CI, NOOS, SourceA, SG, and receipts."
+    },
+    {
+      "term": "Recipe Registry",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Loader/store of Motor recipes and job-truth contracts under Motor Registry."
+    },
+    {
+      "term": "SinaGPT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Founder-facing Brain/Architect and Motor Command Console; ChatGPT Custom GPT cockpit, not persistent institutional owner.",
+      "code_alias": [
+        "sinagpt",
+        "SinaGPT Founder Brain"
+      ]
+    },
+    {
+      "term": "founder.brain-architect",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Canonical role_id for SinaGPT as HUMAN_FACING_COMMAND_COCKPIT."
+    },
+    {
+      "term": "HUMAN_FACING_COMMAND_COCKPIT",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Class of founder conversation interfaces that command via Gateway without owning persistence or execution."
+    },
+    {
+      "term": "Command Gateway",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloudflare Worker front door for SinaGPT Actions; authenticates, normalizes, and policy-gates commands.",
+      "code_alias": [
+        "Noetfield Command Gateway",
+        "command-gateway"
+      ]
+    },
+    {
+      "term": "Command Gateway v1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Cloud Factory command/control API (/v1); kept operational for compatibility."
+    },
+    {
+      "term": "Command Gateway v2",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Founder Command and Motor Gateway API (/v2) for SG, NOOS issues, CI, commissions, Motor truth.",
+      "code_alias": [
+        "Founder Command & Motor Gateway API"
+      ]
+    },
+    {
+      "term": "MotorJobTruth",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Seven independent truth dimensions: dispatch, execution, verification, evidence, authority, promotion, outcome."
+    },
+    {
+      "term": "TruthDimension",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Single truth field with state, observed_at, source, optional reason and evidence_refs."
+    },
+    {
+      "term": "noetfield:noos.issue-manager",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Persistent NOOS Issue Manager Resident Role; owns issue lifecycle."
+    },
+    {
+      "term": "noetfield:noos.ci-reliability-owner",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "NOOS CI infrastructure and flake manager Resident Role."
+    },
+    {
+      "term": "NF-COMMAND-GATEWAY-V2-MOTOR-CONTROL-001",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Commission to implement Command Gateway v2 Motor control surface as draft PR without deploy."
+    },
+    {
+      "term": "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision id for SinaGPT founder brain/architect cockpit role."
+    },
+    {
+      "term": "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision id for Command Gateway v2 architecture under Unified Motor."
+    },
+    {
+      "term": "PROPOSED_BY_BRAIN",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Visible status: architecture proposed by Brain/SinaGPT, not yet SG-accepted."
+    },
+    {
+      "term": "Idempotency-Key",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Required header on consequential Gateway POSTs to prevent duplicate commissions/jobs."
+    },
+    {
+      "term": "subject_version_conflict",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "409 response when founder approval targets a stale subject version."
+    },
+    {
+      "term": "Higgsfield",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Third-party media generation provider; replaceable MediaGenerationAdapter only; never job truth or authority.",
+      "code_alias": [
+        "Higgsfield AI",
+        "Higgsfield CLI",
+        "Higgsfield MCP"
+      ]
+    },
+    {
+      "term": "MediaGenerationAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Replaceable Unified Motor adapter interface for image/video generation providers.",
+      "code_alias": [
+        "HiggsfieldCliMcpAdapter_v1"
+      ]
+    },
+    {
+      "term": "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "SG decision locking Higgsfield as adapter plus campaign Result Motor profile."
+    },
+    {
+      "term": "NF-MOTOR-HIGGSFIELD-CAMPAIGN-001",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Result-driven campaign Motor recipe profile using MediaGenerationAdapter."
+    },
+    {
+      "term": "Result-Driven Motor",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Unified Motor mode: execute, verify, promote, observe outcome, attribute, learn."
+    },
+    {
+      "term": "Activation Cycle",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Execution period: no new lanes/roles/providers/major schemas; only proof circuits and small SG addenda."
+    },
+    {
+      "term": "Circuit A",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Deterministic internal Motor proof: CI or completion-evidence repair without founder."
+    },
+    {
+      "term": "Circuit B",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Result-driven revenue Motor proof: one product campaign with measurable conversion."
+    },
+    {
+      "term": "PublisherAdapter",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "Separate adapter for approved publication; not part of media generation."
+    },
+    {
+      "term": "Outcome Probe",
+      "tag": "RC2_GAP_FILL",
+      "meaning": "External measurement of engagement, conversion, or qualified demand after promotion."
+    },
+    {
+      "term": "Noetfield Runway",
+      "meaning": "Sellable product surface: parallel Runways deliver finished UI results; Motor manages concurrent isolated sandboxes."
+    },
+    {
+      "term": "Video Runway",
+      "meaning": "Initial Noetfield Runway (parallel): brief/assets to playable downloadable video. May run beside Repair/Research."
+    },
+    {
+      "term": "Result UI",
+      "meaning": "User-facing surface that shows Job status and the downloadable finished deliverable."
+    },
+    {
+      "term": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+      "meaning": "SG product lock: sell finished results; parallel Video/Software Repair/Research; credits per completed Job; Gateway \u2260 Motor."
+    },
+    {
+      "term": "VIDEO_RUNWAY_PROVEN",
+      "meaning": "Terminal status when Video Runway delivers the required real playable/downloadable Result UI Jobs."
+    },
+    {
+      "term": "Software Repair Runway",
+      "meaning": "Initial Noetfield Runway (parallel): failing issue/CI to green candidate PR in an isolated sandbox."
+    },
+    {
+      "term": "Research Runway",
+      "meaning": "Initial Noetfield Runway (parallel): question to cited downloadable report."
+    },
+    {
+      "term": "FOUNDATION_VERTICAL_SLICE_BUILT",
+      "meaning": "Shared Unified Motor submit/status/result foundation state; may be bootstrapped by the active Video lane without provider-specific core assumptions."
+    },
+    {
+      "term": "GATEWAY_MODE",
+      "meaning": "Gateway runtime mode. live remains HOLD until five-check preflight PASSes."
+    },
+    {
+      "term": "runway doctor",
+      "meaning": "Stack health command for Gateway, Motor runtime, Prompt Compiler, job state, artifacts, model provider, and NOOS events."
+    },
+    {
+      "term": "Parallel Sandbox Manager",
+      "meaning": "Motor capability: one Job \u2194 one isolated sandbox; concurrent Jobs without cross-contamination; NOOS visibility; create/run/destroy with leak detection."
+    },
+    {
+      "term": "PARALLEL_SANDBOXES_PROVEN",
+      "meaning": "Terminal status when \u22652 concurrent Jobs complete in separate sandboxes with independent results and no shared mutable state."
+    },
+    {
+      "term": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1",
+      "meaning": "SG execution assignment for the first three Runways."
+    },
+    {
+      "term": "Codex Local",
+      "meaning": "Research Runway implementation worker."
+    },
+    {
+      "term": "Codex Cloud",
+      "meaning": "Bounded cloud implementation and verification worker."
+    },
+    {
+      "term": "GPT Work Verifier on GitHub",
+      "meaning": "Independent verification worker."
+    },
+    {
+      "term": "GPT Advisor",
+      "meaning": "Product and architecture advisor."
+    },
+    {
+      "term": "noetfield.runway-core.v0.1",
+      "meaning": "Versioned shared interface contract for Unified Motor and Runways."
+    },
+    {
+      "term": "FIRST_COMMISSIONING_ACCEPTED",
+      "meaning": "First real Runway Job passed commissioning."
+    },
+    {
+      "term": "REPEATABLE",
+      "meaning": "Three consecutive real Jobs passed without manual intervention."
+    },
+    {
+      "term": "NF-SG-AUTHORITY-IDENTITY-V2",
+      "meaning": "Founder containment amendment separating Motor execution identity from deterministic SG authority identity."
+    },
+    {
+      "term": "SG-AUTHORITY-IDENTITY-P0",
+      "meaning": "P0 incident for absent commissioned SG authority and stale legacy advisory identity."
+    },
+    {
+      "term": "runtime reality",
+      "meaning": "Machine-readable current deployment and commissioning truth that overrides architecture prose for live status."
+    },
+    {
+      "term": "noetfield-sg-authority",
+      "meaning": "Planned organization-owned deterministic SG authority GitHub App."
+    },
+    {
+      "term": "BLOCKED_SG_NOT_COMMISSIONED",
+      "meaning": "Containment result when a production mutation is requested before SG runtime commissioning."
+    },
+    {
+      "term": "CONTAINMENT_ENFORCED",
+      "meaning": "State where autonomous production mutation paths are mechanically held."
+    },
+    {
+      "term": "BLOCKED_STALE_IDENTITY",
+      "meaning": "State where configured authority identity is legacy, stale, or not commissioned."
+    },
+    {
+      "term": "REMOTE_CHECK_ADVISORY",
+      "meaning": "Legacy advisory receipt type that cannot authorize production mutation."
+    },
+    {
+      "term": "Core Runway",
+      "meaning": "Foundational Noetfield Runway recipe family on Unified Motor; not a separate engine."
+    },
+    {
+      "term": "Composite Runway",
+      "meaning": "Higher-value product path composed from two or more core Runway recipe families."
+    },
+    {
+      "term": "Data Runway",
+      "meaning": "Core Runway family: tabular/document data export to cleaned workbook, calculations, charts, findings, and downloadable decision report with cell lineage."
+    },
+    {
+      "term": "Document Runway",
+      "meaning": "Core Runway family: source documents/forms/policies to structured extract, completed templates, action lists, and finished document packs."
+    },
+    {
+      "term": "Web/Publish",
+      "meaning": "Core Runway family / adapter class for audit-to-fix, preview, and governed publication; PublisherAdapter may exist earlier for Circuit B."
+    },
+    {
+      "term": "recipe family",
+      "meaning": "Canonical technical grouping of Motor recipes that backs one Core Runway."
+    },
+    {
+      "term": "NF-RUNWAY-CORE-FAMILIES-COMPOSITION-V1",
+      "meaning": "SG lock: six core Runway families, composition law, Data as next family after future_runway_gate."
+    },
+    {
+      "term": "future_runway_gate",
+      "meaning": "Corrected gate: Data remains held until Software Repair and Research have real Jobs and Gallery cost-supply has qualified reuse proof."
+    },
+    {
+      "term": "execution_queued",
+      "meaning": "UI/job status meaning work is queued; not a finished Runway result until Unified Motor Workflow returns artifacts and a receipt."
+    },
+    {
+      "term": "Research-to-Deck",
+      "meaning": "Composite output mode of Research Runway plus document renderer; not a seventh core family."
+    },
+    {
+      "term": "Website Audit-to-Fix",
+      "meaning": "Composite: Research + Software Repair + Web/Publish producing audit, patch, preview, and green PR."
+    },
+    {
+      "term": "Due Diligence",
+      "meaning": "Composite: Research + Document + Data producing evidence index, risk matrix, findings, and decision memo."
+    },
+    {
+      "term": "Knowledge-to-SOP",
+      "meaning": "Composite: Document + Research producing SOPs, checklists, training guides, and quizzes."
+    },
+    {
+      "term": "Meeting-to-Execution",
+      "meaning": "Composite: Document plus tool adapters producing decisions, tasks, follow-ups, and updated records."
+    },
+    {
+      "term": "Proposal/RFP",
+      "meaning": "Composite: Research + Document producing compliance matrix, evidence gaps, response draft, and submission pack."
+    },
+    {
+      "term": "Full App Builder",
+      "meaning": "Held product class (CAT-07); not an authorized next Runway."
+    },
+    {
+      "term": "SourceB",
+      "meaning": "Commercial/product UI surface that may host Runway intake and Result UI; not the Unified Motor executor."
+    },
+    {
+      "term": "Fourth Runway",
+      "meaning": "Any Runway family beyond the parallel first three; held until future_runway_gate."
+    },
+    {
+      "term": "SG-FINALIZATION-RUNWAY-CORE-FAMILIES-V1",
+      "meaning": "Architecture Finalization packet id for core families composition lock."
+    },
+    {
+      "term": "Content Repurposing",
+      "meaning": "B-tier composite path: long media to clips, article, posts, captions, newsletter."
+    },
+    {
+      "term": "Product Catalog",
+      "meaning": "B-tier Runway candidate: product files to listings, descriptions, feed, and image pack."
+    },
+    {
+      "term": "Landing Page",
+      "meaning": "Generic website/landing generation; B-tier and held behind Data/Document."
+    },
+    {
+      "term": "Software Repair",
+      "meaning": "Alias fragment for Software Repair Runway family."
+    },
+    {
+      "term": "Gallery Cost Supply",
+      "meaning": "Operational capability that reuses qualified assets before deterministic composition or paid AI-video generation; not a product Runway."
+    },
+    {
+      "term": "AI-video",
+      "meaning": "Media output whose paid generation cost is reduced by qualified Gallery asset reuse."
     }
   ],
   "structural_allowlist": [
@@ -428,7 +1060,15 @@
     "split",
     "supabase edge",
     "tamper",
-    "update linkedin"
+    "update linkedin",
+    "VIDEO_RUNWAY_PROVEN",
+    "IMPLEMENTATION_AUTHORIZED",
+    "SG_ACCEPTED",
+    "core runway families",
+    "composition law",
+    "decision package",
+    "cell lineage",
+    "downloadable workbook"
   ],
   "alias_map": {},
   "code_alias": [

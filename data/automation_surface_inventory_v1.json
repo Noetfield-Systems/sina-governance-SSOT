@@ -1,13 +1,13 @@
 {
   "schema": "automation_surface_inventory_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-08T06:47:10Z",
+  "version": "1.4.1",
+  "saved_at": "2026-07-20T09:10:00Z",
   "authority": "SG (SSSOT)",
   "parent": "data/github_automation_registry_v1.json",
   "repos": [
     {
       "repo_id": "sina-governance-ssot",
-      "path": "~/Projects/sina-governance-ssot",
+      "path": "~/Desktop/Noetfield-Systems/sina-governance-SSOT",
       "lane": "sg_governance",
       "owner_agent": "sg_sssot_cursor",
       "workflows": [
@@ -21,9 +21,10 @@
         {
           "file": "brain-loop-autorun-v1.yml",
           "motor_id": "gh_actions_brain_loop_autorun_v1",
-          "cadence": "*/30 * * * *",
-          "task_cell": "brain_promote_ci",
-          "copilot_safe": false
+          "cadence": "founder-manual-observe-only",
+          "task_cell": "sg_containment_observation",
+          "copilot_safe": false,
+          "state": "DISABLED_MANUALLY_P0_CONTAINMENT"
         },
         {
           "file": "agent-read-staleness-weekly-v1.yml",
@@ -38,14 +39,49 @@
           "cadence": "0 */6 * * *",
           "task_cell": "sg_auth_surface_probe",
           "copilot_safe": false
+        },
+        {
+          "file": "p0pgr-shadow-cycle-v1.yml",
+          "motor_id": "gh_actions_p0pgr_shadow_cycle_v1",
+          "cadence": "founder-manual-only",
+          "task_cell": "p0pgr_shadow_compile_lint_route",
+          "copilot_safe": false,
+          "state": "FOUNDER_MANUAL_ONLY"
+        },
+        {
+          "file": "site-flow-canaries-executor-v1.yml",
+          "motor_id": "gh_actions_site_flow_canaries_executor_v1",
+          "cadence": "workflow_dispatch_only",
+          "task_cell": "site_flow_canaries_e2e_activation",
+          "copilot_safe": false,
+          "state": "BOUNDED_STAGING_EXECUTOR"
+        },
+        {
+          "file": "motor-learning-organ-v1.yml",
+          "motor_id": "gh_actions_motor_learning_organ_v1",
+          "cadence": "0 6 * * *; 0 7 * * 1",
+          "task_cell": "motor_learning_organ",
+          "copilot_safe": false,
+          "state": "STUB_OBSERVE_HEARTBEAT_ONLY",
+          "loop_id": "motor_learning_organ_v1",
+          "deadman": "sourcea-deadman-v1"
+        },
+        {
+          "file": "motor-learning-organ-w1-validate.yml",
+          "motor_id": "gh_actions_motor_learning_organ_w1_validate_v1",
+          "cadence": "pull_request_and_push",
+          "task_cell": "motor_learning_organ",
+          "copilot_safe": false,
+          "state": "CI_VALIDATE_ONLY_NO_PROMOTE"
         }
       ],
       "mac_motors": [
         {
           "id": "mac_launchd_brain_loop_autorun_v1",
           "plist": "scripts/com.sina.brain-loop-autorun-v1.plist",
-          "cadence": "1800s",
-          "task_cell": "brain_promote_mac"
+          "cadence": "disabled",
+          "task_cell": "sg_containment_observation",
+          "state": "BOOTED_OUT_P0_CONTAINMENT"
         }
       ]
     },

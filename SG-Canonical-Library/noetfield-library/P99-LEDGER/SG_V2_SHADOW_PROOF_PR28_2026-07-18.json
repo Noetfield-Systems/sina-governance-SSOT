@@ -1,0 +1,38 @@
+{
+  "schema": "noetfield.sg-v2-shadow-proof.v1",
+  "receipt_id": "SG-V2-SHADOW-PROOF-PR28",
+  "repository": "Noetfield-Systems/sina-governance-SSOT",
+  "pull_request": 28,
+  "base_sha": "f237902dc68d49cc2216271a4eacdb2f309d116d",
+  "implementation_commit": "99f792b45591015082d3ef7cbc4f9d9cca585442",
+  "recorded_at": "2026-07-18T08:52:26Z",
+  "verdict": "PASS",
+  "sg_v2_shadow_proofs": "PASS",
+  "typescript_negative_tests": 19,
+  "repository_contract_and_containment_tests": 16,
+  "total_tests": 35,
+  "dry_run_build": "PASS",
+  "dependency_audit": "0_VULNERABILITIES",
+  "policy_hash": "12af65eb84d24db934b1ec3f1866306bc78b38abc327e0d005f3827fd8ea2784",
+  "schema_hash": "c8c4cbf4d62826b4d16b0584d4b9cbdd11f6af7d19d5b589e602dc5ff6c73c60",
+  "evaluator_hash": "acd411428fe809cd997f59ab38839c99694d04a39112e68c42495dd541767f1d",
+  "worker_source_hash": "aecdf922a6e48176b3a13de4d4516e8ec43da60bc9a189bdfbe56668d7d9c996",
+  "sg_candidate_app": "NOT_CREATED_OR_PROVEN",
+  "sg_candidate_identity": "NOT_PROVEN",
+  "sg_runtime": "NOT_COMMISSIONED",
+  "sg_enforcement": "NOT_ENABLED",
+  "autonomous_production_mutations": "HOLD",
+  "worker_deployment": "NOT_DEPLOYED",
+  "webhook": "DISABLED",
+  "check_run_publish": "DISABLED",
+  "legacy_app": "PRESERVED_NOT_AUTHORITY",
+  "blocking_dependencies": [
+    "INTERACTIVE_GITHUB_SIGN_IN"
+  ],
+  "forbidden_claims": [
+    "ACTIVE",
+    "AUTHORITY",
+    "COMMISSIONED"
+  ],
+  "approved_nonproduction_canary": "Noetfield-Systems/noetfield-sandbox-private"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "motor_learning_organ_receipt_v1",
+  "loop_id": "motor_learning_organ_v1",
+  "mode": "heartbeat",
+  "saved_at": "2026-07-20T04:20:38Z",
+  "last_fired_at": "2026-07-20T04:20:38Z",
+  "trigger_host": "cloud",
+  "deadman": "sourcea-deadman-v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "runtime_state": "STUB_W0_OBSERVE_ONLY",
+  "actions": {
+    "pattern_mine": "STUB_NOOP",
+    "learning_record_emit": "STUB_NOOP",
+    "policy_snapshot_promote": "FORBIDDEN_THIS_TICK",
+    "architecture_mutate": "FORBIDDEN"
+  },
+  "pass_checks_ref": "data/nf_motor_learning_organ_pass_checks_v1.json",
+  "checks_status": {
+    "MLO-01_shadow_prior_load": "DEFINED_PENDING_W2",
+    "MLO-02_kaizen_ecqr_delta": "DEFINED_PENDING_W1_W3",
+    "MLO-03_ratified_live_prior": "DEFINED_PENDING_RATIFY",
+    "MLO-04_deadman_heartbeat": "DEFINED_PENDING_W4"
+  },
+  "verdict": "PASS_HEARTBEAT_STUB"
+}

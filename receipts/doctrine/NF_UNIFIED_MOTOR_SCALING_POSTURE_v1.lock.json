@@ -1,0 +1,20 @@
+{
+  "receipt_type": "doctrine_lock_receipt_v1",
+  "decision_id": "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+  "packet_id": "SG-FINALIZATION-NF-UNIFIED-MOTOR-SCALING-V1",
+  "status": "SG_ACCEPTED",
+  "amendment": "scaling_posture_v1.1",
+  "locked_at": "2026-07-18T12:00:00Z",
+  "artifacts": {
+    "architecture_md_sha256": "1f42919d55853d81f9ae276e0f82a393c137c85117d052ebdcd0e034bb045dd5",
+    "waves_md_sha256": "1976eee383159c913968c0fc91381af441b97d0e8dfe21a161584b4a3a1ce0f1",
+    "machine_json_sha256": "40e137ebc5106dfeafa76ea6e5664a19e34a24961547e5e33eb957ca26cc633e"
+  },
+  "sg_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e",
+  "hold": {
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  },
+  "final_status": "SCALING_POSTURE_LOCKED_PENDING_FOUNDATION_PR"
+}

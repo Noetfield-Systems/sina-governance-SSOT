@@ -1,0 +1,90 @@
+{
+  "schema": "nf_motor_learning_receipt_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "version": "1.1.0",
+  "saved_at": "2026-07-20T09:10:00Z",
+  "purpose": "Auditable institutional memory for every ratified (or rejected) prior. Required on every GATED promote/reject.",
+  "mutation_class": "GATED",
+  "store_path": "receipts/learning/learning_receipt-*.json",
+  "required": [
+    "affected_loops",
+    "algorithm_versions",
+    "applicable_runways",
+    "candidate_id",
+    "confidence_after",
+    "confidence_before",
+    "decision",
+    "decision_timestamp",
+    "evidence_links",
+    "integrity_hash",
+    "learning_receipt_id",
+    "origin_event",
+    "prior_id",
+    "ratified_at",
+    "rationale",
+    "receipt_id",
+    "repositories",
+    "reviewer",
+    "schema_versions",
+    "snapshot_id",
+    "why_accepted_or_rejected"
+  ],
+  "optional": [
+    "applicable_customers",
+    "decision_outcome",
+    "ecqr_after",
+    "ecqr_before",
+    "expiry",
+    "rollback_target",
+    "shadow_evidence_path",
+    "similarity_score",
+    "stage_market_id",
+    "superseded_by",
+    "supersedes"
+  ],
+  "decision_enum": [
+    "accepted",
+    "rejected",
+    "rolled_back"
+  ],
+  "field_notes": {
+    "prior_id": "Stable ID of the live or rejected prior (policy_snapshot.snapshot_id or derived prior key)",
+    "origin_event": "Incident / job / pattern source that triggered learning",
+    "evidence_links": "Array of receipt paths, job IDs, pattern export paths, shadow run IDs",
+    "confidence_before": "0..1 prior confidence at propose time",
+    "confidence_after": "0..1 confidence after shadow/evidence",
+    "why_accepted_or_rejected": "Human or gate rationale; never empty on decision",
+    "reviewer": "founder | gated_policy_id | auto_apply_allowlist",
+    "affected_loops": "loop_id list impacted by this prior",
+    "applicable_runways": "Runway family or recipe IDs this prior may apply to",
+    "applicable_customers": "Optional customer/tenant scope; omit if global",
+    "expiry": "ISO8601 or null; null means no automatic expiry",
+    "supersedes": "prior_id this replaces",
+    "superseded_by": "prior_id that replaced this one"
+  },
+  "example": {
+    "schema": "nf_motor_learning_receipt_v1",
+    "learning_receipt_id": "lr-20260720-example",
+    "prior_id": "prior-software_repair.edit-reliability-v1",
+    "origin_event": "job:example-not-live",
+    "evidence_links": [
+      "receipts/learning/motor-learning-organ-w0-lock-20260720.json"
+    ],
+    "confidence_before": 0.0,
+    "confidence_after": 0.0,
+    "why_accepted_or_rejected": "SCHEMA_EXAMPLE_ONLY \u2014 not a real ratification",
+    "reviewer": "sg_scaffold",
+    "decision": "rejected",
+    "affected_loops": [
+      "motor_learning_organ_v1"
+    ],
+    "applicable_runways": [],
+    "applicable_customers": null,
+    "expiry": null,
+    "supersedes": null,
+    "superseded_by": null,
+    "snapshot_id": null,
+    "ratified_at": "2026-07-20T04:25:00Z",
+    "note": "Example only; real receipts require live shadow evidence"
+  }
+}

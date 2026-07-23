@@ -1,0 +1,130 @@
+{
+  "schema": "nf_runway_execution_assignment_v1",
+  "decision_id": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-18T03:58:51Z",
+  "execution_model": "parallel",
+  "institutional_owners": {
+    "build_execution": "noetfield:sandbox.builder-owner",
+    "independent_verification": "noetfield:sandbox.verifier-owner"
+  },
+  "worker_taxonomy": {
+    "claude_code": {
+      "runtime": "local",
+      "role": "foundation_and_software_repair_implementation"
+    },
+    "codex_local": {
+      "runtime": "local",
+      "role": "research_repository_implementation"
+    },
+    "cursor": {
+      "runtime": "local",
+      "role": "video_repository_implementation"
+    },
+    "gpt_work_verifier_github": {
+      "runtime": "github",
+      "role": "independent_verification",
+      "research_first_commissioning": true
+    },
+    "codex_cloud": {
+      "runtime": "cloud",
+      "role": "bounded_cloud_build_review_or_commissioning",
+      "research_implementation": false
+    },
+    "gpt_advisor": {
+      "runtime": "advisory",
+      "role": "product_architecture_acceptance_advice",
+      "implementation": false,
+      "verification": false,
+      "promotion": false
+    }
+  },
+  "assignments": {
+    "foundation": {
+      "owner": "noetfield:sandbox.builder-owner",
+      "worker": "claude_code"
+    },
+    "software_repair": {
+      "owner": "noetfield:sandbox.builder-owner",
+      "worker": "claude_code",
+      "first_verifier": "codex_cloud"
+    },
+    "research": {
+      "owner": "noetfield:sandbox.builder-owner",
+      "product_input": [
+        "founder",
+        "gpt_advisor"
+      ],
+      "worker": "codex_local",
+      "first_verifier": "gpt_work_verifier_github"
+    },
+    "video": {
+      "owner": "noetfield:sandbox.builder-owner",
+      "worker": "cursor",
+      "first_verifier": "codex_cloud"
+    }
+  },
+  "shared_contract": {
+    "id": "noetfield.runway-core.v0.1",
+    "publisher_worker": "claude_code",
+    "interfaces": [
+      "RunwayDefinition",
+      "MotorJob",
+      "CompiledPlan",
+      "PromptCompiler",
+      "ModelRouter",
+      "ToolAdapter",
+      "Artifact",
+      "RunwayResult",
+      "JobEvent",
+      "CostRecord",
+      "ExecutionState"
+    ],
+    "conforming_mocks_allowed_before_publish": true
+  },
+  "sandbox_law": {
+    "one_job_one_sandbox": true,
+    "parallel_first_three": true,
+    "no_cross_job_mutation": true
+  },
+  "verification_levels": {
+    "A": "builder_checks",
+    "B": "deterministic_ci",
+    "C": "first_commissioning_or_high_risk_exception_under_verifier_owner"
+  },
+  "release_ladder": [
+    "SPECIFIED",
+    "MOCK_EXECUTABLE",
+    "LIVE_PROVIDER_CONNECTED",
+    "REAL_JOB_COMPLETED",
+    "FIRST_COMMISSIONING_ACCEPTED",
+    "REPEATABLE"
+  ],
+  "repeatable_gate": {
+    "consecutive_real_jobs": 3,
+    "manual_github_intervention": false,
+    "manual_database_intervention": false
+  },
+  "future_runway_gate": "all_first_three_have_one_real_job",
+  "future_gate_is_not_serialization": true,
+  "next_evidence": [
+    "one_green_pr",
+    "one_cited_report",
+    "one_playable_video"
+  ],
+  "holds": [
+    "noos_pr_82_autonomous_routing",
+    "gateway_mode_live",
+    "production_promotion",
+    "fourth_runway_before_gate"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md",
+  "commissions": [
+    "docs/dispatch/nf-runway-foundation-repair-claude-code-v1.md",
+    "docs/dispatch/nf-runway-research-codex-local-v1.md",
+    "docs/dispatch/nf-runway-video-cursor-v1.md",
+    "docs/dispatch/nf-runway-first-commissioning-verifiers-v1.md"
+  ]
+}

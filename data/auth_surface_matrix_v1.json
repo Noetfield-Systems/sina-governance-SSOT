@@ -1,19 +1,33 @@
 {
   "schema": "auth_surface_matrix_v1",
-  "version": "1.1.0",
-  "saved_at": "2026-07-08T07:07:43Z",
+  "version": "1.1.2",
+  "saved_at": "2026-07-18T11:21:00Z",
   "authority": "SG (SSSOT)",
   "parent_proposal": "docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md",
   "identity_plane": {
-    "auth_project": "portfolio_spine",
-    "supabase_ref": "ldfruywifqnfpwsfgmdl",
-    "factory_project": "noetfield",
-    "factory_ref": "tkgpapowwplupyekpivy",
-    "ventures": [
-      "sourcea",
-      "noetfield",
-      "trustfield"
-    ],
+    "strategy": "venture_scoped_supabase_projects",
+    "projects": {
+      "portfolio_spine": {
+        "supabase_ref": "ldfruywifqnfpwsfgmdl",
+        "ventures": [
+          "sourcea"
+        ],
+        "profile_table": "profiles",
+        "url_env": "SUPABASE_URL",
+        "service_key_env": "SUPABASE_SERVICE_ROLE_KEY"
+      },
+      "noetfield": {
+        "supabase_ref": "tkgpapowwplupyekpivy",
+        "ventures": [
+          "noetfield",
+          "trustfield"
+        ],
+        "profile_table": "trustfield_profiles",
+        "url_env": "NOETFIELD_SUPABASE_URL",
+        "service_key_env": "NOETFIELD_SUPABASE_SERVICE_ROLE_KEY"
+      }
+    },
+    "cross_project_rule": "async events only; no cross-project joins",
     "cross_domain_strategy": "per_domain_sessions",
     "auth_methods_p0": [
       "magic_link",
@@ -109,6 +123,16 @@
           "must_not_redirect_to_auth": true
         },
         {
+          "id": "tf_partner_access_landing",
+          "url": "https://www.trustfield.ca/partner-access",
+          "venture": "trustfield",
+          "expect_http": [
+            200
+          ],
+          "must_not_redirect_to_auth": true,
+          "note": "Public recruitment landing; private OS lives at /partner-access/workspace"
+        },
+        {
           "id": "tf_showcase",
           "url": "https://www.trustfield.ca/showcase",
           "venture": "trustfield",
@@ -148,8 +172,9 @@
             200,
             302
           ],
-          "implementation": "partial",
-          "owner_repo": "TrustField-Technologies"
+          "implementation": "live_optional_auth_handoff",
+          "owner_repo": "TrustField-Technologies",
+          "note": "Public program intake hands completed users to /auth/sign-up?next=/customer-portal"
         },
         {
           "id": "tf_register_partner",
@@ -179,17 +204,17 @@
       "law": "Must be signed in \u2014 probe expects 401 or redirect until venture ships gate",
       "surfaces": [
         {
-          "id": "tf_partner_access",
-          "url": "https://www.trustfield.ca/partner-access",
+          "id": "tf_partner_access_workspace",
+          "url": "https://www.trustfield.ca/partner-access/workspace",
           "venture": "trustfield",
           "expect_when_gated": [
             401,
             302,
             307
           ],
-          "implementation": "planned",
+          "implementation": "live",
           "owner_repo": "TrustField-Technologies",
-          "warn_if_public_200": true
+          "client_redirect_allowed": true
         },
         {
           "id": "tf_customer_portal",
@@ -200,13 +225,9 @@
             302,
             307
           ],
-          "implementation": "planned",
+          "implementation": "live",
           "owner_repo": "TrustField-Technologies",
-          "warn_if_public_200": true,
-          "expect_when_planned": [
-            404
-          ],
-          "note": "Route not shipped; 404 acceptable until Phase 1"
+          "client_redirect_allowed": true
         }
       ]
     },
@@ -242,7 +263,8 @@
         "sourcea.app sign-in/up",
         "/auth/callback",
         "buyer sandbox"
-      ]
+      ],
+      "implementation_status": "pending"
     },
     "TrustField-Technologies": {
       "agent": "trustfield_worker",
@@ -252,7 +274,12 @@
         "Partner Access OS",
         "customer portal",
         "api.trustfield.ca JWT"
-      ]
+      ],
+      "implementation_status": "live_verified",
+      "completed_at": "2026-07-18T11:20:28Z",
+      "proof_receipt": "receipts/cross-domain-auth-trustfield-phase1-live-2026-07-18.json",
+      "deployed_sha": "2e862346668dfeea2806055de62f8c6c5cc24155",
+      "product_pr": "https://github.com/Noetfield-Systems/TrustField-Technologies/pull/60"
     },
     "Noetfield": {
       "agent": "noetfield_website",
@@ -291,11 +318,6 @@
   },
   "founder_decisions_pending": [
     {
-      "id": 1,
-      "question": "Auth project",
-      "recommended": "portfolio_spine only"
-    },
-    {
       "id": 2,
       "question": "Cross-brand login",
       "recommended": "per-domain sessions"
@@ -306,17 +328,28 @@
       "recommended": "magic_link + email_password"
     },
     {
-      "id": 4,
-      "question": "First ship target",
-      "recommended": "TrustField /register + portal"
-    },
-    {
       "id": 5,
       "question": "Enterprise SSO",
       "recommended": "defer P2"
     }
   ],
-  "founder_decisions_ratified": [],
+  "founder_decisions_ratified": [
+    {
+      "id": 1,
+      "question": "Auth project",
+      "decision": "venture-scoped projects: SourceA\u2192portfolio_spine; Noetfield/TrustField\u2192noetfield",
+      "ratified_by": "founder",
+      "ratified_at": "2026-07-18T11:15:00Z",
+      "supersedes": "portfolio_spine only (ratified earlier 2026-07-18 before TrustField locked-law preflight)"
+    },
+    {
+      "id": 4,
+      "question": "First ship target",
+      "decision": "TrustField /register + portal",
+      "ratified_by": "founder",
+      "ratified_at": "2026-07-18T10:45:00Z"
+    }
+  ],
   "auth_routes": {
     "law": "Cache-Control private no-store on session routes",
     "routes": [

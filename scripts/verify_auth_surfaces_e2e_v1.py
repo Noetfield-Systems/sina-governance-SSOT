@@ -8,6 +8,7 @@ Does not print secrets. Exit 0 when tier-0 public surfaces pass and no hard fail
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import subprocess
@@ -25,6 +26,25 @@ RECEIPT_DIR = ROOT / "receipts"
 SUPABASE_VERIFY = ROOT / "scripts/verify_supabase_live_profiles_v1.py"
 
 AUTH_REDIRECT_PATTERNS = re.compile(r"/(sign-in|sign-up|login|auth)(/|$)", re.I)
+NEXT_CLIENT_REDIRECT = re.compile(
+    r'id=["\']__next-page-redirect["\'][^>]*content=["\'][^"\']*url=([^"\']+)',
+    re.I,
+)
+
+
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Expose redirects to policy checks instead of following them implicitly."""
+
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: Any,
+        code: int,
+        msg: str,
+        headers: Any,
+        newurl: str,
+    ) -> None:
+        return None
 
 
 def utc_now() -> str:
@@ -40,17 +60,29 @@ def http_probe(
     *,
     timeout: int = 25,
     follow_redirect: bool = False,
+    headers: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    req = urllib.request.Request(url, method="GET", headers={"User-Agent": "sg-auth-surface-probe-v1.1"})
+    request_headers = {"User-Agent": "sg-auth-surface-probe-v1.1"}
+    request_headers.update(headers or {})
+    req = urllib.request.Request(url, method="GET", headers=request_headers)
+    opener = (
+        urllib.request.build_opener()
+        if follow_redirect
+        else urllib.request.build_opener(_NoRedirectHandler())
+    )
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            headers = {k.lower(): v for k, v in resp.headers.items()}
+        with opener.open(req, timeout=timeout) as resp:
+            response_headers = {k.lower(): v for k, v in resp.headers.items()}
+            body_prefix = resp.read(131072).decode("utf-8", errors="ignore")
+            client_match = NEXT_CLIENT_REDIRECT.search(body_prefix)
+            client_redirect = html.unescape(client_match.group(1)) if client_match else None
             return {
                 "ok": True,
                 "http": resp.status,
                 "url": url,
-                "location": headers.get("location"),
-                "cache_control": headers.get("cache-control"),
+                "location": response_headers.get("location"),
+                "client_redirect": client_redirect,
+                "cache_control": response_headers.get("cache-control"),
             }
     except urllib.error.HTTPError as exc:
         loc = exc.headers.get("Location") if exc.headers else None
@@ -77,6 +109,9 @@ def is_auth_redirect(location: str | None) -> bool:
 def check_tier0_anti_login_wall(spec: dict[str, Any], probe: dict[str, Any]) -> str | None:
     if not spec.get("must_not_redirect_to_auth"):
         return None
+    client_redirect = probe.get("client_redirect")
+    if is_auth_redirect(client_redirect):
+        return f"login-wall client redirect to {client_redirect}"
     http = probe.get("http", 0)
     if http in (301, 302, 307, 308):
         loc = probe.get("location")
@@ -90,7 +125,11 @@ def check_tier0_anti_login_wall(spec: dict[str, Any], probe: dict[str, Any]) -> 
 def follow_once(base_url: str, location: str) -> bool:
     target = urljoin(base_url, location)
     second = http_probe(target, follow_redirect=False)
-    return is_auth_redirect(second.get("location")) or is_auth_redirect(target)
+    return (
+        is_auth_redirect(second.get("location"))
+        or is_auth_redirect(second.get("client_redirect"))
+        or is_auth_redirect(target)
+    )
 
 
 def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
@@ -112,6 +151,22 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
             row["status"] = "FAIL"
             row["reason"] = wall
             return row
+        # Canonical host/path redirects are allowed only after one explicit hop.
+        # The hop remains visible to the anti-login-wall check above.
+        if http in (301, 302, 307, 308) and probe.get("location"):
+            target = urljoin(url, probe["location"])
+            probe = http_probe(target, follow_redirect=False)
+            http = probe.get("http", 0)
+            row["http"] = http
+            row["redirected_once_to"] = target
+            if (
+                is_auth_redirect(target)
+                or is_auth_redirect(probe.get("location"))
+                or is_auth_redirect(probe.get("client_redirect"))
+            ):
+                row["status"] = "FAIL"
+                row["reason"] = f"redirect chain leads to auth path: {target}"
+                return row
         allowed = spec.get("expect_http", [200])
         row["status"] = "PASS" if http in allowed else "FAIL"
         if row["status"] == "FAIL":
@@ -119,6 +174,18 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
         return row
 
     if tier == "tier_1_optional":
+        # Follow one canonical non-auth redirect; an auth redirect remains an
+        # acceptable optional-sign-up outcome and is evaluated as-is.
+        if (
+            http in (301, 302, 307, 308)
+            and probe.get("location")
+            and not is_auth_redirect(probe.get("location"))
+        ):
+            target = urljoin(url, probe["location"])
+            second = http_probe(target, follow_redirect=False)
+            http = second.get("http", 0)
+            row["http"] = http
+            row["redirected_once_to"] = target
         allowed = spec.get("expect_http", [200, 302])
         row["status"] = "PASS" if http in allowed else "WARN"
         if row["status"] != "PASS":
@@ -129,6 +196,26 @@ def check_surface(spec: dict[str, Any], *, tier: str) -> dict[str, Any]:
         impl = spec.get("implementation", "planned")
         gated_codes = set(spec.get("expect_when_gated", [401, 302, 307]))
         planned_codes = set(spec.get("expect_when_planned", []))
+
+        auth_redirect = probe.get("location") or probe.get("client_redirect")
+        if is_auth_redirect(auth_redirect):
+            row["status"] = "PASS"
+            row["auth_redirect"] = auth_redirect
+            return row
+
+        # Locale/canonical redirects are not auth proof. Follow one hop and
+        # require an actual auth redirect, 401, or other declared gated code.
+        if http in (301, 302, 307, 308) and probe.get("location"):
+            target = urljoin(url, probe["location"])
+            second = http_probe(target, follow_redirect=False)
+            http = second.get("http", 0)
+            row["http"] = http
+            row["redirected_once_to"] = target
+            auth_redirect = second.get("location") or second.get("client_redirect")
+            if is_auth_redirect(auth_redirect):
+                row["status"] = "PASS"
+                row["auth_redirect"] = auth_redirect
+                return row
 
         if impl == "planned" and http in planned_codes:
             row["status"] = "WARN"
@@ -180,42 +267,86 @@ def _load_portfolio_spine_url() -> str | None:
     return None
 
 
-def probe_auth_health(base: str) -> dict[str, Any]:
+def _load_supabase_probe_key() -> str | None:
+    import os
+
+    key = (
+        os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+        or os.environ.get("SUPABASE_SERVICE_KEY")
+        or os.environ.get("SUPABASE_ANON_KEY")
+    )
+    if key:
+        return key.strip()
+    env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
+    if env_path.is_file():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if line.startswith(("SUPABASE_SERVICE_ROLE_KEY=", "SUPABASE_SERVICE_KEY=", "SUPABASE_ANON_KEY=")):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
+
+
+def _load_noetfield_url() -> str | None:
+    import os
+
+    value = os.environ.get("NOETFIELD_SUPABASE_URL", "").strip()
+    if value:
+        return value.rstrip("/")
+    env_path = Path.home() / ".sourcea-secrets/noetfield.env"
+    if env_path.is_file():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if line.strip().startswith("SUPABASE_URL="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'").rstrip("/")
+    return None
+
+
+def _load_noetfield_probe_key() -> str | None:
+    import os
+
+    key = os.environ.get("NOETFIELD_SUPABASE_SERVICE_ROLE_KEY", "").strip()
+    if key:
+        return key
+    env_path = Path.home() / ".sourcea-secrets/noetfield.env"
+    if env_path.is_file():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if line.strip().startswith(("SUPABASE_SERVICE_ROLE_KEY=", "SUPABASE_ANON_KEY=")):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
+def probe_auth_health(base: str, *, key: str | None = None) -> dict[str, Any]:
     url = f"{base}/auth/v1/health"
-    probe = http_probe(url, timeout=15)
+    key = key or _load_supabase_probe_key()
+    headers = {"apikey": key, "Authorization": f"Bearer {key}"} if key else None
+    probe = http_probe(url, timeout=15, headers=headers)
     status = "PASS" if probe.get("http") == 200 else "WARN"
     return {"status": status, "url": url, "http": probe.get("http"), "error": probe.get("error")}
 
 
-def probe_profiles_table(base: str) -> dict[str, Any]:
-    import os
-
-    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_SERVICE_KEY")
-    if not key:
-        env_path = Path.home() / ".sourcea-secrets/portfolio-spine.env"
-        if env_path.is_file():
-            for line in env_path.read_text(encoding="utf-8").splitlines():
-                if line.startswith("SUPABASE_SERVICE_ROLE_KEY=") or line.startswith("SUPABASE_SERVICE_KEY="):
-                    key = line.split("=", 1)[1].strip().strip('"').strip("'")
-                    break
+def probe_profiles_table(
+    base: str,
+    *,
+    key: str | None = None,
+    table: str = "profiles",
+) -> dict[str, Any]:
+    key = key or _load_supabase_probe_key()
     if not key:
         return {"status": "WARN", "reason": "credentials_not_configured_for_profiles_probe"}
 
     headers = {"apikey": key, "Authorization": f"Bearer {key}"}
     req = urllib.request.Request(
-        f"{base}/rest/v1/profiles?select=id&limit=1",
+        f"{base}/rest/v1/{table}?select=id&limit=1",
         headers=headers,
     )
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
-            return {"status": "PASS", "http": resp.status, "table": "profiles"}
+            return {"status": "PASS", "http": resp.status, "table": table}
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")[:200]
         if exc.code == 404 or "does not exist" in body.lower() or "relation" in body.lower():
-            return {"status": "WARN", "http": exc.code, "reason": "profiles table not migrated yet"}
+            return {"status": "WARN", "http": exc.code, "reason": f"{table} table not migrated yet", "table": table}
         if exc.code >= 500:
-            return {"status": "FAIL", "http": exc.code, "reason": "profiles probe server error"}
-        return {"status": "WARN", "http": exc.code, "reason": "profiles probe non-200"}
+            return {"status": "FAIL", "http": exc.code, "reason": f"{table} probe server error", "table": table}
+        return {"status": "WARN", "http": exc.code, "reason": f"{table} probe non-200", "table": table}
     except urllib.error.URLError as exc:
         return {"status": "WARN", "reason": str(exc.reason)}
 
@@ -250,6 +381,17 @@ def run_supabase_subprobe() -> dict[str, Any]:
         out["auth_health"] = {"status": "WARN", "reason": "portfolio_spine URL not configured"}
         out["profiles_table"] = {"status": "SKIP", "reason": "no base URL"}
 
+    noetfield_base = _load_noetfield_url()
+    noetfield_key = _load_noetfield_probe_key()
+    if noetfield_base:
+        out["noetfield_auth_health"] = probe_auth_health(noetfield_base, key=noetfield_key)
+        out["trustfield_profiles_table"] = probe_profiles_table(
+            noetfield_base, key=noetfield_key, table="trustfield_profiles"
+        )
+    else:
+        out["noetfield_auth_health"] = {"status": "WARN", "reason": "noetfield URL not configured"}
+        out["trustfield_profiles_table"] = {"status": "SKIP", "reason": "no base URL"}
+
     statuses = [v.get("status") for v in out.values() if isinstance(v, dict)]
     if "FAIL" in statuses:
         out["status"] = "FAIL"
@@ -279,7 +421,7 @@ def lint_redirect_allow_list(matrix: dict[str, Any]) -> dict[str, Any]:
         if host not in venture_domains and not host.startswith("localhost"):
             mismatched.append(u)
             continue
-        if not parsed.path.endswith("/auth/callback") and not host.startswith("localhost"):
+        if parsed.path.rstrip("/") != "/auth/callback":
             mismatched.append(u)
     status = "PASS"
     if bad or mismatched:
@@ -301,14 +443,27 @@ def build_summaries(results: list[dict[str, Any]], matrix: dict[str, Any]) -> tu
         venture_summary[v] = venture_summary.get(v, 0) + (1 if row["status"] in ("PASS", "WARN") else 0)
 
     next_actions: list[str] = []
-    for _repo, spec in matrix.get("repo_ownership", {}).items():
-        phase = spec.get("phase")
-        if phase == 1:
-            next_actions.append("TrustField-Technologies: execute docs/dispatch/auth-phase-1-trustfield.md")
-            break
+    dispatches = {
+        "TrustField-Technologies": "docs/dispatch/auth-phase-1-trustfield.md",
+        "SourceA": "docs/dispatch/auth-phase-2-sourcea.md",
+        "noetfeld-os": "docs/dispatch/auth-phase-4-noos.md",
+    }
+    ownership = matrix.get("repo_ownership", {})
+    ordered = sorted(ownership.items(), key=lambda item: item[1].get("phase", 999))
+    for repo, spec in ordered:
+        if repo not in dispatches:
+            continue
+        if spec.get("implementation_status") in ("live_verified", "complete"):
+            continue
+        next_actions.append(f"{repo}: execute {dispatches[repo]}")
+        break
     pending = matrix.get("founder_decisions_pending", [])
-    if pending:
-        next_actions.append("Founder: ratify auth decisions #1 and #4 in matrix founder_decisions_ratified")
+    blocking = sorted(d.get("id") for d in pending if d.get("id") in (1, 4))
+    if blocking:
+        next_actions.append(
+            "Founder: ratify blocking auth decision(s) "
+            + ", ".join(f"#{decision_id}" for decision_id in blocking)
+        )
     return tier_summary, venture_summary, next_actions
 
 

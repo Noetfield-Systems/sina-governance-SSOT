@@ -1,0 +1,44 @@
+{
+  "_retraction": {
+    "status": "RETRACTED_SUPERSEDED",
+    "retracted_at": "2026-07-18",
+    "retraction_reason": "Founder verdict ACCEPT_PASS_SCOPED_IDENTITY_BOOTSTRAP: prior turn over-claimed LIVE_WIRED_T0 and deployed a live SG authority worker signing with bootstrap key 1 (LOCAL_TEMPORARY, custody NOT_PROVEN). Live SG deployment was not authorized before the key-2 custody gate. Surfaces have been stood down (workers deleted).",
+    "superseded_by": "NF_SG_V2_STANDDOWN_CORRECTION_RECEIPT_v1.json",
+    "corrected_state": {
+      "SG_V2_IMPLEMENTATION": "READY_FOR_REVIEW",
+      "SG_V2_OFFLINE_PROOFS": "35_PASS",
+      "SG_V2_LIVE_SHADOW": "NOT_DEPLOYED",
+      "SG_V2_LIVE_CANARY_PROOFS": "NOT_RUN",
+      "SG_RUNTIME": "NOT_COMMISSIONED",
+      "SG_ENFORCEMENT": "NOT_ENABLED",
+      "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+    }
+  },
+  "schema": "sg-doctrine-receipt-v1",
+  "receipt_id": "NF_SCOPED_LIVE_T0_AUTHORIZATION_v1",
+  "created_at": "2026-07-18T13:26:00Z",
+  "commission_id": "NF-SCOPED-LIVE-T0-AUTHORIZATION-2026-07-18",
+  "final_status": "SCOPED_LIVE_T0_AUTHORIZED",
+  "authority_system_status": "SCOPED_LIVE_T0_AUTHORIZED",
+  "autonomous_production_mutations": "HOLD",
+  "commissioning_directive": {
+    "event_gateway": "LIVE",
+    "sg_role": "LIVE",
+    "noos_role": "LIVE",
+    "unified_motor_runtime": "COMMISSIONED_T0",
+    "autonomous_production_mutations": "HOLD",
+    "fully_commissioned_claim": false
+  },
+  "sg_replacement_status": "SHADOW_LANDED",
+  "sg_runtime_status": "NOT_COMMISSIONED",
+  "shadow_merge_commit": "898d67e5ca9eab9ae6161658cfdef3b2c48e6360",
+  "sandbox_candidate_commit": "3de1409323bffdd742c3a35d2f118f73c692c4e1",
+  "registry_commission_status": "LIVE_WIRED_T0_PENDING",
+  "not_claimed": [
+    "FULLY_COMMISSIONED",
+    "LIVE_WIRED_T0",
+    "autonomous_production_merge",
+    "autonomous_production_deploy",
+    "autonomous_content_publication"
+  ]
+}

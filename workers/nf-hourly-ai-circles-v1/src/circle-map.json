@@ -1,0 +1,116 @@
+{
+  "schema": "nf.hourly-ai-circles.v1",
+  "version": "2.0.0",
+  "status": "LIVE_PRODUCTION_REPOSITORY_JOBS_HOLD",
+  "authority_mode": "PRODUCTION_EXECUTION_WITH_PROMOTION_HOLD",
+  "trigger_host": "cloud",
+  "live_urls": {
+    "builder_health": "https://nf-hourly-builder-circle-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "verifier_health": "https://nf-hourly-independent-verifier-circle-v1.kazemnezhadsina144.workers.dev/health"
+  },
+  "production_job_contract": {
+    "kind": "repository_patch",
+    "sandbox": "GitHubActionsSandbox",
+    "required_outputs": [
+      "real_branch",
+      "real_commit",
+      "draft_pr",
+      "ci",
+      "independent_check_run",
+      "durable_receipt"
+    ],
+    "denied_outputs": [
+      "demo",
+      "fixture",
+      "placeholder",
+      "sample_job",
+      "issue_only",
+      "planning_only",
+      "synthetic_runway_dispatch"
+    ]
+  },
+  "groups": {
+    "builder": {
+      "worker": "nf-hourly-builder-circle-v1",
+      "runtime": "cloudflare_workflows",
+      "cron": "0 * * * *",
+      "roles": [
+        "scout",
+        "researcher",
+        "critic",
+        "frugal_divergence",
+        "planner",
+        "implementer"
+      ],
+      "default_model_runtime": [
+        "@cf/meta/llama-3.2-3b-instruct",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      ],
+      "commercial_model_policy": "requires_explicit_escalation_receipt",
+      "maximum_open_candidates": 2,
+      "maximum_files_per_job": 3,
+      "maximum_external_action_per_tick": 1,
+      "allowed_outputs": ["draft_pr", "noop"],
+      "forbidden_outputs": [
+        "issue",
+        "repository_dispatch",
+        "workflow_dispatch",
+        "approve",
+        "merge",
+        "deploy",
+        "authority_change",
+        "secret_change"
+      ]
+    },
+    "verifier": {
+      "worker": "nf-hourly-independent-verifier-circle-v1",
+      "runtime": "cloudflare_cron_secondary_account",
+      "cron": "30 * * * *",
+      "github_identity": "noetfield-sg-authority candidate 4330805 / 147378007",
+      "inputs": ["actual_pr_metadata", "actual_diff", "actual_completed_check_runs"],
+      "excluded_inputs": ["builder_private_reasoning", "builder_self_verdict"],
+      "delivery": "github_check_run",
+      "default_model_runtime": [
+        "@cf/meta/llama-3.2-3b-instruct",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      ],
+      "commercial_model_policy": "requires_explicit_escalation_receipt",
+      "allowed_outputs": ["independent_check_run", "durable_receipt"],
+      "forbidden_outputs": ["edit", "approve", "merge", "deploy", "ratify"]
+    }
+  },
+  "independence": {
+    "separate_cloudflare_accounts": true,
+    "separate_worker_deployments": true,
+    "separate_kv_ledgers": true,
+    "separate_github_identities": true,
+    "verifier_cannot_edit": true,
+    "verifier_cannot_merge": true,
+    "author_not_subject": true
+  },
+  "closed_loop": [
+    "Observe",
+    "Detect",
+    "Critique",
+    "BuildRealPatch",
+    "OpenDraftPR",
+    "RunCI",
+    "IndependentCheck",
+    "RepairByNewDraft",
+    "ReObserve"
+  ],
+  "liveness": {
+    "registry": "separate KV last_fired_at per worker",
+    "stale_after_minutes": 120,
+    "deadman": "reciprocal separate-account health check and one authenticated restart",
+    "cold_test": "48h laptop-closed evidence required before commissioning claim"
+  },
+  "authority": {
+    "current_runtime_truth": "data/runtime_reality_v1.json",
+    "autonomous_production_mutations": "HOLD",
+    "commissioned": false,
+    "promotion_authority": "founder_or_fresh_commissioned_sg_permit",
+    "permitted": ["branch", "commit", "draft_pr", "ci", "independent_check", "receipt"],
+    "forbidden": ["merge", "deploy", "authority_mutation", "secret_mutation"]
+  }
+}

@@ -287,8 +287,8 @@ Verifier MUST validate: enum · receipt schema · optional-section gating · ris
 SG lock proof:
 
 ```bash
-test -f ~/Projects/sina-governance-ssot/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md
-cat ~/Projects/sina-governance-ssot/receipts/signal-factory-iteration2-lock-20260703T100500Z.json
+test -f ~/Desktop/Noetfield-Systems/sina-governance-SSOT/docs/SIGNAL_FACTORY_ITERATION2_LOCK_v1.md
+cat ~/Desktop/Noetfield-Systems/sina-governance-SSOT/receipts/signal-factory-iteration2-lock-20260703T100500Z.json
 ```
 
 ---

@@ -1,0 +1,109 @@
+name: motor-learning-organ-w1-validate
+
+# Validates W1 reference pipeline. NEVER ratifies or promotes live priors.
+on:
+  pull_request:
+    paths:
+      - "scripts/motor_learning/**"
+      - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/motor_learning_organ_tick_v1.py"
+      - "scripts/validate_motor_learning_organ_w1.py"
+      - "tests/test_motor_learning_organ_w1.py"
+      - "fixtures/motor_learning_w1/**"
+      - "data/nf_motor_learning_organ*.json"
+      - "data/nf_motor_learning_receipt_v1.json"
+      - "data/github_automation_registry_v1.json"
+      - "data/automation_surface_inventory_v1.json"
+      - "data/agent_read_surfaces_v1.json"
+      - "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md"
+      - "docs/dispatch/nf-motor-learning-organ-all-repos.md"
+      - ".github/workflows/motor-learning-organ-w1-validate.yml"
+      - ".github/workflows/motor-learning-organ-v1.yml"
+  push:
+    branches: [main, feat/nf-motor-learning-organ-v1]
+    paths:
+      - "scripts/motor_learning/**"
+      - "scripts/motor_learning_organ_w1_run.py"
+      - "scripts/motor_learning_organ_tick_v1.py"
+      - "scripts/validate_motor_learning_organ_w1.py"
+      - "tests/test_motor_learning_organ_w1.py"
+      - "fixtures/motor_learning_w1/**"
+      - "data/nf_motor_learning_organ*.json"
+      - "data/nf_motor_learning_receipt_v1.json"
+      - "data/github_automation_registry_v1.json"
+      - "data/automation_surface_inventory_v1.json"
+      - "data/agent_read_surfaces_v1.json"
+      - "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_MOTOR_LEARNING_ORGAN_LOCKED_v1.md"
+      - "docs/dispatch/nf-motor-learning-organ-all-repos.md"
+      - ".github/workflows/motor-learning-organ-w1-validate.yml"
+      - ".github/workflows/motor-learning-organ-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motor-learning-w1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ensure base SHA available
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags --prune
+          BASE=$(git merge-base HEAD origin/main)
+          echo "MLO_BASE_SHA=$BASE" >> "$GITHUB_ENV"
+          echo "base=$BASE"
+
+      - name: Unit tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest tests.test_motor_learning_organ_w1 -v
+
+      - name: W1 validator
+        shell: bash
+        env:
+          MLO_BASE_SHA: ${{ env.MLO_BASE_SHA }}
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_motor_learning_organ_w1.py
+
+      - name: Scope guard vs exact base SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${MLO_BASE_SHA:?base sha required}"
+          if ! git diff --name-only "${BASE}...HEAD" > /tmp/mlo-scope.txt; then
+            echo "FAIL: cannot compute diff against base $BASE"
+            exit 1
+          fi
+          if grep -E '^landing-site/' /tmp/mlo-scope.txt; then
+            echo "FAIL: landing-site/ changed"
+            exit 1
+          fi
+          echo "scope guard PASS against $BASE"
+          wc -l /tmp/mlo-scope.txt
+
+      - name: Upload W1 validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motor-learning-w1-validate-${{ github.run_id }}
+          path: /tmp/mlo-scope.txt
+          if-no-files-found: ignore

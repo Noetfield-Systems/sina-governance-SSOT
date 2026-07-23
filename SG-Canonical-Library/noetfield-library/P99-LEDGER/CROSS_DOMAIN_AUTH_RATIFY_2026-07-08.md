@@ -13,14 +13,20 @@
 3. **SG verify-only lane** — `sg_auth_surface_probe_v1` motor; no auth UI in SG.
 4. **Venture dispatch** — Phase 1 TrustField, Phase 2 SourceA, Phase 4 NOOS (separate PRs).
 
-## Founder decisions (pending explicit lock)
+## Founder decisions
 
-| # | Decision | Recommended |
-|---|----------|-------------|
-| 1 | Auth project | portfolio_spine only |
-| 2 | Cross-brand login | per-domain sessions |
-| 3 | P0 methods | magic_link + email_password |
-| 4 | First ship | TrustField /register + portal |
-| 5 | Enterprise SSO | defer P2 |
+| # | Decision | State | Value |
+|---|----------|-------|-------|
+| 1 | Auth projects | **RATIFIED 2026-07-18 · CORRECTED AFTER TRUSTFIELD PREFLIGHT** | SourceA → portfolio_spine; Noetfield/TrustField → noetfield |
+| 2 | Cross-brand login | PENDING | per-domain sessions (recommended) |
+| 3 | P0 methods | PENDING | magic_link + email_password (recommended) |
+| 4 | First ship | **RATIFIED 2026-07-18** | TrustField /register + portal; public recruitment landing preserved, private workspace gated |
+| 5 | Enterprise SSO | PENDING | defer P2 (recommended) |
 
-**Signer:** SG W11 auth upgrade — proposal LOCKED on disk.
+Phase 1 TrustField dispatch is authorized. TrustField uses the `noetfield` Supabase project and gates `/partner-access/workspace` plus `/customer-portal`; `/partner-access` remains public. This does not authorize cross-repo edits from SG, production secret changes, or bypass of venture tests.
+
+## Phase 1 closure
+
+`LIVE_VERIFIED` on 2026-07-18. TrustField PR #60 deployed main `2e862346668dfeea2806055de62f8c6c5cc24155`, adding the completed-intake handoff to `/auth/sign-up?next=/customer-portal`. SG cloud run `29642379016` proved public landing PASS, workspace and customer portal auth redirects PASS, noetfield Auth health PASS, and `trustfield_profiles` PASS. TrustField deploy run `29642763388` passed and the portal-account CTA was verified live. Next venture action advances to SourceA Phase 2.
+
+**Signer:** Founder instruction executed through SG W11 auth upgrade.

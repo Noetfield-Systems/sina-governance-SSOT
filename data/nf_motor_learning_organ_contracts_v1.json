@@ -1,0 +1,199 @@
+{
+  "schema": "nf_motor_learning_organ_contracts_v1",
+  "decision_id": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "version": "1.2.0",
+  "saved_at": "2026-07-20T09:10:00Z",
+  "pipeline": [
+    "learning_record",
+    "kaizen_item",
+    "policy_snapshot",
+    "learning_receipt",
+    "motor_consume"
+  ],
+  "learning_record": {
+    "required": [
+      "record_id",
+      "source_event",
+      "layer",
+      "proposed_correction",
+      "ssot_consistency_check",
+      "critic_reviewed",
+      "status",
+      "stage_market_id",
+      "sample_n",
+      "confidence"
+    ],
+    "optional": [
+      "asset_affected",
+      "failure_description",
+      "pattern_description",
+      "receipt_id",
+      "ecqr_delta_estimate"
+    ],
+    "status_enum": [
+      "draft",
+      "proposed",
+      "approved",
+      "rejected",
+      "promoted"
+    ],
+    "mutation_class_default": "OPEN",
+    "notes": "Compatible with BRAIN_REGISTRY_LEARNING_GATE_v0.1.4 learning_record; Motor organ adds stage_market_id, sample_n, confidence, ecqr_delta_estimate."
+  },
+  "kaizen_item": {
+    "required": [
+      "kaizen_id",
+      "record_ids",
+      "title",
+      "ecqr_delta_estimate",
+      "rank_score",
+      "status"
+    ],
+    "status_enum": [
+      "queued",
+      "accepted",
+      "rejected",
+      "superseded"
+    ],
+    "ranking": "roi_ranked_by_ecqr_delta_estimate_times_confidence"
+  },
+  "policy_snapshot": {
+    "required": [
+      "snapshot_id",
+      "stage_market_id",
+      "prior_kind",
+      "priors",
+      "derived_from_records",
+      "sample_n",
+      "ecqr_before",
+      "ecqr_shadow",
+      "status",
+      "rollback_pointer"
+    ],
+    "optional": [
+      "ratified_by",
+      "ratified_at",
+      "ecqr_after_live"
+    ],
+    "prior_kind_enum": [
+      "reliability",
+      "est_cost",
+      "recovery",
+      "gallery_reuse_bias"
+    ],
+    "status_enum": [
+      "draft",
+      "shadow",
+      "live",
+      "rolled_back"
+    ],
+    "mutation_class_promote": "GATED",
+    "store_paths": {
+      "shadow": "routing/roi/{stage_market_id}.shadow.json",
+      "live": "routing/roi/{stage_market_id}.live.json"
+    }
+  },
+  "motor_consume": {
+    "live_selector": "packages/runway-core/src/routing/roi",
+    "recovery_consumer": "packages/runway-core/src/routing/recovery-policy",
+    "failure_classifier": "packages/runway-core/src/routing/failure-classifier",
+    "rules": [
+      "load_live_prior_when_present",
+      "score_shadow_without_mutating_live_unless_allowlist",
+      "missing_live_falls_back_to_stage_local_static_failover"
+    ],
+    "receipt_fields_required_on_route_change": [
+      "snapshot_id",
+      "stage_market_id",
+      "prior_kind",
+      "ecqr_before",
+      "ecqr_after",
+      "ratified_by"
+    ]
+  },
+  "auto_apply_allowlist": {
+    "min_samples": 30,
+    "min_ecqr_improve_pct": 5,
+    "allowed_prior_kinds": [
+      "reliability",
+      "est_cost",
+      "recovery"
+    ],
+    "forbidden_actions": [
+      "architecture_edit",
+      "secret_mutate",
+      "promote_merge_deploy",
+      "level_3_bandit_high_risk",
+      "ssot_vocabulary_edit"
+    ],
+    "enabled": false
+  },
+  "sourcea_export": {
+    "live_path": "~/.sina/execution_patterns.json",
+    "decisions_path": "~/.sina/execution_decisions.jsonl",
+    "durable_export_target": "SourceA/data/motor_learning/pattern_export_*.json",
+    "emits": "learning_record.status=draft"
+  },
+  "learning_receipt": {
+    "schema_ref": "data/nf_motor_learning_receipt_v1.json",
+    "required_on": [
+      "policy_snapshot_promote",
+      "policy_snapshot_reject",
+      "policy_snapshot_rollback"
+    ],
+    "mutation_class": "GATED",
+    "required": [
+      "learning_receipt_id",
+      "prior_id",
+      "origin_event",
+      "evidence_links",
+      "confidence_before",
+      "confidence_after",
+      "why_accepted_or_rejected",
+      "reviewer",
+      "decision",
+      "affected_loops",
+      "applicable_runways",
+      "ratified_at",
+      "snapshot_id"
+    ],
+    "optional": [
+      "applicable_customers",
+      "expiry",
+      "supersedes",
+      "superseded_by",
+      "ecqr_before",
+      "ecqr_after",
+      "stage_market_id",
+      "similarity_score",
+      "shadow_evidence_path"
+    ],
+    "decision_enum": [
+      "accepted",
+      "rejected",
+      "rolled_back"
+    ],
+    "store_path": "receipts/learning/learning_receipt-*.json",
+    "notes": "Every ratification must produce an auditable learning_receipt. This is institutional memory \u2014 not optional logging."
+  },
+  "w1_intelligence_pipeline": {
+    "status": "IMPLEMENTED_SG_REFERENCE_FIXTURE_MODE",
+    "steps": [
+      "motor_event",
+      "normalizer",
+      "pattern_extractor",
+      "prior_search",
+      "similarity_score",
+      "candidate_improvements",
+      "shadow_execution",
+      "evidence",
+      "ecqr_review",
+      "ratified_prior_plus_learning_receipt"
+    ],
+    "explicitly_not": [
+      "model_training",
+      "unsupervised_architecture_redesign"
+    ]
+  },
+  "w1_package": "scripts/motor_learning/"
+}

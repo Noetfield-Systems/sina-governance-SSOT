@@ -1,0 +1,35 @@
+{
+  "schema": "sg_bootstrap_receipt_v1",
+  "receipt_id": "SG-PRECOMMISSIONING-WORKFLOW-HYGIENE-01-PR27",
+  "repository": "Noetfield-Systems/sina-governance-SSOT",
+  "pull_request": 27,
+  "base_sha": "78193af48fa4ded7605a61899e1692c01696ae37",
+  "authorized_change_commit": "2e8733c9e0605216e31687731fbbe8ee6ef88616",
+  "record_scope": "PRECOMMISSIONING_WORKFLOW_HYGIENE_ONLY",
+  "issued_at": "2026-07-18T08:33:27Z",
+  "expires_at": "2026-07-18T10:33:27Z",
+  "nonce": "SG-PRECOMMISSIONING-PR27-2e8733c9e060",
+  "single_use": true,
+  "prior_break_glass_pr26": "CONSUMED_AND_NOT_REUSABLE",
+  "authorized_paths": [
+    ".github/workflows/p0pgr-shadow-cycle-v1.yml",
+    "data/automation_surface_inventory_v1.json",
+    "data/github_automation_registry_v1.json",
+    "data/github_action_pins_v1.json",
+    "scripts/validate_parallel_automation_governance_v1.py",
+    "scripts/validate_p0pgr_packet_path_v1.py",
+    "tests/test_precommissioning_workflow_hygiene_v1.py"
+  ],
+  "forbidden": [
+    "deploy",
+    "sg_commissioning",
+    "hold_lift",
+    "secret_mutation",
+    "permission_expansion",
+    "production_ruleset",
+    "motor_authorization",
+    "legacy_app_revocation"
+  ],
+  "workflow_disabled_at_issue": true,
+  "authority": "founder directive in current session"
+}

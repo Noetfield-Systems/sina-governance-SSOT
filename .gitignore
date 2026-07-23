@@ -27,3 +27,11 @@ receipts/roi-heartbeat-*.json
 receipts/supabase-live-profiles-verify-*.json
 receipts/workflow-census-*.json
 language_gate/receipts/*.receipt.json
+
+# SG candidate local secret artifacts (never commit)
+*.private-key.pem
+*.webhook-secret.txt
+*.client-secret.txt
+
+# Relocated SG worktrees (git worktree checkouts; not repo content)
+worktrees/

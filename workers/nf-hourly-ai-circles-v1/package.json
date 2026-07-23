@@ -1,0 +1,13 @@
+{
+  "name": "nf-hourly-ai-circles-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "deploy:builder": "wrangler deploy --config builder.wrangler.toml",
+    "deploy:verifier": "wrangler deploy --config verifier.wrangler.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^4.112.0"
+  }
+}

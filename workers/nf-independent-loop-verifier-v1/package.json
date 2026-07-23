@@ -1,0 +1,9 @@
+{
+  "name": "nf-independent-loop-verifier-v1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Independent loop verifier on the second Cloudflare account. Off-account staleness/liveness audit of the main-account loops.",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  }
+}

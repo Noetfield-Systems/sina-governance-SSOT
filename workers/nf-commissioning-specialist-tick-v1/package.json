@@ -1,0 +1,13 @@
+{
+  "name": "nf-commissioning-specialist-tick-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "test": "node --test test/*.test.js",
+    "types": "echo ok"
+  },
+  "devDependencies": {
+    "wrangler": "^4.112.0"
+  }
+}

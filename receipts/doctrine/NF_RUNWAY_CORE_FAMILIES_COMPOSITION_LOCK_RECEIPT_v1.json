@@ -1,0 +1,24 @@
+{
+  "schema": "nf_doctrine_lock_receipt_v1",
+  "receipt_id": "NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCK_RECEIPT_v1",
+  "decision_id": "NF-RUNWAY-CORE-FAMILIES-COMPOSITION-V1",
+  "verdict": "PASS_SCOPED_CHANGE",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "TAXONOMY_LOCKED_DATA_BUILD_HELD",
+  "saved_at": "2026-07-18T11:42:15Z",
+  "base_head_before_commit": "63ff2805fb6715e9a0e8c9e0f95aeeb318679f70",
+  "artifacts": [
+    "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCKED_v1.md",
+    "data/nf_runway_core_families_composition_v1_LOCKED.json",
+    "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_RUNWAY_CORE_FAMILIES_COMPOSITION_LOCK_2026-07-18.md",
+    "docs/dispatch/nf-runway-core-families-composition-all-repos.md",
+    "data/agent_read_surfaces_v1.json",
+    "language_gate/dictionary_rc2_supplement.json"
+  ],
+  "holds": [
+    "data_runway_build_before_future_runway_gate",
+    "fourth_runway_before_first_three_real_jobs"
+  ],
+  "next_new_family": "Data",
+  "lane": "sg_governance"
+}

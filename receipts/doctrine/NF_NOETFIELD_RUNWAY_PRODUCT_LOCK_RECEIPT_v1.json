@@ -1,0 +1,23 @@
+{
+  "schema": "sg-doctrine-receipt-v1",
+  "receipt_id": "NF_NOETFIELD_RUNWAY_PRODUCT_LOCK_RECEIPT_v1",
+  "created_at": "2026-07-18T02:29:06Z",
+  "updated_at": "2026-07-18T03:39:45Z",
+  "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+  "version": "1.3.0",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "product_baseline_sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9",
+  "execution_model": "parallel",
+  "serial_first_second_order": false,
+  "initial_runways": [
+    "Video",
+    "Software Repair",
+    "Research"
+  ],
+  "parallel_sandboxes": true,
+  "gateway_mode_live": "HOLD",
+  "supersedes": "serial Video-first / Software-Repair-first monopoly queues in v1.1\u2013v1.2",
+  "founder_override": "Parallel execution; Motor must manage concurrent isolated sandboxes",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md"
+}

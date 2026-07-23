@@ -47,8 +47,13 @@ detail but may never contradict these. Source doctrine in brackets.*
   The safe direction (blanker + truer) needs no approval; the risky direction (adding a claim)
   needs Sina or external proof. [→ derived; the PureFlow asymmetry]
 
-> **0.x — RESERVED.** Slot for any universal invariant Sina adds that is not yet captured by
-> D1–D5. (Open input: what is true across every domain regardless of context?)
+> **0.7 — Motor escalation continuity (99 / 1).** The execution motor must maximize reversible
+> work through deterministic tools and bounded low-cost routes before any founder reasoning
+> escalation. Heavy reasoning is **not** a standing automatic API worker. Escalation produces a
+> structured packet, parks only dependent jobs (`WAITING_FOR_FOUNDER_REASONING`), and must resume
+> automatically after founder result ingestion. Terminal `HANDOFF_REQUIRED` without
+> `packet_id` + queue stage is **invalid**. Library: P8 continuation doctrine + P10 cost
+> execution doctrine. Operational binding: NOOS `noetfield-org/` (commit-pinned). [→ D5 § motor plane]
 
 ---
 
@@ -226,6 +231,13 @@ DECIDE is always Sina's.
 
 **Recovery.** Unsure which trigger you're in → you're one step earlier than you think; back up
 to CHECK/ANALYZE. New thread opens on CHECK.
+
+**Motor execution plane (0.7 applied).** Automatic motor lanes are:
+`W-DET → W-INTEL-LOW → W-INTEL-BOUNDED → FOUNDER_REASONING_QUEUE → RESULT_INGESTION → continue`.
+Cheap capable routes first; bounded API only with caps and receipts; expensive reasoning only
+via founder-operated subscription surfaces (not premium API automation). Independent branches
+continue while a dependency branch waits. Custody: Master SSOT anchors → Library P2/P7/P8/P10
+defines → NOOS operationalizes → product runtime executes → verifier proves.
 
 ---
 ---

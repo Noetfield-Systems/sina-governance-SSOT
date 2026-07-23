@@ -2,7 +2,7 @@
 
 **Meaning authority · foundational · broader · escalation-only**
 
-Status: `v1` · **Source** from which terminology entries are minted. Not loaded on every worker output by default.
+Status: `v1.3` · **Source** from which terminology entries are minted. Not loaded on every worker output by default.
 
 Answers: **“What does this really mean, and is it allowed to exist?”**  
 Wording (daily): `NOETFIELD_TERMINOLOGY_v1.md` — one line minted **from** this file, never the reverse.  
@@ -108,27 +108,72 @@ Policy PDF on shelf · “we use Claude responsibly” · loop that runs until c
 
 ---
 
-## Loop vs motor vs “24/7”
+## Loop vs ops motor vs “24/7”
 
 **Meaning**  
-- **Motor:** A scheduler (such as Cloudflare cron or a Railway executor) that decides which loop runs.  
+- **Ops Motor / Scheduler and executor:** A cloud scheduler (such as Cloudflare cron or a Railway executor) that decides which loop runs.  
 - **Loop:** One unit of work that runs on a schedule with a set interval, steps, receipt, and caps.  
-- **24/7 (honest):** A status showing that the motor is running and receipts are newer than twice the loop interval.  
+- **24/7 (honest):** A status showing that the ops motor is running and receipts are newer than twice the loop interval.  
 
 **Why**  
-Agents often call simple active chats or manual tasks 24/7. This hurts trust with partners and auditors. Separating the motor from the loop lets our health checks report status honestly.
+Agents often call simple active chats or manual tasks 24/7. This hurts trust with partners and auditors. Separating the ops motor from the loop lets our health checks report status honestly.
 
 **IS NOT**  
 - Chat session open overnight  
 - GHA workflow with stale conclusion while Railway runs  
 - Marketing “always-on brain” without motor name + receipt age  
+- The product **AI Motor** category (deterministic execution engine) — see next entry  
 
 **Examples**  
 - “NOOS fleet motor GREEN; 8/14 loops RUNNING; inbox STALE” — honest  
 - “Full auto 24/7 revenue” with R=0 — theater  
 
-**Related:** deploy-truth · drift · observation record  
+**Conflict rule**  
+Bare “Motor” in fleet/census/ops health = **Ops Motor / Scheduler and executor**. “AI Motor” in product, customer, or `/motors/` copy = **AI Motor**. Never equate them.
+
+**Related:** deploy-truth · drift · observation record · AI Motor  
 **Ledger:** `NOOS_FLEET_HEALTH_PASS_2026-07-06.md`
+
+---
+
+## AI Motor vs AI engine (Option A · execution engine)
+
+**Meaning**  
+- **AI Motor / Motor:** A deterministic **execution engine**. It receives governed execution contracts, orchestrates verified workflows, produces evidence, and returns auditable receipts. Industry class: Tesla Vehicle Controller / OpenAI Tool Runtime / Step Functions / Agent Runtime.  
+- **AI engine:** One intelligence / reasoning / analysis power unit that lives **inside Brain only** — model, critic, classifier, retriever, scorer, draft generator, decision-support function (Llama / GPT / Gemini / …). AI engines are never Brain and never Motor.  
+- **Stack law (siblings outside Motor):** Sensors → Brain → Contract → Kernel → Motor → Evidence → Eval → Learning.  
+- **Lock:** **Option A LOCKED** · **Option B RETIRED** (Motor as whole-car container with Brain/Kernel/engines inside Motor).
+
+**Why**  
+Calling Motor the whole car collapses the stack and hides Brain, Contract, Kernel, Evidence, Eval, and Learning. Calling an LLM “Brain” or “Motor” erases plane boundaries. Motor complements LLM reasoning; it does not replace it.
+
+**IS NOT**  
+- AI Motor = AI engine / LLM  
+- AI Motor = whole Tesla-class car / full SourceA–Noetfield governed system  
+- AI engine = Brain (engines live *in* Brain)  
+- AI engine = Motor, the whole product, or promotion authority  
+- AI Motor = chatbot, overnight Cursor session, or unbounded autonomy  
+- Option B “engines inside Motor / Motor = vehicle” teaching  
+
+**Tesla teaching (canonical)**  
+**Whole car ≅ full governed system** (do **not** call that Motor). **Motor ≅ Vehicle Controller** — deterministic execution only. Sensors include crawl/API/webhook/docs/human cmd/receipts; **crawler ≠ Brain**. Full story SSOT: `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md`.
+
+**CTO sentence (exact)**  
+> Noetfield Motor is a deterministic execution engine. It receives governed execution contracts, orchestrates verified workflows, produces evidence, and returns auditable receipts. It complements LLM reasoning rather than replacing it.
+
+**Examples**  
+- TrustField: AI engines inside Brain draft/classify/summarize; Motor executes authorized workflow steps and returns receipts.  
+- Runways: Contract authorizes; Motor executes tools/workflows; Evidence records the run.  
+- Public chat: “ten business ideas” = AI-engine output without Motor execution.
+
+**Conflict rule**  
+Never present Motor and AI engine as interchangeable. Never put Brain or AI engines inside Motor. Product/customer copy: **AI Motor** = execution engine; **AI engine(s)** = intelligence units in Brain. Ops/fleet copy: **Scheduler and executor** (ops motor) for schedulers.
+
+**Public rewrite**  
+> Noetfield Motor is a deterministic execution engine — like a vehicle controller or tool runtime. It runs authorized contracts and returns receipts. AI engines (models) live in Brain and complement Motor; they are not Motor.
+
+**Related:** Scheduler and executor · Loop · Runway · Receipt · Governed · Brain · Contract · Kernel · vendor-neutral  
+**Doctrine:** `NOETFIELD_MOTOR_ENGINE_VOCABULARY_v1.md` · public `/motors/` · A-Z batch entries `AI Motor` / `AI engine`
 
 ---
 
@@ -384,3 +429,7 @@ Founder locks dictionary entry → bump dictionary version → **mint** terminol
 *v1.1 (2026-07-08) — Living System axis dictionary seed for W1 terminology mint.*
 
 *v1 (2026-07-06) — Initial dictionary seed: receipt family, census, motor/loop, commercial tone, deploy-truth, vendor-neutral, diagnostic/enforce split.*
+
+*v1.4 (2026-07-22) — LIVE_LOCK Option A: AI Motor = deterministic execution engine; Option B whole-car-as-Motor RETIRED; AI engines inside Brain only.*
+
+*v1.3 (2026-07-22) — LIVE_LOCK AI Motor vs AI engine nesting; ops motor disambiguated from product AI Motor; A-Z batch mint.*

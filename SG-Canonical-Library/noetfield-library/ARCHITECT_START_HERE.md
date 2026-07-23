@@ -15,6 +15,10 @@ Everything here is ONE continuous thread built layer-by-layer. **Do not re-deriv
 **Gate:** no new job, task, specialist, role, page, clause, or receipt field without dictionary entry.  
 Guide: `P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` · Audit: `P99-LEDGER/TERMINOLOGY_DICTIONARY_FULL_AUDIT_2026-07-06.md`.
 
+## 0c. P0 RUNTIME REALITY (wins for live status)
+
+`data/runtime_reality_v1.json` = current machine truth. Incident `SG-AUTHORITY-IDENTITY-P0` is contained; autonomous production mutations are HOLD. `NF-SG-AUTHORITY-IDENTITY-V2` separates one Motor executor App from one SG authority App. Neither SG v2 nor Unified Motor Core is commissioned.
+
 ## 1. AUTHORITY ORDER (lower number wins on conflict)
 ```
 P0 FOUNDATION-SPINE  ← the constitution (SSOT v6) + index + L0 runtime + governed-autorun
@@ -59,6 +63,67 @@ P99 LEDGER           ← receipts, decisions, audits, reconciliations
 **Skills:** `SKILLS/SKILL_01`…`SKILL_07` · **Playbooks:** `PLAYBOOKS/` · **TrustField overlay:** `P7-OVERLAYS/TRUSTFIELD_PARTNER_ACCESS_CHESS_OVERLAY_v2.0.md`  
 **CLI:** `scripts/chess_pass_cli_v1.py` · **Verify:** `scripts/verify_chess_pattern_reasoning_v2_install_v1.sh`
 
+## 2f. ARCHITECTURE FINALIZATION GATE (P8 — constitutionalizes major design)
+`P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` = **Brain designs; SG constitutionalizes; NOOS operationalizes; Motor executes; P99 remembers.**  
+**Machine:** `data/architecture_finalization_gate_v1_LOCKED.json`  
+Status path: `ARCHITECTURE_DRAFT` → `SG_REVIEW_REQUIRED` → `SG_ACCEPTED` → `IMPLEMENTATION_AUTHORIZED` → … → `P99_PRESERVED`.  
+Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfield-wide policy.
+
+## 2g. UNIFIED MOTOR CORE (P0 — SG-accepted execution plane)
+`P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` = **decision** `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` (`SG_ACCEPTED`).  
+**Machine:** `data/nf_unified_motor_architecture_v1_LOCKED.json` · **Waves:** `docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md`  
+**Split:** Cloudflare Agents = Resident Role owners · Cloudflare Workflows = Motor jobs · Client-Zero Motor = first profile (not discarded).  
+**Foundation:** `NF-UNIFIED-MOTOR-V1-FOUNDATION` is T0-first — no GPU in that commission.  
+**Scaling posture (v1.1):** Cloudflare Agents+Workflows runway; reject Temporal/Kafka+Flink/Ray/Restate substrate; provider hardening deferred to W5; WIP=Circuit A+B; HOLD preserved.  
+**Wiring:** `docs/dispatch/nf-unified-motor-architecture-all-repos.md` · **Wave 0:** `docs/dispatch/wave-0-nf-unified-motor-merge-packet.md`
+**Runtime correction:** `P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md` + `data/runtime_reality_v1.json`; `noetfield-motor` is executor identity only; Unified Motor Core and SG runtime are NOT commissioned.
+
+## 2h. SINAGPT + COMMAND GATEWAY v2 (P1 cockpit · P0 API)
+`P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` = **SinaGPT** = `founder.brain-architect` cockpit — not Issue Manager, CI daemon, or Motor.  
+`P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` = keep `/v1`; add `/v2` Motor+Issues+CI+SG; OAuth founder split; seven-truth; draft-PR commission only.  
+**Machine:** `data/sinagpt_founder_brain_architect_v1_LOCKED.json` · `data/nf_command_gateway_v2_architecture_v1_LOCKED.json`  
+**Commission:** `docs/dispatch/nf-command-gateway-v2-motor-control-001.md` · **Wiring:** `docs/dispatch/sinagpt-command-gateway-v2-all-repos.md`
+
+## 2i. ACTIVATION CYCLE + HIGGSFIELD ADAPTER (P0 — proof over design)
+`docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` = **stop expansion**; WIP = Circuit A (T0 repair) + Circuit B (one campaign).  
+`P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` = Higgsfield = `MediaGenerationAdapter` (not a lane).  
+**Machine:** `data/nf_activation_cycle_v1_LOCKED.json` · `data/nf_higgsfield_media_adapter_result_motor_v1_LOCKED.json`  
+**Dispatch:** `docs/dispatch/higgsfield-activation-cycle-all-repos.md`
+
+## 2j. NOETFIELD RUNWAY PRODUCT (P10 — sell finished results)
+
+`P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` = **decision** `NF-NOETFIELD-RUNWAY-PRODUCT-V1` v1.3 (`SG_ACCEPTED`).
+**Machine:** `data/nf_noetfield_runway_product_v1_LOCKED.json` · **Baseline:** `PRODUCT_CATEGORY@b9ce619`
+**Execution assignment:** `P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` + `data/nf_runway_execution_assignment_v1_LOCKED.json`
+
+**Law:** Sell a finished result. Motor is infrastructure. Gateway ≠ Motor. Governance is not the product.
+**Execution:** **parallel** — Video · Software Repair · Research together; one Job ↔ one isolated sandbox.
+**Workers:** Claude Code (foundation/Repair) · Codex Local (Research) · Cursor (Video) · GPT Work Verifier on GitHub (Research commissioning) · Codex Cloud (separate cloud worker) · GPT Advisor (advice only).
+**Hold:** `GATEWAY_MODE=live` until five-check preflight; NOOS PR #82 autonomous routing not activated by the execution lock.
+
+## 2k. COMPUTE / ROI ALLOCATION (P0 — platform spend law)
+
+`P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md` = **decision** `NF-COMPUTE-ROI-ALLOCATION-V1` (`SG_ACCEPTED`).  
+**Machine:** `data/nf_compute_roi_allocation_v1_LOCKED.json` · **Pointer:** `data/sg-authority-ref-compute-roi-v1.json`  
+**Law:** enterprise plan pays governance minutes; Cloudflare Workers + Workflows and Railway run scale and margin; economical LLM matrix is Kernel policy.  
+**Actions budget:** 50,000 minutes / month — classes A merge · B deploy · C founder proof · D reserve. Not product schedule.  
+**Wake:** authenticated HTTP `job_id` only. HOLD preserved.  
+**Wiring:** `docs/dispatch/nf-compute-roi-allocation-all-repos.md`
+
+## 2k-bis. WAKE-PATH CONFLICT POLICY (P0 — schedule vs event auto table)
+
+`P0-FOUNDATION-SPINE/NF_WAKE_PATH_CONFLICT_POLICY_LOCKED_v1.md` = **decision** `NF-WAKE-PATH-CONFLICT-POLICY-V1` (`SG_ACCEPTED`).
+**Machine:** `data/nf_wake_path_conflict_policy_v1_LOCKED.json`
+**Law:** event-driven authenticated HTTP `job_id` wake is default (Cloudflare Workers first); cron / Workflow schedule / Railway poll / GHA schedule allowed with schedule passport. Do not emit `MOTOR_PRODUCTION_PATH_BLOCKED` solely because a schedule exists. Missing passport = warn + passport PR. HOLD preserved.
+**Wiring:** `docs/dispatch/nf-wake-path-conflict-policy-all-repos.md`
+
+## 2l. DETERMINISTIC API PRODUCT & GTM (P10 — external commercial surface)
+
+`P10-PRODUCT-LAYERS/NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1.md` = **decision** `NF-DETERMINISTIC-API-PRODUCT-AND-GTM-V1` (`LOCKED`).
+**Machine:** `data/nf_deterministic_api_product_and_gtm_v1_LOCKED.json`
+**Law:** Clients buy a deterministic API that returns guaranteed usable outcomes — not a model, agents, Runways, or the Motor.
+**Flagship:** `POST /v1/chat/completions` first; do not build extract/webhooks SKUs before flagship ships and sells.
+**Hold:** internal Motor/Runway/NOOS vocabulary off buyer surfaces; cheap-first cost doctrine preserved.
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.

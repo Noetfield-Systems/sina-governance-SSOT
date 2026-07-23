@@ -1,0 +1,78 @@
+{
+  "receipt_type": "nf_cloud_loops_and_independent_verifier_v1",
+  "captured_at": "2026-07-19T03:19:00Z",
+  "verdict": "LIVE",
+  "founder_order": "Ticks must run on Cloudflare (more reliable than GitHub). Independent verifier from the second Cloudflare account must check the loops.",
+  "hold": "HOLD",
+  "cloud_first_tick": {
+    "worker": "nf-sg-loop-tick-v1",
+    "account": "main_0d0b967b",
+    "cron": "*/10 * * * *",
+    "health_url": "https://nf-sg-loop-tick-v1.sina-kazemnezhad-ca.workers.dev/health",
+    "status_url": "https://nf-sg-loop-tick-v1.sina-kazemnezhad-ca.workers.dev/status",
+    "kv_namespace": "19787d20ba86435884752e29de9d4ca6",
+    "responsibilities": [
+      "key2 custody watch each tick",
+      "living-system 48h window each tick",
+      "one-shot repository_dispatch key2_custody_established when bootstrap key1 dies",
+      "one-shot repository_dispatch liveness_48h_close when window closes"
+    ],
+    "proof": {
+      "http_tick_status": 200,
+      "key2_verdict": "BLOCKED_FOUNDER",
+      "liveness_48h_verdict": "WINDOW_OPEN",
+      "secrets_present": ["SG_BOOTSTRAP_KEY_1_PEM", "SG_AUTHORITY_PRIVATE_KEY", "MOTOR_APP_PRIVATE_KEY"]
+    }
+  },
+  "independent_verifier": {
+    "worker": "nf-independent-loop-verifier-v1",
+    "account": "verifier_b7282b4a",
+    "independence": "runs on the second Cloudflare account, off-account from every loop it audits, so a main-account outage cannot silence the audit",
+    "cron": "*/30 * * * *",
+    "health_url": "https://nf-independent-loop-verifier-v1.kazemnezhadsina144.workers.dev/health",
+    "verify_url": "https://nf-independent-loop-verifier-v1.kazemnezhadsina144.workers.dev/verify",
+    "kv_namespace": "ecc2e175a8ef49a980c5b1b6e7f8bd81",
+    "audits": [
+      "nf-commissioning-specialist-tick-v1",
+      "nf-sg-loop-tick-v1",
+      "noos-deadman-v1",
+      "nf-unified-motor-foundation-v1-staging"
+    ],
+    "checks": [
+      "off-account health probe",
+      "two-times-interval staleness of each loop last_fired_at",
+      "pass / degraded / fail verdict",
+      "independent telegram alert on fail"
+    ],
+    "proof": {
+      "verify_status": 200,
+      "verdict": "PASS",
+      "specialist_age_minutes": 2.8,
+      "loop_tick_age_minutes": 0.3,
+      "unreachable_loop_ids": [],
+      "stale_loop_ids": []
+    }
+  },
+  "github_actions_demoted": {
+    "note": "GitHub Actions is no longer a recurring scheduler for these loops. Both former cron workflows now run only as one-shot apply jobs fired by the Cloudflare tick via repository_dispatch.",
+    "changed": [
+      {
+        "workflow": "nf-sg-key2-custody-watch-v1.yml",
+        "from": "schedule cron 7 * * * *",
+        "to": "repository_dispatch key2_custody_established + workflow_dispatch"
+      },
+      {
+        "workflow": "nf-48h-liveness-closeout-v1.yml",
+        "from": "schedule cron 17 * * * *",
+        "to": "repository_dispatch liveness_48h_close + workflow_dispatch"
+      }
+    ]
+  },
+  "closed_loop": "Observe (probe loops) -> Detect (staleness + key2 custody) -> Critique (verdict) -> Repair (one-shot dispatch) -> Re-deploy (apply job) -> Observe (verifier re-audits)",
+  "forbidden": [
+    "hold lift",
+    "app key mint",
+    "production deploy",
+    "recurring github-actions cron for these loops"
+  ]
+}

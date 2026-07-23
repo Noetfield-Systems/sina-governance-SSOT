@@ -1,0 +1,31 @@
+{
+  "schema": "pr_conflict_resolution_v1",
+  "receipt_id": "pr-conflict-resolution-20260722T230413Z",
+  "pr": 71,
+  "branch": "feat/nf-motor-learning-organ-v1",
+  "merged_from": "origin/main",
+  "conflicted_files": [
+    {
+      "path": "data/agent_read_surfaces_v1.json",
+      "class": "structured_registry",
+      "resolution": "structural_union",
+      "detail": "Git textual conflict only on version/saved_at. Structurally unioned must_read across all lanes: kept motor-learning organ surfaces from feature branch and Company New / wake-path surfaces from main. No same-key content collisions. Bumped version 1.7.11\u222a1.7.12 \u2192 1.7.13."
+    }
+  ],
+  "auto_merged_without_markers": [
+    "data/github_automation_registry_v1.json",
+    "data/automation_surface_inventory_v1.json",
+    "AGENTS.md"
+  ],
+  "classification": {
+    "simple": [
+      "data/agent_read_surfaces_v1.json (metadata + additive must_read union)"
+    ],
+    "complicated": []
+  },
+  "validators": {
+    "validate_parallel_automation_governance_v1.py": "ALL PASS",
+    "audit_automation_surface_v1.py": "ALL PASS (warnings only; pre-existing / path)"
+  },
+  "verdict": "PASS_SCOPED_CHANGE"
+}

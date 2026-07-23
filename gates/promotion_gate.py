@@ -27,6 +27,12 @@ from scripts.brain_autonomous_controls_v1 import (
 
 REGISTRY_PATH = _REPO_ROOT / "data/brain_domain_sandboxes_v1.json"
 INDEPENDENCE_RECEIPT_DEFAULT = _REPO_ROOT / "receipts/verifier-independence-proof-latest.json"
+RUNTIME_REALITY_PATH = _REPO_ROOT / "data/runtime_reality_v1.json"
+LEGACY_ADVISORY_RECEIPT_TYPE = "REMOTE_CHECK_ADVISORY"
+LEGACY_ADVISORY_APP_ID = "4179901"
+LEGACY_ADVISORY_INSTALLATION_ID = "143449507"
+MOTOR_EXECUTOR_APP_ID = "4275961"
+LEGACY_PERSONAL_REPOSITORY = "kazemnezhadsina144-dot/sina-governance-SSOT"
 
 
 REQUIRED_STATUS = "PASS"
@@ -215,8 +221,39 @@ def load_receipt(url: str) -> dict[str, Any]:
         raise RuntimeError(f"receipt fetch failed: {exc.reason}") from exc
 
 
-def refusal_reasons(receipt: dict[str, Any], args: argparse.Namespace) -> list[str]:
+def runtime_authority_refusal_reasons() -> list[str]:
+    if not RUNTIME_REALITY_PATH.is_file():
+        return ["BLOCKED_SG_NOT_COMMISSIONED: runtime reality registry missing"]
+    reality = load_json_file(RUNTIME_REALITY_PATH)
     reasons: list[str] = []
+    if reality.get("sg", {}).get("runtime_status") != "COMMISSIONED":
+        reasons.append("BLOCKED_SG_NOT_COMMISSIONED: SG runtime is not commissioned")
+    if reality.get("authority", {}).get("autonomous_production_mutations") != "ALLOW":
+        reasons.append("BLOCKED_SG_NOT_COMMISSIONED: autonomous production mutations are HOLD")
+    return reasons
+
+
+def receipt_authority_refusal_reasons(receipt: dict[str, Any]) -> list[str]:
+    reasons: list[str] = []
+    if receipt.get("receipt_type") != "SG_DECISION":
+        reasons.append("receipt_type must be exact SG_DECISION")
+    if receipt.get("receipt_type") == LEGACY_ADVISORY_RECEIPT_TYPE:
+        reasons.append("legacy REMOTE_CHECK_ADVISORY receipt is never authority")
+    if str(receipt.get("app_id")) == LEGACY_ADVISORY_APP_ID:
+        reasons.append("legacy personal App ID 4179901 is denied")
+    if str(receipt.get("installation_id")) == LEGACY_ADVISORY_INSTALLATION_ID:
+        reasons.append("legacy personal installation ID 143449507 is denied")
+    if str(receipt.get("app_id")) == MOTOR_EXECUTOR_APP_ID:
+        reasons.append("Motor executor App ID 4275961 cannot issue SG authority decisions")
+    if str(receipt.get("repo") or "").lower() == LEGACY_PERSONAL_REPOSITORY.lower():
+        reasons.append("legacy personal repository identity is denied")
+    if receipt.get("verdict") != REQUIRED_STATUS:
+        reasons.append(f"receipt verdict is {receipt.get('verdict')!r}, not {REQUIRED_STATUS!r}")
+    return reasons
+
+
+def refusal_reasons(receipt: dict[str, Any], args: argparse.Namespace) -> list[str]:
+    reasons: list[str] = receipt_authority_refusal_reasons(receipt)
     artifact_type = receipt.get("artifact_type")
 
     if receipt.get("status") != REQUIRED_STATUS:
@@ -696,6 +733,15 @@ def main() -> int:
         smoke_script = Path(args.deploy_source_root).expanduser() / "scripts/validate-sourcea-brain-live-v1.sh"
         if smoke_script.is_file():
             args.brain_live_smoke_command = "bash scripts/validate-sourcea-brain-live-v1.sh"
+    runtime_reasons = runtime_authority_refusal_reasons()
+    if runtime_reasons:
+        print("PROMOTION_GATE: BLOCKED_SG_NOT_COMMISSIONED")
+        print("deploy_executed: false")
+        print("reasons:")
+        for reason in runtime_reasons:
+            print(f"- {reason}")
+        return 78
+
     load_cloudflare_tokens()
     receipt = load_receipt(args.receipt_url)
     reasons = refusal_reasons(receipt, args)

@@ -1,0 +1,9 @@
+{
+  "schema": "sg.1111-v3-pointer.v1",
+  "saved_at": "2026-07-22T06:36:31Z",
+  "human_plan": "docs/1111_UPGRADE_PLANS_v3_DETERMINISTIC_SANDBOX_RUNWAY_PROJECTS.md",
+  "machine_ssot": "NOETFIELD-RUNWAY/data/nf_1111_deterministic_runway_projects_v3.json",
+  "specs_pack": "NOETFIELD-RUNWAY/governance/1111-deterministic-runway-projects.v3/",
+  "day_project_count": 20,
+  "status": "DRAFT_LOCK_CANDIDATE"
+}

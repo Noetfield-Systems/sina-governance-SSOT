@@ -1,0 +1,22 @@
+{
+  "schema": "pr_conflict_resolution_receipt_v1",
+  "receipt_id": "pr-conflict-resolution-20260719T004208Z",
+  "pr": 33,
+  "branch": "doctrine/nf-runway-core-families-composition-v1",
+  "merged_base": "origin/main",
+  "classification": {
+    "data/agent_read_surfaces_v1.json": {
+      "class": "structured_registry",
+      "kind": "simple_non_overlapping_union",
+      "resolution": "union: keep main scaling-posture entry + PR33 core-families entries; bump version 1.7.6\u21921.7.7",
+      "same_key_owner_conflict": false
+    }
+  },
+  "complicated": [],
+  "validators": {
+    "json_parse": "PASS",
+    "verify_agent_read_staleness_v1": "PASS",
+    "validate_parallel_automation_governance_v1": "FAIL_PREEXISTING_ON_MAIN \u2014 workflow nf-commissioning-specialist-deploy-v1.yml missing registry entry (not introduced by this conflict resolution)"
+  },
+  "verdict": "PASS_SCOPED_CHANGE"
+}

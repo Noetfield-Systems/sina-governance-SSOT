@@ -1,0 +1,2189 @@
+{
+ "synthesis": {
+  "overall": {
+   "done": 49,
+   "partial": 64,
+   "missing": 24,
+   "not_local": 1,
+   "total": 138,
+   "headline": "The execution kernel is doctrine-grade (deterministic-first, receipts, SSOT, permissions, contracts largely DONE), but the system is nearly blind to its own cost and has almost no revenue organ or learning loop — the single keystone gap is real cost metering (#107 -> #133), which unblocks the entire cost-governance cluster (109/132/134/142/143)."
+  },
+  "by_cluster": [
+   {
+    "cluster": "A. Agent-as-role, registry, invocation discipline, permissions",
+    "done": 7,
+    "partial": 3,
+    "missing": 0,
+    "summary": "Strongest structural area: closed callable-worker set (#1/#2), capability guards (#58), per-agent secrets (#57), cost-classed registry (#116); only registry-population and lint items (#117/#123/#135) remain PARTIAL."
+   },
+   {
+    "cluster": "B. Model tiers, cost routing, escalation, local/cloud, vendor failover",
+    "done": 6,
+    "partial": 5,
+    "missing": 2,
+    "summary": "Escalation ladder (#3), vendor-neutral routing (#110) and degraded mode (#112) are DONE, but there is only one provider binding so failover (#111) is thin, and scoring/history feedback (#97/#98) plus distillation/shadow-eval (#101/#103) are absent."
+   },
+   {
+    "cluster": "C. Context slicing, budgets, retrieval, caching, versioning, compression",
+    "done": 4,
+    "partial": 7,
+    "missing": 1,
+    "summary": "Slicing (#5), micro-batching (#78) and output compression (#89) work, but there is no token/context budget at all (#6 MISSING) and retrieval/caching/versioning (#7/#39/#40) are only half-wired."
+   },
+   {
+    "cluster": "D. Deterministic-first, verification pyramid, receipts, heartbeat, structured output",
+    "done": 8,
+    "partial": 5,
+    "missing": 1,
+    "summary": "Deep strength: deterministic-first (#8), code-authored + schema-bearing receipts (#28/#29), structured output (#79); gaps are an unordered pyramid (#27), no real cost receipt (#107), and missing semantic diff (#84)."
+   },
+   {
+    "cluster": "E. Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates",
+    "done": 7,
+    "partial": 3,
+    "missing": 0,
+    "summary": "Contract discipline is solid: immutable contract (#16), branch-per-job (#15), dependency decomposition (#49), irreversible gate (#60); remaining gaps are max_files/lines caps (#48), typed BLOCKED_EXECUTOR_ENDPOINT (#56) and dry-run-default inversion (#59)."
+   },
+   {
+    "cluster": "F. Retry ladder, failure caching, negative KB, success patterns, distillation, audit",
+    "done": 1,
+    "partial": 8,
+    "missing": 2,
+    "summary": "Weak learning organ: signatures/patterns exist in SourceA but are unwired from the motor; failure-typed retry ladder (#19), failure-signature suppression (#20) and capability promotion (#137) are all PARTIAL, kill-criteria (#122) and random audit (#105) MISSING."
+   },
+   {
+    "cluster": "G. Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel",
+    "done": 1,
+    "partial": 6,
+    "missing": 5,
+    "summary": "The cost/ROI blind spot: only event-driven dispatch (#31) is DONE; daily cost sentinel (#133), spike breaker (#132), waste report (#134) and cost-per-outcome (#143) are all MISSING because spend is never aggregated."
+   },
+   {
+    "cluster": "H. SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo",
+    "done": 11,
+    "partial": 11,
+    "missing": 1,
+    "summary": "Largest cluster and second-strongest: SSOT/authority/no-2nd-plane (#41/#42/#43), prompt + deterministic-workflow compilers (#23/#118), canary (#45/#46) all DONE; PARTIALs are integrator automation, interface contracts, Ruflo stubs and workflow-template breadth; change propagation (#130) MISSING."
+   },
+   {
+    "cluster": "I. Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics",
+    "done": 4,
+    "partial": 16,
+    "missing": 12,
+    "summary": "Biggest and least-built cluster: founder-gate plumbing exists but there is no pricing SSOT (#83), claims registry (#82), customer-config layer (#67-72), fulfillment state machine (#74), revenue receipt (#144) or unlock-score queue (#65); the SourceB fast path (#148) is not even local."
+   }
+  ],
+  "top_gaps": [
+   {
+    "n": 133,
+    "title": "Daily cost sentinel",
+    "status": "MISSING",
+    "why_high_leverage": "unlock 5 and the explicit currency the entire cost-governance cluster (109/132/134/142/143) depends on; without a summed daily spend number none of revenue-linked scaling, spike breaker, waste report or cost-per-outcome can fire. Cost receipts exist but are mostly 0.0 and never aggregated.",
+    "next_step": "Write a deterministic daily sentinel that scans all cost receipts for the day and emits cost-by-project / by-model / retry / failed-job totals + top-5 workflows.",
+    "target_repo": "sina-governance-SSOT"
+   },
+   {
+    "n": 107,
+    "title": "Cost receipt (real token metering)",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; the measurement primitive UNDER #133. Cost fields exist in schema but are hardcoded (0.002/0.01) not measured, so every downstream cost gate (108/133/134/143) is computing on fiction. Instrumenting this is the true keystone that makes the whole G cluster real.",
+    "next_step": "Instrument intel_low._call_raw to capture real token counts + call count and have executor.build_receipt compute cost from those plus wall-clock runtime and retry count.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 83,
+    "title": "Pricing SSOT",
+    "status": "MISSING",
+    "why_high_leverage": "unlock 4; foundational commercial primitive that #130 change-propagation, #82 claims registry and every checkout/landing/FAQ surface must derive from. Price is currently a free-form draft field with no canonical source, so commercial correctness is unguaranteed.",
+    "next_step": "Create data/pricing_ssot_v1.json (canonical price IDs + display) and make commercial_pulse price_display and any checkout read from it.",
+    "target_repo": "sina-governance-SSOT"
+   },
+   {
+    "n": 65,
+    "title": "Dependency unlock score",
+    "status": "MISSING",
+    "why_high_leverage": "unlock 4; this is the doctrine's own prioritization mechanism (the very metric this report ranks by). Without an unlock_score term in the scorer, the queue cannot rank foundational unblockers (standing identity, canonical queue, cost metering) ahead of cosmetic work — it self-limits every other improvement.",
+    "next_step": "Add an unlock_score field (0-5) to census metadata and a UNLOCK_WEIGHT term in score_record so foundational unblockers rank first.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 148,
+    "title": "SourceB commercial fast path",
+    "status": "NOT_LOCAL",
+    "why_high_leverage": "unlock 5; the actual revenue pipeline (setup->demo->gate->provision->activate->receipt). It is the highest-unlock point in the audit but currently only a bounded write target — the money path does not exist in any local repo. Everything commercial (67-76, 144) is downstream of standing this up.",
+    "next_step": "Author the fast path as workflow definition sourceb_voice_provision_v1 in the motor workflow registry, targeting the SourceB repo once it is available locally.",
+    "target_repo": "SourceB (not cloned) + motor registry"
+   },
+   {
+    "n": 144,
+    "title": "Revenue receipt",
+    "status": "MISSING",
+    "why_high_leverage": "unlock 4; the denominator for cost-per-verified-outcome (#143) and the only proof the commercial organ works. The outbound revenue log exists but has zero real receipts, so revenue is uncounted and unmeasurable.",
+    "next_step": "Define revenue_receipt_v1 schema (lead_id/payment_id/provisioning_id/trial/captured-call/appointment) and emit one on the first real lead/payment event.",
+    "target_repo": "sina-governance-SSOT"
+   },
+   {
+    "n": 74,
+    "title": "Fulfillment state machine",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; the commercial-pulse SM exists for outbound sends but the customer fulfillment states (requested->approved->provisioning->started->done->trial->cancelled) do not. This is the skeleton the entire SourceB fast path (#148) and provisioning gates (#73/#76) hang on.",
+    "next_step": "Author fulfillment_state_machine_v1 with the doctrine states as a sibling to the commercial-pulse SM, owned by the SourceB fast path.",
+    "target_repo": "sina-governance-SSOT"
+   },
+   {
+    "n": 131,
+    "title": "Default-deny cost explosion",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; already structural for the two costliest dimensions (premium escalation, >2 retries via the router ceiling), but the other 6 doctrine dimensions (full-repo context, agents>3, multi-round, browser automation, paid provisioning, long schedule) have no deny-unless-reason guard — the remaining cost-explosion surface.",
+    "next_step": "Add a single preflight policy check that default-denies the remaining 131 dimensions unless the job contract carries an explicit reason field for that dimension.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 19,
+    "title": "Retry ladder by failure type",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; the motor is single-tier (fail -> W-INTEL-LOW -> handoff) with no failure-class routing. Wiring the already-computed failure_classes to distinct tiers (syntax->T0, test->T1, architecture->handoff, credential/outage->typed blocker) turns blind retries into cause-based escalation and cuts wasted repair cycles.",
+    "next_step": "Add a route table in motor/repair keyed on diagnose_deterministic failure_classes dispatching each class to its matching tier.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 20,
+    "title": "Failure caching (signature)",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; signature computation exists in SourceA but no dispatcher consults it, so the motor re-runs known-blocked jobs and re-burns cost on the same failure. Suppressing re-dispatch on an open blocker signature is direct, compounding waste reduction.",
+    "next_step": "Add a failure-signature ledger the motor intake checks: on a job whose (repo,error,workflow_step) signature is an open blocker, refuse re-dispatch and refresh only the blocker receipt.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 56,
+    "title": "Missing-capability -> exact interface",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; handoff packets describe missing capability in prose, not as a machine-readable interface. A typed BLOCKED_EXECUTOR_ENDPOINT (job_class, worker_class, adapter path, binding_env) lets a capability gap be auto-filled by one registry row — turning founder handoffs into self-describing build tickets.",
+    "next_step": "Add a typed BLOCKED_EXECUTOR_ENDPOINT field to the handoff packet naming the exact missing interface.",
+    "target_repo": "noetfield-sandbox-private (motor)"
+   },
+   {
+    "n": 109,
+    "title": "Revenue-linked scaling",
+    "status": "PARTIAL",
+    "why_high_leverage": "unlock 4; the spend cap is policy text with no enforcement — the founder's own system notes 'no enforcement receipt'. Once #133 produces a monthly spend number, one gate in the ROI Judge closes the loop between spend and revenue, the doctrine's core economic safety.",
+    "next_step": "Build a monthly-spend accumulator from cost receipts and wire a gate that BLOCKS_WITH_REASON new premium dispatch above the applicable cap, emitting an enforcement receipt.",
+    "target_repo": "sina-governance-SSOT"
+   }
+  ],
+  "quick_wins": [
+   {
+    "n": 24,
+    "title": "Compiler shrinks prompt (entropy metric)",
+    "next_step": "Emit input_tokens vs output_tokens (byte size) on each compile receipt and add a canary asserting compiled_contract_size < raw_heading_context_size. Compiler already produces the bounded contract; just measure it."
+   },
+   {
+    "n": 80,
+    "title": "Cheap schema repair",
+    "next_step": "Add a deterministic JSON-repair pass (bracket/quote/trailing-comma fixups) before the single re-prompt in intel_low, fixing most malformed outputs with zero extra model calls."
+   },
+   {
+    "n": 30,
+    "title": "Receipt deduplication (delta only)",
+    "next_step": "In write_receipt, hash the state-bearing fields and, when identical to the previous receipt for the same job, write a small delta/heartbeat pointer instead of a full duplicate."
+   },
+   {
+    "n": 126,
+    "title": "Output length limits",
+    "next_step": "Define an output-limits policy (max_summary_words 250, max_risks 5, max_recommendations 3) and enforce it in intel_low._validate by truncating/rejecting oversized arrays. Caps already exist as scattered prompt hints."
+   },
+   {
+    "n": 53,
+    "title": "Founder decision compression",
+    "next_step": "Define founder_decision_v1 schema (options[], recommended, why[<=3], cost_risk_delta, no_decision_consequence) and have handoff.emit_packet populate it; the decision item already carries kind/detail/receipt/packet."
+   },
+   {
+    "n": 88,
+    "title": "Flaky test registry",
+    "next_step": "Add data/flaky_test_registry_v1.json (test, flake_rate, known_signature, retry_policy, owner) populated from SourceA _unstable scores; detection already exists, only the persistent registry file is missing."
+   },
+   {
+    "n": 86,
+    "title": "Low-risk auto-promotion",
+    "next_step": "Add a low_risk_auto_promote predicate that advances typo/docs/fixture/receipt jobs to READY_FOR_MERGE without a decision item; auto-advance-on-success already exists."
+   },
+   {
+    "n": 123,
+    "title": "Avoid agent theater",
+    "next_step": "Add a CI lint asserting the callable worker set stays <=3 ranks and no job contract requests >1 reasoning agent for risk<high — turns an already-true invariant into a rejectable rule."
+   }
+  ],
+  "strongest_areas": [
+   "Execution/permission discipline (Cluster A, 7/10 DONE): agent-as-role not process (#1), template!=execution with one min-cost worker per job (#2), capability-based permissions (#58), per-agent secret scoping (#57), cost-classed worker registry (#116).",
+   "Deterministic-first + evidence (Cluster D, 8/14 DONE): the doctrine's boundary is structurally enforced — no-LLM deterministic modules (#8), don't-guess-provable-facts recompute (#9), code-authored + schema-bearing receipts (#28/#29), strict structured output (#79), machine-generated human views (#128).",
+   "SSOT + authority + compilation (Cluster H, 11/23 DONE): one-owner-per-domain enforcement (#41), authority check before edit (#42), no second control plane (#43), prompt compilation pipeline (#23), deterministic workflow compiler (#118), thin-slice canary with real proof bundles (#45).",
+   "Job-contract governance (Cluster E, 7/10 DONE): immutable worker-agnostic contract (#16), branch-per-job never-merge (#15), real dependency-graph decomposition (#49), irreversible-action founder gate (#60), rich partial-success state set (#55).",
+   "Cost-safe-by-construction routing: hard router ceiling MAX_AUTOMATIC_RANK=1 as law not config (#3/#131), vendor-neutral binding-by-env-name (#110), first-class degraded-continue mode (#112) — the system fails closed and cheap even though it cannot yet measure its own spend."
+  ]
+ },
+ "full_audit": [
+  {
+   "n": 1,
+   "title": "Agent as role not process",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:19-27 (worker classes as closed set with class|mode|role)",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:1-2 ('Generic worker classes only')",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:116-132 (invoke() is function-like: task+payload -> schema-validated proposal, no persistent process)",
+    "noetfield-sandbox-private/motor/adapters/router.py:31-71 (workers selected per-job, not standing employees)",
+    "noetfeld-OS/noetfield-org/AGENT_REGISTRY.md (each agent has Role/Forbidden Actions/Required Receipts)"
+   ],
+   "gap": "Doctrine's exact per-agent contract fields (Allowed Inputs / Allowed Tools / Required Output Schema) are expressed structurally (capabilities[] + TASK_SCHEMAS + path guard) rather than as one declared agent-role contract object. noos AGENT_REGISTRY is per-repo prose, not machine-enforced.",
+   "next_step": "Add an explicit `allowed_inputs`/`allowed_tools`/`output_schema` triple to each ADAPTER_REGISTRY_v2 worker row and assert it at invoke time so the role contract is data, not just code.",
+   "unlock": 4,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 2,
+   "title": "Template != execution (registry many, invoke few)",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json (7 declared classes = available)",
+    "noetfield-sandbox-private/motor/adapters/router.py:43-71 (dispatch exactly ONE min-cost worker per job; W-HANDOFF structurally unroutable)",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:11-17 (pipeline = compiler/planner once -> worker per job -> verifier legs -> repair only on failure)",
+    "noetfield-sandbox-private/motor/adapters/handoff.py:1-3 (W-HANDOFF NOT callable; available != invoked)"
+   ],
+   "gap": "Doctrine default '1 Planner + 1 Worker + 1 Verifier; +1 Repair on fail; +1 Adversarial Reviewer on risk' is implemented except the risk-triggered Adversarial Reviewer — grep finds it only as an unbuilt checklist item (sina-governance-SSOT/docs/1111_UPGRADE_PLANS_v1.md:141 'when AI budget exists'). High-risk currently routes to the founder decision gate instead.",
+   "next_step": "Add a risk-gated W-INTEL-LOW 'adversarial_review' task (read-diff, propose-only) that fires when contract risk=high before the founder gate, receipted like any other leg.",
+   "unlock": 3,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 25,
+   "title": "Separate thinking / acting / verifying",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:74-79 ('Builder and verifier are separate graph jobs'; 'No model output ever mints truth')",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:11-14 ('Output is ALWAYS a proposal; deterministic validation controls application') = thinking",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:1 (W-DET-PATCH bounded writes) = acting",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:23-25 (W-VERIFY-RECOMPUTE/CI/EDGE, deterministic) = verifying",
+    "noetfield-sandbox-private/motor/kernel/executor.py:97-142 (job_class routes to distinct det_exec/det_patch/intel_low roles)"
+   ],
+   "gap": "Thinking is quarantined into W-INTEL-LOW-as-proposal and verification into separate workflow identities — fully separated. No gap of substance; only W-VERIFY-EDGE (the sole PASS minter) is spec'd-but-not-yet-live per §7.",
+   "next_step": "Stand up the W-VERIFY-EDGE independent-credential leg so the verifier separation reaches PASS-minting, closing the 'max verdict = CHECK_OK until edge live' caveat.",
+   "unlock": 4,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 57,
+   "title": "Per-agent secrets (blast radius)",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json (binding_env per worker: W-DET-EXEC [], W-DET-PATCH ['MOTOR_REPO_TOKEN'], W-INTEL-LOW ['MOTOR_INTEL_LOW_URL','_KEY','_STYLE'])",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:66-70 (_binding reads only its own env)",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:88-92 (short-lived per-job repository tokens; secrets in private deployment config)",
+    "noetfeld-OS/noetfield-org/ROUTING_MATRIX.md (per-tier 'Secret/Token Access' scoping; T1 'Forbidden: Secret credential handling')"
+   ],
+   "gap": "Scoping is declared (each worker sees only its own binding_env) but there is no runtime enforcement that a worker process cannot read another worker's env var — isolation is by convention/adapter discipline, not by a sandboxed secret broker.",
+   "next_step": "Inject each worker's binding_env as the ONLY secrets present in its executor subprocess environment (strip all others in scheduler._dispatch_executor) so blast-radius containment is enforced, not trusted.",
+   "unlock": 3,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 58,
+   "title": "Capability-based permissions",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:36-46 (_guard fail-closed path allowlist; empty=deny-all = worker write:scoped/branch_only)",
+    "noetfield-sandbox-private/motor/config/deployment.json:25,32,38 ('authority_class_max':'bounded_write' per target)",
+    "noetfield-sandbox-private/motor/proof/run_proof.py:46,70,113 (authority_class read_only vs bounded_write per job)",
+    "noetfield-sandbox-private/motor/adapters/router.py:50 (capability match gate) + intel_low always-proposal = planner write:false",
+    "noetfeld-OS/noetfield-org/ROUTING_MATRIX.md (L17 T0-T3 explicit per-tier tool Access + Forbidden lists)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_REGISTRY_SCHEMA_v1.json (authority_scope enum: observe/edit/test/commit/deploy/blocked)"
+   ],
+   "gap": "The doctrine's literal planner(write:false)/worker(write:scoped)/verifier(write:false,test:true) capability triples are enforced structurally (proposal-only intel, path guard, read-only verifiers) rather than declared as one capability object per role. noos ROUTING_MATRIX is authoritative prose, not a runtime policy engine.",
+   "next_step": "Add a `permissions{write,shell,network,git_commit,deploy}` block to each ADAPTER_REGISTRY_v2 worker row and check it in executor before each side-effect, unifying the currently-scattered guards.",
+   "unlock": 4,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 116,
+   "title": "Agent registry with cost_class",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json (per worker: class_rank 0/1, est_cost_usd_per_job, max_concurrency, reliability, health)",
+    "noetfield-sandbox-private/motor/adapters/router.py:68-70 (min-select by class_rank asc, est_cost asc, reliability desc = cost-class routing)",
+    "noetfield-sandbox-private/motor/canaries/test_motor_canaries.py:30-37 (RED canary rejects a rank-2 callable row)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_REGISTRY_SCHEMA_v1.json (packet_defaults.model_tier cheap/capable/premium + cost_limit_usd)"
+   ],
+   "gap": "Motor's registry uses class_rank+est_cost (semantic cost_class) but not the doctrine's literal field names default_model_tier/invoke_when/max_calls. The governance p0-pgr prompt registry that DOES carry model_tier is schema-only — data/p0pgr_prompt_registry_v1.json does not exist on disk (unpopulated).",
+   "next_step": "Create and populate data/p0pgr_prompt_registry_v1.json against its schema (currently absent), giving the governance layer a real cost-classed template registry to match the motor's worker registry.",
+   "unlock": 4,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 117,
+   "title": "Workflow registry vs dynamic swarm",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:98-100 ('New worker = one registry row'; serialized scheduler, no swarm)",
+    "noetfield-sandbox-private/products/sandbox-first-production-law-v1/PARALLEL_SITE_WORKFLOW_MATRIX_v1.md:184 ('runner written ONCE... adding a lane = one map entry, zero new code')",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_REGISTRY_SCHEMA_v1.json (problem_class enum: blocker/repair/verification/revenue/deploy... = named workflow classes)",
+    "noetfeld-OS/tests/test_autorun_status_v1.py:61 (test_workflow_registry_ids)"
+   ],
+   "gap": "The anti-dynamic-swarm principle is fully realized (registry-driven, serialized, no swarm-consensus code anywhere). But a first-class named-workflow catalog is thin: the doctrine's exemplar workflows (repo_repair_v1/storefront_release_v1/pricing_consistency_check_v1/trustfield_partner_audit_v1) are NOT found on disk in any repo, and the p0-pgr registry that would hold problem_class templates is unpopulated (no data file).",
+   "next_step": "Author a data/workflow_registry_v1.json enumerating the named reusable workflows (repo_repair_v1, storefront_release_v1, pricing_consistency_check_v1, trustfield_partner_audit_v1) with their fixed step sequences, referenced by the compiler.",
+   "unlock": 3,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 123,
+   "title": "Avoid agent theater",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:19-25 (closed 3-callable-role set, no 20-agent council / CEO agent / swarm consensus)",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:11 (proposal-only, deterministic truth = no reasoning theater)",
+    "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P7-DOCTRINE/mechanical-not-prose.md:22 ('prose gates enable theater; mechanical gates prevent it')",
+    "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/P7-DOCTRINE/negative-proof.md:10 (anti-theater applied to gates)"
+   ],
+   "gap": "Anti-theater is embodied by construction (bounded roles, evidence receipts, no swarm) and documented as doctrine, but there is no explicit theater-detection lint — nothing mechanically flags an over-provisioned agent count, oversized context, or council-for-typo pattern. It relies on the architecture never adding those, not on a check that would reject them.",
+   "next_step": "Add a CI lint asserting the callable worker set stays <=3 ranks and that no job contract requests >1 reasoning agent for risk<high, turning 'avoid theater' into a rejectable rule.",
+   "unlock": 2,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 124,
+   "title": "Short persona prompts",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:39-59 (PROMPTS are terse task specs: role + strict-JSON schema + input, no long persona)",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:4-6 (product/vendor/model/persona names FORBIDDEN in spec, worker classes, prompts)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_REGISTRY_SCHEMA_v1.json (packet_defaults carry forbidden_actions/constraints, not personas)"
+   ],
+   "gap": "Motor prompts already match the doctrine template (Role / strict output / bounds). The governance packet compiler enforces constraints but there is no explicit max-length/no-persona lint on compiled prompts to prevent future bloat.",
+   "next_step": "Add a compiler assertion capping prompt/persona length and rejecting persona narrative, so the short-prompt discipline survives new templates.",
+   "unlock": 2,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 135,
+   "title": "Agent retirement",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_REGISTRY_SCHEMA_v1.json (template status enum includes RETIRED)",
+    "noetfeld-OS/data/founder-trigger-ledger-v1.json (per-trigger retirement_condition + evidence_counter + target_status)",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json (health field; rows removable — 'Adding a worker = adding one row')",
+    "sina-governance-SSOT/receipts/agent-read-staleness-*.json (retired_deploy_surfaces / retired_workflow_motor detection)"
+   ],
+   "gap": "Retirement exists only as a status value (p0-pgr RETIRED) and as founder-gate delegation conditions (noos ledger retires human gates, not agents). No engine detects unused / duplicate / high-failure / superseded templates and proposes retire/merge; the p0-pgr registry that would track template usage stats and failure rates is unpopulated (no data file), so there is nothing to retire from yet.",
+   "next_step": "Add a retirement pass over data/p0pgr_prompt_registry_v1.json (once populated) that flags templates with zero invocations in N days, duplicate problem_class, or failure_rate>threshold and emits a retire/merge proposal receipt.",
+   "unlock": 2,
+   "cluster": "Agent-as-role, registry, invocation discipline, permissions"
+  },
+  {
+   "n": 3,
+   "title": "Model escalation not uniformity (tier ladder)",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py:13 (MAX_AUTOMATIC_RANK=1, 'law not config')",
+    "noetfield-sandbox-private/motor/adapters/router.py:47 (raises RouterRefusal above W-INTEL-LOW)",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:3 (rank0 deterministic, rank1 low-cost, rank>=2 does not exist -> HANDOFF)",
+    "noetfield-sandbox-private/products/sandbox-first-production-law-v1/COST_INTELLIGENT_EXECUTION_POLICY_v1.md:24-36 (tier0/tier1/tier2 receipt-gated)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:32 (model_tier enum cheap/capable/premium; premium requires roi>=70)",
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:44 (point 3 text)"
+   ],
+   "gap": "The locked 6-name ladder (T0/T1/T1L/T2/Manual/Deterministic) is collapsed to 3 in every system: motor has rank0/rank1/handoff, p0-pgr has cheap/capable/premium. No distinct T1L (long-context) tier exists anywhere. Motor emits HANDOFF_REQUIRED rather than the doctrine's `status: ESCALATE_REQUIRED` receipt with target_tier/risk_if_not_escalated/files_in_scope/estimated_cost fields.",
+   "next_step": "Add a T1L worker row (class_rank between 1 and handoff, or a distinct binding) to ADAPTER_REGISTRY_v2.json for long-context low-cost work, and standardize the handoff packet to carry the doctrine ESCALATE_REQUIRED field set (target_tier, risk_if_not_escalated, estimated_cost).",
+   "unlock": 5,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 4,
+   "title": "Cheap first-pass classifier",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:28-46 ('decompose' shrinks a heading into 2-6 jobs; 'classify' task)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:138-144 (W-INTEL-LOW runs classify/skeleton/diagnose/decompose at tier1)",
+    "sina-governance-SSOT/skills/p0pgr-packet-compiler/SKILL.md (compiles problem statements into packets)"
+   ],
+   "gap": "The cheap decompose emits jobs with title/job_class/instruction/depends_on/risk only. It does NOT produce the doctrine's full shrink field set: project/repo/scope/exclude/required_workflow/founder_gate/model_tier. The cheap pass classifies risk but does not itself assign the downstream model_tier or founder_gate, so it isn't yet the routing-decisive first pass the doctrine describes.",
+   "next_step": "Extend intel_low.py TASK_SCHEMAS['decompose'] jobs_item_required to include scope/exclude/required_workflow/founder_gate/model_tier, and have the compiler use that cheap output to set each job's worker_class/tier before dispatch.",
+   "unlock": 4,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 37,
+   "title": "Local LLM for bulk low-risk",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:1-14 ('Vendor-free by construction'; openai_json wire style explicitly supports OSS/local servers)",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:30-40 (W-INTEL-LOW capabilities: classify/skeleton/diagnose/repair_proposal — the low-risk bulk roles)",
+    "noetfield-sandbox-private/motor/config/deployment.json:12 (MOTOR_INTEL_LOW_URL bound to https://platform.noetfield.com/api/public/chat)"
+   ],
+   "gap": "The abstraction is designed to allow a local model, but the only concrete binding is a hosted cloud endpoint. No local model (doctrine names Qwen3-14B) is wired, and there is no routing that sends bulk low-risk tasks (log clustering / dup detection / inventory / tagging) specifically to a local model vs cloud. The 'no verifier authority' guarantee IS structurally present (tier1 is advisory-only).",
+   "next_step": "Add a local binding (e.g. MOTOR_INTEL_LOW_URL -> local Ollama/vLLM openai_json endpoint) in deployment.json and route the classify/diagnose bulk job_classes to it, keeping cloud only for the escalated path.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 38,
+   "title": "Cloud only for value-dense steps",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/products/sandbox-first-production-law-v1/COST_INTELLIGENT_EXECUTION_POLICY_v1.md:32-35 (tier0 default; expensive model exception, receipt-gated)",
+    "noetfield-sandbox-private/products/sandbox-autorunner-v1/COST_INTELLIGENT_MODEL_ROUTING_POLICY_v1.md:31-44 (tier2 entry only for failed-receipt/hard-conflict/architecture/machine-building)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:231-234 (value-dense exhaustion routes to handoff, not auto-premium)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md:19 (Default CLOUD_ONLY; premium gated by roi>=70)"
+   ],
+   "gap": "Enforcement of 'never listing/counting/formatting to cloud' is doctrinal + tier0-first rather than a hard classifier that rejects a cloud dispatch for a trivially-deterministic job_class. A misclassified trivial task could still be packeted to a cloud/premium lane.",
+   "next_step": "Add a lint in the packet compiler / router that blocks capable/premium model_tier when problem_class is a deterministic type (listing/counting/url-check/key-rename) unless a failed cheaper receipt id is attached.",
+   "unlock": 2,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 97,
+   "title": "Model output scoring",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json:69-80 (cost block: provider/model/tokens_in/tokens_out/total_usd)",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:129 (returns attempts count per invocation)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:67-70 (receipt cost block: model_tier/est_cost_usd)"
+   ],
+   "gap": "Raw per-call cost/token/retry data is captured on receipts, but there is NO scoring layer that rolls these into a per-model quality signal (test-pass rate, review-rejection rate, hallucination rate, unnecessary-files count, retry-cost penalty). Nothing computes 'cheap-but-thrice-retried is actually more expensive'. score_plan_queue.py scores WORK items, not model outputs.",
+   "next_step": "Build a deterministic scorer that greps receipts by model, aggregates {est_cost, retries/attempts, summary.failed, changed_files} into a per-model score record, and writes a MODEL_SCORECARD.json.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 98,
+   "title": "Router sees historical performance",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py:68-70 (sort key includes -reliability tiebreaker)",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:15,27,39 (reliability field present, hardcoded 1.0)",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:41 (documented sort: class_rank asc, est_cost asc, reliability desc)"
+   ],
+   "gap": "The router already CONSUMES a `reliability` field as a tiebreaker, so the hook exists — but the value is a static constant 1.0, never recomputed from receipts. There is no feedback loop reading historical receipt outcomes back into reliability/est_cost. It is 'router could see history' not 'router sees history'. Doctrine's 'internal benchmark not vendor advertising' is not built.",
+   "next_step": "Feed the point-97 MODEL_SCORECARD back into ADAPTER_REGISTRY reliability/est_cost_usd_per_job via a scheduled deterministic updater, so route() ranks on measured history.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 99,
+   "title": "Escalation by failure-type not feeling",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/products/sandbox-first-production-law-v1/COST_INTELLIGENT_EXECUTION_POLICY_v1.md:101 (escalation_reason MUST be a real FAILED cheaper receipt id or 'risk_high')",
+    "noetfield-sandbox-private/products/sandbox-autorunner-v1/COST_INTELLIGENT_MODEL_ROUTING_POLICY_v1.md:33-42 (named failure-type entry conditions)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:204-234 (failure -> repair pipeline on failed_checks -> handoff on exhaustion; no feeling-based jump)",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:35 (diagnose emits failure_class/cause_hypothesis)"
+   ],
+   "gap": "The motor cannot escalate at all automatically (structural ceiling), so the failure-typed escalation contract lives in the sandbox policy + handoff packets rather than an executing escalator. The doctrine's specific '2 bounded T1 attempts failed' counter is enforced only as repair_cycles budget, not as an explicit attempt-type ladder.",
+   "next_step": "Record failure_class from intel_low.diagnose into the handoff packet and require it (not just a receipt id) as the escalation_reason discriminator so the human/premium tier is entered per failure-type, not per lane exhaustion alone.",
+   "unlock": 2,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 100,
+   "title": "Premium only on bottleneck",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/products/sandbox-first-production-law-v1/COST_INTELLIGENT_EXECUTION_POLICY_v1.md:190-209 (escalation algorithm: tier2 only for the specific unresolved/risk_high step, capped by max_est_cost_usd)",
+    "noetfield-sandbox-private/motor/adapters/router.py:62-66 (only the exhausted job_class routes to handoff; unrelated jobs continue)",
+    "noetfield-sandbox-private/products/sandbox-autorunner-v1/COST_INTELLIGENT_MODEL_ROUTING_POLICY_v1.md:43-44 (high-reasoning models do NOT remain daily operators; exit back to tier0/1)"
+   ],
+   "gap": "Enforced per-lane/per-receipt, which correctly isolates the bottleneck. There is no explicit 'apply tier1 -> tier2 one conflict -> tier1 apply' orchestration primitive; it is assembled from separate jobs rather than a single bottleneck-aware workflow.",
+   "next_step": "Encode the doctrine's T1-implement / T2-one-conflict / T1-apply / deterministic-verify sequence as a named workflow template so premium touches exactly the one conflict node.",
+   "unlock": 2,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 101,
+   "title": "Distillation to reusable pattern",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:142-143 (points 101/102 defined only as doctrine)"
+   ],
+   "gap": "No implemented mechanism turns an expensive/tier2 output into a cheap reusable rule (the doctrine's AUTH_SESSION_OWNERSHIP_PATTERN_v1 example). No pattern/rule registry file, no success-pattern library artifact, no pipeline that captures a premium result as a distilled prompt/policy/fixture for cheaper future reuse. Grep for _PATTERN_v / distill / success-pattern returns only doctrine and planning docs.",
+   "next_step": "Create a patterns/ registry (schema + one seed pattern) and a receipt post-step that, when a tier2/handoff resolves a class of failure, writes a distilled reusable rule referenced by future cheap-tier jobs.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 103,
+   "title": "Cheap shadow evaluation",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:73-145 (the existing 'shadow cycle' shadows the DISPATCH/route decision, zero execution — NOT a cheaper-model quality shadow)",
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:144 (point 103 defined only as doctrine)"
+   ],
+   "gap": "The word 'shadow' exists but for a different concept: p0pgr shadow mode is compile+route-without-execution. Nothing runs a cheaper candidate model in parallel-without-authority against real jobs, scores its quality vs the incumbent, and reroutes if it passes. This is the natural consumer of points 97/98 and is absent.",
+   "next_step": "Add a shadow lane that re-runs a sample of completed tier1/tier2 jobs on a cheaper model with authority=none, diffs the output against the accepted receipt, and emits a shadow_quality receipt to inform a routing change.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 110,
+   "title": "Vendor-neutral routing",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:3 ('referenced by ENV VARIABLE NAME, never by value or vendor')",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:1-9 ('Vendor-free by construction'; 'naming a wire format is not naming a vendor')",
+    "noetfield-sandbox-private/motor/config/deployment.json:3 (concrete bindings isolated to private config, replaceable without touching the motor)"
+   ],
+   "gap": "Vendor-neutrality as a structural constraint (no hardcoded provider anywhere in code/registry) is fully achieved. But the ACTIVE part of the doctrine — a router that actually switches among OpenAI/Anthropic/Google/local by performance/economics — is not present: there is exactly one W-INTEL-LOW binding slot, so there is no set of providers to route between.",
+   "next_step": "Generalize the single W-INTEL-LOW binding into a list of interchangeable provider bindings (same class_rank) and have route() pick among them by the point-98 historical score.",
+   "unlock": 4,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 111,
+   "title": "Provider failover",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py:231-241 (exhaustion -> emit handoff packet + continue unrelated jobs; not full stop = the 'queue+receipt' limb)",
+    "noetfield-sandbox-private/motor/adapters/router.py:62-66 (handoff_required, evidence preserved, unrelated jobs continue)",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:123-132 (one retry then FAIL — no alternate provider attempt)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md:3,54 (failed route falls back, does not freeze; runner failures degrade not block)"
+   ],
+   "gap": "The doctrine's third failover limb (queue+receipt, don't stop) is implemented. The first two limbs are NOT: on a provider error intel_low retries the SAME binding once then fails — there is no 'same-tier alternative provider' attempt and no 'degraded lower-capability' provider fallback, because only one provider binding exists (see point 110).",
+   "next_step": "In intel_low._call_raw, on URLError/timeout iterate a list of same-tier provider bindings before failing, then fall back to a lower-capability local binding, emitting a degraded receipt.",
+   "unlock": 3,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 112,
+   "title": "Degraded mode",
+   "status": "DONE",
+   "evidence": [
+    "noetfeld-OS/infrastructure/supabase/migrations/0014_factory_cycle_status_degraded.sql:1-20 (first-class 'degraded' status: partial/failed steps, truth preserved)",
+    "noetfeld-OS/scripts/noos_loop_runner_v1.py:372 (status 'degraded' when not COMPLETE/IDLE)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md:58 (cap breached -> premium BLOCKED_WITH_REASON, cheap-tier + read-only continue — continuity law)",
+    "noetfield-sandbox-private/products/sandbox-autorunner-v1/COST_INTELLIGENT_MODEL_ROUTING_POLICY_v1.md:47-51 (spend governor; deterministic tier0 continues at ~$0)"
+   ],
+   "gap": "Degraded-continue behavior is real (deterministic scans/queue/receipts keep running; premium pauses when budget/authority is blocked). But it is assembled from separate mechanisms (NOOS status enum, p0-pgr spend governor, motor handoff) rather than one declared degraded-mode policy stating exactly what continues vs pauses, so coverage of 'pause: hard architecture/public deploy' is implicit.",
+   "next_step": "Write a single DEGRADED_MODE_POLICY that enumerates continue-set (deterministic scans/queue/receipt/local classification) vs pause-set (hard architecture/public deploy) and reference it from the motor, p0-pgr router, and NOOS loop runner.",
+   "unlock": 2,
+   "cluster": "Model tiers, cost routing, escalation, local/cloud, vendor failover"
+  },
+  {
+   "n": 5,
+   "title": "Context slicing",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/intake.py:50",
+    "noetfield-sandbox-private/motor/kernel/executor.py:141",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:20",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:132"
+   ],
+   "gap": "Slicing is structural (each Job Contract carries only its own instruction+context dict; the sole LLM adapter intel_low.invoke sends `instruction + json.dumps(context)`, never whole repo/conversation; governance packets say 'Workers receive ONLY this packet — never P0 content'). But the doctrine's explicit five-part slice (relevant files + SSOT excerpt + current diff + last relevant receipt) is NOT assembled into the context — context is a free-form dict of spans/probes/skeleton refs, with no diff or SSOT-excerpt retriever populating it.",
+   "next_step": "Add a deterministic context assembler in intake that populates contract.context with {relevant_files[], ssot_excerpt, current_diff, last_receipt_ref} from the target repo before the intel_low call, instead of only span/probe metadata.",
+   "unlock": 4,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 6,
+   "title": "Per-agent context budget",
+   "status": "MISSING",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:38",
+    "noetfield-sandbox-private/motor/kernel/intake.py:41",
+    "noetfeld-OS/config/model-router.yml:8"
+   ],
+   "gap": "Every 'budget' on disk is a COST/repair-cycle budget (contract.budget = {max_cost_usd, max_repair_cycles}; noos model-router budget = max_usd_per_run/day), never a token/context budget per role. There are no per-role token ceilings (Classifier 4-8K, Planner 12-24K, Worker 20-60K, Reviewer diff+criteria), no token counting, and no 'over budget -> summarize/retrieve narrowly' path. The doctrine's context-budget concept is entirely absent from code.",
+   "next_step": "Add a token-budget table keyed by worker_class/job_class to the job contract (e.g. classifier 8000, worker 60000) and enforce it in intel_low._call_raw by measuring prompt tokens and refusing/narrowing when exceeded.",
+   "unlock": 3,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 7,
+   "title": "Retrieval before reading",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/census.py:297",
+    "noetfield-sandbox-private/motor/plans/emit_headings.py:128",
+    "noetfeld-OS/config/model-router.yml:14"
+   ],
+   "gap": "The file-tree->targeted-blob half exists: census/emit_headings pull `git/trees/...?recursive=1` then read only specific blobs (package.json/pyproject/Makefile) rather than whole repos, and the noos router's T0 tier is deterministic grep/check/validate at zero LLM spend. But there is no dependency-map step and no grep/ripgrep-then-targeted-line-range retrieval feeding an agent's context — the intel_low adapter receives no retrieved code at all, so the full 'file tree -> grep -> dep map -> targeted files -> line ranges' ladder is not implemented end-to-end.",
+   "next_step": "Insert a ripgrep-backed retrieval step (grep symbol -> collect hit files -> extract enclosing line ranges) that runs before any intel_low skeleton/repair call and injects only the matched ranges into contract.context.",
+   "unlock": 4,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 39,
+   "title": "Cache stable contexts as registry refs",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json",
+    "noetfield-sandbox-private/motor/config/deployment.json",
+    "noetfeld-OS/config/model-router.yml:4",
+    "noetfield-sandbox-private/motor/adapters/router.py:12"
+   ],
+   "gap": "Several stable contexts ARE externalized to versioned registries loaded by reference: ADAPTER_REGISTRY_v2.json (allowed tools/model policy, loaded by router.load_registry), deployment.json (repo ownership + allowed_paths/deploy topology, loaded by intake), noos model-router.yml (model policy, schema+version pinned). But the set is incomplete vs the doctrine list — no pricing SSOT, branch policy, or risk matrix registry — and registry entries carry version/schema fields but not content HASH references, so 'version/hash reference' is only half-met.",
+   "next_step": "Add a content-hash field to each registry (adapter/deployment/model-router) and record the hash in receipts so a cached context can be proven unchanged; add the missing pricing/branch-policy/risk-matrix registry files.",
+   "unlock": 3,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 40,
+   "title": "Context versioning (policy refs)",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:5",
+    "noetfeld-OS/config/model-router.yml:3",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md"
+   ],
+   "gap": "Reference-by-name-and-version is the house style: packet schema references RUNTIME_CONTINUITY_LAW_v1 and spec_path by name, model-router pins schema/version, governance docs cite POLICY_v1 names rather than inlining. But there is no runtime resolver that takes a 'Apply MODEL_ESCALATION_POLICY_v1' reference and retrieves just the relevant section on demand — the pattern is documentary/convention, not an executable retrieve-by-ref mechanism.",
+   "next_step": "Build a small policy-ref resolver (name+version -> canonical file section) that packets/adapters call to fetch only the cited clause at execution time, so policy text is never inlined into context.",
+   "unlock": 2,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 77,
+   "title": "Batch similar work",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/emit_headings.py:77",
+    "noetfield-sandbox-private/motor/plans/census.py:221",
+    "sina-governance-SSOT/language_gate/generate_batch_markdown_v1.py"
+   ],
+   "gap": "Homogeneous work IS batched deterministically: emit_batch/build_records process the plan queue in one pass, census classifies all candidate docs in a single traversal, and the language_gate has a batch markdown generator. However these are deterministic (no-LLM) scans; there is no batched LLM classify/summarize call — the intel_low adapter is invoked one item at a time, so the doctrine's 'classify/summarize once' for model calls is not realized.",
+   "next_step": "Add a batched intel_low task that accepts an array of homogeneous items (e.g. classify N queue items) in one schema-constrained call, guarded by a context-size check so the batch never bloats the prompt.",
+   "unlock": 2,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 78,
+   "title": "Micro-batching 5-20",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/emit_headings.py:27",
+    "noetfield-sandbox-private/motor/plans/emit_headings.py:159",
+    "noetfield-sandbox-private/motor/kernel/intake.py:90"
+   ],
+   "gap": "The 20-item micro-batch cap is implemented exactly to spec: MAX_ISSUES=20 caps emitted headings to min(20, eligible) homogeneous queue items, and intel_low decomposition is capped at 6 jobs (jobs[:6]). This matches the 5-20 homogeneous-items rule and avoids the '1000 unrelated docs' failure mode. Minor gap: no explicit lower-bound (5) batching-efficiency check, and the cap is a constant rather than adaptive to context size.",
+   "next_step": "Optional: make the 20-cap adaptive — shrink the batch when accumulated item size approaches the (to-be-added) context budget rather than using a fixed constant.",
+   "unlock": 1,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 89,
+   "title": "Tool output compression",
+   "status": "DONE",
+   "evidence": [
+    "SourceA/scripts/execution_spine/writer.py:44",
+    "noetfield-sandbox-private/motor/adapters/det_exec.py:63",
+    "noetfield-sandbox-private/motor/kernel/executor.py:63",
+    "noetfield-sandbox-private/motor/kernel/executor.py:190"
+   ],
+   "gap": "Output compression is real and multi-layered: SourceA's execution_spine keeps only stdout[-12000:]/stderr[-8000:] plus exit_code and a one-line error_signature; motor det_exec keeps `exit {code}` + last 200 chars of combined output; receipts store summary counts {total, passed, failed} instead of full logs. This delivers first/last-lines + exit code + summary counts. Gap vs doctrine wording: the tail is a fixed CHAR budget, not 'last 100 relevant LINES', and there is no relevance filter selecting error-adjacent lines.",
+   "next_step": "Replace the fixed char-tail with a line-based compressor that emits first error line + last 100 lines + exit code + counts, and drops known-noise lines.",
+   "unlock": 2,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 90,
+   "title": "Error signature extraction",
+   "status": "PARTIAL",
+   "evidence": [
+    "SourceA/scripts/execution_spine/writer.py:21",
+    "SourceA/scripts/execution_spine/types.py:43",
+    "SourceA/scripts/runtime/repair_loop/failure_classifier.py:40"
+   ],
+   "gap": "A basic error signature exists: execution_spine._error_signature(stderr, exit_code) returns the last stderr line truncated to 240 chars (or exit_N), stored as ExecutionRecord.error_signature and surfaced to the repair loop; failure_classifier buckets failures into a fixed FAILURE_CLASSES enum. But none of the doctrine's normalization is done — no path normalization, no timestamp stripping, no stack-trace dedup, no grouping of like errors before the model. Two runs with different tmp paths/timestamps produce different signatures.",
+   "next_step": "Extend _error_signature to normalize (strip abs paths to repo-relative, remove ISO timestamps/hex ids, collapse repeated stack frames) and hash the normalized form so identical errors group to one signature.",
+   "unlock": 3,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 125,
+   "title": "Prompt prefix caching",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:39",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:121",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:132"
+   ],
+   "gap": "The prompt is STRUCTURED for prefix caching: intel_low builds `PROMPTS[task] + payload` where PROMPTS holds the stable role+schema prefix and only the job-specific payload varies (packets likewise separate stable governance from context_summary). But no provider prompt-caching is actually engaged — the openai_json/chat_json bodies set no cache_control breakpoint, and the free/cheap endpoints targeted may not support it. The cacheable shape exists; the cache is never claimed. (No cache_control usage found anywhere in the code repos.)",
+   "next_step": "When MOTOR_INTEL_LOW_STYLE targets a caching-capable endpoint, mark the static PROMPTS[task] prefix with the provider's cache_control breakpoint so only the payload is uncached.",
+   "unlock": 2,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 126,
+   "title": "Output length limits",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:132",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:48",
+    "noetfield-sandbox-private/motor/kernel/intake.py:90"
+   ],
+   "gap": "Length caps exist but not the doctrine's exact structured limits: packet context_summary is maxLength 1200, intel_low classify rationale is instructed '<=200 chars', decomposition is capped at 6 jobs. Missing are the named limits max_summary_words:250 / max_risks:5 / max_recommendations:3 as an enforced output schema — nothing in code caps a risks[] or recommendations[] array length, and the word/char caps are prompt hints (classify) or field maxLength, not a shared reusable limit policy.",
+   "next_step": "Define an output-limits policy (max_summary_words 250, max_risks 5, max_recommendations 3) and enforce it in intel_low._validate by truncating/rejecting proposals whose arrays or summary exceed the caps.",
+   "unlock": 2,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 127,
+   "title": "Evidence links not restating",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py:195",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:35",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:129",
+    "SourceA/scripts/execution_spine/writer.py:51"
+   ],
+   "gap": "Evidence-by-reference is pervasive and load-bearing: jobs carry receipts[] as a list of file PATHS (not inlined content); the diagnose schema requires evidence_refs[]; the governance packet requires evidence_refs (minItems 1) + decision_ref + success_receipt.required_fields and forbids restating P0 reasoning; execution records store an artifact_path pointing to the full log while the record keeps only a compressed tail. Downstream consumers get links plus short summaries, exactly per doctrine. Minor gap: no lint that FAILS a receipt for inlining content that should have been a ref.",
+   "next_step": "Add a receipt lint that flags any receipt field embedding >N lines of log/diff content instead of an evidence_ref path, to keep the link-not-restate discipline enforced.",
+   "unlock": 1,
+   "cluster": "Context slicing, budgets, retrieval, caching, versioning, compression"
+  },
+  {
+   "n": 8,
+   "title": "Deterministic First",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/adapters/det_exec.py:1 (\"No LLM anywhere in this module\") — probe/lane_checks/verify_recompute/verify_ci/verify_edge/closure all pure",
+    "motor/motor/adapters/router.py:2 MAX_AUTOMATIC_RANK=1, W-DET-*=class_rank 0 runs before any intelligence",
+    "governance/check.py:1 git ls-remote / sha256 SSOT validation with no model",
+    "motor/motor/plans/census.py:208 dedup_sort, blob_sha reconciliation deterministic",
+    "motor/motor/adapters/det_patch.py:34 _guard fail-closed path check, no LLM"
+   ],
+   "gap": "Fully implemented in the motor; the doctrine's boundary (LLM only for cause/design/ambiguity) is structurally enforced. No gap of substance.",
+   "next_step": "Add a one-line 'deterministic_first: true' assertion check to CI that greps each W-DET adapter for banned model imports, locking the invariant.",
+   "unlock": 5,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 9,
+   "title": "Don't guess provable facts",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/adapters/det_exec.py verify_recompute recomputes summary from checks[] instead of trusting claim; verify_ci polls real GitHub check-runs; probe records body_sha256",
+    "motor/motor/adapters/intel_low.py:invoke fails closed after 2 attempts rather than emitting a guessed proposal",
+    "governance/check.py remote_head() fetches actual remote instead of assuming",
+    "motor/motor/verify/verifier_selftest.py asserts self-claimed PASS is rejected"
+   ],
+   "gap": "Enforced everywhere a tool can prove the fact. No material gap.",
+   "next_step": "Extend the same recompute discipline to governance receipts by having audit_receipt_ledger_v1 recompute any numeric claim it reads, not just schema-check it.",
+   "unlock": 4,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 26,
+   "title": "Independent verification on diff only",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/adapters/det_exec.py verify_recompute: 'Independent recount of a prior receipt's checks[]; separate workflow identity'",
+    "motor/motor/schemas/job_contract.schema.json verification_contract.legs [recompute,target_ci,live_probe,edge] scoped to changed files + diff",
+    "motor/motor/adapters/det_exec.py verify_edge POSTs receipt to MOTOR_EDGE_VERIFIER_URL (separate edge identity), fails closed if not deployed",
+    "governance/scripts/prove_verifier_independence_v1.py"
+   ],
+   "gap": "verify_edge requires an external edge worker (MOTOR_EDGE_VERIFIER_URL) that may be unset; then that leg fails closed rather than running. Independence is real but partly gated on deployment.",
+   "next_step": "Deploy the W-VERIFY-EDGE Cloudflare worker and set MOTOR_EDGE_VERIFIER_URL so the independent edge leg is live rather than fail-closed.",
+   "unlock": 4,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 27,
+   "title": "Verification pyramid (schema->...->human)",
+   "status": "PARTIAL",
+   "evidence": [
+    "motor/motor/schemas/job_contract.schema.json validates every contract (schema tier)",
+    "motor/motor/adapters/det_exec.py run_acceptance runs repo lint/type/test commands (lane_checks) = static/unit/integration tiers",
+    "motor/motor/adapters/det_exec.py verify_ci (e2e/CI) + verify_edge (independent) + closure -> decision queue -> founder (human tier)",
+    "motor/motor/kernel/executor.py cheap deterministic tiers run before W-INTEL-LOW"
+   ],
+   "gap": "The legs exist and are cheap-first, but there is no codified strict ladder ordering (schema->static->lint->type->unit->integration->e2e->LLM->human) nor an explicit 'LLM review' tier before human; the pyramid is implicit in job_class routing rather than a declared ordered gate.",
+   "next_step": "Add an ordered verification_tiers list to verification_contract and make the scheduler refuse to run a higher tier until all lower tiers passed, making the pyramid explicit.",
+   "unlock": 4,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 28,
+   "title": "Receipt by code, narrative by model",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/kernel/executor.py build_receipt: checks[], summary{total,passed,failed}, sha, http_status, promotion_recommendation all code-generated",
+    "motor/motor/adapters/det_exec.py check() builds every fact from the probe/recompute, never from a model",
+    "motor/motor/plans/receipts.py build_plan_receipt assembles provenance purely",
+    "governance/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json:5 'never prose', timestamps machine-generated"
+   ],
+   "gap": "Motor goes further than the doctrine (even promotion_recommendation is code, not model). No gap; if anything the model-authored narrative slot is unused.",
+   "next_step": "Add an optional code-gated 'remaining_risks' narrative field populated by W-INTEL-LOW only on handoff, keeping facts code-authored.",
+   "unlock": 4,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 29,
+   "title": "Machine-readable receipts w/ schema",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/plans/schemas/plan_execution_receipt_v1.schema.json",
+    "governance/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json (schema/packet_id/quality_state/evidence_artifacts/pass_fail/next_pointer)",
+    "motor/products/sandbox-autorunner-v1/SANDBOX_RECEIPT_SCHEMA_v1.json",
+    "governance/receipts/*.json (dozens of schema-bearing receipts, e.g. verifier-independence-proof-latest.json)"
+   ],
+   "gap": "sandbox_receipt_v1 (the motor's runtime receipt) is written by executor.py but has no committed JSON Schema file alongside plan_execution_receipt_v1; validation is by construction, not by a schema doc.",
+   "next_step": "Commit sandbox_receipt_v1.schema.json under motor/schemas and add a unit test asserting build_receipt output validates against it.",
+   "unlock": 5,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 30,
+   "title": "Receipt deduplication (delta only)",
+   "status": "PARTIAL",
+   "evidence": [
+    "motor/motor/plans/schemas/plan_execution_receipt_v1.schema.json:57 terminal_status NO_CHANGE_ALREADY_SATISFIED (records no-op instead of faking work)",
+    "motor/motor/plans/census.py:208 dedup_sort dedups inputs by (repo,path,blob_sha)",
+    "governance/receipts/agent-read-staleness-*.json — multiple near-identical receipts written per run (no delta collapsing)"
+   ],
+   "gap": "The doctrine's rule 'if state unchanged, log only the delta' is not implemented: executor.write_receipt stamps a full new receipt every run; there is no comparison against the last receipt to suppress or delta-encode unchanged state. NO_CHANGE status and input dedup exist but not receipt-delta.",
+   "next_step": "In write_receipt, hash the state-bearing fields and, when identical to the previous receipt for the same job, write a small delta/heartbeat pointer instead of a full duplicate.",
+   "unlock": 2,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 35,
+   "title": "Heartbeat without LLM",
+   "status": "PARTIAL",
+   "evidence": [
+    "motor/.github/workflows/motor-watchdog-v1.yml — deterministic (no LLM) staleness/liveness sweep, re-enable, self-heal, issue-on-fault",
+    "motor/motor/panel/build_panel.py STATUS.md/status.json 'receipts-derived, no self-report'",
+    "governance/scripts/brain_loop_health_check_v1.sh deterministic preflight; governance/receipts/brain-self-heal-tick-*.json",
+    "motor/motor/STATUS.md heartbeat lane rows"
+   ],
+   "gap": "No single heartbeat artifact emits the doctrine's field set (timestamp/queue_depth/last_success/last_fail/worker_health/credential_expiry). Watchdog covers liveness+staleness+workflow health but not queue depth or credential-expiry; these are scattered, not one deterministic heartbeat receipt.",
+   "next_step": "Add a COST-T0 heartbeat emitter that writes heartbeat_v1.json with queue_depth (from statestore), last_success/last_fail, worker health, and MOTOR_APP token expiry each tick.",
+   "unlock": 3,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 79,
+   "title": "Structured output",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/adapters/intel_low.py TASK_SCHEMAS + 'STRICT JSON ONLY' prompts + _validate() required-key enforcement",
+    "motor/motor/schemas/job_contract.schema.json (single worker-agnostic packet)",
+    "governance/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json + P0_PROMPT_LOOP_STATE_SCHEMA_v1.json",
+    "governance/scripts/p0pgr_packet_lint_v1.py enforces packet schema"
+   ],
+   "gap": "intel_low uses hand-rolled required-key checks rather than full JSON-Schema validation (its own comment says 'full JSON-Schema validation happens in verify'). Adequate but not schema-library-strict.",
+   "next_step": "Replace intel_low._validate's manual key checks with jsonschema validation against per-task schema files for parity with the contract validator.",
+   "unlock": 5,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 80,
+   "title": "Cheap schema repair",
+   "status": "PARTIAL",
+   "evidence": [
+    "motor/motor/adapters/intel_low.py invoke() retries once with the validation error appended ('YOUR PREVIOUS OUTPUT WAS INVALID (...) STRICT JSON ONLY') before failing",
+    "motor/motor/adapters/intel_low.py _extract_json salvages a JSON object embedded in prose"
+   ],
+   "gap": "Repair re-invokes the SAME worker/model rather than a dedicated cheap schema-repair pass; the doctrine wants 'invalid JSON -> cheap schema repair, not re-running the Worker'. No separate low-cost repair adapter; also no deterministic structural coercion step before re-prompting.",
+   "next_step": "Add a deterministic JSON-repair pass (bracket/quote/trailing-comma fixups) applied before the single re-prompt, so most malformed outputs are fixed with zero extra model calls.",
+   "unlock": 2,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 81,
+   "title": "Separate content generation from validation",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/adapters/intel_low.py (generation/proposals) is fully separate from motor/motor/adapters/det_exec.py + verify (validation)",
+    "governance/scripts/commercial_pulse_dispatch_check_v1.py deterministic predicates (required fields, FORBIDDEN_ENTITY_TOKENS, CASL address/unsubscribe) validating drafts it did not write",
+    "governance/language_gate/language_gate_core_v1.py deterministic content validator distinct from the rewrite agent (language_gate_agent_rewrite_v1.py)"
+   ],
+   "gap": "Fully realized in two independent subsystems (motor and governance language/commercial gates). No material gap.",
+   "next_step": "Register the commercial_pulse checker's predicate list as a reusable 'content_validation_v1' workflow so other content lanes inherit the same banned-claims/required-sections gate.",
+   "unlock": 3,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 84,
+   "title": "Semantic diff",
+   "status": "MISSING",
+   "evidence": [
+    "sourcea/brain-os/wtm/SINA_PRE_LLM_WORLD_MODEL_ROADMAP_LOCKED_v2.md:98 'L14 Diff intelligence | Semantic diff, change impact | Missing | High'",
+    "sourcea/brain-os/plan-registry/SOURCEA-1000-LOCK.md:72 sa-0969 'Semantic diff L14 spike' (spike doc only, LOCKED)",
+    "motor/motor/adapters/det_patch.py tracks changed_paths but performs no risk-category classification (pricing/auth/secrets/db)"
+   ],
+   "gap": "No implementation anywhere: reviewers are not scoped to only risk-relevant changes by semantic category. Motor knows which paths changed but does not map them to auth/payments/secrets/db-schema risk to trigger scoped review (blocks doctrine #85 risk-triggered review).",
+   "next_step": "Add a deterministic path->risk-class map (pricing/auth/secrets/public-endpoint/db) over det_patch.changed_paths that emits a risk_surface field, driving whether a T2 review leg is required.",
+   "unlock": 3,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 107,
+   "title": "Cost receipt",
+   "status": "PARTIAL",
+   "evidence": [
+    "governance/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json:69 cost{provider,model,tokens_in,tokens_out,total_usd,accounting_note}",
+    "governance/p0-pgr/P0_PROMPT_LOOP_STATE_SCHEMA_v1.json:140 cost with tokens_in/tokens_out",
+    "motor/motor/kernel/executor.py build_receipt cost{model_tier,tier0_checks,escalated,est_cost_usd}"
+   ],
+   "gap": "The cost fields exist in schema but are not computed deterministically from real usage: motor hardcodes est_cost_usd (0.002/0.01) and tier0_checks; governance cost is model/session-authored (schema even warns 'never a bare implausible $0'). No component measures model_calls, actual tokens, deterministic_runtime, retries, and cost_policy_pass. Blocks cost attribution (#108), daily sentinel (#133), waste report (#134).",
+   "next_step": "Instrument intel_low._call_raw to capture real token counts + call count and have executor.build_receipt compute cost from those plus wall-clock deterministic_runtime and retry count.",
+   "unlock": 4,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 128,
+   "title": "Human view from machine artifact",
+   "status": "DONE",
+   "evidence": [
+    "motor/motor/panel/build_panel.py writes STATUS.md (human) + status.json (machine mirror) from the same receipt-derived facts, 'no self-report'",
+    "motor/motor/STATUS.md generated output",
+    "governance/language_gate/generate_batch_markdown_v1.py renders markdown views from machine receipts",
+    "governance/scripts/living_system_chain_validate_v1.py + rendered docs"
+   ],
+   "gap": "Realized for the motor control panel and language gate. Governance p0-pgr execution receipts have no auto-generated markdown view yet (JSON only), so the pattern is not uniform across subsystems.",
+   "next_step": "Add a p0pgr receipt->markdown renderer so each P0 execution receipt gets a committed human view generated from the canonical JSON.",
+   "unlock": 3,
+   "cluster": "Deterministic-first, verification pyramid, receipts, heartbeat, structured output"
+  },
+  {
+   "n": 13,
+   "title": "Single writer rule",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:1",
+    "noetfield-sandbox-private/motor/statestore/store.py:19",
+    "noetfield-sandbox-private/motor/statestore/store.py:220"
+   ],
+   "gap": "Single-writer is guaranteed for scheduling decisions (serialized tick) and for state via compare-and-set; the GitStore fallback is only race-safe under the serialized tick + disjoint executor writes, so multi-writer safety fully depends on the DurableStore CAS backend being provisioned (currently MOTOR_STATE_BACKEND defaults to git).",
+   "next_step": "Provision the DurableStore backend (set MOTOR_DB_URL/MOTOR_DB_KEY and flip MOTOR_STATE_BACKEND=durable) so the single-writer/CAS guarantee holds under real concurrency, not just under the serialized canary tick.",
+   "unlock": 3,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 15,
+   "title": "Branch-per-job",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:73",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:6",
+    "noetfield-sandbox-private/motor/install/app-manifest.json:15"
+   ],
+   "gap": "Fully implemented: every write lands on branch automation/<job-id>, never a default/protected branch, never merges. No gap.",
+   "next_step": "None required; optionally add a canary asserting two concurrent patch jobs produce two distinct automation/<job-id> branches with no cross-contamination.",
+   "unlock": 2,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 16,
+   "title": "Immutable job contract",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:1",
+    "noetfield-sandbox-private/motor/kernel/intake.py:73",
+    "noetfield-sandbox-private/motor/adapters/router.py:1"
+   ],
+   "gap": "A single worker-agnostic contract (additionalProperties:false, all required fields, no vendor/model fields) is the sole work packet; run_id (not the contract) changes per lease. Schema is defined and honored by intake/router/executor. Minor gap: the schema is not runtime-validated on job creation (no jsonschema validate call in intake.create_job path).",
+   "next_step": "Add a jsonschema validation call against job_contract.schema.json inside intake before store.create_job so malformed contracts fail closed at intake rather than at adapter time.",
+   "unlock": 2,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 17,
+   "title": "Budget-per-job",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:38",
+    "noetfield-sandbox-private/motor/adapters/router.py:60",
+    "noetfield-sandbox-private/motor/kernel/executor.py:207"
+   ],
+   "gap": "budget{max_cost_usd,max_repair_cycles} is a required contract field; router throttles when est_cost>budget and executor enforces max_repair_cycles. Gap: cost is estimated per-worker (est_cost_usd_per_job), not metered from actual spend, and there is no cumulative per-heading/run budget ceiling — only per-job estimates.",
+   "next_step": "Record actual measured cost into the receipt cost block and enforce a running cumulative budget per heading in the scheduler tick, not just a per-job estimate compare.",
+   "unlock": 3,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 48,
+   "title": "Bounded change (max_files/lines)",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:37",
+    "noetfield-sandbox-private/motor/config/deployment.json:31",
+    "noetfeld-OS/repo-policy.json:55",
+    "noetfeld-OS/scripts/check_noos_repo_policy.py:50"
+   ],
+   "gap": "Change is bounded by PATH (fail-closed allowed_paths guard, boundary-aware match, explicit-paths-only git add) — strong. But there is NO max_files or max_lines cap enforced in the motor: a patch job could write an unbounded number of files/lines as long as all paths match allowed_paths. The only file-count bound (max_files_per_pass:40) lives in noetfeld-OS/SourceA repo-policy.json as a Cursor-pass lint, not enforced in the motor executor.",
+   "next_step": "Add max_files and max_diff_lines to the contract budget block and enforce them in det_patch._guard/run (reject the change and route to HANDOFF_REQUIRED if exceeded), mirroring the existing path guard.",
+   "unlock": 3,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 49,
+   "title": "Dependency-based decomposition",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/intake.py:99",
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:60",
+    "noetfield-sandbox-private/motor/plans/materialize.py:57"
+   ],
+   "gap": "decompose() builds a real dependency graph (depends_on wired from intel-low depends_on_titles, skeleton->applier links, closure depends on all); scheduler promotes queued->ready only when all deps done and cascade-blocks to dead_letter when a dep is unavailable. Fully present.",
+   "next_step": "None required; optionally add cycle detection in decompose so a malformed depends_on_titles set cannot create a deadlocked heading.",
+   "unlock": 4,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 55,
+   "title": "Partial success states",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:50",
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:11",
+    "noetfield-sandbox-private/motor/kernel/executor.py:220"
+   ],
+   "gap": "Rich non-binary terminal/degraded state set exists: queued/ready/leased/running/verifying/done/repair_pending/handoff_required/dead_letter/decision_pending. On failure the motor parks ONLY the affected job (handoff_required) or cascades a downstream to dead_letter while unrelated jobs continue — genuine partial-success/graceful-degradation. Receipt summary carries passed/failed counts.",
+   "next_step": "None required; optionally emit a heading-level rollup receipt classifying a heading as partial_success when some jobs are done and others handoff_required/dead_letter, so partial outcomes are first-class in the evidence ledger.",
+   "unlock": 2,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 56,
+   "title": "Missing-capability -> exact interface (BLOCKED_EXECUTOR_ENDPOINT)",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/handoff.py:18",
+    "noetfield-sandbox-private/motor/adapters/router.py:66",
+    "noetfield-sandbox-private/motor/kernel/executor.py:229"
+   ],
+   "gap": "The CONCEPT is implemented: when no callable worker at/below the ceiling can execute a job_class, router returns handoff_required and handoff.emit_packet writes a COMPLETE work packet (full contract + reason + failure_evidence + result_inbox). But there is no explicitly named BLOCKED_EXECUTOR_ENDPOINT signal and the 'missing capability' is described in human prose ('no callable worker can execute job_class X'), not as a machine-readable exact interface spec (the endpoint/adapter signature that would need to be built). grep for BLOCKED_EXECUTOR_ENDPOINT returns nothing across all repos.",
+   "next_step": "Add a typed BLOCKED_EXECUTOR_ENDPOINT field to the handoff packet that names the exact missing capability as a machine-readable interface (required job_class, worker_class, adapter module path, binding_env vars) so the gap can be auto-filled by adding one registry row + binding.",
+   "unlock": 4,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 59,
+   "title": "Dry-run default",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/materialize.py:16",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:99",
+    "noetfeld-OS/scripts/noetfield_deploy_v1.py:241",
+    "sina-governance-SSOT/gates/promotion_gate.py:755"
+   ],
+   "gap": "The motor realizes the INTENT structurally: every effect is a branch+PR that is never merged and never deployed (STANDING_EXCLUSIONS + 'DO NOT MERGE' PR body), so nothing irreversible happens by default. Governance promotion_gate has an explicit APPROVED_DRY_RUN mode. BUT there is no uniform default-on dry-run/simulate execution mode: the motor has no dry_run flag at all (it just writes to a branch), and the noetfeld-OS deploy/migration CLIs use --dry-run as an opt-in store_true flag whose DEFAULT is a live run (dry_run=False) — the opposite of dry-run-default.",
+   "next_step": "Invert the noetfeld-OS deploy/migration CLIs to default to dry_run=True (require an explicit --execute/--commit flag for live effects), so 'dry-run first' is the enforced default rather than opt-in.",
+   "unlock": 3,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 60,
+   "title": "Irreversible action gate",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/materialize.py:15",
+    "noetfield-sandbox-private/motor/kernel/executor.py:180",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:38",
+    "sina-governance-SSOT/SG-Canonical-Library/noetfield-library/ARCHITECT_START_HERE.md:36"
+   ],
+   "gap": "Irreversible actions are gated: STANDING_EXCLUSIONS forbid merge/deploy/spend/send/permission-change on every heading; authority_class=founder_only and high-risk refusals route to push_decision (founder decision queue) instead of auto-executing; MOTOR_SPEC reserves irreversible authority for founder decision; governance uses ASK_IF_IRREVERSIBLE and 'Sina owns DECIDE'. Gap: the exclusions are asserted as heading text/policy and enforced by the absence of any callable worker for those ops rather than by a single positive runtime interceptor that classifies an arbitrary proposed action as irreversible before allowing it.",
+   "next_step": "Add a single explicit irreversibility classifier invoked before any effectful adapter call that maps the proposed operation to reversible/irreversible and forces founder-gate routing for the irreversible set, so the guarantee is a positive check rather than an emergent property of the registry.",
+   "unlock": 3,
+   "cluster": "Job contracts, budgets, bounded change, branch-per-job, single writer, states, gates"
+  },
+  {
+   "n": 18,
+   "title": "Cause-based retry",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/repair/repair.py:1 (docstring: \"Repair pipeline — generation, not retry\")",
+    "noetfield-sandbox-private/motor/repair/repair.py:13-25 (diagnose_deterministic classifies failed checks into failure_classes: surface_unreachable_or_missing / expectation_mismatch / check_failed)",
+    "noetfield-sandbox-private/motor/repair/repair.py:28-77 (attempt_repair: classify -> intel_low diagnose cause_hypothesis -> propose ONE bounded change -> new commit -> re-verify; bounded by max_repair_cycles)",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py (diagnose schema requires cause_hypothesis, evidence_refs, repair_direction)",
+    "noetfeld-OS/scripts/noos_self_heal_v1.py:68 (classify_finding routes by finding type before any fix)"
+   ],
+   "gap": "The doctrine's explicit guard 'if no variable changed, retry is meaningless' is not enforced as a precondition — repair always emits a proposal even when the diagnosis yields no actionable change. Logic is also split across motor (job failures) and noos (audit findings) with no shared classifier.",
+   "next_step": "Add a pre-repair assertion in attempt_repair that refuses a new cycle when the proposed file set is identical to the prior cycle's (no variable changed), emitting a handoff receipt instead of a no-op retry.",
+   "unlock": 3,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 19,
+   "title": "Retry ladder by failure type",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/repair/repair.py:4-5 (explicitly: \"No automatic escalation above W-INTEL-LOW exists anywhere in this pipeline\") — single-tier, failed->W-INTEL-LOW->handoff_required",
+    "noetfeld-OS/scripts/noos_self_heal_v1.py:28-40 (SAFE_FIX_CATEGORIES vs HIGH_RISK_ESCALATE — a 2-tier ladder: auto_fix vs escalate-to-researcher)",
+    "noetfeld-OS/data/self-heal-policy-v1.json (path-based auto / proposal / founder-gated tiers)"
+   ],
+   "gap": "No implementation of the doctrine's 6-way failure-type routing (Syntax->T0 deterministic; Test->T1 triager; Architecture->T2; Missing credential->founder_blocked; Vendor outage->defer+receipt; Ambiguous business->promotion packet). Motor is single-tier; noos is 2-tier by risk, not by failure class. Failure classes computed in repair.py are not mapped to distinct worker tiers.",
+   "next_step": "Add a route table in motor/repair keyed on diagnose_deterministic failure_classes that dispatches syntax->det_patch(T0), test->triager(T1), architecture->handoff(T2), credential/outage->typed blocker receipts, matching the doctrine ladder.",
+   "unlock": 4,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 20,
+   "title": "Failure caching (signature)",
+   "status": "PARTIAL",
+   "evidence": [
+    "SourceA/scripts/execution_intelligence/pattern_engine/signatures.py:19 (error_fingerprint), :39 (record_fingerprint) — deterministic failure signatures from cmd+stderr+exit_code",
+    "SourceA/scripts/execution_intelligence_v2/risk_scoring.py:9-14 (_unstable) and :24-31 (repetition risk raises blocking[] when a failure pattern frequency>=2)",
+    "SourceA/scripts/execution_intelligence_v2/causal_linker.py:40+ (fail_by_action groups failures by error_signature)",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json (handoff.failure_evidence array)"
+   ],
+   "gap": "Signature COMPUTATION exists (SourceA) and repetition raises risk, but the doctrine's core behavior — suppress re-running the same attempt until the blocker is resolved, only refreshing the blocker receipt — is NOT wired into any dispatcher. The motor/p0-pgr dispatch does not consult a failure-signature cache before re-dispatching. SourceA intelligence is a separate brain-os, not connected to motor intake.",
+   "next_step": "Add a failure-signature ledger the motor intake checks: on a job whose (repo,error,workflow_step) signature is an open blocker, refuse re-dispatch and emit only a blocker-receipt refresh.",
+   "unlock": 4,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 21,
+   "title": "Negative knowledge base",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:62 (the negative rules are enumerated in prose only)",
+    "SourceA/scripts/execution_intelligence/pattern_engine/extractor.py:1 (mines type='failure' patterns) and classifier.py",
+    "SourceA brain-os incident/law docs carry many 'do-not' rules (e.g. SINA_PROHIBITION_INSTEAD_OF_DISK_WIRE_INCIDENT_034, GOAL1 laws) but as narrative",
+    "sina-governance-SSOT/language_gate/dictionary_index.json (encodes anti-pattern meanings; the pervasive 'n'/'ln' redaction in these repos IS this language gate replacing forbidden terms)"
+   ],
+   "gap": "No structured, machine-queryable negative-rule store that dispatch/planning consults before acting. Negative knowledge is scattered across doctrine prose, SourceA incident docs, and mined failure patterns — never unified into a consulted 'do-not' KB (e.g. 'do not clone sandbox-private', 'do not deploy SourceB before Stripe/auth gates').",
+   "next_step": "Create a negative_kb_v1.json (rule_id, scope, forbidden_action, rationale, source_receipt) seeded from the doctrine's enumerated rules, and add a planner lint that fails any packet whose action matches a negative rule.",
+   "unlock": 3,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 22,
+   "title": "Success pattern library",
+   "status": "PARTIAL",
+   "evidence": [
+    "SourceA/scripts/execution_intelligence/pattern_engine/extractor.py:1 (mines success|failure|repetition|fix patterns)",
+    "~/.sina/execution_patterns.json (LIVE data: contains type='success' and type='repetition' patterns with signatures/confidence)",
+    "noetfeld-OS/data/cloud-forge-run-full-pack-pattern-v1.json, noetfeld-OS/data/founder-pivot-pattern-v1.json (named reusable patterns)",
+    "noetfield-sandbox-private/products/sandbox-autorunner-v1/DETERMINISTIC_WORKFLOW_LIBRARY_v1.yaml (deterministic workflow recipes)"
+   ],
+   "gap": "Success patterns exist in two disconnected forms: SourceA mines command-signature patterns from live memory, and noetfeld-OS/motor hold hand-authored named recipes. Neither is the doctrine's unified reusable-recipe library (e.g. cloudflare_worker_release: tests/deploy/health_check/purge/receipt) that dispatch consults to avoid re-designing. Not wired to motor.",
+   "next_step": "Promote SourceA mined success patterns plus the named YAML recipes into one success_pattern_library the p0-pgr compiler reads, so a matching heading reuses the recipe instead of re-planning.",
+   "unlock": 3,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 88,
+   "title": "Flaky test registry",
+   "status": "PARTIAL",
+   "evidence": [
+    "SourceA/scripts/execution_intelligence_v2/risk_scoring.py:9-14 (_unstable detects flapping: >=2 status flips in last 6 runs of an action)",
+    "noetfeld-OS/scripts/noos_self_heal_v1.py (retry_transient category) and noetfeld-OS/data/self-heal-policy-v1.json:19 ('retry logic' allowed as safe fix)",
+    "noetfeld-OS/docs/WORKFLOW_SELF_HEALING_ECOSYSTEM_v1.md:92 ('Systematic flakiness -> Add retry logic, adjust timeouts')",
+    "noetfeld-OS/data/cost_policy_machine.json (max_retry_count:3)"
+   ],
+   "gap": "Flaky DETECTION exists (SourceA unstable-action scoring; noos transient-retry) but there is NO persistent registry with the doctrine schema (test / flake_rate / known_signature / retry_policy / owner). No data file enumerating flaky tests and their owners/policies was found.",
+   "next_step": "Add data/flaky_test_registry_v1.json (test, flake_rate, known_signature, retry_policy, owner) populated from SourceA _unstable scores, and have CI consult it to apply per-test retry policy instead of blanket max_retry_count.",
+   "unlock": 2,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 102,
+   "title": "Learn once, reuse many",
+   "status": "PARTIAL",
+   "evidence": [
+    "SourceA/scripts/execution_intelligence/decision_memory/fix_linker.py:1 (failure->fix relationship builder: links failure_signal to recovery_signal)",
+    "SourceA/scripts/execution_intelligence/decision_memory/ (causality.py, reasoning.py, extractor.py — WHY layer / cause-fix mapping)",
+    "SourceA/scripts/execution_intelligence/feedback_loop/, planner_influence.py (turns patterns+decisions into planner bias signals)",
+    "~/.sina/execution_decisions.jsonl, ~/.sina/execution_patterns.json (live captured learning); validate scripts: SourceA/scripts/validate-execution-decisions.sh, validate-feedback-loop-v1.sh, validate-pattern-engine-v1.sh"
+   ],
+   "gap": "SourceA captures learning as patterns + fix links + decisions and biases its OWN planner, but the doctrine's full distillation — each expensive solution emitted as reusable workflow/test-fixture/verifier/prompt-template/policy/migration/negative-rule — is not systematic, and none of it feeds the motor or p0-pgr dispatch (different repo, home-dir state).",
+   "next_step": "Add a distiller step that, on a verified expensive fix, emits at least one durable reusable artifact (fixture or verifier or negative rule) into the governance SSOT, closing the loop from SourceA learning to motor reuse.",
+   "unlock": 4,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 105,
+   "title": "Random audit",
+   "status": "MISSING",
+   "evidence": [
+    "noetfeld-OS/.github/workflows/noos-workflow-audit.yml, noos-machine-audit-witness.yml (CONTINUOUS full audit every 15 min — not random sampling)",
+    "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md:24 (receipt audits as an eligible auto-dispatch class)"
+   ],
+   "gap": "No random-sampling audit of completed jobs to catch quality drift. The existing audit machinery is comprehensive/continuous (noos) or receipt-scoped (p0-pgr), never a probabilistic sample of a fraction of jobs as the doctrine specifies.",
+   "next_step": "Add a p0-pgr cycle hook that, with fixed probability p, re-queues a just-completed job as a read-only audit packet and receipts any divergence from the original verdict.",
+   "unlock": 2,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 106,
+   "title": "Anomaly-triggered audit",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfeld-OS/scripts/noos_self_heal_v1.py:41-45 (HIGH_RISK_ESCALATE includes security_finding, integration_broken -> forced escalation)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md (monthly spend governor: model-budget cap breach -> BLOCKED_WITH_REASON — a cost-spike trigger)",
+    "SourceA/scripts/execution_intelligence_v2/risk_scoring.py:24-31 (repeated-retry / repetition risk) and self_optimization/trend_detector.py (trend/anomaly direction detection)"
+   ],
+   "gap": "Individual anomaly signals exist scattered across three repos (security escalation, cost-cap breach, repetition risk, trend detection) but there is no consolidated anomaly-triggered audit that fires on the doctrine's specific set: unusual file count / unexpected dir / cost spike / repeated retries / model disagreement / test bypass / security change.",
+   "next_step": "Add an anomaly_audit gate in the motor executor that computes those specific triggers per job (file count delta, out-of-allowed-path dir, cost vs baseline, retry count, verify-skip) and forces an audit packet when any fires.",
+   "unlock": 3,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 122,
+   "title": "Kill criteria for experiments",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md (ROI Judge + monthly spend cap — adjacent cost governor, blocks premium dispatch on cap breach)",
+    "noetfield-sandbox-private/motor/canaries/test_motor_canaries.py (canaries exist as red/green conformance tests, not experiment-abort criteria)"
+   ],
+   "gap": "No structured experiment kill-criteria mechanism. Nothing implements 'no improvement after 3 canaries / cost>2x baseline / low first-pass / requires permanent premium / duplicates subsystem'. The ROI cost cap is the only adjacent lever and it governs spend, not experiment termination.",
+   "next_step": "Add an experiment ledger (experiment_id, baseline_cost, canary_results[], first_pass_rate) with a kill evaluator that emits ABORT+receipt when any doctrine kill predicate trips.",
+   "unlock": 3,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 137,
+   "title": "Promote capability not just output",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/repair/repair.py:4-5 and OPERATOR.md (router ceiling: no worker above W-INTEL-LOW; deterministic det_patch preferred over intel — embodies 'cheaper model / deterministic replaces reasoning')",
+    "noetfield-sandbox-private/motor/IDENTITY_ACTIVATION_v1.md ('automatic router cannot select a premium worker' — enforced, 11/11 canaries)",
+    "SourceA/scripts/execution_intelligence/self_optimization/recommendation_generator.py, performance_tracker.py, strategy_analyzer.py (optimization recommendations from execution history)"
+   ],
+   "gap": "The motor structurally PREFERS cheaper/deterministic (router ceiling, det-first) and SourceA can recommend optimizations, but there is no promotion/graduation LOOP that observes a repeatable reasoning step, verifies it is reliably automatable, and ratchets it down to a deterministic step or cheaper model. The doctrine's 4-question capability-promotion gate (repeatable? verification reliable? cheaper model next? deterministic replaces reasoning?) is not implemented as a mechanism.",
+   "next_step": "Add a capability-promotion evaluator that scans success patterns (point 22) for a reasoning action passing repeatability+reliable-verification thresholds and files a packet to replace it with a deterministic adapter or lower-cost model tier.",
+   "unlock": 4,
+   "cluster": "Retry ladder, failure caching, negative KB, success patterns, distillation, audit"
+  },
+  {
+   "n": 31,
+   "title": "Event-driven not constant polling",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/.github/workflows/motor-tick-v2.yml:1-12 (workflow_run on intake/executor/plan-intake completion; header: 'No schedules exist anywhere in the motor')",
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:1-5 (continuation is event-driven; every executor completion re-fires the tick)",
+    "noetfeld-OS/.noos-runtime/machine-loops/dispatch-queue-v1.json (trigger_sources: FAILED_WITH_RECEIPT, critic_REJECT, DRIFT, gate_event)",
+    "noetfeld-OS/.noos-runtime/loops/self_heal/cycle-000001.json (trigger_source: repository_dispatch, event_type noos_self_heal_loop_tick)"
+   ],
+   "gap": "Motor is fully event-driven; NOOS loops are dispatch/event-triggered. Remaining periodic crons (governance census/staleness weekly, sg-auth every 6h, brain-loop every 30m, motor-watchdog every 30m) are anti-stall/report jobs where no webhook source exists — consistent with doctrine's 'polling only without webhook' clause, but none carry an explicit why_not_event_driven justification.",
+   "next_step": "Add a one-line why_not_event_driven field to each remaining cron workflow header (census, staleness, auth-probe, brain-loop, watchdog) documenting the missing webhook that forces polling.",
+   "unlock": 2,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 32,
+   "title": "Adaptive polling",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:73 (doctrine text only: high-change hourly / stable daily / dormant weekly)",
+    "grep across noetfield-sandbox-private/motor, noetfeld-OS/scripts, SourceA/brain-os, sina-governance-SSOT/scripts: no frequency-adaptation logic; all crons are fixed-interval literals",
+    "noetfeld-OS/scripts/noos_specialist_v1.py:44 (only a proposed 'backoff: exponential' fix-type string, not runtime cadence adaptation)"
+   ],
+   "gap": "No mechanism anywhere changes a loop's polling frequency based on observed change-rate or dormancy, and NOOS has no evidence artifact proving a given frequency is ROI-positive. Every schedule is a hardcoded cron string.",
+   "next_step": "Add a deterministic cadence recommender that reads each loop's recent cycle receipts (change vs no-change), classifies high-change/stable/dormant, and emits a proposed cron with the observed ROI evidence — recommend-only, founder applies.",
+   "unlock": 2,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 33,
+   "title": "Schedule ROI preflight",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py:41,55-57 (job-level cost preflight: est_cost > budget -> throttled)",
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py:1-30 (deterministic ROI/value-class scoring of queued headings before dispatch)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_GOVERNANCE_RUNTIME_v1.md:42 (ROI Judge stage scores worth-doing-now + value_class before dispatch)",
+    "sina-governance-SSOT/p0-pgr/P0_PGR_CLOUD_ACTIVATION_LADDER_v1.md:3 (each rung has entry gate + exit receipt, but no schedule-creation preflight template)"
+   ],
+   "gap": "Job-level ROI/cost preflight exists, but there is no preflight GATE for creating a new SCHEDULE carrying the doctrine's required fields (purpose, expected_value, estimated_monthly_cost, frequency, why_not_event_driven, why_not_manual, fallback, stop_condition). New crons can be added by editing a .yml with no preflight artifact.",
+   "next_step": "Add a schedule-preflight JSON schema + CI lint that fails any PR adding a `schedule:` cron unless a sibling preflight file with the 8 required fields is present and references a stop_condition.",
+   "unlock": 3,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 34,
+   "title": "Stop condition per loop",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:22 (TERMINAL = done/handoff_required/dead_letter) and :66-84 (terminality-based closure + dead_letter cascade)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:207 and motor/kernel/intake.py:41 (max_repair_cycles budget = budget-exceeded stop)",
+    "noetfeld-OS/.noos-runtime/machine-loops/dispatch-queue-v1.json (max_attempts_before_escalation: 2 -> escalation target)",
+    "noetfeld-OS/scripts/run_noetfield_factory_loop_v1.py:177,269 (--max-cycles bounded-run stop)"
+   ],
+   "gap": "Per-job/per-loop stops exist for budget-exceeded, terminality, and repair-cycle exhaustion, but the doctrine's full set is not covered uniformly: no time-based idle kill (no state change 7d), no explicit 3-identical-failures detector, and no single registry asserting every scheduled loop declares one of the six stop conditions.",
+   "next_step": "Add a deterministic idle-stop check to the watchdog/scheduler that opens a founder decision when a heading/loop shows no state change for N days, and require a stop_condition enum field on every loop registry entry.",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 36,
+   "title": "Liveness via external receipt",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/.github/workflows/motor-watchdog-v1.yml (staleness = tick had no GREEN run in MAX_TICK_AGE_HOURS -> redispatch; this is 'cron ran' liveness)",
+    "noetfeld-OS/scripts/noos_loop_liveness_v1.py:1-2 (upserts loop liveness rows) and .noos-runtime/fly-executor/receipts/fly-c254a0a86914.json:131 (liveness_upsert = last_fired_at only)",
+    "noetfeld-OS/.noos-runtime/integrator/daily-checklist-v1.json:5 (one_law: 'Daily authority = live probes; receipts on disk are snapshots only, never closure' — doctrine philosophy is documented)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:43-90 (real external artifacts do get produced: verification receipts, PRs) "
+   ],
+   "gap": "Liveness is currently measured as 'the loop fired / had a green run / last_fired_at' — exactly the cron-ran signal doctrine 36 says is NOT proof of life. No mechanism asserts liveness from an EXTERNAL OUTCOME (new lead / PR created / test repaired / deploy verified / opportunity classified) within a window.",
+   "next_step": "Change the watchdog/liveness check so a loop is 'alive' only if it produced at least one external-outcome receipt (PR/deploy/lead/classified item) in the window; a green-but-outcome-empty run raises the same stale alert.",
+   "unlock": 3,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 109,
+   "title": "Revenue-linked scaling",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md:58 (cap policy: <=$1,500/mo before revenue>=$10k/mo; <=$2,000/mo after — router checks remaining monthly budget)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md:63 (monthly spend governor enforced 'in ROI Judge' — documented)",
+    "sina-governance-SSOT/scripts/p0pgr_campaign_planner_v1.py:252 (founder's own system states: 'spend governor exists on paper (router rules) but has no enforcement receipt; no per-loop cost attribution receipts')",
+    "noetfield-sandbox-private/motor/adapters/router.py:55-57 (only per-JOB budget check exists; no monthly aggregate or revenue linkage)"
+   ],
+   "gap": "The revenue-linked cap is policy text, not enforced code. There is no aggregate monthly-spend accumulator, no revenue signal wired in, and no enforcement receipt. The cap cannot fire because monthly spend is never computed (cost receipts are mostly 0.0 deterministic).",
+   "next_step": "Build a monthly-spend accumulator from cost receipts and wire a single gate in the ROI Judge / router that reads current revenue (or 'pre-revenue') and BLOCKS_WITH_REASON new premium dispatch above the applicable cap, emitting an enforcement receipt.",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 131,
+   "title": "Default-deny cost explosion",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py:16,53 (MAX_AUTOMATIC_RANK=1 'is law, not config'; module structurally cannot return a worker above W-INTEL-LOW; premium/auto-escalation denied by default, red-canary enforced)",
+    "noetfield-sandbox-private/motor/kernel/intake.py:41 (DEFAULT_BUDGET max_repair_cycles:2 -> >2 retries denied by default)",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json:34 (premium requires roi_score>=70 + difficulty justification)",
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:172 (doctrine 131 lists 8 dimensions to default-deny)"
+   ],
+   "gap": "Default-deny is real and structural for the two highest-cost dimensions (premium/escalation and >2 retries). The other doctrine-131 dimensions — full-repo context, >3 agents, multi-round debate, browser automation, paid provisioning, long schedule — are not each guarded by an explicit deny-unless-reason check in code.",
+   "next_step": "Add a single preflight policy check that default-denies the remaining 131 dimensions (full_repo_context, agents>3, rounds>1, browser_automation, paid_provisioning, schedule) unless the job contract carries an explicit `reason` field for that dimension.",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 132,
+   "title": "Cost spike circuit breaker",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:173 (doctrine text only: threshold -> pause/capture state/partial receipt/request escalation)",
+    "grep 'circuit breaker' across repos returns only the capability-ROUTER circuit breaker (failing-dependency pattern, a different concept) in SG-Canonical-Library / NOETFIELD_DICTIONARY, plus a NOOS proposal type in noetfeld-OS/scripts/noos_specialist_v1.py:84",
+    "no code compares running spend against a threshold to pause a loop"
+   ],
+   "gap": "No cost-spike breaker exists. Nothing watches cumulative or rate-of-spend against a threshold to pause, capture state, write a partial receipt, and request escalation. (The only 'circuit breaker' in the codebase is the dependency-failure pattern, unrelated to cost.)",
+   "next_step": "Add a deterministic spike check invoked per cycle that trips when spend in a rolling window exceeds a configured threshold, writes a partial receipt with captured state, and raises a founder escalation instead of continuing. (Depends on #133 producing a live spend number.)",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 133,
+   "title": "Daily cost sentinel",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/scripts/write_roi_heartbeat_v1.py:1,17-30 (the only cost-heartbeat script — WEEKLY, and every metric is hardcoded 'unknown'; a stub, not a sentinel)",
+    "sina-governance-SSOT/p0-pgr/P0_DISPATCH_BRAIN_RUNTIME_v1.1.md:63 ('daily heartbeat with spend-by-value_class' — documented, not implemented)",
+    "sina-governance-SSOT/scripts/p0pgr_campaign_planner_v1.py:252 ('no per-loop cost attribution receipts')",
+    "per-cycle cost fields exist (sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:149-153; noetfeld-OS/.noos-runtime/loops/self_heal/cycle-000001.json cost block) but are never aggregated into a daily report"
+   ],
+   "gap": "No daily deterministic report of cost today / by project / by model / retry costs / failed-job costs / top-5 expensive workflows. Cost is captured per-receipt (mostly 0.0) but never summed. The existing heartbeat is weekly and entirely unpopulated.",
+   "next_step": "Write a deterministic daily sentinel that scans all cost receipts for the day and emits cost-by-project / by-model / retry / failed-job totals + top-5 workflows; this is the currency the whole cluster (109/132/134/142/143) depends on.",
+   "unlock": 5,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 134,
+   "title": "Weekly waste report",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:174 (doctrine text only)",
+    "sina-governance-SSOT/scripts/write_roi_heartbeat_v1.py (weekly cadence exists but produces an unknown-valued ROI stub, not a waste report)",
+    "no scanner for repeated reads / failed calls / unused agents / oversized contexts / premium-without-escalation / schedules-without-external-outcome"
+   ],
+   "gap": "No weekly waste report is generated. None of the six waste signals are computed. Notably 'schedules without external outcome' is directly computable from receipts once #36's external-outcome liveness exists.",
+   "next_step": "Add a weekly deterministic waste scanner over receipts + workflow census emitting the six signals; start with the two cheapest-to-compute (schedules-without-external-outcome, premium-without-escalation-receipt).",
+   "unlock": 3,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 142,
+   "title": "Measure outcome not activity",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfeld-OS/.noos-runtime/loops/self_heal/cycle-000001.json (per-cycle value_class + sink_invariant + evidence commands with exit codes)",
+    "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:120-125 (receipt carries roi.value_class, reduces_founder_workload, founder_blocked_snapshot)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:43-64 (receipts carry verification checks = verified-outcome signal)",
+    "sina-governance-SSOT/scripts/write_roi_heartbeat_v1.py (aggregate outcome metrics all 'unknown')"
+   ],
+   "gap": "The building blocks exist per-receipt (value_class, verification pass, founder_blocked), but there is no aggregate report that contrasts outcomes (PRs verified / interruptions avoided / setups completed) against activity (cycles run / dispatches). The founder-workload metric (doctrine 138) is likewise uncomputed.",
+   "next_step": "Add an aggregator that rolls up receipts into an outcome scoreboard (verified PRs, deploys, classified opportunities, founder interruptions) alongside raw activity counts, so the ratio is visible.",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 143,
+   "title": "Cost per verified outcome",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:184 (formula: Total Agentic Cost / Verified Useful Outcomes)",
+    "sina-governance-SSOT/scripts/write_roi_heartbeat_v1.py:22 (cost_per_signal_cad: 'unknown' — the intended slot, never computed)",
+    "inputs both exist but are never divided: per-receipt cost (p0pgr_cycle_v1.py:149-153; noos cycle cost block) and verified outcomes (executor verification receipts)"
+   ],
+   "gap": "The headline commercial metric is not computed. Numerator (total agentic cost) is unavailable because spend is never aggregated (#133) and denominator (verified useful outcomes) is never counted (#142). The heartbeat reserves the field but leaves it 'unknown'.",
+   "next_step": "Once #133 (daily spend total) and #142 (verified-outcome count) land, compute cost / verified-outcome per window and populate it in the heartbeat receipt instead of 'unknown'.",
+   "unlock": 4,
+   "cluster": "Event-driven, adaptive polling, ROI preflight, stop conditions, liveness, cost sentinel"
+  },
+  {
+   "n": 10,
+   "title": "Summary passing (compressed handoff)",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:9",
+    "noetfield-sandbox-private/motor/adapters/handoff.py:16",
+    "sina-governance-SSOT/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+    "noetfield-sandbox-private/motor/kernel/intake.py:45"
+   ],
+   "gap": "The Job Contract carries task_id/instruction/context/verification_contract/expected_outputs and handoff packets carry reason+failure_evidence+result_inbox, but there is no explicit closed field set named acceptance_tests/open_questions on every stage boundary — acceptance lives implicitly in verification_contract.legs.",
+   "next_step": "Add explicit acceptance_tests[] and open_questions[] fields to job_contract.schema.json so every handoff boundary is a fully self-describing summary.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 11,
+   "title": "Artifact-based communication",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json",
+    "noetfield-sandbox-private/motor/adapters/handoff.py:16",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:60",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_PACKET_SCHEMA_v1.json",
+    "sina-governance-SSOT/p0-pgr/P0_EXECUTION_RECEIPT_SCHEMA_v1.json",
+    "noetfield-sandbox-private/motor/state/receipts/"
+   ],
+   "gap": "Job Contract, Patch(PR), Verification Receipt and Handoff Packet are all real artifacts; a formal named 'Promotion Packet' schema is only implied by receipts, not a distinct schema in the motor.",
+   "next_step": "Add a promotion_packet_v1.schema.json to motor/schemas and emit it from the closure job so promotion is an artifact, not a state flag.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 12,
+   "title": "No agent-to-agent free chat",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:20",
+    "noetfield-sandbox-private/motor/adapters/router.py:1",
+    "noetfield-sandbox-private/motor/adapters/handoff.py:26",
+    "SourceA/brain-os/law/enforcement/SOURCEA_FORGE_TERMINAL_V3_SWARM_BLACKBOARD_LOCKED_v1.md:12"
+   ],
+   "gap": "The motor structurally forbids agent-to-agent chat (all traffic is contracts+outbox/inbox+receipts), but the bounded-consensus sub-clause (max_agents:3, max_rounds:1, disagreement_matrix for security/governance/irreversible) is not coded anywhere; and SourceA's swarm blackboard (planner_votes/critic_verdicts, shared context) is a live multi-agent coordination lineage that contradicts the free-chat ban.",
+   "next_step": "Implement a single bounded consensus adapter (max_agents:3/max_rounds:1 → disagreement_matrix artifact) gated to security/governance job_classes, and mark the SourceA swarm blackboard as non-authoritative or retire it.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 14,
+   "title": "Parallelize only independent work",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:56",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:44",
+    "noetfield-sandbox-private/motor/config/deployment.json:20",
+    "sina-governance-SSOT/ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md:16"
+   ],
+   "gap": "Independence is enforced by depends_on promotion + one-writer-per-cell + branch-scoped writes; there is no automatic static check that two concurrently-ready jobs do not touch a shared SSOT surface (nav/schema/pricing/auth) — it relies on allowed_paths being disjoint.",
+   "next_step": "Add a scheduler pre-dispatch check that refuses to fan out two ready jobs whose allowed_paths overlap on a declared shared-SSOT surface.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 23,
+   "title": "Prompt compilation pipeline",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/intake.py:70",
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:44",
+    "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:63",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_COMPILER_MVP_PLAN_v1.md",
+    "SourceA/brain-os/law/enforcement/SOURCEA_FORGE_PROMPT_OS_COMPILER_V3_LOCKED_v1.md"
+   ],
+   "gap": "Motor intake does normalize→decompose→classify(risk in W-INTEL-LOW output)→resolve target→generate contract→dispatch, and p0pgr does evidence→packet→lint→route; but voice/text normalization and an explicit 'resolve project/identify SSOT' compiler stage are not a single unified path — they are split across motor intake and p0pgr cycle.",
+   "next_step": "Unify the two compilers behind one entrypoint that runs the full 8-step chain (normalize→intent→resolve project→classify risk→identify SSOT→contract→choose workflow→dispatch) and emits one compile receipt.",
+   "unlock": 5,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 24,
+   "title": "Compiler shrinks prompt (reduce entropy)",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/intake.py:45",
+    "sina-governance-SSOT/scripts/p0pgr_packet_lint_v1.py:100",
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_COMPILER_MVP_PLAN_v1.md"
+   ],
+   "gap": "The compiler emits a bounded, structured Job Contract (contract+context+acceptance via verification legs+risk gate) and the lint strips P0-CORE leakage, which qualitatively reduces entropy — but nothing measures or asserts that output is smaller/lower-entropy than input; there is no size/entropy metric or regression gate.",
+   "next_step": "Emit input_tokens vs output_tokens (or byte size) on each compile receipt and add a canary asserting compiled_contract_size < raw_heading_context_size.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 41,
+   "title": "SSOT enforcement (one owner per domain)",
+   "status": "DONE",
+   "evidence": [
+    "sina-governance-SSOT/ssot/MULTI_REPO_WORKER_REGISTRY_v1.md:5",
+    "SourceA/brain-os/system/authority.yaml:1",
+    "SourceA/brain-os/system/EXECUTION_AUTHORITY_MAP_LOCKED_v1.md",
+    "noetfield-sandbox-private/motor/config/deployment.json:31"
+   ],
+   "gap": "Domain ownership is declared (SG registry: one actor·one repo·one scope; authority.yaml machine SSOT; motor targets[] per repo), but pricing SSOT and product-promise/fulfillment owners named in the doctrine have no canonical record on disk, and there is no runtime resolver an agent calls to resolve authority before acting.",
+   "next_step": "Build a single ssot_resolve(domain) helper reading MULTI_REPO_WORKER_REGISTRY + authority.yaml + motor targets, and add pricing/fulfillment owner rows.",
+   "unlock": 5,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 42,
+   "title": "Authority check before edit",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:69",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:38",
+    "sina-governance-SSOT/scripts/p0pgr_packet_lint_v1.py:104",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:23"
+   ],
+   "gap": "det_patch enforces authority_class==bounded_write + fail-closed path guard, and the packet linter enforces authority_scope==deploy→FOUNDER_ONLY; but the doctrine's explicit duplicate_control_plane_risk:false / file_owner_confirmed booleans are not fields on the contract — they are enforced implicitly by path guard + registry, not asserted per edit.",
+   "next_step": "Add repo_authority_confirmed/file_owner_confirmed/duplicate_control_plane_risk booleans to the job contract and have det_patch refuse a write unless all three are present and true.",
+   "unlock": 4,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 43,
+   "title": "No second control plane",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:10",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:2",
+    "noetfeld-OS/data/noos-integrator-control-plane-v1.json:6",
+    "sina-governance-SSOT/ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md:16"
+   ],
+   "gap": "Extension-not-clone is enforced structurally (new worker=one registry row+one binding; NOOS one_law: SourceA phase_reconciler is sole control authority; one-writer-per-cell), but there is no automated detector that flags an emerging second control plane (duplicated schedules/agents/conflicting states) — it is a doctrine assertion, not a scan.",
+   "next_step": "Add a cross-repo scan that inventories schedulers/reconcilers and fails if two motors claim authority over the same task cell.",
+   "unlock": 4,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 44,
+   "title": "Smallest corrective move",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:44",
+    "noetfield-sandbox-private/motor/repair/repair.py",
+    "sina-governance-SSOT/scripts/p0pgr_packet_lint_v1.py:8"
+   ],
+   "gap": "The repair pipeline is generation-not-retry, bounded (max_repair_cycles=2, constrained to allowed_paths) and the p0pgr continuity law files a repair_candidate rather than freezing the lane — embodying 'repair the missing proof, not the architecture' — but there is no explicit guard that blocks a redesign-scale diff when only evidence is missing.",
+   "next_step": "Add a diff-size/scope ceiling on repair proposals so a repair that rewrites more than the failing surface is refused as over-correction.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 45,
+   "title": "Thin slice canary",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/proof/run_proof.py:1",
+    "noetfield-sandbox-private/motor/proof/bundles/29174463135/PROOF_BUNDLE.json",
+    "noetfield-sandbox-private/motor/proof/assert_proof.py",
+    "noetfield-sandbox-private/motor/canaries/test_motor_canaries.py"
+   ],
+   "gap": "The proof driver executes the exact thin slice (1 heading→intake→parallel jobs→branches→PRs→CI→verifier→bundle) and real proof bundles exist; the missing leg is W-VERIFY-EDGE minting PASS — bundles currently top out at CHECK_OK because the edge verifier binding is optional/unset.",
+   "next_step": "Bind MOTOR_EDGE_VERIFIER_URL and re-run run_proof so at least one canary bundle carries a genuine EDGE-minted PASS.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 46,
+   "title": "Canary before automation",
+   "status": "DONE",
+   "evidence": [
+    "sina-governance-SSOT/p0-pgr/P0_PROMPT_COMPILER_MVP_PLAN_v1.md",
+    "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:1",
+    "noetfield-sandbox-private/motor/config/deployment.json:5",
+    "noetfeld-OS/data/noos-integrator-control-plan-v1.json"
+   ],
+   "gap": "The ladder (manual/shadow → bounded → scheduled → autonomy) is explicit: p0pgr runs shadow (route-only, cost 0.0), motor state_backend has canary=git before durable; but promotion from one rung to the next is a documented gate, not an automated gate that blocks scheduling until the prior rung has green receipts.",
+   "next_step": "Add a promotion gate script that refuses to register a lane in github_automation_registry until N green shadow/canary receipts exist for it.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 50,
+   "title": "Integrator only at end",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfeld-OS/data/noos-integrator-control-plane-v1.json:6",
+    "noetfeld-OS/docs/_NOOS_AGENT/[NOOS-AGENT-20260707-008]_INTEGRATOR_DAILY_CHECKLIST_v1.md",
+    "noetfeld-OS/noetfield-org/receipts/NOOS_INTEGRATOR_SYNC_RECEIPT_2026-07-05.md",
+    "noetfield-sandbox-private/motor/kernel/scheduler.py:60"
+   ],
+   "gap": "The integrator role is defined (NOOS observes/coordinates at end; lanes produce contracts+receipts) and the motor closure job finalizes only when all other jobs are terminal — but the integrator is a daily human checklist + sync receipts, not an automated interface-check-and-merge engine that adjudicates lane conflicts at the end.",
+   "next_step": "Build an integrator job_class that, at heading close, diffs each lane's declared interface contract and emits merge OR return-conflict receipts automatically.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 51,
+   "title": "Interface contract before parallel work",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md:30",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:9",
+    "noetfield-sandbox-private/motor/kernel/intake.py:56"
+   ],
+   "gap": "Ownership/lane is fixed before parallel action (L2 lane declaration; contract fixes target_repository/allowed_paths/authority before dispatch), but the doctrine's explicit endpoint/request_schema/response_schema/error_states interface contract is not a formalized frozen artifact — parallel jobs share only path-ownership, not a typed interface.",
+   "next_step": "Add an interface_contract block (endpoint/request_schema/response_schema/error_states) to job_contract and require it be present before two jobs sharing a boundary are promoted in parallel.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 113,
+   "title": "Avoid framework tax",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:1",
+    "noetfield-sandbox-private/motor/adapters/router.py:1",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:2",
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:154"
+   ],
+   "gap": "The motor is a deliberately minimal vendor-free kernel (its own scheduler/router/statestore) which embodies avoiding framework tax, but the point is specifically about admitting a framework (Ruflo) only for a real gap (dispatcher/shared memory/MCP routing/parallel mgmt) — and there is no on-disk decision record or guard evaluating whether a framework is warranted; it is doctrine text only.",
+   "next_step": "Write a one-page framework-adoption ADR that maps each candidate framework capability to an existing motor component, documenting which gaps (if any) remain.",
+   "unlock": 1,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 114,
+   "title": "Ruflo as executor adapter, not brain",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py:32",
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:2",
+    "SourceA/brain-os/law/enforcement/SOURCEA_FORGE_TERMINAL_V3_SWARM_BLACKBOARD_LOCKED_v1.md:12"
+   ],
+   "gap": "The motor's adapter+registry architecture (governance→compiler→contract→adapter→worker→verifier→receipt) is exactly the slot where Ruflo would plug in as an executor adapter, so the pattern is ready — but Ruflo is not integrated anywhere on disk, and the only live swarm (SourceA blackboard) runs as a planner/critic BRAIN, the inverse of this doctrine.",
+   "next_step": "Add a W-EXEC-RUFLO row + adapter stub to the motor registry that receives sandbox contracts and returns proposals, proving Ruflo can only act as a governed executor.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 115,
+   "title": "Disable default swarm features",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/registry/ADAPTER_REGISTRY_v2.json:2",
+    "noetfield-sandbox-private/motor/config/deployment.json:20",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py:5",
+    "SourceA/brain-os/law/enforcement/SOURCEA_FORGE_TERMINAL_V3_SWARM_BLACKBOARD_LOCKED_v1.md:12"
+   ],
+   "gap": "The motor disables swarm behaviors by construction: no callable worker above W-INTEL-LOW, MOTOR_MAX_PARALLEL=3, bounded max_concurrency, det_patch 'Never merges' (auto_merge:false), no auto_deploy path. But the literal doctrine knobs (max_rounds:1, shared_context:false, full_repo_context:false, premium:deny) are not a single enforced swarm-config block, and SourceA's blackboard runs shared_context=true — a direct violation.",
+   "next_step": "Create one swarm_policy.json (max_agents:3/max_parallel:2/max_rounds:1/shared_context:false/premium:deny/auto_merge:false) and have any swarm-capable surface read and enforce it, retiring the shared blackboard.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 118,
+   "title": "Deterministic workflow compiler",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/intake.py:33",
+    "noetfield-sandbox-private/motor/kernel/intake.py:70",
+    "sina-governance-SSOT/scripts/p0pgr_cycle_v1.py:34"
+   ],
+   "gap": "Deterministic task-type→workflow mapping exists (motor DET_LEXICON maps heading phrases→probe/smoke job_class with no model; p0pgr ROUTE_VERDICT maps execution_mode→dispatch verdict), but the known-workflow library is tiny (2 lexicon rules) — the doctrine's named workflows like web_link_repair_v1 are not yet a registry of reusable workflow templates.",
+   "next_step": "Externalize DET_LEXICON into a workflow_templates registry (task_type→named workflow→job graph) and add the first few concrete templates (web_link_repair_v1, smoke_baseline_v1).",
+   "unlock": 4,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 119,
+   "title": "Unknown work isolation",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:14",
+    "noetfield-sandbox-private/motor/kernel/intake.py:70",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:29"
+   ],
+   "gap": "Unknown/novel spans are isolated as W-INTEL-LOW proposals (read_only, always a proposal, deterministic validation controls application), which prevents unknown work from writing directly — but there is no distinct exploration sandbox with its own small budget and single-research-agent/single-proposal cap; isolation is via proposal-gating, not a separate bounded sandbox.",
+   "next_step": "Add an exploration job_class that runs read-only with a dedicated small budget and hard cap of one proposal before any executable job is compiled.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 120,
+   "title": "Research not mixed with execution",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:14",
+    "noetfield-sandbox-private/motor/MOTOR_SPEC_v2.md:29",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:14"
+   ],
+   "gap": "Research (classify/diagnose) and execution (det_exec/det_patch) are separate job_classes and W-INTEL-LOW output can never mint truth (only a proposal validated deterministically) — so the two are structurally separated — but the explicit pipeline research_receipt→recommendation→implementation_contract is not a formalized three-artifact chain; a diagnosis can feed a repair proposal in the same cycle.",
+   "next_step": "Introduce a research_receipt artifact that must exist and be referenced before an implementation contract for the same heading is compiled.",
+   "unlock": 2,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 121,
+   "title": "Time-boxed exploration",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/intel_low.py:14",
+    "noetfield-sandbox-private/motor/kernel/intake.py:36",
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json:29"
+   ],
+   "gap": "Exploration is cost/attempt-bounded (budget.max_cost_usd, retry once then fail, timeout_seconds) but the doctrine's exploration-specific limits (max_sources:10, max_model_calls:3, max_output:2 pages) and required outputs (recommendation/rejected_options/evidence_gaps) are not encoded — a research job has no sources/calls ceiling distinct from generic budget.",
+   "next_step": "Add exploration_limits (max_sources/max_model_calls/max_output) to the exploration contract and require a recommendation+rejected_options+evidence_gaps output schema.",
+   "unlock": 1,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 129,
+   "title": "One decision, one place",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/ssot/MULTI_REPO_WORKER_REGISTRY_v1.md:23",
+    "SourceA/brain-os/system/authority.yaml:1",
+    "noetfield-sandbox-private/motor/config/deployment.json:31",
+    "noetfeld-OS/data/noos-integrator-control-plane-v1.json:6"
+   ],
+   "gap": "Repo ownership, deploy authority and model routing each have a single canonical record (SG registry / authority.yaml / motor targets / NOOS one_law) — but the other decisions the doctrine names (pricing, production domain, fulfillment status, product promise) have no single canonical record on disk, so several decisions still live in multiple places.",
+   "next_step": "Create a decisions/ directory of one-record-per-decision files (pricing.json, production_domain.json, fulfillment.json, product_promise.json) referenced by every consumer.",
+   "unlock": 3,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 130,
+   "title": "Change propagation automation",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/scripts/commercial_pulse_dispatch_check_v1.py:1",
+    "sina-governance-SSOT/scripts/workflow_census_v1.py:1",
+    "sina-governance-SSOT/docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md:171"
+   ],
+   "gap": "No pricing-SSOT→consumers propagation checker exists. commercial_pulse_dispatch_check validates outbound draft dispatchability and workflow_census classifies loops, but nothing detects that a pricing change must be reflected in checkout/landing/FAQ/calculator/emails/receipts and files issues on divergence. The point is doctrine-only.",
+   "next_step": "Build a propagation checker that, given a pricing SSOT record, greps the declared consumer surfaces and opens an issue for each stale/contradicting value.",
+   "unlock": 4,
+   "cluster": "SSOT enforcement, authority, no-2nd-control-plane, compiler, canary, integrator, parallel, Ruflo"
+  },
+  {
+   "n": 52,
+   "title": "Heading vs founder questions",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json (authority_class enum: read_only|bounded_write|founder_only)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:180 (founder_only + HIGH_RISK -> push_decision)",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py (bounded_write required; else PathGuardViolation)"
+   ],
+   "gap": "authority_class is passed in at intake (intake.py --authority), not auto-classified. No coded classifier that decides an item is a real founder question vs machine detail (filename/branch/lint); the doctrine's exclusion list is enforced only by whoever sets authority_class.",
+   "next_step": "Add a deterministic classifier in motor/kernel/intake.py that assigns authority_class=founder_only ONLY when risk/ambiguity/commercial/legal/money predicates fire, and read_only/bounded_write otherwise.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 53,
+   "title": "Founder decision compression",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py:181 (store.push_decision with kind/job_id/detail/receipt/packet)",
+    "noetfield-sandbox-private/motor/adapters/handoff.py (emit_packet)",
+    "sina-governance-SSOT/docs/commercial_pulse_loop_v0.1.md (founder_approval_gate L5)"
+   ],
+   "gap": "Decision items carry kind/detail/receipt/packet but NOT the doctrine's compressed schema: options A/B/C + Recommended + Why(3 lines) + cost/risk delta + consequence-if-no-decision.",
+   "next_step": "Define a founder_decision_v1 schema (options[], recommended, why[<=3], cost_risk_delta, no_decision_consequence) and have handoff.emit_packet populate it.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 54,
+   "title": "No-blocker doctrine",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py:180-187 (governance refusal -> receipt + handoff_required, never silent, never auto-escalate)",
+    "noetfield-sandbox-private/motor/plans/acceptance.py:14 (no safe command -> BLOCKED_ACCEPTANCE_CONTRACT_MISSING and 'moves on')",
+    "noetfield-sandbox-private/motor/repair/repair.py (bounded repair, never escalates above W-INTEL-LOW)"
+   ],
+   "gap": "Behavior matches (degrade/tag/handoff/receipt); the explicit hard-block whitelist (money/contract/credential/irreversible-send/authority-change) is not enumerated as a single policy constant.",
+   "next_step": "Extract a HARD_BLOCK_CLASSES constant and assert every non-member failure routes to a degraded/handoff state.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 62,
+   "title": "Opportunity dedup",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/census.py:208 (dedup_sort: dedupe ONLY by (repo,path,blob_sha) tuple)",
+    "noetfield-sandbox-private/motor/plans/census.py:211-216 (seen-set dedupe)"
+   ],
+   "gap": "Dedup exists but keys on plan-document identity, not the doctrine's opportunity cluster key project+surface+issue_type+target+normalized_signature. No opportunity/signal clustering.",
+   "next_step": "Add a cluster_key(project,surface,issue_type,target,normalized_signature) helper and dedupe opportunity records on it before queue emission.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 63,
+   "title": "Priority by commercial value",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py:44 (VALUE_WEIGHT: revenue_now=5, customer_delivery=4 ...)",
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py (base=value*effort + urgency; deterministic, byte-stable, --verify)",
+    "noetfield-sandbox-private/motor/plans/fixtures/example_census.json (value_class metadata)"
+   ],
+   "gap": "Formula is value_weight*effort_weight+urgency, not the doctrine's commercial_impact*urgency*confidence*reversibility/cost; confidence, reversibility, and a cost divisor are absent.",
+   "next_step": "Extend score_record to multiply in confidence and reversibility weights and divide by an estimated_cost class, keeping determinism.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 64,
+   "title": "Cost-aware queue",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py:45 (EFFORT_WEIGHT inverse-feasibility used as cost proxy)",
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py (_sort_key: total desc then value/effort)"
+   ],
+   "gap": "Effort is the only cost proxy; no explicit estimated_cost, time_to_value, or dependency_unlocks fields feeding the sort.",
+   "next_step": "Add estimated_cost + time_to_value + dependency_unlocks to the census metadata schema and incorporate them into _sort_key.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 65,
+   "title": "Dependency unlock score",
+   "status": "MISSING",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py (scorer has value/effort/urgency only; no unlock term)"
+   ],
+   "gap": "No dependency_unlock or unlock_score anywhere in the scorer or census. Standing-identity / callable-executor / plan-queue / Stripe-webhook unlock weighting is absent.",
+   "next_step": "Add an unlock_score field (0-5) to census metadata and a UNLOCK_WEIGHT term in score_record so foundational unblockers rank first.",
+   "unlock": 4,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 66,
+   "title": "Commercial surface separate from core",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/config/deployment.json (targets[]: Noetfield-Systems/SourceB bounded to automation-canary/receipts/control, distinct from self target)",
+    "sina-governance-SSOT/docs/commercial_pulse_loop_v0.1.md (lane: metabolism — parallel to homeostasis, never blocks heal work)",
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (lane: metabolism)"
+   ],
+   "gap": "Separation is real at config + lane level; SourceB storefront/lead/checkout runtime itself is not local (reference-only).",
+   "next_step": "Keep the boundary and add a targets[] authority_class ceiling assertion test so commercial writes can never touch core motor paths.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 67,
+   "title": "Productized workflow",
+   "status": "MISSING",
+   "evidence": [
+    "No receptionist / 'AI Receptionist Setup' / productized-vertical workflow found across motor, governance, noos, SourceA (grep receptionist|voice agent -> none)"
+   ],
+   "gap": "Only the doctrine text describes it. No productized single-workflow product exists in code; SourceA remains a generic brain-os.",
+   "next_step": "Author one storefront_release_v1-style workflow definition (e.g. ai_receptionist_setup_v1) with fixed steps as the first productized workflow.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 68,
+   "title": "Customer config not human intake",
+   "status": "MISSING",
+   "evidence": [
+    "No setup wizard / customer config schema found (grep wizard|config_schema|setup wizard -> no product hits)"
+   ],
+   "gap": "No customer-facing config schema or setup wizard; all intake is founder/agent-driven Job Contracts, not customer self-config.",
+   "next_step": "Define a customer_config_v1 JSON schema (fields the customer fills in setup) as the intake contract for the productized workflow.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 69,
+   "title": "Config templates",
+   "status": "MISSING",
+   "evidence": [
+    "No per-vertical (dental/restaurant/real-estate/legal/medical) config templates found in any of the four repos"
+   ],
+   "gap": "No vertical template set on a shared runtime.",
+   "next_step": "Create config/templates/<vertical>.json seeded from the customer_config_v1 schema for one vertical.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 70,
+   "title": "Default-heavy UX",
+   "status": "MISSING",
+   "evidence": [
+    "No config layer exists to carry defaults (68/69 missing)"
+   ],
+   "gap": "Depends on a config schema that does not yet exist; nothing to default from.",
+   "next_step": "Once customer_config_v1 exists, mark every field default vs customer-required and validate that only true commercial fields are required.",
+   "unlock": 1,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 71,
+   "title": "Progressive config",
+   "status": "MISSING",
+   "evidence": [
+    "No staged (demo / paid-essentials / optional-optimization) configuration flow in code"
+   ],
+   "gap": "No staging of configuration; no demo/paid/optimization stages.",
+   "next_step": "Add a stage field (demo|paid_essentials|optimization) to customer_config_v1 and gate later stages behind the commercial gate.",
+   "unlock": 1,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 72,
+   "title": "Browser demo before phone",
+   "status": "MISSING",
+   "evidence": [
+    "grep browser demo|browser_demo -> no hits; no provisioning code"
+   ],
+   "gap": "No create->browser-voice-test->tune->payment->bind-phone sequence exists locally.",
+   "next_step": "Specify a browser_demo step (no telephony provisioning) as the first node of the SourceB fast path state machine.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 73,
+   "title": "Provision after commercial gate",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/docs/commercial_pulse_loop_v0.1.md (founder_approval_gate before send; approved->send only)",
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (states: queued_for_approval, founder_blocked, approved_pending_send)"
+   ],
+   "gap": "An approval-gate-before-action pattern exists for outbound sends, but there is no payment_confirmed/admin_approved_pilot gate guarding customer provisioning (no provisioning code at all).",
+   "next_step": "Add a commercial_gate predicate (payment_confirmed | admin_approved_pilot) that must be true before any provisioning node in the fulfillment state machine.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 74,
+   "title": "Fulfillment state machine",
+   "status": "PARTIAL",
+   "evidence": [
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (states: idle->drafting->validate_failed->queued_for_approval->founder_blocked->approved_pending_send->sent->awaiting_reply->classified->mutation_pending->complete)",
+    "sina-governance-SSOT/docs/commercial_pulse_loop_v0.1.md (§1 state machine)"
+   ],
+   "gap": "A real state machine exists but for outbound commercial pulse, not the doctrine's customer fulfillment states requested->approved->provisioning_pending->started->done->trial_active->cancelled/expired.",
+   "next_step": "Author a fulfillment_state_machine_v1 (the doctrine states) as a sibling to the commercial-pulse SM, owned by the SourceB fast path.",
+   "unlock": 4,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 75,
+   "title": "Idempotency",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/materialize.py:3-4,119 (deterministic heading_id IS the idempotency key; create_heading idempotent)",
+    "noetfield-sandbox-private/motor/plans/emit_headings.py:5,96 (heading_id idempotency; skip already-represented)",
+    "noetfield-sandbox-private/motor/kernel/executor.py:159 ('idempotent: already done')"
+   ],
+   "gap": "General idempotency is solid; not yet applied to a paid/provisioning create path (none exists).",
+   "next_step": "Reuse the heading_id/CAS idempotency pattern for create_phone_agent(customer_id) once provisioning exists.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 76,
+   "title": "Idempotency key for paid actions",
+   "status": "MISSING",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/materialize.py (generic heading_id idempotency only)",
+    "No paid-action key (customer_id+action_type+version) anywhere; commercial_pulse keys on draft_id"
+   ],
+   "gap": "No paid/charge/provisioning action exists, so the doctrine's customer_id+action_type+version key is absent.",
+   "next_step": "Define paid_idempotency_key = f'{customer_id}:{action_type}:{version}' and require it on every provisioning/charge job contract.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 82,
+   "title": "Claims registry",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/scripts/commercial_pulse_dispatch_check_v1.py:27 (FORBIDDEN_ENTITY_TOKENS ban list — a banned-content check, doctrine #81, not a registry)"
+   ],
+   "gap": "There is a banned-token validator but no registry of public claims with source/status (e.g. '24/7'=supported, 'unlimited calls'=cost_risk:unbounded/approval_required).",
+   "next_step": "Create data/claims_registry_v1.json mapping each public claim -> {source, status, approval_required} and have the dispatch check validate copy against it.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 83,
+   "title": "Pricing SSOT",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (draft carries price_display/offer_id but no canonical pricing source)",
+    "No pricing config SSOT inside motor/governance/noos/SourceA (pricing exists only as HTML in out-of-scope sibling product repos)"
+   ],
+   "gap": "No single pricing SSOT that checkout/landing/FAQ/receipt derive from within the four repos; price is a free-form draft field.",
+   "next_step": "Create data/pricing_ssot_v1.json (canonical price IDs + display) and make commercial_pulse price_display and any checkout read from it.",
+   "unlock": 4,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 85,
+   "title": "Risk-triggered review",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py (HIGH_RISK set gates founder decision push)",
+    "noetfield-sandbox-private/motor/plans/acceptance.py:23 (risk-category allowlist; is_forbidden deny gate for deploy/secrets/merge)"
+   ],
+   "gap": "Risk gating exists but is not the explicit trigger matrix (T2 review only if auth/payments/secrets/public-claims/db-migration/permissions/deploy/legal changed); no semantic-diff-driven reviewer selection.",
+   "next_step": "Add a semantic-diff classifier that sets review_tier=T2 only when a change touches the enumerated high-risk surfaces.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 86,
+   "title": "Low-risk auto-promotion",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py (ok -> state 'done' automatically; repaired -> re-verify)",
+    "noetfeld-OS/data/founder-trigger-ledger-v1.json (FT-MERGE-T0-T1 bootstrap_founder_reviewed -> machine_autonomous after 10 matches)"
+   ],
+   "gap": "Auto-advance on success exists and a retirement path toward autonomous merge is defined, but low-risk classes (typo/docs/fixture) are not auto-promoted to READY_FOR_MERGE by rule; merge stays founder-gated.",
+   "next_step": "Add a low_risk_auto_promote predicate that advances typo/docs/fixture/receipt jobs to READY_FOR_MERGE without a decision item.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 87,
+   "title": "Test selection",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/acceptance.py:23 (derives test/lint/typecheck/build commands from repo-observed tooling, allowlisted, never from prose)"
+   ],
+   "gap": "Acceptance derives a safe command set but does not do change-scoped selection (changed files -> affected packages -> targeted tests -> full suite only before promotion).",
+   "next_step": "Add affected-package resolution from the diff so acceptance runs targeted tests first and reserves the full suite for the promotion gate.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 138,
+   "title": "Founder workload metric",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfeld-OS/data/founder-trigger-ledger-v1.json (triggers with class, status, evidence_counter, retirement_condition, target_status; shadow_decision_threshold:10)"
+   ],
+   "gap": "The ledger tracks founder trigger retirement toward autonomy but does not measure the doctrine's workload metric (interruptions/clarifications/context-rebuilds/decision-repeats) or an hours/day target.",
+   "next_step": "Emit a founder_workload_v1 receipt counting interruptions/clarifications/decision items per cycle, trending toward the hours/day target.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 139,
+   "title": "True decision-point detection",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfeld-OS/data/founder-trigger-ledger-v1.json (per-trigger retirement_condition = when it stops being a founder decision)",
+    "noetfield-sandbox-private/motor/kernel/executor.py (founder_only OR high-risk -> decision item; else handoff/machine)",
+    "noetfield-sandbox-private/motor/plans/acceptance.py (has-default/testable derivation)"
+   ],
+   "gap": "No single coded checklist (SSOT-resolvable? testable? has default? reversible? bounded experiment?) that must all be negative before a founder packet is raised; detection is spread across authority_class + risk set.",
+   "next_step": "Implement is_true_decision_point(item) running the five predicates and only calling push_decision when all fail.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 140,
+   "title": "Reversible defaults",
+   "status": "DONE",
+   "evidence": [
+    "noetfield-sandbox-private/motor/schemas/job_contract.schema.json (authority_class default surface bounded_write; founder_only reserved)",
+    "noetfield-sandbox-private/motor/adapters/det_patch.py (requires bounded_write; irreversible refused)",
+    "noetfield-sandbox-private/motor/plans/acceptance.py (deploy/release/publish/merge forbidden by is_forbidden)"
+   ],
+   "gap": "Reversible-by-default + gate-for-irreversible is enforced; the reversible/irreversible taxonomy is implicit in path/authority rules rather than a named list.",
+   "next_step": "Document the reversible vs gated action taxonomy as a constant referenced by both det_patch and acceptance.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 141,
+   "title": "Commercial experiment budget",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (has approval window but no experiment budget object)",
+    "No duration/traffic_scope/spend_cap/success_metric/rollback structure found"
+   ],
+   "gap": "No commercial experiment budget schema anywhere.",
+   "next_step": "Add commercial_experiment_v1 {duration, traffic_scope, spend_cap, success_metric, rollback} required before any paid commercial experiment runs.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 144,
+   "title": "Revenue receipt",
+   "status": "MISSING",
+   "evidence": [
+    "sina-governance-SSOT/scripts/p0pgr_campaign_planner_v1.py (notes REVENUE loop gateway_outbound_log_v1 has ZERO receipts, census rule-4)",
+    "sina-governance-SSOT/language_gate/receipts/GATEWAY_REVENUE_ORGAN_RECEIPT_2026-07-06.md... (doc receipts about the revenue organ, not a machine revenue receipt schema)"
+   ],
+   "gap": "No revenue_receipt schema capturing lead_id/payment_id/provisioning_id/trial/captured-call/appointment; the outbound revenue log exists but is empty (zero real receipts).",
+   "next_step": "Define revenue_receipt_v1 schema and emit one on the first real lead/payment/provisioning event.",
+   "unlock": 4,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 145,
+   "title": "Opportunity capture cheap",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/census.py (deterministic, read-only enumeration; no LLM for numeric values)",
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py (NO model for any numeric value)",
+    "sina-governance-SSOT/docs/commercial_pulse_loop_v0.1.md (cron owns select/draft — deterministic capture)"
+   ],
+   "gap": "Plan/opportunity capture is deterministic and cheap, but there are no commercial sensors (missed call / checkout failure / partner application) and no high-confidence->cloud escalation rule.",
+   "next_step": "Add deterministic local sensors for commercial signals that emit low-cost opportunity records, escalating only high-confidence ones.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 146,
+   "title": "Perishable intent priority",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/plans/score_plan_queue.py:46 (URGENCY_POINTS: customer_blocking+4, active_incident+5, critical_deadline+5)",
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (awaiting_reply / reply-window states)"
+   ],
+   "gap": "Generic urgency boosts exist, but perishable commercial intents (new paid lead / missed call / booking / checkout failure / demo completion) are not modeled as a fast lane ahead of technical backlog.",
+   "next_step": "Add a perishable_intent urgency class that outranks technical backlog in _sort_key.",
+   "unlock": 2,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 147,
+   "title": "Fast path and deep path",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/adapters/router.py (routes by job_class/worker_class)",
+    "noetfield-sandbox-private/motor/kernel/executor.py (deterministic det_patch/det_exec fast path vs W-INTEL-LOW)"
+   ],
+   "gap": "Routing by job_class exists, but there is no explicit fast-vs-deep classifier keyed on known-workflow/low-risk/small-context vs unknown/high-risk/research.",
+   "next_step": "Add a path classifier that tags each job fast|deep and routes cheap auto-verify vs research/founder-packet accordingly.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 148,
+   "title": "SourceB commercial fast path",
+   "status": "NOT_LOCAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/config/deployment.json (Noetfield-Systems/SourceB is a bounded write target only: automation-canary/receipts/control)",
+    "noetfield-sandbox-private/motor/kernel/intake.py:140 (--target default Noetfield-Systems/SourceB)",
+    "SourceB repo is NOT cloned locally"
+   ],
+   "gap": "SourceB is referenced only as a motor write target; the setup->validate->config->browser-demo->approval/payment->provision->test->activate->receipt fast path is not implemented in any local repo.",
+   "next_step": "Build the fast path as a workflow definition (sourceb_voice_provision_v1) in the motor workflow registry, targeting the SourceB repo once available.",
+   "unlock": 5,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  },
+  {
+   "n": 149,
+   "title": "Exception queue",
+   "status": "PARTIAL",
+   "evidence": [
+    "noetfield-sandbox-private/motor/kernel/executor.py (failures route to handoff_required + push_decision — a decision/exception queue)",
+    "sina-governance-SSOT/data/commercial_pulse_queue_v1.json (states validate_failed, founder_blocked)",
+    "sina-governance-SSOT/scripts/commercial_pulse_dispatch_check_v1.py (MALFORMED_DRAFT receipt on predicate failure)"
+   ],
+   "gap": "Handoff/decision and malformed-draft queues exist, but there is no dedicated commercial exception queue categorizing unsupported-integration / contradictory-instructions / regulated-business / high-call-volume / custom-legal / vendor-failure / payment-mismatch.",
+   "next_step": "Add an exception_queue_v1 with those exception categories that the SourceB fast path routes to instead of hard-blocking.",
+   "unlock": 3,
+   "cluster": "Commercial surface / SourceB fulfillment / config / pricing / claims / founder gates / outcome metrics"
+  }
+ ]
+}

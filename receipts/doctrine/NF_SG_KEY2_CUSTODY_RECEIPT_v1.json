@@ -1,0 +1,72 @@
+{
+  "receipt_type": "sg_commissioning_key2_custody_receipt_v1",
+  "captured_at": "2026-07-18T14:36:27Z",
+  "verdict": "KEY2_IMPORTED_TO_VERIFIER_ACCOUNT_PENDING_KEY1_REVOKE",
+  "sg_candidate_app": {
+    "app_id": "4330805",
+    "installation_id": "147378007",
+    "app_slug": "noetfield-sg-authority"
+  },
+  "custody_plane": {
+    "cloudflare_account_id": "b7282b4a5c17b84d62e3ef8866b878f8",
+    "cloudflare_account_role": "independent_verifier_not_main",
+    "worker": "noetfield-sg-authority-v2-shadow",
+    "worker_url": "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev",
+    "kv_namespace_id": "6c8857e6802448d4b8e3ebe815f79dc1",
+    "secrets_present": [
+      "SG_APP_PRIVATE_KEY",
+      "SG_SIGNING_PRIVATE_JWK",
+      "SG_SIGNING_PUBLIC_JWK",
+      "SG_WEBHOOK_SECRET"
+    ]
+  },
+  "key2": {
+    "label": "SG_COMMISSIONING_KEY_2",
+    "public_fingerprint_sha256": "22a9513a3aaee95266538a5fc49c94a4591119d14fe9332f2964fd603817c3a8",
+    "pem_file_sha256": "e3d33c169a1387d64064816d3a5c13114e011e916750c37562c8bfbfe3ca80c9",
+    "proven_get_app": true,
+    "proven_installation": true,
+    "proven_exact_two_repos": true,
+    "imported_to_verifier_worker_secret": true
+  },
+  "receipt_signing_key": {
+    "kid": "sg-receipt-e58df1e53eb48785",
+    "alg": "ES256",
+    "curve": "P-256",
+    "stored_as_worker_secret": true,
+    "note": "Separate from GitHub App private key"
+  },
+  "key1_bootstrap": {
+    "label": "SG_BOOTSTRAP_KEY_1",
+    "public_fingerprint_sha256": "5d75d4e187747d65f459bd1d15ec8005c4477f65c0ccb9d8431599a35f4c436b",
+    "pem_file_sha256": "1b3f3453a2ede302533223ff8616f1fcf272e69be99a5cbd382813b557406fa2",
+    "still_works": true,
+    "revoked_in_github": false,
+    "local_pem_deleted": false,
+    "block_reason": "GitHub has no API to delete App private keys. Founder must delete the OLD key in App UI."
+  },
+  "health_check": {
+    "url": "https://noetfield-sg-authority-v2-shadow.kazemnezhadsina144.workers.dev/health",
+    "body": {
+      "ok": true,
+      "mode": "SHADOW",
+      "sg_runtime": "NOT_COMMISSIONED",
+      "enforcement_enabled": false
+    }
+  },
+  "flags": {
+    "SG_COMMISSIONING_KEY_2_CUSTODY": "IMPORTED_VERIFIER_ACCOUNT",
+    "SG_BOOTSTRAP_KEY_1": "STILL_ACTIVE_PENDING_UI_REVOKE",
+    "SG_V2_LIVE_SHADOW": "WORKER_DEPLOYED_WEBHOOK_DISABLED",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD",
+    "merge_queues_read": false
+  },
+  "not_done": [
+    "Founder deletes OLD App private key in GitHub UI (keep the Jul 18 key2)",
+    "Then agent deletes local bootstrap PEM and re-proves key1 fails / key2 succeeds",
+    "Optional: turn on Merge queues Read",
+    "Order 6 canary proofs still pending (webhook events + check run)"
+  ]
+}

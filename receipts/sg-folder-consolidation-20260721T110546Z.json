@@ -1,0 +1,819 @@
+{
+  "schema": "sg-folder-consolidation-v1",
+  "phase": "complete",
+  "started_at": "20260721T110546Z",
+  "canonical_home": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT",
+  "worktree_list_raw_count": 34,
+  "sg_worktrees": [
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT",
+      "head": "c7eb11600131d6ce0a0e908febb50f7d96c6a2fb",
+      "branch": "refs/heads/main",
+      "name": "sina-governance-SSOT",
+      "dirty": 5,
+      "ahead": 0,
+      "outside_home": false
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-authority-p0",
+      "head": "13490d95cfb74d123edb3bdb8bc9a60e523afd52",
+      "branch": "refs/heads/incident/sg-authority-identity-p0",
+      "name": "_wt-sg-authority-p0",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-candidate-app",
+      "head": "708bc021a3d8a1c2f66e3bf1c811ee8de58f991a",
+      "branch": "refs/heads/security/sg-candidate-app-identity",
+      "name": "_wt-sg-candidate-app",
+      "dirty": 0,
+      "ahead": 4,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-commissioning-real-jobs",
+      "head": "f32b33c9b406a188008c2b6b4942f0a13271a2e1",
+      "branch": "refs/heads/upgrade/commissioning-real-motor-jobs",
+      "name": "_wt-sg-commissioning-real-jobs",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-compute-roi-activate",
+      "head": "bdc0069016f7485e938202fb4e7fa95aaaeb1a6c",
+      "branch": "refs/heads/chore/compute-roi-activate-v1",
+      "name": "_wt-sg-compute-roi-activate",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-compute-roi-lock",
+      "head": "58bcceb97fc9856c7f806d4626701f0e81a5fb2f",
+      "branch": "refs/heads/lock/nf-compute-roi-allocation-v1",
+      "name": "_wt-sg-compute-roi-lock",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-cpl-v1.1",
+      "head": "63351b598d5f9876628689fccdd47e365850716f",
+      "branch": "refs/heads/rules/autonomous-change-preservation-v1.1",
+      "name": "_wt-sg-cpl-v1.1",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-five-gates",
+      "head": "eb2fdb38b2a5c2e2df3e2f5afb2a9baff9bea619",
+      "branch": "refs/heads/upgrade/key2-custody-established",
+      "name": "_wt-sg-five-gates",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-hourly-ai-circles",
+      "head": "1b532da46cf621405ae977310821edf50a6f9575",
+      "branch": "refs/heads/feat/hourly-independent-ai-circles",
+      "name": "_wt-sg-hourly-ai-circles",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-key-pointer",
+      "head": "8e0b10328fe97bcb7e43a1df9654a8dd715cc945",
+      "branch": "refs/heads/security/sg-key-pointer-no-churn",
+      "name": "_wt-sg-key-pointer",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-key2-custody",
+      "head": "647ff1b8ff8a9f94d21904c7a45f60fa0bf825bd",
+      "branch": "refs/heads/security/sg-key2-custody",
+      "name": "_wt-sg-key2-custody",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-motor-learning-w1",
+      "head": "11308af49e3ffb4862bc2315f106e43b4657b759",
+      "branch": "refs/heads/feat/nf-motor-learning-organ-v1",
+      "name": "_wt-sg-motor-learning-w1",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-motor-scaling",
+      "head": "a66d79420717333dbe0c0f7e3562a70b6360a70d",
+      "branch": "refs/heads/doctrine/nf-live-wired-t0-watch-receipt",
+      "name": "_wt-sg-motor-scaling",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-portfolio-routing",
+      "head": "0eb5468699784ca115cacc20048f7598fb5d30aa",
+      "branch": "refs/heads/doctrine/nf-runway-portfolio-routing-intelligence-v1",
+      "name": "_wt-sg-portfolio-routing",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runtime-value-contract",
+      "head": "1b8d5fc8e581ed4b95618c847794588249b6cbbb",
+      "branch": "refs/heads/feat/runtime-value-contract-v1",
+      "name": "_wt-sg-runtime-value-contract",
+      "dirty": 1,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-core-families",
+      "head": "070a3dcfdf01fc028f82b9566dd8f956d3752a6d",
+      "branch": "refs/heads/doctrine/nf-runway-core-families-composition-v1",
+      "name": "_wt-sg-runway-core-families",
+      "dirty": 1,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-exec-spine",
+      "head": "90470b6c501f36938c1877ee27c38eba3ab1f393",
+      "branch": "refs/heads/fix/nf-runway-execution-spine-pointers",
+      "name": "_wt-sg-runway-exec-spine",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-execution",
+      "head": "e1acbaf87436ff9f92402b2211ae5f19216125ad",
+      "branch": "refs/heads/product/nf-runway-execution-assignment-v1",
+      "name": "_wt-sg-runway-execution",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-parallel",
+      "head": "9107906e6730af0d68d02b5362f60220b146e2ee",
+      "branch": "refs/heads/product/nf-runway-parallel-sandboxes-v1",
+      "name": "_wt-sg-runway-parallel",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-prod-pointer",
+      "head": "17dc867f173ef00d591fef8fdcb6f697cf95adbc",
+      "branch": "refs/heads/docs/runway-deterministic-prod-pointer",
+      "name": "_wt-sg-runway-prod-pointer",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-product",
+      "head": "cdceb59fa07113609ce78e09d417b177bd3f2608",
+      "branch": "refs/heads/product/nf-runway-video-v1",
+      "name": "_wt-sg-runway-product",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-v2-shadow",
+      "head": "4b70d887f27be458856f2a498a833775609c1301",
+      "branch": "refs/heads/feature/sg-v2-shadow-proofs",
+      "name": "_wt-sg-v2-shadow",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-verifier-kv-cutback",
+      "head": "4b5f0ef4aa4c0b69f10d433030a4021d1e8ac9e2",
+      "branch": "refs/heads/fix/verifier-kv-free-tier-cutback-v1",
+      "name": "_wt-sg-verifier-kv-cutback",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-wake-path-policy",
+      "head": "3daf70b00c4cdef70018593dc1832523a743c38c",
+      "branch": "refs/heads/lock/nf-wake-path-conflict-policy-v1",
+      "name": "_wt-sg-wake-path-policy",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-workflow-hygiene",
+      "head": "caa034ae8f9e82cabdf3b24ea1bc2b67d97f719a",
+      "branch": "refs/heads/security/sg-precommissioning-workflow-hygiene-01",
+      "name": "_wt-sg-workflow-hygiene",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sg-product-lock",
+      "head": "24d4af84d170c9a1181e234f588cfc6d665158aa",
+      "branch": "refs/heads/cursor/product-category-lock-v1",
+      "name": "sg-product-lock",
+      "dirty": 12,
+      "ahead": null,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sg-sandbox-fix",
+      "head": "9735fa42319b51eb29da4d8cfdb63c1e144dde63",
+      "branch": "refs/heads/claude/sandbox-build",
+      "name": "sg-sandbox-fix",
+      "dirty": 18,
+      "ahead": null,
+      "outside_home": true
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT-wt-det-api-hygiene",
+      "head": "e6abb614edf35f682f439a0ffdba85933cc0066b",
+      "branch": "refs/heads/chore/deterministic-api-lock-hygiene-v1",
+      "name": "sina-governance-SSOT-wt-det-api-hygiene",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": false
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/.claude/worktrees/product-category-lock-status-7a40a4",
+      "head": "49b12e7b00011522ff9a85b4640de8d1501a367f",
+      "detached": true,
+      "name": "product-category-lock-status-7a40a4",
+      "dirty": 0,
+      "ahead": null,
+      "outside_home": false
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/_wt-company-new-lock-v1",
+      "head": "c0ebd15db06466a8097d4d5a090d8b408f8cc134",
+      "branch": "refs/heads/lock/nf-company-new-v1",
+      "name": "_wt-company-new-lock-v1",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": false
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/_wt-verifier-on-demand-v1",
+      "head": "455ab67fd71ee518504cd4bac3cf99a37cee4811",
+      "branch": "refs/heads/fix/verifier-commissioning-on-demand",
+      "name": "_wt-verifier-on-demand-v1",
+      "dirty": 0,
+      "ahead": 0,
+      "outside_home": false
+    }
+  ],
+  "ns_root_sg_fragments": [
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/SG-Canonical-Library",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-authority-p0",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-candidate-app",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-commissioning-real-jobs",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-compute-roi-activate",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-compute-roi-lock",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-cpl-v1.1",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-five-gates",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-hourly-ai-circles",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-key-pointer",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-key2-custody",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-loop-tick-scratch",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-motor-learning-w1",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-motor-scaling",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-portfolio-routing",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runtime-value-contract",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-core-families",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-exec-spine",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-execution",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-parallel",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-prod-pointer",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-runway-product",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-v2-shadow",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-verifier-kv-cutback",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-wake-path-policy",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-sg-workflow-hygiene",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sg-product-lock",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sg-sandbox-fix",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sg-sandbox-ops",
+    "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT-wt-det-api-hygiene"
+  ],
+  "moves": [],
+  "pointer_fixes": [
+    "AGENTS.md",
+    "data/automation_surface_inventory_v1.json",
+    "ssot/*",
+    "docs/* active path rewrites",
+    "~/.sina-governance/LIBRARY_REGISTRY.json -> v0.9"
+  ],
+  "verdict": "PASS_SCOPED_CHANGE",
+  "completed_at": "2026-07-21T11:06:59Z",
+  "post_sg_worktrees": [
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT",
+      "head": "c7eb11600131d6ce0a0e908febb50f7d96c6a2fb",
+      "branch": "refs/heads/main",
+      "name": "sina-governance-SSOT",
+      "dirty": 21,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-auth-v1-1",
+      "head": "0d39f2371cc61dcd9a2f95d06e1a0ed21076da77",
+      "branch": "refs/heads/close/trustfield-auth-phase1",
+      "name": "_wt-auth-v1-1",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-commissioning-on-demand",
+      "head": "4afbbf42d1e3c76bdb594d073efb5e0dfea89563",
+      "branch": "refs/heads/fix/commissioning-deploy-workflow",
+      "name": "_wt-commissioning-on-demand",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-commissioning-specialist",
+      "head": "dfed3e195210eb0fff7e792847353ee11825eb5e",
+      "branch": "refs/heads/feature/commissioning-runway-dispatch",
+      "name": "_wt-commissioning-specialist",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-company-new-lock-v1",
+      "head": "c0ebd15db06466a8097d4d5a090d8b408f8cc134",
+      "branch": "refs/heads/lock/nf-company-new-v1",
+      "name": "_wt-company-new-lock-v1",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-authority-p0",
+      "head": "13490d95cfb74d123edb3bdb8bc9a60e523afd52",
+      "branch": "refs/heads/incident/sg-authority-identity-p0",
+      "name": "_wt-sg-authority-p0",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-candidate-app",
+      "head": "708bc021a3d8a1c2f66e3bf1c811ee8de58f991a",
+      "branch": "refs/heads/security/sg-candidate-app-identity",
+      "name": "_wt-sg-candidate-app",
+      "dirty": 0,
+      "ahead": 4
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-commissioning-real-jobs",
+      "head": "f32b33c9b406a188008c2b6b4942f0a13271a2e1",
+      "branch": "refs/heads/upgrade/commissioning-real-motor-jobs",
+      "name": "_wt-sg-commissioning-real-jobs",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-compute-roi-activate",
+      "head": "bdc0069016f7485e938202fb4e7fa95aaaeb1a6c",
+      "branch": "refs/heads/chore/compute-roi-activate-v1",
+      "name": "_wt-sg-compute-roi-activate",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-compute-roi-lock",
+      "head": "58bcceb97fc9856c7f806d4626701f0e81a5fb2f",
+      "branch": "refs/heads/lock/nf-compute-roi-allocation-v1",
+      "name": "_wt-sg-compute-roi-lock",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-cpl-v1.1",
+      "head": "63351b598d5f9876628689fccdd47e365850716f",
+      "branch": "refs/heads/rules/autonomous-change-preservation-v1.1",
+      "name": "_wt-sg-cpl-v1.1",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-det-api-hygiene",
+      "head": "e6abb614edf35f682f439a0ffdba85933cc0066b",
+      "branch": "refs/heads/chore/deterministic-api-lock-hygiene-v1",
+      "name": "_wt-sg-det-api-hygiene",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-five-gates",
+      "head": "eb2fdb38b2a5c2e2df3e2f5afb2a9baff9bea619",
+      "branch": "refs/heads/upgrade/key2-custody-established",
+      "name": "_wt-sg-five-gates",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-hourly-ai-circles",
+      "head": "1b532da46cf621405ae977310821edf50a6f9575",
+      "branch": "refs/heads/feat/hourly-independent-ai-circles",
+      "name": "_wt-sg-hourly-ai-circles",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-key-pointer",
+      "head": "8e0b10328fe97bcb7e43a1df9654a8dd715cc945",
+      "branch": "refs/heads/security/sg-key-pointer-no-churn",
+      "name": "_wt-sg-key-pointer",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-key2-custody",
+      "head": "647ff1b8ff8a9f94d21904c7a45f60fa0bf825bd",
+      "branch": "refs/heads/security/sg-key2-custody",
+      "name": "_wt-sg-key2-custody",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-motor-learning-w1",
+      "head": "11308af49e3ffb4862bc2315f106e43b4657b759",
+      "branch": "refs/heads/feat/nf-motor-learning-organ-v1",
+      "name": "_wt-sg-motor-learning-w1",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-motor-scaling",
+      "head": "a66d79420717333dbe0c0f7e3562a70b6360a70d",
+      "branch": "refs/heads/doctrine/nf-live-wired-t0-watch-receipt",
+      "name": "_wt-sg-motor-scaling",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-portfolio-routing",
+      "head": "0eb5468699784ca115cacc20048f7598fb5d30aa",
+      "branch": "refs/heads/doctrine/nf-runway-portfolio-routing-intelligence-v1",
+      "name": "_wt-sg-portfolio-routing",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-product-category-lock-status-7a40a4",
+      "head": "49b12e7b00011522ff9a85b4640de8d1501a367f",
+      "detached": true,
+      "name": "_wt-sg-product-category-lock-status-7a40a4",
+      "dirty": 0,
+      "ahead": null
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-product-lock",
+      "head": "24d4af84d170c9a1181e234f588cfc6d665158aa",
+      "branch": "refs/heads/cursor/product-category-lock-v1",
+      "name": "_wt-sg-product-lock",
+      "dirty": 12,
+      "ahead": null
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runtime-value-contract",
+      "head": "1b8d5fc8e581ed4b95618c847794588249b6cbbb",
+      "branch": "refs/heads/feat/runtime-value-contract-v1",
+      "name": "_wt-sg-runtime-value-contract",
+      "dirty": 1,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-core-families",
+      "head": "070a3dcfdf01fc028f82b9566dd8f956d3752a6d",
+      "branch": "refs/heads/doctrine/nf-runway-core-families-composition-v1",
+      "name": "_wt-sg-runway-core-families",
+      "dirty": 1,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-exec-spine",
+      "head": "90470b6c501f36938c1877ee27c38eba3ab1f393",
+      "branch": "refs/heads/fix/nf-runway-execution-spine-pointers",
+      "name": "_wt-sg-runway-exec-spine",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-execution",
+      "head": "e1acbaf87436ff9f92402b2211ae5f19216125ad",
+      "branch": "refs/heads/product/nf-runway-execution-assignment-v1",
+      "name": "_wt-sg-runway-execution",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-parallel",
+      "head": "9107906e6730af0d68d02b5362f60220b146e2ee",
+      "branch": "refs/heads/product/nf-runway-parallel-sandboxes-v1",
+      "name": "_wt-sg-runway-parallel",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-prod-pointer",
+      "head": "17dc867f173ef00d591fef8fdcb6f697cf95adbc",
+      "branch": "refs/heads/docs/runway-deterministic-prod-pointer",
+      "name": "_wt-sg-runway-prod-pointer",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-runway-product",
+      "head": "cdceb59fa07113609ce78e09d417b177bd3f2608",
+      "branch": "refs/heads/product/nf-runway-video-v1",
+      "name": "_wt-sg-runway-product",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-sandbox-fix",
+      "head": "9735fa42319b51eb29da4d8cfdb63c1e144dde63",
+      "branch": "refs/heads/claude/sandbox-build",
+      "name": "_wt-sg-sandbox-fix",
+      "dirty": 18,
+      "ahead": null
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-v2-shadow",
+      "head": "4b70d887f27be458856f2a498a833775609c1301",
+      "branch": "refs/heads/feature/sg-v2-shadow-proofs",
+      "name": "_wt-sg-v2-shadow",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-verifier-kv-cutback",
+      "head": "4b5f0ef4aa4c0b69f10d433030a4021d1e8ac9e2",
+      "branch": "refs/heads/fix/verifier-kv-free-tier-cutback-v1",
+      "name": "_wt-sg-verifier-kv-cutback",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-wake-path-policy",
+      "head": "3daf70b00c4cdef70018593dc1832523a743c38c",
+      "branch": "refs/heads/lock/nf-wake-path-conflict-policy-v1",
+      "name": "_wt-sg-wake-path-policy",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-sg-workflow-hygiene",
+      "head": "caa034ae8f9e82cabdf3b24ea1bc2b67d97f719a",
+      "branch": "refs/heads/security/sg-precommissioning-workflow-hygiene-01",
+      "name": "_wt-sg-workflow-hygiene",
+      "dirty": 0,
+      "ahead": 0
+    },
+    {
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT/worktrees/_wt-verifier-on-demand-v1",
+      "head": "455ab67fd71ee518504cd4bac3cf99a37cee4811",
+      "branch": "refs/heads/fix/verifier-commissioning-on-demand",
+      "name": "_wt-verifier-on-demand-v1",
+      "dirty": 0,
+      "ahead": 0
+    }
+  ],
+  "ns_root_sg_fragments_remaining": [],
+  "outside_home_worktrees": [],
+  "dirty_compare": [
+    {
+      "name": "sina-governance-SSOT",
+      "pre": 5,
+      "post": 21,
+      "note": "main_expected_extra_edits"
+    },
+    {
+      "name": "_wt-sg-authority-p0",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-candidate-app",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-commissioning-real-jobs",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-compute-roi-activate",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-compute-roi-lock",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-cpl-v1.1",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-five-gates",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-hourly-ai-circles",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-key-pointer",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-key2-custody",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-motor-learning-w1",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-motor-scaling",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-portfolio-routing",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runtime-value-contract",
+      "pre": 1,
+      "post": 1,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-core-families",
+      "pre": 1,
+      "post": 1,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-exec-spine",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-execution",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-parallel",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-prod-pointer",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-runway-product",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-v2-shadow",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-verifier-kv-cutback",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-wake-path-policy",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-workflow-hygiene",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-product-lock",
+      "pre": 12,
+      "post": 12,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-sandbox-fix",
+      "pre": 18,
+      "post": 18,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-det-api-hygiene",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-sg-product-category-lock-status-7a40a4",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-company-new-lock-v1",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    },
+    {
+      "name": "_wt-verifier-on-demand-v1",
+      "pre": 0,
+      "post": 0,
+      "match": true
+    }
+  ],
+  "checks": {
+    "ns_root_sg_clear": true,
+    "all_worktrees_under_home": true,
+    "library_intact": true,
+    "projects_symlink_ok": true,
+    "agents_path_ok": true,
+    "key_dirty_preserved": true,
+    "inbox_has_docs": true
+  },
+  "moves_summary": {
+    "worktrees_under_home": 33,
+    "total_registered": 34,
+    "quarantined": [
+      "NOETFIELD_LOCAL_QUARANTINE_2026-07-09/folders/SG-Canonical-Library__ns-root-v0.8-stub",
+      "NOETFIELD_LOCAL_QUARANTINE_2026-07-09/folders/sg-sandbox-ops__cursor-rules-husk",
+      "NOETFIELD_LOCAL_QUARANTINE_2026-07-09/folders/_wt-sg-loop-tick-scratch__empty-husk"
+    ],
+    "inbox": "docs/_inbox_mac_loose/",
+    "symlink": "/Users/sinakazemnezhad/Projects/sina-governance-ssot",
+    "also_moved_from_ns_worktrees": [
+      "_wt-auth-v1-1",
+      "_wt-commissioning-on-demand",
+      "_wt-commissioning-specialist"
+    ]
+  }
+}

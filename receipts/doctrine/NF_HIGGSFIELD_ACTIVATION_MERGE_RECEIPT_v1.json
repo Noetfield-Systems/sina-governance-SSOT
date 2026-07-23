@@ -1,0 +1,26 @@
+{
+  "schema": "noetfield/sg-doctrine-merge-receipt-v1",
+  "decisions": [
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-CIRCUIT-A-DETERMINISTIC-MOTOR-PROOF-001",
+    "NF-CIRCUIT-B-HIGGSFIELD-CAMPAIGN-PROOF-001"
+  ],
+  "doctrine_branch_head_sha": "0a4094321eb24497422f9239b935e7f395257e3c",
+  "decision_artifact_sha": "0a4094321eb24497422f9239b935e7f395257e3c",
+  "canonical_main_sha": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "sg_main_before": "fd62e7f5d6c1d4ef31a4d8137af84b313f378c25",
+  "sg_main_after": "d2c2e6ab9de8d91179aed694abac649866950b33",
+  "merge_strategy": "merge_commit",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/20",
+  "wiring_verifier": "verify_higgsfield_activation_wiring_v1.sh = PASS",
+  "agent_read_surfaces_version": "1.6.0",
+  "deploy_authorized_by_merge": false,
+  "next": [
+    "circuit_a",
+    "higgsfield_adapter_scaffold",
+    "circuit_b"
+  ],
+  "merged_by": "founder",
+  "merged_at": "2026-07-18T00:53:06Z"
+}

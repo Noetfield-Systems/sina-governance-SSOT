@@ -1,0 +1,85 @@
+{
+  "schema": "noetfield/custody-wiring-receipt-v1",
+  "receipt_id": "CUSTODY_WIRING_FOUNDER_REASONING_v1",
+  "issued_at": "2026-07-10T23:45:00-07:00",
+  "subject": "founder_reasoning_motor_custody_chain",
+  "status": "PASS",
+  "custody_rule": "Master SSOT anchors → Library defines → NOOS operationalizes → runtime executes → verifier proves",
+  "installation_steps": [
+    {
+      "step": 1,
+      "action": "anchor_invariant_master_ssot",
+      "artifact": "ssot/strategy-ssot-v6-split.md",
+      "section": "0.7",
+      "mirror_verified": true
+    },
+    {
+      "step": 2,
+      "action": "install_custody_matrix_and_authority_graph_p2",
+      "artifacts": [
+        "P2-SSOT/LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md",
+        "P2-SSOT/AUTHORITY_GRAPH_FOUNDER_REASONING_LOCKED_v1.md",
+        "P2-SSOT/SSOT_INDEX.md"
+      ]
+    },
+    {
+      "step": 3,
+      "action": "mint_terminology_p7",
+      "artifact": "P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md",
+      "section": "11"
+    },
+    {
+      "step": 4,
+      "action": "install_continuation_doctrine_p8",
+      "artifact": "P8-MACHINE-LOOPS/founder-reasoning-continuation-doctrine-LOCKED_v1.md"
+    },
+    {
+      "step": 5,
+      "action": "install_cost_execution_doctrine_p10",
+      "artifacts": [
+        "P10-PRODUCT-LAYERS/COST_EXECUTION_DOCTRINE_LOCKED_v1.md",
+        "P10-PRODUCT-LAYERS/agentic-cost-governance-SSOT.md"
+      ],
+      "note": "customer FinOps draft scoped separately from motor COST-T*"
+    },
+    {
+      "step": 6,
+      "action": "reclassify_noos_operational_binding",
+      "artifact": "noetfeld-OS/noetfield-org/FOUNDER_REASONING_MOTOR_OPERATIONAL_BINDING_v1.md",
+      "supersedes_stub": "FOUNDER_REASONING_MOTOR_ARCHITECTURE_LOCKED_v1.md"
+    },
+    {
+      "step": 7,
+      "action": "commit_pinned_authority_references",
+      "artifacts": [
+        "noetfeld-OS/noetfield-org/CUSTODY_AUTHORITY_PINS_v1.json",
+        "noetfeld-OS/.noetfield/agent_manifest.yml"
+      ]
+    },
+    {
+      "step": 8,
+      "action": "verify_chain_and_issue_receipt",
+      "verifier": "scripts/verify_founder_reasoning_custody_chain_v1.py",
+      "result": "PASS"
+    }
+  ],
+  "authority_pins_ref": "Noetfield-Systems/noetfeld-OS/noetfield-org/CUSTODY_AUTHORITY_PINS_v1.json",
+  "sg_commit": "c280ff7ebf548ff3a1784502a46436fa0e7bf9c0",
+  "noos_commit": "638b015e97f4e7e4b5a7c7619d3d3012b89d08e0",
+  "commit_pending": true,
+  "commit_pending_note": "Custody artifacts exist in working tree; re-run verifier and refresh pins after scoped commits.",
+  "checks": {
+    "master_ssot_section_0_7": true,
+    "p0_mirror_matches_master": true,
+    "p2_custody_matrix": true,
+    "p2_authority_graph": true,
+    "p2_ssot_index_rows": true,
+    "p7_terminology_section_11": true,
+    "p8_continuation_doctrine": true,
+    "p10_cost_execution_doctrine": true,
+    "noos_operational_binding": true,
+    "noos_authority_pins": true,
+    "runtime_manifest_refs": true
+  },
+  "non_duplication_assertion": "Full operational specification not copied into Master SSOT or Library; NOOS binding operationalizes upstream law only."
+}

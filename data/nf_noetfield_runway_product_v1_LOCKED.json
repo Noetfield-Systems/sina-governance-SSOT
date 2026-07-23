@@ -1,0 +1,148 @@
+{
+  "schema": "nf_noetfield_runway_product_v1",
+  "decision_id": "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "1.3.0",
+  "product": "Noetfield Runway",
+  "sell": "finished_result_in_ui",
+  "not_the_product": [
+    "Motor",
+    "governance",
+    "SG",
+    "chat_tokens",
+    "Gateway"
+  ],
+  "product_baseline": {
+    "repo": "Noetfield-Systems/PRODUCT_CATEGORY",
+    "sha": "b9ce619cb575f74800bb56776f3d9acb5e7ebac9"
+  },
+  "engine": "Unified Motor",
+  "engine_law": "One shared Motor; Runways are parallel plugins; core stays provider-neutral, artifact-neutral, and concurrency-capable",
+  "execution_model": "parallel",
+  "serial_first_second_order": false,
+  "initial_runways": [
+    "Video",
+    "Software Repair",
+    "Research"
+  ],
+  "bootstrap_builders": {
+    "Video": "Cursor",
+    "Software Repair": "Claude",
+    "Research": "Codex Local"
+  },
+  "parallel_sandboxes": {
+    "required": true,
+    "law": "one_job_one_sandbox",
+    "isolation": [
+      "filesystem",
+      "secret_scope",
+      "network_allowlist",
+      "artifact_root"
+    ],
+    "no_cross_job_contamination": true,
+    "noos_visibility_per_job": true,
+    "learning_target": "receipts proving create_run_destroy_and_leak_detection_under_concurrency"
+  },
+  "flow": [
+    "INPUT",
+    "INTELLIGENCE",
+    "EXECUTION",
+    "RESULT"
+  ],
+  "detailed_flow": [
+    "User input",
+    "Prompt Compiler",
+    "Plan",
+    "Model/Tool selection",
+    "Execution loop",
+    "Verification",
+    "Final result"
+  ],
+  "success_criteria": {
+    "concurrency": "two_or_more_concurrent_jobs_in_isolated_sandboxes_no_cross_contamination",
+    "video": "real_brief_to_playable_downloadable_video",
+    "software_repair": "real_failing_fixture_to_green_candidate_pr",
+    "research": "cited_downloadable_report",
+    "foundation": "shared_submit_status_result_flow_visible_to_NOOS"
+  },
+  "first_success": "Two concurrent isolated sandboxed Jobs complete independently with NOOS/UI visibility",
+  "pricing_model": "credits_per_completed_job",
+  "gateway": {
+    "role": "entry_control_surface",
+    "not_equal_to": "Unified Motor",
+    "gateway_mode_live": "HOLD_UNTIL_FIVE_CHECK_PREFLIGHT"
+  },
+  "models": {
+    "build_router_interfaces_now": true,
+    "wait_for_api_keys": false,
+    "first_live_provider": "DeepSeek_OR_Kimi_one_only",
+    "huggingface": "disabled_adapter_until_endpoint_chosen",
+    "secret_store_only": [
+      "DEEPSEEK_API_KEY",
+      "MOONSHOT_API_KEY",
+      "HF_TOKEN"
+    ]
+  },
+  "stack_roles": {
+    "Runway": "product",
+    "Unified Motor": "shared_engine",
+    "SourceA": "prompt_job_compiler",
+    "NOOS": "runtime_control_plane",
+    "SG": "canon_authority",
+    "SinaGPT": "founder_cockpit",
+    "Railway": "long_running_workers",
+    "Cloudflare": "ui_gateway_workflows_edge",
+    "Cheap models": "default_operational_intelligence",
+    "Claude/Cursor/Codex": "bootstrap_and_escalation_only"
+  },
+  "required_stack_manifest": "noetfield.runway-stack.v1",
+  "required_doctor": "runway doctor",
+  "forbidden": [
+    "serial_runway_monopoly_queue",
+    "shared_mutable_sandbox_across_jobs",
+    "fourth_runway",
+    "new_lane",
+    "gpu_platform",
+    "three_live_model_providers",
+    "new_governance_framework",
+    "raw_github_dispatch_as_product",
+    "separate_engine_per_agent",
+    "gateway_mode_live_without_preflight",
+    "api_keys_in_chat_or_git",
+    "video_specific_motor_core",
+    "git_specific_motor_core"
+  ],
+  "waves": [
+    "SG_LOCK",
+    "SHARED_MOTOR_AND_PARALLEL_SANDBOX_MANAGER",
+    "THREE_RUNWAYS_IN_PARALLEL",
+    "CONCURRENCY_PROOF_TWO_SANDBOXES"
+  ],
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-HIGGSFIELD-MEDIA-ADAPTER-AND-RESULT-MOTOR-V1",
+    "NF-ACTIVATION-CYCLE-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1"
+  ],
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md",
+  "saved_at": "2026-07-18T03:58:51Z",
+  "base_head_before_commit": "a9c6748a7ba5588b436b72a1545521e29443a662",
+  "founder_override": {
+    "decision": "PARALLEL_EXECUTION",
+    "reason": "First/second order does not matter; Motor must manage parallel isolated sandboxes",
+    "supersedes": "serial Video-first or Software-Repair-first monopoly queues"
+  },
+  "research_product_architecture_input": [
+    "Founder",
+    "GPT Advisor"
+  ],
+  "research_first_commissioning_verifier": "GPT Work Verifier on GitHub",
+  "worker_distinctions": {
+    "Codex Local": "Research repository implementation",
+    "GPT Work Verifier on GitHub": "independent first commissioning",
+    "Codex Cloud": "separate bounded cloud worker",
+    "GPT Advisor": "product and architecture advice only"
+  },
+  "execution_assignment_decision": "NF-RUNWAY-EXECUTION-ASSIGNMENT-V1"
+}

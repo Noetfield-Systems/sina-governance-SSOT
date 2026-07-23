@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noetfield.runtime-reality.v1",
+  "title": "Noetfield runtime reality v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "version",
+    "as_of",
+    "authority",
+    "sg",
+    "unified_motor",
+    "noetfield_motor_app",
+    "security_principals",
+    "allowed_during_containment",
+    "blocked_during_containment",
+    "active_evidence_requirements",
+    "invalid_equivalences",
+    "incident_id",
+    "architecture_amendment"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.runtime-reality.v1"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.(0|1)\\.0$"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "precedence",
+        "system_status",
+        "autonomous_production_mutations",
+        "containment",
+        "founder_break_glass"
+      ],
+      "properties": {
+        "precedence": {
+          "const": "RUNTIME_REALITY_OVERRIDES_ARCHITECTURE_PROSE_FOR_LIVE_STATUS"
+        },
+        "system_status": {
+          "enum": [
+            "BLOCKED_NOT_COMMISSIONED",
+            "SCOPED_LIVE_T0_AUTHORIZED",
+            "LIVE_WIRED_T0",
+            "COMMISSIONED_T0_PROVEN"
+          ]
+        },
+        "autonomous_production_mutations": {
+          "const": "HOLD"
+        },
+        "containment": {
+          "const": "ENFORCED"
+        },
+        "founder_break_glass": {
+          "const": "TEMPORARY_CONTAINMENT_ONLY"
+        }
+      }
+    },
+    "sg": {
+      "type": "object",
+      "required": [
+        "runtime_status",
+        "legacy_app_authoritative",
+        "replacement_status"
+      ],
+      "properties": {
+        "runtime_status": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE_WIRED_T0",
+            "COMMISSIONED_T0_PROVEN"
+          ],
+          "type": "string"
+        },
+        "legacy_app_authoritative": {
+          "const": false
+        },
+        "replacement_status": {
+          "enum": [
+            "NOT_YET_COMMISSIONED",
+            "SHADOW_LANDED",
+            "LIVE_WIRED_T0"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "unified_motor": {
+      "type": "object",
+      "required": [
+        "runtime_status",
+        "active"
+      ],
+      "properties": {
+        "runtime_status": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE_WIRED_T0",
+            "COMMISSIONED_T0_PROVEN"
+          ],
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "active": {
+                "const": true
+              }
+            },
+            "required": [
+              "active"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime_status": {
+                "enum": [
+                  "LIVE_WIRED_T0",
+                  "COMMISSIONED_T0_PROVEN"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "runtime_status": {
+                "const": "NOT_COMMISSIONED"
+              }
+            },
+            "required": [
+              "runtime_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "active": {
+                "const": false
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "noetfield_motor_app": {
+      "type": "object",
+      "required": [
+        "identity_binding",
+        "unified_core_commissioning",
+        "is_unified_motor_core",
+        "is_sg_authority"
+      ],
+      "properties": {
+        "identity_binding": {
+          "const": "PROVEN"
+        },
+        "unified_core_commissioning": {
+          "enum": [
+            "NOT_PROVEN",
+            "LIVE_WIRED_T0",
+            "COMMISSIONED_T0_PROVEN"
+          ],
+          "type": "string"
+        },
+        "is_unified_motor_core": {
+          "type": "boolean"
+        },
+        "is_sg_authority": {
+          "const": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_unified_motor_core": {
+                "const": true
+              }
+            },
+            "required": [
+              "is_unified_motor_core"
+            ]
+          },
+          "then": {
+            "properties": {
+              "unified_core_commissioning": {
+                "enum": [
+                  "LIVE_WIRED_T0",
+                  "COMMISSIONED_T0_PROVEN"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "security_principals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "motor_execution_app_count",
+        "sg_authority_app_count",
+        "total_required",
+        "credentials_disjoint",
+        "custody_disjoint",
+        "motor_may_issue_sg_decisions",
+        "sg_may_execute_mutations"
+      ],
+      "properties": {
+        "motor_execution_app_count": {
+          "const": 1
+        },
+        "sg_authority_app_count": {
+          "const": 1
+        },
+        "total_required": {
+          "const": 2
+        },
+        "credentials_disjoint": {
+          "const": true
+        },
+        "custody_disjoint": {
+          "const": true
+        },
+        "motor_may_issue_sg_decisions": {
+          "const": false
+        },
+        "sg_may_execute_mutations": {
+          "const": false
+        }
+      }
+    },
+    "event_gateway": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        }
+      }
+    },
+    "resident_roles": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "sg_role": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        },
+        "noos_role": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        }
+      }
+    },
+    "commissioning_directive": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_gateway": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        },
+        "sg_role": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        },
+        "noos_role": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "LIVE"
+          ]
+        },
+        "unified_motor_runtime": {
+          "enum": [
+            "NOT_COMMISSIONED",
+            "COMMISSIONED_T0"
+          ]
+        },
+        "autonomous_production_mutations": {
+          "const": "HOLD"
+        },
+        "fully_commissioned_claim": {
+          "const": false
+        }
+      }
+    },
+    "implementation_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shadow_merge_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "sandbox_candidate_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "allowed_during_containment": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "blocked_during_containment": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "active_evidence_requirements": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "invalid_equivalences": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "incident_id": {
+      "const": "SG-AUTHORITY-IDENTITY-P0"
+    },
+    "architecture_amendment": {
+      "const": "NF-SG-AUTHORITY-IDENTITY-V2"
+    }
+  }
+}

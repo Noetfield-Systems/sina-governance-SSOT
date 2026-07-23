@@ -1,0 +1,22 @@
+{
+  "schema": "noetfield/sg-doctrine-merge-receipt-v1",
+  "decisions": [
+    "NF-SINAGPT-FOUNDER-BRAIN-ARCHITECT-V1",
+    "NF-COMMAND-GATEWAY-V2-ARCHITECTURE-V1",
+    "NF-COMMAND-GATEWAY-V2-MOTOR-CONTROL-001"
+  ],
+  "doctrine_branch_head_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "decision_artifact_sha": "792eb6c6fdbf9b063b29dd5672ab66d91f9da37b",
+  "canonical_main_sha": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "sg_main_before": "49f175945db9b6fe2bbe0e32533d746c5f924ccb",
+  "sg_main_after": "b72f5a3975b0170a1b4d9e09eea06cccc9c4acf0",
+  "merge_strategy": "merge_commit",
+  "pr": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/18",
+  "wiring_verifier": "verify_sinagpt_command_gateway_v2_wiring_v1.sh = PASS",
+  "agent_read_surfaces_version": "1.5.0",
+  "deploy_authorized_by_merge": false,
+  "implementation_authorized": "NF-COMMAND-GATEWAY-V2-MOTOR-CONTROL-001 draft_pr_only",
+  "merged_by": "founder",
+  "merged_at": "2026-07-17T19:03:19Z",
+  "related_unified_motor_authority_sha": "dc6080d8519b8a83dcfaaeefb65392691ce3e33e"
+}

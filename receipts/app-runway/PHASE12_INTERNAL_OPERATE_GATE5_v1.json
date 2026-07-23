@@ -1,0 +1,125 @@
+{
+  "deployed_shas": {
+    "hdir_gate5": "fdb6763c82b8f91c3871a699be9602cd42b0088e",
+    "runway_live": "d9b24a7766090cf9c04ebfa3d50c781780cc52a1",
+    "runway_note": "Gate5 Loop Engineer SHA 3f0e6c89 is ancestor; live Kernel tip includes queue_only + post-Gate5 fixes after exact-SHA stall repair"
+  },
+  "org": {
+    "name": "Noetfield Internal",
+    "email": "noetfield-internal-1784734649@example.com",
+    "note": "No /v1/orgs membrane; Internal user is org stand-in"
+  },
+  "offer": "first project free",
+  "queued_projects": [
+    {
+      "id": "prj_5d6017814cc844d785fd2d16",
+      "title": "Corporate Website",
+      "status": "queued"
+    },
+    {
+      "id": "prj_d464f492d984437bba17ba87",
+      "title": "LLM / AI",
+      "status": "queued"
+    },
+    {
+      "id": "prj_5071ac232c614c28b09e2708",
+      "title": "TrustField",
+      "status": "queued"
+    },
+    {
+      "id": "prj_8f4d7fddc3c74002899af115",
+      "title": "Noetfield Growth",
+      "status": "queued"
+    },
+    {
+      "id": "prj_d62a8de593244aabaf53b8da",
+      "title": "Noetfield API",
+      "status": "queued"
+    },
+    {
+      "id": "prj_2735beb1189c40a6842b85d3",
+      "title": "Runway / HDIR",
+      "status": "queued"
+    },
+    {
+      "id": "prj_0e5ec309da244181ac5cdfe5",
+      "title": "Noetfield Platform",
+      "status": "queued"
+    }
+  ],
+  "goal_a": {
+    "goal_id": "goal_3ea2100ab8094d4a8b84ec",
+    "status": "PASSED",
+    "receipt_id": "grcp_a77627b42dcb4a0cb61645",
+    "receipt_hash": "9e6bc2cb9b927aaf86f02df85a371aebc11f0ccd4636d44920245218a1206a1e",
+    "packet_hashes": {
+      "initial_webpage_build": "f676c93af14ade58a068f0543200fae5a522c2c006c5b1173198ec4c8aff9dfd",
+      "repair_links_valid": "202e8a6c386ac520552d1279355d3175db4b0762881eefc00b19a500cd232525",
+      "staging_verify_finalize": "54eb4b062ca0f362c1bdc26665bf1685ab3f9a3fde14ba748d286862fd089429"
+    },
+    "checks": {
+      "1_new_goal_after_promote": true,
+      "2_packet_hash_on_receipt": true,
+      "3_intentional_failed_check": true,
+      "4_distinct_repair_packet": true,
+      "5_pause_resume": true,
+      "6_artifact_url": true,
+      "7_receipt_after_reauth": true,
+      "8_passed": true
+    },
+    "all_pass": true,
+    "artifact_url": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_452e4ad8e6b9417899d8c5/artifacts/index.html",
+    "child_runs": [
+      {
+        "purpose": "initial_webpage_build",
+        "run_id": "run_452e4ad8e6b9417899d8c5",
+        "hdir_execution_id": "prj_0e0c9fde5e92"
+      },
+      {
+        "purpose": "repair_links_valid",
+        "run_id": "run_d296f6e8182d40459d36a7",
+        "hdir_execution_id": "prj_176203d04a3a"
+      },
+      {
+        "purpose": "staging_verify_finalize",
+        "run_id": "run_89aaaa057c6c4634becd76",
+        "hdir_execution_id": "prj_af09bcfef8ad"
+      }
+    ]
+  },
+  "goal_b": {
+    "goal_id": "goal_82bc673603a7453c8c44bc",
+    "status": "PASSED",
+    "receipt_id": "grcp_3056552ab3e34565adc6ab",
+    "receipt_hash": "e17a44c5619c77e81feed130d05e4e42c9e234a186aef8ab614d28067d18ccc1",
+    "child_runs": [
+      {
+        "purpose": "initial_webpage_build",
+        "run_id": "run_6ae48b1a2bdf4763a99517",
+        "hdir_execution_id": "prj_315a47ab466a"
+      },
+      {
+        "purpose": "repair_links_valid",
+        "run_id": "run_bd24b3c768d14c81ab4cf4",
+        "hdir_execution_id": "prj_62208716c4af"
+      },
+      {
+        "purpose": "staging_verify_finalize",
+        "run_id": "run_09d8397abd86483b84cf42",
+        "hdir_execution_id": "prj_3d782ac6b524"
+      }
+    ],
+    "artifact_http": "200",
+    "artifact_url": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/runway/runs/run_09d8397abd86483b84cf42/artifacts/index.html",
+    "deployed_result": true
+  },
+  "goal_c": {
+    "status": "QUEUED_FOR_PUBLISH",
+    "prior_goal": "goal_0e791466584e43d19ec0dd",
+    "prior_run": "run_14e2a35d4c6143cc82a85c",
+    "regulated_term_hits": [],
+    "overclaim_hits": [],
+    "publish_approval_ready": true,
+    "note": "Publish approval must not reach Founder until scan is clean; currently queued."
+  }
+}

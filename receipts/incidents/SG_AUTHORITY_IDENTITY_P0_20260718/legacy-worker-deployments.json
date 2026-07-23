@@ -1,0 +1,163 @@
+[
+  {
+    "id": "6941a7d5-f3b2-4342-ba8a-64ef92f0291a",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/message": "Automatic deployment on upload.",
+      "workers/triggered_by": "upload"
+    },
+    "versions": [
+      {
+        "version_id": "65f452c7-a9cc-485c-9e12-6e21ede0ea8f",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:44:52.554119Z"
+  },
+  {
+    "id": "67cccefc-9180-438f-b1ba-473b4bfabdfe",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "secret"
+    },
+    "versions": [
+      {
+        "version_id": "d92b0760-2df2-4d4e-b7f7-cad2483494e4",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:44:52.931357Z"
+  },
+  {
+    "id": "5fa57177-b9b3-406a-8736-386a96f423ce",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "f3c44c81-8722-4406-b92c-3b2cfe5dff3e",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:44:56.214354Z"
+  },
+  {
+    "id": "459c6e75-0f5f-4472-b665-f96ce726ec6f",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "ff2f8963-a30f-4793-8803-bfa98509a8e6",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:47:03.69731Z"
+  },
+  {
+    "id": "8bdc52a8-d7dc-4b6c-8557-205039b9e0f0",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "32ee618f-ca80-4c09-8138-78cdfdb30f3c",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:52:02.178479Z"
+  },
+  {
+    "id": "e7b5960d-24d7-49b9-a1c6-dd173dd2c729",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "2ba04dde-ceb4-4856-9a8f-34a9c5f8b209",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T06:53:33.174224Z"
+  },
+  {
+    "id": "0efd40d4-76cb-43e2-8915-a8d6aa209f43",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "f919fe1f-2369-42f6-8f5c-755c6ae06fd1",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T08:13:53.604494Z"
+  },
+  {
+    "id": "b4727710-bd37-48c8-bb3f-5c5364e5c571",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "3221a610-bee0-4d92-b38e-d9c174222034",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T11:03:16.919624Z"
+  },
+  {
+    "id": "3a0c1d84-319f-4153-abfb-559c4eb917e0",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "40c98de5-ad90-44a1-b840-94a58c69abc1",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-06-30T11:05:05.703687Z"
+  },
+  {
+    "id": "5557b72e-28f6-44f7-9b98-607d2b6900cf",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "kazemnezhadsina144@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "8163c614-03b3-434f-a3c1-e1e11ee6afc8",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-07-02T08:27:15.521133Z"
+  }
+]

@@ -14,7 +14,25 @@
 | **Cross-domain auth** | `../../docs/CROSS_DOMAIN_AUTH_PROPOSAL_v1.1_LOCKED.md` | Tiered Supabase auth law; matrix `data/auth_surface_matrix_v1.json`; SG probe only. |
 | **Living System doctrine** | `../P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` | P0-CORE organ law: LIVING vs STALE axis; dual circulatory systems; §8 machine rubric. Execution: `docs/LIVING_SYSTEM_110_UPGRADE_PLANS_v1_LOCKED.md`. |
 | **CHESS reasoning machine** | `../P0-DOCTRINE/CHESS_PATTERN_REASONING_MACHINE_v2.0.md` | P0 forecast-before-action machine: Forecast → Patch → Proceed → Verify; labels PROCEED / PROCEED_WITH_PATCH / ASK_IF_IRREVERSIBLE; template `../P0-TEMPLATES/CHESS_PASS_PROMPT_TEMPLATE_v2.0.md`. |
+| **Architecture Finalization Gate** | `../P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` | Major architecture becomes canonical only after SG packet + authority SHA. Machine `data/architecture_finalization_gate_v1_LOCKED.json`. |
+| **Unified Motor Core architecture** | `../P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` | `NF-UNIFIED-MOTOR-ARCHITECTURE-V1` SG_ACCEPTED v1.1; Cloudflare Agents+Workflows runway; scaling reject Temporal/Ray/Restate/Kafka+Flink; W5 provider hardening deferred; waves in `docs/NF_UNIFIED_MOTOR_IMPLEMENTATION_WAVES_v1_LOCKED.md`. |
+| **Runtime reality (highest live-status precedence)** | `../../../data/runtime_reality_v1.json` | Current deployment, commissioning, ACTIVE, identity, and authority truth; autonomous production mutations HOLD. |
+| **SG authority identity v2 amendment** | `../P0-FOUNDATION-SPINE/NF_SG_AUTHORITY_IDENTITY_V2_LOCKED.md` | Separate Motor executor and SG authority Apps; legacy advisory denied; SG v2 and Unified Motor Core not commissioned. |
+| **SinaGPT founder cockpit** | `../P1-CANON/SINAGPT_FOUNDER_BRAIN_ARCHITECT_LOCKED_v1.md` | `founder.brain-architect` HUMAN_FACING_COMMAND_COCKPIT; not Issue Manager/Motor. Machine `data/sinagpt_founder_brain_architect_v1_LOCKED.json`. |
+| **Command Gateway v2 architecture** | `../P0-FOUNDATION-SPINE/NF_COMMAND_GATEWAY_V2_ARCHITECTURE_LOCKED_v1.md` | Keep `/v1`; add Motor+Issues+CI+SG `/v2`; OAuth founder split; seven-truth. Commission `docs/dispatch/nf-command-gateway-v2-motor-control-001.md`. |
+| **Activation cycle** | repo `docs/NF_ACTIVATION_CYCLE_V1_LOCKED.md` | Stop expansion; two proof circuits only. Machine `data/nf_activation_cycle_v1_LOCKED.json`. |
+| **Higgsfield media adapter** | `../P0-FOUNDATION-SPINE/NF_HIGGSFIELD_MEDIA_ADAPTER_AND_RESULT_MOTOR_LOCKED_v1.md` | Replaceable MediaGenerationAdapter + campaign Result Motor profile; not a lane. |
+| **Noetfield Runway product** | `../P10-PRODUCT-LAYERS/NF_NOETFIELD_RUNWAY_PRODUCT_LOCKED_v1.md` | Sell finished results; parallel Video/Software Repair/Research; isolated sandboxes per Job; Unified Motor=infra; Gateway≠Motor. |
+| **Compute / ROI allocation** | `../P0-FOUNDATION-SPINE/NF_COMPUTE_ROI_ALLOCATION_LOCKED_v1.md` | `NF-COMPUTE-ROI-ALLOCATION-V1` SG_ACCEPTED; enterprise CI budget + Cloudflare/Railway scale; Actions classes A–D; job_id wake only; HOLD preserved. |
+| **Runway execution assignment** | `../P10-PRODUCT-LAYERS/NF_RUNWAY_EXECUTION_ASSIGNMENT_LOCKED_v1.md` | Claude Code builds foundation/repair; Codex Local builds Research; Cursor builds Video; GPT Work Verifier on GitHub verifies Research commissioning; all under institutional owners. |
 | **Versioning law** | `SSOT_VERSIONING_LAW_v0.1.1.md` | Every edited artifact carries `v{major}.{minor}.{edit}_{YYYYMMDD-HHMM}` in **filename + in-file header + edit-log**. major=scope/phase change; minor=founder-approved substantive change; edit=every saved pass. No silent re-saves. Superseded versions retained unless founder says clean up. |
+| **Library custody matrix** | `LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md` | Custody chain: Master SSOT → Library → NOOS → runtime → verifier. Tier namespace law. Invalid receipt patterns. |
+| **Founder reasoning authority graph** | `AUTHORITY_GRAPH_FOUNDER_REASONING_LOCKED_v1.md` | Authority routing for §0.7 motor; lane sequence; four required integrator components (names). |
+| **Founder reasoning continuation** | `../P8-MACHINE-LOOPS/founder-reasoning-continuation-doctrine-LOCKED_v1.md` | Escalation = continuation; park rules; packet + ingestion minimums; subscription vs API automation. |
+| **Cost execution doctrine** | `../P10-PRODUCT-LAYERS/COST_EXECUTION_DOCTRINE_LOCKED_v1.md` | COST-T0/T1/T2 lanes; caps; degradation vocabulary; deterministic loops without LLM. |
+| **Motor commissioning standard** | `../P8-MACHINE-LOOPS/MOTOR_COMMISSIONING_AND_ACCEPTANCE_STANDARD_LOCKED_v1.md` | Cold proof runs A+B; `FULLY_COMMISSIONED` acceptance law. Design ≠ commissioned. |
+| **NOOS operational binding** | `Noetfield-Systems/noetfeld-OS` → `noetfield-org/FOUNDER_REASONING_MOTOR_OPERATIONAL_BINDING_v1.md` | Full operational spec; commit-pinned via `CUSTODY_AUTHORITY_PINS_v1.json`. **Not library SSOT.** |
+| **NOOS motor schemas** | `Noetfield-Systems/noetfeld-OS` → `noetfield-org/schemas/` | Packet, result, job contract, private binding JSON schemas. P7 §12 harmonization. |
 
 ## QUICK-REFERENCE derivations (for agents)
 - `R_DOMAIN_SPLIT.md` — the R1–R7 portability table (which rules cross into brain contexts).
@@ -23,7 +41,8 @@
 - `../P7-DOCTRINE/NOETFIELD_TERMINOLOGY_v1.md` — mandatory short vocabulary (Tier 0).
 - `../P7-DOCTRINE/NOETFIELD_DICTIONARY_v1.md` — long-form word SSOT (escalation).
 - `../P0-FOUNDATION-SPINE/P0-CORE/LIVING_SYSTEM_DOCTRINE_v1.1_LOCKED.md` — living vs stale axis (P0-CORE).
-- `../P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` — terminology vs dictionary vs doctrine routing.
+- `LIBRARY_CUSTODY_MATRIX_LOCKED_v1.md` — who locks what (P2 custody law).
+- `AUTHORITY_GRAPH_FOUNDER_REASONING_LOCKED_v1.md` — §0.7 authority routing graph.
 
 ## The R1–R7 portability table (canonical)
 | Rule | Domain | Portable to agentic-brain? |
@@ -36,7 +55,13 @@
 | R6 — receipt law | D4 | ✅ yes |
 | R7 — agent cannot self-verify | D4 | ✅ yes |
 
+- `../P0-FOUNDATION-SPINE/LANGUAGE_LAYER_v1.md` — terminology vs dictionary vs doctrine routing.
+
 ---
-*v0.2 (2026-07-07) — Living System doctrine indexed.
+*v0.4 (2026-07-10) — Option C: P7 §12 harmonization, P8 commissioning, NOOS schemas index.*
+
+*v0.3 (2026-07-10) — Founder reasoning custody chain: custody matrix, authority graph, P8 continuation, P10 cost execution, NOOS operational binding index.*
+
+*v0.2 (2026-07-07) — Living System doctrine indexed.*
 
 *v0.1 (2026-07-03 12:34 PDT) — first write. Indexes the two ratified SSOT items + portability table.*

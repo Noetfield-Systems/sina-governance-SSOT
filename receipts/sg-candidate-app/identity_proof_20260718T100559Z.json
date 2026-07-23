@@ -1,0 +1,79 @@
+{
+  "receipt_type": "sg_candidate_app_identity_proof_v1",
+  "generated_at_utc": "2026-07-18T10:05:59.238326+00:00",
+  "public_metadata_only": true,
+  "verdict": "PROVEN",
+  "app": {
+    "id": 4330805,
+    "slug": "noetfield-sg-authority",
+    "node_id": "A_kwHOEdc-784AQhU1",
+    "html_url": "https://github.com/apps/noetfield-sg-authority",
+    "owner_login": "Noetfield-Systems",
+    "permissions": {
+      "actions": "read",
+      "checks": "write",
+      "contents": "read",
+      "metadata": "read",
+      "pull_requests": "read",
+      "statuses": "write"
+    },
+    "events": []
+  },
+  "installation": {
+    "id": 147378007,
+    "repository_selection": "selected",
+    "repositories": [
+      "Noetfield-Systems/noetfield-sandbox-private",
+      "Noetfield-Systems/sina-governance-SSOT"
+    ]
+  },
+  "expected_repositories": [
+    "Noetfield-Systems/noetfield-sandbox-private",
+    "Noetfield-Systems/sina-governance-SSOT"
+  ],
+  "private_key_fingerprint_sha256": "1b3f3453a2ede302533223ff8616f1fcf272e69be99a5cbd382813b557406fa2",
+  "checks": [
+    {
+      "check": "app_slug",
+      "pass": true,
+      "detail": "got=noetfield-sg-authority"
+    },
+    {
+      "check": "owner_login",
+      "pass": true,
+      "detail": "got=Noetfield-Systems"
+    },
+    {
+      "check": "permissions_exact",
+      "pass": true,
+      "detail": "got={\"actions\": \"read\", \"checks\": \"write\", \"contents\": \"read\", \"metadata\": \"read\", \"pull_requests\": \"read\", \"statuses\": \"write\"}"
+    },
+    {
+      "check": "events_empty",
+      "pass": true,
+      "detail": "got=[]"
+    },
+    {
+      "check": "installation_exists",
+      "pass": true,
+      "detail": "id=147378007"
+    },
+    {
+      "check": "installation_selected",
+      "pass": true,
+      "detail": "got=selected"
+    },
+    {
+      "check": "repos_exact",
+      "pass": true,
+      "detail": "got=['Noetfield-Systems/noetfield-sandbox-private', 'Noetfield-Systems/sina-governance-SSOT']"
+    }
+  ],
+  "runtime_state": {
+    "SG_CANDIDATE_APP": "CREATED",
+    "SG_CANDIDATE_IDENTITY": "PROVEN",
+    "SG_RUNTIME": "NOT_COMMISSIONED",
+    "SG_ENFORCEMENT": "NOT_ENABLED",
+    "AUTONOMOUS_PRODUCTION_MUTATIONS": "HOLD"
+  }
+}
