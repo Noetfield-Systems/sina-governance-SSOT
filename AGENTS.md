@@ -57,6 +57,15 @@ falling back to a blind repo-wide read. Full rationale and rollout plan:
 - Architecture accepted ≠ implemented ≠ deployed ≠ proven ≠ commissioned ≠ active.
 - Agents may observe, test, propose, and open draft PRs; they may not lift HOLD, deploy, promote, mutate secrets/authority/verifiers, or revoke legacy identity under containment.
 
+## Founder gates — closed set, no invented gates (LAW)
+
+`ssot/FOUNDER_GATE_SCOPE_v1.md` · checker: `python3 scripts/verify_founder_gate_scope_v1.py`
+
+- The founder is interrupted ONLY for the eight reasons in the closed set (destructive ops, unauthorized prod deploy, money, legal, credentials, irreversible external sends, authority-plane changes, merge/L5/phase-unlock). Runtime contract: a block without one of these reasons is **malformed**.
+- Before raising ANY founder decision, run the checker. If the SSOT answers it, a test answers it, a default exists, it's reversible, or it can run as a bounded experiment → it is a MACHINE decision: act on the default and write a receipt. Do not ask.
+- Fixing, wiring, and commissioning work inside an accepted plan is machine work. Never re-gate it. Committing ordered, verified work into the SSOT is recording, not merge authority — do it, receipt it, don't ask.
+- Founder-facing text must be plain language: what happened, 2-3 options, one recommendation, why in ≤3 lines, consequence of no decision. No unexplained jargon or codenames.
+
 ## Skills (load at session start)
 
 0c. **Architecture Finalization Gate + Unified Motor (LOCKED)** — `P8-MACHINE-LOOPS/ARCHITECTURE_FINALIZATION_GATE_LOCKED_v1.md` + `P0-FOUNDATION-SPINE/NF_UNIFIED_MOTOR_ARCHITECTURE_LOCKED_v1.md` before redesigning Motors, resident owners, model routing, or sandbox authority. Scaling posture: Cloudflare Agents+Workflows only; no Temporal/Kafka+Flink/Ray/Restate substrate; W5 provider hardening deferred; HOLD preserved
