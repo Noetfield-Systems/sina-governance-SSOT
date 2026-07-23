@@ -1,0 +1,34 @@
+{
+  "schema": "daily_cost_sentinel_v1",
+  "doctrine": "#133 (daily cost sentinel) + #109 building block (monthly accumulator vs founder cap)",
+  "law": [
+    "docs/AGENTIC_COST_EFFICIENCY_DOCTRINE_v1_LOCKED.md",
+    "p0-pgr/P0_DISPATCH_ROUTER_RULES_v1.md (monthly cap)"
+  ],
+  "date": "2026-07-23",
+  "generated_at": "2026-07-23T11:22:32Z",
+  "accounting_rule": "usd per receipt = sum(total_usd); fallback sum(est_cost_usd) only when no total_usd. Zeros reported as zeros \u2014 no invented numbers.",
+  "totals": {
+    "spend_usd": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "receipts_today": 23,
+    "receipts_metered": 0,
+    "receipts_unmetered": 23,
+    "metering_coverage_pct": 0.0
+  },
+  "by_store": {},
+  "by_model": {},
+  "by_provider": {},
+  "retry_cost_usd": 0,
+  "failed_job_cost_usd": 0,
+  "top_5_expensive": [],
+  "month_to_date": {
+    "spend_usd": 0.0,
+    "cap_usd": 1500.0,
+    "cap_basis": "pre-revenue cap; revisit at revenue >= $10k/month per router rules",
+    "remaining_usd": 1500.0,
+    "over_cap": false
+  },
+  "blindness_note": "METERING GAP: most receipts carry zero/no cost data (doctrine #107 is PARTIAL \u2014 upstream token metering is the keystone fix). This sentinel reports what exists; coverage % above is the honest measure of how blind the system still is."
+}

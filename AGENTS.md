@@ -91,3 +91,5 @@ falling back to a blind repo-wide read. Full rationale and rollout plan:
 7. `skills/registry-Scheduler and executor-validator` (in-repo) — run before registering any new GH Action/worker/Copilot workflow, or after touching `data/github_automation_registry_v1.json`; wraps `scripts/validate_parallel_automation_governance_v1.py` + `scripts/audit_automation_surface_v1.py`. Desktop app: `desktop-app/Registry-Scheduler and executor-Validator.app`
 
 8. `skills/commissioning-specialist` — 5-min CF cron commissioning closed loop (heal allowlist + kaizen propose; DeepSeek/GLM/Kimi/HF)
+
+9. **Daily cost sentinel (doctrine #133)** — `python3 scripts/daily_cost_sentinel_v1.py` once per session/day; sums real spend from the unified receipt corpus, tracks month-to-date vs the $1,500 founder cap (exit 2 = over cap), writes `receipts/cost/` + `docs/DAILY_COST_SENTINEL_LATEST.md`. Metering coverage % is the honest blindness measure; upstream token metering (#107, motor repo) is the keystone that makes it non-zero.
