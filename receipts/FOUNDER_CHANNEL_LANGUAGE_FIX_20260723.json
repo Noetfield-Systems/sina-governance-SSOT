@@ -1,0 +1,22 @@
+{
+  "schema": "founder_channel_fix_receipt_v1",
+  "at": "2026-07-23",
+  "by": "claude_mac_session",
+  "founder_order": "2026-07-23: founder showed Telegram flooded with raw machine events ('just buzzword with zero proof') and demanded outcomes in plain language",
+  "root_cause": "NOETFIELD-RUNWAY services/telegram-cockpit relayed EVERY completed workflow run on EVERY branch to the founder chat verbatim (codename + branch + status + link) — 9 messages in 5 minutes, all machine detail, violating the founder language law",
+  "fix": {
+    "repo": "Noetfield-Systems/NOETFIELD-RUNWAY",
+    "commit": "c302609",
+    "deployed": "noetfield-telegram-cockpit worker, deploy run green 2026-07-23",
+    "behavior": [
+      "work-branch events, skips, cancellations: silent (machine lanes own their own noise)",
+      "live-line (main) failure: ONE plain-language message with proof link",
+      "live-line recovery: ONE plain-language message (red/green state kept in KV)",
+      "merged-to-main changes: ONE 'change landed' message; openings/drafts silent",
+      "known workflow codenames translated to plain words; unknown names humanized",
+      "founder-report pipeline added: any machine lane can push a plain-language outcome report to the founder's Telegram; a jargon guard rejects code tags and branch names at the door"
+    ]
+  },
+  "first_outcome_report": "dispatched via founder-report run 30005368450 (today's digest: noise stopped, 3 security holes closed, daily money counter live, no-invented-gates law)",
+  "law": "ssot/FOUNDER_GATE_SCOPE_v1.md (founder-facing text: plain language, outcomes only)"
+}
