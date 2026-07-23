@@ -1,0 +1,64 @@
+name: nf-revenue-receipt-adapter-v1
+
+# W5-11 revenue receipt adapter: sourceb.ca's Stripe webhook fires a
+# repository_dispatch (sourceb_revenue_checkout) carrying the (PII-minimized)
+# checkout.session.completed event; this job runs the deterministic adapter
+# script and commits the resulting FIRST_REVENUE_RECEIPT into receipts/revenue/.
+# NO cron here — scheduled operation is W3 founder-unlock territory. Event- and
+# dispatch-driven only. Test-mode events can only ever mint DRYRUN receipts
+# (enforced inside the adapter script, not here).
+
+on:
+  repository_dispatch:
+    types: [sourceb_revenue_checkout]
+  workflow_dispatch:
+    inputs:
+      event_json:
+        description: "Stripe checkout.session.completed event JSON (test-mode dry-run)"
+        type: string
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: revenue-receipt-adapter
+  cancel-in-progress: false
+
+jobs:
+  land-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write event payload
+        env:
+          DISPATCH_EVENT: ${{ toJSON(github.event.client_payload.stripe_event) }}
+          INPUT_EVENT: ${{ inputs.event_json }}
+        run: |
+          set -euo pipefail
+          if [ -n "${INPUT_EVENT:-}" ]; then
+            printf '%s' "$INPUT_EVENT" > /tmp/stripe_event.json
+          else
+            printf '%s' "$DISPATCH_EVENT" > /tmp/stripe_event.json
+          fi
+          python3 -c "import json; json.load(open('/tmp/stripe_event.json'))"
+      - name: Run deterministic adapter
+        id: adapter
+        run: |
+          set -euo pipefail
+          out=$(python3 scripts/revenue_receipt_adapter_v1.py --event-file /tmp/stripe_event.json)
+          echo "$out"
+          echo "receipt=$(echo "$out" | python3 -c 'import json,sys; print(json.load(sys.stdin)["receipt"])')" >> "$GITHUB_OUTPUT"
+      - name: Commit receipt
+        run: |
+          set -euo pipefail
+          receipt="${{ steps.adapter.outputs.receipt }}"
+          git config user.name "nf-revenue-receipt-adapter-v1"
+          git config user.email "actions@users.noreply.github.com"
+          git add "$receipt"
+          git commit -m "receipt(W5-11): revenue adapter landed $(basename "$receipt") [skip ci]"
+          for i in 1 2 3; do
+            git push && break
+            git pull --rebase && sleep $((i * 2))
+          done

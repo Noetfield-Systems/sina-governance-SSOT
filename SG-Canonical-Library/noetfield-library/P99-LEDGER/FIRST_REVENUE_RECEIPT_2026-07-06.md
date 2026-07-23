@@ -13,7 +13,7 @@ The proving receipt — first non-zero revenue for the revenue organ loop.
 | Field | Value |
 |-------|-------|
 | Amount | _USD/CAD_ |
-| Offer | ACG Tier 1 AI Spend Leak Audit |
+| Offer | Never Miss a Call (AI receptionist — locked first offer; sourceb.ca fit-call/assessment checkouts are its funnel) |
 | Customer ID | _anonymized_ |
 | Payment date | _FOUNDER_ |
 | Delivery receipt | Link to TIER1_AUDIT_DELIVERY_RECEIPT when filed |
