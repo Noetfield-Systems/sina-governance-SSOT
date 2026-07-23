@@ -1,0 +1,39 @@
+{
+  "schema": "autoexec_blockers_fix_receipt_v1",
+  "at": "2026-07-23T12:30:00Z",
+  "by": "cursor_sg_session",
+  "founder_order": "fix the auto-execution blockers",
+  "fixed": [
+    {
+      "blocker": "language_gate_warn_denied_writes",
+      "fix": ".cursor/hooks/language_gate_pre_write_v1.py denies only DECISION=FAIL; WARN uses --soft-undefined and allows writes",
+      "branch": "fix/autoexec-blockers-20260723"
+    },
+    {
+      "blocker": "sourceb_governance_dispatch_dormant",
+      "fix": "SourceB revenue-receipt.ts now mints motor GitHub App installation tokens; secrets put on sourceb-ca worker; code merged to main and deploy/sourceb-ca",
+      "evidence": [
+        "https://github.com/Noetfield-Systems/SourceB/pull/83",
+        "https://github.com/Noetfield-Systems/SourceB/actions/runs/30007098941",
+        "https://github.com/Noetfield-Systems/SourceB/actions/runs/30007109881"
+      ]
+    }
+  ],
+  "not_fixed_honest": [
+    {
+      "blocker": "stripe_webhook_endpoint_registration",
+      "verdict": "I DONT KNOW",
+      "reason": "No Stripe API key is available in local secrets or SourceB GitHub secret names; cannot call Stripe webhook endpoints API. Live /api/webhooks/stripe route already exists in SourceB — registration status unknown without Stripe credentials."
+    },
+    {
+      "blocker": "sg_runtime_not_commissioned_and_mutations_contained",
+      "verdict": "I DONT KNOW",
+      "reason": "WIRING_COMMISSIONING_CONTRACT deliberately marks SG production commissioning out of scope. schemas/runtime_reality_v1.schema.json locks autonomous_production_mutations to a fixed containment value. Key2 custody is already ESTABLISHED and SG_COMMISSIONING_ELIGIBLE=true; flipping COMMISSIONED without live commissioning proofs would be false authority."
+    },
+    {
+      "blocker": "wiring_blocked_deps_chain",
+      "verdict": "PARTIAL",
+      "reason": "24 BLOCKED_DEPS remain dependency-ordered; inventing DONE without exit artifacts would break verify_wiring_commissioning_v1.py fail-closed lock. Revenue dispatch path (W5-11 activation surface) unblocked on the storefront side."
+    }
+  ]
+}

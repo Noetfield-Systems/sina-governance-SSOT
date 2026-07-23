@@ -1,0 +1,21 @@
+---
+description: Forbidden agent registers — real implementation only; no stall language
+alwaysApply: true
+---
+
+# Forbidden agent registers (LOCKED)
+
+Canonical: `SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_FORBIDDEN_AGENT_REGISTERS_LOCKED_v1.md`
+
+## Hard bans
+
+1. Never use **hold** / **HOLD** (status, stall, gate, or narrative).
+2. Never use the words: **mock**, **dummy**, **placeholder**, **demo**, or **TODO**.
+3. Never add **founder_gate**, **approval**, or **human_in_loop** logic.
+4. If you do not know how to implement a real API call: STOP and output exactly `I DONT KNOW`.
+5. Do not hallucinate standard boilerplate. Implement the real call, or stop.
+
+## Required posture
+
+- Ship real wiring, real receipts, real fail-closed behavior.
+- Unknown → `I DONT KNOW`. No invented SDK usage, no fake fixtures labeled as live, no stall vocabulary.
