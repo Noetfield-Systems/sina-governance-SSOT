@@ -1,0 +1,107 @@
+{
+  "verdict": "CANDIDATE_READY_FOR_REWITNESS",
+  "reserved_pass_verdict": "PASS_MOTOR_APP_WIRING_V1",
+  "not_pass_until_independent_witness": true,
+  "recorded_at_utc": "2026-07-23T04:34:07.702Z",
+  "project_id": "prj_6d67727afe154ca0b1498216",
+  "goal_id": "goal_41cfdef706bf41ffb159cc",
+  "motor_job_id": "rj_030b974ac29e20aac11e253140f52cfe",
+  "motor_status": "SUCCEEDED",
+  "escalated": false,
+  "surface": "app.noetfield.com/app/project/?id=prj_6d67727afe154ca0b1498216",
+  "app": "https://app.noetfield.com",
+  "kernel": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev",
+  "runtime": "https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev",
+  "checks": [
+    {
+      "id": "app_project_page_200",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "id": "head_agent_panel_present",
+      "passed": true,
+      "detail": "aside"
+    },
+    {
+      "id": "live_activity_present",
+      "passed": true,
+      "detail": "feed"
+    },
+    {
+      "id": "tasks_panel_present",
+      "passed": true,
+      "detail": "tasks"
+    },
+    {
+      "id": "documents_panel_present",
+      "passed": true,
+      "detail": "documents"
+    },
+    {
+      "id": "deployment_panel_present",
+      "passed": true,
+      "detail": "deployment"
+    },
+    {
+      "id": "receipt_panel_present",
+      "passed": true,
+      "detail": "receipt"
+    },
+    {
+      "id": "auto_review_modes_present",
+      "passed": true,
+      "detail": "modes"
+    },
+    {
+      "id": "kernel_token_present",
+      "passed": true,
+      "detail": "set"
+    },
+    {
+      "id": "motor_hmac_present",
+      "passed": true,
+      "detail": "len=64"
+    },
+    {
+      "id": "goal_created_and_started",
+      "passed": true,
+      "detail": "goal_41cfdef706bf41ffb159cc"
+    },
+    {
+      "id": "motor_website_engine_dispatched",
+      "passed": true,
+      "detail": "rj_030b974ac29e20aac11e253140f52cfe"
+    },
+    {
+      "id": "motor_terminal_status",
+      "passed": true,
+      "detail": "SUCCEEDED"
+    },
+    {
+      "id": "verifier_decided",
+      "passed": true,
+      "detail": "passed"
+    },
+    {
+      "id": "bounded_escalate_after_reject",
+      "passed": true,
+      "detail": "not_needed_verifier_passed"
+    },
+    {
+      "id": "specialist_steps_ran",
+      "passed": true,
+      "detail": "steps=3"
+    },
+    {
+      "id": "app_telegram_id_correlation",
+      "passed": true,
+      "detail": "goal=goal_41cfdef706bf41ffb159cc motor=rj_030b974ac29e20aac11e253140f52cfe surface=app.noetfield.com/app/project/?id=prj_6d67727afe154ca0b1498216"
+    },
+    {
+      "id": "hold_not_lifted",
+      "passed": true,
+      "detail": "qualification does not mutate runtime_reality HOLD"
+    }
+  ]
+}

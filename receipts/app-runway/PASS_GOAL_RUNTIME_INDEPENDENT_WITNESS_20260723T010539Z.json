@@ -1,0 +1,93 @@
+{
+  "schema": "nf.goal_runtime.independent_witness_receipt.v1",
+  "verdict": "PASS_GOAL_RUNTIME",
+  "PASS_GOAL_RUNTIME": true,
+  "equal_sha_identity": true,
+  "sg_hold_preserved": true,
+  "not_full_product_pass": true,
+  "not_production_activation": true,
+  "witnessed_at_utc": "2026-07-23T01:05:39Z",
+  "witness_role": "INDEPENDENT_READ_ONLY",
+  "live_surfaces": {
+    "healthz": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/healthz",
+    "goals_health": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/goals/health",
+    "canvas_url": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/goals/canvas.html",
+    "goals_list": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/goals"
+  },
+  "live_evidence": {
+    "healthz": {
+      "ok": true,
+      "service": "noetfield-runway-live-staging",
+      "contract": "runway.v1+goal.v1",
+      "runtimeMode": "staging",
+      "goal_runtime": true,
+      "commit_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+      "graph_kernel_deployed_sha": "74470123e206f964eada273031a7369039abcfba",
+      "hold_production": true
+    },
+    "goals_health": {
+      "ok": true,
+      "contract": "goal.v1",
+      "tenant_id": "tenant-runway-staging",
+      "goal_runtime": true,
+      "commit_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+      "graph_kernel_deployed_sha": "74470123e206f964eada273031a7369039abcfba",
+      "hold_production": true
+    },
+    "canvas_http_status": 200
+  },
+  "deployed_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+  "tested_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+  "audited_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+  "graph_kernel_deployed_sha": "74470123e206f964eada273031a7369039abcfba",
+  "hold_production": true,
+  "goal_ids": [
+    "goal_7b819fb2974f415d80728b",
+    "goal_6be920c5e5bf4f859829d3",
+    "goal_79ece038275b404db6eec8",
+    "goal_610183d772ce441189b14a"
+  ],
+  "checks": {
+    "goal_runtime_registry_bound": true,
+    "health_goal_runtime_true": true,
+    "health_commit_sha_present": true,
+    "health_graph_kernel_sha_stamped": true,
+    "create_three_prioritized_goals": true,
+    "approve_for_runtime": true,
+    "concurrent_start_three_goals": true,
+    "primary_goal_e2e_child_run": true,
+    "fault_inject_pause_or_kill": true,
+    "restart_recovery": true,
+    "no_duplicate_child_run_ids": true,
+    "costs_bounded": true,
+    "hierarchy_endpoint_200": true,
+    "canvas_html_200": true
+  },
+  "gates": {
+    "gate1_equal_sha_identity": true,
+    "gate2_goal_runtime_and_hold_production": true,
+    "gate3_graph_kernel_sha": true,
+    "gate4_all_verify_checks_passed": true,
+    "gate5_at_least_3_commission_goals": true,
+    "gate6_fault_and_restart_recovery": true,
+    "gate7_costs_and_no_dup_child_runs": true,
+    "gate8_canvas_http_200": true,
+    "gate9_sg_hold_preserved": true,
+    "gate10_not_full_product_not_production": true
+  },
+  "failed_gates": [],
+  "canvas_url": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev/v1/goals/canvas.html",
+  "pr": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/174",
+  "merge_commit": "2f1562251731492490e4385637db2d061a3b6cf3",
+  "builder_verify_report": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/worktrees/runway/_wt-goal-runtime-commission/qualification/goal-runtime-commission-v1/verify-report.json",
+  "sg_hold": {
+    "path": "data/runtime_reality_v1.json",
+    "authority.autonomous_production_mutations": "HOLD",
+    "mutated": false
+  },
+  "notes": [
+    "Independent witness awarded PASS_GOAL_RUNTIME on staging Goal Runtime commissioning evidence only.",
+    "This is NOT full product PASS and NOT production activation.",
+    "SG autonomous_production_mutations remains HOLD; runtime_reality_v1.json untouched."
+  ]
+}

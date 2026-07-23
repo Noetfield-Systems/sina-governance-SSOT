@@ -1,0 +1,93 @@
+{
+  "verdict": "CANDIDATE_READY_FOR_REWITNESS",
+  "not_pass_goal_runtime": true,
+  "reserved_pass_verdict": "PASS_GOAL_RUNTIME",
+  "recorded_at_utc": "2026-07-23T01:05:10.389Z",
+  "base": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev",
+  "tenant": "tenant-runway-staging",
+  "checks": [
+    {
+      "id": "goal_runtime_registry_bound",
+      "passed": true,
+      "detail": "{\"ok\":true,\"contract\":\"goal.v1\",\"tenant_id\":\"tenant-runway-staging\",\"goal_runtime\":true,\"commit_sha\":\"2f1562251731492490e4385637db2d061a3b6cf3\",\"graph_kernel_deployed_sha\":\"74470123e206f964eada273031a7369039abcfba\",\"hold_production\":true}"
+    },
+    {
+      "id": "health_goal_runtime_true",
+      "passed": true,
+      "detail": "health=true goals=true"
+    },
+    {
+      "id": "health_commit_sha_present",
+      "passed": true,
+      "detail": "2f1562251731492490e4385637db2d061a3b6cf3"
+    },
+    {
+      "id": "health_graph_kernel_sha_stamped",
+      "passed": true,
+      "detail": "74470123e206f964eada273031a7369039abcfba"
+    },
+    {
+      "id": "create_three_prioritized_goals",
+      "passed": true,
+      "detail": "goal_7b819fb2974f415d80728b,goal_6be920c5e5bf4f859829d3,goal_79ece038275b404db6eec8"
+    },
+    {
+      "id": "approve_for_runtime",
+      "passed": true,
+      "detail": "approved=3"
+    },
+    {
+      "id": "concurrent_start_three_goals",
+      "passed": true,
+      "detail": "started=3"
+    },
+    {
+      "id": "primary_goal_e2e_child_run",
+      "passed": true,
+      "detail": "goal_7b819fb2974f415d80728b"
+    },
+    {
+      "id": "fault_inject_pause_or_kill",
+      "passed": true,
+      "detail": "pause=PAUSED kill=CANCELLED"
+    },
+    {
+      "id": "restart_recovery",
+      "passed": true,
+      "detail": "resume=RUNNING replacement=goal_610183d772ce441189b14a"
+    },
+    {
+      "id": "no_duplicate_child_run_ids",
+      "passed": true,
+      "detail": "total=3 unique=3"
+    },
+    {
+      "id": "costs_bounded",
+      "passed": true,
+      "detail": "cost <= budget.maximum_cost_usd per goal"
+    },
+    {
+      "id": "hierarchy_endpoint_200",
+      "passed": true,
+      "detail": "all goals"
+    },
+    {
+      "id": "canvas_html_200",
+      "passed": true,
+      "detail": "HTTP 200"
+    }
+  ],
+  "evidence": {
+    "goalIds": [
+      "goal_7b819fb2974f415d80728b",
+      "goal_6be920c5e5bf4f859829d3",
+      "goal_79ece038275b404db6eec8",
+      "goal_610183d772ce441189b14a"
+    ],
+    "pauseTarget": "goal_6be920c5e5bf4f859829d3",
+    "killTarget": "goal_79ece038275b404db6eec8",
+    "replacementId": "goal_610183d772ce441189b14a",
+    "commit_sha": "2f1562251731492490e4385637db2d061a3b6cf3",
+    "graph_kernel_deployed_sha": "74470123e206f964eada273031a7369039abcfba"
+  }
+}

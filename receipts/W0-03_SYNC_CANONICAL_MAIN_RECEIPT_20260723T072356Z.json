@@ -1,0 +1,71 @@
+{
+  "schema": "wiring_commissioning_job_receipt_v1",
+  "job_id": "W0-03",
+  "phase": "W0-TRUTH-HYGIENE",
+  "title": "Sync sina-governance-SSOT canonical checkout to origin/main (preserve the 8 untracked receipts/app-runway/ files)",
+  "status": "PASS",
+  "generated_by": "ready-lane-execution-v1 undefined",
+  "generated_at_utc": "2026-07-23T07:23:56Z",
+  "contract": {
+    "path": "sina-governance-SSOT/worktrees/_wt-sg-product-lock/product/WIRING_COMMISSIONING_CONTRACT_v1.json",
+    "contract_sha256": "56f103791f358136250cbf1fd6fbea527f1a7fd1b0a4bb82ff51ce671b673c1e",
+    "exit_gate": { "type": "git_synced", "repo": "sina-governance-SSOT", "branch": "main" }
+  },
+  "evidence": {
+    "repo_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/sina-governance-SSOT",
+    "worktree_main_conflict_check": {
+      "checked_with": "git worktree list",
+      "linked_worktrees_counted": 37,
+      "any_worktree_on_main": false,
+      "note": "Every linked worktree was on a side branch or detached HEAD; no worktree held main, so checkout of main in the canonical dir was permitted."
+    },
+    "before": {
+      "canonical_branch": "chore/internal-operating-goals-abc",
+      "canonical_head_sha": "88e3ca89770bcc963af30434fff59036e5801ddd",
+      "branch_vs_its_upstream": "0 ahead / 0 behind origin/chore/internal-operating-goals-abc (fully pushed; safe to leave)",
+      "local_main_sha": "c7eb11600131d6ce0a0e908febb50f7d96c6a2fb",
+      "origin_main_sha_after_fetch": "1be6c03db6a03d88f83bb45a702dd5335db6b9f1",
+      "merge_base_main_vs_origin_main": "c7eb11600131d6ce0a0e908febb50f7d96c6a2fb",
+      "main_ahead_behind_origin_main": "0 ahead / 44 behind (fast-forwardable)",
+      "untracked_receipts_app_runway_count": 8,
+      "untracked_receipts_app_runway": [
+        "receipts/app-runway/PASS_COST_RESTORE_0P02_20260723T045033Z.json",
+        "receipts/app-runway/PASS_GOAL_RUNTIME_INDEPENDENT_WITNESS_20260723T010322Z.json",
+        "receipts/app-runway/PASS_GOAL_RUNTIME_INDEPENDENT_WITNESS_20260723T010539Z.json",
+        "receipts/app-runway/PASS_MOTOR_APP_WIRING_V1_INDEPENDENT_WITNESS_20260723T043446Z.json",
+        "receipts/app-runway/SG_P05_CLOSED_CANVAS_COMMISSIONING_ENTRY_20260722T235124Z.json",
+        "receipts/app-runway/cost_restore_0p02_verify-report.json",
+        "receipts/app-runway/goal-runtime-commission-verify-report-2f1562251731.json",
+        "receipts/app-runway/motor-app-wiring-v1-verify-report.json"
+      ],
+      "clobber_precheck": "git ls-tree -r origin/main -- receipts/app-runway/ grepped against all 8 untracked filenames: zero collisions (grep exit 1), so neither checkout nor fast-forward could overwrite them."
+    },
+    "actions": [
+      "git fetch origin  (main updated 1709901..1be6c03)",
+      "git checkout main  (Switched to branch 'main')",
+      "git merge --ff-only origin/main  (Fast-forward c7eb116..1be6c03; 151 files changed, 23063 insertions(+), 353 deletions(-))"
+    ],
+    "after": {
+      "branch": "main",
+      "head_sha": "1be6c03db6a03d88f83bb45a702dd5335db6b9f1",
+      "head_equals_origin_main": true,
+      "head_commit_subject": "Merge pull request #71 from Noetfield-Systems/feat/nf-motor-learning-organ-v1",
+      "git_status_porcelain": "exactly the same 8 untracked ?? receipts/app-runway/ lines; zero modified tracked files",
+      "untracked_receipts_survived": true,
+      "untracked_receipts_recount": 8
+    },
+    "enforcement_script_run": {
+      "command": "python3 scripts/verify_wiring_commissioning_v1.py --no-write --json  (run from worktrees/_wt-sg-product-lock, read-only; --no-write used so nothing was written into the worktree)",
+      "exit_code": 0,
+      "lock_check": "VERIFIED",
+      "checked_at": "2026-07-23T07:23:33Z",
+      "w0_03_computed_status": "DONE",
+      "summary": { "DONE": 3, "READY": 12, "AWAITING_FOUNDER": 10, "BLOCKED_DEPS": 31 }
+    }
+  },
+  "honest_notes": [
+    "PASS is written because every pass condition was directly observed after the merge: branch==main, HEAD==origin/main (1be6c03), zero dirty tracked files, all 8 untracked receipts present, and the contract's own enforcement script independently computed W0-03=DONE with lock_check=VERIFIED.",
+    "This receipt is deliberately left UNTRACKED (not committed): the git_synced exit gate requires HEAD == origin/main, so any local commit on main would immediately un-sync the checkout and flip W0-03 back to failing. The gate explicitly ignores untracked (??) files.",
+    "No push was performed. No worktree was created, modified, or removed. Nothing under worktrees/ was touched except read-only reads and a --no-write script run."
+  ]
+}

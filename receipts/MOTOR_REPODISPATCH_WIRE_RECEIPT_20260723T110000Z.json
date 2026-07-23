@@ -1,0 +1,33 @@
+{
+  "schema": "motor_repodispatch_wire_receipt_v1",
+  "job_id": "W1-07",
+  "status": "PASS",
+  "recorded_at": "2026-07-23T11:00:00Z",
+  "observed_at": "2026-07-23T10:53:57Z",
+  "module": "noetfield-sandbox-private/motor/adapters/sg_repo_dispatch.py",
+  "branch": "wire/sg-gate-preflight-20260723",
+  "commit": "4dc5de5",
+  "target_repository": "Noetfield-Systems/sina-governance-SSOT",
+  "allowed_event_types": [
+    "liveness_48h_close",
+    "key2_custody_established"
+  ],
+  "receiver_hooks_verified_on_sg_main": {
+    "liveness_48h_close": ".github/workflows/nf-48h-liveness-closeout-v1.yml",
+    "key2_custody_established": ".github/workflows/nf-sg-key2-custody-watch-v1.yml"
+  },
+  "sent": false,
+  "off_by_default": true,
+  "dry_run_default": true,
+  "arming_requirements": "dry_run=False AND allow_send=True AND env MOTOR_SG_REPO_DISPATCH_ARMED=1 (all three; module is never invoked by the motor loop)",
+  "import_clean": true,
+  "import_check_command": "python3 -c \"import motor.adapters.sg_repo_dispatch\"",
+  "evidence": {
+    "dry_run_liveness_48h_close_stdout": "DRY RUN (no event sent). Exact call:\n  gh api --method POST repos/Noetfield-Systems/sina-governance-SSOT/dispatches --input - <<< '{\"client_payload\": {\"source\": \"noetfield-motor\", \"wired_by\": \"W1-07\"}, \"event_type\": \"liveness_48h_close\"}'\n{\n  \"event_type\": \"liveness_48h_close\",\n  \"repository\": \"Noetfield-Systems/sina-governance-SSOT\",\n  \"command\": \"gh api --method POST repos/Noetfield-Systems/sina-governance-SSOT/dispatches --input - <<< '{\\\"client_payload\\\": {\\\"source\\\": \\\"noetfield-motor\\\", \\\"wired_by\\\": \\\"W1-07\\\"}, \\\"event_type\\\": \\\"liveness_48h_close\\\"}'\",\n  \"dry_run\": true,\n  \"armed\": false,\n  \"sent\": false,\n  \"checked_at\": \"2026-07-23T10:52:41Z\"\n}\n",
+    "dry_run_key2_custody_established_stdout": "DRY RUN (no event sent). Exact call:\n  gh api --method POST repos/Noetfield-Systems/sina-governance-SSOT/dispatches --input - <<< '{\"client_payload\": {\"source\": \"noetfield-motor\", \"wired_by\": \"W1-07\"}, \"event_type\": \"key2_custody_established\"}'\n{\n  \"event_type\": \"key2_custody_established\",\n  \"repository\": \"Noetfield-Systems/sina-governance-SSOT\",\n  \"command\": \"gh api --method POST repos/Noetfield-Systems/sina-governance-SSOT/dispatches --input - <<< '{\\\"client_payload\\\": {\\\"source\\\": \\\"noetfield-motor\\\", \\\"wired_by\\\": \\\"W1-07\\\"}, \\\"event_type\\\": \\\"key2_custody_established\\\"}'\",\n  \"dry_run\": true,\n  \"armed\": false,\n  \"sent\": false,\n  \"checked_at\": \"2026-07-23T10:52:41Z\"\n}\n",
+    "refusal_proofs_stdout": "PASS disallowed rejected\nREFUSED: real send requires allow_send=True AND MOTOR_SG_REPO_DISPATCH_ARMED=1 (module is OFF by default)\nPASS unarmed refused, sent = False\n"
+  },
+  "pass_criteria": "PASS only because the module imported clean and both dry-runs were actually executed and captured above; no repository_dispatch event was sent (sent=false everywhere).",
+  "written_by": "wire lane W1-06/07 (Claude Opus 4.8)",
+  "note": "UNTRACKED on SG canonical by design; do not commit from this lane."
+}

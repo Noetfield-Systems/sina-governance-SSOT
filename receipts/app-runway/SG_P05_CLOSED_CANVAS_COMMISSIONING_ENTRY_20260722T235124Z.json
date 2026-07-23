@@ -1,0 +1,36 @@
+{
+  "schema": "nf.sg.p05_close_canvas_commissioning_entry_v1",
+  "receipt_id": "SG_P05_CLOSED_CANVAS_COMMISSIONING_ENTRY_20260722T235124Z",
+  "as_of": "2026-07-22T23:51:24Z",
+  "owner": "sg_sssot_cursor",
+  "prior_lane": "NOETFIELD-RUNWAY graph-kernel P05",
+  "p05": {
+    "verdict": "PASS_P05",
+    "witness_run_id": "7f5db5b7-fa61-4533-bd1c-30211dabb2fc",
+    "deployed_sha": "74470123e206f964eada273031a7369039abcfba",
+    "witness_pr": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/170",
+    "status_pointer": "packages/runway-graph-kernel/proofs/p08/P05_STATUS.json",
+    "closed": true,
+    "reopen_forbidden_without_new_fail": true
+  },
+  "advisor_1_alignment": {
+    "p05_closed_no_further_p05_work": true,
+    "not_full_product_pass": true,
+    "not_production_activation": true,
+    "sg_hold_unrelated_preserved": true,
+    "no_founder_handoff_required": true
+  },
+  "sg_next_stage": {
+    "name": "canvas_live_staging_commissioning",
+    "status": "ENTERED",
+    "authority": "staging_only",
+    "production_mutations": "HOLD",
+    "note": "PASS_P05 unlocks Canvas / live-staging commissioning under SG. Does not lift SG-AUTHORITY-IDENTITY-P0 or autonomous production HOLD."
+  },
+  "runtime_reality": {
+    "file": "data/runtime_reality_v1.json",
+    "autonomous_production_mutations": "HOLD",
+    "lifted_by_this_receipt": false
+  },
+  "verdict": "PASS_P05_ACCEPTED_SG_OWNS_CANVAS_STAGING_COMMISSIONING"
+}

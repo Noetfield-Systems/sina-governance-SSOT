@@ -1,0 +1,25 @@
+{
+  "schema": "nf.company_new.cost_restore_receipt.v1",
+  "verdict": "PASS_COST_RESTORE_0P02",
+  "audited_at": "2026-07-23T04:50:33Z",
+  "founder_lock": {
+    "marketing_site_budget_usd": 0.02,
+    "first_paint": "deepseek",
+    "glm": "repair_escalate_only"
+  },
+  "motor_source_sha": "bf361f8fc42afed9d91de11c64837ee1dde672fc",
+  "prs": [
+    "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/181",
+    "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/182",
+    "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/183"
+  ],
+  "app_dispatch_budget_usd": 0.02,
+  "matrix_default_marketing_site_usd": 0.02,
+  "proof_job_id": "rj_23e12bbf91d983faf5dd243cacfe65cb",
+  "proof_project_id": "prj_c24ae1ee0f1f4edb891566fe",
+  "customer_ui": "ops_jargon_scrubbed_telegram_cost_matrix_hidden",
+  "d555a14": "not_cherry_picked; customer-safe direction applied on main via PR 181",
+  "sg_hold_preserved": true,
+  "cockpit_secret_not_rotated": true,
+  "note": "Restored founder cost rules violated by prior Cursor wiring. Telegram ops mirror unchanged."
+}

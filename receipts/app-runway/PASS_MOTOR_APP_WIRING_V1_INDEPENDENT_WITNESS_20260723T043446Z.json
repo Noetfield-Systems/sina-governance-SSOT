@@ -1,0 +1,43 @@
+{
+  "schema": "nf.motor_app_wiring.independent_witness_receipt.v1",
+  "witness_role": "independent_readonly",
+  "verdict": "PASS_MOTOR_APP_WIRING_V1",
+  "PASS_MOTOR_APP_WIRING_V1": true,
+  "audited_at": "2026-07-23T04:34:46Z",
+  "project_id": "prj_6d67727afe154ca0b1498216",
+  "goal_id": "goal_41cfdef706bf41ffb159cc",
+  "motor_job_id": "rj_030b974ac29e20aac11e253140f52cfe",
+  "motor_status": "SUCCEEDED",
+  "escalated": false,
+  "surface": "app.noetfield.com/app/project/?id=prj_6d67727afe154ca0b1498216",
+  "app": "https://app.noetfield.com",
+  "verify_run": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/runs/29979858521",
+  "prs": [
+    "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/178",
+    "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/179"
+  ],
+  "checks": {
+    "app_project_page_200": true,
+    "head_agent_panel_present": true,
+    "live_activity_present": true,
+    "tasks_panel_present": true,
+    "documents_panel_present": true,
+    "deployment_panel_present": true,
+    "receipt_panel_present": true,
+    "auto_review_modes_present": true,
+    "kernel_token_present": true,
+    "motor_hmac_present": true,
+    "goal_created_and_started": true,
+    "motor_website_engine_dispatched": true,
+    "motor_terminal_status": true,
+    "verifier_decided": true,
+    "bounded_escalate_after_reject": true,
+    "specialist_steps_ran": true,
+    "app_telegram_id_correlation": true,
+    "hold_not_lifted": true
+  },
+  "sg_hold_preserved": true,
+  "not_full_product_pass": true,
+  "not_production_activation": true,
+  "note": "Independent witness PASS for Motor\u2194App Head Agent wiring on existing app.noetfield.com project page. Unrelated SG HOLD preserved."
+}
