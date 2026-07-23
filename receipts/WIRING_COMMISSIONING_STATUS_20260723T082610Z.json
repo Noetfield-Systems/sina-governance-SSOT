@@ -1,0 +1,365 @@
+{
+ "schema": "wiring_commissioning_status_v1",
+ "checked_at": "2026-07-23T08:26:10Z",
+ "contract_sha256": "56f103791f358136250cbf1fd6fbea527f1a7fd1b0a4bb82ff51ce671b673c1e",
+ "lock_check": "VERIFIED",
+ "summary": {
+  "DONE": 10,
+  "READY": 8,
+  "AWAITING_FOUNDER": 9,
+  "BLOCKED_DEPS": 29
+ },
+ "jobs": [
+  {
+   "job_id": "W0-01",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "DONE",
+   "title": "Sync NOETFIELD-RUNWAY checkout to origin/main (currently ~201 behind on a merged chore branch)"
+  },
+  {
+   "job_id": "W0-02",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "BLOCKED_DEPS",
+   "title": "Sync noetfield-sandbox-private checkout to origin/main (currently parked on feat/plan-intake-v1; ori",
+   "notes": [
+    "noetfield-sandbox-private: on 'feat/plan-intake-v1', want 'main'"
+   ]
+  },
+  {
+   "job_id": "W0-03",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "READY",
+   "title": "Sync sina-governance-SSOT canonical checkout to origin/main (currently side branch, 16 behind; prese",
+   "notes": [
+    "sina-governance-SSOT: 1 modified tracked file(s)"
+   ]
+  },
+  {
+   "job_id": "W0-04",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "DONE",
+   "title": "Sync noetfield-cloud-factory-infra checkout to main and reconcile which branch GHA receipts were pus"
+  },
+  {
+   "job_id": "W0-05",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "BLOCKED_DEPS",
+   "title": "Land the goal registry: merge cursor/product-category-lock-v1 (product/, offers/, drift-guard workfl",
+   "notes": [
+    "sina-governance-SSOT: cursor/product-category-lock-v1 not merged into origin/main"
+   ]
+  },
+  {
+   "job_id": "W0-06",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "BLOCKED_DEPS",
+   "title": "Close the SG gate-bypass drift: bring the lock worktree's promotion_gate.py to byte-parity with cano"
+  },
+  {
+   "job_id": "W0-07",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "AWAITING_FOUNDER",
+   "title": "Remove the 8 org-root orphan _wt-* residue dirs (verified byte-duplicates of consolidated worktrees)"
+  },
+  {
+   "job_id": "W0-08",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "READY",
+   "title": "P0 \u2014 Fix the LIVE auth outage: /auth/sign-in/ 404s at origin on www.noetfield.com (masked by edge ca"
+  },
+  {
+   "job_id": "W0-09",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "DONE",
+   "title": "Cron-truth reconciliation: video-runway-v1.yml carries an ACTIVE daily cron with no founder-unlock r"
+  },
+  {
+   "job_id": "W0-10",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "READY",
+   "title": "Receipt hygiene: stop gitignoring RUNWAY commissioning receipts (append-only law), remove the ~24 br"
+  },
+  {
+   "job_id": "W0-11",
+   "phase": "W0-TRUTH-HYGIENE",
+   "status": "AWAITING_FOUNDER",
+   "title": "PRESERVE-FIRST: the local-only bench ~/Desktop/Noetfield-Systems/sandbox (main @ 8e27b25, no remote)"
+  },
+  {
+   "job_id": "W1-01",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "BLOCKED_DEPS",
+   "title": "Land the motor half of the site event spine: rebase + merge feat/motor-event-v2-site-spine so the AL",
+   "notes": [
+    "noetfield-sandbox-private: feat/motor-event-v2-site-spine not merged into origin/main"
+   ]
+  },
+  {
+   "job_id": "W1-02",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "BLOCKED_DEPS",
+   "title": "Land the plan-intake stack: merge feat/plan-intake-v1, then the 1-commit sourceb/plan-adapter-v1 on ",
+   "notes": [
+    "noetfield-sandbox-private: feat/plan-intake-v1 not merged into origin/main"
+   ]
+  },
+  {
+   "job_id": "W1-03",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "DONE",
+   "title": "Land the NOOS half of the spine via the REMOTE branch feat/runtime-migration-quarantine-v1 (local co"
+  },
+  {
+   "job_id": "W1-04",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "DONE",
+   "title": "Land www/motors-option-a-copy-v1 (1 pushed commit) into Noetfield main, then remove its org-root wor"
+  },
+  {
+   "job_id": "W1-05",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "READY",
+   "title": "SHA-pin cross-repo work orders: MRW dispatch records must carry a pinned commit SHA + receipt backli"
+  },
+  {
+   "job_id": "W1-06",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "BLOCKED_DEPS",
+   "title": "THE governance wire: motor executor + autorunner runners call SG promotion_gate.py as a deterministi"
+  },
+  {
+   "job_id": "W1-07",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "BLOCKED_DEPS",
+   "title": "Wire the motor's repository_dispatch sender to SG's two waiting event hooks (liveness_48h_close, key"
+  },
+  {
+   "job_id": "W1-08",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "BLOCKED_DEPS",
+   "title": "Map cf_tokens.py keys from GitHub Actions secrets for cloud jobs (loader already prefers env vars; t"
+  },
+  {
+   "job_id": "W1-09",
+   "phase": "W1-CONTRACT-SPINE",
+   "status": "AWAITING_FOUNDER",
+   "title": "Runway Tier-2 persistence: apply db/migrations/001_motor_tier2.sql in Supabase + set MOTOR_DB_URL/MO"
+  },
+  {
+   "job_id": "W2-01",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "Deploy the SourceA /v1/executions executor adapter (already merged to SourceA main) on a dedicated N"
+  },
+  {
+   "job_id": "W2-02",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "AWAITING_FOUNDER",
+   "title": "Deploy the independent Cloudflare Worker verifier (the ONLY component allowed to mint PASS on sandbo"
+  },
+  {
+   "job_id": "W2-03",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "Build the motor-side SandboxJob POST/poll adapter to the SourceA executor endpoint (thin adapter bou"
+  },
+  {
+   "job_id": "W2-04",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "THE motor\u21c4sandbox commissioning proof: one founder heading \u2192 2 motor-executor-v2 run IDs + 2 externa"
+  },
+  {
+   "job_id": "W2-05",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "Upgrade P0-PGR R2 receipt PARTIAL\u2192PASS: execute/hand back the 2 cloud dispatch run URLs (pure receip"
+  },
+  {
+   "job_id": "W2-06",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "HDIR\u21c4motor wire v1: a motor job type that creates a runway.v1 run (existing webpage-build-deploy sce"
+  },
+  {
+   "job_id": "W2-07",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "BLOCKED_DEPS",
+   "title": "Run the 9 per-category Supabase migrations (SQL already written, never applied) and deploy the 9 per"
+  },
+  {
+   "job_id": "W2-08",
+   "phase": "W2-EXECUTOR-LANE",
+   "status": "READY",
+   "title": "Prove cat-08's GHA leg (the only category with a workflow but zero cloud receipts): one workflow_dis"
+  },
+  {
+   "job_id": "W3-01",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "R3 cron-shadow: founder unlock \u2192 uncomment the p0pgr cron \u2192 hold a 24h zero-manual green window \u2192 re"
+  },
+  {
+   "job_id": "W3-02",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "Motor plan-intake DECLARED\u2192VERIFIED: one complete SCHEDULED heading\u2192PR chain plus its 24h zero-manua"
+  },
+  {
+   "job_id": "W3-03",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "Flip the motor GitHub App webhook toggle (App 'noetfield-motor', registered inactive) \u2014 event-driven"
+  },
+  {
+   "job_id": "W3-04",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "Autorunner standing loop on schedule (today workflow_dispatch-only, human-triggered)"
+  },
+  {
+   "job_id": "W3-05",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "TrustField cloud loops DECLARED_ACTIVE\u2192VERIFIED: secrets wired, 24h zero-manual scheduled-receipt wi"
+  },
+  {
+   "job_id": "W3-06",
+   "phase": "W3-SCHEDULED-OPERATION",
+   "status": "BLOCKED_DEPS",
+   "title": "Drift-guard on schedule: once W0-05 lands the workflow on SG main, founder unlock enables the weekly"
+  },
+  {
+   "job_id": "W4-01",
+   "phase": "W4-TRUST-LAYER",
+   "status": "BLOCKED_DEPS",
+   "title": "Auditor unified corpus: point audit_receipt_ledger_v1.py at all three receipt stores recursively (to"
+  },
+  {
+   "job_id": "W4-02",
+   "phase": "W4-TRUST-LAYER",
+   "status": "BLOCKED_DEPS",
+   "title": "RECEIPTGRAPH_SELF_AUDIT: the unified audit receipt countersigned by the independent CF-Worker verifi"
+  },
+  {
+   "job_id": "W4-03",
+   "phase": "W4-TRUST-LAYER",
+   "status": "READY",
+   "title": "HDIR receipt-hash reproducibility: export the canonicalization path so an independent verifier can r"
+  },
+  {
+   "job_id": "W4-04",
+   "phase": "W4-TRUST-LAYER",
+   "status": "DONE",
+   "title": "Fix Studio IDE receipt labels (its committed verify receipts say repo=sina-governance-ssot) AND prun"
+  },
+  {
+   "job_id": "W5-01",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "DONE",
+   "title": "TrustField fresh live-truth: re-run the live-truth check against current main (last PASS is 2026-07-"
+  },
+  {
+   "job_id": "W5-02",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "AWAITING_FOUNDER",
+   "title": "Recommission WitnessBC verification (broken/abandoned since 2026-06-26: CF account mismatch, zero sc"
+  },
+  {
+   "job_id": "W5-03",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "DONE",
+   "title": "Close the noetfield.com apex-404 P1: the proxy worker now carries apex-redirect logic but no post-fi"
+  },
+  {
+   "job_id": "W5-04",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "AWAITING_FOUNDER",
+   "title": "Burn down the 29 open P1 findings on the two noetfield.com product pages (CTA count, og:image, price"
+  },
+  {
+   "job_id": "W5-05",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "AWAITING_FOUNDER",
+   "title": "NOOS public_site gets a real deploy target (founder decision: own domain vs fold into www.noetfield."
+  },
+  {
+   "job_id": "W5-06",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "READY",
+   "title": "Runway stranger-tenant proof: one full qualification run (create project \u2192 build/deploy \u2192 artifact +"
+  },
+  {
+   "job_id": "W5-07",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "BLOCKED_DEPS",
+   "title": "Runway production payment: promote the nf-deterministic-api Stripe top-up from staging-e2e-receipt t"
+  },
+  {
+   "job_id": "W5-08",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "DONE",
+   "title": "Studio IDE green loop: re-run the cursor-lite loop against a running Studio until verify.ok=true and"
+  },
+  {
+   "job_id": "W5-09",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "AWAITING_FOUNDER",
+   "title": "Studio IDE packaging: build the .app via the existing script + commit its :3005 smoke receipt; vsce-"
+  },
+  {
+   "job_id": "W5-10",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "BLOCKED_DEPS",
+   "title": "Studio\u2192motor read-wire: a strictly read-only /api route in Studio that consumes the motor's already-"
+  },
+  {
+   "job_id": "W5-14",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "READY",
+   "title": "Reconcile SourceB production vs upgrade branches (materially divergent per 2026-07-19 audit: 39 vs 3"
+  },
+  {
+   "job_id": "W5-15",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "DONE",
+   "title": "sourceb.ca live-truth: the doctrine endpoint assumes this Stripe storefront is live, but the invento"
+  },
+  {
+   "job_id": "W5-16",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "AWAITING_FOUNDER",
+   "title": "Founder decision-queue item: send RESELLER_RATE_CARD_REQUEST_v1 to My AI Front Desk (Gmail draft sta"
+  },
+  {
+   "job_id": "W5-11",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "BLOCKED_DEPS",
+   "title": "Revenue receipt adapter: Stripe checkout.session.completed (sourceb.ca) \u2192 FIRST_REVENUE_RECEIPT land"
+  },
+  {
+   "job_id": "W5-12",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "BLOCKED_DEPS",
+   "title": "Pricing SSOT: one locked pricing source spanning the three sales surfaces (noetfield.com $497/$297 v"
+  },
+  {
+   "job_id": "W5-13",
+   "phase": "W5-CONSUMER-SURFACES",
+   "status": "BLOCKED_DEPS",
+   "title": "THE DOCTRINE ENDPOINT \u2014 first paid receipt from a stranger: one completed real checkout (sourceb.ca "
+  },
+  {
+   "job_id": "W6-01",
+   "phase": "W6-FULL-LINE-PROOF",
+   "status": "BLOCKED_DEPS",
+   "title": "FULL-LINE COLD PROOF: one founder heading \u2192 P0-PGR packet \u2192 motor DAG \u2192 SourceA sandbox executor + H"
+  },
+  {
+   "job_id": "W6-02",
+   "phase": "W6-FULL-LINE-PROOF",
+   "status": "BLOCKED_DEPS",
+   "title": "STEADY STATE 7D: seven consecutive days of green scheduled receipts across every unlocked cron (drif"
+  }
+ ]
+}
