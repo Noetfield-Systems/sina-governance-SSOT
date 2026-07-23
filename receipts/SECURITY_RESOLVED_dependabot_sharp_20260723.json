@@ -1,0 +1,19 @@
+{
+  "schema": "security_resolution_receipt_v1",
+  "resolved_at": "2026-07-23",
+  "resolved_by": "claude_mac_session",
+  "finding": "3 HIGH Dependabot alerts: sharp < 0.35.0 (dev-only transitive dependency via wrangler -> miniflare) in three worker packages",
+  "alerts": [1, 2, 3],
+  "fix": "npm overrides forcing sharp ^0.35.0 in each worker package.json; lockfiles regenerated; resolved sharp is 0.35.3 in all three",
+  "verification": {
+    "resolved_versions": {
+      "workers/sg-authority-v2": "0.35.3",
+      "workers/sg-authority-v2-shadow": "0.35.3",
+      "workers/nf-hourly-ai-circles-v1": "0.35.3"
+    },
+    "npm_audit": "0 vulnerabilities in all three packages",
+    "production_impact": "none — sharp is dev tooling inside miniflare (local Workers simulator); deployed worker code unchanged"
+  },
+  "founder_involvement": "NONE (machine decision per ssot/FOUNDER_GATE_SCOPE_v1.md: testable, reversible, defaulted)",
+  "supersedes": "receipts/SECURITY_FINDING_dependabot_3_high_20260723.json (deleted)"
+}
