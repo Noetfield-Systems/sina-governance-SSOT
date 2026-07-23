@@ -1,6 +1,6 @@
 {
   "schema": "p0pgr-phase2-scorecard-v1",
-  "updated_at": "2026-07-23T12:42:11Z",
+  "updated_at": "2026-07-23T13:02:59Z",
   "operating_mode": "PHASE_2_CLOUD_ONLY_ROI_TRACK",
   "ranked_queue_receipt": "receipts/p0pgr/phase2_queue_v1.json",
   "queue_order": [
@@ -139,6 +139,8 @@
     "F10: deregister/restore 2 ghost workflows",
     "F11: pr-conflict lock pointer fix",
     "F12: founder-gated retirement of 4 dead CF loops (+billing confirm)",
-    "F13: monthly spend-rollup motor + LS-078 THROTTLED_ROI build + 30% basis definition"
+    "F13: monthly spend-rollup motor + LS-078 THROTTLED_ROI build + 30% basis definition",
+    "RUNWAY: align slug-heavy inline Telegram format in motor-verify GHA example to new plain formatter (commit 2736c4a)",
+    "RUNWAY: exclude agent worktrees from schedule-passports scan (pre-existing test failure)"
   ]
 }
