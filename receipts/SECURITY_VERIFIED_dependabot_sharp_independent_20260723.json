@@ -1,0 +1,42 @@
+{
+  "schema": "security_independent_verification_v1",
+  "verified_at": "2026-07-23T11:25:00Z",
+  "verified_by": "p0pgr_session_agent (worktree frosty-chandrasekhar-ef362f)",
+  "verifies": {
+    "commit": "502342ae0c45cbe2c2c6d0c004b9b7dc50396c1b",
+    "receipt": "receipts/SECURITY_RESOLVED_dependabot_sharp_20260723.json",
+    "claim": "3 HIGH Dependabot alerts (GHSA-f88m-g3jw-g9cj, sharp < 0.35.0) resolved via npm overrides in three worker packages"
+  },
+  "context": "This session independently produced the identical fix in parallel (same override spec, byte-identical regenerated lockfiles) before discovering 502342a had landed first. Adopted main's version; all verification below was run against the landed tree.",
+  "verdict": "PASS",
+  "evidence": {
+    "alerts_github_state": {
+      "1": "fixed at 2026-07-23T11:18:02Z",
+      "2": "fixed at 2026-07-23T11:18:02Z",
+      "3": "fixed at 2026-07-23T11:18:02Z"
+    },
+    "resolved_sharp_version": {
+      "workers/sg-authority-v2": "0.35.3",
+      "workers/sg-authority-v2-shadow": "0.35.3",
+      "workers/nf-hourly-ai-circles-v1": "0.35.3"
+    },
+    "npm_audit": "0 vulnerabilities in all three packages (byte-identical lockfiles)",
+    "test_suites": {
+      "workers/sg-authority-v2": "18/19 pass; 1 failure is PRE-EXISTING (see pre_existing_failure)",
+      "workers/sg-authority-v2-shadow": "19/19 pass",
+      "workers/nf-hourly-ai-circles-v1": "8/8 pass"
+    },
+    "typecheck": {
+      "workers/sg-authority-v2": "PASS",
+      "workers/sg-authority-v2-shadow": "PASS"
+    },
+    "founder_gate_scope_self_test": "5/5 pass"
+  },
+  "pre_existing_failure": {
+    "test": "test/sg-live-eval.spec.ts > non-commissioned Worker surface > reports shadow-only health and keeps webhook disabled (expects webhook 503)",
+    "proof": "identical single failure reproduced on the pre-fix lockfile (dba145a state) via clean install; unrelated to the sharp bump — do not attribute it to this dependency change"
+  },
+  "upstream_note": "latest miniflare (4.20260721.0) still pins sharp 0.34.5; the overrides block in each worker package.json must remain until upstream miniflare bumps sharp >= 0.35.0",
+  "production_impact": "none — sharp is dev-only tooling inside miniflare (local Workers simulator); deployed worker code unchanged",
+  "founder_involvement": "NONE (machine decision per ssot/FOUNDER_GATE_SCOPE_v1.md; no closed-set gate reason present)"
+}
