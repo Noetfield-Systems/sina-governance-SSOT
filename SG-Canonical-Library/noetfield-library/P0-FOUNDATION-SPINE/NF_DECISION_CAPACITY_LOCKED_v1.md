@@ -57,9 +57,11 @@ Work packet state: `FROZEN`. Incident route: `CREATE_OR_EXTEND_POLICY`.
 Policy candidates enter as `learning_record` with:
 
 - `layer`: `policy`
-- `status`: `draft`
+- `status`: `draft` → Phase B shadow advances to `proposed` on structural pass
 - `mutation_class`: `OPEN`
 - `source_event`: `MISSING_DECISION_CAPACITY`
+
+**Phase B (implemented):** `scripts/decision_capacity_shadow_replay_v1.py` + `motor_learning_organ_tick_v1.py --mode daily_mine` run structural shadow replay and update `data/decision_class_policy_coverage_v1.json`. Live prior promote remains `GATED`.
 
 Promotion to live priors remains `GATED` per `NF-MOTOR-LEARNING-ORGAN-V1`.
 

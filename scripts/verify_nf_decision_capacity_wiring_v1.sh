@@ -10,6 +10,8 @@ need=(
   "data/schemas/decision_capacity_proposal_v1.json"
   "data/schemas/decision_policy_candidate_v1.json"
   "scripts/lib/decision_capacity_v1.py"
+  "scripts/decision_capacity_shadow_replay_v1.py"
+  "data/decision_class_policy_coverage_v1.json"
   "docs/dispatch/nf-decision-capacity-all-repos.md"
   "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_DECISION_CAPACITY_LOCK_2026-07-24.md"
   "receipts/doctrine/NF_DECISION_CAPACITY_v1_LOCKED.lock.json"
@@ -43,6 +45,9 @@ assert j["decision_id"] == "NF-DECISION-CAPACITY-V1"
 assert j["incident_trigger"] == "MISSING_DECISION_CAPACITY"
 assert "WEBPAGE_CHANGE" in j["decision_classes"]
 assert j["closed_path"][0] == "MISSING_DECISION_CAPACITY"
+assert j.get("phase_b", {}).get("status") == "IMPLEMENTED"
+assert Path("scripts/decision_capacity_shadow_replay_v1.py").is_file()
+assert Path("data/decision_class_policy_coverage_v1.json").is_file()
 print("machine ok")
 
 inc = json.loads(Path("data/schemas/incident_packet_v1.json").read_text())

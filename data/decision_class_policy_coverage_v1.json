@@ -1,0 +1,53 @@
+{
+  "schema": "noetfield.decision_class_policy_coverage.v1",
+  "decision_id": "NF-DECISION-CAPACITY-V1",
+  "version": "1.0.0",
+  "updated_at": "2026-07-24T01:51:02Z",
+  "note": "Coverage is fraction of Decision Class micro-choices already bound by an active or shadow policy. Used by detect_capacity_gap(existing_policy_coverage).",
+  "classes": {
+    "EMAIL_DRAFT": {
+      "coverage": 0.25,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    },
+    "WEBPAGE_CHANGE": {
+      "coverage": 0.45,
+      "active_policy_version": null,
+      "shadow_policy_versions": [
+        "webpage_change.v1.candidate.2f08672f3aaf"
+      ],
+      "status": "shadow_policy_present"
+    },
+    "WEBPAGE_REPAIR": {
+      "coverage": 0.3,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    },
+    "CRAWL_AND_EXTRACT": {
+      "coverage": 0.2,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    },
+    "DATA_SYNC": {
+      "coverage": 0.2,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    },
+    "DEPLOYMENT": {
+      "coverage": 0.15,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    },
+    "UNKNOWN": {
+      "coverage": 0.0,
+      "active_policy_version": null,
+      "shadow_policy_versions": [],
+      "status": "capacity_gap_open"
+    }
+  }
+}
