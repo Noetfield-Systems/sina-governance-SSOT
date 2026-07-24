@@ -24,7 +24,10 @@
     "shadow_replay_script": "scripts/decision_capacity_shadow_replay_v1.py",
     "coverage_registry": "data/decision_class_policy_coverage_v1.json",
     "tick_mode": "daily_mine",
-    "live_promote": false
+    "live_promote": false,
+    "gated_promote_script": "scripts/decision_capacity_gated_promote_v1.py",
+    "live_classes": ["WEBPAGE_CHANGE", "WEBPAGE_REPAIR"],
+    "note": "Cron/shadow never auto-promotes; live classes require exact founder order promote <CLASS>"
   },
   "decision_classes": [
     "EMAIL_DRAFT",

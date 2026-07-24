@@ -2,7 +2,7 @@
   "schema": "noetfield.decision_class_policy_coverage.v1",
   "decision_id": "NF-DECISION-CAPACITY-V1",
   "version": "1.0.0",
-  "updated_at": "2026-07-24T05:36:15Z",
+  "updated_at": "2026-07-24T06:02:13Z",
   "note": "Coverage is fraction of Decision Class micro-choices already bound by an active or shadow policy. Used by detect_capacity_gap(existing_policy_coverage).",
   "classes": {
     "EMAIL_DRAFT": {
@@ -21,10 +21,13 @@
       "live_policy_path": "data/decision_policies/live/WEBPAGE_CHANGE.json"
     },
     "WEBPAGE_REPAIR": {
-      "coverage": 0.3,
-      "active_policy_version": null,
-      "shadow_policy_versions": [],
-      "status": "capacity_gap_open"
+      "coverage": 0.92,
+      "active_policy_version": "webpage_repair.v1.live.185ec3865a14",
+      "shadow_policy_versions": [
+        "webpage_repair.v1.candidate.185ec3865a14"
+      ],
+      "status": "live_policy_active",
+      "live_policy_path": "data/decision_policies/live/WEBPAGE_REPAIR.json"
     },
     "CRAWL_AND_EXTRACT": {
       "coverage": 0.2,
@@ -52,9 +55,9 @@
     }
   },
   "last_gated_promote": {
-    "decision_class": "WEBPAGE_CHANGE",
-    "policy_version": "webpage_change.v1.live.2f08672f3aaf",
-    "founder_order": "promote WEBPAGE_CHANGE",
-    "at": "2026-07-24T05:36:15Z"
+    "decision_class": "WEBPAGE_REPAIR",
+    "policy_version": "webpage_repair.v1.live.185ec3865a14",
+    "founder_order": "promote WEBPAGE_REPAIR",
+    "at": "2026-07-24T06:02:13Z"
   }
 }

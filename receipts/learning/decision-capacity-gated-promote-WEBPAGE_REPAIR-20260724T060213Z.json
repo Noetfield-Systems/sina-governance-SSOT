@@ -1,0 +1,22 @@
+{
+  "schema": "noetfield.decision_capacity_gated_promote_v1",
+  "verdict": "PASS_GATED_PROMOTE",
+  "decision_id": "NF-DECISION-CAPACITY-V1",
+  "mutation_class": "GATED",
+  "at": "2026-07-24T06:02:13Z",
+  "decision_class": "WEBPAGE_REPAIR",
+  "policy_version": "webpage_repair.v1.live.185ec3865a14",
+  "source_candidate_version": "webpage_repair.v1.candidate.185ec3865a14",
+  "founder_order": "promote WEBPAGE_REPAIR",
+  "live_policy_path": "data/decision_policies/live/WEBPAGE_REPAIR.json",
+  "coverage_after": 0.92,
+  "learning_organ": {
+    "layer": "policy",
+    "status": "promoted",
+    "source_event": "MISSING_DECISION_CAPACITY",
+    "record_id": "lr_041e2513131f"
+  },
+  "shadow_source": "receipts/learning/decision-capacity-phase-b-replay-latest.json",
+  "live_consumable": true,
+  "note": "Founder-authorized GATED promote of Decision Capacity policy; cron ticks cannot do this."
+}
