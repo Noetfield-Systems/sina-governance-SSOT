@@ -26,3 +26,11 @@ cd packages/executive-control-plane-v0 && npm test
 ## Learning Organ
 
 Incidents and capacity gaps continue to feed `NF-MOTOR-LEARNING-ORGAN-V1` / `NF-DECISION-CAPACITY-V1`. This plane does not auto-promote policies.
+
+## Status
+
+| Repo | Status |
+|------|--------|
+| sina-governance-SSOT | lock live on feature branch |
+| SourceA | `packages/executive-control-plane-v0` implemented; 15 acceptance tests PASS |
+| NOETFIELD-RUNWAY | consume later (not wired in v0) |
