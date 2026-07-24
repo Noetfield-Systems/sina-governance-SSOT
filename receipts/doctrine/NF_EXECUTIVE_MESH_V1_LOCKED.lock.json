@@ -1,0 +1,9 @@
+{
+  "schema": "noetfield.doctrine_lock_receipt.v1",
+  "decision_id": "NF-EXECUTIVE-MESH-V1",
+  "status": "LOCKED",
+  "locked_at": "2026-07-24T07:10:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+  "machine": "data/nf_executive_mesh_v1_LOCKED.json",
+  "package_home": "SourceA/packages/executive-mesh-v1"
+}

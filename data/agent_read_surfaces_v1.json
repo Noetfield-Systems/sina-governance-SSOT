@@ -439,6 +439,21 @@
           "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
           "status": "ACTIVE",
           "role": "executive_control_plane_v0_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1"
+        },
+        {
+          "path": "data/nf_executive_mesh_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-mesh-v1-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_dispatch"
         }
       ],
       "skills_resolve": []
@@ -911,6 +926,21 @@
           "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
           "status": "ACTIVE",
           "role": "executive_control_plane_v0_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1"
+        },
+        {
+          "path": "data/nf_executive_mesh_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-mesh-v1-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_dispatch"
         }
       ],
       "skills_resolve": []
@@ -1443,6 +1473,21 @@
           "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
           "status": "ACTIVE",
           "role": "executive_control_plane_v0_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1"
+        },
+        {
+          "path": "data/nf_executive_mesh_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-mesh-v1-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_dispatch"
         }
       ],
       "skills_resolve": [
@@ -1916,6 +1961,21 @@
           "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
           "status": "ACTIVE",
           "role": "executive_control_plane_v0_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1"
+        },
+        {
+          "path": "data/nf_executive_mesh_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-mesh-v1-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_dispatch"
         }
       ],
       "skills_resolve": []
@@ -2390,6 +2450,21 @@
           "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
           "status": "ACTIVE",
           "role": "executive_control_plane_v0_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1"
+        },
+        {
+          "path": "data/nf_executive_mesh_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-mesh-v1-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_mesh_v1_dispatch"
         }
       ],
       "skills_resolve": []
