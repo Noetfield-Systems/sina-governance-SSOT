@@ -1,0 +1,94 @@
+{
+  "schema": "noetfield.decision_capacity_shadow_result.v1",
+  "at": "2026-07-24T06:02:13Z",
+  "verdict": "SHADOW_REPLAY_PASSED",
+  "decision_class": "WEBPAGE_REPAIR",
+  "policy_candidate": {
+    "schema": "noetfield.decision_policy_candidate.v1",
+    "candidate_id": "dpc_93ee19cb3366",
+    "proposal_id": "dcp_31b7c0ec1b1d",
+    "decision_class": "WEBPAGE_REPAIR",
+    "policy_version": "webpage_repair.v1.candidate.185ec3865a14",
+    "body": {
+      "when": {
+        "task_type": "webpage_repair",
+        "risk": "low_or_medium"
+      },
+      "select": {
+        "workflow": "deterministic_web_repair_v1",
+        "executor": "cheapest_passing_executor"
+      },
+      "limits": {
+        "max_files": 5,
+        "max_attempts": 2,
+        "max_fanout": 0
+      },
+      "verify": [
+        "build_passes",
+        "visual_diff_present",
+        "target_issue_absent",
+        "unrelated_pages_unchanged"
+      ],
+      "escalate_when": [
+        "positioning_change_detected",
+        "protected_file_required",
+        "two_distinct_plans_failed"
+      ]
+    },
+    "replay_status": "passed",
+    "learning_record_id": "lr_041e2513131f",
+    "mutation_class": "OPEN",
+    "created_at": "2026-07-24T06:02:13Z"
+  },
+  "learning_record": {
+    "record_id": "lr_041e2513131f",
+    "source_event": "MISSING_DECISION_CAPACITY",
+    "layer": "policy",
+    "proposed_correction": {
+      "kind": "decision_policy_candidate",
+      "candidate_id": "dpc_93ee19cb3366",
+      "decision_class": "WEBPAGE_REPAIR",
+      "policy_version": "webpage_repair.v1.candidate.185ec3865a14",
+      "body": {
+        "when": {
+          "task_type": "webpage_repair",
+          "risk": "low_or_medium"
+        },
+        "select": {
+          "workflow": "deterministic_web_repair_v1",
+          "executor": "cheapest_passing_executor"
+        },
+        "limits": {
+          "max_files": 5,
+          "max_attempts": 2,
+          "max_fanout": 0
+        },
+        "verify": [
+          "build_passes",
+          "visual_diff_present",
+          "target_issue_absent",
+          "unrelated_pages_unchanged"
+        ],
+        "escalate_when": [
+          "positioning_change_detected",
+          "protected_file_required",
+          "two_distinct_plans_failed"
+        ]
+      }
+    },
+    "ssot_consistency_check": "structural_replay_passed",
+    "critic_reviewed": false,
+    "status": "proposed",
+    "stage_market_id": "decision_capacity",
+    "sample_n": 1,
+    "confidence": 0.55,
+    "pattern_description": "Decision capacity gap for WEBPAGE_REPAIR",
+    "mutation_class": "OPEN",
+    "created_at": "2026-07-24T06:02:13Z",
+    "shadow_at": "2026-07-24T06:02:13Z"
+  },
+  "failures": [],
+  "mutation_class_promote": "GATED",
+  "live_promote": false,
+  "source_path": "receipts/learning/decision-capacity-phase-b-fixture-webpage-repair-v1.json"
+}

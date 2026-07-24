@@ -1,0 +1,44 @@
+{
+  "schema": "noetfield.decision_policy_live.v1",
+  "decision_class": "WEBPAGE_REPAIR",
+  "policy_version": "webpage_repair.v1.live.185ec3865a14",
+  "source_candidate_version": "webpage_repair.v1.candidate.185ec3865a14",
+  "candidate_id": "dpc_93ee19cb3366",
+  "proposal_id": "dcp_31b7c0ec1b1d",
+  "learning_record_id": "lr_041e2513131f",
+  "body": {
+    "when": {
+      "task_type": "webpage_repair",
+      "risk": "low_or_medium"
+    },
+    "select": {
+      "workflow": "deterministic_web_repair_v1",
+      "executor": "cheapest_passing_executor"
+    },
+    "limits": {
+      "max_files": 5,
+      "max_attempts": 2,
+      "max_fanout": 0
+    },
+    "verify": [
+      "build_passes",
+      "visual_diff_present",
+      "target_issue_absent",
+      "unrelated_pages_unchanged"
+    ],
+    "escalate_when": [
+      "positioning_change_detected",
+      "protected_file_required",
+      "two_distinct_plans_failed"
+    ]
+  },
+  "mutation_class": "GATED",
+  "status": "active",
+  "promoted_at": "2026-07-24T06:02:13Z",
+  "founder_order": "promote WEBPAGE_REPAIR",
+  "shadow_source": "receipts/learning/decision-capacity-phase-b-replay-latest.json",
+  "rollback_pointer": {
+    "previous_active": null,
+    "coverage_before_promote": 0.35
+  }
+}
