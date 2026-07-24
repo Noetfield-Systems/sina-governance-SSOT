@@ -125,6 +125,16 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 **Flagship:** `POST /v1/chat/completions` first; do not build extract/webhooks SKUs before flagship ships and sells.
 **Hold:** internal Motor/Runway/NOOS vocabulary off buyer surfaces; cheap-first cost doctrine preserved.
 
+## 2m. GOVERNED WORK PACKET CONTROL (P0 — Goal Contract · Human Tax · breakers)
+
+**Read before** changing Goal Contract schemas, work-packet terminals, Human Tax meters, circuit breakers, or SAME_PLAN_HASH resume rules on SourceA / Motor / Runway.
+
+- Law: `P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md`
+- Machine: `data/nf_governed_work_packet_control_v1_LOCKED.json`
+- Dispatch: `docs/dispatch/nf-governed-work-packet-control-all-repos.md`
+- Learning path remains `NF-MOTOR-LEARNING-ORGAN-V1` (no parallel brain)
+
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

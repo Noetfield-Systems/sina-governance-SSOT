@@ -1,7 +1,7 @@
 {
   "schema": "github_automation_registry_v1",
   "version": "1.4.1",
-  "saved_at": "2026-07-20T09:10:00Z",
+  "saved_at": "2026-07-24T01:20:00Z",
   "authority": "SG (SSSOT)",
   "parent_governance": "ssot/PARALLEL_AUTOMATION_GOVERNANCE_v1.md",
   "law": "One motor per task cell. Unregistered workflow or agent = defect on monthly audit.",
@@ -598,6 +598,50 @@
       "commissioned": false,
       "scheduled": false,
       "note": "CI-only W1 validator. Never ratifies or promotes live priors."
+    },
+    {
+      "motor_id": "nf_human_tax_meter_v1",
+      "kind": "cloudflare_cron",
+      "repo": "sina-governance-ssot",
+      "loop_id": "nf-human-tax-meter-v1",
+      "cadence": "pending_after_phase_a",
+      "lane": "sg_governance",
+      "trigger_host": "cloud",
+      "owns": [
+        "human_tax_aggregation",
+        "htu_receipt"
+      ],
+      "must_not_own": [
+        "goal_contract_mutation",
+        "motor_learning_auto_promote",
+        "n8n_as_ssot"
+      ],
+      "receipt_path": "receipts/human-tax/*",
+      "conflicts_with": [],
+      "deadman": "2x_interval",
+      "note": "Autorun only after Goal Contract path enforcement is live on Runway+SourceA (Phase A sealed).",
+      "depends_on": [
+        "NF-GOVERNED-WORK-PACKET-CONTROL-V1"
+      ]
+    },
+    {
+      "motor_id": "gh_actions_nf_revenue_receipt_adapter_v1",
+      "kind": "github_actions",
+      "repo": "sina-governance-ssot",
+      "workflow_file": ".github/workflows/nf-revenue-receipt-adapter-v1.yml",
+      "cadence": "repository_dispatch:sourceb_revenue_checkout",
+      "lane": "sg_governance",
+      "owns": [
+        "revenue_receipt_adapter",
+        "first_revenue_receipt"
+      ],
+      "must_not_own": [
+        "brain_promote",
+        "stripe_webhook_source"
+      ],
+      "receipt_path": "receipts/revenue/*",
+      "conflicts_with": [],
+      "note": "Event-driven Stripe checkout \u2192 FIRST_REVENUE_RECEIPT adapter (W5-11)."
     }
   ],
   "agent_lanes": [

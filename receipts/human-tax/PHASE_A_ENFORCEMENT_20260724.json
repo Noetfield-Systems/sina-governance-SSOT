@@ -1,0 +1,18 @@
+{
+  "schema": "noetfield.governed_work_packet_phase_a_receipt.v1",
+  "decision_id": "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+  "phase": "A_control_before_intelligence",
+  "at": "2026-07-24T01:10:02Z",
+  "verdict": "PASS_SCOPED_CHANGE",
+  "surfaces": {
+    "sg": "LOCKED+schemas+verifier",
+    "runway": "goal_do+intake+hdir+tests",
+    "sourcea": "fbe_contract+auto_runtime+broker_ht+brain_gate+tests"
+  },
+  "human_tax_meter_loop": {
+    "loop_id": "nf-human-tax-meter-v1",
+    "trigger_host": "cloud",
+    "status": "path_enforcement_ready_autorun_pending",
+    "receipt_root": "receipts/human-tax/"
+  }
+}

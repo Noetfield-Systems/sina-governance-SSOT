@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/human_tax_event_v1.json",
+  "title": "Human Tax Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "task_id",
+    "event_type",
+    "new_information",
+    "goal_changed",
+    "avoidable",
+    "active_human_seconds",
+    "root_layer"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.human_tax_event.v1" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "OWNER_DECISION",
+        "NEW_EXTERNAL_FACT",
+        "CREATIVE_CHOICE",
+        "RED_ZONE_APPROVAL",
+        "GOAL_RESTATEMENT",
+        "SCOPE_RESTATEMENT",
+        "MANUAL_CORRECTION",
+        "MANUAL_ROLLBACK",
+        "MANUAL_RESTART",
+        "FALSE_DONE_REJECTION",
+        "OUT_OF_SCOPE_REPAIR",
+        "MANUAL_VERIFICATION",
+        "TOOL_CANCELLATION"
+      ]
+    },
+    "new_information": { "type": "boolean" },
+    "goal_changed": { "type": "boolean" },
+    "avoidable": { "type": "boolean" },
+    "active_human_seconds": { "type": "number", "minimum": 0 },
+    "root_layer": {
+      "type": "string",
+      "enum": ["AGENT", "TOOL", "VERIFIER", "GOVERNOR", "OWNER", "TRANSPORT"]
+    },
+    "related_failure_signature": { "type": "string" },
+    "evidence_ref": { "type": "string" }
+  }
+}
