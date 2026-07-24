@@ -145,11 +145,14 @@ def detect_capacity_gap(
     choices = map_events_to_founder_choices(event_types)
     taxish = [e for e in event_types if e in EVENT_TO_CHOICE]
     occurrences = max(len(taxish), len(choices))
+    if not choices:
+        return None
+    # Live / high-coverage policies close the Decision Frontier for this class
+    if existing_policy_coverage >= 0.9:
+        return None
     if occurrences < min_occurrences and existing_policy_coverage >= 0.8:
         return None
     if occurrences < min_occurrences and existing_policy_coverage > 0.5:
-        return None
-    if not choices:
         return None
     if existing_policy_coverage >= 0.95 and occurrences < 4:
         return None

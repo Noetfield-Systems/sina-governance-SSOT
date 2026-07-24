@@ -2,7 +2,7 @@
   "schema": "noetfield.decision_class_policy_coverage.v1",
   "decision_id": "NF-DECISION-CAPACITY-V1",
   "version": "1.0.0",
-  "updated_at": "2026-07-24T01:51:02Z",
+  "updated_at": "2026-07-24T05:36:15Z",
   "note": "Coverage is fraction of Decision Class micro-choices already bound by an active or shadow policy. Used by detect_capacity_gap(existing_policy_coverage).",
   "classes": {
     "EMAIL_DRAFT": {
@@ -12,12 +12,13 @@
       "status": "capacity_gap_open"
     },
     "WEBPAGE_CHANGE": {
-      "coverage": 0.45,
-      "active_policy_version": null,
+      "coverage": 0.92,
+      "active_policy_version": "webpage_change.v1.live.2f08672f3aaf",
       "shadow_policy_versions": [
         "webpage_change.v1.candidate.2f08672f3aaf"
       ],
-      "status": "shadow_policy_present"
+      "status": "live_policy_active",
+      "live_policy_path": "data/decision_policies/live/WEBPAGE_CHANGE.json"
     },
     "WEBPAGE_REPAIR": {
       "coverage": 0.3,
@@ -49,5 +50,11 @@
       "shadow_policy_versions": [],
       "status": "capacity_gap_open"
     }
+  },
+  "last_gated_promote": {
+    "decision_class": "WEBPAGE_CHANGE",
+    "policy_version": "webpage_change.v1.live.2f08672f3aaf",
+    "founder_order": "promote WEBPAGE_CHANGE",
+    "at": "2026-07-24T05:36:15Z"
   }
 }
