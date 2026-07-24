@@ -1,7 +1,7 @@
 {
   "schema": "runtime_value_contracts_v1",
-  "version": "1.1.1",
-  "saved_at": "2026-07-22T23:07:14Z",
+  "version": "1.1.2",
+  "saved_at": "2026-07-24T01:25:00Z",
   "law": "Every runtime must name a beneficiary, justified trigger, bounded action, useful output, completion condition, and idle no-op. No schedule without a time-dependent reason. No idle LLM. One claim owner per task cell.",
   "contracts": [
     {
@@ -969,6 +969,103 @@
       "receipt_location": "GitHub Actions logs",
       "rollback": "Disable workflow; validators remain runnable locally.",
       "status": "event_driven",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.category_drift_guard_manual",
+      "motor_id": "gh_actions_category_drift_guard_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Detect product category registry drift against evidence without mutating the registry.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "Read-only category drift check; write CATEGORY_DRIFT_CHECK receipt; no deploy or registry mutation.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "category_drift_check_receipt_v1",
+        "destination": "receipts/CATEGORY_DRIFT_CHECK_*.json",
+        "visibility": "operator"
+      },
+      "success_metric": "Drift check exits with explicit PASS/FAIL receipt for the checked registry snapshot.",
+      "completion_condition": "Receipt written under receipts/CATEGORY_DRIFT_CHECK_*.json.",
+      "idempotency_key": "category-drift:{registry_sha}:{run_id}",
+      "retry_backoff": "none; founder re-dispatch",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/CATEGORY_DRIFT_CHECK_*.json",
+      "rollback": "Keep workflow_dispatch-only; do not enable schedule without unlock receipt.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.nf_revenue_receipt_adapter",
+      "motor_id": "gh_actions_nf_revenue_receipt_adapter_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Land a deterministic FIRST_REVENUE_RECEIPT from a PII-minimized Stripe checkout dispatch.",
+      "trigger": {
+        "type": "event",
+        "event": "repository_dispatch:sourceb_revenue_checkout"
+      },
+      "bounded_action": "Run revenue receipt adapter script; commit receipt under receipts/revenue/; no cron.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "first_revenue_receipt_v1",
+        "destination": "receipts/revenue/*",
+        "visibility": "operator"
+      },
+      "success_metric": "Each accepted checkout dispatch yields exactly one revenue receipt artifact.",
+      "completion_condition": "Receipt committed or dry-run receipt written for test-mode events.",
+      "idempotency_key": "revenue-receipt:{checkout_session_id}",
+      "retry_backoff": "none; re-dispatch with same session id is idempotent",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "10m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/revenue/*",
+      "rollback": "Disable workflow_dispatch/repository_dispatch consumers; retain last receipt.",
+      "status": "active",
+      "site_flow": "none"
+    },
+    {
+      "runtime_id": "sg.nf_human_tax_meter",
+      "motor_id": "nf_human_tax_meter_v1",
+      "owner_role": "noetfield:sg.governance-owner",
+      "beneficiary": "operator.governance",
+      "business_customer_goal": "Aggregate Human Tax events into HTU receipts so repair labor is visible before anger.",
+      "trigger": {
+        "type": "manual"
+      },
+      "bounded_action": "Aggregate human-tax event ledger into receipts/human-tax/; no Goal Contract mutation; cloud autorun only after Phase A path enforcement.",
+      "authority_ceiling": "observe",
+      "output": {
+        "schema": "human_tax_meter_receipt_v1",
+        "destination": "receipts/human-tax/*",
+        "visibility": "operator"
+      },
+      "success_metric": "Meter receipt lists HTU totals without inventing founder interrupts.",
+      "completion_condition": "Receipt written under receipts/human-tax/ or no-op when ledger empty.",
+      "idempotency_key": "human-tax-meter:{iso_day}",
+      "retry_backoff": "none until cloud cron commissioned",
+      "no_work_behavior": {
+        "no_write": true,
+        "no_llm": true,
+        "no_notification": true
+      },
+      "cost_time_ceiling": "5m wall / $0 LLM",
+      "review_date": "2026-10-01",
+      "receipt_location": "receipts/human-tax/*",
+      "rollback": "Leave motor pending; keep Phase A path enforcement receipts.",
+      "status": "active",
       "site_flow": "none"
     }
   ]
