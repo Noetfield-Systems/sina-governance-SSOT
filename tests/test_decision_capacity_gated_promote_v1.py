@@ -51,6 +51,9 @@ class GatedPromoteTests(unittest.TestCase):
     def test_live_webpage_repair(self):
         self._assert_live("WEBPAGE_REPAIR", "promote WEBPAGE_REPAIR")
 
+    def test_live_email_draft(self):
+        self._assert_live("EMAIL_DRAFT", "promote EMAIL_DRAFT")
+
 
 if __name__ == "__main__":
     unittest.main()
