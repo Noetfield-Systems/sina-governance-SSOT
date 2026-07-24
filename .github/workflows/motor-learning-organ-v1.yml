@@ -1,7 +1,7 @@
 name: motor-learning-organ-v1
 
 # Authorized by NF-MOTOR-LEARNING-ORGAN-V1.
-# W0/W4 stub: heartbeat + receipt only. NEVER ratifies or promotes live priors.
+# Phase B: daily_mine runs Decision Capacity shadow replay. NEVER promotes live priors.
 # W1 validation lives in motor-learning-organ-w1-validate.yml (fixture/dry-run only).
 on:
   schedule:
@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Motor learning organ tick (observe/heartbeat stub)
+      - name: Motor learning organ tick (heartbeat / daily_mine Phase B)
         shell: bash
         env:
           MLO_TICK_MODE: ${{ github.event.inputs.mode }}
@@ -63,5 +63,7 @@ jobs:
           name: motor-learning-organ-receipt-${{ github.run_id }}
           path: |
             receipts/learning/motor-learning-organ-latest-summary.json
+            receipts/learning/decision-capacity-phase-b-replay-*.json
+            receipts/learning/decision-capacity-shadow/
             ${{ env.MLO_RECEIPT_PATH }}
           if-no-files-found: ignore
