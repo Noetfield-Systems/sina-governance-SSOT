@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DecisionRecord",
+  "type": "object",
+  "required": [
+    "schema",
+    "decision_id",
+    "version",
+    "zone",
+    "goal_id",
+    "policy_version",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.executive.decision_record.v0"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "zone": {
+      "enum": [
+        "GREEN",
+        "AMBER",
+        "RED"
+      ]
+    },
+    "goal_id": {
+      "type": "string"
+    },
+    "decision_class": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "APPROVED",
+        "RED_ZONE_REQUIRED",
+        "REJECTED"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "source_decision_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

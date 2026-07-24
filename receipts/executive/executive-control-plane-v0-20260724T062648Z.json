@@ -1,0 +1,38 @@
+{
+  "schema": "noetfield.executive_control_plane_v0_impl_receipt.v1",
+  "decision_id": "NF-EXECUTIVE-CONTROL-PLANE-V0",
+  "verdict": "PASS",
+  "at": "2026-07-24T06:26:48Z",
+  "package": "SourceA/packages/executive-control-plane-v0",
+  "test_command": "cd packages/executive-control-plane-v0 && npm test",
+  "tests": {
+    "pass": 16,
+    "fail": 0,
+    "acceptance_tests": 15
+  },
+  "test_tail": [
+    "\u2714 5. irreversible or governance-changing task produces RED_ZONE_REQUIRED (0.161375ms)",
+    "\u2714 6. model proposal cannot mutate canonical state directly (0.14175ms)",
+    "\u2714 7. commitment cannot close without required EvidenceReceipt (0.314458ms)",
+    "\u2714 8. executor completion claim without evidence is rejected (0.23875ms)",
+    "\u2714 9. two identical semantic failures create repeated-failure incident (0.309958ms)",
+    "\u2714 10. two zero-progress cycles stop the work packet (0.285208ms)",
+    "\u2714 11. human-tax breach freezes affected work and creates incident (0.181459ms)",
+    "\u2714 12. newer Founder decision beats older policy in conflict (0.208208ms)",
+    "\u2714 13. unresolvable conflict produces Founder Decision Packet (0.070959ms)",
+    "\u2714 14. webpage-edit work packet cannot spawn subagents when max_fanout is zero (0.184ms)",
+    "\u2714 15. out-of-scope mutation creates AUTHORITY_DRIFT and freezes the task (0.428958ms)",
+    "\u2714 evidence path: valid evidence allows verify and commitment close (0.218125ms)",
+    "\u2139 tests 16",
+    "\u2139 suites 0",
+    "\u2139 pass 16",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 59.802667"
+  ],
+  "cloudflare_wired": false,
+  "llm_on_decision_path": false,
+  "note": "Wave 2 kernel + Wave 3 seal; GoalDO import deferred"
+}

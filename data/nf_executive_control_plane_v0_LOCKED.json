@@ -1,0 +1,60 @@
+{
+  "schema": "nf_executive_control_plane_v0",
+  "decision_id": "NF-EXECUTIVE-CONTROL-PLANE-V0",
+  "status": "SG_ACCEPTED",
+  "version": "0.1.0",
+  "saved_at": "2026-07-24T06:20:00Z",
+  "one_line_law": "Always-present operator is a deterministic Executive Governor; next action is compiled from state, not freely invented",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+  "depends_on": [
+    "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+    "NF-DECISION-CAPACITY-V1",
+    "NF-MOTOR-LEARNING-ORGAN-V1"
+  ],
+  "package_home": "SourceA/packages/executive-control-plane-v0",
+  "modules": [
+    "ExecutiveGovernor",
+    "GoalController",
+    "CommitmentController",
+    "ConflictResolver",
+    "DriftMonitor",
+    "NextActionCompiler",
+    "EvidenceVerifier",
+    "IncidentMotor"
+  ],
+  "decision_zones": [
+    "GREEN",
+    "AMBER",
+    "RED"
+  ],
+  "invariant": "same_state_same_event_same_policy_version_same_decision",
+  "cloudflare_in_v0": false,
+  "llm_on_decision_path": false,
+  "background_loops_in_v0": false,
+  "future_pulse": {
+    "trigger_host": "cloud",
+    "loop_id": "sourcea_executive_pulse_v0",
+    "deadman": "sourcea-deadman-v1",
+    "receipt_dir": "receipts/executive/"
+  },
+  "schemas": [
+    "data/schemas/executive_founder_charter_v0.json",
+    "data/schemas/executive_decision_record_v0.json",
+    "data/schemas/executive_commitment_v0.json",
+    "data/schemas/executive_work_packet_v0.json",
+    "data/schemas/executive_canonical_state_v0.json",
+    "data/schemas/executive_decision_result_v0.json",
+    "data/schemas/executive_founder_decision_packet_v0.json",
+    "data/schemas/executive_drift_finding_v0.json"
+  ],
+  "forbidden": [
+    "llm_decision_path",
+    "super_agent",
+    "agent_swarm",
+    "prompt_chain_as_governor",
+    "close_commitment_without_evidence",
+    "finalize_red_without_founder_packet",
+    "cloudflare_wire_in_v0",
+    "unsupervised_architecture_redesign"
+  ]
+}

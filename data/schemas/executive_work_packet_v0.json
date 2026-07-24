@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkPacket",
+  "type": "object",
+  "required": [
+    "schema",
+    "action_id",
+    "version",
+    "goal_id",
+    "decision_id",
+    "executor_class",
+    "budget",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.executive.work_packet.v0"
+    },
+    "action_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "goal_id": {
+      "type": "string"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "plan_step_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "why_now": {
+      "type": "string"
+    },
+    "executor_class": {
+      "type": "string"
+    },
+    "allowed_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_predicates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget": {
+      "type": "object"
+    },
+    "on_failure": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

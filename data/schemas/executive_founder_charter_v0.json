@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FounderCharter",
+  "type": "object",
+  "required": [
+    "schema",
+    "charter_id",
+    "version",
+    "non_negotiables",
+    "delegation_envelope",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.executive.founder_charter.v0"
+    },
+    "charter_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "non_negotiables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "red_zone_classes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "delegation_envelope": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}
