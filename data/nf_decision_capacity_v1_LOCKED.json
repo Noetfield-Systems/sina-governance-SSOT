@@ -26,7 +26,7 @@
     "tick_mode": "daily_mine",
     "live_promote": false,
     "gated_promote_script": "scripts/decision_capacity_gated_promote_v1.py",
-    "live_classes": ["WEBPAGE_CHANGE", "WEBPAGE_REPAIR"],
+    "live_classes": ["WEBPAGE_CHANGE", "WEBPAGE_REPAIR", "EMAIL_DRAFT"],
     "note": "Cron/shadow never auto-promotes; live classes require exact founder order promote <CLASS>"
   },
   "decision_classes": [
