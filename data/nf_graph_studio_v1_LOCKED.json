@@ -1,0 +1,46 @@
+{
+  "schema": "nf_graph_studio_v1",
+  "decision_id": "NF-GRAPH-STUDIO-V1",
+  "status": "SG_ACCEPTED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-24T08:30:00Z",
+  "one_line_law": "Studio authors Blueprints; Compiler freezes plan_hash; Mesh executes pinned plans; Verifier decides reality; React Flow is UI-only",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GRAPH_STUDIO_V1_LOCKED_v1.md",
+  "depends_on": [
+    "NF-EXECUTIVE-MESH-V1"
+  ],
+  "package_home": "SourceA/packages/graph-studio-v1",
+  "studio_web": "SourceA/apps/graph-studio-web",
+  "studio_worker": "SourceA/cloud/workers/sourcea-graph-studio-v1",
+  "runtime": "SourceA/packages/executive-mesh-v1",
+  "governor_worker": "SourceA/cloud/workers/sourcea-executive-governor-v1",
+  "four_representations": [
+    "node_definition_registry",
+    "blueprint_graph",
+    "compiled_execution_plan",
+    "run_graph"
+  ],
+  "slice1_blueprint": "webpage_repair_l0_v1",
+  "canonical_store": "supabase_portfolio_spine",
+  "coordinator": "cloudflare_durable_object",
+  "layout_in_plan_hash": false,
+  "execute_react_flow_json": false,
+  "llm_authority": false,
+  "second_railway_executor": false,
+  "future_pulse": {
+    "trigger_host": "cloud",
+    "loop_id": "sourcea_graph_studio_pulse_v1",
+    "deadman": "sourcea-deadman-v1",
+    "receipt_dir": "receipts/graph-studio/"
+  },
+  "forbidden": [
+    "execute_canvas_json",
+    "layout_affects_semantics",
+    "llm_authority",
+    "parallel_ssot",
+    "second_railway_heavy_executor",
+    "unbounded_composite_recursion",
+    "generic_graph_interpreter_replacing_mesh",
+    "unsupervised_blueprint_evolution"
+  ]
+}
