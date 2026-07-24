@@ -1,0 +1,17 @@
+{
+  "schema": "noetfield.doctrine_lock_receipt.v1",
+  "decision_id": "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+  "locked_at": "2026-07-24T01:03:13Z",
+  "status": "SG_ACCEPTED",
+  "artifacts": {
+    "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md": "sha256:71d5651c877fb5b35fc7853b8955a16f5afc0b08c0939ffa8a1d37f0789bc774",
+    "data/nf_governed_work_packet_control_v1_LOCKED.json": "sha256:310efa88deee6cd283645eb0f76ef01a332d67418961fdf55f66b9e5968fec59",
+    "data/schemas/goal_contract_v1.json": "sha256:cb211af4b11844d89bd107be16efafcb998d665cff831836f92270db8243a08c",
+    "data/schemas/human_tax_event_v1.json": "sha256:0529121b0f3d3a7e30a67ad08006754071edad2b135ee693c9017e4e46b66f84",
+    "data/schemas/work_packet_terminal_v1.json": "sha256:aaf3d8f3bc22382b75b0ccaaa2d5dfa1d6220a8546777691f361a62420fbcd9d",
+    "data/schemas/failure_signature_v1.json": "sha256:1c576f1845c3992b4bf9f8d524010b1588a77f67fb0f255d04791a6d43eec94e",
+    "data/schemas/incident_packet_v1.json": "sha256:f6319e3f443dad375b19855f0a219ac2005d76d66e6aa299534711df3e25e732",
+    "scripts/lib/governed_work_packet_v1.py": "sha256:3d5ef0c60524f4ab13a93a02a7765ca5d0f171eae290890720b79e70c48c713d",
+    "docs/dispatch/nf-governed-work-packet-control-all-repos.md": "sha256:91e075f21ba6a2ad53354d71a9fc4bf5c81ffaebb9e4d2399bbe3f1cb0a46ba9"
+  }
+}

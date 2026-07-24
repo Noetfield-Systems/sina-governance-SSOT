@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/work_packet_terminal_v1.json",
+  "title": "Work Packet Terminal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "work_packet_id", "terminal", "closed_at"],
+  "properties": {
+    "schema": { "const": "noetfield.work_packet_terminal.v1" },
+    "work_packet_id": { "type": "string", "minLength": 1 },
+    "terminal": {
+      "type": "string",
+      "enum": [
+        "ACCEPTED_ARTIFACT",
+        "BOUNDED_FAILURE",
+        "RED_ZONE_DECISION_PACKET"
+      ]
+    },
+    "closed_at": { "type": "string", "format": "date-time" },
+    "artifact_ref": { "type": "string" },
+    "incident_id": { "type": "string" },
+    "red_zone_packet_id": { "type": "string" },
+    "goal_authority_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "plan_hash": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "terminal": { "const": "ACCEPTED_ARTIFACT" } } },
+      "then": { "required": ["artifact_ref"] }
+    },
+    {
+      "if": { "properties": { "terminal": { "const": "BOUNDED_FAILURE" } } },
+      "then": { "required": ["incident_id"] }
+    },
+    {
+      "if": {
+        "properties": { "terminal": { "const": "RED_ZONE_DECISION_PACKET" } }
+      },
+      "then": { "required": ["red_zone_packet_id"] }
+    }
+  ]
+}

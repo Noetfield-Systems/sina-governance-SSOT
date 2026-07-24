@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/failure_signature_v1.json",
+  "title": "Failure Signature v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "failure_signature",
+    "task_class",
+    "goal_version",
+    "failing_acceptance_check",
+    "error_code",
+    "affected_scope",
+    "tool_class",
+    "plan_hash"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.failure_signature.v1" },
+    "failure_signature": {
+      "type": "string",
+      "pattern": "^sig_[a-f0-9]{16,64}$"
+    },
+    "task_class": { "type": "string", "minLength": 1 },
+    "goal_version": { "type": "integer", "minimum": 1 },
+    "failing_acceptance_check": { "type": "string" },
+    "error_code": { "type": "string", "minLength": 1 },
+    "affected_scope": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tool_class": { "type": "string", "minLength": 1 },
+    "plan_hash": { "type": "string", "minLength": 1 }
+  }
+}

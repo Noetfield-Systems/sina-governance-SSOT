@@ -394,6 +394,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control"
+        },
+        {
+          "path": "data/nf_governed_work_packet_control_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_dispatch"
         }
       ],
       "skills_resolve": []
@@ -821,6 +836,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control"
+        },
+        {
+          "path": "data/nf_governed_work_packet_control_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_dispatch"
         }
       ],
       "skills_resolve": []
@@ -1308,6 +1338,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control"
+        },
+        {
+          "path": "data/nf_governed_work_packet_control_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_dispatch"
         }
       ],
       "skills_resolve": [
@@ -1736,6 +1781,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control"
+        },
+        {
+          "path": "data/nf_governed_work_packet_control_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_dispatch"
         }
       ],
       "skills_resolve": []
@@ -2165,6 +2225,21 @@
           "path": "SG-Canonical-Library/noetfield-library/P99-LEDGER/NF_UNIFIED_MOTOR_SCALING_POSTURE_2026-07-18.md",
           "role": "unified_motor_scaling_posture",
           "why": "Accepted scaling runway + reject list + HOLD floor"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control"
+        },
+        {
+          "path": "data/nf_governed_work_packet_control_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+          "status": "ACTIVE",
+          "role": "governed_work_packet_control_dispatch"
         }
       ],
       "skills_resolve": []

@@ -1,0 +1,142 @@
+{
+  "schema": "nf_governed_work_packet_control_v1",
+  "decision_id": "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+  "status": "SG_ACCEPTED",
+  "implementation_status": "IMPLEMENTATION_AUTHORIZED",
+  "version": "v1.0.0_locked_20260724",
+  "saved_at": "2026-07-24T01:00:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_GOVERNED_WORK_PACKET_CONTROL_LOCKED_v1.md",
+  "one_line_law": "Contracts define the goal; machines control execution; models propose; verifiers decide; incidents teach.",
+  "depends_on": [
+    "NF-UNIFIED-MOTOR-ARCHITECTURE-V1",
+    "NF-MOTOR-LEARNING-ORGAN-V1",
+    "NF-NOETFIELD-RUNWAY-PRODUCT-V1",
+    "NF_FORBIDDEN_AGENT_REGISTERS_LOCKED_v1"
+  ],
+  "applies_to_repos": [
+    "Noetfield-Systems/sina-governance-SSOT",
+    "Noetfield-Systems/NOETFIELD-RUNWAY",
+    "Noetfield-Systems/SourceA"
+  ],
+  "work_packet_terminals": [
+    "ACCEPTED_ARTIFACT",
+    "BOUNDED_FAILURE",
+    "RED_ZONE_DECISION_PACKET"
+  ],
+  "forbidden_terminals": ["ACTIVE_FOREVER"],
+  "goal_contract_schema": "data/schemas/goal_contract_v1.json",
+  "human_tax_event_schema": "data/schemas/human_tax_event_v1.json",
+  "work_packet_terminal_schema": "data/schemas/work_packet_terminal_v1.json",
+  "failure_signature_schema": "data/schemas/failure_signature_v1.json",
+  "incident_packet_schema": "data/schemas/incident_packet_v1.json",
+  "goal_mutation_path": "OWNER_GOAL_CHANGE_only",
+  "same_plan_hash_resume_after_incident": false,
+  "transport_retry_consumes_repair_budget": false,
+  "repair_attempt_requires_new_plan_hash": true,
+  "human_tax": {
+    "meter_mode": "observe_and_enforce_budget",
+    "non_tax_event_types": [
+      "OWNER_DECISION",
+      "NEW_EXTERNAL_FACT",
+      "CREATIVE_CHOICE",
+      "RED_ZONE_APPROVAL"
+    ],
+    "tax_event_types": [
+      "GOAL_RESTATEMENT",
+      "SCOPE_RESTATEMENT",
+      "MANUAL_CORRECTION",
+      "MANUAL_ROLLBACK",
+      "MANUAL_RESTART",
+      "FALSE_DONE_REJECTION",
+      "OUT_OF_SCOPE_REPAIR",
+      "MANUAL_VERIFICATION",
+      "TOOL_CANCELLATION"
+    ],
+    "htu_weights": {
+      "active_correction_minutes": 1,
+      "goal_restatements": 3,
+      "scope_restatements": 3,
+      "manual_rollbacks": 5,
+      "manual_restarts": 2,
+      "false_done_rejections": 4,
+      "out_of_scope_repairs": 5
+    },
+    "primary_metric": "human_tax_per_accepted_artifact"
+  },
+  "hard_breakers": [
+    "protected_state_mutation",
+    "out_of_scope_write",
+    "fabricated_receipt",
+    "unauthorized_deploy",
+    "secret_exposure",
+    "budget_hard_cap",
+    "goal_contract_mutation_attempt"
+  ],
+  "soft_breakers": {
+    "same_failure_signature": 2,
+    "goal_restatement": 2,
+    "scope_restatement": 2,
+    "no_progress_cycles": 2,
+    "human_tax_over_budget": true,
+    "fanout_over_plan_budget": true,
+    "repeated_done_without_evidence": 2
+  },
+  "progress_counts": [
+    "newly_passing_acceptance_checks",
+    "new_verified_artifacts",
+    "validated_state_improvement"
+  ],
+  "progress_does_not_count": [
+    "tokens_consumed",
+    "analysis_prose",
+    "open_workflows",
+    "log_growth"
+  ],
+  "learning_path": "NF-MOTOR-LEARNING-ORGAN-V1",
+  "forbidden_learning": [
+    "live_online_retraining",
+    "agent_mutates_own_verifier",
+    "agent_mutates_own_reward",
+    "crawler_to_ssot_direct",
+    "unsupervised_architecture_redesign"
+  ],
+  "surface_seams": {
+    "runway_goal_pursuit": [
+      "goal-types.ts",
+      "goal-do.ts",
+      "goal-loop-engineer-contract.ts",
+      "goal-pursuit-workflow.ts"
+    ],
+    "runway_motor": ["intake.ts", "client-intent.ts", "hdir_loop.py"],
+    "sourcea": [
+      "fbe_execution_contract_v1",
+      "cloud_auto_runtime_v1.py",
+      "goal1_lane_broker.py",
+      "brain-core-gate-v1.js"
+    ]
+  },
+  "acceptance_attacks": [
+    "UNNECESSARY_FANOUT",
+    "REPEATED_FAILURE_SIGNATURE",
+    "GOAL_RESTATEMENT_TAX",
+    "ZERO_PROGRESS",
+    "FALSE_DONE_WITHOUT_EVIDENCE",
+    "OUT_OF_SCOPE_WRITE",
+    "HUMAN_TAX_BUDGET_EXCEEDED",
+    "SAME_PLAN_HASH_RESUME_DENIED"
+  ],
+  "human_tax_meter_loop": {
+    "loop_id": "nf-human-tax-meter-v1",
+    "trigger_host": "cloud",
+    "cadence": "after_path_enforcement",
+    "deadman": "2x_interval",
+    "receipt_root": "receipts/human-tax/"
+  },
+  "dispatch_path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
+  "does_not_activate": [
+    "lora_training",
+    "n8n_as_ssot",
+    "mac_only_human_tax_motor",
+    "motor_learning_organ_auto_promote_unlock"
+  ]
+}

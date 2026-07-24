@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/incident_packet_v1.json",
+  "title": "Incident Packet v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "incident_id",
+    "task_id",
+    "trigger",
+    "state",
+    "goal_hash",
+    "plan_hash",
+    "human_tax",
+    "progress",
+    "failure_signature",
+    "containment",
+    "route",
+    "resume_requires"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.incident_packet.v1" },
+    "incident_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "HARD_BREAKER",
+        "HUMAN_TAX_BUDGET_EXCEEDED",
+        "REPEATED_FAILURE_SIGNATURE",
+        "ZERO_PROGRESS",
+        "FALSE_DONE_WITHOUT_EVIDENCE",
+        "OUT_OF_SCOPE_WRITE",
+        "GOAL_CONTRACT_MUTATION_ATTEMPT",
+        "UNNECESSARY_FANOUT",
+        "PROTECTED_STATE_MUTATION",
+        "BUDGET_HARD_CAP"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": ["QUARANTINED", "FROZEN", "DIAGNOSING", "RETIRED"]
+    },
+    "goal_hash": { "type": "string", "minLength": 1 },
+    "plan_hash": { "type": "string", "minLength": 1 },
+    "human_tax": {
+      "type": "object",
+      "required": ["units", "budget"],
+      "properties": {
+        "units": { "type": "number" },
+        "budget": { "type": "number" },
+        "goal_restatements": { "type": "integer" },
+        "manual_corrections": { "type": "integer" },
+        "active_minutes": { "type": "number" }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "required": ["cycles", "accepted_artifacts"],
+      "properties": {
+        "cycles": { "type": "integer" },
+        "accepted_artifacts": { "type": "integer" },
+        "progress_delta_last_two_cycles": { "type": "number" }
+      }
+    },
+    "failure_signature": { "type": "string" },
+    "last_verified_state": { "type": "string" },
+    "containment": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "route": {
+      "type": "string",
+      "enum": [
+        "CRITIC_DIAGNOSIS",
+        "KNOWN_REPAIR_RECIPE",
+        "RETIRE_TASK",
+        "RETIRE_TOOL"
+      ]
+    },
+    "resume_requires": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["new_plan_hash", "repair_receipt", "regression_pass"]
+      }
+    }
+  }
+}
