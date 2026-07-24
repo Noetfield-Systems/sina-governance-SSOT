@@ -1,0 +1,61 @@
+{
+  "schema": "noetfield.governed_work_packet_production_ready_v1",
+  "at": "2026-07-24T01:32:47Z",
+  "verdict": "PASS_PRODUCTION_READY_E2E",
+  "surface": "https://app.noetfield.com",
+  "topology_note": "app.noetfield.com production Pages binds RUNWAY_KERNEL_BASE_URL to noetfield-runway-live-staging (canonical live Goal Kernel for the app product path)",
+  "layers": {
+    "company_new_pages": {
+      "source_sha": "6d9175022820b47603849e897b41742e8043cd5b",
+      "target": "production",
+      "deploy_run": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/runs/30058999098",
+      "release_url": "https://app.noetfield.com/v1/release.json"
+    },
+    "goal_kernel": {
+      "url": "https://noetfield-runway-live-staging.sina-kazemnezhad-ca.workers.dev",
+      "commit_sha": "6d9175022820b47603849e897b41742e8043cd5b",
+      "contract": "runway.v1+goal.v1",
+      "goals": true,
+      "deploy_run": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/runs/30058877853"
+    },
+    "motor_worker": {
+      "url": "https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev",
+      "source_sha": "6d9175022820b47603849e897b41742e8043cd5b",
+      "environment": "staging",
+      "deploy_run": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/runs/30059055226",
+      "enforces": [
+        "assertAppScaffoldGoalContract",
+        "GOAL_CONTRACT_HASH_REQUIRED"
+      ]
+    },
+    "sourcea_brain": {
+      "worker": "https://sourcea-brain-chat-v1.sina-kazemnezhad-ca.workers.dev",
+      "gate": "BRAIN_CORE_GATE_V1_ENABLED=1",
+      "false_done_reason": "FALSE_DONE_WITHOUT_EVIDENCE",
+      "version_id": "40ab7642-c5bf-445e-bb64-96a4c0a39b01"
+    },
+    "sourcea_fbe": {
+      "url": "https://sourcea-fbe-runner-production.up.railway.app",
+      "health_ok": true,
+      "deploy_receipt": "/Users/sinakazemnezhad/.sina/fbe-cloud-deploy-receipt-v1.json"
+    }
+  },
+  "e2e_proof": {
+    "workflow": "Verify Motor App Wiring v1",
+    "run": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/runs/30059216673",
+    "result": "PASS",
+    "proves": [
+      "app.noetfield.com project page surfaces",
+      "Goal create/start on live Kernel",
+      "Motor website Engine dispatch SUCCEEDED",
+      "verifier decided",
+      "app telegram id correlation to app.noetfield.com project surface"
+    ]
+  },
+  "merged_prs": {
+    "sg": "https://github.com/Noetfield-Systems/sina-governance-SSOT/pull/87",
+    "runway": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/224",
+    "sourcea": "https://github.com/Noetfield-Systems/SourceA/pull/50",
+    "harness_label_fix": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/225"
+  }
+}
