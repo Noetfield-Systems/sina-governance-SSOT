@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/decision_policy_candidate_v1.json",
+  "title": "Decision Policy Candidate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "candidate_id",
+    "proposal_id",
+    "decision_class",
+    "policy_version",
+    "body",
+    "replay_status",
+    "learning_record_id"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.decision_policy_candidate.v1" },
+    "candidate_id": { "type": "string", "minLength": 1 },
+    "proposal_id": { "type": "string", "minLength": 1 },
+    "decision_class": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "body": { "type": "object" },
+    "replay_status": {
+      "type": "string",
+      "enum": ["queued", "shadow", "passed", "failed", "promoted", "rolled_back"]
+    },
+    "learning_record_id": { "type": "string", "minLength": 1 },
+    "mutation_class": { "const": "OPEN" },
+    "created_at": { "type": "string" }
+  }
+}

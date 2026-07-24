@@ -35,7 +35,8 @@
         "GOAL_CONTRACT_MUTATION_ATTEMPT",
         "UNNECESSARY_FANOUT",
         "PROTECTED_STATE_MUTATION",
-        "BUDGET_HARD_CAP"
+        "BUDGET_HARD_CAP",
+        "MISSING_DECISION_CAPACITY"
       ]
     },
     "state": {
@@ -76,9 +77,12 @@
         "CRITIC_DIAGNOSIS",
         "KNOWN_REPAIR_RECIPE",
         "RETIRE_TASK",
-        "RETIRE_TOOL"
+        "RETIRE_TOOL",
+        "CREATE_OR_EXTEND_POLICY"
       ]
     },
+    "decision_capacity_proposal_id": { "type": "string" },
+    "decision_capacity_gap_id": { "type": "string" },
     "resume_requires": {
       "type": "array",
       "items": {

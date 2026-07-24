@@ -134,6 +134,16 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 - Dispatch: `docs/dispatch/nf-governed-work-packet-control-all-repos.md`
 - Learning path remains `NF-MOTOR-LEARNING-ORGAN-V1` (no parallel brain)
 
+## 2n. DECISION CAPACITY (P0 — gap → proposal → Learning Organ)
+
+**Read before** turning Human Tax / soft breakers into “what next?” chats, or inventing parallel learning brains.
+
+- Law: `P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md`
+- Machine: `data/nf_decision_capacity_v1_LOCKED.json`
+- Dispatch: `docs/dispatch/nf-decision-capacity-all-repos.md`
+- Path: `MISSING_DECISION_CAPACITY` → proposal → policy candidate → `NF-MOTOR-LEARNING-ORGAN-V1` replay
+
+
 
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
