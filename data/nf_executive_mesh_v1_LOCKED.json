@@ -1,0 +1,49 @@
+{
+  "schema": "nf_executive_mesh_v1",
+  "decision_id": "NF-EXECUTIVE-MESH-V1",
+  "status": "SG_ACCEPTED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-24T07:10:00Z",
+  "one_line_law": "Models deliberate in Role Pods; Governor alone commits; Verifier decides reality; reuse production plane",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md",
+  "depends_on": [
+    "NF-EXECUTIVE-CONTROL-PLANE-V0",
+    "NF-DECISION-CAPACITY-V1",
+    "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+    "NF-MOTOR-LEARNING-ORGAN-V1"
+  ],
+  "package_home": "SourceA/packages/executive-mesh-v1",
+  "governor_worker": "SourceA/cloud/workers/sourcea-executive-governor-v1",
+  "kernel": "SourceA/packages/executive-control-plane-v0",
+  "slice1_pods": [
+    "SG",
+    "MEMORY_STEWARD",
+    "STRATEGIC_PLANNER",
+    "CRITIC"
+  ],
+  "slice1_executor": "RUNWAY_GOAL_KERNEL",
+  "deliberation_required": [
+    "L0"
+  ],
+  "deliberation_optional": [
+    "L1"
+  ],
+  "canonical_store": "supabase_portfolio_spine",
+  "coordinator": "cloudflare_durable_object",
+  "llm_authority": false,
+  "second_railway_executor": false,
+  "future_pulse": {
+    "trigger_host": "cloud",
+    "loop_id": "sourcea_executive_pulse_v1",
+    "deadman": "sourcea-deadman-v1",
+    "receipt_dir": "receipts/executive/"
+  },
+  "forbidden": [
+    "llm_authority",
+    "parallel_ssot",
+    "second_railway_heavy_executor",
+    "unbounded_subagent_fanout",
+    "model_self_promote_canonical",
+    "active_forever_runs"
+  ]
+}

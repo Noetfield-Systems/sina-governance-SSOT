@@ -154,6 +154,15 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 - Dispatch: `docs/dispatch/nf-executive-control-plane-v0-all-repos.md`
 - Package: SourceA `packages/executive-control-plane-v0` (no Cloudflare in v0)
 
+## 2p. EXECUTIVE MESH V1 (P0 — Role Pods + Governor on production plane)
+
+**Read before** inventing a parallel SSOT, second Railway executor, or giving models Authority.
+
+- Law: `P0-FOUNDATION-SPINE/NF_EXECUTIVE_MESH_V1_LOCKED_v1.md`
+- Machine: `data/nf_executive_mesh_v1_LOCKED.json`
+- Dispatch: `docs/dispatch/nf-executive-mesh-v1-all-repos.md`
+- Kernel: SourceA `packages/executive-control-plane-v0` · Mesh: `packages/executive-mesh-v1`
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.
