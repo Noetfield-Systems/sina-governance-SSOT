@@ -1,0 +1,60 @@
+{
+  "schema": "nf_decision_capacity_v1",
+  "decision_id": "NF-DECISION-CAPACITY-V1",
+  "status": "SG_ACCEPTED",
+  "version": "1.0.0",
+  "saved_at": "2026-07-24T02:00:00Z",
+  "one_line_law": "Human Tax that names repeated founder micro-choices must become Decision Capacity — not another chat turn",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+  "depends_on": [
+    "NF-GOVERNED-WORK-PACKET-CONTROL-V1",
+    "NF-MOTOR-LEARNING-ORGAN-V1"
+  ],
+  "closed_path": [
+    "MISSING_DECISION_CAPACITY",
+    "decision_capacity_gap",
+    "decision_capacity_proposal",
+    "decision_policy_candidate",
+    "motor_learning_organ_learning_record",
+    "shadow_replay",
+    "gated_promote"
+  ],
+  "decision_classes": [
+    "EMAIL_DRAFT",
+    "WEBPAGE_CHANGE",
+    "WEBPAGE_REPAIR",
+    "CRAWL_AND_EXTRACT",
+    "DATA_SYNC",
+    "DEPLOYMENT"
+  ],
+  "incident_trigger": "MISSING_DECISION_CAPACITY",
+  "incident_route": "CREATE_OR_EXTEND_POLICY",
+  "work_status_on_gap": "FROZEN",
+  "learning_organ": {
+    "layer": "policy",
+    "mutation_class_candidate": "OPEN",
+    "mutation_class_promote": "GATED",
+    "source_event": "MISSING_DECISION_CAPACITY",
+    "receipt_glob": "receipts/learning/decision-capacity-*.json"
+  },
+  "schemas": [
+    "data/schemas/decision_capacity_gap_v1.json",
+    "data/schemas/decision_capacity_proposal_v1.json",
+    "data/schemas/decision_policy_candidate_v1.json"
+  ],
+  "lib": "scripts/lib/decision_capacity_v1.py",
+  "metrics": [
+    "policy_coverage",
+    "decision_reuse_ratio",
+    "founder_translation_rate",
+    "human_tax_per_accepted_outcome",
+    "autonomous_closure_rate"
+  ],
+  "forbidden": [
+    "ask_next_step_after_capacity_gap",
+    "promote_without_learning_organ_shadow",
+    "advisor_or_coding_agent_writes_policy_registry",
+    "unsupervised_architecture_redesign",
+    "base_model_finetune_in_this_lock"
+  ]
+}

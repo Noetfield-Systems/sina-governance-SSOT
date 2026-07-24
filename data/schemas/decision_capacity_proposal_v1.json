@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/decision_capacity_proposal_v1.json",
+  "title": "Decision Capacity Proposal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "proposal_id",
+    "gap_id",
+    "capacity_gap",
+    "proposed_policy",
+    "status"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.decision_capacity_proposal.v1" },
+    "proposal_id": { "type": "string", "minLength": 1 },
+    "gap_id": { "type": "string", "minLength": 1 },
+    "capacity_gap": {
+      "type": "object",
+      "required": ["name", "repeated_decision"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "repeated_decision": { "type": "string", "minLength": 1 }
+      }
+    },
+    "proposed_policy": {
+      "type": "object",
+      "required": ["when", "select", "limits", "verify", "escalate_when"],
+      "properties": {
+        "when": { "type": "object" },
+        "select": { "type": "object" },
+        "limits": { "type": "object" },
+        "verify": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "escalate_when": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "awaiting_founder", "accepted", "rejected", "superseded"]
+    },
+    "decision_class": { "type": "string" },
+    "created_at": { "type": "string" }
+  }
+}

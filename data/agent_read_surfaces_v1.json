@@ -409,6 +409,21 @@
           "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
           "status": "ACTIVE",
           "role": "governed_work_packet_control_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity"
+        },
+        {
+          "path": "data/nf_decision_capacity_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "decision_capacity_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity_dispatch"
         }
       ],
       "skills_resolve": []
@@ -851,6 +866,21 @@
           "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
           "status": "ACTIVE",
           "role": "governed_work_packet_control_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity"
+        },
+        {
+          "path": "data/nf_decision_capacity_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "decision_capacity_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity_dispatch"
         }
       ],
       "skills_resolve": []
@@ -1353,6 +1383,21 @@
           "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
           "status": "ACTIVE",
           "role": "governed_work_packet_control_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity"
+        },
+        {
+          "path": "data/nf_decision_capacity_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "decision_capacity_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity_dispatch"
         }
       ],
       "skills_resolve": [
@@ -1796,6 +1841,21 @@
           "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
           "status": "ACTIVE",
           "role": "governed_work_packet_control_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity"
+        },
+        {
+          "path": "data/nf_decision_capacity_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "decision_capacity_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity_dispatch"
         }
       ],
       "skills_resolve": []
@@ -2240,6 +2300,21 @@
           "path": "docs/dispatch/nf-governed-work-packet-control-all-repos.md",
           "status": "ACTIVE",
           "role": "governed_work_packet_control_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity"
+        },
+        {
+          "path": "data/nf_decision_capacity_v1_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "decision_capacity_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
+          "status": "ACTIVE",
+          "role": "decision_capacity_dispatch"
         }
       ],
       "skills_resolve": []

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetfield.systems/schemas/decision_capacity_gap_v1.json",
+  "title": "Decision Capacity Gap v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "gap_id",
+    "incident_type",
+    "decision_class",
+    "repeated_founder_choices",
+    "occurrences",
+    "existing_policy_coverage",
+    "proposed_action",
+    "work_status"
+  ],
+  "properties": {
+    "schema": { "const": "noetfield.decision_capacity_gap.v1" },
+    "gap_id": { "type": "string", "minLength": 1 },
+    "incident_type": { "const": "MISSING_DECISION_CAPACITY" },
+    "decision_class": {
+      "type": "string",
+      "enum": [
+        "EMAIL_DRAFT",
+        "WEBPAGE_CHANGE",
+        "CRAWL_AND_EXTRACT",
+        "DATA_SYNC",
+        "DEPLOYMENT",
+        "WEBPAGE_REPAIR",
+        "UNKNOWN"
+      ]
+    },
+    "repeated_founder_choices": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "select_executor",
+          "select_target_files",
+          "choose_retry_or_stop",
+          "choose_verification_method",
+          "restate_goal_intent",
+          "redefine_scope",
+          "choose_next_action",
+          "choose_model"
+        ]
+      }
+    },
+    "occurrences": { "type": "integer", "minimum": 1 },
+    "existing_policy_coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+    "proposed_action": { "const": "CREATE_OR_EXTEND_POLICY" },
+    "work_status": { "const": "FROZEN" },
+    "task_id": { "type": "string" },
+    "human_tax_units": { "type": "number" },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } }
+  }
+}

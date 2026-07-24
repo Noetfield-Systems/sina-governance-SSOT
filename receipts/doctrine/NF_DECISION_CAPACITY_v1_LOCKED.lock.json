@@ -1,0 +1,15 @@
+{
+  "schema": "noetfield.doctrine_lock_receipt.v1",
+  "decision_id": "NF-DECISION-CAPACITY-V1",
+  "status": "LOCKED",
+  "locked_at": "2026-07-24T02:00:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_DECISION_CAPACITY_LOCKED_v1.md",
+  "machine": "data/nf_decision_capacity_v1_LOCKED.json",
+  "closed_path": [
+    "MISSING_DECISION_CAPACITY",
+    "decision_capacity_gap",
+    "decision_capacity_proposal",
+    "decision_policy_candidate",
+    "motor_learning_organ_learning_record"
+  ]
+}
