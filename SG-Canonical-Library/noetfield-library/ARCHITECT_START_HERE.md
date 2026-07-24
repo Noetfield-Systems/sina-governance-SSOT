@@ -145,6 +145,15 @@ Before `SG_ACCEPTED`: do not call a design canonical / locked / final / Noetfiel
 
 
 
+## 2o. EXECUTIVE CONTROL PLANE V0 (P0 — deterministic Executive Office)
+
+**Read before** inventing a Super-Agent, putting an LLM on the decision path, or free-form next-prompt generation.
+
+- Law: `P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md`
+- Machine: `data/nf_executive_control_plane_v0_LOCKED.json`
+- Dispatch: `docs/dispatch/nf-executive-control-plane-v0-all-repos.md`
+- Package: SourceA `packages/executive-control-plane-v0` (no Cloudflare in v0)
+
 ## 3. THE CORE THESIS (what we're building, in 5 lines)
 - A **raw deterministic brain** (empty core + Sina's locked definitions) that decides; **LLMs are soup-walled workers** that only draft/execute, never hold meaning.
 - **Contracts run the system; LLMs only propose.** The Execution Contract holds authority.

@@ -424,6 +424,21 @@
           "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
           "status": "ACTIVE",
           "role": "decision_capacity_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0"
+        },
+        {
+          "path": "data/nf_executive_control_plane_v0_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_dispatch"
         }
       ],
       "skills_resolve": []
@@ -881,6 +896,21 @@
           "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
           "status": "ACTIVE",
           "role": "decision_capacity_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0"
+        },
+        {
+          "path": "data/nf_executive_control_plane_v0_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_dispatch"
         }
       ],
       "skills_resolve": []
@@ -1398,6 +1428,21 @@
           "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
           "status": "ACTIVE",
           "role": "decision_capacity_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0"
+        },
+        {
+          "path": "data/nf_executive_control_plane_v0_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_dispatch"
         }
       ],
       "skills_resolve": [
@@ -1856,6 +1901,21 @@
           "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
           "status": "ACTIVE",
           "role": "decision_capacity_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0"
+        },
+        {
+          "path": "data/nf_executive_control_plane_v0_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_dispatch"
         }
       ],
       "skills_resolve": []
@@ -2315,6 +2375,21 @@
           "path": "docs/dispatch/nf-decision-capacity-all-repos.md",
           "status": "ACTIVE",
           "role": "decision_capacity_dispatch"
+        },
+        {
+          "path": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0"
+        },
+        {
+          "path": "data/nf_executive_control_plane_v0_LOCKED.json",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_machine"
+        },
+        {
+          "path": "docs/dispatch/nf-executive-control-plane-v0-all-repos.md",
+          "status": "ACTIVE",
+          "role": "executive_control_plane_v0_dispatch"
         }
       ],
       "skills_resolve": []

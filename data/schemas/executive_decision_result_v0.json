@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DecisionResult",
+  "type": "object",
+  "required": [
+    "schema",
+    "result_id",
+    "zone",
+    "status",
+    "decision_hash",
+    "policy_version",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.executive.decision_result.v0"
+    },
+    "result_id": {
+      "type": "string"
+    },
+    "zone": {
+      "enum": [
+        "GREEN",
+        "AMBER",
+        "RED"
+      ]
+    },
+    "status": {
+      "enum": [
+        "APPROVED",
+        "RED_ZONE_REQUIRED",
+        "REJECTED",
+        "FROZEN"
+      ]
+    },
+    "decision_hash": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

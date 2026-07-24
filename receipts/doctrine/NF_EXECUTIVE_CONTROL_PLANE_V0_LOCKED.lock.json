@@ -1,0 +1,19 @@
+{
+  "schema": "noetfield.doctrine_lock_receipt.v1",
+  "decision_id": "NF-EXECUTIVE-CONTROL-PLANE-V0",
+  "status": "LOCKED",
+  "locked_at": "2026-07-24T06:20:00Z",
+  "canonical_md": "SG-Canonical-Library/noetfield-library/P0-FOUNDATION-SPINE/NF_EXECUTIVE_CONTROL_PLANE_V0_LOCKED_v1.md",
+  "machine": "data/nf_executive_control_plane_v0_LOCKED.json",
+  "package_home": "SourceA/packages/executive-control-plane-v0",
+  "modules": [
+    "ExecutiveGovernor",
+    "GoalController",
+    "CommitmentController",
+    "ConflictResolver",
+    "DriftMonitor",
+    "NextActionCompiler",
+    "EvidenceVerifier",
+    "IncidentMotor"
+  ]
+}

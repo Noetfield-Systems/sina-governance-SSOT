@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DriftFinding",
+  "type": "object",
+  "required": [
+    "schema",
+    "finding_id",
+    "drift_kind",
+    "goal_id",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "noetfield.executive.drift_finding.v0"
+    },
+    "finding_id": {
+      "type": "string"
+    },
+    "drift_kind": {
+      "enum": [
+        "GOAL_DRIFT",
+        "SCOPE_DRIFT",
+        "AUTHORITY_DRIFT",
+        "BUDGET_DRIFT",
+        "EVIDENCE_DRIFT",
+        "FOUNDER_INTENT_DRIFT",
+        "ARCHITECTURE_DRIFT"
+      ]
+    },
+    "goal_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "detail": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}
